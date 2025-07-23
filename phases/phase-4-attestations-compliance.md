@@ -2,7 +2,7 @@
 
 ## Overview
 
-Phase 4 introduces the B-Chain (Attestation Blockchain) and comprehensive compliance infrastructure, enabling regulated asset issuance, identity management, and permission-based access while maintaining the decentralized ethos of the Lux Network.
+Phase 4 introduces the A-Chain (Attestation Blockchain) and comprehensive compliance infrastructure, enabling regulated asset issuance, identity management, and permission-based access while maintaining the decentralized ethos of the Lux Network.
 
 ## Timeline
 
@@ -13,14 +13,14 @@ Phase 4 introduces the B-Chain (Attestation Blockchain) and comprehensive compli
 ## Objectives
 
 ### Primary Goals
-1. Launch B-Chain for attestation management
+1. Launch A-Chain for attestation management
 2. Implement BLS signature aggregation
 3. Create compliant token standards
 4. Build permission management system
 5. Enable regulated DeFi
 
 ### Success Metrics
-- B-Chain processing 10k+ attestations/day
+- A-Chain processing 10k+ attestations/day
 - 5+ regulated institutions onboarded
 - Zero compliance violations
 - Sub-second attestation verification
@@ -28,7 +28,7 @@ Phase 4 introduces the B-Chain (Attestation Blockchain) and comprehensive compli
 
 ## LIP Specifications
 
-### LIP-25: B-Chain Specification
+### LIP-25: A-Chain Specification
 - **Type**: Standards Track (Core)
 - **Status**: Draft
 - **Description**: Dedicated blockchain for attestations and compliance
@@ -112,7 +112,7 @@ Phase 4 introduces the B-Chain (Attestation Blockchain) and comprehensive compli
   - AML/KYC integration
   - Regulatory reporting
 
-## B-Chain Architecture
+## A-Chain Architecture
 
 ### Technical Specifications
 ```
@@ -146,7 +146,7 @@ B-Chain Parameters:
 ## Implementation Plan
 
 ### Month 1 (October 2025)
-- [ ] B-Chain testnet launch
+- [ ] A-Chain testnet launch
 - [ ] BLS implementation complete
 - [ ] Compliance engine prototype
 - [ ] Partner institution outreach
@@ -234,14 +234,14 @@ modules/
 
 ## Economic Model
 
-### B-Chain Fees
+### A-Chain Fees
 - Attestation storage: 0.01 LUX
 - Verification: 0.001 LUX
 - Batch operations: 0.05 LUX
 - Annual maintenance: 1 LUX/attestation
 
 ### Revenue Distribution
-- 50% to B-Chain validators
+- 50% to A-Chain validators
 - 25% to attestation providers
 - 15% to development fund
 - 10% to insurance pool
@@ -316,7 +316,7 @@ const attestation = await compliance.issueAttestation({
 
 ## Phase Completion Criteria
 
-- [ ] B-Chain mainnet stable
+- [ ] A-Chain mainnet stable
 - [ ] All 8 LIPs Final status
 - [ ] 10+ regulated issuers
 - [ ] 100k+ attestations issued
