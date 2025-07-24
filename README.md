@@ -1,11 +1,5 @@
 # Lux Improvement Proposals (LIPs)
 
-<div align="center">
-  <img src="https://lux.network/logo.png" alt="Lux Network" width="300">
-</div>
-
----
-
 This repository contains all Lux Improvement Proposals (LIPs) - the primary mechanism for proposing new features, collecting community input, and documenting design decisions for the Lux Network.
 
 ## What is a LIP?
