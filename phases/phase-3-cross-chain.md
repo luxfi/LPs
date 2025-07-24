@@ -26,9 +26,9 @@ Phase 3 establishes Lux Network as a premier interoperability hub by implementin
 - 50+ dApps using cross-chain features
 - Zero bridge exploits
 
-## LIP Specifications
+## LP Specifications
 
-### LIP-15: Teleporter (AWM) Message Format
+### LP-15: Teleporter (AWM) Message Format
 - **Type**: Standards Track (Core)
 - **Status**: Draft
 - **Description**: Avalanche Warp Messaging standardization
@@ -38,7 +38,7 @@ Phase 3 establishes Lux Network as a premier interoperability hub by implementin
   - Validation rules
   - Fee mechanism
   
-### LIP-16: Cross-Subnet Communication Protocol
+### LP-16: Cross-Subnet Communication Protocol
 - **Type**: Standards Track (Core)
 - **Status**: Proposed
 - **Description**: Protocol for communication between Lux subnets
@@ -48,7 +48,7 @@ Phase 3 establishes Lux Network as a premier interoperability hub by implementin
   - State verification
   - Failure handling
 
-### LIP-17: Universal Bridge Standards
+### LP-17: Universal Bridge Standards
 - **Type**: Standards Track (Interface)
 - **Status**: Draft
 - **Description**: Unified interface for all bridge implementations
@@ -62,7 +62,7 @@ Phase 3 establishes Lux Network as a premier interoperability hub by implementin
   }
   ```
 
-### LIP-18: Cross-Chain Asset Registry
+### LP-18: Cross-Chain Asset Registry
 - **Type**: Standards Track (Interface)
 - **Status**: Draft
 - **Description**: Global registry for cross-chain asset mapping
@@ -72,7 +72,7 @@ Phase 3 establishes Lux Network as a premier interoperability hub by implementin
   - Metadata storage
   - Ownership verification
 
-### LIP-19: Wallet Integration Standards
+### LP-19: Wallet Integration Standards
 - **Type**: Standards Track (Interface)
 - **Status**: Proposed
 - **Description**: Standardized wallet interactions for cross-chain operations
@@ -82,7 +82,7 @@ Phase 3 establishes Lux Network as a premier interoperability hub by implementin
   - Signature standards
   - Error handling
 
-### LIP-23: LRC-23 Cross-Chain NFT Standard
+### LP-23: LRC-23 Cross-Chain NFT Standard
 - **Type**: Standards Track (LRC)
 - **Status**: Draft
 - **Description**: NFTs that maintain properties across chains
@@ -92,7 +92,7 @@ Phase 3 establishes Lux Network as a premier interoperability hub by implementin
   - Royalty enforcement
   - Burn/mint mechanism
 
-### LIP-24: LRC-24 Wrapped Asset Standard
+### LP-24: LRC-24 Wrapped Asset Standard
 - **Type**: Standards Track (LRC)
 - **Status**: Proposed
 - **Description**: Standard for wrapped tokens from external chains
@@ -279,7 +279,7 @@ const status = await luxBridge.getStatus(result.messageId);
 
 ## Phase Completion Criteria
 
-- [ ] All 7 LIPs in Final status
+- [ ] All 7 LPs in Final status
 - [ ] 5+ chains fully integrated
 - [ ] $1B+ in cross-chain volume
 - [ ] 99.9% uptime achieved

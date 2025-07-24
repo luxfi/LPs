@@ -1,28 +1,28 @@
 # Frequently Asked Questions (FAQ)
 
-This document answers common questions about Lux Improvement Proposals (LIPs) and Lux Request for Comments (LRCs).
+This document answers common questions about Lux Improvement Proposals (LPs) and Lux Request for Comments (LRCs).
 
 ## General Questions
 
-### What is a LIP?
+### What is a LP?
 
-A LIP (Lux Improvement Proposal) is a design document that provides information to the Lux community or describes a new feature, process, or environment change for the Lux Network. It's the primary mechanism for proposing changes and documenting design decisions.
+A LP (Lux Improvement Proposal) is a design document that provides information to the Lux community or describes a new feature, process, or environment change for the Lux Network. It's the primary mechanism for proposing changes and documenting design decisions.
 
 ### What is an LRC?
 
-An LRC (Lux Request for Comment) is a subcategory of Standards Track LIPs focused on application-layer standards like token interfaces, wallet standards, and smart contract conventions. Every LRC is a LIP, but not every LIP is an LRC.
+An LRC (Lux Request for Comment) is a subcategory of Standards Track LPs focused on application-layer standards like token interfaces, wallet standards, and smart contract conventions. Every LRC is a LP, but not every LP is an LRC.
 
-### What's the difference between LIP and LRC?
+### What's the difference between LP and LRC?
 
-- **LIP**: Covers all types of proposals (governance, core protocol, networking, applications)
+- **LP**: Covers all types of proposals (governance, core protocol, networking, applications)
 - **LRC**: Specifically for application-layer standards (like ERC in Ethereum)
-- Think of LRC as a category within LIP, similar to how ERC-20 is actually EIP-20
+- Think of LRC as a category within LP, similar to how ERC-20 is actually EIP-20
 
-### Who can submit a LIP?
+### Who can submit a LP?
 
-Anyone! The LIP process is open to all. You don't need special permissions, just a good idea and the willingness to see it through the process.
+Anyone! The LP process is open to all. You don't need special permissions, just a good idea and the willingness to see it through the process.
 
-### How long does the LIP process take?
+### How long does the LP process take?
 
 It varies significantly:
 - Simple standards: 1-3 months
@@ -35,15 +35,15 @@ The timeline depends on complexity, community feedback, and implementation requi
 
 ### How do I start?
 
-1. **Research**: Check existing LIPs to avoid duplicates
-2. **Discuss**: Post in [GitHub Discussions](https://github.com/luxfi/lips/discussions) or Discord
-3. **Draft**: Write your LIP following the [template](./LIPs/TEMPLATE.md)
-4. **Submit**: Open a PR to the LIPs repository
+1. **Research**: Check existing LPs to avoid duplicates
+2. **Discuss**: Post in [GitHub Discussions](https://github.com/luxfi/lps/discussions) or Discord
+3. **Draft**: Write your LP following the [template](./LPs/TEMPLATE.md)
+4. **Submit**: Open a PR to the LPs repository
 5. **Iterate**: Address feedback and improve
 
-### What makes a good LIP?
+### What makes a good LP?
 
-A good LIP has:
+A good LP has:
 - Clear problem statement
 - Well-defined solution
 - Technical specifications
@@ -51,14 +51,14 @@ A good LIP has:
 - Implementation plan
 - Community support
 
-### Can I update my LIP after submission?
+### Can I update my LP after submission?
 
-Yes! LIPs can be updated:
+Yes! LPs can be updated:
 - **Draft/Review**: Unlimited updates
 - **Last Call**: Only critical fixes
-- **Final**: No changes (create new LIP for updates)
+- **Final**: No changes (create new LP for updates)
 
-### What if my LIP is rejected?
+### What if my LP is rejected?
 
 Rejection reasons might include:
 - Duplicate of existing work
@@ -71,9 +71,9 @@ You can:
 - Collaborate with existing similar proposals
 - Refine the idea with more research
 
-### How do I get a LIP number?
+### How do I get a LP number?
 
-LIP numbers are assigned when your PR is ready to merge:
+LP numbers are assigned when your PR is ready to merge:
 1. Submit PR with `lip-draft.md`
 2. Editor reviews and assigns number
 3. File renamed to `lip-N.md`
@@ -83,7 +83,7 @@ LIP numbers are assigned when your PR is ready to merge:
 
 ### Do I need to provide code?
 
-Depends on the LIP type:
+Depends on the LP type:
 - **Standards Track**: Reference implementation required
 - **Meta**: Usually no code needed
 - **Informational**: Code optional
@@ -123,7 +123,7 @@ For smart contract standards:
 
 ## LRC-Specific Questions
 
-### When should I create an LRC vs regular LIP?
+### When should I create an LRC vs regular LP?
 
 Create an LRC when your proposal:
 - Defines smart contract interfaces
@@ -131,7 +131,7 @@ Create an LRC when your proposal:
 - Specifies wallet interactions
 - Establishes dApp conventions
 
-Use regular LIP for:
+Use regular LP for:
 - Protocol changes
 - Governance updates
 - Network modifications
@@ -162,7 +162,7 @@ Not always, but:
 
 ## Implementation Questions
 
-### Do I need to implement my LIP?
+### Do I need to implement my LP?
 
 - **Standards Track**: Reference implementation required
 - **Meta/Informational**: Implementation optional
@@ -217,7 +217,7 @@ Not always, but:
 - Use GitHub's collaboration features
 - Join working groups
 
-### Can I get funding for my LIP?
+### Can I get funding for my LP?
 
 Possible funding sources:
 - Lux Grants Program
@@ -238,7 +238,7 @@ Possible funding sources:
 - **Withdrawn**: Author abandoned
 - **Rejected**: Not accepted by community
 
-### How do I move my LIP forward?
+### How do I move my LP forward?
 
 1. **Draft → Review**: Address initial feedback, complete specs
 2. **Review → Last Call**: Implement feedback, show community support
@@ -246,23 +246,23 @@ Possible funding sources:
 
 ### What is "Last Call" deadline?
 
-A 14-day period for final objections. If no critical issues arise, the LIP moves to Final. Critical issues reset the deadline.
+A 14-day period for final objections. If no critical issues arise, the LP moves to Final. Critical issues reset the deadline.
 
-### Can a Final LIP be changed?
+### Can a Final LP be changed?
 
-No. Final LIPs are immutable. To make changes:
-1. Create a new LIP
+No. Final LPs are immutable. To make changes:
+1. Create a new LP
 2. Reference the original
 3. Explain the updates
 4. May mark original as "Superseded"
 
 ## Miscellaneous Questions
 
-### Are LIPs legally binding?
+### Are LPs legally binding?
 
-No. LIPs are technical standards and community agreements, not legal contracts. Implementation is voluntary based on community consensus.
+No. LPs are technical standards and community agreements, not legal contracts. Implementation is voluntary based on community consensus.
 
-### Can I submit a LIP anonymously?
+### Can I submit a LP anonymously?
 
 Yes, but:
 - Still need GitHub account
@@ -272,9 +272,9 @@ Yes, but:
 
 ### What about intellectual property?
 
-All LIPs are released under CC0 (public domain). By submitting, you agree to waive all copyright claims.
+All LPs are released under CC0 (public domain). By submitting, you agree to waive all copyright claims.
 
-### Can I withdraw my LIP?
+### Can I withdraw my LP?
 
 Yes, at any stage before Final:
 - Comment on the PR/issue
@@ -282,7 +282,7 @@ Yes, at any stage before Final:
 - Editor updates status
 - Content remains for reference
 
-### How do I become a LIP editor?
+### How do I become a LP editor?
 
 1. Demonstrate knowledge of process
 2. Active community participation
@@ -299,6 +299,6 @@ Yes, at any stage before Final:
 
 ---
 
-*Can't find your answer? Ask in [Discord](https://discord.gg/lux) or [open an issue](https://github.com/luxfi/lips/issues)*
+*Can't find your answer? Ask in [Discord](https://discord.gg/lux) or [open an issue](https://github.com/luxfi/lps/issues)*
 
 *Last Updated: January 2025*

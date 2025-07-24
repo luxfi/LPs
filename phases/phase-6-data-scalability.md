@@ -26,9 +26,9 @@ Phase 6 introduces the A-Chain (Archive Chain) and implements comprehensive scal
 - Network TPS >100k
 - Storage cost <$0.01/MB/year
 
-## LIP Specifications
+## LP Specifications
 
-### LIP-40: A-Chain Specification
+### LP-40: A-Chain Specification
 - **Type**: Standards Track (Core)
 - **Status**: Draft
 - **Description**: Dedicated chain for long-term data storage
@@ -38,7 +38,7 @@ Phase 6 introduces the A-Chain (Archive Chain) and implements comprehensive scal
   - Incentivized retrieval
   - Cross-chain data access
 
-### LIP-41: Data Availability Sampling (DAS)
+### LP-41: Data Availability Sampling (DAS)
 - **Type**: Standards Track (Core)
 - **Status**: Proposed
 - **Description**: Efficient data availability verification
@@ -51,7 +51,7 @@ Phase 6 introduces the A-Chain (Archive Chain) and implements comprehensive scal
   4. Statistical guarantee with few samples
   ```
 
-### LIP-42: State Rent Mechanism
+### LP-42: State Rent Mechanism
 - **Type**: Standards Track (Core)
 - **Status**: Draft
 - **Description**: Economic model for state storage
@@ -61,7 +61,7 @@ Phase 6 introduces the A-Chain (Archive Chain) and implements comprehensive scal
   - State expiry and revival
   - Rent distribution
 
-### LIP-43: Light Client Protocol
+### LP-43: Light Client Protocol
 - **Type**: Standards Track (Networking)
 - **Status**: Proposed
 - **Description**: Ultra-light client implementation
@@ -71,7 +71,7 @@ Phase 6 introduces the A-Chain (Archive Chain) and implements comprehensive scal
   - State queries
   - <1MB total size
 
-### LIP-44: Archival Node Standards
+### LP-44: Archival Node Standards
 - **Type**: Standards Track (Networking)
 - **Status**: Draft
 - **Description**: Standards for full history nodes
@@ -81,7 +81,7 @@ Phase 6 introduces the A-Chain (Archive Chain) and implements comprehensive scal
   - Query interface
   - Incentive mechanism
 
-### LIP-45: Off-Chain Data Pointer Standard
+### LP-45: Off-Chain Data Pointer Standard
 - **Type**: Standards Track (Interface)
 - **Status**: Draft
 - **Description**: Linking on-chain references to off-chain data
@@ -95,7 +95,7 @@ Phase 6 introduces the A-Chain (Archive Chain) and implements comprehensive scal
   }
   ```
 
-### LIP-46: LRC-46 Data Registry Standard
+### LP-46: LRC-46 Data Registry Standard
 - **Type**: Standards Track (LRC)
 - **Status**: Proposed
 - **Description**: On-chain registry for data availability
@@ -332,7 +332,7 @@ const proof = await lightClient.getProof();
 ## Phase Completion Criteria
 
 - [ ] A-Chain operational
-- [ ] All 7 LIPs Final status
+- [ ] All 7 LPs Final status
 - [ ] 100k+ TPS achieved
 - [ ] State growth controlled
 - [ ] Light client adoption >10%

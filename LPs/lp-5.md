@@ -3,7 +3,7 @@ lp: 5
 title: Lux Quantum-Safe Wallets and Multisig Standard
 description: Focuses on the design of Lux’s quantum-safe wallet infrastructure, including a new multisignature (multisig) standard that remains secure against quantum adversaries.
 author: Lux Network Team (@luxdefi)
-discussions-to: https://github.com/luxfi/lips/discussions
+discussions-to: https://github.com/luxfi/lps/discussions
 status: Final
 type: Standards Track
 category: Core

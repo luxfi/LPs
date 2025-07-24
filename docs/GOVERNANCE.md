@@ -1,8 +1,8 @@
-# Lux Network Governance & LIP Process
+# Lux Network Governance & LP Process
 
 ## Overview
 
-The Lux Network employs a decentralized governance model that combines Lux Improvement Proposal (LIP) standardization with on-chain voting mechanisms. This document explains how governance works, how proposals become standards, and how the community participates in network evolution.
+The Lux Network employs a decentralized governance model that combines Lux Improvement Proposal (LP) standardization with on-chain voting mechanisms. This document explains how governance works, how proposals become standards, and how the community participates in network evolution.
 
 ## Governance Architecture
 
@@ -25,16 +25,16 @@ The Lux Network employs a decentralized governance model that combines Lux Impro
 - **Reputation Staking**: Validator influence grows with consistent good behavior
 - **Delegation**: Token holders can delegate voting power to validators
 
-## LIP (Lux Improvement Proposal) Process
+## LP (Lux Improvement Proposal) Process
 
-### Purpose of LIPs
-LIPs serve as the primary mechanism for:
+### Purpose of LPs
+LPs serve as the primary mechanism for:
 - Proposing protocol changes
 - Standardizing interfaces and practices
 - Documenting design decisions
 - Building community consensus
 
-### LIP Lifecycle
+### LP Lifecycle
 
 ```
    ┌─────────────┐
@@ -46,7 +46,7 @@ LIPs serve as the primary mechanism for:
    └──────┬──────┘
           │
    ┌──────▼──────┐
-   │  PROPOSED   │ ← Formal LIP Submission
+   │  PROPOSED   │ ← Formal LP Submission
    └──────┬──────┘
           │
    ┌──────▼──────┐
@@ -77,7 +77,7 @@ LIPs serve as the primary mechanism for:
 #### 2. **Draft Phase**
 - **Duration**: 2-4 weeks typical
 - **Requirements**:
-  - Author creates LIP following template
+  - Author creates LP following template
   - Post draft for community feedback
   - Iterate based on input
 - **Exit Criteria**: Author confidence in proposal completeness
@@ -85,8 +85,8 @@ LIPs serve as the primary mechanism for:
 #### 3. **Proposed Phase**
 - **Duration**: 1-2 weeks
 - **Actions**:
-  - Submit LIP via Pull Request
-  - Assigned LIP number
+  - Submit LP via Pull Request
+  - Assigned LP number
   - Formal review begins
 - **Review Focus**: Format, completeness, clarity
 
@@ -110,9 +110,9 @@ LIPs serve as the primary mechanism for:
 #### 6. **Voting Phase**
 - **Duration**: 1-2 weeks
 - **Voting Mechanisms**:
-  - **Standard LIPs**: Simple majority of participating tokens
-  - **Protocol LIPs**: Supermajority (67%) with validator approval
-  - **Economic LIPs**: Weighted voting including liquidity providers
+  - **Standard LPs**: Simple majority of participating tokens
+  - **Protocol LPs**: Supermajority (67%) with validator approval
+  - **Economic LPs**: Weighted voting including liquidity providers
 - **Quorum**: 10% of circulating supply must participate
 
 #### 7. **Activation Phase**
@@ -147,7 +147,7 @@ LIPs serve as the primary mechanism for:
 
 ### Standardization Criteria
 
-For an LIP to become a standard, it must:
+For an LP to become a standard, it must:
 
 1. **Technical Soundness**
    - Peer-reviewed implementation
@@ -169,26 +169,26 @@ For an LIP to become a standard, it must:
 
 ### Standard Maintenance
 
-- **Living Standards**: Can be updated via new LIPs
+- **Living Standards**: Can be updated via new LPs
 - **Deprecated Standards**: Marked obsolete but documented for history
 - **Emergency Updates**: Fast-track process for critical security fixes
 
 ## Governance Participants
 
-### 1. **LIP Authors**
-- Anyone can author an LIP
+### 1. **LP Authors**
+- Anyone can author an LP
 - Responsible for shepherding through process
 - Must engage with community feedback
-- Maintain LIP until activation
+- Maintain LP until activation
 
 ### 2. **Core Contributors**
 - Review technical feasibility
 - Provide implementation guidance
 - Ensure protocol coherence
-- May sponsor LIPs
+- May sponsor LPs
 
 ### 3. **Validators**
-- Enhanced voting weight on technical LIPs
+- Enhanced voting weight on technical LPs
 - Must review protocol changes
 - Responsible for network upgrades
 - Can delegate review responsibilities
@@ -212,22 +212,22 @@ For an LIP to become a standard, it must:
 - **Requires**: 3 core contributor signatures
 - **Review**: Post-facto community validation
 
-### Meta LIPs
-- **Purpose**: Change the LIP process itself
+### Meta LPs
+- **Purpose**: Change the LP process itself
 - **Requirement**: Higher approval threshold (75%)
-- **Example**: Adding new LIP categories
+- **Example**: Adding new LP categories
 
-### Subnet-Specific LIPs
+### Subnet-Specific LPs
 - **Scope**: Changes affecting only specific subnets
 - **Voting**: Subnet validators and stakeholders
 - **Integration**: Must not break cross-subnet compatibility
 
 ## Incentive Alignment
 
-### LIP Rewards
-- **Successful LIP Authors**: LUX token rewards from treasury
+### LP Rewards
+- **Successful LP Authors**: LUX token rewards from treasury
 - **Quality Reviews**: Reviewer rewards for substantive feedback
-- **Implementation Bounties**: For complex LIP implementations
+- **Implementation Bounties**: For complex LP implementations
 
 ### Participation Incentives
 - **Voting Rewards**: Small rewards for governance participation
@@ -236,7 +236,7 @@ For an LIP to become a standard, it must:
 
 ## Tools and Infrastructure
 
-### 1. **LIP Repository**
+### 1. **LP Repository**
 - GitHub-based for transparency
 - Version control for all proposals
 - Automated status tracking
@@ -249,16 +249,16 @@ For an LIP to become a standard, it must:
 - Historical vote records
 
 ### 3. **Discussion Platforms**
-- GitHub Discussions for LIP debates
+- GitHub Discussions for LP debates
 - Discord for real-time discussion
 - Forum for long-form analysis
 - Regular community calls
 
 ## Best Practices
 
-### For LIP Authors
+### For LP Authors
 1. Start with informal discussion
-2. Study successful past LIPs
+2. Study successful past LPs
 3. Provide clear problem statement
 4. Include concrete examples
 5. Address all template sections
@@ -272,7 +272,7 @@ For an LIP to become a standard, it must:
 5. Suggest specific improvements
 
 ### For Voters
-1. Read full LIP before voting
+1. Read full LP before voting
 2. Consider long-term implications
 3. Evaluate technical feasibility
 4. Assess economic impacts
@@ -290,6 +290,6 @@ The Lux governance system is designed to evolve. Future improvements may include
 
 ## Conclusion
 
-The Lux LIP process combines the best of open-source development with blockchain governance. By standardizing how changes are proposed, reviewed, and adopted, we ensure that Lux Network evolves in a decentralized yet coordinated manner. The process prioritizes technical excellence, community input, and long-term sustainability.
+The Lux LP process combines the best of open-source development with blockchain governance. By standardizing how changes are proposed, reviewed, and adopted, we ensure that Lux Network evolves in a decentralized yet coordinated manner. The process prioritizes technical excellence, community input, and long-term sustainability.
 
-For specific questions about the LIP process or governance participation, join our [Discord](https://discord.gg/lux) or visit the [Governance Forum](https://forum.lux.network).
+For specific questions about the LP process or governance participation, join our [Discord](https://discord.gg/lux) or visit the [Governance Forum](https://forum.lux.network).

@@ -26,9 +26,9 @@ Phase 5 introduces the Z-Chain (Zero-knowledge Chain) and comprehensive privacy 
 - Gas cost <3x public transactions
 - $50M+ in shielded value
 
-## LIP Specifications
+## LP Specifications
 
-### LIP-33: Z-Chain Architecture
+### LP-33: Z-Chain Architecture
 - **Type**: Standards Track (Core)
 - **Status**: Draft
 - **Description**: Privacy-focused blockchain with zero-knowledge proofs
@@ -38,7 +38,7 @@ Phase 5 introduces the Z-Chain (Zero-knowledge Chain) and comprehensive privacy 
   - Recursive proof composition
   - Cross-chain privacy bridge
 
-### LIP-34: zk-SNARK Integration
+### LP-34: zk-SNARK Integration
 - **Type**: Standards Track (Core)
 - **Status**: Proposed
 - **Description**: Zero-knowledge proof system implementation
@@ -48,7 +48,7 @@ Phase 5 introduces the Z-Chain (Zero-knowledge Chain) and comprehensive privacy 
   - Trusted setup ceremony
   - Proof verification precompiles
 
-### LIP-35: Private Transaction Format
+### LP-35: Private Transaction Format
 - **Type**: Standards Track (Core)
 - **Status**: Draft
 - **Description**: Format for confidential transactions
@@ -63,7 +63,7 @@ Phase 5 introduces the Z-Chain (Zero-knowledge Chain) and comprehensive privacy 
   }
   ```
 
-### LIP-36: Shielded Pool Specification
+### LP-36: Shielded Pool Specification
 - **Type**: Standards Track (Core)
 - **Status**: Proposed
 - **Description**: Anonymity set management for private assets
@@ -73,7 +73,7 @@ Phase 5 introduces the Z-Chain (Zero-knowledge Chain) and comprehensive privacy 
   - Pool rebalancing
   - Emergency disclosure
 
-### LIP-37: Privacy-Preserving Bridge Protocol
+### LP-37: Privacy-Preserving Bridge Protocol
 - **Type**: Standards Track (Interface)
 - **Status**: Draft
 - **Description**: Cross-chain transfers with privacy
@@ -83,7 +83,7 @@ Phase 5 introduces the Z-Chain (Zero-knowledge Chain) and comprehensive privacy 
   - Unshield on destination
   - Metadata protection
 
-### LIP-38: LRC-38 Private Token Standard
+### LP-38: LRC-38 Private Token Standard
 - **Type**: Standards Track (LRC)
 - **Status**: Draft
 - **Description**: Fungible tokens with optional privacy
@@ -93,7 +93,7 @@ Phase 5 introduces the Z-Chain (Zero-knowledge Chain) and comprehensive privacy 
   - Mixed mode (partial privacy)
   - Compliance mode (viewable)
 
-### LIP-39: LRC-39 Confidential Asset Standard
+### LP-39: LRC-39 Confidential Asset Standard
 - **Type**: Standards Track (LRC)
 - **Status**: Proposed
 - **Description**: Assets with amount privacy but visible ownership
@@ -349,7 +349,7 @@ Operation Fees:
 ## Phase Completion Criteria
 
 - [ ] Z-Chain fully operational
-- [ ] All 7 LIPs Final status
+- [ ] All 7 LPs Final status
 - [ ] 10k+ shielded transactions
 - [ ] <3 second proof generation
 - [ ] Zero privacy breaches

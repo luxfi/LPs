@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Link Checker Script
-# Checks all links in LIP files for validity
+# Checks all links in LP files for validity
 
 set -e
 
@@ -49,7 +49,7 @@ check_local_file() {
     fi
 }
 
-echo "Checking links in LIP files..."
+echo "Checking links in LP files..."
 echo "=============================="
 
 TOTAL_LINKS=0

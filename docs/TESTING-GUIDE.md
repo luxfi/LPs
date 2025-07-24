@@ -1,6 +1,6 @@
-# Comprehensive Testing Guide for LIP Implementations
+# Comprehensive Testing Guide for LP Implementations
 
-This guide provides detailed testing strategies, frameworks, and best practices for ensuring LIP implementations are robust, secure, and performant.
+This guide provides detailed testing strategies, frameworks, and best practices for ensuring LP implementations are robust, secure, and performant.
 
 ## Table of Contents
 
@@ -1214,7 +1214,7 @@ module.exports = {
 
 ## Conclusion
 
-Comprehensive testing is essential for LIP implementation success. By following this guide and maintaining high testing standards, we ensure the security, reliability, and performance of the Lux Network ecosystem.
+Comprehensive testing is essential for LP implementation success. By following this guide and maintaining high testing standards, we ensure the security, reliability, and performance of the Lux Network ecosystem.
 
 Remember: **A feature without tests is not complete.**
 

@@ -2,12 +2,16 @@
 
 """
 Update Index Script
-Automatically updates the LIP index in README.md based on LIP files
+Automatically updates the LP index in README.md based on LP files
 """
 
 import os
 import re
-import yaml
+try:
+    import yaml
+    _yaml_available = True
+except ImportError:
+    _yaml_available = False
 from datetime import datetime
 from pathlib import Path
 
@@ -15,41 +19,51 @@ def extract_frontmatter(filepath):
     """Extract YAML frontmatter from a markdown file"""
     with open(filepath, 'r') as f:
         content = f.read()
-    
+
     # Find frontmatter between --- markers
     match = re.search(r'^---\s*\n(.*?)\n---\s*\n', content, re.MULTILINE | re.DOTALL)
-    if match:
+    if not match:
+        return None
+    fm_text = match.group(1)
+    if _yaml_available:
         try:
-            return yaml.safe_load(match.group(1))
-        except:
+            return yaml.safe_load(fm_text)
+        except Exception:
             print(f"Error parsing YAML in {filepath}")
             return None
-    return None
 
-def get_all_lips(directory='LIPs'):
-    """Get all LIP files and their metadata"""
-    lips = []
+    # Fallback: simple parse of key: value pairs
+    data = {}
+    for line in fm_text.splitlines():
+        if ':' in line:
+            key, val = line.split(':', 1)
+            data[key.strip()] = val.strip().strip('"').strip("'")
+    return data
+
+def get_all_lps(directory='LPs'):
+    """Get all LP files and their metadata"""
+    lps = []
     
     for filename in os.listdir(directory):
-        if filename.endswith('.md') and filename.startswith('lip-'):
+        if filename.endswith('.md') and filename.startswith('lp-'):
             filepath = os.path.join(directory, filename)
             frontmatter = extract_frontmatter(filepath)
             
             if frontmatter:
-                # Extract LIP number from filename
-                match = re.search(r'lip-(\d+)\.md', filename)
+                # Extract LP number from filename
+                match = re.search(r'lp-(\d+)\.md', filename)
                 if match:
                     lip_number = int(match.group(1))
                     frontmatter['number'] = lip_number
                     frontmatter['filename'] = filename
-                    lips.append(frontmatter)
+                    lps.append(frontmatter)
     
-    # Sort by LIP number
-    lips.sort(key=lambda x: x['number'])
-    return lips
+    # Sort by LP number
+    lps.sort(key=lambda x: x['number'])
+    return lps
 
-def categorize_lips(lips):
-    """Categorize LIPs by type and category"""
+def categorize_lps(lps):
+    """Categorize LPs by type and category"""
     categories = {
         'meta': [],
         'core': [],
@@ -59,7 +73,7 @@ def categorize_lips(lips):
         'informational': []
     }
     
-    for lip in lips:
+    for lip in lps:
         lip_type = lip.get('type', '').lower()
         category = lip.get('category', '').lower()
         
@@ -80,7 +94,7 @@ def categorize_lips(lips):
     return categories
 
 def format_table_row(lip):
-    """Format a LIP as a markdown table row"""
+    """Format a LP as a markdown table row"""
     number = lip['number']
     title = lip.get('title', 'Untitled')
     authors = lip.get('author', 'Unknown')
@@ -96,43 +110,43 @@ def format_table_row(lip):
     if len(title) > 50:
         title = title[:47] + '...'
     
-    return f"| [LIP-{number}](./LIPs/lip-{number}.md) | {title} | {authors} | {lip_type} | {category} | {status} |"
+    return f"| [LP-{number}](./LPs/lp-{number}.md) | {title} | {authors} | {lip_type} | {category} | {status} |"
 
 def generate_index_section():
     """Generate the index section for README"""
-    lips = get_all_lips()
+    lps = get_all_lps()
     
-    if not lips:
-        return "No LIPs found."
+    if not lps:
+        return "No LPs found."
     
     # Main table
-    output = ["## Current Proposals\n"]
+    output = ["## LP Index\n"]
     output.append("| Number | Title | Author(s) | Type | Category | Status |")
     output.append("|:-------|:------|:----------|:-----|:---------|:-------|")
     
-    for lip in lips:
+    for lip in lps:
         output.append(format_table_row(lip))
     
     # LRC-specific table
-    lrcs = [lip for lip in lips if lip.get('category', '').lower() == 'lrc']
+    lrcs = [lip for lip in lps if lip.get('category', '').lower() == 'lrc']
     if lrcs:
         output.append("\n### Notable LRCs (Application Standards)\n")
-        output.append("| LRC Number | LIP | Title | Status |")
+        output.append("| LRC Number | LP | Title | Status |")
         output.append("|:-----------|:----|:------|:-------|")
         
         for lrc in lrcs:
             number = lrc['number']
             title = lrc.get('title', 'Untitled')
             status = lrc.get('status', 'Unknown')
-            
+
             # Extract LRC number from title if present
             lrc_match = re.search(r'LRC-(\d+)', title)
             if lrc_match:
                 lrc_num = f"LRC-{lrc_match.group(1)}"
             else:
                 lrc_num = f"LRC-{number}"
-            
-            output.append(f"| {lrc_num} | [LIP-{number}](./LIPs/lip-{number}.md) | {title} | {status} |")
+
+            output.append(f"| {lrc_num} | [LP-{number}](./LPs/lp-{number}.md) | {title} | {status} |")
     
     return '\n'.join(output)
 
@@ -145,8 +159,8 @@ def update_readme():
         content = f.read()
     
     # Find the section to replace
-    start_marker = "## Current Proposals"
-    end_marker = "## Contributing"
+    start_marker = "## LP Index"
+    end_marker = "## LP Process"
     
     start_idx = content.find(start_marker)
     end_idx = content.find(end_marker)
@@ -164,17 +178,30 @@ def update_readme():
     # Write back
     with open(readme_path, 'w') as f:
         f.write(new_content)
-    
+
+    # Clean up and normalize markdown: remove tabs, replacement characters, and normalize lists
+    with open(readme_path, 'r') as f:
+        content = f.read().replace('\t', '').replace('\uFFFC', '')
+    # Remove leading spaces before bullet and numbered list markers
+    content = re.sub(r'(?m)^\s+([•])', r'\1', content)
+    content = re.sub(r'(?m)^\s+([0-9]+\.)', r'\1', content)
+    # Convert bullet characters to hyphens for proper markdown lists
+    content = content.replace('•', '-')
+    # Normalize bullet marker spacing
+    content = re.sub(r'(?m)^- +', '- ', content)
+    with open(readme_path, 'w') as f:
+        f.write(content)
+
     print(f"README.md updated successfully!")
     return True
 
 def generate_statistics():
-    """Generate statistics about LIPs"""
-    lips = get_all_lips()
-    categories = categorize_lips(lips)
+    """Generate statistics about LPs"""
+    lps = get_all_lps()
+    categories = categorize_lps(lps)
     
-    print("\nLIP Statistics:")
-    print(f"  Total LIPs: {len(lips)}")
+    print("\nLP Statistics:")
+    print(f"  Total LPs: {len(lps)}")
     print(f"  Meta: {len(categories['meta'])}")
     print(f"  Core: {len(categories['core'])}")
     print(f"  Networking: {len(categories['networking'])}")
@@ -184,7 +211,7 @@ def generate_statistics():
     
     # Status breakdown
     status_count = {}
-    for lip in lips:
+    for lip in lps:
         status = lip.get('status', 'Unknown')
         status_count[status] = status_count.get(status, 0) + 1
     
@@ -193,7 +220,7 @@ def generate_statistics():
         print(f"  {status}: {count}")
 
 if __name__ == "__main__":
-    print("Updating LIP index...")
+    print("Updating LP index...")
     
     # Change to script directory
     script_dir = Path(__file__).parent

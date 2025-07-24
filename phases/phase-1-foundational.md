@@ -13,7 +13,7 @@ Phase 1 establishes the critical foundation for the Lux Network's governance and
 ## Objectives
 
 ### Primary Goals
-1. Establish the LIP governance framework
+1. Establish the LP governance framework
 2. Define core consensus mechanisms
 3. Create foundational network standards
 4. Set up validator infrastructure
@@ -21,19 +21,19 @@ Phase 1 establishes the critical foundation for the Lux Network's governance and
 
 ### Success Metrics
 - 100% of governance processes documented
-- Core protocol LIPs approved and implemented
+- Core protocol LPs approved and implemented
 - Validator onboarding time < 1 hour
 - Network uptime > 99.9%
 
-## LIP Specifications
+## LP Specifications
 
-### LIP-1: LIP Purpose and Guidelines
+### LP-1: LP Purpose and Guidelines
 - **Type**: Meta
 - **Status**: Review
-- **Description**: Defines the LIP process, categories, and lifecycle
+- **Description**: Defines the LP process, categories, and lifecycle
 - **Impact**: Establishes how all future changes will be proposed and adopted
 
-### LIP-2: Lux DAO Constitution
+### LP-2: Lux DAO Constitution
 - **Type**: Meta
 - **Status**: Draft
 - **Description**: Governance structure, voting mechanisms, and DAO operations
@@ -43,7 +43,7 @@ Phase 1 establishes the critical foundation for the Lux Network's governance and
   - Quorum requirements
   - Treasury management rules
 
-### LIP-3: Holographic Consensus Implementation
+### LP-3: Holographic Consensus Implementation
 - **Type**: Standards Track (Core)
 - **Status**: Proposed
 - **Description**: Scalable governance mechanism for efficient decision-making
@@ -53,7 +53,7 @@ Phase 1 establishes the critical foundation for the Lux Network's governance and
   - Economic security model
   - Implementation roadmap
 
-### LIP-4: Validator Requirements and Slashing Conditions
+### LP-4: Validator Requirements and Slashing Conditions
 - **Type**: Standards Track (Core)
 - **Status**: Draft
 - **Description**: Technical and economic requirements for validators
@@ -63,7 +63,7 @@ Phase 1 establishes the critical foundation for the Lux Network's governance and
   - Uptime requirements (>98%)
   - Slashing conditions and penalties
 
-### LIP-5: P-Chain Transaction Format
+### LP-5: P-Chain Transaction Format
 - **Type**: Standards Track (Core)
 - **Status**: Draft
 - **Description**: Standard format for platform chain transactions
@@ -73,7 +73,7 @@ Phase 1 establishes the critical foundation for the Lux Network's governance and
   - Fee calculation
   - Validation rules
 
-### LIP-6: Block Structure and Header Format
+### LP-6: Block Structure and Header Format
 - **Type**: Standards Track (Core)
 - **Status**: Proposed
 - **Description**: Standardized block format across all chains
@@ -83,7 +83,7 @@ Phase 1 establishes the critical foundation for the Lux Network's governance and
   - Timestamp requirements
   - Size limits
 
-### LIP-7: Network Protocol Specification
+### LP-7: Network Protocol Specification
 - **Type**: Standards Track (Networking)
 - **Status**: Draft
 - **Description**: P2P network communication standards
@@ -93,7 +93,7 @@ Phase 1 establishes the critical foundation for the Lux Network's governance and
   - Connection management
   - Network topology
 
-### LIP-8: P2P Communication Standards
+### LP-8: P2P Communication Standards
 - **Type**: Standards Track (Networking)
 - **Status**: Draft
 - **Description**: Detailed P2P messaging and gossip protocols
@@ -106,25 +106,25 @@ Phase 1 establishes the critical foundation for the Lux Network's governance and
 ## Implementation Plan
 
 ### Month 1 (January 2025)
-- [ ] Finalize LIP-1 and establish review process
-- [ ] Complete LIP-2 DAO Constitution draft
+- [ ] Finalize LP-1 and establish review process
+- [ ] Complete LP-2 DAO Constitution draft
 - [ ] Begin validator outreach program
 - [ ] Set up governance infrastructure
 
 ### Month 2 (February 2025)
 - [ ] Launch testnet with proposed consensus changes
-- [ ] Complete technical LIPs (3-6) drafts
+- [ ] Complete technical LPs (3-6) drafts
 - [ ] Begin security audits
 - [ ] Community feedback period
 
 ### Month 3 (March 2025)
-- [ ] Finalize all Phase 1 LIPs
+- [ ] Finalize all Phase 1 LPs
 - [ ] Complete security audits
 - [ ] Begin mainnet deployment preparation
 - [ ] Validator onboarding begins
 
 ### Month 4 (April 2025)
-- [ ] Mainnet activation of approved LIPs
+- [ ] Mainnet activation of approved LPs
 - [ ] Monitor network stability
 - [ ] Address any issues
 - [ ] Documentation completion
@@ -152,7 +152,7 @@ Phase 1 establishes the critical foundation for the Lux Network's governance and
 - Video content creation
 
 ### Feedback Channels
-- GitHub Discussions for each LIP
+- GitHub Discussions for each LP
 - Discord dedicated channels
 - Forum discussion threads
 - Regular surveys
@@ -183,7 +183,7 @@ Phase 1 establishes the critical foundation for the Lux Network's governance and
 ## Resources
 
 ### Documentation
-- [LIP Repository](https://github.com/luxfi/lips)
+- [LP Repository](https://github.com/luxfi/lps)
 - [Governance Forum](https://forum.lux.network)
 - [Technical Specifications](https://docs.lux.network)
 
@@ -195,7 +195,7 @@ Phase 1 establishes the critical foundation for the Lux Network's governance and
 
 ## Phase Completion Criteria
 
-- [ ] All 8 LIPs moved to Final status
+- [ ] All 8 LPs moved to Final status
 - [ ] Governance portal fully operational
 - [ ] >100 active validators onboarded
 - [ ] Network stability maintained

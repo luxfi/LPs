@@ -3,7 +3,7 @@ lp: 8
 title: Plugin Architecture
 description: Describes a Plugin Architecture for Lux nodes.
 author: Lux Network Team (@luxdefi)
-discussions-to: https://github.com/luxfi/lips/discussions
+discussions-to: https://github.com/luxfi/lps/discussions
 status: Draft
 type: Standards Track
 category: Core
@@ -12,11 +12,11 @@ created: 2025-01-23
 
 ## Abstract
 
-This LIP describes a Plugin Architecture for Lux nodes (for the lpm repo, possibly Lux Plugin Manager). This LIP sets the standard for extending Lux node functionality via plugins or modules, without needing to fork or alter core code.
+This LP describes a Plugin Architecture for Lux nodes (for the lpm repo, possibly Lux Plugin Manager). This LP sets the standard for extending Lux node functionality via plugins or modules, without needing to fork or alter core code.
 
 ## Specification
 
-*(This LIP will specify how plugins are structured, how they are installed/loaded by a node, and what APIs they can access.)*
+*(This LP will specify how plugins are structured, how they are installed/loaded by a node, and what APIs they can access.)*
 
 ## Rationale
 

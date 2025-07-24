@@ -16,15 +16,15 @@ The Lux Network standards framework aims to establish a comprehensive set of pro
 - Define core consensus mechanisms
 - Create foundational network standards
 
-### Key LIPs
-- **LIP-1**: LIP Purpose and Guidelines (Meta)
-- **LIP-2**: Lux DAO Constitution (Meta)
-- **LIP-3**: Holographic Consensus Implementation (Core)
-- **LIP-4**: Validator Requirements and Slashing Conditions (Core)
-- **LIP-5**: P-Chain Transaction Format (Core)
-- **LIP-6**: Block Structure and Header Format (Core)
-- **LIP-7**: Network Protocol Specification (Networking)
-- **LIP-8**: P2P Communication Standards (Networking)
+### Key LPs
+- **LP-1**: LP Purpose and Guidelines (Meta)
+- **LP-2**: Lux DAO Constitution (Meta)
+- **LP-3**: Holographic Consensus Implementation (Core)
+- **LP-4**: Validator Requirements and Slashing Conditions (Core)
+- **LP-5**: P-Chain Transaction Format (Core)
+- **LP-6**: Block Structure and Header Format (Core)
+- **LP-7**: Network Protocol Specification (Networking)
+- **LP-8**: P2P Communication Standards (Networking)
 
 ### Success Criteria
 - Clear governance processes established
@@ -42,16 +42,16 @@ The Lux Network standards framework aims to establish a comprehensive set of pro
 - Define asset standards and bridges
 - Establish DeFi primitives
 
-### Key LIPs
-- **LIP-9**: C-Chain EVM Extensions (Core)
-- **LIP-10**: Native Asset Bridge Protocol (Core)
-- **LIP-11**: X-Chain UTXO Extensions (Core)
-- **LIP-12**: Multi-Asset Transaction Format (Core)
-- **LIP-20**: LRC-20 Fungible Token Standard (LRC)
-- **LIP-21**: LRC-21 Semi-Fungible Token Standard (LRC)
-- **LIP-22**: LRC-22 Multi-Token Standard (LRC)
-- **LIP-13**: DeFi Primitive Interfaces (Interface)
-- **LIP-14**: Oracle Integration Standards (Interface)
+### Key LPs
+- **LP-9**: C-Chain EVM Extensions (Core)
+- **LP-10**: Native Asset Bridge Protocol (Core)
+- **LP-11**: X-Chain UTXO Extensions (Core)
+- **LP-12**: Multi-Asset Transaction Format (Core)
+- **LP-20**: LRC-20 Fungible Token Standard (LRC)
+- **LP-21**: LRC-21 Semi-Fungible Token Standard (LRC)
+- **LP-22**: LRC-22 Multi-Token Standard (LRC)
+- **LP-13**: DeFi Primitive Interfaces (Interface)
+- **LP-14**: Oracle Integration Standards (Interface)
 
 ### Success Criteria
 - Token standards widely adopted
@@ -69,14 +69,14 @@ The Lux Network standards framework aims to establish a comprehensive set of pro
 - Standardize messaging protocols
 - Create unified wallet experiences
 
-### Key LIPs
-- **LIP-15**: Teleport (AWM) Message Format (Core)
-- **LIP-16**: Cross-Subnet Communication Protocol (Core)
-- **LIP-17**: Universal Bridge Standards (Interface)
-- **LIP-18**: Cross-Chain Asset Registry (Interface)
-- **LIP-19**: Wallet Integration Standards (Interface)
-- **LIP-23**: LRC-23 Cross-Chain NFT Standard (LRC)
-- **LIP-24**: LRC-24 Wrapped Asset Standard (LRC)
+### Key LPs
+- **LP-15**: Teleport (AWM) Message Format (Core)
+- **LP-16**: Cross-Subnet Communication Protocol (Core)
+- **LP-17**: Universal Bridge Standards (Interface)
+- **LP-18**: Cross-Chain Asset Registry (Interface)
+- **LP-19**: Wallet Integration Standards (Interface)
+- **LP-23**: LRC-23 Cross-Chain NFT Standard (LRC)
+- **LP-24**: LRC-24 Wrapped Asset Standard (LRC)
 
 ### Success Criteria
 - Cross-chain transfers operational
@@ -94,15 +94,15 @@ The Lux Network standards framework aims to establish a comprehensive set of pro
 - Create compliant token standards
 - Enable permission-based systems
 
-### Key LIPs
-- **LIP-25**: B-Chain Specification (Core)
-- **LIP-26**: BLS Signature Aggregation (Core)
-- **LIP-27**: Batch Transaction Processing (Core)
-- **LIP-28**: Compliance Engine Interface (Interface)
-- **LIP-29**: Permission Management System (Interface)
-- **LIP-30**: LRC-30 Regulated Security Token (LRC)
-- **LIP-31**: LRC-31 Identity Token Standard (LRC)
-- **LIP-32**: LRC-32 Compliant Stablecoin Standard (LRC)
+### Key LPs
+- **LP-25**: B-Chain Specification (Core)
+- **LP-26**: BLS Signature Aggregation (Core)
+- **LP-27**: Batch Transaction Processing (Core)
+- **LP-28**: Compliance Engine Interface (Interface)
+- **LP-29**: Permission Management System (Interface)
+- **LP-30**: LRC-30 Regulated Security Token (LRC)
+- **LP-31**: LRC-31 Identity Token Standard (LRC)
+- **LP-32**: LRC-32 Compliant Stablecoin Standard (LRC)
 
 ### Success Criteria
 - B-Chain operational
@@ -120,14 +120,14 @@ The Lux Network standards framework aims to establish a comprehensive set of pro
 - Implement ZK proof systems
 - Create private asset standards
 
-### Key LIPs
-- **LIP-33**: Z-Chain Architecture (Core)
-- **LIP-34**: zk-SNARK Integration (Core)
-- **LIP-35**: Private Transaction Format (Core)
-- **LIP-36**: Shielded Pool Specification (Core)
-- **LIP-37**: Privacy-Preserving Bridge Protocol (Interface)
-- **LIP-38**: LRC-38 Private Token Standard (LRC)
-- **LIP-39**: LRC-39 Confidential Asset Standard (LRC)
+### Key LPs
+- **LP-33**: Z-Chain Architecture (Core)
+- **LP-34**: zk-SNARK Integration (Core)
+- **LP-35**: Private Transaction Format (Core)
+- **LP-36**: Shielded Pool Specification (Core)
+- **LP-37**: Privacy-Preserving Bridge Protocol (Interface)
+- **LP-38**: LRC-38 Private Token Standard (LRC)
+- **LP-39**: LRC-39 Confidential Asset Standard (LRC)
 
 ### Success Criteria
 - Z-Chain fully operational
@@ -145,14 +145,14 @@ The Lux Network standards framework aims to establish a comprehensive set of pro
 - Create off-chain data standards
 - Enable modular scalability
 
-### Key LIPs
-- **LIP-40**: A-Chain Specification (Core)
-- **LIP-41**: Data Availability Sampling (Core)
-- **LIP-42**: State Rent Mechanism (Core)
-- **LIP-43**: Light Client Protocol (Networking)
-- **LIP-44**: Archival Node Standards (Networking)
-- **LIP-45**: Off-Chain Data Pointer Standard (Interface)
-- **LIP-46**: LRC-46 Data Registry Standard (LRC)
+### Key LPs
+- **LP-40**: A-Chain Specification (Core)
+- **LP-41**: Data Availability Sampling (Core)
+- **LP-42**: State Rent Mechanism (Core)
+- **LP-43**: Light Client Protocol (Networking)
+- **LP-44**: Archival Node Standards (Networking)
+- **LP-45**: Off-Chain Data Pointer Standard (Interface)
+- **LP-46**: LRC-46 Data Registry Standard (LRC)
 
 ### Success Criteria
 - A-Chain operational
@@ -170,17 +170,17 @@ The Lux Network standards framework aims to establish a comprehensive set of pro
 - Enhanced user experiences
 - Ecosystem interoperability
 
-### Key LIPs
-- **LIP-165**: LRC-165 Interface Detection (LRC)
-- **LIP-404**: LRC-404 Hybrid Token Standard (LRC)
-- **LIP-721**: LRC-721 NFT Standard (LRC)
-- **LIP-1155**: LRC-1155 Multi-Token Standard (LRC)
-- **LIP-2612**: LRC-2612 Permit Extension (LRC)
-- **LIP-3525**: LRC-3525 Semi-Fungible Token (LRC)
-- **LIP-4337**: LRC-4337 Account Abstraction (LRC)
-- **LIP-4626**: LRC-4626 Vault Standard (LRC)
-- **LIP-5192**: LRC-5192 Soulbound Token (LRC)
-- **LIP-6551**: LRC-6551 Token Bound Accounts (LRC)
+### Key LPs
+- **LP-165**: LRC-165 Interface Detection (LRC)
+- **LP-404**: LRC-404 Hybrid Token Standard (LRC)
+- **LP-721**: LRC-721 NFT Standard (LRC)
+- **LP-1155**: LRC-1155 Multi-Token Standard (LRC)
+- **LP-2612**: LRC-2612 Permit Extension (LRC)
+- **LP-3525**: LRC-3525 Semi-Fungible Token (LRC)
+- **LP-4337**: LRC-4337 Account Abstraction (LRC)
+- **LP-4626**: LRC-4626 Vault Standard (LRC)
+- **LP-5192**: LRC-5192 Soulbound Token (LRC)
+- **LP-6551**: LRC-6551 Token Bound Accounts (LRC)
 
 ### Success Criteria
 - Rich ecosystem of standards
@@ -196,13 +196,13 @@ The Lux Network standards framework aims to establish a comprehensive set of pro
 - Core infrastructure takes priority
 
 ### Community Involvement
-- Each LIP requires community discussion
+- Each LP requires community discussion
 - Technical reviews mandatory
 - Implementation bounties available
 - Regular progress updates
 
 ### Quality Assurance
-- Security audits for critical LIPs
+- Security audits for critical LPs
 - Reference implementations required
 - Comprehensive test suites
 - Documentation standards
@@ -230,7 +230,7 @@ The Lux Network standards framework aims to establish a comprehensive set of pro
 ## Success Metrics
 
 ### Technical Metrics
-- LIPs implemented
+- LPs implemented
 - Standards adopted
 - Security incidents
 - Performance benchmarks
@@ -292,7 +292,7 @@ The Lux Network standards framework aims to establish a comprehensive set of pro
 ## Getting Involved
 
 ### For Developers
-1. Review existing LIPs
+1. Review existing LPs
 2. Join technical discussions
 3. Contribute implementations
 4. Propose improvements
@@ -311,7 +311,7 @@ The Lux Network standards framework aims to establish a comprehensive set of pro
 
 ## Resources
 
-- **LIP Repository**: [github.com/luxfi/lips](https://github.com/luxfi/lips)
+- **LP Repository**: [github.com/luxfi/lps](https://github.com/luxfi/lps)
 - **Discussion Forum**: [forum.lux.network](https://forum.lux.network)
 - **Discord**: [discord.gg/lux](https://discord.gg/lux)
 - **Documentation**: [docs.lux.network](https://docs.lux.network)

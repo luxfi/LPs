@@ -1,15 +1,15 @@
-# LIP Repository Directory Structure
+# LP Repository Directory Structure
 
-This document provides an overview of the LIP repository organization and file purposes.
+This document provides an overview of the LP repository organization and file purposes.
 
 ## Directory Structure
 
 ```
-lux-lips/
+lux-lps/
 ├── README.md                    # Main documentation and overview
 ├── ROADMAP.md                   # 7-phase development roadmap
 ├── GOVERNANCE.md                # Governance process details
-├── CONTRIBUTING.md              # How to contribute to LIPs
+├── CONTRIBUTING.md              # How to contribute to LPs
 ├── LICENSE                      # CC0 Public Domain
 │
 ├── Documentation/
@@ -18,17 +18,17 @@ lux-lips/
 │   ├── ARCHITECTURE.md          # Visual diagrams and flows
 │   ├── FAQ.md                   # Frequently asked questions
 │   ├── GLOSSARY.md              # Term definitions
-│   ├── STATUS.md                # Current status of all LIPs
+│   ├── STATUS.md                # Current status of all LPs
 │   └── STANDARDIZATION-FLOW.md  # Standards development process
 │
 ├── Guides/
 │   ├── IMPLEMENTATION-GUIDE.md  # Developer implementation guide
-│   ├── NUMBER-ALLOCATION.md     # LIP numbering system
+│   ├── NUMBER-ALLOCATION.md     # LP numbering system
 │   ├── CROSS-REFERENCE.md       # Ethereum/Avalanche mappings
-│   └── EDITORS.md               # Guide for LIP editors
+│   └── EDITORS.md               # Guide for LP editors
 │
-├── LIPs/                        # Actual LIP documents
-│   ├── TEMPLATE.md              # Template for new LIPs
+├── LPs/                        # Actual LP documents
+│   ├── TEMPLATE.md              # Template for new LPs
 │   ├── lip-1.md                 # Community Contribution Framework
 │   ├── lip-20.md                # LRC-20 Token Standard
 │   └── lip-draft.md             # (Created by authors)
@@ -43,13 +43,13 @@ lux-lips/
 │   └── phase-7-application-standards.md # Q3 2026+
 │
 ├── scripts/                     # Automation tools
-│   ├── validate-lip.sh          # Validate LIP formatting
+│   ├── validate-lip.sh          # Validate LP formatting
 │   ├── update-index.py          # Update README index
 │   ├── check-links.sh           # Check for broken links
-│   └── new-lip.sh               # Create new LIP wizard
+│   └── new-lip.sh               # Create new LP wizard
 │
 └── assets/                      # Supporting materials
-    └── lip-{number}/            # Assets for specific LIPs
+    └── lip-{number}/            # Assets for specific LPs
         ├── images/
         ├── contracts/
         └── examples/
@@ -61,10 +61,10 @@ lux-lips/
 
 | File | Purpose | Audience |
 |------|---------|----------|
-| README.md | Main entry point, explains LIP/LRC | Everyone |
+| README.md | Main entry point, explains LP/LRC | Everyone |
 | ROADMAP.md | 7-phase development timeline | Planners |
 | GOVERNANCE.md | How governance works | Community |
-| CONTRIBUTING.md | How to submit LIPs | Authors |
+| CONTRIBUTING.md | How to submit LPs | Authors |
 
 ### Documentation
 
@@ -75,24 +75,24 @@ lux-lips/
 | ARCHITECTURE.md | Visual diagrams | As needed |
 | FAQ.md | Common questions | Monthly |
 | GLOSSARY.md | Term definitions | As needed |
-| STATUS.md | LIP status tracker | Weekly |
+| STATUS.md | LP status tracker | Weekly |
 
 ### Guides
 
 | File | Purpose | Primary Users |
 |------|---------|---------------|
 | IMPLEMENTATION-GUIDE.md | How to implement standards | Developers |
-| NUMBER-ALLOCATION.md | LIP numbering rules | Authors |
+| NUMBER-ALLOCATION.md | LP numbering rules | Authors |
 | CROSS-REFERENCE.md | Standard mappings | Developers |
 | EDITORS.md | Editor responsibilities | Editors |
 
-### LIPs Directory
+### LPs Directory
 
 | Pattern | Description | Example |
 |---------|-------------|---------|
-| lip-{N}.md | Approved LIPs | lip-20.md |
+| lip-{N}.md | Approved LPs | lip-20.md |
 | lip-draft.md | New submissions | lip-draft.md |
-| TEMPLATE.md | LIP template | - |
+| TEMPLATE.md | LP template | - |
 
 ### Phase Documentation
 
@@ -110,10 +110,10 @@ lux-lips/
 
 | Script | Purpose | Usage |
 |--------|---------|-------|
-| validate-lip.sh | Check LIP format | `./scripts/validate-lip.sh lip-20.md` |
+| validate-lip.sh | Check LP format | `./scripts/validate-lip.sh lip-20.md` |
 | update-index.py | Update README | `python scripts/update-index.py` |
 | check-links.sh | Find broken links | `./scripts/check-links.sh` |
-| new-lip.sh | Create new LIP | `./scripts/new-lip.sh` |
+| new-lip.sh | Create new LP | `./scripts/new-lip.sh` |
 
 ## Navigation Guide
 
@@ -127,11 +127,11 @@ lux-lips/
 1. Read [IMPLEMENTATION-GUIDE.md](./IMPLEMENTATION-GUIDE.md)
 2. Check [CROSS-REFERENCE.md](./CROSS-REFERENCE.md) for standards
 3. Review relevant phase documentation
-4. Study existing LIPs in your area
+4. Study existing LPs in your area
 
 ### For Contributors
 1. Read [CONTRIBUTING.md](./CONTRIBUTING.md)
-2. Use [TEMPLATE.md](./LIPs/TEMPLATE.md)
+2. Use [TEMPLATE.md](./LPs/TEMPLATE.md)
 3. Check [NUMBER-ALLOCATION.md](./NUMBER-ALLOCATION.md)
 4. Run validation scripts
 
@@ -147,7 +147,7 @@ lux-lips/
 |------|-----------|-------------|
 | Update STATUS.md | Weekly | Editors |
 | Update INDEX.md | Monthly | Editors |
-| Review stagnant LIPs | Monthly | Editors |
+| Review stagnant LPs | Monthly | Editors |
 | Update cross-references | Quarterly | Maintainers |
 | Archive completed phases | Annually | Admins |
 
@@ -156,7 +156,7 @@ lux-lips/
 - All files use semantic versioning in comments
 - Major updates tracked in commit messages
 - Phase documents frozen after completion
-- LIPs are immutable once Final
+- LPs are immutable once Final
 
 ---
 

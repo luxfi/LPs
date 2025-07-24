@@ -3,7 +3,7 @@ lp: 9
 title: CLI Tool Specification
 description: Defines the official Command-Line Interface (CLI) tools for Lux.
 author: Lux Network Team (@luxdefi)
-discussions-to: https://github.com/luxfi/lips/discussions
+discussions-to: https://github.com/luxfi/lps/discussions
 status: Draft
 type: Standards Track
 category: Interface
@@ -12,11 +12,11 @@ created: 2025-01-23
 
 ## Abstract
 
-This LIP defines the official Command-Line Interface (CLI) tools for Lux (for the cli repo). This LIP enumerates the standard commands, options, and JSON outputs for the lux-cli (and related tools), ensuring a uniform experience for users and scripts.
+This LP defines the official Command-Line Interface (CLI) tools for Lux (for the cli repo). This LP enumerates the standard commands, options, and JSON outputs for the lux-cli (and related tools), ensuring a uniform experience for users and scripts.
 
 ## Specification
 
-*(This LIP will include sections for each major command group: managing keys and wallets, issuing transactions on various chains, node administration, network deployment (interfacing with LP-6’s testnet framework), etc.)*
+*(This LP will include sections for each major command group: managing keys and wallets, issuing transactions on various chains, node administration, network deployment (interfacing with LP-6’s testnet framework), etc.)*
 
 ## Rationale
 

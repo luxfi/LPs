@@ -1,10 +1,10 @@
-# LIP/LRC Number Allocation Guide
+# LP/LRC Number Allocation Guide
 
-This document provides guidelines for allocating LIP numbers and understanding the numbering system for Lux Improvement Proposals and Lux Request for Comments.
+This document provides guidelines for allocating LP numbers and understanding the numbering system for Lux Improvement Proposals and Lux Request for Comments.
 
 ## Overview
 
-The LIP numbering system is designed to be clear, organized, and compatible with existing blockchain standards while maintaining Lux Network's unique identity.
+The LP numbering system is designed to be clear, organized, and compatible with existing blockchain standards while maintaining Lux Network's unique identity.
 
 ## Number Ranges and Categories
 
@@ -13,7 +13,7 @@ Reserved for fundamental protocol changes and governance.
 
 | Range | Category | Description |
 |-------|----------|-------------|
-| 1-9 | Meta/Governance | LIP process, DAO governance |
+| 1-9 | Meta/Governance | LP process, DAO governance |
 | 10-19 | Consensus | Consensus mechanisms, validators |
 | 20-29 | Core Protocol | Block structure, transactions |
 | 30-39 | Networking | P2P, message propagation |
@@ -42,9 +42,9 @@ Standards for application-level implementations.
 
 ### Special Number Mappings
 
-To maintain compatibility and developer familiarity, certain LIP numbers map directly to well-known Ethereum standards:
+To maintain compatibility and developer familiarity, certain LP numbers map directly to well-known Ethereum standards:
 
-| LIP Number | LRC Name | Ethereum Equivalent | Status |
+| LP Number | LRC Name | Ethereum Equivalent | Status |
 |------------|----------|-------------------|---------|
 | 165 | LRC-165 | ERC-165 | Final |
 | 20 | LRC-20 | ERC-20 | Final |
@@ -62,7 +62,7 @@ To maintain compatibility and developer familiarity, certain LIP numbers map dir
 
 ### 1. Check Existing Allocations
 Before requesting a number, check:
-- [Current LIPs](./LIPs/) directory
+- [Current LPs](./LPs/) directory
 - [Roadmap](./ROADMAP.md) for planned allocations
 - GitHub issues for pending requests
 
@@ -94,7 +94,7 @@ status: Draft
 - ✅ Use Ethereum-equivalent numbers for ported standards
 - ✅ Keep related standards in nearby numbers
 - ✅ Reserve numbers for planned series (e.g., 100-105 for a suite)
-- ✅ Document number choice rationale in LIP
+- ✅ Document number choice rationale in LP
 
 ### DON'T:
 - ❌ Skip numbers without reason
@@ -108,19 +108,19 @@ status: Draft
 For related standards, block allocation is allowed:
 ```
 Example: DeFi Suite
-- LIP-500: DeFi Primitive Base
-- LIP-501: Liquidity Pool Standard
-- LIP-502: Yield Aggregator Standard
-- LIP-503: Flash Loan Extension
-- LIP-504: Automated Market Maker
-- LIP-505: Reserved for suite expansion
+- LP-500: DeFi Primitive Base
+- LP-501: Liquidity Pool Standard
+- LP-502: Yield Aggregator Standard
+- LP-503: Flash Loan Extension
+- LP-504: Automated Market Maker
+- LP-505: Reserved for suite expansion
 ```
 
 ### Cross-Chain Standards
 When creating Lux-specific versions of multi-chain standards:
 ```
 Original: UNI-V2 (Uniswap)
-Lux Version: LIP-550 (LRC-550 AMM Standard)
+Lux Version: LP-550 (LRC-550 AMM Standard)
 Note: Reference original in specification
 ```
 
@@ -147,7 +147,7 @@ For critical security or protocol fixes:
 ### 4. **Deprecation**
 - Number remains allocated
 - Status changes to "Deprecated"
-- Replacement LIP referenced
+- Replacement LP referenced
 
 ## Registry Maintenance
 
@@ -178,14 +178,14 @@ For critical security or protocol fixes:
 Need: Create a new semi-fungible token standard
 Check: No existing Ethereum equivalent
 Range: 300-399 (NFT standards)
-Allocation: LIP-325 (next available in range)
+Allocation: LP-325 (next available in range)
 ```
 
 ### Example 2: Porting ERC Standard
 ```
 Need: Port ERC-2981 (NFT Royalty Standard)
 Check: Not yet allocated
-Action: Allocate LIP-2981 to maintain compatibility
+Action: Allocate LP-2981 to maintain compatibility
 Category: LRC (application standard)
 ```
 
@@ -193,7 +193,7 @@ Category: LRC (application standard)
 ```
 Need: Consensus mechanism improvement
 Range: 10-19 (Consensus)
-Allocation: LIP-15 (if 10-14 taken)
+Allocation: LP-15 (if 10-14 taken)
 Review: Technical committee required
 ```
 
@@ -242,8 +242,8 @@ Future major protocol upgrade may:
 For number allocation questions:
 - GitHub: Open issue with "number-allocation" label
 - Discord: #lip-authors channel
-- Email: lips@lux.network
+- Email: lps@lux.network
 
 ---
 
-*This document is maintained by the LIP Editors and updated monthly*
+*This document is maintained by the LP Editors and updated monthly*

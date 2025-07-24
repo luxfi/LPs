@@ -1,4 +1,4 @@
-# LIP/LRC Glossary
+# LP/LRC Glossary
 
 This glossary defines key terms used throughout the Lux Improvement Proposal documentation and process.
 
@@ -8,13 +8,13 @@ This glossary defines key terms used throughout the Lux Improvement Proposal doc
 A specialized blockchain in the Lux Network designed for long-term data storage and archival. Enables efficient data availability and historical state access.
 
 **Abstract**  
-A brief (~200 word) summary of a LIP that describes the technical issue being addressed. Required section in all LIPs.
+A brief (~200 word) summary of a LP that describes the technical issue being addressed. Required section in all LPs.
 
 **Account Abstraction**  
 The concept of making accounts programmable, allowing smart contract wallets with custom validation logic. See LRC-4337.
 
 **ACP (Avalanche Community Proposal)**  
-The equivalent of LIPs in the Avalanche ecosystem. Lux drew inspiration from this model.
+The equivalent of LPs in the Avalanche ecosystem. Lux drew inspiration from this model.
 
 **Application Standards**  
 Standards that define application-layer protocols, typically categorized as LRCs (Lux Request for Comments).
@@ -31,13 +31,13 @@ Cross-subnet messaging protocol that Lux adapted as Teleporter for cross-chain c
 A specialized blockchain in the Lux Network focused on attestations, compliance, and identity management.
 
 **Backwards Compatibility**  
-The property of a system to work with older versions. LIPs must address backwards compatibility concerns.
+The property of a system to work with older versions. LPs must address backwards compatibility concerns.
 
 **BLS Signatures**  
 Boneh-Lynn-Shacham signatures that allow efficient signature aggregation, used in B-Chain for attestations.
 
 **Bridge**  
-Infrastructure that enables asset transfers between different blockchains. See LIP-17 for universal bridge standards.
+Infrastructure that enables asset transfers between different blockchains. See LP-17 for universal bridge standards.
 
 ## C
 
@@ -45,16 +45,16 @@ Infrastructure that enables asset transfers between different blockchains. See L
 The EVM-compatible blockchain in Lux Network where smart contracts are deployed.
 
 **Category**  
-Classification within Standards Track LIPs: Core, Networking, Interface, or LRC.
+Classification within Standards Track LPs: Core, Networking, Interface, or LRC.
 
 **CC0**  
-Creative Commons Zero - public domain dedication under which all LIPs are released.
+Creative Commons Zero - public domain dedication under which all LPs are released.
 
 **Consensus**  
 The mechanism by which network participants agree on the state of the blockchain.
 
 **Core**  
-Category of Standards Track LIPs that affect consensus, block validation, or other low-level protocol changes.
+Category of Standards Track LPs that affect consensus, block validation, or other low-level protocol changes.
 
 **Cross-chain**  
 Refers to interactions between different blockchains, a key focus of Phase 3 development.
@@ -68,15 +68,15 @@ Technique for verifying data availability without downloading all data, implemen
 Financial applications built on blockchain technology, including lending, trading, and yield generation.
 
 **Draft**  
-Initial status of a LIP when first submitted.
+Initial status of a LP when first submitted.
 
 ## E
 
 **Editor**  
-Community members responsible for managing the LIP repository and guiding authors through the process.
+Community members responsible for managing the LP repository and guiding authors through the process.
 
 **EIP (Ethereum Improvement Proposal)**  
-The Ethereum equivalent of LIPs, which served as inspiration for the LIP process.
+The Ethereum equivalent of LPs, which served as inspiration for the LP process.
 
 **ERC (Ethereum Request for Comments)**  
 Application-layer standards in Ethereum, equivalent to LRCs in Lux.
@@ -87,7 +87,7 @@ The runtime environment for smart contracts, which Lux C-Chain is compatible wit
 ## F
 
 **Final**  
-The terminal status for accepted LIPs that have been implemented and adopted.
+The terminal status for accepted LPs that have been implemented and adopted.
 
 **Finality**  
 The guarantee that a transaction cannot be reversed or altered.
@@ -117,13 +117,13 @@ A scalable governance mechanism implemented in Lux that enables efficient decisi
 ## I
 
 **Implementation**  
-Working code that demonstrates how a LIP specification functions in practice.
+Working code that demonstrates how a LP specification functions in practice.
 
 **Informational**  
-Type of LIP that provides guidelines or information but doesn't require implementation.
+Type of LP that provides guidelines or information but doesn't require implementation.
 
 **Interface**  
-Category of Standards Track LIPs dealing with API/RPC specifications and standards.
+Category of Standards Track LPs dealing with API/RPC specifications and standards.
 
 **Interoperability**  
 The ability of different blockchain systems to exchange and make use of information.
@@ -131,16 +131,16 @@ The ability of different blockchain systems to exchange and make use of informat
 ## L
 
 **Last Call**  
-The final review period (14 days) before a LIP moves to Final status.
+The final review period (14 days) before a LP moves to Final status.
 
 **Light Client**  
 A client that can verify blockchain data without storing the entire chain history.
 
-**LIP (Lux Improvement Proposal)**  
+**LP (Lux Improvement Proposal)**  
 The primary mechanism for proposing changes to the Lux Network.
 
 **LRC (Lux Request for Comments)**  
-A subcategory of Standards Track LIPs focused on application-layer standards.
+A subcategory of Standards Track LPs focused on application-layer standards.
 
 **LUX**  
 The native token of the Lux Network.
@@ -148,7 +148,7 @@ The native token of the Lux Network.
 ## M
 
 **Meta**  
-Type of LIP dealing with process, governance, or other non-technical changes.
+Type of LP dealing with process, governance, or other non-technical changes.
 
 **Multi-sig (Multi-signature)**  
 Requiring multiple signatures to authorize a transaction.
@@ -156,7 +156,7 @@ Requiring multiple signatures to authorize a transaction.
 ## N
 
 **Networking**  
-Category of Standards Track LIPs dealing with p2p protocols and network communication.
+Category of Standards Track LPs dealing with p2p protocols and network communication.
 
 **NFT (Non-Fungible Token)**  
 Unique tokens that cannot be exchanged on a 1:1 basis, standardized in LRC-721.
@@ -186,18 +186,18 @@ The minimum number of participants required for a governance decision.
 ## R
 
 **Reference Implementation**  
-Example code showing how to implement a LIP specification.
+Example code showing how to implement a LP specification.
 
 **Rejected**  
-Status for LIPs that were not accepted by the community.
+Status for LPs that were not accepted by the community.
 
 **Review**  
-Status indicating a LIP is ready for community review and feedback.
+Status indicating a LP is ready for community review and feedback.
 
 ## S
 
 **Security Considerations**  
-Required section in all LIPs addressing potential security implications.
+Required section in all LPs addressing potential security implications.
 
 **Shielded Pool**  
 A privacy mechanism where funds are mixed to obscure transaction trails.
@@ -209,10 +209,10 @@ Penalty mechanism for validators who violate protocol rules.
 Self-executing code deployed on the blockchain.
 
 **Stagnant**  
-Status for LIPs that have had no activity for 60+ days.
+Status for LPs that have had no activity for 60+ days.
 
 **Standards Track**  
-Type of LIP that defines technical standards requiring implementation.
+Type of LP that defines technical standards requiring implementation.
 
 **State Rent**  
 Economic mechanism where storage on the blockchain requires ongoing payment.
@@ -226,7 +226,7 @@ An independent blockchain network within the Lux ecosystem.
 Lux's implementation of cross-chain messaging, based on AWM.
 
 **Template**  
-The required format for submitting new LIPs.
+The required format for submitting new LPs.
 
 **Test Cases**  
 Required examples showing how an implementation should behave.
@@ -238,7 +238,7 @@ A test version of the network used for development and testing.
 Measure of blockchain throughput and scalability.
 
 **Type**  
-Top-level classification of LIPs: Standards Track, Meta, or Informational.
+Top-level classification of LPs: Standards Track, Meta, or Informational.
 
 ## V
 
@@ -257,7 +257,7 @@ A key that allows viewing private transactions without spending ability.
 Software or hardware that stores private keys and enables blockchain interactions.
 
 **Withdrawn**  
-Status for LIPs that have been withdrawn by their authors.
+Status for LPs that have been withdrawn by their authors.
 
 **Wrapped Token**  
 A token that represents another token, often from a different blockchain.

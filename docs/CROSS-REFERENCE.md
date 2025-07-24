@@ -1,6 +1,6 @@
 # Cross-Reference Index: Lux, Ethereum, and Avalanche Standards
 
-This document provides a comprehensive mapping between Lux (LIP/LRC), Ethereum (EIP/ERC), and Avalanche (ACP) standards to help developers understand equivalencies and differences.
+This document provides a comprehensive mapping between Lux (LP/LRC), Ethereum (EIP/ERC), and Avalanche (ACP) standards to help developers understand equivalencies and differences.
 
 ## Overview
 
@@ -46,8 +46,8 @@ The Lux Network incorporates the best standards from Ethereum and Avalanche whil
 | Standard | Lux | Ethereum | Avalanche | Description | Enhancements |
 |----------|-----|----------|-----------|-------------|--------------|
 | Vault Standard | LRC-4626 | ERC-4626 | - | Tokenized vaults | Cross-chain yield |
-| AMM Interface | LIP-13 | Various | Joe V2 | DEX standards | Unified interface |
-| Lending Protocol | LIP-14 | Compound/Aave | Benqi | Lending interface | Cross-chain collateral |
+| AMM Interface | LP-13 | Various | Joe V2 | DEX standards | Unified interface |
+| Lending Protocol | LP-14 | Compound/Aave | Benqi | Lending interface | Cross-chain collateral |
 | Options | LRC-508 | - | - | Options protocol | Lux-native design |
 
 ### Advanced DeFi
@@ -66,7 +66,7 @@ The Lux Network incorporates the best standards from Ethereum and Avalanche whil
 |----------|-----|----------|-----------|-------------|--------------|
 | Account Abstraction | LRC-4337 | ERC-4337 | - | Smart wallets | Native integration |
 | Social Recovery | LRC-6239 | ERC-6239 | - | Guardian recovery | Privacy preserving |
-| Multi-sig | LIP-28 | Gnosis Safe | - | Multi-signature | Threshold signatures |
+| Multi-sig | LP-28 | Gnosis Safe | - | Multi-signature | Threshold signatures |
 
 ### Identity & Compliance
 
@@ -82,9 +82,9 @@ The Lux Network incorporates the best standards from Ethereum and Avalanche whil
 
 | Standard | Lux | Ethereum | Avalanche | Description | Key Differences |
 |----------|-----|----------|-----------|-------------|-----------------|
-| Message Format | LIP-15 | LayerZero | AWM | Cross-chain messages | Native implementation |
-| Bridge Protocol | LIP-17 | Various | AB | Asset bridges | Unified standard |
-| Interop Registry | LIP-18 | - | - | Chain registry | Lux innovation |
+| Message Format | LP-15 | LayerZero | AWM | Cross-chain messages | Native implementation |
+| Bridge Protocol | LP-17 | Various | AB | Asset bridges | Unified standard |
+| Interop Registry | LP-18 | - | - | Chain registry | Lux innovation |
 
 ### Cross-Chain Assets
 
@@ -100,18 +100,18 @@ The Lux Network incorporates the best standards from Ethereum and Avalanche whil
 
 | Standard | Lux | Ethereum | Avalanche | Description | Differences |
 |----------|-----|----------|-----------|-------------|-------------|
-| Proposal Format | LIP-1 | EIP-1 | ACP-1 | Proposal structure | Similar format |
-| DAO Framework | LIP-2 | Various | - | DAO constitution | Holographic consensus |
-| Voting | LIP-3 | Governor | - | On-chain voting | Multi-chain votes |
+| Proposal Format | LP-1 | EIP-1 | ACP-1 | Proposal structure | Similar format |
+| DAO Framework | LP-2 | Various | - | DAO constitution | Holographic consensus |
+| Voting | LP-3 | Governor | - | On-chain voting | Multi-chain votes |
 | Delegation | LRC-511 | - | - | Vote delegation | Cross-chain delegation |
 
 ### Advanced Governance
 
 | Standard | Lux | Ethereum | Avalanche | Description | Innovation |
 |----------|-----|----------|-----------|-------------|------------|
-| Quadratic Voting | LIP-52 | Gitcoin | - | Quadratic mechanisms | Native support |
-| Futarchy | LIP-53 | - | - | Prediction governance | Lux-specific |
-| Liquid Democracy | LIP-54 | - | - | Delegative voting | Novel implementation |
+| Quadratic Voting | LP-52 | Gitcoin | - | Quadratic mechanisms | Native support |
+| Futarchy | LP-53 | - | - | Prediction governance | Lux-specific |
+| Liquid Democracy | LP-54 | - | - | Delegative voting | Novel implementation |
 
 ## Privacy Standards
 
@@ -119,8 +119,8 @@ The Lux Network incorporates the best standards from Ethereum and Avalanche whil
 
 | Standard | Lux | Ethereum | Avalanche | Description | Advantages |
 |----------|-----|----------|-----------|-------------|------------|
-| Private Transfers | LIP-35 | Tornado | - | Shielded transfers | Z-Chain native |
-| ZK Proofs | LIP-34 | Various | - | Proof systems | Multiple schemes |
+| Private Transfers | LP-35 | Tornado | - | Shielded transfers | Z-Chain native |
+| ZK Proofs | LP-34 | Various | - | Proof systems | Multiple schemes |
 | Private Tokens | LRC-38 | AZTEC | - | Confidential assets | Better performance |
 
 ## Unique Lux Standards
@@ -129,9 +129,9 @@ The Lux Network incorporates the best standards from Ethereum and Avalanche whil
 
 | Standard | Description | Purpose | Status |
 |----------|-------------|---------|---------|
-| LIP-25 | B-Chain Specification | Attestation blockchain | Unique |
-| LIP-33 | Z-Chain Architecture | Privacy chain | Unique |
-| LIP-40 | A-Chain Specification | Archive chain | Unique |
+| LP-25 | B-Chain Specification | Attestation blockchain | Unique |
+| LP-33 | Z-Chain Architecture | Privacy chain | Unique |
+| LP-40 | A-Chain Specification | Archive chain | Unique |
 | LRC-30 | Regulated Security Token | Compliant securities | Innovation |
 | LRC-46 | Data Registry Standard | Data availability | Novel |
 
@@ -178,8 +178,8 @@ These standards are compatible but Lux adds features:
 
 Similar purpose, different implementation:
 - Ethereum L2s ↔ Lux Subnets
-- Various bridges ↔ LIP-17 unified bridge
-- Multiple DEXs ↔ LIP-13 standard interface
+- Various bridges ↔ LP-17 unified bridge
+- Multiple DEXs ↔ LP-13 standard interface
 
 ### Lux Exclusive 🆕
 
@@ -229,11 +229,11 @@ No equivalent on other chains:
 
 | Feature | Lux Advantage | Standard |
 |---------|---------------|----------|
-| Privacy | Native Z-Chain | LIP-33+ |
-| Compliance | B-Chain attestations | LIP-25+ |
-| Archival | A-Chain storage | LIP-40+ |
-| Bridging | Native support | LIP-15+ |
-| Governance | Holographic | LIP-3 |
+| Privacy | Native Z-Chain | LP-33+ |
+| Compliance | B-Chain attestations | LP-25+ |
+| Archival | A-Chain storage | LP-40+ |
+| Bridging | Native support | LP-15+ |
+| Governance | Holographic | LP-3 |
 
 ## Resources
 

@@ -1,65 +1,65 @@
-# Makefile for Lux Improvement Proposals (LIPs)
-# This file provides convenient shortcuts for common LIP management tasks
+# Makefile for Lux Improvement Proposals (LPs)
+# This file provides convenient shortcuts for common LP management tasks
 
 .PHONY: help new validate check-links update-index validate-all clean permissions
 
 # Default target - show help
 help:
-	@echo "Lux Improvement Proposals (LIPs) Management"
+	@echo "Lux Improvement Proposals (LPs) Management"
 	@echo "==========================================="
 	@echo ""
 	@echo "Available commands:"
-	@echo "  make new           - Create a new LIP using the interactive wizard"
-	@echo "  make validate      - Validate a specific LIP file (use FILE=path/to/lip.md)"
-	@echo "  make validate-all  - Validate all LIP files in the repository"
-	@echo "  make check-links   - Check all links in LIP files"
-	@echo "  make update-index  - Update the LIP index in README.md"
+	@echo "  make new           - Create a new LP using the interactive wizard"
+	@echo "  make validate      - Validate a specific LP file (use FILE=path/to/lip.md)"
+	@echo "  make validate-all  - Validate all LP files in the repository"
+	@echo "  make check-links   - Check all links in LP files"
+	@echo "  make update-index  - Update the LP index in README.md"
 	@echo "  make permissions   - Fix script permissions (make them executable)"
 	@echo "  make clean         - Clean up temporary files"
 	@echo ""
 	@echo "Examples:"
-	@echo "  make new                              # Create a new LIP"
-	@echo "  make validate FILE=LIPs/lip-20.md     # Validate a specific LIP"
-	@echo "  make validate-all                     # Validate all LIPs"
+	@echo "  make new                              # Create a new LP"
+	@echo "  make validate FILE=LPs/lip-20.md     # Validate a specific LP"
+	@echo "  make validate-all                     # Validate all LPs"
 	@echo ""
 
-# Create a new LIP using the interactive wizard
+# Create a new LP using the interactive wizard
 new:
-	@echo "Starting LIP creation wizard..."
+	@echo "Starting LP creation wizard..."
 	@./scripts/new-lip.sh
 
-# Validate a specific LIP file
-# Usage: make validate FILE=LIPs/lip-20.md
+# Validate a specific LP file
+# Usage: make validate FILE=LPs/lip-20.md
 validate:
 ifndef FILE
 	@echo "Error: Please specify a file to validate"
 	@echo "Usage: make validate FILE=path/to/lip.md"
-	@echo "Example: make validate FILE=LIPs/lip-20.md"
+	@echo "Example: make validate FILE=LPs/lip-20.md"
 	@exit 1
 else
 	@echo "Validating $(FILE)..."
 	@./scripts/validate-lip.sh $(FILE)
 endif
 
-# Validate all LIP files
+# Validate all LP files
 validate-all:
-	@echo "Validating all LIP files..."
-	@for file in LIPs/lip-*.md; do \
+	@echo "Validating all LP files..."
+	@for file in LPs/lip-*.md; do \
 		if [ -f "$$file" ]; then \
 			echo "Checking $$file..."; \
 			./scripts/validate-lip.sh "$$file" || exit 1; \
 		fi \
 	done
-	@echo "All LIP files validated successfully!"
+	@echo "All LP files validated successfully!"
 
-# Check all links in LIP files
+# Check all links in LP files
 check-links:
-	@echo "Checking all links in LIP files..."
+	@echo "Checking all links in LP files..."
 	@./scripts/check-links.sh
 
-# Update the LIP index in README.md
+# Update the LP index in README.md
 update-index:
-	@echo "Updating LIP index..."
+	@echo "Updating LP index..."
 	@python3 ./scripts/update-index.py
 
 # Fix script permissions (make them executable)
@@ -97,35 +97,35 @@ pre-pr: validate-all check-links update-index
 	@echo "Pre-PR checks complete!"
 	@echo "Your changes are ready for submission."
 
-# Show current LIP statistics
+# Show current LP statistics
 .PHONY: stats
 stats:
-	@echo "LIP Statistics"
+	@echo "LP Statistics"
 	@echo "=============="
-	@echo "Total LIPs: $$(ls -1 LIPs/lip-*.md 2>/dev/null | wc -l)"
+	@echo "Total LPs: $$(ls -1 LPs/lip-*.md 2>/dev/null | wc -l)"
 	@echo ""
 	@echo "By Status:"
 	@for status in Draft Review "Last Call" Final Withdrawn Stagnant; do \
-		count=$$(grep -l "status: $$status" LIPs/lip-*.md 2>/dev/null | wc -l); \
+		count=$$(grep -l "status: $$status" LPs/lip-*.md 2>/dev/null | wc -l); \
 		printf "  %-12s %s\n" "$$status:" "$$count"; \
 	done
 	@echo ""
 	@echo "By Type:"
 	@for type in "Standards Track" Meta Informational; do \
-		count=$$(grep -l "type: $$type" LIPs/lip-*.md 2>/dev/null | wc -l); \
+		count=$$(grep -l "type: $$type" LPs/lip-*.md 2>/dev/null | wc -l); \
 		printf "  %-12s %s\n" "$$type:" "$$count"; \
 	done
 
-# List all LIPs with their titles
+# List all LPs with their titles
 .PHONY: list
 list:
-	@echo "Current LIPs:"
+	@echo "Current LPs:"
 	@echo "============="
-	@for file in LIPs/lip-*.md; do \
+	@for file in LPs/lip-*.md; do \
 		if [ -f "$$file" ]; then \
 			lip=$$(grep "^lip:" "$$file" | cut -d' ' -f2); \
 			title=$$(grep "^title:" "$$file" | cut -d' ' -f2-); \
-			printf "LIP-%-4s %s\n" "$$lip:" "$$title"; \
+			printf "LP-%-4s %s\n" "$$lip:" "$$title"; \
 		fi \
 	done
 
@@ -133,16 +133,16 @@ list:
 .PHONY: watch
 watch:
 	@command -v entr >/dev/null 2>&1 || { echo "Error: 'entr' is required but not installed. Install with: brew install entr"; exit 1; }
-	@echo "Watching for changes in LIPs directory..."
+	@echo "Watching for changes in LPs directory..."
 	@echo "Press Ctrl+C to stop"
-	@find LIPs -name "*.md" | entr -c make validate-all
+	@find LPs -name "*.md" | entr -c make validate-all
 
 # Create a draft from template
 .PHONY: draft
 draft:
-	@cp LIPs/TEMPLATE.md LIPs/lip-draft.md
-	@echo "Created LIPs/lip-draft.md from template"
-	@echo "Edit this file and submit as a PR to get your LIP number"
+	@cp LPs/TEMPLATE.md LPs/lip-draft.md
+	@echo "Created LPs/lip-draft.md from template"
+	@echo "Edit this file and submit as a PR to get your LP number"
 
 # Development helpers
 .PHONY: setup
@@ -154,5 +154,5 @@ setup: permissions
 # Show recent changes
 .PHONY: recent
 recent:
-	@echo "Recently modified LIPs (last 10):"
-	@ls -lt LIPs/lip-*.md 2>/dev/null | head -10 | awk '{print $$9}'
+	@echo "Recently modified LPs (last 10):"
+	@ls -lt LPs/lip-*.md 2>/dev/null | head -10 | awk '{print $$9}'

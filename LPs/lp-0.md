@@ -3,7 +3,7 @@ lp: 0
 title: Lux Network Architecture & Community Framework
 description: Defines the overall architecture of the Lux multi-chain network and the governance/process framework for the community.
 author: Lux Network Team (@luxdefi)
-discussions-to: https://github.com/luxfi/lips/discussions
+discussions-to: https://github.com/luxfi/lps/discussions
 status: Final
 type: Meta
 created: 2025-01-23
@@ -11,15 +11,15 @@ created: 2025-01-23
 
 ## Abstract
 
-LIP‑0 establishes the foundational blueprint for Lux, defining both its heterogeneous multi‑chain architecture and the community‑driven improvement process.
+LP‑0 establishes the foundational blueprint for Lux, defining both its heterogeneous multi‑chain architecture and the community‑driven improvement process.
 
 Lux cleanly decouples execution semantics from consensus and security, enabling each blockchain “subnet” to run its own virtual machine (e.g., EVM or alternative VMs) while leveraging a shared security and transport layer for cross‑chain communication[1][2]. This architectural separation addresses scalability through workload partitioning (“divide‑and‑conquer”) and modular isolation, optimizing performance for specialized applications[3].
 
 Interoperability is protocol‑native: subnets exchange messages trustlessly via secure primitives inspired by Polkadot’s Cross‑Chain Message Passing and Cosmos IBC[4][5]. Each subnet benefits from shared security guarantees and can interoperate regardless of its underlying consensus or VM.
 
-Governance and evolution follow a meta‑proposal model modeled after Ethereum’s EIP process. Any community member may draft, review, and ratify LIPs through open discussion and structured stages, ensuring transparency, inclusivity, and rigorous technical scrutiny[6][7].
+Governance and evolution follow a meta‑proposal model modeled after Ethereum’s EIP process. Any community member may draft, review, and ratify LPs through open discussion and structured stages, ensuring transparency, inclusivity, and rigorous technical scrutiny[6][7].
 
-In summary, Lux’s architecture combines a modular, scalable multi‑chain framework with a formalized, community‑centric governance process, providing a coherent foundation for all subsequent LIPs.
+In summary, Lux’s architecture combines a modular, scalable multi‑chain framework with a formalized, community‑centric governance process, providing a coherent foundation for all subsequent LPs.
 
 ## Motivation
 
@@ -74,28 +74,28 @@ As the Lux Network evolves to support advanced cross-chain operations, privacy f
 
 ### Part 2: Community Contribution Framework
 
-#### LIP Process
+#### LP Process
 
 1. **Idea Discussion**: Post on forum.lux.network
-2. **Draft LIP**: Use `./scripts/new-lip.sh` or `make new`
-3. **Submit PR**: PR number becomes LIP number
+2. **Draft LP**: Use `./scripts/new-lip.sh` or `make new`
+3. **Submit PR**: PR number becomes LP number
 4. **Review Process**: Technical and community review
 5. **Implementation**: Build reference implementation
 6. **Finalization**: Move to Final status
 
 #### Governance
 
-- **LIP Governance**: Proposals require 10M LUX, 7-day voting, 75% approval.
+- **LP Governance**: Proposals require 10M LUX, 7-day voting, 75% approval.
 - **Network Governance**: Parameter changes via governance proposals.
 
 ## Rationale
 
-This LIP serves as the pedagogical introduction to Lux, referencing fundamental distributed systems concepts (nodes, consensus, finality) and how they come together in the Lux Network. It provides a single, high-level document to understand the entire ecosystem and how to contribute to it.
+This LP serves as the pedagogical introduction to Lux, referencing fundamental distributed systems concepts (nodes, consensus, finality) and how they come together in the Lux Network. It provides a single, high-level document to understand the entire ecosystem and how to contribute to it.
 
 ## Backwards Compatibility
 
-As the foundational LIP, this document establishes the initial standards. Future changes to this meta-LIP will:
-- Maintain compatibility with existing LIP processes
+As the foundational LP, this document establishes the initial standards. Future changes to this meta-LP will:
+- Maintain compatibility with existing LP processes
 - Provide migration paths for any structural changes
 - Announce deprecations with sufficient notice
 

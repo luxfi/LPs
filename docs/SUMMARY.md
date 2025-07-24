@@ -1,15 +1,15 @@
-# Lux Improvement Proposals (LIPs) - Executive Summary
+# Lux Improvement Proposals (LPs) - Executive Summary
 
 ## Overview
 
-The Lux Improvement Proposal (LIP) framework is the cornerstone of Lux Network's decentralized governance and technical evolution. Modeled after successful systems like Ethereum's EIPs and Avalanche's ACPs, LIPs provide a structured process for proposing, discussing, and implementing changes to the Lux ecosystem.
+The Lux Improvement Proposal (LP) framework is the cornerstone of Lux Network's decentralized governance and technical evolution. Modeled after successful systems like Ethereum's EIPs and Avalanche's ACPs, LPs provide a structured process for proposing, discussing, and implementing changes to the Lux ecosystem.
 
 ## Key Concepts
 
-### LIP vs LRC
-- **LIP (Lux Improvement Proposal)**: The overarching framework for all proposals
-- **LRC (Lux Request for Comment)**: A subcategory of LIPs focused on application-layer standards (tokens, DeFi, etc.)
-- Every LRC is a LIP, but not every LIP is an LRC
+### LP vs LRC
+- **LP (Lux Improvement Proposal)**: The overarching framework for all proposals
+- **LRC (Lux Request for Comment)**: A subcategory of LPs focused on application-layer standards (tokens, DeFi, etc.)
+- Every LRC is a LP, but not every LP is an LRC
 
 ### Proposal Types
 1. **Standards Track**: Technical specifications (Core, Networking, Interface, LRC)
@@ -57,7 +57,7 @@ The Lux Improvement Proposal (LIP) framework is the cornerstone of Lux Network's
 
 ### For Proposal Authors
 1. Read the [Contributing Guide](./CONTRIBUTING.md)
-2. Use the [LIP Template](./LIPs/TEMPLATE.md)
+2. Use the [LP Template](./LPs/TEMPLATE.md)
 3. Run `./scripts/new-lip.sh` to start
 4. Submit via GitHub PR
 
@@ -68,7 +68,7 @@ The Lux Improvement Proposal (LIP) framework is the cornerstone of Lux Network's
 4. Join developer community
 
 ### For Community Members
-1. Participate in [GitHub Discussions](https://github.com/luxfi/lips/discussions)
+1. Participate in [GitHub Discussions](https://github.com/luxfi/lps/discussions)
 2. Review open proposals
 3. Vote on governance decisions
 4. Contribute feedback
@@ -76,8 +76,8 @@ The Lux Improvement Proposal (LIP) framework is the cornerstone of Lux Network's
 ## Current Status
 
 As of January 2025:
-- **Active LIPs**: 2 (LIP-1 in Review, LIP-20 in Draft)
-- **Planned LIPs**: 60+ across all phases
+- **Active LPs**: 2 (LP-1 in Review, LP-20 in Draft)
+- **Planned LPs**: 60+ across all phases
 - **Timeline**: 2025-2026 for core phases
 - **Goal**: Comprehensive blockchain ecosystem
 
@@ -106,10 +106,10 @@ As of January 2025:
 - [Validation Script](./scripts/validate-lip.sh)
 - [Index Updater](./scripts/update-index.py)
 - [Link Checker](./scripts/check-links.sh)
-- [New LIP Wizard](./scripts/new-lip.sh)
+- [New LP Wizard](./scripts/new-lip.sh)
 
 ### Community
-- GitHub: [luxfi/lips](https://github.com/luxfi/lips)
+- GitHub: [luxfi/lps](https://github.com/luxfi/lps)
 - Discord: [discord.gg/lux](https://discord.gg/lux)
 - Forum: [forum.lux.network](https://forum.lux.network)
 
@@ -129,7 +129,7 @@ As of January 2025:
 
 ## Call to Action
 
-The success of Lux Network depends on community participation. Whether you're a developer, validator, or token holder, there's a role for you in shaping the future of Lux through the LIP process.
+The success of Lux Network depends on community participation. Whether you're a developer, validator, or token holder, there's a role for you in shaping the future of Lux through the LP process.
 
 **Start Today:**
 1. Review the roadmap
@@ -144,6 +144,6 @@ Together, we're building the most advanced, interoperable, and user-friendly blo
 *"The best way to predict the future is to invent it."*  
 *- The Lux Community*
 
-**Contact**: lips@lux.network  
+**Contact**: lps@lux.network  
 **Last Updated**: January 2025  
 **Version**: 1.0

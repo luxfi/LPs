@@ -1,11 +1,11 @@
-# LIP Editors Guide
+# LP Editors Guide
 
-This document outlines the responsibilities, processes, and guidelines for LIP Editors who maintain the Lux Improvement Proposals repository.
+This document outlines the responsibilities, processes, and guidelines for LP Editors who maintain the Lux Improvement Proposals repository.
 
-## Role of LIP Editors
+## Role of LP Editors
 
-LIP Editors are responsible for:
-- Managing the LIP repository
+LP Editors are responsible for:
+- Managing the LP repository
 - Guiding authors through the process
 - Ensuring quality and consistency
 - Facilitating community discussion
@@ -14,7 +14,7 @@ LIP Editors are responsible for:
 ### What Editors Do
 
 ✅ **Administrative Tasks**
-- Assign LIP numbers
+- Assign LP numbers
 - Merge formatting PRs
 - Update proposal statuses
 - Maintain documentation
@@ -47,10 +47,10 @@ LIP Editors are responsible for:
 
 ### 1. New Proposal Review
 
-When a new LIP is submitted:
+When a new LP is submitted:
 
 ```markdown
-## New LIP Checklist
+## New LP Checklist
 - [ ] Formatting follows template
 - [ ] All required sections present
 - [ ] Abstract is clear (200 words)
@@ -133,7 +133,7 @@ gh issue list --label "editor-review"
 
 ### Monthly Tasks
 - Update allocation registry
-- Archive withdrawn LIPs
+- Archive withdrawn LPs
 - Review editor guidelines
 - Community report
 - Process improvements
@@ -161,7 +161,7 @@ gh issue list --label "editor-review"
 ### When to Reject
 
 ❌ **Reject Only When:**
-- Duplicate of existing LIP
+- Duplicate of existing LP
 - Out of scope completely
 - Author unresponsive (>30 days)
 - Spam or inappropriate
@@ -171,7 +171,7 @@ gh issue list --label "editor-review"
 
 ### New Author Welcome
 ```markdown
-Welcome to the LIP process! I'm [Name], one of the LIP editors.
+Welcome to the LP process! I'm [Name], one of the LP editors.
 
 I've reviewed your submission and have the following feedback:
 [Specific feedback points]
@@ -184,9 +184,9 @@ Looking forward to your revisions!
 
 ### Status Update
 ```markdown
-## Status Update: LIP-[N] moving to [Status]
+## Status Update: LP-[N] moving to [Status]
 
-This LIP has met the criteria for [Status]:
+This LP has met the criteria for [Status]:
 - [Criteria 1]
 - [Criteria 2]
 - [Criteria 3]
@@ -199,9 +199,9 @@ Congratulations on the progress!
 
 ### Stagnant Notice
 ```markdown
-## Notice: LIP-[N] Marked as Stagnant
+## Notice: LP-[N] Marked as Stagnant
 
-This LIP has had no activity for 60 days. As per our process, 
+This LP has had no activity for 60 days. As per our process, 
 it has been marked as Stagnant.
 
 To reactivate:
@@ -209,7 +209,7 @@ To reactivate:
 2. Update the proposal
 3. Request status change
 
-The LIP will be withdrawn after 90 days of inactivity.
+The LP will be withdrawn after 90 days of inactivity.
 ```
 
 ## Tools for Editors
@@ -219,11 +219,11 @@ The LIP will be withdrawn after 90 days of inactivity.
 ```bash
 # scripts/validate-lip.sh
 #!/bin/bash
-# Validates LIP formatting and structure
+# Validates LP formatting and structure
 
 # scripts/assign-number.sh
 #!/bin/bash  
-# Assigns next available LIP number
+# Assigns next available LP number
 
 # scripts/update-index.sh
 #!/bin/bash
@@ -272,7 +272,7 @@ For each review, ensure:
 **References**
 - [ ] All links work
 - [ ] Citations complete
-- [ ] Related LIPs linked
+- [ ] Related LPs linked
 - [ ] External standards noted
 
 ## Conflict Resolution
@@ -305,8 +305,8 @@ For each review, ensure:
 - [ ] Discord editor role
 - [ ] Read all documentation
 - [ ] Shadow senior editor
-- [ ] Review 5 LIPs with mentor
-- [ ] Handle first LIP solo
+- [ ] Review 5 LPs with mentor
+- [ ] Handle first LP solo
 - [ ] Join editor meetings
 
 ### Required Knowledge
@@ -360,7 +360,7 @@ For each review, ensure:
 ## Metrics & Reporting
 
 ### Track Monthly
-- New LIPs submitted
+- New LPs submitted
 - Average review time
 - Author satisfaction
 - Status transitions
@@ -390,6 +390,6 @@ For each review, ensure:
 
 ---
 
-*This guide is for LIP Editors only. For public contribution guidelines, see [CONTRIBUTING.md](./CONTRIBUTING.md)*
+*This guide is for LP Editors only. For public contribution guidelines, see [CONTRIBUTING.md](./CONTRIBUTING.md)*
 
 *Last Updated: January 2025*

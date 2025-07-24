@@ -26,9 +26,9 @@ Phase 2 focuses on standardizing the execution environment and establishing comp
 - Zero critical vulnerabilities
 - Developer tools adoption > 50%
 
-## LIP Specifications
+## LP Specifications
 
-### LIP-9: C-Chain EVM Extensions
+### LP-9: C-Chain EVM Extensions
 - **Type**: Standards Track (Core)
 - **Status**: Draft
 - **Description**: Custom opcodes and precompiles for enhanced functionality
@@ -38,7 +38,7 @@ Phase 2 focuses on standardizing the execution environment and establishing comp
   - Gas optimization features
   - Cross-subnet calls
 
-### LIP-10: Native Asset Bridge Protocol
+### LP-10: Native Asset Bridge Protocol
 - **Type**: Standards Track (Core)
 - **Status**: Draft
 - **Description**: Trustless bridging between Lux chains
@@ -48,7 +48,7 @@ Phase 2 focuses on standardizing the execution environment and establishing comp
   - Fee structure
   - Security model
 
-### LIP-11: X-Chain UTXO Extensions
+### LP-11: X-Chain UTXO Extensions
 - **Type**: Standards Track (Core)
 - **Status**: Proposed
 - **Description**: Enhanced UTXO model for complex asset operations
@@ -58,7 +58,7 @@ Phase 2 focuses on standardizing the execution environment and establishing comp
   - Time-locked transactions
   - Aggregated signatures
 
-### LIP-12: Multi-Asset Transaction Format
+### LP-12: Multi-Asset Transaction Format
 - **Type**: Standards Track (Core)
 - **Status**: Draft
 - **Description**: Unified format for transactions involving multiple assets
@@ -68,7 +68,7 @@ Phase 2 focuses on standardizing the execution environment and establishing comp
   - Fee abstraction
   - Priority ordering
 
-### LIP-20: LRC-20 Fungible Token Standard
+### LP-20: LRC-20 Fungible Token Standard
 - **Type**: Standards Track (LRC)
 - **Status**: Draft
 - **Description**: Standard interface for fungible tokens
@@ -82,7 +82,7 @@ Phase 2 focuses on standardizing the execution environment and establishing comp
   - allowance(address, address)
   ```
 
-### LIP-21: LRC-21 Semi-Fungible Token Standard
+### LP-21: LRC-21 Semi-Fungible Token Standard
 - **Type**: Standards Track (LRC)
 - **Status**: Proposed
 - **Description**: Tokens with both fungible and non-fungible properties
@@ -92,7 +92,7 @@ Phase 2 focuses on standardizing the execution environment and establishing comp
   - Batch minting
   - Tiered assets
 
-### LIP-22: LRC-22 Multi-Token Standard
+### LP-22: LRC-22 Multi-Token Standard
 - **Type**: Standards Track (LRC)
 - **Status**: Draft
 - **Description**: Single contract managing multiple token types
@@ -102,7 +102,7 @@ Phase 2 focuses on standardizing the execution environment and establishing comp
   - Simplified management
   - Batch transfers
 
-### LIP-13: DeFi Primitive Interfaces
+### LP-13: DeFi Primitive Interfaces
 - **Type**: Standards Track (Interface)
 - **Status**: Draft
 - **Description**: Standard interfaces for DeFi building blocks
@@ -112,7 +112,7 @@ Phase 2 focuses on standardizing the execution environment and establishing comp
   - Vault standard
   - Flash loan interface
 
-### LIP-14: Oracle Integration Standards
+### LP-14: Oracle Integration Standards
 - **Type**: Standards Track (Interface)
 - **Status**: Proposed
 - **Description**: Standardized oracle data feeds and integration
@@ -262,7 +262,7 @@ contracts/
 
 ## Phase Completion Criteria
 
-- [ ] All 9 LIPs achieve Final status
+- [ ] All 9 LPs achieve Final status
 - [ ] 20+ projects using LRC standards
 - [ ] $1B+ in bridge volume
 - [ ] Zero critical incidents

@@ -3,7 +3,7 @@ lp: 4-r2
 title: M-Chain – Decentralised MPC Custody & Swap-Signature Layer
 description: Purpose-built subnet providing threshold-signature custody, on-chain swap-signature proofs, slashing and reward logic, and light-client proofs for bridge operations.
 author: Lux Protocol Team (@luxdefi)
-discussions-to: https://github.com/luxfi/lips/discussions
+discussions-to: https://github.com/luxfi/lps/discussions
 status: Draft
 type: Standards Track
 category: Core
@@ -20,7 +20,7 @@ M-Chain is a purpose-built subnet that provides:
 3. Autonomous slashing & reward accounting for MPC signers based on service-level compliance.
 4. A light-client proof format (MProof) consumable by X-Chain and Z-Chain without full M-Chain sync.
 
-This LIP formalises the VM, transaction formats, validator duties, RPCs and economic parameters that replace the legacy off-chain bridge back-end (`swaps.ts`) with fully decentralised, auditable on-chain logic.
+This LP formalises the VM, transaction formats, validator duties, RPCs and economic parameters that replace the legacy off-chain bridge back-end (`swaps.ts`) with fully decentralised, auditable on-chain logic.
 
 ## 2  Motivation
 
@@ -91,7 +91,7 @@ type KeyGenTx struct {
 
 Commits to new key; must be signed by ≥ threshold validators listed in `SignerBitmap`.
 
-#### 4.2.2  SwapSigTx (core of this LIP)
+#### 4.2.2  SwapSigTx (core of this LP)
 
 ```go
 type SwapSigTx struct {
@@ -218,7 +218,7 @@ With daily 10 000 swaps × avg fee $4, signers earn ~ 20 000 LUX/mo, c
 
 ## 11  Governance Actions Required
 
-1. Accept LIP‑004‑R2 → freeze spec.
+1. Accept LP‑004‑R2 → freeze spec.
 2. Allocate 3 MM LUX from DAO treasury as initial signer reward buffer.
 3. Elect first signer set & whitelists for BTC, ETH, XRPL assets.
 4. Schedule main‑net “M‑Chain activation” height (T + 30 days after audit pass).

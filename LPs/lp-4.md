@@ -3,7 +3,7 @@ lp: 4
 title: Quantum-Resistant Cryptography Integration in Lux
 description: Proposes integrating quantum-resistant cryptographic primitives into the Lux protocol to future-proof the network against quantum computer attacks.
 author: Lux Network Team (@luxdefi)
-discussions-to: https://github.com/luxfi/lips/discussions
+discussions-to: https://github.com/luxfi/lps/discussions
 status: Final
 type: Standards Track
 category: Core

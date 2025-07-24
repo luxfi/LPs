@@ -26,9 +26,9 @@ Phase 4 introduces the A-Chain (Attestation Blockchain) and comprehensive compli
 - Sub-second attestation verification
 - $100M+ in regulated assets
 
-## LIP Specifications
+## LP Specifications
 
-### LIP-25: A-Chain Specification
+### LP-25: A-Chain Specification
 - **Type**: Standards Track (Core)
 - **Status**: Draft
 - **Description**: Dedicated blockchain for attestations and compliance
@@ -38,7 +38,7 @@ Phase 4 introduces the A-Chain (Attestation Blockchain) and comprehensive compli
   - Privacy-preserving verification
   - Cross-chain attestation access
 
-### LIP-26: BLS Signature Aggregation
+### LP-26: BLS Signature Aggregation
 - **Type**: Standards Track (Core)
 - **Status**: Proposed
 - **Description**: Efficient signature aggregation for attestations
@@ -48,7 +48,7 @@ Phase 4 introduces the A-Chain (Attestation Blockchain) and comprehensive compli
   - Reduced storage costs
   - Faster validation
 
-### LIP-27: Batch Transaction Processing
+### LP-27: Batch Transaction Processing
 - **Type**: Standards Track (Core)
 - **Status**: Draft
 - **Description**: Process multiple attestations in single transaction
@@ -58,7 +58,7 @@ Phase 4 introduces the A-Chain (Attestation Blockchain) and comprehensive compli
   - Parallel validation
   - Rollback protection
 
-### LIP-28: Compliance Engine Interface
+### LP-28: Compliance Engine Interface
 - **Type**: Standards Track (Interface)
 - **Status**: Draft
 - **Description**: Standardized interface for compliance checks
@@ -72,7 +72,7 @@ Phase 4 introduces the A-Chain (Attestation Blockchain) and comprehensive compli
   }
   ```
 
-### LIP-29: Permission Management System
+### LP-29: Permission Management System
 - **Type**: Standards Track (Interface)
 - **Status**: Proposed
 - **Description**: Role-based access control for regulated operations
@@ -82,7 +82,7 @@ Phase 4 introduces the A-Chain (Attestation Blockchain) and comprehensive compli
   - Delegation mechanisms
   - Audit logging
 
-### LIP-30: LRC-30 Regulated Security Token
+### LP-30: LRC-30 Regulated Security Token
 - **Type**: Standards Track (LRC)
 - **Status**: Draft
 - **Description**: Security token with built-in compliance
@@ -92,7 +92,7 @@ Phase 4 introduces the A-Chain (Attestation Blockchain) and comprehensive compli
   - Regulatory reporting
   - Corporate actions
 
-### LIP-31: LRC-31 Identity Token Standard
+### LP-31: LRC-31 Identity Token Standard
 - **Type**: Standards Track (LRC)
 - **Status**: Proposed
 - **Description**: Self-sovereign identity tokens
@@ -102,7 +102,7 @@ Phase 4 introduces the A-Chain (Attestation Blockchain) and comprehensive compli
   - Revocation support
   - Multi-issuer trust
 
-### LIP-32: LRC-32 Compliant Stablecoin Standard
+### LP-32: LRC-32 Compliant Stablecoin Standard
 - **Type**: Standards Track (LRC)
 - **Status**: Draft
 - **Description**: Stablecoins with regulatory compliance
@@ -317,7 +317,7 @@ const attestation = await compliance.issueAttestation({
 ## Phase Completion Criteria
 
 - [ ] A-Chain mainnet stable
-- [ ] All 8 LIPs Final status
+- [ ] All 8 LPs Final status
 - [ ] 10+ regulated issuers
 - [ ] 100k+ attestations issued
 - [ ] Zero compliance incidents

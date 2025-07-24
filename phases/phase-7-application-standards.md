@@ -30,7 +30,7 @@ Phase 7 represents the ongoing evolution of application-level standards through 
 
 ### Token Standards
 
-#### LIP-165: LRC-165 Interface Detection
+#### LP-165: LRC-165 Interface Detection
 - **Status**: Essential
 - **Description**: Standard interface detection mechanism
 - **Interface**:
@@ -40,7 +40,7 @@ Phase 7 represents the ongoing evolution of application-level standards through 
   }
   ```
 
-#### LIP-721: LRC-721 NFT Standard
+#### LP-721: LRC-721 NFT Standard
 - **Status**: Final
 - **Description**: Non-fungible token standard
 - **Key Features**:
@@ -50,7 +50,7 @@ Phase 7 represents the ongoing evolution of application-level standards through 
   - Metadata URIs
   - Event emissions
 
-#### LIP-1155: LRC-1155 Multi-Token Standard
+#### LP-1155: LRC-1155 Multi-Token Standard
 - **Status**: Final
 - **Description**: Multi-token standard for fungible and NFTs
 - **Benefits**:
@@ -59,7 +59,7 @@ Phase 7 represents the ongoing evolution of application-level standards through 
   - Mixed token types
   - Reduced deployment costs
 
-#### LIP-404: LRC-404 Hybrid Token Standard
+#### LP-404: LRC-404 Hybrid Token Standard
 - **Status**: Experimental
 - **Description**: Hybrid fungible/non-fungible tokens
 - **Innovation**:
@@ -70,7 +70,7 @@ Phase 7 represents the ongoing evolution of application-level standards through 
 
 ### DeFi Standards
 
-#### LIP-2612: LRC-2612 Permit Extension
+#### LP-2612: LRC-2612 Permit Extension
 - **Status**: Recommended
 - **Description**: Gasless approvals using signatures
 - **Implementation**:
@@ -86,7 +86,7 @@ Phase 7 represents the ongoing evolution of application-level standards through 
   ) external;
   ```
 
-#### LIP-4626: LRC-4626 Vault Standard
+#### LP-4626: LRC-4626 Vault Standard
 - **Status**: Final
 - **Description**: Tokenized vault standard
 - **Features**:
@@ -95,7 +95,7 @@ Phase 7 represents the ongoing evolution of application-level standards through 
   - Yield optimization
   - Composability
 
-#### LIP-3156: LRC-3156 Flash Loan Standard
+#### LP-3156: LRC-3156 Flash Loan Standard
 - **Status**: Final
 - **Description**: Standard flash loan interface
 - **Components**:
@@ -106,7 +106,7 @@ Phase 7 represents the ongoing evolution of application-level standards through 
 
 ### Advanced Token Features
 
-#### LIP-3525: LRC-3525 Semi-Fungible Token
+#### LP-3525: LRC-3525 Semi-Fungible Token
 - **Status**: Draft
 - **Description**: Tokens with ID and value properties
 - **Use Cases**:
@@ -115,7 +115,7 @@ Phase 7 represents the ongoing evolution of application-level standards through 
   - Membership tiers
   - Voucher systems
 
-#### LIP-5192: LRC-5192 Soulbound Token
+#### LP-5192: LRC-5192 Soulbound Token
 - **Status**: Final
 - **Description**: Non-transferable tokens
 - **Applications**:
@@ -124,7 +124,7 @@ Phase 7 represents the ongoing evolution of application-level standards through 
   - Memberships
   - Reputation
 
-#### LIP-6551: LRC-6551 Token Bound Accounts
+#### LP-6551: LRC-6551 Token Bound Accounts
 - **Status**: Experimental
 - **Description**: NFTs as smart contract wallets
 - **Features**:
@@ -135,7 +135,7 @@ Phase 7 represents the ongoing evolution of application-level standards through 
 
 ### Account Abstraction
 
-#### LIP-4337: LRC-4337 Account Abstraction
+#### LP-4337: LRC-4337 Account Abstraction
 - **Status**: In Development
 - **Description**: Smart contract wallets standard
 - **Components**:
@@ -146,7 +146,7 @@ Phase 7 represents the ongoing evolution of application-level standards through 
 
 ### Gaming Standards
 
-#### LIP-6081: LRC-6081 Game Asset Standard
+#### LP-6081: LRC-6081 Game Asset Standard
 - **Status**: Proposed
 - **Description**: Comprehensive game asset framework
 - **Features**:
@@ -155,7 +155,7 @@ Phase 7 represents the ongoing evolution of application-level standards through 
   - Level progression
   - Cross-game compatibility
 
-#### LIP-5773: LRC-5773 Context-Dependent Multi-Asset
+#### LP-5773: LRC-5773 Context-Dependent Multi-Asset
 - **Status**: Draft
 - **Description**: Assets that change based on context
 - **Examples**:
@@ -166,7 +166,7 @@ Phase 7 represents the ongoing evolution of application-level standards through 
 
 ### Social & Identity
 
-#### LIP-735: LRC-735 Claim Holder
+#### LP-735: LRC-735 Claim Holder
 - **Status**: Final
 - **Description**: Identity claims standard
 - **Components**:
@@ -175,7 +175,7 @@ Phase 7 represents the ongoing evolution of application-level standards through 
   - Revocation support
   - Privacy options
 
-#### LIP-6239: LRC-6239 Social Recovery
+#### LP-6239: LRC-6239 Social Recovery
 - **Status**: Proposed
 - **Description**: Social recovery for wallets
 - **Mechanism**:
@@ -191,7 +191,7 @@ Phase 7 represents the ongoing evolution of application-level standards through 
 ```mermaid
 graph LR
     A[Idea] --> B[Discussion]
-    B --> C[Draft LIP]
+    B --> C[Draft LP]
     C --> D[Reference Implementation]
     D --> E[Testing]
     E --> F[Security Review]

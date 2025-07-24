@@ -1,6 +1,6 @@
-# LIP Implementation Guide for Developers
+# LP Implementation Guide for Developers
 
-This guide provides comprehensive instructions for developers implementing Lux Improvement Proposals (LIPs) and Lux Request for Comments (LRCs) standards.
+This guide provides comprehensive instructions for developers implementing Lux Improvement Proposals (LPs) and Lux Request for Comments (LRCs) standards.
 
 ## Table of Contents
 
@@ -19,7 +19,7 @@ This guide provides comprehensive instructions for developers implementing Lux I
 
 ### Prerequisites
 
-Before implementing a LIP/LRC, ensure you have:
+Before implementing a LP/LRC, ensure you have:
 
 1. **Development Environment**
    ```bash
@@ -37,7 +37,7 @@ Before implementing a LIP/LRC, ensure you have:
 2. **Knowledge Requirements**
    - Solidity 0.8+ for smart contracts
    - TypeScript for tooling
-   - Understanding of the specific LIP/LRC
+   - Understanding of the specific LP/LRC
    - Lux Network architecture basics
 
 3. **Access to Resources**
@@ -68,7 +68,7 @@ pnpm install @lux/contracts @lux/sdk
 ### 1. Study the Standard
 
 Before coding:
-- Read the full LIP/LRC specification
+- Read the full LP/LRC specification
 - Review reference implementations
 - Understand all MUST/SHOULD/MAY requirements
 - Check for updates or amendments
@@ -549,7 +549,7 @@ contract MyToken is LRC20, AccessControl {
 ### Useful Resources
 
 - [Lux Documentation](https://docs.lux.network)
-- [LIP Repository](https://github.com/luxfi/lips)
+- [LP Repository](https://github.com/luxfi/lps)
 - [Developer Discord](https://discord.gg/lux-dev)
 - [Example Implementations](https://github.com/luxfi/lrc-examples)
 - [Security Best Practices](https://docs.lux.network/security)
@@ -558,7 +558,7 @@ contract MyToken is LRC20, AccessControl {
 
 ```mermaid
 graph LR
-    A[Read LIP] --> B[Setup Project]
+    A[Read LP] --> B[Setup Project]
     B --> C[Implement Interface]
     C --> D[Add Features]
     D --> E[Write Tests]
@@ -612,7 +612,7 @@ A:
 
 ## Conclusion
 
-Implementing LIPs and LRCs correctly is crucial for ecosystem interoperability. Follow this guide, use the provided tools, and don't hesitate to ask for help in the developer community.
+Implementing LPs and LRCs correctly is crucial for ecosystem interoperability. Follow this guide, use the provided tools, and don't hesitate to ask for help in the developer community.
 
 Remember: **Compatibility is key!**
 
