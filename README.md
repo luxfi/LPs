@@ -1,6 +1,6 @@
 # Lux Proposals (LPs)
 
-Lux Proposals (LPs) are the primary mechanism for proposing new features, gathering community input, and documenting design decisions for the Lux Network. This process ensures that changes to the network are transparently reviewed and achieve community consensus before implementation – much like Bitcoin’s BIPs and Ethereum’s EIPs, which allow anyone to propose and debate protocol improvements ￼ ￼.
+Lux Proposals (LPs) are the primary mechanism for proposing new features, gathering community input, and documenting design decisions for the [Lux Network](https://lux.network). This process ensures that changes to the network are transparently reviewed and achieve community consensus before implementation – much like Bitcoin’s BIPs and Ethereum’s EIPs, which allow anyone to propose and debate protocol improvements ￼ ￼.
 
 ## What is an LP?
 
