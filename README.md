@@ -1,164 +1,183 @@
-# Lux Improvement Proposals (LIPs)
+# Lux Proposals (LPs)
 
-This repository contains all Lux Improvement Proposals (LIPs) - the primary mechanism for proposing new features, collecting community input, and documenting design decisions for the Lux Network.
+Lux Proposals (LPs) are the primary mechanism for proposing new features, gathering community input, and documenting design decisions for the Lux Network. This process ensures that changes to the network are transparently reviewed and achieve community consensus before implementation – much like Bitcoin’s BIPs and Ethereum’s EIPs, which allow anyone to propose and debate protocol improvements ￼ ￼.
 
-## What is a LIP?
+## What is an LP?
 
-A Lux Improvement Proposal (LIP) is a design document providing information to the Lux community about a proposed change to the system. LIPs are the primary mechanism for:
-- Proposing new features and standards
-- Collecting community technical input
-- Documenting design decisions
+A Lux Proposal (LP) is a design document that provides information to the Lux community about a proposed change to the system. LPs serve as the formal pathway to introduce improvements and build agreement on their adoption. They are used for:
+	•	Proposing new features or standards – outlining technical specs for enhancements.
+	•	Collecting community input – soliciting feedback and technical review from the community.
+	•	Documenting design decisions – recording the rationale behind changes.
+
+By using LPs, the Lux community can coordinate development in a decentralized manner, similar to the improvement proposal frameworks of other blockchains ￼. Every network upgrade or standard in Lux originates from an LP, ensuring an open governance process.
 
 ## Quick Start
+	•	📖 New to LPs? Begin with LP-0, which provides an overview of the Lux Network architecture and the community contribution framework.
+	•	🚀 Create a new LP: Use the provided template by running make new (this invokes the ./scripts/new-lp.sh script) to scaffold a proposal draft.
+	•	📋 View all LPs: See INDEX.md for a complete list of proposals and their details.
+	•	🔍 Check status: See STATUS.md for the current status of each LP (Draft, Final, etc.).
 
-- 📖 **New to LIPs?** Start with [LIP-0](LIPs/lip-0.md) for architecture overview and contribution guidelines
-- 🚀 **Create a new LIP:** Run `make new` or `./scripts/new-lip.sh`
-- 📋 **View all LIPs:** See [INDEX.md](INDEX.md) for complete documentation
-- 🔍 **Check status:** See [STATUS.md](STATUS.md) for current LIP statuses
+## LP Index
 
-## LIP Index
+Below is an index of all Lux Proposals, grouped by topic area:
 
-### Foundation & Governance (LIPs 0–9)
-| LIP | Title | Status | Type |
-|---|---|---|---|
-| [0](LIPs/lip-0.md) | Lux Network Architecture & Community Framework | Final | Meta |
-| [1](LIPs/lip-1.md) | Native LUX Token Standard | Final | Standards Track |
-| [2](LIPs/lip-2.md) | Liquidity Pool Standard | Draft | Standards Track |
-| [3](LIPs/lip-3.md) | LX Exchange Protocol | Draft | Standards Track |
-| [4](LIPs/lip-4.md) | Core Consensus & Node Architecture | Draft | Standards Track |
-| [5](LIPs/lip-5.md) | Simplex Consensus Mechanism | Draft | Standards Track |
-| [6](LIPs/lip-6.md) | Network Runner & Testing Framework | Draft | Standards Track |
-| [7](LIPs/lip-7.md) | VM SDK Specification | Draft | Standards Track |
-| [8](LIPs/lip-8.md) | Plugin Architecture | Draft | Standards Track |
-| [9](LIPs/lip-9.md) | CLI Tool Specification | Draft | Standards Track |
+### Foundation & Governance (LPs 0–9)
 
-### Chain Specifications (LIPs 10–14)
-| LIP | Title | Status | Type |
-|---|---|---|---|
-| [10](LIPs/lip-10.md) | P-Chain (Platform Chain) Specification | Draft | Standards Track |
-| [11](LIPs/lip-11.md) | X-Chain (Exchange Chain) Specification | Draft | Standards Track |
-| [12](LIPs/lip-12.md) | C-Chain (Contract Chain) Specification | Draft | Standards Track |
-| [13](LIPs/lip-13.md) | M-Chain (MPC Bridge Chain) Specification | Draft | Standards Track |
-| [14](LIPs/lip-14.md) | Z-Chain (Zero-Knowledge Chain) Specification | Draft | Standards Track |
+#### LP	Title	Status	Type
+0	Lux Network Architecture & Community Framework	Final	Meta
+1	Native LUX Token Standard	Final	Standards Track
+2	Liquidity Pool Standard	Draft	Standards Track
+3	LX Exchange Protocol	Draft	Standards Track
+4	Core Consensus & Node Architecture	Draft	Standards Track
+5	Simplex Consensus Mechanism	Draft	Standards Track
+6	Network Runner & Testing Framework	Draft	Standards Track
+7	VM SDK Specification	Draft	Standards Track
+8	Plugin Architecture	Draft	Standards Track
+9	CLI Tool Specification	Draft	Standards Track
 
-### Bridge & Cross-Chain (LIPs 15–19)
-| LIP | Title | Status | Type |
-|---|---|---|---|
-| [15](LIPs/lip-15.md) | MPC Bridge Protocol | Draft | Standards Track |
-| [16](LIPs/lip-16.md) | Teleport Cross-Chain Protocol | Draft | Standards Track |
-| [17](LIPs/lip-17.md) | Bridge Asset Registry | Draft | Standards Track |
-| [18](LIPs/lip-18.md) | Cross-Chain Message Format | Draft | Standards Track |
-| [19](LIPs/lip-19.md) | Bridge Security Framework | Draft | Standards Track |
+### Chain Specifications (LPs 10–14)
 
-### Token Standards (LIPs 20–39)
-| LIP | Title | Status | Type |
-|---|---|---|---|
-| [20](LIPs/lip-20.md) | LRC-20 Fungible Token Standard | Final | Standards Track |
+#### LP	Title	Status	Type
+10	P-Chain (Platform Chain) Specification	Draft	Standards Track
+11	X-Chain (Exchange Chain) Specification	Draft	Standards Track
+12	C-Chain (Contract Chain) Specification	Draft	Standards Track
+13	M-Chain (MPC Bridge Chain) Specification	Draft	Standards Track
+14	Z-Chain (Zero-Knowledge Chain) Specification	Draft	Standards Track
 
-### Advanced Standards (LIPs 40+)
-| LIP | Title | Status | Type |
-|---|---|---|---|
-| [40](LIPs/lip-40.md) | Wallet Standards | Draft | Standards Track |
-| [50](LIPs/lip-50.md) | Developer Tools | Draft | Standards Track |
-| [60](LIPs/lip-60.md) | DeFi Protocols | Draft | Standards Track |
-| [80](LIPs/lip-80.md) | Infrastructure & Operations | Draft | Standards Track |
-| [90](LIPs/lip-90.md) | Research & Future | Draft | Standards Track |
-| [721](LIPs/lip-721.md) | LRC-721 Non-Fungible Token Standard | Final | Standards Track |
-| [1155](LIPs/lip-1155.md) | LRC-1155 Multi-Token Standard | Final | Standards Track |
+### Bridge & Cross-Chain (LPs 15–19)
 
-## LIP Process
+#### LP	Title	Status	Type
+15	MPC Bridge Protocol	Draft	Standards Track
+16	Teleport Cross-Chain Protocol	Draft	Standards Track
+17	Bridge Asset Registry	Draft	Standards Track
+18	Cross-Chain Message Format	Draft	Standards Track
+19	Bridge Security Framework	Draft	Standards Track
 
-1. **💡 Have an idea** - Start with community discussion on [forum.lux.network](https://forum.lux.network)
-2. **📝 Draft your LIP** - Use `make new` to create from template
-3. **🔄 Submit PR** - Your PR number becomes your LIP number
-4. **👥 Get reviewed** - LIP editors review for completeness
-5. **🗳️ Build consensus** - Community discussion and feedback
-6. **⏰ Last Call** - 14-day final review period
-7. **✅ Final** - LIP is finalized and ready for implementation
+### Token Standards (LPs 20–39)
 
-## Types of LIPs
+#### LP	Title	Status	Type
+20	LRC-20 Fungible Token Standard	Final	Standards Track
 
-- **Standards Track**: Technical specifications affecting protocol
-  - Core: Consensus and network changes
-  - Networking: P2P and network layer
-  - Interface: API/RPC specifications
-  - LRC: Application-layer standards (tokens, NFTs, etc.)
-- **Meta**: Process and governance proposals
-- **Informational**: Guidelines and best practices
+### Network Standards (LPs 40+)
+
+LP	Title	Status	Type
+40	Wallet Standards	Draft	Standards Track
+50	Developer Tools	Draft	Standards Track
+60	DeFi Protocols	Draft	Standards Track
+80	Infrastructure & Operations	Draft	Standards Track
+90	Research & Future	Draft	Standards Track
+721	LRC-721 Non-Fungible Token Standard	Final	Standards Track
+1155	LRC-1155 Multi-Token Standard	Final	Standards Track
+
+Note: The LRC-20, LRC-721, and LRC-1155 proposals define Lux’s token standards. These correspond to the well-known Ethereum token standards ERC-20 (fungible tokens) and ERC-721/1155 (non-fungible and multi-token standards) ￼ ￼, adapted for the Lux Network.
+
+## LP Process
+
+To ensure each proposal is thoroughly vetted and agreed upon, Lux Proposals follow a structured process:
+	1.	💡 Have an idea – Begin by discussing your idea with the community (for example, on the Lux forum). Early discussion helps refine the idea and gauge community interest, much like how Bitcoin proposals start on mailing lists before formalization ￼.
+	2.	📝 Draft your LP – Using the template provided (via make new), write a draft of the proposal. This draft should clearly outline the problem, the proposed solution, and technical details.
+	3.	🔄 Submit a Pull Request – Submit your LP as a pull request to the luxfi/LPs repository. The pull request number will be assigned as the official LP number.
+	4.	👥 Get reviewed – The LP editors (maintainers of the proposals repository) will review the draft for completeness, correct formatting, and adherence to the guidelines. They may request changes or improvements before acceptance.
+	5.	🤝 Build consensus – Once the draft is published, the wider community discusses the proposal (on forums, Discord, GitHub discussions, etc.). Feedback is incorporated by the author to address concerns and build rough consensus that the change is worthwhile.
+	6.	⏰ Last Call – After consensus emerges, the proposal enters a Last Call status, a final 14-day review period ￼. This gives any remaining stakeholders a chance to raise objections or point out issues. If no major issues arise during this time, the proposal moves forward.
+	7.	✅ Final – With successful completion of Last Call, the LP is marked Final. A Final LP signifies the proposal is accepted as a standard and is ready for implementation. At this stage, it should only be updated for minor corrections or clarifications. Implementation (in client code, smart contracts, etc.) can proceed, and the changes defined by the LP become part of the Lux Network.
+
+Throughout this process, the goal is to emulate the best practices of open governance in blockchain communities: transparent discussion, iterative improvement, and broad consensus ￼ ￼. Just as Ethereum’s core updates consist of sets of EIPs that clients must implement to stay in consensus ￼, Lux uses LPs to coordinate network upgrades and standards.
+
+## Types of LPs
+
+Not all proposals are alike. Lux Proposals are categorized by their purpose and scope, similar to the categorization in Ethereum’s EIP process ￼:
+	•	Standards Track: Proposals that involve technical changes affecting the Lux protocol or network on a broad scale. These include:
+	•	Core: Changes to core consensus or network rules (e.g. consensus algorithm modifications or upgrades that require coordination across all nodes).
+	•	Networking: Improvements to peer-to-peer networking, communication protocols, or other network-layer changes.
+	•	Interface: Specifications for client APIs, RPC interfaces, and language-level standards that developers use to interact with Lux.
+	•	LRC (Lux Request for Comments): Application-layer standards, such as token standards and smart contract interfaces (e.g. fungible token specs, NFT standards, naming systems). LRC proposals are analogous to Ethereum’s ERC category, defining how applications and assets operate on Lux ￼.
+	•	Meta: Proposals about the process itself or governance of the Lux ecosystem. Meta LPs do not alter the protocol but rather propose changes to processes, decision-making, or tools (for example, the proposal defining the LP process would be a Meta LP). These typically require community consensus to implement, similar to how Ethereum uses Meta EIPs for process changes ￼.
+	•	Informational: Proposals that provide general guidelines, design recommendations, or other information to the community. These do not propose new features or require adoption; they are simply for disseminating best practices or design philosophies. (The community is free to follow or ignore informational LPs.)
 
 ## Tools and Commands
 
-We provide a Makefile and scripts to help manage LIPs:
+To help manage the LP workflow, this repository provides a Makefile and helper scripts. Common tasks include:
 
-```bash
-# Create a new LIP
+# Create a new LP from the template
 make new
 
-# Validate a LIP
-make validate FILE=LIPs/lip-20.md
+# Validate a specific LP (checks formatting, front-matter, etc.)
+make validate FILE=LPs/lp-20.md
 
-# Validate all LIPs
+# Validate all LPs in the repository
 make validate-all
 
-# Check all links
+# Check all hyperlinks in LP documents for validity
 make check-links
 
-# Update the index
+# Update the index (INDEX.md) based on current LP files
 make update-index
 
-# Show LIP statistics
+# Show statistics (e.g., counts by status or category)
 make stats
 
-# Run all checks before PR
+# Run all checks (validation, links, etc.) before submitting a PR
 make pre-pr
 
-# Manage LIP discussions (requires GitHub CLI):
-```bash
-# Create a GitHub Discussion for a LIP:
-gh discussion create --repo luxfi/lips \
-  --category "LIP Discussions" \
-  --title "LIP <number>: <LIP title>" \
-  --body "Discussion for LIP-<number>: https://github.com/luxfi/lips/blob/main/LIPs/lip-<number>.md"
+## Managing LP discussions (requires GitHub CLI):
 
-# List existing LIP discussion categories:
-gh api repos/luxfi/lips/discussions/categories
-```
-```
+For governance and transparency, each LP can have an associated discussion thread on the Lux forum or GitHub Discussions. The following commands use the GitHub CLI to create and manage proposal discussion posts:
+
+# Create a GitHub Discussion for an LP (in the "LP Discussions" category of the repo)
+gh discussion create --repo luxfi/LPs \
+  --category "LP Discussions" \
+  --title "LP <number>: <Proposal Title>" \
+  --body "Discussion for LP-<number>: https://github.com/luxfi/LPs/blob/main/LPs/lp-<number>.md"
+
+# List existing discussion categories (to confirm the category name or ID)
+gh api repos/luxfi/LPs/discussions/categories
+
+These tools ensure that proposal authors can easily format their submissions and that reviewers can quickly verify consistency. They are especially useful as the number of proposals grows.
 
 ## Development Roadmap
 
-The Lux Network follows a phased development approach:
+The Lux Network’s evolution is planned in phases, with each phase focusing on a set of milestones and features. This phased development roadmap provides context for many LPs (especially Standards Track proposals targeting specific phases):
+	•	Phase 1 (Q1 2025): Foundational Governance & Core Protocol – Establish governance structures and launch core network functionality (consensus, base chains, native token). LPs in the 0–9 range (core framework and token standard) fall under this phase.
+	•	Phase 2 (Q2 2025): Execution Environment & Asset Standards – Develop the execution layer (e.g. virtual machine support) and introduce asset standards (like LRC-20). This phase includes proposals like VM specifications and token standards.
+	•	Phase 3 (Q3 2025): Cross-Chain Interoperability – Enable seamless interaction between Lux subnets/chains and external chains. Bridge protocols (LPs 15–19) and cross-chain message formats are addressed here.
+	•	Phase 4 (Q4 2025): Attestations & Compliance – Introduce identity attestations, compliance frameworks, and features for regulatory integration. (Expect LPs dealing with identity, KYC/AML frameworks, etc.)
+	•	Phase 5 (Q1 2026): Privacy & Zero-Knowledge – Implement privacy-preserving technology and zero-knowledge proof integrations (such as the Z-Chain and privacy enhancements in transactions).
+	•	Phase 6 (Q2 2026): Data Availability & Scalability – Improve data availability solutions (for off-chain data or rollups) and scale throughput of the network.
+	•	Phase 7 (Q3 2026 and beyond): Application Layer Standards – Focus on higher-level standards for DeFi, DAO governance, and dApp development to enrich the ecosystem (e.g. advanced smart contract standards, financial primitives, etc.).
 
-- **Phase 1** (Q1 2025): Foundational Governance & Core Protocol
-- **Phase 2** (Q2 2025): Execution Environment & Asset Standards
-- **Phase 3** (Q3 2025): Cross-Chain Interoperability
-- **Phase 4** (Q4 2025): Attestations & Compliance
-- **Phase 5** (Q1 2026): Privacy & Zero-Knowledge
-- **Phase 6** (Q2 2026): Data Availability & Scalability
-- **Phase 7** (Q3 2026+): Application Layer Standards
-
-See [phases/](phases/) for detailed roadmap information.
+See the phases/ directory for detailed specifications and design documents for each development phase. Each phase’s completion is marked by the implementation of key LPs associated with that phase.
 
 ## Contributing
 
-We welcome contributions! Please see:
-- [CONTRIBUTING.md](CONTRIBUTING.md) for contribution guidelines
-- [LIP-0](LIPs/lip-0.md) for the community framework
-- [GOVERNANCE.md](GOVERNANCE.md) for governance processes
+We warmly welcome community contributions to the Lux Proposal process and the Lux Network in general. To get involved:
+	•	Read the CONTRIBUTING.md guide for general contribution guidelines and tips on how to write a good LP.
+	•	Review LP-0 for the community framework and overall architecture – this provides important context if you plan to propose changes.
+	•	Check GOVERNANCE.md for details on how decisions are made in the Lux community and the formal governance process (off-chain and on-chain governance, voting, etc.).
+
+Whether you want to author a new proposal, improve existing ones, or simply offer feedback, your participation is valuable. All LPs start as ideas from community members – your ideas could shape the future of Lux!
 
 ## Resources
+	•	🌐 Forum: Join the discussion on the Lux Forum – a great place for informal proposal ideas and community Q&A.
+	•	📚 Documentation: Explore the Lux Network Docs for technical documentation, tutorials, and background on Lux architecture.
+	•	💬 Discord: Chat with core developers and community members in real-time on Discord.
+	•	🐦 Twitter: Follow @luxdefi on Twitter for announcements, updates, and highlights of new proposals.
 
-- 🌐 **Forum**: [forum.lux.network](https://forum.lux.network)
-- 📚 **Documentation**: [docs.lux.network](https://docs.lux.network)
-- 💬 **Discord**: [discord.gg/lux](https://discord.gg/lux)
-- 🐦 **Twitter**: [@luxdefi](https://twitter.com/luxdefi)
+These resources will help you stay informed and get support as you work with Lux and LPs.
 
 ## License
 
-All LIPs are released under [CC0 1.0 Universal](LICENSE.md).
+All LPs are released under the CC0 1.0 Universal Public Domain Dedication. This means that the proposals are in the public domain – you are free to share and adapt them without restriction. We believe that open standards and protocols best serve the community when they are unencumbered by proprietary restrictions.
 
----
+⸻
+
 
 <div align="center">
   <strong>Building the future of decentralized finance, one proposal at a time.</strong>
 </div>
+
+
+Sources:
+	1.	Bitcoin Magazine – What Is A Bitcoin Improvement Proposal (BIP)? ￼ (illustrating the purpose of BIPs in Bitcoin’s governance).
+	2.	Crypto.com Glossary – Ethereum Improvement Proposals (EIPs) ￼ ￼ (explaining EIPs and their categories, which Lux’s LPs mirror).
+	3.	Investopedia – What Is ERC-20? ￼ ￼ (describing Ethereum’s token standards ERC-20 and ERC-721, analogous to Lux’s LRC-20 and LRC-721 standards).
