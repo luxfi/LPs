@@ -38,11 +38,11 @@ All LPs that introduce backwards incompatibilities must include a section descri
 
 ## Test Cases
 
-Test cases for an implementation are mandatory for LPs that are affecting consensus changes. Tests should either be inlined in the LP as data (such as input/expected output pairs, or included in `../assets/lip-###/<filename>`.
+Test cases for an implementation are mandatory for LPs that are affecting consensus changes. Tests should either be inlined in the LP as data (such as input/expected output pairs, or included in `../assets/lp-###/<filename>`.
 
 ## Reference Implementation
 
-An optional section that contains a reference/example implementation that people can use to assist in understanding or implementing this specification. If the implementation is too large to reasonably be included inline, then consider adding it to `../assets/lip-###/` or linking to a repository.
+An optional section that contains a reference/example implementation that people can use to assist in understanding or implementing this specification. If the implementation is too large to reasonably be included inline, then consider adding it to `../assets/lp-###/` or linking to a repository.
 
 ## Security Considerations
 

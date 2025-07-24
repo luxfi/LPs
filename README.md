@@ -14,8 +14,8 @@ By using LPs, the Lux community can coordinate development in a decentralized ma
 ## Quick Start
 - 📖 New to LPs? Begin with LP-0, which provides an overview of the Lux Network architecture and the community contribution framework.
 - 🚀 Create a new LP: Use the provided template by running make new (this invokes the ./scripts/new-lp.sh script) to scaffold a proposal draft.
-- 📋 View all LPs: See INDEX.md for a complete list of proposals and their details.
-- 🔍 Check status: See STATUS.md for the current status of each LP (Draft, Final, etc.).
++ 📋 View all LPs: See [docs/INDEX.md](./docs/INDEX.md) for a complete list of proposals and their details.
++ 🔍 Check status: See [docs/STATUS.md](./docs/STATUS.md) for the current status of each LP (Draft, Final, etc.).
 
 ## LP Index
 
@@ -91,6 +91,7 @@ By using LPs, the Lux community can coordinate development in a decentralized ma
 | [LP-95](./LPs/lp-95.md) | Stablecoin Mechanisms Research | Lux Network Team | Informational | - | Draft |
 | [LP-96](./LPs/lp-96.md) | MEV Protection Research | Lux Network Team | Informational | - | Draft |
 | [LP-97](./LPs/lp-97.md) | Data Availability Research | Lux Network Team | Informational | - | Draft |
+| [LP-98](./LPs/lp-98.md) | Luxfi GraphDB & GraphQL Engine Integration | Lux Network Team | Standards Track | Interface | Draft |
 | [LP-721](./LPs/lp-721.md) | LRC-721 Non-Fungible Token Standard | Lux Network Team | Standards Track | LRC | Final |
 | [LP-1155](./LPs/lp-1155.md) | LRC-1155 Multi-Token Standard | Lux Network Team | Standards Track | LRC | Final |
 

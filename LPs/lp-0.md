@@ -77,7 +77,7 @@ As the Lux Network evolves to support advanced cross-chain operations, privacy f
 #### LP Process
 
 1. **Idea Discussion**: Post on forum.lux.network
-2. **Draft LP**: Use `./scripts/new-lip.sh` or `make new`
+2. **Draft LP**: Use `./scripts/new-lp.sh` or `make new`
 3. **Submit PR**: PR number becomes LP number
 4. **Review Process**: Technical and community review
 5. **Implementation**: Build reference implementation
@@ -114,13 +114,13 @@ As the foundational LP, this document establishes the initial standards. Future 
 
 ## References
 
-- [1] G. Wood, “Polkadot: Vision for a Heterogeneous Multi‑chain Framework,” Whitepaper, 2016.  
-- [2] J. Kwon & E. Buchman, “Cosmos: A Network of Distributed Ledgers,” Whitepaper, 2016.  
-- [3] Ethereum Foundation, “EIP‑1: EIP Purpose and Guidelines,” GitHub, 2015.  
-- [4] G. Wood et al., “Polkadot White Paper,” Polkadot Wiki, 2020.  
-- [5] Cosmos Network, “Inter‑Blockchain Communication (IBC) Protocol,” Cosmos SDK Docs.  
-- [6] Ethereum Foundation, “Ethereum Improvement Proposal Process,” eips.ethereum.org.  
-- [7] Polkadot Wiki, “Polkadot Governance Overview.”  
+- [1] G. Wood, “Polkadot: Vision for a Heterogeneous Multi‑chain Framework,” Whitepaper, 2016.
+- [2] J. Kwon & E. Buchman, “Cosmos: A Network of Distributed Ledgers,” Whitepaper, 2016.
+- [3] Ethereum Foundation, “EIP‑1: EIP Purpose and Guidelines,” GitHub, 2015.
+- [4] G. Wood et al., “Polkadot White Paper,” Polkadot Wiki, 2020.
+- [5] Cosmos Network, “Inter‑Blockchain Communication (IBC) Protocol,” Cosmos SDK Docs.
+- [6] Ethereum Foundation, “Ethereum Improvement Proposal Process,” eips.ethereum.org.
+- [7] Polkadot Wiki, “Polkadot Governance Overview.”
 
 ## Copyright
 
