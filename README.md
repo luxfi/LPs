@@ -24,6 +24,7 @@ Below is an index of all Lux Proposals, grouped by topic area:
 ### Foundation & Governance (LPs 0–9)
 
 #### LP	Title	Status	Type
+
 0	Lux Network Architecture & Community Framework	Final	Meta
 1	Native LUX Token Standard	Final	Standards Track
 2	Liquidity Pool Standard	Draft	Standards Track
