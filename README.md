@@ -1,7 +1,7 @@
 # Lux Improvement Proposals (LIPs)
 
 <div align="center">
-  <img src="resources/LuxLogoRed.png?raw=true" alt="Lux Network" width="300">
+  <img src="https://lux.network/logo.png" alt="Lux Network" width="300">
 </div>
 
 ---
