@@ -3,7 +3,7 @@ lip: 66
 title: Oracle Integration Standard via Z-Chain
 description: Defines the standard for oracle services leveraging Z-Chain's shared root and light client infrastructure
 author: Lux Network Team (@luxdefi)
-discussions-to: https://forum.lux.network/lip-66
+discussions-to: https://github.com/luxfi/lips/discussions
 status: Draft
 type: Standards Track
 category: Core

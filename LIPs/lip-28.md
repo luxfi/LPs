@@ -3,7 +3,7 @@ lip: 28
 title: LRC-20 Burnable Token Extension
 description: Optional extension of the fungible token standard to allow token holders to irreversibly destroy tokens
 author: Gemini (@gemini)
-discussions-to: <URL>
+discussions-to: https://github.com/luxfi/lips/discussions
 status: Draft
 type: Standards Track
 category: LRC

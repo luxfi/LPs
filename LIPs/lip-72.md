@@ -3,7 +3,7 @@ lip: 72
 title: Bridged Asset Standard
 description: Standard for bridged tokens from external chains to Lux Network
 author: Lux Network Team (@luxdefi)
-discussions-to: https://forum.lux.network/lip-72
+discussions-to: https://github.com/luxfi/lips/discussions
 status: Draft
 type: Standards Track
 category: LRC

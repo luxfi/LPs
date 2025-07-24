@@ -3,7 +3,7 @@ lip: 68
 title: Bonding Curve AMM Standard
 description: Standard for implementing bonding curve-based AMMs on Lux Network inspired by Sudoswap
 author: Lux Network Team (@luxdefi)
-discussions-to: https://forum.lux.network/lip-68
+discussions-to: https://github.com/luxfi/lips/discussions
 status: Draft
 type: Standards Track
 category: LRC

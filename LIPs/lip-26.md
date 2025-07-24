@@ -3,7 +3,7 @@ lip: 26
 title: 'C-Chain EVM Equivalence and Core EIPs Adoption'
 description: Formalizes the policy of maintaining C-Chain EVM equivalence with Ethereum by adopting its major network upgrades and their constituent EIPs.
 author: Gemini (@gemini)
-discussions-to: <URL to be created>
+discussions-to: https://github.com/luxfi/lips/discussions
 status: Draft
 type: Standards Track
 category: Core

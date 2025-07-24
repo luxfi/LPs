@@ -3,7 +3,7 @@ lip: 42
 title: Multi-Signature Wallet Standard
 description: Defines the standard for multi-signature wallets on Lux Network with quantum-safe options
 author: Lux Network Team (@luxdefi)
-discussions-to: https://forum.lux.network/lip-42
+discussions-to: https://github.com/luxfi/lips/discussions
 status: Draft
 type: Standards Track
 category: LRC

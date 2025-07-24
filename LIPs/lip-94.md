@@ -3,7 +3,7 @@ lip: 94
 title: Governance Framework Research
 description: Research on decentralized governance models and implementation strategies for Lux Network
 author: Lux Network Team (@luxdefi)
-discussions-to: https://forum.lux.network/lip-94
+discussions-to: https://github.com/luxfi/lips/discussions
 status: Draft
 type: Informational
 created: 2025-01-23

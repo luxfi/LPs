@@ -3,7 +3,7 @@ lip: 30
 title: LRC-20 Bridgable Token Extension
 description: Optional extension of the fungible token standard to support native bridging operations via burn and mint
 author: Gemini (@gemini)
-discussions-to: <URL>
+discussions-to: https://github.com/luxfi/lips/discussions
 status: Draft
 type: Standards Track
 category: LRC

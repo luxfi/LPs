@@ -3,7 +3,7 @@ lip: 64
 title: Tokenized Vault Standard (LRC-4626)
 description: A standard for tokenized vaults on Lux Network based on ERC-4626
 author: Lux Network Team (@luxdefi)
-discussions-to: https://forum.lux.network/lip-64
+discussions-to: https://github.com/luxfi/lips/discussions
 status: Draft
 type: Standards Track
 category: LRC

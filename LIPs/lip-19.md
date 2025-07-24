@@ -1,11 +1,11 @@
 ---
-lip: 90
-title: Research & Future
-description: This range is set aside for forward-looking and experimental proposals.
+lip: 19
+title: Bridge Security Framework
+description: Establishes a comprehensive security framework for cross-chain bridges in Lux.
 author: Lux Network Team (@luxdefi)
 discussions-to: https://github.com/luxfi/lips/discussions
 status: Draft
 type: Standards Track
-category: Research
+category: Bridge
 created: 2025-01-23
 ---

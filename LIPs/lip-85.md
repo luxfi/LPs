@@ -3,7 +3,7 @@ lip: 85
 title: Security Audit Framework
 description: Defines the security audit standards and requirements for Lux Network protocols
 author: Lux Network Team (@luxdefi)
-discussions-to: https://forum.lux.network/lip-85
+discussions-to: https://github.com/luxfi/lips/discussions
 status: Draft
 type: Standards Track
 category: Meta

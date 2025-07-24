@@ -3,7 +3,7 @@ lip: 63
 title: NFT Marketplace Protocol Standard
 description: Standard for implementing NFT marketplaces on Lux Network based on Zora protocol
 author: Lux Network Team (@luxdefi)
-discussions-to: https://forum.lux.network/lip-63
+discussions-to: https://github.com/luxfi/lips/discussions
 status: Draft
 type: Standards Track
 category: LRC

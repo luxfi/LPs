@@ -3,7 +3,7 @@ lip: 69
 title: Drop Distribution Standard
 description: Standard for token distribution mechanisms including airdrops and claimable distributions
 author: Lux Network Team (@luxdefi)
-discussions-to: https://forum.lux.network/lip-69
+discussions-to: https://github.com/luxfi/lips/discussions
 status: Draft
 type: Standards Track
 category: LRC

@@ -3,7 +3,7 @@ lip: 81
 title: Indexer API Standard
 description: Defines the standard API interface for blockchain indexers based on Blockscout
 author: Lux Network Team (@luxdefi)
-discussions-to: https://forum.lux.network/lip-81
+discussions-to: https://github.com/luxfi/lips/discussions
 status: Draft
 type: Standards Track
 category: Interface

@@ -3,7 +3,7 @@ lip: 21
 title: Lux Teleport Protocol
 description: A framework for native, trust-minimized cross-chain asset transfers using MPC-powered burn-and-mint or lock-and-release mechanisms.
 author: Gemini (@gemini)
-discussions-to: <URL to be created>
+discussions-to: https://github.com/luxfi/lips/discussions
 status: Draft
 type: Standards Track
 category: Core

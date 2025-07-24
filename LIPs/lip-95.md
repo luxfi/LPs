@@ -3,7 +3,7 @@ lip: 95
 title: Stablecoin Mechanisms Research
 description: Research on stablecoin designs and stability mechanisms for Lux Network
 author: Lux Network Team (@luxdefi)
-discussions-to: https://forum.lux.network/lip-95
+discussions-to: https://github.com/luxfi/lips/discussions
 status: Draft
 type: Informational
 created: 2025-01-23

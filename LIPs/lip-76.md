@@ -3,7 +3,7 @@ lip: 76
 title: Random Number Generation Standard
 description: Defines standard interfaces for secure random number generation on Lux Network
 author: Lux Network Team (@luxdefi)
-discussions-to: https://forum.lux.network/lip-76
+discussions-to: https://github.com/luxfi/lips/discussions
 status: Draft
 type: Standards Track
 category: Core

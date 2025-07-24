@@ -3,7 +3,7 @@ lip: 91
 title: Payment Processing Research
 description: Research on payment processing systems and credit card integration for Lux Network
 author: Lux Network Team (@luxdefi)
-discussions-to: https://forum.lux.network/lip-91
+discussions-to: https://github.com/luxfi/lips/discussions
 status: Draft
 type: Informational
 created: 2025-01-23

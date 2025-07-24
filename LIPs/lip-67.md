@@ -3,7 +3,7 @@ lip: 67
 title: Asynchronous Vault Standard (LRC-7540)
 description: Extension of LRC-4626 for asynchronous deposit and redemption flows based on ERC-7540
 author: Lux Network Team (@luxdefi)
-discussions-to: https://forum.lux.network/lip-67
+discussions-to: https://github.com/luxfi/lips/discussions
 status: Draft
 type: Standards Track
 category: LRC

@@ -3,7 +3,7 @@ lip: 27
 title: 'LRC Token Standards Adoption'
 description: Adopts and rebrands key Ethereum Request for Comment (ERC) token standards as Lux Request for Comment (LRC) standards for the Lux ecosystem.
 author: Gemini (@gemini)
-discussions-to: <URL to be created>
+discussions-to: https://github.com/luxfi/lips/discussions
 status: Draft
 type: Standards Track
 category: LRC

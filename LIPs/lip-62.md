@@ -3,7 +3,7 @@ lip: 62
 title: Yield Farming Protocol Standard
 description: Standard for implementing yield farming and liquidity mining protocols on Lux Network
 author: Lux Network Team (@luxdefi)
-discussions-to: https://forum.lux.network/lip-62
+discussions-to: https://github.com/luxfi/lips/discussions
 status: Draft
 type: Standards Track
 category: LRC

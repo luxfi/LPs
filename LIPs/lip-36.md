@@ -3,7 +3,7 @@ lip: 36
 title: X-Chain Order-Book DEX API & RPC Addendum
 description: Detailed specification of transaction types, wire formats, RPC endpoints, indexer schema, and CLI enhancements for the X-Chain Order-Book DEX extension (LIP-006)
 author: Lux Network Team
-discussions-to: <URL>
+discussions-to: https://github.com/luxfi/lips/discussions
 status: Draft
 type: Standards Track
 category: Interface

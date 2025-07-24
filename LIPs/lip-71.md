@@ -3,7 +3,7 @@ lip: 71
 title: Media Content NFT Standard
 description: Standard for media and content NFTs with licensing, royalties, and metadata on Lux Network
 author: Lux Network Team (@luxdefi)
-discussions-to: https://forum.lux.network/lip-71
+discussions-to: https://github.com/luxfi/lips/discussions
 status: Draft
 type: Standards Track
 category: LRC

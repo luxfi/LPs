@@ -3,7 +3,7 @@ lip: 35
 title: Stage-Sync Pipeline for Coreth Bootstrapping
 description: Study and prototype a staged sync architecture, inspired by Erigon, to accelerate and optimize the C-Chain initial sync in Lux’s geth fork
 author: Lux Network Team
-discussions-to: https://blog.erigon.dev/erigon-stage-sync-and-control-flows
+discussions-to: https://github.com/luxfi/lips/discussions
 status: Draft
 type: Standards Track
 category: Core

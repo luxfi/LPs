@@ -3,7 +3,7 @@ lip: 73
 title: Batch Execution Standard (Multicall)
 description: Standard for executing multiple contract calls in a single transaction on Lux Network
 author: Lux Network Team (@luxdefi)
-discussions-to: https://forum.lux.network/lip-73
+discussions-to: https://github.com/luxfi/lips/discussions
 status: Draft
 type: Standards Track
 category: LRC

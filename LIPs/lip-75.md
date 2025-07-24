@@ -3,7 +3,7 @@ lip: 75
 title: TEE Integration Standard
 description: Defines standard interfaces for Trusted Execution Environment integration on Lux Network
 author: Lux Network Team (@luxdefi)
-discussions-to: https://forum.lux.network/lip-75
+discussions-to: https://github.com/luxfi/lips/discussions
 status: Draft
 type: Standards Track
 category: Core

@@ -24,79 +24,53 @@ A Lux Improvement Proposal (LIP) is a design document providing information to t
 
 ## LIP Index
 
-### Foundation & Governance (0-9)
+### Foundation & Governance (LIPs 0–9)
 | LIP | Title | Status | Type |
-|-----|-------|--------|------|
+|---|---|---|---|
 | [0](LIPs/lip-0.md) | Lux Network Architecture & Community Framework | Final | Meta |
-| [1](LIPs/lip-1.md) | Native LUX Token Standard | Draft | Standards Track |
+| [1](LIPs/lip-1.md) | Native LUX Token Standard | Final | Standards Track |
 | [2](LIPs/lip-2.md) | Liquidity Pool Standard | Draft | Standards Track |
 | [3](LIPs/lip-3.md) | LX Exchange Protocol | Draft | Standards Track |
-| [4](LIPs/lip-4.md) | Core Consensus and Node Architecture | Draft | Standards Track |
+| [4](LIPs/lip-4.md) | Core Consensus & Node Architecture | Draft | Standards Track |
+| [5](LIPs/lip-5.md) | Simplex Consensus Mechanism | Draft | Standards Track |
+| [6](LIPs/lip-6.md) | Network Runner & Testing Framework | Draft | Standards Track |
+| [7](LIPs/lip-7.md) | VM SDK Specification | Draft | Standards Track |
+| [8](LIPs/lip-8.md) | Plugin Architecture | Draft | Standards Track |
+| [9](LIPs/lip-9.md) | CLI Tool Specification | Draft | Standards Track |
 
-### Chain Specifications (10-14)
+### Chain Specifications (LIPs 10–14)
 | LIP | Title | Status | Type |
-|-----|-------|--------|------|
+|---|---|---|---|
 | [10](LIPs/lip-10.md) | P-Chain (Platform Chain) Specification | Draft | Standards Track |
 | [11](LIPs/lip-11.md) | X-Chain (Exchange Chain) Specification | Draft | Standards Track |
-| [12](LIPs/lip-12.md) | C-Chain (Contract Chain) EVM Specification | Draft | Standards Track |
+| [12](LIPs/lip-12.md) | C-Chain (Contract Chain) Specification | Draft | Standards Track |
 | [13](LIPs/lip-13.md) | M-Chain (MPC Bridge Chain) Specification | Draft | Standards Track |
 | [14](LIPs/lip-14.md) | Z-Chain (Zero-Knowledge Chain) Specification | Draft | Standards Track |
 
-### Token Standards (20-39)
+### Bridge & Cross-Chain (LIPs 15–19)
 | LIP | Title | Status | Type |
-|-----|-------|--------|------|
-| [20](LIPs/lip-20.md) | LRC-20 Fungible Token Standard | Draft | Standards Track |
-| [21](LIPs/lip-21.md) | LRC-21 Payable Token Extension | Draft | Standards Track |
-| [22](LIPs/lip-22.md) | LRC-22 Permit Extension | Draft | Standards Track |
-| ... | [See full list](STATUS.md) | ... | ... |
+|---|---|---|---|
+| [15](LIPs/lip-15.md) | MPC Bridge Protocol | Draft | Standards Track |
+| [16](LIPs/lip-16.md) | Teleport Cross-Chain Protocol | Draft | Standards Track |
+| [17](LIPs/lip-17.md) | Bridge Asset Registry | Draft | Standards Track |
+| [18](LIPs/lip-18.md) | Cross-Chain Message Format | Draft | Standards Track |
+| [19](LIPs/lip-19.md) | Bridge Security Framework | Draft | Standards Track |
 
-### Wallet & Security Standards (40-49)
+### Token Standards (LIPs 20–39)
 | LIP | Title | Status | Type |
-|-----|-------|--------|------|
-| [40](LIPs/lip-40.md) | Wallet Interface Standard | Draft | Standards Track |
-| [42](LIPs/lip-42.md) | Multi-Signature Wallet Standard | Draft | Standards Track |
+|---|---|---|---|
+| [20](LIPs/lip-20.md) | LRC-20 Fungible Token Standard | Final | Standards Track |
 
-### Developer Tools (50-59)
+### Advanced Standards (LIPs 40+)
 | LIP | Title | Status | Type |
-|-----|-------|--------|------|
-| [50](LIPs/lip-50.md) | JavaScript SDK Specification | Draft | Standards Track |
-
-### DeFi Protocols (60-79)
-| LIP | Title | Status | Type |
-|-----|-------|--------|------|
-| [60](LIPs/lip-60.md) | Lending Protocol Standard (Alchemix-based) | Draft | Standards Track |
-| [61](LIPs/lip-61.md) | Automated Market Maker (AMM) Standard | Draft | Standards Track |
-| [62](LIPs/lip-62.md) | Yield Farming Protocol Standard | Draft | Standards Track |
-| [63](LIPs/lip-63.md) | NFT Marketplace Protocol Standard | Draft | Standards Track |
-| [64](LIPs/lip-64.md) | Tokenized Vault Standard (LRC-4626) | Draft | Standards Track |
-| [65](LIPs/lip-65.md) | Multi-Token Standard (LRC-6909) | Draft | Standards Track |
-| [66](LIPs/lip-66.md) | Oracle Integration Standard via Z-Chain | Draft | Standards Track |
-| [67](LIPs/lip-67.md) | Asynchronous Vault Standard (LRC-7540) | Draft | Standards Track |
-| [68](LIPs/lip-68.md) | Bonding Curve AMM Standard | Draft | Standards Track |
-
-### Infrastructure & Operations (80-89)
-| LIP | Title | Status | Type |
-|-----|-------|--------|------|
-| [81](LIPs/lip-81.md) | Indexer API Standard (Blockscout-based) | Draft | Standards Track |
-| [85](LIPs/lip-85.md) | Security Audit Framework | Draft | Standards Track |
-
-### Research Papers (90-99)
-| LIP | Title | Status | Type |
-|-----|-------|--------|------|
-| [90](LIPs/lip-90.md) | NFT Marketplace Research | Draft | Informational |
-| [91](LIPs/lip-91.md) | Payment Processing Research | Draft | Informational |
-| [92](LIPs/lip-92.md) | Cross-Chain Messaging Research | Draft | Informational |
-| [93](LIPs/lip-93.md) | Decentralized Identity Research | Draft | Informational |
-| [94](LIPs/lip-94.md) | Governance Framework Research | Draft | Informational |
-| [95](LIPs/lip-95.md) | Stablecoin Mechanisms Research | Draft | Informational |
-| [96](LIPs/lip-96.md) | MEV Protection Research | Draft | Informational |
-| [97](LIPs/lip-97.md) | Data Availability Research | Draft | Informational |
-
-### Advanced Standards (721+)
-| LIP | Title | Status | Type |
-|-----|-------|--------|------|
-| [721](LIPs/lip-721.md) | LRC-721 Non-Fungible Token Standard | Draft | Standards Track |
-| [1155](LIPs/lip-1155.md) | LRC-1155 Multi-Token Standard | Draft | Standards Track |
+|---|---|---|---|
+| [40](LIPs/lip-40.md) | Wallet Standards | Draft | Standards Track |
+| [50](LIPs/lip-50.md) | Developer Tools | Draft | Standards Track |
+| [60](LIPs/lip-60.md) | DeFi Protocols | Draft | Standards Track |
+| [80](LIPs/lip-80.md) | Infrastructure & Operations | Draft | Standards Track |
+| [90](LIPs/lip-90.md) | Research & Future | Draft | Standards Track |
+| [721](LIPs/lip-721.md) | LRC-721 Non-Fungible Token Standard | Final | Standards Track |
+| [1155](LIPs/lip-1155.md) | LRC-1155 Multi-Token Standard | Final | Standards Track |
 
 ## LIP Process
 
@@ -143,6 +117,18 @@ make stats
 
 # Run all checks before PR
 make pre-pr
+
+# Manage LIP discussions (requires GitHub CLI):
+```bash
+# Create a GitHub Discussion for a LIP:
+gh discussion create --repo luxfi/lips \
+  --category "LIP Discussions" \
+  --title "LIP <number>: <LIP title>" \
+  --body "Discussion for LIP-<number>: https://github.com/luxfi/lips/blob/main/LIPs/lip-<number>.md"
+
+# List existing LIP discussion categories:
+gh api repos/luxfi/lips/discussions/categories
+```
 ```
 
 ## Development Roadmap

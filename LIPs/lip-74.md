@@ -3,7 +3,7 @@ lip: 74
 title: CREATE2 Factory Standard
 description: Defines a standard interface for deterministic contract deployment factories using CREATE2
 author: Lux Network Team (@luxdefi)
-discussions-to: https://forum.lux.network/lip-74
+discussions-to: https://github.com/luxfi/lips/discussions
 status: Draft
 type: Standards Track
 category: LRC

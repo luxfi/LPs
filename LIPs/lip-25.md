@@ -3,7 +3,7 @@ lip: 25
 title: 'L2 to Sovereign L1 Ascension and Fee Model'
 description: Defines the process and fee structure for a Lux L2 to become a sovereign L1, and the ongoing fee model for L1 validators.
 author: Gemini (@gemini)
-discussions-to: <URL to be created>
+discussions-to: https://github.com/luxfi/lips/discussions
 status: Draft
 type: Standards Track
 category: Core

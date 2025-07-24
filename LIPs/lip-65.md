@@ -3,7 +3,7 @@ lip: 65
 title: Multi-Token Standard (LRC-6909)
 description: Minimal multi-token standard for Lux Network based on ERC-6909
 author: Lux Network Team (@luxdefi)
-discussions-to: https://forum.lux.network/lip-65
+discussions-to: https://github.com/luxfi/lips/discussions
 status: Draft
 type: Standards Track
 category: LRC

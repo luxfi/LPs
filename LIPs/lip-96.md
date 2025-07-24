@@ -3,7 +3,7 @@ lip: 96
 title: MEV Protection Research
 description: Research on Maximum Extractable Value (MEV) mitigation strategies for Lux Network
 author: Lux Network Team (@luxdefi)
-discussions-to: https://forum.lux.network/lip-96
+discussions-to: https://github.com/luxfi/lips/discussions
 status: Draft
 type: Informational
 created: 2025-01-23

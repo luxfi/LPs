@@ -3,7 +3,7 @@ lip: 93
 title: Decentralized Identity Research
 description: Research on decentralized identity solutions and privacy-preserving KYC for Lux Network
 author: Lux Network Team (@luxdefi)
-discussions-to: https://forum.lux.network/lip-93
+discussions-to: https://github.com/luxfi/lips/discussions
 status: Draft
 type: Informational
 created: 2025-01-23

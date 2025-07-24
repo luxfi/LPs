@@ -1,11 +1,11 @@
 ---
-lip: 90
-title: Research & Future
-description: This range is set aside for forward-looking and experimental proposals.
+lip: 17
+title: Bridge Asset Registry
+description: Specifies a standard registry for bridged assets.
 author: Lux Network Team (@luxdefi)
 discussions-to: https://github.com/luxfi/lips/discussions
 status: Draft
 type: Standards Track
-category: Research
+category: Bridge
 created: 2025-01-23
 ---

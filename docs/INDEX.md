@@ -25,19 +25,80 @@ Welcome to the comprehensive documentation for Lux Improvement Proposals. This i
 - [ROADMAP.md](./ROADMAP.md) - 7-phase development roadmap
 - [Phase Documentation](./phases/) - Detailed phase breakdowns
 
-## 🗂️ LIP Categories
+# 🗂️ LIP Categories
 
-### Meta LIPs (Governance & Process)
-- [LIP-1](./LIPs/lip-1.md) - Community Contribution Framework
-- LIP-2 (Planned) - Lux DAO Constitution
+### Foundation & Governance (0-9)
+- [LIP-0](./LIPs/lip-0.md) - Lux Network Architecture & Community Framework
+- [LIP-1](./LIPs/lip-1.md) - Native LUX Token Standard
+- [LIP-2](./LIPs/lip-2.md) - Liquidity Pool Standard
+- [LIP-3](./LIPs/lip-3.md) - LX Exchange Protocol
+- [LIP-4](./LIPs/lip-4.md) - Core Consensus & Node Architecture
+- [LIP-5](./LIPs/lip-5.md) - Simplex Consensus Mechanism
+- [LIP-6](./LIPs/lip-6.md) - Network Runner & Testing Framework
+- [LIP-7](./LIPs/lip-7.md) - VM SDK Specification
+- [LIP-8](./LIPs/lip-8.md) - Plugin Architecture
+- [LIP-9](./LIPs/lip-9.md) - CLI Tool Specification
 
-### Standards Track - Core
-- LIP-3 to LIP-19 - Core protocol standards
-- LIP-25 to LIP-45 - Chain-specific standards
+### Chain Specifications (10-14)
+- [LIP-10](./LIPs/lip-10.md) - P-Chain (Platform Chain) Specification
+- [LIP-11](./LIPs/lip-11.md) - X-Chain (Exchange Chain) Specification
+- [LIP-12](./LIPs/lip-12.md) - C-Chain (Contract Chain) EVM Specification
+- [LIP-13](./LIPs/lip-13.md) - M-Chain (MPC Bridge Chain) Specification
+- [LIP-14](./LIPs/lip-14.md) - Z-Chain (Zero-Knowledge Chain) Specification
 
-### Standards Track - LRC (Application Layer)
+### Bridge & Cross-Chain (15-19)
+- [LIP-15](./LIPs/lip-15.md) - MPC Bridge Protocol
+- [LIP-16](./LIPs/lip-16.md) - Teleport Cross-Chain Protocol
+- [LIP-17](./LIPs/lip-17.md) - Bridge Asset Registry
+- [LIP-18](./LIPs/lip-18.md) - Cross-Chain Message Format
+- [LIP-19](./LIPs/lip-19.md) - Bridge Security Framework
+
+### Token Standards (20-39)
 - [LIP-20](./LIPs/lip-20.md) - LRC-20 Fungible Token Standard
-- LIP-165 to LIP-6551 - Application standards
+- [LIP-21](./LIPs/lip-21.md) - LRC-21 Payable Token Extension
+- [LIP-22](./LIPs/lip-22.md) - LRC-22 Permit Extension
+- … (See full list in [STATUS.md](./STATUS.md))
+
+### Wallet Standards (40-49)
+- [LIP-40](./LIPs/lip-40.md) - Wallet Interface Standard
+- [LIP-42](./LIPs/lip-42.md) - Multi-Signature Wallet Standard
+- … (See full list in [STATUS.md](./STATUS.md))
+
+### Developer Tools (50-59)
+- [LIP-50](./LIPs/lip-50.md) - JavaScript SDK Specification
+- … (See full list in [STATUS.md](./STATUS.md))
+
+### DeFi Protocols (60-79)
+- [LIP-60](./LIPs/lip-60.md) - Lending Protocol Standard (Alchemix-based)
+- [LIP-61](./LIPs/lip-61.md) - Automated Market Maker (AMM) Standard
+- [LIP-62](./LIPs/lip-62.md) - Yield Farming Protocol Standard
+- [LIP-63](./LIPs/lip-63.md) - NFT Marketplace Protocol Standard
+- [LIP-64](./LIPs/lip-64.md) - Tokenized Vault Standard (LRC-4626)
+- [LIP-65](./LIPs/lip-65.md) - Multi-Token Standard (LRC-6909)
+- [LIP-66](./LIPs/lip-66.md) - Oracle Integration Standard via Z-Chain
+- [LIP-67](./LIPs/lip-67.md) - Asynchronous Vault Standard (LRC-7540)
+- [LIP-68](./LIPs/lip-68.md) - Bonding Curve AMM Standard
+- … (See full list in [STATUS.md](./STATUS.md))
+
+### Infrastructure & Operations (80-89)
+- [LIP-81](./LIPs/lip-81.md) - Indexer API Standard (Blockscout-based)
+- [LIP-85](./LIPs/lip-85.md) - Security Audit Framework
+- … (See full list in [STATUS.md](./STATUS.md))
+
+### Research & Future (90-99)
+- [LIP-90](./LIPs/lip-90.md) - NFT Marketplace Research
+- [LIP-91](./LIPs/lip-91.md) - Payment Processing Research
+- [LIP-92](./LIPs/lip-92.md) - Cross-Chain Messaging Research
+- [LIP-93](./LIPs/lip-93.md) - Decentralized Identity Research
+- [LIP-94](./LIPs/lip-94.md) - Governance Framework Research
+- [LIP-95](./LIPs/lip-95.md) - Stablecoin Mechanisms Research
+- [LIP-96](./LIPs/lip-96.md) - MEV Protection Research
+- [LIP-97](./LIPs/lip-97.md) - Data Availability Research
+- … (See full list in [STATUS.md](./STATUS.md))
+
+### Advanced Standards (721, 1155)
+- [LIP-721](./LIPs/lip-721.md) - LRC-721 Non-Fungible Token Standard
+- [LIP-1155](./LIPs/lip-1155.md) - LRC-1155 Multi-Token Standard
 
 ## 📅 Development Phases
 

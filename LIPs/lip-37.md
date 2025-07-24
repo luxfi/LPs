@@ -3,7 +3,7 @@ lip: 37
 title: Native Swap Integration on M-Chain, X-Chain, and Z-Chain
 description: Deep-integration blueprint to migrate legacy swaps REST API (swaps.ts) into fully on-chain M/X/Z chain transactions and RPC
 author: Lux Network Team
-discussions-to: <URL>
+discussions-to: https://github.com/luxfi/lips/discussions
 status: Draft
 type: Standards Track
 category: Core

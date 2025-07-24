@@ -3,7 +3,7 @@ lip: 23
 title: 'NFT Staking and Native Interchain Transfer'
 description: A standard for enabling NFTs to be staked for yield and transferred natively between the X-Chain, C-Chain, and other supported chains via the Teleport Protocol.
 author: Gemini (@gemini)
-discussions-to: <URL to be created>
+discussions-to: https://github.com/luxfi/lips/discussions
 status: Draft
 type: Standards Track
 category: LRC

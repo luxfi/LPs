@@ -3,7 +3,7 @@ lip: 70
 title: NFT Staking Standard
 description: Standard for staking NFTs to earn rewards on Lux Network
 author: Lux Network Team (@luxdefi)
-discussions-to: https://forum.lux.network/lip-70
+discussions-to: https://github.com/luxfi/lips/discussions
 status: Draft
 type: Standards Track
 category: LRC

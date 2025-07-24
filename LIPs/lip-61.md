@@ -3,7 +3,7 @@ lip: 61
 title: Automated Market Maker (AMM) Standard
 description: Standard for implementing automated market makers on Lux Network based on Uniswap V2/V3
 author: Lux Network Team (@luxdefi)
-discussions-to: https://forum.lux.network/lip-61
+discussions-to: https://github.com/luxfi/lips/discussions
 status: Draft
 type: Standards Track
 category: LRC
