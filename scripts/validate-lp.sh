@@ -27,7 +27,7 @@ print_warning() {
 # Check if file is provided
 if [ $# -eq 0 ]; then
     print_error "No file provided"
-    echo "Usage: $0 <lip-file.md>"
+    echo "Usage: $0 <lp-file.md>"
     exit 1
 fi
 
@@ -38,6 +38,9 @@ if [ ! -f "$LP_FILE" ]; then
     print_error "File not found: $LP_FILE"
     exit 1
 fi
+
+# Valid status values
+VALID_STATUSES=("Draft" "Review" "Last Call" "Final" "Withdrawn" "Deferred" "Superseded" "Stagnant")
 
 echo "Validating LP: $LP_FILE"
 echo "================================"
@@ -55,7 +58,7 @@ else
     FRONTMATTER=$(sed -n '/^---$/,/^---$/p' "$LP_FILE")
     
     # Check required fields
-    for field in "lip" "title" "description" "author" "status" "type" "created"; do
+    for field in "lp" "title" "description" "author" "status" "type" "created"; do
         if ! echo "$FRONTMATTER" | grep -q "^$field:"; then
             print_error "Missing required field: $field"
             ((ERRORS++))
@@ -70,14 +73,39 @@ else
         fi
     fi
     
+    # Validate status field
+    STATUS=$(echo "$FRONTMATTER" | grep "^status:" | cut -d' ' -f2- | tr -d ' ')
+    if [ ! -z "$STATUS" ]; then
+        VALID_STATUS=0
+        for valid in "${VALID_STATUSES[@]}"; do
+            if [ "$STATUS" == "$(echo $valid | tr -d ' ')" ]; then
+                VALID_STATUS=1
+                break
+            fi
+        done
+        if [ $VALID_STATUS -eq 0 ]; then
+            print_error "Invalid status: $STATUS. Must be one of: ${VALID_STATUSES[*]}"
+            ((ERRORS++))
+        fi
+    fi
+    
     if [ $ERRORS -eq 0 ]; then
         print_success "Valid"
     fi
 fi
 
-# Check required sections
+# Check required sections based on LP type
 echo "Checking required sections..."
-REQUIRED_SECTIONS=("Abstract" "Motivation" "Specification" "Rationale" "Backwards Compatibility" "Security Considerations")
+
+# Extract LP type from frontmatter
+LP_TYPE=$(grep "^type:" "$LP_FILE" | cut -d: -f2- | xargs)
+
+# Define required sections based on type
+if [[ "$LP_TYPE" == "Meta" ]] || [[ "$LP_TYPE" == "Informational" ]]; then
+    REQUIRED_SECTIONS=("Abstract" "Motivation")
+else
+    REQUIRED_SECTIONS=("Abstract" "Motivation" "Specification" "Rationale" "Backwards Compatibility" "Security Considerations")
+fi
 
 for section in "${REQUIRED_SECTIONS[@]}"; do
     echo -n "  Checking $section... "
@@ -139,10 +167,10 @@ fi
 # Check LP number format
 echo -n "Checking LP number format... "
 FILENAME=$(basename "$LP_FILE")
-if [[ $FILENAME =~ ^lip-[0-9]+\.md$ ]] || [[ $FILENAME == "lip-draft.md" ]]; then
+if [[ $FILENAME =~ ^lp-[0-9]+\.md$ ]] || [[ $FILENAME =~ ^lp-[0-9]+-r[0-9]+\.md$ ]] || [[ $FILENAME == "lp-draft.md" ]]; then
     print_success "Valid"
 else
-    print_error "Invalid filename format. Should be 'lip-N.md' or 'lip-draft.md'"
+    print_error "Invalid filename format. Should be 'lp-N.md', 'lp-N-rM.md', or 'lp-draft.md'"
     ((ERRORS++))
 fi
 

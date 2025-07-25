@@ -5,10 +5,13 @@ description: Focuses on the design of Lux’s quantum-safe wallet infrastructure
 author: Lux Network Team (@luxdefi)
 discussions-to: https://github.com/luxfi/lps/discussions
 status: Final
+requires: 4
 type: Standards Track
 category: Core
 created: 2025-01-28
 ---
+
+> **See also**: [LP-4: Quantum-Resistant Cryptography Integration in Lux](./lp-4.md)
 
 ## Abstract
 

@@ -14,6 +14,7 @@ help:
 	@echo "  make validate-all  - Validate all LP files in the repository"
 	@echo "  make check-links   - Check all links in LP files"
 	@echo "  make update-index  - Update the LP index in README.md"
+	@echo "  make stats         - Show LP statistics by status and type"
 	@echo "  make permissions   - Fix script permissions (make them executable)"
 	@echo "  make clean         - Clean up temporary files"
 	@echo ""
@@ -105,7 +106,7 @@ stats:
 	@echo "Total LPs: $$(ls -1 LPs/lp-*.md 2>/dev/null | wc -l)"
 	@echo ""
 	@echo "By Status:"
-	@for status in Draft Review "Last Call" Final Withdrawn Stagnant; do \
+	@for status in Draft Review "Last Call" Final Withdrawn Deferred Superseded Stagnant; do \
 		count=$$(grep -l "status: $$status" LPs/lp-*.md 2>/dev/null | wc -l); \
 		printf "  %-12s %s\n" "$$status:" "$$count"; \
 	done

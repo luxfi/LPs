@@ -4,13 +4,16 @@ title: M-Chain – Decentralised MPC Custody & Swap-Signature Layer
 description: Purpose-built subnet providing threshold-signature custody, on-chain swap-signature proofs, slashing and reward logic, and light-client proofs for bridge operations.
 author: Lux Protocol Team (@luxdefi)
 discussions-to: https://github.com/luxfi/lps/discussions
-status: Draft
+status: Superseded
 type: Standards Track
 category: Core
 created: 2025-07-24
 replaces: 4-r1
 requires: 1, 2, 3, 5, 6
+superseded-by: 13
 ---
+
+> **Note**: This LP has been superseded by [LP-13](./lp-13.md), which consolidates all M-Chain specifications into a single comprehensive document.
 
 ## 1  Abstract
 
