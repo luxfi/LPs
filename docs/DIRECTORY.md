@@ -29,9 +29,9 @@ lux-lps/
 │
 ├── LPs/                        # Actual LP documents
 │   ├── TEMPLATE.md              # Template for new LPs
-│   ├── lip-1.md                 # Community Contribution Framework
-│   ├── lip-20.md                # LRC-20 Token Standard
-│   └── lip-draft.md             # (Created by authors)
+│   ├── lp-1.md                 # Community Contribution Framework
+│   ├── lp-20.md                # LRC-20 Token Standard
+│   └── lp-draft.md             # (Created by authors)
 │
 ├── phases/                      # Detailed phase documentation
 │   ├── phase-1-foundational.md # Q1-Q2 2025
@@ -43,13 +43,13 @@ lux-lps/
 │   └── phase-7-application-standards.md # Q3 2026+
 │
 ├── scripts/                     # Automation tools
-│   ├── validate-lip.sh          # Validate LP formatting
+│   ├── validate-lp.sh          # Validate LP formatting
 │   ├── update-index.py          # Update README index
 │   ├── check-links.sh           # Check for broken links
-│   └── new-lip.sh               # Create new LP wizard
+│   └── new-lp.sh               # Create new LP wizard
 │
 └── assets/                      # Supporting materials
-    └── lip-{number}/            # Assets for specific LPs
+    └── lp-{number}/            # Assets for specific LPs
         ├── images/
         ├── contracts/
         └── examples/
@@ -90,8 +90,8 @@ lux-lps/
 
 | Pattern | Description | Example |
 |---------|-------------|---------|
-| lip-{N}.md | Approved LPs | lip-20.md |
-| lip-draft.md | New submissions | lip-draft.md |
+| lp-{N}.md | Approved LPs | lp-20.md |
+| lp-draft.md | New submissions | lp-draft.md |
 | TEMPLATE.md | LP template | - |
 
 ### Phase Documentation
@@ -110,10 +110,10 @@ lux-lps/
 
 | Script | Purpose | Usage |
 |--------|---------|-------|
-| validate-lip.sh | Check LP format | `./scripts/validate-lip.sh lip-20.md` |
+| validate-lp.sh | Check LP format | `./scripts/validate-lp.sh lp-20.md` |
 | update-index.py | Update README | `python scripts/update-index.py` |
 | check-links.sh | Find broken links | `./scripts/check-links.sh` |
-| new-lip.sh | Create new LP | `./scripts/new-lip.sh` |
+| new-lp.sh | Create new LP | `./scripts/new-lp.sh` |
 
 ## Navigation Guide
 

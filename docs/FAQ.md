@@ -1,12 +1,12 @@
 # Frequently Asked Questions (FAQ)
 
-This document answers common questions about Lux Improvement Proposals (LPs) and Lux Request for Comments (LRCs).
+This document answers common questions about Lux Proposals (LPs) and Lux Request for Comments (LRCs).
 
 ## General Questions
 
 ### What is a LP?
 
-A LP (Lux Improvement Proposal) is a design document that provides information to the Lux community or describes a new feature, process, or environment change for the Lux Network. It's the primary mechanism for proposing changes and documenting design decisions.
+A LP (Lux Proposal) is a design document that provides information to the Lux community or describes a new feature, process, or environment change for the Lux Network. It's the primary mechanism for proposing changes and documenting design decisions.
 
 ### What is an LRC?
 
@@ -74,9 +74,9 @@ You can:
 ### How do I get a LP number?
 
 LP numbers are assigned when your PR is ready to merge:
-1. Submit PR with `lip-draft.md`
+1. Submit PR with `lp-draft.md`
 2. Editor reviews and assigns number
-3. File renamed to `lip-N.md`
+3. File renamed to `lp-N.md`
 4. PR merged with assigned number
 
 ## Technical Questions
@@ -196,7 +196,7 @@ Not always, but:
 ### How do I get community feedback?
 
 1. Post in GitHub Discussions
-2. Share in Discord #lip-discussion
+2. Share in Discord #lp-discussion
 3. Present at community calls
 4. Write blog posts
 5. Engage on social media
@@ -293,7 +293,7 @@ Yes, at any stage before Final:
 ### Where can I get more help?
 
 - **Technical**: Discord #dev-help
-- **Process**: Discord #lip-help
+- **Process**: Discord #lp-help
 - **General**: GitHub Discussions
 - **Urgent**: editors@lux.network
 

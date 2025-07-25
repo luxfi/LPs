@@ -1,6 +1,6 @@
 # LP/LRC Number Allocation Guide
 
-This document provides guidelines for allocating LP numbers and understanding the numbering system for Lux Improvement Proposals and Lux Request for Comments.
+This document provides guidelines for allocating LP numbers and understanding the numbering system for Lux Proposals and Lux Request for Comments.
 
 ## Overview
 
@@ -81,7 +81,7 @@ Before requesting a number, check:
 ### 3. Submission Format
 ```yaml
 ---
-lip: [number]
+lp: [number]
 title: [title]
 category: [Core|Networking|Interface|LRC]
 status: Draft
@@ -154,7 +154,7 @@ For critical security or protocol fixes:
 ### Allocation Registry Format
 ```json
 {
-  "lip": 42,
+  "lp": 42,
   "title": "State Rent Mechanism",
   "category": "Core",
   "status": "Draft",
@@ -241,7 +241,7 @@ Future major protocol upgrade may:
 
 For number allocation questions:
 - GitHub: Open issue with "number-allocation" label
-- Discord: #lip-authors channel
+- Discord: #lp-authors channel
 - Email: lps@lux.network
 
 ---

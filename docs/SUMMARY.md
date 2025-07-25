@@ -1,13 +1,13 @@
-# Lux Improvement Proposals (LPs) - Executive Summary
+# Lux Proposals (LPs) - Executive Summary
 
 ## Overview
 
-The Lux Improvement Proposal (LP) framework is the cornerstone of Lux Network's decentralized governance and technical evolution. Modeled after successful systems like Ethereum's EIPs and Avalanche's ACPs, LPs provide a structured process for proposing, discussing, and implementing changes to the Lux ecosystem.
+The Lux Proposal (LP) framework is the cornerstone of Lux Network's decentralized governance and technical evolution. Modeled after successful systems like Ethereum's EIPs and Avalanche's ACPs, LPs provide a structured process for proposing, discussing, and implementing changes to the Lux ecosystem.
 
 ## Key Concepts
 
 ### LP vs LRC
-- **LP (Lux Improvement Proposal)**: The overarching framework for all proposals
+- **LP (Lux Proposal)**: The overarching framework for all proposals
 - **LRC (Lux Request for Comment)**: A subcategory of LPs focused on application-layer standards (tokens, DeFi, etc.)
 - Every LRC is a LP, but not every LP is an LRC
 
@@ -58,7 +58,7 @@ The Lux Improvement Proposal (LP) framework is the cornerstone of Lux Network's 
 ### For Proposal Authors
 1. Read the [Contributing Guide](./CONTRIBUTING.md)
 2. Use the [LP Template](./LPs/TEMPLATE.md)
-3. Run `./scripts/new-lip.sh` to start
+3. Run `./scripts/new-lp.sh` to start
 4. Submit via GitHub PR
 
 ### For Developers
@@ -103,10 +103,10 @@ As of January 2025:
 - [Glossary](./GLOSSARY.md) - Term definitions
 
 ### Tools
-- [Validation Script](./scripts/validate-lip.sh)
+- [Validation Script](./scripts/validate-lp.sh)
 - [Index Updater](./scripts/update-index.py)
 - [Link Checker](./scripts/check-links.sh)
-- [New LP Wizard](./scripts/new-lip.sh)
+- [New LP Wizard](./scripts/new-lp.sh)
 
 ### Community
 - GitHub: [luxfi/lps](https://github.com/luxfi/lps)

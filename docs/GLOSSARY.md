@@ -1,6 +1,6 @@
 # LP/LRC Glossary
 
-This glossary defines key terms used throughout the Lux Improvement Proposal documentation and process.
+This glossary defines key terms used throughout the Lux Proposal documentation and process.
 
 ## A
 
@@ -136,7 +136,7 @@ The final review period (14 days) before a LP moves to Final status.
 **Light Client**  
 A client that can verify blockchain data without storing the entire chain history.
 
-**LP (Lux Improvement Proposal)**  
+**LP (Lux Proposal)**  
 The primary mechanism for proposing changes to the Lux Network.
 
 **LRC (Lux Request for Comments)**  

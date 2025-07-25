@@ -1,4 +1,4 @@
-# Lux Improvement Proposals (LPs) - Documentation Index
+# Lux Proposals (LPs) - Documentation Index
 
 For a comprehensive list of proposals and their details, see the [LP Index](../README.md#lp-index) in the main README.
 

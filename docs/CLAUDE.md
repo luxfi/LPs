@@ -4,9 +4,9 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Repository Overview
 
-This is the **Lux Improvement Proposals (LPs)** repository - a governance and standardization framework for the Lux Network blockchain ecosystem. Unlike typical code repositories, this is a **documentation and specification repository** that manages proposals for improvements, standards, and processes within the Lux ecosystem.
+This is the **Lux Proposals (LPs)** repository - a governance and standardization framework for the Lux Network blockchain ecosystem. Unlike typical code repositories, this is a **documentation and specification repository** that manages proposals for improvements, standards, and processes within the Lux ecosystem.
 
-The LP process is modeled after Ethereum's EIP (Ethereum Improvement Proposal) system and serves as the primary mechanism for:
+The LP process is modeled after Ethereum's EIP system and serves as the primary mechanism for:
 - Proposing new features and standards
 - Collecting community input on proposals
 - Documenting design decisions
@@ -14,7 +14,7 @@ The LP process is modeled after Ethereum's EIP (Ethereum Improvement Proposal) s
 
 ## Key Concepts
 
-### LP (Lux Improvement Proposal)
+### LP (Lux Proposal)
 Any proposed change to the Lux Network ecosystem. All proposals start as LPs.
 
 ### LRC (Lux Request for Comment)
@@ -38,7 +38,7 @@ The repository includes a Makefile for convenient access to all common tasks. Yo
 ### Creating a New LP
 ```bash
 make new
-# or directly: ./scripts/new-lip.sh
+# or directly: ./scripts/new-lp.sh
 ```
 Interactive wizard that creates a properly formatted LP with all required sections. It will:
 - Prompt for LP metadata (title, type, category, etc.)
@@ -47,8 +47,8 @@ Interactive wizard that creates a properly formatted LP with all required sectio
 
 ### Validating a LP
 ```bash
-make validate FILE=LPs/lip-20.md
-# or directly: ./scripts/validate-lip.sh LPs/lip-20.md
+make validate FILE=LPs/lp-20.md
+# or directly: ./scripts/validate-lp.sh LPs/lp-20.md
 ```
 Checks that a LP:
 - Has all required sections
@@ -93,24 +93,24 @@ make permissions   # Fix script permissions if needed
 lps/
 ├── LPs/                    # Individual LP documents
 │   ├── TEMPLATE.md         # Template for new proposals
-│   ├── lip-1.md            # LP-1: Community Contribution Framework
-│   └── lip-20.md           # LP-20: LRC-20 Fungible Token Standard
+│   ├── lp-1.md            # LP-1: Community Contribution Framework
+│   └── lp-20.md           # LP-20: LRC-20 Fungible Token Standard
 ├── assets/                  # Supporting files for LPs
-│   └── lip-N/              # Assets for specific LP number N
+│   └── lp-N/              # Assets for specific LP number N
 ├── phases/                  # Development roadmap phases
 ├── scripts/                 # Automation scripts
 └── *.md                    # Documentation files (README, CONTRIBUTING, etc.)
 ```
 
 ### File Naming
-- LP files: `lip-N.md` where N is the LP number
-- Draft files: `lip-draft.md` for initial submissions
-- Assets: Place in `assets/lip-N/` directory
+- LP files: `lp-N.md` where N is the LP number
+- Draft files: `lp-draft.md` for initial submissions
+- Assets: Place in `assets/lp-N/` directory
 
 ### Required LP Sections
 1. **YAML Frontmatter** (required fields):
    ```yaml
-   lip: <number>
+   lp: <number>
    title: <short descriptive title>
    description: <one sentence description>
    author: <Name (@github-username)>
@@ -137,17 +137,17 @@ lps/
 
 ### Proposing a New LP
 1. **Discuss idea** on forum first (forum.lux.network)
-2. **Run** `./scripts/new-lip.sh` to create draft
-3. **Submit PR** with `lip-draft.md` file
+2. **Run** `./scripts/new-lp.sh` to create draft
+3. **Submit PR** with `lp-draft.md` file
 4. **PR number** becomes your LP number
-5. **Rename file** to `lip-N.md` where N is PR number
+5. **Rename file** to `lp-N.md` where N is PR number
 6. **Address feedback** from editors and community
 7. **Move through statuses** as consensus builds
 
 ### Making Changes to Existing LPs
 - Only Draft status LPs can have substantial changes
 - Final LPs require a new LP to modify
-- Always validate changes with `./scripts/validate-lip.sh`
+- Always validate changes with `./scripts/validate-lp.sh`
 - Update index after changes with `python3 ./scripts/update-index.py`
 
 ## Important Notes
@@ -160,7 +160,7 @@ This is a documentation repository:
 - Scripts are standalone shell/Python scripts
 
 ### LRC Numbering
-- LRCs use the same file naming as LPs: `lip-N.md`
+- LRCs use the same file naming as LPs: `lp-N.md`
 - The LRC number is assigned separately (e.g., LP-20 defines LRC-20)
 - Title should include both: "LP-20: LRC-20 Fungible Token Standard"
 
@@ -209,15 +209,15 @@ Check `requires:` field in frontmatter and search for references
 
 ### Validate Before Submitting
 ```bash
-./scripts/validate-lip.sh LPs/lip-draft.md
+./scripts/validate-lp.sh LPs/lp-draft.md
 ./scripts/check-links.sh
 ```
 
 ### Common Issues
-- Missing required sections → Use template or `new-lip.sh`
+- Missing required sections → Use template or `new-lp.sh`
 - Invalid links → Run `check-links.sh` before submitting
 - Wrong file location → LPs go in `LPs/` directory
-- Incorrect naming → Use `lip-N.md` format
+- Incorrect naming → Use `lp-N.md` format
 
 ### Getting Help
 - Read `CONTRIBUTING.md` for detailed guidelines

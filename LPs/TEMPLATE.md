@@ -1,5 +1,5 @@
 ---
-lip: <LP number>
+lp: <LP number>
 title: <The LP title is a few words, not a complete sentence>
 description: <Description is one full (short) sentence>
 author: <a comma separated list of the author's or authors' name + GitHub username (in parenthesis), or name and email (in angle brackets).  Example, FirstName LastName (@GitHubUsername), FirstName LastName <foo@bar.com>, FirstName (@GitHubUsername) and GitHubUsername (@GitHubUsername)>

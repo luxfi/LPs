@@ -1,6 +1,6 @@
 # LP Editors Guide
 
-This document outlines the responsibilities, processes, and guidelines for LP Editors who maintain the Lux Improvement Proposals repository.
+This document outlines the responsibilities, processes, and guidelines for LP Editors who maintain the Lux Proposals repository.
 
 ## Role of LP Editors
 
@@ -70,7 +70,7 @@ Follow these steps:
 2. Verify no conflicts
 3. Assign appropriate number
 4. Update allocation registry
-5. Rename file to `lip-N.md`
+5. Rename file to `lp-N.md`
 
 ### 3. Status Updates
 
@@ -115,7 +115,7 @@ Withdrawn  Rejected  Stagnant
 ### Daily Tasks
 ```bash
 # Check new PRs
-gh pr list --label "new-lip"
+gh pr list --label "new-lp"
 
 # Review discussions
 gh issue list --label "editor-review"
@@ -177,7 +177,7 @@ I've reviewed your submission and have the following feedback:
 [Specific feedback points]
 
 Please address these items and update your PR. If you have questions, 
-feel free to ask here or in our Discord #lip-help channel.
+feel free to ask here or in our Discord #lp-help channel.
 
 Looking forward to your revisions!
 ```
@@ -217,7 +217,7 @@ The LP will be withdrawn after 90 days of inactivity.
 ### Automation Scripts
 
 ```bash
-# scripts/validate-lip.sh
+# scripts/validate-lp.sh
 #!/bin/bash
 # Validates LP formatting and structure
 
@@ -352,7 +352,7 @@ For each review, ensure:
 - [Markdown Guide](https://www.markdownguide.org)
 
 ### Communication Channels
-- **Slack**: #lip-editors (private)
+- **Slack**: #lp-editors (private)
 - **Discord**: Editor channels
 - **Email**: editors@lux.network
 - **Meetings**: Weekly Thursdays 2pm UTC

@@ -1,6 +1,6 @@
 # LP Implementation Guide for Developers
 
-This guide provides comprehensive instructions for developers implementing Lux Improvement Proposals (LPs) and Lux Request for Comments (LRCs) standards.
+This guide provides comprehensive instructions for developers implementing Lux Proposals (LPs) and Lux Request for Comments (LRCs) standards.
 
 ## Table of Contents
 

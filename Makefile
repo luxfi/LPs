@@ -1,11 +1,11 @@
-# Makefile for Lux Improvement Proposals (LPs)
+# Makefile for Lux Proposals (LPs)
 # This file provides convenient shortcuts for common LP management tasks
 
 .PHONY: help new validate check-links update-index validate-all clean permissions
 
 # Default target - show help
 help:
-	@echo "Lux Improvement Proposals (LPs) Management"
+	@echo "Lux Proposals (LPs) Management"
 	@echo "==========================================="
 	@echo ""
 	@echo "Available commands:"
@@ -19,35 +19,35 @@ help:
 	@echo ""
 	@echo "Examples:"
 	@echo "  make new                              # Create a new LP"
-	@echo "  make validate FILE=LPs/lip-20.md     # Validate a specific LP"
+	@echo "  make validate FILE=LPs/lp-20.md     # Validate a specific LP"
 	@echo "  make validate-all                     # Validate all LPs"
 	@echo ""
 
 # Create a new LP using the interactive wizard
 new:
 	@echo "Starting LP creation wizard..."
-	@./scripts/new-lip.sh
+	@./scripts/new-lp.sh
 
 # Validate a specific LP file
 # Usage: make validate FILE=LPs/lip-20.md
 validate:
 ifndef FILE
 	@echo "Error: Please specify a file to validate"
-	@echo "Usage: make validate FILE=path/to/lip.md"
-	@echo "Example: make validate FILE=LPs/lip-20.md"
+	@echo "Usage: make validate FILE=path/to/lp.md"
+	@echo "Example: make validate FILE=LPs/lp-20.md"
 	@exit 1
 else
 	@echo "Validating $(FILE)..."
-	@./scripts/validate-lip.sh $(FILE)
+	@./scripts/validate-lp.sh $(FILE)
 endif
 
 # Validate all LP files
 validate-all:
 	@echo "Validating all LP files..."
-	@for file in LPs/lip-*.md; do \
+	@for file in LPs/lp-*.md; do \
 		if [ -f "$$file" ]; then \
 			echo "Checking $$file..."; \
-			./scripts/validate-lip.sh "$$file" || exit 1; \
+			./scripts/validate-lp.sh "$$file" || exit 1; \
 		fi \
 	done
 	@echo "All LP files validated successfully!"
@@ -102,17 +102,17 @@ pre-pr: validate-all check-links update-index
 stats:
 	@echo "LP Statistics"
 	@echo "=============="
-	@echo "Total LPs: $$(ls -1 LPs/lip-*.md 2>/dev/null | wc -l)"
+	@echo "Total LPs: $$(ls -1 LPs/lp-*.md 2>/dev/null | wc -l)"
 	@echo ""
 	@echo "By Status:"
 	@for status in Draft Review "Last Call" Final Withdrawn Stagnant; do \
-		count=$$(grep -l "status: $$status" LPs/lip-*.md 2>/dev/null | wc -l); \
+		count=$$(grep -l "status: $$status" LPs/lp-*.md 2>/dev/null | wc -l); \
 		printf "  %-12s %s\n" "$$status:" "$$count"; \
 	done
 	@echo ""
 	@echo "By Type:"
 	@for type in "Standards Track" Meta Informational; do \
-		count=$$(grep -l "type: $$type" LPs/lip-*.md 2>/dev/null | wc -l); \
+		count=$$(grep -l "type: $$type" LPs/lp-*.md 2>/dev/null | wc -l); \
 		printf "  %-12s %s\n" "$$type:" "$$count"; \
 	done
 
@@ -121,11 +121,11 @@ stats:
 list:
 	@echo "Current LPs:"
 	@echo "============="
-	@for file in LPs/lip-*.md; do \
+	@for file in LPs/lp-*.md; do \
 		if [ -f "$$file" ]; then \
-			lip=$$(grep "^lip:" "$$file" | cut -d' ' -f2); \
+			lp=$$(grep "^lp:" "$$file" | cut -d' ' -f2); \
 			title=$$(grep "^title:" "$$file" | cut -d' ' -f2-); \
-			printf "LP-%-4s %s\n" "$$lip:" "$$title"; \
+			printf "LP-%-4s %s\n" "$$lp:" "$$title"; \
 		fi \
 	done
 
@@ -140,8 +140,8 @@ watch:
 # Create a draft from template
 .PHONY: draft
 draft:
-	@cp LPs/TEMPLATE.md LPs/lip-draft.md
-	@echo "Created LPs/lip-draft.md from template"
+	@cp LPs/TEMPLATE.md LPs/lp-draft.md
+	@echo "Created LPs/lp-draft.md from template"
 	@echo "Edit this file and submit as a PR to get your LP number"
 
 # Development helpers
@@ -155,4 +155,4 @@ setup: permissions
 .PHONY: recent
 recent:
 	@echo "Recently modified LPs (last 10):"
-	@ls -lt LPs/lip-*.md 2>/dev/null | head -10 | awk '{print $$9}'
+	@ls -lt LPs/lp-*.md 2>/dev/null | head -10 | awk '{print $$9}'

@@ -2,7 +2,7 @@
 
 ## Overview
 
-The Lux Network employs a decentralized governance model that combines Lux Improvement Proposal (LP) standardization with on-chain voting mechanisms. This document explains how governance works, how proposals become standards, and how the community participates in network evolution.
+The Lux Network employs a decentralized governance model that combines Lux Proposal (LP) standardization with on-chain voting mechanisms. This document explains how governance works, how proposals become standards, and how the community participates in network evolution.
 
 ## Governance Architecture
 
@@ -25,7 +25,7 @@ The Lux Network employs a decentralized governance model that combines Lux Impro
 - **Reputation Staking**: Validator influence grows with consistent good behavior
 - **Delegation**: Token holders can delegate voting power to validators
 
-## LP (Lux Improvement Proposal) Process
+## LP (Lux Proposal) Process
 
 ### Purpose of LPs
 LPs serve as the primary mechanism for:
