@@ -38,7 +38,7 @@ read -p "Choose (1-3): " type_choice
 
 case $type_choice in
     1)
-        lip_type="Standards Track"
+        lp_type="Standards Track"
         # Ask for category
         echo -e "\nSelect category:"
         echo "1) Core"
@@ -56,15 +56,15 @@ case $type_choice in
         esac
         ;;
     2)
-        lip_type="Meta"
+        lp_type="Meta"
         category=""
         ;;
     3)
-        lip_type="Informational"
+        lp_type="Informational"
         category=""
         ;;
     *)
-        lip_type="Standards Track"
+        lp_type="Standards Track"
         category="Core"
         ;;
 esac
@@ -82,20 +82,20 @@ fi
 created_date=$(date +%Y-%m-%d)
 
 # Create the file
-filename="LPs/lip-draft.md"
+filename="LPs/lp-draft.md"
 
 print_info "Creating new LP draft at $filename"
 
 # Generate the LP content
 cat > "$filename" << EOF
 ---
-lip: <to be assigned>
+lp: <to be assigned>
 title: $title
 description: $description
 author: $author
 discussions-to: <URL>
 status: Draft
-type: $lip_type
+type: $lp_type
 EOF
 
 if [ -n "$category" ]; then
@@ -131,7 +131,7 @@ replaces: <LP number(s)>
 EOF
 
 # Add code example for Standards Track
-if [ "$lip_type" == "Standards Track" ]; then
+if [ "$lp_type" == "Standards Track" ]; then
     cat >> "$filename" << 'EOF'
 ### Interface
 
@@ -157,11 +157,11 @@ cat >> "$filename" << 'EOF'
 EOF
 
 # Add test cases for Standards Track
-if [ "$lip_type" == "Standards Track" ]; then
+if [ "$lp_type" == "Standards Track" ]; then
     cat >> "$filename" << 'EOF'
 ## Test Cases
 
-[TODO: Provide test cases for an implementation. Tests should either be inlined in the LP as data (such as input/expected output pairs, or included in `../assets/lip-###/<filename>`.]
+[TODO: Provide test cases for an implementation. Tests should either be inlined in the LP as data (such as input/expected output pairs, or included in `../assets/lp-###/<filename>`.]
 
 ```
 // Example test case
@@ -172,7 +172,7 @@ Actual: ...
 
 ## Reference Implementation
 
-[TODO: Provide a reference/example implementation that people can use to assist in understanding or implementing this specification. If the implementation is too large to reasonably be included inline, then consider adding it to `../assets/lip-###/` or linking to a repository.]
+[TODO: Provide a reference/example implementation that people can use to assist in understanding or implementing this specification. If the implementation is too large to reasonably be included inline, then consider adding it to `../assets/lp-###/` or linking to a repository.]
 
 ```solidity
 // TODO: Add reference implementation
@@ -202,7 +202,7 @@ echo
 print_info "Next steps:"
 echo "1. Fill in the TODO sections in $filename"
 echo "2. Post your idea in GitHub Discussions for initial feedback"
-echo "3. Run ./scripts/validate-lip.sh $filename to check formatting"
+echo "3. Run ./scripts/validate-lp.sh $filename to check formatting"
 echo "4. Submit a PR when ready"
 echo
 echo "For the discussions-to field, create a new discussion at:"

@@ -67,13 +67,16 @@ As the Lux Network evolves to support advanced cross-chain operations, privacy f
 
 #### Chain Specifications
 
-- **P-Chain (Platform Chain):** Coordinates validators, staking, and subnets. See LP-10.
-- **X-Chain (Exchange Chain):** Optimized for asset creation and transfers. See LP-11.
-- **C-Chain (Contract Chain):** EVM-compatible smart contract chain. See LP-12.
-- **M-Chain (MPC Bridge Chain):** Bridges assets using Multi-Party Computation. See LP-13.
-- **Z-Chain (Zero-Knowledge Chain):** Enables privacy using zero-knowledge proofs. See LP-14.
+- **P-Chain (Platform Chain):** Coordinates validators, staking, and subnets. See [LP-10](./lp-10.md).
+- **X-Chain (Exchange Chain):** Optimized for asset creation and transfers. See [LP-11](./lp-11.md).
+- **C-Chain (Contract Chain):** EVM-compatible smart contract chain. See [LP-12](./lp-12.md).
+- **M-Chain (MPC Bridge Chain):** Bridges assets using Multi-Party Computation. See [LP-13](./lp-13.md).
+- **Z-Chain (Zero-Knowledge Chain):** Enables privacy using zero-knowledge proofs. See [LP-14](./lp-14.md).
+- **G-Chain (Graph Chain):** Universal omnichain oracle. See [LP-98](./lp-98.md).
 
 ### Part 2: Community Contribution Framework
+
+See the [LP Index](./LP-INDEX.md) for a complete list of LPs.
 
 #### LP Process
 

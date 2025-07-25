@@ -53,8 +53,8 @@ def get_all_lps(directory='LPs'):
                 # Extract LP number from filename
                 match = re.search(r'lp-(\d+)\.md', filename)
                 if match:
-                    lip_number = int(match.group(1))
-                    frontmatter['number'] = lip_number
+                    lp_number = int(match.group(1))
+                    frontmatter['number'] = lp_number
                     frontmatter['filename'] = filename
                     lps.append(frontmatter)
     
@@ -73,34 +73,34 @@ def categorize_lps(lps):
         'informational': []
     }
     
-    for lip in lps:
-        lip_type = lip.get('type', '').lower()
-        category = lip.get('category', '').lower()
+    for lp in lps:
+        lp_type = lp.get('type', '').lower()
+        category = lp.get('category', '').lower()
         
-        if lip_type == 'meta':
-            categories['meta'].append(lip)
-        elif lip_type == 'informational':
-            categories['informational'].append(lip)
-        elif lip_type == 'standards track':
+        if lp_type == 'meta':
+            categories['meta'].append(lp)
+        elif lp_type == 'informational':
+            categories['informational'].append(lp)
+        elif lp_type == 'standards track':
             if category == 'core':
-                categories['core'].append(lip)
+                categories['core'].append(lp)
             elif category == 'networking':
-                categories['networking'].append(lip)
+                categories['networking'].append(lp)
             elif category == 'interface':
-                categories['interface'].append(lip)
+                categories['interface'].append(lp)
             elif category == 'lrc':
-                categories['lrc'].append(lip)
+                categories['lrc'].append(lp)
     
     return categories
 
-def format_table_row(lip):
+def format_table_row(lp):
     """Format a LP as a markdown table row"""
-    number = lip['number']
-    title = lip.get('title', 'Untitled')
-    authors = lip.get('author', 'Unknown')
-    lip_type = lip.get('type', 'Unknown')
-    category = lip.get('category', '-')
-    status = lip.get('status', 'Unknown')
+    number = lp['number']
+    title = lp.get('title', 'Untitled')
+    authors = lp.get('author', 'Unknown')
+    lp_type = lp.get('type', 'Unknown')
+    category = lp.get('category', '-')
+    status = lp.get('status', 'Unknown')
     
     # Clean up authors (remove emails/github handles for brevity)
     authors = re.sub(r'\s*\([^)]*\)', '', authors)
@@ -110,7 +110,7 @@ def format_table_row(lip):
     if len(title) > 50:
         title = title[:47] + '...'
     
-    return f"| [LP-{number}](./LPs/lp-{number}.md) | {title} | {authors} | {lip_type} | {category} | {status} |"
+    return f"| [LP-{number}](./LPs/lp-{number}.md) | {title} | {authors} | {lp_type} | {category} | {status} |"
 
 def generate_index_section():
     """Generate the index section for README"""
@@ -124,11 +124,11 @@ def generate_index_section():
     output.append("| Number | Title | Author(s) | Type | Category | Status |")
     output.append("|:-------|:------|:----------|:-----|:---------|:-------|")
     
-    for lip in lps:
-        output.append(format_table_row(lip))
+    for lp in lps:
+        output.append(format_table_row(lp))
     
     # LRC-specific table
-    lrcs = [lip for lip in lps if lip.get('category', '').lower() == 'lrc']
+    lrcs = [lp for lp in lps if lp.get('category', '').lower() == 'lrc']
     if lrcs:
         output.append("\n### Notable LRCs (Application Standards)\n")
         output.append("| LRC Number | LP | Title | Status |")
@@ -211,8 +211,8 @@ def generate_statistics():
     
     # Status breakdown
     status_count = {}
-    for lip in lps:
-        status = lip.get('status', 'Unknown')
+    for lp in lps:
+        status = lp.get('status', 'Unknown')
         status_count[status] = status_count.get(status, 0) + 1
     
     print("\nStatus Breakdown:")

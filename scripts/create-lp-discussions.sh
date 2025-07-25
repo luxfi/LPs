@@ -8,16 +8,16 @@ set -euo pipefail
 
 REPO="luxfi/lps"
 
-for file in LPs/lip-*.md; do
+for file in LPs/lp-*.md; do
   # Extract LP number and title from frontmatter
-  lip_number=$(grep -E '^lip: ' "$file" | awk '{print $2}')
+  lp_number=$(grep -E '^lp: ' "$file" | awk '{print $2}')
   title=$(grep -E '^title: ' "$file" | sed -E 's/^title: (.+)/\1/')
 
   # Construct discussion title and body
-  disc_title="LP ${lip_number}: ${title}"
-  disc_body="Discussion for LP-${lip_number}: https://github.com/${REPO}/blob/main/${file}"
+  disc_title="LP ${lp_number}: ${title}"
+  disc_body="Discussion for LP-${lp_number}: https://github.com/${REPO}/blob/main/${file}"
 
-  echo "Creating discussion for LP-${lip_number}: $disc_title"
+  echo "Creating discussion for LP-${lp_number}: $disc_title"
   gh discussion create --repo "$REPO" \
     --category "LP Discussions" \
     --title "$disc_title" \
