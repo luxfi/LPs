@@ -10,7 +10,27 @@ category: <Core, Networking, Interface, LRC> (*only required for Standards Track
 created: <date created on, in ISO 8601 (yyyy-mm-dd) format>
 requires: <LP number(s)> (*optional; remove if none)
 replaces: <LP number(s)> (*optional; remove if none)
+activation:
+  flag: <lp-number-title>
+  hfName: "<fork-name>"
+  activationHeight: "0"
 ---
+
+This is the suggested template for new LPs.
+
+## Abstract
+
+A short (~200 word) description of the technical issue being addressed. This should be a very terse and human-readable version of the specification section. Someone should be able to read only the abstract to get the gist of what this specification does.
+
+## Activation
+
+| Parameter          | Value                    |
+|--------------------|--------------------------|
+| Flag string        | `lp<number>-<title>`      |
+| Default in code    | **false** until block X  |
+| Deployment branch  | `v0.0.0-lp<number>`       |
+| Roll‑out criteria  |                          |
+| Back‑off plan      |                          |
 
 This is the suggested template for new LPs.
 

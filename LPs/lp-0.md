@@ -8,9 +8,25 @@ status: Final
 type: Meta
 created: 2025-01-23
 updated: 2025-07-25
+activation:
+  flag: lp0-architecture-framework
+  hfName: ""
+  activationHeight: "N/A"
 ---
 
 ## Abstract
+
+## Activation
+
+| Parameter          | Value                                           |
+|--------------------|-------------------------------------------------|
+| Flag string        | `lp0-architecture-framework`                    |
+| Default in code    | N/A                                             |
+| Deployment branch  | N/A                                             |
+| Roll-out criteria  | N/A                                             |
+| Back-off plan      | N/A                                             |
+
+A short (~200 word) description of the technical issue being addressed. This should be a very terse and human-readable version of the specification section. Someone should be able to read only the abstract to get the gist of what this specification does.
 
 LP‑0 establishes the foundational blueprint for Lux, defining both its heterogeneous multi‑chain architecture and the community‑driven improvement process.
 
