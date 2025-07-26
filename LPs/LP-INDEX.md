@@ -31,6 +31,7 @@ This document provides a categorized index of all Lux Improvement Proposals (LPs
 | [LP-66](./lp-66.md) | Oracle Integration Standard via Z-Chain | Draft |
 | [LP-75](./lp-75.md) | TEE Integration Standard | Draft |
 | [LP-76](./lp-76.md) | Random Number Generation Standard | Draft |
+| [LP-80](./lp-80.md) | A-Chain (Attestation Chain) Specification | Draft |
 
 ## Bridge
 
