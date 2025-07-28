@@ -54,41 +54,55 @@ As the Lux Network evolves to support advanced cross-chain operations, privacy f
 
 ```text
 ┌─────────────────────────────────────────────────────────────────────┐
-│                         Lux Network Architecture                      │
+│                    Lux Network Architecture 2.0                       │
 ├─────────────────────────────────────────────────────────────────────┤
 │                          Primary Network                              │
 ├─────────────────────┬─────────────────────┬─────────────────────────┤
-│      P-Chain       │      X-Chain         │       C-Chain           │
-│    (Platform)      │    (Exchange)        │     (Contract)          │
+│      Q-Chain       │      X-Chain         │       C-Chain           │
+│    (Quantum)       │    (Exchange)        │     (Contract)          │
 ├─────────────────────┼─────────────────────┼─────────────────────────┤
-│ • Validators       │ • UTXO Model         │ • EVM Compatible        │
-│ • Subnets          │ • Asset Transfers    │ • Smart Contracts       │
-│ • Staking          │ • Settlement Layer   │ • DeFi Ecosystem        │
-│ • Governance       │ • High-Perf Exchange │ • OP-Stack Ready        │
+│ • Quasar Consensus │ • Order Book DEX     │ • EVM Compatible        │
+│ • Validators/Stake │ • Lamport OTS        │ • Smart Contracts       │
+│ • BLS + Ringtail   │ • High-Perf Trading  │ • DeFi Ecosystem        │
+│ • Platform Mgmt    │ • Quantum-Safe       │ • OP-Stack Ready        │
 └─────────────────────┴─────────────────────┴─────────────────────────┘
                                 │
                     ┌───────────┴────────────┐
                     │   Specialized Chains   │
-        ┌───────────┴────────┐      ┌────────┴───────────┐
-        │     M-Chain         │      │     Z-Chain        │
-        │  (Money/MPC Chain)  │      │  (Zero-Knowledge)  │
-        ├─────────────────────┤      ├────────────────────┤
-        │ • CGG21 MPC         │      │ • zkEVM/zkVM       │
-        │ • Asset Bridges     │      │ • FHE Operations   │
-        │ • Teleport Protocol │      │ • Privacy Proofs   │
-        │ • X-Chain Settlement│      │ • Omnichain Root   │
-        │                     │      │ • AI Attestations  │
-        └─────────────────────┘      └────────────────────┘
+        ┌───────────┴────────┬──────┴────────┬────────────────┐
+        │     A-Chain        │   B-Chain     │   M-Chain      │
+        │ (AI/Attestation)   │   (Bridge)    │    (MPC)       │
+        ├────────────────────┼───────────────┼────────────────┤
+        │ • TEE Attestation  │ • Cross-Chain │ • CGG21 + Ring │
+        │ • Proof-of-AI      │ • MPC Custody │ • Threshold Sig│
+        │ • LUX Gas Token    │ • Dual-Sig    │ • Key Manager  │
+        │ • GRPO Learning    │ • Native BTC  │ • Asset Swaps  │
+        └────────────────────┴───────────────┴────────────────┘
+                                │
+        ┌───────────┴────────┬──────┴────────┬────────────────┐
+        │     Q-Chain        │   Z-Chain     │   G-Chain      │
+        │    (Quantum)       │ (ZK-Privacy)  │   (Graph)      │  
+        ├────────────────────┼───────────────┼────────────────┤
+        │ • Quasar Consensus │ • zkEVM/zkVM  │ • Oracle Data  │
+        │ • BLS + Ringtail   │ • FHE Privacy │ • Graph DB     │
+        │ • Dual-Certificate │ • Ring Sigs   │ • Analytics    │
+        │ • Post-Quantum     │ • Stealth     │ • Indexing     │
+        └────────────────────┴───────────────┴────────────────┘
 ```
 
 #### Chain Specifications
 
-- **P-Chain (Platform Chain):** Coordinates validators, staking, and subnets. See [LP-10](./lp-10.md).
-- **X-Chain (Exchange Chain):** Optimized for asset creation and transfers. See [LP-11](./lp-11.md).
+**Lux 2.0 (Current Architecture):**
+- **Q-Chain (Quantum Chain):** Platform management with Quasar consensus, validator coordination, and staking. Replaces P-Chain from Lux 1.0. See [LP-99](./lp-99.md).
+- **X-Chain (Exchange Chain):** High-performance order book DEX with Lamport OTS quantum safety. See [LP-11](./lp-11.md).
 - **C-Chain (Contract Chain):** EVM-compatible smart contract chain. See [LP-12](./lp-12.md).
-- **M-Chain (MPC Bridge Chain):** Bridges assets using Multi-Party Computation. See [LP-13](./lp-13.md).
-- **Z-Chain (Zero-Knowledge Chain):** Enables privacy using zero-knowledge proofs. See [LP-14](./lp-14.md).
+- **A-Chain (AI/Attestation Chain):** TEE attestation layer for AI compute verification. See [LP-80](./lp-80.md).
+- **B-Chain (Bridge Chain):** MPC-based cross-chain bridge with dual signatures. See [LP-81](./lp-81.md).
+- **M-Chain (MPC Chain):** Threshold signature custody with CGG21 + Ringtail. See [LP-13](./lp-13.md).
+- **Z-Chain (Zero-Knowledge Chain):** Privacy layer with zkEVM and FHE. See [LP-14](./lp-14.md).
 - **G-Chain (Graph Chain):** Universal omnichain oracle. See [LP-98](./lp-98.md).
+
+**Note:** Lux 1.0 followed the Avalanche model with P-Chain (Platform), X-Chain (Exchange), and C-Chain (Contract). In Lux 2.0, P-Chain functionality has been absorbed into Q-Chain with enhanced quantum-secure consensus.
 
 ### Part 2: Community Contribution Framework
 

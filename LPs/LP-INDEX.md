@@ -3,6 +3,21 @@
 
 This document provides a categorized index of all Lux Improvement Proposals (LPs).
 
+## Lux Network Chain Architecture
+
+The Lux Network consists of multiple specialized chains, each optimized for specific functionality:
+
+| Chain | Name | Purpose | Key Features |
+|-------|------|---------|--------------|
+| **A-Chain** | AI Chain | TEE attestation & AI compute verification | • LUX gas token<br>• Hardware attestation registry<br>• Proof-of-AI (PoAI) validation<br>• Oracle-based compute pricing |
+| **B-Chain** | Bridge Chain | Cross-chain asset transfers | • MPC-based custody<br>• Threshold signatures<br>• Multi-chain support<br>• Quantum-safe with Ringtail |
+| **C-Chain** | Contract Chain | Smart contract execution | • EVM compatibility<br>• DeFi protocols<br>• NFT standards<br>• High throughput |
+| **G-Chain** | Graph Chain | Universal query & indexing layer | • GraphQL API for all chains<br>• Real-time indexing<br>• Cross-chain queries<br>• Analytics engine |
+| **M-Chain** | MPC Chain | Multi-party computation & custody | • CGG21 threshold ECDSA<br>• Ringtail quantum safety<br>• Decentralized custody<br>• Native swaps |
+| **Q-Chain** | Quantum Chain | Platform mgmt with quantum security | • Quasar consensus<br>• Validator/staking ops<br>• Subnet management<br>• Dual-certificate finality |
+| **X-Chain** | Exchange Chain | High-performance trading | • Order book DEX<br>• Lamport OTS signatures<br>• Post-quantum safe<br>• Ultra-low latency |
+| **Z-Chain** | Zero-knowledge Chain | Privacy & encrypted execution | • Zero-knowledge proofs<br>• Private transactions<br>• Encrypted state<br>• Compliance ready |
+
 ## Core Protocol
 
 | LP | Title | Status |
@@ -13,7 +28,7 @@ This document provides a categorized index of all Lux Improvement Proposals (LPs
 | [LP-3](./lp-3.md) | Lux Subnet Architecture and Cross-Chain Interoperability | Final |
 | [LP-4](./lp-4.md) | Quantum-Resistant Cryptography Integration in Lux | Final |
 | [LP-5](./lp-5.md) | Lux Quantum-Safe Wallets and Multisig Standard | Final |
-| [LP-10](./lp-10.md) | P-Chain (Platform Chain) Specification | Draft |
+| [LP-10](./lp-10.md) | P-Chain (Platform Chain) Specification [OBSOLETE - See LP-99] | Deprecated |
 | [LP-11](./lp-11.md) | X-Chain (Exchange Chain) Specification | Draft |
 | [LP-12](./lp-12.md) | C-Chain (Contract Chain) Specification | Draft |
 | [LP-13](./lp-13.md) | M-Chain – Decentralised MPC Custody & Swap-Signature Layer | Draft |
@@ -32,6 +47,8 @@ This document provides a categorized index of all Lux Improvement Proposals (LPs
 | [LP-75](./lp-75.md) | TEE Integration Standard | Draft |
 | [LP-76](./lp-76.md) | Random Number Generation Standard | Draft |
 | [LP-80](./lp-80.md) | A-Chain (Attestation Chain) Specification | Draft |
+| [LP-81](./lp-81.md) | B-Chain (Bridge Chain) Specification | Draft |
+| [LP-99](./lp-99.md) | Quantum Consensus & Q-Chain Specification | Draft |
 
 ## Bridge
 
@@ -99,6 +116,8 @@ This document provides a categorized index of all Lux Improvement Proposals (LPs
 | [LP-95](./lp-95.md) | Stablecoin Mechanisms Research | Informational |
 | [LP-96](./lp-96.md) | MEV Protection Research | Informational |
 | [LP-97](./lp-97.md) | Data Availability Research | Informational |
+| [LP-99](./lp-99.md) | Quantum Consensus & Q-Chain Specification | Draft |
+| [LP-101](./lp-101.md) | Solidity GraphQL Extension for Native G-Chain Integration | Draft |
 
 ## Superseded
 
