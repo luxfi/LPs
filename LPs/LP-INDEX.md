@@ -33,6 +33,7 @@ The Lux Network consists of multiple specialized chains, each optimized for spec
 | [LP-12](./lp-12.md) | C-Chain (Contract Chain) Specification | Draft |
 | [LP-13](./lp-13.md) | M-Chain – Decentralised MPC Custody & Swap-Signature Layer | Draft |
 | [LP-14](./lp-14.md) | M-Chain Threshold Signatures with CGG21 (UC Non-Interactive ECDSA) | Draft |
+| [LP-15](./lp-15.md) | MPC Bridge Protocol | Draft |
 | [LP-21](./lp-21.md) | Lux Teleport Protocol | Draft |
 | [LP-22](./lp-22.md) | Warp Messaging 2.0: Native Interchain Transfers | Draft |
 | [LP-24](./lp-24.md) | Parallel Validation and Shared Mempool | Draft |
@@ -118,6 +119,8 @@ The Lux Network consists of multiple specialized chains, each optimized for spec
 | [LP-97](./lp-97.md) | Data Availability Research | Informational |
 | [LP-99](./lp-99.md) | Quantum Consensus & Q-Chain Specification | Draft |
 | [LP-101](./lp-101.md) | Solidity GraphQL Extension for Native G-Chain Integration | Draft |
+| [LP-103](./lp-103.md) | MPC-LSS - Multi-Party Computation Linear Secret Sharing with Dynamic Resharing | Draft |
+| [LP-104](./lp-104.md) | FROST - Flexible Round-Optimized Schnorr Threshold Signatures for EdDSA | Draft |
 
 ## Superseded
 

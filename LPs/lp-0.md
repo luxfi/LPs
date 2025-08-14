@@ -61,10 +61,10 @@ As the Lux Network evolves to support advanced cross-chain operations, privacy f
 │      Q-Chain       │      X-Chain         │       C-Chain           │
 │    (Quantum)       │    (Exchange)        │     (Contract)          │
 ├─────────────────────┼─────────────────────┼─────────────────────────┤
-│ • Quasar Consensus │ • Order Book DEX     │ • EVM Compatible        │
-│ • Validators/Stake │ • Lamport OTS        │ • Smart Contracts       │
-│ • BLS + Ringtail   │ • High-Perf Trading  │ • DeFi Ecosystem        │
-│ • Platform Mgmt    │ • Quantum-Safe       │ • OP-Stack Ready        │
+│ • Quasar Consensus │ • Colocated DEX      │ • EVM Compatible        │
+│ • Verkle + Witness │ • 1B+ trades/sec     │ • Smart Contracts       │
+│ • BLS + Ringtail   │ • KCMO Datacenter    │ • DeFi Ecosystem        │
+│ • Platform Mgmt    │ • FIX/gRPC Protocol  │ • OP-Stack Ready        │
 └─────────────────────┴─────────────────────┴─────────────────────────┘
                                 │
                     ┌───────────┴────────────┐
@@ -93,8 +93,8 @@ As the Lux Network evolves to support advanced cross-chain operations, privacy f
 #### Chain Specifications
 
 **Lux 2.0 (Current Architecture):**
-- **Q-Chain (Quantum Chain):** Platform management with Quasar consensus, validator coordination, and staking. Replaces P-Chain from Lux 1.0. See [LP-99](./lp-99.md).
-- **X-Chain (Exchange Chain):** High-performance order book DEX with Lamport OTS quantum safety. See [LP-11](./lp-11.md).
+- **Q-Chain (Quantum Chain):** Platform management with Quasar consensus (Photon, Wave, Nova, Nebula, Prism protocols), validator coordination, and staking. Uses verkle trees and witness support. Replaces P-Chain from Lux 1.0. See [LP-99](./lp-99.md).
+- **X-Chain (Exchange Chain):** Colocated high-performance DEX running in KCMO datacenter. Achieves 1B+ trades/sec using DAG improvements, FPC, verkle trees, and new storage backend. Traders can request colocation access for ultra-low latency. See [LP-11](./lp-11.md).
 - **C-Chain (Contract Chain):** EVM-compatible smart contract chain. See [LP-12](./lp-12.md).
 - **A-Chain (AI/Attestation Chain):** TEE attestation layer for AI compute verification. See [LP-80](./lp-80.md).
 - **B-Chain (Bridge Chain):** MPC-based cross-chain bridge with dual signatures. See [LP-81](./lp-81.md).
@@ -102,7 +102,7 @@ As the Lux Network evolves to support advanced cross-chain operations, privacy f
 - **Z-Chain (Zero-Knowledge Chain):** Privacy layer with zkEVM and FHE. See [LP-14](./lp-14.md).
 - **G-Chain (Graph Chain):** Universal omnichain oracle. See [LP-98](./lp-98.md).
 
-**Note:** Lux 1.0 followed the Avalanche model with P-Chain (Platform), X-Chain (Exchange), and C-Chain (Contract). In Lux 2.0, P-Chain functionality has been absorbed into Q-Chain with enhanced quantum-secure consensus.
+**Note:** Lux 1.0 was based on Avalanche architecture with P-Chain (Platform), X-Chain (Exchange), and C-Chain (Contract). Lux 2.0 features a complete rewrite with our Quasar consensus protocol family, verkle trees, FPC, and witness support. P-Chain functionality has been absorbed into Q-Chain with quantum-secure consensus. The new X-Chain is a colocated high-performance DEX achieving 1B+ trades/sec.
 
 ### Part 2: Community Contribution Framework
 
