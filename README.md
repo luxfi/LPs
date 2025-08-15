@@ -152,38 +152,38 @@ Not all proposals are alike. Lux Proposals are categorized by their purpose and 
 
 To help manage the LP workflow, this repository provides a Makefile and helper scripts. Common tasks include:
 
-# Create a new LP from the template
+### Create a new LP from the template
 make new
 
-# Validate a specific LP (checks formatting, front-matter, etc.)
+### Validate a specific LP (checks formatting, front-matter, etc.)
 make validate FILE=LPs/lp-20.md
 
-# Validate all LPs in the repository
+### Validate all LPs in the repository
 make validate-all
 
-# Check all hyperlinks in LP documents for validity
+### Check all hyperlinks in LP documents for validity
 make check-links
 
-# Update the index (INDEX.md) based on current LP files
+### Update the index (INDEX.md) based on current LP files
 make update-index
 
-# Show statistics (e.g., counts by status or category)
+### Show statistics (e.g., counts by status or category)
 make stats
 
-# Run all checks (validation, links, etc.) before submitting a PR
+### Run all checks (validation, links, etc.) before submitting a PR
 make pre-pr
 
 ## Managing LP discussions (requires GitHub CLI):
 
 For governance and transparency, each LP can have an associated discussion thread on the Lux forum or GitHub Discussions. The following commands use the GitHub CLI to create and manage proposal discussion posts:
 
-# Create a GitHub Discussion for an LP (in the "LP Discussions" category of the repo)
+### Create a GitHub Discussion for an LP (in the "LP Discussions" category of the repo)
 gh discussion create --repo luxfi/LPs \
   --category "LP Discussions" \
   --title "LP <number>: <Proposal Title>" \
   --body "Discussion for LP-<number>: https://github.com/luxfi/LPs/blob/main/LPs/lp-<number>.md"
 
-# List existing discussion categories (to confirm the category name or ID)
+### List existing discussion categories (to confirm the category name or ID)
 gh api repos/luxfi/LPs/discussions/categories
 
 These tools ensure that proposal authors can easily format their submissions and that reviewers can quickly verify consistency. They are especially useful as the number of proposals grows.
