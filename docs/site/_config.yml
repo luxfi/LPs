@@ -1,8 +1,8 @@
 # GitHub Pages Configuration
 title: Lux Proposals (LPs)
 description: The Industry Standard for Quantum-Resistant Blockchain Technology
-baseurl: "/lps"
-url: "https://luxfi.github.io"
+baseurl: ""
+url: "https://lps.lux.network"
 
 # Theme
 theme: null
