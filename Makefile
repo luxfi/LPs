@@ -10,11 +10,14 @@ help:
 	@echo ""
 	@echo "Available commands:"
 	@echo "  make new           - Create a new LP using the interactive wizard"
-	@echo "  make validate      - Validate a specific LP file (use FILE=path/to/lip.md)"
+	@echo "  make validate      - Validate a specific LP file (use FILE=path/to/lp.md)"
 	@echo "  make validate-all  - Validate all LP files in the repository"
 	@echo "  make check-links   - Check all links in LP files"
 	@echo "  make update-index  - Update the LP index in README.md"
 	@echo "  make stats         - Show LP statistics by status and type"
+	@echo "  make decision      - Create an Informational 'Decision LP' draft"
+	@echo "  make web-build     - Build LP JSON index and site bundle"
+	@echo "  make web-serve     - Serve repo locally for web UI"
 	@echo "  make permissions   - Fix script permissions (make them executable)"
 	@echo "  make clean         - Clean up temporary files"
 	@echo ""
@@ -30,7 +33,7 @@ new:
 	@./scripts/new-lp.sh
 
 # Validate a specific LP file
-# Usage: make validate FILE=LPs/lip-20.md
+# Usage: make validate FILE=LPs/lp-20.md
 validate:
 ifndef FILE
 	@echo "Error: Please specify a file to validate"
@@ -84,6 +87,7 @@ va: validate-all
 cl: check-links
 ui: update-index
 p: permissions
+dec: decision
 
 # Advanced targets for maintainers
 
@@ -145,6 +149,12 @@ draft:
 	@echo "Created LPs/lp-draft.md from template"
 	@echo "Edit this file and submit as a PR to get your LP number"
 
+# Create an Informational "Decision LP" draft
+.PHONY: decision
+decision:
+	@echo "Starting Decision LP (Informational) wizard..."
+	@./scripts/new-decision-lp.sh
+
 # Development helpers
 .PHONY: setup
 setup: permissions
@@ -157,3 +167,24 @@ setup: permissions
 recent:
 	@echo "Recently modified LPs (last 10):"
 	@ls -lt LPs/lp-*.md 2>/dev/null | head -10 | awk '{print $$9}'
+
+# -----------------
+# Web UI for LPs
+# -----------------
+.PHONY: web-index web-build web-serve
+
+web-index:
+	@echo "Building LP JSON index..."
+	@python3 ./scripts/build-lp-index-json.py
+
+web-build: web-index
+	@echo "Preparing site in docs/site..."
+	@mkdir -p docs/site
+	@cp -r web/* docs/site/
+	@# Ensure lp-index.json is co-located for same-origin fetch
+	@cp docs/lp-index.json docs/site/lp-index.json
+	@echo "Web bundle ready at docs/site/index.html"
+
+web-serve: web-build
+	@echo "Serving on http://localhost:8080 (Ctrl+C to stop)"
+	@python3 -m http.server 8080 >/dev/null 2>&1

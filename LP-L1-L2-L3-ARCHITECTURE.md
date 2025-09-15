@@ -25,15 +25,15 @@ This document defines the complete architectural specification for building L1, 
 ┌────────────────────────────────────────────────────────┐
 │                    L3: Application Layer                │
 │         DApps, DEXs, Games, DAOs, Domain-Specific      │
-│                   100,000+ TPS, <10ms                   │
+│                   1,000,000+ TPS, <10ms                 │
 ├────────────────────────────────────────────────────────┤
 │                    L2: Scaling Layer                    │
 │    Rollups, Sidechains, State Channels, Plasma, Validium│
-│                   10,000+ TPS, <100ms                   │
+│                   100,000+ TPS, <100ms                  │
 ├────────────────────────────────────────────────────────┤
 │                    L1: Settlement Layer                 │
 │         Lux Mainnet - Quantum-Secure Foundation        │
-│                    5,000+ TPS, <1s                      │
+│                    10,000+ TPS, <1s                     │
 ├────────────────────────────────────────────────────────┤
 │                 L0: Network Infrastructure              │
 │            QZMQ, Quantum Channels, P2P Layer           │
@@ -48,7 +48,7 @@ L1 - Settlement Layer:
   Consensus: Quasar (quantum-finality)
   Security: Maximum (256-bit post-quantum)
   Decentralization: Maximum (21+ validators)
-  Performance: Moderate (5,000 TPS)
+  Performance: High (10,000 TPS)
   Cost: Higher (security premium)
   
 L2 - Scaling Layer:
@@ -56,7 +56,7 @@ L2 - Scaling Layer:
   Consensus: Derived from L1 or custom
   Security: Inherited from L1
   Decentralization: Variable (1-100 validators)
-  Performance: High (10,000+ TPS)
+  Performance: Very High (100,000+ TPS)
   Cost: Low (batch processing)
   
 L3 - Application Layer:
@@ -64,7 +64,7 @@ L3 - Application Layer:
   Consensus: Application-specific
   Security: Inherited from L2/L1
   Decentralization: Optional
-  Performance: Maximum (100,000+ TPS)
+  Performance: Maximum (1,000,000+ TPS)
   Cost: Minimal (subsidized)
 ```
 
@@ -111,7 +111,7 @@ type L1Requirements struct {
     AuditFrequency     string  // "quarterly" minimum
     
     // Performance Requirements
-    MinThroughput      uint32  // 5,000 TPS
+    MinThroughput      uint32  // 10,000 TPS
     MaxBlockTime       time.Duration // 2 seconds
     MaxBlockSize       uint32  // 2 MB
     
@@ -781,7 +781,7 @@ type SecurityManager struct {
 
 | Metric | L1 Target | L2 Target | L3 Target | Combined |
 |--------|-----------|-----------|-----------|----------|
-| **TPS** | 5,000 | 50,000 | 500,000 | 555,000 |
+| **TPS** | 10,000 | 100,000 | 1,000,000 | 1,110,000 |
 | **Finality** | <1s | <100ms | <10ms | <1.11s |
 | **Block Time** | 2s | 250ms | 10ms | - |
 | **State Growth** | 1GB/day | 100MB/day | 10MB/day | 1.11GB/day |

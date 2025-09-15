@@ -180,7 +180,7 @@ var CanonicalSnowmanPlus = SnowmanPlusParams{
 |--------|---------------|----------------|--------------|----------|
 | **Block Time** | 2s | 2s | 1s | ✅ 1.8s |
 | **Finality Time** | <1s | <1s | <500ms | ✅ 500-800ms |
-| **Transaction Throughput** | 10,000 TPS | 5,000 TPS | 1,000 TPS | ✅ 15,000 TPS |
+| **Transaction Throughput** | 10,000 TPS | 10,000 TPS | 5,000 TPS | ✅ 15,000 TPS |
 | **Committee Size** | 21 | 11 | 5 | ✅ Dynamic |
 | **Message Complexity** | O(n) | O(n) | O(n) | ✅ O(n) |
 | **Network Bandwidth** | 100 Mbps | 50 Mbps | 10 Mbps | ✅ Optimized |
