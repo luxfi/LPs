@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Lux Proposals Explorer</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header>
+      <h1>Lux Proposals (LPs)</h1>
+      <nav>
+        <a href="../README.md" target="_blank">Repo README</a>
+        <a href="https://github.com/luxfi/LPs" target="_blank">GitHub</a>
+      </nav>
+    </header>
+
+    <section id="controls">
+      <input id="q" type="search" placeholder="Search title, author, description..." />
+      <select id="typeFilter">
+        <option value="">All Types</option>
+        <option>Standards Track</option>
+        <option>Meta</option>
+        <option>Informational</option>
+      </select>
+      <select id="categoryFilter">
+        <option value="">All Categories</option>
+        <option>Core</option>
+        <option>Networking</option>
+        <option>Interface</option>
+        <option>LRC</option>
+      </select>
+      <select id="statusFilter">
+        <option value="">All Statuses</option>
+        <option>Draft</option>
+        <option>Review</option>
+        <option>Last Call</option>
+        <option>Final</option>
+        <option>Withdrawn</option>
+        <option>Deferred</option>
+        <option>Superseded</option>
+        <option>Stagnant</option>
+      </select>
+      <select id="sortBy">
+        <option value="number">Sort: Number</option>
+        <option value="title">Sort: Title</option>
+        <option value="status">Sort: Status</option>
+      </select>
+    </section>
+
+    <section id="results">
+      <div id="summary"></div>
+      <ul id="list"></ul>
+    </section>
+
+    <template id="row">
+      <li class="lp">
+        <div class="meta">
+          <span class="num"></span>
+          <span class="status chip"></span>
+          <span class="type chip"></span>
+          <span class="category chip"></span>
+        </div>
+        <h3 class="title"></h3>
+        <p class="desc"></p>
+        <div class="actions">
+          <a class="view" target="_blank">View</a>
+          <a class="edit" target="_blank">Edit</a>
+          <a class="discussion" target="_blank">Discussion</a>
+          <a class="file" target="_blank">File</a>
+        </div>
+      </li>
+    </template>
+
+    <script src="app.js"></script>
+  </body>
+  </html>
+
