@@ -1,0 +1,43 @@
+# GitHub Pages Configuration
+title: Lux Proposals (LPs)
+description: The Industry Standard for Quantum-Resistant Blockchain Technology
+baseurl: "/lps"
+url: "https://luxfi.github.io"
+
+# Theme
+theme: null
+
+# Plugins
+plugins:
+  - jekyll-seo-tag
+  - jekyll-sitemap
+
+# SEO
+twitter:
+  username: luxdefi
+  card: summary_large_image
+
+# Social
+social:
+  name: Lux Network
+  links:
+    - https://github.com/luxfi
+    - https://twitter.com/luxdefi
+    - https://lux.network
+
+# Analytics (add your tracking ID when ready)
+# google_analytics: UA-XXXXXXXXX-X
+
+# Files to include
+include:
+  - index.html
+  - app.js
+  - styles.css
+  - lp-index.json
+
+# Files to exclude
+exclude:
+  - README.md
+  - Makefile
+  - scripts/
+  - "*.sh"
