@@ -1,0 +1,20 @@
+# GitHub Pages Configuration for root
+title: Lux Proposals (LPs)
+description: The Industry Standard for Quantum-Resistant Blockchain Technology
+url: "https://lps.lux.network"
+baseurl: ""
+
+# Use docs/site as the source
+source: docs/site
+
+# Include the CNAME file
+include:
+  - CNAME
+
+# Exclude unnecessary files
+exclude:
+  - "*.md"
+  - scripts/
+  - LPs/
+  - Makefile
+  - LICENSE
