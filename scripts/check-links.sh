@@ -23,10 +23,15 @@ print_warning() {
     echo -e "${YELLOW}[WARN]${NC} $1"
 }
 
-# Function to check if URL is valid
+# Function to check if URL is valid (skippable for restricted networks)
 check_url() {
     local url=$1
-    if curl -s -f -I "$url" > /dev/null; then
+    # Allow skipping external checks in restricted environments
+    if [ "$SKIP_EXTERNAL" = "1" ]; then
+        return 0
+    fi
+    # Conservative curl options to avoid long hangs
+    if curl -sSfI --max-time 10 --connect-timeout 5 "$url" > /dev/null; then
         return 0
     else
         return 1
@@ -56,8 +61,8 @@ TOTAL_LINKS=0
 BROKEN_LINKS=0
 CHECKED_FILES=0
 
-# Find all markdown files
-for file in $(find . -name "*.md" -type f); do
+# Find LP markdown files only (scope per repo guidelines)
+for file in $(find LPs -name "*.md" -type f); do
     ((CHECKED_FILES++))
     echo -e "\nChecking: $file"
     
@@ -92,7 +97,9 @@ for file in $(find . -name "*.md" -type f); do
         # Check if it's an external URL
         if [[ $link == http://* ]] || [[ $link == https://* ]]; then
             echo -n "  External: $link "
-            if check_url "$link"; then
+            if [ "$SKIP_EXTERNAL" = "1" ]; then
+                print_warning "Skipped"
+            elif check_url "$link"; then
                 print_success "Valid"
             else
                 print_error "Broken"

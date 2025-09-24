@@ -13,6 +13,7 @@ help:
 	@echo "  make validate      - Validate a specific LP file (use FILE=path/to/lp.md)"
 	@echo "  make validate-all  - Validate all LP files in the repository"
 	@echo "  make check-links   - Check all links in LP files"
+	@echo "                     (use SKIP_EXTERNAL=1 in restricted networks)"
 	@echo "  make update-index  - Update the LP index in README.md"
 	@echo "  make stats         - Show LP statistics by status and type"
 	@echo "  make decision      - Create an Informational 'Decision LP' draft"

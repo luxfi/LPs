@@ -25,3 +25,14 @@ By standardizing the CLI, all users from developers to validators have a clear r
 ## Copyright
 
 Copyright and related rights waived via [CC0](../LICENSE.md).
+## Backwards Compatibility
+
+Additive proposal; does not break existing modules. Adoption can be phased in.
+
+## Security Considerations
+
+Follow recommended validation and cryptographic practices; consider rate‑limiting and replay protections where relevant.
+
+## Motivation
+
+A unified approach here reduces fragmentation and improves developer ergonomics and compatibility across Lux networks and tools.

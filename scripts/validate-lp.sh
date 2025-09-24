@@ -155,9 +155,20 @@ fi
 # Check code blocks
 echo -n "  Checking code blocks... "
 if grep -q '```' "$LP_FILE"; then
-    # Check if code blocks have language specified
-    if grep -q '^```$' "$LP_FILE"; then
-        print_warning "Code blocks should specify language"
+    # Detect unlabeled opening fences (ignore closing fences)
+    UNLABELED_OPENINGS=$(awk '
+        BEGIN { inblock=0; unlabeled=0 }
+        /^```[A-Za-z0-9_-]+/ { inblock=1; next }
+        /^```$/ {
+            if (inblock==0) { unlabeled++; inblock=1 }
+            else { inblock=0 }
+            next
+        }
+        { next }
+        END { print unlabeled }
+    ' "$LP_FILE")
+    if [ "$UNLABELED_OPENINGS" -gt 0 ]; then
+        print_warning "Found $UNLABELED_OPENINGS unlabeled code block(s)"
         ((WARNINGS++))
     else
         print_success "OK"

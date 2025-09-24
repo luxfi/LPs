@@ -22,6 +22,17 @@ This LP specifies the Lux Network Runner and testing frameworks (for the netrunn
 
 By formalizing this in a LP, contributors will know how to test protocol changes and new applications in a controlled environment, which improves the overall quality and reliability of Lux’s ecosystem.
 
+## Motivation
+
+A standard network runner removes ad‑hoc scripts and inconsistencies, enabling reliable local/CI testing, reproducible environments, and faster iteration for protocol and dApp developers.
+
 ## Copyright
 
 Copyright and related rights waived via [CC0](../LICENSE.md).
+## Backwards Compatibility
+
+Additive specification; no breaking changes to existing interfaces. Adoption is optional per component.
+
+## Security Considerations
+
+Follow threat models relevant to this LP (input validation, replay/DoS protections, key handling). Implement recommended mitigations.

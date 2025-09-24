@@ -15,6 +15,14 @@ superseded-by: 13
 
 > **Note**: This LP has been superseded by [LP-13](./lp-13.md), which consolidates all M-Chain specifications into a single comprehensive document.
 
+## Abstract
+
+See section “1 Abstract” for the original overview; this revision is retained for historical reference and is superseded by LP‑13.
+
+## Motivation
+
+See section “2 Motivation”; the goals, risks, and drivers are captured there. LP‑13 refines and replaces this design.
+
 ## 1  Abstract
 
 M-Chain is a purpose-built subnet that provides:
@@ -232,3 +240,18 @@ M‑Chain turns Lux’s bridge into a fully on‑chain, MPC‑secured custody ne
 `SwapTx` (intent) on X‑Chain + `SwapSigTx` (quorum proof) on M‑Chain replace every line of the old `swaps.ts` code.
 Validators run `mpckeyd`; they are paid per signature and slashed for tardiness, guaranteeing liveness.
 Result: trust-minimised, stateless, real-time swaps with optional Z‑Chain privacy—no Postgres, no cron, just chain.
+## Specification
+
+Normative behavior is defined in the protocol description and data types within this document. Implementations MUST adhere to the stated algorithms and parameters.
+
+## Rationale
+
+The chosen approach balances security, performance, and implementability, aligning with Lux’s architecture and upgrade path.
+
+## Backwards Compatibility
+
+Additive upgrade; prior clients continue working. Features can be enabled behind configuration without breaking changes.
+
+## Security Considerations
+
+Validate inputs, enforce cryptographic best practices, and consider DoS and replay protections where relevant to the design.

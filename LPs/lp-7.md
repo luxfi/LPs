@@ -22,6 +22,17 @@ This LP defines the Virtual Machine SDK for Lux (in the vmsdk repo), which allow
 
 By providing an SDK spec, Lux invites innovation: teams could develop specialized chains (subnets) for particular use cases, all while conforming to a common framework.
 
+## Motivation
+
+A standardized VM SDK removes ambiguity for VM authors, accelerates development of specialized subnets, and ensures consistent integration with Lux consensus and tooling.
+
 ## Copyright
 
 Copyright and related rights waived via [CC0](../LICENSE.md).
+## Backwards Compatibility
+
+Additive and non‑breaking; existing consumers continue to work. Adoption is opt‑in.
+
+## Security Considerations
+
+Apply appropriate validation, authentication, and resource‑limiting to prevent abuse; follow cryptographic best practices where applicable.

@@ -22,19 +22,19 @@ By using LPs, the Lux community can coordinate development in a decentralized ma
 | Number | Title | Author(s) | Type | Category | Status |
 |:-------|:------|:----------|:-----|:---------|:-------|
 | [LP-0](./LPs/lp-0.md) | Lux Network Architecture & Community Framework | Lux Network Team | Meta | - | Final |
-| [LP-1](./LPs/lp-1.md) | Lux Consensus | Lux Network Team | Standards Track | Core | Final |
+| [LP-1](./LPs/lp-1.md) | Primary Chain, Native Tokens, and Tokenomics |  | Standards Track | Core | Draft |
 | [LP-2](./LPs/lp-2.md) | Lux Virtual Machine and Execution Environment | Lux Network Team | Standards Track | Core | Final |
 | [LP-3](./LPs/lp-3.md) | Lux Subnet Architecture and Cross-Chain Interop... | Lux Network Team | Standards Track | Core | Final |
-| [LP-4](./LPs/lp-4.md) | Quantum-Resistant Cryptography Integration in Lux | Lux Network Team | Standards Track | Core | Draft |
-| [LP-5](./LPs/lp-5.md) | Lux Quantum-Safe Wallets and Multisig Standard | Lux Network Team | Standards Track | Core | Draft |
+| [LP-4](./LPs/lp-4.md) | Quantum-Resistant Cryptography Integration in Lux | Lux Network Team | Standards Track | Core | Final |
+| [LP-5](./LPs/lp-5.md) | Lux Quantum-Safe Wallets and Multisig Standard | Lux Network Team | Standards Track | Core | Final |
 | [LP-6](./LPs/lp-6.md) | Network Runner & Testing Framework | Lux Network Team | Standards Track | Interface | Draft |
 | [LP-7](./LPs/lp-7.md) | VM SDK Specification | Lux Network Team | Standards Track | Core | Draft |
 | [LP-8](./LPs/lp-8.md) | Plugin Architecture | Lux Network Team | Standards Track | Core | Draft |
 | [LP-9](./LPs/lp-9.md) | CLI Tool Specification | Lux Network Team | Standards Track | Interface | Draft |
-| [LP-10](./LPs/lp-10.md) | P-Chain (Platform Chain) Specification | Lux Network Team | Standards Track | Core | Draft |
+| [LP-10](./LPs/lp-10.md) | P-Chain (Platform Chain) Specification [DEPRECA... | Lux Network Team | Standards Track | Core | Superseded |
 | [LP-11](./LPs/lp-11.md) | X-Chain (Exchange Chain) Specification | Lux Network Team | Standards Track | Core | Draft |
 | [LP-12](./LPs/lp-12.md) | C-Chain (Contract Chain) Specification | Lux Network Team | Standards Track | Core | Draft |
-| [LP-13](./LPs/lp-13.md) | M-Chain – Decentralised MPC Custody & Swap-Signature Layer | Lux Protocol Team | Standards Track | Core | Draft |
+| [LP-13](./LPs/lp-13.md) | M-Chain – Decentralised MPC Custody & Swap-Sign... | Lux Protocol Team | Standards Track | Core | Draft |
 | [LP-14](./LPs/lp-14.md) | M-Chain Threshold Signatures with CGG21 (UC Non... | Lux Industries Inc. | Standards Track | Core | Draft |
 | [LP-15](./LPs/lp-15.md) | MPC Bridge Protocol | Lux Network Team | Standards Track | Bridge | Draft |
 | [LP-16](./LPs/lp-16.md) | Teleport Cross-Chain Protocol | Lux Network Team | Standards Track | Bridge | Draft |
@@ -63,8 +63,8 @@ By using LPs, the Lux community can coordinate development in a decentralized ma
 | [LP-40](./LPs/lp-40.md) | Wallet Standards | Lux Network Team | Standards Track | Interface | Draft |
 | [LP-42](./LPs/lp-42.md) | Multi-Signature Wallet Standard | Lux Network Team | Standards Track | LRC | Draft |
 | [LP-45](./LPs/lp-45.md) | Z-Chain Encrypted Execution Layer Interface | Zach Kelling and Lux Team | Standards Track | Interface | Draft |
-| [LP-50](./LPs/lp-50.md) | Developer Tools Overview | Lux Network Team | Meta | - | Draft |
-| [LP-60](./LPs/lp-60.md) | DeFi Protocols Overview | Lux Network Team | Meta | - | Draft |
+| [LP-50](./LPs/lp-50.md) | Developer Tools Overview | Lux Network Team | Meta |  | Draft |
+| [LP-60](./LPs/lp-60.md) | DeFi Protocols Overview | Lux Network Team | Meta |  | Draft |
 | [LP-61](./LPs/lp-61.md) | Automated Market Maker (AMM) Standard | Lux Network Team | Standards Track | LRC | Draft |
 | [LP-62](./LPs/lp-62.md) | Yield Farming Protocol Standard | Lux Network Team | Standards Track | LRC | Draft |
 | [LP-63](./LPs/lp-63.md) | NFT Marketplace Protocol Standard | Lux Network Team | Standards Track | LRC | Draft |
@@ -81,8 +81,10 @@ By using LPs, the Lux community can coordinate development in a decentralized ma
 | [LP-74](./LPs/lp-74.md) | CREATE2 Factory Standard | Lux Network Team | Standards Track | LRC | Draft |
 | [LP-75](./LPs/lp-75.md) | TEE Integration Standard | Lux Network Team | Standards Track | Core | Draft |
 | [LP-76](./LPs/lp-76.md) | Random Number Generation Standard | Lux Network Team | Standards Track | Core | Draft |
+| [LP-80](./LPs/lp-80.md) | A-Chain (Attestation Chain) Specification | Lux Network Team | Standards Track | Core | Draft |
+| [LP-81](./LPs/lp-81.md) | B-Chain (Bridge Chain) Specification | Lux Network Team | Standards Track | Core | Draft |
 | [LP-85](./LPs/lp-85.md) | Security Audit Framework | Lux Network Team | Standards Track | Meta | Draft |
-| [LP-90](./LPs/lp-90.md) | Research Papers Index | Lux Network Team | Meta | - | Draft |
+| [LP-90](./LPs/lp-90.md) | Research Papers Index | Lux Network Team | Meta |  | Draft |
 | [LP-91](./LPs/lp-91.md) | Payment Processing Research | Lux Network Team | Informational | - | Draft |
 | [LP-92](./LPs/lp-92.md) | Cross-Chain Messaging Research | Lux Network Team | Informational | - | Draft |
 | [LP-93](./LPs/lp-93.md) | Decentralized Identity Research | Lux Network Team | Informational | - | Draft |
@@ -90,10 +92,17 @@ By using LPs, the Lux community can coordinate development in a decentralized ma
 | [LP-95](./LPs/lp-95.md) | Stablecoin Mechanisms Research | Lux Network Team | Informational | - | Draft |
 | [LP-96](./LPs/lp-96.md) | MEV Protection Research | Lux Network Team | Informational | - | Draft |
 | [LP-97](./LPs/lp-97.md) | Data Availability Research | Lux Network Team | Informational | - | Draft |
-| [LP-98](./LPs/lp-98.md) | Luxfi GraphDB & GraphQL Engine Integration | Lux Network Team | Standards Track | Interface | Draft |
+| [LP-98](./LPs/lp-98.md) | Luxfi GraphDB & GraphQL Engine Integration | Lux Network Team, Luxfi Contributors | Standards Track | Interface | Draft |
+| [LP-99](./LPs/lp-99.md) | Q-Chain – Quantum-Secure Consensus Protocol Fam... | Lux Network Team | Standards Track | Core | Draft |
+| [LP-100](./LPs/lp-100.md) | NIST Post-Quantum Cryptography Integration for ... | Lux Network Team | Standards Track | Core | Draft |
+| [LP-101](./LPs/lp-101.md) | Solidity GraphQL Extension for Native G-Chain I... | Lux Network Team | Standards Track | Core | Draft |
+| [LP-102](./LPs/lp-102.md) | Immutable Training Ledger for Privacy-Preservin... | Lux Network Team | Standards Track | Core | Draft |
+| [LP-103](./LPs/lp-103.md) | MPC-LSS - Multi-Party Computation Linear Secret... | Lux Industries Inc., Vishnu | Standards Track | Core | Draft |
+| [LP-104](./LPs/lp-104.md) | FROST - Flexible Round-Optimized Schnorr Thresh... | Lux Industries Inc. | Standards Track | Core | Draft |
+| [LP-105](./LPs/lp-105.md) | Lamport One-Time Signatures (OTS) for Lux Safe | Lux Network Team | Standards Track | Core | Draft |
+| [LP-106](./LPs/lp-106.md) | LLM Gateway Integration with Hanzo AI | Lux Team, Hanzo Team | Standards Track | Interface | Draft |
 | [LP-721](./LPs/lp-721.md) | LRC-721 Non-Fungible Token Standard | Lux Network Team | Standards Track | LRC | Final |
 | [LP-1155](./LPs/lp-1155.md) | LRC-1155 Multi-Token Standard | Lux Network Team | Standards Track | LRC | Final |
-| [LP-4-r2](./LPs/lp-4-r2.md) | M-Chain – Decentralised MPC Custody (Superseded) | Lux Protocol Team | Standards Track | Core | Superseded |
 
 ### Notable LRCs (Application Standards)
 
@@ -107,7 +116,6 @@ By using LPs, the Lux community can coordinate development in a decentralized ma
 | LRC-20 | [LP-30](./LPs/lp-30.md) | LRC-20 Bridgable Token Extension | Draft |
 | LRC-721 | [LP-31](./LPs/lp-31.md) | LRC-721 Burnable Token Extension | Draft |
 | LRC-42 | [LP-42](./LPs/lp-42.md) | Multi-Signature Wallet Standard | Draft |
-| LRC-60 | [LP-60](./LPs/lp-60.md) | DeFi Protocols | Draft |
 | LRC-61 | [LP-61](./LPs/lp-61.md) | Automated Market Maker (AMM) Standard | Draft |
 | LRC-62 | [LP-62](./LPs/lp-62.md) | Yield Farming Protocol Standard | Draft |
 | LRC-63 | [LP-63](./LPs/lp-63.md) | NFT Marketplace Protocol Standard | Draft |

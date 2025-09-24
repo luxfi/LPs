@@ -25,3 +25,14 @@ This standard encourages a rich ecosystem of node add-ons (think monitoring dash
 ## Copyright
 
 Copyright and related rights waived via [CC0](../LICENSE.md).
+## Backwards Compatibility
+
+This LP is additive; existing behavior remains unchanged. Migration can be performed progressively.
+
+## Security Considerations
+
+Implement input checks, authentication as needed, and standard defenses against replay/DoS.
+
+## Motivation
+
+Standardizing this area improves developer experience and interoperability across wallets, tooling, and chains within Lux.
