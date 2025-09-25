@@ -102,7 +102,7 @@ As the Lux Network evolves to support advanced cross-chain operations, privacy f
 - **Z-Chain (Zero-Knowledge Chain):** ZK co-processor for Lux FHE implementation and fheEVM providing fully homomorphic encryption. See [LP-14](./lp-14.md).
 - **G-Chain (Graph Chain):** Universal omnichain oracle. See [LP-98](./lp-98.md).
 
-**Note:** Lux 1.0 was based on Avalanche architecture with P-Chain (Platform), X-Chain (Exchange), and C-Chain (Contract). Lux 2.0 features a complete rewrite with our Quasar consensus protocol family, verkle trees, FPC, and witness support. P-Chain functionality has been absorbed into Q-Chain with quantum-secure consensus. The new X-Chain is a colocated high-performance DEX achieving 1B+ trades/sec.
+**Note:** Lux 1.0 was based on Lux architecture with P-Chain (Platform), X-Chain (Exchange), and C-Chain (Contract). Lux 2.0 features a complete rewrite with our Quasar consensus protocol family, verkle trees, FPC, and witness support. P-Chain functionality has been absorbed into Q-Chain with quantum-secure consensus. The new X-Chain is a colocated high-performance DEX achieving 1B+ trades/sec.
 
 ### Part 2: Community Contribution Framework
 
