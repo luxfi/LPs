@@ -41,7 +41,7 @@ Q-Security provides post-quantum protection across Lux's **6-chain mainnet archi
 | **Q-Security** | PQC Layer | Embedded in P-Chain, NOT standalone chain |
 | **A-Chain** | AI Attestation (Hanzo) | Attestations anchored to P-Chain with PQC checkpoints |
 
-**Key Insight**: Q-Security is a **cross-cutting security layer**, not a separate chain. It enhances P-Chain consensus and propagates quantum resistance to all L1 chains (X/B/Z) and L2 networks (Hanzo/Zoo).
+**Key Insight**: Q-Security is a **cross-cutting security layer**, not a separate chain. It enhances P-Chain consensus and propagates quantum resistance to all L1 chains (X/B/Z) and research networks (Hanzo AI compute, Zoo DeAI/DeSci via zips.zoo.ngo).
 
 ## Specification
 

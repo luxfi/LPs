@@ -41,7 +41,7 @@ B-Chain is the **critical interconnect** for Lux's multi-network ecosystem:
 |---------|------|-------------------|
 | **Lux.network** | L1 Settlement | B-Chain native, anchors all cross-chain state |
 | **Hanzo.network** | AI Compute | A-Chain attestations route through B-Chain |
-| **Zoo.network** | Consumer Apps | Asset transfers and DeFi via B-Chain |
+| **Zoo.network** | Open AI Research (ZIPs) | DeAI/DeSci research data via B-Chain (zips.zoo.ngo) |
 
 **B-Chain Architecture**:
 ```

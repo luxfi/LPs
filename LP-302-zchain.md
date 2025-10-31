@@ -43,7 +43,7 @@ The Z/A-Chain operates across Lux's multi-network ecosystem:
 |---------|------|--------|
 | **Lux.network** | L1 Settlement & Privacy | P-Chain, X-Chain, B-Chain, Z-Chain, Q-security |
 | **Hanzo.network** | AI Compute & Attestation | A-Chain (AttestationVM), MCP infrastructure |
-| **Zoo.network** | Consumer Applications | DeFi, GameFi, NFT marketplace |
+| **Zoo.network** | Open AI Research (ZIPs) | DeAI, DeSci research networks (zips.zoo.ngo) |
 
 **Z-Chain (Lux.network)**:
 - ZK privacy coprocessor for confidential transactions
@@ -55,6 +55,13 @@ The Z/A-Chain operates across Lux's multi-network ecosystem:
 - Receipt Circuit validation (Groth16/Plonk)
 - GPU mining infrastructure for attestations
 - MCP-powered AI agent coordination
+
+**Zoo.network (ZIPs - Zoo Improvement Proposals)**:
+- Open AI research network via zips.zoo.ngo
+- Bleeding-edge DeAI (Decentralized AI) experiments
+- DeSci (Decentralized Science) research chains
+- Community-driven AI/science governance
+- Foundation: Zoo Labs Foundation
 
 ## Specification
 
