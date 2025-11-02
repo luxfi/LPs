@@ -408,3 +408,85 @@ The Lux Network has adopted three Avalanche Community Proposals (ACPs) as part o
 1. **ALWAYS** update LLM.md with significant discoveries
 2. **NEVER** commit symlinked files (.AGENTS.md, CLAUDE.md, etc.) - they're in .gitignore
 3. **NEVER** create random summary files - update THIS file
+
+## Lux-Specific Proposals (LP vs ACP)
+
+**IMPORTANT**: Lux Network uses "LP" (Lux Proposal) prefix, NOT "ACP" (Avalanche Community Proposal).
+
+While we adopt specifications from Avalanche ACPs, all implementations in Lux use LP naming:
+
+### Adopted and Renamed
+
+| Avalanche ACP | Lux LP | Package Name | Status |
+|---------------|--------|--------------|--------|
+| ACP-176 | LP-176 | `lp176` | Implemented |
+| ACP-226 | LP-226 | `lp226` | Implemented |
+| Cortina | LP-118 | `lp118` | Implemented |
+| ACP-181 | LP-181 | (uses acp181) | Implemented |
+| ACP-204 | LP-204 | (secp256r1) | Implemented |
+
+### Implementation Locations
+
+**LP-176: Dynamic Gas Pricing**
+- **Spec**: `~/work/lux/lps/LP-176-dynamic-gas-pricing.md`
+- **Implementation**: 
+  - `/Users/z/work/lux/node/vms/evm/lp176/` (core logic)
+  - `/Users/z/work/lux/geth/plugin/evm/upgrade/lp176/` (plugin params)
+- **Package**: `github.com/luxfi/geth/plugin/evm/upgrade/lp176`
+
+**LP-118: Subnet-EVM Compatibility**
+- **Spec**: `~/work/lux/lps/LP-118-subnetevm-compat.md`
+- **Implementation**: 
+  - `/Users/z/work/lux/geth/plugin/evm/upgrade/lp118/` (plugin params)
+- **Package**: `github.com/luxfi/geth/plugin/evm/upgrade/lp118`
+- **Note**: Replaces "Cortina" naming
+
+**LP-226: Dynamic Block Timing**
+- **Spec**: `~/work/lux/lps/LP-226-dynamic-block-timing.md`
+- **Implementation**: `/Users/z/work/lux/node/vms/evm/lp226/`
+- **Package**: `github.com/luxfi/node/vms/evm/lp226`
+
+**LP-181: Epoching**
+- **Spec**: `~/work/lux/lps/LP-181-epoching.md`
+- **Implementation**: `/Users/z/work/lux/node/vms/proposervm/acp181/`
+- **Package**: `github.com/luxfi/node/vms/proposervm/acp181`
+- **Note**: Kept ACP naming in code for upstream compatibility
+
+**LP-204: secp256r1 Precompile**
+- **Spec**: `~/work/lux/lps/LP-204-secp256r1.md`
+- **Implementation**: `/Users/z/work/lux/geth/core/vm/contracts.go`
+- **Address**: `0x0000000000000000000000000000000000000100`
+
+### Naming Convention Guidelines
+
+When implementing Lux proposals:
+
+1. **Specifications**: Always use `LP-NNN` format in documentation
+2. **Go Packages**: Use `lpNNN` (e.g., `lp176`, `lp118`, `lp226`)
+3. **File Names**: Use `lp_nnn` or `lpNNN` consistently
+4. **Comments**: Reference both LP and upstream ACP for clarity
+5. **Imports**: `"github.com/luxfi/geth/plugin/evm/upgrade/lp176"`
+
+**Example**:
+```go
+// LP-176: Dynamic EVM Gas Limit and Price Discovery
+// Based on Avalanche ACP-176, adapted for Lux Network
+//
+// See: ~/work/lux/lps/LP-176-dynamic-gas-pricing.md
+package lp176
+```
+
+### Migration from ACP References
+
+If you encounter code using ACP names:
+1. Rename package directories: `acp176` → `lp176`
+2. Update package declarations: `package acp176` → `package lp176`
+3. Update imports in consuming code
+4. Update documentation references
+5. Keep comments referencing upstream ACP for traceability
+
+**DO NOT** use ACP prefixes in Lux codebase except for:
+- Historical context in comments
+- References to upstream Avalanche documentation
+- Explaining relationship to upstream proposals
+
