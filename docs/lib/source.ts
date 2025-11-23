@@ -61,7 +61,12 @@ function readLPFile(filename: string): LPPage | null {
 
 export const source = {
   getPage(slugParam?: string[]): LPPage | null {
-    const slug = slugParam || ['index'];
+    // Return null for empty slug - let the page component handle redirect
+    if (!slugParam || slugParam.length === 0) {
+      return null;
+    }
+
+    const slug = slugParam;
     const filename = `${slug.join('/')}.md`;
     const mdxFilename = `${slug.join('/')}.mdx`;
 
