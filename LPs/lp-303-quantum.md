@@ -1,3 +1,12 @@
+---
+lp: 303
+title: Lux Q-Security - Post-Quantum P-Chain Integration
+status: Active
+type: Protocol Specification
+category: Core
+created: 2025-10-28
+---
+
 # LP-303: Lux Q-Security - Post-Quantum P-Chain Integration
 
 **Status**: Active

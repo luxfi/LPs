@@ -1,3 +1,12 @@
+---
+lp: 118
+title: Subnet-EVM Compatibility Layer
+status: Implemented
+type: Standards Track
+category: Interface
+created: 2025-01-15
+---
+
 # LP-118: Subnet-EVM Compatibility Layer
 
 **Status**: Implemented

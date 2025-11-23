@@ -1,3 +1,12 @@
+---
+lp: 176
+title: Dynamic Gas Pricing Mechanism
+status: Implemented
+type: Standards Track
+category: Core
+created: 2025-01-15
+---
+
 # LP-176: Dynamic EVM Gas Limit and Price Discovery
 
 **Status**: Implemented

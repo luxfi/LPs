@@ -1,3 +1,12 @@
+---
+lp: 181
+title: Epoching and Validator Rotation
+status: | Adopted (Granite Upgrade) |
+type: Standards Track
+category: Core
+created: 2025-11-22
+---
+
 # LP-181: P-Chain Epoched Views (Granite Upgrade)
 
 | LP | 181 |

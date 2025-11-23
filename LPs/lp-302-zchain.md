@@ -1,3 +1,12 @@
+---
+lp: 302
+title: Lux Z/A-Chain - Privacy & AI Attestation Layer
+status: Active
+type: Protocol Specification
+category: Core
+created: 2025-10-28
+---
+
 # LP-302: Lux Z/A-Chain - Privacy & AI Attestation Layer
 
 **Status**: Active

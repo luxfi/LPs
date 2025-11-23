@@ -1,3 +1,12 @@
+---
+lp: 312
+title: SLH-DSA Stateless Hash-Based Digital Signatures
+status: Final
+type: Standards Track
+category: Core
+created: 2025-11-22
+---
+
 # LP-312: SLH-DSA Stateless Hash-Based Digital Signatures
 
 **Status**: Final

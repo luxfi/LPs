@@ -1,3 +1,12 @@
+---
+lp: 301
+title: Lux B-Chain - Cross-Chain Bridge Protocol
+status: Active (
+type: Protocol Specification
+category: Core
+created: 2025-10-28
+---
+
 # LP-301: Lux B-Chain - Cross-Chain Bridge Protocol
 
 **Status**: Active (**CRITICAL MAINNET COMPONENT**)
