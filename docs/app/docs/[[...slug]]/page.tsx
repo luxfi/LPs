@@ -1,5 +1,5 @@
 import { source } from '@/lib/source';
-import { notFound } from 'next/navigation';
+import { notFound, redirect } from 'next/navigation';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 
@@ -9,6 +9,12 @@ export default async function Page({
   params: Promise<{ slug?: string[] }>;
 }) {
   const { slug } = await params;
+
+  // Redirect /docs to /docs/lp-0 (first LP)
+  if (!slug || slug.length === 0) {
+    redirect('/docs/lp-0');
+  }
+
   const page = source.getPage(slug);
   if (!page) notFound();
 
