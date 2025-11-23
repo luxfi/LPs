@@ -50,6 +50,47 @@ LP-4 proposes integrating quantum-resistant cryptographic primitives into the Lu
 
 [TODO]
 
+## Implementation
+
+### ML-DSA Post-Quantum Signatures (FIPS 204)
+
+**Location**: `~/work/lux/crypto/mldsa/`
+**GitHub**: [`github.com/luxfi/node/tree/main/crypto/mldsa`](https://github.com/luxfi/node/tree/main/crypto/mldsa)
+
+**Key Files**:
+- [`mldsa.go`](https://github.com/luxfi/node/blob/main/crypto/mldsa/mldsa.go) - ML-DSA-65 signature implementation (7.7 KB)
+- [`mldsa_test.go`](https://github.com/luxfi/node/blob/main/crypto/mldsa/mldsa_test.go) - Comprehensive test suite with 11 test cases (6.2 KB)
+
+**Algorithm**: ML-DSA-65 (Dilithium, NIST Level 3)
+- Public Key Size: 1,952 bytes
+- Signature Size: 3,309 bytes
+- Quantum Security: ~192 bits
+
+**Testing**:
+```bash
+cd ~/work/lux/crypto/mldsa
+go test -v ./...
+```
+
+### EVM ML-DSA Precompile
+
+**Location**: `~/work/lux/evm/precompile/contracts/mldsa/`
+**GitHub**: [`github.com/luxfi/evm/tree/main/precompile/contracts/mldsa`](https://github.com/luxfi/evm/tree/main/precompile/contracts/mldsa)
+
+**Key Files**:
+- [`contract.go`](https://github.com/luxfi/evm/blob/main/precompile/contracts/mldsa/contract.go) - Precompile contract (4.3 KB)
+- [`contract_test.go`](https://github.com/luxfi/evm/blob/main/precompile/contracts/mldsa/contract_test.go) - Precompile tests (7.4 KB)
+- [`IMLDSA.sol`](https://github.com/luxfi/evm/blob/main/precompile/contracts/mldsa/IMLDSA.sol) - Solidity interface (7.1 KB)
+
+**Precompile Address**: `0x0200000000000000000000000000000000000006`
+**Gas Cost**: 100,000 base + 10 per message byte
+
+**Testing**:
+```bash
+cd ~/work/lux/evm/precompile/contracts/mldsa
+go test -v ./...
+```
+
 ## Copyright
 
 Copyright and related rights waived via [CC0](../LICENSE.md).

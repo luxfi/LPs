@@ -26,6 +26,63 @@ By providing an SDK spec, Lux invites innovation: teams could develop specialize
 
 A standardized VM SDK removes ambiguity for VM authors, accelerates development of specialized subnets, and ensures consistent integration with Lux consensus and tooling.
 
+## Implementation
+
+### VM SDK Framework
+
+**Location**: `~/work/lux/vmsdk/`
+**GitHub**: [`github.com/luxfi/vmsdk/tree/main`](https://github.com/luxfi/vmsdk/tree/main)
+
+**Core Modules**:
+- [`chain/`](https://github.com/luxfi/vmsdk/tree/main/chain) - Chain state and block management (16 files)
+  - State transitions, block validation, consensus integration
+- [`builder/`](https://github.com/luxfi/vmsdk/tree/main/builder) - Block and transaction builders (6 files)
+- [`codec/`](https://github.com/luxfi/vmsdk/tree/main/codec) - Serialization/deserialization (9 files)
+  - Support for custom types and efficient encoding
+- [`examples/`](https://github.com/luxfi/vmsdk/tree/main/examples) - Sample VM implementations
+- [`config/`](https://github.com/luxfi/vmsdk/tree/main/config) - Configuration management (3 files)
+- [`crypto/`](https://github.com/luxfi/vmsdk/tree/main/crypto) - Cryptographic utilities (5 files)
+
+**VM Interface**:
+- Block validation hooks
+- State machine interface
+- Consensus callbacks (block proposal, acceptance, rejection)
+- Custom transaction types support
+
+**Key Features**:
+- Modular architecture for VM specialization
+- Built-in support for UTXO and account models
+- Async block processing
+- Configurable consensus parameters
+
+**Documentation**:
+```bash
+cd ~/work/lux/vmsdk
+# View API documentation
+go doc ./... | head -100
+```
+
+**Example VM**:
+- Location: `~/work/lux/vmsdk/examples/`
+- Demonstrates full VM lifecycle
+- Shows custom transaction handling
+
+### VM Registry
+
+**Location**: `~/work/lux/node/vms/`
+**GitHub**: [`github.com/luxfi/node/tree/main/vms`](https://github.com/luxfi/node/tree/main/vms)
+
+**Registered VMs**:
+- `platformvm/` - Platform VM (P-Chain)
+- `avm/` - Asset VM (X-Chain, UTXO-based)
+- `evm/` - EVM Compatible VM (C-Chain)
+- `quantumvm/` - Quantum VM (Q-Chain)
+
+**VM Manager**:
+- Dynamically loads and instantiates VMs
+- Manages VM lifecycle (start, stop, shutdown)
+- Routes messages to correct VM handler
+
 ## Copyright
 
 Copyright and related rights waived via [CC0](../LICENSE.md).

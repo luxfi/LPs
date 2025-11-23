@@ -88,3 +88,65 @@ This is a foundational specification. No prior on‑chain deployments are change
 - Parsers must map `P/C/X/M/Z/G` to the intended chains.
 - Wallets and explorers display balances and fees in `LUX`.
 - Link and config schemas accept only the specified chain codes.
+
+## Implementation
+
+### Genesis Configuration
+
+**Genesis Files**: `~/work/lux/node/genesis/`
+**GitHub**: [`github.com/luxfi/node/tree/main/genesis`](https://github.com/luxfi/node/tree/main/genesis)
+
+**Key Files**:
+- [`genesis.go`](https://github.com/luxfi/node/blob/main/genesis/genesis.go) - Genesis block generation (Total supply: 1B LUX)
+- [`config.go`](https://github.com/luxfi/node/blob/main/genesis/config.go) - Network configuration and chain IDs
+
+**Testing**:
+```bash
+cd ~/work/lux/node/genesis
+go test -v ./...
+```
+
+### Chain ID Constants
+
+**Location**: `~/work/lux/node/ids/` and `~/work/lux/node/utils/constants/`
+**GitHub**: [`github.com/luxfi/node/tree/main/utils/constants`](https://github.com/luxfi/node/tree/main/utils/constants)
+
+**Files**:
+- [`network_ids.go`](https://github.com/luxfi/node/blob/main/utils/constants/network_ids.go) - Network ID definitions
+- [`vm_ids.go`](https://github.com/luxfi/node/blob/main/utils/constants/vm_ids.go) - Chain VM identifiers
+
+### LUX Token Implementation
+
+**Native Asset**: `~/work/lux/node/vms/components/lux/`
+**GitHub**: [`github.com/luxfi/node/tree/main/vms/components/lux`](https://github.com/luxfi/node/tree/main/vms/components/lux)
+
+**Key Files**:
+- [`asset.go`](https://github.com/luxfi/node/blob/main/vms/components/lux/asset.go) - LUX asset definitions
+- [`transferables.go`](https://github.com/luxfi/node/blob/main/vms/components/lux/transferables.go) - Transfer logic
+- [`utxo.go`](https://github.com/luxfi/node/blob/main/vms/components/lux/utxo.go) - UTXO handling
+
+### Staking and Rewards
+
+**Location**: `~/work/lux/node/vms/platformvm/`
+**GitHub**: [`github.com/luxfi/node/tree/main/vms/platformvm`](https://github.com/luxfi/node/tree/main/vms/platformvm)
+
+**Files**:
+- [`validator/validator.go`](https://github.com/luxfi/node/blob/main/vms/platformvm/validator/validator.go) - Validator management
+- [`reward/calculator.go`](https://github.com/luxfi/node/blob/main/vms/platformvm/reward/calculator.go) - Staking rewards
+- [`state/state.go`](https://github.com/luxfi/node/blob/main/vms/platformvm/state/state.go) - Staking state
+
+### API Endpoints
+
+**Balance Queries**:
+- P-Chain: `platform.getBalance(address)`
+- X-Chain: `avm.getBalance(address, assetID)`
+- C-Chain: `eth_getBalance(address)`
+
+**Staking Queries**:
+- `platform.getCurrentValidators()` - Active validators
+- `platform.getTotalStake()` - Total staked LUX
+- `platform.getCurrentSupply()` - Total LUX supply
+
+## Copyright
+
+Copyright and related rights waived via [CC0](../LICENSE.md).

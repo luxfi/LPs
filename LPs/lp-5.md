@@ -51,6 +51,47 @@ LP-5 focuses on the design of Lux’s quantum-safe wallet infrastructure, includ
 
 [TODO]
 
+## Implementation
+
+### Lux Safe Multisig Wallet
+
+**Location**: `~/work/lux/safe/`
+**GitHub**: [`github.com/luxfi/safe/tree/main`](https://github.com/luxfi/safe/tree/main)
+
+**Quantum-Safe Wallet Components**:
+- [`app/`](https://github.com/luxfi/safe/tree/main/app) - Next.js wallet application (React, TypeScript)
+- [`react/`](https://github.com/luxfi/safe/tree/main/react) - Reusable React components for Safe interface
+- [`contracts/`](https://github.com/luxfi/safe/tree/main/contracts) - Smart contract module (Solidity)
+
+**Key Features**:
+- M-of-N multisig with post-quantum key support
+- Hierarchical deterministic (HD) wallet derivation
+- One-time signature capability (XMSS/hash-based)
+- Zero-knowledge proof integration for privacy
+
+**Testing & Documentation**:
+```bash
+cd ~/work/lux/safe/app
+npm install && npm test
+```
+
+### Wallet CLI and Key Management
+
+**Location**: `~/work/lux/cli/cmd/`
+**GitHub**: [`github.com/luxfi/cli/tree/main/cmd`](https://github.com/luxfi/cli/tree/main/cmd)
+
+**Quantum-Safe Features**:
+- Post-quantum key generation (ML-DSA, SLH-DSA, ML-KEM support)
+- Hybrid key management (classical + post-quantum)
+- Secure key storage and recovery
+- Transaction signing with quantum-resistant algorithms
+
+**Testing**:
+```bash
+cd ~/work/lux/cli
+make test  # Run full CLI test suite
+```
+
 ## Copyright
 
 Copyright and related rights waived via [CC0](../LICENSE.md).

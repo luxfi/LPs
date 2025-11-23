@@ -48,6 +48,44 @@ LP-3 introduces Lux’s subnet architecture, wherein the network consists of mul
 
 [TODO]
 
+## Implementation
+
+### Chain Manager
+
+**Location**: `~/work/lux/node/chains/`
+**GitHub**: [`github.com/luxfi/node/tree/main/chains`](https://github.com/luxfi/node/tree/main/chains)
+
+**Key Files**:
+- [`manager.go`](https://github.com/luxfi/node/blob/main/chains/manager.go) - Chain lifecycle management and subnet registration (71.5 KB)
+- [`registrant.go`](https://github.com/luxfi/node/blob/main/chains/registrant.go) - Registrant adapter for chain creation hooks (559 bytes)
+- [`nets.go`](https://github.com/luxfi/node/blob/main/chains/nets.go) - Network isolation and chain namespace management (1.9 KB)
+- [`manager_test.go`](https://github.com/luxfi/node/blob/main/chains/manager_test.go) - Manager test suite (4.9 KB)
+
+**Atomic Chain Operations**:
+- [`atomic/`](https://github.com/luxfi/node/tree/main/chains/atomic) - Cross-chain state coordination (16 files)
+
+**Testing**:
+```bash
+cd ~/work/lux/node/chains
+go test -v ./...
+```
+
+### Warp Messaging (Cross-Subnet Communication)
+
+**Location**: `~/work/lux/node/vms/platformvm/warp/`
+**GitHub**: [`github.com/luxfi/node/tree/main/vms/platformvm/warp`](https://github.com/luxfi/node/tree/main/vms/platformvm/warp)
+
+**Key Features**:
+- BLS signature aggregation across validators
+- Warp message validation and verification
+- Subnet-to-subnet trusted messaging
+
+**Testing**:
+```bash
+cd ~/work/lux/node/vms/platformvm/warp
+go test -v ./...
+```
+
 ## Copyright
 
 Copyright and related rights waived via [CC0](../LICENSE.md).

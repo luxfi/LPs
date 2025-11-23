@@ -255,3 +255,49 @@ Additive upgrade; prior clients continue working. Features can be enabled behind
 ## Security Considerations
 
 Validate inputs, enforce cryptographic best practices, and consider DoS and replay protections where relevant to the design.
+
+## Implementation
+
+### Threshold Cryptography Library
+
+**Location**: `~/work/lux/threshold/`
+**GitHub**: [`github.com/luxfi/threshold/tree/main/protocols`](https://github.com/luxfi/threshold/tree/main/protocols)
+
+**MPC Protocol Implementations** (13 packages):
+- [`cmp/`](https://github.com/luxfi/threshold/tree/main/protocols/cmp) - Canetti-Makriyannis-Peled threshold ECDSA (14 files)
+- [`bls/`](https://github.com/luxfi/threshold/tree/main/protocols/bls) - BLS threshold signatures (4 files)
+- [`frost/`](https://github.com/luxfi/threshold/tree/main/protocols/frost) - FROST Schnorr threshold signatures (27 files)
+- [`lss/`](https://github.com/luxfi/threshold/tree/main/protocols/lss) - Lattice-based threshold signatures (30 files)
+- [`ringtail/`](https://github.com/luxfi/threshold/tree/main/protocols/ringtail) - Ring signatures (10 files)
+
+**Key Files**:
+- [`integration_test.go`](https://github.com/luxfi/threshold/blob/main/protocols/integration_test.go) - Full protocol integration tests (12.7 KB)
+- [`integration_simple_test.go`](https://github.com/luxfi/threshold/blob/main/protocols/integration_simple_test.go) - Simple test suite (3.2 KB)
+
+**Testing** (100% pass rate, 55+ packages):
+```bash
+cd ~/work/lux/threshold
+go test -v -race ./...  # All tests pass, zero race conditions
+```
+
+### MPC Custody Implementation
+
+**Location**: `~/work/lux/mpc/`
+**GitHub**: [`github.com/luxfi/mpc/tree/main`](https://github.com/luxfi/mpc/tree/main)
+
+**Core Packages** (9):
+- [`pkg/mpc/`](https://github.com/luxfi/mpc/tree/main/pkg/mpc) - Core MPC logic
+- [`pkg/threshold/`](https://github.com/luxfi/mpc/tree/main/pkg/threshold) - Threshold signature integration
+- [`pkg/config/`](https://github.com/luxfi/mpc/tree/main/pkg/config) - Configuration management
+- [`pkg/kvstore/`](https://github.com/luxfi/mpc/tree/main/pkg/kvstore) - Key-value storage with backup
+- [`pkg/encoding/`](https://github.com/luxfi/mpc/tree/main/pkg/encoding) - Cryptographic encoding
+
+**Testing**:
+```bash
+cd ~/work/lux/mpc
+go test -v -race ./...
+```
+
+## Copyright
+
+Copyright and related rights waived via [CC0](../LICENSE.md).

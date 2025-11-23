@@ -156,6 +156,96 @@ As the foundational LP, this document establishes the initial standards. Future 
 - [6] Ethereum Foundation, “Ethereum Improvement Proposal Process,” eips.ethereum.org.
 - [7] Polkadot Wiki, “Polkadot Governance Overview.”
 
+## Implementation
+
+### LP Repository and Governance Framework
+
+**GitHub**: [`github.com/luxfi/lps`](https://github.com/luxfi/lps)
+**Local Path**: `~/work/lux/lps/`
+
+**Key Components**:
+- [`LPs/`](https://github.com/luxfi/lps/tree/main/LPs/) - All LP specifications (119 total)
+- [`TEMPLATE.md`](https://github.com/luxfi/lps/blob/main/LPs/TEMPLATE.md) - Template for new LPs
+- [`Makefile`](https://github.com/luxfi/lps/blob/main/Makefile) - LP validation and management
+- [`docs/`](https://github.com/luxfi/lps/tree/main/docs/) - Documentation site (Next.js)
+- [`scripts/`](https://github.com/luxfi/lps/tree/main/scripts/) - Automation utilities
+
+**Documentation Site**:
+```bash
+cd ~/work/lux/lps/docs
+pnpm dev      # Development: http://localhost:3002
+pnpm build    # Production build (124 static pages)
+```
+
+### Network Architecture Implementation
+
+**Core Node**: [`github.com/luxfi/node`](https://github.com/luxfi/node)
+**Local Path**: `~/work/lux/node/`
+
+**Chain Implementations**:
+- **Q-Chain** (Quasar): `~/work/lux/node/vms/quantumvm/`
+  - Hybrid BFT + Post-Quantum consensus
+  - Ringtail ring signatures
+  - Verkle trie + witness support
+
+- **X-Chain** (Exchange): `~/work/lux/node/vms/avm/`
+  - DAG consensus
+  - UTXO model
+  - High-throughput asset exchange
+
+- **C-Chain** (Contract): `~/work/lux/evm/`
+  - EVM-compatible execution
+  - UniswapV2/V3 DEX integration
+  - OP-Stack compatibility
+
+**Consensus Engines**: `~/work/lux/consensus/`
+- `engine/bft/` - Byzantine Fault Tolerant (21 files)
+- `engine/chain/` - Linear consensus (11 files)
+- `engine/dag/` - Directed Acyclic Graph (8 files)
+- `engine/pq/` - Post-Quantum consensus (6 files)
+- `protocol/quasar/` - Hybrid consensus (8 files)
+
+**Cross-Chain Messaging**:
+- `~/work/lux/node/vms/platformvm/warp/` - Warp messaging protocol
+- `~/work/lux/bridge/` - Cross-chain bridge implementations
+
+### Community Contribution Tools
+
+**LP Management**:
+```bash
+cd ~/work/lux/lps
+
+# Create new LP
+make new
+
+# Validate LP format
+make validate FILE=LPs/lp-N.md
+
+# Pre-PR checks
+make pre-pr
+```
+
+**Governance Process**:
+1. Discussion Phase: [`forum.lux.network`](https://forum.lux.network)
+2. Draft Submission: Create PR with `lp-draft.md`
+3. Review: Community feedback and technical review
+4. Last Call: 14-day final comment period
+5. Final: Ratification and implementation
+
+### Architecture Verification
+
+**Network Structure**:
+- Primary Network: Q, X, C chains (mandatory)
+- Specialized Chains: A (AI), B (Bridge), M (MPC)
+- All chains share security and cross-chain messaging
+
+**Running Local Network**:
+```bash
+cd ~/work/lux/netrunner
+RUN_E2E=1 go test -v ./tests/e2e/
+# Bootstraps all chains in <60 seconds
+```
+
 ## Copyright
 
 Copyright and related rights waived via [CC0](../LICENSE.md).
