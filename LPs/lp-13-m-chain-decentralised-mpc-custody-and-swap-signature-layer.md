@@ -13,7 +13,7 @@ requires: 1, 2, 3, 5, 6
 supersedes: 4-r2
 ---
 
-> **See also**: [LP-0](./lp-0.md), [LP-10](./lp-10.md), [LP-11](./lp-11.md), [LP-12](./lp-12.md), [LP-14](./lp-14.md), [LP-INDEX](./LP-INDEX.md)
+> **See also**: [LP-0](./lp-0-network-architecture-and-community-framework.md), [LP-10](./lp-10-p-chain-platform-chain-specification-deprecated.md), [LP-11](./lp-11-x-chain-exchange-chain-specification.md), [LP-12](./lp-12-c-chain-contract-chain-specification.md), [LP-14](./lp-14-m-chain-threshold-signatures-with-cgg21-uc-non-interactive-ecdsa.md), [LP-INDEX](./LP-INDEX.md)
 
 ## Abstract
 

@@ -588,12 +588,22 @@ Copyright and related rights waived via [CC0](https://creativecommons.org/public
 
 ## References
 
+### Related Lux Proposals
+- [LP-200: Post-Quantum Cryptography Suite](lp-200-post-quantum-cryptography-suite-for-lux-network.md) - Parent specification
+- [LP-316: ML-DSA Post-Quantum Digital Signatures](lp-316-ml-dsa-post-quantum-digital-signatures.md) - Lattice-based alternative
+- [LP-318: ML-KEM Post-Quantum Key Encapsulation](lp-318-ml-kem-post-quantum-key-encapsulation.md) - Complementary key exchange
+- [LP-312: SLH-DSA Signature Verification Precompile](lp-312-slh-dsa-signature-verification-precompile.md) - EVM precompile implementation
+- [LP-201: Hybrid Classical-Quantum Transitions](lp-201-hybrid-classical-quantum-cryptography-transitions.md) - Migration strategy
+
+### Standards and Specifications
 1. **FIPS 205**: [Stateless Hash-Based Digital Signature Standard](https://csrc.nist.gov/pubs/fips/205/final)
 2. **SPHINCS+**: [Specification v3.1](https://sphincs.org/)
 3. **CIRCL Library**: [Cloudflare Cryptographic Library](https://github.com/cloudflare/circl)
-4. **Implementation**: `/Users/z/work/lux/crypto/slhdsa/`
-5. **Precompile**: `/Users/z/work/lux/evm/precompile/contracts/slhdsa/`
-6. **Merkle Signatures**: [Merkle (1979) "Secrecy, Authentication, and Public Key Systems"](https://www.merkle.com/papers/Thesis1979.pdf)
+4. **Merkle Signatures**: [Merkle (1979) "Secrecy, Authentication, and Public Key Systems"](https://www.merkle.com/papers/Thesis1979.pdf)
+
+### Implementation Files
+5. **Implementation**: `/Users/z/work/lux/crypto/slhdsa/`
+6. **Precompile**: `/Users/z/work/lux/evm/precompile/contracts/slhdsa/`
 
 ## Appendix A: Signature Size Comparison
 

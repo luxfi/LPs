@@ -382,9 +382,9 @@ func (b *BridgeClient) RelayTransfer(
 
 ## References
 
-- **Paper**: `/lux/papers/lux-bridge.pdf`
-- **Contracts**: `/lux/bridge/contracts/`
-- **Relayer**: `/lux/bridge/relayer/`
+- **Paper**: [~/work/lux/papers/lux-bridge.tex](~/work/lux/papers/lux-bridge.tex)
+- **Contracts**: https://github.com/luxfi/bridge/tree/main/contracts
+- **Relayer**: https://github.com/luxfi/bridge/tree/main/relayer
 
 ## Copyright
 

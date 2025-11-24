@@ -303,7 +303,7 @@ This LP introduces additive interfaces and on-chain records. Existing applicatio
 
 ## References
 
-1. [LP-100: NIST PQC Integration](./lp-100.md)
+1. [LP-100: NIST PQC Integration](./lp-100-nist-post-quantum-cryptography-integration-for-lux-network.md)
 2. [HIP-1: Hanzo Multimodal Models](https://github.com/hanzoai/hips/blob/main/HIPs/hip-1.md)
 3. [Federated Learning](https://arxiv.org/abs/1602.05629)
 

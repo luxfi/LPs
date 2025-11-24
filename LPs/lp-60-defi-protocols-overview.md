@@ -24,24 +24,24 @@ The DeFi ecosystem on Lux is rapidly expanding with various protocols for lendin
 ### 1. Token Standards
 
 #### Core Token Standards
-- **[LP-20: LRC-20 Fungible Token Standard](./lp-20.md)**
+- **[LP-20: LRC-20 Fungible Token Standard](./lp-20-lrc-20-fungible-token-standard.md)**
   - Status: Final
   - ERC-20 compatible fungible token standard
   - Foundation for all DeFi tokens
 
-- **[LP-721: LRC-721 Non-Fungible Token Standard](./lp-721.md)**
+- **[LP-721: LRC-721 Non-Fungible Token Standard](./lp-721-lrc-721-non-fungible-token-standard.md)**
   - Status: Final
   - NFT standard for unique digital assets
   - Used in NFT marketplaces and gaming
 
-- **[LP-1155: LRC-1155 Multi-Token Standard](./lp-1155.md)**
+- **[LP-1155: LRC-1155 Multi-Token Standard](./lp-1155-lrc-1155-multi-token-standard.md)**
   - Status: Draft
   - Efficient multi-token management
   - Supports both fungible and non-fungible tokens
 
 ### 2. Staking and Rewards
 
-#### [LP-70: NFT Staking Standard](./lp-70.md)
+#### [LP-70: NFT Staking Standard](./lp-70-nft-staking-standard.md)
 - **Status**: Draft
 - **Purpose**: Standardized protocol for staking NFTs to earn rewards
 - **Key Features**:
@@ -52,7 +52,7 @@ The DeFi ecosystem on Lux is rapidly expanding with various protocols for lendin
 
 ### 3. Payment and Financial Services
 
-#### [LP-91: Payment Processing Research](./lp-91.md)
+#### [LP-91: Payment Processing Research](./lp-91-payment-processing-research.md)
 - **Status**: Draft
 - **Type**: Informational
 - **Purpose**: Research on implementing efficient payment processing on Lux
@@ -62,7 +62,7 @@ The DeFi ecosystem on Lux is rapidly expanding with various protocols for lendin
   - Cross-chain payments
   - Privacy-preserving transactions
 
-#### [LP-95: Stablecoin Mechanisms Research](./lp-95.md)
+#### [LP-95: Stablecoin Mechanisms Research](./lp-95-stablecoin-mechanisms-research.md)
 - **Status**: Draft
 - **Type**: Informational
 - **Purpose**: Research on various stablecoin implementation strategies
@@ -186,7 +186,7 @@ The DeFi ecosystem on Lux is rapidly expanding with various protocols for lendin
 
 ### Development Tools
 - [Lux DeFi SDK](https://github.com/luxfi/defi-sdk)
-- [Testing Framework](./lp-6.md)
+- [Testing Framework](./lp-6-network-runner-and-testing-framework.md)
 - [Security Tools](https://github.com/luxfi/security-tools)
 
 ### Documentation
@@ -201,11 +201,11 @@ The DeFi ecosystem on Lux is rapidly expanding with various protocols for lendin
 ## Related Specifications
 
 ### Infrastructure
-- [LP-13: M-Chain MPC Bridge](./lp-13.md)
-- [LP-15: MPC Bridge Protocol](./lp-15.md)
+- [LP-13: M-Chain MPC Bridge](./lp-13-m-chain-decentralised-mpc-custody-and-swap-signature-layer.md)
+- [LP-15: MPC Bridge Protocol](./lp-15-mpc-bridge-protocol.md)
 
 ### Development
-- [LP-50: Developer Tools Overview](./lp-50.md)
+- [LP-50: Developer Tools Overview](./lp-50-developer-tools-overview.md)
 
 ## Copyright
 

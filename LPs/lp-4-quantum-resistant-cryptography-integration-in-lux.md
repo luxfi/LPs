@@ -14,7 +14,7 @@ activation:
   activationHeight: "0"
 ---
 
-> **See also**: [LP-5: Lux Quantum-Safe Wallets and Multisig Standard](./lp-5.md)
+> **See also**: [LP-5: Lux Quantum-Safe Wallets and Multisig Standard](./lp-5-quantum-safe-wallets-and-multisig-standard.md)
 
 ## Abstract
 

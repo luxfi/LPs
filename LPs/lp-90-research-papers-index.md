@@ -27,7 +27,7 @@ Research is critical for the long-term success and innovation of the Lux Network
 
 ### 1. Payment and Financial Systems
 
-#### [LP-91: Payment Processing Research](./lp-91.md)
+#### [LP-91: Payment Processing Research](./lp-91-payment-processing-research.md)
 - **Status**: Draft
 - **Focus**: Efficient payment processing mechanisms
 - **Key Research Areas**:
@@ -39,7 +39,7 @@ Research is critical for the long-term success and innovation of the Lux Network
 
 ### 2. Cross-Chain Communication
 
-#### [LP-92: Cross-Chain Messaging Research](./lp-92.md)
+#### [LP-92: Cross-Chain Messaging Research](./lp-92-cross-chain-messaging-research.md)
 - **Status**: Draft
 - **Focus**: Advanced cross-chain communication protocols
 - **Key Research Areas**:
@@ -51,7 +51,7 @@ Research is critical for the long-term success and innovation of the Lux Network
 
 ### 3. Identity and Privacy
 
-#### [LP-93: Decentralized Identity Research](./lp-93.md)
+#### [LP-93: Decentralized Identity Research](./lp-93-decentralized-identity-research.md)
 - **Status**: Draft
 - **Focus**: Self-sovereign identity solutions
 - **Key Research Areas**:
@@ -63,7 +63,7 @@ Research is critical for the long-term success and innovation of the Lux Network
 
 ### 4. Governance Systems
 
-#### [LP-94: Governance Framework Research](./lp-94.md)
+#### [LP-94: Governance Framework Research](./lp-94-governance-framework-research.md)
 - **Status**: Draft
 - **Focus**: Advanced governance mechanisms
 - **Key Research Areas**:
@@ -75,7 +75,7 @@ Research is critical for the long-term success and innovation of the Lux Network
 
 ### 5. Stablecoin Design
 
-#### [LP-95: Stablecoin Mechanisms Research](./lp-95.md)
+#### [LP-95: Stablecoin Mechanisms Research](./lp-95-stablecoin-mechanisms-research.md)
 - **Status**: Draft
 - **Focus**: Stablecoin design and stability mechanisms
 - **Key Research Areas**:
@@ -115,7 +115,7 @@ Research is critical for the long-term success and innovation of the Lux Network
 ## Current Research Priorities
 
 ### High Priority
-1. **Quantum-Resistant Cryptography** (see [LP-4](./lp-4.md))
+1. **Quantum-Resistant Cryptography** (see [LP-4](./lp-4-quantum-resistant-cryptography-integration-in-lux.md))
 2. **Scalability Solutions**
 3. **Privacy Technologies**
 4. **Cross-Chain Interoperability**
@@ -212,12 +212,12 @@ Research is critical for the long-term success and innovation of the Lux Network
 ## Related Specifications
 
 ### Implementation LPs
-- [LP-4: Quantum-Resistant Cryptography](./lp-4.md)
-- [LP-5: Quantum-Safe Wallets](./lp-5.md)
+- [LP-4: Quantum-Resistant Cryptography](./lp-4-quantum-resistant-cryptography-integration-in-lux.md)
+- [LP-5: Quantum-Safe Wallets](./lp-5-quantum-safe-wallets-and-multisig-standard.md)
 
 ### Infrastructure
-- [LP-50: Developer Tools Overview](./lp-50.md)
-- [LP-60: DeFi Protocols Overview](./lp-60.md)
+- [LP-50: Developer Tools Overview](./lp-50-developer-tools-overview.md)
+- [LP-60: DeFi Protocols Overview](./lp-60-defi-protocols-overview.md)
 
 ## Copyright
 

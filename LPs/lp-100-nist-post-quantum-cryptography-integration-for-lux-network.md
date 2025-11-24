@@ -195,8 +195,8 @@ The implementation maintains full backward compatibility:
 1. [FIPS 203](https://csrc.nist.gov/pubs/fips/203/final): Module-Lattice-Based Key-Encapsulation Mechanism
 2. [FIPS 204](https://csrc.nist.gov/pubs/fips/204/final): Module-Lattice-Based Digital Signature Standard
 3. [SP 800-56C Rev. 2](https://csrc.nist.gov/pubs/sp/800/56/c/r2/final): Key Derivation Methods
-4. [LP-4](./lp-4.md): Quantum-Resistant Cryptography Integration in Lux
-5. [LP-5](./lp-5.md): Lux Quantum-Safe Wallets and Multisig Standard
+4. [LP-4](./lp-4-quantum-resistant-cryptography-integration-in-lux.md): Quantum-Resistant Cryptography Integration in Lux
+5. [LP-5](./lp-5-quantum-safe-wallets-and-multisig-standard.md): Lux Quantum-Safe Wallets and Multisig Standard
 
 ## Copyright
 

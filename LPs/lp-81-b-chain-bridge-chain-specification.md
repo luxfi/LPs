@@ -363,10 +363,10 @@ it("should slash validator for double signing", async () => {
 
 ## References
 
-- [LP-13: M-Chain MPC Specification](./lp-13.md)
-- [LP-14: CGG21 Threshold Signatures](./lp-14.md)
-- [LP-15: MPC Bridge Protocol](./lp-15.md)
-- [LP-75: TEE Integration Standard](./lp-75.md)
+- [LP-13: M-Chain MPC Specification](./lp-13-m-chain-decentralised-mpc-custody-and-swap-signature-layer.md)
+- [LP-14: CGG21 Threshold Signatures](./lp-14-m-chain-threshold-signatures-with-cgg21-uc-non-interactive-ecdsa.md)
+- [LP-15: MPC Bridge Protocol](./lp-15-mpc-bridge-protocol.md)
+- [LP-75: TEE Integration Standard](./lp-75-tee-integration-standard.md)
 - CGG21 Paper: "UC Non-Interactive, Proactive, Threshold ECDSA"
 - Ringtail Paper: "Practical Lattice-Based Threshold Signatures"
 

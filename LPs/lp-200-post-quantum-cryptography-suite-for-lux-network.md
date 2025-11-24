@@ -334,12 +334,24 @@ Complete implementation available at: https://github.com/luxfi/crypto
 
 ## References
 
+### Related Lux Proposals
+- [LP-318: ML-KEM Post-Quantum Key Encapsulation](lp-318-ml-kem-post-quantum-key-encapsulation.md)
+- [LP-316: ML-DSA Post-Quantum Digital Signatures](lp-316-ml-dsa-post-quantum-digital-signatures.md)
+- [LP-317: SLH-DSA Stateless Hash-Based Digital Signatures](lp-317-slh-dsa-stateless-hash-based-digital-signatures.md)
+- [LP-311: ML-DSA Signature Verification Precompile](lp-311-ml-dsa-signature-verification-precompile.md)
+- [LP-312: SLH-DSA Signature Verification Precompile](lp-312-slh-dsa-signature-verification-precompile.md)
+- [LP-201: Hybrid Classical-Quantum Cryptography Transitions](lp-201-hybrid-classical-quantum-cryptography-transitions.md)
+- [LP-202: Cryptographic Agility Framework](lp-202-cryptographic-agility-framework.md)
+
+### NIST Standards
 1. [FIPS 203: Module-Lattice-Based Key-Encapsulation Mechanism](https://doi.org/10.6028/NIST.FIPS.203)
 2. [FIPS 204: Module-Lattice-Based Digital Signature Algorithm](https://doi.org/10.6028/NIST.FIPS.204)
 3. [FIPS 205: Stateless Hash-Based Digital Signature Algorithm](https://doi.org/10.6028/NIST.FIPS.205)
 4. [Regev, O. "On lattices, learning with errors, random linear codes, and cryptography"](https://doi.org/10.1145/1060590.1060603)
 5. [Peikert, C. "A Decade of Lattice Cryptography"](https://doi.org/10.1561/0400000074)
 6. [NIST Post-Quantum Cryptography Standardization](https://csrc.nist.gov/Projects/post-quantum-cryptography)
+
+### Implementation References
 7. [ZKNOX ETHDILITHIUM - EVM Optimizations](https://github.com/ZKNOX/ETHDILITHIUM)
 8. [Cloudflare CIRCL - Pure Go Implementation](https://github.com/cloudflare/circl)
 

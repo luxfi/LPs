@@ -410,10 +410,10 @@ luxd kms set-weight google-cloud-kms 100  # Full cutover
 ### Documentation
 - [Lux KMS Documentation](https://github.com/luxfi/kms/tree/main/docs)
 - [HSM Provider Comparison](https://github.com/luxfi/kms/blob/main/docs/documentation/platform/kms/hsm-providers-comparison.md)
-- [LP-320: Ringtail Threshold Signatures](./lp-320.md)
-- [LP-321: FROST Threshold Signatures](./lp-321.md)
-- [LP-322: CGGMP21 Threshold ECDSA](./lp-322.md)
-- [LP-323: LSS-MPC Dynamic Resharing](./lp-323.md)
+- [LP-321: Ringtail Threshold Signature Precompile](lp-321-ringtail-threshold-signature-precompile.md)
+- [LP-321: FROST Threshold Signature Precompile](lp-321-frost-threshold-signature-precompile.md)
+- [LP-322: CGGMP21 Threshold ECDSA Precompile](lp-322-cggmp21-threshold-ecdsa-precompile.md)
+- [LP-323: LSS-MPC Dynamic Resharing Extension](lp-323-lss-mpc-dynamic-resharing-extension.md)
 
 ### HSM Vendors
 - [Thales Luna Cloud HSM](https://cpl.thalesgroup.com/encryption/hardware-security-modules/cloud-hsms)

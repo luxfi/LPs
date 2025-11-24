@@ -15,7 +15,7 @@ activation:
   activationHeight: "0"
 ---
 
-> **See also**: [LP-4: Quantum-Resistant Cryptography Integration in Lux](./lp-4.md)
+> **See also**: [LP-4: Quantum-Resistant Cryptography Integration in Lux](./lp-4-quantum-resistant-cryptography-integration-in-lux.md)
 
 ## Abstract
 

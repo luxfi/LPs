@@ -12,9 +12,9 @@ deprecated: 2025-01-28
 superseded-by: 99
 ---
 
-> **See also**: [LP-0](./lp-0.md), [LP-11](./lp-11.md), [LP-12](./lp-12.md), [LP-13](./lp-13.md), [LP-99](./lp-99.md), [LP-INDEX](./LP-INDEX.md)
+> **See also**: [LP-0](./lp-0-network-architecture-and-community-framework.md), [LP-11](./lp-11-x-chain-exchange-chain-specification.md), [LP-12](./lp-12-c-chain-contract-chain-specification.md), [LP-13](./lp-13-m-chain-decentralised-mpc-custody-and-swap-signature-layer.md), [LP-99](./lp-99-q-chain-quantum-secure-consensus-protocol-family-quasar.md), [LP-INDEX](./LP-INDEX.md)
 
-> **⚠️ DEPRECATION NOTICE**: This LP has been deprecated in Lux 2.0. The P-Chain has been replaced by the Q-Chain (Quantum/Platform Chain) which provides all platform management functionality with quantum-secure consensus. See [LP-99](./lp-99.md) for the current specification.
+> **⚠️ DEPRECATION NOTICE**: This LP has been deprecated in Lux 2.0. The P-Chain has been replaced by the Q-Chain (Quantum/Platform Chain) which provides all platform management functionality with quantum-secure consensus. See [LP-99](./lp-99-q-chain-quantum-secure-consensus-protocol-family-quasar.md) for the current specification.
 
 ## Abstract
 

@@ -11,7 +11,7 @@ created: 2025-08-14
 requires: 14, 103
 ---
 
-> **See also**: [LP-14](./lp-14.md), [LP-103](./lp-103.md), [LP-INDEX](./LP-INDEX.md)
+> **See also**: [LP-14](./lp-14-m-chain-threshold-signatures-with-cgg21-uc-non-interactive-ecdsa.md), [LP-103](./lp-103-mpc-lss---multi-party-computation-linear-secret-sharing-with-dynamic-resharing.md), [LP-INDEX](./LP-INDEX.md)
 
 ## Abstract
 

@@ -11,7 +11,7 @@ created: 2025-01-23
 updated: 2025-01-28
 ---
 
-> **See also**: [LP-0](./lp-0.md), [LP-10](./lp-10.md), [LP-12](./lp-12.md), [LP-13](./lp-13.md), [LP-36](./lp-36.md), [LP-105](./lp-105.md), [LP-INDEX](./LP-INDEX.md)
+> **See also**: [LP-0](./lp-0-network-architecture-and-community-framework.md), [LP-10](./lp-10-p-chain-platform-chain-specification-deprecated.md), [LP-12](./lp-12-c-chain-contract-chain-specification.md), [LP-13](./lp-13-m-chain-decentralised-mpc-custody-and-swap-signature-layer.md), [LP-36](./lp-36-x-chain-order-book-dex-api-and-rpc-addendum.md), [LP-105](./lp-105-lamport-one-time-signatures-ots-for-lux-safe.md), [LP-INDEX](./LP-INDEX.md)
 
 ## Abstract
 

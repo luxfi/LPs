@@ -13,7 +13,7 @@ requires: 13
 
 ## Abstract
 
-This LP defines the overall Lux Bridge protocol using Multi-Party Computation/Threshold Signatures. This LP focuses on the cross-chain bridge processes themselves, abstracted from the specific M-Chain implementation described in [LP-13](./lp-13.md).
+This LP defines the overall Lux Bridge protocol using Multi-Party Computation/Threshold Signatures. This LP focuses on the cross-chain bridge processes themselves, abstracted from the specific M-Chain implementation described in [LP-13](./lp-13-m-chain-decentralised-mpc-custody-and-swap-signature-layer.md).
 
 ## Motivation
 

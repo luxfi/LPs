@@ -31,13 +31,13 @@ This LP formally adopts and rebrands the core Ethereum token standards as Lux Re
 
 | LRC Standard | Maps To  | LP Reference    |
 |-------------:|:--------:|:-----------------|
-| LRC-20           | ERC-20      | [LP-20](./lp-20.md)    |
-| LRC-20Burnable   | IERC20Burnable   | [LP-28](./lp-28.md)    |
-| LRC-20Mintable   | IERC20Mintable   | [LP-29](./lp-29.md)    |
-| LRC-20Bridgable  | IERC20Bridgable  | [LP-30](./lp-30.md)    |
-| LRC-721          | ERC-721     | [LP-721](./lp-721.md)  |
-| LRC-721Burnable  | IERC721Burnable  | [LP-31](./lp-31.md)    |
-| LRC-1155         | ERC-1155    | [LP-1155](./lp-1155.md)|
+| LRC-20           | ERC-20      | [LP-20](./lp-20-lrc-20-fungible-token-standard.md)    |
+| LRC-20Burnable   | IERC20Burnable   | [LP-28](./lp-28-lrc-20-burnable-token-extension.md)    |
+| LRC-20Mintable   | IERC20Mintable   | [LP-29](./lp-29-lrc-20-mintable-token-extension.md)    |
+| LRC-20Bridgable  | IERC20Bridgable  | [LP-30](./lp-30-lrc-20-bridgable-token-extension.md)    |
+| LRC-721          | ERC-721     | [LP-721](./lp-721-lrc-721-non-fungible-token-standard.md)  |
+| LRC-721Burnable  | IERC721Burnable  | [LP-31](./lp-31-lrc-721-burnable-token-extension.md)    |
+| LRC-1155         | ERC-1155    | [LP-1155](./lp-1155-lrc-1155-multi-token-standard.md)|
 
 ## Rationale
 

@@ -214,10 +214,9 @@ Thanks to Lux Protocol Team for integration testing and Y-Chain quantum coordina
 ## References
 
 - [ACP-181 Original Specification](https://github.com/avalanche-foundation/ACPs/tree/main/ACPs/181-p-chain-epoched-views)
-- [LP-600: Snowman Consensus](LP-600-snowman.md)
-- [LP-605: Validators](LP-605-validators.md)
-- [LP-001: ML-KEM (Post-Quantum)](LP-001-ML-KEM.md)
-- [LP-002: ML-DSA (Post-Quantum)](LP-002-ML-DSA.md)
+- [LP-605: Elastic Validator Subnets](lp-605-elastic-validator-subnets.md)
+- [LP-318: ML-KEM (Post-Quantum Key Encapsulation)](lp-318-ml-kem-post-quantum-key-encapsulation.md)
+- [LP-316: ML-DSA (Post-Quantum Digital Signatures)](lp-316-ml-dsa-post-quantum-digital-signatures.md)
 
 ## Copyright
 

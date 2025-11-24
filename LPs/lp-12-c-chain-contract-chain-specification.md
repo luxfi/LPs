@@ -10,7 +10,7 @@ category: Core
 created: 2025-01-23
 ---
 
-> **See also**: [LP-0](./lp-0.md), [LP-10](./lp-10.md), [LP-11](./lp-11.md), [LP-13](./lp-13.md), [LP-INDEX](./LP-INDEX.md)
+> **See also**: [LP-0](./lp-0-network-architecture-and-community-framework.md), [LP-10](./lp-10-p-chain-platform-chain-specification-deprecated.md), [LP-11](./lp-11-x-chain-exchange-chain-specification.md), [LP-13](./lp-13-m-chain-decentralised-mpc-custody-and-swap-signature-layer.md), [LP-INDEX](./LP-INDEX.md)
 
 ## Abstract
 

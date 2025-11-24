@@ -23,7 +23,7 @@ As the Lux ecosystem grows, developers need a centralized reference point to dis
 
 ### 1. Testing and Development Infrastructure
 
-#### [LP-6: Network Runner & Testing Framework](./lp-6.md)
+#### [LP-6: Network Runner & Testing Framework](./lp-6-network-runner-and-testing-framework.md)
 - **Status**: Draft
 - **Purpose**: Provides a standardized framework for running local Lux networks for development and testing
 - **Key Features**:
@@ -34,7 +34,7 @@ As the Lux ecosystem grows, developers need a centralized reference point to dis
 
 ### 2. Virtual Machine Development
 
-#### [LP-7: VM SDK Specification](./lp-7.md)
+#### [LP-7: VM SDK Specification](./lp-7-vm-sdk-specification.md)
 - **Status**: Draft
 - **Purpose**: Software Development Kit for creating custom Virtual Machines on Lux
 - **Key Features**:
@@ -45,7 +45,7 @@ As the Lux ecosystem grows, developers need a centralized reference point to dis
 
 ### 3. Plugin Architecture
 
-#### [LP-8: Plugin Architecture](./lp-8.md)
+#### [LP-8: Plugin Architecture](./lp-8-plugin-architecture.md)
 - **Status**: Draft
 - **Purpose**: Extensible plugin system for Lux nodes
 - **Key Features**:
@@ -56,7 +56,7 @@ As the Lux ecosystem grows, developers need a centralized reference point to dis
 
 ### 4. Command Line Interface
 
-#### [LP-9: CLI Tool Specification](./lp-9.md)
+#### [LP-9: CLI Tool Specification](./lp-9-cli-tool-specification.md)
 - **Status**: Draft
 - **Purpose**: Comprehensive command-line interface for Lux operations
 - **Key Features**:
@@ -70,14 +70,14 @@ As the Lux ecosystem grows, developers need a centralized reference point to dis
 ### For New Developers
 
 1. **Set Up Development Environment**
-   - Install the CLI tool ([LP-9](./lp-9.md))
-   - Set up Network Runner ([LP-6](./lp-6.md))
+   - Install the CLI tool ([LP-9](./lp-9-cli-tool-specification.md))
+   - Set up Network Runner ([LP-6](./lp-6-network-runner-and-testing-framework.md))
    - Configure your development environment
 
 2. **Choose Your Development Path**
    - **Building dApps**: Focus on existing chains (C-Chain, X-Chain)
-   - **Creating Custom VMs**: Study the VM SDK ([LP-7](./lp-7.md))
-   - **Extending Node Functionality**: Review Plugin Architecture ([LP-8](./lp-8.md))
+   - **Creating Custom VMs**: Study the VM SDK ([LP-7](./lp-7-vm-sdk-specification.md))
+   - **Extending Node Functionality**: Review Plugin Architecture ([LP-8](./lp-8-plugin-architecture.md))
 
 3. **Testing Your Application**
    - Use Network Runner for local testing
@@ -128,13 +128,13 @@ If you're building developer tools for the Lux ecosystem:
 ## Related Specifications
 
 ### Core Infrastructure
-- [LP-0: Lux Network Architecture](./lp-0.md)
-- [LP-1: Lux Consensus](./lp-1.md)
-- [LP-2: Lux Virtual Machine](./lp-2.md)
+- [LP-0: Lux Network Architecture](./lp-0-network-architecture-and-community-framework.md)
+- [LP-1: Lux Consensus](./lp-1-primary-chain-native-tokens-and-tokenomics.md)
+- [LP-2: Lux Virtual Machine](./lp-2-virtual-machine-and-execution-environment.md)
 
 ### Token Standards
-- [LP-20: LRC-20 Token Standard](./lp-20.md)
-- [LP-721: LRC-721 NFT Standard](./lp-721.md)
+- [LP-20: LRC-20 Token Standard](./lp-20-lrc-20-fungible-token-standard.md)
+- [LP-721: LRC-721 NFT Standard](./lp-721-lrc-721-non-fungible-token-standard.md)
 
 ## Implementation
 

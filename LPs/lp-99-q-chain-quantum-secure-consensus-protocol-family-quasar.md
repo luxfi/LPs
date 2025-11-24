@@ -772,8 +772,8 @@ The dual-certificate mechanism ensures that Q-Chain remains secure against both 
 3. Boneh et al., "BLS Signatures: Short Signatures from the Weil Pairing"
 4. Shor, P.W., "Polynomial-Time Algorithms for Prime Factorization and Discrete Logarithms on a Quantum Computer"
 5. NIST Post-Quantum Cryptography Standardization
-6. [LP-4: Quantum-Resistant Cryptography Integration](./lp-4.md)
-7. [LP-5: Quantum-Safe Wallets and Multisig](./lp-5.md)
+6. [LP-4: Quantum-Resistant Cryptography Integration](./lp-4-quantum-resistant-cryptography-integration-in-lux.md)
+7. [LP-5: Quantum-Safe Wallets and Multisig](./lp-5-quantum-safe-wallets-and-multisig-standard.md)
 8. Sui Network, "Fast Path Consensus for Low-Latency Blockchain Finality"
 9. Verkle Trees, "Efficient State Proofs for Blockchain Systems"
 

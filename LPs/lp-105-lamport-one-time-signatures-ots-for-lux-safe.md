@@ -11,7 +11,7 @@ created: 2025-01-28
 requires: 4, 5
 ---
 
-> **See also**: [LP-4: Quantum-Resistant Cryptography](./lp-4.md), [LP-5: Quantum-Safe Wallets](./lp-5.md), [LP-11: X-Chain Lamport OTS](./lp-11.md)
+> **See also**: [LP-4: Quantum-Resistant Cryptography](./lp-4-quantum-resistant-cryptography-integration-in-lux.md), [LP-5: Quantum-Safe Wallets](./lp-5-quantum-safe-wallets-and-multisig-standard.md), [LP-11: X-Chain Lamport OTS](./lp-11-x-chain-exchange-chain-specification.md)
 
 ## Abstract
 

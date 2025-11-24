@@ -483,9 +483,9 @@ function verifyP256(bytes32 hash, bytes32 r, bytes32 s, bytes32 x, bytes32 y)
 - [EIP-7212: secp256r1 Curve Support](https://eips.ethereum.org/EIPS/eip-7212)
 - [NIST FIPS 186-3: Digital Signature Standard](https://csrc.nist.gov/publications/detail/fips/186/3/archive/2009-06-25)
 - [WebAuthn Specification](https://www.w3.org/TR/webauthn/)
-- [LP-001: ML-KEM (Post-Quantum)](LP-001-ML-KEM.md)
-- [LP-002: ML-DSA (Post-Quantum)](LP-002-ML-DSA.md)
-- [LP-181: Epoching](LP-181-epoching.md)
+- [LP-318: ML-KEM (Post-Quantum Key Encapsulation)](lp-318-ml-kem-post-quantum-key-encapsulation.md)
+- [LP-316: ML-DSA (Post-Quantum Digital Signatures)](lp-316-ml-dsa-post-quantum-digital-signatures.md)
+- [LP-181: P-Chain Epoched Views](lp-181-epoching.md)
 
 ## Copyright
 

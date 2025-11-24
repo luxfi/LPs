@@ -10,7 +10,7 @@ category: Core
 created: 2025-07-23
 ---
 
-> **See also**: [LP-13](./lp-13.md), [LP-INDEX](./LP-INDEX.md)
+> **See also**: [LP-13](./lp-13-m-chain-decentralised-mpc-custody-and-swap-signature-layer.md), [LP-INDEX](./LP-INDEX.md)
 
 ## Abstract
 

@@ -664,9 +664,19 @@ Copyright and related rights waived via [CC0](https://creativecommons.org/public
 
 ## References
 
+### Related Lux Proposals
+- [LP-200: Post-Quantum Cryptography Suite](lp-200-post-quantum-cryptography-suite-for-lux-network.md) - Parent specification
+- [LP-316: ML-DSA Post-Quantum Digital Signatures](lp-316-ml-dsa-post-quantum-digital-signatures.md) - Complementary signature scheme
+- [LP-317: SLH-DSA Stateless Hash-Based Digital Signatures](lp-317-slh-dsa-stateless-hash-based-digital-signatures.md) - Alternative signature scheme
+- [LP-201: Hybrid Classical-Quantum Transitions](lp-201-hybrid-classical-quantum-cryptography-transitions.md) - Migration strategy
+- [LP-202: Cryptographic Agility Framework](lp-202-cryptographic-agility-framework.md) - Algorithm flexibility
+
+### Standards and Specifications
 1. **FIPS 203**: [Module-Lattice-Based Key-Encapsulation Mechanism Standard](https://csrc.nist.gov/pubs/fips/203/final)
 2. **CRYSTALS-Kyber**: [Specification v3.02](https://pq-crystals.org/kyber/)
 3. **CIRCL Library**: [Cloudflare Cryptographic Library](https://github.com/cloudflare/circl)
+
+### Implementation Files
 4. **Implementation**: `/Users/z/work/lux/crypto/mlkem/`
 5. **Precompile**: `/Users/z/work/lux/evm/precompile/contracts/mlkem/`
 
