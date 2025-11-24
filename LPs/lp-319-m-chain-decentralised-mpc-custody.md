@@ -1,5 +1,5 @@
 ---
-lp: 4-r2
+lp: 319
 title: M-Chain – Decentralised MPC Custody & Swap-Signature Layer
 description: Purpose-built subnet providing threshold-signature custody, on-chain swap-signature proofs, slashing and reward logic, and light-client proofs for bridge operations.
 author: Lux Protocol Team (@luxdefi)

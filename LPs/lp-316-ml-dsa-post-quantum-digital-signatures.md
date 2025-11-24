@@ -1,5 +1,5 @@
 ---
-lp: 311
+lp: 316
 title: ML-DSA Post-Quantum Digital Signatures
 status: Final
 type: Standards Track
@@ -7,7 +7,7 @@ category: Core
 created: 2025-11-22
 ---
 
-# LP-311: ML-DSA Post-Quantum Digital Signatures
+# LP-316: ML-DSA Post-Quantum Digital Signatures
 
 **Status**: Final
 **Type**: Standards Track

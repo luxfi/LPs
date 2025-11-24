@@ -1,5 +1,5 @@
 ---
-lp: 313
+lp: 318
 title: ML-KEM Post-Quantum Key Encapsulation
 status: Final
 type: Standards Track
@@ -7,7 +7,7 @@ category: Core
 created: 2025-11-22
 ---
 
-# LP-313: ML-KEM Post-Quantum Key Encapsulation
+# LP-318: ML-KEM Post-Quantum Key Encapsulation
 
 **Status**: Final
 **Type**: Standards Track

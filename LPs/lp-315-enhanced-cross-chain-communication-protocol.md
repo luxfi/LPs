@@ -1,13 +1,13 @@
 ---
-lp: 226
+lp: 315
 title: Enhanced Cross-Chain Communication Protocol
-status: Placeholder implementation
+status: Draft
 type: Standards Track
 category: Core
 created: 2025-11-22
 ---
 
-# LP-226: Enhanced Cross-Chain Communication Protocol
+# LP-315: Enhanced Cross-Chain Communication Protocol
 
 ## Status
 **Draft** - Initial implementation added to node

@@ -1,8 +1,8 @@
 ---
 lp: 226
 title: Dynamic Minimum Block Times (Granite Upgrade)
-status: | Adopted (Granite Upgrade) |
-type: `uint64`
+status: Final
+type: Standards Track
 category: Core
 created: 2025-11-22
 ---

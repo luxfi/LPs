@@ -1,7 +1,7 @@
 ---
 lp: 181
 title: Epoching and Validator Rotation
-status: | Adopted (Granite Upgrade) |
+status: Final
 type: Standards Track
 category: Core
 created: 2025-11-22

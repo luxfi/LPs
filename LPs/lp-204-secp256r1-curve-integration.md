@@ -1,7 +1,7 @@
 ---
 lp: 204
 title: secp256r1 Curve Integration
-status: | Adopted (Granite Upgrade) |
+status: Final
 type: Standards Track
 category: Core
 created: 2025-11-22

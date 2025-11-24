@@ -1,5 +1,5 @@
 ---
-lp: 176
+lp: 320
 title: Dynamic EVM Gas Limit and Price Discovery Updates
 description: Dynamic gas limit adjustments and EIP-1559 fee mechanism for Lux C-Chain
 author: Lux Core Team (@luxfi)
@@ -9,6 +9,7 @@ type: Standards Track
 category: Core
 created: 2024-10-15
 updated: 2024-11-20
+replaces: 176
 activation:
   flag: lp176-dynamic-gas
   hfName: "Granite"

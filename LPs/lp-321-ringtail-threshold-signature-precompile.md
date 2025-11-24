@@ -1,5 +1,5 @@
 ---
-lp: 320
+lp: 321
 title: Ringtail Threshold Signature Precompile
 description: Native precompile for lattice-based (LWE) post-quantum threshold signatures
 author: Lux Core Team (@luxfi)

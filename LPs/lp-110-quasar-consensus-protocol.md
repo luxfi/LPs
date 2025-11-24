@@ -1,6 +1,6 @@
 ---
 lp: 110
-title: quasar consensus protocol
+title: Quasar Consensus Protocol
 description: Quantum-finality consensus with 2-round BLS+Lattice signatures for sub-second finality
 author: Lux Network Team (@luxdefi)
 discussions-to: https://github.com/luxfi/lps/discussions

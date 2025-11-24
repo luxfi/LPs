@@ -178,10 +178,10 @@ fi
 # Check LP number format
 echo -n "Checking LP number format... "
 FILENAME=$(basename "$LP_FILE")
-if [[ $FILENAME =~ ^lp-[0-9]+\.md$ ]] || [[ $FILENAME =~ ^lp-[0-9]+-r[0-9]+\.md$ ]] || [[ $FILENAME == "lp-draft.md" ]]; then
+if [[ $FILENAME =~ ^lp-[0-9]+(-[a-z0-9-]+)?\.md$ ]] || [[ $FILENAME =~ ^lp-[0-9]+-r[0-9]+\.md$ ]] || [[ $FILENAME == "lp-draft.md" ]]; then
     print_success "Valid"
 else
-    print_error "Invalid filename format. Should be 'lp-N.md', 'lp-N-rM.md', or 'lp-draft.md'"
+    print_error "Invalid filename format. Should be 'lp-N.md', 'lp-N-descriptive-title.md', 'lp-N-rM.md', or 'lp-draft.md'"
     ((ERRORS++))
 fi
 
