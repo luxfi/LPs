@@ -246,7 +246,95 @@ For systems currently using static threshold schemes:
 3. Gradually rotate out old system
 4. Enable dynamic features once stable
 
-## Test Coverage and Validation
+## Test Cases
+
+### Unit Tests
+
+```go
+func TestDistributedKeyGeneration(t *testing.T) {
+    // Test DKG with 3-of-5 threshold
+    parties := []party.ID{"p1", "p2", "p3", "p4", "p5"}
+    threshold := 3
+
+    configs, err := lss.RunDKG(parties, threshold)
+    require.NoError(t, err)
+    require.Len(t, configs, 5)
+
+    // Verify all parties have same public key
+    pubKey := configs[0].VerificationKey
+    for _, cfg := range configs {
+        require.True(t, cfg.VerificationKey.Equal(pubKey))
+    }
+}
+
+func TestThresholdSigning(t *testing.T) {
+    // Generate keys for 3-of-5
+    configs := setupTestConfigs(t, 5, 3)
+    message := []byte("test message")
+
+    // Sign with exactly threshold parties
+    signers := configs[:3]
+    sig, err := lss.Sign(signers, message)
+    require.NoError(t, err)
+
+    // Verify signature
+    valid := lss.Verify(configs[0].VerificationKey, message, sig)
+    require.True(t, valid)
+}
+
+func TestDynamicResharing(t *testing.T) {
+    // Initial 3-of-5
+    oldConfigs := setupTestConfigs(t, 5, 3)
+    pubKey := oldConfigs[0].VerificationKey
+
+    // Reshare to new 4-of-7
+    newParties := []party.ID{"n1", "n2", "n3", "n4", "n5", "n6", "n7"}
+    newConfigs, err := lss.Reshare(oldConfigs[:3], newParties, 4)
+    require.NoError(t, err)
+
+    // Verify public key unchanged
+    require.True(t, newConfigs[0].VerificationKey.Equal(pubKey))
+
+    // Verify new threshold works
+    message := []byte("after reshare")
+    sig, err := lss.Sign(newConfigs[:4], message)
+    require.NoError(t, err)
+    require.True(t, lss.Verify(pubKey, message, sig))
+}
+
+func TestShareVerification(t *testing.T) {
+    // Test Feldman VSS verification
+    configs := setupTestConfigs(t, 5, 3)
+
+    for _, cfg := range configs {
+        valid := lss.VerifyShare(cfg)
+        require.True(t, valid, "share verification failed for %s", cfg.ID)
+    }
+}
+
+func TestByzantineResilience(t *testing.T) {
+    // Test with malicious parties providing invalid shares
+    configs := setupTestConfigs(t, 5, 3)
+
+    // Corrupt one party's share
+    configs[0].SecretKeyShare = curve.NewScalar().Random()
+
+    // Signing should fail with identifiable abort
+    _, err := lss.Sign(configs[:3], []byte("test"))
+    require.Error(t, err)
+    require.Contains(t, err.Error(), "invalid share")
+}
+```
+
+### Integration Tests
+
+1. **End-to-End DKG Flow**: Full distributed key generation with network simulation
+2. **Cross-Protocol Verification**: LSS signatures verified by external Schnorr implementations
+3. **Resharing Migration**: Complete validator set rotation with zero downtime
+4. **Concurrent Operations**: Multiple signing sessions with same key
+5. **Network Partition Recovery**: Handling temporary disconnections during protocol
+
+### Test Coverage Summary
 
 Our implementation achieves:
 - **100% test coverage** with zero skipped tests
