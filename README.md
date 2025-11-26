@@ -63,17 +63,8 @@ By using LPs, the Lux community can coordinate development in a decentralized ma
 | [LP-40](./LPs/lp-40.md) | Wallet Standards | Lux Network Team | Standards Track | Interface | Draft |
 | [LP-42](./LPs/lp-42.md) | Multi-Signature Wallet Standard | Lux Network Team | Standards Track | LRC | Draft |
 | [LP-45](./LPs/lp-45.md) | Z-Chain Encrypted Execution Layer Interface | Zach Kelling and Lux Team | Standards Track | Interface | Draft |
-| [LP-50](./LPs/lp-50.md) | Developer Tools Overview | Lux Network Team | Meta |  | Draft |
-| [LP-60](./LPs/lp-60.md) | DeFi Protocols Overview | Lux Network Team | Meta |  | Draft |
-| [LP-61](./LPs/lp-61.md) | Automated Market Maker (AMM) Standard | Lux Network Team | Standards Track | LRC | Draft |
-| [LP-62](./LPs/lp-62.md) | Yield Farming Protocol Standard | Lux Network Team | Standards Track | LRC | Draft |
-| [LP-63](./LPs/lp-63.md) | NFT Marketplace Protocol Standard | Lux Network Team | Standards Track | LRC | Draft |
-| [LP-64](./LPs/lp-64.md) | Tokenized Vault Standard (LRC-4626) | Lux Network Team | Standards Track | LRC | Draft |
-| [LP-65](./LPs/lp-65.md) | Multi-Token Standard (LRC-6909) | Lux Network Team | Standards Track | LRC | Draft |
-| [LP-66](./LPs/lp-66.md) | Oracle Integration Standard via Z-Chain | Lux Network Team | Standards Track | Core | Draft |
-| [LP-67](./LPs/lp-67.md) | Asynchronous Vault Standard (LRC-7540) | Lux Network Team | Standards Track | LRC | Draft |
-| [LP-68](./LPs/lp-68.md) | Bonding Curve AMM Standard | Lux Network Team | Standards Track | LRC | Draft |
-| [LP-69](./LPs/lp-69.md) | Drop Distribution Standard | Lux Network Team | Standards Track | LRC | Draft |
+| [LP-50](./LPs/lp-50.md) | Developer Tools Overview | Lux Network Team | Meta | None | Draft |
+| [LP-60](./LPs/lp-60.md) | DeFi Protocols Overview | Lux Network Team | Meta | None | Draft |
 | [LP-70](./LPs/lp-70.md) | NFT Staking Standard | Lux Network Team | Standards Track | LRC | Draft |
 | [LP-71](./LPs/lp-71.md) | Media Content NFT Standard | Lux Network Team | Standards Track | LRC | Draft |
 | [LP-72](./LPs/lp-72.md) | Bridged Asset Standard | Lux Network Team | Standards Track | LRC | Draft |
@@ -84,7 +75,7 @@ By using LPs, the Lux community can coordinate development in a decentralized ma
 | [LP-80](./LPs/lp-80.md) | A-Chain (Attestation Chain) Specification | Lux Network Team | Standards Track | Core | Draft |
 | [LP-81](./LPs/lp-81.md) | B-Chain (Bridge Chain) Specification | Lux Network Team | Standards Track | Core | Draft |
 | [LP-85](./LPs/lp-85.md) | Security Audit Framework | Lux Network Team | Standards Track | Meta | Draft |
-| [LP-90](./LPs/lp-90.md) | Research Papers Index | Lux Network Team | Meta |  | Draft |
+| [LP-90](./LPs/lp-90.md) | Research Papers Index | Lux Network Team | Meta | None | Draft |
 | [LP-91](./LPs/lp-91.md) | Payment Processing Research | Lux Network Team | Informational | - | Draft |
 | [LP-92](./LPs/lp-92.md) | Cross-Chain Messaging Research | Lux Network Team | Informational | - | Draft |
 | [LP-93](./LPs/lp-93.md) | Decentralized Identity Research | Lux Network Team | Informational | - | Draft |
@@ -101,6 +92,54 @@ By using LPs, the Lux community can coordinate development in a decentralized ma
 | [LP-104](./LPs/lp-104.md) | FROST - Flexible Round-Optimized Schnorr Thresh... | Lux Industries Inc. | Standards Track | Core | Draft |
 | [LP-105](./LPs/lp-105.md) | Lamport One-Time Signatures (OTS) for Lux Safe | Lux Network Team | Standards Track | Core | Draft |
 | [LP-106](./LPs/lp-106.md) | LLM Gateway Integration with Hanzo AI | Lux Team, Hanzo Team | Standards Track | Interface | Draft |
+| [LP-110](./LPs/lp-110.md) | Quasar Consensus Protocol | Lux Network Team | Standards Track | Core | Draft |
+| [LP-111](./LPs/lp-111.md) | photon consensus selection | Lux Network Team | Standards Track | Core | Draft |
+| [LP-112](./LPs/lp-112.md) | flare dag finalization protocol | Lux Network Team | Standards Track | Core | Draft |
+| [LP-118](./LPs/lp-118.md) | Subnet-EVM Compatibility Layer | Lux Network Team | Standards Track | Interface | Final |
+| [LP-176](./LPs/lp-176.md) | Dynamic Gas Pricing Mechanism | Lux Network Team | Standards Track | Core | Final |
+| [LP-181](./LPs/lp-181.md) | Epoching and Validator Rotation | Lux Protocol Team, Cam Schultz | Standards Track | Core | Final |
+| [LP-200](./LPs/lp-200.md) | Post-Quantum Cryptography Suite for Lux Network | Lux Industries Inc | Standards Track | Core | Draft |
+| [LP-201](./LPs/lp-201.md) | Hybrid Classical-Quantum Cryptography Transitions | Lux Industries Inc | Standards Track | Core | Draft |
+| [LP-202](./LPs/lp-202.md) | Cryptographic Agility Framework | Lux Industries Inc | Standards Track | Core | Draft |
+| [LP-204](./LPs/lp-204.md) | secp256r1 Curve Integration | Lux Protocol Team, Santiago Cammi, Arran Schlosberg | Standards Track | Core | Final |
+| [LP-226](./LPs/lp-226.md) | Dynamic Minimum Block Times (Granite Upgrade) | Lux Protocol Team, Stephen Buttolph, Michael Kaplan | Standards Track | Core | Final |
+| [LP-301](./LPs/lp-301.md) | Lux B-Chain - Cross-Chain Bridge Protocol | Lux Partners | Standards Track | Core | Final |
+| [LP-302](./LPs/lp-302.md) | Lux Z/A-Chain - Privacy & AI Attestation Layer | Lux Partners | Standards Track | Core | Final |
+| [LP-303](./LPs/lp-303.md) | Lux Q-Security - Post-Quantum P-Chain Integration | Lux Partners | Standards Track | Core | Final |
+| [LP-311](./LPs/lp-311.md) | ML-DSA Signature Verification Precompile | Lux Core Team | Standards Track | Core | Draft |
+| [LP-312](./LPs/lp-312.md) | SLH-DSA Signature Verification Precompile | Lux Core Team | Standards Track | Core | Draft |
+| [LP-313](./LPs/lp-313.md) | Warp Messaging Precompile | Lux Core Team | Standards Track | Core | Draft |
+| [LP-314](./LPs/lp-314.md) | Fee Manager Precompile | Lux Core Team | Standards Track | Core | Draft |
+| [LP-315](./LPs/lp-315.md) | Enhanced Cross-Chain Communication Protocol | Lux Core Team | Standards Track | Core | Draft |
+| [LP-316](./LPs/lp-316.md) | ML-DSA Post-Quantum Digital Signatures | Lux Partners | Standards Track | Core | Final |
+| [LP-317](./LPs/lp-317.md) | SLH-DSA Stateless Hash-Based Digital Signatures | Lux Partners | Standards Track | Core | Final |
+| [LP-318](./LPs/lp-318.md) | ML-KEM Post-Quantum Key Encapsulation | Lux Partners | Standards Track | Core | Final |
+| [LP-319](./LPs/lp-319.md) | M-Chain – Decentralised MPC Custody & Swap-Sign... | Lux Protocol Team | Standards Track | Core | Superseded |
+| [LP-320](./LPs/lp-320.md) | Dynamic EVM Gas Limit and Price Discovery Updates | Lux Core Team | Standards Track | Core | Final |
+| [LP-321](./LPs/lp-321.md) | Ringtail Threshold Signature Precompile | Lux Core Team | Standards Track | Core | Draft |
+| [LP-321](./LPs/lp-321.md) | FROST Threshold Signature Precompile | Lux Core Team | Standards Track | Core | Draft |
+| [LP-322](./LPs/lp-322.md) | CGGMP21 Threshold ECDSA Precompile | Lux Core Team | Standards Track | Core | Draft |
+| [LP-323](./LPs/lp-323.md) | LSS-MPC Dynamic Resharing Extension | Lux Core Team | Standards Track | Core | Draft |
+| [LP-325](./LPs/lp-325.md) | Lux KMS Hardware Security Module Integration | Lux Core Team | Standards Track | Core | Draft |
+| [LP-326](./LPs/lp-326.md) | Blockchain Regenesis and State Migration | Lux Core Team | Standards Track | Core | Draft |
+| [LP-327](./LPs/lp-327.md) | BadgerDB + Verkle Tree Optimization Strategy | Lux Core Team | Standards Track | Core | Final |
+| [LP-400](./LPs/lp-400.md) | Automated Market Maker Protocol with Privacy | Lux Network Team | Standards Track | LRC | Draft |
+| [LP-401](./LPs/lp-401.md) | Confidential Lending Protocol | Lux Network Team | Standards Track | LRC | Draft |
+| [LP-402](./LPs/lp-402.md) | Zero-Knowledge Swap Protocol | Lux Network Team | Standards Track | LRC | Draft |
+| [LP-403](./LPs/lp-403.md) | Private Staking Mechanisms | Lux Network Team | Standards Track | LRC | Draft |
+| [LP-500](./LPs/lp-500.md) | Layer 2 Rollup Framework | Lux Network Team, Hanzo AI, Zoo Protocol | Standards Track | Core | Draft |
+| [LP-501](./LPs/lp-501.md) | Data Availability Layer | Lux Network Team, Hanzo AI, Zoo Protocol | Standards Track | Core | Draft |
+| [LP-502](./LPs/lp-502.md) | Fraud Proof System | Lux Network Team, Hanzo AI, Zoo Protocol | Standards Track | Core | Draft |
+| [LP-503](./LPs/lp-503.md) | Validity Proof System | Lux Network Team, Hanzo AI, Zoo Protocol | Standards Track | Core | Draft |
+| [LP-504](./LPs/lp-504.md) | Sequencer Registry Protocol | Lux Network Team, Hanzo AI, Zoo Protocol | Standards Track | Core | Draft |
+| [LP-505](./LPs/lp-505.md) | L2 Block Format Specification | Lux Network Team, Hanzo AI, Zoo Protocol | Standards Track | Core | Draft |
+| [LP-601](./LPs/lp-601.md) | Dynamic Gas Fee Mechanism with AI Compute Pricing | Lux Core Team | Standards Track | Core | Draft |
+| [LP-602](./LPs/lp-602.md) | Warp Cross-Chain Messaging Protocol | Lux Core Team | Standards Track | Networking | Draft |
+| [LP-603](./LPs/lp-603.md) | Verkle Trees for Efficient State Management | Lux Core Team | Standards Track | Core | Draft |
+| [LP-604](./LPs/lp-604.md) | State Sync and Pruning Protocol | Lux Core Team | Standards Track | Core | Draft |
+| [LP-605](./LPs/lp-605.md) | Elastic Validator Subnets | Lux Core Team | Standards Track | Core | Draft |
+| [LP-607](./LPs/lp-607.md) | GPU Acceleration Framework | Lux Core Team | Standards Track | Core | Draft |
+| [LP-608](./LPs/lp-608.md) | High-Performance Decentralized Exchange Protocol | Lux Core Team | Standards Track | LRC | Draft |
 | [LP-721](./LPs/lp-721.md) | LRC-721 Non-Fungible Token Standard | Lux Network Team | Standards Track | LRC | Final |
 | [LP-1155](./LPs/lp-1155.md) | LRC-1155 Multi-Token Standard | Lux Network Team | Standards Track | LRC | Final |
 
@@ -116,19 +155,16 @@ By using LPs, the Lux community can coordinate development in a decentralized ma
 | LRC-20 | [LP-30](./LPs/lp-30.md) | LRC-20 Bridgable Token Extension | Draft |
 | LRC-721 | [LP-31](./LPs/lp-31.md) | LRC-721 Burnable Token Extension | Draft |
 | LRC-42 | [LP-42](./LPs/lp-42.md) | Multi-Signature Wallet Standard | Draft |
-| LRC-61 | [LP-61](./LPs/lp-61.md) | Automated Market Maker (AMM) Standard | Draft |
-| LRC-62 | [LP-62](./LPs/lp-62.md) | Yield Farming Protocol Standard | Draft |
-| LRC-63 | [LP-63](./LPs/lp-63.md) | NFT Marketplace Protocol Standard | Draft |
-| LRC-4626 | [LP-64](./LPs/lp-64.md) | Tokenized Vault Standard (LRC-4626) | Draft |
-| LRC-6909 | [LP-65](./LPs/lp-65.md) | Multi-Token Standard (LRC-6909) | Draft |
-| LRC-7540 | [LP-67](./LPs/lp-67.md) | Asynchronous Vault Standard (LRC-7540) | Draft |
-| LRC-68 | [LP-68](./LPs/lp-68.md) | Bonding Curve AMM Standard | Draft |
-| LRC-69 | [LP-69](./LPs/lp-69.md) | Drop Distribution Standard | Draft |
 | LRC-70 | [LP-70](./LPs/lp-70.md) | NFT Staking Standard | Draft |
 | LRC-71 | [LP-71](./LPs/lp-71.md) | Media Content NFT Standard | Draft |
 | LRC-72 | [LP-72](./LPs/lp-72.md) | Bridged Asset Standard | Draft |
 | LRC-73 | [LP-73](./LPs/lp-73.md) | Batch Execution Standard (Multicall) | Draft |
 | LRC-74 | [LP-74](./LPs/lp-74.md) | CREATE2 Factory Standard | Draft |
+| LRC-400 | [LP-400](./LPs/lp-400.md) | Automated Market Maker Protocol with Privacy | Draft |
+| LRC-401 | [LP-401](./LPs/lp-401.md) | Confidential Lending Protocol | Draft |
+| LRC-402 | [LP-402](./LPs/lp-402.md) | Zero-Knowledge Swap Protocol | Draft |
+| LRC-403 | [LP-403](./LPs/lp-403.md) | Private Staking Mechanisms | Draft |
+| LRC-608 | [LP-608](./LPs/lp-608.md) | High-Performance Decentralized Exchange Protocol | Draft |
 | LRC-721 | [LP-721](./LPs/lp-721.md) | LRC-721 Non-Fungible Token Standard | Final |
 | LRC-1155 | [LP-1155](./LPs/lp-1155.md) | LRC-1155 Multi-Token Standard | Final |
 

@@ -50,8 +50,8 @@ def get_all_lps(directory='LPs'):
             frontmatter = extract_frontmatter(filepath)
             
             if frontmatter:
-                # Extract LP number from filename
-                match = re.search(r'lp-(\d+)\.md', filename)
+                # Extract LP number from filename (supports lp-N.md and lp-N-title.md formats)
+                match = re.search(r'lp-(\d+)(?:-[a-z0-9-]+)?\.md', filename)
                 if match:
                     lp_number = int(match.group(1))
                     frontmatter['number'] = lp_number
@@ -75,7 +75,7 @@ def categorize_lps(lps):
     
     for lp in lps:
         lp_type = lp.get('type', '').lower()
-        category = lp.get('category', '').lower()
+        category = (lp.get('category') or '').lower()
         
         if lp_type == 'meta':
             categories['meta'].append(lp)
@@ -128,7 +128,7 @@ def generate_index_section():
         output.append(format_table_row(lp))
     
     # LRC-specific table
-    lrcs = [lp for lp in lps if lp.get('category', '').lower() == 'lrc']
+    lrcs = [lp for lp in lps if (lp.get('category') or '').lower() == 'lrc']
     if lrcs:
         output.append("\n### Notable LRCs (Application Standards)\n")
         output.append("| LRC Number | LP | Title | Status |")
