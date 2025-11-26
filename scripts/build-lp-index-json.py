@@ -36,7 +36,7 @@ def collect_lps():
     for name in os.listdir(LP_DIR):
         if not name.startswith('lp-') or not name.endswith('.md'):
             continue
-        m = re.match(r"lp-(\d+)\.md", name)
+        m = re.match(r"lp-(\d+)(?:-[a-z0-9-]+)?\.md", name)
         if not m:
             continue
         number = int(m.group(1))
