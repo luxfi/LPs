@@ -1,7 +1,10 @@
 ---
 lp: 118
 title: Subnet-EVM Compatibility Layer
-status: Implemented
+description: Provides compatibility layer for legacy Avalanche Subnet-EVM chains migrating to Lux Network
+author: Lux Network Team (@luxdefi)
+discussions-to: https://github.com/luxfi/lps/discussions
+status: Final
 type: Standards Track
 category: Interface
 created: 2025-01-15
@@ -9,7 +12,7 @@ created: 2025-01-15
 
 # LP-118: Subnet-EVM Compatibility Layer
 
-**Status**: Implemented
+**Status**: Final
 **Type**: Standards Track
 **Category**: Interface
 **Created**: 2025-01-15
@@ -71,6 +74,27 @@ When `LP118Timestamp` is set:
 - LP-118 compatibility can be deprecated
 - Full Lux native features enabled
 - Legacy format support optional
+
+## Rationale
+
+### Design Decisions
+
+**1. Opt-in Compatibility**: Rather than forcing all chains to support legacy formats, LP-118 is activated per-chain via `LP118Timestamp`. This keeps the core protocol clean while enabling migration.
+
+**2. Phased Migration**: The three-phase approach allows for gradual transition without network disruption:
+- Phase 1 enables validation without risk (read-only)
+- Phase 2 enables full operation with both formats
+- Phase 3 allows clean deprecation when ready
+
+**3. Precompile Mapping**: Direct address mapping ensures existing contracts work without modification. Enhanced precompiles in Lux (like Warp) maintain backward compatibility while offering new features.
+
+**4. Transaction Format Detection**: The format detection order (Subnet-EVM first, then Lux) ensures legacy transactions are always correctly parsed while allowing native transactions.
+
+### Alternatives Considered
+
+- **Full Emulation**: Rejected due to complexity and performance overhead
+- **One-Time Migration**: Rejected due to risk of data loss and downtime
+- **Parallel Networks**: Rejected due to liquidity fragmentation
 
 ## Implementation
 
@@ -136,7 +160,7 @@ func (b *SubnetEVMBlock) ToLuxBlock() *LuxBlock {
 }
 ```
 
-## Testing
+## Test Cases
 
 ### Compatibility Tests
 
@@ -157,6 +181,77 @@ Scenarios:
 3. **Mixed Transactions**: Process both formats in same block
 4. **Precompile Calls**: Verify identical behavior
 5. **State Continuity**: Ensure no state divergence
+
+### Unit Tests
+
+```go
+// Test: Transaction format detection
+func TestTransactionFormatDetection(t *testing.T) {
+    // Subnet-EVM format transaction
+    subnetTx := createSubnetEVMTx()
+    tx, err := parseTransaction(subnetTx.Bytes(), true)
+    require.NoError(t, err)
+    require.Equal(t, subnetTx.Hash(), tx.Hash())
+
+    // Lux native format transaction
+    luxTx := createLuxTx()
+    tx, err = parseTransaction(luxTx.Bytes(), true)
+    require.NoError(t, err)
+    require.Equal(t, luxTx.Hash(), tx.Hash())
+}
+
+// Test: Precompile compatibility
+func TestPrecompileMapping(t *testing.T) {
+    addresses := []common.Address{
+        common.HexToAddress("0x0200000000000000000000000000000000000000"),
+        common.HexToAddress("0x0200000000000000000000000000000000000001"),
+        common.HexToAddress("0x0200000000000000000000000000000000000005"),
+    }
+
+    for _, addr := range addresses {
+        // Verify precompile exists
+        precompile := GetPrecompile(addr)
+        require.NotNil(t, precompile)
+
+        // Verify behavior matches Subnet-EVM
+        result, err := precompile.Run(testInput)
+        require.NoError(t, err)
+        require.Equal(t, expectedSubnetEVMResult, result)
+    }
+}
+
+// Test: Block format translation
+func TestBlockTranslation(t *testing.T) {
+    subnetBlock := loadSubnetEVMBlock(t, "testdata/subnet_block.json")
+    luxBlock := subnetBlock.ToLuxBlock()
+
+    // Verify state root matches
+    require.Equal(t, subnetBlock.Root(), luxBlock.Root())
+
+    // Verify transaction count matches
+    require.Equal(t, len(subnetBlock.Transactions), len(luxBlock.Transactions))
+
+    // Verify deterministic translation
+    luxBlock2 := subnetBlock.ToLuxBlock()
+    require.Equal(t, luxBlock.Hash(), luxBlock2.Hash())
+}
+
+// Test: LP-118 activation
+func TestLP118Activation(t *testing.T) {
+    config := &ChainConfig{
+        LP118Timestamp: ptr(uint64(1000)),
+    }
+
+    // Before activation
+    require.False(t, config.IsLP118Active(999))
+
+    // At activation
+    require.True(t, config.IsLP118Active(1000))
+
+    // After activation
+    require.True(t, config.IsLP118Active(1001))
+}
+```
 
 ## Security Considerations
 

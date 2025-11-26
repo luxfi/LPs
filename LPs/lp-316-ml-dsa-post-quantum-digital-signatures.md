@@ -1,10 +1,14 @@
 ---
 lp: 316
 title: ML-DSA Post-Quantum Digital Signatures
+description: NIST FIPS 204 ML-DSA (CRYSTALS-Dilithium) post-quantum digital signature implementation for Lux Network
+author: Lux Partners (@luxdefi)
+discussions-to: https://github.com/luxfi/lps/discussions
 status: Final
 type: Standards Track
 category: Core
 created: 2025-11-22
+requires: 303
 ---
 
 # LP-316: ML-DSA Post-Quantum Digital Signatures

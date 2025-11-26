@@ -120,6 +120,21 @@ Having both provides:
 3. **Use case optimization**: ML-DSA for speed, SLH-DSA for conservatism
 4. **Hybrid schemes**: Can require both for maximum security
 
+## Backwards Compatibility
+
+This LP introduces a new precompiled contract at a previously unused address. There are no backwards compatibility concerns:
+
+- **New functionality**: The precompile address `0x0200000000000000000000000000000000000007` has no prior use
+- **No state changes**: The precompile is stateless and read-only
+- **Optional adoption**: Contracts may choose to use SLH-DSA alongside existing signature schemes
+- **Activation**: Requires network upgrade (Quantum hard fork) for coordinated deployment
+
+### Migration Path
+
+1. **Phase 1**: Deploy precompile at activation height
+2. **Phase 2**: Contracts integrate SLH-DSA alongside ML-DSA (LP-311)
+3. **Phase 3**: Hybrid verification patterns adopted for critical applications
+
 ## Security Considerations
 
 ### Hash-Based Security

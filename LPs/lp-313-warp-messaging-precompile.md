@@ -81,6 +81,25 @@ See: `node/vms/platformvm/warp/`
 - Interface: `IWarp.sol` - Solidity interface and library
 - Gas Cost: BASE_COST (50,000) + SIGNER_COST (1,000 per validator)
 
+## Rationale
+
+### Design Decisions
+
+**1. BLS Signature Aggregation**: BLS signatures allow multiple validator signatures to be combined into a single aggregate signature, dramatically reducing on-chain verification costs. A single aggregate verification replaces N individual signature checks.
+
+**2. Epoch-Based Validator Sets**: Using epoched validator sets (LP-181) provides predictable verification targets. Validators know in advance which public keys to aggregate against, enabling efficient message signing without real-time P-Chain queries.
+
+**3. Weight Threshold**: The 67% stake weight threshold ensures Byzantine fault tolerance while allowing message finality with a supermajority. This matches Lux consensus assumptions.
+
+**4. Precompile vs. Native Opcode**: Implementing as a precompile rather than a new EVM opcode maintains compatibility with standard EVM tooling while enabling specialized BLS cryptography operations.
+
+### Alternatives Considered
+
+- **ECDSA Multi-sig**: Rejected due to O(n) verification cost vs O(1) for BLS aggregation
+- **Relay-based bridges**: Rejected as requiring additional trust assumptions beyond validator set
+- **State proofs only**: Insufficient for general message passing; combined approach preferred
+- **Per-message threshold**: Fixed 67% chosen for simplicity and alignment with consensus
+
 ## Test Cases
 
 ### Test Vector 1: Valid Warp Message

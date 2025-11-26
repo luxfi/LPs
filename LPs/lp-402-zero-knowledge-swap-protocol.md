@@ -615,6 +615,21 @@ function testZKSwap() public {
 }
 ```
 
+## Backwards Compatibility
+
+This LP introduces a new ZK swap protocol compatible with existing infrastructure:
+
+- **Standard Swaps**: Non-private swaps continue to work through existing DEX contracts
+- **Token Standards**: Compatible with LRC-20/ERC-20 tokens via commitment scheme
+- **Aggregator Support**: ZK swaps can be routed through DEX aggregators
+- **Bridge Integration**: Cross-chain ZK swaps leverage existing bridge infrastructure
+
+**Migration Path**:
+1. Deploy ZK swap verifier contracts
+2. Create commitment pools for liquid token pairs
+3. Users deposit to commitment pools to enable private swaps
+4. Withdrawals reveal balances; transfers remain private
+
 ## Security Considerations
 
 ### Cryptographic Assumptions

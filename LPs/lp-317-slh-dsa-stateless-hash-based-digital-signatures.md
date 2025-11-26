@@ -1,10 +1,14 @@
 ---
 lp: 317
 title: SLH-DSA Stateless Hash-Based Digital Signatures
+description: NIST FIPS 205 SLH-DSA (SPHINCS+) stateless hash-based post-quantum digital signature implementation
+author: Lux Partners (@luxdefi)
+discussions-to: https://github.com/luxfi/lps/discussions
 status: Final
 type: Standards Track
 category: Core
 created: 2025-11-22
+requires: 303, 312
 ---
 
 # LP-317: SLH-DSA Stateless Hash-Based Digital Signatures

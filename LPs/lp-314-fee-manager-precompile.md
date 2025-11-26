@@ -93,6 +93,25 @@ See: `node/vms/evm/lp176/`
 - Write operations: 20,000 gas base + state changes
 - Parameter update validation: Included in write cost
 
+## Rationale
+
+### Design Decisions
+
+**1. Precompile vs. System Contract**: A precompile provides deterministic gas costs and cannot be modified or upgraded accidentally. Fee configuration is critical infrastructure that should not be vulnerable to contract bugs.
+
+**2. Role-Based Access Control**: The FeeManager role prevents unauthorized fee changes while allowing flexibility in governance structures. Chains can assign this role to multisigs, DAOs, or admin addresses as needed.
+
+**3. Parameter Validation**: On-chain validation ensures invalid fee configurations cannot be applied. This prevents denial-of-service through misconfiguration and maintains network stability.
+
+**4. Event Emission**: `FeeConfigChanged` events enable off-chain monitoring and indexing of fee parameter changes for transparency and analytics.
+
+### Alternatives Considered
+
+- **Governor-controlled**: Rejected as too slow for operational fee adjustments needed during network congestion
+- **Automatic EIP-1559**: Partially adopted; manual override capability retained for exceptional circumstances
+- **Per-transaction fee setting**: Rejected due to complexity and potential for abuse
+- **Immutable defaults**: Rejected as chains may need different parameters based on use case
+
 ## Test Cases
 
 ### Test Vector 1: Set Valid Fee Config

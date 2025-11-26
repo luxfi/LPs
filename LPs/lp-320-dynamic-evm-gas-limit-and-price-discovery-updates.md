@@ -51,6 +51,24 @@ Key components:
 - Gas target and capacity management
 - Excess gas tracking for EIP-1559 compatibility
 
+## Rationale
+
+### Design Decisions
+
+**1. EIP-1559 Compatibility**: Building on the proven EIP-1559 mechanism ensures compatibility with existing Ethereum tooling and user expectations for predictable fee estimation.
+
+**2. Dynamic Gas Limit**: Adaptive gas limits allow the network to handle varying load conditions without manual intervention, improving throughput during high demand.
+
+**3. Exponential Adjustment**: The exponential adjustment curve (from LP-176) provides smooth transitions while preventing rapid oscillations that could destabilize fee markets.
+
+**4. Per-Chain Configuration**: Each chain (C-Chain, subnets) can configure its own gas parameters based on specific performance requirements and use cases.
+
+### Alternatives Considered
+
+- **Fixed gas price**: Rejected as it cannot adapt to network conditions
+- **Linear adjustment**: Rejected due to potential for manipulation and slow response to congestion
+- **Off-chain fee oracles**: Rejected as they introduce trust assumptions and latency
+
 ## Backwards Compatibility
 Fully backwards compatible with existing EVM transactions while providing enhanced fee mechanisms for new transactions.
 

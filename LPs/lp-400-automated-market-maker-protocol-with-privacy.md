@@ -462,6 +462,22 @@ function testZKSwapProof() public {
 }
 ```
 
+## Backwards Compatibility
+
+This LP introduces a new protocol that can coexist with existing AMM implementations:
+
+- **Existing Pools**: Standard Uniswap/SushiSwap-style pools continue to operate unchanged
+- **Liquidity Migration**: LPs can choose to migrate liquidity to privacy-enabled pools
+- **Interface Compatibility**: Core swap interface remains compatible with existing DEX aggregators
+- **Token Standards**: Compatible with existing LRC-20 and ERC-20 tokens
+- **Router Integration**: Private AMM exposes standard `swap()` interface with additional privacy parameters
+
+**Migration Path**:
+1. Deploy PrivateAMM contracts alongside existing pools
+2. Create private pools for high-value pairs
+3. Update DEX aggregators to route through private pools when privacy is requested
+4. Existing integrations continue to work with public pools
+
 ## Security Considerations
 
 ### Cryptographic Assumptions

@@ -1,10 +1,14 @@
 ---
 lp: 226
 title: Dynamic Minimum Block Times (Granite Upgrade)
+description: Dynamic minimum block delay system enabling sub-second blocks and adaptive performance tuning
+author: Lux Protocol Team (@luxdefi), Stephen Buttolph, Michael Kaplan
+discussions-to: https://github.com/luxfi/lps/discussions
 status: Final
 type: Standards Track
 category: Core
 created: 2025-11-22
+requires: 12, 176
 ---
 
 # LP-226: Dynamic Minimum Block Times (Granite Upgrade)
@@ -158,6 +162,151 @@ The ProposerVM currently has a static `MinBlkDelay` (seconds). For EVM chains ad
 **Requirement**: Set ProposerVM `MinBlkDelay = 0`
 
 **Rationale**: LP-226 provides dynamic minimum delay, making ProposerVM's static delay redundant and potentially conflicting.
+
+## Rationale
+
+### Design Decisions
+
+**1. Exponential Formula**: Using $m = M \cdot e^{q/D}$ provides smooth, continuous adjustment of block timing. Linear formulas were rejected as they don't provide the fine-grained control needed at both high and low delay values.
+
+**2. Millisecond Timestamps**: Adding `timestampMilliseconds` while keeping `timestamp` (seconds) ensures backward compatibility with existing tooling while enabling sub-second precision.
+
+**3. Validator-Controlled Rate**: Allowing validators to gradually adjust timing through the $Q$ parameter ensures network stability. Instant changes were rejected as they could cause consensus issues.
+
+**4. Initial 2-Second Target**: Starting with current C-Chain timing ensures smooth activation, then allowing gradual optimization as validators gain confidence.
+
+### Alternatives Considered
+
+- **Per-Block Configurable Delay**: Rejected due to potential for abuse and consensus complexity
+- **Time-Weighted Average**: Rejected as it adds latency to adjustments
+- **Fixed Sub-Second Timing**: Rejected as different network conditions require different optima
+- **Block-Height-Based Timing**: Rejected as it doesn't adapt to network conditions
+
+### Parameter Selection
+
+The choice of $M=100ms$, $D=2^{20}$, and $Q=200$ provides:
+- Minimum possible block time: 100ms (10 blocks/second max)
+- Current target: ~2 seconds
+- Full range traversal: ~3,600 blocks per doubling/halving
+- Stability: No sudden jumps in block timing
+
+## Test Cases
+
+### Unit Tests
+
+```go
+// Test: Minimum block delay calculation
+func TestCalculateMinimumBlockDelay(t *testing.T) {
+    cases := []struct {
+        name     string
+        excess   uint64
+        expected uint64
+    }{
+        {"at minimum", 0, 100},                     // m = 100 * e^0 = 100ms
+        {"initial C-Chain", 3141253, 2000},         // ~2 seconds
+        {"half initial", 2414216, 1000},            // ~1 second
+        {"near max", 6282506, 4000},                // ~4 seconds
+    }
+
+    for _, tc := range cases {
+        t.Run(tc.name, func(t *testing.T) {
+            delay := CalculateMinimumBlockDelay(tc.excess)
+            require.InDelta(t, tc.expected, delay, 50) // Allow 50ms tolerance
+        })
+    }
+}
+
+// Test: Excess update with max change limit
+func TestUpdateExcess(t *testing.T) {
+    maxChange := uint64(200)
+
+    // Test increase toward target
+    current := uint64(1000)
+    desired := uint64(1500)
+    result := UpdateExcess(current, desired, maxChange)
+    require.Equal(t, uint64(1200), result) // +200
+
+    // Test decrease toward target
+    current = uint64(1500)
+    desired = uint64(1000)
+    result = UpdateExcess(current, desired, maxChange)
+    require.Equal(t, uint64(1300), result) // -200
+
+    // Test small change (less than max)
+    current = uint64(1000)
+    desired = uint64(1050)
+    result = UpdateExcess(current, desired, maxChange)
+    require.Equal(t, uint64(1050), result) // +50
+}
+
+// Test: Block timing validation
+func TestBlockTimingValidation(t *testing.T) {
+    parent := &Block{
+        TimestampMilliseconds: 1000000,
+        MinimumBlockDelay:     500,
+    }
+
+    // Valid: respects minimum delay
+    validBlock := &Block{
+        TimestampMilliseconds: 1000500, // exactly at minimum
+    }
+    err := VerifyBlockTiming(validBlock, parent)
+    require.NoError(t, err)
+
+    // Invalid: too early
+    earlyBlock := &Block{
+        TimestampMilliseconds: 1000400, // 100ms too early
+    }
+    err = VerifyBlockTiming(earlyBlock, parent)
+    require.Error(t, err)
+}
+
+// Test: Timestamp alignment
+func TestTimestampAlignment(t *testing.T) {
+    // Valid alignment
+    block := &Block{
+        Timestamp:             1234567890,
+        TimestampMilliseconds: 1234567890500, // .500 seconds
+    }
+    require.True(t, ValidateTimestampAlignment(block))
+
+    // Invalid alignment
+    block = &Block{
+        Timestamp:             1234567890,
+        TimestampMilliseconds: 1234567891500, // Wrong second
+    }
+    require.False(t, ValidateTimestampAlignment(block))
+}
+
+// Test: Convergence rate
+func TestConvergenceRate(t *testing.T) {
+    // Starting from 2s target, converging to 1s target
+    initialExcess := uint64(3141253)
+    targetExcess := uint64(2414216)
+    maxChange := uint64(200)
+
+    blocks := 0
+    excess := initialExcess
+    for excess > targetExcess {
+        excess = UpdateExcess(excess, targetExcess, maxChange)
+        blocks++
+    }
+
+    // Should take ~3,635 blocks
+    require.InDelta(t, 3635, blocks, 10)
+}
+```
+
+### Integration Tests
+
+**Location**: `tests/e2e/block_timing/lp226_test.go`
+
+Scenarios:
+1. **Activation Transition**: Verify smooth transition from static to dynamic timing
+2. **Validator Coordination**: Multiple validators converging on new target
+3. **Min/Max Bounds**: Block timing at extreme values
+4. **ProposerVM Integration**: Verify compatibility with ProposerVM changes
+5. **Cross-Chain Consistency**: Same timing behavior across EVM chains
 
 ## Implementation
 

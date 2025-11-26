@@ -1,15 +1,19 @@
 ---
 lp: 176
 title: Dynamic Gas Pricing Mechanism
-status: Implemented
+description: Adaptive gas pricing and limits that respond to network congestion based on ACP-176
+author: Lux Network Team (@luxdefi)
+discussions-to: https://github.com/luxfi/lps/discussions
+status: Final
 type: Standards Track
 category: Core
 created: 2025-01-15
+requires: 12
 ---
 
 # LP-176: Dynamic EVM Gas Limit and Price Discovery
 
-**Status**: Implemented
+**Status**: Final
 **Type**: Standards Track
 **Category**: Core
 **Created**: 2025-01-15
@@ -67,6 +71,32 @@ Under sustained load, prices double approximately every 60 seconds:
 time_to_double = ln(2) * conversionRate / demand_rate
 ```
 
+## Rationale
+
+### Design Decisions
+
+**1. Exponential Adjustment**: Linear adjustments don't respond quickly enough to sudden demand changes. Exponential scaling provides rapid response to congestion while maintaining stability during normal operation.
+
+**2. Minimum Base Fee**: A floor of 25 gwei prevents zero-cost spam while remaining affordable for normal users. This balances accessibility with attack resistance.
+
+**3. Elasticity Multiplier of 2x**: Allowing blocks up to 2x target provides burst capacity for legitimate demand spikes while keeping long-term averages at target.
+
+**4. 60-Second Price Doubling**: This rate is aggressive enough to deter sustained attacks but slow enough to give users time to react and adjust their gas prices.
+
+### Alternatives Considered
+
+- **Fixed EIP-1559**: Rejected due to inability to adapt to Lux's multi-chain architecture
+- **Linear Scaling**: Rejected as too slow to respond to attacks
+- **Auction-Based**: Rejected due to complexity and poor UX
+- **Time-Weighted Average**: Rejected as it allows manipulation through timing
+
+### Upstream Compatibility
+
+LP-176 maintains exact parameter compatibility with ACP-176 to ensure:
+- Cross-chain tooling works identically
+- Gas estimation libraries function correctly
+- Existing Avalanche documentation remains applicable
+
 ## Implementation
 
 ### Location
@@ -107,7 +137,7 @@ type ChainConfig struct {
 }
 ```
 
-## Testing
+## Test Cases
 
 ### Unit Tests
 
@@ -118,6 +148,68 @@ Test cases:
 - Excess adjustment boundary conditions
 - Price doubling verification
 - Min/max constraint enforcement
+
+```go
+// Test: Base fee adjustment
+func TestBaseFeeAdjustment(t *testing.T) {
+    cases := []struct {
+        name           string
+        currentBaseFee uint64
+        gasUsed        uint64
+        gasTarget      uint64
+        expected       uint64
+    }{
+        {"below target", 100, 5000000, 10000000, 94},    // 6% decrease
+        {"at target", 100, 10000000, 10000000, 100},     // no change
+        {"above target", 100, 15000000, 10000000, 106},  // 6% increase
+        {"at min", 25, 0, 10000000, 25},                 // stays at min
+        {"approaching max", 950, 20000000, 10000000, 1000}, // caps at max
+    }
+
+    for _, tc := range cases {
+        t.Run(tc.name, func(t *testing.T) {
+            result := calculateNewBaseFee(tc.currentBaseFee, tc.gasUsed, tc.gasTarget)
+            require.Equal(t, tc.expected, result)
+        })
+    }
+}
+
+// Test: Dynamic gas limit
+func TestDynamicGasLimit(t *testing.T) {
+    config := &LP176Config{
+        MinTargetPerSecond:   1_000_000,
+        MaxTargetChangeRate:  1024,
+        TargetToMax:          2,
+        TimeToFillCapacity:   5,
+    }
+
+    // Normal conditions
+    target, max := calculateGasLimits(config, 0)
+    require.Equal(t, uint64(5_000_000), target)
+    require.Equal(t, uint64(10_000_000), max)
+
+    // Sustained load (high excess)
+    target, max = calculateGasLimits(config, 1_000_000)
+    require.Greater(t, target, uint64(5_000_000))
+    require.Equal(t, target*2, max)
+}
+
+// Test: Price doubling time
+func TestPriceDoublingTime(t *testing.T) {
+    // Under sustained 100% load, price should double in ~60 seconds
+    startPrice := uint64(100)
+    price := startPrice
+    blocks := 0
+
+    for price < startPrice*2 {
+        price = calculateNewBaseFee(price, 20_000_000, 10_000_000)
+        blocks++
+    }
+
+    // At 2-second blocks, 60 seconds = 30 blocks
+    require.InDelta(t, 30, blocks, 5)
+}
+```
 
 ### Integration Tests
 

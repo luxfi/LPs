@@ -639,6 +639,21 @@ function testPrivateRewardClaim() public {
 }
 ```
 
+## Backwards Compatibility
+
+This LP introduces private staking as an optional feature alongside standard staking:
+
+- **Public Staking**: Existing D-Chain staking remains unchanged and fully functional
+- **Validator Compatibility**: Private delegators can stake to any validator
+- **Reward Distribution**: Compatible with existing reward calculation mechanisms
+- **Unbonding**: Standard unbonding periods apply to private stakes
+
+**Migration Path**:
+1. Deploy private staking contracts on D-Chain
+2. Validators opt-in to accept private delegations
+3. Delegators can move between public and private staking
+4. Rewards accumulate privately until withdrawal
+
 ## Security Considerations
 
 ### VDF Security

@@ -544,6 +544,21 @@ function testConfidentialCollateral() public {
 }
 ```
 
+## Backwards Compatibility
+
+This LP introduces a new lending protocol that operates independently from existing lending markets:
+
+- **Existing Protocols**: Aave, Compound-style lending continues unchanged
+- **Token Compatibility**: Works with existing LRC-20 tokens wrapped in privacy layer
+- **Liquidation Bots**: Can integrate with existing liquidation infrastructure via privacy-preserving interfaces
+- **Oracle Integration**: Compatible with Chainlink and other price oracles via secure enclave
+
+**Migration Path**:
+1. Deploy confidential lending contracts on C-Chain
+2. Create wrapped token pools for major assets
+3. Existing lending positions remain in traditional protocols
+4. Users opt-in to privacy-preserving lending as desired
+
 ## Security Considerations
 
 ### Cryptographic Security

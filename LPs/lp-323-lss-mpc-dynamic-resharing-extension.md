@@ -58,7 +58,7 @@ LSS-MPC provides sophisticated dynamic resharing capabilities:
 - **LSS Solution**: Add/remove signers without re-keying all wallets
 - **Impact**: Operational efficiency, reduced risk
 
-## Technical Specification
+## Specification
 
 ### Supported Base Protocols
 

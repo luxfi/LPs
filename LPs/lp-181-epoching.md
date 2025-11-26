@@ -1,10 +1,14 @@
 ---
 lp: 181
 title: Epoching and Validator Rotation
+description: P-Chain epoched views for optimized validator set retrieval and ICM performance based on ACP-181
+author: Lux Protocol Team (@luxdefi), Cam Schultz
+discussions-to: https://github.com/luxfi/lps/discussions
 status: Final
 type: Standards Track
 category: Core
 created: 2025-11-22
+requires: 10
 ---
 
 # LP-181: P-Chain Epoched Views (Granite Upgrade)
@@ -129,6 +133,131 @@ func GetDChainEpoch(parent Block) Epoch {
 - Initial epoch duration: $D$ = 2 minutes
 - Configurable via future network upgrades
 - Balances validator set stability with update responsiveness
+
+## Rationale
+
+### Design Decisions
+
+**1. Fixed Epoch Duration**: Using a constant duration $D$ (2 minutes) provides predictable validator set windows. Variable durations were rejected as they complicate relayer implementations and make gas estimation difficult.
+
+**2. Sealing Mechanism**: The first-block-past-deadline approach ensures deterministic epoch transitions. Alternative approaches like slot-based or block-count-based were rejected for their complexity and less predictable behavior.
+
+**3. D-Chain Height Locking**: Locking the D-Chain height at epoch start eliminates expensive traversal during block execution. The trade-off of slightly stale validator data is acceptable given typical epoch durations.
+
+**4. Multi-Chain Coordination**: All Lux chains reference the same D-Chain epoch, ensuring consistent validator views across A, B, C, D, Y, Z chains.
+
+### Alternatives Considered
+
+- **Per-Block Validator Queries**: Rejected due to high gas costs and unpredictable execution
+- **Rolling Window**: Rejected for complexity in implementation and relayer logic
+- **Variable Duration Based on Churn**: Rejected as it complicates prediction and tooling
+- **Separate Epochs per Chain**: Rejected to maintain consistency across the ecosystem
+
+## Test Cases
+
+### Unit Tests
+
+```go
+// Test: Epoch advancement
+func TestEpochAdvancement(t *testing.T) {
+    duration := 2 * time.Minute
+    epoch := Epoch{
+        DChainHeight: 1000,
+        Number:       5,
+        StartTime:    time.Now(),
+    }
+
+    // Within epoch duration - should not advance
+    parentWithinEpoch := &mockBlock{
+        timestamp:     epoch.StartTime.Add(time.Minute),
+        dChainHeight:  1050,
+        epoch:         epoch,
+    }
+    nextEpoch := GetDChainEpoch(parentWithinEpoch)
+    require.Equal(t, epoch.Number, nextEpoch.Number)
+    require.Equal(t, epoch.DChainHeight, nextEpoch.DChainHeight)
+
+    // Past epoch duration - should advance
+    parentPastEpoch := &mockBlock{
+        timestamp:     epoch.StartTime.Add(3 * time.Minute),
+        dChainHeight:  1100,
+        epoch:         epoch,
+    }
+    nextEpoch = GetDChainEpoch(parentPastEpoch)
+    require.Equal(t, epoch.Number+1, nextEpoch.Number)
+    require.Equal(t, uint64(1100), nextEpoch.DChainHeight)
+}
+
+// Test: Epoch sealing
+func TestEpochSealing(t *testing.T) {
+    epoch := Epoch{Number: 10, StartTime: time.Unix(1000, 0)}
+    duration := 120 * time.Second // 2 minutes
+
+    // Block exactly at boundary should seal
+    blockAtBoundary := &mockBlock{
+        timestamp: time.Unix(1120, 0),
+        epoch:     epoch,
+    }
+    require.True(t, blockSealsEpoch(blockAtBoundary, duration))
+
+    // Block before boundary should not seal
+    blockBefore := &mockBlock{
+        timestamp: time.Unix(1119, 0),
+        epoch:     epoch,
+    }
+    require.False(t, blockSealsEpoch(blockBefore, duration))
+}
+
+// Test: Multi-chain epoch consistency
+func TestMultiChainEpochConsistency(t *testing.T) {
+    // All chains should derive same epoch from D-Chain state
+    dChainState := &DChainState{Height: 5000, Timestamp: time.Now()}
+
+    chains := []string{"A", "B", "C", "Y", "Z"}
+    var epochs []Epoch
+
+    for _, chain := range chains {
+        epoch := deriveEpochForChain(chain, dChainState)
+        epochs = append(epochs, epoch)
+    }
+
+    // All epochs should be identical
+    for i := 1; i < len(epochs); i++ {
+        require.Equal(t, epochs[0].Number, epochs[i].Number)
+        require.Equal(t, epochs[0].DChainHeight, epochs[i].DChainHeight)
+    }
+}
+
+// Test: ICM verification with epoched views
+func TestICMVerificationWithEpoch(t *testing.T) {
+    epoch := Epoch{DChainHeight: 2000, Number: 15}
+
+    // Create ICM message signed by validators at epoch height
+    validators := getValidatorsAtHeight(epoch.DChainHeight)
+    message := createICMMessage("C", "Y", []byte("test"))
+    signature := signWithValidators(message, validators)
+
+    // Verification should use epoch height, not current height
+    verified := verifyICMWithEpoch(message, signature, epoch)
+    require.True(t, verified)
+
+    // Verification with wrong epoch should fail
+    wrongEpoch := Epoch{DChainHeight: 1500, Number: 10}
+    verified = verifyICMWithEpoch(message, signature, wrongEpoch)
+    require.False(t, verified)
+}
+```
+
+### Integration Tests
+
+**Location**: `tests/e2e/epoching/epoch_test.go`
+
+Scenarios:
+1. **Epoch Transition**: Verify smooth transition at epoch boundaries
+2. **ICM Cost Reduction**: Measure gas savings for cross-chain calls
+3. **Relayer Behavior**: Test message delivery across epoch boundaries
+4. **Multi-Chain Sync**: Verify epoch consistency across all 6 chains
+5. **Validator Set Changes**: Test handling of validator changes at boundaries
 
 ## Security Considerations
 

@@ -4,9 +4,9 @@ title: Lux KMS Hardware Security Module Integration
 description: Unified key management system with multi-provider HSM support for validator security
 author: Lux Core Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
-status: Active
+status: Draft
 type: Standards Track
-category: Infrastructure
+category: Core
 created: 2025-11-22
 requires: 320, 321, 322, 323
 ---
@@ -404,6 +404,115 @@ luxd kms set-weight google-cloud-kms 100  # Full cutover
 **Cost Calculation Notes**:
 - Google Cloud KMS: 10M ops/mo = $30/mo operations + $0.30/mo key storage = $30.30/mo ≈ $360/year
 - AWS CloudHSM: $1.60/hour × 730 hours/mo × 12 = $14,016/year
+
+## Rationale
+
+### Design Decisions
+
+**1. Multi-Provider Architecture**: Supporting 8 HSM providers ensures validators can choose solutions matching their security requirements, compliance needs, and budget constraints. No vendor lock-in.
+
+**2. Unified Interface**: A single KMS API across all providers simplifies integration and allows seamless migration between HSM backends without code changes.
+
+**3. Plugin Architecture**: HSM providers are loaded as plugins, enabling community-contributed backends and custom integrations for specialized hardware.
+
+**4. Hardware Abstraction**: The KMS layer abstracts hardware-specific details, allowing the same validator code to run against SoftHSM (development) and enterprise HSMs (production).
+
+### Alternatives Considered
+
+- **Single Provider**: Rejected as it creates vendor lock-in and limits deployment options
+- **Direct HSM Integration**: Rejected due to complexity; each HSM vendor has different APIs
+- **Software-only**: Rejected for production use; HSMs provide tamper resistance and key isolation
+- **Threshold Signatures Only**: Rejected as some use cases require single-key operations
+
+## Backwards Compatibility
+
+This LP introduces new infrastructure without breaking existing validator deployments:
+
+- **Existing Validators**: Can continue using file-based keys; KMS is opt-in
+- **Migration Path**: Validators can gradually migrate keys to HSM without downtime
+- **API Compatibility**: KMS interface is additive; existing signing APIs remain unchanged
+- **Configuration**: New KMS config section in validator config files
+
+## Security Considerations
+
+### Key Isolation
+
+- Private keys never leave HSM boundary in hardware-backed deployments
+- Memory isolation prevents key extraction even with root access
+- Side-channel resistant operations in compliant HSMs
+
+### Audit and Compliance
+
+- FIPS 140-2 Level 3 certification available with enterprise HSMs
+- Key usage audit logs for compliance reporting
+- Role-based access control for multi-operator setups
+
+### Backup and Recovery
+
+- Secure key backup with split-secret schemes
+- Recovery procedures require multi-party authorization
+- Hardware redundancy recommendations in documentation
+
+### Attack Vectors
+
+- Physical tampering detected by HSM zeroization
+- Network isolation recommended for HSM interfaces
+- Regular firmware updates for security patches
+
+## Test Cases
+
+### Unit Tests
+
+```go
+func TestKMSProviderInitialization(t *testing.T) {
+    providers := []string{"softhsm", "yubikey", "gcpkms", "awscloudkey"}
+    for _, provider := range providers {
+        kms, err := kms.NewProvider(provider, testConfig)
+        require.NoError(t, err)
+        require.NotNil(t, kms)
+    }
+}
+
+func TestKeyGeneration(t *testing.T) {
+    kms := setupTestKMS(t)
+    keyID, err := kms.GenerateKey(kms.ECDSA_SECP256K1)
+    require.NoError(t, err)
+    require.NotEmpty(t, keyID)
+}
+
+func TestSignAndVerify(t *testing.T) {
+    kms := setupTestKMS(t)
+    keyID, _ := kms.GenerateKey(kms.ECDSA_SECP256K1)
+    message := []byte("test message")
+
+    signature, err := kms.Sign(keyID, message)
+    require.NoError(t, err)
+
+    valid, err := kms.Verify(keyID, message, signature)
+    require.NoError(t, err)
+    require.True(t, valid)
+}
+
+func TestProviderSwitch(t *testing.T) {
+    // Generate key on SoftHSM
+    soft := setupProvider(t, "softhsm")
+    keyID, _ := soft.GenerateKey(kms.ECDSA_SECP256K1)
+
+    // Export and import to YubiKey (test migration)
+    exported, _ := soft.ExportKey(keyID, wrappingKey)
+    yubi := setupProvider(t, "yubikey")
+    newKeyID, err := yubi.ImportKey(exported, wrappingKey)
+    require.NoError(t, err)
+    require.NotEmpty(t, newKeyID)
+}
+```
+
+### Integration Tests
+
+1. **Multi-Provider Signing**: Sign same message with keys from different HSMs, verify signatures
+2. **Failover Testing**: Simulate HSM failure, verify backup HSM takes over
+3. **Concurrent Access**: 100 concurrent signing requests to verify thread safety
+4. **Key Rotation**: Generate new key, migrate operations, retire old key
 
 ## References
 

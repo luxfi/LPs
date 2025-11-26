@@ -433,6 +433,40 @@ When a malicious party causes signing to fail:
 - **Robustness**: Tolerates up to n-t malicious parties
 - **Identifiability**: Malicious parties causing aborts are identified
 
+## Rationale
+
+### Design Decisions
+
+**1. CGGMP21 Protocol Selection**: The CGGMP21 protocol was chosen over older threshold ECDSA schemes due to:
+- UC (Universally Composable) security proofs under malicious adversaries
+- Optimal round complexity (4 rounds for signing)
+- Identifiable abort capability for detecting malicious participants
+- Support for arbitrary threshold t-of-n configurations
+
+**2. Precompile vs. Native Transaction Type**: Implementing as a precompile rather than a new transaction type provides:
+- Composability with existing smart contracts
+- Simpler integration for wallet developers
+- Gas-metered access for predictable costs
+- No consensus layer changes required
+
+**3. On-Chain Key Generation**: DKG as a precompile enables:
+- Trustless key generation without off-chain coordination
+- Transparent dealer-free setup
+- Verifiable key share distribution
+- Integration with smart contract governance
+
+**4. Proactive Security (Key Refresh)**: The key refresh mechanism provides:
+- Forward secrecy for long-lived keys
+- Recovery from partial compromise
+- Ability to change threshold without changing public key
+
+### Alternatives Considered
+
+- **GG18/GG20**: Earlier protocols lack identifiable abort, making debugging failures difficult
+- **FROST**: Schnorr-based, requires different curve; not ECDSA compatible
+- **Shamir-based TSS**: Requires trusted dealer; no malicious security
+- **Off-chain MPC**: Introduces availability and censorship concerns
+
 ## Security Considerations
 
 ### Threshold Selection

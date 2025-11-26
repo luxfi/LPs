@@ -380,6 +380,221 @@ contract UniversalBridge {
 }
 ```
 
+## Test Cases
+
+### 1. Basic Query Compilation
+
+```solidity
+// Test: Query compiles and generates correct struct
+pragma solidity ^0.8.24;
+pragma experimental GraphQL;
+
+contract TestBasicQuery {
+    query GetBalance {
+        """
+        query Balance($user: Address!) {
+            account(address: $user) {
+                balance
+            }
+        }
+        """
+    }
+
+    function test_queryCompiles() public view {
+        address user = address(0x1234);
+        var result = GetBalance.execute(user);
+        assert(result.account.balance >= 0);
+    }
+}
+```
+
+### 2. Type Safety Enforcement
+
+```solidity
+// Test: Compiler rejects type mismatches
+contract TestTypeSafety {
+    query GetUser {
+        """
+        query User($id: BigInt!) {
+            user(id: $id) {
+                name
+                age
+            }
+        }
+        """
+    }
+
+    function test_typeMismatchFails() public {
+        // This should fail at compile time:
+        // string memory age = GetUser.execute(1).user.age; // Error: uint to string
+
+        // This should succeed:
+        uint256 age = GetUser.execute(1).user.age;
+        string memory name = GetUser.execute(1).user.name;
+    }
+}
+```
+
+### 3. Cross-Chain Aggregation
+
+```solidity
+// Test: Multi-chain query returns aggregated results
+contract TestCrossChain {
+    query GetMultiChainBalance {
+        """
+        query TotalBalance($user: Address!) {
+            chains {
+                id
+                balance(owner: $user)
+            }
+            total: aggregate(source: chains.balance, fn: SUM)
+        }
+        """
+    }
+
+    function test_crossChainAggregation() public view {
+        address user = msg.sender;
+        var result = GetMultiChainBalance.execute(user);
+
+        // Verify all chains returned
+        assert(result.chains.length == 8); // All 8 Lux chains
+
+        // Verify aggregation
+        uint256 sum = 0;
+        for (uint i = 0; i < result.chains.length; i++) {
+            sum += result.chains[i].balance;
+        }
+        assert(result.total == sum);
+    }
+}
+```
+
+### 4. Caching Behavior
+
+```solidity
+// Test: Cached queries return consistent results
+contract TestCaching {
+    query GetCachedData {
+        """
+        query Stats @cache(ttl: 300) {
+            stats {
+                tvl
+                timestamp
+            }
+        }
+        """
+    }
+
+    function test_cacheHit() public view {
+        var result1 = GetCachedData.execute();
+        var result2 = GetCachedData.execute();
+
+        // Within TTL, results should be identical
+        assert(result1.stats.timestamp == result2.stats.timestamp);
+    }
+}
+```
+
+### 5. Gas Metering
+
+```solidity
+// Test: Complex queries respect gas limits
+contract TestGasLimits {
+    query GetLargeDataset {
+        """
+        query AllTransactions($limit: Int!) {
+            transactions(limit: $limit) {
+                hash
+                from
+                to
+                value
+            }
+        }
+        """
+    }
+
+    function test_gasLimitEnforced() public view {
+        uint256 gasBefore = gasleft();
+        var result = GetLargeDataset.execute(1000);
+        uint256 gasUsed = gasBefore - gasleft();
+
+        // Verify gas consumption is within expected bounds
+        assert(gasUsed < 500000); // Max 500k gas for query
+        assert(result.transactions.length <= 1000);
+    }
+}
+```
+
+### 6. Precompile Integration
+
+```solidity
+// Test: Direct precompile call returns valid response
+contract TestPrecompile {
+    address constant G_CHAIN_PRECOMPILE = address(0x0100);
+
+    function test_precompileCall() public view {
+        bytes memory queryData = abi.encode(
+            bytes4(keccak256("ping()")),
+            ""
+        );
+
+        (bool success, bytes memory result) = G_CHAIN_PRECOMPILE.staticcall(queryData);
+        assert(success);
+        assert(result.length > 0);
+    }
+}
+```
+
+### 7. Error Handling
+
+```solidity
+// Test: Invalid queries revert with descriptive errors
+contract TestErrorHandling {
+    query GetInvalidField {
+        """
+        query InvalidQuery {
+            nonexistent {
+                field
+            }
+        }
+        """
+    }
+
+    function test_invalidQueryReverts() public view {
+        // Should revert with "GraphQL: unknown field 'nonexistent'"
+        try this.executeInvalid() {
+            revert("Should have reverted");
+        } catch Error(string memory reason) {
+            assert(bytes(reason).length > 0);
+        }
+    }
+
+    function executeInvalid() external view {
+        GetInvalidField.execute();
+    }
+}
+```
+
+### 8. Batch Query Execution
+
+```solidity
+// Test: Batch queries execute atomically
+contract TestBatchQueries {
+    function test_batchExecution() public view {
+        var results = query.batch {
+            balance: GetBalance(msg.sender),
+            prices: GetPrices(["LUX", "ETH"]),
+            stats: GetProtocolStats()
+        };
+
+        // All queries should succeed or all should fail
+        assert(results.balance.account.balance >= 0);
+        assert(results.prices.length == 2);
+        assert(results.stats.tvl > 0);
+    }
+}
+```
+
 ## Backwards Compatibility
 
 This extension is opt-in via `pragma experimental GraphQL`. Contracts without this pragma are unaffected. The feature can be enabled per-contract, allowing gradual adoption.

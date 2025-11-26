@@ -1,10 +1,14 @@
 ---
 lp: 301
 title: Lux B-Chain - Cross-Chain Bridge Protocol
-status: Active (
-type: Protocol Specification
+description: Trustless cross-chain bridge protocol using MPC threshold signatures and ZK light clients
+author: Lux Partners (@luxdefi)
+discussions-to: https://github.com/luxfi/lps/discussions
+status: Final
+type: Standards Track
 category: Core
 created: 2025-10-28
+requires: 13, 14, 15
 ---
 
 # LP-301: Lux B-Chain - Cross-Chain Bridge Protocol
@@ -262,6 +266,115 @@ For chains without light client support (e.g., Bitcoin):
 - IBC packet relay: 2 seconds average
 - Gas cost: 150k per IBC packet
 
+## Rationale
+
+### Design Decisions
+
+**1. MPC Threshold Signatures (CGGMP21)**: Chosen over multisig for lower on-chain verification costs and better security properties. CGGMP21 provides UC-secure threshold ECDSA with efficient key generation and signing.
+
+**2. ZK Light Clients**: Zero-knowledge proofs enable trustless cross-chain verification without requiring full node operation on destination chains. This reduces relayer costs and improves decentralization.
+
+**3. Committee Rotation**: Time-limited committee membership prevents long-term key compromise attacks and enables graceful security parameter upgrades.
+
+**4. PQC Dual-Signature**: Using both classical (BLS) and post-quantum (Ringtail) signatures provides migration path to quantum-safe security without breaking compatibility.
+
+### Alternatives Considered
+
+- **Optimistic Bridges**: Rejected due to long challenge periods (~7 days) unsuitable for UX
+- **Hash Time-Lock Contracts (HTLC)**: Rejected due to liquidity fragmentation and poor atomic composability
+- **Single Custodian**: Rejected due to centralization and trust assumptions
+- **Native Consensus Verification**: Rejected as too expensive for external chains
+
+## Backwards Compatibility
+
+**Migration Path**:
+- Existing Lux chain transfers are unaffected
+- Legacy bridge contracts can integrate via adapter interfaces
+- Gradual transition with parallel operation period
+
+**Compatibility Considerations**:
+- EVM chains: Full ERC-20/721 token support
+- Bitcoin: UTXO-based transfers via threshold signatures
+- Cosmos: ICS-20 standard compliance
+
+**Breaking Changes**: None for existing applications. B-Chain is additive functionality.
+
+## Test Cases
+
+### Unit Tests
+
+```go
+// Test: MPC signature generation
+func TestMPCSignature(t *testing.T) {
+    committee := setupTestCommittee(t, 5, 3) // 5 members, threshold 3
+
+    message := crypto.Keccak256([]byte("test transfer"))
+    signature, err := committee.Sign(message)
+
+    require.NoError(t, err)
+    require.True(t, committee.Verify(message, signature))
+}
+
+// Test: Bridge transfer lifecycle
+func TestBridgeTransfer(t *testing.T) {
+    bridge := setupTestBridge(t)
+
+    // Lock tokens on source chain
+    transferID, err := bridge.Lock(testToken, big.NewInt(1000), destChainID, recipient)
+    require.NoError(t, err)
+
+    // Generate and verify proof
+    proof, err := bridge.GenerateProof(transferID)
+    require.NoError(t, err)
+
+    // Release on destination
+    err = bridge.Release(transferID, proof)
+    require.NoError(t, err)
+}
+
+// Test: Committee rotation
+func TestCommitteeRotation(t *testing.T) {
+    bridge := setupTestBridge(t)
+    initialCommittee := bridge.GetCommittee()
+
+    // Advance to next epoch
+    bridge.AdvanceEpoch()
+    newCommittee := bridge.GetCommittee()
+
+    // Verify rotation occurred
+    require.NotEqual(t, initialCommittee.Epoch, newCommittee.Epoch)
+    require.True(t, newCommittee.IsValid())
+}
+
+// Test: Fraud proof submission
+func TestFraudProof(t *testing.T) {
+    bridge := setupTestBridge(t)
+
+    // Create invalid state root
+    invalidRoot := crypto.Keccak256([]byte("invalid state"))
+
+    // Generate fraud proof
+    proof, err := generateFraudProof(invalidRoot)
+    require.NoError(t, err)
+
+    // Submit and verify acceptance
+    success, err := bridge.SubmitFraudProof(invalidRoot, proof)
+    require.NoError(t, err)
+    require.True(t, success)
+}
+```
+
+### Integration Tests
+
+**Location**: `tests/e2e/bridge/b_chain_test.go`
+
+Scenarios:
+1. **Lux ↔ Ethereum Transfer**: Full round-trip token transfer
+2. **Committee Epoch Transition**: Verify handoff between committees
+3. **Slashing Trigger**: Malicious validator detection and slashing
+4. **Multi-Hop Routing**: Hanzo → Lux → Zoo transfer
+5. **PQC Signature Verification**: Dual-sig validation
+
 ## Implementation
 
 ### Solidity Interfaces
@@ -330,7 +443,7 @@ func (b *BridgeClient) RelayTransfer(
 | LayerZero | $1.80 | 12 min |
 | Multichain | $3.20 | 20 min |
 
-## Security Analysis
+## Security Considerations
 
 ### Threat Model
 

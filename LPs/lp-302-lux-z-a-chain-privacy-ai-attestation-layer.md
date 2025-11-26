@@ -1,10 +1,14 @@
 ---
 lp: 302
 title: Lux Z/A-Chain - Privacy & AI Attestation Layer
-status: Active
-type: Protocol Specification
+description: Dual-purpose L1 chain for privacy-focused ZK computation and AI attestation verification
+author: Lux Partners (@luxdefi)
+discussions-to: https://github.com/luxfi/lps/discussions
+status: Final
+type: Standards Track
 category: Core
 created: 2025-10-28
+requires: 301
 ---
 
 # LP-302: Lux Z/A-Chain - Privacy & AI Attestation Layer
@@ -349,6 +353,135 @@ PlaintextData = Decrypt(C, vk)
 
 Auditors receive vk (not sk_user), enabling read-only access without spending authority.
 
+## Rationale
+
+### Design Decisions
+
+**1. Dual-Purpose Architecture (Z/A)**: Separating privacy (Z-Chain) from AI attestation (A-Chain) allows each to optimize for their specific use cases while sharing security infrastructure.
+
+**2. ZK-SNARKs over STARKs**: Groth16-based proofs offer smaller proof sizes (288 bytes vs 50KB+) and faster verification (~6ms vs ~50ms), critical for on-chain privacy.
+
+**3. FHE for Computation-Heavy Privacy**: Some operations benefit from keeping data encrypted during computation rather than using ZK proofs, especially for ML inference on private data.
+
+**4. TEE Integration**: Hardware enclaves provide a pragmatic bridge for complex computations that are impractical to express as circuits.
+
+### Alternatives Considered
+
+- **Single-Purpose Chain**: Rejected as it wouldn't capture synergies between privacy and AI use cases
+- **Pure STARK-based**: Rejected due to larger proof sizes and verification costs
+- **Pure FHE**: Rejected as too slow for real-time applications
+- **No TEE**: Rejected as some AI workloads require practical execution environments
+
+## Backwards Compatibility
+
+**Migration Path**:
+- Existing Lux smart contracts can interact with Z-Chain via bridge interface
+- A-Chain attestations can be verified on C-Chain through cross-chain messaging
+- Legacy applications don't require modification
+
+**Compatibility Considerations**:
+- EVM compatibility for Z-Chain smart contracts
+- Standard REST/gRPC APIs for A-Chain attestation submission
+- Interoperability with existing ZK proof systems (Groth16, PLONK)
+
+**Breaking Changes**: None for existing applications. Z/A-Chain is additive functionality.
+
+## Test Cases
+
+### Unit Tests
+
+```go
+// Test: Shielded deposit
+func TestShieldedDeposit(t *testing.T) {
+    zchain := setupTestZChain(t)
+
+    // Generate commitment
+    note := generateNote(big.NewInt(1000), randomBlinding())
+    commitment := note.Commitment()
+
+    // Deposit
+    err := zchain.Deposit(testToken, big.NewInt(1000), commitment)
+    require.NoError(t, err)
+
+    // Verify commitment in Merkle tree
+    require.True(t, zchain.CommitmentExists(commitment))
+}
+
+// Test: Private transfer with ZK proof
+func TestPrivateTransfer(t *testing.T) {
+    zchain := setupTestZChain(t)
+
+    // Setup: deposit funds
+    inputNote := depositTestFunds(t, zchain, big.NewInt(1000))
+
+    // Generate transfer proof
+    outputNotes := []Note{
+        generateNote(big.NewInt(600), randomBlinding()),
+        generateNote(big.NewInt(400), randomBlinding()),
+    }
+    proof, err := generateTransferProof(inputNote, outputNotes)
+    require.NoError(t, err)
+
+    // Execute transfer
+    err = zchain.Transfer(proof)
+    require.NoError(t, err)
+
+    // Verify nullifier spent
+    require.True(t, zchain.NullifierSpent(inputNote.Nullifier()))
+}
+
+// Test: AI attestation verification
+func TestAIAttestation(t *testing.T) {
+    achain := setupTestAChain(t)
+
+    // Create attestation
+    attestation := &AIAttestation{
+        ModelHash:   crypto.Keccak256(modelWeights),
+        InputHash:   crypto.Keccak256(inputData),
+        OutputHash:  crypto.Keccak256(outputData),
+        ProviderID:  testProvider.ID(),
+        Timestamp:   time.Now(),
+    }
+
+    // Sign and submit
+    signedAttestation := testProvider.Sign(attestation)
+    err := achain.SubmitAttestation(signedAttestation)
+    require.NoError(t, err)
+
+    // Verify retrieval
+    retrieved, err := achain.GetAttestation(attestation.Hash())
+    require.NoError(t, err)
+    require.Equal(t, attestation.OutputHash, retrieved.OutputHash)
+}
+
+// Test: Compliance proof
+func TestComplianceProof(t *testing.T) {
+    zchain := setupTestZChain(t)
+
+    // User with verified KYC
+    user := createVerifiedUser(t)
+
+    // Generate compliance proof without revealing identity
+    proof, err := user.GenerateComplianceProof()
+    require.NoError(t, err)
+
+    // Verify proof
+    verified := zchain.VerifyComplianceProof(proof)
+    require.True(t, verified)
+}
+```
+
+### Integration Tests
+
+**Location**: `tests/e2e/privacy/za_chain_test.go`
+
+Scenarios:
+1. **Full Privacy Lifecycle**: Deposit → Transfer → Withdraw with ZK proofs
+2. **AI Attestation Flow**: Model registration → Inference → Attestation → Settlement
+3. **Cross-Chain Attestation**: A-Chain attestation verified on C-Chain
+4. **Compliance Verification**: KYC proof generation and verification
+5. **Anonymity Set Analysis**: Measure effective anonymity under various conditions
+
 ## Implementation
 
 ### Solidity Interfaces
@@ -423,7 +556,7 @@ func (z *ZChainClient) EncryptedCompute(
 - Average finality: 1.85s
 - Privacy breaches: 0
 
-## Security Analysis
+## Security Considerations
 
 ### Privacy Guarantees
 

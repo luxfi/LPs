@@ -1,10 +1,14 @@
 ---
 lp: 315
 title: Enhanced Cross-Chain Communication Protocol
+description: Enhanced Warp messaging protocol with batched processing, priority queuing, compression, and encryption for cross-chain communication
+author: Lux Core Team (@luxfi)
+discussions-to: https://github.com/luxfi/lps/discussions
 status: Draft
 type: Standards Track
 category: Core
 created: 2025-11-22
+requires: 313
 ---
 
 # LP-315: Enhanced Cross-Chain Communication Protocol
@@ -59,6 +63,65 @@ Leverages Quasar's fast finality for:
 - Rapid cross-chain confirmations
 - Reduced bridge withdrawal times
 - Enhanced security guarantees
+
+## Rationale
+
+### Design Decisions
+
+**1. Batched Message Processing**: Batching multiple messages reduces per-message overhead and enables atomic cross-chain operations. Messages destined for the same target chain are grouped for efficient relay.
+
+**2. Priority Queuing**: Time-sensitive operations (liquidations, arbitrage protection) require prioritization. A priority queue ensures critical messages are processed before lower-priority traffic.
+
+**3. Compression**: Large payloads (NFT metadata, contract deployments) benefit from compression. Snappy compression provides good compression ratio with minimal CPU overhead.
+
+**4. Optional Encryption**: End-to-end encryption enables private cross-chain communication for confidential transactions while maintaining interoperability with public messages.
+
+### Alternatives Considered
+
+- **IBC Protocol**: Cosmos IBC evaluated but rejected due to different validator set model
+- **LayerZero/Axelar**: Third-party bridge protocols add external trust assumptions
+- **Direct P2P**: Too slow for high-throughput requirements; Warp extension preferred
+- **Per-chain custom bridges**: Creates fragmentation; standardized protocol chosen
+
+## Test Cases
+
+### Unit Tests
+
+```go
+func TestBatchedMessageProcessing(t *testing.T) {
+    batch := warp.NewMessageBatch()
+    for i := 0; i < 10; i++ {
+        msg := warp.NewMessage(sourceChain, destChain, payload[i])
+        batch.Add(msg)
+    }
+    encoded := batch.Encode()
+    require.Less(t, len(encoded), 10*singleMessageSize)
+}
+
+func TestPriorityQueuing(t *testing.T) {
+    queue := warp.NewPriorityQueue()
+    queue.Enqueue(lowPriorityMsg)
+    queue.Enqueue(highPriorityMsg)
+    first := queue.Dequeue()
+    require.Equal(t, highPriorityMsg.ID(), first.ID())
+}
+
+func TestCompression(t *testing.T) {
+    payload := generateLargePayload(100 * 1024)  // 100KB
+    compressed := warp.Compress(payload)
+    require.Less(t, len(compressed), len(payload)/2)
+    decompressed := warp.Decompress(compressed)
+    require.Equal(t, payload, decompressed)
+}
+
+func TestEncryptedMessage(t *testing.T) {
+    senderKey, receiverKey := generateKeyPair()
+    msg := warp.NewMessage(source, dest, payload)
+    encrypted := msg.Encrypt(receiverKey.Public())
+    decrypted := encrypted.Decrypt(receiverKey)
+    require.Equal(t, payload, decrypted.Payload())
+}
+```
 
 ## Backwards Compatibility
 Maintains compatibility with existing Warp messages while adding optional enhanced features.

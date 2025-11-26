@@ -4,7 +4,7 @@ title: Blockchain Regenesis and State Migration
 description: Standard procedure for exporting chain state and creating new genesis files for network upgrades
 author: Lux Core Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
-status: Active
+status: Draft
 type: Standards Track
 category: Core
 created: 2025-11-22
@@ -511,6 +511,37 @@ qChainGenesis := generateFreshGenesis(
 )
 deployNewChain(qChainGenesis)
 ```
+
+## Rationale
+
+### Design Decisions
+
+**1. Full State Export**: Exporting complete state (accounts, storage, code) rather than replaying transactions ensures:
+- Deterministic reproduction regardless of historical data availability
+- Faster migration without re-executing all historical transactions
+- Independence from block history
+
+**2. Genesis Injection**: Embedding state in genesis.json rather than snapshot files provides:
+- Standard format understood by all node implementations
+- Easy verification and auditing
+- Atomic activation at network launch
+
+**3. Separate Validator Handling**: Treating validator state separately ensures:
+- Clean separation of consensus and execution layers
+- Ability to restructure validator set during migration
+- Compatibility with different consensus mechanisms
+
+**4. Multi-Chain Coordination**: Phased migration with designated cutover times:
+- Minimizes network disruption
+- Allows coordinated community preparation
+- Enables rollback if issues detected
+
+### Alternatives Considered
+
+- **Transaction Replay**: Rejected due to time/resource requirements for long-running chains
+- **Snapshot Import**: Rejected as non-standard; genesis provides better tooling support
+- **In-Place Upgrade**: Not possible for major architecture changes (e.g., chain consolidation)
+- **State Diffs Only**: Rejected as incomplete; fresh genesis provides clean slate
 
 ## Security Considerations
 
