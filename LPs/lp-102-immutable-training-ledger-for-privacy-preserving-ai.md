@@ -285,6 +285,57 @@ Every user is unique:
 - **Compliance**: Regulatory requirements
 - **Trust**: Verifiable training history
 
+## Test Cases
+
+### Unit Tests
+
+```python
+def test_training_record_creation():
+    """Test creating an immutable training record"""
+    record = TrainingRecord(
+        model_id="zen-0.6b",
+        dataset_hash="0x1234...abcd",
+        training_config={"epochs": 10, "batch_size": 32},
+        contributor_proofs=[]
+    )
+    assert record.timestamp > 0
+    assert record.hash is not None
+
+def test_contribution_proof_verification():
+    """Test ZK proof verification for data contribution"""
+    proof = generate_contribution_proof(
+        data_hash="0xdata...",
+        contributor_id="0xuser...",
+        contribution_type="training_data"
+    )
+    assert verify_contribution_proof(proof)
+
+def test_immutability_guarantee():
+    """Test that records cannot be modified after creation"""
+    ledger = TrainingLedger()
+    record_id = ledger.add_record(training_record)
+
+    with pytest.raises(ImmutabilityError):
+        ledger.modify_record(record_id, new_data)
+
+def test_attribution_chain():
+    """Test data contributor attribution tracking"""
+    chain = AttributionChain()
+    chain.add_contributor("alice", proof_alice)
+    chain.add_contributor("bob", proof_bob)
+
+    attributions = chain.get_attributions("model_v1")
+    assert len(attributions) == 2
+    assert attributions[0].verified
+```
+
+### Integration Tests
+
+1. **End-to-End Training Flow**: Submit training job → Record creation → Verification
+2. **Multi-Contributor Attribution**: Multiple data sources → Proper credit distribution
+3. **Privacy Verification**: ZK proof generation and verification across HIP-4 gateway
+4. **Cross-Chain Recording**: Training on A-Chain → Record on Hanzo ledger
+
 ## Security Considerations
 
 ### Privacy
