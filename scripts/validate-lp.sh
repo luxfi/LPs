@@ -5,6 +5,7 @@
 
 set -e
 
+
 # Colors for output
 RED='\033[0;31m'
 GREEN='\033[0;32m'
@@ -52,7 +53,7 @@ WARNINGS=0
 echo -n "Checking YAML frontmatter... "
 if ! grep -q "^---$" "$LP_FILE"; then
     print_error "Missing YAML frontmatter"
-    ((ERRORS++))
+    ERRORS=$((ERRORS + 1))
 else
     # Extract frontmatter
     FRONTMATTER=$(sed -n '/^---$/,/^---$/p' "$LP_FILE")
@@ -61,7 +62,7 @@ else
     for field in "lp" "title" "description" "author" "status" "type" "created"; do
         if ! echo "$FRONTMATTER" | grep -q "^$field:"; then
             print_error "Missing required field: $field"
-            ((ERRORS++))
+            ERRORS=$((ERRORS + 1))
         fi
     done
     
@@ -69,7 +70,7 @@ else
     if echo "$FRONTMATTER" | grep -q "^type: Standards Track"; then
         if ! echo "$FRONTMATTER" | grep -q "^category:"; then
             print_error "Standards Track LPs must have a category"
-            ((ERRORS++))
+            ERRORS=$((ERRORS + 1))
         fi
     fi
     
@@ -85,7 +86,7 @@ else
         done
         if [ $VALID_STATUS -eq 0 ]; then
             print_error "Invalid status: $STATUS. Must be one of: ${VALID_STATUSES[*]}"
-            ((ERRORS++))
+            ERRORS=$((ERRORS + 1))
         fi
     fi
     
@@ -111,7 +112,7 @@ for section in "${REQUIRED_SECTIONS[@]}"; do
     echo -n "  Checking $section... "
     if ! grep -q "^## $section" "$LP_FILE"; then
         print_error "Missing required section: $section"
-        ((ERRORS++))
+        ERRORS=$((ERRORS + 1))
     else
         print_success "Found"
     fi
@@ -123,7 +124,7 @@ ABSTRACT=$(sed -n '/^## Abstract$/,/^##/p' "$LP_FILE" | sed '1d;$d')
 WORD_COUNT=$(echo "$ABSTRACT" | wc -w)
 if [ $WORD_COUNT -gt 300 ]; then
     print_warning "Abstract is $WORD_COUNT words (recommended: ~200)"
-    ((WARNINGS++))
+    WARNINGS=$((WARNINGS + 1))
 else
     print_success "OK ($WORD_COUNT words)"
 fi
@@ -133,7 +134,7 @@ if grep -q "^type: Standards Track" "$LP_FILE"; then
     echo -n "Checking for test cases... "
     if ! grep -q "^## Test Cases" "$LP_FILE"; then
         print_warning "Standards Track LPs should include test cases"
-        ((WARNINGS++))
+        WARNINGS=$((WARNINGS + 1))
     else
         print_success "Found"
     fi
@@ -147,7 +148,7 @@ echo -n "  Checking for broken internal links... "
 BROKEN_LINKS=$(grep -o '\[.*\](.*)' "$LP_FILE" | grep -v "http" | grep -c "]()" || true)
 if [ $BROKEN_LINKS -gt 0 ]; then
     print_warning "Found $BROKEN_LINKS potentially broken links"
-    ((WARNINGS++))
+    WARNINGS=$((WARNINGS + 1))
 else
     print_success "OK"
 fi
@@ -169,7 +170,7 @@ if grep -q '```' "$LP_FILE"; then
     ' "$LP_FILE")
     if [ "$UNLABELED_OPENINGS" -gt 0 ]; then
         print_warning "Found $UNLABELED_OPENINGS unlabeled code block(s)"
-        ((WARNINGS++))
+        WARNINGS=$((WARNINGS + 1))
     else
         print_success "OK"
     fi
@@ -182,7 +183,7 @@ if [[ $FILENAME =~ ^lp-[0-9]+(-[a-z0-9-]+)?\.md$ ]] || [[ $FILENAME =~ ^lp-[0-9]
     print_success "Valid"
 else
     print_error "Invalid filename format. Should be 'lp-N.md', 'lp-N-descriptive-title.md', 'lp-N-rM.md', or 'lp-draft.md'"
-    ((ERRORS++))
+    ERRORS=$((ERRORS + 1))
 fi
 
 # Summary
