@@ -63,7 +63,7 @@ CHECKED_FILES=0
 
 # Find LP markdown files only (scope per repo guidelines)
 for file in $(find LPs -name "*.md" -type f); do
-    ((CHECKED_FILES++))
+    CHECKED_FILES=$((CHECKED_FILES + 1))
     echo -e "\nChecking: $file"
     
     # Extract all links from the file
@@ -80,7 +80,7 @@ for file in $(find LPs -name "*.md" -type f); do
     
     # Check each link
     while IFS= read -r link; do
-        ((TOTAL_LINKS++))
+        TOTAL_LINKS=$((TOTAL_LINKS + 1))
         
         # Skip empty links
         if [ -z "$link" ]; then
@@ -103,7 +103,7 @@ for file in $(find LPs -name "*.md" -type f); do
                 print_success "Valid"
             else
                 print_error "Broken"
-                ((BROKEN_LINKS++))
+                BROKEN_LINKS=$((BROKEN_LINKS + 1))
             fi
         else
             # It's a local file reference
@@ -112,7 +112,7 @@ for file in $(find LPs -name "*.md" -type f); do
                 print_success "Found"
             else
                 print_error "Not found"
-                ((BROKEN_LINKS++))
+                BROKEN_LINKS=$((BROKEN_LINKS + 1))
             fi
         fi
     done <<< "$links"
