@@ -63,8 +63,8 @@ By using LPs, the Lux community can coordinate development in a decentralized ma
 | [LP-40](./LPs/lp-40.md) | Wallet Standards | Lux Network Team | Standards Track | Interface | Draft |
 | [LP-42](./LPs/lp-42.md) | Multi-Signature Wallet Standard | Lux Network Team | Standards Track | LRC | Draft |
 | [LP-45](./LPs/lp-45.md) | Z-Chain Encrypted Execution Layer Interface | Zach Kelling and Lux Team | Standards Track | Interface | Draft |
-| [LP-50](./LPs/lp-50.md) | Developer Tools Overview | Lux Network Team | Meta | None | Draft |
-| [LP-60](./LPs/lp-60.md) | DeFi Protocols Overview | Lux Network Team | Meta | None | Draft |
+| [LP-50](./LPs/lp-50.md) | Developer Tools Overview | Lux Network Team | Meta | - | Draft |
+| [LP-60](./LPs/lp-60.md) | DeFi Protocols Overview | Lux Network Team | Meta | - | Draft |
 | [LP-70](./LPs/lp-70.md) | NFT Staking Standard | Lux Network Team | Standards Track | LRC | Draft |
 | [LP-71](./LPs/lp-71.md) | Media Content NFT Standard | Lux Network Team | Standards Track | LRC | Draft |
 | [LP-72](./LPs/lp-72.md) | Bridged Asset Standard | Lux Network Team | Standards Track | LRC | Draft |
@@ -75,7 +75,7 @@ By using LPs, the Lux community can coordinate development in a decentralized ma
 | [LP-80](./LPs/lp-80.md) | A-Chain (Attestation Chain) Specification | Lux Network Team | Standards Track | Core | Draft |
 | [LP-81](./LPs/lp-81.md) | B-Chain (Bridge Chain) Specification | Lux Network Team | Standards Track | Core | Draft |
 | [LP-85](./LPs/lp-85.md) | Security Audit Framework | Lux Network Team | Standards Track | Meta | Draft |
-| [LP-90](./LPs/lp-90.md) | Research Papers Index | Lux Network Team | Meta | None | Draft |
+| [LP-90](./LPs/lp-90.md) | Research Papers Index | Lux Network Team | Meta | - | Draft |
 | [LP-91](./LPs/lp-91.md) | Payment Processing Research | Lux Network Team | Informational | - | Draft |
 | [LP-92](./LPs/lp-92.md) | Cross-Chain Messaging Research | Lux Network Team | Informational | - | Draft |
 | [LP-93](./LPs/lp-93.md) | Decentralized Identity Research | Lux Network Team | Informational | - | Draft |

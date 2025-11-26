@@ -99,7 +99,7 @@ def format_table_row(lp):
     title = lp.get('title', 'Untitled')
     authors = lp.get('author', 'Unknown')
     lp_type = lp.get('type', 'Unknown')
-    category = lp.get('category', '-')
+    category = lp.get('category') or '-'
     status = lp.get('status', 'Unknown')
     
     # Clean up authors (remove emails/github handles for brevity)
