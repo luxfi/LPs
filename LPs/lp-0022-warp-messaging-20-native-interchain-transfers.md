@@ -1,0 +1,97 @@
+---
+lp: 0022
+title: 'Warp Messaging 2.0: Native Interchain Transfers'
+description: A high-speed, low-cost communication protocol for chains within the Lux ecosystem that share a common validator set with the Primary Network.
+author: Gemini (@gemini)
+discussions-to: https://github.com/luxfi/lps/discussions
+status: Draft
+type: Standards Track
+category: Networking
+created: 2025-07-22
+requires: 21
+---
+
+## Abstract
+
+This LP proposes Warp Messaging 2.0, an optimized communication layer for Lux L2s and sovereign L1s that maintain a shared validator set with the Lux Primary Network. Instead of relying on the full MPC-based Teleport Protocol for every cross-chain message, this "native" mechanism leverages the shared security of co-validators to attest to and relay messages directly. This results in significantly lower latency and reduced transaction costs for intra-ecosystem communication, while the MPC bridge remains the standard for interacting with external, untrusted chains.
+
+## Motivation
+
+The MPC-powered Lux Teleport Protocol (LP-21) provides robust and secure communication with any external blockchain. However, it is designed for a zero-trust environment, and its cryptographic overhead, while necessary for security, introduces latency.
+
+For chains within the Lux ecosystem (e.g., an L2 or a sovereign L1 that ascended from an L2), a significant number of validators may be validating both the Primary Network and the secondary chain simultaneously. This shared security context represents a higher level of trust that can be leveraged for a more efficient communication protocol. Warp 2.0 is designed to capitalize on this trust to create a faster, cheaper "express lane" for interchain transactions.
+
+## Specification
+
+**1. Shared Validator Definition:**
+
+A "Shared Validator" is a validator node that is concurrently participating in the consensus of both the Lux Primary Network and one or more participating Lux L2s or sovereign L1s.
+
+**2. Native Interchain Transfer Mechanism:**
+
+When a message or asset transfer is initiated between two chains that share a set of validators (e.g., Lux C-Chain to Hanzo L2), the following process occurs:
+
+1.  **Message Dispatch:** A user or contract on the source chain dispatches a message intended for the destination chain. This message is included in a block on the source chain.
+2.  **Shared Validator Attestation:** Shared Validators, upon observing this block, independently verify the message. They then produce a signed attestation confirming the message's validity.
+3.  **Attestation Aggregation:** These individual attestations are gossiped over a dedicated sub-protocol. Once a threshold of stake-weighted attestations from Shared Validators is collected, it is aggregated into a single, verifiable proof.
+4.  **Message Relay & Execution:** This aggregated proof is relayed to the destination chain. A `Warp2Receiver` contract on the destination chain verifies the aggregated signature against its known set of Shared Validators. If valid, the message is executed.
+
+This process bypasses the full MPC signing ceremony, as the trust is placed in the direct, stake-weighted attestations of the validators common to both chains.
+
+**3. Fallback to MPC:**
+
+If a message is destined for an external chain (e.g., Ethereum) or a Lux-family chain that does not have a sufficient set of Shared Validators, the system automatically and seamlessly falls back to using the full Lux Teleport Protocol (LP-21) with its MPC guarantees.
+
+## Rationale
+
+This two-tiered approach provides the best of both worlds:
+
+*   **High-Speed for Intra-Ecosystem:** Leverages existing trust relationships for fast, cheap, and frequent communication between tightly coupled chains.
+*   **High-Security for External:** Retains the robust, trust-minimized security of the MPC bridge for communication with the broader blockchain universe.
+
+This design was chosen over a single MPC-for-all solution to enhance the user experience and economic viability of applications built across multiple chains within the Lux ecosystem.
+
+## Implementation
+
+### Warp Messenger Components
+**Base Location**: `/Users/z/work/lux/node/vms/evm/precompiles/` (C-Chain)
+
+### Smart Contracts
+- **Warp2Receiver**: Contract interface for receiving cross-chain messages
+  - Located in standard library: `/Users/z/work/lux/standard/src/`
+  - Validates aggregated validator signatures
+  - Processes intra-ecosystem messages
+
+- **Fallback to MPC**: Automatic routing to LP-21 for external chains
+
+### Node Implementation
+- **Validator Attestation**: In node P2P gossip layer
+- **Message Relay**: Integrated with consensus engine
+- **Signature Aggregation**: BLS signature combining
+
+### Testing
+```bash
+cd /Users/z/work/lux/standard
+forge test --match "Warp"  # Warp messaging tests
+```
+
+### Integration Points
+- **C-Chain Integration**: LP-26 (EVM equivalence)
+- **Consensus Layer**: Chain consensus engine coordination
+- **MPC Bridge Fallback**: Automatic switch for non-shared validator chains
+
+### Configuration
+- Shared validator threshold: 2/3 of stake-weighted validators
+- Message timeout: Configurable per chain
+- Attestation gossip: P2P subnet coordination
+
+### GitHub References
+- **Node Implementation**: https://github.com/luxfi/node/tree/main/vms/evm/precompiles
+- **Standard Contracts**: https://github.com/luxfi/standard/
+
+## Security Considerations
+
+The security of Warp 2.0 relies on the economic stake of the Shared Validators. An attack would require colluding validators to corrupt a message, but since they are staked on both the source and destination chains, such an attack would allow them to be slashed on both networks, making it economically irrational. The security threshold (e.g., 2/3 of shared stake) must be met for any message to be considered valid.
+## Backwards Compatibility
+
+Additive change; existing interfaces remain valid. Adoption is opt‑in and can be rolled out gradually without breaking behavior.

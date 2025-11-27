@@ -55,8 +55,8 @@ def collect_lps():
             'discussions_to': fm.get('discussions-to', ''),
             'requires': fm.get('requires', ''),
             'replaces': fm.get('replaces', ''),
-            'github_view': f"https://github.com/luxfi/LPs/blob/main/LPs/lp-{number}.md",
-            'github_edit': f"https://github.com/luxfi/LPs/edit/main/LPs/lp-{number}.md",
+            'github_view': f"https://github.com/luxfi/LPs/blob/main/LPs/lp-{number:04d}.md",
+            'github_edit': f"https://github.com/luxfi/LPs/edit/main/LPs/lp-{number:04d}.md",
         }
         items.append(item)
     items.sort(key=lambda x: x['number'])

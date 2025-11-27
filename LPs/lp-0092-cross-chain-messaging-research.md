@@ -1,0 +1,392 @@
+---
+lp: 0092
+title: Cross-Chain Messaging Research  
+description: Research on cross-chain messaging protocols and implementations for Lux Network
+author: Lux Network Team (@luxdefi)
+discussions-to: https://github.com/luxfi/lps/discussions
+status: Draft
+type: Informational
+created: 2025-01-23
+requires: 0, 13, 14
+---
+
+## Abstract
+
+This research LP analyzes cross-chain messaging architectures for the Lux Network, examining how messages, state, and assets can be securely communicated across Lux's eight chains and external blockchains. It investigates current implementations, security models, and provides recommendations for building robust cross-chain communication infrastructure.
+
+## Motivation
+
+Effective cross-chain messaging is crucial for:
+
+1. **Asset Portability**: Moving tokens and NFTs between chains
+2. **State Synchronization**: Keeping cross-chain applications consistent
+3. **Composability**: Enabling cross-chain smart contract calls
+4. **User Experience**: Seamless interaction across chains
+5. **Ecosystem Growth**: Connecting Lux with external blockchains
+
+## Current Implementation
+
+### M-Chain Bridge Repository
+- **GitHub**: https://github.com/luxdefi/bridge
+- **Technology**: MPC-based message passing
+- **Status**: Production on testnet
+
+### Teleporter Protocol
+- **GitHub**: https://github.com/luxdefi/teleporter
+- **Technology**: Native Lux cross-chain messaging
+- **Status**: Research phase
+
+### Architecture Analysis
+
+```typescript
+// Current cross-chain architecture from repos
+interface CrossChainArchitecture {
+  messaging_layer: {
+    protocol: "MPC-based consensus";
+    validators: "Top 100 by stake";
+    finality: "2/3 threshold";
+    message_format: "ABI-encoded";
+  };
+  
+  security_model: {
+    consensus: "CGG21 threshold signatures";
+    verification: "Light client proofs";
+    replay_protection: "Nonce-based";
+    timeout: "Configurable per message";
+  };
+  
+  supported_chains: {
+    internal: ["P-Chain", "X-Chain", "C-Chain", "M-Chain", "Z-Chain"];
+    external: ["Ethereum", "BSC", "Lux", "Polygon"];
+  };
+}
+```
+
+## Research Findings
+
+### 1. Message Protocol Design
+
+#### Current Implementation
+```solidity
+// From bridge repository
+contract CrossChainMessenger {
+    struct Message {
+        uint256 nonce;
+        uint256 sourceChain;
+        uint256 destChain;
+        address sender;
+        address recipient;
+        bytes payload;
+        uint256 gasLimit;
+        uint256 timestamp;
+    }
+    
+    struct MessageProof {
+        bytes32 messageHash;
+        bytes[] signatures;
+        uint256 blockHeight;
+        bytes32 blockHash;
+    }
+    
+    mapping(bytes32 => MessageStatus) public messageStatus;
+    
+    function sendMessage(
+        uint256 destChain,
+        address recipient,
+        bytes calldata payload
+    ) external payable returns (bytes32 messageId) {
+        uint256 nonce = _incrementNonce(msg.sender);
+        
+        Message memory message = Message({
+            nonce: nonce,
+            sourceChain: block.chainid,
+            destChain: destChain,
+            sender: msg.sender,
+            recipient: recipient,
+            payload: payload,
+            gasLimit: 200000,
+            timestamp: block.timestamp
+        });
+        
+        messageId = keccak256(abi.encode(message));
+        
+        emit MessageSent(messageId, message);
+    }
+}
+```
+
+#### Optimization Opportunities
+1. **Batching**: Bundle multiple messages for efficiency
+2. **Compression**: Reduce message size with efficient encoding
+3. **Priority Fees**: Express lanes for urgent messages
+
+### 2. Security Models Comparison
+
+```typescript
+interface SecurityModels {
+  mpc_based: {
+    pros: ["No single point of failure", "Flexible threshold", "Chain agnostic"];
+    cons: ["Complex key management", "Slower consensus", "Liveness assumptions"];
+    implementation: "M-Chain with CGG21";
+  };
+  
+  light_client: {
+    pros: ["Trustless verification", "No external validators", "Deterministic"];
+    cons: ["High gas costs", "Chain-specific", "Reorg handling"];
+    implementation: "IBC-style with Tendermint";
+  };
+  
+  optimistic: {
+    pros: ["Low cost", "Fast finality", "Simple implementation"];
+    cons: ["Challenge period", "Liquidity requirements", "Fraud proof complexity"];
+    implementation: "Optimism-style with fault proofs";
+  };
+  
+  zk_based: {
+    pros: ["Instant finality", "Trustless", "Privacy options"];
+    cons: ["Computational overhead", "Proof generation time", "Circuit complexity"];
+    implementation: "Z-Chain with Plonky2";
+  };
+}
+```
+
+### 3. Teleporter Protocol Design
+
+```solidity
+// Proposed Teleporter implementation
+contract TeleporterMessenger {
+    // Unified message format for all Lux chains
+    struct TeleporterMessage {
+        bytes32 messageID;
+        address senderAddress;
+        address destinationAddress;
+        uint256 destinationChainID;
+        bytes message;
+        uint256 requiredGasLimit;
+        address[] allowedRelayers;
+        TeleporterFeeInfo feeInfo;
+    }
+    
+    struct TeleporterFeeInfo {
+        address feeAsset;
+        uint256 amount;
+        address recipient;
+    }
+    
+    // Chain-specific adapters
+    mapping(uint256 => IChainAdapter) public chainAdapters;
+    
+    function sendCrossChainMessage(
+        uint256 destinationChainID,
+        address destinationAddress,
+        bytes calldata message,
+        uint256 requiredGasLimit,
+        address feeAsset,
+        uint256 feeAmount
+    ) external returns (bytes32 messageID) {
+        TeleporterMessage memory teleporterMessage = TeleporterMessage({
+            messageID: _generateMessageID(),
+            senderAddress: msg.sender,
+            destinationAddress: destinationAddress,
+            destinationChainID: destinationChainID,
+            message: message,
+            requiredGasLimit: requiredGasLimit,
+            allowedRelayers: new address[](0),
+            feeInfo: TeleporterFeeInfo({
+                feeAsset: feeAsset,
+                amount: feeAmount,
+                recipient: msg.sender
+            })
+        });
+        
+        // Route through appropriate chain adapter
+        chainAdapters[destinationChainID].sendMessage(teleporterMessage);
+        
+        emit MessageSent(messageID, destinationChainID);
+        return messageID;
+    }
+}
+```
+
+### 4. State Synchronization
+
+#### Cross-Chain State Machine
+```solidity
+// State sync implementation
+contract StateSynchronizer {
+    struct StateUpdate {
+        bytes32 stateRoot;
+        uint256 blockHeight;
+        uint256 timestamp;
+        bytes proof;
+    }
+    
+    mapping(uint256 => mapping(uint256 => StateUpdate)) public chainStates;
+    
+    function syncState(
+        uint256 sourceChain,
+        StateUpdate calldata update,
+        bytes calldata signatures
+    ) external {
+        // Verify signatures from validator set
+        require(
+            _verifyValidatorSignatures(
+                keccak256(abi.encode(update)),
+                signatures
+            ),
+            "Invalid signatures"
+        );
+        
+        // Update state
+        chainStates[sourceChain][update.blockHeight] = update;
+        
+        // Trigger dependent updates
+        _processStateUpdate(sourceChain, update);
+    }
+    
+    function verifyStateInclusion(
+        uint256 sourceChain,
+        bytes32 key,
+        bytes calldata value,
+        bytes calldata proof
+    ) external view returns (bool) {
+        StateUpdate memory latestState = _getLatestState(sourceChain);
+        
+        return MerkleProof.verify(
+            proof,
+            latestState.stateRoot,
+            keccak256(abi.encodePacked(key, value))
+        );
+    }
+}
+```
+
+### 5. Message Ordering and Delivery
+
+```typescript
+// Message ordering guarantees
+enum OrderingType {
+    UNORDERED,      // No ordering guarantees
+    ORDERED,        // FIFO per sender
+    TOTAL_ORDERED   // Global ordering across all messages
+}
+
+interface MessageDelivery {
+    at_most_once: {
+        description: "Message may be lost but never duplicated";
+        use_case: "Non-critical notifications";
+        implementation: "Simple send without retry";
+    };
+    
+    at_least_once: {
+        description: "Message guaranteed delivery but may duplicate";
+        use_case: "Critical operations with idempotency";
+        implementation: "Retry with deduplication";
+    };
+    
+    exactly_once: {
+        description: "Message delivered exactly once";
+        use_case: "Financial transactions";
+        implementation: "Two-phase commit with state tracking";
+    };
+}
+```
+
+## Recommendations
+
+### 1. Hybrid Architecture
+
+```yaml
+recommended_architecture:
+  internal_chains:  # Between Lux chains
+    protocol: "Teleporter"
+    security: "Native consensus"
+    latency: "<1 second"
+    cost: "Minimal"
+  
+  external_chains:  # To/from external blockchains
+    protocol: "M-Chain MPC Bridge"
+    security: "Threshold signatures"
+    latency: "2-5 minutes"
+    cost: "Variable based on destination"
+  
+  specialized:
+    privacy: "Z-Chain for private messages"
+    high_throughput: "Batching on X-Chain"
+    complex_logic: "C-Chain smart contracts"
+```
+
+### 2. Security Enhancements
+
+1. **Multi-Layer Verification**: Combine MPC with light clients
+2. **Economic Security**: Stake-based validator selection
+3. **Timelock Protection**: Delay for high-value transfers
+4. **Circuit Breakers**: Automatic pause on anomalies
+
+### 3. Performance Optimizations
+
+1. **Message Aggregation**: Bundle small messages
+2. **Compression**: Use efficient encoding schemes
+3. **Caching**: Store frequently accessed state
+4. **Parallel Processing**: Independent message lanes
+
+## Implementation Roadmap
+
+### Phase 1: Teleporter Protocol (Q1 2025)
+- [ ] Native Lux chain messaging
+- [ ] Basic message passing
+- [ ] State verification
+
+### Phase 2: External Bridges (Q2 2025)
+- [ ] Ethereum bridge upgrade
+- [ ] BSC and Polygon support
+- [ ] Unified bridge interface
+
+### Phase 3: Advanced Features (Q3 2025)
+- [ ] Private messaging via Z-Chain
+- [ ] Cross-chain smart contract calls
+- [ ] State synchronization
+
+## Related Repositories
+
+- **Bridge**: https://github.com/luxdefi/bridge
+- **Teleporter**: https://github.com/luxdefi/teleporter
+- **Light Client**: https://github.com/luxdefi/light-client
+- **MPC Implementation**: https://github.com/luxdefi/mpc-tss
+
+## Open Questions
+
+1. **Finality**: How to handle chain reorganizations?
+2. **Gas Abstraction**: Who pays for destination gas?
+3. **Message Size**: Optimal limits for efficiency?
+4. **Governance**: How to upgrade the protocol?
+
+## Conclusion
+
+Cross-chain messaging is fundamental to Lux's multi-chain vision. The combination of Teleporter for internal communication and MPC bridges for external chains provides a robust foundation. Focus should be on security, performance, and developer experience.
+
+## References
+
+- [IBC Protocol](https://github.com/cosmos/ibc)
+- [LayerZero](https://github.com/LayerZero-Labs/LayerZero)
+- [Axelar Network](https://github.com/axelarnetwork/axelar-core)
+- [Chainlink CCIP](https://chain.link/cross-chain)
+
+## Copyright
+
+Copyright and related rights waived via [CC0](../LICENSE.md).
+## Specification
+
+Normative content includes the processes, data formats, and constants described here; implementations MUST conform for compatibility.
+
+## Rationale
+
+Chosen to simplify operations while preserving strong safety properties.
+
+## Backwards Compatibility
+
+Additive change; no breaking effects. Rollout is opt‑in.
+
+## Security Considerations
+
+Treat untrusted inputs carefully, validate proofs, and use robust cryptographic primitives as discussed.

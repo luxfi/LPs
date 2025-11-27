@@ -110,7 +110,7 @@ def format_table_row(lp):
     if len(title) > 50:
         title = title[:47] + '...'
     
-    return f"| [LP-{number}](./LPs/lp-{number}.md) | {title} | {authors} | {lp_type} | {category} | {status} |"
+    return f"| [LP-{number:04d}](./LPs/lp-{number:04d}.md) | {title} | {authors} | {lp_type} | {category} | {status} |"
 
 def generate_index_section():
     """Generate the index section for README"""
@@ -146,7 +146,7 @@ def generate_index_section():
             else:
                 lrc_num = f"LRC-{number}"
 
-            output.append(f"| {lrc_num} | [LP-{number}](./LPs/lp-{number}.md) | {title} | {status} |")
+            output.append(f"| {lrc_num} | [LP-{number:04d}](./LPs/lp-{number:04d}.md) | {title} | {status} |")
     
     return '\n'.join(output)
 

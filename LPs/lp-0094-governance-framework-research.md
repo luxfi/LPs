@@ -1,0 +1,474 @@
+---
+lp: 0094
+title: Governance Framework Research
+description: Research on decentralized governance models and implementation strategies for Lux Network
+author: Lux Network Team (@luxdefi)
+discussions-to: https://github.com/luxfi/lps/discussions
+status: Draft
+type: Informational
+created: 2025-01-23
+requires: 0, 1, 10
+---
+
+## Abstract
+
+This research LP explores governance frameworks for the Lux Network, analyzing different decentralized governance models, voting mechanisms, proposal systems, and treasury management. It examines how Lux's multi-chain architecture enables innovative governance approaches and provides recommendations for building an effective, inclusive governance system.
+
+## Motivation
+
+Effective governance is essential for:
+
+1. **Decentralization**: Distribute decision-making power
+2. **Evolution**: Adapt to changing market conditions
+3. **Treasury Management**: Allocate resources effectively
+4. **Community Alignment**: Ensure stakeholder representation
+5. **Protocol Upgrades**: Coordinate network improvements
+
+## Current Implementation
+
+### Governance Components in Ecosystem
+- **GitHub**: https://github.com/luxdefi/governance
+- **Status**: Research phase
+- **Model**: Token-weighted with delegation
+
+### Existing Governance Touchpoints
+```typescript
+// Current governance elements across repos
+interface GovernanceArchitecture {
+  voting: {
+    repo: "luxdefi/governance";
+    mechanism: "Token-weighted voting";
+    delegation: true;
+    timelock: "48 hours";
+  };
+  
+  treasury: {
+    repo: "luxdefi/treasury";
+    multisig: "5 of 9";
+    funds: ["Development", "Ecosystem", "Community"];
+  };
+  
+  proposals: {
+    types: ["Protocol", "Treasury", "Parameter"];
+    threshold: "100,000 LUX";
+    quorum: "10% of supply";
+  };
+}
+```
+
+## Research Findings
+
+### 1. Voting Mechanisms
+
+#### Quadratic Voting Implementation
+```solidity
+// Quadratic voting to reduce whale influence
+contract QuadraticGovernance {
+    struct Proposal {
+        uint256 id;
+        string description;
+        uint256 startTime;
+        uint256 endTime;
+        uint256 totalVotes;
+        mapping(address => uint256) voterCredits;
+        mapping(uint256 => uint256) optionVotes;
+        bool executed;
+    }
+    
+    mapping(uint256 => Proposal) public proposals;
+    mapping(address => uint256) public votingPower;
+    
+    function vote(
+        uint256 proposalId,
+        uint256 option,
+        uint256 credits
+    ) external {
+        Proposal storage proposal = proposals[proposalId];
+        require(block.timestamp >= proposal.startTime, "Not started");
+        require(block.timestamp < proposal.endTime, "Ended");
+        
+        uint256 currentCredits = proposal.voterCredits[msg.sender];
+        uint256 totalCredits = currentCredits + credits;
+        
+        // Quadratic cost: votes = sqrt(credits)
+        uint256 currentVotes = sqrt(currentCredits);
+        uint256 newVotes = sqrt(totalCredits);
+        uint256 additionalVotes = newVotes - currentVotes;
+        
+        // Check user has enough voting power
+        require(
+            votingPower[msg.sender] >= totalCredits,
+            "Insufficient voting power"
+        );
+        
+        proposal.voterCredits[msg.sender] = totalCredits;
+        proposal.optionVotes[option] += additionalVotes;
+        proposal.totalVotes += additionalVotes;
+        
+        emit VoteCast(msg.sender, proposalId, option, additionalVotes);
+    }
+    
+    function sqrt(uint256 x) internal pure returns (uint256) {
+        if (x == 0) return 0;
+        uint256 z = (x + 1) / 2;
+        uint256 y = x;
+        while (z < y) {
+            y = z;
+            z = (x / z + z) / 2;
+        }
+        return y;
+    }
+}
+```
+
+### 2. Multi-Chain Governance
+
+#### Cross-Chain Coordination
+```solidity
+// Governance across Lux's eight chains
+contract MultiChainGovernance {
+    struct ChainWeight {
+        uint256 chainId;
+        uint256 weight;     // Voting weight multiplier
+        address governor;   // Chain-specific governor
+    }
+    
+    struct CrossChainProposal {
+        bytes32 proposalHash;
+        uint256[] targetChains;
+        bytes[] calldata;
+        uint256 totalVotes;
+        mapping(uint256 => uint256) chainVotes;
+        mapping(uint256 => bool) chainExecuted;
+    }
+    
+    mapping(uint256 => ChainWeight) public chainWeights;
+    mapping(bytes32 => CrossChainProposal) public proposals;
+    
+    // Different chains have different voting weights
+    constructor() {
+        chainWeights[1] = ChainWeight(1, 30, address(0)); // C-Chain: 30%
+        chainWeights[2] = ChainWeight(2, 25, address(0)); // X-Chain: 25%
+        chainWeights[3] = ChainWeight(3, 20, address(0)); // P-Chain: 20%
+        chainWeights[4] = ChainWeight(4, 15, address(0)); // M-Chain: 15%
+        chainWeights[5] = ChainWeight(5, 10, address(0)); // Z-Chain: 10%
+    }
+    
+    function aggregateVotes(bytes32 proposalHash) external view returns (uint256) {
+        CrossChainProposal storage proposal = proposals[proposalHash];
+        uint256 weightedVotes = 0;
+        
+        for (uint256 i = 0; i < proposal.targetChains.length; i++) {
+            uint256 chainId = proposal.targetChains[i];
+            uint256 chainVote = proposal.chainVotes[chainId];
+            uint256 weight = chainWeights[chainId].weight;
+            
+            weightedVotes += (chainVote * weight) / 100;
+        }
+        
+        return weightedVotes;
+    }
+}
+```
+
+### 3. Delegation Systems
+
+#### Liquid Democracy
+```solidity
+// Delegation with recursive vote counting
+contract LiquidDemocracy {
+    struct Delegation {
+        address delegate;
+        uint256 timestamp;
+        bool isActive;
+    }
+    
+    mapping(address => Delegation) public delegations;
+    mapping(address => uint256) public votingPower;
+    mapping(address => address[]) public delegators;
+    
+    function delegate(address to) external {
+        require(to != msg.sender, "Cannot delegate to self");
+        require(to != address(0), "Invalid delegate");
+        
+        // Check for circular delegation
+        address current = to;
+        while (delegations[current].isActive) {
+            current = delegations[current].delegate;
+            require(current != msg.sender, "Circular delegation");
+        }
+        
+        // Remove from previous delegate
+        if (delegations[msg.sender].isActive) {
+            _removeDelegator(
+                delegations[msg.sender].delegate,
+                msg.sender
+            );
+        }
+        
+        // Add to new delegate
+        delegations[msg.sender] = Delegation({
+            delegate: to,
+            timestamp: block.timestamp,
+            isActive: true
+        });
+        
+        delegators[to].push(msg.sender);
+        
+        emit DelegationChanged(msg.sender, to);
+    }
+    
+    function getVotingPower(address voter) public view returns (uint256) {
+        uint256 power = votingPower[voter];
+        
+        // Add delegated power recursively
+        for (uint256 i = 0; i < delegators[voter].length; i++) {
+            address delegator = delegators[voter][i];
+            if (delegations[delegator].isActive) {
+                power += getVotingPower(delegator);
+            }
+        }
+        
+        return power;
+    }
+}
+```
+
+### 4. Treasury Management
+
+#### Programmable Treasury
+```solidity
+// Advanced treasury with streaming and vesting
+contract ProgrammableTreasury {
+    struct Stream {
+        address recipient;
+        uint256 amountPerSecond;
+        uint256 startTime;
+        uint256 endTime;
+        uint256 withdrawn;
+        bool cancellable;
+    }
+    
+    struct Grant {
+        address recipient;
+        uint256 totalAmount;
+        uint256 vestingStart;
+        uint256 vestingDuration;
+        uint256 cliffDuration;
+        uint256 withdrawn;
+        bool revocable;
+    }
+    
+    mapping(uint256 => Stream) public streams;
+    mapping(uint256 => Grant) public grants;
+    uint256 public nextStreamId;
+    uint256 public nextGrantId;
+    
+    modifier onlyGovernance() {
+        require(msg.sender == governance, "Not governance");
+        _;
+    }
+    
+    function createStream(
+        address recipient,
+        uint256 totalAmount,
+        uint256 duration
+    ) external onlyGovernance returns (uint256 streamId) {
+        streamId = nextStreamId++;
+        
+        streams[streamId] = Stream({
+            recipient: recipient,
+            amountPerSecond: totalAmount / duration,
+            startTime: block.timestamp,
+            endTime: block.timestamp + duration,
+            withdrawn: 0,
+            cancellable: true
+        });
+        
+        emit StreamCreated(streamId, recipient, totalAmount, duration);
+    }
+    
+    function withdrawFromStream(uint256 streamId) external {
+        Stream storage stream = streams[streamId];
+        require(msg.sender == stream.recipient, "Not recipient");
+        
+        uint256 available = _getAvailableAmount(stream);
+        require(available > 0, "Nothing to withdraw");
+        
+        stream.withdrawn += available;
+        
+        // Transfer tokens
+        token.transfer(stream.recipient, available);
+        
+        emit StreamWithdrawal(streamId, available);
+    }
+    
+    function _getAvailableAmount(Stream memory stream) 
+        private 
+        view 
+        returns (uint256) 
+    {
+        if (block.timestamp < stream.startTime) return 0;
+        
+        uint256 elapsed = block.timestamp >= stream.endTime
+            ? stream.endTime - stream.startTime
+            : block.timestamp - stream.startTime;
+            
+        uint256 totalVested = elapsed * stream.amountPerSecond;
+        return totalVested - stream.withdrawn;
+    }
+}
+```
+
+### 5. Proposal Lifecycle
+
+```typescript
+// Comprehensive proposal system
+interface ProposalLifecycle {
+  stages: {
+    idea: {
+      location: "Forum discussion";
+      duration: "Open-ended";
+      requirements: "None";
+    };
+    
+    draft: {
+      location: "GitHub PR";
+      duration: "7 days minimum";
+      requirements: ["100K LUX support", "Technical specification"];
+    };
+    
+    review: {
+      location: "On-chain proposal";
+      duration: "3 days";
+      requirements: ["Security audit if code", "Economic analysis"];
+    };
+    
+    voting: {
+      location: "Multi-chain governance";
+      duration: "7 days";
+      requirements: ["10% quorum", "60% approval"];
+    };
+    
+    timelock: {
+      location: "Timelock contract";
+      duration: "48 hours";
+      requirements: ["No veto from security council"];
+    };
+    
+    execution: {
+      location: "Target chain";
+      duration: "Immediate";
+      requirements: ["Automated execution"];
+    };
+  };
+}
+```
+
+## Recommendations
+
+### 1. Governance Architecture
+
+```yaml
+recommended_architecture:
+  voting_mechanism:
+    primary: "Token-weighted with quadratic options"
+    delegation: "Liquid democracy"
+    privacy: "Optional shielded voting via Z-Chain"
+  
+  proposal_types:
+    protocol_upgrade:
+      threshold: "500K LUX"
+      quorum: "15%"
+      timelock: "7 days"
+    
+    treasury_allocation:
+      threshold: "100K LUX"
+      quorum: "10%"
+      timelock: "48 hours"
+    
+    parameter_change:
+      threshold: "50K LUX"
+      quorum: "5%"
+      timelock: "24 hours"
+  
+  security_measures:
+    guardian: "Multi-sig veto for critical issues"
+    emergency_pause: "3 of 5 security council"
+    upgrade_delay: "Mandatory timelock"
+```
+
+### 2. Incentive Alignment
+
+1. **Participation Rewards**: Reward active governance participants
+2. **Delegation Incentives**: Share rewards with delegates
+3. **Long-term Staking**: Higher weight for locked tokens
+4. **Reputation System**: Track governance participation
+
+### 3. Tooling Requirements
+
+1. **Governance Dashboard**: Unified view across chains
+2. **Proposal Builder**: Template-based proposal creation
+3. **Simulation Tools**: Test proposal effects
+4. **Analytics Platform**: Voting patterns and participation
+
+## Implementation Roadmap
+
+### Phase 1: Basic Governance (Q1 2025)
+- [ ] Deploy governance token contracts
+- [ ] Implement basic voting
+- [ ] Create proposal system
+
+### Phase 2: Advanced Features (Q2 2025)
+- [ ] Add delegation system
+- [ ] Implement quadratic voting
+- [ ] Deploy treasury contracts
+
+### Phase 3: Multi-Chain (Q3 2025)
+- [ ] Cross-chain proposal execution
+- [ ] Unified governance dashboard
+- [ ] Advanced treasury management
+
+## Related Repositories
+
+- **Governance Contracts**: https://github.com/luxdefi/governance
+- **Treasury**: https://github.com/luxdefi/treasury
+- **Voting UI**: https://github.com/luxdefi/governance-ui
+- **Forum**: https://github.com/luxdefi/forum
+
+## Open Questions
+
+1. **Vote Buying**: How to prevent governance attacks?
+2. **Participation**: How to encourage broad participation?
+3. **Emergency Actions**: Balance between speed and decentralization?
+4. **Cross-Chain Coordination**: How to handle chain-specific issues?
+
+## Conclusion
+
+Lux's multi-chain architecture enables innovative governance approaches that balance efficiency with decentralization. The combination of liquid democracy, quadratic voting options, and cross-chain coordination positions Lux to build a robust, inclusive governance system that can evolve with the ecosystem.
+
+## References
+
+- [Compound Governance](https://compound.finance/governance)
+- [MakerDAO Governance](https://makerdao.com/governance)
+- [Snapshot](https://snapshot.org/)
+- [Quadratic Voting](https://www.radicalxchange.org/concepts/quadratic-voting/)
+
+## Copyright
+
+Copyright and related rights waived via [CC0](../LICENSE.md).
+## Specification
+
+Normative algorithms, types, and constants described herein MUST be followed for interoperability.
+
+## Rationale
+
+The design balances clarity, performance, and security trade‑offs appropriate for Lux.
+
+## Backwards Compatibility
+
+Additive; does not break existing interfaces. Migration is opt‑in.
+
+## Security Considerations
+
+Validate inputs, authenticate where needed, and follow cryptographic best practices to mitigate common threats.
