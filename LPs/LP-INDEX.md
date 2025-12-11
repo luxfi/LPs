@@ -415,7 +415,7 @@ Quick links to find LPs by tag:
 | `t-chain` | Threshold chain | 2 |
 | `m-chain` | MPC chain | 3 |
 | `q-chain` | Quantum chain | 2 |
-| `x-chain` | Exchange chain | 2 |
+| `x-chain` | Exchange chain (DEX) | 8 |
 | `z-chain` | Zero-knowledge chain | 3 |
 
 ### Development
@@ -433,6 +433,17 @@ Quick links to find LPs by tag:
 | `l2` | Layer 2 solutions | 8 |
 | `rollup` | Rollup technology | 4 |
 | `scaling` | Scaling solutions | 4 |
+
+### DEX & Trading (LP-9000 Series) ⚡
+| Tag | Description | Count |
+|-----|-------------|-------|
+| `dex` | DEX infrastructure | 6 |
+| `trading` | Trading protocols | 6 |
+| `orderbook` | Order book systems | 2 |
+| `perpetuals` | Perpetual futures | 1 |
+| `margin` | Margin trading | 1 |
+| `oracle` | Price oracles | 2 |
+| `lp-9000-series` | LP-9000 DEX series | 6 |
 
 ### AI & Privacy
 | Tag | Description | Count |
