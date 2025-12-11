@@ -2,7 +2,7 @@
 lp: 0301
 title: Lux B-Chain - Cross-Chain Bridge Protocol
 description: Trustless cross-chain bridge protocol using MPC threshold signatures and ZK light clients
-author: Lux Partners (@luxdefi)
+author: Lux Partners (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
 status: Final
 type: Standards Track

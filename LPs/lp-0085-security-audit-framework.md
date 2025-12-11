@@ -2,7 +2,7 @@
 lp: 0085
 title: Security Audit Framework
 description: Defines the security audit standards and requirements for Lux Network protocols
-author: Lux Network Team (@luxdefi)
+author: Lux Network Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
 status: Draft
 type: Standards Track
@@ -490,7 +490,7 @@ async function testEmergencyResponse() {
 ## Reference Implementation
 
 Reference security framework at:
-https://github.com/luxdefi/security-framework
+https://github.com/luxfi/security-framework
 
 Key components:
 - Automated security scanning

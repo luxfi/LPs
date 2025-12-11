@@ -14,7 +14,7 @@ plugins:
 
 # SEO
 twitter:
-  username: luxdefi
+  username: luxfi
   card: summary_large_image
 
 # Social
@@ -22,7 +22,7 @@ social:
   name: Lux Network
   links:
     - https://github.com/luxfi
-    - https://twitter.com/luxdefi
+    - https://twitter.com/luxfi
     - https://lux.network
 
 # Analytics (add your tracking ID when ready)

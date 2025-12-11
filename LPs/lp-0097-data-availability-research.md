@@ -2,7 +2,7 @@
 lp: 0097
 title: Data Availability Research
 description: Research on data availability solutions and storage optimization for Lux Network
-author: Lux Network Team (@luxdefi)
+author: Lux Network Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
 status: Draft
 type: Informational
@@ -488,10 +488,10 @@ recommended_architecture:
 
 ## Related Repositories
 
-- **DA Layer**: https://github.com/luxdefi/data-availability
-- **State Management**: https://github.com/luxdefi/state-rent
-- **IPFS Gateway**: https://github.com/luxdefi/ipfs-gateway
-- **Archival Node**: https://github.com/luxdefi/archive-node
+- **DA Layer**: https://github.com/luxfi/data-availability
+- **State Management**: https://github.com/luxfi/state-rent
+- **IPFS Gateway**: https://github.com/luxfi/ipfs-gateway
+- **Archival Node**: https://github.com/luxfi/archive-node
 
 ## Open Questions
 

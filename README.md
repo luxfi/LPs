@@ -63,6 +63,7 @@ By using LPs, the Lux community can coordinate development in a decentralized ma
 | [LP-0040](./LPs/lp-0040-wallet-standards.md) | Wallet Standards | Lux Network Team | Standards Track | Interface | Draft |
 | [LP-0042](./LPs/lp-0042-multi-signature-wallet-standard.md) | Multi-Signature Wallet Standard | Lux Network Team | Standards Track | LRC | Draft |
 | [LP-0045](./LPs/lp-0045-z-chain-encrypted-execution-layer-interface.md) | Z-Chain Encrypted Execution Layer Interface | Zach Kelling and Lux Team | Standards Track | Interface | Draft |
+| [LP-0046](./LPs/lp-0046-z-chain-zkvm-architecture.md) | Z-Chain ZKVM Architecture | Zach Kelling and Lux Team | Standards Track | Core | Draft |
 | [LP-0050](./LPs/lp-0050-developer-tools-overview.md) | Developer Tools Overview | Lux Network Team | Meta | - | Draft |
 | [LP-0060](./LPs/lp-0060-defi-protocols-overview.md) | DeFi Protocols Overview | Lux Network Team | Meta | - | Draft |
 | [LP-0070](./LPs/lp-0070-nft-staking-standard.md) | NFT Staking Standard | Lux Network Team | Standards Track | LRC | Draft |
@@ -280,7 +281,7 @@ Whether you want to author a new proposal, improve existing ones, or simply offe
 - 🌐 Forum: Join the discussion on the Lux Forum – a great place for informal proposal ideas and community Q&A.
 - 📚 Documentation: Explore the Lux Network Docs for technical documentation, tutorials, and background on Lux architecture.
 - 💬 Discord: Chat with core developers and community members in real-time on Discord.
-- 🐦 Twitter: Follow @luxdefi on Twitter for announcements, updates, and highlights of new proposals.
+- 🐦 Twitter: Follow @luxfi on Twitter for announcements, updates, and highlights of new proposals.
 
 These resources will help you stay informed and get support as you work with Lux and LPs.
 

@@ -2,7 +2,7 @@
 lp: 0099
 title: Q-Chain – Root PQC with Quasar Consensus Protocol Family
 description: Comprehensive specification of Q-Chain as the root Post-Quantum Chain with Quasar consensus, featuring dual-certificate finality and recursive PQC architecture
-author: Lux Network Team (@luxdefi)
+author: Lux Network Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
 status: Draft
 type: Standards Track

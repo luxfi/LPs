@@ -2,7 +2,7 @@
 lp: 0074
 title: CREATE2 Factory Standard
 description: Defines a standard interface for deterministic contract deployment factories using CREATE2
-author: Lux Network Team (@luxdefi)
+author: Lux Network Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
 status: Draft
 type: Standards Track
@@ -546,8 +546,8 @@ forge verify-contract \
 ## Reference Implementation
 
 Reference implementations available at:
-- https://github.com/luxdefi/create2-factory
-- https://github.com/luxdefi/standard
+- https://github.com/luxfi/create2-factory
+- https://github.com/luxfi/standard
 
 Key features:
 - Multi-chain deployment support

@@ -2,7 +2,7 @@
 lp: 0060
 title: DeFi Protocols Overview
 description: Index of decentralized finance protocols, standards, and building blocks in the Lux ecosystem.
-author: Lux Network Team (@luxdefi)
+author: Lux Network Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
 status: Draft
 type: Meta

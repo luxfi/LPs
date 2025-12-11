@@ -2,7 +2,7 @@
 lp: 0341
 title: Decentralized Secrets Management Platform
 description: Application-layer secrets management platform built on K-Chain providing Infisical-like functionality for projects, environments, version control, and DevOps integration
-author: Lux Protocol Team (@luxdefi)
+author: Lux Protocol Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
 status: Draft
 type: Standards Track

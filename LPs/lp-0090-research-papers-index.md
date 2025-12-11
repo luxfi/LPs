@@ -2,7 +2,7 @@
 lp: 0090
 title: Research Papers Index
 description: Index of research papers, experimental proposals, and forward-looking explorations for the Lux ecosystem.
-author: Lux Network Team (@luxdefi)
+author: Lux Network Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
 status: Draft
 type: Meta

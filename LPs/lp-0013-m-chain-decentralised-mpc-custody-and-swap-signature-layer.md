@@ -3,7 +3,7 @@ lp: 0013
 title: M-Chain – Decentralised MPC Custody & Swap-Signature Layer
 tags: [mpc, threshold-crypto, bridge]
 description: Purpose-built subnet providing threshold-signature custody, on-chain swap-signature proofs, slashing and reward logic, and light-client proofs for bridge operations.
-author: Lux Protocol Team (@luxdefi)
+author: Lux Protocol Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
 status: Draft
 type: Standards Track

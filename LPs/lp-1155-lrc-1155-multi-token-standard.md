@@ -2,7 +2,7 @@
 lp: 1155
 title: LRC-1155 Multi-Token Standard
 description: Another special number, corresponding to Ethereum's ERC-1155 multi-token standard.
-author: Lux Network Team (@luxdefi)
+author: Lux Network Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
 status: Final
 type: Standards Track

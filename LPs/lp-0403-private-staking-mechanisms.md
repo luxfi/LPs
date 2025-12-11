@@ -2,7 +2,7 @@
 lp: 0403
 title: Private Staking Mechanisms
 description: Anonymous staking pools with private reward distribution and verifiable delay functions
-author: Lux Network Team (@luxdefi)
+author: Lux Network Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
 status: Draft
 type: Standards Track

@@ -3,7 +3,7 @@ lp: 0010
 title: P-Chain (Platform Chain) Specification
 tags: [core, consensus, staking, validators]
 description: Specifies the Platform Chain, which is the metadata and coordination chain of Lux.
-author: Lux Network Team (@luxdefi)
+author: Lux Network Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
 status: Final
 type: Standards Track

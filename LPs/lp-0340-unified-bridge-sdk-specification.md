@@ -2,7 +2,7 @@
 lp: 0340
 title: Unified Bridge SDK Specification
 description: Comprehensive SDK specification for developers integrating with the Teleport bridge protocol across TypeScript, Go, and Python
-author: Lux Partners (@luxdefi)
+author: Lux Partners (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
 status: Draft
 type: Standards Track

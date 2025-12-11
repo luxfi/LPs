@@ -3,7 +3,7 @@ lp: 0009
 title: CLI Tool Specification
 tags: [dev-tools, cli]
 description: Defines the official Command-Line Interface (CLI) tools for Lux.
-author: Lux Network Team (@luxdefi)
+author: Lux Network Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
 status: Draft
 type: Standards Track

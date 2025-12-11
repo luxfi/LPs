@@ -3,7 +3,7 @@ lp: 0005
 title: Lux Quantum-Safe Wallets and Multisig Standard
 tags: [pqc, wallet, threshold-crypto]
 description: Focuses on the design of Lux's quantum-safe wallet infrastructure, including a new multisignature (multisig) standard that remains secure against quantum adversaries.
-author: Lux Network Team (@luxdefi)
+author: Lux Network Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
 status: Final
 requires: 4

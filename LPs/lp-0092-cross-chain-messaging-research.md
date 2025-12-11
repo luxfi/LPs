@@ -2,7 +2,7 @@
 lp: 0092
 title: Cross-Chain Messaging Research  
 description: Research on cross-chain messaging protocols and implementations for Lux Network
-author: Lux Network Team (@luxdefi)
+author: Lux Network Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
 status: Draft
 type: Informational
@@ -28,12 +28,12 @@ Effective cross-chain messaging is crucial for:
 ## Current Implementation
 
 ### M-Chain Bridge Repository
-- **GitHub**: https://github.com/luxdefi/bridge
+- **GitHub**: https://github.com/luxfi/bridge
 - **Technology**: MPC-based message passing
 - **Status**: Production on testnet
 
 ### Teleporter Protocol
-- **GitHub**: https://github.com/luxdefi/teleporter
+- **GitHub**: https://github.com/luxfi/teleporter
 - **Technology**: Native Lux cross-chain messaging
 - **Status**: Research phase
 
@@ -350,10 +350,10 @@ recommended_architecture:
 
 ## Related Repositories
 
-- **Bridge**: https://github.com/luxdefi/bridge
-- **Teleporter**: https://github.com/luxdefi/teleporter
-- **Light Client**: https://github.com/luxdefi/light-client
-- **MPC Implementation**: https://github.com/luxdefi/mpc-tss
+- **Bridge**: https://github.com/luxfi/bridge
+- **Teleporter**: https://github.com/luxfi/teleporter
+- **Light Client**: https://github.com/luxfi/light-client
+- **MPC Implementation**: https://github.com/luxfi/mpc-tss
 
 ## Open Questions
 

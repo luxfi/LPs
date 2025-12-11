@@ -2,7 +2,7 @@
 lp: 0401
 title: Confidential Lending Protocol
 description: Privacy-preserving lending protocol with zero-knowledge credit scoring and confidential collateral
-author: Lux Network Team (@luxdefi)
+author: Lux Network Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
 status: Draft
 type: Standards Track

@@ -2,7 +2,7 @@
 lp: 0094
 title: Governance Framework Research
 description: Research on decentralized governance models and implementation strategies for Lux Network
-author: Lux Network Team (@luxdefi)
+author: Lux Network Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
 status: Draft
 type: Informational
@@ -28,7 +28,7 @@ Effective governance is essential for:
 ## Current Implementation
 
 ### Governance Components in Ecosystem
-- **GitHub**: https://github.com/luxdefi/governance
+- **GitHub**: https://github.com/luxfi/governance
 - **Status**: Research phase
 - **Model**: Token-weighted with delegation
 
@@ -37,14 +37,14 @@ Effective governance is essential for:
 // Current governance elements across repos
 interface GovernanceArchitecture {
   voting: {
-    repo: "luxdefi/governance";
+    repo: "luxfi/governance";
     mechanism: "Token-weighted voting";
     delegation: true;
     timelock: "48 hours";
   };
   
   treasury: {
-    repo: "luxdefi/treasury";
+    repo: "luxfi/treasury";
     multisig: "5 of 9";
     funds: ["Development", "Ecosystem", "Community"];
   };
@@ -432,10 +432,10 @@ recommended_architecture:
 
 ## Related Repositories
 
-- **Governance Contracts**: https://github.com/luxdefi/governance
-- **Treasury**: https://github.com/luxdefi/treasury
-- **Voting UI**: https://github.com/luxdefi/governance-ui
-- **Forum**: https://github.com/luxdefi/forum
+- **Governance Contracts**: https://github.com/luxfi/governance
+- **Treasury**: https://github.com/luxfi/treasury
+- **Voting UI**: https://github.com/luxfi/governance-ui
+- **Forum**: https://github.com/luxfi/forum
 
 ## Open Questions
 

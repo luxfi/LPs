@@ -2,7 +2,7 @@
 lp: 0072
 title: Bridged Asset Standard
 description: Standard for bridged tokens from external chains to Lux Network
-author: Lux Network Team (@luxdefi)
+author: Lux Network Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
 status: Draft
 type: Standards Track

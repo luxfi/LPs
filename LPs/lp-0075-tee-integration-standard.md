@@ -2,7 +2,7 @@
 lp: 0075
 title: TEE Integration Standard
 description: Defines standard interfaces for Trusted Execution Environment integration on Lux Network
-author: Lux Network Team (@luxdefi)
+author: Lux Network Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
 status: Draft
 type: Standards Track
@@ -779,8 +779,8 @@ forge verify-contract \
 ## Reference Implementation
 
 Reference implementations available at:
-- https://github.com/luxdefi/tee-integration
-- https://github.com/luxdefi/confidential-contracts
+- https://github.com/luxfi/tee-integration
+- https://github.com/luxfi/confidential-contracts
 
 Key features:
 - Multi-TEE provider support

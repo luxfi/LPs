@@ -2,7 +2,7 @@
 lp: 0093
 title: Decentralized Identity Research
 description: Research on decentralized identity solutions and privacy-preserving KYC for Lux Network
-author: Lux Network Team (@luxdefi)
+author: Lux Network Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
 status: Draft
 type: Informational
@@ -28,7 +28,7 @@ Decentralized identity is critical for:
 ## Current Implementation
 
 ### Z-Chain Privacy Features
-- **GitHub**: https://github.com/luxdefi/z-chain
+- **GitHub**: https://github.com/luxfi/z-chain
 - **Technology**: ZK-proofs, FHE, TEE attestations
 - **Status**: Development phase
 
@@ -37,18 +37,18 @@ Decentralized identity is critical for:
 // Current identity touchpoints across repos
 interface IdentityArchitecture {
   wallet: {
-    repo: "luxdefi/wallet";
+    repo: "luxfi/wallet";
     features: ["Address management", "Key derivation", "Social recovery"];
   };
   
   compliance: {
-    repo: "luxdefi/compliance";
+    repo: "luxfi/compliance";
     providers: ["Jumio", "Onfido", "Sumsub"];
     data_handling: "Centralized with encryption";
   };
   
   credit_system: {
-    repo: "luxdefi/credit";
+    repo: "luxfi/credit";
     identity_requirements: ["KYC Level 2", "Proof of income"];
     reputation_tracking: true;
   };
@@ -359,10 +359,10 @@ recommended_architecture:
 
 ## Related Repositories
 
-- **Z-Chain**: https://github.com/luxdefi/z-chain
-- **Identity SDK**: https://github.com/luxdefi/identity-sdk
-- **Compliance Tools**: https://github.com/luxdefi/compliance
-- **Wallet Integration**: https://github.com/luxdefi/wallet
+- **Z-Chain**: https://github.com/luxfi/z-chain
+- **Identity SDK**: https://github.com/luxfi/identity-sdk
+- **Compliance Tools**: https://github.com/luxfi/compliance
+- **Wallet Integration**: https://github.com/luxfi/wallet
 
 ## Open Questions
 

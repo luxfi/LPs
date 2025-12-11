@@ -2,7 +2,7 @@
 lp: 0040
 title: Wallet Standards
 description: Wallet-related standards.
-author: Lux Network Team (@luxdefi)
+author: Lux Network Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
 status: Draft
 type: Standards Track

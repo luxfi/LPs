@@ -2,7 +2,7 @@
 lp: 0176
 title: Dynamic Gas Pricing Mechanism
 description: Adaptive gas pricing and limits that respond to network congestion based on ACP-176
-author: Lux Network Team (@luxdefi)
+author: Lux Network Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
 status: Final
 type: Standards Track

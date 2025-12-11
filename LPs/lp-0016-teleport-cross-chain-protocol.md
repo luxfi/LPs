@@ -3,7 +3,7 @@ lp: 0016
 title: Teleport Cross-Chain Protocol
 tags: [teleport, cross-chain, bridge]
 description: Defines the Teleport protocol for cross-chain transfers within Lux's network.
-author: Lux Network Team (@luxdefi)
+author: Lux Network Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
 status: Draft
 type: Standards Track

@@ -2,7 +2,7 @@
 lp: 0336
 title: K-Chain (KeyManagementVM) Specification
 description: Defines the K-Chain as Lux Network's dedicated key management chain for post-quantum secure key encapsulation, encrypted data storage, and threshold secret management
-author: Lux Protocol Team (@luxdefi)
+author: Lux Protocol Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
 status: Draft
 type: Standards Track

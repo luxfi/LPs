@@ -2,7 +2,7 @@
 lp: 0071
 title: Media Content NFT Standard
 description: Standard for media and content NFTs with licensing, royalties, and metadata on Lux Network
-author: Lux Network Team (@luxdefi)
+author: Lux Network Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
 status: Draft
 type: Standards Track

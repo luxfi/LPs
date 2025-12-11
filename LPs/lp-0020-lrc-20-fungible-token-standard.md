@@ -2,7 +2,7 @@
 lp: 0020
 title: LRC-20 Fungible Token Standard
 description: This LP retains the Lux Request for Comment 20 standard.
-author: Lux Network Team (@luxdefi)
+author: Lux Network Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
 status: Final
 type: Standards Track

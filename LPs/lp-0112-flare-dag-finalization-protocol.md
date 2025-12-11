@@ -2,7 +2,7 @@
 lp: 0112
 title: flare dag finalization protocol
 description: DAG finalization via cascading accept protocol with causal ordering
-author: Lux Network Team (@luxdefi)
+author: Lux Network Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
 status: Draft
 type: Standards Track

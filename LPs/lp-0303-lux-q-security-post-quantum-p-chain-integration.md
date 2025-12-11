@@ -2,7 +2,7 @@
 lp: 0303
 title: Lux Q-Security - Post-Quantum P-Chain Integration
 description: Post-quantum secure consensus layer integrated into P-Chain using ML-DSA (Dilithium), ML-KEM (Kyber), and BLS+Ringtail hybrid signatures
-author: Lux Partners (@luxdefi)
+author: Lux Partners (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
 status: Final
 type: Standards Track

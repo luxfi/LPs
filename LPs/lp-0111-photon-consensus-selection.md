@@ -2,7 +2,7 @@
 lp: 0111
 title: photon consensus selection
 description: Performance-based peer selection with luminance tracking for optimal consensus participation
-author: Lux Network Team (@luxdefi)
+author: Lux Network Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
 status: Draft
 type: Standards Track

@@ -2,7 +2,7 @@
 lp: 0339
 title: Bridge Security and Emergency Procedures
 description: Security measures and emergency response procedures for the Lux Bridge cross-chain infrastructure
-author: Lux Protocol Team (@luxdefi)
+author: Lux Protocol Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
 status: Draft
 type: Standards Track

@@ -2,7 +2,7 @@
 lp: 0081
 title: B-Chain (Bridge Chain) Specification
 description: Defines the B-Chain as Lux Network's dedicated bridge chain with MPC custody and quantum-safe extensions
-author: Lux Network Team (@luxdefi)
+author: Lux Network Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
 status: Draft
 type: Standards Track

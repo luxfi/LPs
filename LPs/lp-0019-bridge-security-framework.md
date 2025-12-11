@@ -3,7 +3,7 @@ lp: 0019
 title: Bridge Security Framework
 tags: [bridge, security]
 description: Comprehensive security framework for cross-chain bridge operations.
-author: Lux Network Team (@luxdefi)
+author: Lux Network Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
 status: Draft
 type: Standards Track

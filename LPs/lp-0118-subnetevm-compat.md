@@ -2,7 +2,7 @@
 lp: 0118
 title: Subnet-EVM Compatibility Layer
 description: Provides compatibility layer for legacy Avalanche Subnet-EVM chains migrating to Lux Network
-author: Lux Network Team (@luxdefi)
+author: Lux Network Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
 status: Final
 type: Standards Track

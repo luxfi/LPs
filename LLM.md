@@ -305,8 +305,8 @@ All files reference the same knowledge base. Updates here propagate to all AI sy
 The Lux Network has adopted three Avalanche Community Proposals (ACPs) as part of the Granite upgrade, significantly enhancing network capabilities:
 
 ### LP-181: P-Chain Epoched Views
-**Status**: Adopted (Granite Upgrade)  
-**Based On**: [ACP-181](https://github.com/avalanche-foundation/ACPs/tree/main/ACPs/181-p-chain-epoched-views)  
+**Status**: Adopted (Granite Upgrade)
+**Based On**: [ACP-181](https://github.com/avalanche-foundation/ACPs/tree/main/ACPs/181-p-chain-epoched-views)
 **File**: `LP-181-epoching.md`
 
 **Purpose**: Optimizes validator set retrievals through epoched P-Chain views
@@ -322,12 +322,12 @@ The Lux Network has adopted three Avalanche Community Proposals (ACPs) as part o
 - Y-Chain quantum checkpoint coordination with epoch boundaries
 - Multi-chain validator synchronization
 
-**Implementation**: Cherry-picked from AvalancheGo commit `7b75fa536`  
+**Implementation**: Cherry-picked from AvalancheGo commit `7b75fa536`
 **Location**: `vms/proposervm/acp181/`
 
 ### LP-204: secp256r1 Elliptic Curve Precompile
-**Status**: Adopted (Granite Upgrade)  
-**Based On**: [ACP-204](https://github.com/avalanche-foundation/ACPs/tree/main/ACPs/204-precompile-secp256r1), [RIP-7212](https://github.com/ethereum/RIPs/blob/master/RIPS/rip-7212.md)  
+**Status**: Adopted (Granite Upgrade)
+**Based On**: [ACP-204](https://github.com/avalanche-foundation/ACPs/tree/main/ACPs/204-precompile-secp256r1), [RIP-7212](https://github.com/ethereum/RIPs/blob/master/RIPS/rip-7212.md)
 **File**: `LP-204-secp256r1.md`
 
 **Purpose**: Native secp256r1 (P-256) signature verification for enterprise/consumer adoption
@@ -344,15 +344,15 @@ The Lux Network has adopted three Avalanche Community Proposals (ACPs) as part o
 - WebAuthn/Passkeys for DeFi applications
 - Cross-chain identity across Lux multi-chain ecosystem
 
-**Quantum Transition**: Bridge to post-quantum signatures (LP-001, LP-002, LP-003)  
+**Quantum Transition**: Bridge to post-quantum signatures (LP-001, LP-002, LP-003)
 **Compliance**: NIST FIPS 186-3 approved
 
-**Implementation**: To be integrated from RIP-7212 reference implementations  
+**Implementation**: To be integrated from RIP-7212 reference implementations
 **Location**: `vm/precompiles/secp256r1.go` (C-Chain)
 
 ### LP-226: Dynamic Minimum Block Times
-**Status**: Adopted (Granite Upgrade)  
-**Based On**: [ACP-226](https://github.com/avalanche-foundation/ACPs/tree/main/ACPs/226-dynamic-minimum-block-times)  
+**Status**: Adopted (Granite Upgrade)
+**Based On**: [ACP-226](https://github.com/avalanche-foundation/ACPs/tree/main/ACPs/226-dynamic-minimum-block-times)
 **File**: `LP-226-dynamic-block-timing.md`
 
 **Purpose**: Replace static block gas cost with validator-controlled dynamic block timing
@@ -375,7 +375,7 @@ The Lux Network has adopted three Avalanche Community Proposals (ACPs) as part o
 - Per-chain optimization for A, B, C, D, Y, Z chain workloads
 - Network stability through explicit minimum delay enforcement
 
-**Implementation**: Cherry-picked from AvalancheGo commits `8aa4f1e25` and `24aa89019`  
+**Implementation**: Cherry-picked from AvalancheGo commits `8aa4f1e25` and `24aa89019`
 **Location**: `vms/evm/acp226/`
 
 ### Granite Upgrade Summary
@@ -472,14 +472,14 @@ While we adopt specifications from Avalanche ACPs, all implementations in Lux us
 
 **LP-176: Dynamic Gas Pricing**
 - **Spec**: `~/work/lux/lps/LP-176-dynamic-gas-pricing.md`
-- **Implementation**: 
+- **Implementation**:
   - `node/vms/evm/lp176/` (core logic)
   - `geth/plugin/evm/upgrade/lp176/` (plugin params)
 - **Package**: `github.com/luxfi/geth/plugin/evm/upgrade/lp176`
 
 **LP-118: Subnet-EVM Compatibility**
 - **Spec**: `~/work/lux/lps/LP-118-subnetevm-compat.md`
-- **Implementation**: 
+- **Implementation**:
   - `geth/plugin/evm/upgrade/lp118/` (plugin params)
 - **Package**: `github.com/luxfi/geth/plugin/evm/upgrade/lp118`
 - **Note**: Replaces "Cortina" naming
@@ -727,123 +727,3 @@ Total implementation files referenced: 34 files
 - Benchmark data collected on Apple M1 Max
 - Performance characteristics documented with actual timing
 - Gas cost calculations verified against implementation
-
-### Recommendations for Future Work
-
-1. **LP-322 (CGGMP21 Threshold ECDSA)**: Already fully documented with implementation links in root
-2. **LP-321 (FROST Threshold Signatures)**: Ready for similar enhancement
-3. **LP-320 (Ringtail Post-Quantum)**: Ring signature implementation documented
-4. **LP-323 (LSS-MPC Dynamic Resharing)**: Extends CGGMP21
-
-### Notes for Next CTO Review
-
-- All 10 batch LPs verified and enhanced
-- Implementation files verified to exist on disk
-- Testing documentation complete with actual test output
-- API endpoints documented where applicable
-- File paths use absolute paths for clarity
-- All links point to GitHub repository structure
-- No breaking changes to existing documentation
-
----
-
-**Batch Completion Date**: November 22, 2025
-**Total Time**: ~2 hours
-**Quality Score**: 98/100
-
-## External Link Verification Report - November 23, 2025
-
-### Executive Summary
-
-Comprehensive audit of 125 LP markdown files revealed **427 unique external links** with the following distribution:
-- **311 GitHub links** (288 luxfi/luxdefi, 23 other orgs, 3 Hanzo AI)
-- **13 NIST post-quantum cryptography standards** (DOI + CSRC)
-- **4 academic papers** (arXiv + IACR)
-- **99 other resources** (APIs, specifications, licenses)
-
-**Overall Status**: ✅ **GOOD** with 4 minor action items
-
-### Key Findings
-
-#### Critical Implementation Links
-✅ **Well-documented**: 30 LPs reference `github.com/luxfi/node`, 23 reference `github.com/luxfi/standard`
-
-⚠️ **Missing links** (4 core protocol LPs):
-- **LP-5**: Quantum-safe wallets (needs `github.com/luxfi/wallet` or `github.com/luxfi/node/wallet`)
-- **LP-6**: Network runner (needs `github.com/luxfi/netrunner`)
-- **LP-9**: CLI tool (needs `github.com/luxfi/cli`)
-- **LP-12**: C-Chain (needs `github.com/luxfi/geth` or `github.com/luxfi/node/vms/evm`)
-
-#### GitHub Organization Inconsistency
-⚠️ **Mixed naming**: LPs reference both `luxfi` (48 repos) and `luxdefi` (35 repos)
-- **Critical overlap**: `standard`, `bridge` referenced in both orgs
-- **Recommendation**: Standardize on `luxfi` (appears to be current standard)
-
-#### Academic & Standards References
-✅ **Excellent citations**:
-- **NIST FIPS 203/204/205**: ML-KEM, ML-DSA, SLH-DSA (post-quantum crypto)
-- **IACR ePrint 2021/060**: CGGMP21 threshold ECDSA paper
-- **SPHINCS+ specification**: Hash-based signatures
-- **Avalanche ACPs**: 176, 181, 204, 226 (upstream attribution)
-- **Ethereum RIP-7212**: secp256r1 precompile
-
-#### Hanzo AI Integration
-✅ **3 LPs with valid Hanzo references**:
-- **LP-500**: Layer 2 rollup (`github.com/hanzoai/hip-rollup`)
-- **LP-102**: Training ledger (`github.com/hanzoai/hips` HIP-1)
-- **LP-106**: LLM gateway (`api.hanzo.ai/v1`, HIP-4)
-
-#### Research/Placeholder Repos
-ℹ️ **Expected**: 83 unique repos referenced (mostly 1 LP each)
-- Many are future/proposed implementations (normal for proposal system)
-- Examples: ai-circuits, zk-rollup, mev-protection, governance-ui
-
-### Top LPs by External Link Count
-
-| Rank | Links | LP |
-|------|-------|----|
-| 1 | 30 | LP-2 (Virtual Machine & Execution) |
-| 2 | 16 | LP-316 (ML-DSA Signatures) |
-| 3 | 16 | LP-325 (KMS/HSM Integration) |
-| 4 | 15 | LP-319 (M-Chain MPC Custody) |
-| 5 | 15 | LP-1 (Primary Chain & Tokenomics) |
-
-### Action Items
-
-**Immediate** (today):
-1. Verify `github.com/luxfi/node`, `github.com/luxfi/standard`, `github.com/luxfi/geth` exist and are public
-
-**Short-term** (this week):
-2. Add missing implementation links to LPs 5, 6, 9, 12
-3. Clarify luxfi vs luxdefi organization naming policy
-
-**Medium-term** (next sprint):
-4. Standardize GitHub org references across all LPs (luxfi or luxdefi?)
-5. Remove/document localhost URLs in production LPs (found 10+)
-
-### Verification Notes
-
-**Cannot auto-verify** (manual check needed):
-- ❓ `github.com/hanzoai/hip-rollup` - Hanzo rollup integration
-- ❓ `github.com/hanzoai/hips` - Hanzo improvement proposals
-- ✅ NIST FIPS 203/204/205 - Verified publicly accessible
-- ✅ IACR ePrint 2021/060 - Verified publicly accessible
-- ✅ SPHINCS+ (sphincs.org) - Verified publicly accessible
-
-**Full link list**: `/tmp/lp-external-links.txt` (427 links)
-**Detailed report**: `/tmp/lp-link-report.md` (comprehensive analysis)
-
-### Quality Score: 95/100
-
-**Strengths** (+):
-- Comprehensive external references (427 unique)
-- Strong academic citations (NIST, IACR, arXiv)
-- Proper upstream attribution (Avalanche, Ethereum, Bitcoin)
-- Good Hanzo AI integration documentation
-
-**Improvements** (-):
-- 4 core LPs missing implementation links (-3 points)
-- Mixed luxfi/luxdefi organization naming (-2 points)
-
----
-

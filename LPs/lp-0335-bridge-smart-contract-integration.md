@@ -2,7 +2,7 @@
 lp: 0335
 title: Bridge Smart Contract Integration
 description: Specification for bridge smart contract integration with T-Chain MPC threshold signatures and B-Chain bridge coordination
-author: Lux Partners (@luxdefi)
+author: Lux Partners (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
 status: Draft
 type: Standards Track

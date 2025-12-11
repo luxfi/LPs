@@ -2,7 +2,7 @@
 lp: 0096
 title: MEV Protection Research
 description: Research on Maximum Extractable Value (MEV) mitigation strategies for Lux Network
-author: Lux Network Team (@luxdefi)
+author: Lux Network Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
 status: Draft
 type: Informational
@@ -436,10 +436,10 @@ recommended_architecture:
 
 ## Related Repositories
 
-- **MEV Protection**: https://github.com/luxdefi/mev-protection
-- **Fair Sequencer**: https://github.com/luxdefi/sequencer
-- **MEV Dashboard**: https://github.com/luxdefi/mev-dashboard
-- **Flashbots Integration**: https://github.com/luxdefi/flashbots
+- **MEV Protection**: https://github.com/luxfi/mev-protection
+- **Fair Sequencer**: https://github.com/luxfi/sequencer
+- **MEV Dashboard**: https://github.com/luxfi/mev-dashboard
+- **Flashbots Integration**: https://github.com/luxfi/flashbots
 
 ## Open Questions
 

@@ -2,7 +2,7 @@
 lp: 0076
 title: Random Number Generation Standard
 description: Defines standard interfaces for secure random number generation on Lux Network
-author: Lux Network Team (@luxdefi)
+author: Lux Network Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
 status: Draft
 type: Standards Track
@@ -796,8 +796,8 @@ forge verify-contract \
 ## Reference Implementation
 
 Reference implementations available at:
-- https://github.com/luxdefi/rng-contracts
-- https://github.com/luxdefi/vrf-provider
+- https://github.com/luxfi/rng-contracts
+- https://github.com/luxfi/vrf-provider
 
 Key features:
 - Multiple RNG provider support

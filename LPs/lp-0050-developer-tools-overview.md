@@ -2,7 +2,7 @@
 lp: 0050
 title: Developer Tools Overview
 description: Index of standards and protocols that support developer workflows and tooling in the Lux ecosystem.
-author: Lux Network Team (@luxdefi)
+author: Lux Network Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
 status: Draft
 type: Meta

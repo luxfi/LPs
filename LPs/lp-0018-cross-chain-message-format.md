@@ -3,7 +3,7 @@ lp: 0018
 title: Cross-Chain Message Format
 tags: [cross-chain, warp, bridge]
 description: Standardizes the message format for cross-chain communications.
-author: Lux Network Team (@luxdefi)
+author: Lux Network Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
 status: Draft
 type: Standards Track

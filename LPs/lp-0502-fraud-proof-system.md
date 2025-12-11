@@ -2,7 +2,7 @@
 lp: 0502
 title: Fraud Proof System
 description: Interactive fraud proof system for optimistic rollups with bisection protocol and one-step verification
-author: Lux Network Team (@luxdefi), Hanzo AI (@hanzoai), Zoo Protocol (@zooprotocol)
+author: Lux Network Team (@luxfi), Hanzo AI (@hanzoai), Zoo Protocol (@zooprotocol)
 discussions-to: https://github.com/luxfi/lps/discussions
 status: Draft
 type: Standards Track

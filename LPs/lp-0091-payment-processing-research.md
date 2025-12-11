@@ -2,7 +2,7 @@
 lp: 0091
 title: Payment Processing Research
 description: Research on payment processing systems and credit card integration for Lux Network
-author: Lux Network Team (@luxdefi)
+author: Lux Network Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
 status: Draft
 type: Informational
@@ -28,12 +28,12 @@ Bridging traditional finance with blockchain requires sophisticated payment proc
 ## Current Implementation
 
 ### Lux Pay Repository
-- **GitHub**: https://github.com/luxdefi/pay
+- **GitHub**: https://github.com/luxfi/pay
 - **Status**: Production
 - **Features**: Fiat on-ramp, merchant tools, subscription payments
 
 ### Lux Credit Repository  
-- **GitHub**: https://github.com/luxdefi/credit
+- **GitHub**: https://github.com/luxfi/credit
 - **Status**: Beta
 - **Innovation**: Zero-interest credit cards backed by crypto collateral
 
@@ -343,10 +343,10 @@ recommended_architecture:
 
 ## Related Repositories
 
-- **Lux Pay**: https://github.com/luxdefi/pay
-- **Lux Credit**: https://github.com/luxdefi/credit
-- **Merchant SDK**: https://github.com/luxdefi/merchant-sdk
-- **Compliance Tools**: https://github.com/luxdefi/compliance
+- **Lux Pay**: https://github.com/luxfi/pay
+- **Lux Credit**: https://github.com/luxfi/credit
+- **Merchant SDK**: https://github.com/luxfi/merchant-sdk
+- **Compliance Tools**: https://github.com/luxfi/compliance
 
 ## Open Questions
 

@@ -2,7 +2,7 @@
 lp: 0095
 title: Stablecoin Mechanisms Research
 description: Research on stablecoin designs and stability mechanisms for Lux Network
-author: Lux Network Team (@luxdefi)
+author: Lux Network Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
 status: Draft
 type: Informational
@@ -28,7 +28,7 @@ Native stablecoins are essential for:
 ## Current Implementation
 
 ### Stablecoin Usage in Ecosystem
-- **GitHub**: https://github.com/luxdefi/stablecoin
+- **GitHub**: https://github.com/luxfi/stablecoin
 - **Status**: Research phase
 - **Current stables**: USDC, USDT bridged via M-Chain
 
@@ -37,21 +37,21 @@ Native stablecoins are essential for:
 // Stablecoin touchpoints across repos
 interface StablecoinArchitecture {
   credit_system: {
-    repo: "luxdefi/credit";
+    repo: "luxfi/credit";
     model: "Zero-interest loans";
     collateral: ["LUX", "BTC", "ETH"];
     stability: "Overcollateralization";
   };
   
   lending_protocol: {
-    repo: "luxdefi/lending";
+    repo: "luxfi/lending";
     inspired_by: "Alchemix";
     feature: "Self-repaying loans";
     yield_source: "Multiple strategies";
   };
   
   bridge: {
-    repo: "luxdefi/bridge";
+    repo: "luxfi/bridge";
     supported_stables: ["USDC", "USDT", "DAI"];
     chains: ["Ethereum", "BSC", "Polygon"];
   };
@@ -448,10 +448,10 @@ recommended_architecture:
 
 ## Related Repositories
 
-- **Stablecoin Contracts**: https://github.com/luxdefi/stablecoin
-- **Oracle System**: https://github.com/luxdefi/oracles
-- **Yield Strategies**: https://github.com/luxdefi/yield
-- **Liquidation Engine**: https://github.com/luxdefi/liquidations
+- **Stablecoin Contracts**: https://github.com/luxfi/stablecoin
+- **Oracle System**: https://github.com/luxfi/oracles
+- **Yield Strategies**: https://github.com/luxfi/yield
+- **Liquidation Engine**: https://github.com/luxfi/liquidations
 
 ## Open Questions
 

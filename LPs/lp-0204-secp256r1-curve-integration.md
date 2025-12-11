@@ -2,7 +2,7 @@
 lp: 0204
 title: secp256r1 Curve Integration
 description: Native secp256r1 (P-256) signature verification precompile for biometric authentication and enterprise SSO
-author: Lux Protocol Team (@luxdefi), Santiago Cammi, Arran Schlosberg
+author: Lux Protocol Team (@luxfi), Santiago Cammi, Arran Schlosberg
 discussions-to: https://github.com/luxfi/lps/discussions
 status: Final
 type: Standards Track

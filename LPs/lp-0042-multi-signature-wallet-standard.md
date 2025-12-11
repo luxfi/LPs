@@ -2,7 +2,7 @@
 lp: 0042
 title: Multi-Signature Wallet Standard
 description: Defines the standard for multi-signature wallets on Lux Network with quantum-safe options
-author: Lux Network Team (@luxdefi)
+author: Lux Network Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
 status: Draft
 type: Standards Track
@@ -502,7 +502,7 @@ function testQuantumSafe() public {
 ## Reference Implementation
 
 Reference implementation available at:
-https://github.com/luxdefi/safe
+https://github.com/luxfi/safe
 
 Key features:
 - Gnosis Safe compatible

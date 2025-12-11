@@ -2,7 +2,7 @@
 lp: 0332
 title: Teleport Bridge Architecture - Unified Cross-Chain Protocol
 description: Comprehensive specification for Lux Network's decentralized cross-chain bridge using T-Chain (ThresholdVM) for MPC key management and B-Chain (BridgeVM) for bridge coordination
-author: Lux Partners (@luxdefi)
+author: Lux Partners (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
 status: Draft
 type: Standards Track

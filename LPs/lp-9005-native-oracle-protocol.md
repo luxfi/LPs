@@ -3,7 +3,7 @@ lp: 9005
 title: Native Oracle Protocol (Network-Wide)
 tags: [oracle, dex, price-feed, t-chain, warp, a-chain, c-chain, x-chain, lp-9000-series]
 description: Native oracle protocol for Lux network with sub-600ms price feeds via T-Chain signers and Warp TeleportAttest - OVER 9000x FASTER
-author: Lux Network Team (@luxdefi)
+author: Lux Network Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
 status: Final
 type: Standards Track

@@ -3,7 +3,7 @@ lp: 0017
 title: Bridge Asset Registry
 tags: [bridge, cross-chain]
 description: Specifies a standard registry for bridged assets.
-author: Lux Network Team (@luxdefi)
+author: Lux Network Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
 status: Draft
 type: Standards Track

@@ -2,7 +2,7 @@
 lp: 0329
 title: Teleport Bridge System Index
 description: Master index and navigation guide for the Lux Network's Teleport cross-chain bridge system, unifying threshold cryptography, bridge operations, key management, and smart contract integration.
-author: Lux Protocol Team (@luxdefi)
+author: Lux Protocol Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
 status: Draft
 type: Informational

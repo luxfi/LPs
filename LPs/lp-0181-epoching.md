@@ -2,7 +2,7 @@
 lp: 0181
 title: Epoching and Validator Rotation
 description: P-Chain epoched views for optimized validator set retrieval and ICM performance based on ACP-181
-author: Lux Protocol Team (@luxdefi), Cam Schultz
+author: Lux Protocol Team (@luxfi), Cam Schultz
 discussions-to: https://github.com/luxfi/lps/discussions
 status: Final
 type: Standards Track

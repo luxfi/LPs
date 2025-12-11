@@ -2,7 +2,7 @@
 lp: 0330
 title: T-Chain (ThresholdVM) Specification
 description: Defines the T-Chain as Lux Network's dedicated threshold signature chain for distributed key management with dynamic resharing
-author: Lux Protocol Team (@luxdefi)
+author: Lux Protocol Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
 status: Draft
 type: Standards Track

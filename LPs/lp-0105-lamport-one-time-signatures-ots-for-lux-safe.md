@@ -2,7 +2,7 @@
 lp: 0105
 title: Lamport One-Time Signatures (OTS) for Lux Safe
 description: Quantum-resistant signature extension for Lux Safe (Gnosis Safe fork) using Lamport OTS
-author: Lux Network Team (@luxdefi)
+author: Lux Network Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
 status: Draft
 type: Standards Track

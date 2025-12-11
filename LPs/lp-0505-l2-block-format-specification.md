@@ -2,7 +2,7 @@
 lp: 0505
 title: L2 Block Format Specification
 description: Standardized block format for L2 rollups with compression, batch aggregation, and AI metadata
-author: Lux Network Team (@luxdefi), Hanzo AI (@hanzoai), Zoo Protocol (@zooprotocol)
+author: Lux Network Team (@luxfi), Hanzo AI (@hanzoai), Zoo Protocol (@zooprotocol)
 discussions-to: https://github.com/luxfi/lps/discussions
 status: Draft
 type: Standards Track

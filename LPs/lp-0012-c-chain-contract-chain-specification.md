@@ -3,7 +3,7 @@ lp: 0012
 title: C-Chain (Contract Chain) Specification
 tags: [evm, core]
 description: Defines the Contract Chain, which is Lux’s EVM-compatible smart contract chain.
-author: Lux Network Team (@luxdefi)
+author: Lux Network Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
 status: Draft
 type: Standards Track
