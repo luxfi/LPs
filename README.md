@@ -131,8 +131,6 @@ By using LPs, the Lux community can coordinate development in a decentralized ma
 | [LP-0334](./LPs/lp-0334-per-asset-threshold-key-management.md) | Per-Asset Threshold Key Management | Lux Protocol Team | Standards Track | Core | Draft |
 | [LP-0335](./LPs/lp-0335-bridge-smart-contract-integration.md) | Bridge Smart Contract Integration | Lux Partners | Standards Track | Bridge | Draft |
 | [LP-0336](./LPs/lp-0336-k-chain-keymanagementvm-specification.md) | K-Chain (KeyManagementVM) Specification | Lux Protocol Team | Standards Track | Core | Draft |
-| [LP-0337](./LPs/lp-0337-m-chain-multisigvm-specification.md) | M-Chain (MultisigVM) Specification [DEPRECATED] | Lux Protocol Team | Informational | - | Withdrawn |
-| [LP-0338](./LPs/lp-0338-teleport-relayer-network-specification.md) | Teleport Relayer Network Specification [DEPRECA... | Lux Protocol Team | Informational | - | Withdrawn |
 | [LP-0339](./LPs/lp-0339-bridge-security-emergency-procedures.md) | Bridge Security and Emergency Procedures | Lux Protocol Team | Standards Track | Bridge | Draft |
 | [LP-0340](./LPs/lp-0340-unified-bridge-sdk-specification.md) | Unified Bridge SDK Specification | Lux Partners | Standards Track | SDK | Draft |
 | [LP-0341](./LPs/lp-0341-decentralized-secrets-management-infisical-integration.md) | Decentralized Secrets Management Platform | Lux Protocol Team | Standards Track | Interface | Draft |

@@ -1,5 +1,5 @@
 {
-  "lp_count": 137,
+  "lp_count": 135,
   "lps": [
     {
       "number": 0,
@@ -1760,38 +1760,6 @@
       "replaces": "",
       "github_view": "https://github.com/luxfi/LPs/blob/main/LPs/lp-0336.md",
       "github_edit": "https://github.com/luxfi/LPs/edit/main/LPs/lp-0336.md"
-    },
-    {
-      "number": 337,
-      "file": "LPs/lp-0337-m-chain-multisigvm-specification.md",
-      "title": "M-Chain (MultisigVM) Specification [DEPRECATED]",
-      "description": "DEPRECATED - Traditional n-of-m multisig is handled natively by P-Chain and X-Chain. Threshold cryptography operations are handled by T-Chain (ThresholdVM).",
-      "author": "Lux Protocol Team (@luxdefi)",
-      "status": "Withdrawn",
-      "type": "Informational",
-      "category": "",
-      "created": "2025-12-11",
-      "discussions_to": "https://github.com/luxfi/lps/discussions",
-      "requires": "",
-      "replaces": "",
-      "github_view": "https://github.com/luxfi/LPs/blob/main/LPs/lp-0337.md",
-      "github_edit": "https://github.com/luxfi/LPs/edit/main/LPs/lp-0337.md"
-    },
-    {
-      "number": 338,
-      "file": "LPs/lp-0338-teleport-relayer-network-specification.md",
-      "title": "Teleport Relayer Network Specification [DEPRECATED]",
-      "description": "DEPRECATED - The Teleport bridge uses a fully decentralized architecture without a separate relayer network. Cross-chain observation is handled by B-Chain watchers.",
-      "author": "Lux Protocol Team (@luxdefi)",
-      "status": "Withdrawn",
-      "type": "Informational",
-      "category": "",
-      "created": "2025-12-11",
-      "discussions_to": "https://github.com/luxfi/lps/discussions",
-      "requires": "",
-      "replaces": "",
-      "github_view": "https://github.com/luxfi/LPs/blob/main/LPs/lp-0338.md",
-      "github_edit": "https://github.com/luxfi/LPs/edit/main/LPs/lp-0338.md"
     },
     {
       "number": 339,

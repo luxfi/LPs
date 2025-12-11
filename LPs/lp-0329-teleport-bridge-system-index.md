@@ -119,12 +119,11 @@ Chain Legend:
 | [LP-0340](./lp-0340-unified-bridge-sdk-specification.md) | Bridge SDK | Client libraries for TypeScript, Go, and Rust | Draft |
 | [LP-0341](./lp-0341-decentralized-secrets-management-infisical-integration.md) | Secrets Management | Decentralized secrets management with HSM | Draft |
 
-### Deprecated LPs
+### Architecture Notes
 
-| LP | Title | Reason | Superseded By |
-|----|-------|--------|---------------|
-| [LP-0337](./lp-0337-m-chain-multisigvm-specification.md) | ~~M-Chain MultisigVM~~ | P-Chain/X-Chain provide native multisig | LP-0330 (T-Chain) |
-| [LP-0338](./lp-0338-teleport-relayer-network-specification.md) | ~~Relayer Network~~ | Decentralized via B-Chain validators | LP-0331 (B-Chain) |
+**Multisig**: Traditional n-of-m multisig is handled natively by P-Chain and X-Chain. For C-Chain, Gnosis Safe is the recommended approach. Threshold cryptography (where no single party holds the complete key) is provided by T-Chain.
+
+**Relayers**: Bridge relayer functionality (external chain observation, fee funding, transaction execution) is fully integrated into B-Chain's BridgeVM via the RelayerRegistry. Relayers register with B-Chain and earn fees for executing cross-chain transactions.
 
 ### Foundation LPs
 
