@@ -226,6 +226,7 @@ LPs for decentralized finance protocols and privacy features.
 | [LP-0402](./lp-0402-zero-knowledge-swap-protocol.md) | Zero-Knowledge Swap Protocol | `defi`, `swap`, `zk` | Draft |
 | [LP-0403](./lp-0403-private-staking-mechanisms.md) | Private Staking Mechanisms | `defi`, `staking`, `privacy` | Draft |
 | [LP-0608](./lp-0608-high-performance-decentralized-exchange-protocol.md) | High-Performance DEX Protocol | `defi`, `dex` | Draft |
+| [LP-0610](./lp-0610-x-chain-native-oracle-protocol.md) | X-Chain Native Oracle Protocol | `oracle`, `dex`, `price-feed`, `t-chain`, `warp` | Draft |
 
 ---
 
