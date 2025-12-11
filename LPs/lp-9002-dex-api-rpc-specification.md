@@ -1,7 +1,7 @@
 ---
 lp: 9002
-title: X-Chain Order-Book DEX API & RPC Specification
-description: Detailed specification of transaction types, wire formats, RPC endpoints, indexer schema, and CLI enhancements for the X-Chain DEX - OVER 9000x FASTER
+title: DEX API & RPC Specification
+description: JSON-RPC, gRPC, WebSocket, and FIX protocol APIs for the Lux DEX sidecar network
 author: Zach Kelling (@zeekay) and Lux Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
 status: Final
@@ -16,9 +16,9 @@ series: LP-9000 DEX Series
 implementation: https://github.com/luxfi/dex
 ---
 
-> **Part of LP-9000 Series**: This LP is part of the [LP-9000 DEX Series](./lp-9000-dex-overview.md) - Lux's high-performance decentralized exchange infrastructure.
+> **Part of LP-9000 Series**: This LP is part of the [LP-9000 DEX Series](./lp-9000-dex-overview.md) - Lux's standalone sidecar exchange network.
 
-> **LP-9000 Series**: [LP-9000 Overview](./lp-9000-dex-overview.md) | [LP-9001 X-Chain](./lp-9001-x-chain-exchange-specification.md) | [LP-9003 Performance](./lp-9003-high-performance-dex-protocol.md) | [LP-9004 Perpetuals](./lp-9004-perpetuals-derivatives-protocol.md) | [LP-9005 Oracle](./lp-9005-native-oracle-protocol.md)
+> **LP-9000 Series**: [LP-9000 Overview](./lp-9000-dex-overview.md) | [LP-9001 Trading Engine](./lp-9001-dex-trading-engine.md) | [LP-9003 Performance](./lp-9003-high-performance-dex-protocol.md) | [LP-9004 Perpetuals](./lp-9004-perpetuals-derivatives-protocol.md) | [LP-9005 Oracle](./lp-9005-native-oracle-protocol.md)
 
 ## Implementation Status
 

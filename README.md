@@ -156,9 +156,9 @@ By using LPs, the Lux community can coordinate development in a decentralized ma
 | [LP-2000](./LPs/lp-2000-ai-mining-standard.md) | AI Mining Standard | Hanzo AI, Lux Network, Zoo Labs | Standards Track | Core | Draft |
 | [LP-2001](./LPs/lp-2001-aivm-ai-virtual-machine.md) | AIVM - AI Virtual Machine | Hanzo AI, Lux Network | Standards Track | Core | Draft |
 | [LP-9000](./LPs/lp-9000-dex-overview.md) | Lux DEX - Over 9000 Series Overview | Lux Network Team | Informational | - | Final |
-| [LP-9001](./LPs/lp-9001-x-chain-exchange-specification.md) | X-Chain (Exchange Chain) Specification | Lux Network Team | Standards Track | Core | Final |
-| [LP-9002](./LPs/lp-9002-dex-api-rpc-specification.md) | X-Chain Order-Book DEX API & RPC Specification | Zach Kelling and Lux Team | Standards Track | Interface | Final |
-| [LP-9003](./LPs/lp-9003-high-performance-dex-protocol.md) | High-Performance Decentralized Exchange Protocol | Lux Core Team | Standards Track | LRC | Final |
+| [LP-9001](./LPs/lp-9001-dex-trading-engine.md) | DEX Trading Engine Specification | Lux Network Team | Standards Track | LRC | Final |
+| [LP-9002](./LPs/lp-9002-dex-api-rpc-specification.md) | DEX API & RPC Specification | Zach Kelling and Lux Team | Standards Track | Interface | Final |
+| [LP-9003](./LPs/lp-9003-high-performance-dex-protocol.md) | High-Performance DEX Protocol | Lux Core Team | Standards Track | LRC | Final |
 | [LP-9004](./LPs/lp-9004-perpetuals-derivatives-protocol.md) | Perpetuals & Derivatives Protocol | Lux Network Team | Standards Track | LRC | Final |
 | [LP-9005](./LPs/lp-9005-native-oracle-protocol.md) | Native Oracle Protocol (Network-Wide) | Lux Network Team | Standards Track | Core | Final |
 | [LP-9006](./LPs/lp-9006-hft-trading-venues-global-network.md) | HFT Trading Venues & Global Network Architecture | Lux Network Team | Standards Track | Infrastructure | Draft |
@@ -186,7 +186,8 @@ By using LPs, the Lux community can coordinate development in a decentralized ma
 | LRC-403 | [LP-0403](./LPs/lp-0403-private-staking-mechanisms.md) | Private Staking Mechanisms | Draft |
 | LRC-721 | [LP-0721](./LPs/lp-0721-lrc-721-non-fungible-token-standard.md) | LRC-721 Non-Fungible Token Standard | Final |
 | LRC-1155 | [LP-1155](./LPs/lp-1155-lrc-1155-multi-token-standard.md) | LRC-1155 Multi-Token Standard | Final |
-| LRC-9003 | [LP-9003](./LPs/lp-9003-high-performance-dex-protocol.md) | High-Performance Decentralized Exchange Protocol | Final |
+| LRC-9001 | [LP-9001](./LPs/lp-9001-dex-trading-engine.md) | DEX Trading Engine Specification | Final |
+| LRC-9003 | [LP-9003](./LPs/lp-9003-high-performance-dex-protocol.md) | High-Performance DEX Protocol | Final |
 | LRC-9004 | [LP-9004](./LPs/lp-9004-perpetuals-derivatives-protocol.md) | Perpetuals & Derivatives Protocol | Final |
 
 ## LP Process
