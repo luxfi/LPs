@@ -31,7 +31,7 @@ High test coverage is critical for:
 
 ## Test Coverage Summary
 
-### Current Coverage Status (2025-12-11)
+### Current Coverage Status (2025-12-11) - Updated v1.1.0
 
 | Package | Coverage | Status | Notes |
 |---------|----------|--------|-------|
@@ -39,22 +39,29 @@ High test coverage is critical for:
 | `pkg/mlx` | **96.2%** | ✅ Excellent | MLX acceleration |
 | `pkg/engine` | **95.8%** | ✅ Excellent | MLX matching engine |
 | `pkg/log` | **92.0%** | ✅ Excellent | Structured logging |
+| `pkg/orderbook` | **90.5%** | ✅ Excellent | Order book core (+9.7%) |
 | `pkg/consensus` | **87.4%** | ✅ Good | DAG consensus |
 | `pkg/marketdata` | **83.4%** | ✅ Good | Market data feeds |
-| `pkg/orderbook` | **80.8%** | ✅ Good | Order book core |
 | `pkg/lx` | **74.6%** | ⚠️ Acceptable | Core types |
-| `pkg/client` | **47.7%** | ⚠️ Partial | WebSocket client |
-| `pkg/price` | **46.3%** | ⚠️ Partial | Price oracle |
-| `pkg/api` | **42.8%** | ⚠️ Partial | WebSocket server |
+| `pkg/api` | **70.5%** | ⚠️ Acceptable | WebSocket server (+27.7%) |
+| `pkg/client` | **64.2%** | ⚠️ Acceptable | WebSocket client (+16.5%) |
+| `pkg/price` | **47.4%** | ⚠️ Partial | Price oracle (+1.1%) |
 | `pkg/dpdk` | **0.0%** | ⏸️ Skipped | CGO/hardware-specific |
 | `pkg/proto` | **0.0%** | ⏸️ Generated | Protobuf generated code |
 | `pkg/types` | **N/A** | ✅ Complete | No statements |
 
 ### Overall Metrics
 - **Total Packages**: 14
-- **Packages with 80%+ Coverage**: 7 (50%)
+- **Packages with 80%+ Coverage**: 6 (43%)
 - **Packages with Tests**: 12 (86%)
 - **All Tests Passing**: ✅ Yes
+- **Latest Release**: v1.1.0
+
+### v1.1.0 Release Notes
+- Fixed critical infinite loop bug in orderbook insertBid/insertAsk functions
+- pkg/orderbook: 80.8% → 90.5% (+9.7%)
+- pkg/client: 47.7% → 64.2% (+16.5%)
+- pkg/api: 42.8% → 70.5% (+27.7%)
 
 ## Package Specifications
 
