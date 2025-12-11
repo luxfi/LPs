@@ -1,5 +1,5 @@
 ---
-lp: 0321
+lp: 0324
 title: Ringtail Threshold Signature Precompile
 description: Native precompile for lattice-based (LWE) post-quantum threshold signatures
 author: Lux Core Team (@luxfi)
@@ -10,7 +10,7 @@ category: Core
 created: 2025-11-13
 requires: 4, 311
 activation:
-  flag: lp320-ringtail-precompile
+  flag: lp324-ringtail-precompile
   hfName: "Quantum"
   activationHeight: "0"
 ---

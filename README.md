@@ -116,10 +116,10 @@ By using LPs, the Lux community can coordinate development in a decentralized ma
 | [LP-0318](./LPs/lp-0318-ml-kem-post-quantum-key-encapsulation.md) | ML-KEM Post-Quantum Key Encapsulation | Lux Partners | Standards Track | Core | Final |
 | [LP-0319](./LPs/lp-0319-m-chain-decentralised-mpc-custody.md) | M-Chain – Decentralised MPC Custody & Swap-Sign... | Lux Protocol Team | Standards Track | Core | Superseded |
 | [LP-0320](./LPs/lp-0320-dynamic-evm-gas-limit-and-price-discovery-updates.md) | Dynamic EVM Gas Limit and Price Discovery Updates | Lux Core Team | Standards Track | Core | Final |
-| [LP-0321](./LPs/lp-0321-ringtail-threshold-signature-precompile.md) | Ringtail Threshold Signature Precompile | Lux Core Team | Standards Track | Core | Draft |
 | [LP-0321](./LPs/lp-0321-frost-threshold-signature-precompile.md) | FROST Threshold Signature Precompile | Lux Core Team | Standards Track | Core | Draft |
 | [LP-0322](./LPs/lp-0322-cggmp21-threshold-ecdsa-precompile.md) | CGGMP21 Threshold ECDSA Precompile | Lux Core Team | Standards Track | Core | Draft |
 | [LP-0323](./LPs/lp-0323-lss-mpc-dynamic-resharing-extension.md) | LSS-MPC Dynamic Resharing Extension | Lux Core Team | Standards Track | Core | Draft |
+| [LP-0324](./LPs/lp-0324-ringtail-threshold-signature-precompile.md) | Ringtail Threshold Signature Precompile | Lux Core Team | Standards Track | Core | Draft |
 | [LP-0325](./LPs/lp-0325-kms-hardware-security-module-integration.md) | Lux KMS Hardware Security Module Integration | Lux Core Team | Standards Track | Core | Draft |
 | [LP-0326](./LPs/lp-0326-blockchain-regenesis-and-state-migration.md) | Blockchain Regenesis and State Migration | Lux Core Team | Standards Track | Core | Draft |
 | [LP-0327](./LPs/lp-0327-badgerdb-verkle-optimization.md) | BadgerDB + Verkle Tree Optimization Strategy | Lux Core Team | Standards Track | Core | Final |
@@ -148,9 +148,10 @@ By using LPs, the Lux community can coordinate development in a decentralized ma
 | [LP-0505](./LPs/lp-0505-l2-block-format-specification.md) | L2 Block Format Specification | Lux Network Team, Hanzo AI, Zoo Protocol | Standards Track | Core | Draft |
 | [LP-0601](./LPs/lp-0601-dynamic-gas-fee-mechanism-with-ai-compute-pricing.md) | Dynamic Gas Fee Mechanism with AI Compute Pricing | Lux Core Team | Standards Track | Core | Draft |
 | [LP-0602](./LPs/lp-0602-warp-cross-chain-messaging-protocol.md) | Warp Cross-Chain Messaging Protocol | Lux Core Team | Standards Track | Networking | Draft |
-| [LP-0603](./LPs/lp-0603-verkle-trees-for-efficient-state-management.md) | Verkle Trees for Efficient State Management | Lux Core Team | Standards Track | Core | Draft |
+| [LP-0603](./LPs/lp-0603-warp-15-quantum-safe-cross-chain-messaging.md) | Warp 1.5 - Quantum-Safe Cross-Chain Messaging | Lux Core Team | Standards Track | Networking | Final |
 | [LP-0604](./LPs/lp-0604-state-sync-and-pruning-protocol.md) | State Sync and Pruning Protocol | Lux Core Team | Standards Track | Core | Draft |
 | [LP-0605](./LPs/lp-0605-elastic-validator-subnets.md) | Elastic Validator Subnets | Lux Core Team | Standards Track | Core | Draft |
+| [LP-0606](./LPs/lp-0606-verkle-trees-for-efficient-state-management.md) | Verkle Trees for Efficient State Management | Lux Core Team | Standards Track | Core | Draft |
 | [LP-0607](./LPs/lp-0607-gpu-acceleration-framework.md) | GPU Acceleration Framework | Lux Core Team | Standards Track | Core | Draft |
 | [LP-0608](./LPs/lp-0608-high-performance-decentralized-exchange-protocol.md) | High-Performance Decentralized Exchange Protocol | Lux Core Team | Standards Track | LRC | Draft |
 | [LP-0721](./LPs/lp-0721-lrc-721-non-fungible-token-standard.md) | LRC-721 Non-Fungible Token Standard | Lux Network Team | Standards Track | LRC | Final |

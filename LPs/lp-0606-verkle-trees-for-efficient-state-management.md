@@ -1,16 +1,16 @@
 ---
-lp: 0603
+lp: 0606
 title: Verkle Trees for Efficient State Management
 description: Constant-size state proofs using Verkle trees for stateless clients and efficient cross-chain verification
 author: Lux Core Team (@luxfi)
-discussions-to: https://forum.lux.network/t/lp-603-verkle-trees
+discussions-to: https://forum.lux.network/t/lp-606-verkle-trees
 status: Draft
 type: Standards Track
 category: Core
 created: 2025-01-09
 ---
 
-# LP-603: Verkle Trees for Efficient State Management
+# LP-606: Verkle Trees for Efficient State Management
 
 ## Abstract
 
