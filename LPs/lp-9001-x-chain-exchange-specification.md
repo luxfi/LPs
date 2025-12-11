@@ -5,7 +5,7 @@ tags: [core, defi, lp-9000-series]
 description: High-performance order book DEX with Lamport OTS quantum safety - OVER 9000x FASTER
 author: Lux Network Team (@luxdefi)
 discussions-to: https://github.com/luxfi/lps/discussions
-status: Implemented
+status: Final
 type: Standards Track
 category: Core
 created: 2025-01-23

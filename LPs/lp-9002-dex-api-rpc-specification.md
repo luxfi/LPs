@@ -4,7 +4,7 @@ title: X-Chain Order-Book DEX API & RPC Specification
 description: Detailed specification of transaction types, wire formats, RPC endpoints, indexer schema, and CLI enhancements for the X-Chain DEX - OVER 9000x FASTER
 author: Zach Kelling (@zeekay) and Lux Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
-status: Implemented
+status: Final
 type: Standards Track
 category: Interface
 created: 2025-07-24

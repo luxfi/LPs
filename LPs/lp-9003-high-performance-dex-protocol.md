@@ -4,7 +4,7 @@ title: High-Performance Decentralized Exchange Protocol
 description: GPU/FPGA-accelerated DEX with commit-reveal MEV protection and unified liquidity aggregation - OVER 9000x FASTER
 author: Lux Core Team (@luxfi)
 discussions-to: https://forum.lux.network/t/lp-9003-dex-protocol
-status: Implemented
+status: Final
 type: Standards Track
 category: LRC
 created: 2025-01-09

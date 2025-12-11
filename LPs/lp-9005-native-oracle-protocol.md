@@ -5,7 +5,7 @@ tags: [oracle, dex, price-feed, t-chain, warp, a-chain, c-chain, x-chain, lp-900
 description: Native oracle protocol for Lux network with sub-600ms price feeds via T-Chain signers and Warp TeleportAttest - OVER 9000x FASTER
 author: Lux Network Team (@luxdefi)
 discussions-to: https://github.com/luxfi/lps/discussions
-status: Implemented
+status: Final
 type: Standards Track
 category: Core
 created: 2025-12-11

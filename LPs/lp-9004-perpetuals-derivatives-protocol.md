@@ -4,7 +4,7 @@ title: Perpetuals & Derivatives Protocol
 description: Perpetual futures, margin trading, liquidation engine, and vault strategies - OVER 9000x FASTER
 author: Lux Network Team (@luxfi)
 discussions-to: https://forum.lux.network/t/lp-9004-perpetuals
-status: Implemented
+status: Final
 type: Standards Track
 category: LRC
 created: 2025-12-11

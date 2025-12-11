@@ -5,7 +5,7 @@ tags: [core, defi]
 description: High-performance order book DEX with Lamport OTS quantum safety
 author: Lux Network Team (@luxdefi)
 discussions-to: https://github.com/luxfi/lps/discussions
-status: Implemented
+status: Final
 type: Standards Track
 category: Core
 created: 2025-01-23
