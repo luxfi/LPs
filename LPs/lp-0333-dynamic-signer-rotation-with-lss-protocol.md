@@ -21,7 +21,22 @@ activation:
 
 This proposal specifies the Dynamic Signer Rotation protocol for the Lux Network, enabling live resharing of threshold keys in response to validator set changes. The protocol leverages Linear Secret Sharing (LSS) with Feldman Verifiable Secret Sharing (VSS) to transition signing authority between generations of validators while preserving the same public key. This eliminates the need for bridge contract updates, asset migrations, or service interruptions when validator sets change.
 
-The protocol introduces six new transaction types (ReshareInitTx, ReshareCommitTx, ReshareShareTx, ReshareVerifyTx, ReshareActivateTx, ReshareRollbackTx) for orchestrating resharing operations on-chain, a ValidatorWatcher component for automatic detection of validator set changes, and a Generation Management system for version tracking and atomic rollback. The design achieves zero-downtime rotation, proactive security against mobile adversaries, and maintains t-security throughout all protocol phases.
+The protocol introduces six new transaction types (ReshareInitTx, ReshareCommitTx, ReshareShareTx, ReshareVerifyTx, ReshareActivateTx, ReshareRollbackTx) for orchestrating resharing operations on-chain, an **opt-in signer set model** where first 100 validators join via `lux-cli` without resharing, and a Generation Management system for version tracking and atomic rollback. Resharing is triggered ONLY when a signer slot is replaced (not on validator join). The design achieves zero-downtime rotation, proactive security against mobile adversaries, and maintains t-security throughout all protocol phases.
+
+## Implementation Status
+
+| Component | Repository | Path | Status |
+|-----------|------------|------|--------|
+| BridgeVM (B-Chain) | [luxfi/node](https://github.com/luxfi/node) | [`vms/bridgevm/`](https://github.com/luxfi/node/tree/main/vms/bridgevm) | ✅ Implemented |
+| ThresholdVM (T-Chain) | [luxfi/node](https://github.com/luxfi/node) | [`vms/thresholdvm/`](https://github.com/luxfi/node/tree/main/vms/thresholdvm) | ✅ Implemented |
+| Threshold Crypto | [luxfi/threshold](https://github.com/luxfi/threshold) | [`pkg/`](https://github.com/luxfi/threshold/tree/main/pkg) | ✅ Implemented |
+| Bridge App Client | [luxfi/bridge](https://github.com/luxfi/bridge) | [`app/bridge/src/lib/BridgeRPCClient.ts`](https://github.com/luxfi/bridge/tree/main/app/bridge/src/lib/BridgeRPCClient.ts) | ✅ Implemented |
+| CLI Integration | [luxfi/cli](https://github.com/luxfi/cli) | `cmd/bridge/` | 🚧 In Progress |
+
+**Key Source Files:**
+- [BridgeVM RPC handlers](https://github.com/luxfi/node/blob/main/vms/bridgevm/rpc.go) - `bridge_registerValidator`, `bridge_getSignerSetInfo`, `bridge_replaceSigner`
+- [BridgeVM core logic](https://github.com/luxfi/node/blob/main/vms/bridgevm/vm.go) - `RegisterValidator()`, `RemoveSigner()`, signer set management
+- [Threshold MPC protocol](https://github.com/luxfi/threshold/tree/main/pkg/cggmp21) - CGGMP21 threshold ECDSA implementation
 
 ## Conformance
 
@@ -34,9 +49,10 @@ Implementations claiming conformance to this specification:
 3. **MUST** verify Feldman VSS commitments for all received shares
 4. **MUST** support atomic rollback to previous generation on failure
 5. **MUST** invalidate old shares after successful generation activation
-6. **SHOULD** implement automatic validator change detection
-7. **SHOULD** support proactive refresh scheduling
-8. **MAY** implement custom threshold computation rules
+6. **MUST** implement opt-in signer registration (first 100 validators, no reshare on join)
+7. **MUST** trigger resharing ONLY on signer slot replacement (not on validator join)
+8. **SHOULD** support manual reshare triggers via `lux-cli`
+9. **MAY** implement custom threshold computation rules
 
 ## Activation
 
@@ -1082,347 +1098,234 @@ func (gm *GenerationManager) CheckReshareTimeout(keyID ids.ID) error {
 }
 ```
 
-### 4. Validator Set Integration
+### 4. Signer Set Management (Opt-In Model)
 
-This section details the integration between the ValidatorWatcher component and the P-Chain validator state. For threshold configuration per key, see LP-0334 (Per-Asset Threshold Key Management).
+This section details the opt-in signer set management for B-Chain bridge operations. For threshold configuration per key, see LP-0334 (Per-Asset Threshold Key Management).
 
-#### 4.1 ValidatorWatcher Component
+> **Design Decision**: B-Chain uses a simplified opt-in model rather than automatic validator tracking. This provides predictability and explicit operator control over MPC participation.
+
+#### 4.1 Opt-In Signer Set Rules
+
+```
+Signer Set Lifecycle:
+┌──────────────────────────────────────────────────────────────────────────┐
+│                                                                          │
+│  1. GENESIS (5+ initial signers)                                         │
+│     └─> lux-cli launches network with initial keygen                     │
+│                                                                          │
+│  2. OPT-IN PHASE (signers 6-100)                                        │
+│     └─> Validators register via bridge_registerValidator                 │
+│     └─> NO reshare on join - added directly to signer set               │
+│     └─> Key shards stored in ~/.lux/keys by operator                    │
+│                                                                          │
+│  3. SET CLOSED (at 100 signers)                                         │
+│     └─> No new registrations accepted                                    │
+│     └─> Waitlist for slot replacement only                              │
+│                                                                          │
+│  4. SLOT REPLACEMENT (only time reshare occurs)                         │
+│     └─> Signer fails health checks or stops                             │
+│     └─> Slot opens for next in waitlist                                 │
+│     └─> bridge_replaceSigner triggers reshare                           │
+│     └─> Epoch increments                                                │
+│                                                                          │
+└──────────────────────────────────────────────────────────────────────────┘
+```
+
+**Key Properties:**
+- **Opt-in**: Validators explicitly choose to participate via `lux-cli`
+- **First 100**: Only first 100 validators accepted, then set closes
+- **No reshare on join**: New signers added directly (no protocol overhead)
+- **Reshare only on replacement**: Minimizes cryptographic operations
+- **Predictable**: Fixed signer set after 100 (until protocol upgrade)
+
+#### 4.2 Signer Registration
 
 ```go
-// ValidatorWatcher monitors validator set changes and triggers resharing
-// Located in: github.com/luxfi/node/vms/thresholdvm/validator_watcher.go
-type ValidatorWatcher struct {
-    vm            *VM
-    platformState validators.State
-
-    // Managed keys and their configurations
-    managedKeys map[ids.ID]*ManagedKeyConfig
-
-    // Configuration
-    config *ValidatorWatcherConfig
-
-    // Event channels
-    validatorChangeCh chan ValidatorChangeEvent
-    reshareTriggerCh  chan *ReshareRequest
+// SignerSetConfig defines the opt-in signer management parameters
+// Located in: github.com/luxfi/node/vms/bridgevm/config.go
+type SignerSetConfig struct {
+    MaxSigners      int     `json:"maxSigners"`      // Default: 100
+    ThresholdRatio  float64 `json:"thresholdRatio"`  // Default: 0.67 (2/3)
+    SignerSetFrozen bool    `json:"signerSetFrozen"` // True when MaxSigners reached
+    CurrentEpoch    uint64  `json:"currentEpoch"`    // Increments only on reshare
 }
 
-type ManagedKeyConfig struct {
-    KeyID         ids.ID
-    Source        KeySource     // Where this key's validators come from
-    ThresholdRule ThresholdRule // How to compute threshold from validator count
-    MinParties    uint32
-    MaxParties    uint32
+// RegisterValidatorInput for opt-in registration
+type RegisterValidatorInput struct {
+    NodeID      ids.NodeID `json:"nodeId"`
+    StakeAmount uint64     `json:"stakeAmount"`
+    MPCPubKey   []byte     `json:"mpcPubKey"`
 }
 
-type KeySource uint8
-
-const (
-    KeySourcePlatformValidators KeySource = 0  // Primary network validators
-    KeySourceNetValidators      KeySource = 1  // Specific subnet validators
-    KeySourceCustom             KeySource = 2  // Manually managed
-)
-
-type ThresholdRule uint8
-
-const (
-    ThresholdFixed     ThresholdRule = 0  // Fixed threshold (e.g., always 3)
-    ThresholdMajority  ThresholdRule = 1  // 50% + 1
-    ThresholdByzantine ThresholdRule = 2  // 2/3 + 1 (BFT safe)
-    ThresholdCustom    ThresholdRule = 3  // Custom function
-)
-
-type ValidatorWatcherConfig struct {
-    // How often to check for validator changes
-    PollInterval time.Duration
-
-    // Minimum change to trigger reshare (e.g., at least 10% change)
-    MinChangeThreshold float64
-
-    // Cooldown between reshares
-    ReshareCooldown time.Duration
-
-    // Proactive refresh interval (even without changes)
-    ProactiveRefreshInterval time.Duration
-}
-
-type ValidatorChangeEvent struct {
-    AddedValidators   []ids.NodeID
-    RemovedValidators []ids.NodeID
-    NetID             ids.ID  // Empty for primary network
-    Height            uint64
-    Timestamp         time.Time
+// RegisterValidatorResult returned after registration
+type RegisterValidatorResult struct {
+    NodeID          ids.NodeID `json:"nodeId"`
+    Registered      bool       `json:"registered"`
+    SignerIndex     int        `json:"signerIndex"`
+    TotalSigners    int        `json:"totalSigners"`
+    Threshold       int        `json:"threshold"`
+    ReshareRequired bool       `json:"reshareRequired"` // Always false on join
+    Epoch           uint64     `json:"epoch"`
+    SetFrozen       bool       `json:"setFrozen"`
+    Message         string     `json:"message"`
 }
 ```
 
-#### 4.2 P-Chain Integration
+**Registration Flow (via lux-cli):**
 
-The ValidatorWatcher subscribes to P-Chain validator set updates via the `validators.State` interface. This enables automatic detection of validator additions, removals, and weight changes.
+```bash
+# Validator operator opts in to B-Chain signer set
+$ lux bridge join --node-id=NodeID-xxxxx --stake=100000000
+
+# CLI calls bridge_registerValidator RPC
+# Key shard saved to ~/.lux/keys/bridge-shard.key
+```
+
+#### 4.3 Slot Replacement (Only Reshare Trigger)
 
 ```go
-// PChainSubscription connects ValidatorWatcher to P-Chain state
-// Located in: github.com/luxfi/node/vms/thresholdvm/pchain_integration.go
-type PChainSubscription struct {
-    watcher *ValidatorWatcher
-    client  platformvm.Client
-    netID   ids.ID
+// RemoveSigner handles failed signer replacement
+// This is the ONLY operation that triggers a reshare
+func (vm *VM) RemoveSigner(nodeID ids.NodeID, replacementNodeID *ids.NodeID) (*SignerReplacementResult, error)
 
-    // Subscription state
-    lastHeight uint64
-    lastHash   ids.ID
-}
-
-// StartPChainSubscription begins monitoring P-Chain for validator changes
-func (w *ValidatorWatcher) StartPChainSubscription(ctx context.Context, client platformvm.Client) error {
-    sub := &PChainSubscription{
-        watcher: w,
-        client:  client,
-        netID:   ids.Empty, // Primary network
-    }
-
-    go sub.pollLoop(ctx)
-    return nil
-}
-
-func (sub *PChainSubscription) pollLoop(ctx context.Context) {
-    ticker := time.NewTicker(sub.watcher.config.PollInterval)
-    defer ticker.Stop()
-
-    for {
-        select {
-        case <-ctx.Done():
-            return
-        case <-ticker.C:
-            if err := sub.checkForChanges(ctx); err != nil {
-                log.Error("P-Chain poll failed", "error", err)
-            }
-        }
-    }
-}
-
-func (sub *PChainSubscription) checkForChanges(ctx context.Context) error {
-    // Get current validator set from P-Chain
-    currentValidators, err := sub.client.GetCurrentValidators(ctx, sub.netID, nil)
-    if err != nil {
-        return fmt.Errorf("failed to get validators: %w", err)
-    }
-
-    // Compute diff with previous state
-    added, removed := sub.computeDiff(currentValidators)
-
-    if len(added) == 0 && len(removed) == 0 {
-        return nil // No changes
-    }
-
-    // Get current height for event
-    height, err := sub.client.GetHeight(ctx)
-    if err != nil {
-        return fmt.Errorf("failed to get height: %w", err)
-    }
-
-    // Emit change event
-    event := ValidatorChangeEvent{
-        AddedValidators:   added,
-        RemovedValidators: removed,
-        NetID:             sub.netID,
-        Height:            height,
-        Timestamp:         time.Now(),
-    }
-
-    sub.watcher.OnValidatorSetChange(event)
-    return nil
+// SignerReplacementResult returned after slot replacement
+type SignerReplacementResult struct {
+    Success           bool   `json:"success"`
+    RemovedNodeID     string `json:"removedNodeId"`
+    ReplacementNodeID string `json:"replacementNodeId,omitempty"`
+    ReshareSession    string `json:"reshareSession"`
+    NewEpoch          uint64 `json:"newEpoch"`
+    ActiveSigners     int    `json:"activeSigners"`
+    Threshold         int    `json:"threshold"`
+    Message           string `json:"message"`
 }
 ```
 
-**Supported Validator Sources:**
+**Replacement Flow:**
 
-| Source | P-Chain Query | Use Case |
-|--------|--------------|----------|
-| Primary Network | `GetCurrentValidators(empty)` | Bridge keys backed by all validators |
-| Subnet Validators | `GetCurrentValidators(netID)` | Per-subnet threshold keys |
-| Pending Validators | `GetPendingValidators` | Proactive reshare before activation |
-
-#### 4.3 Validator Change Detection
-
-```go
-func (w *ValidatorWatcher) OnValidatorSetChange(event ValidatorChangeEvent) {
-    for keyID, config := range w.managedKeys {
-        if !w.shouldTriggerReshare(keyID, config, event) {
-            continue
-        }
-
-        // Compute new party set
-        newParties := w.computeNewParties(config, event)
-        if len(newParties) < int(config.MinParties) {
-            log.Warn("insufficient validators for reshare",
-                "keyID", keyID,
-                "parties", len(newParties),
-                "minimum", config.MinParties)
-            continue
-        }
-
-        // Compute new threshold
-        newThreshold := w.computeThreshold(config, len(newParties))
-
-        // Generate reshare request
-        request := &ReshareRequest{
-            KeyID:        keyID,
-            NewParties:   newParties,
-            NewThreshold: newThreshold,
-            TriggerType:  TriggerValidatorChange,
-            TriggerEvent: event,
-        }
-
-        w.reshareTriggerCh <- request
-    }
-}
-
-func (w *ValidatorWatcher) shouldTriggerReshare(
-    keyID ids.ID,
-    config *ManagedKeyConfig,
-    event ValidatorChangeEvent,
-) bool {
-    // Check if this key cares about this validator change
-    switch config.Source {
-    case KeySourcePlatformValidators:
-        if event.NetID != ids.Empty {
-            return false  // Only care about primary network
-        }
-    case KeySourceNetValidators:
-        // Check if event is for the relevant subnet
-        // ...
-    }
-
-    // Check minimum change threshold
-    totalChange := len(event.AddedValidators) + len(event.RemovedValidators)
-    currentParties := w.getCurrentParties(keyID)
-    changeRatio := float64(totalChange) / float64(len(currentParties))
-
-    if changeRatio < w.config.MinChangeThreshold {
-        return false
-    }
-
-    // Check cooldown
-    lastReshare := w.getLastReshareTime(keyID)
-    if time.Since(lastReshare) < w.config.ReshareCooldown {
-        return false
-    }
-
-    return true
-}
-
-func (w *ValidatorWatcher) computeNewParties(
-    config *ManagedKeyConfig,
-    event ValidatorChangeEvent,
-) []ids.NodeID {
-    // Get current validator set
-    currentValidators := w.getCurrentValidators(config.Source)
-
-    // Convert to party IDs
-    parties := make([]ids.NodeID, 0, len(currentValidators))
-    for _, v := range currentValidators {
-        parties = append(parties, v.NodeID)
-    }
-
-    // Apply constraints
-    if len(parties) > int(config.MaxParties) {
-        // Select top validators by stake/uptime
-        parties = w.selectTopParties(parties, int(config.MaxParties))
-    }
-
-    return parties
-}
-
-func (w *ValidatorWatcher) computeThreshold(
-    config *ManagedKeyConfig,
-    partyCount int,
-) uint32 {
-    switch config.ThresholdRule {
-    case ThresholdFixed:
-        return config.MinParties  // Use MinParties as fixed threshold
-
-    case ThresholdMajority:
-        return uint32(partyCount/2 + 1)
-
-    case ThresholdByzantine:
-        // t > 2n/3 for BFT safety
-        return uint32(2*partyCount/3 + 1)
-
-    default:
-        return uint32(partyCount/2 + 1)
-    }
-}
+```
+Signer #42 fails health checks
+         │
+         ▼
+Operator calls: bridge_replaceSigner(nodeId: "42", replacementNodeId: "101")
+         │
+         ▼
+┌────────────────────────────────────────┐
+│ 1. Mark signer #42 as inactive         │
+│ 2. Add signer #101 from waitlist       │
+│ 3. Call T-Chain triggerReshare()       │
+│ 4. Increment CurrentEpoch              │
+│ 5. Remove #42 from signer set          │
+└────────────────────────────────────────┘
+         │
+         ▼
+New epoch active with 100 signers (99 original + 1 replacement)
 ```
 
-### 5. Automatic vs Manual Resharing Triggers
+#### 4.4 Epoch Management
+
+Unlike automatic validator tracking, the opt-in model has predictable epoch progression:
+
+| Event | Epoch Change | Reshare |
+|-------|--------------|---------|
+| Genesis keygen (5+ signers) | 0 | Initial DKG |
+| Validator joins (6-100) | No change | None |
+| Set closes at 100 | No change | None |
+| Signer replaced | +1 | Yes |
+| Protocol upgrade | Reset/TBD | Full re-keygen |
+
+**Rationale for Opt-In Model:**
+
+1. **Simplicity**: No polling, no automatic triggers, no race conditions
+2. **Predictability**: Operators know exactly when reshares occur
+3. **Gas Efficiency**: No unnecessary reshares during validator churn
+4. **Security**: Explicit operator action required for signer changes
+5. **Debuggability**: Clear audit trail of signer set changes
+
+### 5. Resharing Triggers (Opt-In Model)
+
+Under the opt-in model, resharing is triggered only when a signer slot is replaced. This section describes the trigger types and their implementation.
 
 #### 5.1 Trigger Types
 
 | Trigger Type | Initiator | Condition | Typical Delay |
 |--------------|-----------|-----------|---------------|
-| ValidatorChange | ValidatorWatcher | Validator set modified | Immediate |
-| ProactiveRefresh | Scheduler | Time-based interval | Configurable |
+| SlotReplacement | `lux-cli` operator | Signer fails/stops, slot opens | On-demand |
 | ThresholdUpdate | Governance | Policy change | After voting |
 | Emergency | Security team | Suspected compromise | Immediate |
 | Manual | Administrator | Operational need | On-demand |
 
-#### 5.2 Automatic Trigger Configuration
+**Note:** Unlike automatic validator-watching systems, the opt-in model does NOT trigger reshares on:
+- New validators joining (they're added directly to signer set until cap of 100)
+- Validator stake changes
+- Routine validator set updates
+
+#### 5.2 Slot Replacement Trigger (Primary)
 
 ```go
-type AutoTriggerConfig struct {
-    // Enable automatic resharing on validator changes
-    EnableValidatorTrigger bool
-
-    // Minimum validator change ratio to trigger (0.0-1.0)
-    ValidatorChangeThreshold float64
-
-    // Enable proactive refresh even without changes
-    EnableProactiveRefresh bool
-
-    // Proactive refresh interval
-    ProactiveRefreshInterval time.Duration
-
-    // Maximum pending reshares (prevent spam)
-    MaxPendingReshares uint32
-
-    // Blackout periods (no auto-reshare during these times)
-    BlackoutPeriods []TimeRange
+// SlotReplacementTrigger handles the primary reshare trigger
+// Located in: github.com/luxfi/node/vms/bridgevm/triggers.go
+type SlotReplacementTrigger struct {
+    vm           *VM
+    signerSet    *SignerSetInfo
+    waitlist     []ids.NodeID
 }
 
-func (w *ValidatorWatcher) StartAutoTriggers(ctx context.Context) {
-    // Validator change monitor
-    go w.monitorValidatorChanges(ctx)
-
-    // Proactive refresh scheduler
-    if w.config.EnableProactiveRefresh {
-        go w.scheduleProactiveRefresh(ctx)
+// TriggerReplacement initiates a reshare when a signer is replaced
+// This is the ONLY automatic reshare trigger in the opt-in model
+func (t *SlotReplacementTrigger) TriggerReplacement(
+    ctx context.Context,
+    removedSigner ids.NodeID,
+    replacementSigner *ids.NodeID,
+) (*ReshareRequest, error) {
+    // Verify signer exists and can be removed
+    if !t.signerSet.HasSigner(removedSigner) {
+        return nil, fmt.Errorf("signer %s not in active set", removedSigner)
     }
+
+    // Determine replacement (from waitlist or explicit)
+    var replacement ids.NodeID
+    if replacementSigner != nil {
+        replacement = *replacementSigner
+    } else if len(t.waitlist) > 0 {
+        replacement = t.waitlist[0]
+        t.waitlist = t.waitlist[1:]
+    } else {
+        return nil, fmt.Errorf("no replacement available")
+    }
+
+    // Create reshare request
+    newParties := t.computeNewParties(removedSigner, replacement)
+
+    return &ReshareRequest{
+        KeyID:        t.vm.bridgeKeyID,
+        NewParties:   newParties,
+        NewThreshold: t.computeThreshold(len(newParties)),
+        TriggerType:  TriggerSlotReplacement,
+        Metadata: map[string]interface{}{
+            "removed":     removedSigner.String(),
+            "replacement": replacement.String(),
+        },
+    }, nil
 }
 
-func (w *ValidatorWatcher) scheduleProactiveRefresh(ctx context.Context) {
-    ticker := time.NewTicker(w.config.ProactiveRefreshInterval)
-    defer ticker.Stop()
-
-    for {
-        select {
-        case <-ctx.Done():
-            return
-        case <-ticker.C:
-            for keyID, config := range w.managedKeys {
-                if w.inBlackoutPeriod() {
-                    continue
-                }
-
-                request := &ReshareRequest{
-                    KeyID:        keyID,
-                    NewParties:   w.getCurrentParties(keyID),  // Same parties
-                    NewThreshold: w.getCurrentThreshold(keyID), // Same threshold
-                    TriggerType:  TriggerProactiveRefresh,
-                }
-
-                w.reshareTriggerCh <- request
-            }
+func (t *SlotReplacementTrigger) computeNewParties(
+    removed ids.NodeID,
+    added ids.NodeID,
+) []ids.NodeID {
+    parties := make([]ids.NodeID, 0, len(t.signerSet.Signers))
+    for _, signer := range t.signerSet.Signers {
+        if signer.NodeID != removed {
+            parties = append(parties, signer.NodeID)
         }
     }
+    parties = append(parties, added)
+    return parties
+}
+
+func (t *SlotReplacementTrigger) computeThreshold(partyCount int) uint32 {
+    // Use configured threshold ratio (default 2/3)
+    return uint32(float64(partyCount) * t.vm.config.ThresholdRatio)
 }
 ```
 
@@ -2321,31 +2224,44 @@ func MigrateLegacyKey(ctx context.Context, vm *VM, legacy *LegacyKeyMigration) (
 }
 ```
 
-#### Migration CLI Commands
+#### CLI Commands (lux-cli)
 
 ```bash
-# List static keys eligible for migration
-luxd threshold migration list-static
+# Opt-in as bridge signer (for validators)
+lux bridge signer register \
+  --node-id=<node-id> \
+  --stake-amount=100000000000
 
-# Migrate a single key
-luxd threshold migration migrate \
+# Check signer set status
+lux bridge signer status
+
+# Get detailed signer set info
+lux bridge signer list
+
+# Replace a failed signer (requires governance/operator role)
+lux bridge signer replace \
+  --remove=<node-id> \
+  --replacement=<new-node-id>
+
+# Check waitlist (validators waiting for slot)
+lux bridge signer waitlist
+
+# Legacy migration (for systems with static keys)
+lux bridge migration migrate \
   --key-id=<key-id> \
   --validate-shares \
-  --enable-auto-trigger \
-  --proactive-refresh=168h \
   --test-reshare
 
-# Migrate all keys
-luxd threshold migration migrate-all \
-  --batch-size=10 \
-  --delay-between=30s
-
 # Check migration status
-luxd threshold migration status --key-id=<key-id>
-
-# Rollback migration (if issues)
-luxd threshold migration rollback --key-id=<key-id>
+lux bridge migration status --key-id=<key-id>
 ```
+
+**RPC Endpoint Mapping:**
+| CLI Command | RPC Method |
+|-------------|------------|
+| `lux bridge signer register` | `bridge_registerValidator` |
+| `lux bridge signer status` | `bridge_getSignerSetInfo` |
+| `lux bridge signer replace` | `bridge_replaceSigner` |
 
 ### Migration Path
 
@@ -2426,36 +2342,51 @@ func TestGenerationRollback(t *testing.T) {
     assert.Equal(t, GenerationRolledBack, gen2.State)
 }
 
-func TestValidatorChangeTriggersReshare(t *testing.T) {
-    watcher := NewValidatorWatcher(testConfig)
-    keyID := ids.GenerateTestID()
+func TestSlotReplacementTriggersReshare(t *testing.T) {
+    // Setup: B-Chain VM with opt-in signer set (100 signers, set frozen)
+    vm := NewTestBridgeVM(testConfig)
+    signerSet := createTestSignerSet(100) // Full set, frozen
+    vm.SetSignerSet(signerSet)
 
-    // Register managed key
-    watcher.RegisterManagedKey(keyID, &ManagedKeyConfig{
-        Source:        KeySourcePlatformValidators,
-        ThresholdRule: ThresholdByzantine,
-    })
+    // Simulate signer #42 failing
+    failedSigner := signerSet.Signers[42].NodeID
+    replacementSigner := generateNodeID()
 
-    // Simulate validator change
-    event := ValidatorChangeEvent{
-        AddedValidators:   []ids.NodeID{generateNodeID()},
-        RemovedValidators: []ids.NodeID{generateNodeID()},
-        Height:            1000,
+    // Trigger slot replacement (this is the ONLY reshare trigger in opt-in model)
+    result, err := vm.RemoveSigner(failedSigner, &replacementSigner)
+    require.NoError(t, err)
+
+    // Verify reshare was triggered
+    assert.True(t, result.Success)
+    assert.Equal(t, failedSigner.String(), result.RemovedNodeID)
+    assert.Equal(t, replacementSigner.String(), result.ReplacementNodeID)
+    assert.NotEmpty(t, result.ReshareSession)
+    assert.Equal(t, uint64(1), result.NewEpoch) // Epoch incremented on reshare
+
+    // Verify set size unchanged (100 signers)
+    assert.Equal(t, 100, result.ActiveSigners)
+}
+
+func TestOptInRegistrationNoReshare(t *testing.T) {
+    // Setup: B-Chain VM with partial signer set (50 signers)
+    vm := NewTestBridgeVM(testConfig)
+    signerSet := createTestSignerSet(50)
+    vm.SetSignerSet(signerSet)
+
+    // Register new validator (should NOT trigger reshare under opt-in model)
+    newValidator := &RegisterValidatorInput{
+        NodeID:      generateNodeID().String(),
+        StakeAmount: "100000000000",
     }
 
-    // Capture reshare request
-    requestCh := make(chan *ReshareRequest, 1)
-    watcher.reshareTriggerCh = requestCh
+    result, err := vm.RegisterValidator(newValidator)
+    require.NoError(t, err)
 
-    watcher.OnValidatorSetChange(event)
-
-    select {
-    case req := <-requestCh:
-        assert.Equal(t, keyID, req.KeyID)
-        assert.Equal(t, TriggerValidatorChange, req.TriggerType)
-    case <-time.After(time.Second):
-        t.Fatal("expected reshare request not received")
-    }
+    // Verify no reshare occurred
+    assert.True(t, result.Success)
+    assert.Equal(t, 51, result.TotalSigners)
+    assert.Equal(t, vm.signerSet.CurrentEpoch, result.CurrentEpoch) // Epoch unchanged
+    assert.False(t, result.SetFrozen) // Not yet at 100
 }
 
 func TestPartitionTolerantReshare(t *testing.T) {
@@ -2491,11 +2422,12 @@ func TestMaliciousShareDetection(t *testing.T) {
 
 ### Integration Tests
 
-1. **End-to-End Validator Rotation**: Full cycle from validator join/leave to reshare completion
-2. **Cross-Epoch Resharing**: Reshare spanning multiple consensus epochs
-3. **Concurrent Signing During Reshare**: Verify signing continues throughout reshare process
-4. **Multi-Key Reshare**: Multiple keys resharing simultaneously
-5. **Rollback After Partial Failure**: Recovery from mid-reshare failures
+1. **End-to-End Slot Replacement**: Full cycle from signer failure detection to reshare completion
+2. **Opt-In Registration Flow**: Validator opts in via `lux-cli`, joins signer set, no reshare
+3. **Set Closure at 100**: Verify set freezes at 100 signers, new validators go to waitlist
+4. **Cross-Epoch Resharing**: Reshare spanning multiple consensus epochs
+5. **Concurrent Signing During Reshare**: Verify signing continues throughout reshare process
+6. **Rollback After Partial Failure**: Recovery from mid-reshare failures
 
 ### Stress Tests
 

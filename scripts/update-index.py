@@ -96,21 +96,22 @@ def categorize_lps(lps):
 def format_table_row(lp):
     """Format a LP as a markdown table row"""
     number = lp['number']
+    filename = lp.get('filename', f'lp-{number:04d}.md')
     title = lp.get('title', 'Untitled')
     authors = lp.get('author', 'Unknown')
     lp_type = lp.get('type', 'Unknown')
     category = lp.get('category') or '-'
     status = lp.get('status', 'Unknown')
-    
+
     # Clean up authors (remove emails/github handles for brevity)
     authors = re.sub(r'\s*\([^)]*\)', '', authors)
     authors = re.sub(r'\s*<[^>]*>', '', authors)
-    
+
     # Truncate long titles
     if len(title) > 50:
         title = title[:47] + '...'
-    
-    return f"| [LP-{number:04d}](./LPs/lp-{number:04d}.md) | {title} | {authors} | {lp_type} | {category} | {status} |"
+
+    return f"| [LP-{number:04d}](./LPs/{filename}) | {title} | {authors} | {lp_type} | {category} | {status} |"
 
 def generate_index_section():
     """Generate the index section for README"""
@@ -146,7 +147,8 @@ def generate_index_section():
             else:
                 lrc_num = f"LRC-{number}"
 
-            output.append(f"| {lrc_num} | [LP-{number:04d}](./LPs/lp-{number:04d}.md) | {title} | {status} |")
+            filename = lrc.get('filename', f'lp-{number:04d}.md')
+            output.append(f"| {lrc_num} | [LP-{number:04d}](./LPs/{filename}) | {title} | {status} |")
     
     return '\n'.join(output)
 

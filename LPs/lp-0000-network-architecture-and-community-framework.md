@@ -59,7 +59,7 @@ As the Lux Network evolves to support advanced cross-chain operations, privacy f
 │                          Primary Network                              │
 ├─────────────────────┬─────────────────────┬─────────────────────────┤
 │      Q-Chain       │      X-Chain         │       C-Chain           │
-│    (Quantum)       │    (Exchange)        │     (Contract)          │
+│    (Root PQC)     │    (Exchange)        │     (Contract)          │
 ├─────────────────────┼─────────────────────┼─────────────────────────┤
 │ • Quasar Consensus │ • CEX (Hyperliquid)  │ • EVM Compatible        │
 │ • Verkle + Witness │ • 1B+ trades/sec     │ • Uniswap AMM DEX       │
@@ -93,16 +93,169 @@ As the Lux Network evolves to support advanced cross-chain operations, privacy f
 #### Chain Specifications
 
 **Lux 2.0 (Current Architecture):**
-- **Q-Chain (Quantum Chain):** Platform management with Quasar consensus (Photon, Wave, Nova, Nebula, Prism protocols), validator coordination, and staking. Uses verkle trees and witness support. Replaces P-Chain from Lux 1.0. See [LP-99](./lp-99-q-chain-quantum-secure-consensus-protocol-family-quasar.md).
-- **X-Chain (Exchange Chain):** High-performance CEX with full Hyperliquid feature parity. Colocated infrastructure in KCMO datacenter achieving 1B+ trades/sec. Uses FIX protocol for institutional traders. High-performance C++ CEX available by request (pre-launch). See [LP-11](./lp-11-x-chain-exchange-chain-specification.md).
-- **C-Chain (Contract Chain):** EVM-compatible smart contract chain hosting Uniswap-based AMM DEX and DeFi ecosystem. See [LP-12](./lp-12-c-chain-contract-chain-specification.md).
-- **A-Chain (AI/Attestation Chain):** TEE attestation layer for AI compute verification. See [LP-80](./lp-80-a-chain-attestation-chain-specification.md).
-- **B-Chain (Bridge Chain):** Cross-chain bridge layer built on top of the existing infrastructure with MPC dual signatures. See [LP-81](./lp-81-b-chain-bridge-chain-specification.md).
-- **M-Chain (MPC Chain):** Threshold signature custody with CGG21 + Ringtail. See [LP-13](./lp-13-m-chain-decentralised-mpc-custody-and-swap-signature-layer.md).
-- **Z-Chain (Zero-Knowledge Chain):** ZK co-processor for Lux FHE implementation and fheEVM providing fully homomorphic encryption. See [LP-14](./lp-14-m-chain-threshold-signatures-with-cgg21-uc-non-interactive-ecdsa.md).
-- **G-Chain (Graph Chain):** Universal omnichain oracle. See [LP-98](./lp-98-luxfi-graphdb-and-graphql-engine-integration.md).
+
+The Lux ecosystem has four main strata:
+
+1. **X-Chain (Liquidity Layer)**
+EVM chain with:
+- LUX + all ERC-20 native assets,
+- AMM pools Pool(T, S) for native_asset/security_token pairs,
+- LP tokens used as collateral,
+- Security Fee (σ) contracts (SecurityAnchor).
+
+2. **P-Chain (Registry & Staking)**
+Minimal control plane:
+- Tracks LUX staking for PQC validators,
+- Registers all chains and their security_token relationships,
+- Stores basic config (σ, cadence c, chain type).
+
+3. **Q-Chain (Root PQC)**
+A specific Post-Quantum Chain with global scope:
+- Validated by LUX-staked validators (registered on P-Chain),
+- Stores checkpoints from all chains (or from sector PQCs that aggregate them),
+- Runs the QSF fee market in LUX (EIP-1559-style baseFee per byte),
+- Acts as canonical root of finality for the entire ecosystem.
+
+4. **PQC family (PQC₁, PQC₂, …)**
+Additional chains that:
+- Also run the Lux PQ consensus,
+- May be specialized per sector / jurisdiction / application (e.g., "Defense PQC", "Settlement PQC-EU"),
+- Can themselves act as finality anchors for downstream chains (L2s, LSCs),
+- Ultimately checkpoint upwards to Q-Chain for global finality.
+
+The recursive picture:
+
+          Q-Chain (PQC_0)
+         /        |      \
+   PQC_1         PQC_2    …
+    |              |
+  L2 / LSCs      L2 / LSCs
+    |              |
+  Appchains      Appchains
+
+But all liquidity is still flat on X-Chain; only the security / finality graph is hierarchical.
 
 **Note:** Lux 1.0 was based on Lux architecture with P-Chain (Platform), X-Chain (Exchange), and C-Chain (Contract). Lux 2.0 features a complete rewrite with our Quasar consensus protocol family, verkle trees, FPC, and witness support. P-Chain functionality has been absorbed into Q-Chain with quantum-secure consensus. The new X-Chain is a colocated high-performance DEX achieving 1B+ trades/sec.
+
+### Data Flow and Security vs Liquidity Layers
+
+#### Data Flow
+
+- **LSC / L2 / Appchain:**
+  - Runs its own consensus (Avalanche-style, EVM chain, rollup, etc.).
+  - Maintains:
+    - SecurityAnchor(T,S) on X-Chain for σ,
+    - Possibly LSCStaking on X-Chain for LP-based collateral.
+  - Periodically creates a Checkpoint(T) (height, stateRoot, proof).
+  - To PQC (child / sector) or Q-Chain (root):
+    - Sends Checkpoint(T) as a tx to its parent PQC.
+    - Parent PQC:
+      - Verifies proof,
+      - Charges QSF (in security_token or LUX, depending on layer),
+      - Embeds checkpoint in a block.
+  - Upwards Recursion:
+    - PQC_n regularly sends its own checkpoint to Q-Chain (or to PQC_{n-1} then Q-Chain).
+    - Q-Chain stores final root checkpoints.
+
+#### Security vs Liquidity Layers
+
+- **Security tree:**
+  - PQCs (including Q-Chain) + LSCs define a DAG / tree of "who finalizes whom".
+- **Liquidity surface:**
+  - All ERC-20 tokens and LPs live on X-Chain.
+  - SecurityAnchor contracts implement σ as swap+burn+POL.
+  - Arbitrage / routers see everything as just AMM pairs across a single chain.
+
+So from an EVM / DEX engineer point of view:
+  - PQC vs non-PQC doesn't change how the DEX works. It only changes:
+    - Which chain emits which Checkpoint,
+    - How often they checkpoint,
+    - What "layer" of finality they're tied into.
+
+### Roles and Types Table
+
+| Role | Type | Description | Consensus | Security Token | Finality Anchor |
+|------|------|-------------|-----------|----------------|-----------------|
+| ROOT_PQC | Q-Chain | Global root of finality | Quasar (PQ) | LUX | None (root) |
+| PQC | Sector PQC | Regional/domain-specific PQC | Quasar (PQ) | LUX or derived | Q-Chain |
+| LSC | Liquidity-Secured Chain | Classical consensus with liquidity backing | Various | LP tokens | PQC or Q-Chain |
+| L2-classic | Classical L2 | Traditional rollup/validium | Various | Native | PQC or Q-Chain |
+| X-Chain | Liquidity Layer | High-performance DEX | EVM | LUX | N/A (liquidity) |
+| P-Chain | Registry & Staking | Validator management | Minimal | LUX | N/A (control) |
+
+### Chain Type Definitions
+
+- **ROOT_PQC (Q-Chain)**: The canonical global finality chain with quantum-resistant consensus and global QSF fee market.
+- **PQC (Post-Quantum Chain)**: Any chain running Lux PQ consensus that can accept checkpoints from downstream chains and emit checkpoints to upstream PQCs.
+- **LSC (Liquidity-Secured Chain)**: Chains secured by liquidity providers via SecurityAnchor contracts on X-Chain.
+- **L2-classic**: Traditional Layer 2 solutions (rollups, validiums) that checkpoint to PQCs.
+- **X-Chain**: The liquidity layer where all assets and AMM pools reside.
+- **P-Chain**: The registry and staking control plane for validator management.
+
+### Checkpoint Flow State Machine
+
+```
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                    CHECKPOINT FLOW STATE MACHINE                             │
+├─────────────────────────────────────────────────────────────────────────────┤
+│                                                                             │
+│  [Appchain/L2/LSC]     [Sector PQC]     [Q-Chain (Root PQC)]              │
+│      │                     │                     │                           │
+│      ├─ Produce Blocks ────►│                     │                           │
+│      │                     │                     │                           │
+│      ├─ Update MMR      ───►│                     │                           │
+│      │                     │                     │                           │
+│      ├─ Generate Checkpoint (every N blocks)                                  │
+│      │                     │                     │                           │
+│      ├─ Sign with Dual PQ Sigs (BLS+Ringtail)                               │
+│      │                     │                     │                           │
+│      └─ Submit Checkpoint ─────────────────►│                     │                           │
+│                                          │                     │                           │
+│                                          ├─ Verify MMR Proof ───►│                           │
+│                                          │                     │                           │
+│                                          ├─ Verify Dual Sigs ───►│                           │
+│                                          │                     │                           │
+│                                          ├─ Charge QSF Fee ─────►│                           │
+│                                          │                     │                           │
+│                                          ├─ Embed in Block ─────►│                           │
+│                                          │                     │                           │
+│                                          ├─ Update State ───────►│                           │
+│                                          │                     │                           │
+│                                          ├─ Generate PQC Checkpoint (if Sector PQC)   │
+│                                          │                     │                           │
+│                                          └─ Submit to Q-Chain ───────────────────────►│
+│                                                                     │                           │
+│                                                                     ├─ Verify Sector Checkpoint  │
+│                                                                     │                           │
+│                                                                     ├─ Charge QSF Fee           │
+│                                                                     │                           │
+│                                                                     ├─ Embed in Q-Block         │
+│                                                                     │                           │
+│                                                                     └─ Global Finality Achieved  │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+```
+
+### State Transitions
+
+1. **Block Production**: Child chain produces blocks and updates its MMR
+2. **Checkpoint Generation**: At interval, generate MMR proof and create checkpoint
+3. **Dual Signing**: Sign checkpoint with both BLS and Ringtail signatures
+4. **Submission**: Submit signed checkpoint to parent PQC
+5. **Parent Validation**: Parent PQC verifies proofs, signatures, and fees
+6. **Inclusion**: Parent embeds checkpoint in its own block
+7. **Recursive Checkpointing**: Sector PQCs create their own checkpoints for Q-Chain
+8. **Global Finality**: Q-Chain includes final checkpoint, achieving global finality
+
+### Failure Modes and Recovery
+
+- **Invalid Checkpoint**: Rejected with specific error code, child chain must resubmit
+- **Signature Failure**: Slashing conditions triggered for malicious validators
+- **QSF Fee Shortage**: Checkpoint held until sufficient fees provided
+- **Network Partition**: Checkpoints queue and process when connectivity restored
+- **Validator Set Change**: New checkpoints use updated validator set after epoch transition
+
+This state machine ensures cryptographically secure, economically incentivized, and post-quantum resistant checkpoint flow throughout the Lux ecosystem.
 
 ### Part 2: Community Contribution Framework
 

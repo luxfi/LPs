@@ -1,7 +1,7 @@
 ---
 lp: 0099
-title: Q-Chain – Quantum-Secure Consensus Protocol Family (Quasar)
-description: Comprehensive specification of the Quasar quantum-secure consensus protocol family for Lux Network, featuring dual-certificate finality
+title: Q-Chain – Root PQC with Quasar Consensus Protocol Family
+description: Comprehensive specification of Q-Chain as the root Post-Quantum Chain with Quasar consensus, featuring dual-certificate finality and recursive PQC architecture
 author: Lux Network Team (@luxdefi)
 discussions-to: https://github.com/luxfi/lps/discussions
 status: Draft
@@ -26,6 +26,192 @@ Blockchain networks face an impending quantum threat that could undermine curren
 4. **Unified Framework**: Multiple consensus variants (linear chains, DAGs) need consistent quantum protection
 
 Q-Chain addresses these challenges by providing a modular, high-performance consensus stack with built-in quantum resistance.
+
+## Post-Quantum Chains (PQC) – General
+
+A Post-Quantum Chain (PQC) is any chain in the Lux ecosystem that:
+
+- Runs the Lux PQ consensus (post-quantum BFT),
+- Has a validator set backed by stake in LUX or a chain whose security_token ultimately resolves to LUX,
+- Can accept checkpoint transactions from downstream chains,
+- Can emit checkpoints to an upstream PQC (often Q-Chain).
+
+### Properties
+
+- **High-security**: PQC consensus uses post-quantum signatures (e.g. lattice/hash-based), with crypto-agility to allow future upgrades.
+- **Configurable throughput**: A PQC can be low-throughput (like Q-Chain) or medium-throughput (e.g. a regional PQC) depending on its role.
+- **Recursive**: A PQC itself may be a "parent" to:
+  - classical LSCs / L2s that use its stateRoot as their finality anchor,
+  - or even to other PQCs (if you want multi-layer PQ trees).
+
+### Requirements
+
+In RFC language:
+
+A PQC MUST:
+  - Run LuxPQConsensus (parametrized PBFT-like protocol with PQ signatures).
+  - Accept Checkpoint(tx) messages from authorized child chains.
+  - Produce Checkpoint(tx) messages to its parent PQC or to Q-Chain.
+
+A PQC MAY:
+  - Run application logic (EVM/WASM/etc.).
+  - Maintain its own QSF-like fee market for its children, denominated in its own security_token,
+    as long as it ultimately settles to LUX when checkpointing to Q-Chain.
+
+## Q-Chain – Root PQC
+
+Q-Chain is the distinguished root Post-Quantum Chain of the Lux ecosystem. It is a high-security, low-throughput PQC that:
+
+- Is validated by LUX-staked validators registered on P-Chain,
+- Stores checkpoints from all chains and from other PQCs,
+- Implements the global Quantum Security Fee (QSF) fee market in LUX on a per-byte basis,
+- Acts as the canonical root of finality from which all other PQCs and Liquidity-Secured Chains derive their long-term safety.
+
+### Checkpoint Inclusion Mechanism
+
+The checkpoint inclusion mechanism is cryptographically sound and builds on Lux's post-quantum consensus and signing infrastructure:
+
+#### 1. Merkle Mountain Ranges (MMR) for Efficient Proofs
+
+Each child chain (LSC, L2, or PQC) maintains a Merkle Mountain Range of its block headers:
+
+```go
+type ChainMMR struct {
+    peaks       []Hash          // Current MMR peaks
+    height      uint64         // Current height
+    chainID     ChainID        // Source chain identifier
+    lastCheckpoint uint64       // Last checkpointed height
+}
+
+func (mmr *ChainMMR) AddBlock(header BlockHeader) {
+    // Add block to MMR, update peaks
+    mmr.peaks = mmr.updatePeaks(header.Hash())
+    mmr.height++
+}
+
+func (mmr *ChainMMR) GenerateProof(targetHeight uint64) *MMRProof {
+    // Generate inclusion proof for specific height
+    return generateMMRProof(mmr.peaks, targetHeight)
+}
+```
+
+#### 2. Post-Quantum Signed Checkpoints
+
+Checkpoints are signed using the existing Lux PQ consensus infrastructure:
+
+```go
+type Checkpoint struct {
+    ChainID        ChainID        // Source chain ID
+    StartHeight    uint64         // First block in this checkpoint
+    EndHeight      uint64         // Last block in this checkpoint
+    StartRoot      Hash           // MMR root at StartHeight-1
+    EndRoot        Hash           // MMR root at EndHeight
+    BlockCount     uint64         // Number of blocks included
+    StateRoot      Hash           // Final state root
+    Proof         *MMRProof      // MMR inclusion proof
+    QSFFee        uint64         // Quantum Security Fee paid
+    ValidatorSet   ValidatorSetID // Validator set ID
+}
+
+type SignedCheckpoint struct {
+    Checkpoint     Checkpoint
+    BLSsig         []byte         // Classical BLS aggregate signature
+    RingtailSig    []byte         // Post-quantum threshold signature
+    SignerBitmap   []byte         // Bitmap of signing validators
+}
+```
+
+#### 3. Dual-Signature Verification
+
+Q-Chain validates checkpoints using both classical and post-quantum signatures:
+
+```go
+func (q *QuasarConsensus) VerifyCheckpoint(signed *SignedCheckpoint) bool {
+    // 1. Verify MMR proof structure
+    if !verifyMMRProof(signed.Checkpoint.Proof, signed.Checkpoint.StartRoot, 
+                      signed.Checkpoint.EndRoot, signed.Checkpoint.BlockCount) {
+        return false
+    }
+    
+    // 2. Verify classical BLS signature
+    if !q.blsAgg.Verify(signed.Checkpoint.Hash(), signed.BLSsig) {
+        return false
+    }
+    
+    // 3. Verify post-quantum Ringtail signature
+    if !q.ringtail.Verify(signed.Checkpoint.Hash(), signed.RingtailSig) {
+        return false
+    }
+    
+    // 4. Verify validator set matches current epoch
+    currentSet := q.getCurrentValidatorSet()
+    if !currentSet.Matches(signed.ValidatorSet) {
+        return false
+    }
+    
+    // 5. Verify QSF fee payment
+    if !q.verifyQSFPayment(signed.Checkpoint.QSFFee, signed.Checkpoint.BlockCount) {
+        return false
+    }
+    
+    return true
+}
+```
+
+#### 4. Verkle Tree Integration for State Proofs
+
+For chains that need state verification (not just block inclusion):
+
+```go
+type StateProof struct {
+    StateRoot     Hash           // Root of state trie
+    Key           []byte         // Key being proven
+    Value         []byte         // Value at key
+    Proof         []byte         // Verkle proof
+    BlockHeight   uint64         // Block height for this state
+}
+
+func (q *QuasarConsensus) VerifyStateProof(proof *StateProof, checkpoint *Checkpoint) bool {
+    // Verify state proof against checkpoint's state root
+    return q.verkleTree.Verify(proof.StateRoot, proof.Key, proof.Value, proof.Proof)
+}
+```
+
+#### 5. Checkpoint Processing Flow
+
+```
+1. Child chain produces blocks and updates its MMR
+2. At checkpoint interval (e.g., every 100 blocks):
+   - Generate MMR proof from last checkpoint to current height
+   - Create Checkpoint struct with metadata
+   - Sign with dual BLS+Ringtail signatures
+3. Submit SignedCheckpoint to Q-Chain (or parent PQC)
+4. Q-Chain validates:
+   - Cryptographic proofs (MMR + signatures)
+   - Validator set authorization
+   - QSF fee payment
+5. If valid, Q-Chain includes checkpoint in next block
+6. Q-Chain updates its global state with new chain head
+```
+
+#### 6. Security Properties
+
+- **Post-Quantum Security**: All signatures use Lux's dual BLS+Ringtail scheme
+- **Efficient Proofs**: MMR provides O(log n) proofs for arbitrary block ranges
+- **State Verifiability**: Optional Verkle proofs for state transitions
+- **Economic Security**: QSF fees paid in LUX provide Sybil resistance
+- **Validator Accountability**: Signer bitmaps enable slashing for misbehavior
+- **Crypto-Agility**: Signature schemes can be upgraded via governance
+
+#### 7. Performance Characteristics
+
+- **Proof Size**: ~1-2 KB per checkpoint (MMR + signatures)
+- **Verification Time**: ~5-10ms on modern hardware
+- **Checkpoint Frequency**: Configurable per chain (e.g., every 10-1000 blocks)
+- **Throughput**: Q-Chain can process 1000+ checkpoints/second
+- **Storage**: MMR peaks allow pruning of old block data
+
+This mechanism ensures that Q-Chain can securely and efficiently include proofs of other networks' blocks while maintaining the full post-quantum security guarantees of the Lux consensus protocol.
 
 ## The Quasar Consensus Stack
 
