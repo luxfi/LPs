@@ -185,7 +185,7 @@ Reference implementations for the MPC Bridge Protocol can be found at:
 ### MPC Bridge Implementation
 
 - **GitHub**: https://github.com/luxfi/bridge
-- **Local**: `/Users/z/work/lux/bridge/`
+- **Local**: `bridge/`
 - **Size**: ~800 MB (bridge-new branch ~2.5 GB)
 - **Languages**: TypeScript/JavaScript (frontend), Go (backend)
 
@@ -205,7 +205,7 @@ Reference implementations for the MPC Bridge Protocol can be found at:
 
 ```bash
 # Build bridge backend
-cd /Users/z/work/lux/bridge
+cd bridge
 go build -o bin/bridge-server ./app/bridge
 
 # Build bridge UI
@@ -219,7 +219,7 @@ npm run dev  # Development server on :3000
 
 ```bash
 # Test swap protocol
-cd /Users/z/work/lux/bridge
+cd bridge
 go test ./pkg/swap -v
 
 # Test asset registry

@@ -306,20 +306,20 @@ See [github.com/luxfi/gpu-compute](https://github.com/luxfi/gpu-compute) for the
 
 ### Files and Locations
 
-**GPU Compute Framework** (`/Users/z/work/lux/gpu-compute/`):
+**GPU Compute Framework** (`gpu-compute/`):
 - `gpu.h` - Unified C++ GPU interface
 - `cuda_backend.cu` - NVIDIA CUDA implementation
 - `mlx_backend.cpp` - Apple MLX implementation
 - `rocm_backend.cpp` - AMD ROCm implementation
 - `cpu_fallback.cpp` - CPU reference implementation
 
-**Go Integration** (`/Users/z/work/lux/node/gpu/`):
+**Go Integration** (`node/gpu/`):
 - `gpu.go` - CGo bindings to C++ library
 - `cuda_bridge.go` - CUDA-specific wrappers
 - `mlx_bridge.go` - MLX-specific wrappers
 - `executor.go` - GPU task execution
 
-**Consensus Acceleration** (`/Users/z/work/lux/consensus/engine/gpu/`):
+**Consensus Acceleration** (`consensus/engine/gpu/`):
 - `signature_verify.go` - Batch signature verification
 - `proof_generator.go` - Cryptographic proof generation
 - `neural_engine.go` - Neural consensus operations
@@ -331,7 +331,7 @@ See [github.com/luxfi/gpu-compute](https://github.com/luxfi/gpu-compute) for the
 
 ### Testing
 
-**Unit Tests** (`/Users/z/work/lux/node/gpu/gpu_test.go`):
+**Unit Tests** (`node/gpu/gpu_test.go`):
 - TestGPUSignatureVerification (10K signatures)
 - TestGPUBLSAggregation (large signature sets)
 - TestGPUVerkleProofs (proof generation)
@@ -376,7 +376,7 @@ Timeout: 30 seconds per operation
 Thermal Throttle: 85°C (pause work)
 ```
 
-**Configuration File** (`/Users/z/work/lux/config/gpu.yaml`):
+**Configuration File** (`config/gpu.yaml`):
 ```yaml
 gpu:
   enabled: true
@@ -394,9 +394,9 @@ gpu:
 ### Source Code References
 
 All implementation files verified to exist:
-- ✅ `/Users/z/work/lux/gpu-compute/` (5 files C++/CUDA)
-- ✅ `/Users/z/work/lux/node/gpu/` (4 Go files)
-- ✅ `/Users/z/work/lux/consensus/engine/gpu/` (3 files)
+- ✅ `gpu-compute/` (5 files C++/CUDA)
+- ✅ `node/gpu/` (4 Go files)
+- ✅ `consensus/engine/gpu/` (3 files)
 - ✅ CGo integration tested on macOS, Linux, and Windows
 
 ## Security Considerations

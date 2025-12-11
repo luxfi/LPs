@@ -518,9 +518,9 @@ function pausePrivateSwaps() external onlyGovernance {
 ### Reference Implementation
 
 **Primary Locations**:
-- Privacy protocols: `/Users/z/work/lux/standard/src/privacy/`
-- AMM reference: `/Users/z/work/lux/standard/deploy/19_uniswapv2.ts` (base AMM structure)
-- EVM precompiles: `/Users/z/work/lux/evm/precompile/contracts/pqcrypto/`
+- Privacy protocols: `standard/src/privacy/`
+- AMM reference: `standard/deploy/19_uniswapv2.ts` (base AMM structure)
+- EVM precompiles: `evm/precompile/contracts/pqcrypto/`
 
 **Implementation Components**:
 

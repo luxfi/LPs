@@ -236,14 +236,14 @@ See [github.com/luxfi/node/sync](https://github.com/luxfi/node/tree/main/sync) f
 
 ### Files and Locations
 
-**Sync Engine** (`/Users/z/work/lux/node/sync/`):
+**Sync Engine** (`node/sync/`):
 - `sync.go` - Main sync coordinator
 - `fast_sync.go` - Fast sync protocol implementation
 - `snap_sync.go` - Snapshot sync (state-only)
 - `warp_sync.go` - Checkpoint-based sync
 - `downloader.go` - Block and state download
 
-**Pruning System** (`/Users/z/work/lux/node/database/pruner/`):
+**Pruning System** (`node/database/pruner/`):
 - `pruner.go` - State pruning coordinator
 - `ancient_store.go` - Freezer interface
 - `batch_pruner.go` - Batch pruning operations
@@ -256,7 +256,7 @@ See [github.com/luxfi/node/sync](https://github.com/luxfi/node/tree/main/sync) f
 
 ### Testing
 
-**Unit Tests** (`/Users/z/work/lux/node/sync/sync_test.go`):
+**Unit Tests** (`node/sync/sync_test.go`):
 - TestFastSync (header + state download)
 - TestSnapSync (recent state only)
 - TestWarpSync (checkpoint recovery)
@@ -312,8 +312,8 @@ Enable Snapshots: false
 ### Source Code References
 
 All implementation files verified to exist:
-- ✅ `/Users/z/work/lux/node/sync/` (5 files)
-- ✅ `/Users/z/work/lux/node/database/pruner/` (2 files)
+- ✅ `node/sync/` (5 files)
+- ✅ `node/database/pruner/` (2 files)
 - ✅ Ancient store integration with core database
 
 ## Security Considerations

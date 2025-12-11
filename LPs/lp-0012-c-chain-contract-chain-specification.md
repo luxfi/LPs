@@ -33,7 +33,7 @@ The educational side explains how aligning with EVM greatly lowers the barrier f
 ### C-Chain VM (Contract Chain)
 
 - **GitHub**: https://github.com/luxfi/geth (Lux-specific coreth fork)
-- **Local**: `/Users/z/work/lux/geth/` and `/Users/z/work/lux/coreth/`
+- **Local**: `geth/` and `coreth/`
 - **Size**: Combined ~2.5 GB
 - **Languages**: Go (Geth fork), Solidity (contracts)
 - **Consensus**: BFT (Byzantine Fault Tolerance)
@@ -53,11 +53,11 @@ The educational side explains how aligning with EVM greatly lowers the barrier f
 ### Build Instructions
 
 ```bash
-cd /Users/z/work/lux/geth
+cd geth
 go build -o bin/geth ./cmd/geth
 
 # Or build full node with C-Chain
-cd /Users/z/work/lux/node
+cd node
 go build -o build/luxd ./cmd/main.go
 ```
 
@@ -65,7 +65,7 @@ go build -o build/luxd ./cmd/main.go
 
 ```bash
 # Test C-Chain VM package
-cd /Users/z/work/lux/node
+cd node
 go test ./vms/cchainvm/... -v
 
 # Test EVM state management
@@ -127,7 +127,7 @@ curl -L https://foundry.paradigm.xyz | bash
 foundryup
 
 # Test Solidity contracts
-cd /Users/z/work/lux/standard
+cd standard
 forge test
 
 # Gas profiling

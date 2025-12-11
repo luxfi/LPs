@@ -339,7 +339,7 @@ contract SecureVault {
 
 ### Core Library
 
-**Location**: `/Users/z/work/lux/crypto/mlkem/`
+**Location**: `crypto/mlkem/`
 
 **Dependencies**:
 - `github.com/cloudflare/circl v1.6.1` (FIPS 203 compliant)
@@ -384,7 +384,7 @@ func (mode Mode) SharedSecretSize() int  // Always 32
 
 ### EVM Precompile (Optional)
 
-**Location**: `/Users/z/work/lux/evm/precompile/contracts/mlkem/`
+**Location**: `evm/precompile/contracts/mlkem/`
 
 **Files**:
 - `contract.go`: Precompile implementation
@@ -681,8 +681,8 @@ Copyright and related rights waived via [CC0](https://creativecommons.org/public
 3. **CIRCL Library**: [Cloudflare Cryptographic Library](https://github.com/cloudflare/circl)
 
 ### Implementation Files
-4. **Implementation**: `/Users/z/work/lux/crypto/mlkem/`
-5. **Precompile**: `/Users/z/work/lux/evm/precompile/contracts/mlkem/`
+4. **Implementation**: `crypto/mlkem/`
+5. **Precompile**: `evm/precompile/contracts/mlkem/`
 
 ## Appendix A: Key Size Comparison
 

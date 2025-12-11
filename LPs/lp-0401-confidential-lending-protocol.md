@@ -594,9 +594,9 @@ This LP introduces a new lending protocol that operates independently from exist
 ### Reference Implementation
 
 **Primary Locations**:
-- Lending core: `/Users/z/work/lux/standard/src/lending/`
-- MPC protocols: `/Users/z/work/lux/mpc/pkg/`
-- Threshold cryptography: `/Users/z/work/lux/threshold/protocols/`
+- Lending core: `standard/src/lending/`
+- MPC protocols: `mpc/pkg/`
+- Threshold cryptography: `threshold/protocols/`
 
 **Implementation Components**:
 

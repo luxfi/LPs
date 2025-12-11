@@ -219,13 +219,13 @@ See [github.com/luxfi/go-verkle](https://github.com/luxfi/go-verkle) for the com
 
 ### Files and Locations
 
-**Verkle Tree Implementation** (`/Users/z/work/lux/go-verkle/`):
+**Verkle Tree Implementation** (`go-verkle/`):
 - `verkle_tree.go` - Tree structure and node operations
 - `commitment.go` - Commitment scheme implementations (IPA/KZG)
 - `proof.go` - Proof generation and verification
 - `witness.go` - Witness creation for stateless clients
 
-**State Database** (`/Users/z/work/lux/node/database/verkle/`):
+**State Database** (`node/database/verkle/`):
 - `verkle_db.go` - Verkle-aware state database
 - `migration.go` - MPT to Verkle migration
 - `cache.go` - Proof and commitment caching
@@ -237,7 +237,7 @@ See [github.com/luxfi/go-verkle](https://github.com/luxfi/go-verkle) for the com
 
 ### Testing
 
-**Unit Tests** (`/Users/z/work/lux/go-verkle/verkle_test.go`):
+**Unit Tests** (`go-verkle/verkle_test.go`):
 - TestConstantProofSize (1KB target validation)
 - TestProofGeneration (witness creation)
 - TestProofVerification (proof validity)
@@ -281,8 +281,8 @@ Final Switch: Hard fork at agreed height
 ### Source Code References
 
 All implementation files verified to exist:
-- ✅ `/Users/z/work/lux/go-verkle/` (4 files)
-- ✅ `/Users/z/work/lux/node/database/verkle/` (integration)
+- ✅ `go-verkle/` (4 files)
+- ✅ `node/database/verkle/` (integration)
 - ✅ Verkle proof generation library integrated with core
 
 ## Security Considerations

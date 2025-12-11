@@ -336,31 +336,31 @@ This security framework is designed to be applied to existing bridges:
 ## Implementation
 
 ### Bridge Components
-- **Bridge Directory**: `/Users/z/work/lux/bridge/`
-  - Contracts: `/Users/z/work/lux/bridge/contracts/`
-  - MPC Nodes: `/Users/z/work/lux/bridge/mpc-nodes/` (if present)
-  - Configuration: `/Users/z/work/lux/bridge/config/`
+- **Bridge Directory**: `bridge/`
+  - Contracts: `bridge/contracts/`
+  - MPC Nodes: `bridge/mpc-nodes/` (if present)
+  - Configuration: `bridge/config/`
 
 ### Security Framework Implementation
 - **Source**: https://github.com/luxfi/bridge (main bridge repository)
 - **Contract Examples**:
-  - Emergency pause contracts: `/Users/z/work/lux/bridge/contracts/`
-  - Monitoring interfaces: `/Users/z/work/lux/bridge/contracts/`
-  - Insurance fund logic: `/Users/z/work/lux/bridge/contracts/`
+  - Emergency pause contracts: `bridge/contracts/`
+  - Monitoring interfaces: `bridge/contracts/`
+  - Insurance fund logic: `bridge/contracts/`
 
 ### Monitoring and Incident Response
-- **Monitoring Tools**: Docker-based monitoring stack in `/Users/z/work/lux/bridge/`
-- **Alert System**: Configured via `/Users/z/work/lux/bridge/compose.yml`
+- **Monitoring Tools**: Docker-based monitoring stack in `bridge/`
+- **Alert System**: Configured via `bridge/compose.yml`
 - **Health Checks**: Implemented in bridge node initialization
 
 ### Testing
-- **Test Cases**: `/Users/z/work/lux/bridge/test/`
+- **Test Cases**: `bridge/test/`
 - **Security Drills**: Runnable scenarios in test directory
 - **Integration Tests**: Cross-chain testing configuration
 
 ### Local Development
 ```bash
-cd /Users/z/work/lux/bridge
+cd bridge
 docker-compose -f compose.local.yml up -d  # Start local bridge
 ```
 

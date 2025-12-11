@@ -3031,7 +3031,7 @@ Deprecation warnings are provided for at least one minor version before removal.
 
 ## Test Cases
 
-See `/home/z/work/lux/bridge/test/sdk/` for comprehensive test suites covering:
+See `bridge/test/sdk/` for comprehensive test suites covering:
 - Unit tests for each module
 - Integration tests with mock bridge
 - E2E tests against testnet

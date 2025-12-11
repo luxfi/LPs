@@ -130,7 +130,7 @@ Use authenticated channels, verify transcripts, and schedule periodic key refres
 ### CGG21 Threshold ECDSA Library
 
 - **GitHub**: https://github.com/luxfi/threshold/protocols/cmp
-- **Local**: `/Users/z/work/lux/threshold/protocols/cmp/`
+- **Local**: `threshold/protocols/cmp/`
 - **Size**: ~150 MB
 - **Languages**: Go, Rust (cryptographic core)
 - **Standards**: CGG21 (Canetti-Gennaro-Goldfeder-Makriyannis-Peled 2021)
@@ -149,7 +149,7 @@ Use authenticated channels, verify transcripts, and schedule periodic key refres
 ### Build Instructions
 
 ```bash
-cd /Users/z/work/lux/threshold
+cd threshold
 go build -o bin/cgg21-keygen ./cmd/keygen
 
 # Or build all tools

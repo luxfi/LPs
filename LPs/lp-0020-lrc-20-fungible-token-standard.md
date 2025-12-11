@@ -286,15 +286,15 @@ Key components:
 ## Implementation
 
 ### Standard Library Location
-- **Local Implementation**: `/Users/z/work/lux/standard/src/`
-- **LRC-20 Base**: `/Users/z/work/lux/standard/src/ERC20.sol` (reference)
+- **Local Implementation**: `standard/src/`
+- **LRC-20 Base**: `standard/src/ERC20.sol` (reference)
 - **GitHub Repository**: https://github.com/luxfi/standard
 
 ### Confidential Transfer Implementation
 - **Source Files**:
-  - Privacy extensions: `/Users/z/work/lux/standard/src/` (LRC20Confidential-derived)
+  - Privacy extensions: `standard/src/` (LRC20Confidential-derived)
   - zkSNARK integration: Reference implementation directory
-  - Test cases: `/Users/z/work/lux/standard/test/`
+  - Test cases: `standard/test/`
 
 ### AI Compute Token Extensions
 - **Compute Provider Registry**: Available in standard library
@@ -303,7 +303,7 @@ Key components:
 
 ### Testing Infrastructure
 ```bash
-cd /Users/z/work/lux/standard
+cd standard
 forge test                      # Run all LRC-20 tests
 forge test --match "Confidential"  # Test privacy features
 forge test --match "AICompute"     # Test AI extensions

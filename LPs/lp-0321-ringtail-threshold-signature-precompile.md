@@ -358,7 +358,7 @@ See: `standard/src/precompiles/ringtail/`
 - `README.md` - Complete documentation (501 lines)
 
 **Cryptography:**
-- External Package: `/Users/z/work/lux/ringtail/sign`
+- External Package: `ringtail/sign`
 - Protocol: Two-round threshold signature (ePrint 2024/1113)
 - Security: Ring-LWE with 128-bit post-quantum security
 - Parameters: Configurable threshold and total parties
@@ -513,7 +513,7 @@ For Quasar consensus validators:
 
 ## Implementation Notes
 
-### Integration with `/Users/z/work/lux/ringtail`
+### Integration with `ringtail`
 
 The precompile uses the external Ringtail implementation:
 ```go

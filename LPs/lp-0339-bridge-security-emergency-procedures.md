@@ -3410,7 +3410,7 @@ github.com/luxfi/bridge/security/
 
 ```bash
 # Build security module
-cd /home/z/work/lux/bridge
+cd bridge
 go build ./security/...
 
 # Run tests

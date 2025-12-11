@@ -665,10 +665,10 @@ This LP introduces a new ZK swap protocol compatible with existing infrastructur
 ### Reference Implementation
 
 **Primary Locations**:
-- Ring signatures: `/Users/z/work/lux/node/crypto/ringtail/`
-- ZK swaps: `/Users/z/work/lux/standard/src/privacy/zkswap/`
-- Stealth addresses: `/Users/z/work/lux/standard/src/privacy/stealth/`
-- Bulletproofs: `/Users/z/work/lux/node/crypto/bulletproof/`
+- Ring signatures: `node/crypto/ringtail/`
+- ZK swaps: `standard/src/privacy/zkswap/`
+- Stealth addresses: `standard/src/privacy/stealth/`
+- Bulletproofs: `node/crypto/bulletproof/`
 
 **Implementation Components**:
 

@@ -53,10 +53,10 @@ The primary security consideration is ensuring the long-term economic sustainabi
 ## Implementation
 
 ### P-Chain Components
-**Repository**: `/Users/z/work/lux/node/`
+**Repository**: `node/`
 
 ### Ascension Transaction Types
-- **Location**: `/Users/z/work/lux/node/vms/platformvm/txs/`
+- **Location**: `node/vms/platformvm/txs/`
   - `AscendToSovereignTx`: L2→L1 transition transaction
   - `RegisterL1ValidatorTx`: Add sovereign L1 validator
   - `IncreaseL1ValidatorBalanceTx`: Top-up validator balance
@@ -80,13 +80,13 @@ The primary security consideration is ensuring the long-term economic sustainabi
   - Parameter adjustment via governance
 
 - **Source**:
-  - Located in `/Users/z/work/lux/node/vms/platformvm/state/`
+  - Located in `node/vms/platformvm/state/`
   - Balance tracking contracts
   - Fee calculation logic
 
 ### Testing and Deployment
 ```bash
-cd /Users/z/work/lux/node
+cd node
 # Test ascension transaction
 go test ./vms/platformvm/txs -run TestAscend
 

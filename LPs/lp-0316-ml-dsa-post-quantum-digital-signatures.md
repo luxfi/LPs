@@ -496,8 +496,8 @@ Copyright and related rights waived via [CC0](https://creativecommons.org/public
 3. **CIRCL Library**: [Cloudflare Cryptographic Library](https://github.com/cloudflare/circl)
 
 ### Implementation Files
-4. **Implementation**: `/Users/z/work/lux/crypto/mldsa/`
-5. **Precompile**: `/Users/z/work/lux/evm/precompile/contracts/mldsa/`
+4. **Implementation**: `crypto/mldsa/`
+5. **Precompile**: `evm/precompile/contracts/mldsa/`
 
 ## Appendix A: Key Size Comparison
 

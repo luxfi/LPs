@@ -312,7 +312,7 @@ The message format includes versioning to ensure backwards compatibility:
 ### Cross-Chain Message Protocol Implementation
 
 - **GitHub**: https://github.com/luxfi/node (warp protocol)
-- **Local**: `/Users/z/work/lux/node/vms/platformvm/warp/`
+- **Local**: `node/vms/platformvm/warp/`
 - **Size**: ~150 MB (warp subsystem)
 - **Languages**: Go
 
@@ -331,11 +331,11 @@ The message format includes versioning to ensure backwards compatibility:
 
 ```bash
 # Build with warp support
-cd /Users/z/work/lux/node
+cd node
 go build -o build/luxd ./cmd/main.go
 
 # Build warp client library
-cd /Users/z/work/lux/sdk/warp
+cd sdk/warp
 go build ./...
 ```
 
@@ -343,7 +343,7 @@ go build ./...
 
 ```bash
 # Test warp protocol
-cd /Users/z/work/lux/node
+cd node
 go test ./vms/platformvm/warp/... -v
 
 # Test message encoding/decoding

@@ -95,10 +95,10 @@ The reference implementation for the Lux Teleport Protocol is the existing Lux N
 ## Implementation
 
 ### Local Bridge Components
-**Repository Location**: `/Users/z/work/lux/bridge/`
+**Repository Location**: `bridge/`
 
 ### Smart Contracts
-- **Teleporter Contracts**: `/Users/z/work/lux/bridge/contracts/`
+- **Teleporter Contracts**: `bridge/contracts/`
   - ERC20 burn/mint logic (L2→L2, L1→L2)
   - Vault contracts for native assets
   - MPC signature verification
@@ -117,14 +117,14 @@ The reference implementation for the Lux Teleport Protocol is the existing Lux N
 
 ### Testing and Deployment
 ```bash
-cd /Users/z/work/lux/bridge
+cd bridge
 docker-compose -f compose.local.yml up -d  # Local bridge testing
 cd test/
 # Run bridge integration tests
 ```
 
 ### Cross-Chain Testing
-- **Test Cases**: `/Users/z/work/lux/bridge/test/`
+- **Test Cases**: `bridge/test/`
   - ERC20 burn-and-mint verification
   - Vault lock-and-release scenarios
   - UTXO chain interoperability

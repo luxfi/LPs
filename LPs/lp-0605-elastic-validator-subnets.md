@@ -294,18 +294,18 @@ See [github.com/luxfi/node/validator](https://github.com/luxfi/node/tree/main/va
 
 ### Files and Locations
 
-**Validator Management** (`/Users/z/work/lux/node/vms/platformvm/validator/`):
+**Validator Management** (`node/vms/platformvm/validator/`):
 - `validator.go` - Core Validator struct and methods
 - `elastic.go` - Dynamic validator set management
 - `performance.go` - Performance metric tracking
 - `selection.go` - Validator selection algorithm
 
-**Liquid Staking** (`/Users/z/work/lux/standard/src/contracts/staking/`):
+**Liquid Staking** (`standard/src/contracts/staking/`):
 - `LiquidStaking.sol` - ERC-4626 vault implementation
 - `LiquidToken.sol` - sLX token contract
 - `StakingPool.sol` - Multi-subnet staking pool
 
-**Rewards** (`/Users/z/work/lux/node/vms/platformvm/reward/`):
+**Rewards** (`node/vms/platformvm/reward/`):
 - `calculator.go` - Reward calculation engine
 - `distributor.go` - Reward distribution logic
 - `performance_multiplier.go` - Performance-based bonuses
@@ -318,7 +318,7 @@ See [github.com/luxfi/node/validator](https://github.com/luxfi/node/tree/main/va
 
 ### Testing
 
-**Unit Tests** (`/Users/z/work/lux/node/vms/platformvm/validator/validator_test.go`):
+**Unit Tests** (`node/vms/platformvm/validator/validator_test.go`):
 - TestElasticScaling (min/max/target sizing)
 - TestValidatorSelection (performance scoring)
 - TestPerformanceTracking (uptime and block metrics)
@@ -371,9 +371,9 @@ Unstaking Delay: 14 days
 ### Source Code References
 
 All implementation files verified to exist:
-- ✅ `/Users/z/work/lux/node/vms/platformvm/validator/` (4 files)
-- ✅ `/Users/z/work/lux/standard/src/contracts/staking/` (3 contracts)
-- ✅ `/Users/z/work/lux/node/vms/platformvm/reward/` (3 files)
+- ✅ `node/vms/platformvm/validator/` (4 files)
+- ✅ `standard/src/contracts/staking/` (3 contracts)
+- ✅ `node/vms/platformvm/reward/` (3 files)
 - ✅ Elastic validator selection integrated in consensus
 
 ## Security Considerations

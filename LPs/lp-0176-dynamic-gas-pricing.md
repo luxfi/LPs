@@ -101,13 +101,13 @@ LP-176 maintains exact parameter compatibility with ACP-176 to ensure:
 
 ### Location
 
-**Primary Implementation**: `/Users/z/work/lux/node/vms/evm/lp176/`
+**Primary Implementation**: `node/vms/evm/lp176/`
 
 Key files:
 - `lp176.go` - Core math and state tracking
 - `lp176_test.go` - Unit tests and verification
 
-**Plugin Interface**: `/Users/z/work/lux/geth/plugin/evm/upgrade/lp176/`
+**Plugin Interface**: `geth/plugin/evm/upgrade/lp176/`
 
 Files:
 - `params.go` - Configuration parameters

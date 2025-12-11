@@ -459,14 +459,14 @@ signature: <valid 10-of-15 signature>
 See: `standard/src/precompiles/frost/`
 
 **Key Files:**
-- [`contract.go`](/Users/z/work/lux/standard/src/precompiles/frost/contract.go) - Core precompile implementation (167 lines)
-- [`module.go`](/Users/z/work/lux/standard/src/precompiles/frost/module.go) - Precompile registration
-- [`contract_test.go`](/Users/z/work/lux/standard/src/precompiles/frost/contract_test.go) - Comprehensive test suite
-- [`IFROST.sol`](/Users/z/work/lux/standard/src/precompiles/frost/IFROST.sol) - Solidity interface and library (238 lines)
-- [`README.md`](/Users/z/work/lux/standard/src/precompiles/frost/README.md) - Complete documentation (266 lines)
+- [`contract.go`](standard/src/precompiles/frost/contract.go) - Core precompile implementation (167 lines)
+- [`module.go`](standard/src/precompiles/frost/module.go) - Precompile registration
+- [`contract_test.go`](standard/src/precompiles/frost/contract_test.go) - Comprehensive test suite
+- [`IFROST.sol`](standard/src/precompiles/frost/IFROST.sol) - Solidity interface and library (238 lines)
+- [`README.md`](standard/src/precompiles/frost/README.md) - Complete documentation (266 lines)
 
 **Cryptography:**
-- External Package: [`/Users/z/work/lux/threshold/protocols/frost`](/Users/z/work/lux/threshold/protocols/frost)
+- External Package: [`threshold/protocols/frost`](threshold/protocols/frost)
 - Protocol: Two-round Schnorr threshold signature (IETF CFRG FROST)
 - Curves: secp256k1 (Bitcoin), Ed25519 (Solana), curve25519
 - Security: Discrete logarithm assumption
@@ -664,7 +664,7 @@ For cross-chain bridges using FROST threshold:
 
 ## Implementation Notes
 
-### Integration with `/Users/z/work/lux/threshold`
+### Integration with `threshold`
 
 The precompile integrates with the external FROST threshold library:
 
@@ -741,10 +741,10 @@ See **LP-323** (LSS-MPC) for dynamic resharing capabilities:
 - Torben Pryds Pedersen (1991). "A Threshold Cryptosystem without a Trusted Party"
 
 ### Implementation
-- **Precompile**: [`standard/src/precompiles/frost/`](/Users/z/work/lux/standard/src/precompiles/frost/)
-- **Threshold Library**: [`threshold/protocols/frost/`](/Users/z/work/lux/threshold/protocols/frost/)
-- **Tests**: [`standard/src/precompiles/frost/contract_test.go`](/Users/z/work/lux/standard/src/precompiles/frost/contract_test.go)
-- **Interface**: [`standard/src/precompiles/frost/IFROST.sol`](/Users/z/work/lux/standard/src/precompiles/frost/IFROST.sol)
+- **Precompile**: [`standard/src/precompiles/frost/`](standard/src/precompiles/frost/)
+- **Threshold Library**: [`threshold/protocols/frost/`](threshold/protocols/frost/)
+- **Tests**: [`standard/src/precompiles/frost/contract_test.go`](standard/src/precompiles/frost/contract_test.go)
+- **Interface**: [`standard/src/precompiles/frost/IFROST.sol`](standard/src/precompiles/frost/IFROST.sol)
 
 ### Related LPs
 - **LP-4**: Quantum-Resistant Cryptography Integration

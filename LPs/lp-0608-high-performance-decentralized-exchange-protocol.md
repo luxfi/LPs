@@ -338,24 +338,24 @@ See [github.com/luxfi/dex](https://github.com/luxfi/dex) for the complete implem
 
 ### Files and Locations
 
-**DEX Core** (`/Users/z/work/lux/dex/`):
+**DEX Core** (`dex/`):
 - `orderbook.go` - Order book management
 - `matcher.go` - GPU-accelerated order matching
 - `settlement.go` - Trade settlement and clearing
 - `liquidity_aggregator.go` - Cross-chain liquidity
 
-**Smart Contracts** (`/Users/z/work/lux/standard/src/contracts/dex/`):
+**Smart Contracts** (`standard/src/contracts/dex/`):
 - `CommitRevealDEX.sol` - MEV protection auction
 - `LiquidityPool.sol` - Liquidity pools
 - `Router.sol` - Order routing and execution
 - `ZKVerifier.sol` - Zero-knowledge proof verification
 
-**Consensus Integration** (`/Users/z/work/lux/node/vms/evm/dex/`):
+**Consensus Integration** (`node/vms/evm/dex/`):
 - `dex_engine.go` - DEX precompile entry point
 - `batch_auction.go` - Batch auction execution
 - `market_maker.go` - Market maker support
 
-**Cross-Chain** (`/Users/z/work/lux/warp/dex/`):
+**Cross-Chain** (`warp/dex/`):
 - `cross_chain_settlement.go` - Warp message integration
 - `liquidity_bridge.go` - Cross-chain liquidity routing
 
@@ -368,7 +368,7 @@ See [github.com/luxfi/dex](https://github.com/luxfi/dex) for the complete implem
 
 ### Testing
 
-**Unit Tests** (`/Users/z/work/lux/dex/dex_test.go`):
+**Unit Tests** (`dex/dex_test.go`):
 - TestGPUMatching (10K+ orders)
 - TestCommitRevealAuction (MEV protection)
 - TestZKProofVerification (trade privacy)
@@ -431,10 +431,10 @@ Verification Gas: 150,000
 ### Source Code References
 
 All implementation files verified to exist:
-- ✅ `/Users/z/work/lux/dex/` (4 files)
-- ✅ `/Users/z/work/lux/standard/src/contracts/dex/` (4 contracts)
-- ✅ `/Users/z/work/lux/node/vms/evm/dex/` (3 files)
-- ✅ `/Users/z/work/lux/warp/dex/` (2 files)
+- ✅ `dex/` (4 files)
+- ✅ `standard/src/contracts/dex/` (4 contracts)
+- ✅ `node/vms/evm/dex/` (3 files)
+- ✅ `warp/dex/` (2 files)
 - ✅ GPU matching via LP-607 framework
 - ✅ Verkle trees via LP-603 for state proofs
 

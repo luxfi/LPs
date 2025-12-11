@@ -157,13 +157,13 @@ See [github.com/luxfi/node/gas](https://github.com/luxfi/node/tree/main/gas) for
 
 ### Files and Locations
 
-**Core Implementation** (`/Users/z/work/lux/node/gas/`):
+**Core Implementation** (`node/gas/`):
 - `gas_schedule.go` - Gas cost definitions and schedules
 - `calculator.go` - Dynamic fee calculation engine
 - `pricing.go` - EIP-1559 and AI compute pricing
 - `distribution.go` - Fee distribution logic
 
-**EVM Integration** (`/Users/z/work/lux/node/vms/evm/`):
+**EVM Integration** (`node/vms/evm/`):
 - `evm.go` - Gas parameter integration with EVM
 - `tx_pool.go` - Transaction pool fee handling
 - `state_transition.go` - Fee application during execution
@@ -175,7 +175,7 @@ See [github.com/luxfi/node/gas](https://github.com/luxfi/node/tree/main/gas) for
 
 ### Testing
 
-**Unit Tests** (`/Users/z/work/lux/node/gas/gas_test.go`):
+**Unit Tests** (`node/gas/gas_test.go`):
 - TestDynamicBaseFee (basic calculation)
 - TestEIP1559FeeAdjustment (congestion handling)
 - TestAIComputePricing (GPU resource costs)
@@ -213,8 +213,8 @@ BaseFeeChangeDenominator: 4 (faster adjustment)
 ### Source Code References
 
 All implementation files verified to exist:
-- ✅ `/Users/z/work/lux/node/gas/` (4 files)
-- ✅ `/Users/z/work/lux/node/vms/evm/` (integration)
+- ✅ `node/gas/` (4 files)
+- ✅ `node/vms/evm/` (integration)
 - ✅ Gas precompile at address `0x0200...0001`
 
 ## Security Considerations

@@ -466,7 +466,7 @@ Key modules:
 
 ## Reference Implementation
 
-**Primary Location**: `/Users/z/work/lux/consensus/core/dag/`
+**Primary Location**: `consensus/core/dag/`
 
 **Implementation Files** (total: 3.8 KB):
 - `flare.go` (1.2 KB) - DAG finalization protocol
@@ -485,7 +485,7 @@ Key modules:
 
 **Test Coverage** (8 tests, 96% code coverage):
 ```bash
-cd /Users/z/work/lux/consensus/core/dag
+cd consensus/core/dag
 go test -v ./... -coverprofile=coverage.out
 
 # === RUN   TestFlareCausalOrdering
@@ -518,7 +518,7 @@ go test -v ./... -coverprofile=coverage.out
 
 ## Implementation
 
-**Primary Location**: `/Users/z/work/lux/consensus/core/dag/`
+**Primary Location**: `consensus/core/dag/`
 
 **Core Implementation Files**:
 1. **flare.go** (1.2 KB) - DAG finalization protocol with cascading accept
@@ -544,7 +544,7 @@ go test -v ./... -coverprofile=coverage.out
 
 **Testing Commands**:
 ```bash
-cd /Users/z/work/lux/consensus/core/dag
+cd consensus/core/dag
 go test -v ./... -run Flare
 go test -v ./... -run Finalization
 go test -v ./... -run Vertex

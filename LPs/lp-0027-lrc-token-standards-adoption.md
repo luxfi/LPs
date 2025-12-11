@@ -58,12 +58,12 @@ The canonical reference implementations for LRC standards are maintained in the 
 ## Implementation
 
 ### Standard Library Location
-**Repository**: `/Users/z/work/lux/standard/`
+**Repository**: `standard/`
 
 ### LRC-20 Implementation
-- **Location**: `/Users/z/work/lux/standard/src/`
+- **Location**: `standard/src/`
   - `ERC20.sol` - Base fungible token implementation
-  - Test cases in `/Users/z/work/lux/standard/test/`
+  - Test cases in `standard/test/`
 
 - **Interface**:
   ```solidity
@@ -78,28 +78,28 @@ The canonical reference implementations for LRC standards are maintained in the 
   ```
 
 ### LRC-721 Implementation
-- **Location**: `/Users/z/work/lux/standard/src/ERC721.sol`
+- **Location**: `standard/src/ERC721.sol`
   - NFT standard with metadata
   - Enumeration extension support
   - Test suite for compliance
 
 ### LRC-1155 Implementation
-- **Location**: `/Users/z/work/lux/standard/src/ERC1155.sol`
+- **Location**: `standard/src/ERC1155.sol`
   - Multi-token standard
   - Batch operations
   - URI handling for metadata
 
 ### Extension Standards
-- **LRC-20Burnable** (LP-28): `/Users/z/work/lux/standard/src/ERC20Burnable.sol`
+- **LRC-20Burnable** (LP-28): `standard/src/ERC20Burnable.sol`
   - Mint/burn operations
-- **LRC-20Mintable** (LP-29): `/Users/z/work/lux/standard/src/ERC20Mintable.sol`
+- **LRC-20Mintable** (LP-29): `standard/src/ERC20Mintable.sol`
   - Controlled minting with access control
 - **LRC-20Bridgable** (LP-30): Bridge integration for cross-chain transfers
 - **LRC-721Burnable** (LP-31): NFT burning support
 
 ### Testing Framework
 ```bash
-cd /Users/z/work/lux/standard
+cd standard
 # Run all LRC token tests
 forge test
 

@@ -131,7 +131,7 @@ Use the `export-state-to-genesis` tool to extract all state from the blockchain 
 
 ```bash
 # Export state from PebbleDB/BadgerDB
-cd /Users/z/work/lux/state/scripts
+cd state/scripts
 go run export-state-to-genesis.go \
   /path/to/chaindata \
   /output/genesis-export.json
@@ -275,7 +275,7 @@ for _, v := range oldValidators {
 
 ### Chain Migration Framework
 
-Location: `/Users/z/work/lux/node/chainmigrate/`
+Location: `node/chainmigrate/`
 
 The Lux blockchain uses a generic **Chain Migration Framework** with VM-specific importer/exporter interfaces for regenesis:
 
@@ -767,15 +767,15 @@ func (n *Network) CheckRegenesisSchedule() {
 
 ## Tools
 
-- **Chain Migration Framework**: `/Users/z/work/lux/node/chainmigrate/`
+- **Chain Migration Framework**: `node/chainmigrate/`
   - Core interfaces: `interfaces.go`
   - C-Chain importer: `cchain_importer.go`
   - EVM exporter: `evm_exporter.go`
   - Documentation: `README.md`
-- **lux-cli Network Commands**: `/Users/z/work/lux/cli/cmd/networkcmd/`
+- **lux-cli Network Commands**: `cli/cmd/networkcmd/`
   - Import command: `import.go`
   - Network management: `start.go`
-- **EVM Plugin Exporter**: `/Users/z/work/lux/evm/plugin/evm/exporter.go`
+- **EVM Plugin Exporter**: `evm/plugin/evm/exporter.go`
 
 ## Acknowledgements
 

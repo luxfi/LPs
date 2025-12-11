@@ -281,7 +281,7 @@ The Teleport network requires a minimum of 5 nodes running both BridgeVM and Thr
 
 set -euo pipefail
 
-LUXD_BIN="${LUXD_BIN:-/home/z/work/lux/node/build/luxd}"
+LUXD_BIN="${LUXD_BIN:-node/build/luxd}"
 CONFIG_DIR="${CONFIG_DIR:-/etc/teleport}"
 DATA_DIR="${DATA_DIR:-/var/lib/teleport}"
 LOG_DIR="${LOG_DIR:-/var/log/teleport}"

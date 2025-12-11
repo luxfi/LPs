@@ -414,7 +414,7 @@ Full compatibility maintained through:
 
 ## Implementation
 
-**Primary Location**: `/Users/z/work/lux/consensus/protocol/quasar/`
+**Primary Location**: `consensus/protocol/quasar/`
 
 **Core Implementation Files**:
 1. **hybrid_consensus.go** - Dual-signature validation (BLS + ML-DSA)
@@ -449,7 +449,7 @@ Full compatibility maintained through:
 
 **Testing Commands**:
 ```bash
-cd /Users/z/work/lux/consensus/protocol/quasar
+cd consensus/protocol/quasar
 go test -v ./... -run Hybrid
 go test -v ./... -run Migration
 go test -v ./... -run Signature

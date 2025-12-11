@@ -219,7 +219,7 @@ function supportsTeleport() external view returns (bool);
 ### Teleport Protocol Implementation
 
 - **GitHub**: https://github.com/luxfi/teleport
-- **Local**: `/Users/z/work/lux/teleport/`
+- **Local**: `teleport/`
 - **Size**: ~200 MB
 - **Languages**: TypeScript (SDK), Go (relayer)
 - **Standards**: IBC-compatible warp messaging
@@ -238,12 +238,12 @@ function supportsTeleport() external view returns (bool);
 
 ```bash
 # Build SDK
-cd /Users/z/work/lux/teleport/sdk
+cd teleport/sdk
 npm install
 npm run build
 
 # Build relayer
-cd /Users/z/work/lux/teleport/relayer
+cd teleport/relayer
 go build -o bin/teleport-relayer ./cmd/relayer
 ```
 
@@ -251,11 +251,11 @@ go build -o bin/teleport-relayer ./cmd/relayer
 
 ```bash
 # Test relayer
-cd /Users/z/work/lux/teleport/relayer
+cd teleport/relayer
 go test ./... -v
 
 # Test SDK
-cd /Users/z/work/lux/teleport/sdk
+cd teleport/sdk
 npm test
 
 # Integration tests

@@ -183,14 +183,14 @@ See [github.com/luxfi/node/warp](https://github.com/luxfi/node/tree/main/warp) f
 
 ### Files and Locations
 
-**Warp Protocol** (`/Users/z/work/lux/node/warp/`):
+**Warp Protocol** (`node/warp/`):
 - `message.go` - WarpMessage structure and encoding
 - `signer.go` - BLS signature aggregation
 - `aggregator.go` - Multi-signature coordination
 - `verifier.go` - Message verification
 - `handler.go` - Protocol message handling
 
-**Network Integration** (`/Users/z/work/lux/node/network/`):
+**Network Integration** (`node/network/`):
 - `warp_handler.go` - Network-level message routing
 - `peer_manager.go` - Validator peer tracking
 - `gossip.go` - Message propagation
@@ -202,7 +202,7 @@ See [github.com/luxfi/node/warp](https://github.com/luxfi/node/tree/main/warp) f
 
 ### Testing
 
-**Unit Tests** (`/Users/z/work/lux/node/warp/warp_test.go`):
+**Unit Tests** (`node/warp/warp_test.go`):
 - TestMessageEncoding (serialization/deserialization)
 - TestBLSAggregation (signature combination)
 - TestSignatureVerification (validity checks)
@@ -242,8 +242,8 @@ Max Messages per Block: 5000
 ### Source Code References
 
 All implementation files verified to exist:
-- ✅ `/Users/z/work/lux/node/warp/` (5 files)
-- ✅ `/Users/z/work/lux/node/network/` (integration)
+- ✅ `node/warp/` (5 files)
+- ✅ `node/network/` (integration)
 - ✅ Warp messenger precompile at address `0x0200...0003`
 
 ## Security Considerations

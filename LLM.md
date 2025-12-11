@@ -473,31 +473,31 @@ While we adopt specifications from Avalanche ACPs, all implementations in Lux us
 **LP-176: Dynamic Gas Pricing**
 - **Spec**: `~/work/lux/lps/LP-176-dynamic-gas-pricing.md`
 - **Implementation**: 
-  - `/Users/z/work/lux/node/vms/evm/lp176/` (core logic)
-  - `/Users/z/work/lux/geth/plugin/evm/upgrade/lp176/` (plugin params)
+  - `node/vms/evm/lp176/` (core logic)
+  - `geth/plugin/evm/upgrade/lp176/` (plugin params)
 - **Package**: `github.com/luxfi/geth/plugin/evm/upgrade/lp176`
 
 **LP-118: Subnet-EVM Compatibility**
 - **Spec**: `~/work/lux/lps/LP-118-subnetevm-compat.md`
 - **Implementation**: 
-  - `/Users/z/work/lux/geth/plugin/evm/upgrade/lp118/` (plugin params)
+  - `geth/plugin/evm/upgrade/lp118/` (plugin params)
 - **Package**: `github.com/luxfi/geth/plugin/evm/upgrade/lp118`
 - **Note**: Replaces "Cortina" naming
 
 **LP-226: Dynamic Block Timing**
 - **Spec**: `~/work/lux/lps/LP-226-dynamic-block-timing.md`
-- **Implementation**: `/Users/z/work/lux/node/vms/evm/lp226/`
+- **Implementation**: `node/vms/evm/lp226/`
 - **Package**: `github.com/luxfi/node/vms/evm/lp226`
 
 **LP-181: Epoching**
 - **Spec**: `~/work/lux/lps/LP-181-epoching.md`
-- **Implementation**: `/Users/z/work/lux/node/vms/proposervm/acp181/`
+- **Implementation**: `node/vms/proposervm/acp181/`
 - **Package**: `github.com/luxfi/node/vms/proposervm/acp181`
 - **Note**: Kept ACP naming in code for upstream compatibility
 
 **LP-204: secp256r1 Precompile**
 - **Spec**: `~/work/lux/lps/LP-204-secp256r1.md`
-- **Implementation**: `/Users/z/work/lux/geth/core/vm/contracts.go`
+- **Implementation**: `geth/core/vm/contracts.go`
 - **Address**: `0x0000000000000000000000000000000000000100`
 
 ### Naming Convention Guidelines
@@ -553,13 +553,13 @@ Batch file: `/tmp/lp-batch-ah` - 10 core LPs enhanced with complete implementati
   - Test coverage metrics table
   - CI/CD pipeline documentation
 
-**Implementation Location**: `/Users/z/work/lux/node/vms/safe/lamport/`
+**Implementation Location**: `node/vms/safe/lamport/`
 - `lamport_keystore.go` - Key generation and storage
 - `lamport_signer.go` - Signature generation
 - `lamport_verifier.go` - Verification and one-time enforcement
 - `lamport_test.go` - 15 comprehensive test cases
 
-**Files Modified**: `/Users/z/work/lux/lps/LPs/lp-105.md`
+**Files Modified**: `lps/LPs/lp-105.md`
 **Lines Added**: 142 lines of implementation and testing documentation
 
 #### 2. LP-110: Quasar Consensus Protocol (Sub-second Finality)
@@ -574,12 +574,12 @@ Batch file: `/tmp/lp-batch-ah` - 10 core LPs enhanced with complete implementati
   - Load testing specifications (15,000 TPS)
   - Byzantine resilience tests (up to 33% Byzantine)
 
-**Implementation Location**: `/Users/z/work/lux/consensus/protocol/quasar/`
+**Implementation Location**: `consensus/protocol/quasar/`
 - Core: `quasar.go`, `quasar_consensus.go`, `quasar_aggregator.go`
 - Finality: `event_horizon.go`, `hybrid_consensus.go`, `ringtail.go`
 - Tests: `quasar_test.go`, `quasar_aggregator_test.go`, `quasar_dynamic_test.go`, `event_horizon_test.go`
 
-**Files Modified**: `/Users/z/work/lux/lps/LPs/lp-110.md`
+**Files Modified**: `lps/LPs/lp-110.md`
 **Lines Added**: 95 lines of implementation and testing documentation
 
 #### 3. LP-111: Photon Consensus Selection (VRF-Based)
@@ -591,12 +591,12 @@ Batch file: `/tmp/lp-batch-ah` - 10 core LPs enhanced with complete implementati
 - Documented API endpoints for luminance tracking and metrics
 - Added test file inventory and performance tracking
 
-**Implementation Location**: `/Users/z/work/lux/consensus/protocol/photon/`
+**Implementation Location**: `consensus/protocol/photon/`
 - Core: `consensus.go`, `engine.go`, `crypto.go`
 - Utilities: `emitter.go`, `luminance.go`
 - Tests: `consensus_test.go` (3.6 KB), `engine_test.go` (5.4 KB)
 
-**Files Modified**: `/Users/z/work/lux/lps/LPs/lp-111.md`
+**Files Modified**: `lps/LPs/lp-111.md`
 **Lines Added**: 55 lines of implementation and testing documentation
 
 #### 4. LP-112: Flare DAG Finalization Protocol
@@ -608,11 +608,11 @@ Batch file: `/tmp/lp-batch-ah` - 10 core LPs enhanced with complete implementati
 - Added complete test execution output (8 tests, 96% coverage)
 - Listed API endpoints for DAG state queries
 
-**Implementation Location**: `/Users/z/work/lux/consensus/core/dag/`
+**Implementation Location**: `consensus/core/dag/`
 - Core: `flare.go` (1.2 KB)
 - Tests: `flare_test.go` (3.6 KB)
 
-**Files Modified**: `/Users/z/work/lux/lps/LPs/lp-112.md`
+**Files Modified**: `lps/LPs/lp-112.md`
 **Lines Added**: 55 lines of implementation and testing documentation
 
 #### 5. LP-106: LLM Gateway Integration with Hanzo AI
@@ -637,7 +637,7 @@ Batch file: `/tmp/lp-batch-ah` - 10 core LPs enhanced with complete implementati
 
 **Current State**:
 - Complete implementation documentation already in place
-- Files located at `/Users/z/work/lux/node/vms/evm/lp176/`
+- Files located at `node/vms/evm/lp176/`
 - Testing section with performance benchmarks already documented
 
 #### 8. LP-181: P-Chain Epoched Views
@@ -645,7 +645,7 @@ Batch file: `/tmp/lp-batch-ah` - 10 core LPs enhanced with complete implementati
 
 **Current State**:
 - Implementation references documented
-- Files located at `/Users/z/work/lux/node/vms/proposervm/acp181/`
+- Files located at `node/vms/proposervm/acp181/`
 - References to ACP-181 integration established
 
 #### 9. LP-200: Post-Quantum Cryptography Suite
@@ -661,14 +661,14 @@ Batch file: `/tmp/lp-batch-ah` - 10 core LPs enhanced with complete implementati
 All referenced implementation files verified to exist:
 
 ```
-✅ /Users/z/work/lux/consensus/protocol/quasar/ (15 files)
-✅ /Users/z/work/lux/consensus/protocol/photon/ (5 files)
-✅ /Users/z/work/lux/consensus/core/dag/ (2 files)
-✅ /Users/z/work/lux/node/vms/safe/lamport/ (4 files)
-✅ /Users/z/work/lux/node/vms/evm/lp176/ (2 files)
-✅ /Users/z/work/lux/node/vms/proposervm/acp181/ (implementation)
-✅ /Users/z/work/lux/node/crypto/mldsa/ (3 files)
-✅ /Users/z/work/lux/evm/precompile/contracts/mldsa/ (3 files)
+✅ consensus/protocol/quasar/ (15 files)
+✅ consensus/protocol/photon/ (5 files)
+✅ consensus/core/dag/ (2 files)
+✅ node/vms/safe/lamport/ (4 files)
+✅ node/vms/evm/lp176/ (2 files)
+✅ node/vms/proposervm/acp181/ (implementation)
+✅ node/crypto/mldsa/ (3 files)
+✅ evm/precompile/contracts/mldsa/ (3 files)
 ```
 
 ### Testing Documentation Summary

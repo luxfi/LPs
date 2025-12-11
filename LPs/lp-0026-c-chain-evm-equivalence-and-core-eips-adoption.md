@@ -60,16 +60,16 @@ By adopting Ethereum's upgrades, the C-Chain also inherits any backwards incompa
 ## Implementation
 
 ### C-Chain Repository Structure
-**Repository**: `/Users/z/work/lux/geth/` (coreth fork)
+**Repository**: `geth/` (coreth fork)
 
 ### EVM Implementation
 - **Base**: Ethereum go-ethereum (geth)
-- **Lux Integration**: `/Users/z/work/lux/geth/core/`
+- **Lux Integration**: `geth/core/`
   - EIP adoption and testing
   - Opcode implementations
   - Gas cost adjustments
 
-- **Precompiles**: `/Users/z/work/lux/geth/core/vm/`
+- **Precompiles**: `geth/core/vm/`
   - Standard Ethereum precompiles (0x01-0x08)
   - Lux-specific precompiles
   - Custom precompile framework
@@ -82,7 +82,7 @@ By adopting Ethereum's upgrades, the C-Chain also inherits any backwards incompa
 
 ### Testing Framework
 ```bash
-cd /Users/z/work/lux/geth
+cd geth
 # Run C-Chain tests
 go test ./core/vm -v
 # Run EIP-specific tests
@@ -91,7 +91,7 @@ go test ./core/vm -run TestEIP1559
 
 ### Upgrade Activation
 - **Hardfork Coordination**: Node consensus parameters
-  - Located in `/Users/z/work/lux/geth/params/`
+  - Located in `geth/params/`
   - Block heights for each upgrade
   - Feature flag activation
 

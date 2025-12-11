@@ -268,7 +268,7 @@ The registry is designed to be integrated with existing bridge systems:
 ### Bridge Asset Registry Implementation
 
 - **GitHub**: https://github.com/luxfi/standard (contracts)
-- **Local**: `/Users/z/work/lux/standard/`
+- **Local**: `standard/`
 - **Size**: ~2.0 GB
 - **Languages**: Solidity (smart contracts), TypeScript (tools)
 
@@ -290,7 +290,7 @@ curl -L https://foundry.paradigm.xyz | bash
 foundryup
 
 # Build and test
-cd /Users/z/work/lux/standard
+cd standard
 forge build
 
 # Deploy registry (testnet)
@@ -303,7 +303,7 @@ forge script script/registry/DeployRegistry.s.sol:DeployRegistry \
 
 ```bash
 # Test asset registry contracts
-cd /Users/z/work/lux/standard
+cd standard
 forge test --match="Registry"
 
 # Test wrapped token deployment

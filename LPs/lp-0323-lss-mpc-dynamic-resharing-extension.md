@@ -148,7 +148,7 @@ func DynamicReshareCMP(
 // - Cryptographic verification of resharing correctness
 ```
 
-**Implementation:** [`/Users/z/work/lux/threshold/protocols/lss/lss_cmp.go`](https://github.com/luxfi/threshold/blob/main/protocols/lss/lss_cmp.go)
+**Implementation:** [`threshold/protocols/lss/lss_cmp.go`](https://github.com/luxfi/threshold/blob/main/protocols/lss/lss_cmp.go)
 
 **Key Functions:**
 - `DynamicReshareCMP()` - Main resharing protocol (lines 35-228)
@@ -174,7 +174,7 @@ func DynamicReshareFROST(
 // - Suitable for Bitcoin Taproot, Solana validators
 ```
 
-**Implementation:** [`/Users/z/work/lux/threshold/protocols/lss/lss_frost.go`](https://github.com/luxfi/threshold/blob/main/protocols/lss/lss_frost.go)
+**Implementation:** [`threshold/protocols/lss/lss_frost.go`](https://github.com/luxfi/threshold/blob/main/protocols/lss/lss_frost.go)
 
 **Key Functions:**
 - `DynamicReshareFROST()` - Main resharing protocol (lines 46-214)
@@ -545,7 +545,7 @@ for range ticker.C {
 ### Core Implementation Files
 
 #### CGGMP21 Resharing
-- **File:** `/Users/z/work/lux/threshold/protocols/lss/lss_cmp.go`
+- **File:** `threshold/protocols/lss/lss_cmp.go`
 - **Lines:** 334 lines
 - **Key Functions:**
   - `DynamicReshareCMP()` (lines 35-228) - Main resharing protocol
@@ -554,7 +554,7 @@ for range ticker.C {
 - **Dependencies:** `github.com/luxfi/threshold/protocols/cmp/config`
 
 #### FROST Resharing
-- **File:** `/Users/z/work/lux/threshold/protocols/lss/lss_frost.go`
+- **File:** `threshold/protocols/lss/lss_frost.go`
 - **Lines:** 365 lines
 - **Key Functions:**
   - `DynamicReshareFROST()` (lines 46-214) - Main resharing protocol
@@ -564,7 +564,7 @@ for range ticker.C {
 - **Dependencies:** `github.com/luxfi/threshold/protocols/frost/keygen`
 
 #### Protocol Documentation
-- **File:** `/Users/z/work/lux/threshold/protocols/lss/README.md`
+- **File:** `threshold/protocols/lss/README.md`
 - **Lines:** 219 lines
 - **Sections:**
   - Overview and core innovations
@@ -577,17 +577,17 @@ for range ticker.C {
 #### Supporting Modules
 
 **JVSS (Joint Verifiable Secret Sharing):**
-- **File:** `/Users/z/work/lux/threshold/protocols/lss/jvss/jvss.go`
+- **File:** `threshold/protocols/lss/jvss/jvss.go`
 - **Purpose:** Auxiliary secret generation with verifiability
 - **Functions:** `GenerateShares()`, `VerifyShare()`, `Reconstruct()`
 
 **Rollback Manager:**
-- **File:** `/Users/z/work/lux/threshold/protocols/lss/rollback.go`
+- **File:** `threshold/protocols/lss/rollback.go`
 - **Purpose:** State snapshots and recovery
 - **Functions:** `SaveSnapshot()`, `Rollback()`, `RollbackOnFailure()`
 
 **Signing with Blinding:**
-- **File:** `/Users/z/work/lux/threshold/protocols/lss/sign_blinding.go`
+- **File:** `threshold/protocols/lss/sign_blinding.go`
 - **Purpose:** Protocol I (localized) and Protocol II (collaborative) nonce blinding
 - **Functions:** `SignWithBlinding()`, `SignCollaborative()`
 
@@ -620,7 +620,7 @@ for range ticker.C {
 **Run Tests:**
 ```bash
 # All LSS tests
-cd /Users/z/work/lux/threshold/protocols/lss
+cd threshold/protocols/lss
 go test ./...
 
 # With verbose output
@@ -639,7 +639,7 @@ go test -cover ./...
 
 LSS includes adapters for 10+ blockchains:
 
-- **File:** `/Users/z/work/lux/threshold/protocols/lss/adapters/`
+- **File:** `threshold/protocols/lss/adapters/`
 - **Chains:**
   - Ethereum (`ethereum.go`, `evm.go`) - EIP-155 signing
   - Bitcoin (`bitcoin.go`) - Taproot/SegWit support
@@ -1137,7 +1137,7 @@ defer func() {
 
 ### Documentation
 
-- **LSS README:** `/Users/z/work/lux/threshold/protocols/lss/README.md`
+- **LSS README:** `threshold/protocols/lss/README.md`
 - **Architecture Documentation:** LSS paper Section 2 (System Architecture)
 - **Security Proofs:** LSS paper Section 4 (Dynamic Resharing Protocol)
 - **Performance Benchmarks:** LSS README Performance section

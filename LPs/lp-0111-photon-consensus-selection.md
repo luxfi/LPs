@@ -366,7 +366,7 @@ def test_byzantine_block_withholding():
 
 ## Reference Implementation
 
-**Primary Location**: `/Users/z/work/lux/consensus/protocol/photon/`
+**Primary Location**: `consensus/protocol/photon/`
 
 **Implementation Files** (total: 8.6 KB):
 - `consensus.go` (6.6 KB) - Photon++ engine with VRF-based proposer selection
@@ -381,7 +381,7 @@ def test_byzantine_block_withholding():
 
 **Test Execution and Results**:
 ```bash
-cd /Users/z/work/lux/consensus/protocol/photon
+cd consensus/protocol/photon
 go test -v ./... -coverprofile=coverage.out
 
 # === RUN   TestPhotonCommitteeSelection
@@ -422,7 +422,7 @@ go test -v ./... -coverprofile=coverage.out
 
 ## Implementation
 
-**Primary Location**: `/Users/z/work/lux/consensus/protocol/photon/`
+**Primary Location**: `consensus/protocol/photon/`
 
 **Core Implementation Files**:
 1. **emitter.go** - Stake-weighted sampler for vote collection
@@ -448,7 +448,7 @@ go test -v ./... -coverprofile=coverage.out
 
 **Testing Commands**:
 ```bash
-cd /Users/z/work/lux/consensus/protocol/photon
+cd consensus/protocol/photon
 go test -v ./... -run Photon
 go test -v ./... -run Luminance
 go test -v ./... -run VRF

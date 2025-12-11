@@ -48,10 +48,10 @@ The primary security consideration is the resource management of the validator n
 ## Implementation
 
 ### Node Architecture
-**Repository**: `/Users/z/work/lux/node/`
+**Repository**: `node/`
 
 ### Parallel Validation Module
-- **Location**: `/Users/z/work/lux/node/app/`
+- **Location**: `node/app/`
   - Multi-chain initialization logic
   - Consensus engine per-chain isolation
   - Network module per-chain instantiation
@@ -64,7 +64,7 @@ The primary security consideration is the resource management of the validator n
 ### Shared Mempool Protocol
 - **Implementation**: P2P gossip sub-protocol
   - Cross-chain transaction intent broadcasting
-  - Located in `/Users/z/work/lux/node/network/`
+  - Located in `node/network/`
   - Intent message serialization and validation
 
 - **Message Format**:
@@ -78,14 +78,14 @@ The primary security consideration is the resource management of the validator n
   - Competitive fulfillment auction
   - Fee-based execution marketplace
 
-- **Smart Contracts**: Available in `/Users/z/work/lux/standard/src/`
+- **Smart Contracts**: Available in `standard/src/`
   - Intent settlement contracts
   - Refund/failure handling
   - Multi-chain atomic execution
 
 ### Testing and Performance
 ```bash
-cd /Users/z/work/lux/node
+cd node
 # Test parallel validation
 make test
 

@@ -2789,7 +2789,7 @@ github.com/luxfi/node/
 
 ```bash
 # Build and test threshold library
-cd /home/z/work/lux/threshold
+cd threshold
 go build ./...
 go test ./protocols/lss/... -v
 
@@ -2798,7 +2798,7 @@ go test ./protocols/lss/reshare/... -v
 go test -run TestReshare ./protocols/lss/ -v
 
 # Build threshold VM plugin
-cd /home/z/work/lux/node
+cd node
 go build -o build/plugins/thresholdvm ./vms/thresholdvm
 
 # Run VM tests

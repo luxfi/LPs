@@ -352,7 +352,7 @@ Result: trust-minimised, stateless, real-time swaps with optional Z‑Chain priv
 ### M-Chain VM (MPC Custody & Bridge)
 
 - **GitHub**: https://github.com/luxfi/mpc
-- **Local**: `/Users/z/work/lux/mpc/`
+- **Local**: `mpc/`
 - **Size**: ~500 MB
 - **Languages**: Go (mpckeyd daemon), Rust (cryptographic backend)
 - **Consensus**: Bonded MPC validators with CGG21 + Ringtail signing
@@ -373,7 +373,7 @@ Result: trust-minimised, stateless, real-time swaps with optional Z‑Chain priv
 
 ```bash
 # Build MPC daemon
-cd /Users/z/work/lux/mpc
+cd mpc
 go build -o bin/lux-mpc-bridge ./cmd/lux-mpc-bridge
 
 # Build CLI tool
@@ -388,7 +388,7 @@ make install
 
 ```bash
 # Test MPC threshold signing
-cd /Users/z/work/lux/mpc
+cd mpc
 go test ./pkg/crypto/cgg21 -v
 
 # Test Ringtail quantum-safe signatures

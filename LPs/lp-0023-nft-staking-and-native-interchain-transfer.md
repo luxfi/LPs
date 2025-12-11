@@ -57,17 +57,17 @@ The security of NFT transfers relies entirely on the Lux Teleport Protocol (LP-2
 ## Implementation
 
 ### NFT Standards Location
-**Repository**: `/Users/z/work/lux/standard/`
+**Repository**: `standard/`
 
 ### NFT Staking Interface (LRC-23)
-- **Source**: `/Users/z/work/lux/standard/src/`
+- **Source**: `standard/src/`
   - `ERC721.sol` - Base NFT standard
   - NFT staking extensions (LRC-23Stakable interface)
   - Reward distribution logic
 
 ### Smart Contracts
 - **Staking Contracts**:
-  - Located in `/Users/z/work/lux/standard/src/`
+  - Located in `standard/src/`
   - Implements ILRC23Stakable interface
   - Reward calculation and distribution
   - Emergency unstaking mechanisms
@@ -90,7 +90,7 @@ The security of NFT transfers relies entirely on the Lux Teleport Protocol (LP-2
 
 ### Testing and Deployment
 ```bash
-cd /Users/z/work/lux/standard
+cd standard
 # NFT staking tests
 forge test --match "NFT"
 # Cross-chain transfer tests
@@ -99,7 +99,7 @@ forge test --match "Teleport"
 
 ### Example Implementation
 ```solidity
-// Reference: /Users/z/work/lux/standard/src/ERC721.sol
+// Reference: standard/src/ERC721.sol
 contract StakableNFT is ERC721, ILRC23Stakable {
     // Staking logic with reward distribution
 }

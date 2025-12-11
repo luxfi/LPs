@@ -167,17 +167,17 @@ contract BurnableToken is ERC20, IERC20Burnable {
 ## Implementation
 
 ### Standard Library Location
-**Repository**: `/Users/z/work/lux/standard/`
+**Repository**: `standard/`
 
 ### Burnable Token Implementation
-- **Source**: `/Users/z/work/lux/standard/src/ERC20Burnable.sol`
+- **Source**: `standard/src/ERC20Burnable.sol`
   - `burn(uint256)` function implementation
   - `burnFrom(address, uint256)` function implementation
   - Event emission for tracking
 
 ### Smart Contract Interface
 ```solidity
-// Location: /Users/z/work/lux/standard/src/ERC20Burnable.sol
+// Location: standard/src/ERC20Burnable.sol
 interface IERC20Burnable {
     event Burn(address indexed account, uint256 value);
 
@@ -187,13 +187,13 @@ interface IERC20Burnable {
 ```
 
 ### Integration with LRC-20 Base
-- **Base Contract**: `/Users/z/work/lux/standard/src/ERC20.sol`
+- **Base Contract**: `standard/src/ERC20.sol`
 - **Extension Pattern**: Composition with access control via OpenZeppelin
 - **Inheritance**: `contract BurnableToken is ERC20, IERC20Burnable`
 
 ### Testing Framework
 ```bash
-cd /Users/z/work/lux/standard
+cd standard
 # Run burnable token tests
 forge test --match "Burn"
 
@@ -228,7 +228,7 @@ cast send <contract> "burn(uint256)" 1000000000000000000 \
 
 ### Example Implementation
 ```solidity
-// Reference: /Users/z/work/lux/standard/src/ERC20Burnable.sol
+// Reference: standard/src/ERC20Burnable.sol
 contract BurnableToken is ERC20 {
     function burn(uint256 amount) external {
         _burn(msg.sender, amount);

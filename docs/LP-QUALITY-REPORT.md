@@ -2,7 +2,7 @@
 
 **Date:** 2025-11-23  
 **Reviewer:** Claude Code (Sonnet 4.5)  
-**Repository:** /Users/z/work/lux/lps  
+**Repository:** lps  
 **Assessment Type:** Comprehensive Pre-Deployment Review
 
 ---
@@ -205,7 +205,7 @@ LPs/lp-312-slhdsa.md
 **Next.js Site:** ✅ FULLY OPERATIONAL
 
 - **Framework:** Next.js 16.0.1 with App Router
-- **Location:** `/Users/z/work/lux/lps/docs/`
+- **Location:** `lps/docs/`
 - **Build Output:** 124 static pages
 - **Features:**
   - Server-side markdown rendering

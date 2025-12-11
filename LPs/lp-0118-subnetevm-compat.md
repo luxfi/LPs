@@ -100,12 +100,12 @@ When `LP118Timestamp` is set:
 
 ### Location
 
-**Plugin Interface**: `/Users/z/work/lux/geth/plugin/evm/upgrade/lp118/`
+**Plugin Interface**: `geth/plugin/evm/upgrade/lp118/`
 
 Files:
 - `params.go` - Activation parameters
 
-**Integration Points**: `/Users/z/work/lux/evm/plugin/evm/`
+**Integration Points**: `evm/plugin/evm/`
 
 Key areas:
 - `vm.go` - VM initialization with compat mode

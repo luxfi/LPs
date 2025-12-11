@@ -2694,16 +2694,16 @@ describe('Bridge Integration', () => {
 
 ### Local Development Paths
 
-- **Existing Contracts**: `/home/z/work/lux/bridge/contracts/contracts/`
-- **Bridge Interface**: `/home/z/work/lux/bridge/contracts/contracts/interfaces/IBridge.sol`
-- **Vault Implementation**: `/home/z/work/lux/bridge/contracts/contracts/LuxVault.sol`
-- **Main Bridge**: `/home/z/work/lux/bridge/contracts/contracts/Bridge.sol`
+- **Existing Contracts**: `bridge/contracts/contracts/`
+- **Bridge Interface**: `bridge/contracts/contracts/interfaces/IBridge.sol`
+- **Vault Implementation**: `bridge/contracts/contracts/LuxVault.sol`
+- **Main Bridge**: `bridge/contracts/contracts/Bridge.sol`
 
 ### Build and Test
 
 ```bash
 # Using Hardhat
-cd /home/z/work/lux/bridge/contracts
+cd bridge/contracts
 npm install
 npx hardhat compile
 npx hardhat test

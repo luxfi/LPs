@@ -355,8 +355,8 @@ make check-links
 ## Contact
 
 For questions or clarifications about this audit:
-- Review the LP specification: `/Users/z/work/lux/lps/CLAUDE.md`
-- Check template: `/Users/z/work/lux/lps/LPs/TEMPLATE.md`
+- Review the LP specification: `lps/CLAUDE.md`
+- Check template: `lps/LPs/TEMPLATE.md`
 - Run validation: `make validate-all`
 
 ---

@@ -54,11 +54,11 @@ This design was chosen over a single MPC-for-all solution to enhance the user ex
 ## Implementation
 
 ### Warp Messenger Components
-**Base Location**: `/Users/z/work/lux/node/vms/evm/precompiles/` (C-Chain)
+**Base Location**: `node/vms/evm/precompiles/` (C-Chain)
 
 ### Smart Contracts
 - **Warp2Receiver**: Contract interface for receiving cross-chain messages
-  - Located in standard library: `/Users/z/work/lux/standard/src/`
+  - Located in standard library: `standard/src/`
   - Validates aggregated validator signatures
   - Processes intra-ecosystem messages
 
@@ -71,7 +71,7 @@ This design was chosen over a single MPC-for-all solution to enhance the user ex
 
 ### Testing
 ```bash
-cd /Users/z/work/lux/standard
+cd standard
 forge test --match "Warp"  # Warp messaging tests
 ```
 

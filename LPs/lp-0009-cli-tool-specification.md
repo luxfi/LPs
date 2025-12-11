@@ -44,7 +44,7 @@ A unified approach here reduces fragmentation and improves developer ergonomics 
 The CLI implementation is in the `lux-cli` repository:
 
 - **GitHub**: https://github.com/luxfi/cli
-- **Local**: `/Users/z/work/lux/cli/`
+- **Local**: `cli/`
 - **Size**: 1.6 GB total
 - **Go Files**: 523 implementation files
 
@@ -65,7 +65,7 @@ The CLI implementation is in the `lux-cli` repository:
 ### Build Instructions
 
 ```bash
-cd /Users/z/work/lux/cli
+cd cli
 go build -o bin/lux-cli ./cmd/main.go
 
 # Or using make (if available)
@@ -77,7 +77,7 @@ make install  # Install to $GOPATH/bin
 
 ```bash
 # Run all CLI tests
-cd /Users/z/work/lux/cli
+cd cli
 go test ./...
 
 # Run with coverage

@@ -261,7 +261,7 @@ This LP is foundational and does not introduce backwards compatibility issues.
 **Status**: Active implementation in Lux Node (deprecated in favor of Q-Chain for new deployments)
 
 - **GitHub**: https://github.com/luxfi/node/tree/main/vms/platformvm
-- **Local**: `/Users/z/work/lux/node/vms/platformvm/`
+- **Local**: `node/vms/platformvm/`
 - **Size**: ~45 MB, 44 directories
 - **Languages**: Go
 
@@ -280,7 +280,7 @@ This LP is foundational and does not introduce backwards compatibility issues.
 ### Build Instructions
 
 ```bash
-cd /Users/z/work/lux/node
+cd node
 go build -o build/luxd ./cmd/main.go
 
 # Build with specific features
@@ -291,7 +291,7 @@ go build -ldflags "-X github.com/luxfi/node/version.Current=v1.20.1" -o build/lu
 
 ```bash
 # Test platform VM package
-cd /Users/z/work/lux/node
+cd node
 go test ./vms/platformvm/... -v
 
 # Test validator operations

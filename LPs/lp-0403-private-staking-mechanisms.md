@@ -696,11 +696,11 @@ This LP introduces private staking as an optional feature alongside standard sta
 ### Reference Implementation
 
 **Primary Locations**:
-- VDF implementation: `/Users/z/work/lux/node/consensus/engine/vdf/`
-- Staking system: `/Users/z/work/lux/node/vms/platformvm/`
-- Validator registry: `/Users/z/work/lux/node/vms/platformvm/validator/`
-- DKG and threshold: `/Users/z/work/lux/threshold/protocols/`
-- Reward distribution: `/Users/z/work/lux/node/vms/platformvm/reward/`
+- VDF implementation: `node/consensus/engine/vdf/`
+- Staking system: `node/vms/platformvm/`
+- Validator registry: `node/vms/platformvm/validator/`
+- DKG and threshold: `threshold/protocols/`
+- Reward distribution: `node/vms/platformvm/reward/`
 
 **Implementation Components**:
 

@@ -382,16 +382,16 @@ Pain points:                          ← Appears unexpectedly in middle
 
 ```bash
 # List audit files
-ls -la /Users/z/work/lux/lps/LPs/ | grep -E "lp-(29|[3-4][0-9]|45)\.md"
+ls -la lps/LPs/ | grep -E "lp-(29|[3-4][0-9]|45)\.md"
 
 # Verify YAML frontmatter
-grep -A 12 "^---" /Users/z/work/lux/lps/LPs/lp-*.md | head -20
+grep -A 12 "^---" lps/LPs/lp-*.md | head -20
 
 # Check for ava-labs references (should be 0)
-grep -r "github.com/ava-labs" /Users/z/work/lux/lps/LPs/lp-{29..45}.md || echo "✓ No ava-labs references found"
+grep -r "github.com/ava-labs" lps/LPs/lp-{29..45}.md || echo "✓ No ava-labs references found"
 
 # Verify GitHub links use luxfi/
-grep -o "github.com/[^/]*/[^/]*" /Users/z/work/lux/lps/LPs/lp-*.md | sort -u
+grep -o "github.com/[^/]*/[^/]*" lps/LPs/lp-*.md | sort -u
 ```
 
 ---

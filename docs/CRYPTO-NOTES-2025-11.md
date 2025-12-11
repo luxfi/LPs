@@ -505,7 +505,7 @@ contract CrossChainBridge {
 
 ### 4.4 MPC Integration
 
-**Implementation**: `/Users/z/work/lux/mpc/`
+**Implementation**: `mpc/`
 
 **Supported MPC Protocols**:
 1. **CGGMP21**: Modern ECDSA threshold
@@ -692,12 +692,12 @@ signature := cggmp21.Sign(mpcConfig, signers, withdrawalHash)
 
 ### 8.3 Implementations
 
-- **Standard Precompiles**: `/Users/z/work/lux/standard/src/precompiles/`
-- **Node Crypto**: `/Users/z/work/lux/node/crypto/`
-- **Threshold**: `/Users/z/work/lux/threshold/protocols/`
-- **MPC**: `/Users/z/work/lux/mpc/pkg/protocol/`
-- **Ringtail**: `/Users/z/work/lux/ringtail/`
-- **Bridge**: `/Users/z/work/lux/bridge/`
+- **Standard Precompiles**: `standard/src/precompiles/`
+- **Node Crypto**: `node/crypto/`
+- **Threshold**: `threshold/protocols/`
+- **MPC**: `mpc/pkg/protocol/`
+- **Ringtail**: `ringtail/`
+- **Bridge**: `bridge/`
 
 ### 8.4 Lux Precompile Standards (LPS)
 
@@ -776,6 +776,6 @@ signature := cggmp21.Sign(mpcConfig, signers, withdrawalHash)
 **Maintained by**: Lux Core Team
 
 For questions or updates, see:
-- Documentation: `/Users/z/work/lux/lps/docs/`
-- Implementations: `/Users/z/work/lux/standard/src/precompiles/`
+- Documentation: `lps/docs/`
+- Implementations: `standard/src/precompiles/`
 - LPS Repository: https://github.com/luxfi/lps

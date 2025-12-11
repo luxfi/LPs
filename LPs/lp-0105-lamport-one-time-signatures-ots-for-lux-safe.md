@@ -383,7 +383,7 @@ This proposal is additive. Existing Safes and ECDSA signatures continue to work 
 
 ## Reference Implementation
 
-**Primary Location**: `/Users/z/work/lux/node/vms/safe/lamport/`
+**Primary Location**: `node/vms/safe/lamport/`
 
 **Implementation Files**:
 - `lamport_keystore.go` (1,245 bytes) - Key generation, storage, rotation
@@ -437,7 +437,7 @@ TestSecurityProperties            // ✅ Hash-based security guarantees
 
 **Test Execution**:
 ```bash
-cd /Users/z/work/lux/node/vms/safe/lamport
+cd node/vms/safe/lamport
 go test -v ./... -count=1
 
 # Output:

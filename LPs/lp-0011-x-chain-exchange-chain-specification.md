@@ -502,7 +502,7 @@ func BenchmarkOrderMatching(b *testing.B) {
 ### Exchange VM (X-Chain)
 
 - **GitHub**: https://github.com/luxfi/node/tree/main/vms/exchangevm
-- **Local**: `/Users/z/work/lux/node/vms/exchangevm/`
+- **Local**: `node/vms/exchangevm/`
 - **Size**: ~40 MB, 40 directories
 - **Languages**: Go
 - **Consensus**: DAG-based (high-throughput)
@@ -522,7 +522,7 @@ func BenchmarkOrderMatching(b *testing.B) {
 ### Build Instructions
 
 ```bash
-cd /Users/z/work/lux/node
+cd node
 go build -o build/luxd ./cmd/main.go
 
 # Or build with race detection for testing
@@ -533,7 +533,7 @@ go build -race -o build/luxd-race ./cmd/main.go
 
 ```bash
 # Test exchange VM package
-cd /Users/z/work/lux/node
+cd node
 go test ./vms/exchangevm/... -v
 
 # Test order book engine

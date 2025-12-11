@@ -12,7 +12,7 @@
 
 ### Production Build
 ```bash
-cd /Users/z/work/lux/lps/docs
+cd lps/docs
 pnpm install
 pnpm build
 ```
@@ -32,7 +32,7 @@ pnpm dev  # Runs on http://localhost:3002
 npm i -g vercel
 
 # Deploy
-cd /Users/z/work/lux/lps/docs
+cd lps/docs
 vercel --prod
 ```
 
@@ -47,7 +47,7 @@ vercel --prod
 npm i -g netlify-cli
 
 # Deploy
-cd /Users/z/work/lux/lps/docs
+cd lps/docs
 netlify deploy --prod --dir=out
 ```
 
@@ -92,7 +92,7 @@ NODE_ENV=production
 - No server-side rendering required
 
 ### Content Source
-- Reads from `/Users/z/work/lux/lps/LPs/` directory
+- Reads from `lps/LPs/` directory
 - Markdown files with YAML frontmatter
 - fumadocs-mdx for processing
 

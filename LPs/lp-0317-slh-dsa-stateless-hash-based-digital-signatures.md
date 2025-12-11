@@ -249,7 +249,7 @@ contract GovernanceVault {
 
 ### Core Library
 
-**Location**: `/Users/z/work/lux/crypto/slhdsa/`
+**Location**: `crypto/slhdsa/`
 
 **Dependencies**:
 - `github.com/cloudflare/circl v1.6.1` (FIPS 205 compliant)
@@ -302,7 +302,7 @@ func GetSignatureSize(mode Mode) int
 
 ### EVM Precompile
 
-**Location**: `/Users/z/work/lux/evm/precompile/contracts/slhdsa/`
+**Location**: `evm/precompile/contracts/slhdsa/`
 
 **Files**:
 - `contract.go`: Precompile implementation (5,280 bytes)
@@ -606,8 +606,8 @@ Copyright and related rights waived via [CC0](https://creativecommons.org/public
 4. **Merkle Signatures**: [Merkle (1979) "Secrecy, Authentication, and Public Key Systems"](https://www.merkle.com/papers/Thesis1979.pdf)
 
 ### Implementation Files
-5. **Implementation**: `/Users/z/work/lux/crypto/slhdsa/`
-6. **Precompile**: `/Users/z/work/lux/evm/precompile/contracts/slhdsa/`
+5. **Implementation**: `crypto/slhdsa/`
+6. **Precompile**: `evm/precompile/contracts/slhdsa/`
 
 ## Appendix A: Signature Size Comparison
 
