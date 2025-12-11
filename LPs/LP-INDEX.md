@@ -122,6 +122,13 @@ The Lux Network consists of multiple specialized chains, each optimized for spec
 | [LP-103](./lp-103.md) | MPC-LSS - Multi-Party Computation Linear Secret Sharing with Dynamic Resharing | Draft |
 | [LP-104](./lp-104.md) | FROST - Flexible Round-Optimized Schnorr Threshold Signatures for EdDSA | Draft |
 
+## AI & Compute
+
+| LP | Title | Status |
+|---|---|---|
+| [LP-2000](./lp-2000-ai-mining-standard.md) | AI Mining Standard | Draft |
+| [LP-2001](./lp-2001-aivm-ai-virtual-machine.md) | AIVM - AI Virtual Machine | Draft |
+
 ## Superseded
 
 | LP | Title | Status |
