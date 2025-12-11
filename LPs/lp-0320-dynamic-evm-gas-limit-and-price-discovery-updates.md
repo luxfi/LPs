@@ -13,8 +13,8 @@ replaces: 176
 activation:
   flag: lp176-dynamic-gas
   hfName: "Granite"
-tags: [evm, gas]
   activationHeight: "0"
+tags: [evm, gas]
 ---
 
 ## Abstract
