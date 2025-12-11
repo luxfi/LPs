@@ -11,6 +11,7 @@ created: 2025-07-24
 replaces: 4-r1
 requires: 1, 2, 3, 5, 6
 superseded-by: 13
+tags: [mpc, threshold-crypto, bridge]
 ---
 
 > **Note**: This LP has been superseded by [LP-13](./lp-13.md), which consolidates all M-Chain specifications into a single comprehensive document.

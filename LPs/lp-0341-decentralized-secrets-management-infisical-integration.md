@@ -13,6 +13,7 @@ activation:
   flag: lp341-secrets-platform
   hfName: "Vault"
   activationHeight: "0"
+tags: [security, dev-tools]
 ---
 
 > **See also**: [LP-330](./lp-0330-t-chain-thresholdvm-specification.md), [LP-336](./lp-0336-k-chain-keymanagementvm-specification.md), [LP-INDEX](./LP-INDEX.md)
@@ -4071,6 +4072,26 @@ github.com/luxfi/node/vms/kmsvm/
     │   └── ...
     └── state.go
 ```
+
+## Security Considerations
+
+This specification implements multiple layers of security for secrets management:
+
+1. **Zero-Knowledge Architecture**: The K-Chain platform never sees plaintext secrets. All encryption and decryption operations occur client-side, with only ciphertext stored on-chain.
+
+2. **End-to-End Encryption**: Secrets are encrypted at rest using AES-256-GCM and in transit using TLS 1.3 with ML-KEM hybrid key exchange for quantum resistance.
+
+3. **Client-Side Key Derivation**: User master keys are derived locally from password and organization salt using HKDF-SHA256. The platform never has access to master keys.
+
+4. **Access Control**: Fine-grained RBAC with environment-based access policies. All access is audited on-chain for compliance.
+
+5. **Threshold Signature Integration**: Critical operations require T-Chain threshold signatures, preventing single-point-of-compromise attacks.
+
+6. **Post-Quantum Cryptography**: ML-KEM encryption ensures long-term security against future quantum computing attacks.
+
+7. **Audit Logging**: All secret access events are recorded on-chain, providing immutable audit trails for compliance (SOC 2, ISO 27001).
+
+See Section "Security Considerations" within the Specification for detailed implementation including zero-knowledge proofs and end-to-end encryption flows.
 
 ## References
 

@@ -9,6 +9,7 @@ type: Standards Track
 category: Core
 created: 2025-08-14
 requires: 14, 103
+tags: [threshold-crypto, mpc]
 ---
 
 > **See also**: [LP-14](./lp-14-m-chain-threshold-signatures-with-cgg21-uc-non-interactive-ecdsa.md), [LP-103](./lp-103-mpc-lss---multi-party-computation-linear-secret-sharing-with-dynamic-resharing.md), [LP-INDEX](./LP-INDEX.md)

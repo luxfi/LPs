@@ -9,6 +9,7 @@ type: Standards Track
 category: Core
 created: 2025-12-11
 requires: 13, 14, 15, 17, 330, 333
+tags: [mpc, threshold-crypto, bridge]
 ---
 
 > **See also**: [LP-13](./lp-0013-m-chain-decentralised-mpc-custody-and-swap-signature-layer.md), [LP-14](./lp-0014-m-chain-threshold-signatures-with-cgg21-uc-non-interactive-ecdsa.md), [LP-15](./lp-0015-mpc-bridge-protocol.md), [LP-17](./lp-0017-bridge-asset-registry.md), [LP-330](./lp-0330-t-chain-thresholdvm-specification.md), [LP-333](./lp-0333-dynamic-signer-rotation-with-lss-protocol.md), [LP-INDEX](./LP-INDEX.md)
@@ -1580,9 +1581,9 @@ service KeyManager {
 }
 ```
 
-### 10. Security Considerations
+## Security Considerations
 
-#### 10.1 Key Isolation Properties
+### Key Isolation Properties
 
 Each managed key provides cryptographic isolation:
 
@@ -1592,7 +1593,7 @@ Each managed key provides cryptographic isolation:
 
 3. **Value Compartmentalization**: Maximum custody value per key can be enforced, limiting exposure from any single key compromise.
 
-#### 10.2 Compromise Scenarios
+### Compromise Scenarios
 
 | Scenario | Impact | Mitigation |
 |----------|--------|------------|
@@ -1602,7 +1603,7 @@ Each managed key provides cryptographic isolation:
 | Algorithm break (ECDSA) | Keys using that algorithm at risk | Migrate to PQ algorithms; dual-sig mode |
 | Key metadata leaked | Operational intelligence exposed | Metadata is mostly public; shares remain secure |
 
-#### 10.3 Attack Surface Minimization
+### Attack Surface Minimization
 
 ```go
 // Access control for key operations
@@ -1631,7 +1632,7 @@ func (vm *VM) CheckPermission(caller ids.ShortID, keyID string, required Permiss
 }
 ```
 
-#### 10.4 Quantum Security
+### Quantum Security
 
 Keys may be configured for hybrid classical/quantum security:
 
@@ -1658,7 +1659,7 @@ func VerifyDualSignature(msg []byte, classical, quantum []byte, config QuantumCo
 }
 ```
 
-### 11. Backwards Compatibility
+## Backwards Compatibility
 
 This LP is additive to existing M-Chain and T-Chain functionality:
 
@@ -1670,9 +1671,25 @@ This LP is additive to existing M-Chain and T-Chain functionality:
 
 4. **Signer Software**: Existing `mpckeyd` instances can be upgraded incrementally. The protocol negotiates capabilities during DKG.
 
-### 12. Test Cases
+## Rationale
 
-#### 12.1 Key Creation Tests
+### Design Decisions
+
+1. **Per-Asset Isolation**: Each managed key operates independently with its own threshold (t), total party count (n), and signer set. This provides cryptographic isolation where compromise of one key does not affect others, enabling risk-appropriate security configurations per asset.
+
+2. **Value-Based Tiering**: Threshold and party count scale with asset value to balance security requirements against operational efficiency. High-value assets receive proportionally stronger protection (higher thresholds, larger committees) while low-value assets optimize for speed.
+
+3. **Hierarchical Key Naming**: The `{chain}-{asset}[-{variant}]` naming convention provides uniqueness, discoverability, and extensibility. New chains and assets can be added without conflicts while maintaining clear operational semantics.
+
+4. **Geographic Diversity**: Signer distribution across multiple jurisdictions ensures resilience against regional failures, regulatory actions, and coordinated attacks. Higher-value tiers require more geographic diversity.
+
+5. **Algorithm Flexibility**: Supporting multiple MPC algorithms (CGG21, MuSig2, FROST, Ringtail) enables native compatibility with different blockchain curves and provides a quantum-safe migration path.
+
+6. **Proactive Key Refresh**: Time-based share regeneration without changing public keys provides forward security while maintaining operational continuity. Refresh intervals scale inversely with asset value.
+
+## Test Cases
+
+### Key Creation Tests
 
 ```go
 func TestKeyCreation_ValidConfig(t *testing.T) {
@@ -1724,7 +1741,7 @@ func TestKeyCreation_DuplicateKeyID(t *testing.T) {
 }
 ```
 
-#### 12.2 Multi-Key Signing Tests
+### Multi-Key Signing Tests
 
 ```go
 func TestMultiKeySigning_AllSucceed(t *testing.T) {
@@ -1765,7 +1782,7 @@ func TestMultiKeySigning_OneKeyFails(t *testing.T) {
 }
 ```
 
-#### 12.3 Key Rotation Tests
+### Key Rotation Tests
 
 ```go
 func TestKeyRotation_SameSigners(t *testing.T) {
@@ -1811,7 +1828,7 @@ func TestKeyRotation_ChangeSigners(t *testing.T) {
 }
 ```
 
-#### 12.4 Threshold Tier Tests
+### Threshold Tier Tests
 
 ```go
 func TestThresholdTiers(t *testing.T) {
@@ -1838,11 +1855,11 @@ func TestThresholdTiers(t *testing.T) {
 }
 ```
 
-### 13. Reference Implementation
+## Reference Implementation
 
 All reference implementations are available in the Lux GitHub organization: https://github.com/luxfi
 
-#### 13.1 Core Components
+### Core Components
 
 | Component | Repository | Path |
 |-----------|------------|------|
@@ -1854,7 +1871,7 @@ All reference implementations are available in the Lux GitHub organization: http
 | Value Tier Config | `github.com/luxfi/node` | `vms/thresholdvm/keys/tiers.go` |
 | Geographic Diversity | `github.com/luxfi/node` | `vms/thresholdvm/keys/geography.go` |
 
-#### 13.2 SDK Integration
+### SDK Integration
 
 | Component | Repository | Path |
 |-----------|------------|------|
@@ -1863,7 +1880,7 @@ All reference implementations are available in the Lux GitHub organization: http
 | Signing Sessions | `github.com/luxfi/sdk` | `multisig/session.go` |
 | Asset Configs | `github.com/luxfi/sdk` | `multisig/assets.go` |
 
-#### 13.3 Threshold Cryptography
+### Threshold Cryptography
 
 | Protocol | Repository | Path |
 |----------|------------|------|
@@ -1873,7 +1890,7 @@ All reference implementations are available in the Lux GitHub organization: http
 | Ringtail (PQ) | `github.com/luxfi/threshold` | `protocols/ringtail/` |
 | LSS Resharing | `github.com/luxfi/threshold` | `protocols/lss/` |
 
-#### 13.4 Bridge Integration
+### Bridge Integration
 
 | Component | Repository | Path |
 |-----------|------------|------|
@@ -1881,7 +1898,7 @@ All reference implementations are available in the Lux GitHub organization: http
 | Teleport Protocol | `github.com/luxfi/bridge` | `teleport/` |
 | Asset Registry | `github.com/luxfi/bridge` | `registry/` |
 
-#### 13.5 Related Repositories
+### Related Repositories
 
 - **Node**: `github.com/luxfi/node` - Lux Network node implementation
 - **Threshold**: `github.com/luxfi/threshold` - Threshold cryptography library
@@ -1889,9 +1906,9 @@ All reference implementations are available in the Lux GitHub organization: http
 - **SDK**: `github.com/luxfi/sdk` - Client SDK for interacting with Lux Network
 - **CLI**: `github.com/luxfi/cli` - Command-line tools for network management
 
-### 14. Economic Impact
+## Economic Impact
 
-#### 14.1 Signer Economics
+### Signer Economics
 
 Per-asset keys enable differentiated economics:
 
@@ -1904,7 +1921,7 @@ Per-asset keys enable differentiated economics:
 | Very Large | 2.0 LUX | 25,000 LUX |
 | Custody | 5.0 LUX | 50,000 LUX |
 
-#### 14.2 Protocol Revenue
+### Protocol Revenue
 
 Higher-tier keys generate more revenue per signature, incentivizing signers to maintain high-quality infrastructure for valuable assets.
 

@@ -9,6 +9,7 @@ type: Standards Track
 category: Core
 created: 2025-01-24
 requires: 200, 201
+tags: [pqc, core, security]
 ---
 
 ## Abstract

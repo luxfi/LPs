@@ -14,6 +14,7 @@ activation:
   flag: lp331-bridgevm
   hfName: "Teleport"
   activationHeight: "0"
+tags: [bridge, mpc, vm]
 ---
 
 > **See also**: [LP-330 T-Chain ThresholdVM](./lp-0330-t-chain-thresholdvm-specification.md), [LP-332 Teleport Bridge Architecture](./lp-0332-teleport-bridge-architecture-unified-cross-chain-protocol.md), [LP-333 Dynamic Signer Rotation](./lp-0333-dynamic-signer-rotation-with-lss-protocol.md), [LP-334 Per-Asset Threshold Key Management](./lp-0334-per-asset-threshold-key-management.md), [LP-335 Bridge Smart Contract Integration](./lp-0335-bridge-smart-contract-integration.md), [LP-INDEX](./LP-INDEX.md)

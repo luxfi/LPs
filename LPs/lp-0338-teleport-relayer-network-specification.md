@@ -5,14 +5,20 @@ description: DEPRECATED - The Teleport bridge uses a fully decentralized archite
 author: Lux Protocol Team (@luxdefi)
 discussions-to: https://github.com/luxfi/lps/discussions
 status: Withdrawn
-type: Standards Track
-category: Core
+type: Informational
 created: 2025-12-11
 withdrawal-reason: Architecture consolidation - B-Chain watchers provide decentralized cross-chain observation without separate relayer infrastructure
 superseded-by: lp-0331
+tags: [teleport, bridge, cross-chain]
 ---
 
-# LP-0338: Teleport Relayer Network Specification [DEPRECATED]
+## Abstract
+
+This LP documents the DEPRECATED Teleport Relayer Network concept. The Teleport bridge has adopted a fully decentralized architecture without requiring a separate relayer network. Cross-chain event observation is handled by B-Chain watchers integrated into validator nodes, eliminating the need for separate relayer infrastructure. This LP serves as a historical reference and migration guide.
+
+## Motivation
+
+The Relayer Network was originally proposed to provide cross-chain message passing for bridge operations. However, the architecture was simplified by integrating observation directly into B-Chain validators as watchers. This eliminates the complexity of a separate relayer incentive layer while leveraging existing validator infrastructure for secure cross-chain observation.
 
 ## Deprecation Notice
 

@@ -9,6 +9,7 @@ type: Standards Track
 category: Core
 created: 2025-09-24
 requires: 500, 501, 502, 503, 504
+tags: [l2, core]
 ---
 
 ## Abstract

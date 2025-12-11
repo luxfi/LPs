@@ -9,6 +9,7 @@ type: Standards Track
 category: Core
 created: 2025-01-09
 requires: 603
+tags: [core, scaling]
 ---
 
 # LP-604: State Sync and Pruning Protocol

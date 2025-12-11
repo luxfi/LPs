@@ -8,6 +8,7 @@ status: Draft
 type: Standards Track
 category: Core
 created: 2025-01-09
+tags: [core, scaling]
 ---
 
 # LP-606: Verkle Trees for Efficient State Management

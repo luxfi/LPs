@@ -9,6 +9,7 @@ type: Standards Track
 category: LRC
 created: 2025-01-23
 requires: 20, 13
+tags: [bridge, lrc]
 ---
 
 ## Abstract

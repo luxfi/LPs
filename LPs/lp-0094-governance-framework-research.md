@@ -8,6 +8,7 @@ status: Draft
 type: Informational
 created: 2025-01-23
 requires: 0, 1, 10
+tags: [research, governance]
 ---
 
 ## Abstract

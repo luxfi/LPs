@@ -1,6 +1,6 @@
 ---
 lp: 0080
-title: A-Chain (Attestation Chain) Specification  
+title: A-Chain (Attestation Chain) Specification
 description: Defines the A-Chain for network-wide trusted execution verification and two-token economics
 author: Lux Network Team (@luxdefi)
 discussions-to: https://github.com/luxfi/lps/discussions
@@ -9,6 +9,7 @@ type: Standards Track
 category: Core
 created: 2025-07-25
 requires: 10, 11, 12, 75
+tags: [core, ai, attestation]
 ---
 
 ## Abstract

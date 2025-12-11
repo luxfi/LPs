@@ -9,6 +9,7 @@ type: Standards Track
 category: Core
 created: 2025-11-22
 requires: 12
+tags: [precompile, evm]
 ---
 
 # LP-204: Precompile for secp256r1 Curve Support (Granite Upgrade)

@@ -9,6 +9,7 @@ type: Standards Track
 category: Core
 created: 2024-11-30
 requires: 0004, 0005
+tags: [ai, consensus]
 activation:
   flag: lp-2000-ai-mining
   hfName: "ai-mining"

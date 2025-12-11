@@ -9,6 +9,7 @@ type: Standards Track
 category: Core
 created: 2025-01-29
 requires: 4, 5
+tags: [consensus, pqc]
 ---
 
 ## Abstract

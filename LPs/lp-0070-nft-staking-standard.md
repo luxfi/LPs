@@ -9,6 +9,7 @@ type: Standards Track
 category: LRC
 created: 2025-01-23
 requires: 721, 1155, 20
+tags: [lrc, defi, nft]
 ---
 
 ## Abstract

@@ -13,6 +13,7 @@ activation:
   flag: lp322-cggmp21-precompile
   hfName: "Quantum"
   activationHeight: "0"
+tags: [threshold-crypto, mpc, precompile]
 ---
 
 ## Abstract

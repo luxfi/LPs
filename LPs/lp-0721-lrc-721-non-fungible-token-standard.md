@@ -1,7 +1,7 @@
 ---
 lp: 0721
 title: LRC-721 Non-Fungible Token Standard
-description: This special-numbered LP corresponds to the NFT standard on Lux, equivalent to Ethereum’s ERC-721.
+description: This special-numbered LP corresponds to the NFT standard on Lux, equivalent to Ethereum's ERC-721.
 author: Lux Network Team (@luxdefi)
 discussions-to: https://github.com/luxfi/lps/discussions
 status: Final
@@ -9,6 +9,7 @@ type: Standards Track
 category: LRC
 created: 2025-01-23
 updated: 2025-07-25
+tags: [lrc, nft, token-standard]
 activation:
   flag: lp721-lrc721-nft-standard
   hfName: ""

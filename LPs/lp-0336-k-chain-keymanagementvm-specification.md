@@ -13,6 +13,7 @@ activation:
   flag: lp336-k-chain
   hfName: "KeyVault"
   activationHeight: "0"
+tags: [mpc, vm, security]
 ---
 
 > **See also**: [LP-103](./lp-0103-mpc-lss---multi-party-computation-linear-secret-sharing-with-dynamic-resharing.md), [LP-104](./lp-0104-frost---flexible-round-optimized-schnorr-threshold-signatures-for-eddsa.md), [LP-330](./lp-0330-t-chain-thresholdvm-specification.md), [LP-332](./lp-0332-teleport-bridge-architecture-unified-cross-chain-protocol.md), [LP-334](./lp-0334-per-asset-threshold-key-management.md), [LP-INDEX](./LP-INDEX.md)

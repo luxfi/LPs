@@ -1,6 +1,7 @@
 ---
 lp: 0000
 title: Lux Network Architecture & Community Framework
+tags: [core, consensus]
 description: Defines the overall architecture of the Lux multi-chain network and the governance/process framework for the community.
 author: Lux Network Team (@luxdefi)
 discussions-to: https://github.com/luxfi/lps/discussions

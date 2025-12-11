@@ -8,6 +8,7 @@ status: Final
 type: Standards Track
 category: Interface
 created: 2025-01-15
+tags: [evm, scaling]
 ---
 
 # LP-118: Subnet-EVM Compatibility Layer

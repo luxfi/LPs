@@ -9,6 +9,7 @@ type: Standards Track
 category: Core
 created: 2025-11-22
 requires: 303, 312
+tags: [pqc]
 ---
 
 # LP-317: SLH-DSA Stateless Hash-Based Digital Signatures

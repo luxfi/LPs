@@ -8,6 +8,7 @@ status: Draft
 type: Standards Track
 category: Core
 created: 2025-07-22
+tags: [evm, core]
 ---
 
 ## Abstract

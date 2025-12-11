@@ -9,6 +9,7 @@ type: Standards Track
 category: Core
 created: 2025-01-09
 requires: 600
+tags: [ai, gas, evm]
 ---
 
 # LP-601: Dynamic Gas Fee Mechanism with AI Compute Pricing

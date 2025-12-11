@@ -1,6 +1,7 @@
 ---
 lp: 0014
 title: M-Chain Threshold Signatures with CGG21 (UC Non-Interactive ECDSA)
+tags: [threshold-crypto, mpc]
 description: Formal design for integrating the CGG21 threshold ECDSA protocol in Lux's M-Chain (expanding on LP-13).
 author: Lux Industries Inc.
 discussions-to: https://github.com/luxfi/lps/discussions

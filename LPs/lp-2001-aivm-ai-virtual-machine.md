@@ -9,6 +9,7 @@ type: Standards Track
 category: Core
 created: 2024-12-11
 requires: 2000
+tags: [ai, vm]
 activation:
   flag: lp-2001-aivm
   hfName: "aivm"

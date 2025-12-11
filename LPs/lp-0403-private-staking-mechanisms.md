@@ -9,6 +9,7 @@ type: Standards Track
 category: LRC
 created: 2025-01-24
 requires: 20, 69
+tags: [defi, privacy, staking]
 ---
 
 ## Abstract

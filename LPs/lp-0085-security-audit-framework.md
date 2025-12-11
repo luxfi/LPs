@@ -8,6 +8,7 @@ status: Draft
 type: Standards Track
 category: Meta
 created: 2025-01-23
+tags: [security, dev-tools]
 ---
 
 ## Abstract

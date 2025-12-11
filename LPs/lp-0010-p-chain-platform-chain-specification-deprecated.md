@@ -1,6 +1,7 @@
 ---
 lp: 0010
 title: P-Chain (Platform Chain) Specification [DEPRECATED]
+tags: [core, consensus, deprecated]
 description: Specifies the Platform Chain, which is the metadata and coordination chain of Lux.
 author: Lux Network Team (@luxdefi)
 discussions-to: https://github.com/luxfi/lps/discussions

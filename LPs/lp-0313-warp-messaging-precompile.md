@@ -13,6 +13,7 @@ activation:
   flag: lp313-warp-precompile
   hfName: "Teleport"
   activationHeight: "0"
+tags: [warp, precompile, cross-chain]
 ---
 
 ## Abstract

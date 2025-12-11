@@ -9,6 +9,7 @@ type: Standards Track
 category: Core
 created: 2025-11-22
 requires: 12, 176
+tags: [consensus, core]
 ---
 
 # LP-226: Dynamic Minimum Block Times (Granite Upgrade)

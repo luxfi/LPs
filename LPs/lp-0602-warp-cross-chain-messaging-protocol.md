@@ -9,6 +9,7 @@ type: Standards Track
 category: Networking
 created: 2025-01-09
 requires: 603
+tags: [warp, cross-chain]
 ---
 
 # LP-602: Warp Cross-Chain Messaging Protocol

@@ -9,6 +9,7 @@ type: Standards Track
 category: LRC
 created: 2025-01-09
 requires: 603, 607
+tags: [defi, scaling]
 ---
 
 # LP-608: High-Performance Decentralized Exchange Protocol

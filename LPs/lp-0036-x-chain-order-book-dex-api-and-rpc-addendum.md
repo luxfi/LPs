@@ -8,6 +8,7 @@ status: Draft
 type: Standards Track
 category: Interface
 created: 2025-07-24
+tags: [defi, core]
 requires: 6
 ---
 

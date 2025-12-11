@@ -1,6 +1,7 @@
 ---
 lp: 0008
 title: Plugin Architecture
+tags: [vm, core, dev-tools]
 description: Describes a Plugin Architecture for Lux nodes.
 author: Lux Network Team (@luxdefi)
 discussions-to: https://github.com/luxfi/lps/discussions

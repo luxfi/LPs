@@ -9,6 +9,7 @@ type: Standards Track
 category: Core
 created: 2025-11-22
 requires: 313
+tags: [cross-chain, warp]
 ---
 
 # LP-315: Enhanced Cross-Chain Communication Protocol

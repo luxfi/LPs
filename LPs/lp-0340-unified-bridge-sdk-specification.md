@@ -9,6 +9,7 @@ type: Standards Track
 category: SDK
 created: 2025-12-11
 requires: 332, 335
+tags: [bridge, dev-tools, sdk]
 ---
 
 ## Abstract
@@ -3052,6 +3053,26 @@ See `bridge/test/sdk/` for comprehensive test suites covering:
 - **LP-0335**: Bridge Smart Contract Integration
 - **LP-0330**: T-Chain (ThresholdVM) Specification
 - **LP-0331**: B-Chain (BridgeVM) Specification
+
+## Security Considerations
+
+The SDK implementations MUST address the following security requirements:
+
+1. **Private Key Handling**: Private keys MUST never be exposed in client-side code. Production deployments SHOULD use hardware wallets or server-side signing services.
+
+2. **RPC Endpoint Security**: SDKs SHOULD support authenticated RPC endpoints and recommend rate limiting and IP whitelisting for production.
+
+3. **Input Validation**: All user inputs MUST be validated before processing using the SDK's built-in validation functions.
+
+4. **Signature Verification**: MPC signatures MUST be verified on-chain. The SDK MUST NOT trust off-chain signature claims.
+
+5. **Nonce Management**: The SDK MUST handle nonce management to prevent replay attacks.
+
+6. **Timeout Handling**: All operations MUST have configurable timeouts with sensible defaults to prevent resource exhaustion.
+
+7. **Error Information Disclosure**: Error messages MUST NOT leak sensitive information such as internal paths, key material, or infrastructure details.
+
+See Section 10 of the Specification for detailed security implementation guidelines.
 
 ## Copyright
 

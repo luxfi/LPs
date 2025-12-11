@@ -8,6 +8,7 @@ category: Interface
 status: Draft
 created: 2025-01-09
 requires: LP-10, LP-103, HIP-4
+tags: [ai, dev-tools]
 ---
 
 # LP-106: LLM Gateway Integration with Hanzo AI

@@ -6,9 +6,10 @@ author: Lux Network Team (@luxdefi)
 discussions-to: https://github.com/luxfi/lps/discussions
 status: Draft
 type: Meta
-category: 
+category:
 created: 2025-01-23
 updated: 2025-07-25
+tags: [dev-tools]
 ---
 
 ## Abstract

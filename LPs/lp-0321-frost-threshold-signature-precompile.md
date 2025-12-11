@@ -13,6 +13,7 @@ activation:
   flag: lp321-frost-precompile
   hfName: "Quantum"
   activationHeight: "0"
+tags: [threshold-crypto, precompile]
 ---
 
 ## Abstract

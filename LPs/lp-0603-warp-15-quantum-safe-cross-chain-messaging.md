@@ -630,6 +630,31 @@ go test -v ./vms/thresholdvm/...
 
 ---
 
+## Rationale
+
+### Why Ringtail Over ML-DSA for Threshold Signatures?
+
+ML-DSA (formerly Dilithium) is NIST-approved but was designed for single-signer scenarios. Converting ML-DSA to threshold form requires complex MPC protocols with significant overhead. Ringtail was purpose-built for threshold signing:
+
+- **Native Threshold Support**: Ringtail's algebraic structure directly supports threshold operations without generic MPC protocols
+- **Two-Round Protocol**: Only 2 communication rounds for distributed signing (vs. 5+ for generic threshold ML-DSA)
+- **Same Security Foundation**: Based on Ring-LWE, sharing security assumptions with NIST-approved ML-KEM and ML-DSA
+
+### Why Hybrid Mode?
+
+The hybrid BLS+Ringtail approach provides:
+
+1. **Immediate Classical Security**: BLS signatures provide proven security against classical adversaries
+2. **Future Quantum Security**: Ringtail component provides protection against future quantum attacks
+3. **Graceful Migration**: Validators can progressively upgrade to full quantum-safe mode
+4. **Backwards Compatibility**: Classical clients can still verify the BLS component
+
+### Why Not ML-KEM for Key Exchange?
+
+ML-KEM is excellent for key encapsulation but Warp messages require digital signatures (authentication), not key exchange (confidentiality). Ringtail provides post-quantum signatures directly.
+
+---
+
 ## Backwards Compatibility
 
 - Warp 1.0 clients can verify BLS signatures (unchanged)

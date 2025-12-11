@@ -9,6 +9,7 @@ type: Standards Track
 category: Core
 created: 2025-11-22
 requires: 303
+tags: [pqc, encryption]
 ---
 
 # LP-318: ML-KEM Post-Quantum Key Encapsulation

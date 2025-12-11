@@ -1,13 +1,14 @@
 ---
 lp: 0035
 title: Stage-Sync Pipeline for Coreth Bootstrapping
-description: Study and prototype a staged sync architecture, inspired by Erigon, to accelerate and optimize the C-Chain initial sync in Lux’s geth fork
+description: Study and prototype a staged sync architecture, inspired by Erigon, to accelerate and optimize the C-Chain initial sync in Lux's geth fork
 author: Zach Kelling (@zeekay) and Lux Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
 status: Draft
 type: Standards Track
 category: Core
 created: 2025-07-24
+tags: [evm, dev-tools]
 requires: 26, 34
 ---
 

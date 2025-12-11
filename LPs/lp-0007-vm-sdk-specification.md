@@ -1,6 +1,7 @@
 ---
 lp: 0007
 title: VM SDK Specification
+tags: [vm, dev-tools, sdk]
 description: Defines the Virtual Machine SDK for Lux.
 author: Lux Network Team (@luxdefi)
 discussions-to: https://github.com/luxfi/lps/discussions

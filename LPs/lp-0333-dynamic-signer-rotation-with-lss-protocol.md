@@ -13,6 +13,7 @@ activation:
   flag: lp333-dynamic-signer-rotation
   hfName: "Photon"
   activationHeight: "0"
+tags: [mpc, threshold-crypto, bridge]
 ---
 
 > **See also**: [LP-103](./lp-0103-mpc-lss---multi-party-computation-linear-secret-sharing-with-dynamic-resharing.md), [LP-323](./lp-0323-lss-mpc-dynamic-resharing-extension.md), [LP-14](./lp-0014-m-chain-threshold-signatures-with-cgg21-uc-non-interactive-ecdsa.md), [LP-330](./lp-0330-t-chain-thresholdvm-specification.md), [LP-334](./lp-0334-per-asset-threshold-key-management.md), [LP-INDEX](./LP-INDEX.md)

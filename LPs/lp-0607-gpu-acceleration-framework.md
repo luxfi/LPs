@@ -9,6 +9,7 @@ type: Standards Track
 category: Core
 created: 2025-01-09
 requires: 601
+tags: [ai, scaling]
 ---
 
 # LP-607: GPU Acceleration Framework

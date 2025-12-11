@@ -9,6 +9,7 @@ type: Standards Track
 category: Core
 created: 2025-09-24
 requires: 20, 100, 101, 102
+tags: [l2, scaling]
 ---
 
 ## Abstract

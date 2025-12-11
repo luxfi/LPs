@@ -13,6 +13,7 @@ activation:
   flag: lp339-bridge-security
   hfName: "Sentinel"
   activationHeight: "0"
+tags: [bridge, security]
 ---
 
 > **See also**: [LP-330](./lp-0330-t-chain-thresholdvm-specification.md), [LP-331](./lp-0331-b-chain-bridgevm-specification.md), [LP-333](./lp-0333-dynamic-signer-rotation-with-lss-protocol.md), [LP-335](./lp-0335-bridge-smart-contract-integration.md), [LP-INDEX](./LP-INDEX.md)

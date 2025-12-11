@@ -1,6 +1,7 @@
 ---
 lp: 0011
 title: X-Chain (Exchange Chain) Specification
+tags: [core, defi]
 description: High-performance order book DEX with Lamport OTS quantum safety
 author: Lux Network Team (@luxdefi)
 discussions-to: https://github.com/luxfi/lps/discussions

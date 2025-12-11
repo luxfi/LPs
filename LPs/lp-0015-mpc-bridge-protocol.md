@@ -1,6 +1,7 @@
 ---
 lp: 0015
 title: MPC Bridge Protocol
+tags: [mpc, bridge, cross-chain]
 description: Defines the overall Lux Bridge protocol using Multi-Party Computation/Threshold Signatures.
 author: Lux Network Team (@luxdefi)
 discussions-to: https://github.com/luxfi/lps/discussions

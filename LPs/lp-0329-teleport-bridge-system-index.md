@@ -9,6 +9,7 @@ type: Informational
 category: Core
 created: 2025-12-11
 requires: 13, 14, 15, 17, 81, 103, 104
+tags: [teleport, bridge, cross-chain]
 ---
 
 ## Abstract

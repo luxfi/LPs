@@ -9,6 +9,7 @@ type: Standards Track
 category: Core
 created: 2025-10-28
 requires: 301
+tags: [privacy, ai, attestation]
 ---
 
 # LP-302: Lux Z/A-Chain - Privacy & AI Attestation Layer

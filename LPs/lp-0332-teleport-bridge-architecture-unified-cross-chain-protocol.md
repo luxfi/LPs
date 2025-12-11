@@ -9,6 +9,7 @@ type: Standards Track
 category: Core
 created: 2025-12-11
 requires: 13, 14, 15, 16, 81, 103, 301
+tags: [teleport, bridge, cross-chain]
 ---
 
 > **See also**: [LP-330](./lp-0330-t-chain-thresholdvm-specification.md), [LP-331](./lp-0331-b-chain-bridgevm-specification.md), [LP-333](./lp-0333-dynamic-signer-rotation-with-lss-protocol.md), [LP-334](./lp-0334-per-asset-threshold-key-management.md), [LP-335](./lp-0335-bridge-smart-contract-integration.md), [LP-336](./lp-0336-k-chain-keymanagementvm-specification.md), [LP-INDEX](./LP-INDEX.md)

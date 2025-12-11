@@ -5,14 +5,20 @@ description: DEPRECATED - Traditional n-of-m multisig is handled natively by P-C
 author: Lux Protocol Team (@luxdefi)
 discussions-to: https://github.com/luxfi/lps/discussions
 status: Withdrawn
-type: Standards Track
-category: Core
+type: Informational
 created: 2025-12-11
 withdrawal-reason: Architecture consolidation - P-Chain/X-Chain provide native multisig, T-Chain provides threshold signatures
 superseded-by: lp-0330
+tags: [mpc, threshold-crypto, vm]
 ---
 
-# LP-0337: M-Chain (MultisigVM) Specification [DEPRECATED]
+## Abstract
+
+This LP documents the DEPRECATED M-Chain (MultisigVM) concept. Traditional n-of-m multisig functionality is handled natively by P-Chain and X-Chain, while threshold cryptography operations are handled by T-Chain (ThresholdVM) as specified in LP-0330. This LP serves as a historical reference and migration guide for implementations that were planning to use M-Chain.
+
+## Motivation
+
+The M-Chain concept was originally proposed to provide explicit n-of-m multisignature support as a dedicated chain. However, analysis revealed that this functionality duplicates capabilities already provided by P-Chain (subnet governance, validator management) and X-Chain (UTXO multisig). For threshold cryptography (where no party holds the complete key), T-Chain provides superior functionality. This LP is withdrawn to consolidate the architecture.
 
 ## Deprecation Notice
 

@@ -8,6 +8,7 @@ status: Draft
 type: Informational
 created: 2025-01-23
 requires: 0, 13, 14
+tags: [research, cross-chain]
 ---
 
 ## Abstract

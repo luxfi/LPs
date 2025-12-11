@@ -9,6 +9,7 @@ type: Standards Track
 category: Core
 created: 2025-10-28
 requires: 13, 14, 15
+tags: [bridge, cross-chain]
 ---
 
 # LP-301: Lux B-Chain - Cross-Chain Bridge Protocol

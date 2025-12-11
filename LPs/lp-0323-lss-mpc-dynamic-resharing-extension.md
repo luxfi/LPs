@@ -13,6 +13,7 @@ activation:
   flag: lp323-lss-mpc
   hfName: "Quantum"
   activationHeight: "0"
+tags: [mpc, threshold-crypto]
 ---
 
 ## Abstract

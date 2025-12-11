@@ -9,6 +9,7 @@ type: Standards Track
 category: Core
 created: 2025-11-22
 requires: 320, 321, 322, 323
+tags: [security, mpc]
 ---
 
 ## Abstract

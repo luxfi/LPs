@@ -13,6 +13,7 @@ activation:
   flag: lp312-slhdsa-precompile
   hfName: "Quantum"
   activationHeight: "0"
+tags: [pqc, precompile, evm]
 ---
 
 ## Abstract

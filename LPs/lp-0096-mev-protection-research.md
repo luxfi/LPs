@@ -8,6 +8,7 @@ status: Draft
 type: Informational
 created: 2025-01-23
 requires: 0, 11, 12
+tags: [research, defi, security]
 ---
 
 ## Abstract

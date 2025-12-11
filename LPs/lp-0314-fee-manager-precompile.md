@@ -12,6 +12,7 @@ activation:
   flag: lp314-feemanager-precompile
   hfName: "Genesis"
   activationHeight: "0"
+tags: [precompile, gas, evm]
 ---
 
 ## Abstract

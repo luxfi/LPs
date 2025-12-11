@@ -8,6 +8,7 @@ category: Core
 status: Draft
 created: 2024-12-20
 requires: LP-4, LP-5
+tags: [pqc, core]
 ---
 
 # LP-100: NIST Post-Quantum Cryptography Integration for Lux Network

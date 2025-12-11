@@ -9,6 +9,7 @@ type: Standards Track
 category: LRC
 created: 2025-01-23
 updated: 2025-07-25
+tags: [lrc, evm, token-standard]
 activation:
   flag: lp20-lrc20-fungible-token
   hfName: ""

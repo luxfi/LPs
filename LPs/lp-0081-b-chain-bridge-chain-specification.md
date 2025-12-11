@@ -9,6 +9,7 @@ type: Standards Track
 category: Core
 created: 2025-07-25
 requires: 13, 14, 15, 75
+tags: [bridge, core, mpc]
 ---
 
 ## Abstract

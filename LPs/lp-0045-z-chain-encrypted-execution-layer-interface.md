@@ -1,13 +1,14 @@
 ---
 lp: 0045
 title: Z-Chain Encrypted Execution Layer Interface
-description: Interface specification for Z-Chain’s encrypted execution layer, including EVM precompiles, JSON-RPC extensions, and TEE design.
+description: Interface specification for Z-Chain's encrypted execution layer, including EVM precompiles, JSON-RPC extensions, and TEE design.
 author: Zach Kelling (@zeekay) and Lux Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
 status: Draft
 type: Standards Track
 category: Interface
 created: 2025-07-24
+tags: [privacy, zk, core]
 ---
 
 ## Abstract

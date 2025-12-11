@@ -13,6 +13,7 @@ activation:
   flag: lp324-ringtail-precompile
   hfName: "Quantum"
   activationHeight: "0"
+tags: [pqc, threshold-crypto, precompile]
 ---
 
 ## Abstract

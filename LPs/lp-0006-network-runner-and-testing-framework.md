@@ -1,6 +1,7 @@
 ---
 lp: 0006
 title: Network Runner & Testing Framework
+tags: [dev-tools, testing]
 description: Specifies the Lux Network Runner and testing frameworks.
 author: Lux Network Team (@luxdefi)
 discussions-to: https://github.com/luxfi/lps/discussions

@@ -9,6 +9,7 @@ type: Standards Track
 category: Bridge
 created: 2025-12-11
 requires: 13, 14, 15, 17, 19, 301, 330, 331, 332
+tags: [bridge, evm]
 ---
 
 ## Abstract
