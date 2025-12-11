@@ -1,21 +1,20 @@
 ---
 lp: 0010
-title: P-Chain (Platform Chain) Specification [DEPRECATED]
-tags: [core, consensus, deprecated]
+title: P-Chain (Platform Chain) Specification
+tags: [core, consensus, staking, validators]
 description: Specifies the Platform Chain, which is the metadata and coordination chain of Lux.
 author: Lux Network Team (@luxdefi)
 discussions-to: https://github.com/luxfi/lps/discussions
-status: Superseded
+status: Final
 type: Standards Track
 category: Core
 created: 2025-01-23
-deprecated: 2025-01-28
-superseded-by: 99
+updated: 2025-12-11
 ---
 
-> **See also**: [LP-0](./lp-0-network-architecture-and-community-framework.md), [LP-11](./lp-11-x-chain-exchange-chain-specification.md), [LP-12](./lp-12-c-chain-contract-chain-specification.md), [LP-13](./lp-13-m-chain-decentralised-mpc-custody-and-swap-signature-layer.md), [LP-99](./lp-99-q-chain-quantum-secure-consensus-protocol-family-quasar.md), [LP-INDEX](./LP-INDEX.md)
+> **See also**: [LP-0](./lp-0000-network-architecture-and-community-framework.md), [LP-11](./lp-0011-x-chain-exchange-chain-specification.md), [LP-12](./lp-0012-c-chain-contract-chain-specification.md), [LP-99](./lp-0099-q-chain-quantum-secure-consensus-protocol-family-quasar.md)
 
-> **⚠️ DEPRECATION NOTICE**: This LP has been deprecated in Lux 2.0. The P-Chain has been replaced by the Q-Chain (Quantum/Platform Chain) which provides all platform management functionality with quantum-secure consensus. See [LP-99](./lp-99-q-chain-quantum-secure-consensus-protocol-family-quasar.md) for the current specification.
+> **Note**: P-Chain handles classical platform operations (validators, staking, subnets). Q-Chain (LP-99) provides separate quantum-secure consensus for post-quantum finality. Both chains operate independently in the Lux multi-chain architecture.
 
 ## Abstract
 
@@ -259,7 +258,7 @@ This LP is foundational and does not introduce backwards compatibility issues.
 
 ### Platform VM (P-Chain)
 
-**Status**: Active implementation in Lux Node (deprecated in favor of Q-Chain for new deployments)
+**Status**: Active implementation in Lux Node
 
 - **GitHub**: https://github.com/luxfi/node/tree/main/vms/platformvm
 - **Local**: `node/vms/platformvm/`
@@ -332,15 +331,11 @@ curl -X POST --data '{
 ### Related LPs
 
 - **LP-2**: P-Chain Identifier (defines chain ID 'P')
-- **LP-99**: Q-Chain (replaces P-Chain with quantum-secure consensus)
+- **LP-99**: Q-Chain (quantum-secure consensus, operates alongside P-Chain)
 - **LP-11**: X-Chain (asset exchange)
 - **LP-12**: C-Chain (smart contracts)
 - **LP-605**: Validator Management (upgrades to P-Chain)
 - **LP-181**: P-Chain Epoched Views (optimizes validator queries)
-
-### Deprecation Notes
-
-This implementation remains active but is superseded by the Q-Chain (LP-99) for new deployments. The P-Chain will continue to operate for backwards compatibility but all new developments should target the Q-Chain specification.
 
 ## Copyright
 

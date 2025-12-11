@@ -31,7 +31,7 @@ By using LPs, the Lux community can coordinate development in a decentralized ma
 | [LP-0007](./LPs/lp-0007-vm-sdk-specification.md) | VM SDK Specification | Lux Network Team | Standards Track | Core | Draft |
 | [LP-0008](./LPs/lp-0008-plugin-architecture.md) | Plugin Architecture | Lux Network Team | Standards Track | Core | Draft |
 | [LP-0009](./LPs/lp-0009-cli-tool-specification.md) | CLI Tool Specification | Lux Network Team | Standards Track | Interface | Draft |
-| [LP-0010](./LPs/lp-0010-p-chain-platform-chain-specification-deprecated.md) | P-Chain (Platform Chain) Specification [DEPRECA... | Lux Network Team | Standards Track | Core | Superseded |
+| [LP-0010](./LPs/lp-0010-p-chain-platform-chain-specification.md) | P-Chain (Platform Chain) Specification | Lux Network Team | Standards Track | Core | Final |
 | [LP-0011](./LPs/lp-0011-x-chain-exchange-chain-specification.md) | X-Chain (Exchange Chain) Specification | Lux Network Team | Standards Track | Core | Final |
 | [LP-0012](./LPs/lp-0012-c-chain-contract-chain-specification.md) | C-Chain (Contract Chain) Specification | Lux Network Team | Standards Track | Core | Draft |
 | [LP-0013](./LPs/lp-0013-m-chain-decentralised-mpc-custody-and-swap-signature-layer.md) | M-Chain – Decentralised MPC Custody & Swap-Sign... | Lux Protocol Team | Standards Track | Core | Draft |
