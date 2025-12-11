@@ -69,7 +69,7 @@ This LP specifies the perpetual futures and derivatives trading protocol for the
 
 ---
 
-## 1. Motivation
+## Motivation
 
 Perpetual futures are the most traded derivative instrument in crypto, with daily volumes exceeding spot markets. A native perpetual trading protocol provides:
 
@@ -82,7 +82,7 @@ Integration with the Lux DEX spot orderbook (LP-0011) and native oracle (LP-0610
 
 ---
 
-## 2. Perpetual Contracts
+## Specification
 
 ### 2.1 Contract Specification
 
@@ -707,9 +707,17 @@ SupplyRate = BorrowRate × UtilizationRate × (1 - ReserveFactor)
 
 ---
 
-## 11. Security Considerations
+## Rationale
 
-### 11.1 Oracle Security
+The derivatives protocol design prioritizes capital efficiency and risk management. The funding rate mechanism follows industry standards (8-hour intervals, premium/discount calculation) to ensure price convergence with spot markets. The three margin modes (cross, isolated, portfolio) provide flexibility for different trading strategies. The insurance fund and ADL system provide a robust safety net without requiring socialized losses in normal market conditions.
+
+## Backwards Compatibility
+
+This LP supersedes LP-0609. Existing integrations using the previous protocol should migrate to the new API endpoints. The core data structures (positions, orders, funding) maintain compatibility, but new fields have been added for enhanced functionality. A 90-day deprecation period applies to legacy endpoints.
+
+## Security Considerations
+
+### Oracle Security
 
 - **Multi-source aggregation**: Weighted median from Pyth, Chainlink, C-Chain AMMs
 - **Circuit breakers**: 10% deviation triggers price freeze

@@ -32,7 +32,7 @@ By using LPs, the Lux community can coordinate development in a decentralized ma
 | [LP-0008](./LPs/lp-0008-plugin-architecture.md) | Plugin Architecture | Lux Network Team | Standards Track | Core | Draft |
 | [LP-0009](./LPs/lp-0009-cli-tool-specification.md) | CLI Tool Specification | Lux Network Team | Standards Track | Interface | Draft |
 | [LP-0010](./LPs/lp-0010-p-chain-platform-chain-specification-deprecated.md) | P-Chain (Platform Chain) Specification [DEPRECA... | Lux Network Team | Standards Track | Core | Superseded |
-| [LP-0011](./LPs/lp-0011-x-chain-exchange-chain-specification.md) | X-Chain (Exchange Chain) Specification | Lux Network Team | Standards Track | Core | Draft |
+| [LP-0011](./LPs/lp-0011-x-chain-exchange-chain-specification.md) | X-Chain (Exchange Chain) Specification | Lux Network Team | Standards Track | Core | Final |
 | [LP-0012](./LPs/lp-0012-c-chain-contract-chain-specification.md) | C-Chain (Contract Chain) Specification | Lux Network Team | Standards Track | Core | Draft |
 | [LP-0013](./LPs/lp-0013-m-chain-decentralised-mpc-custody-and-swap-signature-layer.md) | M-Chain – Decentralised MPC Custody & Swap-Sign... | Lux Protocol Team | Standards Track | Core | Draft |
 | [LP-0014](./LPs/lp-0014-m-chain-threshold-signatures-with-cgg21-uc-non-interactive-ecdsa.md) | M-Chain Threshold Signatures with CGG21 (UC Non... | Lux Industries Inc. | Standards Track | Core | Draft |
@@ -57,7 +57,7 @@ By using LPs, the Lux community can coordinate development in a decentralized ma
 | [LP-0033](./LPs/lp-0033-p-chain-state-rollup-to-c-chain-evm.md) | P-Chain State Rollup to C-Chain EVM | Lux Network Team | Standards Track | Core | Draft |
 | [LP-0034](./LPs/lp-0034-p-chain-as-superchain-l2-op-stack-rollup-integration.md) | P-Chain as Superchain L2 – OP Stack Rollup Inte... | Zach Kelling and Lux Team | Standards Track | Core | Draft |
 | [LP-0035](./LPs/lp-0035-stage-sync-pipeline-for-coreth-bootstrapping.md) | Stage-Sync Pipeline for Coreth Bootstrapping | Zach Kelling and Lux Team | Standards Track | Core | Draft |
-| [LP-0036](./LPs/lp-0036-x-chain-order-book-dex-api-and-rpc-addendum.md) | X-Chain Order-Book DEX API & RPC Addendum | Zach Kelling and Lux Team | Standards Track | Interface | Draft |
+| [LP-0036](./LPs/lp-0036-x-chain-order-book-dex-api-and-rpc-addendum.md) | X-Chain Order-Book DEX API & RPC Addendum | Zach Kelling and Lux Team | Standards Track | Interface | Final |
 | [LP-0037](./LPs/lp-0037-native-swap-integration-on-m-chain-x-chain-and-z-chain.md) | Native Swap Integration on M-Chain, X-Chain, an... | Lux Network Team | Standards Track | Core | Draft |
 | [LP-0039](./LPs/lp-0039-lx-python-sdk-corollary-for-on-chain-actions.md) | LX Python SDK Corollary for On-Chain Actions | Lux Network Team | Informational | Interface | Draft |
 | [LP-0040](./LPs/lp-0040-wallet-standards.md) | Wallet Standards | Lux Network Team | Standards Track | Interface | Draft |
@@ -151,11 +151,17 @@ By using LPs, the Lux community can coordinate development in a decentralized ma
 | [LP-0605](./LPs/lp-0605-elastic-validator-subnets.md) | Elastic Validator Subnets | Lux Core Team | Standards Track | Core | Draft |
 | [LP-0606](./LPs/lp-0606-verkle-trees-for-efficient-state-management.md) | Verkle Trees for Efficient State Management | Lux Core Team | Standards Track | Core | Draft |
 | [LP-0607](./LPs/lp-0607-gpu-acceleration-framework.md) | GPU Acceleration Framework | Lux Core Team | Standards Track | Core | Draft |
-| [LP-0608](./LPs/lp-0608-high-performance-decentralized-exchange-protocol.md) | High-Performance Decentralized Exchange Protocol | Lux Core Team | Standards Track | LRC | Draft |
 | [LP-0721](./LPs/lp-0721-lrc-721-non-fungible-token-standard.md) | LRC-721 Non-Fungible Token Standard | Lux Network Team | Standards Track | LRC | Final |
 | [LP-1155](./LPs/lp-1155-lrc-1155-multi-token-standard.md) | LRC-1155 Multi-Token Standard | Lux Network Team | Standards Track | LRC | Final |
 | [LP-2000](./LPs/lp-2000-ai-mining-standard.md) | AI Mining Standard | Hanzo AI, Lux Network, Zoo Labs | Standards Track | Core | Draft |
 | [LP-2001](./LPs/lp-2001-aivm-ai-virtual-machine.md) | AIVM - AI Virtual Machine | Hanzo AI, Lux Network | Standards Track | Core | Draft |
+| [LP-9000](./LPs/lp-9000-dex-overview.md) | Lux DEX - Over 9000 Series Overview | Lux Network Team | Informational | - | Final |
+| [LP-9001](./LPs/lp-9001-x-chain-exchange-specification.md) | X-Chain (Exchange Chain) Specification | Lux Network Team | Standards Track | Core | Final |
+| [LP-9002](./LPs/lp-9002-dex-api-rpc-specification.md) | X-Chain Order-Book DEX API & RPC Specification | Zach Kelling and Lux Team | Standards Track | Interface | Final |
+| [LP-9003](./LPs/lp-9003-high-performance-dex-protocol.md) | High-Performance Decentralized Exchange Protocol | Lux Core Team | Standards Track | LRC | Final |
+| [LP-9004](./LPs/lp-9004-perpetuals-derivatives-protocol.md) | Perpetuals & Derivatives Protocol | Lux Network Team | Standards Track | LRC | Final |
+| [LP-9005](./LPs/lp-9005-native-oracle-protocol.md) | Native Oracle Protocol (Network-Wide) | Lux Network Team | Standards Track | Core | Final |
+| [LP-9006](./LPs/lp-9006-hft-trading-venues-global-network.md) | HFT Trading Venues & Global Network Architecture | Lux Network Team | Standards Track | Infrastructure | Draft |
 
 ### Notable LRCs (Application Standards)
 
@@ -178,9 +184,10 @@ By using LPs, the Lux community can coordinate development in a decentralized ma
 | LRC-401 | [LP-0401](./LPs/lp-0401-confidential-lending-protocol.md) | Confidential Lending Protocol | Draft |
 | LRC-402 | [LP-0402](./LPs/lp-0402-zero-knowledge-swap-protocol.md) | Zero-Knowledge Swap Protocol | Draft |
 | LRC-403 | [LP-0403](./LPs/lp-0403-private-staking-mechanisms.md) | Private Staking Mechanisms | Draft |
-| LRC-608 | [LP-0608](./LPs/lp-0608-high-performance-decentralized-exchange-protocol.md) | High-Performance Decentralized Exchange Protocol | Draft |
 | LRC-721 | [LP-0721](./LPs/lp-0721-lrc-721-non-fungible-token-standard.md) | LRC-721 Non-Fungible Token Standard | Final |
 | LRC-1155 | [LP-1155](./LPs/lp-1155-lrc-1155-multi-token-standard.md) | LRC-1155 Multi-Token Standard | Final |
+| LRC-9003 | [LP-9003](./LPs/lp-9003-high-performance-dex-protocol.md) | High-Performance Decentralized Exchange Protocol | Final |
+| LRC-9004 | [LP-9004](./LPs/lp-9004-perpetuals-derivatives-protocol.md) | Perpetuals & Derivatives Protocol | Final |
 
 ## LP Process
 

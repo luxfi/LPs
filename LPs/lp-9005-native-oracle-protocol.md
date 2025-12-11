@@ -567,6 +567,18 @@ func TestWarpPriceAttestation(t *testing.T) {
 - **LP-333**: Dynamic Signer Rotation
 - **LP-608**: High-Performance DEX Protocol
 
+## Security Considerations
+
+1. **Oracle Manipulation**: Multi-source aggregation with weighted median prevents single-source manipulation. Circuit breakers halt trading on 10% price deviation.
+
+2. **Staleness**: Price feeds expire after 60 seconds. Stale prices trigger conservative fallback pricing or trading halts.
+
+3. **Front-Running**: T-Chain signers use commit-reveal for price attestations. Price updates are encrypted until threshold signatures are collected.
+
+4. **Sybil Resistance**: Oracle operators must stake LUX tokens. Slashing for incorrect price reporting.
+
+5. **Warp Message Integrity**: TeleportAttest messages are cryptographically verified at destination. Invalid attestations are rejected at consensus level.
+
 ## Copyright
 
 Copyright and related rights waived via [CC0](../LICENSE.md).

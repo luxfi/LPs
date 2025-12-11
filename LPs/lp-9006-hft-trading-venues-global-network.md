@@ -54,7 +54,7 @@ The first trading venue launches in **Kansas City, USA**, offering optimal edge-
 
 ---
 
-## 1. Motivation
+## Motivation
 
 ### The Problem with Traditional DEXs
 
@@ -93,7 +93,9 @@ Lux DEX operates as its own daemon/network that:
 
 ---
 
-## 2. Architecture: Standalone Sidecar Network
+## Specification
+
+### Architecture: Standalone Sidecar Network
 
 ### Network Separation
 
@@ -509,7 +511,15 @@ Community governance determines additional venues based on:
 
 ---
 
-## 10. Security Considerations
+## Rationale
+
+The standalone sidecar network architecture separates ultra-low-latency HFT infrastructure from regular Lux Network operations. This ensures that HFT activity doesn't congest the main network while still providing settlement guarantees. Colocation at major exchanges and data centers provides the sub-millisecond latency required for competitive HFT operations.
+
+## Backwards Compatibility
+
+This LP introduces new infrastructure that operates alongside existing Lux Network components. No changes to existing protocols are required. HFT venues connect to the X-Chain for settlement using standard transaction formats.
+
+## Security Considerations
 
 ### Physical Security
 

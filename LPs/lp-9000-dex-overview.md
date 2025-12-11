@@ -1,3 +1,17 @@
+---
+lp: 9000
+title: Lux DEX - Over 9000 Series Overview
+description: Master index and architecture overview for the LP-9000 DEX series - over 9000x faster than traditional DEXs
+author: Lux Network Team (@luxfi)
+discussions-to: https://github.com/luxfi/lps/discussions
+status: Final
+type: Informational
+created: 2025-12-11
+updated: 2025-12-11
+series: LP-9000 DEX Series
+tags: [dex, defi, trading, lp-9000-series]
+---
+
 # LP-9000: Lux DEX - Over 9000 Series
 
 ```
@@ -17,20 +31,15 @@
 ╚═══════════════════════════════════════════════════════════════════════════════╝
 ```
 
-| Field | Value |
-|-------|-------|
-| LP | 9000 |
-| Title | Lux DEX - Over 9000 Series Overview |
-| Author | Lux Network Team |
-| Status | Final |
-| Created | 2025-12-11 |
-| Implementation | [github.com/luxfi/dex](https://github.com/luxfi/dex) |
-
 ## Abstract
 
 The **LP-9000 Series** documents the Lux Decentralized Exchange (DEX) - the fastest, most comprehensive on-chain trading infrastructure in existence. Built on the X-Chain's DAG architecture with FPGA/GPU acceleration, the Lux DEX achieves **over 9000x** the performance of traditional DEXs while providing institutional-grade features: perpetual futures, margin trading, vaults, and quantum-safe signatures.
 
 > *"It's over 9000!"* - Every validator seeing our TPS
+
+## Motivation
+
+Current decentralized exchanges suffer from fundamental performance limitations: low throughput, high latency, and poor capital efficiency. Traditional AMM-based DEXs process only ~15 transactions per second with multi-second finality, while order book DEXs on Layer 2 solutions still can't match centralized exchange performance. The LP-9000 series addresses these limitations by leveraging Lux's unique multi-chain architecture, DAG consensus, and hardware acceleration to deliver institutional-grade trading performance in a fully decentralized manner.
 
 ## Why LP-9000?
 
