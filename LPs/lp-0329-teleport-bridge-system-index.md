@@ -15,6 +15,10 @@ requires: 13, 14, 15, 17, 81, 103, 104
 
 This LP serves as the master index for the Teleport Bridge System, Lux Network's unified cross-chain protocol combining threshold cryptography, dedicated bridge chains, and smart contract custody. The Teleport system enables trustless, decentralized bridging between Lux Network and external blockchains including Ethereum, Bitcoin, Base, Arbitrum, Optimism, and Cosmos IBC chains. A single MPC-generated address works across all EVM-compatible chains, with threshold signatures (CGG21 for ECDSA, LSS for dynamic resharing, FROST for Schnorr, and Ringtail for quantum-safe extensions) ensuring no single party controls bridged funds. This index provides navigation to all related LPs, summarizes system architecture, and serves as the entry point for understanding the complete bridge infrastructure.
 
+## Motivation
+
+The Teleport Bridge System spans multiple LPs covering threshold cryptography, bridge operations, key management, and smart contract integration. Navigating this complex documentation requires a central index that provides a high-level overview of the system architecture, lists all component LPs, and explains how they relate to each other. This informational LP serves as the entry point for developers, auditors, and users seeking to understand or implement cross-chain bridging on Lux Network.
+
 ## System Overview
 
 ```
