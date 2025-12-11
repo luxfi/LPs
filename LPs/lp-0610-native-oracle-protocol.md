@@ -5,12 +5,26 @@ tags: [oracle, dex, price-feed, t-chain, warp, a-chain, c-chain, x-chain]
 description: Defines the native oracle protocol for the entire Lux network, providing decentralized price feeds accessible from X-Chain, C-Chain, and A-Chain via Warp TeleportAttest.
 author: Lux Network Team (@luxdefi)
 discussions-to: https://github.com/luxfi/lps/discussions
-status: Draft
+status: Implemented
 type: Standards Track
 category: Core
 created: 2025-12-11
 requires: [LP-11, LP-12, LP-36, LP-13, LP-80, LP-608]
+implementation: https://github.com/luxfi/dex
 ---
+
+## Implementation Status
+
+| Component | Source | Status |
+|-----------|--------|--------|
+| Price Types | [`dex/pkg/price/types.go`](https://github.com/luxfi/dex/blob/main/pkg/price/types.go) | ✅ Complete |
+| Price Aggregator | [`dex/pkg/price/aggregator.go`](https://github.com/luxfi/dex/blob/main/pkg/price/aggregator.go) | ✅ Complete |
+| Pyth Source | [`dex/pkg/price/pyth.go`](https://github.com/luxfi/dex/blob/main/pkg/price/pyth.go) | ✅ Complete |
+| Chainlink Source | [`dex/pkg/price/chainlink.go`](https://github.com/luxfi/dex/blob/main/pkg/price/chainlink.go) | ✅ Complete |
+| C-Chain AMM Source | [`dex/pkg/price/cchain.go`](https://github.com/luxfi/dex/blob/main/pkg/price/cchain.go) | ✅ Complete |
+| Orderbook Source | [`dex/pkg/price/source.go`](https://github.com/luxfi/dex/blob/main/pkg/price/source.go) | ✅ Complete |
+| Full Oracle (LX) | [`dex/pkg/lx/oracle.go`](https://github.com/luxfi/dex/blob/main/pkg/lx/oracle.go) | ✅ Complete |
+| Alpaca Source | [`dex/pkg/lx/alpaca_source.go`](https://github.com/luxfi/dex/blob/main/pkg/lx/alpaca_source.go) | ✅ Complete |
 
 > **See also**: [LP-11](./lp-0011-x-chain-exchange-chain-specification.md), [LP-12](./lp-0012-c-chain-contract-chain-specification.md), [LP-36](./lp-0036-x-chain-order-book-dex-api-and-rpc-addendum.md), [LP-13](./lp-0013-m-chain-decentralised-mpc-custody-and-swap-signature-layer.md), [LP-80](./lp-0080-a-chain-attestation-chain-specification.md), [LP-608](./lp-0608-high-performance-dex-protocol.md), [LP-INDEX](./LP-INDEX.md)
 

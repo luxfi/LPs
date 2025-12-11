@@ -5,12 +5,25 @@ tags: [core, defi]
 description: High-performance order book DEX with Lamport OTS quantum safety
 author: Lux Network Team (@luxdefi)
 discussions-to: https://github.com/luxfi/lps/discussions
-status: Draft
+status: Implemented
 type: Standards Track
 category: Core
 created: 2025-01-23
-updated: 2025-01-28
+updated: 2025-12-11
+implementation: https://github.com/luxfi/dex
 ---
+
+## Implementation Status
+
+| Component | Source | Status |
+|-----------|--------|--------|
+| Order Book | [`dex/pkg/lx/orderbook.go`](https://github.com/luxfi/dex/blob/main/pkg/lx/orderbook.go) | ✅ Complete |
+| Advanced Orderbook | [`dex/pkg/lx/orderbook_advanced.go`](https://github.com/luxfi/dex/blob/main/pkg/lx/orderbook_advanced.go) | ✅ Complete |
+| Matching Engine | [`dex/pkg/lx/orderbook_extended.go`](https://github.com/luxfi/dex/blob/main/pkg/lx/orderbook_extended.go) | ✅ Complete |
+| Orderbook Server | [`dex/pkg/lx/orderbook_server.go`](https://github.com/luxfi/dex/blob/main/pkg/lx/orderbook_server.go) | ✅ Complete |
+| X-Chain Integration | [`dex/pkg/lx/x_chain_integration.go`](https://github.com/luxfi/dex/blob/main/pkg/lx/x_chain_integration.go) | ✅ Complete |
+| C++ Orderbook | [`dex/pkg/orderbook/cpp_orderbook.go`](https://github.com/luxfi/dex/blob/main/pkg/orderbook/cpp_orderbook.go) | ✅ Complete |
+| Types | [`dex/pkg/lx/types.go`](https://github.com/luxfi/dex/blob/main/pkg/lx/types.go) | ✅ Complete |
 
 > **See also**: [LP-0](./lp-0-network-architecture-and-community-framework.md), [LP-10](./lp-10-p-chain-platform-chain-specification-deprecated.md), [LP-12](./lp-12-c-chain-contract-chain-specification.md), [LP-13](./lp-13-m-chain-decentralised-mpc-custody-and-swap-signature-layer.md), [LP-36](./lp-36-x-chain-order-book-dex-api-and-rpc-addendum.md), [LP-105](./lp-105-lamport-one-time-signatures-ots-for-lux-safe.md), [LP-INDEX](./LP-INDEX.md)
 

@@ -4,13 +4,27 @@ title: High-Performance Decentralized Exchange Protocol
 description: GPU-accelerated DEX with commit-reveal MEV protection and unified liquidity aggregation
 author: Lux Core Team (@luxfi)
 discussions-to: https://forum.lux.network/t/lp-608-dex-protocol
-status: Draft
+status: Implemented
 type: Standards Track
 category: LRC
 created: 2025-01-09
+updated: 2025-12-11
 requires: 603, 607
 tags: [defi, scaling]
+implementation: https://github.com/luxfi/dex
 ---
+
+## Implementation Status
+
+| Component | Source | Status |
+|-----------|--------|--------|
+| FPGA Engine | [`dex/pkg/fpga/fpga_engine.go`](https://github.com/luxfi/dex/blob/main/pkg/fpga/fpga_engine.go) | ✅ Complete |
+| AMD Versal Integration | [`dex/pkg/fpga/amd_versal.go`](https://github.com/luxfi/dex/blob/main/pkg/fpga/amd_versal.go) | ✅ Complete |
+| AWS F2 Integration | [`dex/pkg/fpga/aws_f2.go`](https://github.com/luxfi/dex/blob/main/pkg/fpga/aws_f2.go) | ✅ Complete |
+| FPGA Accelerator | [`dex/pkg/lx/fpga_accelerator.go`](https://github.com/luxfi/dex/blob/main/pkg/lx/fpga_accelerator.go) | ✅ Complete |
+| MLX Engine | [`dex/pkg/mlx/mlx.go`](https://github.com/luxfi/dex/blob/main/pkg/mlx/mlx.go) | ✅ Complete |
+| DPDK Kernel Bypass | [`dex/pkg/dpdk/kernel_bypass.go`](https://github.com/luxfi/dex/blob/main/pkg/dpdk/kernel_bypass.go) | ✅ Complete |
+| DAG Consensus | [`dex/pkg/consensus/dag.go`](https://github.com/luxfi/dex/blob/main/pkg/consensus/dag.go) | ✅ Complete |
 
 # LP-608: High-Performance Decentralized Exchange Protocol
 

@@ -4,13 +4,25 @@ title: X-Chain Order-Book DEX API & RPC Addendum
 description: Detailed specification of transaction types, wire formats, RPC endpoints, indexer schema, and CLI enhancements for the X-Chain Order-Book DEX extension (LP-006)
 author: Zach Kelling (@zeekay) and Lux Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
-status: Draft
+status: Implemented
 type: Standards Track
 category: Interface
 created: 2025-07-24
+updated: 2025-12-11
 tags: [defi, core]
 requires: 6
+implementation: https://github.com/luxfi/dex
 ---
+
+## Implementation Status
+
+| Component | Source | Status |
+|-----------|--------|--------|
+| JSON-RPC API | [`dex/pkg/api/jsonrpc.go`](https://github.com/luxfi/dex/blob/main/pkg/api/jsonrpc.go) | ✅ Complete |
+| WebSocket Server | [`dex/pkg/api/websocket_server.go`](https://github.com/luxfi/dex/blob/main/pkg/api/websocket_server.go) | ✅ Complete |
+| Trader Client | [`dex/pkg/client/trader_client.go`](https://github.com/luxfi/dex/blob/main/pkg/client/trader_client.go) | ✅ Complete |
+| gRPC Protocol | [`dex/pkg/grpc/pb/`](https://github.com/luxfi/dex/tree/main/pkg/grpc/pb) | ✅ Complete |
+| Market Data Aggregator | [`dex/pkg/marketdata/aggregator.go`](https://github.com/luxfi/dex/blob/main/pkg/marketdata/aggregator.go) | ✅ Complete |
 
 ## Abstract
 

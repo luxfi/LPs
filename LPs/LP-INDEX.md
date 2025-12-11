@@ -12,6 +12,7 @@
 - [Consensus Protocols](#consensus-protocols)
 - [EVM & Smart Contracts](#evm--smart-contracts)
 - [Token Standards (LRC)](#token-standards-lrc)
+- [**DEX & Trading (X-Chain)**](#dex--trading-x-chain) ⭐ **NEW**
 - [DeFi & Privacy](#defi--privacy)
 - [AI & Compute](#ai--compute)
 - [Layer 2 & Scaling](#layer-2--scaling)
@@ -210,6 +211,43 @@ Lux Request for Comments (LRC) token standards, similar to ERC.
 
 ---
 
+## DEX & Trading (X-Chain)
+
+> **Tags**: `dex`, `trading`, `orderbook`, `perpetuals`, `oracle`
+
+Comprehensive decentralized exchange infrastructure on X-Chain, including spot trading, perpetuals, margin, vaults, and native oracles.
+
+**Implementation**: [github.com/luxfi/dex](https://github.com/luxfi/dex)
+
+### Core DEX LPs
+
+| LP | Title | Tags | Status | Source |
+|----|-------|------|--------|--------|
+| [LP-0011](./lp-0011-x-chain-exchange-chain-specification.md) | **X-Chain Exchange Specification** | `dex`, `core`, `orderbook` | Implemented | [`dex/pkg/lx/orderbook.go`](https://github.com/luxfi/dex/blob/main/pkg/lx/orderbook.go) |
+| [LP-0036](./lp-0036-x-chain-order-book-dex-api-and-rpc-addendum.md) | X-Chain DEX API & RPC | `dex`, `api`, `rpc` | Implemented | [`dex/pkg/api/jsonrpc.go`](https://github.com/luxfi/dex/blob/main/pkg/api/jsonrpc.go) |
+| [LP-0608](./lp-0608-high-performance-decentralized-exchange-protocol.md) | High-Performance DEX (GPU/FPGA) | `dex`, `performance`, `fpga` | Implemented | [`dex/pkg/fpga/`](https://github.com/luxfi/dex/tree/main/pkg/fpga) |
+| [LP-0609](./lp-0609-perpetuals-derivatives-protocol.md) | **Perpetuals & Derivatives Protocol** | `dex`, `perpetuals`, `margin`, `vaults` | Implemented | [`dex/pkg/lx/`](https://github.com/luxfi/dex/tree/main/pkg/lx) |
+| [LP-0610](./lp-0610-native-oracle-protocol.md) | Native Oracle Protocol (Network-Wide) | `dex`, `oracle`, `price-feed` | Implemented | [`dex/pkg/price/`](https://github.com/luxfi/dex/tree/main/pkg/price) |
+
+### DEX Feature Matrix
+
+| Feature | LP | Source | Status |
+|---------|----|---------| -------|
+| **Spot Trading** | LP-0011, LP-0036 | `orderbook.go`, `orderbook_advanced.go` | ✅ |
+| **Perpetual Futures** | LP-0609 | `perp_types.go`, `clearinghouse.go` | ✅ |
+| **Margin Trading** | LP-0609 | `margin_trading.go` | ✅ |
+| **Liquidation Engine** | LP-0609 | `liquidation_engine.go` | ✅ |
+| **Funding Rates** | LP-0609 | `funding.go` | ✅ |
+| **Vaults & Copy Trading** | LP-0609 | `vaults.go`, `vault_strategy.go` | ✅ |
+| **Lending Pool** | LP-0609 | `lending_pool.go` | ✅ |
+| **Risk Management** | LP-0609 | `risk_engine.go` | ✅ |
+| **Staking** | LP-0609 | `staking.go` | ✅ |
+| **Price Oracles** | LP-0610 | `aggregator.go`, `pyth.go`, `chainlink.go` | ✅ |
+| **FPGA Acceleration** | LP-0608 | `fpga_engine.go`, `amd_versal.go` | ✅ |
+| **X-Chain Integration** | LP-0011 | `x_chain_integration.go` | ✅ |
+
+---
+
 ## DeFi & Privacy
 
 > **Tags**: `defi`, `amm`, `privacy`, `zk`
@@ -225,8 +263,6 @@ LPs for decentralized finance protocols and privacy features.
 | [LP-0401](./lp-0401-confidential-lending-protocol.md) | Confidential Lending Protocol | `defi`, `lending`, `privacy` | Draft |
 | [LP-0402](./lp-0402-zero-knowledge-swap-protocol.md) | Zero-Knowledge Swap Protocol | `defi`, `swap`, `zk` | Draft |
 | [LP-0403](./lp-0403-private-staking-mechanisms.md) | Private Staking Mechanisms | `defi`, `staking`, `privacy` | Draft |
-| [LP-0608](./lp-0608-high-performance-decentralized-exchange-protocol.md) | High-Performance DEX Protocol | `defi`, `dex` | Draft |
-| [LP-0610](./lp-0610-native-oracle-protocol.md) | Native Oracle Protocol (Network-Wide) | `oracle`, `dex`, `price-feed`, `t-chain`, `warp`, `a-chain`, `c-chain`, `x-chain` | Draft |
 
 ---
 
