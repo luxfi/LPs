@@ -8,7 +8,7 @@ status: Draft
 type: Standards Track
 category: Core
 created: 2025-07-25
-requires: 10, 11, 12, 75
+requires: 10, 9011, 2012, 75
 tags: [core, ai, attestation]
 ---
 

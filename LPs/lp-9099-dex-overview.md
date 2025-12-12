@@ -412,13 +412,13 @@ go run ./cmd/fix-benchmark/
 - LP-9006: HFT Venues
 
 **Blockchain Chains (Separate)**:
-- [LP-0011](./lp-0011-x-chain-exchange-chain-specification.md): X-Chain (UTXO assets)
-- [LP-0012](./lp-0012-c-chain-contract-chain-specification.md): C-Chain (EVM)
+- [LP-0011](./lp-9011-x-chain-exchange-chain-specification.md): X-Chain (UTXO assets)
+- [LP-0012](./lp-2012-c-chain-contract-chain-specification.md): C-Chain (EVM)
 - [LP-0010](./lp-0010-p-chain-platform-chain-specification-deprecated.md): D-Chain (Staking)
 
 **Cross-Chain**:
-- [LP-603](./lp-0603-warp-15-quantum-safe-cross-chain-messaging.md): Warp Messaging
-- [LP-331](./lp-0331-b-chain-bridgevm-specification.md): B-Chain Bridge
+- [LP-603](./lp-6603-warp-15-quantum-safe-cross-chain-messaging.md): Warp Messaging
+- [LP-331](./lp-6331-b-chain-bridgevm-specification.md): B-Chain Bridge
 
 ---
 

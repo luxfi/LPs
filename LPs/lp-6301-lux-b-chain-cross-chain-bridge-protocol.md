@@ -8,7 +8,7 @@ status: Final
 type: Standards Track
 category: Core
 created: 2025-10-28
-requires: 13, 14, 15
+requires: 7013, 7014, 6015
 tags: [bridge, cross-chain]
 ---
 

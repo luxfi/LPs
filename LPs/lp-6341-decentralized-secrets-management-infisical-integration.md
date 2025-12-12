@@ -8,7 +8,7 @@ status: Draft
 type: Standards Track
 category: Interface
 created: 2025-12-11
-requires: 330, 336
+requires: 7330, 7336
 activation:
   flag: lp341-secrets-platform
   hfName: "Vault"
@@ -16,7 +16,7 @@ activation:
 tags: [security, dev-tools]
 ---
 
-> **See also**: [LP-330](./lp-0330-t-chain-thresholdvm-specification.md), [LP-336](./lp-0336-k-chain-keymanagementvm-specification.md), [LP-INDEX](./LP-INDEX.md)
+> **See also**: [LP-330](./lp-7330-t-chain-thresholdvm-specification.md), [LP-336](./lp-7336-k-chain-keymanagementvm-specification.md), [LP-INDEX](./LP-INDEX.md)
 
 ## Conformance
 
@@ -4095,8 +4095,8 @@ See Section "Security Considerations" within the Specification for detailed impl
 
 ## References
 
-1. [LP-330](./lp-0330-t-chain-thresholdvm-specification.md) - T-Chain ThresholdVM Specification
-2. [LP-336](./lp-0336-k-chain-keymanagementvm-specification.md) - K-Chain KeyManagementVM Specification
+1. [LP-330](./lp-7330-t-chain-thresholdvm-specification.md) - T-Chain ThresholdVM Specification
+2. [LP-336](./lp-7336-k-chain-keymanagementvm-specification.md) - K-Chain KeyManagementVM Specification
 3. Infisical Documentation - https://infisical.com/docs
 4. HashiCorp Vault - https://www.vaultproject.io/docs
 5. NIST FIPS 203 - ML-KEM Standard

@@ -8,8 +8,7 @@ status: Draft
 type: Standards Track
 category: LRC
 created: 2025-01-23
-requires:
-tags: [evm, dev-tools]
+requires: tags:, evm, dev-tools
 ---
 
 ## Abstract

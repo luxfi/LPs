@@ -16,7 +16,7 @@ activation:
   activationHeight: "0"
 ---
 
-> **See also**: [LP-12: C-Chain (Contract Chain) Specification](./lp-12-c-chain-contract-chain-specification.md), [LP-721: LRC-721 Non-Fungible Token Standard](./lp-721-lrc-721-non-fungible-token-standard.md), [LP-1155: LRC-1155 Multi-Token Standard](./lp-1155-lrc-1155-multi-token-standard.md)
+> **See also**: [LP-12: C-Chain (Contract Chain) Specification](./lp-12-c-chain-contract-chain-specification.md), [LP-721: LRC-721 Non-Fungible Token Standard](./lp-721-lrc-721-non-fungible-token-standard.md), [LP-1155: LRC-1155 Multi-Token Standard](./lp-2155-lrc-1155-multi-token-standard.md)
 
 ## Abstract
 

@@ -9,7 +9,7 @@ status: Final
 type: Standards Track
 category: Core
 created: 2025-12-11
-requires: [13, 14, 15, 81]
+requires: 7013, 7014, 6015, 6081
 ---
 
 ## Abstract

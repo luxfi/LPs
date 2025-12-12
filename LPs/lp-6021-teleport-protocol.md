@@ -9,8 +9,7 @@ type: Standards Track
 category: Core
 created: 2025-07-22
 tags: [teleport, cross-chain, bridge]
-requires:
-replaces:
+requires: replaces:
 ---
 
 ## Abstract

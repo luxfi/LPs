@@ -8,7 +8,7 @@ status: Draft
 type: Standards Track
 category: Core
 created: 2025-01-09
-requires: 603
+requires: 6603
 tags: [core, scaling]
 ---
 

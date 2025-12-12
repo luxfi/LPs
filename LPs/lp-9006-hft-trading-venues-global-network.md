@@ -10,7 +10,7 @@ type: Standards Track
 category: Infrastructure
 created: 2025-12-11
 updated: 2025-12-11
-requires: [9000, 9001, 9003]
+requires: 9000, 9001, 9003
 series: LP-9000 DEX Series
 implementation: https://github.com/luxfi/dex
 ---

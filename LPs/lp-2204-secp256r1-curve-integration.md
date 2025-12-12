@@ -8,7 +8,7 @@ status: Final
 type: Standards Track
 category: Core
 created: 2025-11-22
-requires: 12
+requires: 2012
 tags: [precompile, evm]
 ---
 

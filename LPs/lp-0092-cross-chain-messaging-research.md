@@ -7,7 +7,7 @@ discussions-to: https://github.com/luxfi/lps/discussions
 status: Draft
 type: Informational
 created: 2025-01-23
-requires: 0, 13, 14
+requires: 0, 7013, 7014
 tags: [research, cross-chain]
 ---
 

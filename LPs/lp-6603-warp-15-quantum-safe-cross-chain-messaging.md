@@ -8,7 +8,7 @@ status: Final
 type: Standards Track
 category: Networking
 created: 2025-12-11
-requires: 602, 330, 331, 332, 333
+requires: 6602, 7330, 6331, 6332, 7333
 tags: [pqc, threshold-crypto, cross-chain, warp, teleport, bridge, encryption, signatures]
 ---
 
@@ -36,16 +36,16 @@ Before reading this LP, you should understand:
 
 | Concept | Description | Reference |
 |---------|-------------|-----------|
-| Warp 1.0 | Basic cross-chain messaging with BLS | [LP-602](./lp-0602-warp-cross-chain-messaging-protocol.md) |
+| Warp 1.0 | Basic cross-chain messaging with BLS | [LP-602](./lp-6602-warp-cross-chain-messaging-protocol.md) |
 | BLS Signatures | Aggregatable signatures using bilinear pairings | - |
-| Threshold Signatures | t-of-n signing without reconstructing full key | [LP-330](./lp-0330-t-chain-thresholdvm-specification.md) |
+| Threshold Signatures | t-of-n signing without reconstructing full key | [LP-330](./lp-7330-t-chain-thresholdvm-specification.md) |
 | Post-Quantum Crypto | Cryptography resistant to quantum computers | [LP-4](./lp-0004-quantum-resistant-cryptography-integration-in-lux.md) |
 
 **Related LPs:**
-- [LP-330](./lp-0330-t-chain-thresholdvm-specification.md) - ThresholdVM (T-Chain) for MPC signing
-- [LP-331](./lp-0331-b-chain-bridgevm-specification.md) - BridgeVM (B-Chain) orchestration
-- [LP-332](./lp-0332-teleport-bridge-architecture-unified-cross-chain-protocol.md) - Teleport architecture
-- [LP-333](./lp-0333-dynamic-signer-rotation-with-lss-protocol.md) - LP-333 signer management
+- [LP-330](./lp-7330-t-chain-thresholdvm-specification.md) - ThresholdVM (T-Chain) for MPC signing
+- [LP-331](./lp-6331-b-chain-bridgevm-specification.md) - BridgeVM (B-Chain) orchestration
+- [LP-332](./lp-6332-teleport-bridge-architecture-unified-cross-chain-protocol.md) - Teleport architecture
+- [LP-333](./lp-7333-dynamic-signer-rotation-with-lss-protocol.md) - LP-333 signer management
 
 ---
 
@@ -410,7 +410,7 @@ BridgeVM orchestrates bridge operations using Teleport:
 
 | Method | Description |
 |--------|-------------|
-| `bridge_registerValidator` | Opt-in as signer ([LP-333](./lp-0333-dynamic-signer-rotation-with-lss-protocol.md)) |
+| `bridge_registerValidator` | Opt-in as signer ([LP-333](./lp-7333-dynamic-signer-rotation-with-lss-protocol.md)) |
 | `bridge_getSignerSetInfo` | Get current signer set |
 | `bridge_replaceSigner` | Replace failed signer (triggers reshare) |
 | `bridge_slashSigner` | Slash misbehaving signer's bond |
@@ -527,7 +527,7 @@ if teleportMsg.Encrypted {
 
 - Validators MUST secure both BLS and Ringtail private keys
 - HSM storage recommended for production
-- Key rotation via LSS resharing protocol ([LP-333](./lp-0333-dynamic-signer-rotation-with-lss-protocol.md))
+- Key rotation via LSS resharing protocol ([LP-333](./lp-7333-dynamic-signer-rotation-with-lss-protocol.md))
 
 ### Upgrade Security
 

@@ -8,13 +8,13 @@ status: Draft
 type: Standards Track
 category: Interface
 created: 2025-07-24
-requires: 0046
+requires: 8046
 tags: [privacy, zk, core]
 ---
 
-> **See also**: [LP-46](./lp-0046-z-chain-zkvm-architecture.md) (ZKVM Architecture), [LP-302](./lp-0302-lux-z-a-chain-privacy-ai-attestation-layer.md), [LP-503](./lp-0503-validity-proof-system.md)
+> **See also**: [LP-46](./lp-8046-z-chain-zkvm-architecture.md) (ZKVM Architecture), [LP-302](./lp-0302-lux-z-a-chain-privacy-ai-attestation-layer.md), [LP-503](./lp-0503-validity-proof-system.md)
 
-> **Note**: This LP specifies the EVM precompile interface for FHE/TEE operations. For the RISC-V ZKVM architecture with GPU/FPGA acceleration, see [LP-46](./lp-0046-z-chain-zkvm-architecture.md).
+> **Note**: This LP specifies the EVM precompile interface for FHE/TEE operations. For the RISC-V ZKVM architecture with GPU/FPGA acceleration, see [LP-46](./lp-8046-z-chain-zkvm-architecture.md).
 
 ## Abstract
 

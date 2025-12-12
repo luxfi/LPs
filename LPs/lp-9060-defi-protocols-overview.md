@@ -35,7 +35,7 @@ The DeFi ecosystem on Lux is rapidly expanding with various protocols for lendin
   - NFT standard for unique digital assets
   - Used in NFT marketplaces and gaming
 
-- **[LP-1155: LRC-1155 Multi-Token Standard](./lp-1155-lrc-1155-multi-token-standard.md)**
+- **[LP-1155: LRC-1155 Multi-Token Standard](./lp-2155-lrc-1155-multi-token-standard.md)**
   - Status: Draft
   - Efficient multi-token management
   - Supports both fungible and non-fungible tokens

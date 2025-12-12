@@ -8,11 +8,11 @@ status: Draft
 type: Standards Track
 category: Core
 created: 2025-12-11
-requires: 13, 14, 15, 16, 81, 103, 301
+requires: 7013, 7014, 6015, 6016, 6081, 7103, 301
 tags: [teleport, bridge, cross-chain]
 ---
 
-> **See also**: [LP-330](./lp-0330-t-chain-thresholdvm-specification.md), [LP-331](./lp-0331-b-chain-bridgevm-specification.md), [LP-333](./lp-0333-dynamic-signer-rotation-with-lss-protocol.md), [LP-334](./lp-0334-per-asset-threshold-key-management.md), [LP-335](./lp-0335-bridge-smart-contract-integration.md), [LP-336](./lp-0336-k-chain-keymanagementvm-specification.md), [LP-INDEX](./LP-INDEX.md)
+> **See also**: [LP-330](./lp-7330-t-chain-thresholdvm-specification.md), [LP-331](./lp-6331-b-chain-bridgevm-specification.md), [LP-333](./lp-7333-dynamic-signer-rotation-with-lss-protocol.md), [LP-334](./lp-7334-per-asset-threshold-key-management.md), [LP-335](./lp-6335-bridge-smart-contract-integration.md), [LP-336](./lp-7336-k-chain-keymanagementvm-specification.md), [LP-INDEX](./LP-INDEX.md)
 
 ## Abstract
 
@@ -24,13 +24,13 @@ This LP is part of the Teleport Bridge specification suite:
 
 | LP | Title | Description |
 |----|-------|-------------|
-| **LP-330** | [T-Chain (ThresholdVM)](./lp-0330-t-chain-thresholdvm-specification.md) | Threshold signature chain for distributed key management |
-| **LP-331** | [B-Chain (BridgeVM)](./lp-0331-b-chain-bridgevm-specification.md) | Bridge coordination chain for cross-chain operations |
+| **LP-330** | [T-Chain (ThresholdVM)](./lp-7330-t-chain-thresholdvm-specification.md) | Threshold signature chain for distributed key management |
+| **LP-331** | [B-Chain (BridgeVM)](./lp-6331-b-chain-bridgevm-specification.md) | Bridge coordination chain for cross-chain operations |
 | **LP-332** | Teleport Bridge Architecture (this document) | Unified architecture specification |
-| **LP-333** | [Dynamic Signer Rotation](./lp-0333-dynamic-signer-rotation-with-lss-protocol.md) | LSS protocol for validator set changes |
-| **LP-334** | [Per-Asset Key Management](./lp-0334-per-asset-threshold-key-management.md) | Independent threshold configs per asset |
-| **LP-335** | [Bridge Smart Contracts](./lp-0335-bridge-smart-contract-integration.md) | Solidity contract integration |
-| **LP-336** | [K-Chain (KeyManagementVM)](./lp-0336-k-chain-keymanagementvm-specification.md) | Post-quantum key encapsulation |
+| **LP-333** | [Dynamic Signer Rotation](./lp-7333-dynamic-signer-rotation-with-lss-protocol.md) | LSS protocol for validator set changes |
+| **LP-334** | [Per-Asset Key Management](./lp-7334-per-asset-threshold-key-management.md) | Independent threshold configs per asset |
+| **LP-335** | [Bridge Smart Contracts](./lp-6335-bridge-smart-contract-integration.md) | Solidity contract integration |
+| **LP-336** | [K-Chain (KeyManagementVM)](./lp-7336-k-chain-keymanagementvm-specification.md) | Post-quantum key encapsulation |
 
 ## Motivation
 
@@ -113,7 +113,7 @@ The Teleport system operates across two specialized chains within Lux Network:
 
 #### T-Chain (ThresholdVM)
 
-T-Chain is a specialized subnet providing MPC key management. See [LP-330](./lp-0330-t-chain-thresholdvm-specification.md) for complete specification.
+T-Chain is a specialized subnet providing MPC key management. See [LP-330](./lp-7330-t-chain-thresholdvm-specification.md) for complete specification.
 
 **Chain Parameters:**
 - **Chain ID**: `T` (Threshold)
@@ -126,12 +126,12 @@ T-Chain is a specialized subnet providing MPC key management. See [LP-330](./lp-
 - Distributed key generation (DKG) without trusted dealer
 - Threshold signature generation (CGG21, LSS, FROST, Ringtail)
 - Proactive key refresh (epoch-based)
-- Dynamic resharing for validator rotation (see [LP-333](./lp-0333-dynamic-signer-rotation-with-lss-protocol.md))
+- Dynamic resharing for validator rotation (see [LP-333](./lp-7333-dynamic-signer-rotation-with-lss-protocol.md))
 - Key share storage and recovery
 
 #### B-Chain (BridgeVM)
 
-B-Chain orchestrates bridge operations. See [LP-331](./lp-0331-b-chain-bridgevm-specification.md) for complete specification.
+B-Chain orchestrates bridge operations. See [LP-331](./lp-6331-b-chain-bridgevm-specification.md) for complete specification.
 
 **Chain Parameters:**
 - **Chain ID**: `B` (Bridge)
@@ -141,7 +141,7 @@ B-Chain orchestrates bridge operations. See [LP-331](./lp-0331-b-chain-bridgevm-
 
 **Responsibilities:**
 - Bridge request processing and validation
-- Asset registry management (see [LP-334](./lp-0334-per-asset-threshold-key-management.md))
+- Asset registry management (see [LP-334](./lp-7334-per-asset-threshold-key-management.md))
 - Relayer coordination
 - Fee calculation and distribution
 - Cross-chain message routing
@@ -149,7 +149,7 @@ B-Chain orchestrates bridge operations. See [LP-331](./lp-0331-b-chain-bridgevm-
 
 #### K-Chain (KeyManagementVM)
 
-K-Chain provides post-quantum key management. See [LP-336](./lp-0336-k-chain-keymanagementvm-specification.md) for complete specification.
+K-Chain provides post-quantum key management. See [LP-336](./lp-7336-k-chain-keymanagementvm-specification.md) for complete specification.
 
 **Responsibilities:**
 - ML-KEM (FIPS 203) key encapsulation
@@ -755,7 +755,7 @@ Complete deposit flow from Ethereum to Lux C-Chain:
 
 #### Deposit Contract Interface
 
-See [LP-335](./lp-0335-bridge-smart-contract-integration.md) for complete contract specification.
+See [LP-335](./lp-6335-bridge-smart-contract-integration.md) for complete contract specification.
 
 ```solidity
 // SPDX-License-Identifier: MIT
@@ -1583,7 +1583,7 @@ func (c *FeeConfig) CalculateFee(amount *big.Int) *big.Int {
 ### Why CGG21 + LSS + Ringtail?
 
 1. **CGG21**: Best-in-class threshold ECDSA with identifiable aborts - essential for accountability
-2. **LSS**: Unique dynamic resharing capability - enables validator rotation without key change (see [LP-333](./lp-0333-dynamic-signer-rotation-with-lss-protocol.md))
+2. **LSS**: Unique dynamic resharing capability - enables validator rotation without key change (see [LP-333](./lp-7333-dynamic-signer-rotation-with-lss-protocol.md))
 3. **Ringtail**: Lattice-based post-quantum protection - future-proofs against quantum attacks
 
 ### Why Same MPC Address Across EVM Chains?

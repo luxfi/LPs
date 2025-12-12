@@ -8,7 +8,7 @@ status: Draft
 type: Standards Track
 category: Core
 created: 2025-12-11
-requires: 103, 323
+requires: 7103, 7323
 activation:
   flag: lp333-dynamic-signer-rotation
   hfName: "Photon"
@@ -16,7 +16,7 @@ activation:
 tags: [mpc, threshold-crypto, bridge]
 ---
 
-> **See also**: [LP-103](./lp-0103-mpc-lss---multi-party-computation-linear-secret-sharing-with-dynamic-resharing.md), [LP-323](./lp-0323-lss-mpc-dynamic-resharing-extension.md), [LP-14](./lp-0014-m-chain-threshold-signatures-with-cgg21-uc-non-interactive-ecdsa.md), [LP-330](./lp-0330-t-chain-thresholdvm-specification.md), [LP-334](./lp-0334-per-asset-threshold-key-management.md), [LP-INDEX](./LP-INDEX.md)
+> **See also**: [LP-103](./lp-7103-mpc-lss---multi-party-computation-linear-secret-sharing-with-dynamic-resharing.md), [LP-323](./lp-7323-lss-mpc-dynamic-resharing-extension.md), [LP-14](./lp-7014-m-chain-threshold-signatures-with-cgg21-uc-non-interactive-ecdsa.md), [LP-330](./lp-7330-t-chain-thresholdvm-specification.md), [LP-334](./lp-7334-per-asset-threshold-key-management.md), [LP-INDEX](./LP-INDEX.md)
 
 ## Abstract
 
@@ -3125,14 +3125,14 @@ This LP integrates with several related Lux Protocol specifications:
 
 | LP | Title | Relationship |
 |----|-------|--------------|
-| [LP-0103](./lp-0103-mpc-lss---multi-party-computation-linear-secret-sharing-with-dynamic-resharing.md) | MPC LSS | Core LSS mathematics and protocol foundation |
-| [LP-0014](./lp-0014-m-chain-threshold-signatures-with-cgg21-uc-non-interactive-ecdsa.md) | CGG21 ECDSA | Threshold ECDSA signing protocol used after reshare |
-| [LP-0323](./lp-0323-lss-mpc-dynamic-resharing-extension.md) | LSS Dynamic Resharing | Extended reshare protocol specification |
-| [LP-0330](./lp-0330-t-chain-thresholdvm-specification.md) | T-Chain ThresholdVM | VM that executes reshare transactions |
-| [LP-0334](./lp-0334-per-asset-threshold-key-management.md) | Per-Asset Keys | Key configuration and threshold selection |
-| [LP-0331](./lp-0331-b-chain-bridgevm-specification.md) | B-Chain BridgeVM | Consumer of threshold signatures for bridge operations |
-| [LP-0332](./lp-0332-teleport-bridge-architecture-unified-cross-chain-protocol.md) | Teleport Bridge | Cross-chain protocol using managed keys |
-| [LP-0335](./lp-0335-bridge-smart-contract-integration.md) | Bridge Contracts | Smart contracts verifying threshold signatures |
+| [LP-0103](./lp-7103-mpc-lss---multi-party-computation-linear-secret-sharing-with-dynamic-resharing.md) | MPC LSS | Core LSS mathematics and protocol foundation |
+| [LP-0014](./lp-7014-m-chain-threshold-signatures-with-cgg21-uc-non-interactive-ecdsa.md) | CGG21 ECDSA | Threshold ECDSA signing protocol used after reshare |
+| [LP-0323](./lp-7323-lss-mpc-dynamic-resharing-extension.md) | LSS Dynamic Resharing | Extended reshare protocol specification |
+| [LP-0330](./lp-7330-t-chain-thresholdvm-specification.md) | T-Chain ThresholdVM | VM that executes reshare transactions |
+| [LP-0334](./lp-7334-per-asset-threshold-key-management.md) | Per-Asset Keys | Key configuration and threshold selection |
+| [LP-0331](./lp-6331-b-chain-bridgevm-specification.md) | B-Chain BridgeVM | Consumer of threshold signatures for bridge operations |
+| [LP-0332](./lp-6332-teleport-bridge-architecture-unified-cross-chain-protocol.md) | Teleport Bridge | Cross-chain protocol using managed keys |
+| [LP-0335](./lp-6335-bridge-smart-contract-integration.md) | Bridge Contracts | Smart contracts verifying threshold signatures |
 
 ### Integration Points
 

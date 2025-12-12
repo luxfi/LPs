@@ -9,8 +9,8 @@ status: Final
 type: Standards Track
 category: Core
 created: 2025-12-11
-requires: [0, 99]
-supersedes: 46
+requires: 0, 99
+supersedes: 8046
 ---
 
 ## Abstract

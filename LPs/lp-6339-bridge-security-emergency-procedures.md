@@ -8,7 +8,7 @@ status: Draft
 type: Standards Track
 category: Bridge
 created: 2025-12-11
-requires: 330, 331, 333, 335
+requires: 7330, 6331, 7333, 6335
 activation:
   flag: lp339-bridge-security
   hfName: "Sentinel"
@@ -16,7 +16,7 @@ activation:
 tags: [bridge, security]
 ---
 
-> **See also**: [LP-330](./lp-0330-t-chain-thresholdvm-specification.md), [LP-331](./lp-0331-b-chain-bridgevm-specification.md), [LP-333](./lp-0333-dynamic-signer-rotation-with-lss-protocol.md), [LP-335](./lp-0335-bridge-smart-contract-integration.md), [LP-INDEX](./LP-INDEX.md)
+> **See also**: [LP-330](./lp-7330-t-chain-thresholdvm-specification.md), [LP-331](./lp-6331-b-chain-bridgevm-specification.md), [LP-333](./lp-7333-dynamic-signer-rotation-with-lss-protocol.md), [LP-335](./lp-6335-bridge-smart-contract-integration.md), [LP-INDEX](./LP-INDEX.md)
 
 ## Abstract
 

@@ -8,7 +8,7 @@ status: Draft
 type: Standards Track
 category: Core
 created: 2025-01-28
-requires: 12, 26, 98
+requires: 2012, 2026, 98
 tags: [evm, dev-tools, indexing]
 ---
 

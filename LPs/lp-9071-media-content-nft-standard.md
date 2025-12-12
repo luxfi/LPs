@@ -8,7 +8,7 @@ status: Draft
 type: Standards Track
 category: LRC
 created: 2025-01-23
-requires: 721, 20
+requires: 2721, 2300
 tags: [lrc, nft]
 ---
 

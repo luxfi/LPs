@@ -8,7 +8,7 @@ status: Draft
 type: Standards Track
 category: Core
 created: 2025-08-14
-requires: 14
+requires: 7014
 tags: [mpc, threshold-crypto]
 ---
 

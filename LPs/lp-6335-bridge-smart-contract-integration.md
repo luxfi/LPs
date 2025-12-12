@@ -8,7 +8,7 @@ status: Draft
 type: Standards Track
 category: Bridge
 created: 2025-12-11
-requires: 13, 14, 15, 17, 19, 301, 330, 331, 332
+requires: 7013, 7014, 6015, 6017, 6019, 301, 7330, 6331, 6332
 tags: [bridge, evm]
 ---
 
@@ -20,11 +20,11 @@ This LP specifies the smart contract architecture for integrating the Lux Bridge
 
 This LP is part of the Teleport Bridge architecture and coordinates with:
 
-- **[LP-0330](./lp-0330-t-chain-thresholdvm-specification.md)**: T-Chain ThresholdVM - MPC key generation and threshold signatures
-- **[LP-0331](./lp-0331-b-chain-bridgevm-specification.md)**: B-Chain BridgeVM - Bridge operation coordination and asset tracking
-- **[LP-0332](./lp-0332-teleport-bridge-architecture-unified-cross-chain-protocol.md)**: Teleport Architecture - Unified cross-chain protocol overview
-- **[LP-0333](./lp-0333-dynamic-signer-rotation-with-lss-protocol.md)**: LSS Protocol - Dynamic signer rotation without key changes
-- **[LP-0334](./lp-0334-per-asset-threshold-key-management.md)**: Per-Asset Keys - Asset-specific threshold key management
+- **[LP-0330](./lp-7330-t-chain-thresholdvm-specification.md)**: T-Chain ThresholdVM - MPC key generation and threshold signatures
+- **[LP-0331](./lp-6331-b-chain-bridgevm-specification.md)**: B-Chain BridgeVM - Bridge operation coordination and asset tracking
+- **[LP-0332](./lp-6332-teleport-bridge-architecture-unified-cross-chain-protocol.md)**: Teleport Architecture - Unified cross-chain protocol overview
+- **[LP-0333](./lp-7333-dynamic-signer-rotation-with-lss-protocol.md)**: LSS Protocol - Dynamic signer rotation without key changes
+- **[LP-0334](./lp-7334-per-asset-threshold-key-management.md)**: Per-Asset Keys - Asset-specific threshold key management
 
 ## Motivation
 
@@ -2830,17 +2830,17 @@ MAX_DELAY = 30 days
 
 ### Related LPs
 
-- **[LP-0013](./lp-0013-m-chain-decentralised-mpc-custody-and-swap-signature-layer.md)**: M-Chain Specification (legacy MPC custody layer)
-- **[LP-0014](./lp-0014-m-chain-threshold-signatures-with-cgg21-uc-non-interactive-ecdsa.md)**: M-Chain Threshold Signatures (CGG21 protocol)
-- **[LP-0015](./lp-0015-mpc-bridge-protocol.md)**: MPC Bridge Protocol (bridge protocol overview)
-- **[LP-0017](./lp-0017-bridge-asset-registry.md)**: Bridge Asset Registry (asset tracking)
-- **[LP-0019](./lp-0019-bridge-security-framework.md)**: Bridge Security Framework (security requirements)
+- **[LP-0013](./lp-7013-m-chain-decentralised-mpc-custody-and-swap-signature-layer.md)**: M-Chain Specification (legacy MPC custody layer)
+- **[LP-0014](./lp-7014-m-chain-threshold-signatures-with-cgg21-uc-non-interactive-ecdsa.md)**: M-Chain Threshold Signatures (CGG21 protocol)
+- **[LP-0015](./lp-6015-mpc-bridge-protocol.md)**: MPC Bridge Protocol (bridge protocol overview)
+- **[LP-0017](./lp-6017-bridge-asset-registry.md)**: Bridge Asset Registry (asset tracking)
+- **[LP-0019](./lp-6019-bridge-security-framework.md)**: Bridge Security Framework (security requirements)
 - **[LP-0301](./lp-0301-lux-b-chain-cross-chain-bridge-protocol.md)**: B-Chain Cross-Chain Bridge Protocol (legacy B-Chain integration)
-- **[LP-0330](./lp-0330-t-chain-thresholdvm-specification.md)**: T-Chain ThresholdVM Specification (MPC key management)
-- **[LP-0331](./lp-0331-b-chain-bridgevm-specification.md)**: B-Chain BridgeVM Specification (bridge coordination)
-- **[LP-0332](./lp-0332-teleport-bridge-architecture-unified-cross-chain-protocol.md)**: Teleport Bridge Architecture (unified protocol)
-- **[LP-0333](./lp-0333-dynamic-signer-rotation-with-lss-protocol.md)**: Dynamic Signer Rotation (LSS protocol)
-- **[LP-0334](./lp-0334-per-asset-threshold-key-management.md)**: Per-Asset Threshold Keys
+- **[LP-0330](./lp-7330-t-chain-thresholdvm-specification.md)**: T-Chain ThresholdVM Specification (MPC key management)
+- **[LP-0331](./lp-6331-b-chain-bridgevm-specification.md)**: B-Chain BridgeVM Specification (bridge coordination)
+- **[LP-0332](./lp-6332-teleport-bridge-architecture-unified-cross-chain-protocol.md)**: Teleport Bridge Architecture (unified protocol)
+- **[LP-0333](./lp-7333-dynamic-signer-rotation-with-lss-protocol.md)**: Dynamic Signer Rotation (LSS protocol)
+- **[LP-0334](./lp-7334-per-asset-threshold-key-management.md)**: Per-Asset Threshold Keys
 
 ## Copyright
 

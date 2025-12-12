@@ -8,11 +8,11 @@ status: Draft
 type: Standards Track
 category: Core
 created: 2025-12-11
-requires: 0045, 0302, 0503
+requires: 8045, 0302, 0503
 tags: [privacy, zk, zkvm, core]
 ---
 
-> **See also**: [LP-45](./lp-0045-z-chain-encrypted-execution-layer-interface.md), [LP-302](./lp-0302-lux-z-a-chain-privacy-ai-attestation-layer.md), [LP-503](./lp-0503-validity-proof-system.md)
+> **See also**: [LP-45](./lp-8045-z-chain-encrypted-execution-layer-interface.md), [LP-302](./lp-0302-lux-z-a-chain-privacy-ai-attestation-layer.md), [LP-503](./lp-0503-validity-proof-system.md)
 
 ## Abstract
 

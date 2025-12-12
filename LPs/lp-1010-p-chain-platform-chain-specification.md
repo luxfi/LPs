@@ -12,7 +12,7 @@ created: 2025-01-23
 updated: 2025-12-11
 ---
 
-> **See also**: [LP-0](./lp-0000-network-architecture-and-community-framework.md), [LP-11](./lp-0011-x-chain-exchange-chain-specification.md), [LP-12](./lp-0012-c-chain-contract-chain-specification.md), [LP-99](./lp-0099-q-chain-quantum-secure-consensus-protocol-family-quasar.md)
+> **See also**: [LP-0](./lp-0000-network-architecture-and-community-framework.md), [LP-11](./lp-9011-x-chain-exchange-chain-specification.md), [LP-12](./lp-2012-c-chain-contract-chain-specification.md), [LP-99](./lp-0099-q-chain-quantum-secure-consensus-protocol-family-quasar.md)
 
 > **Note**: P-Chain handles classical platform operations (validators, staking, subnets). Q-Chain (LP-99) provides separate quantum-secure consensus for post-quantum finality. Both chains operate independently in the Lux multi-chain architecture.
 

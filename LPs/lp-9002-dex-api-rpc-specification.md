@@ -11,7 +11,7 @@ created: 2025-07-24
 updated: 2025-12-11
 tags: [defi, core, lp-9000-series]
 requires: 9001
-supersedes: 0036
+supersedes: 3036
 series: LP-9000 DEX Series
 implementation: https://github.com/luxfi/dex
 ---

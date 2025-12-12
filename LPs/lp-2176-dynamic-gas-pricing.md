@@ -8,7 +8,7 @@ status: Final
 type: Standards Track
 category: Core
 created: 2025-01-15
-requires: 12
+requires: 2012
 tags: [evm, gas]
 ---
 

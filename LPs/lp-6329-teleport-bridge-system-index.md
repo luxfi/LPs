@@ -8,7 +8,7 @@ status: Draft
 type: Informational
 category: Core
 created: 2025-12-11
-requires: 13, 14, 15, 17, 81, 103, 104
+requires: 7013, 7014, 6015, 6017, 6081, 7103, 7104
 tags: [teleport, bridge, cross-chain]
 ---
 
@@ -91,33 +91,33 @@ Chain Legend:
 
 | LP | Chain | Description | Status |
 |----|-------|-------------|--------|
-| [LP-0336](./lp-0336-k-chain-keymanagementvm-specification.md) | K-Chain | KeyManagementVM - ML-KEM post-quantum encryption, secrets management | RFC |
+| [LP-0336](./lp-7336-k-chain-keymanagementvm-specification.md) | K-Chain | KeyManagementVM - ML-KEM post-quantum encryption, secrets management | RFC |
 | TBD | I-Chain | Decentralized Identity chain (DID/Verifiable Credentials) | RFC |
-| [LP-0325](./lp-0325-kms-hardware-security-module-integration.md) | - | HSM Integration (8 providers, PKCS#11) | Draft |
+| [LP-0325](./lp-6325-kms-hardware-security-module-integration.md) | - | HSM Integration (8 providers, PKCS#11) | Draft |
 
 ### Teleport Bridge Chain Specifications
 
 | LP | Title | Description | Status |
 |----|-------|-------------|--------|
-| [LP-0330](./lp-0330-t-chain-thresholdvm-specification.md) | T-Chain ThresholdVM | All MPC/threshold operations: DKG, signing (CGG21, FROST), resharing (LSS) | Draft |
-| [LP-0331](./lp-0331-b-chain-bridgevm-specification.md) | B-Chain BridgeVM | Bridge operations: deposits, withdrawals, cross-chain observation via validators | Draft |
+| [LP-0330](./lp-7330-t-chain-thresholdvm-specification.md) | T-Chain ThresholdVM | All MPC/threshold operations: DKG, signing (CGG21, FROST), resharing (LSS) | Draft |
+| [LP-0331](./lp-6331-b-chain-bridgevm-specification.md) | B-Chain BridgeVM | Bridge operations: deposits, withdrawals, cross-chain observation via validators | Draft |
 
 ### Protocols
 
 | LP | Title | Description | Status |
 |----|-------|-------------|--------|
-| [LP-0332](./lp-0332-teleport-bridge-architecture-unified-cross-chain-protocol.md) | Teleport Architecture | Complete cross-chain bridge protocol specification | Draft |
-| [LP-0333](./lp-0333-dynamic-signer-rotation-with-lss-protocol.md) | LSS Dynamic Rotation | Validator-integrated signer rotation without key reconstruction | Draft |
-| [LP-0334](./lp-0334-per-asset-threshold-key-management.md) | Per-Asset Keys | Independent threshold configurations per bridged asset | Draft |
+| [LP-0332](./lp-6332-teleport-bridge-architecture-unified-cross-chain-protocol.md) | Teleport Architecture | Complete cross-chain bridge protocol specification | Draft |
+| [LP-0333](./lp-7333-dynamic-signer-rotation-with-lss-protocol.md) | LSS Dynamic Rotation | Validator-integrated signer rotation without key reconstruction | Draft |
+| [LP-0334](./lp-7334-per-asset-threshold-key-management.md) | Per-Asset Keys | Independent threshold configurations per bridged asset | Draft |
 
 ### Integration
 
 | LP | Title | Description | Status |
 |----|-------|-------------|--------|
-| [LP-0335](./lp-0335-bridge-smart-contract-integration.md) | Smart Contract Integration | Bridge contracts (Vault, Router, Registry) with MPC signatures | Draft |
-| [LP-0339](./lp-0339-bridge-security-emergency-procedures.md) | Security Procedures | Operational security, incident response, key rotation | Draft |
-| [LP-0340](./lp-0340-unified-bridge-sdk-specification.md) | Bridge SDK | Client libraries for TypeScript, Go, and Rust | Draft |
-| [LP-0341](./lp-0341-decentralized-secrets-management-infisical-integration.md) | Secrets Management | Decentralized secrets management with HSM | Draft |
+| [LP-0335](./lp-6335-bridge-smart-contract-integration.md) | Smart Contract Integration | Bridge contracts (Vault, Router, Registry) with MPC signatures | Draft |
+| [LP-0339](./lp-6339-bridge-security-emergency-procedures.md) | Security Procedures | Operational security, incident response, key rotation | Draft |
+| [LP-0340](./lp-6340-unified-bridge-sdk-specification.md) | Bridge SDK | Client libraries for TypeScript, Go, and Rust | Draft |
+| [LP-0341](./lp-6341-decentralized-secrets-management-infisical-integration.md) | Secrets Management | Decentralized secrets management with HSM | Draft |
 
 ### Architecture Notes
 
@@ -129,10 +129,10 @@ Chain Legend:
 
 | LP | Title | Description |
 |----|-------|-------------|
-| [LP-13](./lp-0013-m-chain-decentralised-mpc-custody-and-swap-signature-layer.md) | M-Chain MPC Custody | Original MPC custody and swap signature layer |
-| [LP-14](./lp-0014-m-chain-threshold-signatures-with-cgg21-uc-non-interactive-ecdsa.md) | CGG21 Threshold ECDSA | UC non-interactive threshold ECDSA with identifiable aborts |
-| [LP-103](./lp-0103-mpc-lss---multi-party-computation-linear-secret-sharing-with-dynamic-resharing.md) | LSS Protocol | Linear Secret Sharing with dynamic resharing |
-| [LP-104](./lp-0104-frost---flexible-round-optimized-schnorr-threshold-signatures-for-eddsa.md) | FROST | Flexible Round-Optimized Schnorr Threshold Signatures |
+| [LP-13](./lp-7013-m-chain-decentralised-mpc-custody-and-swap-signature-layer.md) | M-Chain MPC Custody | Original MPC custody and swap signature layer |
+| [LP-14](./lp-7014-m-chain-threshold-signatures-with-cgg21-uc-non-interactive-ecdsa.md) | CGG21 Threshold ECDSA | UC non-interactive threshold ECDSA with identifiable aborts |
+| [LP-103](./lp-7103-mpc-lss---multi-party-computation-linear-secret-sharing-with-dynamic-resharing.md) | LSS Protocol | Linear Secret Sharing with dynamic resharing |
+| [LP-104](./lp-7104-frost---flexible-round-optimized-schnorr-threshold-signatures-for-eddsa.md) | FROST | Flexible Round-Optimized Schnorr Threshold Signatures |
 
 ## Architecture Summary
 

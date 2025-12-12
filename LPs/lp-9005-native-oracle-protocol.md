@@ -10,7 +10,7 @@ type: Standards Track
 category: Core
 created: 2025-12-11
 updated: 2025-12-11
-requires: [9001, 9002, LP-12, LP-13, LP-80]
+requires: 9001, 9002, LP-12, LP-13, LP-80
 supersedes: 0610
 series: LP-9000 DEX Series
 implementation: https://github.com/luxfi/dex
@@ -33,7 +33,7 @@ implementation: https://github.com/luxfi/dex
 | Full Oracle (LX) | [`dex/pkg/lx/oracle.go`](https://github.com/luxfi/dex/blob/main/pkg/lx/oracle.go) | ✅ Complete |
 | Alpaca Source | [`dex/pkg/lx/alpaca_source.go`](https://github.com/luxfi/dex/blob/main/pkg/lx/alpaca_source.go) | ✅ Complete |
 
-> **See also**: [LP-11](./lp-0011-x-chain-exchange-chain-specification.md), [LP-12](./lp-0012-c-chain-contract-chain-specification.md), [LP-36](./lp-0036-x-chain-order-book-dex-api-and-rpc-addendum.md), [LP-13](./lp-0013-m-chain-decentralised-mpc-custody-and-swap-signature-layer.md), [LP-80](./lp-0080-a-chain-attestation-chain-specification.md), [LP-608](./lp-0608-high-performance-dex-protocol.md), [LP-INDEX](./LP-INDEX.md)
+> **See also**: [LP-11](./lp-9011-x-chain-exchange-chain-specification.md), [LP-12](./lp-2012-c-chain-contract-chain-specification.md), [LP-36](./lp-3036-x-chain-order-book-dex-api-and-rpc-addendum.md), [LP-13](./lp-7013-m-chain-decentralised-mpc-custody-and-swap-signature-layer.md), [LP-80](./lp-5080-a-chain-attestation-chain-specification.md), [LP-608](./lp-0608-high-performance-dex-protocol.md), [LP-INDEX](./LP-INDEX.md)
 
 ## Abstract
 

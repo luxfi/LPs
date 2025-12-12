@@ -9,7 +9,7 @@ type: Standards Track
 category: Core
 created: 2025-07-24
 tags: [l2, evm, core]
-requires: 26, 32
+requires: 2026, 32
 ---
 
 ## Abstract

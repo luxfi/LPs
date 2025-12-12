@@ -9,7 +9,7 @@ type: Standards Track
 category: LRC
 created: 2025-07-23
 tags: [lrc, bridge, token-standard]
-requires: 20, 28
+requires: 2300, 28
 ---
 
 ## Abstract

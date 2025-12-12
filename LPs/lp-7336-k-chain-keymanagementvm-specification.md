@@ -8,7 +8,7 @@ status: Draft
 type: Standards Track
 category: Core
 created: 2025-12-11
-requires: 103, 104, 330, 332, 334
+requires: 7103, 7104, 7330, 6332, 7334
 activation:
   flag: lp336-k-chain
   hfName: "KeyVault"
@@ -16,7 +16,7 @@ activation:
 tags: [mpc, vm, security]
 ---
 
-> **See also**: [LP-103](./lp-0103-mpc-lss---multi-party-computation-linear-secret-sharing-with-dynamic-resharing.md), [LP-104](./lp-0104-frost---flexible-round-optimized-schnorr-threshold-signatures-for-eddsa.md), [LP-330](./lp-0330-t-chain-thresholdvm-specification.md), [LP-332](./lp-0332-teleport-bridge-architecture-unified-cross-chain-protocol.md), [LP-334](./lp-0334-per-asset-threshold-key-management.md), [LP-INDEX](./LP-INDEX.md)
+> **See also**: [LP-103](./lp-7103-mpc-lss---multi-party-computation-linear-secret-sharing-with-dynamic-resharing.md), [LP-104](./lp-7104-frost---flexible-round-optimized-schnorr-threshold-signatures-for-eddsa.md), [LP-330](./lp-7330-t-chain-thresholdvm-specification.md), [LP-332](./lp-6332-teleport-bridge-architecture-unified-cross-chain-protocol.md), [LP-334](./lp-7334-per-asset-threshold-key-management.md), [LP-INDEX](./LP-INDEX.md)
 
 ## Abstract
 
@@ -797,7 +797,7 @@ single party having access to the complete decryption key.
 4. When threshold (t-of-n) is reached, T-Chain sends result back to K-Chain
 5. K-Chain completes decryption and delivers result via callback
 
-See [LP-330: T-Chain ThresholdVM Specification](./lp-0330-t-chain-thresholdvm-specification.md) for
+See [LP-330: T-Chain ThresholdVM Specification](./lp-7330-t-chain-thresholdvm-specification.md) for
 details on threshold signature protocols (CGGMP21, FROST, LSS).
 
 ```go
@@ -1022,7 +1022,7 @@ type TChainDecryptResponse struct {
 +------------------+                    +------------------+
 ```
 
-For detailed T-Chain signer operations, see [LP-330](./lp-0330-t-chain-thresholdvm-specification.md).
+For detailed T-Chain signer operations, see [LP-330](./lp-7330-t-chain-thresholdvm-specification.md).
 
 #### Threshold Decryption Protocol Specification
 
@@ -2155,8 +2155,8 @@ All RPC methods require signed transactions for write operations. Read operation
 unauthenticated but may be rate-limited.
 
 **Related Documentation:**
-- [LP-330 T-Chain RPC](./lp-0330-t-chain-thresholdvm-specification.md) - Threshold signature APIs
-- [LP-332 Teleport Bridge](./lp-0332-teleport-bridge-architecture-unified-cross-chain-protocol.md) - Bridge integration
+- [LP-330 T-Chain RPC](./lp-7330-t-chain-thresholdvm-specification.md) - Threshold signature APIs
+- [LP-332 Teleport Bridge](./lp-6332-teleport-bridge-architecture-unified-cross-chain-protocol.md) - Bridge integration
 
 #### kms_generateKey - Generate ML-KEM Key Pair
 

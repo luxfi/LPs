@@ -9,7 +9,7 @@ status: Final
 type: Standards Track
 category: Core
 created: 2025-12-11
-requires: [4, 5, 10]
+requires: 4, 5, 10
 ---
 
 ## Abstract

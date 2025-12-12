@@ -8,7 +8,7 @@ status: Draft
 type: Standards Track
 category: SDK
 created: 2025-12-11
-requires: 332, 335
+requires: 6332, 6335
 tags: [bridge, dev-tools, sdk]
 ---
 

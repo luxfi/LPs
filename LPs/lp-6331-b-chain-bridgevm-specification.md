@@ -8,7 +8,7 @@ status: Draft
 type: Standards Track
 category: Core
 created: 2025-12-11
-requires: 13, 14, 15, 16, 17, 18, 81, 301, 319, 322
+requires: 7013, 7014, 6015, 6016, 6017, 6018, 6081, 301, 7319, 7322
 replaces: 81, 301
 activation:
   flag: lp331-bridgevm
@@ -17,7 +17,7 @@ activation:
 tags: [bridge, mpc, vm]
 ---
 
-> **See also**: [LP-330 T-Chain ThresholdVM](./lp-0330-t-chain-thresholdvm-specification.md), [LP-332 Teleport Bridge Architecture](./lp-0332-teleport-bridge-architecture-unified-cross-chain-protocol.md), [LP-333 Dynamic Signer Rotation](./lp-0333-dynamic-signer-rotation-with-lss-protocol.md), [LP-334 Per-Asset Threshold Key Management](./lp-0334-per-asset-threshold-key-management.md), [LP-335 Bridge Smart Contract Integration](./lp-0335-bridge-smart-contract-integration.md), [LP-INDEX](./LP-INDEX.md)
+> **See also**: [LP-330 T-Chain ThresholdVM](./lp-7330-t-chain-thresholdvm-specification.md), [LP-332 Teleport Bridge Architecture](./lp-6332-teleport-bridge-architecture-unified-cross-chain-protocol.md), [LP-333 Dynamic Signer Rotation](./lp-7333-dynamic-signer-rotation-with-lss-protocol.md), [LP-334 Per-Asset Threshold Key Management](./lp-7334-per-asset-threshold-key-management.md), [LP-335 Bridge Smart Contract Integration](./lp-6335-bridge-smart-contract-integration.md), [LP-INDEX](./LP-INDEX.md)
 
 # LP-331: B-Chain - BridgeVM Specification
 
@@ -3246,7 +3246,7 @@ The insurance fund (10% of fees) covers:
 | M3.3 | Key Management | Per-asset key assignment from T-Chain |
 | M3.4 | Withdrawal Execution | MPC-signed release transactions |
 
-**Dependencies**: [LP-330](./lp-0330-t-chain-thresholdvm-specification.md), [LP-333](./lp-0333-dynamic-signer-rotation-with-lss-protocol.md), [LP-334](./lp-0334-per-asset-threshold-key-management.md)
+**Dependencies**: [LP-330](./lp-7330-t-chain-thresholdvm-specification.md), [LP-333](./lp-7333-dynamic-signer-rotation-with-lss-protocol.md), [LP-334](./lp-7334-per-asset-threshold-key-management.md)
 
 ### Phase 4: Security Hardening (Q3 2025) - 6 weeks
 
@@ -3277,11 +3277,11 @@ The insurance fund (10% of fees) covers:
 
 | LP | Title | Relationship |
 |----|-------|--------------|
-| [LP-330](./lp-0330-t-chain-thresholdvm-specification.md) | T-Chain ThresholdVM | MPC signing infrastructure |
-| [LP-332](./lp-0332-teleport-bridge-architecture-unified-cross-chain-protocol.md) | Teleport Bridge Architecture | High-level protocol design |
-| [LP-333](./lp-0333-dynamic-signer-rotation-with-lss-protocol.md) | Dynamic Signer Rotation (LSS) | Proactive key refresh |
-| [LP-334](./lp-0334-per-asset-threshold-key-management.md) | Per-Asset Threshold Keys | Asset isolation |
-| [LP-335](./lp-0335-bridge-smart-contract-integration.md) | Bridge Smart Contracts | On-chain vault contracts |
+| [LP-330](./lp-7330-t-chain-thresholdvm-specification.md) | T-Chain ThresholdVM | MPC signing infrastructure |
+| [LP-332](./lp-6332-teleport-bridge-architecture-unified-cross-chain-protocol.md) | Teleport Bridge Architecture | High-level protocol design |
+| [LP-333](./lp-7333-dynamic-signer-rotation-with-lss-protocol.md) | Dynamic Signer Rotation (LSS) | Proactive key refresh |
+| [LP-334](./lp-7334-per-asset-threshold-key-management.md) | Per-Asset Threshold Keys | Asset isolation |
+| [LP-335](./lp-6335-bridge-smart-contract-integration.md) | Bridge Smart Contracts | On-chain vault contracts |
 
 ## Open Questions
 

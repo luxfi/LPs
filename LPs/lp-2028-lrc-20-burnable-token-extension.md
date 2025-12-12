@@ -9,7 +9,7 @@ type: Standards Track
 category: LRC
 created: 2025-07-23
 tags: [lrc, token-standard, evm]
-requires: 20
+requires: 2300
 ---
 
 ## Abstract

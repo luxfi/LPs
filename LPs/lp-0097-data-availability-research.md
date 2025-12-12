@@ -7,7 +7,7 @@ discussions-to: https://github.com/luxfi/lps/discussions
 status: Draft
 type: Informational
 created: 2025-01-23
-requires: 0, 10, 12, 14
+requires: 0, 10, 2012, 7014
 tags: [research, l2]
 ---
 
