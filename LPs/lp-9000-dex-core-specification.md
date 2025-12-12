@@ -10,7 +10,15 @@ type: Standards Track
 category: LRC
 created: 2025-12-11
 requires: 0, 99, 3000
+implementation: https://github.com/luxfi/dex
+documentation: https://dex.lux.network
 ---
+
+> **Documentation**: [dex.lux.network](https://dex.lux.network)
+>
+> **Source**: [github.com/luxfi/dex](https://github.com/luxfi/dex)
+>
+> **Discussions**: [GitHub Discussions](https://github.com/luxfi/LPs/discussions)
 
 ## Abstract
 

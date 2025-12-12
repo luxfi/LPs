@@ -11,7 +11,14 @@ updated: 2025-12-11
 series: LP-9000 DEX Series
 tags: [dex, defi, trading, lp-9000-series]
 implementation: https://github.com/luxfi/dex
+documentation: https://dex.lux.network
 ---
+
+> **Documentation**: [dex.lux.network](https://dex.lux.network)
+>
+> **Source**: [github.com/luxfi/dex](https://github.com/luxfi/dex)
+>
+> **Discussions**: [GitHub Discussions](https://github.com/luxfi/LPs/discussions)
 
 # LP-9000: Lux DEX - Over 9000 Series
 

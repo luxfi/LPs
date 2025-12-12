@@ -13,7 +13,12 @@ updated: 2025-12-11
 requires: 9000, 9001, 9003
 series: LP-9000 DEX Series
 implementation: https://github.com/luxfi/dex
+documentation: https://dex.lux.network
 ---
+
+> **Documentation**: [dex.lux.network](https://dex.lux.network)
+>
+> **Source**: [github.com/luxfi/dex](https://github.com/luxfi/dex)
 
 > **Part of LP-9000 Series**: This LP is part of the [LP-9000 DEX Series](./lp-9000-dex-overview.md) - Lux's standalone sidecar exchange network.
 
