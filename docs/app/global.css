@@ -174,3 +174,20 @@
     display: none;
   }
 }
+
+/* Improved spacing for docs layout - using Fumadocs CSS variables */
+:root {
+  --fd-sidebar-width: 280px;
+  --fd-content-width: 800px;
+}
+
+/* Add breathing room between sidebar and content */
+.fd-page-container {
+  gap: 2rem;
+}
+
+/* Content area padding */
+article.max-w-4xl,
+.max-w-4xl {
+  @apply px-6;
+}

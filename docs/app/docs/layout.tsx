@@ -1,7 +1,7 @@
 import { DocsLayout } from 'fumadocs-ui/layouts/docs';
 import type { ReactNode } from 'react';
 import { FileText, GitPullRequest, Users, BookOpen, ExternalLink } from 'lucide-react';
-import { Logo } from '../../components/logo';
+import { LogoWithText } from '../../components/logo';
 import { source } from '@/lib/source';
 
 export default function Layout({ children }: { children: ReactNode }) {
@@ -12,12 +12,7 @@ export default function Layout({ children }: { children: ReactNode }) {
     <DocsLayout
       tree={pageTree}
       nav={{
-        title: (
-          <div className="flex items-center gap-2">
-            <Logo size={28} variant="white" />
-            <span className="font-bold">Lux Proposals</span>
-          </div>
-        ),
+        title: <LogoWithText size={24} />,
         transparentMode: 'top',
       }}
       sidebar={{
