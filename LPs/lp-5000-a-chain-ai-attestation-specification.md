@@ -106,6 +106,79 @@ type ProofOfExecution struct {
 }
 ```
 
+#### 3. NVTrust Chain-Binding (Double-Spend Prevention)
+
+The core mechanism preventing AI work from being claimed on multiple chains:
+
+```go
+// WorkContext binds work to a specific chain BEFORE compute runs
+type WorkContext struct {
+    ChainID     ChainId   // HANZO (36963) / ZOO (200200) / LUX (96369)
+    JobID       [32]byte  // Specific workload or block height
+    ModelHash   [32]byte  // Which model
+    InputHash   [32]byte  // Which data / prompt
+    DeviceID    [32]byte  // GPU identity
+    Nonce       [32]byte  // Unique per job
+    Timestamp   uint64    // Unix timestamp
+}
+
+// AttestedReceipt is signed by NVTrust enclave
+type AttestedReceipt struct {
+    Context         WorkContext
+    ResultHash      [32]byte      // Hash of output
+    WorkMetrics     WorkMetrics   // FLOPs, tokens, compute time
+    NVTrustSig      []byte        // Rooted in NVIDIA hardware attestation
+    SPDMEvidence    []byte        // SPDM measurement response
+}
+
+// SpentKey uniquely identifies a minted work unit
+// Key = BLAKE3(device_id || nonce || chain_id)
+type SpentKey [32]byte
+
+// SpentSet tracks all minted work to prevent double-spend
+type SpentSet map[SpentKey]bool
+```
+
+**Verification Flow:**
+
+```go
+func (vm *VM) VerifyAndMint(receipt *AttestedReceipt) error {
+    // 1. Verify NVTrust signature is valid
+    if !nvtrust.VerifySignature(receipt) {
+        return ErrInvalidAttestation
+    }
+
+    // 2. Verify chain_id matches THIS chain
+    if receipt.Context.ChainID != vm.chainID {
+        return ErrWrongChain
+    }
+
+    // 3. Compute unique spent key
+    key := blake3.Hash(concat(
+        receipt.Context.DeviceID[:],
+        receipt.Context.Nonce[:],
+        uint32ToBytes(receipt.Context.ChainID),
+    ))
+
+    // 4. Check spent set (double-spend prevention)
+    if vm.spentSet[key] {
+        return ErrAlreadyMinted
+    }
+
+    // 5. Mark as spent and mint reward
+    vm.spentSet[key] = true
+    reward := calculateReward(receipt.WorkMetrics)
+    return vm.mintReward(receipt.Context.DeviceID, reward)
+}
+```
+
+**Key Invariant:** The same AI work can't be minted on Hanzo, Lux, AND Zoo - only on the chain specified in the pre-committed `WorkContext.ChainID`.
+
+**Reference Implementation:**
+- [`lux/ai/pkg/attestation/nvtrust.go`](https://github.com/luxfi/ai/blob/main/pkg/attestation/nvtrust.go) - NVTrust local verification
+- [`lux/ai/pkg/rewards/rewards.go`](https://github.com/luxfi/ai/blob/main/pkg/rewards/rewards.go) - Receipt/spent set handling
+- [`shinkai/hanzo-node/hanzo-libs/hanzo-mining/src/ledger.rs`](https://github.com/hanzoai/node/blob/main/hanzo-libs/hanzo-mining/src/ledger.rs)
+
 ### Supported TEE Vendors
 
 | Vendor | Technology | Compute Class |

@@ -163,15 +163,159 @@ interface IAIMining {
 **Reference Implementation:**
 - [`lux/standard/src/precompiles/AIMining.sol`](https://github.com/luxfi/standard/blob/main/src/precompiles/AIMining.sol)
 
-### 6. Consensus Integration
+### 6. NVTrust Chain-Binding Double-Spend Prevention
+
+The core mechanism preventing AI work from being claimed on multiple chains.
+
+#### 6.1 Design Principle
+
+We avoid double-spend by **binding each unit of AI work to a specific chain before the compute runs**, and then having the GPU's confidential-compute environment sign an attested receipt that includes that chain ID.
+
+That receipt is:
+- **Unique** (per device + nonce)
+- **Bound to one chain** (via chain_id in the attested context)
+- **Signed by NVIDIA's NVTrust root**
+
+So you cannot take one chunk of work and mint it on multiple chains without re-doing the compute.
+
+#### 6.2 Work Context (Pre-Compute Commitment)
+
+When a miner wants to do AI work, their node commits to a target chain:
+
+```rust
+pub struct WorkContext {
+    pub chain_id: ChainId,         // HANZO / LUX / ZOO
+    pub job_id: [u8; 32],          // Specific workload or block height
+    pub model_hash: [u8; 32],      // Which model
+    pub input_hash: [u8; 32],      // Which data / prompt
+    pub device_id: [u8; 32],       // GPU identity
+    pub nonce: [u8; 32],           // Unique per job
+    pub timestamp: u64,            // Unix timestamp
+}
+```
+
+This context is passed into the GPU's NVTrust enclave as job metadata. The miner has effectively said: *"This work is for this chain, this job, with this model + input."*
+
+**Reference Implementation:**
+- [`lux/ai/pkg/attestation/nvtrust.go`](https://github.com/luxfi/ai/blob/main/pkg/attestation/nvtrust.go)
+
+#### 6.3 GPU TEE Execution (NVTrust)
+
+Inside the TEE, the GPU:
+1. Verifies the code + model hashes (no tampering)
+2. Runs the AI workload (inference / training)
+3. Creates a work receipt:
+
+```rust
+pub struct WorkReceipt {
+    pub context: WorkContext,      // Includes chain_id, job_id, etc.
+    pub result_hash: [u8; 32],     // Hash of the output
+    pub work_metrics: WorkMetrics, // FLOPs, steps, tokens, etc.
+    pub device_id: [u8; 32],       // GPU identity
+}
+
+pub struct WorkMetrics {
+    pub flops: u64,                // Floating point operations
+    pub tokens_processed: u64,     // For LLM inference
+    pub compute_time_ms: u64,      // Execution time
+    pub memory_used_mb: u64,       // Peak VRAM usage
+}
+```
+
+The NVTrust enclave signs `WorkReceipt` with its attested key:
+
+```rust
+pub struct AttestedReceipt {
+    pub receipt: WorkReceipt,
+    pub nvtrust_signature: Vec<u8>,  // Rooted in NVIDIA hardware attestation
+    pub spdm_evidence: SPDMEvidence, // SPDM measurement response
+}
+```
+
+This is cryptographic proof that: *"This exact device ran this exact workload with this exact context."*
+
+**Reference Implementation:**
+- [`lux/ai/pkg/attestation/attestation.go`](https://github.com/luxfi/ai/blob/main/pkg/attestation/attestation.go)
+- [`shinkai/hanzo-node/hanzo-bin/hanzo-node/src/security/tee_attestation.rs`](https://github.com/hanzoai/node/blob/main/hanzo-bin/hanzo-node/src/security/tee_attestation.rs)
+
+#### 6.4 Chain Verification and Minting
+
+When the miner submits the receipt to a chain:
+
+```rust
+pub fn verify_and_mint(
+    receipt: &AttestedReceipt,
+    spent_set: &mut HashSet<[u8; 32]>,
+    expected_chain_id: ChainId,
+) -> Result<u64, MiningError> {
+    // Step 1: Verify NVTrust signature is valid
+    verify_nvtrust_signature(&receipt)?;
+
+    // Step 2: Verify chain_id matches this chain
+    if receipt.receipt.context.chain_id != expected_chain_id {
+        return Err(MiningError::WrongChain);
+    }
+
+    // Step 3: Compute unique key
+    let key = blake3::hash(&[
+        &receipt.receipt.context.device_id[..],
+        &receipt.receipt.context.nonce[..],
+        &(receipt.receipt.context.chain_id as u32).to_le_bytes()[..],
+    ]);
+
+    // Step 4: Check spent set (double-spend prevention)
+    if spent_set.contains(&key.into()) {
+        return Err(MiningError::AlreadyMinted);
+    }
+
+    // Step 5: Mark as spent and mint
+    spent_set.insert(key.into());
+    let reward = calculate_reward(&receipt.receipt.work_metrics);
+    Ok(reward)
+}
+```
+
+**Reference Implementation:**
+- [`lux/ai/pkg/rewards/rewards.go`](https://github.com/luxfi/ai/blob/main/pkg/rewards/rewards.go)
+- [`shinkai/hanzo-node/hanzo-libs/hanzo-mining/src/ledger.rs`](https://github.com/hanzoai/node/blob/main/hanzo-libs/hanzo-mining/src/ledger.rs)
+
+#### 6.5 Multi-Chain Mining (Same GPU, No Double-Spend)
+
+The same GPU can mine for Hanzo, Lux, Zoo, etc., but:
+- Each chain requires a **separate job** with a **different chain_id** in the NVTrust context
+- Each job produces a **different attested receipt** with a different `(chain_id, job_id, nonce)` triple
+
+| GPU | Job 1 | Job 2 | Job 3 |
+|-----|-------|-------|-------|
+| H100-001 | Hanzo (36963) | Zoo (200200) | Lux (96369) |
+| H100-001 | nonce: 0x1a... | nonce: 0x2b... | nonce: 0x3c... |
+| H100-001 | Receipt A | Receipt B | Receipt C |
+
+**No "copy-paste" mining** - you can't run one workload and cash it in on three chains.
+
+#### 6.6 Supported GPUs for NVTrust
+
+| GPU Model | CC Support | Trust Score |
+|-----------|------------|-------------|
+| H100 | Full NVTrust | 95 |
+| H200 | Full NVTrust | 95 |
+| B100 | Full NVTrust + TEE-I/O | 100 |
+| B200 | Full NVTrust + TEE-I/O | 100 |
+| GB200 | Full NVTrust + TEE-I/O | 100 |
+| RTX PRO 6000 | NVTrust | 85 |
+| RTX 5090 | No CC | Software only (60) |
+| RTX 4090 | No CC | Software only (60) |
+
+### 7. Consensus Integration
 
 Mining rewards require BFT finality from Lux consensus:
 
 1. Miner submits AI work proof with ML-DSA signature
-2. Validators verify work and signature (69% quorum)
-3. Reward entry added to global ledger
-4. 2-round BFT finality confirms reward
-5. Teleport bridge unlocks cross-chain transfers
+2. Validators verify NVTrust attestation and chain binding
+3. Spent set checked for `hash(device_id || nonce || chain_id)`
+4. Reward entry added to global ledger
+5. 2-round BFT finality confirms reward
+6. Teleport bridge unlocks cross-chain transfers
 
 ## Rationale
 
