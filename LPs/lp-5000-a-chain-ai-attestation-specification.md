@@ -174,6 +174,28 @@ func (vm *VM) VerifyAndMint(receipt *AttestedReceipt) error {
 
 **Key Invariant:** The same AI work can't be minted on Hanzo, Lux, AND Zoo - only on the chain specified in the pre-committed `WorkContext.ChainID`.
 
+#### Multi-Chain Mining (Same GPU)
+
+The same GPU can mine for Hanzo, Lux, Zoo simultaneously, but each chain requires a separate job with a different `ChainID`:
+
+| GPU | Hanzo Receipt | Zoo Receipt | Lux Receipt |
+|-----|---------------|-------------|-------------|
+| H100-001 | ChainID: 36963 | ChainID: 200200 | ChainID: 96369 |
+| H100-001 | Valid on Hanzo | Invalid on Hanzo | Invalid on Hanzo |
+
+#### Supported GPUs for NVTrust
+
+| GPU Model | CC Support | Trust Score |
+|-----------|------------|-------------|
+| H100 | Full NVTrust | 95 |
+| H200 | Full NVTrust | 95 |
+| B100 | Full NVTrust + TEE-I/O | 100 |
+| B200 | Full NVTrust + TEE-I/O | 100 |
+| GB200 | Full NVTrust + TEE-I/O | 100 |
+| RTX PRO 6000 | NVTrust | 85 |
+| RTX 5090 | No CC | Software only (60) |
+| RTX 4090 | No CC | Software only (60) |
+
 **Reference Implementation:**
 - [`lux/ai/pkg/attestation/nvtrust.go`](https://github.com/luxfi/ai/blob/main/pkg/attestation/nvtrust.go) - NVTrust local verification
 - [`lux/ai/pkg/rewards/rewards.go`](https://github.com/luxfi/ai/blob/main/pkg/rewards/rewards.go) - Receipt/spent set handling
