@@ -1,37 +1,105 @@
+import { DocsLayout } from 'fumadocs-ui/layouts/docs';
 import type { ReactNode } from 'react';
-import Link from 'next/link';
+import { FileText, GitPullRequest, Users, BookOpen, ExternalLink } from 'lucide-react';
+import { Logo } from '../../components/logo';
+import { source } from '@/lib/source';
 
-export default function RootDocsLayout({ children }: { children: ReactNode }) {
+export default function Layout({ children }: { children: ReactNode }) {
+  const pageTree = source.getPageTree();
+  const stats = source.getStats();
+
   return (
-    <div className="flex flex-col min-h-screen">
-      <nav className="border-b bg-white dark:bg-gray-900">
-        <div className="container mx-auto px-4 py-4 flex items-center justify-between">
-          <Link href="/docs" className="text-2xl font-bold hover:text-blue-600 dark:hover:text-blue-400">
-            Lux Proposals
-          </Link>
-          <div className="flex gap-4 text-sm">
-            <Link href="/docs/index" className="hover:text-blue-600 dark:hover:text-blue-400">
-              Home
-            </Link>
+    <DocsLayout
+      tree={pageTree}
+      nav={{
+        title: (
+          <div className="flex items-center gap-2">
+            <Logo size={28} variant="white" />
+            <span className="font-bold">Lux Proposals</span>
+          </div>
+        ),
+        transparentMode: 'top',
+      }}
+      sidebar={{
+        defaultOpenLevel: 1,
+        banner: (
+          <div className="rounded-lg border border-border bg-card p-4">
+            <div className="flex items-center gap-2 mb-2">
+              <FileText className="size-4" />
+              <span className="text-sm font-semibold">LP Statistics</span>
+            </div>
+            <div className="grid grid-cols-2 gap-2 text-xs">
+              <div>
+                <span className="text-muted-foreground">Total:</span>
+                <span className="ml-1 font-medium">{stats.total}</span>
+              </div>
+              <div>
+                <span className="text-muted-foreground">Final:</span>
+                <span className="ml-1 font-medium text-green-500">{stats.byStatus['Final'] || 0}</span>
+              </div>
+              <div>
+                <span className="text-muted-foreground">Draft:</span>
+                <span className="ml-1 font-medium text-yellow-500">{stats.byStatus['Draft'] || 0}</span>
+              </div>
+              <div>
+                <span className="text-muted-foreground">Review:</span>
+                <span className="ml-1 font-medium text-blue-500">{stats.byStatus['Review'] || 0}</span>
+              </div>
+            </div>
+          </div>
+        ),
+        footer: (
+          <div className="flex flex-col gap-3 p-4 text-xs border-t border-border">
             <a
-              href="https://github.com/luxfi/lux"
+              href="https://github.com/luxfi/lps"
               target="_blank"
               rel="noopener noreferrer"
-              className="hover:text-blue-600 dark:hover:text-blue-400"
+              className="flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors"
             >
-              GitHub
+              <GitPullRequest className="size-4" />
+              Contribute on GitHub
+            </a>
+            <a
+              href="https://forum.lux.network"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors"
+            >
+              <Users className="size-4" />
+              Discussion Forum
+            </a>
+            <a
+              href="https://docs.lux.network"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors"
+            >
+              <BookOpen className="size-4" />
+              Network Docs
             </a>
           </div>
-        </div>
-      </nav>
-      <main className="flex-1 container mx-auto px-4 py-8">
-        {children}
-      </main>
-      <footer className="border-t bg-gray-50 dark:bg-gray-900 py-6">
-        <div className="container mx-auto px-4 text-center text-sm text-gray-600 dark:text-gray-400">
-          <p>Lux Proposals (LPs) - Community-driven standards and improvements</p>
-        </div>
-      </footer>
-    </div>
+        ),
+      }}
+      links={[
+        {
+          text: 'All LPs',
+          url: '/docs',
+          icon: <FileText className="size-4" />,
+        },
+        {
+          text: 'Contribute',
+          url: '/contribute',
+          icon: <GitPullRequest className="size-4" />,
+        },
+        {
+          text: 'GitHub',
+          url: 'https://github.com/luxfi/lps',
+          icon: <ExternalLink className="size-4" />,
+          external: true,
+        },
+      ]}
+    >
+      {children}
+    </DocsLayout>
   );
 }
