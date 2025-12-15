@@ -385,13 +385,84 @@ ML-DSA provides NIST Level 3 (128-bit) quantum security. Key sizes are larger th
 
 ## Economic Impact
 
+### Tokenomics (Per Chain)
+
+| Parameter | Value | Description |
+|-----------|-------|-------------|
+| Supply Cap | 1,000,000,000 AI | 1B per chain |
+| LP Allocation | 100,000,000 AI | 10% for liquidity seeding |
+| Mining Allocation | 900,000,000 AI | 90% via Bitcoin schedule |
+| Initial Price | $0.10/AI | 96% discount from market rate |
+| LP Depth | $10,000,000 | Per chain at launch |
+
+### Bitcoin-Aligned Halving Schedule
+
+| Parameter | Bitcoin | AI Token |
+|-----------|---------|----------|
+| Block Time | 10 minutes | 2 seconds |
+| Halving Interval | 210,000 blocks | 6,300,000 blocks |
+| Halving Period | ~4 years | ~4 years (aligned) |
+| Initial Reward | 50 BTC | 79.4 AI |
+| Supply Cap | 21M BTC | 1B AI (per chain) |
+
+**Halving Formula:**
+```
+R(epoch) = 79.4 × 2^(-epoch) AI per block
+```
+
+**Epoch Timeline:**
+| Epoch | Blocks | Years | Reward/Block | Cumulative Supply |
+|-------|--------|-------|--------------|-------------------|
+| 0 | 0-6.3M | 0-4 | 79.4 AI | 500M AI |
+| 1 | 6.3M-12.6M | 4-8 | 39.7 AI | 750M AI |
+| 2 | 12.6M-18.9M | 8-12 | 19.85 AI | 875M AI |
+| 3 | 18.9M-25.2M | 12-16 | 9.925 AI | 937.5M AI |
+
+### Launch Chains (10 at Genesis)
+
+| Chain | Chain ID | Type | DEX | LP Pair |
+|-------|----------|------|-----|---------|
+| Lux C-Chain | 96369 | Native (Warp) | LuxSwap | AI/LUX |
+| Hanzo EVM | 36963 | Native (Warp) | HanzoSwap | AI/LUX |
+| Zoo EVM | 200200 | Native (Warp) | ZooSwap | AI/LUX |
+| Ethereum | 1 | External (Teleport) | Uniswap V3 | AI/ETH |
+| Base | 8453 | External (Teleport) | Aerodrome | AI/ETH |
+| BNB Chain | 56 | External (Teleport) | PancakeSwap | AI/BNB |
+| Arbitrum | 42161 | External (Teleport) | Camelot | AI/ETH |
+| Optimism | 10 | External (Teleport) | Velodrome | AI/ETH |
+| Polygon | 137 | External (Teleport) | QuickSwap | AI/MATIC |
+| Avalanche | 43114 | External (Teleport) | Trader Joe | AI/AVAX |
+
+**Global Supply at Launch:** 10B AI (10 chains × 1B each)
+
+### Future Expansion
+
+| Chains | Total Supply | Governance |
+|--------|--------------|------------|
+| 10 (launch) | 10B AI | Safe multi-sig (MPC) |
+| 100 chains | 100B AI | DAO governance |
+| 1000 chains | 1T AI | Cross-chain DAO |
+
+New chains added via governance vote. Each chain deploys independent AI token contract with same parameters.
+
 ### Mining Rewards
-- AI mining creates new AI tokens on L1
-- Rewards distributed proportionally to AI compute contribution
-- No additional gas costs for L1 mining operations
+
+**Miner Economics (At Launch Price):**
+| GPUs | Hash Rate | Revenue/Hour | Cost/Hour | Profit |
+|------|-----------|--------------|-----------|--------|
+| 1 H100 | ~1 AI/hr | $0.10 | ~$2.50 | -$2.40 |
+| 100 H100s | ~100 AI/hr | $10.00 | ~$250 | -$240 |
+| 1000 H100s | ~1000 AI/hr | $100.00 | ~$2,500 | -$2,400 |
+
+*Note: At launch price, mining is subsidized. As AI price appreciates toward market rate (~$2.50), profitability reaches parity.*
+
+**Break-Even Analysis:**
+- At $2.50/AI: Mining reaches cost parity with cloud compute
+- At $5.00/AI: 2x profitable vs cloud
+- At $10.00/AI: 4x profitable vs cloud
 
 ### Cross-Chain Fees
-- Teleport transfers incur minimal bridge fees
+- Teleport transfers incur minimal bridge fees (~$1-5)
 - EVM operations use standard gas pricing
 - Precompile calls reduce gas vs pure Solidity
 
