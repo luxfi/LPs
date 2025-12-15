@@ -1,3 +1,9 @@
+/**
+ * Lux Documentation Theme
+ * Pure monochrome - Vercel/Linear style
+ * Values aligned with @luxfi/brand
+ */
+
 @import "tailwindcss";
 @import "fumadocs-ui/style.css";
 
@@ -27,103 +33,90 @@
   --color-accent: var(--accent);
   --color-accent-foreground: var(--accent-foreground);
   --color-destructive: var(--destructive);
-  --color-destructive-foreground: var(--destructive-foreground);
   --color-border: var(--border);
   --color-input: var(--input);
   --color-ring: var(--ring);
-  --color-sidebar: var(--sidebar);
-  --color-sidebar-foreground: var(--sidebar-foreground);
-  --color-sidebar-primary: var(--sidebar-primary);
-  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
-  --color-sidebar-accent: var(--sidebar-accent);
-  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
-  --color-sidebar-border: var(--sidebar-border);
-  --color-sidebar-ring: var(--sidebar-ring);
-  --color-code: var(--code);
-  --color-code-foreground: var(--code-foreground);
 }
 
+/* Light mode - Pure white */
 :root {
   --radius: 0.5rem;
-  /* Pure white theme */
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.1 0 0);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.1 0 0);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.1 0 0);
-  --primary: oklch(0.1 0 0);
-  --primary-foreground: oklch(1 0 0);
-  --secondary: oklch(0.96 0 0);
-  --secondary-foreground: oklch(0.1 0 0);
-  --muted: oklch(0.96 0 0);
-  --muted-foreground: oklch(0.5 0 0);
-  --accent: oklch(0.96 0 0);
-  --accent-foreground: oklch(0.1 0 0);
-  --destructive: oklch(0.55 0.2 25);
-  --border: oklch(0.9 0 0);
-  --input: oklch(0.9 0 0);
-  --ring: oklch(0.5 0 0);
-  --sidebar: oklch(0.98 0 0);
-  --sidebar-foreground: oklch(0.1 0 0);
-  --sidebar-primary: oklch(0.1 0 0);
-  --sidebar-primary-foreground: oklch(1 0 0);
-  --sidebar-accent: oklch(0.94 0 0);
-  --sidebar-accent-foreground: oklch(0.1 0 0);
-  --sidebar-border: oklch(0.9 0 0);
-  --sidebar-ring: oklch(0.5 0 0);
-  --code: oklch(0.96 0 0);
-  --code-foreground: oklch(0.1 0 0);
+  --background: hsl(0, 0%, 100%);
+  --foreground: hsl(0, 0%, 9%);
+  --card: hsl(0, 0%, 100%);
+  --card-foreground: hsl(0, 0%, 9%);
+  --popover: hsl(0, 0%, 100%);
+  --popover-foreground: hsl(0, 0%, 9%);
+  --primary: hsl(0, 0%, 9%);
+  --primary-foreground: hsl(0, 0%, 100%);
+  --secondary: hsl(0, 0%, 96%);
+  --secondary-foreground: hsl(0, 0%, 9%);
+  --muted: hsl(0, 0%, 96%);
+  --muted-foreground: hsl(0, 0%, 45%);
+  --accent: hsl(0, 0%, 96%);
+  --accent-foreground: hsl(0, 0%, 9%);
+  --destructive: hsl(0, 84%, 60%);
+  --border: hsl(0, 0%, 90%);
+  --input: hsl(0, 0%, 90%);
+  --ring: hsl(0, 0%, 64%);
+
+  /* Fumadocs overrides */
+  --color-fd-background: hsl(0, 0%, 100%);
+  --color-fd-foreground: hsl(0, 0%, 9%);
+  --color-fd-muted: hsl(0, 0%, 96%);
+  --color-fd-muted-foreground: hsl(0, 0%, 45%);
+  --color-fd-popover: hsl(0, 0%, 100%);
+  --color-fd-popover-foreground: hsl(0, 0%, 9%);
+  --color-fd-card: hsl(0, 0%, 100%);
+  --color-fd-card-foreground: hsl(0, 0%, 9%);
+  --color-fd-border: hsl(0, 0%, 90%);
+  --color-fd-primary: hsl(0, 0%, 9%);
+  --color-fd-primary-foreground: hsl(0, 0%, 100%);
+  --color-fd-secondary: hsl(0, 0%, 96%);
+  --color-fd-secondary-foreground: hsl(0, 0%, 9%);
+  --color-fd-accent: hsl(0, 0%, 96%);
+  --color-fd-accent-foreground: hsl(0, 0%, 9%);
+  --color-fd-ring: hsl(0, 0%, 64%);
 }
 
+/* Dark mode - Pure black */
 .dark {
-  /* Pure black theme */
-  --background: oklch(0 0 0);
-  --foreground: oklch(0.98 0 0);
-  --card: oklch(0.06 0 0);
-  --card-foreground: oklch(0.98 0 0);
-  --popover: oklch(0.06 0 0);
-  --popover-foreground: oklch(0.98 0 0);
-  --primary: oklch(0.98 0 0);
-  --primary-foreground: oklch(0.06 0 0);
-  --secondary: oklch(0.12 0 0);
-  --secondary-foreground: oklch(0.98 0 0);
-  --muted: oklch(0.12 0 0);
-  --muted-foreground: oklch(0.6 0 0);
-  --accent: oklch(0.12 0 0);
-  --accent-foreground: oklch(0.98 0 0);
-  --destructive: oklch(0.6 0.2 25);
-  --border: oklch(0.18 0 0);
-  --input: oklch(0.18 0 0);
-  --ring: oklch(0.4 0 0);
-  --sidebar: oklch(0 0 0);
-  --sidebar-foreground: oklch(0.98 0 0);
-  --sidebar-primary: oklch(0.98 0 0);
-  --sidebar-primary-foreground: oklch(0.06 0 0);
-  --sidebar-accent: oklch(0.1 0 0);
-  --sidebar-accent-foreground: oklch(0.98 0 0);
-  --sidebar-border: oklch(0.18 0 0);
-  --sidebar-ring: oklch(0.4 0 0);
-  --code: oklch(0.1 0 0);
-  --code-foreground: oklch(0.98 0 0);
+  --background: hsl(0, 0%, 0%);
+  --foreground: hsl(0, 0%, 98%);
+  --card: hsl(0, 0%, 4%);
+  --card-foreground: hsl(0, 0%, 98%);
+  --popover: hsl(0, 0%, 4%);
+  --popover-foreground: hsl(0, 0%, 98%);
+  --primary: hsl(0, 0%, 98%);
+  --primary-foreground: hsl(0, 0%, 4%);
+  --secondary: hsl(0, 0%, 10%);
+  --secondary-foreground: hsl(0, 0%, 98%);
+  --muted: hsl(0, 0%, 8%);
+  --muted-foreground: hsl(0, 0%, 55%);
+  --accent: hsl(0, 0%, 12%);
+  --accent-foreground: hsl(0, 0%, 98%);
+  --destructive: hsl(0, 62%, 50%);
+  --border: hsl(0, 0%, 15%);
+  --input: hsl(0, 0%, 15%);
+  --ring: hsl(0, 0%, 36%);
 
-  /* Override fumadocs variables for pure black */
+  /* Fumadocs overrides */
   --color-fd-background: hsl(0, 0%, 0%);
   --color-fd-foreground: hsl(0, 0%, 98%);
-  --color-fd-muted: hsl(0, 0%, 6%);
-  --color-fd-muted-foreground: hsl(0, 0%, 60%);
+  --color-fd-muted: hsl(0, 0%, 8%);
+  --color-fd-muted-foreground: hsl(0, 0%, 55%);
   --color-fd-popover: hsl(0, 0%, 4%);
   --color-fd-popover-foreground: hsl(0, 0%, 98%);
   --color-fd-card: hsl(0, 0%, 4%);
   --color-fd-card-foreground: hsl(0, 0%, 98%);
-  --color-fd-border: hsl(0, 0%, 14%);
+  --color-fd-border: hsl(0, 0%, 15%);
   --color-fd-primary: hsl(0, 0%, 98%);
   --color-fd-primary-foreground: hsl(0, 0%, 4%);
   --color-fd-secondary: hsl(0, 0%, 10%);
   --color-fd-secondary-foreground: hsl(0, 0%, 98%);
   --color-fd-accent: hsl(0, 0%, 12%);
-  --color-fd-accent-foreground: hsl(0, 0%, 100%);
-  --color-fd-ring: hsl(0, 0%, 30%);
+  --color-fd-accent-foreground: hsl(0, 0%, 98%);
+  --color-fd-ring: hsl(0, 0%, 36%);
 }
 
 @layer base {
@@ -132,7 +125,7 @@
   }
 
   ::selection {
-    @apply bg-primary/20 text-primary-foreground;
+    @apply bg-foreground/10 text-foreground;
   }
 
   html {
@@ -143,69 +136,46 @@
     font-synthesis-weight: none;
     text-rendering: optimizeLegibility;
   }
-
-  a:active,
-  button:active {
-    @apply opacity-60 md:opacity-100;
-  }
 }
 
-/* Status badges for LPs */
+/* Status badges */
 .status-draft {
-  @apply bg-yellow-100 text-yellow-800 dark:bg-yellow-900/30 dark:text-yellow-200;
+  @apply border border-yellow-500/30 bg-yellow-500/10 text-yellow-600 dark:text-yellow-400;
 }
-
 .status-review {
-  @apply bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-200;
+  @apply border border-blue-500/30 bg-blue-500/10 text-blue-600 dark:text-blue-400;
 }
-
 .status-final {
-  @apply bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-200;
+  @apply border border-green-500/30 bg-green-500/10 text-green-600 dark:text-green-400;
 }
-
 .status-withdrawn {
-  @apply bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-200;
+  @apply border border-red-500/30 bg-red-500/10 text-red-600 dark:text-red-400;
 }
-
 .status-stagnant {
-  @apply bg-gray-100 text-gray-800 dark:bg-gray-900/30 dark:text-gray-200;
+  @apply border border-foreground/20 bg-foreground/5 text-muted-foreground;
 }
 
 /* Type badges */
 .type-standards {
-  @apply bg-purple-100 text-purple-800 dark:bg-purple-900/30 dark:text-purple-200;
+  @apply border border-foreground/20 bg-foreground/5 text-foreground;
 }
-
 .type-meta {
-  @apply bg-indigo-100 text-indigo-800 dark:bg-indigo-900/30 dark:text-indigo-200;
+  @apply border border-foreground/20 bg-foreground/5 text-foreground;
 }
-
 .type-informational {
-  @apply bg-cyan-100 text-cyan-800 dark:bg-cyan-900/30 dark:text-cyan-200;
+  @apply border border-foreground/20 bg-foreground/5 text-foreground;
 }
 
 @utility no-scrollbar {
   -ms-overflow-style: none;
   scrollbar-width: none;
-
   &::-webkit-scrollbar {
     display: none;
   }
 }
 
-/* Improved spacing for docs layout - using Fumadocs CSS variables */
+/* Layout spacing */
 :root {
   --fd-sidebar-width: 280px;
   --fd-content-width: 800px;
-}
-
-/* Add breathing room between sidebar and content */
-.fd-page-container {
-  gap: 2rem;
-}
-
-/* Content area padding */
-article.max-w-4xl,
-.max-w-4xl {
-  @apply px-6;
 }
