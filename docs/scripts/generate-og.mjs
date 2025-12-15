@@ -94,7 +94,7 @@ const ogImageJsx = {
                   marginBottom: 32,
                 },
                 children: [
-                  // Triangle logo
+                  // Triangle logo (downward-pointing per @luxfi/logo)
                   {
                     type: 'svg',
                     props: {
@@ -104,7 +104,7 @@ const ogImageJsx = {
                       children: {
                         type: 'path',
                         props: {
-                          d: 'M50 10 L95 90 L5 90 Z',
+                          d: 'M50 85 L15 25 L85 25 Z',
                           fill: 'white',
                         },
                       },
@@ -268,7 +268,7 @@ const twitterImageJsx = {
                       children: {
                         type: 'path',
                         props: {
-                          d: 'M50 10 L95 90 L5 90 Z',
+                          d: 'M50 85 L15 25 L85 25 Z',
                           fill: 'white',
                         },
                       },

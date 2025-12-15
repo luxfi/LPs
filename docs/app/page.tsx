@@ -5,21 +5,21 @@ type ProposalStatus = 'Final' | 'Draft' | 'Review';
 
 function StatusBadge({ status }: { status: ProposalStatus }) {
   return (
-    <span className="inline-flex items-center gap-1.5 rounded-full border border-white/10 bg-white/[0.03] px-2.5 py-1 text-[11px] font-medium tracking-wide text-white/60">
-      <span className={`h-1.5 w-1.5 rounded-full ${
+    <span className="inline-flex items-center gap-1.5 rounded-full bg-white/5 px-2.5 py-1 text-xs font-medium text-white/60 ring-1 ring-inset ring-white/10">
+      <span className={`size-1.5 rounded-full ${
         status === 'Final' ? 'bg-white' :
-        status === 'Review' ? 'bg-white/70' : 'bg-white/40'
+        status === 'Review' ? 'bg-white/60' : 'bg-white/40'
       }`} />
       {status}
     </span>
   );
 }
 
-// Icon components with explicit sizing
+// Lux logo - downward-pointing triangle per @luxfi/logo
 function LuxLogo({ size = 14 }: { size?: number }) {
   return (
     <svg width={size} height={size} viewBox="0 0 100 100" fill="currentColor">
-      <path d="M50 10 L95 90 L5 90 Z" />
+      <path d="M50 85 L15 25 L85 25 Z" />
     </svg>
   );
 }
@@ -32,7 +32,7 @@ function ArrowIcon({ size = 14 }: { size?: number }) {
   );
 }
 
-function SearchIcon({ size = 20 }: { size?: number }) {
+function SearchIcon({ size = 18 }: { size?: number }) {
   return (
     <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5}>
       <circle cx="11" cy="11" r="8" />
@@ -140,130 +140,121 @@ export default function HomePage() {
   const stats = source.getStats();
   const recentLPs = source.getAllPages().slice(0, 6);
 
-  const statsData = [
-    { label: 'Total proposals', value: stats.total },
-    { label: 'Final', value: stats.byStatus['Final'] || 0 },
-    { label: 'In review', value: stats.byStatus['Review'] || 0 },
-    { label: 'Draft', value: stats.byStatus['Draft'] || 0 },
-  ];
-
   return (
-    <div className="min-h-screen bg-black text-white antialiased selection:bg-white/20">
-      {/* Ambient background */}
-      <div className="pointer-events-none fixed inset-0 -z-10 overflow-hidden">
-        {/* Top glow */}
-        <div className="absolute -top-[50%] left-1/2 h-[1000px] w-[1600px] -translate-x-1/2 rounded-full bg-white/[0.03] blur-[150px]" />
-        {/* Secondary glow */}
-        <div className="absolute top-[20%] right-0 h-[600px] w-[600px] translate-x-1/2 rounded-full bg-white/[0.02] blur-[100px]" />
+    <div className="min-h-screen bg-black text-white antialiased">
+      {/* Ambient effects */}
+      <div className="pointer-events-none fixed inset-0 overflow-hidden">
+        <div className="absolute -top-1/2 left-1/2 h-[800px] w-[1200px] -translate-x-1/2 rounded-full bg-gradient-to-b from-white/[0.07] to-transparent blur-3xl" />
+        <div className="absolute top-1/4 -right-1/4 h-[600px] w-[600px] rounded-full bg-gradient-to-b from-white/[0.04] to-transparent blur-3xl" />
       </div>
 
       {/* Header */}
-      <header className="sticky top-0 z-50 border-b border-white/[0.06] bg-black/80 backdrop-blur-xl backdrop-saturate-150">
-        <nav className="mx-auto flex h-16 max-w-6xl items-center justify-between px-6">
-          <Link href="/" className="flex items-center gap-3 transition-opacity hover:opacity-80">
-            <div className="flex h-8 w-8 items-center justify-center rounded-lg border border-white/10 bg-white/[0.03]">
-              <LuxLogo size={14} />
-            </div>
-            <span className="text-[15px] font-semibold tracking-tight">Lux Proposals</span>
-          </Link>
-
-          <div className="hidden items-center gap-8 md:flex">
-            <Link href="/docs" className="text-[13px] text-white/50 transition-colors hover:text-white">
-              Browse
-            </Link>
-            <Link href="/contribute" className="text-[13px] text-white/50 transition-colors hover:text-white">
-              Contribute
-            </Link>
-            <a
-              href="https://github.com/luxfi/lps"
-              target="_blank"
-              rel="noreferrer"
-              className="text-[13px] text-white/50 transition-colors hover:text-white"
-            >
-              GitHub
-            </a>
-          </div>
-
-          <Link
-            href="/docs"
-            className="flex items-center gap-2 rounded-full bg-white px-4 py-2 text-[13px] font-semibold text-black transition-all hover:bg-white/90 hover:shadow-lg hover:shadow-white/10"
-          >
-            Browse
-            <ArrowIcon size={14} />
-          </Link>
-        </nav>
-      </header>
-
-      <main>
-        {/* Hero */}
-        <section className="relative">
-          <div className="mx-auto max-w-6xl px-6 pb-20 pt-24 md:pb-28 md:pt-32">
-            <div className="mx-auto max-w-3xl text-center">
-              {/* Status pill */}
-              <div className="inline-flex items-center gap-2.5 rounded-full border border-white/[0.08] bg-white/[0.02] px-4 py-2">
-                <span className="relative flex h-2 w-2">
-                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-white/60" style={{ animationDuration: '2s' }} />
-                  <span className="relative inline-flex h-2 w-2 rounded-full bg-white" />
-                </span>
-                <span className="text-[13px] text-white/60">
-                  <span className="font-semibold text-white">{stats.byStatus['Final'] || 0}</span> standards finalized
-                </span>
+      <header className="sticky top-0 z-50 backdrop-blur-xl">
+        <div className="mx-auto max-w-6xl px-6">
+          <nav className="flex h-16 items-center justify-between border-b border-white/[0.08]">
+            <Link href="/" className="flex items-center gap-3 transition-opacity hover:opacity-70">
+              <div className="flex size-8 items-center justify-center rounded-lg bg-white/[0.08]">
+                <LuxLogo size={14} />
               </div>
+              <span className="text-sm font-semibold">Lux Proposals</span>
+            </Link>
 
-              <h1 className="mt-8 text-4xl font-semibold leading-[1.1] tracking-tight md:text-6xl">
-                Lux Proposals
-              </h1>
-
-              <p className="mx-auto mt-6 max-w-xl text-base leading-relaxed text-white/50 md:text-lg">
-                Open, community-driven standards and improvements for the Lux ecosystem of OSS AI blockchains.
-              </p>
-
-              {/* CTAs */}
-              <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
-                <Link
-                  href="/docs"
-                  className="inline-flex h-12 w-full items-center justify-center gap-2 rounded-full bg-white px-8 text-sm font-semibold text-black transition-all hover:bg-white/90 hover:shadow-lg hover:shadow-white/10 sm:w-auto"
-                >
-                  Browse proposals
+            <div className="flex items-center gap-6">
+              <div className="hidden items-center gap-6 md:flex">
+                <Link href="/docs" className="text-sm text-white/50 transition-colors hover:text-white">
+                  Browse
                 </Link>
-                <a
-                  href="https://github.com/luxfi/lps"
-                  target="_blank"
-                  rel="noreferrer"
-                  className="inline-flex h-12 w-full items-center justify-center gap-2 rounded-full border border-white/10 bg-white/[0.02] px-8 text-sm font-semibold text-white transition-all hover:border-white/20 hover:bg-white/[0.05] sm:w-auto"
-                >
-                  <GitHubIcon size={16} />
-                  View on GitHub
+                <Link href="/contribute" className="text-sm text-white/50 transition-colors hover:text-white">
+                  Contribute
+                </Link>
+                <a href="https://github.com/luxfi/lps" target="_blank" rel="noreferrer" className="text-sm text-white/50 transition-colors hover:text-white">
+                  GitHub
                 </a>
               </div>
+              <Link
+                href="/docs"
+                className="inline-flex items-center gap-2 rounded-full bg-white px-4 py-2 text-sm font-medium text-black transition-all hover:bg-white/90"
+              >
+                Browse
+                <ArrowIcon size={14} />
+              </Link>
+            </div>
+          </nav>
+        </div>
+      </header>
 
-              {/* Search */}
-              <div className="mx-auto mt-12 max-w-xl">
-                <div className="group flex items-center gap-3 rounded-2xl border border-white/[0.08] bg-white/[0.02] px-5 py-4 transition-all focus-within:border-white/20 focus-within:bg-white/[0.04] hover:border-white/15">
-                  <SearchIcon size={20} />
-                  <input
-                    type="text"
-                    placeholder="Search LPs by number, title, or keyword..."
-                    className="min-w-0 flex-1 bg-transparent text-[15px] text-white placeholder:text-white/30 focus:outline-none"
-                  />
-                  <kbd className="hidden flex-shrink-0 rounded-md border border-white/10 bg-white/[0.03] px-2 py-1 text-[11px] font-medium text-white/40 md:block">
-                    ⌘K
-                  </kbd>
-                </div>
-              </div>
+      <main className="relative">
+        {/* Hero */}
+        <section className="mx-auto max-w-6xl px-6 pb-24 pt-20 md:pb-32 md:pt-28">
+          <div className="mx-auto max-w-3xl text-center">
+            {/* Status pill */}
+            <div className="inline-flex items-center gap-2 rounded-full bg-white/[0.05] px-4 py-2 ring-1 ring-inset ring-white/[0.1]">
+              <span className="relative flex size-2">
+                <span className="absolute inline-flex size-full animate-ping rounded-full bg-white/40" style={{ animationDuration: '2s' }} />
+                <span className="relative inline-flex size-2 rounded-full bg-white" />
+              </span>
+              <span className="text-sm text-white/70">
+                <span className="font-medium text-white">{stats.byStatus['Final'] || 0}</span> standards finalized
+              </span>
             </div>
 
-            {/* Stats */}
-            <div className="mx-auto mt-20 grid max-w-4xl grid-cols-2 gap-4 md:grid-cols-4">
-              {statsData.map((stat) => (
-                <div
-                  key={stat.label}
-                  className="group rounded-2xl border border-white/[0.06] bg-white/[0.02] p-6 transition-all hover:border-white/10 hover:bg-white/[0.03]"
-                >
-                  <div className="text-3xl font-semibold tracking-tight text-white md:text-4xl">
-                    {stat.value}
-                  </div>
-                  <div className="mt-1 text-[13px] text-white/40">{stat.label}</div>
+            <h1 className="mt-8 bg-gradient-to-b from-white to-white/70 bg-clip-text text-5xl font-semibold tracking-tight text-transparent md:text-6xl lg:text-7xl">
+              Lux Proposals
+            </h1>
+
+            <p className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-white/50">
+              Open, community-driven standards and improvements for the Lux ecosystem of open-source AI blockchains.
+            </p>
+
+            {/* CTAs */}
+            <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
+              <Link
+                href="/docs"
+                className="inline-flex h-12 w-full items-center justify-center gap-2 rounded-full bg-white px-8 text-sm font-semibold text-black transition-all hover:bg-white/90 sm:w-auto"
+              >
+                Browse proposals
+              </Link>
+              <a
+                href="https://github.com/luxfi/lps"
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex h-12 w-full items-center justify-center gap-2.5 rounded-full bg-white/[0.05] px-8 text-sm font-semibold text-white ring-1 ring-inset ring-white/[0.1] transition-all hover:bg-white/[0.08] sm:w-auto"
+              >
+                <GitHubIcon size={16} />
+                View on GitHub
+              </a>
+            </div>
+
+            {/* Search */}
+            <div className="mx-auto mt-14 max-w-xl">
+              <div className="flex items-center gap-3 rounded-2xl bg-white/[0.03] px-5 py-4 ring-1 ring-inset ring-white/[0.08] transition-all focus-within:ring-white/20">
+                <SearchIcon size={18} />
+                <input
+                  type="text"
+                  placeholder="Search LPs by number, title, or keyword..."
+                  className="min-w-0 flex-1 bg-transparent text-sm text-white placeholder:text-white/30 focus:outline-none"
+                />
+                <kbd className="hidden rounded-md bg-white/[0.05] px-2 py-1 text-xs font-medium text-white/40 ring-1 ring-inset ring-white/[0.1] md:block">
+                  ⌘K
+                </kbd>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Stats */}
+        <section className="border-y border-white/[0.06] bg-gradient-to-b from-white/[0.02] to-transparent">
+          <div className="mx-auto max-w-6xl px-6 py-12">
+            <div className="grid grid-cols-2 gap-px overflow-hidden rounded-2xl bg-white/[0.06] md:grid-cols-4">
+              {[
+                { label: 'Total proposals', value: stats.total },
+                { label: 'Final', value: stats.byStatus['Final'] || 0 },
+                { label: 'In review', value: stats.byStatus['Review'] || 0 },
+                { label: 'Draft', value: stats.byStatus['Draft'] || 0 },
+              ].map((stat) => (
+                <div key={stat.label} className="bg-black p-8 text-center">
+                  <div className="text-4xl font-semibold tracking-tight">{stat.value}</div>
+                  <div className="mt-1 text-sm text-white/40">{stat.label}</div>
                 </div>
               ))}
             </div>
@@ -271,52 +262,47 @@ export default function HomePage() {
         </section>
 
         {/* Categories */}
-        <section className="border-t border-white/[0.06]">
-          <div className="mx-auto max-w-6xl px-6 py-24">
-            <div className="mx-auto max-w-2xl text-center">
-              <h2 className="text-2xl font-semibold tracking-tight md:text-3xl">Proposal categories</h2>
-              <p className="mt-3 text-[15px] text-white/50">
-                LPs are organized by number ranges that indicate category and purpose.
-              </p>
-            </div>
+        <section className="mx-auto max-w-6xl px-6 py-24">
+          <div className="text-center">
+            <h2 className="text-2xl font-semibold tracking-tight md:text-3xl">Proposal categories</h2>
+            <p className="mt-3 text-base text-white/50">
+              LPs are organized by number ranges that indicate category and purpose.
+            </p>
+          </div>
 
-            <div className="mt-14 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-              {categories.map((cat) => (
-                <Link
-                  key={cat.title}
-                  href="/docs"
-                  className="group relative overflow-hidden rounded-2xl border border-white/[0.06] bg-white/[0.01] p-6 transition-all hover:border-white/15 hover:bg-white/[0.03]"
-                >
-                  {/* Hover glow effect */}
-                  <div className="pointer-events-none absolute -right-12 -top-12 h-24 w-24 rounded-full bg-white/5 opacity-0 blur-2xl transition-opacity group-hover:opacity-100" />
-
-                  <div className="relative flex items-start justify-between">
-                    <div className="flex h-11 w-11 items-center justify-center rounded-xl border border-white/[0.08] bg-white/[0.03] text-white/60 transition-colors group-hover:border-white/15 group-hover:text-white/80">
-                      <cat.Icon size={20} />
-                    </div>
-                    <span className="rounded-full border border-white/[0.08] bg-white/[0.02] px-2.5 py-1 font-mono text-[11px] text-white/40 transition-colors group-hover:text-white/60">
-                      {cat.range}
-                    </span>
+          <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {categories.map((cat) => (
+              <Link
+                key={cat.title}
+                href="/docs"
+                className="group relative rounded-2xl bg-gradient-to-b from-white/[0.04] to-transparent p-6 ring-1 ring-inset ring-white/[0.08] transition-all hover:from-white/[0.06] hover:ring-white/[0.15]"
+              >
+                <div className="flex items-start justify-between">
+                  <div className="flex size-12 items-center justify-center rounded-xl bg-white/[0.05] text-white/60 ring-1 ring-inset ring-white/[0.1] transition-colors group-hover:text-white/80">
+                    <cat.Icon size={22} />
                   </div>
-                  <h3 className="mt-4 text-[15px] font-semibold transition-colors group-hover:text-white">{cat.title}</h3>
-                  <p className="mt-1.5 text-[13px] leading-relaxed text-white/40">{cat.desc}</p>
-                </Link>
-              ))}
-            </div>
+                  <span className="rounded-full bg-white/[0.05] px-3 py-1 font-mono text-xs text-white/50 ring-1 ring-inset ring-white/[0.08]">
+                    {cat.range}
+                  </span>
+                </div>
+                <h3 className="mt-5 text-base font-semibold">{cat.title}</h3>
+                <p className="mt-1.5 text-sm text-white/40">{cat.desc}</p>
+              </Link>
+            ))}
           </div>
         </section>
 
         {/* Recent proposals */}
-        <section className="border-t border-white/[0.06] bg-white/[0.01]">
+        <section className="border-t border-white/[0.06] bg-gradient-to-b from-white/[0.015] to-transparent">
           <div className="mx-auto max-w-6xl px-6 py-24">
             <div className="flex items-end justify-between">
               <div>
                 <h2 className="text-2xl font-semibold tracking-tight">Recent proposals</h2>
-                <p className="mt-2 text-[15px] text-white/50">Latest LPs across protocol, tooling, and standards.</p>
+                <p className="mt-2 text-base text-white/50">Latest LPs across protocol, tooling, and standards.</p>
               </div>
               <Link
                 href="/docs"
-                className="hidden items-center gap-2 rounded-full border border-white/10 bg-white/[0.02] px-5 py-2.5 text-[13px] font-semibold text-white transition-all hover:border-white/20 hover:bg-white/[0.05] sm:inline-flex"
+                className="hidden items-center gap-2 rounded-full bg-white/[0.05] px-5 py-2.5 text-sm font-medium text-white ring-1 ring-inset ring-white/[0.1] transition-all hover:bg-white/[0.08] sm:inline-flex"
               >
                 View all
                 <ArrowIcon size={14} />
@@ -331,17 +317,17 @@ export default function HomePage() {
                   <Link
                     key={lp.slug.join('/')}
                     href={`/docs/${lp.slug.join('/')}`}
-                    className="group rounded-2xl border border-white/[0.06] bg-black/50 p-6 transition-all hover:border-white/12 hover:bg-white/[0.02]"
+                    className="group rounded-2xl bg-gradient-to-b from-white/[0.03] to-transparent p-6 ring-1 ring-inset ring-white/[0.06] transition-all hover:from-white/[0.05] hover:ring-white/[0.12]"
                   >
                     <div className="flex items-center justify-between gap-3">
-                      <span className="font-mono text-[13px] text-white/40 transition-colors group-hover:text-white/60">LP-{lpNum}</span>
+                      <span className="font-mono text-sm text-white/50 transition-colors group-hover:text-white/70">LP-{lpNum}</span>
                       <StatusBadge status={status} />
                     </div>
-                    <h3 className="mt-4 text-[15px] font-semibold leading-snug transition-colors group-hover:text-white line-clamp-2">
+                    <h3 className="mt-4 text-base font-semibold leading-snug line-clamp-2">
                       {lp.data.title}
                     </h3>
                     {lp.data.description && (
-                      <p className="mt-2 text-[13px] leading-relaxed text-white/40 line-clamp-2">
+                      <p className="mt-2 text-sm leading-relaxed text-white/40 line-clamp-2">
                         {lp.data.description}
                       </p>
                     )}
@@ -350,10 +336,10 @@ export default function HomePage() {
               })}
             </div>
 
-            <div className="mt-8 text-center sm:hidden">
+            <div className="mt-10 text-center sm:hidden">
               <Link
                 href="/docs"
-                className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.02] px-5 py-2.5 text-[13px] font-semibold text-white"
+                className="inline-flex items-center gap-2 rounded-full bg-white/[0.05] px-6 py-3 text-sm font-medium text-white ring-1 ring-inset ring-white/[0.1]"
               >
                 View all proposals
               </Link>
@@ -362,38 +348,32 @@ export default function HomePage() {
         </section>
 
         {/* CTA */}
-        <section className="border-t border-white/[0.06]">
-          <div className="mx-auto max-w-6xl px-6 py-24">
-            <div className="relative overflow-hidden rounded-3xl border border-white/[0.08] bg-gradient-to-b from-white/[0.04] to-transparent">
-              {/* Decorative elements */}
-              <div className="pointer-events-none absolute -right-20 -top-20 h-40 w-40 rounded-full bg-white/[0.03] blur-3xl" />
-              <div className="pointer-events-none absolute -bottom-10 -left-10 h-32 w-32 rounded-full bg-white/[0.02] blur-2xl" />
-
-              <div className="relative px-8 py-12 md:px-16 md:py-16">
-                <div className="flex flex-col items-start gap-8 md:flex-row md:items-center md:justify-between">
-                  <div className="max-w-lg">
-                    <h2 className="text-2xl font-semibold tracking-tight md:text-3xl">Ready to contribute?</h2>
-                    <p className="mt-3 text-[15px] leading-relaxed text-white/50">
-                      Have an idea that improves Lux? Start with the guidelines, then open a pull request for your LP.
-                    </p>
-                  </div>
-                  <div className="flex flex-col gap-3 sm:flex-row">
-                    <Link
-                      href="/contribute"
-                      className="inline-flex h-12 items-center justify-center rounded-full bg-white px-6 text-sm font-semibold text-black transition-all hover:bg-white/90"
-                    >
-                      Read guidelines
-                    </Link>
-                    <a
-                      href="https://github.com/luxfi/lps"
-                      target="_blank"
-                      rel="noreferrer"
-                      className="inline-flex h-12 items-center justify-center gap-2 rounded-full border border-white/10 bg-white/[0.02] px-6 text-sm font-semibold text-white transition-all hover:border-white/20 hover:bg-white/[0.05]"
-                    >
-                      <GitHubIcon size={16} />
-                      Open on GitHub
-                    </a>
-                  </div>
+        <section className="mx-auto max-w-6xl px-6 pb-24">
+          <div className="overflow-hidden rounded-3xl bg-gradient-to-b from-white/[0.06] to-white/[0.02] ring-1 ring-inset ring-white/[0.1]">
+            <div className="px-8 py-14 md:px-14 md:py-16">
+              <div className="flex flex-col gap-10 md:flex-row md:items-center md:justify-between">
+                <div className="max-w-xl">
+                  <h2 className="text-2xl font-semibold tracking-tight md:text-3xl">Ready to contribute?</h2>
+                  <p className="mt-3 text-base leading-relaxed text-white/50">
+                    Have an idea that improves Lux? Start with the guidelines, then open a pull request for your LP.
+                  </p>
+                </div>
+                <div className="flex flex-shrink-0 flex-col gap-3 sm:flex-row">
+                  <Link
+                    href="/contribute"
+                    className="inline-flex h-12 items-center justify-center rounded-full bg-white px-6 text-sm font-semibold text-black transition-all hover:bg-white/90"
+                  >
+                    Read guidelines
+                  </Link>
+                  <a
+                    href="https://github.com/luxfi/lps"
+                    target="_blank"
+                    rel="noreferrer"
+                    className="inline-flex h-12 items-center justify-center gap-2 rounded-full bg-white/[0.05] px-6 text-sm font-semibold text-white ring-1 ring-inset ring-white/[0.1] transition-all hover:bg-white/[0.08]"
+                  >
+                    <GitHubIcon size={16} />
+                    Open on GitHub
+                  </a>
                 </div>
               </div>
             </div>
@@ -408,80 +388,91 @@ export default function HomePage() {
             {/* Brand */}
             <div className="md:col-span-2">
               <div className="flex items-center gap-3">
-                <div className="flex h-9 w-9 items-center justify-center rounded-xl border border-white/10 bg-white/[0.03]">
+                <div className="flex size-10 items-center justify-center rounded-xl bg-white/[0.05] ring-1 ring-inset ring-white/[0.1]">
                   <LuxLogo size={16} />
                 </div>
-                <span className="text-[15px] font-semibold">Lux Network</span>
+                <span className="text-base font-semibold">Lux Network</span>
               </div>
-              <p className="mt-4 max-w-xs text-[13px] leading-relaxed text-white/40">
+              <p className="mt-4 max-w-sm text-sm leading-relaxed text-white/40">
                 Building the future of decentralized infrastructure—open-source, verifiable, and community governed.
               </p>
-              {/* Social icons */}
-              <div className="mt-6 flex items-center gap-3">
-                <a
-                  href="https://github.com/luxfi"
-                  target="_blank"
-                  rel="noreferrer"
-                  className="flex h-9 w-9 items-center justify-center rounded-lg border border-white/[0.08] bg-white/[0.02] text-white/40 transition-all hover:border-white/15 hover:bg-white/[0.05] hover:text-white"
-                  aria-label="GitHub"
-                >
-                  <GitHubIcon size={16} />
-                </a>
-                <a
-                  href="https://discord.gg/lux"
-                  target="_blank"
-                  rel="noreferrer"
-                  className="flex h-9 w-9 items-center justify-center rounded-lg border border-white/[0.08] bg-white/[0.02] text-white/40 transition-all hover:border-white/15 hover:bg-white/[0.05] hover:text-white"
-                  aria-label="Discord"
-                >
-                  <DiscordIcon size={16} />
-                </a>
-                <a
-                  href="https://twitter.com/luxfi"
-                  target="_blank"
-                  rel="noreferrer"
-                  className="flex h-9 w-9 items-center justify-center rounded-lg border border-white/[0.08] bg-white/[0.02] text-white/40 transition-all hover:border-white/15 hover:bg-white/[0.05] hover:text-white"
-                  aria-label="X / Twitter"
-                >
-                  <XIcon size={16} />
-                </a>
+              <div className="mt-6 flex items-center gap-2">
+                {[
+                  { href: 'https://github.com/luxfi', icon: GitHubIcon, label: 'GitHub' },
+                  { href: 'https://discord.gg/lux', icon: DiscordIcon, label: 'Discord' },
+                  { href: 'https://twitter.com/luxfi', icon: XIcon, label: 'X' },
+                ].map((social) => (
+                  <a
+                    key={social.label}
+                    href={social.href}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="flex size-10 items-center justify-center rounded-lg text-white/40 transition-colors hover:bg-white/[0.05] hover:text-white"
+                    aria-label={social.label}
+                  >
+                    <social.icon size={18} />
+                  </a>
+                ))}
               </div>
             </div>
 
             {/* Links */}
-            <div>
-              <h4 className="text-[13px] font-semibold text-white/70">LPs</h4>
-              <ul className="mt-4 space-y-3 text-[13px]">
-                <li><Link href="/docs" className="text-white/40 transition-colors hover:text-white">Browse</Link></li>
-                <li><Link href="/contribute" className="text-white/40 transition-colors hover:text-white">Contribute</Link></li>
-                <li><a href="https://github.com/luxfi/lps" target="_blank" rel="noreferrer" className="text-white/40 transition-colors hover:text-white">GitHub</a></li>
-              </ul>
-            </div>
-
-            <div>
-              <h4 className="text-[13px] font-semibold text-white/70">Network</h4>
-              <ul className="mt-4 space-y-3 text-[13px]">
-                <li><a href="https://lux.network" target="_blank" rel="noreferrer" className="text-white/40 transition-colors hover:text-white">Home</a></li>
-                <li><a href="https://explorer.lux.network" target="_blank" rel="noreferrer" className="text-white/40 transition-colors hover:text-white">Explorer</a></li>
-                <li><a href="https://docs.lux.network" target="_blank" rel="noreferrer" className="text-white/40 transition-colors hover:text-white">Docs</a></li>
-              </ul>
-            </div>
-
-            <div>
-              <h4 className="text-[13px] font-semibold text-white/70">Community</h4>
-              <ul className="mt-4 space-y-3 text-[13px]">
-                <li><a href="https://github.com/luxfi" target="_blank" rel="noreferrer" className="text-white/40 transition-colors hover:text-white">GitHub org</a></li>
-                <li><a href="https://discord.gg/lux" target="_blank" rel="noreferrer" className="text-white/40 transition-colors hover:text-white">Discord</a></li>
-                <li><a href="https://twitter.com/luxfi" target="_blank" rel="noreferrer" className="text-white/40 transition-colors hover:text-white">X / Twitter</a></li>
-              </ul>
-            </div>
+            {[
+              {
+                title: 'LPs',
+                links: [
+                  { label: 'Browse', href: '/docs' },
+                  { label: 'Contribute', href: '/contribute' },
+                  { label: 'GitHub', href: 'https://github.com/luxfi/lps', external: true },
+                ],
+              },
+              {
+                title: 'Network',
+                links: [
+                  { label: 'Home', href: 'https://lux.network', external: true },
+                  { label: 'Explorer', href: 'https://explorer.lux.network', external: true },
+                  { label: 'Docs', href: 'https://docs.lux.network', external: true },
+                ],
+              },
+              {
+                title: 'Community',
+                links: [
+                  { label: 'GitHub org', href: 'https://github.com/luxfi', external: true },
+                  { label: 'Discord', href: 'https://discord.gg/lux', external: true },
+                  { label: 'X / Twitter', href: 'https://twitter.com/luxfi', external: true },
+                ],
+              },
+            ].map((group) => (
+              <div key={group.title}>
+                <h4 className="text-sm font-semibold text-white/70">{group.title}</h4>
+                <ul className="mt-4 space-y-3">
+                  {group.links.map((link) => (
+                    <li key={link.label}>
+                      {link.external ? (
+                        <a href={link.href} target="_blank" rel="noreferrer" className="text-sm text-white/40 transition-colors hover:text-white">
+                          {link.label}
+                        </a>
+                      ) : (
+                        <Link href={link.href} className="text-sm text-white/40 transition-colors hover:text-white">
+                          {link.label}
+                        </Link>
+                      )}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
           </div>
 
-          <div className="mt-16 flex flex-col items-center justify-between gap-4 border-t border-white/[0.06] pt-8 text-[13px] text-white/30 md:flex-row">
-            <div>© {new Date().getFullYear()} Lux Network. All rights reserved.</div>
+          <div className="mt-16 flex flex-col items-center justify-between gap-4 border-t border-white/[0.06] pt-8 md:flex-row">
+            <div className="text-sm text-white/30">© {new Date().getFullYear()} Lux Network. All rights reserved.</div>
             <div className="flex items-center gap-6">
-              <a href="https://lux.network/privacy" target="_blank" rel="noreferrer" className="transition-colors hover:text-white">Privacy</a>
-              <a href="https://lux.network/terms" target="_blank" rel="noreferrer" className="transition-colors hover:text-white">Terms</a>
+              <a href="https://lux.network/privacy" target="_blank" rel="noreferrer" className="text-sm text-white/30 transition-colors hover:text-white">
+                Privacy
+              </a>
+              <a href="https://lux.network/terms" target="_blank" rel="noreferrer" className="text-sm text-white/30 transition-colors hover:text-white">
+                Terms
+              </a>
             </div>
           </div>
         </div>
