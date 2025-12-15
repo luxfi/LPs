@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { Logo, LogoWithText } from '@/components/logo';
 import { source, type LPCategory } from '@/lib/source';
 import { ThemeToggle } from '@/components/theme-toggle';
+import { SearchDialog } from '@/components/search-dialog';
 
 type ProposalStatus = 'Final' | 'Draft' | 'Review' | 'Last Call' | 'Withdrawn' | 'Stagnant';
 
@@ -210,28 +211,40 @@ const footerLinks = {
 // Educational concept cards
 const learningTopics = [
   {
-    title: 'What is Blockchain?',
-    description: 'A distributed ledger technology that enables secure, transparent, and immutable record-keeping across a network of computers without requiring a central authority.',
-    icon: '🔗',
+    title: 'Post-Quantum Cryptography',
+    description: 'Quantum-resistant cryptographic algorithms including ML-KEM and ML-DSA that provide long-term security against quantum computing threats.',
+    icon: '🔐',
     color: 'blue',
   },
   {
-    title: 'Consensus Mechanisms',
-    description: 'Protocols that ensure all nodes in a network agree on the current state of the blockchain. Lux uses probabilistic consensus for sub-second finality.',
-    icon: '🤝',
+    title: 'Zero-Knowledge Proofs',
+    description: 'Privacy-preserving cryptographic protocols including zk-SNARKs and zk-STARKs for confidential transactions and verifiable computation.',
+    icon: '🕵️',
     color: 'purple',
   },
   {
-    title: 'Post-Quantum Cryptography',
-    description: 'Next-generation cryptographic algorithms designed to resist attacks from quantum computers. Lux implements NIST-standardized ML-KEM and ML-DSA.',
-    icon: '🔐',
+    title: 'Homomorphic Encryption',
+    description: 'Advanced encryption techniques that enable computation on encrypted data, supporting privacy-preserving analytics and machine learning.',
+    icon: '🔢',
     color: 'emerald',
   },
   {
-    title: 'Decentralized Finance (DeFi)',
-    description: 'Financial services built on blockchain that operate without intermediaries. Includes lending, trading, and yield generation protocols.',
-    icon: '💰',
+    title: 'Hardware Acceleration',
+    description: 'Optimized cryptographic operations leveraging GPU, FPGA, and ASIC technologies for high-performance blockchain applications.',
+    icon: '⚡',
+    color: 'amber',
+  },
+  {
+    title: 'Threshold Signatures',
+    description: 'Distributed cryptographic protocols that enhance security by eliminating single points of failure in key management.',
+    icon: '🔑',
     color: 'green',
+  },
+  {
+    title: 'Secure Multi-Party Computation',
+    description: 'Collaborative computation frameworks that preserve data privacy while enabling advanced analytics and machine learning applications.',
+    icon: '🤖',
+    color: 'indigo',
   },
 ];
 
@@ -262,10 +275,9 @@ export default function HomePage() {
     return { final, draft, total: cat.lps.length };
   };
 
-  // Group categories by type
-  const coreCategories = allCategories.filter(c => ['Core Architecture', 'Consensus', 'Cryptography', 'Network Upgrades', 'Research'].includes(c.name));
-  const applicationCategories = allCategories.filter(c => ['Token Standards', 'DeFi', 'Governance'].includes(c.name));
-  const chainCategories = allCategories.filter(c => ['P-Chain', 'C-Chain', 'X-Chain'].includes(c.name));
+  // Group categories by type for balanced 6-category sections
+  const foundationalCategories = allCategories.filter(c => ['Core Architecture', 'Consensus', 'Cryptography', 'Token Standards', 'DeFi', 'Governance'].includes(c.name));
+  const advancedCategories = allCategories.filter(c => ['Network Upgrades', 'Research', 'P-Chain', 'C-Chain', 'X-Chain'].includes(c.name));
 
   return (
     <div className="min-h-screen bg-background text-foreground">
@@ -276,6 +288,7 @@ export default function HomePage() {
             <LogoWithText size={18} />
           </Link>
           <div className="flex items-center gap-3">
+            <SearchDialog />
             <ThemeToggle />
             <Link
               href="/docs"
@@ -297,7 +310,7 @@ export default function HomePage() {
             Lux Proposals
           </h1>
           <p className="mx-auto mt-6 max-w-2xl text-lg text-muted-foreground">
-            Open standards for blockchain architecture, consensus protocols, cryptography, and decentralized finance. Learn how modern blockchains work while exploring production-ready specifications.
+            Lux Network: A high-performance, quantum-resistant blockchain platform designed for the AI era. Explore advanced cryptography, privacy-preserving technologies, and decentralized infrastructure standards.
           </p>
           <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
             <Link
@@ -340,8 +353,8 @@ export default function HomePage() {
         {/* Learning Topics */}
         <section className="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-20 lg:px-8">
           <div className="text-center">
-            <h2 className="text-2xl font-bold sm:text-3xl">Understanding Blockchain Technology</h2>
-            <p className="mt-3 text-muted-foreground">Key concepts that power decentralized networks</p>
+            <h2 className="text-2xl font-bold sm:text-3xl">Advanced Cryptography & Privacy Technologies</h2>
+            <p className="mt-3 text-muted-foreground">Cutting-edge security innovations powering the quantum-safe, AI-ready blockchain</p>
           </div>
           <div className="mt-10 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {learningTopics.map((topic) => (
@@ -359,17 +372,17 @@ export default function HomePage() {
           </div>
         </section>
 
-        {/* Protocol Layer Categories */}
+        {/* Foundational Standards */}
         <section className="border-y border-border bg-muted/20">
           <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-20 lg:px-8">
             <div className="flex items-center justify-between">
               <div>
-                <h2 className="text-2xl font-bold">Protocol Layer</h2>
-                <p className="mt-1 text-muted-foreground">Core infrastructure and security</p>
+                <h2 className="text-2xl font-bold">Foundational Standards</h2>
+                <p className="mt-1 text-muted-foreground">Core blockchain infrastructure and protocols</p>
               </div>
             </div>
             <div className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-              {coreCategories.map((cat) => {
+              {foundationalCategories.map((cat) => {
                 const catStats = getCategoryStats(cat);
                 return (
                   <Link
@@ -418,16 +431,16 @@ export default function HomePage() {
           </div>
         </section>
 
-        {/* Application Layer Categories */}
+        {/* Advanced Technology */}
         <section className="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-20 lg:px-8">
           <div className="flex items-center justify-between">
             <div>
-              <h2 className="text-2xl font-bold">Application Layer</h2>
-              <p className="mt-1 text-muted-foreground">Standards for tokens, DeFi, and governance</p>
+              <h2 className="text-2xl font-bold">Advanced Technology</h2>
+              <p className="mt-1 text-muted-foreground">Quantum-resistant cryptography and multi-chain architecture</p>
             </div>
           </div>
           <div className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-3">
-            {applicationCategories.map((cat) => {
+            {advancedCategories.slice(0, 3).map((cat) => {
               const catStats = getCategoryStats(cat);
               return (
                 <Link
@@ -481,11 +494,11 @@ export default function HomePage() {
             <div className="flex items-center justify-between">
               <div>
                 <h2 className="text-2xl font-bold">Multi-Chain Architecture</h2>
-                <p className="mt-1 text-muted-foreground">Specialized chains for different use cases</p>
+                <p className="mt-1 text-muted-foreground">Specialized blockchain networks for diverse applications</p>
               </div>
             </div>
             <div className="mt-8 grid grid-cols-1 gap-6 lg:grid-cols-3">
-              {chainCategories.map((cat) => {
+              {advancedCategories.slice(3).map((cat) => {
                 const catStats = getCategoryStats(cat);
                 return (
                   <Link
@@ -659,9 +672,9 @@ export default function HomePage() {
         {/* CTA */}
         <section className="mx-auto max-w-6xl px-4 pb-16 sm:px-6 sm:pb-20 lg:px-8">
           <div className="rounded-2xl bg-foreground p-8 text-background sm:p-12">
-            <h2 className="text-2xl font-bold sm:text-3xl">Ready to contribute?</h2>
+            <h2 className="text-2xl font-bold sm:text-3xl">Contribute to advanced blockchain standards</h2>
             <p className="mt-3 max-w-xl opacity-80">
-              Have an idea for improving the Lux ecosystem? Start with the guidelines, then open a PR.
+              Help shape the future of high-performance, quantum-resistant blockchain technology. Explore our contribution guidelines and join the Lux Network ecosystem.
             </p>
             <div className="mt-8 flex flex-col gap-4 sm:flex-row">
               <Link
