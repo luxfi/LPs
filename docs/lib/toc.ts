@@ -1,3 +1,9 @@
+import type { TOCItemType } from 'fumadocs-core/toc';
+
+// Re-export for convenience
+export type { TOCItemType };
+
+// Legacy interface for our custom TOC component
 export interface TOCItem {
   id: string;
   text: string;
@@ -5,24 +11,25 @@ export interface TOCItem {
 }
 
 // Extract headings from markdown content (server-side utility)
-export function extractHeadings(content: string): TOCItem[] {
-  const headings: TOCItem[] = [];
+// Returns fumadocs-compatible TOCItemType format
+export function extractHeadings(content: string): TOCItemType[] {
+  const headings: TOCItemType[] = [];
   const lines = content.split('\n');
 
   for (const line of lines) {
     // Match markdown headings (## Heading, ### Heading, etc.)
     const match = line.match(/^(#{2,4})\s+(.+)$/);
     if (match) {
-      const level = match[1].length;
-      const text = match[2].trim();
+      const depth = match[1].length;
+      const title = match[2].trim();
       // Create a slug from the heading text
-      const id = text
+      const id = title
         .toLowerCase()
         .replace(/[^a-z0-9\s-]/g, '')
         .replace(/\s+/g, '-')
         .replace(/-+/g, '-');
 
-      headings.push({ id, text, level });
+      headings.push({ title, url: `#${id}`, depth });
     }
   }
 

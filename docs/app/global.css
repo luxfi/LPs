@@ -80,32 +80,50 @@
   /* Pure black theme */
   --background: oklch(0 0 0);
   --foreground: oklch(0.98 0 0);
-  --card: oklch(0.08 0 0);
+  --card: oklch(0.06 0 0);
   --card-foreground: oklch(0.98 0 0);
-  --popover: oklch(0.08 0 0);
+  --popover: oklch(0.06 0 0);
   --popover-foreground: oklch(0.98 0 0);
   --primary: oklch(0.98 0 0);
-  --primary-foreground: oklch(0.08 0 0);
-  --secondary: oklch(0.15 0 0);
+  --primary-foreground: oklch(0.06 0 0);
+  --secondary: oklch(0.12 0 0);
   --secondary-foreground: oklch(0.98 0 0);
-  --muted: oklch(0.15 0 0);
-  --muted-foreground: oklch(0.65 0 0);
-  --accent: oklch(0.15 0 0);
+  --muted: oklch(0.12 0 0);
+  --muted-foreground: oklch(0.6 0 0);
+  --accent: oklch(0.12 0 0);
   --accent-foreground: oklch(0.98 0 0);
   --destructive: oklch(0.6 0.2 25);
-  --border: oklch(0.2 0 0);
-  --input: oklch(0.2 0 0);
+  --border: oklch(0.18 0 0);
+  --input: oklch(0.18 0 0);
   --ring: oklch(0.4 0 0);
-  --sidebar: oklch(0.04 0 0);
+  --sidebar: oklch(0 0 0);
   --sidebar-foreground: oklch(0.98 0 0);
   --sidebar-primary: oklch(0.98 0 0);
-  --sidebar-primary-foreground: oklch(0.08 0 0);
-  --sidebar-accent: oklch(0.12 0 0);
+  --sidebar-primary-foreground: oklch(0.06 0 0);
+  --sidebar-accent: oklch(0.1 0 0);
   --sidebar-accent-foreground: oklch(0.98 0 0);
-  --sidebar-border: oklch(0.2 0 0);
+  --sidebar-border: oklch(0.18 0 0);
   --sidebar-ring: oklch(0.4 0 0);
-  --code: oklch(0.12 0 0);
+  --code: oklch(0.1 0 0);
   --code-foreground: oklch(0.98 0 0);
+
+  /* Override fumadocs variables for pure black */
+  --color-fd-background: hsl(0, 0%, 0%);
+  --color-fd-foreground: hsl(0, 0%, 98%);
+  --color-fd-muted: hsl(0, 0%, 6%);
+  --color-fd-muted-foreground: hsl(0, 0%, 60%);
+  --color-fd-popover: hsl(0, 0%, 4%);
+  --color-fd-popover-foreground: hsl(0, 0%, 98%);
+  --color-fd-card: hsl(0, 0%, 4%);
+  --color-fd-card-foreground: hsl(0, 0%, 98%);
+  --color-fd-border: hsl(0, 0%, 14%);
+  --color-fd-primary: hsl(0, 0%, 98%);
+  --color-fd-primary-foreground: hsl(0, 0%, 4%);
+  --color-fd-secondary: hsl(0, 0%, 10%);
+  --color-fd-secondary-foreground: hsl(0, 0%, 98%);
+  --color-fd-accent: hsl(0, 0%, 12%);
+  --color-fd-accent-foreground: hsl(0, 0%, 100%);
+  --color-fd-ring: hsl(0, 0%, 30%);
 }
 
 @layer base {
