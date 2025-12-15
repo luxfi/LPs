@@ -4,7 +4,7 @@ import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import Link from 'next/link';
 import { ArrowLeft, ArrowRight, ExternalLink, Calendar, User, Tag } from 'lucide-react';
-import { TableOfContents } from '@/components/toc';
+import { DocsPage, DocsBody } from 'fumadocs-ui/page';
 import { extractHeadings } from '@/lib/toc';
 
 // LP Index/Overview Page Component
@@ -112,12 +112,10 @@ function LPDetailPage({ page }: { page: any }) {
   const tocItems = extractHeadings(page.data.content);
 
   return (
-    <div className="flex gap-8">
-      {/* Main Content */}
-      <article className="flex-1 min-w-0 max-w-4xl">
-        {/* Header */}
-        <div className="mb-8 pb-8 border-b border-border">
-        <div className="flex items-center gap-2 mb-4">
+    <DocsPage toc={tocItems}>
+      {/* Header */}
+      <div className="mb-6 pb-6 border-b border-border">
+        <div className="flex items-center gap-2 mb-3">
           <Link
             href="/docs"
             className="text-sm text-muted-foreground hover:text-foreground flex items-center gap-1"
@@ -127,15 +125,15 @@ function LPDetailPage({ page }: { page: any }) {
           </Link>
         </div>
 
-        <div className="flex items-start justify-between gap-4 mb-4">
+        <div className="flex items-start justify-between gap-4 mb-3">
           <div>
-            <span className="text-sm font-mono text-muted-foreground">
+            <span className="text-xs font-mono text-muted-foreground">
               LP-{String(frontmatter.lp).padStart(4, '0')}
             </span>
-            <h1 className="text-3xl font-bold mt-1">{page.data.title}</h1>
+            <h1 className="text-2xl font-bold mt-1">{page.data.title}</h1>
           </div>
           {frontmatter.status && (
-            <span className={`text-sm px-3 py-1 rounded-full shrink-0 ${
+            <span className={`text-xs px-2 py-1 rounded-full shrink-0 ${
               frontmatter.status === 'Final' ? 'bg-green-500/10 text-green-500' :
               frontmatter.status === 'Draft' ? 'bg-yellow-500/10 text-yellow-500' :
               frontmatter.status === 'Review' ? 'bg-blue-500/10 text-blue-500' :
@@ -148,50 +146,50 @@ function LPDetailPage({ page }: { page: any }) {
         </div>
 
         {page.data.description && (
-          <p className="text-muted-foreground">{page.data.description}</p>
+          <p className="text-sm text-muted-foreground">{page.data.description}</p>
         )}
 
-        {/* Metadata Grid */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-6 p-4 rounded-lg bg-card border border-border">
+        {/* Metadata Grid - Tighter */}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mt-4 p-3 rounded-lg bg-card border border-border text-xs">
           {frontmatter.type && (
             <div>
-              <div className="text-xs text-muted-foreground mb-1">Type</div>
-              <div className="text-sm font-medium">{frontmatter.type}</div>
+              <div className="text-muted-foreground mb-0.5">Type</div>
+              <div className="font-medium">{frontmatter.type}</div>
             </div>
           )}
           {frontmatter.category && (
             <div>
-              <div className="text-xs text-muted-foreground mb-1">Category</div>
-              <div className="text-sm font-medium">{frontmatter.category}</div>
+              <div className="text-muted-foreground mb-0.5">Category</div>
+              <div className="font-medium">{frontmatter.category}</div>
             </div>
           )}
           {frontmatter.author && (
             <div>
-              <div className="text-xs text-muted-foreground mb-1 flex items-center gap-1">
+              <div className="text-muted-foreground mb-0.5 flex items-center gap-1">
                 <User className="size-3" /> Author
               </div>
-              <div className="text-sm font-medium">{frontmatter.author}</div>
+              <div className="font-medium">{frontmatter.author}</div>
             </div>
           )}
           {frontmatter.created && (
             <div>
-              <div className="text-xs text-muted-foreground mb-1 flex items-center gap-1">
+              <div className="text-muted-foreground mb-0.5 flex items-center gap-1">
                 <Calendar className="size-3" /> Created
               </div>
-              <div className="text-sm font-medium">{frontmatter.created}</div>
+              <div className="font-medium">{frontmatter.created}</div>
             </div>
           )}
         </div>
 
         {/* Tags */}
         {frontmatter.tags && frontmatter.tags.length > 0 && (
-          <div className="flex items-center gap-2 mt-4">
-            <Tag className="size-4 text-muted-foreground" />
-            <div className="flex flex-wrap gap-2">
+          <div className="flex items-center gap-2 mt-3">
+            <Tag className="size-3 text-muted-foreground" />
+            <div className="flex flex-wrap gap-1">
               {frontmatter.tags.map((tag: string) => (
                 <span
                   key={tag}
-                  className="text-xs px-2 py-1 rounded-full bg-accent text-muted-foreground"
+                  className="text-xs px-2 py-0.5 rounded-full bg-accent text-muted-foreground"
                 >
                   {tag}
                 </span>
@@ -206,34 +204,24 @@ function LPDetailPage({ page }: { page: any }) {
             href={frontmatter['discussions-to']}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 mt-4 text-sm text-muted-foreground hover:text-foreground"
+            className="inline-flex items-center gap-1 mt-3 text-xs text-muted-foreground hover:text-foreground"
           >
-            <ExternalLink className="size-4" />
+            <ExternalLink className="size-3" />
             Join Discussion
           </a>
         )}
-        </div>
+      </div>
 
-        {/* Content */}
-        <div className="prose prose-neutral dark:prose-invert max-w-none">
-          <ReactMarkdown
-            remarkPlugins={[remarkGfm]}
-            components={markdownComponents}
-          >
-            {page.data.content}
-          </ReactMarkdown>
-        </div>
-      </article>
-
-      {/* Table of Contents Sidebar */}
-      {tocItems.length > 0 && (
-        <aside className="hidden xl:block w-64 shrink-0">
-          <div className="sticky top-24">
-            <TableOfContents items={tocItems} />
-          </div>
-        </aside>
-      )}
-    </div>
+      {/* Content */}
+      <DocsBody>
+        <ReactMarkdown
+          remarkPlugins={[remarkGfm]}
+          components={markdownComponents}
+        >
+          {page.data.content}
+        </ReactMarkdown>
+      </DocsBody>
+    </DocsPage>
   );
 }
 
