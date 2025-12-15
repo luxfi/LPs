@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { Logo, LogoWithText } from '../components/logo';
-import { FileText, GitPullRequest, Search, Users, ArrowRight, BookOpen, Shield, Zap, Lock, Database } from 'lucide-react';
+import { FileText, GitPullRequest, Search, Users, ArrowRight, Shield, Zap, Lock, Database } from 'lucide-react';
 import { source } from '@/lib/source';
 
 export default function HomePage() {
