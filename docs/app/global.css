@@ -36,6 +36,11 @@
   --color-border: var(--border);
   --color-input: var(--input);
   --color-ring: var(--ring);
+  /* Custom shadows */
+  --shadow-soft: 0 0 0 1px rgba(255,255,255,0.08), 0 20px 60px rgba(0,0,0,0.55);
+  --shadow-soft-hover: 0 0 0 1px rgba(255,255,255,0.14), 0 24px 80px rgba(0,0,0,0.60);
+  --shadow-soft-light: 0 0 0 1px rgba(0,0,0,0.06), 0 20px 60px rgba(0,0,0,0.08);
+  --shadow-soft-light-hover: 0 0 0 1px rgba(0,0,0,0.10), 0 24px 80px rgba(0,0,0,0.12);
 }
 
 /* Light mode - Pure white */
@@ -124,12 +129,17 @@
     @apply border-border outline-ring/50;
   }
 
+  /* Refined selection - matches landing page */
   ::selection {
-    @apply bg-foreground/10 text-foreground;
+    background: rgba(255, 255, 255, 0.18);
+  }
+
+  :root ::selection {
+    background: rgba(0, 0, 0, 0.12);
   }
 
   html {
-    @apply scroll-smooth;
+    @apply scroll-smooth antialiased;
   }
 
   body {
@@ -138,32 +148,169 @@
   }
 }
 
-/* Status badges */
-.status-draft {
-  @apply border border-yellow-500/30 bg-yellow-500/10 text-yellow-600 dark:text-yellow-400;
-}
-.status-review {
-  @apply border border-blue-500/30 bg-blue-500/10 text-blue-600 dark:text-blue-400;
-}
-.status-final {
-  @apply border border-green-500/30 bg-green-500/10 text-green-600 dark:text-green-400;
-}
-.status-withdrawn {
-  @apply border border-red-500/30 bg-red-500/10 text-red-600 dark:text-red-400;
-}
-.status-stagnant {
-  @apply border border-foreground/20 bg-foreground/5 text-muted-foreground;
+/* Subtle grid background - Vercel/Linear style */
+.lux-grid {
+  background-image:
+    linear-gradient(to right, rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+  background-size: 56px 56px;
+  mask-image: radial-gradient(ellipse at top, rgba(0, 0, 0, 1) 35%, rgba(0, 0, 0, 0) 72%);
+  -webkit-mask-image: radial-gradient(ellipse at top, rgba(0, 0, 0, 1) 35%, rgba(0, 0, 0, 0) 72%);
 }
 
-/* Type badges */
-.type-standards {
-  @apply border border-foreground/20 bg-foreground/5 text-foreground;
+:root .lux-grid {
+  background-image:
+    linear-gradient(to right, rgba(0, 0, 0, 0.04) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(0, 0, 0, 0.04) 1px, transparent 1px);
 }
-.type-meta {
-  @apply border border-foreground/20 bg-foreground/5 text-foreground;
+
+/* Noise overlay for depth */
+.lux-noise::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20width%3D%27160%27%20height%3D%27160%27%3E%0A%3Cfilter%20id%3D%27n%27%3E%3CfeTurbulence%20type%3D%27fractalNoise%27%20baseFrequency%3D%27.8%27%20numOctaves%3D%274%27%20stitchTiles%3D%27stitch%27/%3E%3C/filter%3E%0A%3Crect%20width%3D%27160%27%20height%3D%27160%27%20filter%3D%27url%28%23n%29%27%20opacity%3D%27.35%27/%3E%3C/svg%3E");
+  opacity: 0.06;
+  mix-blend-mode: overlay;
+  z-index: 0;
 }
+
+/* Status badges - monochrome with dot indicators */
+.status-draft {
+  @apply inline-flex items-center gap-1.5 rounded-full border border-white/10 bg-black/30 px-2.5 py-1 text-xs font-medium text-white/70;
+}
+.status-draft::before {
+  content: "";
+  @apply h-1.5 w-1.5 rounded-full bg-white/50;
+}
+
+.status-review {
+  @apply inline-flex items-center gap-1.5 rounded-full border border-white/10 bg-black/30 px-2.5 py-1 text-xs font-medium text-white/70;
+}
+.status-review::before {
+  content: "";
+  @apply h-1.5 w-1.5 rounded-full bg-white/60;
+}
+
+.status-final {
+  @apply inline-flex items-center gap-1.5 rounded-full border border-white/10 bg-black/30 px-2.5 py-1 text-xs font-medium text-white/80;
+}
+.status-final::before {
+  content: "";
+  @apply h-1.5 w-1.5 rounded-full bg-white;
+}
+
+.status-withdrawn {
+  @apply inline-flex items-center gap-1.5 rounded-full border border-white/10 bg-black/30 px-2.5 py-1 text-xs font-medium text-white/50;
+}
+.status-withdrawn::before {
+  content: "";
+  @apply h-1.5 w-1.5 rounded-full bg-white/30;
+}
+
+.status-stagnant {
+  @apply inline-flex items-center gap-1.5 rounded-full border border-white/10 bg-black/30 px-2.5 py-1 text-xs font-medium text-white/50;
+}
+.status-stagnant::before {
+  content: "";
+  @apply h-1.5 w-1.5 rounded-full bg-white/30;
+}
+
+/* Light mode status badges */
+:root .status-draft {
+  @apply border-black/10 bg-white text-black/60;
+}
+:root .status-draft::before {
+  @apply bg-black/40;
+}
+
+:root .status-review {
+  @apply border-black/10 bg-white text-black/60;
+}
+:root .status-review::before {
+  @apply bg-black/50;
+}
+
+:root .status-final {
+  @apply border-black/10 bg-white text-black/80;
+}
+:root .status-final::before {
+  @apply bg-black;
+}
+
+:root .status-withdrawn {
+  @apply border-black/10 bg-white text-black/40;
+}
+:root .status-withdrawn::before {
+  @apply bg-black/30;
+}
+
+:root .status-stagnant {
+  @apply border-black/10 bg-white text-black/40;
+}
+:root .status-stagnant::before {
+  @apply bg-black/30;
+}
+
+/* Type badges - monochrome */
+.type-standards,
+.type-meta,
 .type-informational {
-  @apply border border-foreground/20 bg-foreground/5 text-foreground;
+  @apply inline-flex items-center rounded-full border border-white/10 bg-black/30 px-2.5 py-1 text-xs font-medium text-white/70;
+}
+
+:root .type-standards,
+:root .type-meta,
+:root .type-informational {
+  @apply border-black/10 bg-black/5 text-black/70;
+}
+
+/* Card styles with soft shadows */
+.lux-card {
+  @apply rounded-2xl border border-white/10 bg-white/5 p-5 transition-all;
+  box-shadow: var(--shadow-soft);
+}
+
+.lux-card:hover {
+  @apply border-white/15;
+  box-shadow: var(--shadow-soft-hover);
+}
+
+:root .lux-card {
+  @apply border-black/10 bg-black/[0.02];
+  box-shadow: var(--shadow-soft-light);
+}
+
+:root .lux-card:hover {
+  @apply border-black/15;
+  box-shadow: var(--shadow-soft-light-hover);
+}
+
+/* Inset shadow for depth on icons/badges */
+.lux-inset {
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06);
+}
+
+:root .lux-inset {
+  box-shadow: inset 0 1px 0 rgba(0, 0, 0, 0.04);
+}
+
+/* Button styles */
+.lux-btn-primary {
+  @apply inline-flex items-center justify-center rounded-xl bg-white px-5 py-3 text-sm font-semibold text-black transition-opacity hover:opacity-90;
+}
+
+:root .lux-btn-primary {
+  @apply bg-black text-white;
+}
+
+.lux-btn-secondary {
+  @apply inline-flex items-center justify-center rounded-xl border border-white/10 bg-white/5 px-5 py-3 text-sm font-semibold text-white transition-colors hover:border-white/15 hover:bg-white/10;
+}
+
+:root .lux-btn-secondary {
+  @apply border-black/10 bg-black/5 text-black hover:border-black/15 hover:bg-black/10;
 }
 
 @utility no-scrollbar {
@@ -178,4 +325,50 @@
 :root {
   --fd-sidebar-width: 280px;
   --fd-content-width: 800px;
+}
+
+/* Refined fumadocs components */
+.dark [data-rehype-pretty-code-figure] pre {
+  @apply border-white/10 bg-white/[0.02];
+}
+
+[data-rehype-pretty-code-figure] pre {
+  @apply border-black/10 bg-black/[0.02];
+}
+
+/* Sidebar refinements */
+.dark [data-fd-sidebar] {
+  @apply border-white/10;
+}
+
+[data-fd-sidebar] {
+  @apply border-black/10;
+}
+
+/* Link styles */
+.dark a:not([class]) {
+  @apply text-white/80 underline-offset-2 hover:text-white;
+}
+
+a:not([class]) {
+  @apply text-black/80 underline-offset-2 hover:text-black;
+}
+
+/* Prose refinements for dark mode */
+.dark .prose {
+  --tw-prose-body: hsl(0, 0%, 70%);
+  --tw-prose-headings: hsl(0, 0%, 98%);
+  --tw-prose-links: hsl(0, 0%, 98%);
+  --tw-prose-bold: hsl(0, 0%, 98%);
+  --tw-prose-counters: hsl(0, 0%, 55%);
+  --tw-prose-bullets: hsl(0, 0%, 40%);
+  --tw-prose-hr: hsl(0, 0%, 15%);
+  --tw-prose-quotes: hsl(0, 0%, 80%);
+  --tw-prose-quote-borders: hsl(0, 0%, 20%);
+  --tw-prose-captions: hsl(0, 0%, 55%);
+  --tw-prose-code: hsl(0, 0%, 98%);
+  --tw-prose-pre-code: hsl(0, 0%, 80%);
+  --tw-prose-pre-bg: hsl(0, 0%, 4%);
+  --tw-prose-th-borders: hsl(0, 0%, 20%);
+  --tw-prose-td-borders: hsl(0, 0%, 15%);
 }
