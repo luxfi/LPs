@@ -16,7 +16,7 @@ activation:
 tags: [bridge, security]
 ---
 
-> **See also**: [LP-330](./lp-7330-t-chain-thresholdvm-specification.md), [LP-331](./lp-6331-b-chain-bridgevm-specification.md), [LP-333](./lp-7333-dynamic-signer-rotation-with-lss-protocol.md), [LP-335](./lp-6335-bridge-smart-contract-integration.md), [LP-INDEX](./LP-INDEX.md)
+> **See also**: [LP-330](/docs/lp-7330-t-chain-thresholdvm-specification/), [LP-331](/docs/lp-6331-b-chain-bridgevm-specification/), [LP-333](/docs/lp-7333-dynamic-signer-rotation-with-lss-protocol/), [LP-335](/docs/lp-6335-bridge-smart-contract-integration/), [LP-INDEX](/docs/)
 
 ## Abstract
 

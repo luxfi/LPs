@@ -16,7 +16,7 @@ activation:
   activationHeight: "0"
 ---
 
-> **See also**: [LP-12: C-Chain (Contract Chain) Specification](./lp-12-c-chain-contract-chain-specification.md), [LP-20: LRC-20 Fungible Token Standard](./lp-20-lrc-20-fungible-token-standard.md), [LP-1155: LRC-1155 Multi-Token Standard](./lp-2155-lrc-1155-multi-token-standard.md)
+> **See also**: [LP-12: C-Chain (Contract Chain) Specification](/docs/lp-12-c-chain-contract-chain-specification/), [LP-20: LRC-20 Fungible Token Standard](/docs/lp-20-lrc-20-fungible-token-standard/), [LP-1155: LRC-1155 Multi-Token Standard](/docs/lp-2155-lrc-1155-multi-token-standard/)
 
 ## Abstract
 

@@ -19,9 +19,9 @@ series: LP-9000 DEX Series
 >
 > **Source**: [github.com/luxfi/dex](https://github.com/luxfi/dex)
 
-> **Part of LP-9000 Series**: This LP is part of the [LP-9000 DEX Series](./lp-9000-dex-overview.md) - Lux's high-performance decentralized exchange infrastructure.
+> **Part of LP-9000 Series**: This LP is part of the [LP-9000 DEX Series](/docs/lp-9000-dex-overview/) - Lux's high-performance decentralized exchange infrastructure.
 
-> **LP-9000 Series**: [LP-9000 Overview](./lp-9000-dex-overview.md) | [LP-9002 API](./lp-9002-dex-api-rpc-specification.md) | [LP-9003 Performance](./lp-9003-high-performance-dex-protocol.md) | [LP-9004 Perpetuals](./lp-9004-perpetuals-derivatives-protocol.md) | [LP-9005 Oracle](./lp-9005-native-oracle-protocol.md)
+> **LP-9000 Series**: [LP-9000 Overview](/docs/lp-9000-dex-overview/) | [LP-9002 API](/docs/lp-9002-dex-api-rpc-specification/) | [LP-9003 Performance](/docs/lp-9003-high-performance-dex-protocol/) | [LP-9004 Perpetuals](/docs/lp-9004-perpetuals-derivatives-protocol/) | [LP-9005 Oracle](/docs/lp-9005-native-oracle-protocol/)
 
 ## Implementation Status
 
@@ -417,11 +417,11 @@ This is a new system with no backwards compatibility concerns. The DEX integrate
 
 ## Related LPs
 
-- [LP-9000](./lp-9000-dex-overview.md): DEX Overview
-- [LP-9002](./lp-9002-dex-api-rpc-specification.md): DEX API & RPC
-- [LP-9003](./lp-9003-high-performance-dex-protocol.md): Performance & Acceleration
-- [LP-9004](./lp-9004-perpetuals-derivatives-protocol.md): Perpetuals & Derivatives
-- [LP-9005](./lp-9005-native-oracle-protocol.md): Oracle Protocol
+- [LP-9000](/docs/lp-9000-dex-overview/): DEX Overview
+- [LP-9002](/docs/lp-9002-dex-api-rpc-specification/): DEX API & RPC
+- [LP-9003](/docs/lp-9003-high-performance-dex-protocol/): Performance & Acceleration
+- [LP-9004](/docs/lp-9004-perpetuals-derivatives-protocol/): Perpetuals & Derivatives
+- [LP-9005](/docs/lp-9005-native-oracle-protocol/): Oracle Protocol
 
 ## Copyright
 

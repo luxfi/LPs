@@ -288,7 +288,7 @@ A: No. Submit a new LP that supersedes the old one.
 
 ## Related Documents
 
-- [LP-0](./lp-0.md) - Network Architecture & Governance Framework
+- [LP-0](/docs/lp-0/) - Network Architecture & Governance Framework
 - [CONTRIBUTING.md](../CONTRIBUTING.md) - Contribution guidelines
 - [README.md](../README.md) - Repository overview
 

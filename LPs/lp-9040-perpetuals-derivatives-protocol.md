@@ -16,9 +16,9 @@ tags: [defi, derivatives, lp-9000-series]
 implementation: https://github.com/luxfi/dex
 ---
 
-> **Part of LP-9000 Series**: This LP is part of the [LP-9000 DEX Series](./lp-9000-dex-overview.md) - Lux's standalone sidecar exchange network.
+> **Part of LP-9000 Series**: This LP is part of the [LP-9000 DEX Series](/docs/lp-9000-dex-overview/) - Lux's standalone sidecar exchange network.
 
-> **LP-9000 Series**: [LP-9000 Overview](./lp-9000-dex-overview.md) | [LP-9001 Trading Engine](./lp-9001-dex-trading-engine.md) | [LP-9002 API](./lp-9002-dex-api-rpc-specification.md) | [LP-9003 Performance](./lp-9003-high-performance-dex-protocol.md) | [LP-9005 Oracle](./lp-9005-native-oracle-protocol.md)
+> **LP-9000 Series**: [LP-9000 Overview](/docs/lp-9000-dex-overview/) | [LP-9001 Trading Engine](/docs/lp-9001-dex-trading-engine/) | [LP-9002 API](/docs/lp-9002-dex-api-rpc-specification/) | [LP-9003 Performance](/docs/lp-9003-high-performance-dex-protocol/) | [LP-9005 Oracle](/docs/lp-9005-native-oracle-protocol/)
 
 # LP-9004: Perpetuals & Derivatives Protocol
 

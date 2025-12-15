@@ -12,7 +12,7 @@ requires: 7014
 tags: [mpc, threshold-crypto]
 ---
 
-> **See also**: [LP-14](./lp-14-m-chain-threshold-signatures-with-cgg21-uc-non-interactive-ecdsa.md), [LP-13](./lp-13-m-chain-decentralised-mpc-custody-and-swap-signature-layer.md), [LP-INDEX](./LP-INDEX.md)
+> **See also**: [LP-14](/docs/lp-14-m-chain-threshold-signatures-with-cgg21-uc-non-interactive-ecdsa/), [LP-13](/docs/lp-13-m-chain-decentralised-mpc-custody-and-swap-signature-layer/), [LP-INDEX](/docs/)
 
 ## Abstract
 

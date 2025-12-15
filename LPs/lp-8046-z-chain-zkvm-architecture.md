@@ -12,7 +12,7 @@ requires: 8045, 0302, 0503
 tags: [privacy, zk, zkvm, core]
 ---
 
-> **See also**: [LP-45](./lp-8045-z-chain-encrypted-execution-layer-interface.md), [LP-302](./lp-0302-lux-z-a-chain-privacy-ai-attestation-layer.md), [LP-503](./lp-0503-validity-proof-system.md)
+> **See also**: [LP-45](/docs/lp-8045-z-chain-encrypted-execution-layer-interface/), [LP-302](/docs/lp-0302-lux-z-a-chain-privacy-ai-attestation-layer/), [LP-503](/docs/lp-0503-validity-proof-system/)
 
 ## Abstract
 

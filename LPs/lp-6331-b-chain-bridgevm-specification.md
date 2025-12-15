@@ -17,7 +17,7 @@ activation:
 tags: [bridge, mpc, vm]
 ---
 
-> **See also**: [LP-330 T-Chain ThresholdVM](./lp-7330-t-chain-thresholdvm-specification.md), [LP-332 Teleport Bridge Architecture](./lp-6332-teleport-bridge-architecture-unified-cross-chain-protocol.md), [LP-333 Dynamic Signer Rotation](./lp-7333-dynamic-signer-rotation-with-lss-protocol.md), [LP-334 Per-Asset Threshold Key Management](./lp-7334-per-asset-threshold-key-management.md), [LP-335 Bridge Smart Contract Integration](./lp-6335-bridge-smart-contract-integration.md), [LP-INDEX](./LP-INDEX.md)
+> **See also**: [LP-330 T-Chain ThresholdVM](/docs/lp-7330-t-chain-thresholdvm-specification/), [LP-332 Teleport Bridge Architecture](/docs/lp-6332-teleport-bridge-architecture-unified-cross-chain-protocol/), [LP-333 Dynamic Signer Rotation](/docs/lp-7333-dynamic-signer-rotation-with-lss-protocol/), [LP-334 Per-Asset Threshold Key Management](/docs/lp-7334-per-asset-threshold-key-management/), [LP-335 Bridge Smart Contract Integration](/docs/lp-6335-bridge-smart-contract-integration/), [LP-INDEX](/docs/)
 
 # LP-331: B-Chain - BridgeVM Specification
 
@@ -3246,7 +3246,7 @@ The insurance fund (10% of fees) covers:
 | M3.3 | Key Management | Per-asset key assignment from T-Chain |
 | M3.4 | Withdrawal Execution | MPC-signed release transactions |
 
-**Dependencies**: [LP-330](./lp-7330-t-chain-thresholdvm-specification.md), [LP-333](./lp-7333-dynamic-signer-rotation-with-lss-protocol.md), [LP-334](./lp-7334-per-asset-threshold-key-management.md)
+**Dependencies**: [LP-330](/docs/lp-7330-t-chain-thresholdvm-specification/), [LP-333](/docs/lp-7333-dynamic-signer-rotation-with-lss-protocol/), [LP-334](/docs/lp-7334-per-asset-threshold-key-management/)
 
 ### Phase 4: Security Hardening (Q3 2025) - 6 weeks
 
@@ -3277,11 +3277,11 @@ The insurance fund (10% of fees) covers:
 
 | LP | Title | Relationship |
 |----|-------|--------------|
-| [LP-330](./lp-7330-t-chain-thresholdvm-specification.md) | T-Chain ThresholdVM | MPC signing infrastructure |
-| [LP-332](./lp-6332-teleport-bridge-architecture-unified-cross-chain-protocol.md) | Teleport Bridge Architecture | High-level protocol design |
-| [LP-333](./lp-7333-dynamic-signer-rotation-with-lss-protocol.md) | Dynamic Signer Rotation (LSS) | Proactive key refresh |
-| [LP-334](./lp-7334-per-asset-threshold-key-management.md) | Per-Asset Threshold Keys | Asset isolation |
-| [LP-335](./lp-6335-bridge-smart-contract-integration.md) | Bridge Smart Contracts | On-chain vault contracts |
+| [LP-330](/docs/lp-7330-t-chain-thresholdvm-specification/) | T-Chain ThresholdVM | MPC signing infrastructure |
+| [LP-332](/docs/lp-6332-teleport-bridge-architecture-unified-cross-chain-protocol/) | Teleport Bridge Architecture | High-level protocol design |
+| [LP-333](/docs/lp-7333-dynamic-signer-rotation-with-lss-protocol/) | Dynamic Signer Rotation (LSS) | Proactive key refresh |
+| [LP-334](/docs/lp-7334-per-asset-threshold-key-management/) | Per-Asset Threshold Keys | Asset isolation |
+| [LP-335](/docs/lp-6335-bridge-smart-contract-integration/) | Bridge Smart Contracts | On-chain vault contracts |
 
 ## Open Questions
 

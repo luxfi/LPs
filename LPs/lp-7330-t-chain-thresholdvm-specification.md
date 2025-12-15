@@ -16,7 +16,7 @@ activation:
 tags: [threshold-crypto, mpc, vm]
 ---
 
-> **See also**: [LP-14](./lp-7014-m-chain-threshold-signatures-with-cgg21-uc-non-interactive-ecdsa.md), [LP-81](./lp-6081-b-chain-bridge-chain-specification.md), [LP-103](./lp-7103-mpc-lss---multi-party-computation-linear-secret-sharing-with-dynamic-resharing.md), [LP-104](./lp-7104-frost---flexible-round-optimized-schnorr-threshold-signatures-for-eddsa.md), [LP-331](./lp-6331-b-chain-bridgevm-specification.md), [LP-332](./lp-6332-teleport-bridge-architecture-unified-cross-chain-protocol.md), [LP-333](./lp-7333-dynamic-signer-rotation-with-lss-protocol.md), [LP-334](./lp-7334-per-asset-threshold-key-management.md), [LP-335](./lp-6335-bridge-smart-contract-integration.md), [LP-336](./lp-7336-k-chain-keymanagementvm-specification.md), [LP-INDEX](./LP-INDEX.md)
+> **See also**: [LP-14](/docs/lp-7014-m-chain-threshold-signatures-with-cgg21-uc-non-interactive-ecdsa/), [LP-81](/docs/lp-6081-b-chain-bridge-chain-specification/), [LP-103](/docs/lp-7103-mpc-lss---multi-party-computation-linear-secret-sharing-with-dynamic-resharing/), [LP-104](/docs/lp-7104-frost---flexible-round-optimized-schnorr-threshold-signatures-for-eddsa/), [LP-331](/docs/lp-6331-b-chain-bridgevm-specification/), [LP-332](/docs/lp-6332-teleport-bridge-architecture-unified-cross-chain-protocol/), [LP-333](/docs/lp-7333-dynamic-signer-rotation-with-lss-protocol/), [LP-334](/docs/lp-7334-per-asset-threshold-key-management/), [LP-335](/docs/lp-6335-bridge-smart-contract-integration/), [LP-336](/docs/lp-7336-k-chain-keymanagementvm-specification/), [LP-INDEX](/docs/)
 
 ## Abstract
 
@@ -3257,9 +3257,9 @@ func (vm *VM) Initialize(
 | **M4.5** | End-to-end bridge signing tests | 2 weeks | M4.1-M4.4 |
 
 **Deliverables:**
-- Complete B-Chain integration (see [LP-331](./lp-6331-b-chain-bridgevm-specification.md))
+- Complete B-Chain integration (see [LP-331](/docs/lp-6331-b-chain-bridgevm-specification/))
 - External chain signature delivery
-- Per-asset key management (see [LP-334](./lp-7334-per-asset-threshold-key-management.md))
+- Per-asset key management (see [LP-334](/docs/lp-7334-per-asset-threshold-key-management/))
 
 ### Phase 5: Security Hardening (Q4 2025)
 
@@ -3308,12 +3308,12 @@ func (vm *VM) Initialize(
 
 | LP | Title | Integration Point |
 |----|-------|-------------------|
-| [LP-331](./lp-6331-b-chain-bridgevm-specification.md) | B-Chain BridgeVM | Signature consumer |
-| [LP-332](./lp-6332-teleport-bridge-architecture-unified-cross-chain-protocol.md) | Teleport Architecture | System design |
-| [LP-333](./lp-7333-dynamic-signer-rotation-with-lss-protocol.md) | Dynamic Signer Rotation | Resharing protocol |
-| [LP-334](./lp-7334-per-asset-threshold-key-management.md) | Per-Asset Keys | Key configuration |
-| [LP-335](./lp-6335-bridge-smart-contract-integration.md) | Bridge Contracts | External chain integration |
-| [LP-336](./lp-7336-k-chain-keymanagementvm-specification.md) | K-Chain KeyManagementVM | Key encapsulation |
+| [LP-331](/docs/lp-6331-b-chain-bridgevm-specification/) | B-Chain BridgeVM | Signature consumer |
+| [LP-332](/docs/lp-6332-teleport-bridge-architecture-unified-cross-chain-protocol/) | Teleport Architecture | System design |
+| [LP-333](/docs/lp-7333-dynamic-signer-rotation-with-lss-protocol/) | Dynamic Signer Rotation | Resharing protocol |
+| [LP-334](/docs/lp-7334-per-asset-threshold-key-management/) | Per-Asset Keys | Key configuration |
+| [LP-335](/docs/lp-6335-bridge-smart-contract-integration/) | Bridge Contracts | External chain integration |
+| [LP-336](/docs/lp-7336-k-chain-keymanagementvm-specification/) | K-Chain KeyManagementVM | Key encapsulation |
 
 ## References
 

@@ -12,7 +12,7 @@ requires: 7013, 7014, 6015, 6017, 7330, 7333
 tags: [mpc, threshold-crypto, bridge]
 ---
 
-> **See also**: [LP-13](./lp-7013-m-chain-decentralised-mpc-custody-and-swap-signature-layer.md), [LP-14](./lp-7014-m-chain-threshold-signatures-with-cgg21-uc-non-interactive-ecdsa.md), [LP-15](./lp-6015-mpc-bridge-protocol.md), [LP-17](./lp-6017-bridge-asset-registry.md), [LP-330](./lp-7330-t-chain-thresholdvm-specification.md), [LP-333](./lp-7333-dynamic-signer-rotation-with-lss-protocol.md), [LP-INDEX](./LP-INDEX.md)
+> **See also**: [LP-13](/docs/lp-7013-m-chain-decentralised-mpc-custody-and-swap-signature-layer/), [LP-14](/docs/lp-7014-m-chain-threshold-signatures-with-cgg21-uc-non-interactive-ecdsa/), [LP-15](/docs/lp-6015-mpc-bridge-protocol/), [LP-17](/docs/lp-6017-bridge-asset-registry/), [LP-330](/docs/lp-7330-t-chain-thresholdvm-specification/), [LP-333](/docs/lp-7333-dynamic-signer-rotation-with-lss-protocol/), [LP-INDEX](/docs/)
 >
 > **Related LPs**:
 > - **LP-330**: T-Chain ThresholdVM Specification - defines the underlying threshold signature infrastructure
