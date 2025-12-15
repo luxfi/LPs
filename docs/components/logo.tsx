@@ -1,53 +1,47 @@
 'use client';
 
-import { LuxLogo } from '@luxfi/logo/react';
-
 type LogoVariant = 'color' | 'mono' | 'white' | 'black';
 
 interface LogoProps {
   size?: number;
   variant?: LogoVariant;
   className?: string;
-  adaptive?: boolean; // Auto-switch between white (dark mode) and black (light mode)
+  adaptive?: boolean;
 }
 
-// Custom black filled logo SVG (not available in @luxfi/logo yet)
-function BlackLogo({ size, className }: { size: number; className?: string }) {
+// Lux logo - downward-pointing triangle per @luxfi/logo
+function LuxLogoSvg({ size, fill, className }: { size: number; fill: string; className?: string }) {
   return (
-    <div className={className} style={{ width: size, height: size }}>
-      <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" width={size} height={size}>
-        <path d="M50 85 L15 25 L85 25 Z" fill="black" />
-      </svg>
-    </div>
+    <svg
+      width={size}
+      height={size}
+      viewBox="0 0 100 100"
+      className={className}
+    >
+      <path d="M50 85 L15 25 L85 25 Z" fill={fill} />
+    </svg>
   );
 }
 
 export function Logo({ size = 24, variant = 'white', className = '', adaptive = true }: LogoProps) {
   if (adaptive) {
-    // Use CSS to show different variants based on theme
-    // Dark mode: white filled logo, Light mode: black filled logo
     return (
       <div className={className} style={{ width: size, height: size }}>
-        <LuxLogo size={size} variant="white" className="hidden dark:block" />
-        <BlackLogo size={size} className="dark:hidden" />
+        <LuxLogoSvg size={size} fill="white" className="hidden dark:block" />
+        <LuxLogoSvg size={size} fill="black" className="dark:hidden" />
       </div>
     );
   }
 
-  // Non-adaptive: use specified variant
-  if (variant === 'black') {
-    return <BlackLogo size={size} className={className} />;
-  }
-  return <LuxLogo size={size} variant={variant as 'color' | 'mono' | 'white'} className={className} />;
+  const fill = variant === 'black' ? 'black' : 'white';
+  return <LuxLogoSvg size={size} fill={fill} className={className} />;
 }
 
-// Logo with "LPs" text that expands to "Lux Proposals" on hover
 export function LogoWithText({ size = 24 }: { size?: number }) {
   return (
     <div className="flex items-center gap-2 group">
       <Logo
         size={size}
-        variant="white"
         className="transition-transform duration-200 group-hover:scale-110"
       />
       <div className="relative overflow-hidden">
@@ -62,11 +56,10 @@ export function LogoWithText({ size = 24 }: { size?: number }) {
   );
 }
 
-// Simple logo with static text
 export function LogoStatic({ size = 24, text = 'LPs' }: { size?: number; text?: string }) {
   return (
     <div className="flex items-center gap-2">
-      <Logo size={size} variant="white" />
+      <Logo size={size} />
       <span className="font-bold text-lg">{text}</span>
     </div>
   );
