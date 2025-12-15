@@ -2,6 +2,7 @@ import './global.css';
 import { RootProvider } from 'fumadocs-ui/provider';
 import { Inter } from 'next/font/google';
 import type { ReactNode } from 'react';
+import { SearchDialog } from '@/components/search-dialog';
 
 const inter = Inter({
   subsets: ['latin'],
@@ -63,7 +64,7 @@ export default function Layout({ children }: { children: ReactNode }) {
       <body className="min-h-svh bg-background font-sans antialiased">
         <RootProvider
           search={{
-            enabled: true,
+            enabled: false,
           }}
           theme={{
             enabled: true,
@@ -71,6 +72,7 @@ export default function Layout({ children }: { children: ReactNode }) {
             storageKey: 'lux-lps-theme',
           }}
         >
+          <SearchDialog />
           <div className="relative flex min-h-svh flex-col bg-background">
             {children}
           </div>

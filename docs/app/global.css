@@ -434,3 +434,35 @@ main.fd-default-layout article {
 @utility fill-foreground {
   fill: hsl(var(--foreground));
 }
+
+/* Search dialog animations */
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes zoom-in-95 {
+  from { transform: translate(-50%, 0) scale(0.95); }
+  to { transform: translate(-50%, 0) scale(1); }
+}
+
+@keyframes slide-in-from-top {
+  from { transform: translate(-50%, -8px) scale(0.95); }
+  to { transform: translate(-50%, 0) scale(1); }
+}
+
+@utility animate-in {
+  animation: fade-in 0.15s ease-out, zoom-in-95 0.15s ease-out, slide-in-from-top 0.15s ease-out;
+}
+
+@utility fade-in-0 {
+  animation: fade-in 0.15s ease-out;
+}
+
+@utility zoom-in-95 {
+  animation: zoom-in-95 0.15s ease-out;
+}
+
+@utility slide-in-from-top-2 {
+  animation: slide-in-from-top 0.15s ease-out;
+}

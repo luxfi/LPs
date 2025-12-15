@@ -29,26 +29,134 @@ export interface LPPage {
   };
 }
 
-export interface LPCategory {
-  name: string;
-  description: string;
-  range?: [number, number];
+export interface LPCategory extends CategoryMeta {
   lps: LPPage[];
 }
 
-// LP number ranges for categories
-const LP_CATEGORIES: { name: string; description: string; range: [number, number] }[] = [
-  { name: 'Core Architecture', description: 'Network fundamentals', range: [0, 99] },
-  { name: 'Consensus', description: 'Consensus protocols', range: [100, 199] },
-  { name: 'Cryptography', description: 'Crypto standards', range: [200, 299] },
-  { name: 'Token Standards', description: 'LRC token specs', range: [300, 399] },
-  { name: 'DeFi', description: 'DeFi protocols', range: [400, 499] },
-  { name: 'Governance', description: 'Governance proposals', range: [500, 599] },
-  { name: 'Network Upgrades', description: 'Protocol upgrades', range: [600, 699] },
-  { name: 'Research', description: 'Research papers', range: [700, 999] },
-  { name: 'P-Chain', description: 'Platform chain', range: [1000, 1999] },
-  { name: 'C-Chain', description: 'Contract chain', range: [2000, 2999] },
-  { name: 'X-Chain', description: 'Exchange chain', range: [3000, 3999] },
+// LP category metadata with educational content
+export interface CategoryMeta {
+  name: string;
+  shortDesc: string;
+  description: string;
+  range: [number, number];
+  icon: string;
+  color: string;
+  learnMore: string;
+  keyTopics: string[];
+}
+
+// LP number ranges for categories with rich educational content
+const LP_CATEGORIES: CategoryMeta[] = [
+  {
+    name: 'Core Architecture',
+    shortDesc: 'Network fundamentals',
+    description: 'Foundational specifications defining how the Lux Network operates. Covers network topology, node requirements, data structures, and the multi-chain architecture that enables high throughput and low latency.',
+    range: [0, 99],
+    icon: 'layers',
+    color: 'blue',
+    learnMore: 'Core architecture LPs define the backbone of Lux Network, including how nodes communicate, validate transactions, and maintain consensus across multiple chains.',
+    keyTopics: ['Network topology', 'Node specifications', 'Data structures', 'Multi-chain design'],
+  },
+  {
+    name: 'Consensus',
+    shortDesc: 'Consensus protocols',
+    description: 'Consensus mechanisms that secure the network. Lux uses a novel family of consensus protocols including Snowman for linear chains and Avalanche for DAG-based consensus, enabling sub-second finality.',
+    range: [100, 199],
+    icon: 'consensus',
+    color: 'purple',
+    learnMore: 'Consensus protocols determine how nodes agree on the state of the blockchain. Lux\'s probabilistic consensus achieves finality in under 2 seconds with mathematical guarantees.',
+    keyTopics: ['Snowman consensus', 'Avalanche protocol', 'Byzantine fault tolerance', 'Finality guarantees'],
+  },
+  {
+    name: 'Cryptography',
+    shortDesc: 'Cryptographic standards',
+    description: 'Cryptographic primitives and post-quantum security standards. Includes digital signatures (ECDSA, Ed25519, ML-DSA), hash functions, key encapsulation (ML-KEM), and zero-knowledge proofs.',
+    range: [200, 299],
+    icon: 'lock',
+    color: 'emerald',
+    learnMore: 'Cryptography secures transactions and protects user assets. Lux is pioneering post-quantum cryptography to future-proof against quantum computer attacks.',
+    keyTopics: ['Digital signatures', 'Post-quantum crypto', 'ML-KEM/ML-DSA', 'Zero-knowledge proofs'],
+  },
+  {
+    name: 'Token Standards',
+    shortDesc: 'LRC token specifications',
+    description: 'Standards for fungible and non-fungible tokens on Lux. LRC-20 (fungible), LRC-721 (NFTs), and LRC-1155 (multi-token) maintain ERC compatibility while adding Lux-specific optimizations.',
+    range: [300, 399],
+    icon: 'token',
+    color: 'amber',
+    learnMore: 'Token standards define how digital assets are created, transferred, and managed. ERC-compatible standards ensure seamless migration from Ethereum.',
+    keyTopics: ['LRC-20 fungible', 'LRC-721 NFTs', 'LRC-1155 multi-token', 'Token metadata'],
+  },
+  {
+    name: 'DeFi',
+    shortDesc: 'Decentralized finance',
+    description: 'Protocols for decentralized finance including automated market makers (AMMs), lending/borrowing, yield optimization, and derivatives. Building blocks for permissionless financial infrastructure.',
+    range: [400, 499],
+    icon: 'chart',
+    color: 'green',
+    learnMore: 'DeFi eliminates intermediaries from financial services. These protocols enable trustless trading, lending, and yield generation directly on-chain.',
+    keyTopics: ['AMM protocols', 'Lending markets', 'Yield aggregators', 'Liquid staking'],
+  },
+  {
+    name: 'Governance',
+    shortDesc: 'On-chain governance',
+    description: 'Decentralized governance mechanisms for protocol upgrades, parameter changes, and treasury management. Enables token holders to propose and vote on network changes.',
+    range: [500, 599],
+    icon: 'vote',
+    color: 'indigo',
+    learnMore: 'Governance LPs define how the community makes decisions. On-chain voting ensures transparent, verifiable, and democratic protocol evolution.',
+    keyTopics: ['Proposal system', 'Voting mechanisms', 'Treasury management', 'Delegation'],
+  },
+  {
+    name: 'Network Upgrades',
+    shortDesc: 'Protocol upgrades',
+    description: 'Specifications for network upgrades, hard forks, and feature activations. Coordinates changes across validators and ensures smooth transitions without disrupting operations.',
+    range: [600, 699],
+    icon: 'upgrade',
+    color: 'orange',
+    learnMore: 'Network upgrades introduce new features and improvements. Coordinated activation ensures all nodes upgrade together, maintaining consensus.',
+    keyTopics: ['Hard fork specs', 'Feature activation', 'Validator coordination', 'Migration guides'],
+  },
+  {
+    name: 'Research',
+    shortDesc: 'Research & innovation',
+    description: 'Cutting-edge research including quantum-resistant cryptography, novel consensus mechanisms, scalability solutions, and theoretical foundations for blockchain security.',
+    range: [700, 999],
+    icon: 'research',
+    color: 'pink',
+    learnMore: 'Research LPs push the boundaries of blockchain technology. Includes academic papers, proofs of security, and experimental protocols.',
+    keyTopics: ['Quantum security', 'Scalability research', 'Formal verification', 'Novel protocols'],
+  },
+  {
+    name: 'P-Chain',
+    shortDesc: 'Platform chain',
+    description: 'The Platform Chain coordinates validators, manages staking, and handles subnet creation. It\'s the metadata layer that orchestrates the entire Lux ecosystem.',
+    range: [1000, 1999],
+    icon: 'platform',
+    color: 'cyan',
+    learnMore: 'The P-Chain is Lux\'s coordination layer. Validators stake here, subnets are created here, and cross-chain transfers are initiated here.',
+    keyTopics: ['Validator staking', 'Subnet creation', 'Delegation', 'Rewards distribution'],
+  },
+  {
+    name: 'C-Chain',
+    shortDesc: 'Contract chain',
+    description: 'The Contract Chain runs the Ethereum Virtual Machine (EVM), enabling Solidity smart contracts. Full EVM compatibility means existing Ethereum dApps deploy without modification.',
+    range: [2000, 2999],
+    icon: 'contract',
+    color: 'violet',
+    learnMore: 'The C-Chain is where DeFi lives. EVM compatibility means any Ethereum tool, wallet, or dApp works seamlessly on Lux with faster finality and lower fees.',
+    keyTopics: ['EVM compatibility', 'Smart contracts', 'Gas optimization', 'Precompiles'],
+  },
+  {
+    name: 'X-Chain',
+    shortDesc: 'Exchange chain',
+    description: 'The Exchange Chain uses a DAG-based UTXO model optimized for high-throughput asset transfers. Native support for creating and trading digital assets with instant finality.',
+    range: [3000, 3999],
+    icon: 'exchange',
+    color: 'rose',
+    learnMore: 'The X-Chain excels at simple asset transfers. Its DAG structure enables massive parallelization, handling thousands of transactions per second.',
+    keyTopics: ['DAG consensus', 'UTXO model', 'Asset creation', 'Atomic swaps'],
+  },
 ];
 
 function getAllLPFiles(): string[] {
@@ -166,11 +274,31 @@ export const source = {
 
     return LP_CATEGORIES.map(cat => ({
       ...cat,
+      description: cat.shortDesc, // Keep backward compatibility
       lps: allPages.filter(page => {
         const lpNum = getLPNumber(page);
         return lpNum >= cat.range[0] && lpNum <= cat.range[1];
       }),
     })).filter(cat => cat.lps.length > 0);
+  },
+
+  // Get all categories including empty ones (for educational display)
+  getAllCategories(): LPCategory[] {
+    const allPages = this.getAllPages();
+
+    return LP_CATEGORIES.map(cat => ({
+      ...cat,
+      description: cat.shortDesc,
+      lps: allPages.filter(page => {
+        const lpNum = getLPNumber(page);
+        return lpNum >= cat.range[0] && lpNum <= cat.range[1];
+      }),
+    }));
+  },
+
+  // Get category metadata by name
+  getCategoryByName(name: string): CategoryMeta | undefined {
+    return LP_CATEGORIES.find(cat => cat.name.toLowerCase() === name.toLowerCase());
   },
 
   getStats(): { total: number; byStatus: Record<string, number>; byType: Record<string, number> } {
