@@ -17,8 +17,10 @@ help:
 	@echo "  make update-index  - Update the LP index in README.md"
 	@echo "  make stats         - Show LP statistics by status and type"
 	@echo "  make decision      - Create an Informational 'Decision LP' draft"
-	@echo "  make web-build     - Build LP JSON index and site bundle"
-	@echo "  make web-serve     - Serve repo locally for web UI"
+	@echo "  make docs-dev      - Run documentation site in development mode (port 3002)"
+	@echo "  make docs-kill     - Kill any process using port 3002"
+	@echo "  make docs-build    - Build static documentation site"
+	@echo "  make docs-start    - Run production documentation server"
 	@echo "  make permissions   - Fix script permissions (make them executable)"
 	@echo "  make clean         - Clean up temporary files"
 	@echo ""
@@ -89,6 +91,10 @@ cl: check-links
 ui: update-index
 p: permissions
 dec: decision
+dd: docs-dev
+dk: docs-kill
+db: docs-build
+ds: docs-start
 
 # Advanced targets for maintainers
 
@@ -170,22 +176,24 @@ recent:
 	@ls -lt LPs/lp-*.md 2>/dev/null | head -10 | awk '{print $$9}'
 
 # -----------------
-# Web UI for LPs
+# Documentation Site for LPs
 # -----------------
-.PHONY: web-index web-build web-serve
+.PHONY: docs-dev docs-build docs-start docs-kill
 
-web-index:
-	@echo "Building LP JSON index..."
-	@python3 ./scripts/build-lp-index-json.py
+# Kill any processes using the docs port
+docs-kill:
+	@echo "Killing any existing processes on port 3002..."
+	-@lsof -ti :3002 | xargs kill -9 2>/dev/null || true
 
-web-build: web-index
-	@echo "Preparing site in docs/site..."
-	@mkdir -p docs/site
-	@cp -r web/* docs/site/
-	@# Ensure lp-index.json is co-located for same-origin fetch
-	@cp docs/lp-index.json docs/site/lp-index.json
-	@echo "Web bundle ready at docs/site/index.html"
+docs-dev: docs-kill
+	@echo "Starting documentation development server on http://localhost:3002..."
+	@cd docs && pnpm install && pnpm dev
 
-web-serve: web-build
-	@echo "Serving on http://localhost:8080 (Ctrl+C to stop)"
-	@python3 -m http.server 8080 >/dev/null 2>&1
+docs-build:
+	@echo "Building documentation site..."
+	@cd docs && pnpm install && pnpm build
+	@echo "Documentation site built in docs/out directory"
+
+docs-start:
+	@echo "Starting production documentation server..."
+	@cd docs && pnpm install && pnpm start

@@ -1,5 +1,7 @@
 'use client';
 
+import { LuxLogo } from '@luxfi/logo/react';
+
 type LogoVariant = 'color' | 'mono' | 'white' | 'black';
 
 interface LogoProps {
@@ -9,37 +11,41 @@ interface LogoProps {
   adaptive?: boolean;
 }
 
-// Lux logo - downward-pointing triangle per @luxfi/logo
-function LuxLogoSvg({ size, fill, className }: { size: number; fill: string; className?: string }) {
-  return (
-    <svg
-      width={size}
-      height={size}
-      viewBox="0 0 100 100"
-      className={className}
-    >
-      <path d="M50 85 L15 25 L85 25 Z" fill={fill} />
-    </svg>
-  );
-}
-
 export function Logo({ size = 24, variant = 'white', className = '', adaptive = true }: LogoProps) {
   if (adaptive) {
     return (
-      <div className={className} style={{ width: size, height: size }}>
-        <LuxLogoSvg size={size} fill="white" className="hidden dark:block" />
-        <LuxLogoSvg size={size} fill="black" className="dark:hidden" />
+      <div className={`logo-container ${className}`}>
+        <div className="hidden dark:block lux-logo lux-logo-dark">
+          <LuxLogo
+            size={size}
+            variant="white"
+          />
+        </div>
+        <div className="dark:hidden block lux-logo lux-logo-light">
+          <LuxLogo
+            size={size}
+            variant="mono"
+          />
+        </div>
       </div>
     );
   }
 
-  const fill = variant === 'black' ? 'black' : 'white';
-  return <LuxLogoSvg size={size} fill={fill} className={className} />;
+  // Determine color based on variant
+  const logoVariant = variant === 'black' ? 'mono' : 'white';
+
+  return (
+    <LuxLogo
+      size={size}
+      variant={logoVariant}
+      className={`logo-container lux-logo ${className}`}
+    />
+  );
 }
 
 export function LogoWithText({ size = 24 }: { size?: number }) {
   return (
-    <div className="flex items-center gap-2 group">
+    <div className="flex items-center gap-2 group logo-with-text">
       <Logo
         size={size}
         className="transition-transform duration-200 group-hover:scale-110"
