@@ -125,64 +125,97 @@
 :root {
   /* Fumadocs layout variables */
   --fd-sidebar-width: 260px;
-  --fd-toc-width: 240px;
+  --fd-toc-width: 220px;
   --fd-layout-offset: 0px;
   --fd-content-max-width: 800px;
+  --fd-page-width: 1400px;
 }
 
-/* Main content area - proper spacing from sidebar */
-main.fd-default-layout {
-  --fd-layout-offset: 2rem;
+/* Content wrapper (#nd-page) - add padding for fixed TOC since pe-(--fd-toc-width) doesn't work in Tailwind 4 */
+#nd-page {
+  padding-inline-end: var(--fd-toc-width) !important;
 }
 
-/* Article content - generous breathing room */
-main.fd-default-layout article {
-  padding: 2.5rem 2rem !important;
+/* Article content - centered within the available space */
+main article {
+  padding: 2rem !important;
   max-width: var(--fd-content-max-width) !important;
+  width: 100% !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
 }
 
-/* Content wrapper padding */
-main.fd-default-layout #nd-page {
-  padding-left: 2.5rem;
-  padding-right: 1.5rem;
+/* Index page layout - centered */
+main > div.max-w-4xl {
+  margin-left: auto !important;
+  margin-right: auto !important;
+  padding-left: 2rem !important;
+  padding-right: 2rem !important;
+  padding-top: 2rem !important;
+  max-width: 900px !important;
 }
 
 /* Responsive adjustments */
 @media (min-width: 1280px) {
   :root {
     --fd-sidebar-width: 280px;
-    --fd-toc-width: 260px;
+    --fd-toc-width: 240px;
   }
 
-  main.fd-default-layout article {
-    padding: 3rem 2.5rem !important;
+  main article {
+    padding: 2.5rem !important;
   }
 
-  main.fd-default-layout #nd-page {
-    padding-left: 3rem;
-    padding-right: 2rem;
+  main > div.max-w-4xl {
+    max-width: 1000px !important;
   }
 }
 
 @media (max-width: 1024px) {
-  main.fd-default-layout article {
-    padding: 2rem 1.5rem !important;
+  :root {
+    --fd-toc-width: 200px;
   }
 
-  main.fd-default-layout #nd-page {
-    padding-left: 1.5rem;
-    padding-right: 1rem;
+  main article {
+    padding: 1.5rem !important;
+  }
+
+  main > div.max-w-4xl {
+    max-width: 800px !important;
+    padding-left: 1.5rem !important;
+    padding-right: 1.5rem !important;
   }
 }
 
 @media (max-width: 768px) {
-  main.fd-default-layout article {
-    padding: 1.5rem 1rem !important;
+  /* On mobile, sidebar is hidden so reset padding */
+  main > div.flex.mx-auto {
+    justify-content: flex-start !important;
   }
 
-  main.fd-default-layout #nd-page {
-    padding-left: 1rem;
-    padding-right: 1rem;
+  main > div.max-w-4xl {
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+    max-width: 100% !important;
+  }
+
+  main article {
+    padding: 1rem !important;
+  }
+
+  main #nd-page {
+    justify-content: flex-start !important;
+  }
+
+  /* Reset TOC padding on mobile since TOC is hidden */
+  #nd-page {
+    padding-inline-end: 0 !important;
+  }
+
+  /* Reset sidebar padding on mobile since sidebar is a drawer */
+  main {
+    padding-left: 0 !important;
+    padding-inline-start: 0 !important;
   }
 }
 
@@ -326,6 +359,15 @@ main article a:not([class]):hover {
 /* Sidebar refinements */
 aside[role="complementary"] {
   border-right: 1px solid hsl(var(--border) / 0.5) !important;
+  /* Fix sidebar alignment - override items-end that creates left gap */
+  align-items: stretch !important;
+  /* Match sidebar width to content width */
+  width: var(--fd-sidebar-width) !important;
+}
+
+/* Ensure sidebar children fill full width */
+aside[role="complementary"] > * {
+  width: 100% !important;
 }
 
 /* Remove underline from sidebar bottom section */
@@ -357,16 +399,22 @@ nav[aria-label="Table of Contents"],
   min-width: 0 !important;
 }
 
-/* Fix content container to not be cramped */
-#nd-page {
-  width: 100% !important;
-  max-width: none !important;
+/* Fix content container - constrain width to prevent TOC overlap */
+.fd-page-container {
+  max-width: calc(100% - var(--fd-toc-width) - 2rem) !important;
 }
 
-#nd-page > div {
-  max-width: var(--fd-content-max-width) !important;
-  margin: 0 auto !important;
-  padding: 0 1.5rem !important;
+/* Ensure article content doesn't overflow into TOC */
+main.fd-default-layout article {
+  overflow-wrap: break-word !important;
+  word-wrap: break-word !important;
+}
+
+/* On larger screens, ensure proper spacing for TOC */
+@media (min-width: 1280px) {
+  .fd-page-container {
+    max-width: calc(100% - var(--fd-toc-width) - 3rem) !important;
+  }
 }
 
 /* Hide scrollbar utility */
@@ -376,4 +424,13 @@ nav[aria-label="Table of Contents"],
   &::-webkit-scrollbar {
     display: none;
   }
+}
+
+/* Fill utilities for SVG */
+@utility fill-background {
+  fill: hsl(var(--background));
+}
+
+@utility fill-foreground {
+  fill: hsl(var(--foreground));
 }
