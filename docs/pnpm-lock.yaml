@@ -11,6 +11,9 @@ importers:
       '@luxfi/logo':
         specifier: ^1.0.0
         version: 1.0.0(react@19.2.0)
+      clsx:
+        specifier: ^2.1.1
+        version: 2.1.1
       fumadocs-core:
         specifier: ^15.8.5
         version: 15.8.5(@types/react@19.2.6)(lucide-react@0.468.0(react@19.2.0))(next@16.0.1(react-dom@19.2.0(react@19.2.0))(react@19.2.0))(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
@@ -41,6 +44,9 @@ importers:
       remark-gfm:
         specifier: ^4.0.1
         version: 4.0.1
+      tailwind-merge:
+        specifier: ^3.4.0
+        version: 3.4.0
       tailwindcss:
         specifier: ^4.1.16
         version: 4.1.17

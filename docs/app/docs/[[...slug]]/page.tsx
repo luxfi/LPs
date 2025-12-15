@@ -4,6 +4,8 @@ import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import Link from 'next/link';
 import { ArrowLeft, ArrowRight, ExternalLink, Calendar, User, Tag } from 'lucide-react';
+import { TableOfContents } from '@/components/toc';
+import { extractHeadings } from '@/lib/toc';
 
 // LP Index/Overview Page Component
 function LPIndexPage() {
@@ -81,14 +83,40 @@ function LPIndexPage() {
   );
 }
 
+// Custom heading components with IDs for TOC linking
+function createHeadingComponent(level: number) {
+  const HeadingComponent = ({ children, ...props }: any) => {
+    const text = typeof children === 'string' ? children : String(children);
+    const id = text
+      .toLowerCase()
+      .replace(/[^a-z0-9\s-]/g, '')
+      .replace(/\s+/g, '-')
+      .replace(/-+/g, '-');
+
+    const Tag = `h${level}` as keyof JSX.IntrinsicElements;
+    return <Tag id={id} {...props}>{children}</Tag>;
+  };
+  HeadingComponent.displayName = `Heading${level}`;
+  return HeadingComponent;
+}
+
+const markdownComponents = {
+  h2: createHeadingComponent(2),
+  h3: createHeadingComponent(3),
+  h4: createHeadingComponent(4),
+};
+
 // Individual LP Page Component
 function LPDetailPage({ page }: { page: any }) {
   const { frontmatter } = page.data;
+  const tocItems = extractHeadings(page.data.content);
 
   return (
-    <article className="max-w-4xl">
-      {/* Header */}
-      <div className="mb-8 pb-8 border-b border-border">
+    <div className="flex gap-8">
+      {/* Main Content */}
+      <article className="flex-1 min-w-0 max-w-4xl">
+        {/* Header */}
+        <div className="mb-8 pb-8 border-b border-border">
         <div className="flex items-center gap-2 mb-4">
           <Link
             href="/docs"
@@ -184,15 +212,28 @@ function LPDetailPage({ page }: { page: any }) {
             Join Discussion
           </a>
         )}
-      </div>
+        </div>
 
-      {/* Content */}
-      <div className="prose prose-neutral dark:prose-invert max-w-none">
-        <ReactMarkdown remarkPlugins={[remarkGfm]}>
-          {page.data.content}
-        </ReactMarkdown>
-      </div>
-    </article>
+        {/* Content */}
+        <div className="prose prose-neutral dark:prose-invert max-w-none">
+          <ReactMarkdown
+            remarkPlugins={[remarkGfm]}
+            components={markdownComponents}
+          >
+            {page.data.content}
+          </ReactMarkdown>
+        </div>
+      </article>
+
+      {/* Table of Contents Sidebar */}
+      {tocItems.length > 0 && (
+        <aside className="hidden xl:block w-64 shrink-0">
+          <div className="sticky top-24">
+            <TableOfContents items={tocItems} />
+          </div>
+        </aside>
+      )}
+    </div>
   );
 }
 

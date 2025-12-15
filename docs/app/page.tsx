@@ -226,7 +226,7 @@ export default function HomePage() {
             {/* Brand */}
             <div className="col-span-2 md:col-span-1">
               <div className="flex items-center gap-2 mb-4">
-                <Logo size={24} variant="white" />
+                <Logo size={24} />
                 <span className="font-bold">Lux Network</span>
               </div>
               <p className="text-sm text-muted-foreground">
