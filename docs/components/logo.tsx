@@ -1,45 +1,59 @@
 'use client';
 
-import { LuxLogo } from '@luxfi/logo/react';
-
-type LogoVariant = 'color' | 'mono' | 'white' | 'black';
-
 interface LogoProps {
   size?: number;
-  variant?: LogoVariant;
   className?: string;
-  adaptive?: boolean;
 }
 
-export function Logo({ size = 24, variant = 'white', className = '', adaptive = true }: LogoProps) {
-  if (adaptive) {
-    return (
-      <div className={`logo-container ${className}`}>
-        <div className="hidden dark:block lux-logo lux-logo-dark">
-          <LuxLogo
-            size={size}
-            variant="white"
-          />
-        </div>
-        <div className="dark:hidden block lux-logo lux-logo-light">
-          <LuxLogo
-            size={size}
-            variant="mono"
-          />
-        </div>
-      </div>
-    );
-  }
-
-  // Determine color based on variant
-  const logoVariant = variant === 'black' ? 'mono' : 'white';
-
+// SVG Lux logo that adapts to theme
+export function Logo({ size = 24, className = '' }: LogoProps) {
   return (
-    <LuxLogo
-      size={size}
-      variant={logoVariant}
-      className={`logo-container lux-logo ${className}`}
-    />
+    <div className={`logo-container ${className}`}>
+      {/* Dark mode: white logo */}
+      <svg
+        className="hidden dark:block"
+        width={size}
+        height={size}
+        viewBox="0 0 100 100"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M50 5L95 50L50 95L5 50L50 5Z"
+          fill="white"
+        />
+        <path
+          d="M50 20L80 50L50 80L20 50L50 20Z"
+          fill="black"
+        />
+        <path
+          d="M50 35L65 50L50 65L35 50L50 35Z"
+          fill="white"
+        />
+      </svg>
+      {/* Light mode: black logo */}
+      <svg
+        className="dark:hidden block"
+        width={size}
+        height={size}
+        viewBox="0 0 100 100"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M50 5L95 50L50 95L5 50L50 5Z"
+          fill="black"
+        />
+        <path
+          d="M50 20L80 50L50 80L20 50L50 20Z"
+          fill="white"
+        />
+        <path
+          d="M50 35L65 50L50 65L35 50L50 35Z"
+          fill="black"
+        />
+      </svg>
+    </div>
   );
 }
 
