@@ -125,8 +125,13 @@
 }
 
 @layer base {
-  * {
-    @apply border-border outline-ring/50;
+  /* Reset border styles - prevent visible borders on all elements */
+  *,
+  ::before,
+  ::after {
+    border-width: 0;
+    border-style: solid;
+    border-color: var(--border);
   }
 
   /* Ensure SVGs respect their container sizes */

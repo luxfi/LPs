@@ -151,23 +151,10 @@ export default function HomePage() {
     <div className="min-h-screen bg-black text-white antialiased selection:bg-white/20">
       {/* Ambient background */}
       <div className="pointer-events-none fixed inset-0 -z-10 overflow-hidden">
-        {/* Subtle grid */}
-        <div
-          className="absolute inset-0 opacity-[0.02]"
-          style={{
-            backgroundImage: `
-              linear-gradient(rgba(255,255,255,0.6) 1px, transparent 1px),
-              linear-gradient(90deg, rgba(255,255,255,0.6) 1px, transparent 1px)
-            `,
-            backgroundSize: '72px 72px',
-          }}
-        />
         {/* Top glow */}
         <div className="absolute -top-[50%] left-1/2 h-[1000px] w-[1600px] -translate-x-1/2 rounded-full bg-white/[0.03] blur-[150px]" />
         {/* Secondary glow */}
         <div className="absolute top-[20%] right-0 h-[600px] w-[600px] translate-x-1/2 rounded-full bg-white/[0.02] blur-[100px]" />
-        {/* Top edge line */}
-        <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/15 to-transparent" />
       </div>
 
       {/* Header */}
