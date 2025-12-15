@@ -328,11 +328,45 @@ aside[role="complementary"] {
   border-right: 1px solid hsl(var(--border) / 0.5) !important;
 }
 
+/* Remove underline from sidebar bottom section */
+aside[role="complementary"] > div:last-child {
+  border-top: none !important;
+}
+
+/* Sidebar bottom buttons - remove border */
+aside[role="complementary"] button[aria-label*="Theme"],
+aside[role="complementary"] [class*="theme"] {
+  border: none !important;
+}
+
+/* Fix sidebar content spacing */
+aside[role="complementary"] nav {
+  padding-bottom: 1rem !important;
+}
+
 /* TOC refinements */
 nav[aria-label="Table of Contents"],
 .fd-toc {
   border-left: 1px solid hsl(var(--border) / 0.3) !important;
   padding-left: 1.5rem !important;
+}
+
+/* Main content area - ensure proper width */
+.fd-default-layout > div:not([role="complementary"]):not(.fd-toc) {
+  flex: 1 !important;
+  min-width: 0 !important;
+}
+
+/* Fix content container to not be cramped */
+#nd-page {
+  width: 100% !important;
+  max-width: none !important;
+}
+
+#nd-page > div {
+  max-width: var(--fd-content-max-width) !important;
+  margin: 0 auto !important;
+  padding: 0 1.5rem !important;
 }
 
 /* Hide scrollbar utility */

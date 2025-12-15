@@ -1,14 +1,15 @@
 import Link from 'next/link';
-import { Logo } from '@/components/logo';
+import { Logo, LogoWithText } from '@/components/logo';
 import { source } from '@/lib/source';
+import { ThemeToggle } from '@/components/theme-toggle';
 
 type ProposalStatus = 'Final' | 'Draft' | 'Review';
 
 function StatusBadge({ status }: { status: ProposalStatus }) {
   const styles = {
-    Final: 'bg-black text-white',
-    Review: 'bg-neutral-200 text-neutral-700',
-    Draft: 'bg-neutral-100 text-neutral-500',
+    Final: 'bg-foreground text-background',
+    Review: 'bg-muted text-muted-foreground',
+    Draft: 'bg-muted/50 text-muted-foreground',
   };
   return (
     <span className={`inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-xs font-medium ${styles[status]}`}>
@@ -35,6 +36,15 @@ const categories = [
 ];
 
 const footerLinks = {
+  network: [
+    { title: 'Network', href: 'https://lux.network', header: true },
+    { title: 'Documentation', href: 'https://docs.lux.network' },
+    { title: 'Bridge', href: 'https://bridge.lux.network' },
+    { title: 'Explorer', href: 'https://explore.lux.network' },
+    { title: 'Wallet', href: 'https://wallet.lux.network' },
+    { title: 'Safe', href: 'https://safe.lux.network' },
+    { title: 'Governance', href: 'https://lux.vote' },
+  ],
   ecosystem: [
     { title: 'Ecosystem', href: 'https://lux.link', header: true },
     { title: 'Lux AI', href: 'https://lux.chat' },
@@ -42,14 +52,6 @@ const footerLinks = {
     { title: 'Lux Exchange', href: 'https://lux.exchange' },
     { title: 'Lux Finance', href: 'https://lux.finance' },
     { title: 'Lux Market', href: 'https://lux.market' },
-  ],
-  network: [
-    { title: 'Network', href: 'https://lux.network', header: true },
-    { title: 'Bridge', href: 'https://bridge.lux.network' },
-    { title: 'Explorer', href: 'https://explore.lux.network' },
-    { title: 'Wallet', href: 'https://wallet.lux.network' },
-    { title: 'Safe', href: 'https://safe.lux.network' },
-    { title: 'Governance', href: 'https://lux.vote' },
   ],
   company: [
     { title: 'Company', href: 'https://lux.partners', header: true },
@@ -72,39 +74,41 @@ export default function HomePage() {
   const recentLPs = source.getAllPages().slice(0, 6);
 
   return (
-    <div className="min-h-screen bg-white text-neutral-900">
+    <div className="min-h-screen bg-background text-foreground">
       {/* Header */}
-      <header className="sticky top-0 z-50 border-b border-neutral-200 bg-white/80 backdrop-blur-xl">
+      <header className="sticky top-0 z-50 border-b border-border bg-background/80 backdrop-blur-xl">
         <div className="mx-auto flex h-14 max-w-6xl items-center justify-between px-4 sm:px-6 lg:px-8">
           <Link href="/" className="flex items-center gap-2">
-            <Logo size={18} />
-            <span className="font-semibold">Lux Proposals</span>
+            <LogoWithText size={18} />
           </Link>
-          <Link
-            href="/docs"
-            className="rounded-full bg-neutral-900 px-4 py-1.5 text-sm font-medium text-white transition-colors hover:bg-neutral-800"
-          >
-            Browse
-          </Link>
+          <div className="flex items-center gap-3">
+            <ThemeToggle />
+            <Link
+              href="/docs"
+              className="rounded-full bg-foreground px-4 py-1.5 text-sm font-medium text-background transition-colors hover:bg-foreground/90"
+            >
+              Browse
+            </Link>
+          </div>
         </div>
       </header>
 
       <main>
         {/* Hero */}
         <section className="mx-auto max-w-6xl px-4 py-16 text-center sm:px-6 sm:py-24 lg:px-8">
-          <p className="text-sm font-medium text-neutral-500">
+          <p className="text-sm font-medium text-muted-foreground">
             {stats.byStatus['Final'] || 0} standards finalized
           </p>
           <h1 className="mt-4 text-4xl font-bold tracking-tight sm:text-5xl lg:text-6xl">
             Lux Proposals
           </h1>
-          <p className="mx-auto mt-6 max-w-2xl text-lg text-neutral-600">
+          <p className="mx-auto mt-6 max-w-2xl text-lg text-muted-foreground">
             Open, community-driven standards for the Lux ecosystem.
           </p>
           <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
             <Link
               href="/docs"
-              className="w-full rounded-full bg-neutral-900 px-8 py-3 text-sm font-semibold text-white transition-colors hover:bg-neutral-800 sm:w-auto"
+              className="w-full rounded-full bg-foreground px-8 py-3 text-sm font-semibold text-background transition-colors hover:bg-foreground/90 sm:w-auto"
             >
               Browse proposals
             </Link>
@@ -112,7 +116,7 @@ export default function HomePage() {
               href="https://github.com/luxfi/lps"
               target="_blank"
               rel="noreferrer"
-              className="flex w-full items-center justify-center gap-2 rounded-full border border-neutral-300 px-8 py-3 text-sm font-semibold transition-colors hover:bg-neutral-50 sm:w-auto"
+              className="flex w-full items-center justify-center gap-2 rounded-full border border-border px-8 py-3 text-sm font-semibold transition-colors hover:bg-muted sm:w-auto"
             >
               <GitHubIcon size={16} />
               GitHub
@@ -121,9 +125,9 @@ export default function HomePage() {
         </section>
 
         {/* Stats */}
-        <section className="border-y border-neutral-200 bg-neutral-50">
+        <section className="border-y border-border bg-muted/30">
           <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-            <div className="grid grid-cols-2 divide-x divide-neutral-200 sm:grid-cols-4">
+            <div className="grid grid-cols-2 divide-x divide-border sm:grid-cols-4">
               {[
                 { label: 'Total', value: stats.total },
                 { label: 'Final', value: stats.byStatus['Final'] || 0 },
@@ -132,7 +136,7 @@ export default function HomePage() {
               ].map((stat) => (
                 <div key={stat.label} className="px-4 py-8 text-center sm:px-6">
                   <div className="text-3xl font-bold tabular-nums sm:text-4xl">{stat.value}</div>
-                  <div className="mt-1 text-sm text-neutral-500">{stat.label}</div>
+                  <div className="mt-1 text-sm text-muted-foreground">{stat.label}</div>
                 </div>
               ))}
             </div>
@@ -147,17 +151,17 @@ export default function HomePage() {
               <Link
                 key={cat.title}
                 href="/docs"
-                className="group flex items-center gap-4 rounded-xl border border-neutral-200 p-4 transition-all hover:border-neutral-300 hover:bg-neutral-50"
+                className="group flex items-center gap-4 rounded-xl border border-border p-4 transition-all hover:border-border/80 hover:bg-muted/50"
               >
-                <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-neutral-100 text-sm font-bold text-neutral-600 transition-colors group-hover:bg-neutral-200">
+                <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-muted text-sm font-bold text-muted-foreground transition-colors group-hover:bg-muted/80">
                   {cat.icon}
                 </div>
                 <div className="flex-1">
                   <div className="flex items-center justify-between">
                     <span className="font-semibold">{cat.title}</span>
-                    <span className="font-mono text-xs text-neutral-400">{cat.range}</span>
+                    <span className="font-mono text-xs text-muted-foreground">{cat.range}</span>
                   </div>
-                  <p className="mt-0.5 text-sm text-neutral-500">{cat.desc}</p>
+                  <p className="mt-0.5 text-sm text-muted-foreground">{cat.desc}</p>
                 </div>
               </Link>
             ))}
@@ -165,11 +169,11 @@ export default function HomePage() {
         </section>
 
         {/* Recent Proposals */}
-        <section className="border-t border-neutral-200 bg-neutral-50">
+        <section className="border-t border-border bg-muted/30">
           <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-20 lg:px-8">
             <div className="flex items-center justify-between">
               <h2 className="text-2xl font-bold">Recent proposals</h2>
-              <Link href="/docs" className="text-sm font-medium text-neutral-500 transition-colors hover:text-neutral-900">
+              <Link href="/docs" className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground">
                 View all &rarr;
               </Link>
             </div>
@@ -181,17 +185,17 @@ export default function HomePage() {
                   <Link
                     key={lp.slug.join('/')}
                     href={`/docs/${lp.slug.join('/')}`}
-                    className="group rounded-xl border border-neutral-200 bg-white p-5 transition-all hover:border-neutral-300 hover:shadow-sm"
+                    className="group rounded-xl border border-border bg-card p-5 transition-all hover:border-border/80 hover:shadow-sm"
                   >
                     <div className="flex items-center justify-between">
-                      <span className="font-mono text-sm text-neutral-400">LP-{lpNum}</span>
+                      <span className="font-mono text-sm text-muted-foreground">LP-{lpNum}</span>
                       <StatusBadge status={status} />
                     </div>
-                    <h3 className="mt-3 font-semibold leading-snug line-clamp-2 group-hover:text-neutral-700">
+                    <h3 className="mt-3 font-semibold leading-snug line-clamp-2 group-hover:text-muted-foreground">
                       {lp.data.title}
                     </h3>
                     {lp.data.description && (
-                      <p className="mt-2 text-sm text-neutral-500 line-clamp-2">
+                      <p className="mt-2 text-sm text-muted-foreground line-clamp-2">
                         {lp.data.description}
                       </p>
                     )}
@@ -204,15 +208,15 @@ export default function HomePage() {
 
         {/* CTA */}
         <section className="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-20 lg:px-8">
-          <div className="rounded-2xl bg-neutral-900 p-8 text-white sm:p-12">
+          <div className="rounded-2xl bg-foreground p-8 text-background sm:p-12">
             <h2 className="text-2xl font-bold sm:text-3xl">Ready to contribute?</h2>
-            <p className="mt-3 max-w-xl text-neutral-400">
+            <p className="mt-3 max-w-xl text-background/70">
               Have an idea for improving the Lux ecosystem? Start with the guidelines, then open a PR.
             </p>
             <div className="mt-8 flex flex-col gap-4 sm:flex-row">
               <Link
                 href="/contribute"
-                className="rounded-full bg-white px-8 py-3 text-center text-sm font-semibold text-neutral-900 transition-colors hover:bg-neutral-100"
+                className="rounded-full bg-background px-8 py-3 text-center text-sm font-semibold text-foreground transition-colors hover:bg-background/90"
               >
                 Read guidelines
               </Link>
@@ -220,7 +224,7 @@ export default function HomePage() {
                 href="https://github.com/luxfi/lps"
                 target="_blank"
                 rel="noreferrer"
-                className="flex items-center justify-center gap-2 rounded-full border border-neutral-600 px-8 py-3 text-sm font-semibold transition-colors hover:bg-neutral-800"
+                className="flex items-center justify-center gap-2 rounded-full border border-background/30 px-8 py-3 text-sm font-semibold transition-colors hover:bg-background/10"
               >
                 <GitHubIcon size={16} />
                 Open on GitHub
@@ -231,11 +235,11 @@ export default function HomePage() {
       </main>
 
       {/* Footer */}
-      <footer className="border-t border-neutral-200 bg-neutral-50">
+      <footer className="border-t border-border bg-muted/30">
         <div className="mx-auto max-w-6xl px-4 py-12 sm:px-6 lg:px-8">
           <div className="grid grid-cols-2 gap-8 sm:grid-cols-5">
             <div className="col-span-2 sm:col-span-1">
-              <Logo size={24} />
+              <Logo size={32} />
             </div>
             {Object.entries(footerLinks).map(([key, links]) => (
               <div key={key}>
@@ -247,8 +251,8 @@ export default function HomePage() {
                     rel={link.header ? undefined : 'noreferrer'}
                     className={`block text-sm ${
                       link.header
-                        ? 'mb-3 font-semibold text-neutral-900'
-                        : 'mb-2 text-neutral-500 transition-colors hover:text-neutral-900'
+                        ? 'mb-3 font-semibold text-foreground'
+                        : 'mb-2 text-muted-foreground transition-colors hover:text-foreground'
                     }`}
                   >
                     {link.title}
@@ -257,16 +261,16 @@ export default function HomePage() {
               </div>
             ))}
           </div>
-          <div className="mt-12 flex flex-col items-center justify-between gap-4 border-t border-neutral-200 pt-8 sm:flex-row">
-            <div className="flex gap-6 text-sm text-neutral-500">
-              <a href="https://lux.network/terms" target="_blank" rel="noreferrer" className="transition-colors hover:text-neutral-900">
+          <div className="mt-12 flex flex-col items-center justify-between gap-4 border-t border-border pt-8 sm:flex-row">
+            <div className="flex gap-6 text-sm text-muted-foreground">
+              <a href="https://lux.network/terms" target="_blank" rel="noreferrer" className="transition-colors hover:text-foreground">
                 Terms
               </a>
-              <a href="https://lux.network/privacy" target="_blank" rel="noreferrer" className="transition-colors hover:text-neutral-900">
+              <a href="https://lux.network/privacy" target="_blank" rel="noreferrer" className="transition-colors hover:text-foreground">
                 Privacy
               </a>
             </div>
-            <p className="text-sm text-neutral-400">
+            <p className="text-sm text-muted-foreground">
               &copy; {new Date().getFullYear()} Lux Industries Inc.
             </p>
           </div>

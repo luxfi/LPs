@@ -50,7 +50,7 @@ export default function Layout({ children }: { children: ReactNode }) {
           }}
           theme={{
             enabled: true,
-            defaultTheme: 'system',
+            defaultTheme: 'dark',
             storageKey: 'lux-lps-theme',
           }}
         >
