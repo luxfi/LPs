@@ -1,8 +1,4 @@
 <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-  <!-- Outer diamond -->
-  <path d="M50 5L95 50L50 95L5 50L50 5Z" fill="currentColor"/>
-  <!-- Middle diamond (inverted) -->
-  <path d="M50 20L80 50L50 80L20 50L50 20Z" fill="white"/>
-  <!-- Inner diamond -->
-  <path d="M50 35L65 50L50 65L35 50L50 35Z" fill="currentColor"/>
+  <!-- Lux logo - downward-pointing triangle -->
+  <path d="M50 85 L15 25 L85 25 Z" fill="currentColor"/>
 </svg>
