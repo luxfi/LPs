@@ -16,9 +16,11 @@
   },
   "dependencies": {
     "@fontsource/inter": "^5.2.8",
-    "@hanzo/docs": "^16.2.5",
     "@luxfi/logo": "^1.0.0",
+    "@types/mdx": "^2.0.13",
     "clsx": "^2.1.1",
+    "fumadocs-core": "^16.2.5",
+    "fumadocs-mdx": "^14.1.0",
     "gray-matter": "^4.0.3",
     "lucide-react": "^0.468.0",
     "next": "16.0.1",
