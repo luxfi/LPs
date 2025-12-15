@@ -3,22 +3,10 @@ import { source } from '@/lib/source';
 
 type ProposalStatus = 'Final' | 'Draft' | 'Review';
 
-function StatusBadge({ status }: { status: ProposalStatus }) {
-  return (
-    <span className="inline-flex items-center gap-1.5 rounded-full bg-white/5 px-2.5 py-1 text-xs font-medium text-white/60 ring-1 ring-inset ring-white/10">
-      <span className={`size-1.5 rounded-full ${
-        status === 'Final' ? 'bg-white' :
-        status === 'Review' ? 'bg-white/60' : 'bg-white/40'
-      }`} />
-      {status}
-    </span>
-  );
-}
-
 // Lux logo - downward-pointing triangle per @luxfi/logo
-function LuxLogo({ size = 14 }: { size?: number }) {
+function LuxLogo({ size = 14, className = '' }: { size?: number; className?: string }) {
   return (
-    <svg width={size} height={size} viewBox="0 0 100 100" fill="currentColor">
+    <svg width={size} height={size} viewBox="0 0 100 100" fill="currentColor" className={className}>
       <path d="M50 85 L15 25 L85 25 Z" />
     </svg>
   );
@@ -49,29 +37,24 @@ function GitHubIcon({ size = 16 }: { size?: number }) {
   );
 }
 
-function DiscordIcon({ size = 16 }: { size?: number }) {
+function StatusBadge({ status }: { status: ProposalStatus }) {
+  const colors = {
+    Final: 'bg-black text-white',
+    Review: 'bg-neutral-200 text-neutral-700',
+    Draft: 'bg-neutral-100 text-neutral-500',
+  };
   return (
-    <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor">
-      <path d="M20.317 4.37a19.791 19.791 0 00-4.885-1.515.074.074 0 00-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 00-5.487 0 12.64 12.64 0 00-.617-1.25.077.077 0 00-.079-.037A19.736 19.736 0 003.677 4.37a.07.07 0 00-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 00.031.057 19.9 19.9 0 005.993 3.03.078.078 0 00.084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 00-.041-.106 13.107 13.107 0 01-1.872-.892.077.077 0 01-.008-.128 10.2 10.2 0 00.372-.292.074.074 0 01.077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 01.078.01c.12.098.246.198.373.292a.077.077 0 01-.006.127 12.299 12.299 0 01-1.873.892.077.077 0 00-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 00.084.028 19.839 19.839 0 006.002-3.03.077.077 0 00.032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 00-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z" />
-    </svg>
+    <span className={`inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-xs font-medium ${colors[status]}`}>
+      {status}
+    </span>
   );
 }
 
-function XIcon({ size = 16 }: { size?: number }) {
-  return (
-    <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor">
-      <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
-    </svg>
-  );
-}
-
-// Category icons
+// Icons
 function IconLayers({ size = 20 }: { size?: number }) {
   return (
     <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5}>
-      <path d="M12 2L2 7l10 5 10-5-10-5z" />
-      <path d="M2 17l10 5 10-5" />
-      <path d="M2 12l10 5 10-5" />
+      <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
     </svg>
   );
 }
@@ -79,11 +62,7 @@ function IconLayers({ size = 20 }: { size?: number }) {
 function IconNodes({ size = 20 }: { size?: number }) {
   return (
     <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5}>
-      <circle cx="12" cy="12" r="3" />
-      <circle cx="12" cy="5" r="1.5" />
-      <circle cx="19" cy="12" r="1.5" />
-      <circle cx="12" cy="19" r="1.5" />
-      <circle cx="5" cy="12" r="1.5" />
+      <circle cx="12" cy="12" r="3" /><circle cx="12" cy="5" r="1.5" /><circle cx="19" cy="12" r="1.5" /><circle cx="12" cy="19" r="1.5" /><circle cx="5" cy="12" r="1.5" />
     </svg>
   );
 }
@@ -91,8 +70,7 @@ function IconNodes({ size = 20 }: { size?: number }) {
 function IconLock({ size = 20 }: { size?: number }) {
   return (
     <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5}>
-      <rect x="3" y="11" width="18" height="11" rx="2" />
-      <path d="M7 11V7a5 5 0 0110 0v4" />
+      <rect x="3" y="11" width="18" height="11" rx="2" /><path d="M7 11V7a5 5 0 0110 0v4" />
     </svg>
   );
 }
@@ -100,8 +78,7 @@ function IconLock({ size = 20 }: { size?: number }) {
 function IconMonitor({ size = 20 }: { size?: number }) {
   return (
     <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5}>
-      <rect x="2" y="3" width="20" height="14" rx="2" />
-      <path d="M8 21h8M12 17v4" />
+      <rect x="2" y="3" width="20" height="14" rx="2" /><path d="M8 21h8M12 17v4" />
     </svg>
   );
 }
@@ -109,9 +86,7 @@ function IconMonitor({ size = 20 }: { size?: number }) {
 function IconFile({ size = 20 }: { size?: number }) {
   return (
     <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5}>
-      <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8l-6-6z" />
-      <path d="M14 2v6h6" />
-      <path d="M9 15h6" />
+      <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8l-6-6z" /><path d="M14 2v6h6M9 15h6" />
     </svg>
   );
 }
@@ -119,361 +94,221 @@ function IconFile({ size = 20 }: { size?: number }) {
 function IconExchange({ size = 20 }: { size?: number }) {
   return (
     <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5}>
-      <path d="M16 3l4 4-4 4" />
-      <path d="M20 7H4" />
-      <path d="M8 21l-4-4 4-4" />
-      <path d="M4 17h16" />
+      <path d="M16 3l4 4-4 4M20 7H4M8 21l-4-4 4-4M4 17h16" />
     </svg>
   );
 }
 
 const categories = [
-  { title: 'Core', range: '0–99', desc: 'Network fundamentals and infrastructure', Icon: IconLayers },
-  { title: 'Consensus', range: '100–199', desc: 'Protocols, safety, liveness', Icon: IconNodes },
-  { title: 'Cryptography', range: '200–299', desc: 'Primitives, signatures, proofs', Icon: IconLock },
-  { title: 'P-Chain', range: '1000–1999', desc: 'Platform chain specifications', Icon: IconMonitor },
-  { title: 'C-Chain', range: '2000–2999', desc: 'EVM & contract standards', Icon: IconFile },
-  { title: 'X-Chain', range: '3000–3999', desc: 'Exchange chain protocols', Icon: IconExchange },
+  { title: 'Core', range: '0–99', desc: 'Network fundamentals', Icon: IconLayers },
+  { title: 'Consensus', range: '100–199', desc: 'Protocols & safety', Icon: IconNodes },
+  { title: 'Cryptography', range: '200–299', desc: 'Signatures & proofs', Icon: IconLock },
+  { title: 'P-Chain', range: '1000–1999', desc: 'Platform chain', Icon: IconMonitor },
+  { title: 'C-Chain', range: '2000–2999', desc: 'EVM & contracts', Icon: IconFile },
+  { title: 'X-Chain', range: '3000–3999', desc: 'Exchange chain', Icon: IconExchange },
 ] as const;
+
+const footerLinks = {
+  ecosystem: [
+    { title: 'Ecosystem', href: 'https://lux.link', header: true },
+    { title: 'Lux AI', href: 'https://lux.chat' },
+    { title: 'Lux Credit', href: 'https://lux.credit' },
+    { title: 'Lux Exchange', href: 'https://lux.exchange' },
+    { title: 'Lux Finance', href: 'https://lux.finance' },
+    { title: 'Lux Market', href: 'https://lux.market' },
+    { title: 'Lux Shop', href: 'https://lux.shop' },
+    { title: 'Lux Quest', href: 'https://lux.quest' },
+  ],
+  network: [
+    { title: 'Network', href: 'https://lux.network', header: true },
+    { title: 'Bridge', href: 'https://bridge.lux.network' },
+    { title: 'Explorer', href: 'https://explore.lux.network' },
+    { title: 'Wallet', href: 'https://wallet.lux.network' },
+    { title: 'Safe', href: 'https://safe.lux.network' },
+    { title: 'Validator', href: 'https://lux.network/validator' },
+    { title: 'Governance', href: 'https://lux.vote' },
+    { title: 'Open Source', href: 'https://github.com/luxfi' },
+  ],
+  company: [
+    { title: 'Company', href: 'https://lux.partners', header: true },
+    { title: 'About', href: 'https://lux.partners' },
+    { title: 'Brand', href: 'https://drive.google.com/drive/folders/14OJtKLVakGY6883XO9yGbiHtlFxQUUm5' },
+    { title: 'Careers', href: 'https://docs.google.com/document/d/1SCt0Hg7EIs06TootKCA1am1xo4mcXoKF/edit' },
+    { title: 'Partnerships', href: 'https://apply.lux.partners' },
+    { title: 'Press', href: 'mailto:ai@lux.partners?subject=Press' },
+    { title: 'Help', href: 'mailto:ai@lux.partners?subject=Help' },
+  ],
+  community: [
+    { title: 'Community', href: '#', header: true },
+    { title: 'Discord', href: 'https://discord.gg/sxaS7FFHwh' },
+    { title: 'Telegram', href: 'https://t.me/luxdefi' },
+    { title: '@luxdefi', href: 'https://twitter.com/luxdefi' },
+    { title: 'Discussions', href: 'https://github.com/orgs/luxfi/discussions' },
+  ],
+};
 
 export default function HomePage() {
   const stats = source.getStats();
   const recentLPs = source.getAllPages().slice(0, 6);
 
   return (
-    <div className="min-h-screen bg-black text-white antialiased">
-      {/* Ambient effects */}
-      <div className="pointer-events-none fixed inset-0 overflow-hidden">
-        <div className="absolute -top-1/2 left-1/2 h-[800px] w-[1200px] -translate-x-1/2 rounded-full bg-gradient-to-b from-white/[0.07] to-transparent blur-3xl" />
-        <div className="absolute top-1/4 -right-1/4 h-[600px] w-[600px] rounded-full bg-gradient-to-b from-white/[0.04] to-transparent blur-3xl" />
-      </div>
-
+    <div className="min-h-screen bg-white text-black antialiased">
       {/* Header */}
-      <header className="sticky top-0 z-50 backdrop-blur-xl">
-        <div className="mx-auto max-w-6xl px-6">
-          <nav className="flex h-16 items-center justify-between border-b border-white/[0.08]">
-            <Link href="/" className="flex items-center gap-3 transition-opacity hover:opacity-70">
-              <div className="flex size-8 items-center justify-center rounded-lg bg-white/[0.08]">
-                <LuxLogo size={14} />
-              </div>
-              <span className="text-sm font-semibold">Lux Proposals</span>
-            </Link>
-
-            <div className="flex items-center gap-6">
-              <div className="hidden items-center gap-6 md:flex">
-                <Link href="/docs" className="text-sm text-white/50 transition-colors hover:text-white">
-                  Browse
-                </Link>
-                <Link href="/contribute" className="text-sm text-white/50 transition-colors hover:text-white">
-                  Contribute
-                </Link>
-                <a href="https://github.com/luxfi/lps" target="_blank" rel="noreferrer" className="text-sm text-white/50 transition-colors hover:text-white">
-                  GitHub
-                </a>
-              </div>
-              <Link
-                href="/docs"
-                className="inline-flex items-center gap-2 rounded-full bg-white px-4 py-2 text-sm font-medium text-black transition-all hover:bg-white/90"
-              >
-                Browse
-                <ArrowIcon size={14} />
-              </Link>
-            </div>
-          </nav>
+      <header className="sticky top-0 z-50 border-b border-neutral-200 bg-white/80 backdrop-blur-xl">
+        <div className="mx-auto flex h-14 max-w-6xl items-center justify-between px-4 sm:px-6">
+          <Link href="/" className="flex items-center gap-2">
+            <LuxLogo size={18} />
+            <span className="font-semibold">Lux Proposals</span>
+          </Link>
+          <Link href="/docs" className="rounded-full bg-black px-4 py-1.5 text-sm font-medium text-white hover:bg-neutral-800">
+            Browse →
+          </Link>
         </div>
       </header>
 
-      <main className="relative">
+      <main>
         {/* Hero */}
-        <section className="mx-auto max-w-6xl px-6 pb-24 pt-20 md:pb-32 md:pt-28">
-          <div className="mx-auto max-w-3xl text-center">
-            {/* Status pill */}
-            <div className="inline-flex items-center gap-2 rounded-full bg-white/[0.05] px-4 py-2 ring-1 ring-inset ring-white/[0.1]">
-              <span className="relative flex size-2">
-                <span className="absolute inline-flex size-full animate-ping rounded-full bg-white/40" style={{ animationDuration: '2s' }} />
-                <span className="relative inline-flex size-2 rounded-full bg-white" />
-              </span>
-              <span className="text-sm text-white/70">
-                <span className="font-medium text-white">{stats.byStatus['Final'] || 0}</span> standards finalized
-              </span>
-            </div>
+        <section className="mx-auto max-w-6xl px-4 py-16 text-center sm:px-6 sm:py-24">
+          <p className="text-sm text-neutral-500">
+            {stats.byStatus['Final'] || 0} standards finalized
+          </p>
+          <h1 className="mt-4 text-4xl font-semibold tracking-tight sm:text-5xl">
+            Lux Proposals
+          </h1>
+          <p className="mx-auto mt-4 max-w-xl text-neutral-500">
+            Open, community-driven standards for the Lux ecosystem.
+          </p>
+          <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
+            <Link href="/docs" className="w-full rounded-full bg-black px-6 py-2.5 text-sm font-medium text-white hover:bg-neutral-800 sm:w-auto">
+              Browse proposals
+            </Link>
+            <a href="https://github.com/luxfi/lps" target="_blank" rel="noreferrer" className="flex w-full items-center justify-center gap-2 rounded-full border border-neutral-200 px-6 py-2.5 text-sm font-medium hover:bg-neutral-50 sm:w-auto">
+              <GitHubIcon size={16} />
+              GitHub
+            </a>
+          </div>
 
-            <h1 className="mt-8 bg-gradient-to-b from-white to-white/70 bg-clip-text text-5xl font-semibold tracking-tight text-transparent md:text-6xl lg:text-7xl">
-              Lux Proposals
-            </h1>
-
-            <p className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-white/50">
-              Open, community-driven standards and improvements for the Lux ecosystem of open-source AI blockchains.
-            </p>
-
-            {/* CTAs */}
-            <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
-              <Link
-                href="/docs"
-                className="inline-flex h-12 w-full items-center justify-center gap-2 rounded-full bg-white px-8 text-sm font-semibold text-black transition-all hover:bg-white/90 sm:w-auto"
-              >
-                Browse proposals
-              </Link>
-              <a
-                href="https://github.com/luxfi/lps"
-                target="_blank"
-                rel="noreferrer"
-                className="inline-flex h-12 w-full items-center justify-center gap-2.5 rounded-full bg-white/[0.05] px-8 text-sm font-semibold text-white ring-1 ring-inset ring-white/[0.1] transition-all hover:bg-white/[0.08] sm:w-auto"
-              >
-                <GitHubIcon size={16} />
-                View on GitHub
-              </a>
-            </div>
-
-            {/* Search */}
-            <div className="mx-auto mt-14 max-w-xl">
-              <div className="flex items-center gap-3 rounded-2xl bg-white/[0.03] px-5 py-4 ring-1 ring-inset ring-white/[0.08] transition-all focus-within:ring-white/20">
-                <SearchIcon size={18} />
-                <input
-                  type="text"
-                  placeholder="Search LPs by number, title, or keyword..."
-                  className="min-w-0 flex-1 bg-transparent text-sm text-white placeholder:text-white/30 focus:outline-none"
-                />
-                <kbd className="hidden rounded-md bg-white/[0.05] px-2 py-1 text-xs font-medium text-white/40 ring-1 ring-inset ring-white/[0.1] md:block">
-                  ⌘K
-                </kbd>
-              </div>
+          {/* Search */}
+          <div className="mx-auto mt-10 max-w-md">
+            <div className="flex items-center gap-2 rounded-lg border border-neutral-200 bg-neutral-50 px-3 py-2">
+              <SearchIcon size={16} />
+              <input type="text" placeholder="Search LPs..." className="flex-1 bg-transparent text-sm focus:outline-none" />
+              <kbd className="hidden rounded bg-neutral-200 px-1.5 py-0.5 text-xs text-neutral-500 sm:block">⌘K</kbd>
             </div>
           </div>
         </section>
 
         {/* Stats */}
-        <section className="border-y border-white/[0.06] bg-gradient-to-b from-white/[0.02] to-transparent">
-          <div className="mx-auto max-w-6xl px-6 py-12">
-            <div className="grid grid-cols-2 gap-px overflow-hidden rounded-2xl bg-white/[0.06] md:grid-cols-4">
-              {[
-                { label: 'Total proposals', value: stats.total },
-                { label: 'Final', value: stats.byStatus['Final'] || 0 },
-                { label: 'In review', value: stats.byStatus['Review'] || 0 },
-                { label: 'Draft', value: stats.byStatus['Draft'] || 0 },
-              ].map((stat) => (
-                <div key={stat.label} className="bg-black p-8 text-center">
-                  <div className="text-4xl font-semibold tracking-tight">{stat.value}</div>
-                  <div className="mt-1 text-sm text-white/40">{stat.label}</div>
-                </div>
-              ))}
-            </div>
+        <section className="border-y border-neutral-200 bg-neutral-50">
+          <div className="mx-auto grid max-w-6xl grid-cols-4 divide-x divide-neutral-200">
+            {[
+              { label: 'Total', value: stats.total },
+              { label: 'Final', value: stats.byStatus['Final'] || 0 },
+              { label: 'Review', value: stats.byStatus['Review'] || 0 },
+              { label: 'Draft', value: stats.byStatus['Draft'] || 0 },
+            ].map((stat) => (
+              <div key={stat.label} className="px-4 py-6 text-center sm:px-6">
+                <div className="text-2xl font-semibold tabular-nums sm:text-3xl">{stat.value}</div>
+                <div className="mt-0.5 text-xs text-neutral-500 sm:text-sm">{stat.label}</div>
+              </div>
+            ))}
           </div>
         </section>
 
         {/* Categories */}
-        <section className="mx-auto max-w-6xl px-6 py-24">
-          <div className="text-center">
-            <h2 className="text-2xl font-semibold tracking-tight md:text-3xl">Proposal categories</h2>
-            <p className="mt-3 text-base text-white/50">
-              LPs are organized by number ranges that indicate category and purpose.
-            </p>
-          </div>
-
-          <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        <section className="mx-auto max-w-6xl px-4 py-16 sm:px-6">
+          <h2 className="text-xl font-semibold sm:text-2xl">Categories</h2>
+          <div className="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
             {categories.map((cat) => (
-              <Link
-                key={cat.title}
-                href="/docs"
-                className="group relative rounded-2xl bg-gradient-to-b from-white/[0.04] to-transparent p-6 ring-1 ring-inset ring-white/[0.08] transition-all hover:from-white/[0.06] hover:ring-white/[0.15]"
-              >
-                <div className="flex items-start justify-between">
-                  <div className="flex size-12 items-center justify-center rounded-xl bg-white/[0.05] text-white/60 ring-1 ring-inset ring-white/[0.1] transition-colors group-hover:text-white/80">
-                    <cat.Icon size={22} />
-                  </div>
-                  <span className="rounded-full bg-white/[0.05] px-3 py-1 font-mono text-xs text-white/50 ring-1 ring-inset ring-white/[0.08]">
-                    {cat.range}
-                  </span>
+              <Link key={cat.title} href="/docs" className="flex items-center gap-4 rounded-lg border border-neutral-200 p-4 hover:bg-neutral-50">
+                <div className="flex size-10 items-center justify-center rounded-lg bg-neutral-100 text-neutral-600">
+                  <cat.Icon size={20} />
                 </div>
-                <h3 className="mt-5 text-base font-semibold">{cat.title}</h3>
-                <p className="mt-1.5 text-sm text-white/40">{cat.desc}</p>
+                <div className="flex-1">
+                  <div className="flex items-center justify-between">
+                    <span className="font-medium">{cat.title}</span>
+                    <span className="font-mono text-xs text-neutral-400">{cat.range}</span>
+                  </div>
+                  <p className="text-sm text-neutral-500">{cat.desc}</p>
+                </div>
               </Link>
             ))}
           </div>
         </section>
 
-        {/* Recent proposals */}
-        <section className="border-t border-white/[0.06] bg-gradient-to-b from-white/[0.015] to-transparent">
-          <div className="mx-auto max-w-6xl px-6 py-24">
-            <div className="flex items-end justify-between">
-              <div>
-                <h2 className="text-2xl font-semibold tracking-tight">Recent proposals</h2>
-                <p className="mt-2 text-base text-white/50">Latest LPs across protocol, tooling, and standards.</p>
-              </div>
-              <Link
-                href="/docs"
-                className="hidden items-center gap-2 rounded-full bg-white/[0.05] px-5 py-2.5 text-sm font-medium text-white ring-1 ring-inset ring-white/[0.1] transition-all hover:bg-white/[0.08] sm:inline-flex"
-              >
-                View all
-                <ArrowIcon size={14} />
-              </Link>
+        {/* Recent */}
+        <section className="border-t border-neutral-200 bg-neutral-50">
+          <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6">
+            <div className="flex items-center justify-between">
+              <h2 className="text-xl font-semibold sm:text-2xl">Recent proposals</h2>
+              <Link href="/docs" className="text-sm font-medium text-neutral-500 hover:text-black">View all →</Link>
             </div>
-
-            <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            <div className="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
               {recentLPs.map((lp) => {
                 const lpNum = String(lp.data.frontmatter.lp || '0').padStart(4, '0');
                 const status = (lp.data.frontmatter.status || 'Draft') as ProposalStatus;
                 return (
-                  <Link
-                    key={lp.slug.join('/')}
-                    href={`/docs/${lp.slug.join('/')}`}
-                    className="group rounded-2xl bg-gradient-to-b from-white/[0.03] to-transparent p-6 ring-1 ring-inset ring-white/[0.06] transition-all hover:from-white/[0.05] hover:ring-white/[0.12]"
-                  >
-                    <div className="flex items-center justify-between gap-3">
-                      <span className="font-mono text-sm text-white/50 transition-colors group-hover:text-white/70">LP-{lpNum}</span>
+                  <Link key={lp.slug.join('/')} href={`/docs/${lp.slug.join('/')}`} className="rounded-lg border border-neutral-200 bg-white p-4 hover:border-neutral-300">
+                    <div className="flex items-center justify-between">
+                      <span className="font-mono text-sm text-neutral-400">LP-{lpNum}</span>
                       <StatusBadge status={status} />
                     </div>
-                    <h3 className="mt-4 text-base font-semibold leading-snug line-clamp-2">
-                      {lp.data.title}
-                    </h3>
-                    {lp.data.description && (
-                      <p className="mt-2 text-sm leading-relaxed text-white/40 line-clamp-2">
-                        {lp.data.description}
-                      </p>
-                    )}
+                    <h3 className="mt-2 font-medium leading-snug line-clamp-2">{lp.data.title}</h3>
+                    {lp.data.description && <p className="mt-1 text-sm text-neutral-500 line-clamp-2">{lp.data.description}</p>}
                   </Link>
                 );
               })}
-            </div>
-
-            <div className="mt-10 text-center sm:hidden">
-              <Link
-                href="/docs"
-                className="inline-flex items-center gap-2 rounded-full bg-white/[0.05] px-6 py-3 text-sm font-medium text-white ring-1 ring-inset ring-white/[0.1]"
-              >
-                View all proposals
-              </Link>
             </div>
           </div>
         </section>
 
         {/* CTA */}
-        <section className="mx-auto max-w-6xl px-6 pb-24">
-          <div className="overflow-hidden rounded-3xl bg-gradient-to-b from-white/[0.06] to-white/[0.02] ring-1 ring-inset ring-white/[0.1]">
-            <div className="px-8 py-14 md:px-14 md:py-16">
-              <div className="flex flex-col gap-10 md:flex-row md:items-center md:justify-between">
-                <div className="max-w-xl">
-                  <h2 className="text-2xl font-semibold tracking-tight md:text-3xl">Ready to contribute?</h2>
-                  <p className="mt-3 text-base leading-relaxed text-white/50">
-                    Have an idea that improves Lux? Start with the guidelines, then open a pull request for your LP.
-                  </p>
-                </div>
-                <div className="flex flex-shrink-0 flex-col gap-3 sm:flex-row">
-                  <Link
-                    href="/contribute"
-                    className="inline-flex h-12 items-center justify-center rounded-full bg-white px-6 text-sm font-semibold text-black transition-all hover:bg-white/90"
-                  >
-                    Read guidelines
-                  </Link>
-                  <a
-                    href="https://github.com/luxfi/lps"
-                    target="_blank"
-                    rel="noreferrer"
-                    className="inline-flex h-12 items-center justify-center gap-2 rounded-full bg-white/[0.05] px-6 text-sm font-semibold text-white ring-1 ring-inset ring-white/[0.1] transition-all hover:bg-white/[0.08]"
-                  >
-                    <GitHubIcon size={16} />
-                    Open on GitHub
-                  </a>
-                </div>
-              </div>
+        <section className="mx-auto max-w-6xl px-4 py-16 sm:px-6">
+          <div className="rounded-xl bg-black p-8 text-white sm:p-12">
+            <h2 className="text-xl font-semibold sm:text-2xl">Ready to contribute?</h2>
+            <p className="mt-2 text-neutral-400">Have an idea? Start with the guidelines, then open a PR.</p>
+            <div className="mt-6 flex flex-col gap-3 sm:flex-row">
+              <Link href="/contribute" className="rounded-full bg-white px-6 py-2.5 text-center text-sm font-medium text-black hover:bg-neutral-100">
+                Read guidelines
+              </Link>
+              <a href="https://github.com/luxfi/lps" target="_blank" rel="noreferrer" className="flex items-center justify-center gap-2 rounded-full border border-neutral-600 px-6 py-2.5 text-sm font-medium hover:bg-neutral-800">
+                <GitHubIcon size={16} />
+                Open on GitHub
+              </a>
             </div>
           </div>
         </section>
       </main>
 
       {/* Footer */}
-      <footer className="border-t border-white/[0.06]">
-        <div className="mx-auto max-w-6xl px-6 py-16">
-          <div className="grid gap-12 md:grid-cols-5">
-            {/* Brand */}
-            <div className="md:col-span-2">
-              <div className="flex items-center gap-3">
-                <div className="flex size-10 items-center justify-center rounded-xl bg-white/[0.05] ring-1 ring-inset ring-white/[0.1]">
-                  <LuxLogo size={16} />
-                </div>
-                <span className="text-base font-semibold">Lux Network</span>
-              </div>
-              <p className="mt-4 max-w-sm text-sm leading-relaxed text-white/40">
-                Building the future of decentralized infrastructure—open-source, verifiable, and community governed.
-              </p>
-              <div className="mt-6 flex items-center gap-2">
-                {[
-                  { href: 'https://github.com/luxfi', icon: GitHubIcon, label: 'GitHub' },
-                  { href: 'https://discord.gg/lux', icon: DiscordIcon, label: 'Discord' },
-                  { href: 'https://twitter.com/luxfi', icon: XIcon, label: 'X' },
-                ].map((social) => (
+      <footer className="border-t border-neutral-200 bg-neutral-50">
+        <div className="mx-auto max-w-6xl px-4 py-12 sm:px-6">
+          <div className="grid grid-cols-2 gap-8 sm:grid-cols-5">
+            <div className="col-span-2 sm:col-span-1">
+              <LuxLogo size={24} />
+            </div>
+            {Object.entries(footerLinks).map(([key, links]) => (
+              <div key={key}>
+                {links.map((link) => (
                   <a
-                    key={social.label}
-                    href={social.href}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="flex size-10 items-center justify-center rounded-lg text-white/40 transition-colors hover:bg-white/[0.05] hover:text-white"
-                    aria-label={social.label}
+                    key={link.title}
+                    href={link.href}
+                    target={link.header ? undefined : '_blank'}
+                    rel={link.header ? undefined : 'noreferrer'}
+                    className={`block text-sm ${link.header ? 'mb-2 font-medium text-neutral-700' : 'mb-1.5 text-neutral-500 hover:text-black'}`}
                   >
-                    <social.icon size={18} />
+                    {link.title}
                   </a>
                 ))}
               </div>
-            </div>
-
-            {/* Links */}
-            {[
-              {
-                title: 'LPs',
-                links: [
-                  { label: 'Browse', href: '/docs' },
-                  { label: 'Contribute', href: '/contribute' },
-                  { label: 'GitHub', href: 'https://github.com/luxfi/lps', external: true },
-                ],
-              },
-              {
-                title: 'Network',
-                links: [
-                  { label: 'Home', href: 'https://lux.network', external: true },
-                  { label: 'Explorer', href: 'https://explorer.lux.network', external: true },
-                  { label: 'Docs', href: 'https://docs.lux.network', external: true },
-                ],
-              },
-              {
-                title: 'Community',
-                links: [
-                  { label: 'GitHub org', href: 'https://github.com/luxfi', external: true },
-                  { label: 'Discord', href: 'https://discord.gg/lux', external: true },
-                  { label: 'X / Twitter', href: 'https://twitter.com/luxfi', external: true },
-                ],
-              },
-            ].map((group) => (
-              <div key={group.title}>
-                <h4 className="text-sm font-semibold text-white/70">{group.title}</h4>
-                <ul className="mt-4 space-y-3">
-                  {group.links.map((link) => (
-                    <li key={link.label}>
-                      {link.external ? (
-                        <a href={link.href} target="_blank" rel="noreferrer" className="text-sm text-white/40 transition-colors hover:text-white">
-                          {link.label}
-                        </a>
-                      ) : (
-                        <Link href={link.href} className="text-sm text-white/40 transition-colors hover:text-white">
-                          {link.label}
-                        </Link>
-                      )}
-                    </li>
-                  ))}
-                </ul>
-              </div>
             ))}
           </div>
-
-          <div className="mt-16 flex flex-col items-center justify-between gap-4 border-t border-white/[0.06] pt-8 md:flex-row">
-            <div className="text-sm text-white/30">© {new Date().getFullYear()} Lux Network. All rights reserved.</div>
-            <div className="flex items-center gap-6">
-              <a href="https://lux.network/privacy" target="_blank" rel="noreferrer" className="text-sm text-white/30 transition-colors hover:text-white">
-                Privacy
-              </a>
-              <a href="https://lux.network/terms" target="_blank" rel="noreferrer" className="text-sm text-white/30 transition-colors hover:text-white">
-                Terms
-              </a>
+          <div className="mt-12 flex flex-col items-center justify-between gap-4 border-t border-neutral-200 pt-8 sm:flex-row">
+            <div className="flex gap-4 text-sm text-neutral-500">
+              <a href="https://lux.network/terms" target="_blank" rel="noreferrer" className="hover:text-black">Terms</a>
+              <a href="https://lux.network/privacy" target="_blank" rel="noreferrer" className="hover:text-black">Privacy</a>
             </div>
+            <p className="text-sm text-neutral-400">© {new Date().getFullYear()} Lux Industries Inc.</p>
           </div>
         </div>
       </footer>
