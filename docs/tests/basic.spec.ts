@@ -63,12 +63,13 @@ test.describe('Lux Proposals Landing Page', () => {
     const footer = page.locator('footer');
     await expect(footer).toBeVisible();
 
-    // Check for footer sections using exact matching
-    await expect(footer.getByRole('link', { name: 'Network', exact: true })).toBeVisible();
-    await expect(footer.getByRole('link', { name: 'Ecosystem', exact: true })).toBeVisible();
-    await expect(footer.getByRole('link', { name: 'Company', exact: true })).toBeVisible();
-    await expect(footer.getByRole('link', { name: 'Community', exact: true })).toBeVisible();
-    await expect(footer.getByRole('link', { name: 'Documentation', exact: true })).toBeVisible();
+    // Check for footer section headers (now spans, not links)
+    await expect(footer.getByText('Ecosystem', { exact: true })).toBeVisible();
+    await expect(footer.getByText('Network', { exact: true })).toBeVisible();
+    await expect(footer.getByText('Company', { exact: true })).toBeVisible();
+    await expect(footer.getByText('Community', { exact: true })).toBeVisible();
+    // Check for some actual links within the footer
+    await expect(footer.getByRole('link', { name: 'Privacy Policy', exact: true })).toBeVisible();
   });
 
   test('should render the Lux logo', async ({ page }) => {
