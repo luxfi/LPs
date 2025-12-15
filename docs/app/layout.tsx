@@ -17,10 +17,26 @@ export const metadata = {
   description: 'Standards and improvement proposals for the Lux Network - community-driven governance for an open network.',
   keywords: ['Lux', 'blockchain', 'proposals', 'governance', 'standards', 'LRC', 'tokens'],
   authors: [{ name: 'Lux Network' }],
+  metadataBase: new URL('https://lps.lux.network'),
   openGraph: {
     title: 'Lux Proposals (LPs)',
-    description: 'Standards and improvement proposals for the Lux Network',
+    description: 'Open, community-driven standards for the Lux Network ecosystem',
     type: 'website',
+    siteName: 'Lux Proposals',
+    images: [
+      {
+        url: '/og.png',
+        width: 1200,
+        height: 630,
+        alt: 'Lux Proposals - Open standards for Lux Network',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Lux Proposals (LPs)',
+    description: 'Open, community-driven standards for the Lux Network ecosystem',
+    images: ['/twitter.png'],
   },
 };
 
