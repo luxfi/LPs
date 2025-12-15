@@ -2,7 +2,7 @@
 
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { useRouter, usePathname } from 'next/navigation';
-import { Search, FileText, ExternalLink, Github, MessageSquare, ArrowRight, Hash, BookOpen, Layers, Lock, Coins, Vote, Rocket, FlaskConical, X, Command } from 'lucide-react';
+import { Search, FileText, Github, MessageSquare, ArrowRight, Hash, BookOpen, Layers, Lock, Coins, Vote, Rocket, FlaskConical, X, Command } from 'lucide-react';
 
 interface SearchResult {
   id: string;
