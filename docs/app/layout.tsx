@@ -5,7 +5,7 @@ import type { ReactNode } from 'react';
 
 const inter = Inter({
   subsets: ['latin'],
-  variable: '--font-geist-sans',
+  variable: '--font-inter',
   display: 'swap',
 });
 
@@ -50,7 +50,7 @@ export default function Layout({ children }: { children: ReactNode }) {
           }}
           theme={{
             enabled: true,
-            defaultTheme: 'dark',
+            defaultTheme: 'system',
             storageKey: 'lux-lps-theme',
           }}
         >

@@ -1,83 +1,129 @@
-# Lux Proposals (LPs)
+# Lux Proposals (LPs) 🚀
 
-Lux Proposals (LPs) are the primary mechanism for proposing new features, gathering community input, and documenting design decisions for the [Lux Network](https://lux.network).
+<div align="center">
 
-## Network Architecture
+**The governance and standardization framework for the [Lux Network](https://lux.network)**
+
+_Lux Network is an 8-chain blockchain ecosystem designed for quantum-safe operations, AI integration, and high-performance DeFi._
+
+[![Documentation](https://img.shields.io/badge/docs-latest-brightgreen?style=for-the-badge)](https://docs.lux.network)
+[![License](https://img.shields.io/badge/license-CC0_1.0-blue?style=for-the-badge)](https://creativecommons.org/publicdomain/zero/1.0/)
+[![Network Status](https://img.shields.io/badge/network-mainnet-success?style=for-the-badge)](https://explorer.lux.network)
+
+</div>
+
+---
+
+## 🌐 Network Architecture
 
 Lux Network operates an **8-chain architecture** with specialized chains for different workloads:
 
 ```
-┌─────────────────────────────────────────────────────────────────────────────┐
-│                           LUX NETWORK                                       │
-├─────────────────────────────────────────────────────────────────────────────┤
-│                                                                             │
-│   ┌─────────┐  ┌─────────┐  ┌─────────┐  ┌─────────┐                       │
-│   │ P-Chain │  │ C-Chain │  │ X-Chain │  │ Q-Chain │                       │
-│   │Platform │  │Contract │  │Exchange │  │ Quantum │                       │
-│   │  1xxx   │  │  2xxx   │  │  3xxx   │  │  4xxx   │                       │
-│   │   🟢    │  │   🟢    │  │   🟢    │  │   🟢    │                       │
-│   └─────────┘  └─────────┘  └─────────┘  └─────────┘                       │
-│                                                                             │
-│   ┌─────────┐  ┌─────────┐  ┌─────────┐  ┌─────────┐                       │
-│   │ A-Chain │  │ B-Chain │  │ T-Chain │  │ Z-Chain │                       │
-│   │   AI    │  │ Bridge  │  │Threshold│  │   ZK    │                       │
-│   │  5xxx   │  │  6xxx   │  │  7xxx   │  │  8xxx   │                       │
-│   │   🟢    │  │   🟢    │  │   🟢    │  │   🟢    │                       │
-│   └─────────┘  └─────────┘  └─────────┘  └─────────┘                       │
-│                                                                             │
-│   ┌─────────────────────────────────┐  ┌─────────────────────────────────┐ │
-│   │      Warp (Native XCM)          │  │       DEX / Finance (9xxx)      │ │
-│   │  BLS + Ringtail • Sub-second    │  │   Order Book • AMM • Perpetuals │ │
-│   │       Platform-level 🟢         │  │             🟢                  │ │
-│   └─────────────────────────────────┘  └─────────────────────────────────┘ │
-│                                                                             │
-│   🟢 Active   🟡 Development                                                │
-└─────────────────────────────────────────────────────────────────────────────┘
+┌───────────────────────────────────────────────────────────────────────────────────────┐
+│                                🟢 LUX NETWORK (8-Chain Architecture) 🟢               │
+├───────────────────────────────────────────────────────────────────────────────────────┤
+│                                                                                       │
+│   ┌─────────────┐  ┌─────────────┐  ┌─────────────┐  ┌─────────────┐                │
+│   │    P-Chain  │  │    C-Chain  │  │    X-Chain  │  │    Q-Chain  │                │
+│   │  Platform   │  │  Contract   │  │  Exchange   │  │   Quantum   │                │
+│   │    1xxx     │  │    2xxx     │  │    3xxx     │  │    4xxx     │                │
+│   │   🔷🟢      │  │    🟢       │  │    🟢       │  │    🟢       │                │
+│   └─────────────┘  └─────────────┘  └─────────────┘  └─────────────┘                │
+│                                                                                       │
+│   ┌─────────────┐  ┌─────────────┐  ┌─────────────┐  ┌─────────────┐                │
+│   │    A-Chain  │  │    B-Chain  │  │    T-Chain  │  │    Z-Chain  │                │
+│   │     AI      │  │   Bridge    │  │ Threshold   │  │   ZK Proofs │                │
+│   │    5xxx     │  │    6xxx     │  │    7xxx     │  │    8xxx     │                │
+│   │    🟢       │  │    🟢       │  │    🟢       │  │    🟢       │                │
+│   └─────────────┘  └─────────────┘  └─────────────┘  └─────────────┘                │
+│                                                                                       │
+│   ┌─────────────────────────────────────────────────────────────────────────────────┐ │
+│   │        📡 Warp (Native XCM) • BLS + Ringtail • Sub-second Finality             │ │
+│   │                          Platform-level Quantum-Safe                           │ │
+│   └─────────────────────────────────────────────────────────────────────────────────┘ │
+│                                                                                       │
+│   ┌─────────────────────────────────────────────────────────────────────────────────┐ │
+│   │      📈 DEX/Finance Suite • Order Book • AMM • Perpetuals • HFT Venues        │ │
+│   │                                 9xxx Series                                     │ │
+│   └─────────────────────────────────────────────────────────────────────────────────┘ │
+│                                                                                       │
+│   Legend: 🟢 Active • 🟡 Development • 🔷 Platform • 📡 Cross-Chain                  │
+└───────────────────────────────────────────────────────────────────────────────────────┘
 ```
 
-### Cross-Chain Communication Stack
+### 🔄 Cross-Chain Communication Stack
 
 ```
-┌──────────────────────────────────────────────────────────────────────────────┐
-│                        EXTERNAL CHAINS (Ethereum, Bitcoin, Cosmos)           │
-└─────────────────────────────────────┬────────────────────────────────────────┘
-                                      │ MPC Signatures (CGGMP21, FROST)
+┌──────────────────────────────────────────────────────────────────────────────────────┐
+│                    🌐 EXTERNAL BLOCKCHAINS (ETH, BTC, Cosmos)                        │
+└─────────────────────────────────────┬────────────────────────────────────────────────┘
+                                      │
+                    Multi-Party Computation Signatures (CGGMP21, FROST)
+                                      │
                         ┌─────────────▼─────────────┐
-                        │  TELEPORT BRIDGE (6xxx)   │
-                        │  T-Chain ↔ B-Chain        │
-                        │  External asset custody   │
-                        └─────────────┬─────────────┘
-                                      │ Uses internally
-                        ┌─────────────▼─────────────┐
-                        │  WARP 1.5 (Platform-level)│  ◄── Native XCM primitive
-                        │  BLS + Ringtail (PQ-safe) │
-                        │  Validator attestations   │
-                        │  Sub-second finality      │
+                        │   🌉 TELEPORT BRIDGE     │
+                        │    (6xxx Series)         │
+                        │   T-Chain ↔ B-Chain      │
+                        │   MPC-Based Custody      │
                         └─────────────┬─────────────┘
                                       │
-┌─────────────────────────────────────▼────────────────────────────────────────┐
-│     P-Chain ◄──► C-Chain ◄──► X-Chain ◄──► Q-Chain ◄──► A-Chain ◄──► etc    │
-│                         INTRA-LUX CHAIN MESSAGING                            │
-└──────────────────────────────────────────────────────────────────────────────┘
+                    Uses Internal Quantum-Safe Primitives
+                                      │
+                        ┌─────────────▼─────────────┐
+                        │    📡 WARP 1.5 (PQ-Safe) │
+                        │    BLS + Ringtail        │
+                        │    Validator Attestations │
+                        │    Sub-second Finality    │
+                        └─────────────┬─────────────┘
+                                      │
+┌─────────────────────────────────────▼────────────────────────────────────────────────┐
+│         🟢 P-Chain ↔ C-Chain ↔ X-Chain ↔ Q-Chain ↔ A-Chain ↔ ... (Intra-Lux)        │
+│                        Native Cross-Chain Messaging                                  │
+└──────────────────────────────────────────────────────────────────────────────────────┘
 ```
-
-## Quick Links
-
-| Resource | Link |
-|:---------|:-----|
-| **Architecture** | [LP-0000](./LPs/lp-0000-network-architecture-and-community-framework.md) |
-| **Numbering Scheme** | [LP-0099](./LPs/lp-0099-lp-numbering-scheme-and-chain-organization.md) |
-| **Token Standard (LRC-20)** | [LP-2300](./LPs/lp-2300-lrc-20-fungible-token-standard.md) |
-| **NFT Standard (LRC-721)** | [LP-2721](./LPs/lp-2721-lrc-721-non-fungible-token-standard.md) |
-| **DEX Core** | [LP-9000](./LPs/lp-9000-dex-core-specification.md) |
 
 ---
 
-## Chain Specifications
+## 🚀 Quick Start
 
-### 🔷 P-Chain — Platform (1xxx)
+### 📋 Browse Proposals
+- **[All LPs Index](./LPs)** - Complete list of all Lux Proposals
+- **[Documentation Site](https://docs.lux.network)** - Interactive docs viewer
+- **[Network Architecture](./LPs/lp-0000-network-architecture-and-community-framework.md)** - Core design overview
 
-> Validator management, staking, subnet creation
+### 🎯 Essential LPs
+| Category | Resource | Description |
+|:---------|:---------|:------------|
+| **Core Architecture** | [LP-0000](./LPs/lp-0000-network-architecture-and-community-framework.md) | Network foundation and community framework |
+| **Chain Organization** | [LP-0099](./LPs/lp-0099-lp-numbering-scheme-and-chain-organization.md) | LP numbering scheme and chain organization |
+| **Token Standards** | [LRC-20](./LPs/lp-2300-lrc-20-fungible-token-standard.md) | Fungible token standard (Ethereum-compatible) |
+| **NFT Standards** | [LRC-721](./LPs/lp-2721-lrc-721-non-fungible-token-standard.md) | Non-fungible token standard |
+| **DEX Core** | [LP-9000](./LPs/lp-9000-dex-core-specification.md) | Core DEX specification |
+| **Quantum Safety** | [LP-4200](./LPs/lp-4200-post-quantum-cryptography-suite-for-lux-network.md) | Post-quantum cryptography suite |
+
+---
+
+## 🏗️ Chain Specifications
+
+<div align="center">
+
+| Chain | Series | Focus | Status |
+|:------|:-------|:------|:-------:|
+| **P-Chain** | 1xxx | Platform, Staking, Subnets | ✅ |
+| **C-Chain** | 2xxx | EVM Contracts, Token Standards | ✅ |
+| **X-Chain** | 3xxx | Exchange, Asset Transfers | ✅ |
+| **Q-Chain** | 4xxx | Quantum-Safe Operations | ✅ |
+| **A-Chain** | 5xxx | AI/Attestation, TEE | ✅ |
+| **B-Chain** | 6xxx | Cross-Chain Bridges | ✅ |
+| **T-Chain** | 7xxx | MPC, Threshold Signatures | ✅ |
+| **Z-Chain** | 8xxx | Zero-Knowledge Proofs | ✅ |
+| **DEX/Fi** | 9xxx | DeFi Protocols, Trading | ✅ |
+
+</div>
+
+### 🔷 P-Chain — Platform (1xxx Series)
+
+> *Validator management, staking, subnet creation*
 
 | LP | Title | Status |
 |:---|:------|:------:|
@@ -89,11 +135,9 @@ Lux Network operates an **8-chain architecture** with specialized chains for dif
 | [1181](./LPs/lp-1181-epoching.md) | Epoching & Validator Rotation | ✅ |
 | [1605](./LPs/lp-1605-elastic-validator-subnets.md) | Elastic Validator Subnets | 📝 |
 
----
+### 🟢 C-Chain — Contract/EVM (2xxx Series)
 
-### 🟢 C-Chain — Contract/EVM (2xxx)
-
-> EVM-compatible smart contracts, token standards
+> *EVM-compatible smart contracts, token standards*
 
 | LP | Title | Status |
 |:---|:------|:------:|
@@ -109,8 +153,7 @@ Lux Network operates an **8-chain architecture** with specialized chains for dif
 | [2320](./LPs/lp-2320-dynamic-evm-gas-limit-and-price-discovery-updates.md) | Dynamic EVM Gas Limit | ✅ |
 | [2327](./LPs/lp-2327-badgerdb-verkle-optimization.md) | BadgerDB + Verkle Optimization | ✅ |
 
-**Token Standards:**
-
+#### 🪙 Token Standards
 | LP | Standard | Status |
 |:---|:---------|:------:|
 | [2300](./LPs/lp-2300-lrc-20-fungible-token-standard.md) | **LRC-20** Fungible Token | ✅ |
@@ -122,8 +165,7 @@ Lux Network operates an **8-chain architecture** with specialized chains for dif
 | [2030](./LPs/lp-2030-lrc-20-bridgable-token-extension.md) | LRC-20 Bridgable Extension | ✅ |
 | [2031](./LPs/lp-2031-lrc-721-burnable-token-extension.md) | LRC-721 Burnable Extension | ✅ |
 
-**Precompiles & Infrastructure:**
-
+#### 🔧 Precompiles & Infrastructure
 | LP | Title | Status |
 |:---|:------|:------:|
 | [2032](./LPs/lp-2032-c-chain-rollup-plugin-architecture.md) | Rollup Plugin Architecture | 📝 |
@@ -137,11 +179,9 @@ Lux Network operates an **8-chain architecture** with specialized chains for dif
 | [2604](./LPs/lp-2604-state-sync-and-pruning-protocol.md) | State Sync & Pruning | ✅ |
 | [2606](./LPs/lp-2606-verkle-trees-for-efficient-state-management.md) | Verkle Trees | ✅ |
 
----
+### 🟢 X-Chain — Exchange (3xxx Series)
 
-### 🟢 X-Chain — Exchange (3xxx)
-
-> High-speed asset transfers, UTXO model, order books
+> *High-speed asset transfers, UTXO model, order books*
 > **Implementation**: [`github.com/luxfi/node/vms/exchangevm`](https://github.com/luxfi/node)
 
 | LP | Title | Status |
@@ -151,11 +191,9 @@ Lux Network operates an **8-chain architecture** with specialized chains for dif
 | [3036](./LPs/lp-3036-x-chain-order-book-dex-api-and-rpc-addendum.md) | Order-Book DEX API & RPC | ✅ |
 | [3037](./LPs/lp-3037-native-swap-integration-on-m-chain-x-chain-and-z-chain.md) | Native Swap Integration | ✅ |
 
----
+### 🟢 Q-Chain — Quantum (4xxx Series)
 
-### 🟢 Q-Chain — Quantum (4xxx)
-
-> Post-quantum cryptography, quantum-safe operations
+> *Post-quantum cryptography, quantum-safe operations*
 > **Implementation**: [`github.com/luxfi/crypto`](https://github.com/luxfi/crypto) (FIPS 203-205)
 
 | LP | Title | Status |
@@ -169,8 +207,7 @@ Lux Network operates an **8-chain architecture** with specialized chains for dif
 | [4105](./LPs/lp-4105-lamport-one-time-signatures-ots-for-lux-safe.md) | Lamport OTS for Lux Safe | ✅ |
 | [4110](./LPs/lp-4110-quasar-consensus-protocol.md) | Quasar Consensus Protocol | ✅ |
 
-**Post-Quantum Standards:**
-
+#### 🔐 Post-Quantum Standards
 | LP | Algorithm | Status |
 |:---|:----------|:------:|
 | [4316](./LPs/lp-4316-ml-dsa-post-quantum-digital-signatures.md) | **ML-DSA** (Dilithium) | ✅ |
@@ -181,11 +218,9 @@ Lux Network operates an **8-chain architecture** with specialized chains for dif
 | [4202](./LPs/lp-4202-cryptographic-agility-framework.md) | Crypto Agility Framework | ✅ |
 | [4303](./LPs/lp-4303-lux-q-security-post-quantum-p-chain-integration.md) | Q-Security P-Chain | ✅ |
 
----
+### 🟢 A-Chain — AI/Attestation (5xxx Series)
 
-### 🟢 A-Chain — AI/Attestation (5xxx)
-
-> AI compute, attestations, TEE integration
+> *AI compute, attestations, TEE integration*
 > **Implementation**: [`github.com/luxfi/node/vms/aivm`](https://github.com/luxfi/node)
 
 | LP | Title | Status |
@@ -201,11 +236,9 @@ Lux Network operates an **8-chain architecture** with specialized chains for dif
 | [5601](./LPs/lp-5601-dynamic-gas-fee-mechanism-with-ai-compute-pricing.md) | AI Compute Gas Pricing | ✅ |
 | [5607](./LPs/lp-5607-gpu-acceleration-framework.md) | GPU Acceleration | ✅ |
 
----
-
 ### 📡 Warp — Native Cross-Chain Messaging (Platform)
 
-> Platform-level XCM primitive for intra-Lux messaging. Uses BLS + Ringtail signatures.
+> *Platform-level XCM primitive for intra-Lux messaging. Uses BLS + Ringtail signatures.*
 > **Implementation**: [`github.com/luxfi/warp`](https://github.com/luxfi/warp)
 
 | LP | Title | Status |
@@ -215,19 +248,16 @@ Lux Network operates an **8-chain architecture** with specialized chains for dif
 | [2313](./LPs/lp-2313-warp-messaging-precompile.md) | Warp EVM Precompile | ✅ |
 | [6022](./LPs/lp-6022-warp-messaging-20-native-interchain-transfers.md) | Warp Native Transfers | ✅ |
 
----
+### 🌉 B-Chain — Bridge (6xxx Series)
 
-### 🌉 B-Chain — Bridge (6xxx)
-
-> External bridge for Ethereum, Bitcoin, Cosmos. Uses MPC (CGGMP21, FROST) via T-Chain.
+> *External bridge for Ethereum, Bitcoin, Cosmos. Uses MPC (CGGMP21, FROST) via T-Chain.*
 
 | LP | Title | Status |
 |:---|:------|:------:|
 | [6000](./LPs/lp-6000-b-chain-bridge-specification.md) | **Bridge Specification** | ✅ |
 | [6301](./LPs/lp-6301-lux-b-chain-cross-chain-bridge-protocol.md) | Cross-Chain Bridge Protocol | ✅ |
 
-**Teleport Protocol:**
-
+#### 🌉 Teleport Protocol
 | LP | Title | Status |
 |:---|:------|:------:|
 | [6332](./LPs/lp-6332-teleport-bridge-architecture-unified-cross-chain-protocol.md) | **Teleport Architecture** | ✅ |
@@ -235,8 +265,7 @@ Lux Network operates an **8-chain architecture** with specialized chains for dif
 | [6021](./LPs/lp-6021-teleport-protocol.md) | Teleport Implementation | ✅ |
 | [6329](./LPs/lp-6329-teleport-bridge-system-index.md) | Bridge System Index | ✅ |
 
-**Bridge Infrastructure:**
-
+#### 🔗 Bridge Infrastructure
 | LP | Title | Status |
 |:---|:------|:------:|
 | [6015](./LPs/lp-6015-mpc-bridge-protocol.md) | MPC Bridge Protocol | ✅ |
@@ -252,11 +281,9 @@ Lux Network operates an **8-chain architecture** with specialized chains for dif
 | [6340](./LPs/lp-6340-unified-bridge-sdk-specification.md) | Bridge SDK | 📝 |
 | [6341](./LPs/lp-6341-decentralized-secrets-management-infisical-integration.md) | Secrets Management | 📝 |
 
----
+### 🟢 T-Chain — Threshold (7xxx Series)
 
-### 🟢 T-Chain — Threshold (7xxx)
-
-> MPC custody, threshold signatures, key management
+> *MPC custody, threshold signatures, key management*
 > **Implementation**: [`github.com/luxfi/threshold`](https://github.com/luxfi/threshold), [`github.com/luxfi/crypto`](https://github.com/luxfi/crypto)
 
 | LP | Title | Status |
@@ -264,8 +291,7 @@ Lux Network operates an **8-chain architecture** with specialized chains for dif
 | [7000](./LPs/lp-7000-t-chain-threshold-specification.md) | **Threshold Specification** | ✅ |
 | [7330](./LPs/lp-7330-t-chain-thresholdvm-specification.md) | ThresholdVM Specification | ✅ |
 
-**Threshold Signatures:**
-
+#### 🔐 Threshold Signatures
 | LP | Protocol | Status |
 |:---|:---------|:------:|
 | [7321](./LPs/lp-7321-frost-threshold-signature-precompile.md) | **FROST** Precompile | ✅ |
@@ -273,8 +299,7 @@ Lux Network operates an **8-chain architecture** with specialized chains for dif
 | [7324](./LPs/lp-7324-ringtail-threshold-signature-precompile.md) | **Ringtail** Precompile | ✅ |
 | [7104](./LPs/lp-7104-frost---flexible-round-optimized-schnorr-threshold-signatures-for-eddsa.md) | FROST (EdDSA) | ✅ |
 
-**MPC & Key Management:**
-
+#### 🔑 MPC & Key Management
 | LP | Title | Status |
 |:---|:------|:------:|
 | [7013](./LPs/lp-7013-m-chain-decentralised-mpc-custody-and-swap-signature-layer.md) | MPC Custody & Swap-Sig | ✅ |
@@ -288,11 +313,9 @@ Lux Network operates an **8-chain architecture** with specialized chains for dif
 | [7334](./LPs/lp-7334-per-asset-threshold-key-management.md) | Per-Asset Key Management | ✅ |
 | [7336](./LPs/lp-7336-k-chain-keymanagementvm-specification.md) | K-Chain KeyManagementVM | 📝 |
 
----
+### 🟢 Z-Chain — Zero-Knowledge (8xxx Series)
 
-### 🟢 Z-Chain — Zero-Knowledge (8xxx)
-
-> Privacy, ZK proofs, FHE, confidential transactions
+> *Privacy, ZK proofs, FHE, confidential transactions*
 > **Implementation**: [`github.com/luxfi/node/vms/zkvm`](https://github.com/luxfi/node)
 
 | LP | Title | Status |
@@ -301,8 +324,7 @@ Lux Network operates an **8-chain architecture** with specialized chains for dif
 | [8045](./LPs/lp-8045-z-chain-encrypted-execution-layer-interface.md) | Encrypted Execution Layer | ✅ |
 | [8046](./LPs/lp-8046-z-chain-zkvm-architecture.md) | ZKVM Architecture | ✅ |
 
-**Privacy DeFi:**
-
+#### 🕵️ Privacy DeFi
 | LP | Title | Status |
 |:---|:------|:------:|
 | [8400](./LPs/lp-8400-automated-market-maker-protocol-with-privacy.md) | Private AMM | ✅ |
@@ -310,8 +332,7 @@ Lux Network operates an **8-chain architecture** with specialized chains for dif
 | [8402](./LPs/lp-8402-zero-knowledge-swap-protocol.md) | ZK Swap Protocol | ✅ |
 | [8403](./LPs/lp-8403-private-staking-mechanisms.md) | Private Staking | 📝 |
 
-**Layer 2 Rollups:**
-
+#### 🔄 Layer 2 Rollups
 | LP | Title | Status |
 |:---|:------|:------:|
 | [8500](./LPs/lp-8500-layer-2-rollup-framework.md) | **L2 Rollup Framework** | 📝 |
@@ -321,11 +342,9 @@ Lux Network operates an **8-chain architecture** with specialized chains for dif
 | [8504](./LPs/lp-8504-sequencer-registry-protocol.md) | Sequencer Registry | 📝 |
 | [8505](./LPs/lp-8505-l2-block-format-specification.md) | L2 Block Format | 📝 |
 
----
+### 📈 DEX & Finance (9xxx Series)
 
-### 📈 DEX & Finance (9xxx)
-
-> Trading, DeFi, derivatives, oracle
+> *Trading, DeFi, derivatives, oracle*
 > **Implementation**: [`github.com/luxfi/exchange`](https://github.com/luxfi/exchange), [`github.com/luxfi/dex`](https://github.com/luxfi/dex)
 
 | LP | Title | Status |
@@ -333,8 +352,7 @@ Lux Network operates an **8-chain architecture** with specialized chains for dif
 | [9000](./LPs/lp-9000-dex-core-specification.md) | **DEX Core Specification** | ✅ |
 | [9099](./LPs/lp-9099-dex-overview.md) | DEX Series Overview | ✅ |
 
-**Trading Engine:**
-
+#### 🏪 Trading Engine
 | LP | Title | Status |
 |:---|:------|:------:|
 | [9001](./LPs/lp-9001-dex-trading-engine.md) | Trading Engine | ✅ |
@@ -344,8 +362,7 @@ Lux Network operates an **8-chain architecture** with specialized chains for dif
 | [9006](./LPs/lp-9006-hft-trading-venues-global-network.md) | HFT Trading Venues | ✅ |
 | [9040](./LPs/lp-9040-perpetuals-derivatives-protocol.md) | Perpetuals & Derivatives | ✅ |
 
-**Application Standards:**
-
+#### 🏛️ Application Standards
 | LP | Title | Status |
 |:---|:------|:------:|
 | [9060](./LPs/lp-9060-defi-protocols-overview.md) | DeFi Protocols Overview | ✅ |
@@ -355,11 +372,9 @@ Lux Network operates an **8-chain architecture** with specialized chains for dif
 | [9073](./LPs/lp-9073-batch-execution-standard-multicall.md) | Multicall Standard | ✅ |
 | [9074](./LPs/lp-9074-create2-factory-standard.md) | CREATE2 Factory | ✅ |
 
----
+### ⚙️ Core & Meta (0xxx Series)
 
-### ⚙️ Core & Meta (0xxx)
-
-> Architecture, governance, research, developer tools
+> *Architecture, governance, research, developer tools*
 
 | LP | Title | Status |
 |:---|:------|:------:|
@@ -369,8 +384,7 @@ Lux Network operates an **8-chain architecture** with specialized chains for dif
 | [0003](./LPs/lp-0003-subnet-architecture-and-cross-chain-interoperability.md) | Subnet Architecture | ✅ |
 | [0099](./LPs/lp-0099-lp-numbering-scheme-and-chain-organization.md) | LP Numbering Scheme | ✅ |
 
-**Developer Tools:**
-
+#### 🛠️ Developer Tools
 | LP | Title | Status |
 |:---|:------|:------:|
 | [0006](./LPs/lp-0006-network-runner-and-testing-framework.md) | Network Runner | ✅ |
@@ -383,15 +397,13 @@ Lux Network operates an **8-chain architecture** with specialized chains for dif
 | [0050](./LPs/lp-0050-developer-tools-overview.md) | Dev Tools Overview | ✅ |
 | [0098](./LPs/lp-0098-luxfi-graphdb-and-graphql-engine-integration.md) | GraphDB & GraphQL | 📝 |
 
-**Consensus:**
-
+#### 📊 Consensus
 | LP | Title | Status |
 |:---|:------|:------:|
 | [0111](./LPs/lp-0111-photon-consensus-selection.md) | Photon Consensus | ✅ |
 | [0112](./LPs/lp-0112-flare-dag-finalization-protocol.md) | Flare DAG Finalization | ✅ |
 
-**Research:**
-
+#### 🔍 Research Papers
 | LP | Title | Status |
 |:---|:------|:------:|
 | [0085](./LPs/lp-0085-security-audit-framework.md) | Security Audit Framework | ✅ |
@@ -406,17 +418,17 @@ Lux Network operates an **8-chain architecture** with specialized chains for dif
 
 ---
 
-## Status Legend
+## 📋 Status Legend
 
 | Symbol | Meaning |
 |:------:|:--------|
-| ✅ | Final - Implemented |
-| 📝 | Draft - In Development |
-| ⚠️ | Superseded |
+| ✅ | **Final** - Implemented and deployed |
+| 📝 | **Draft** - In development or review |
+| ⚠️ | **Superseded** - Replaced by newer standards |
 
 ---
 
-## LP Process
+## 🔄 LP Process
 
 ```
 💡 Idea → 📝 Draft → 🔄 Review → ⏰ Last Call → ✅ Final
@@ -430,25 +442,64 @@ Lux Network operates an **8-chain architecture** with specialized chains for dif
 6. **Last Call** (14 days)
 7. **Final** - Ready for implementation
 
-## Tools
+---
 
+## 🛠️ Development Tools
+
+### Quick Commands
 ```bash
-make new          # Create new LP
+make new          # Create a new LP
 make validate-all # Validate all LPs
 make check-links  # Verify links
 make stats        # Statistics
+make pre-pr       # Run all pre-PR checks
 ```
 
-## Resources
+### Documentation Commands
+```bash
+cd docs && pnpm install  # Install documentation dependencies
+cd docs && pnpm dev      # Run docs locally on http://localhost:3002
+cd docs && pnpm build    # Build static documentation site
+cd docs && pnpm start    # Run production documentation server
+```
 
-- [Forum](https://forum.lux.network) • [Docs](https://docs.lux.network) • [Discord](https://discord.gg/luxfi) • [@luxfi](https://twitter.com/luxfi)
-
-## License
-
-[CC0 1.0 Universal](https://creativecommons.org/publicdomain/zero/1.0/)
+### Advanced Commands
+```bash
+make list         # List all LPs
+make update-index # Update the LP index in README.md
+make decision     # Create an Informational Decision LP draft
+make watch        # Watch for changes and auto-validate
+```
 
 ---
 
+## 🌐 Community & Resources
+
 <div align="center">
-  <strong>Building the future of decentralized finance, one proposal at a time.</strong>
+
+[![Forum](https://img.shields.io/badge/Lux_Forum-Community-blue?style=for-the-badge&logo=discourse)](https://forum.lux.network)
+[![Documentation](https://img.shields.io/badge/Docs-Lux_Network-4D82B7?style=for-the-badge)](https://docs.lux.network)
+[![Discord](https://img.shields.io/badge/Discord-Join_Chat-5865F2?style=for-the-badge&logo=discord&logoColor=white)](https://discord.gg/luxfi)
+[![Twitter](https://img.shields.io/badge/Twitter-Follow_Us-1DA1F2?style=for-the-badge&logo=twitter&logoColor=white)](https://twitter.com/luxfi)
+
+</div>
+
+### Contributing
+1. **Explore** the existing [LPs](./LPs) to understand current specifications
+2. **Discuss** your idea on the [Lux Forum](https://forum.lux.network)
+3. **Draft** your proposal using `make new`
+4. **Submit** a Pull Request to start the formal review process
+
+---
+
+## 📄 License
+
+[CC0 1.0 Universal](https://creativecommons.org/publicdomain/zero/1.0/) - Public Domain Dedication
+
+<div align="center">
+
+### 🚀 Building the future of decentralized finance, one proposal at a time.
+
+_Lux Network - Quantum-Safe, AI-Integrated, High-Performance DeFi_
+
 </div>

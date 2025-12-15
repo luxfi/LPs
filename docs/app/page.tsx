@@ -1,31 +1,19 @@
 import Link from 'next/link';
+import { Logo } from '@/components/logo';
 import { source } from '@/lib/source';
 
 type ProposalStatus = 'Final' | 'Draft' | 'Review';
 
-// Lux logo - downward-pointing triangle per @luxfi/logo
-function LuxLogo({ size = 14, className = '' }: { size?: number; className?: string }) {
+function StatusBadge({ status }: { status: ProposalStatus }) {
+  const styles = {
+    Final: 'bg-black text-white',
+    Review: 'bg-neutral-200 text-neutral-700',
+    Draft: 'bg-neutral-100 text-neutral-500',
+  };
   return (
-    <svg width={size} height={size} viewBox="0 0 100 100" fill="currentColor" className={className}>
-      <path d="M50 85 L15 25 L85 25 Z" />
-    </svg>
-  );
-}
-
-function ArrowIcon({ size = 14 }: { size?: number }) {
-  return (
-    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}>
-      <path d="M5 12h14M12 5l7 7-7 7" />
-    </svg>
-  );
-}
-
-function SearchIcon({ size = 18 }: { size?: number }) {
-  return (
-    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5}>
-      <circle cx="11" cy="11" r="8" />
-      <path d="m21 21-4.3-4.3" />
-    </svg>
+    <span className={`inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-xs font-medium ${styles[status]}`}>
+      {status}
+    </span>
   );
 }
 
@@ -37,76 +25,14 @@ function GitHubIcon({ size = 16 }: { size?: number }) {
   );
 }
 
-function StatusBadge({ status }: { status: ProposalStatus }) {
-  const colors = {
-    Final: 'bg-black text-white',
-    Review: 'bg-neutral-200 text-neutral-700',
-    Draft: 'bg-neutral-100 text-neutral-500',
-  };
-  return (
-    <span className={`inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-xs font-medium ${colors[status]}`}>
-      {status}
-    </span>
-  );
-}
-
-// Icons
-function IconLayers({ size = 20 }: { size?: number }) {
-  return (
-    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5}>
-      <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
-    </svg>
-  );
-}
-
-function IconNodes({ size = 20 }: { size?: number }) {
-  return (
-    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5}>
-      <circle cx="12" cy="12" r="3" /><circle cx="12" cy="5" r="1.5" /><circle cx="19" cy="12" r="1.5" /><circle cx="12" cy="19" r="1.5" /><circle cx="5" cy="12" r="1.5" />
-    </svg>
-  );
-}
-
-function IconLock({ size = 20 }: { size?: number }) {
-  return (
-    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5}>
-      <rect x="3" y="11" width="18" height="11" rx="2" /><path d="M7 11V7a5 5 0 0110 0v4" />
-    </svg>
-  );
-}
-
-function IconMonitor({ size = 20 }: { size?: number }) {
-  return (
-    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5}>
-      <rect x="2" y="3" width="20" height="14" rx="2" /><path d="M8 21h8M12 17v4" />
-    </svg>
-  );
-}
-
-function IconFile({ size = 20 }: { size?: number }) {
-  return (
-    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5}>
-      <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8l-6-6z" /><path d="M14 2v6h6M9 15h6" />
-    </svg>
-  );
-}
-
-function IconExchange({ size = 20 }: { size?: number }) {
-  return (
-    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5}>
-      <path d="M16 3l4 4-4 4M20 7H4M8 21l-4-4 4-4M4 17h16" />
-    </svg>
-  );
-}
-
 const categories = [
-  { title: 'Core', range: '0–99', desc: 'Network fundamentals', Icon: IconLayers },
-  { title: 'Consensus', range: '100–199', desc: 'Protocols & safety', Icon: IconNodes },
-  { title: 'Cryptography', range: '200–299', desc: 'Signatures & proofs', Icon: IconLock },
-  { title: 'P-Chain', range: '1000–1999', desc: 'Platform chain', Icon: IconMonitor },
-  { title: 'C-Chain', range: '2000–2999', desc: 'EVM & contracts', Icon: IconFile },
-  { title: 'X-Chain', range: '3000–3999', desc: 'Exchange chain', Icon: IconExchange },
-] as const;
+  { title: 'Core', range: '0-99', desc: 'Network fundamentals', icon: '1' },
+  { title: 'Consensus', range: '100-199', desc: 'Protocols & safety', icon: '2' },
+  { title: 'Cryptography', range: '200-299', desc: 'Signatures & proofs', icon: '3' },
+  { title: 'P-Chain', range: '1000-1999', desc: 'Platform chain', icon: '4' },
+  { title: 'C-Chain', range: '2000-2999', desc: 'EVM & contracts', icon: '5' },
+  { title: 'X-Chain', range: '3000-3999', desc: 'Exchange chain', icon: '6' },
+];
 
 const footerLinks = {
   ecosystem: [
@@ -116,8 +42,6 @@ const footerLinks = {
     { title: 'Lux Exchange', href: 'https://lux.exchange' },
     { title: 'Lux Finance', href: 'https://lux.finance' },
     { title: 'Lux Market', href: 'https://lux.market' },
-    { title: 'Lux Shop', href: 'https://lux.shop' },
-    { title: 'Lux Quest', href: 'https://lux.quest' },
   ],
   network: [
     { title: 'Network', href: 'https://lux.network', header: true },
@@ -125,18 +49,14 @@ const footerLinks = {
     { title: 'Explorer', href: 'https://explore.lux.network' },
     { title: 'Wallet', href: 'https://wallet.lux.network' },
     { title: 'Safe', href: 'https://safe.lux.network' },
-    { title: 'Validator', href: 'https://lux.network/validator' },
     { title: 'Governance', href: 'https://lux.vote' },
-    { title: 'Open Source', href: 'https://github.com/luxfi' },
   ],
   company: [
     { title: 'Company', href: 'https://lux.partners', header: true },
     { title: 'About', href: 'https://lux.partners' },
     { title: 'Brand', href: 'https://drive.google.com/drive/folders/14OJtKLVakGY6883XO9yGbiHtlFxQUUm5' },
     { title: 'Careers', href: 'https://docs.google.com/document/d/1SCt0Hg7EIs06TootKCA1am1xo4mcXoKF/edit' },
-    { title: 'Partnerships', href: 'https://apply.lux.partners' },
-    { title: 'Press', href: 'mailto:ai@lux.partners?subject=Press' },
-    { title: 'Help', href: 'mailto:ai@lux.partners?subject=Help' },
+    { title: 'Open Source', href: 'https://github.com/luxfi' },
   ],
   community: [
     { title: 'Community', href: '#', header: true },
@@ -152,109 +72,129 @@ export default function HomePage() {
   const recentLPs = source.getAllPages().slice(0, 6);
 
   return (
-    <div className="min-h-screen bg-white text-black antialiased">
+    <div className="min-h-screen bg-white text-neutral-900">
       {/* Header */}
       <header className="sticky top-0 z-50 border-b border-neutral-200 bg-white/80 backdrop-blur-xl">
-        <div className="mx-auto flex h-14 max-w-6xl items-center justify-between px-4 sm:px-6">
+        <div className="mx-auto flex h-14 max-w-6xl items-center justify-between px-4 sm:px-6 lg:px-8">
           <Link href="/" className="flex items-center gap-2">
-            <LuxLogo size={18} />
+            <Logo size={18} />
             <span className="font-semibold">Lux Proposals</span>
           </Link>
-          <Link href="/docs" className="rounded-full bg-black px-4 py-1.5 text-sm font-medium text-white hover:bg-neutral-800">
-            Browse →
+          <Link
+            href="/docs"
+            className="rounded-full bg-neutral-900 px-4 py-1.5 text-sm font-medium text-white transition-colors hover:bg-neutral-800"
+          >
+            Browse
           </Link>
         </div>
       </header>
 
       <main>
         {/* Hero */}
-        <section className="mx-auto max-w-6xl px-4 py-16 text-center sm:px-6 sm:py-24">
-          <p className="text-sm text-neutral-500">
+        <section className="mx-auto max-w-6xl px-4 py-16 text-center sm:px-6 sm:py-24 lg:px-8">
+          <p className="text-sm font-medium text-neutral-500">
             {stats.byStatus['Final'] || 0} standards finalized
           </p>
-          <h1 className="mt-4 text-4xl font-semibold tracking-tight sm:text-5xl">
+          <h1 className="mt-4 text-4xl font-bold tracking-tight sm:text-5xl lg:text-6xl">
             Lux Proposals
           </h1>
-          <p className="mx-auto mt-4 max-w-xl text-neutral-500">
+          <p className="mx-auto mt-6 max-w-2xl text-lg text-neutral-600">
             Open, community-driven standards for the Lux ecosystem.
           </p>
-          <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
-            <Link href="/docs" className="w-full rounded-full bg-black px-6 py-2.5 text-sm font-medium text-white hover:bg-neutral-800 sm:w-auto">
+          <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
+            <Link
+              href="/docs"
+              className="w-full rounded-full bg-neutral-900 px-8 py-3 text-sm font-semibold text-white transition-colors hover:bg-neutral-800 sm:w-auto"
+            >
               Browse proposals
             </Link>
-            <a href="https://github.com/luxfi/lps" target="_blank" rel="noreferrer" className="flex w-full items-center justify-center gap-2 rounded-full border border-neutral-200 px-6 py-2.5 text-sm font-medium hover:bg-neutral-50 sm:w-auto">
+            <a
+              href="https://github.com/luxfi/lps"
+              target="_blank"
+              rel="noreferrer"
+              className="flex w-full items-center justify-center gap-2 rounded-full border border-neutral-300 px-8 py-3 text-sm font-semibold transition-colors hover:bg-neutral-50 sm:w-auto"
+            >
               <GitHubIcon size={16} />
               GitHub
             </a>
-          </div>
-
-          {/* Search */}
-          <div className="mx-auto mt-10 max-w-md">
-            <div className="flex items-center gap-2 rounded-lg border border-neutral-200 bg-neutral-50 px-3 py-2">
-              <SearchIcon size={16} />
-              <input type="text" placeholder="Search LPs..." className="flex-1 bg-transparent text-sm focus:outline-none" />
-              <kbd className="hidden rounded bg-neutral-200 px-1.5 py-0.5 text-xs text-neutral-500 sm:block">⌘K</kbd>
-            </div>
           </div>
         </section>
 
         {/* Stats */}
         <section className="border-y border-neutral-200 bg-neutral-50">
-          <div className="mx-auto grid max-w-6xl grid-cols-4 divide-x divide-neutral-200">
-            {[
-              { label: 'Total', value: stats.total },
-              { label: 'Final', value: stats.byStatus['Final'] || 0 },
-              { label: 'Review', value: stats.byStatus['Review'] || 0 },
-              { label: 'Draft', value: stats.byStatus['Draft'] || 0 },
-            ].map((stat) => (
-              <div key={stat.label} className="px-4 py-6 text-center sm:px-6">
-                <div className="text-2xl font-semibold tabular-nums sm:text-3xl">{stat.value}</div>
-                <div className="mt-0.5 text-xs text-neutral-500 sm:text-sm">{stat.label}</div>
-              </div>
-            ))}
+          <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+            <div className="grid grid-cols-2 divide-x divide-neutral-200 sm:grid-cols-4">
+              {[
+                { label: 'Total', value: stats.total },
+                { label: 'Final', value: stats.byStatus['Final'] || 0 },
+                { label: 'Review', value: stats.byStatus['Review'] || 0 },
+                { label: 'Draft', value: stats.byStatus['Draft'] || 0 },
+              ].map((stat) => (
+                <div key={stat.label} className="px-4 py-8 text-center sm:px-6">
+                  <div className="text-3xl font-bold tabular-nums sm:text-4xl">{stat.value}</div>
+                  <div className="mt-1 text-sm text-neutral-500">{stat.label}</div>
+                </div>
+              ))}
+            </div>
           </div>
         </section>
 
         {/* Categories */}
-        <section className="mx-auto max-w-6xl px-4 py-16 sm:px-6">
-          <h2 className="text-xl font-semibold sm:text-2xl">Categories</h2>
-          <div className="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+        <section className="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-20 lg:px-8">
+          <h2 className="text-2xl font-bold">Categories</h2>
+          <div className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {categories.map((cat) => (
-              <Link key={cat.title} href="/docs" className="flex items-center gap-4 rounded-lg border border-neutral-200 p-4 hover:bg-neutral-50">
-                <div className="flex size-10 items-center justify-center rounded-lg bg-neutral-100 text-neutral-600">
-                  <cat.Icon size={20} />
+              <Link
+                key={cat.title}
+                href="/docs"
+                className="group flex items-center gap-4 rounded-xl border border-neutral-200 p-4 transition-all hover:border-neutral-300 hover:bg-neutral-50"
+              >
+                <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-neutral-100 text-sm font-bold text-neutral-600 transition-colors group-hover:bg-neutral-200">
+                  {cat.icon}
                 </div>
                 <div className="flex-1">
                   <div className="flex items-center justify-between">
-                    <span className="font-medium">{cat.title}</span>
+                    <span className="font-semibold">{cat.title}</span>
                     <span className="font-mono text-xs text-neutral-400">{cat.range}</span>
                   </div>
-                  <p className="text-sm text-neutral-500">{cat.desc}</p>
+                  <p className="mt-0.5 text-sm text-neutral-500">{cat.desc}</p>
                 </div>
               </Link>
             ))}
           </div>
         </section>
 
-        {/* Recent */}
+        {/* Recent Proposals */}
         <section className="border-t border-neutral-200 bg-neutral-50">
-          <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6">
+          <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-20 lg:px-8">
             <div className="flex items-center justify-between">
-              <h2 className="text-xl font-semibold sm:text-2xl">Recent proposals</h2>
-              <Link href="/docs" className="text-sm font-medium text-neutral-500 hover:text-black">View all →</Link>
+              <h2 className="text-2xl font-bold">Recent proposals</h2>
+              <Link href="/docs" className="text-sm font-medium text-neutral-500 transition-colors hover:text-neutral-900">
+                View all &rarr;
+              </Link>
             </div>
-            <div className="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+            <div className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
               {recentLPs.map((lp) => {
                 const lpNum = String(lp.data.frontmatter.lp || '0').padStart(4, '0');
                 const status = (lp.data.frontmatter.status || 'Draft') as ProposalStatus;
                 return (
-                  <Link key={lp.slug.join('/')} href={`/docs/${lp.slug.join('/')}`} className="rounded-lg border border-neutral-200 bg-white p-4 hover:border-neutral-300">
+                  <Link
+                    key={lp.slug.join('/')}
+                    href={`/docs/${lp.slug.join('/')}`}
+                    className="group rounded-xl border border-neutral-200 bg-white p-5 transition-all hover:border-neutral-300 hover:shadow-sm"
+                  >
                     <div className="flex items-center justify-between">
                       <span className="font-mono text-sm text-neutral-400">LP-{lpNum}</span>
                       <StatusBadge status={status} />
                     </div>
-                    <h3 className="mt-2 font-medium leading-snug line-clamp-2">{lp.data.title}</h3>
-                    {lp.data.description && <p className="mt-1 text-sm text-neutral-500 line-clamp-2">{lp.data.description}</p>}
+                    <h3 className="mt-3 font-semibold leading-snug line-clamp-2 group-hover:text-neutral-700">
+                      {lp.data.title}
+                    </h3>
+                    {lp.data.description && (
+                      <p className="mt-2 text-sm text-neutral-500 line-clamp-2">
+                        {lp.data.description}
+                      </p>
+                    )}
                   </Link>
                 );
               })}
@@ -263,15 +203,25 @@ export default function HomePage() {
         </section>
 
         {/* CTA */}
-        <section className="mx-auto max-w-6xl px-4 py-16 sm:px-6">
-          <div className="rounded-xl bg-black p-8 text-white sm:p-12">
-            <h2 className="text-xl font-semibold sm:text-2xl">Ready to contribute?</h2>
-            <p className="mt-2 text-neutral-400">Have an idea? Start with the guidelines, then open a PR.</p>
-            <div className="mt-6 flex flex-col gap-3 sm:flex-row">
-              <Link href="/contribute" className="rounded-full bg-white px-6 py-2.5 text-center text-sm font-medium text-black hover:bg-neutral-100">
+        <section className="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-20 lg:px-8">
+          <div className="rounded-2xl bg-neutral-900 p-8 text-white sm:p-12">
+            <h2 className="text-2xl font-bold sm:text-3xl">Ready to contribute?</h2>
+            <p className="mt-3 max-w-xl text-neutral-400">
+              Have an idea for improving the Lux ecosystem? Start with the guidelines, then open a PR.
+            </p>
+            <div className="mt-8 flex flex-col gap-4 sm:flex-row">
+              <Link
+                href="/contribute"
+                className="rounded-full bg-white px-8 py-3 text-center text-sm font-semibold text-neutral-900 transition-colors hover:bg-neutral-100"
+              >
                 Read guidelines
               </Link>
-              <a href="https://github.com/luxfi/lps" target="_blank" rel="noreferrer" className="flex items-center justify-center gap-2 rounded-full border border-neutral-600 px-6 py-2.5 text-sm font-medium hover:bg-neutral-800">
+              <a
+                href="https://github.com/luxfi/lps"
+                target="_blank"
+                rel="noreferrer"
+                className="flex items-center justify-center gap-2 rounded-full border border-neutral-600 px-8 py-3 text-sm font-semibold transition-colors hover:bg-neutral-800"
+              >
                 <GitHubIcon size={16} />
                 Open on GitHub
               </a>
@@ -282,10 +232,10 @@ export default function HomePage() {
 
       {/* Footer */}
       <footer className="border-t border-neutral-200 bg-neutral-50">
-        <div className="mx-auto max-w-6xl px-4 py-12 sm:px-6">
+        <div className="mx-auto max-w-6xl px-4 py-12 sm:px-6 lg:px-8">
           <div className="grid grid-cols-2 gap-8 sm:grid-cols-5">
             <div className="col-span-2 sm:col-span-1">
-              <LuxLogo size={24} />
+              <Logo size={24} />
             </div>
             {Object.entries(footerLinks).map(([key, links]) => (
               <div key={key}>
@@ -295,7 +245,11 @@ export default function HomePage() {
                     href={link.href}
                     target={link.header ? undefined : '_blank'}
                     rel={link.header ? undefined : 'noreferrer'}
-                    className={`block text-sm ${link.header ? 'mb-2 font-medium text-neutral-700' : 'mb-1.5 text-neutral-500 hover:text-black'}`}
+                    className={`block text-sm ${
+                      link.header
+                        ? 'mb-3 font-semibold text-neutral-900'
+                        : 'mb-2 text-neutral-500 transition-colors hover:text-neutral-900'
+                    }`}
                   >
                     {link.title}
                   </a>
@@ -304,11 +258,17 @@ export default function HomePage() {
             ))}
           </div>
           <div className="mt-12 flex flex-col items-center justify-between gap-4 border-t border-neutral-200 pt-8 sm:flex-row">
-            <div className="flex gap-4 text-sm text-neutral-500">
-              <a href="https://lux.network/terms" target="_blank" rel="noreferrer" className="hover:text-black">Terms</a>
-              <a href="https://lux.network/privacy" target="_blank" rel="noreferrer" className="hover:text-black">Privacy</a>
+            <div className="flex gap-6 text-sm text-neutral-500">
+              <a href="https://lux.network/terms" target="_blank" rel="noreferrer" className="transition-colors hover:text-neutral-900">
+                Terms
+              </a>
+              <a href="https://lux.network/privacy" target="_blank" rel="noreferrer" className="transition-colors hover:text-neutral-900">
+                Privacy
+              </a>
             </div>
-            <p className="text-sm text-neutral-400">© {new Date().getFullYear()} Lux Industries Inc.</p>
+            <p className="text-sm text-neutral-400">
+              &copy; {new Date().getFullYear()} Lux Industries Inc.
+            </p>
           </div>
         </div>
       </footer>
