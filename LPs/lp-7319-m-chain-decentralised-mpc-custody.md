@@ -14,7 +14,7 @@ superseded-by: 13
 tags: [mpc, threshold-crypto, bridge]
 ---
 
-> **Note**: This LP has been superseded by [LP-13](./lp-13.md), which consolidates all M-Chain specifications into a single comprehensive document.
+> **Note**: This LP has been superseded by [LP-13](/docs/lp-13/), which consolidates all M-Chain specifications into a single comprehensive document.
 
 ## Abstract
 

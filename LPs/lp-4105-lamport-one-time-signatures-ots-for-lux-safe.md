@@ -12,7 +12,7 @@ requires: 4, 5
 tags: [pqc, wallet]
 ---
 
-> **See also**: [LP-4: Quantum-Resistant Cryptography](./lp-4-quantum-resistant-cryptography-integration-in-lux.md), [LP-5: Quantum-Safe Wallets](./lp-5-quantum-safe-wallets-and-multisig-standard.md), [LP-11: X-Chain Lamport OTS](./lp-11-x-chain-exchange-chain-specification.md)
+> **See also**: [LP-4: Quantum-Resistant Cryptography](/docs/lp-4-quantum-resistant-cryptography-integration-in-lux/), [LP-5: Quantum-Safe Wallets](/docs/lp-5-quantum-safe-wallets-and-multisig-standard/), [LP-11: X-Chain Lamport OTS](/docs/lp-11-x-chain-exchange-chain-specification/)
 
 ## Abstract
 

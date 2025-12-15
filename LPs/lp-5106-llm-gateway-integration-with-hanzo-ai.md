@@ -478,8 +478,8 @@ npm run test:ai-sdk
 ## References
 
 1. [HIP-4: LLM Gateway Standard](https://github.com/hanzoai/hips/blob/main/HIPs/hip-4.md)
-2. [LP-10: P-Chain Platform Chain Specification](./lp-10-p-chain-platform-chain-specification-deprecated.md)
-3. [LP-103: MPC-LSS Multi-Party Computation](./lp-103-mpc-lss---multi-party-computation-linear-secret-sharing-with-dynamic-resharing.md)
+2. [LP-10: P-Chain Platform Chain Specification](/docs/lp-10-p-chain-platform-chain-specification-deprecated/)
+3. [LP-103: MPC-LSS Multi-Party Computation](/docs/lp-103-mpc-lss---multi-party-computation-linear-secret-sharing-with-dynamic-resharing/)
 4. [Hanzo LLM Gateway Docs](https://docs.hanzo.ai/llm-gateway)
 
 ## Copyright

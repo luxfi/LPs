@@ -114,12 +114,12 @@ The Lux exchange ecosystem consists of two complementary systems:
 | LP | Title | Description | Status |
 |----|-------|-------------|--------|
 | **LP-9000** | DEX Overview (this doc) | Architecture overview | Final |
-| [LP-9001](./lp-9001-dex-trading-engine.md) | DEX Trading Engine | Orderbook, matching, backends | Implemented |
-| [LP-9002](./lp-9002-dex-api-rpc-specification.md) | DEX API & RPC | JSON-RPC, gRPC, WebSocket | Implemented |
-| [LP-9003](./lp-9003-high-performance-dex-protocol.md) | High-Performance Protocol | GPU/FPGA acceleration | Implemented |
-| [LP-9004](./lp-9004-perpetuals-derivatives-protocol.md) | Perpetuals & Derivatives | Margin, liquidation, vaults | Implemented |
-| [LP-9005](./lp-9005-native-oracle-protocol.md) | Oracle Protocol | Multi-source price aggregation | Implemented |
-| [LP-9006](./lp-9006-hft-trading-venues-global-network.md) | HFT Trading Venues | Global colocation network | Implemented |
+| [LP-9001](/docs/lp-9001-dex-trading-engine/) | DEX Trading Engine | Orderbook, matching, backends | Implemented |
+| [LP-9002](/docs/lp-9002-dex-api-rpc-specification/) | DEX API & RPC | JSON-RPC, gRPC, WebSocket | Implemented |
+| [LP-9003](/docs/lp-9003-high-performance-dex-protocol/) | High-Performance Protocol | GPU/FPGA acceleration | Implemented |
+| [LP-9004](/docs/lp-9004-perpetuals-derivatives-protocol/) | Perpetuals & Derivatives | Margin, liquidation, vaults | Implemented |
+| [LP-9005](/docs/lp-9005-native-oracle-protocol/) | Oracle Protocol | Multi-source price aggregation | Implemented |
+| [LP-9006](/docs/lp-9006-hft-trading-venues-global-network/) | HFT Trading Venues | Global colocation network | Implemented |
 
 ## Actual Benchmark Results
 
@@ -419,13 +419,13 @@ go run ./cmd/fix-benchmark/
 - LP-9006: HFT Venues
 
 **Blockchain Chains (Separate)**:
-- [LP-0011](./lp-9011-x-chain-exchange-chain-specification.md): X-Chain (UTXO assets)
-- [LP-0012](./lp-2012-c-chain-contract-chain-specification.md): C-Chain (EVM)
-- [LP-0010](./lp-0010-p-chain-platform-chain-specification-deprecated.md): D-Chain (Staking)
+- [LP-0011](/docs/lp-9011-x-chain-exchange-chain-specification/): X-Chain (UTXO assets)
+- [LP-0012](/docs/lp-2012-c-chain-contract-chain-specification/): C-Chain (EVM)
+- [LP-0010](/docs/lp-0010-p-chain-platform-chain-specification-deprecated/): D-Chain (Staking)
 
 **Cross-Chain**:
-- [LP-603](./lp-6603-warp-15-quantum-safe-cross-chain-messaging.md): Warp Messaging
-- [LP-331](./lp-6331-b-chain-bridgevm-specification.md): B-Chain Bridge
+- [LP-603](/docs/lp-6603-warp-15-quantum-safe-cross-chain-messaging/): Warp Messaging
+- [LP-331](/docs/lp-6331-b-chain-bridgevm-specification/): B-Chain Bridge
 
 ---
 

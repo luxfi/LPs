@@ -492,10 +492,10 @@ This design enables Lux to scale to many AI-centric chains without duplicating t
 
 ## References
 
-- [LP-10: P-Chain Specification](./lp-10-p-chain-platform-chain-specification-deprecated.md)
-- [LP-11: X-Chain Specification](./lp-11-x-chain-exchange-chain-specification.md)
-- [LP-12: C-Chain Specification](./lp-12-c-chain-contract-chain-specification.md)
-- [LP-75: TEE Integration Standard](./lp-75-tee-integration-standard.md)
+- [LP-10: P-Chain Specification](/docs/lp-10-p-chain-platform-chain-specification-deprecated/)
+- [LP-11: X-Chain Specification](/docs/lp-11-x-chain-exchange-chain-specification/)
+- [LP-12: C-Chain Specification](/docs/lp-12-c-chain-contract-chain-specification/)
+- [LP-75: TEE Integration Standard](/docs/lp-75-tee-integration-standard/)
 - Intel SGX Documentation
 - NVIDIA Confidential Computing
 - AMD SEV-SNP Specification

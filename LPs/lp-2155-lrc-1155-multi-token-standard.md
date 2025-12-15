@@ -15,7 +15,7 @@ activation:
   activationHeight: "0"
 ---
 
-> **See also**: [LP-12: C-Chain (Contract Chain) Specification](./lp-12.md), [LP-20: LRC-20 Fungible Token Standard](./lp-20.md), [LP-721: LRC-721 Non-Fungible Token Standard](./lp-721.md)
+> **See also**: [LP-12: C-Chain (Contract Chain) Specification](/docs/lp-12/), [LP-20: LRC-20 Fungible Token Standard](/docs/lp-20/), [LP-721: LRC-721 Non-Fungible Token Standard](/docs/lp-721/)
 
 ## Abstract
 

@@ -20,9 +20,9 @@ documentation: https://dex.lux.network
 >
 > **Source**: [github.com/luxfi/dex](https://github.com/luxfi/dex)
 
-> **Part of LP-9000 Series**: This LP is part of the [LP-9000 DEX Series](./lp-9000-dex-overview.md) - Lux's standalone sidecar exchange network.
+> **Part of LP-9000 Series**: This LP is part of the [LP-9000 DEX Series](/docs/lp-9000-dex-overview/) - Lux's standalone sidecar exchange network.
 
-> **LP-9000 Series**: [LP-9000 Overview](./lp-9000-dex-overview.md) | [LP-9001 Trading Engine](./lp-9001-dex-trading-engine.md) | [LP-9003 Performance](./lp-9003-high-performance-dex-protocol.md) | [LP-9004 Perpetuals](./lp-9004-perpetuals-derivatives-protocol.md) | [LP-9005 Oracle](./lp-9005-native-oracle-protocol.md)
+> **LP-9000 Series**: [LP-9000 Overview](/docs/lp-9000-dex-overview/) | [LP-9001 Trading Engine](/docs/lp-9001-dex-trading-engine/) | [LP-9003 Performance](/docs/lp-9003-high-performance-dex-protocol/) | [LP-9004 Perpetuals](/docs/lp-9004-perpetuals-derivatives-protocol/) | [LP-9005 Oracle](/docs/lp-9005-native-oracle-protocol/)
 
 ```
   ╔═══════════════════════════════════════════════════════════════════════╗
@@ -596,10 +596,10 @@ This LP introduces new infrastructure that operates alongside existing Lux Netwo
 
 ### Related LPs
 
-- [LP-9000: DEX Overview](./lp-9000-dex-overview.md)
-- [LP-9001: X-Chain Exchange Specification](./lp-9001-x-chain-exchange-specification.md)
-- [LP-9003: High-Performance DEX Protocol](./lp-9003-high-performance-dex-protocol.md)
-- [LP-9005: Native Oracle Protocol](./lp-9005-native-oracle-protocol.md)
+- [LP-9000: DEX Overview](/docs/lp-9000-dex-overview/)
+- [LP-9001: X-Chain Exchange Specification](/docs/lp-9001-x-chain-exchange-specification/)
+- [LP-9003: High-Performance DEX Protocol](/docs/lp-9003-high-performance-dex-protocol/)
+- [LP-9005: Native Oracle Protocol](/docs/lp-9005-native-oracle-protocol/)
 
 ---
 

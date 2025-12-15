@@ -260,7 +260,7 @@ This state machine ensures cryptographically secure, economically incentivized, 
 
 ### Part 2: Community Contribution Framework
 
-See the [LP Index](./LP-INDEX.md) for a complete list of LPs.
+See the [LP Index](/docs/) for a complete list of LPs.
 
 #### LP Process
 

@@ -12,7 +12,7 @@ requires: 7014, 7103
 tags: [threshold-crypto, mpc]
 ---
 
-> **See also**: [LP-14](./lp-14-m-chain-threshold-signatures-with-cgg21-uc-non-interactive-ecdsa.md), [LP-103](./lp-103-mpc-lss---multi-party-computation-linear-secret-sharing-with-dynamic-resharing.md), [LP-INDEX](./LP-INDEX.md)
+> **See also**: [LP-14](/docs/lp-14-m-chain-threshold-signatures-with-cgg21-uc-non-interactive-ecdsa/), [LP-103](/docs/lp-103-mpc-lss---multi-party-computation-linear-secret-sharing-with-dynamic-resharing/), [LP-INDEX](/docs/)
 
 ## Abstract
 

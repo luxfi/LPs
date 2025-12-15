@@ -16,9 +16,9 @@ series: LP-9000 DEX Series
 implementation: https://github.com/luxfi/dex
 ---
 
-> **Part of LP-9000 Series**: This LP is part of the [LP-9000 DEX Series](./lp-9000-dex-overview.md) - Lux's standalone sidecar exchange network.
+> **Part of LP-9000 Series**: This LP is part of the [LP-9000 DEX Series](/docs/lp-9000-dex-overview/) - Lux's standalone sidecar exchange network.
 
-> **LP-9000 Series**: [LP-9000 Overview](./lp-9000-dex-overview.md) | [LP-9001 Trading Engine](./lp-9001-dex-trading-engine.md) | [LP-9002 API](./lp-9002-dex-api-rpc-specification.md) | [LP-9003 Performance](./lp-9003-high-performance-dex-protocol.md) | [LP-9004 Perpetuals](./lp-9004-perpetuals-derivatives-protocol.md)
+> **LP-9000 Series**: [LP-9000 Overview](/docs/lp-9000-dex-overview/) | [LP-9001 Trading Engine](/docs/lp-9001-dex-trading-engine/) | [LP-9002 API](/docs/lp-9002-dex-api-rpc-specification/) | [LP-9003 Performance](/docs/lp-9003-high-performance-dex-protocol/) | [LP-9004 Perpetuals](/docs/lp-9004-perpetuals-derivatives-protocol/)
 
 ## Implementation Status
 
@@ -33,7 +33,7 @@ implementation: https://github.com/luxfi/dex
 | Full Oracle (LX) | [`dex/pkg/lx/oracle.go`](https://github.com/luxfi/dex/blob/main/pkg/lx/oracle.go) | ✅ Complete |
 | Alpaca Source | [`dex/pkg/lx/alpaca_source.go`](https://github.com/luxfi/dex/blob/main/pkg/lx/alpaca_source.go) | ✅ Complete |
 
-> **See also**: [LP-11](./lp-9011-x-chain-exchange-chain-specification.md), [LP-12](./lp-2012-c-chain-contract-chain-specification.md), [LP-36](./lp-3036-x-chain-order-book-dex-api-and-rpc-addendum.md), [LP-13](./lp-7013-m-chain-decentralised-mpc-custody-and-swap-signature-layer.md), [LP-80](./lp-5080-a-chain-attestation-chain-specification.md), [LP-608](./lp-0608-high-performance-dex-protocol.md), [LP-INDEX](./LP-INDEX.md)
+> **See also**: [LP-11](/docs/lp-9011-x-chain-exchange-chain-specification/), [LP-12](/docs/lp-2012-c-chain-contract-chain-specification/), [LP-36](/docs/lp-3036-x-chain-order-book-dex-api-and-rpc-addendum/), [LP-13](/docs/lp-7013-m-chain-decentralised-mpc-custody-and-swap-signature-layer/), [LP-80](/docs/lp-5080-a-chain-attestation-chain-specification/), [LP-608](/docs/lp-0608-high-performance-dex-protocol/), [LP-INDEX](/docs/)
 
 ## Abstract
 
