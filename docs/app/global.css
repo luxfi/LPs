@@ -129,6 +129,12 @@
     @apply border-border outline-ring/50;
   }
 
+  /* Ensure SVGs respect their container sizes */
+  svg {
+    display: block;
+    flex-shrink: 0;
+  }
+
   /* Refined selection - matches landing page */
   ::selection {
     background: rgba(255, 255, 255, 0.18);
