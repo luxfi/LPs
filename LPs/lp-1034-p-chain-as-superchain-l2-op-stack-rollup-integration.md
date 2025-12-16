@@ -45,7 +45,7 @@ Ethereum L1
 │ C-Chain (EVM) │ X-Chain   │ M-Chain    │ Z-Chain    │
 │               │ (AMM)     │ (MPC)      │ (zk/FHE)   │
 └───────────────┴───────────┴────────────┴────────────┘
-```
+```text
 
 ### 2. P-Chain Component Changes
 
@@ -106,7 +106,7 @@ func (pr *ProposerRotation) NextProposer() ids.NodeID {
         }
     }
 }
-```
+```text
 
 **Testing**:
 ```bash

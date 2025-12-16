@@ -54,7 +54,7 @@ interface MEVLandscape {
     prevention: "Currently minimal";
   };
 }
-```
+```text
 
 ## Research Findings
 
@@ -122,7 +122,7 @@ contract EncryptedMempool {
         }
     }
 }
-```
+```text
 
 ### 2. Commit-Reveal Auction for Block Space
 
@@ -199,7 +199,7 @@ contract BlockSpaceAuction {
         _processRefunds(targetBlock, winners);
     }
 }
-```
+```text
 
 ### 3. MEV Redistribution
 
@@ -246,7 +246,7 @@ contract MEVRedistribution {
         emit MEVRebateClaimed(msg.sender, rebate, epoch);
     }
 }
-```
+```text
 
 ### 4. Application-Specific MEV Protection
 
@@ -311,7 +311,7 @@ contract MEVResistantAMM {
         return amountOut;
     }
 }
-```
+```text
 
 ### 5. Cross-Chain MEV Mitigation
 
@@ -372,7 +372,7 @@ contract CrossChainMEVProtection {
         delete pendingCrossChainTxs[txId];
     }
 }
-```
+```text
 
 ## Recommendations
 

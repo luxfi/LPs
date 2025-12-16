@@ -53,9 +53,9 @@ Ringtail provides unique properties for quantum-safe threshold signatures:
 
 ### Precompile Address
 
-```
+```text
 0x020000000000000000000000000000000000000B
-```
+```markdown
 
 ### Input Format
 
@@ -92,7 +92,7 @@ gas = BASE_COST + (totalParties * PER_PARTY_COST)
 Where:
   BASE_COST = 150,000 gas
   PER_PARTY_COST = 10,000 gas per participant
-```
+```markdown
 
 **Examples:**
 - 3-of-5 threshold: 150,000 + (5 × 10,000) = 200,000 gas
@@ -167,7 +167,7 @@ abstract contract RingtailVerifier {
         _;
     }
 }
-```
+```text
 
 ### Example Usage
 
@@ -218,7 +218,7 @@ contract ThresholdWallet is RingtailVerifier {
         payable(to).transfer(amount);
     }
 }
-```
+```text
 
 ## Rationale
 
@@ -257,11 +257,11 @@ The gas formula accounts for:
 
 Ringtail achieves threshold signatures in 2 rounds:
 
-```
+```yaml
 Round 1: Each party broadcasts commitment
 Round 2: Each party broadcasts response
 Result: Aggregated threshold signature
-```
+```text
 
 This is optimal - no threshold scheme can do better than 2 rounds without a trusted dealer.
 
@@ -287,7 +287,7 @@ function verify(bytes calldata frostSig, bytes calldata ringtailSig) {
     require(verifyFROST(frostSig), "FROST failed");
     require(verifyRingtail(ringtailSig), "Ringtail failed");
 }
-```
+```text
 
 **Phase 2**: Migrate keys to Ringtail-only
 
@@ -298,7 +298,7 @@ function verify(bytes calldata frostSig, bytes calldata ringtailSig) {
 ### Test Vector 1: Valid 2-of-3 Threshold
 
 **Input:**
-```
+```yaml
 threshold: 2
 totalParties: 3
 messageHash: keccak256("Test message for threshold signature")
@@ -311,31 +311,31 @@ signature: <Ringtail signature from 2 of 3 parties>
 ### Test Vector 2: Insufficient Signers (1-of-3)
 
 **Input:**
-```
+```yaml
 threshold: 2
 totalParties: 3
 messageHash: <same as above>
 signature: <Ringtail signature from only 1 party>
-```
+```text
 
 **Expected Output:** `0x...0000` (invalid - threshold not met)
 
 ### Test Vector 3: Invalid Signature Share
 
 **Input:**
-```
+```yaml
 threshold: 2
 totalParties: 3
 messageHash: <valid hash>
 signature: <Ringtail signature with 1 corrupted share>
-```
+```text
 
 **Expected Output:** `0x...0000` (invalid - share verification failed)
 
 ### Test Vector 4: Large Threshold (67-of-100)
 
 **Input:**
-```
+```yaml
 threshold: 67
 totalParties: 100
 messageHash: <valid hash>
@@ -403,12 +403,12 @@ Ringtail's security rests on the hardness of:
 ### Distributed Key Generation
 
 Ringtail supports DKG without trusted dealer:
-```
+```text
 1. Each party generates share locally
 2. Broadcast commitments
 3. Verify all commitments
 4. Compute public key from commitments
-```
+```text
 
 No party ever sees the full private key.
 
@@ -454,7 +454,7 @@ function withdraw(bytes calldata sig) external {
     updateState();  // Vulnerable to reentrancy
     require(ringtail.verify(sig), "Invalid sig");
 }
-```
+```text
 
 ## Economic Impact
 

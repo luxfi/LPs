@@ -60,9 +60,9 @@ ML-DSA was selected by NIST in August 2024 as the primary post-quantum digital s
 
 ### Precompile Address
 
-```
+```text
 0x0200000000000000000000000000000000000006
-```
+```markdown
 
 ### Security Levels
 
@@ -93,7 +93,7 @@ gas = BASE_COST + (messageLength * PER_BYTE_COST)
 Where:
   BASE_COST = 100,000 gas
   PER_BYTE_COST = 10 gas
-```
+```markdown
 
 **Examples:**
 
@@ -143,7 +143,7 @@ interface IMLDSA {
         bytes calldata signature
     ) external view returns (bool valid);
 }
-```
+```text
 
 ### Library Support
 
@@ -180,7 +180,7 @@ library MLDSALib {
         return BASE_GAS + (messageLength * PER_BYTE_GAS);
     }
 }
-```
+```markdown
 
 ## Rationale
 
@@ -241,7 +241,7 @@ contract HybridVerifier {
         }
     }
 }
-```
+```text
 
 **Recommended Migration Timeline:**
 1. **Phase 1**: Support both ECDSA and ML-DSA signatures
@@ -253,11 +253,11 @@ contract HybridVerifier {
 ### Test Vector 1: Valid Signature
 
 **Input:**
-```
+```yaml
 publicKey: 0x<1952 bytes ML-DSA-65 public key>
 message: "Hello, quantum-safe world!"
 signature: 0x<3309 bytes ML-DSA-65 signature>
-```
+```text
 
 **Expected Output:** `0x0000...0001` (valid)
 **Expected Gas:** ~100,270 (27 byte message)
@@ -265,33 +265,33 @@ signature: 0x<3309 bytes ML-DSA-65 signature>
 ### Test Vector 2: Invalid Signature
 
 **Input:**
-```
+```yaml
 publicKey: 0x<1952 bytes valid public key>
 message: "Hello, quantum-safe world!"
 signature: 0x<3309 bytes CORRUPTED signature>
-```
+```text
 
 **Expected Output:** `0x0000...0000` (invalid)
 
 ### Test Vector 3: Wrong Message
 
 **Input:**
-```
+```yaml
 publicKey: 0x<1952 bytes public key>
 message: "Different message"
 signature: 0x<3309 bytes signature for ORIGINAL message>
-```
+```text
 
 **Expected Output:** `0x0000...0000` (invalid)
 
 ### Test Vector 4: Empty Message
 
 **Input:**
-```
+```yaml
 publicKey: 0x<1952 bytes public key>
 message: "" (empty)
 signature: 0x<3309 bytes signature for empty message>
-```
+```text
 
 **Expected Output:** `0x0000...0001` (valid if signature matches)
 
@@ -304,11 +304,11 @@ signature: 0x<3309 bytes signature for empty message>
 ### Test Vector 6: Large Message (10KB)
 
 **Input:**
-```
+```yaml
 publicKey: 0x<1952 bytes>
 message: 0x<10,240 bytes of data>
 signature: 0x<3309 bytes>
-```
+```text
 
 **Expected Gas:** ~202,400
 
@@ -316,9 +316,9 @@ signature: 0x<3309 bytes>
 
 ### Location
 
-```
+```text
 /Users/z/work/lux/standard/src/precompiles/mldsa/
-```
+```text
 
 ### Key Files
 
@@ -374,7 +374,7 @@ func (p *mldsaVerifyPrecompile) Run(
     }
     return result, suppliedGas - gasCost, nil
 }
-```
+```text
 
 ## Security Considerations
 

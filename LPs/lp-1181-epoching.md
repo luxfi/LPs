@@ -103,7 +103,7 @@ func GetDChainEpoch(parent Block) Epoch {
         StartTime:    parent.Epoch().StartTime,
     }
 }
-```
+```markdown
 
 ## Lux-Specific Enhancements
 

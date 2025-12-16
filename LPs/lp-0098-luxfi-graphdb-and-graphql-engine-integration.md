@@ -114,7 +114,7 @@ query CrossChainPortfolio($address: Address!) {
     jobs, earnings, reputation
   }
 }
-```
+```solidity
 
 ## Backwards Compatibility
 
@@ -175,7 +175,7 @@ go test -bench=. -benchmem    # Benchmarks
 cd ~/work/lux/graphql
 go test -v ./...              # GraphVM tests
 go test -v -run TestGas       # Gas metering tests
-```
+```text
 
 **Foundry Test Suite** (Precompiles):
 
@@ -188,7 +188,7 @@ forge test --gas-report
 
 # Coverage
 forge coverage
-```
+```text
 
 **Test Cases**:
 - `TestGraphDB_NodeOps()` - Node insertion/update/deletion
@@ -240,7 +240,7 @@ go build ./graphql/cmd/graphql
 
 # Deploy GraphDB+GraphVM to local Lux network
 # See: node/scripts/local_network_graphdb.sh
-```
+```text
 
 ### Integration Points
 
@@ -254,7 +254,7 @@ go build ./graphql/cmd/graphql
 # Local network with G-Chain enabled
 cd ~/work/lux/node/scripts
 ./local_network_graphdb.sh
-```
+```text
 
 ### Contract Verification
 

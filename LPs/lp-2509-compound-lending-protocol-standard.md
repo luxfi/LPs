@@ -45,7 +45,7 @@ Compound V3 (Comet) provides the most gas-efficient lending architecture availab
 
 Compound V3 (Comet) uses a monolithic contract design optimized for gas efficiency:
 
-```
+```text
 lib/compound/
 ├── contracts/
 │   ├── Comet.sol                    # Main lending pool contract
@@ -66,7 +66,7 @@ lib/compound/
 │   └── bulkers/                     # Batch operations
 │       ├── BaseBulker.sol
 │       └── MainnetBulker.sol
-```
+```markdown
 
 ### Key Contracts
 
@@ -108,7 +108,7 @@ interface IComet {
     // Admin
     function pause(bool supplyPaused, bool transferPaused, bool withdrawPaused, bool absorbPaused, bool buyPaused) external;
 }
-```
+```text
 
 #### CometRewards
 
@@ -122,7 +122,7 @@ interface ICometRewards {
     function claimTo(address comet, address src, address to, bool shouldAccrue) external;
     function getRewardOwed(address comet, address account) external returns (RewardOwed memory);
 }
-```
+```text
 
 ### Interest Rate Model
 
@@ -145,7 +145,7 @@ struct InterestRateConfig {
     uint64 borrowPerSecondInterestRateSlopeHigh;
     uint64 borrowPerSecondInterestRateBase;
 }
-```
+```text
 
 #### Default Parameters (Recommended)
 
@@ -182,7 +182,7 @@ struct AssetInfo {
     uint64 liquidationFactor;          // Liquidation penalty factor
     uint128 supplyCap;                 // Maximum supply allowed
 }
-```
+```text
 
 ### Flash Loans
 
@@ -204,7 +204,7 @@ contract FlashLoanReceiver {
         comet.supply(comet.baseToken(), amount);
     }
 }
-```
+```text
 
 ### Liquidation Mechanism
 
@@ -228,7 +228,7 @@ function buyCollateral(
     uint baseAmount,    // Base token to pay
     address recipient   // Where to send collateral
 ) external;
-```
+```text
 
 ### Price Feeds
 
@@ -245,7 +245,7 @@ interface IPriceFeed {
         uint80 answeredInRound
     );
 }
-```
+```solidity
 
 Custom price feed adapters available:
 - `ScalingPriceFeed`: Decimal conversion
@@ -294,7 +294,7 @@ function testSupplyAndBorrow() public {
     assertGt(comet.borrowBalanceOf(address(this)), 0);
     assertEq(usdc.balanceOf(address(this)), 5000e6);
 }
-```
+```text
 
 ### Liquidation Test
 
@@ -314,7 +314,7 @@ function testLiquidation() public {
     // Buy discounted collateral
     comet.buyCollateral(address(weth), minWeth, baseAmount, address(this));
 }
-```
+```text
 
 ### Interest Accrual Test
 
@@ -331,7 +331,7 @@ function testInterestAccrual() public {
     uint256 finalBalance = comet.balanceOf(supplier);
     assertGt(finalBalance, initialBalance);
 }
-```
+```text
 
 ## Reference Implementation
 
@@ -359,7 +359,7 @@ forge script script/DeployCompound.s.sol:DeployCompound \
   --rpc-url https://api.lux.network/ext/bc/C/rpc \
   --broadcast \
   --verify
-```
+```text
 
 ### Configuration Example
 
@@ -387,7 +387,7 @@ CometConfiguration.Configuration memory config = CometConfiguration.Configuratio
     targetReserves: 1000000e6,
     assetConfigs: assetConfigs
 });
-```
+```text
 
 ## Security Considerations
 

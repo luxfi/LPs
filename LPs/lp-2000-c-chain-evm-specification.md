@@ -57,11 +57,11 @@ var EVMID = constants.EVMID // ids.ID{'e', 'v', 'm'}
 // Create C-Chain VM
 factory := &cvm.Factory{}
 vm, err := factory.New(logger)
-```
+```text
 
 ### Directory Structure
 
-```
+```text
 node/vms/cchainvm/        # VM wrapper
 ├── factory.go            # VM factory
 ├── vm.go                 # Main VM implementation
@@ -74,7 +74,7 @@ geth/                     # EVM implementation (luxfi/geth)
 │   └── types/           # Transaction types
 ├── plugin/evm/          # Plugin interface
 └── rpc/                 # JSON-RPC API
-```
+```text
 
 ### EVM Compatibility
 
@@ -116,7 +116,7 @@ type GasConfig struct {
     BlockGasLimit  uint64 // 15,000,000
     TargetGasUsage uint64 // 50% of limit
 }
-```
+```text
 
 **LP-176 Dynamic Gas**:
 - Base fee adjusts based on block utilization
@@ -146,11 +146,11 @@ type GasConfig struct {
 
 #### REST Endpoints
 
-```
+```text
 POST /ext/bc/C/rpc              # JSON-RPC endpoint
 GET  /ext/bc/C/lux/getUTXOs     # Get atomic UTXOs
 POST /ext/bc/C/lux/issueTx      # Issue atomic tx
-```
+```text
 
 ### Smart Contract Standards
 
@@ -174,7 +174,7 @@ type AtomicTx struct {
     Ins          []*AtomicInput
     Outs         []*AtomicOutput
 }
-```
+```text
 
 #### Warp Messaging
 
@@ -183,7 +183,7 @@ interface IWarpMessenger {
     function sendWarpMessage(bytes calldata payload) external returns (bytes32);
     function getVerifiedWarpMessage(uint32 index) external view returns (WarpMessage memory);
 }
-```
+```text
 
 ### Configuration
 
@@ -203,7 +203,7 @@ interface IWarpMessenger {
     }
   }
 }
-```
+```text
 
 ### Performance
 

@@ -129,7 +129,7 @@ interface ILuxMedia {
     function currentAskForToken(uint256 tokenId) external view returns (Ask memory);
     function currentBidForToken(uint256 tokenId) external view returns (Bid memory);
 }
-```
+```text
 
 ### Licensing Extension
 
@@ -186,7 +186,7 @@ interface IMediaLicensing is ILuxMedia {
         LicenseType licenseType
     ) external view returns (bool);
 }
-```
+```text
 
 ### Collaborative Creation Extension
 
@@ -242,7 +242,7 @@ interface IMediaCollaboration is ILuxMedia {
     
     function distributeRoyalties(uint256 tokenId) external;
 }
-```
+```text
 
 ### Content Verification Extension
 
@@ -288,7 +288,7 @@ interface IMediaVerification is ILuxMedia {
         uint256 tokenId
     ) external view returns (ContentProof memory);
 }
-```
+```text
 
 ### Metadata Schema
 
@@ -335,7 +335,7 @@ interface IMediaMetadata {
         string calldata value
     ) external;
 }
-```
+```text
 
 ## Rationale
 
@@ -428,7 +428,7 @@ contract MediaTest {
         assertFalse(verification.verifyContent(tokenId, tamperedContent));
     }
 }
-```
+```text
 
 ### Collaborative Creation
 
@@ -465,7 +465,7 @@ function testCollaboration() public {
     // Distribute royalties
     collab.distributeRoyalties(tokenId);
 }
-```
+```text
 
 ## Implementation
 
@@ -489,7 +489,7 @@ forge build
 forge script script/DeployMedia.s.sol:DeployMedia \
   --rpc-url https://api.avax.network/ext/bc/C/rpc \
   --broadcast
-```
+```text
 
 ### Testing
 
@@ -509,7 +509,7 @@ forge test --match-path test/media-nft/\* --gas-report
 
 # Coverage
 forge coverage --match-path test/media-nft/\*
-```
+```markdown
 
 **Test Cases** (see `/test/media-nft/LuxMedia.t.sol`):
 - `testMintMedia()` - Mint with metadata and bid shares
@@ -539,7 +539,7 @@ forge verify-contract \
   --chain-id 43114 \
   --watch 0x<MEDIA_ADDRESS> \
   src/media-nft/LuxMedia.sol:LuxMedia
-```
+```text
 
 ## Reference Implementation
 
@@ -696,7 +696,7 @@ contract LuxMedia is ILuxMedia, IMediaLicensing, ERC721 {
         }
     }
 }
-```
+```text
 
 ## Security Considerations
 
@@ -705,7 +705,7 @@ contract LuxMedia is ILuxMedia, IMediaLicensing, ERC721 {
 Always verify content hashes:
 ```solidity
 require(keccak256(content) == contentHash, "Content mismatch");
-```
+```text
 
 ### Royalty Distribution
 
@@ -713,14 +713,14 @@ Ensure safe transfers:
 ```solidity
 (bool success, ) = recipient.call{value: amount}("");
 require(success, "Transfer failed");
-```
+```text
 
 ### License Enforcement
 
 Validate license terms:
 ```solidity
 require(block.timestamp < license.expirationTime, "License expired");
-```
+```text
 
 ### Collaborative Work
 

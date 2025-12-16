@@ -32,7 +32,7 @@ Without standardization, each bridge implementation would create incompatible fo
 ### Message Structure
 
 #### Base Message Format
-```
+```text
 CrossChainMessage {
     header: MessageHeader
     payload: MessagePayload
@@ -41,7 +41,7 @@ CrossChainMessage {
 ```
 
 #### Message Header
-```
+```text
 MessageHeader {
     version: uint8              // Protocol version (currently 1)
     messageType: uint8          // Message type identifier
@@ -54,7 +54,7 @@ MessageHeader {
 ```
 
 #### Message Types
-```
+```solidity
 enum MessageType {
     ASSET_TRANSFER = 0x01,     // Simple asset transfer
     CONTRACT_CALL = 0x02,      // Smart contract execution
@@ -63,7 +63,7 @@ enum MessageType {
     REGISTRY_UPDATE = 0x05,    // Asset registry update
     EMERGENCY = 0x06           // Emergency action
 }
-```
+```markdown
 
 ### Payload Formats
 
@@ -77,10 +77,10 @@ AssetTransferPayload {
     fee: uint256              // Bridge fee
     data: bytes               // Optional callback data
 }
-```
+```markdown
 
 #### Contract Call Payload
-```
+```solidity
 ContractCallPayload {
     target: bytes              // Target contract address
     value: uint256            // Native token value
@@ -88,7 +88,7 @@ ContractCallPayload {
     gasLimit: uint256         // Gas limit for execution
     sender: bytes             // Original sender
 }
-```
+```markdown
 
 #### Batch Transfer Payload
 ```
@@ -96,7 +96,7 @@ BatchTransferPayload {
     transfers: AssetTransfer[] // Array of transfers
     atomicExecution: bool      // All or nothing execution
 }
-```
+```markdown
 
 ### Message Proof
 
@@ -107,7 +107,7 @@ MessageProof {
     signatures: Signature[]    // Array of signatures
     metadata: bytes           // Additional proof data
 }
-```
+```markdown
 
 #### Signature Format
 ```
@@ -117,7 +117,7 @@ Signature {
     r: bytes32               // Signature r value
     s: bytes32               // Signature s value
 }
-```
+```markdown
 
 ### Encoding Specification
 
@@ -129,7 +129,7 @@ Messages use a compact binary encoding:
 3. **Arrays**: Count-prefixed with uint16
 
 #### Encoding Example
-```
+```text
 // Header (88 bytes)
 [version(1)] [type(1)] [sourceChain(32)] [destChain(32)] 
 [nonce(8)] [timestamp(8)] [expiry(8)]
@@ -141,7 +141,7 @@ Messages use a compact binary encoding:
 // Proof
 [proofType(1)] [signatureCount(2)] [signatures(...)] 
 [metadataLen(2)] [metadata(...)]
-```
+```markdown
 
 ### Message Validation
 
@@ -174,19 +174,19 @@ function validateMessage(
     
     return (true, "");
 }
-```
+```text
 
 ### Cross-Chain Identifiers
 
 #### Chain ID Format
-```
+```yaml
 ChainID = keccak256(abi.encode(networkType, networkId, subnetId))
 
 Examples:
 - Ethereum Mainnet: keccak256("EVM", 1, 0)
 - Lux C-Chain: keccak256("EVM", 43114, 0)
 - Bitcoin: keccak256("Bitcoin", 0, 0)
-```
+```text
 
 #### Address Format
 Addresses are encoded based on chain type:
@@ -213,7 +213,7 @@ function bridgeAsset(
     bytes32 messageHash = keccak256(encode(message));
     // MPC nodes sign messageHash
 }
-```
+```markdown
 
 #### With Teleport (LP-16)
 ```solidity
@@ -230,7 +230,7 @@ function teleportAsset(
     // AWM handles message relay
     warpMessenger.sendMessage(destChain, encode(message));
 }
-```
+```text
 
 ## Rationale
 
@@ -338,7 +338,7 @@ go build -o build/luxd ./cmd/main.go
 # Build warp client library
 cd sdk/warp
 go build ./...
-```
+```text
 
 ### Testing
 
@@ -358,7 +358,7 @@ go test ./vms/platformvm/warp/validator -v
 
 # Integration tests
 go test -tags=integration ./vms/platformvm/warp/...
-```
+```text
 
 ### Message Format Testing
 

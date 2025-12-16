@@ -126,7 +126,7 @@ All new methods follow the standard JSON‑RPC rules (positional or named params
 │ CPU‑TEE CVM  │◄──────────►│ Blackwell GPU │
 │  (TDX/SNP)   │            │   CC‑On mode  │
 └──────────────┘            └──────────────┘
-```
+```markdown
 
 - **TEE‑Manager**: Maintains queue of FHE jobs, loads CUDA kernels compiled with -DGPU_CC, watches for timeouts, and hands results back to the EVM host function invoked by precompile 0xF021/0xF022.
 - **Key storage**: Each validator’s FHE secret‑key share is sealed inside the CPU‑TEE; GPU kernels never access raw shares, only ciphertext operands.
@@ -178,7 +178,7 @@ func FHEAdd(input []byte) ([]byte, error) {
 
     return result, nil
 }
-```
+```text
 
 **Testing**:
 ```bash
@@ -237,3 +237,35 @@ Additive and non‑breaking; features can be introduced gradually with configura
 ## Security Considerations
 
 Enforce authentication where required, validate inputs, and follow recommended operational controls to prevent misuse.
+
+## Test Cases
+
+### Unit Tests
+
+1. **Proof Generation**
+   - Test circuit compilation
+   - Verify witness generation
+   - Test proof serialization
+
+2. **Proof Verification**
+   - Test verifier correctness
+   - Verify gas costs
+   - Test batch verification
+
+3. **Privacy Guarantees**
+   - Test nullifier uniqueness
+   - Verify commitment hiding
+   - Test information leakage
+
+### Integration Tests
+
+1. **Private Transactions**
+   - Test shielded transfers
+   - Verify balance privacy
+   - Test mixing operations
+
+2. **ZK-Rollup Integration**
+   - Test batch proving
+   - Verify state roots
+   - Test fraud proofs
+

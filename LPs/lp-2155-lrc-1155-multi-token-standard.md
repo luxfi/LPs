@@ -58,7 +58,7 @@ interface ILRC1155 {
     function isApprovedForAll(address owner, address operator) external view returns (bool);
     function uri(uint256 id) external view returns (string memory);
 }
-```
+```text
 
 ### Batch Confidential Operations Extension
 
@@ -111,7 +111,7 @@ interface ILRC1155Confidential {
     event BatchUnshield(address indexed to, uint256[] ids, uint256[] amounts);
     event ConfidentialSwap(bytes32 indexed swapHash, bytes32 commitmentA, bytes32 commitmentB);
 }
-```
+```text
 
 ### AI Model Sharding Extension
 
@@ -180,7 +180,7 @@ interface ILRC1155AISharding {
     event TrainingSessionStarted(bytes32 indexed sessionId, uint256 modelId);
     event ShardUpdated(bytes32 indexed sessionId, uint256 shardId, address trainer);
 }
-```
+```text
 
 ### Recursive zkSNARK Proof Structure
 
@@ -193,7 +193,7 @@ struct RecursiveProof {
     bytes32 previousProofHash;     // Hash of previous proof in chain
     uint256 depth;                 // Recursion depth
 }
-```
+```text
 
 ### Fractional Ownership Extension
 
@@ -390,7 +390,7 @@ describe("LRC1155 Batch Confidential Operations", () => {
         expect(valid).to.be.true;
     });
 });
-```
+```text
 
 ### AI Model Sharding Tests
 
@@ -451,7 +451,7 @@ describe("LRC1155 AI Model Sharding", () => {
         expect(newModelId).to.be.gt(modelId);
     });
 });
-```
+```text
 
 ### Fractional Ownership Tests
 
@@ -488,7 +488,7 @@ describe("LRC1155 Fractional Ownership", () => {
         expect(await token.getLicense(parentTokenId)).to.equal(newLicenseURI);
     });
 });
-```
+```text
 
 ## Implementation
 
@@ -519,7 +519,7 @@ cd ~/work/lux/standard
 forge test --match-contract ERC1155Test
 forge test --match-contract LRC1155ModelShardTest
 forge test --match-contract LRC1155FederatedTest
-```
+```text
 
 ### Batch Operations
 
@@ -536,7 +536,7 @@ function safeBatchTransferFrom(
     require(ids.length == amounts.length);
     _safeBatchTransferFrom(from, to, ids, amounts, data);
 }
-```
+```text
 
 **Gas Optimization**:
 - Single transfer: ~45,000 gas
@@ -566,7 +566,7 @@ function mintModelShards(
         });
     }
 }
-```
+```text
 
 **Shard Reconstruction**:
 - Requires all shards to reconstruct model
@@ -596,7 +596,7 @@ function mintGradientTokens(
         timestamp: block.timestamp
     });
 }
-```
+```text
 
 **Secure Aggregation**:
 - Homomorphic encryption for gradient privacy

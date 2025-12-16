@@ -56,7 +56,7 @@ type KEMScheme interface {
 // Security proof: Based on Module-LWE problem
 // Reduction: If Module-LWE is hard, ML-KEM is IND-CCA2 secure
 // Reference: Bos et al., "CRYSTALS-Kyber: A CCA-Secure Module-Lattice-Based KEM"
-```
+```text
 
 #### EVM Precompiled Contracts
 
@@ -70,7 +70,7 @@ address constant ML_KEM_DECAP = 0x0000000000000000000000000000000000000123;
 // Gas costs based on computational complexity
 uint256 constant GAS_ML_KEM_ENCAP = 500_000;
 uint256 constant GAS_ML_KEM_DECAP = 600_000;
-```
+```text
 
 ### 2. ML-DSA (Module-Lattice Digital Signature Algorithm) - FIPS 204
 
@@ -114,18 +114,18 @@ contract ETHMDLSA {
         return success;
     }
 }
-```
+```text
 
 #### Security Analysis
 
-```
+```text
 Security Reduction: ML-DSA → Module-SIS + Module-LWE
 Quantum Security: 128/192/256-bit against Grover's algorithm
 Classical Security: 256/384/512-bit against lattice reduction
 
 Reference: Ducas et al., "CRYSTALS-Dilithium: Digital Signatures from Module Lattices"
 NIST PQC Round 3 Winner - Selected July 2022
-```
+```text
 
 ### 3. SLH-DSA (Stateless Hash-Based Digital Signature Algorithm) - FIPS 205
 
@@ -159,7 +159,7 @@ func (k *SLHDSAKey) Sign(message []byte) []byte {
 
 // Security: Only assumes collision resistance of SHA-256/SHA3
 // No algebraic structure that quantum computers can exploit
-```
+```text
 
 ### 4. Hybrid Cryptography Mode
 
@@ -191,7 +191,7 @@ func VerifyHybrid(msg []byte, sig *HybridSignature, pubkeys *HybridPublicKey) bo
         return classicalValid || quantumValid  // Either passes
     }
 }
-```
+```text
 
 ### 5. AI Confidential Compute Applications
 
@@ -224,7 +224,7 @@ func (c *ConfidentialAICompute) SecureInference(
     // Aggregate results while preserving privacy
     return c.secretSharing.Reconstruct(results)
 }
-```
+```text
 
 #### Private Finance Integration
 
@@ -247,7 +247,7 @@ contract QuantumSafeDeFi {
         return verifyLatticeProof(latticeProof, threshold);
     }
 }
-```
+```text
 
 ## Rationale
 
@@ -288,7 +288,7 @@ SLH-DSA-192s:
 Hardware Acceleration (with AVX2/SHA extensions):
   2-3x speedup for lattice operations
   5x speedup for hash operations
-```
+```text
 
 ## Backwards Compatibility
 

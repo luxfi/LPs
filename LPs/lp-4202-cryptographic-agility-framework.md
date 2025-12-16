@@ -72,7 +72,7 @@ const (
     FamilySymmetric     AlgorithmFamily = 0x06  // AES, ChaCha20
     FamilyExperimental  AlgorithmFamily = 0xFF  // Research algorithms
 )
-```
+```text
 
 #### Algorithm Lifecycle
 
@@ -102,7 +102,7 @@ Lifecycle States:
     - No longer validated
     - Historical verification only
     - Archive mode required
-```
+```text
 
 ### 2. Agile Signature Scheme
 
@@ -130,7 +130,7 @@ type SignatureMetadata struct {
     HardwareToken   bool            `json:"hardware_token"`
     ThresholdShare  *ThresholdInfo  `json:"threshold_share,omitempty"`
 }
-```
+```text
 
 #### Validation Logic
 
@@ -164,7 +164,7 @@ func (v *AgileValidator) Validate(
     
     return nil
 }
-```
+```text
 
 ### 3. Emergency Response Protocol
 
@@ -218,7 +218,7 @@ func (e *EmergencyProtocol) HandleCompromise(
     
     return nil
 }
-```
+```text
 
 #### Quantum Threat Escalation
 
@@ -248,7 +248,7 @@ Quantum Threat Levels:
     - Algorithm broken
     - Immediate shutdown
     - Emergency recovery mode
-```
+```text
 
 ### 4. Performance Optimization
 
@@ -295,7 +295,7 @@ func (s *AdaptiveSelector) SelectOptimal(
     
     return s.selectBest(scores)
 }
-```
+```text
 
 #### Hardware Acceleration Registry
 
@@ -314,7 +314,7 @@ const (
     HardwareASIC   HardwareType = "ASIC"    // Dedicated chips
     HardwareQPU    HardwareType = "QPU"     // Quantum processor
 )
-```
+```text
 
 ### 5. Compliance and Standards
 
@@ -346,7 +346,7 @@ contract RegionalCompliance {
         return performRegionalChecks(tx, region);
     }
 }
-```
+```text
 
 #### AI/ML Integration Points
 
@@ -379,7 +379,7 @@ class CryptoAgilityAI:
                 MinimizeCost()
             ]
         )
-```
+```text
 
 ## Rationale
 

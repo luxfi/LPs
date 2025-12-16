@@ -87,9 +87,9 @@ FROST (Flexible Round-Optimized Schnorr Threshold) provides unique advantages:
 
 ### Precompile Address
 
-```
+```text
 0x020000000000000000000000000000000000000C
-```
+```markdown
 
 ### Input Format
 
@@ -114,7 +114,7 @@ signature = R || s
 where:
   R = 32 bytes (nonce commitment, x-coordinate only)
   s = 32 bytes (signature scalar)
-```
+```markdown
 
 The signature is cryptographically indistinguishable from a single-party Schnorr signature.
 
@@ -132,7 +132,7 @@ gas = BASE_COST + (totalSigners * PER_SIGNER_COST)
 where:
   BASE_COST = 50,000 gas
   PER_SIGNER_COST = 5,000 gas per participant
-```
+```markdown
 
 **Cost Examples**:
 
@@ -164,7 +164,7 @@ Round 2 (Response):
   - Each signer computes z = d + (e * rho) + (lambda * sk * c)
   - Aggregator combines: s = SUM(z), R = SUM(D + rho*E)
   - Output: signature (R, s)
-```
+```markdown
 
 ### Solidity Interface
 
@@ -316,7 +316,7 @@ abstract contract FROSTVerifier {
         );
     }
 }
-```
+```text
 
 ### Usage Examples
 
@@ -355,7 +355,7 @@ contract TaprootBridge is FROSTVerifier {
         // Mint wrapped BTC or release locked assets
     }
 }
-```
+```text
 
 **MPC Custody Wallet**:
 
@@ -391,7 +391,7 @@ contract MPCCustodyWallet is FROSTVerifier {
         require(success, "Transaction failed");
     }
 }
-```
+```text
 
 **DAO Treasury**:
 
@@ -418,7 +418,7 @@ contract DAOTreasury is FROSTVerifier {
         _executeProposal(proposalId);
     }
 }
-```
+```text
 
 ## Rationale
 
@@ -461,10 +461,10 @@ One-round schemes require either:
 
 FROST signatures are byte-identical to BIP-340 Schnorr:
 
-```
+```text
 BIP-340 Signature: R (32 bytes) || s (32 bytes)
 FROST Signature:   R (32 bytes) || s (32 bytes)
-```
+```text
 
 This enables:
 - Same threshold key controls Bitcoin Taproot + Lux EVM
@@ -488,7 +488,7 @@ function verify(bytes calldata sig) internal view returns (bool) {
         return verifyMultisig(sig);  // Legacy multisig
     }
 }
-```
+```text
 
 **Phase 2 - Transition**: Generate FROST keys, update configurations
 
@@ -498,7 +498,7 @@ function verify(bytes calldata sig) internal view returns (bool) {
 
 ### Test Vector 1: Valid 3-of-5 Threshold
 
-```
+```yaml
 Input:
   threshold: 3
   totalSigners: 5
@@ -508,11 +508,11 @@ Input:
 
 Expected Output: 0x...0001 (valid)
 Expected Gas: 75,000
-```
+```text
 
 ### Test Vector 2: Invalid Signature
 
-```
+```yaml
 Input:
   threshold: 3
   totalSigners: 5
@@ -526,18 +526,18 @@ Expected Gas: 75,000 (verification still runs)
 
 ### Test Vector 3: Invalid Threshold (t > n)
 
-```
+```yaml
 Input:
   threshold: 6
   totalSigners: 5
   ...
 
 Expected: Revert with "invalid threshold: t must be <= n"
-```
+```text
 
 ### Test Vector 4: Zero Threshold
 
-```
+```yaml
 Input:
   threshold: 0
   totalSigners: 5
@@ -548,7 +548,7 @@ Expected: Revert with "invalid threshold: t must be > 0"
 
 ### Test Vector 5: Large Threshold (10-of-15)
 
-```
+```yaml
 Input:
   threshold: 10
   totalSigners: 15
@@ -558,7 +558,7 @@ Input:
 
 Expected Output: 0x...0001 (valid)
 Expected Gas: 125,000
-```
+```text
 
 ## Reference Implementation
 
@@ -641,7 +641,7 @@ func (c *FROSTPrecompile) RequiredGas(input []byte) uint64 {
     totalSigners := binary.BigEndian.Uint32(input[4:8])
     return BaseCost + uint64(totalSigners)*PerSignerCost
 }
-```
+```markdown
 
 ### External Dependency
 
@@ -698,7 +698,7 @@ for each signature {
     d, e := crypto.RandomNonces()
     sig := sign(msg, d, e)
 }
-```
+```text
 
 **2. Message Hashing**:
 
@@ -709,7 +709,7 @@ verifyFROST(..., messageHash, signature);
 
 // WRONG: Sign raw data (collision vulnerability)
 verifyFROST(..., rawData, signature);
-```
+```text
 
 **3. Domain Separation**:
 
@@ -721,7 +721,7 @@ bytes32 messageHash = keccak256(abi.encodePacked(
     nonce,               // Replay protection
     data
 ));
-```
+```text
 
 ### Side-Channel Considerations
 

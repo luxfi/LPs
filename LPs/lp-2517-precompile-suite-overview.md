@@ -15,6 +15,18 @@ tags: [precompile, evm, index]
 
 This LP provides a complete index of the Lux Network EVM precompile suite. The suite includes 12 precompiled contracts spanning access control, fee management, native token operations, cross-chain messaging, and cryptographic signature verification. Precompiles are organized into two address ranges: the Lux stateful precompile range (`0x0200...0001` through `0x0200...000D`) and the standard Ethereum precompile range (`0x0...0100` for RIP-7212).
 
+## Motivation
+
+As the Lux Network precompile suite has grown to include 13 precompiled contracts across multiple categories, developers and auditors need a single reference document that provides:
+
+1. **Complete Address Map**: All precompile addresses in one place, eliminating the need to search multiple LPs
+2. **Gas Cost Comparison**: Side-by-side gas costs to help developers choose the right precompile for their use case
+3. **Security Classification**: Clear distinction between classical, post-quantum, and hybrid cryptographic precompiles
+4. **Implementation Status**: Current state of each precompile's development and documentation
+5. **Usage Patterns**: Common integration patterns and code examples
+
+Without a central index, developers must navigate dozens of individual LPs to understand the full precompile landscape. This overview serves as the canonical reference for all Lux Network precompiles.
+
 ## Precompile Address Map
 
 ### Lux Stateful Precompiles
@@ -237,7 +249,7 @@ function verifyHybrid(
     // Both must pass
     return classical && quantum;
 }
-```
+```text
 
 ### Threshold Wallet Selection
 
@@ -252,7 +264,7 @@ ICGGMP21 cggmp = ICGGMP21(0x020000000000000000000000000000000000000D);
 
 // For post-quantum security
 IRingtail ringtail = IRingtail(0x020000000000000000000000000000000000000B);
-```
+```text
 
 ### Cross-Chain Message Verification
 

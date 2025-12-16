@@ -58,7 +58,7 @@ B-Chain is the **critical interconnect** for Lux's multi-network ecosystem:
 | **Zoo.network** | Open AI Research (ZIPs) | DeAI/DeSci research data via B-Chain (zips.zoo.ngo) |
 
 **B-Chain Architecture**:
-```
+```text
 ┌─────────────────────────────────────────────────────────┐
 │                    B-Chain (BridgeVM)                   │
 │                                                          │
@@ -76,7 +76,7 @@ B-Chain is the **critical interconnect** for Lux's multi-network ecosystem:
 │                                                          │
 │  External Chains: Ethereum │ Bitcoin │ Cosmos          │
 └─────────────────────────────────────────────────────────┘
-```
+```markdown
 
 ## Specification
 
@@ -105,7 +105,7 @@ B-Chain is the **critical interconnect** for Lux's multi-network ecosystem:
 **Light Client Verification**:
 ```
 π ← Prove({H₁, ..., Hₙ}, {σ₁, ..., σₙ}, genesis)
-```
+```text
 
 Verifying π costs only 50k gas regardless of n (batch size).
 
@@ -132,9 +132,9 @@ Verifying π costs only 50k gas regardless of n (batch size).
 ### Timeout Guarantees
 
 All bridge operations have **timeout refunds**:
-```
+```text
 Refund if t > t_lock + Δt_timeout
-```
+```markdown
 
 Default timeouts:
 - Lux ↔ L2/L3: 2 minutes
@@ -151,7 +151,7 @@ Default timeouts:
 **ZK Fraud Proofs**:
 ```
 π_fraud ← Prove(Invalid(r) | block_data)
-```
+```markdown
 
 Circuit proves one of:
 - Invalid signature on block header
@@ -175,7 +175,7 @@ B-Chain uses state-of-the-art MPC for secure custody without single points of fa
 Where:
 - n = total validators
 - t = threshold (2/3+1 required for signing)
-```
+```text
 
 **Signing Protocol**:
 ```
@@ -184,7 +184,7 @@ Where:
 
 // Single signature, verifiable with pk
 Valid ← Verify(pk, message, σ)
-```
+```text
 
 **Committee Rotation**:
 - **Epoch Duration**: 24 hours (coordinated with LP-181 P-Chain epochs)
@@ -207,7 +207,7 @@ Slash = min(
         0.1 × bridge_TVL
     )
 )
-```
+```markdown
 
 ### PQC Integration
 
@@ -232,7 +232,7 @@ committee_sig = {
 
 // Verification
 Valid ← VerifyBLS(bls_agg) ∧ VerifyRingtail(ringtail_agg)
-```
+```markdown
 
 **Migration Timeline**:
 - **Phase 1** (2025): BLS primary, Ringtail optional
@@ -363,7 +363,7 @@ func TestFraudProof(t *testing.T) {
     require.NoError(t, err)
     require.True(t, success)
 }
-```
+```yaml
 
 ### Integration Tests
 
@@ -394,7 +394,7 @@ interface ILuxBridge {
   function submitFraudProof(bytes32 stateRoot, bytes calldata zkProof)
     external returns (bool);
 }
-```
+```text
 
 ### Go API
 

@@ -104,7 +104,7 @@ interface IPrivateStaking {
         bytes calldata proof
     ) external view returns (bool eligible);
 }
-```
+```markdown
 
 ### Verifiable Delay Functions (VDF)
 
@@ -165,7 +165,7 @@ interface IVerifiableDelay {
         uint256 epoch
     ) external view returns (bytes32 randomness);
 }
-```
+```text
 
 ### Anonymous Validator Registry
 
@@ -221,7 +221,7 @@ interface IAnonymousValidators {
         uint256 count
     ) external returns (bytes32[] memory selected);
 }
-```
+```text
 
 ### Private Delegation System
 
@@ -279,7 +279,7 @@ interface IPrivateDelegation {
         bytes calldata weightProof
     ) external view returns (uint256 weight);
 }
-```
+```text
 
 ### Private Slashing Mechanism
 
@@ -335,7 +335,7 @@ interface IPrivateSlashing {
         bytes calldata proof
     ) external view returns (bool valid);
 }
-```
+```markdown
 
 ### Distributed Key Generation (DKG)
 
@@ -396,7 +396,7 @@ interface IDistributedKeyGen {
         uint256 roundId
     ) external returns (bytes32 publicKey);
 }
-```
+```text
 
 ### Private Reward Distribution
 
@@ -452,7 +452,7 @@ interface IPrivateRewardDistribution {
         bytes calldata proof
     ) external view returns (bool included);
 }
-```
+```text
 
 ### Governance Privacy
 
@@ -509,7 +509,7 @@ interface IPrivateGovernance {
         bytes calldata tallyProof
     ) external;
 }
-```
+```text
 
 ## Rationale
 
@@ -575,7 +575,7 @@ function testPrivateStaking() public {
 
     assertTrue(stakeId != bytes32(0));
 }
-```
+```text
 
 ### VDF Randomness Test
 
@@ -611,7 +611,7 @@ function testVDFRandomness() public {
 
     assertTrue(randomness != bytes32(0));
 }
-```
+```text
 
 ### Private Reward Claim Test
 
@@ -638,7 +638,7 @@ function testPrivateRewardClaim() public {
     uint256 decryptedAmount = decryptReward(encryptedReward, privateKey);
     assertEq(decryptedAmount, expectedReward);
 }
-```
+```markdown
 
 ## Backwards Compatibility
 
@@ -788,7 +788,7 @@ This LP introduces private staking as an optional feature alongside standard sta
 - Validator registry update: <200ms per epoch
 
 **Gas Costs**:
-```
+```text
 VDF verification: 150,000 gas
 Validator registration: 200,000 gas
 Delegation: 100,000 gas

@@ -71,7 +71,7 @@ LP-4 proposes integrating quantum-resistant cryptographic primitives into the Lu
 ```bash
 cd ~/work/lux/crypto/mldsa
 go test -v ./...
-```
+```solidity
 
 ### EVM ML-DSA Precompile
 
@@ -91,6 +91,37 @@ go test -v ./...
 cd ~/work/lux/evm/precompile/contracts/mldsa
 go test -v ./...
 ```
+
+## Test Cases
+
+### Unit Tests
+
+1. **Cryptographic Primitives**
+   - Test key generation
+   - Verify signature creation
+   - Test signature verification
+
+2. **Post-Quantum Security**
+   - Verify NIST compliance
+   - Test parameter validation
+   - Validate security levels
+
+3. **Performance Benchmarks**
+   - Measure key generation time
+   - Benchmark signing operations
+   - Test verification throughput
+
+### Integration Tests
+
+1. **Hybrid Signature Schemes**
+   - Test classical-PQ combinations
+   - Verify fallback mechanisms
+   - Test key rotation
+
+2. **Network Integration**
+   - Test consensus with PQ signatures
+   - Verify cross-chain compatibility
+   - Test upgrade transitions
 
 ## Copyright
 

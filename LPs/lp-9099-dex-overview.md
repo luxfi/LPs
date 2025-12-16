@@ -22,7 +22,7 @@ documentation: https://dex.lux.network
 
 # LP-9000: Lux DEX - Over 9000 Series
 
-```
+```text
 ╔═══════════════════════════════════════════════════════════════════════════════╗
 ║                                                                               ║
 ║     ██╗     ██╗   ██╗██╗  ██╗    ██████╗ ███████╗██╗  ██╗                     ║
@@ -37,7 +37,7 @@ documentation: https://dex.lux.network
 ║     1,000,000+ orders/sec │ 597ns latency │ 50ms finality                     ║
 ║                                                                               ║
 ╚═══════════════════════════════════════════════════════════════════════════════╝
-```
+```markdown
 
 ## Abstract
 
@@ -51,7 +51,7 @@ Traditional DEXs suffer from high latency, MEV exploitation, and limited order t
 
 The Lux exchange ecosystem consists of two complementary systems:
 
-```
+```text
 ┌──────────────────────────────────────────────────────────────────────────────┐
 │                      LUX EXCHANGE ARCHITECTURE                                │
 ├──────────────────────────────────────────────────────────────────────────────┤
@@ -76,7 +76,7 @@ The Lux exchange ecosystem consists of two complementary systems:
                     │   Routes to DEX or AMM based    │
                     │   on liquidity & best price     │
                     └─────────────────────────────────┘
-```
+```markdown
 
 ### Domain Architecture
 
@@ -89,7 +89,7 @@ The Lux exchange ecosystem consists of two complementary systems:
 
 ## Key Distinction: Sidecar vs Chain
 
-```
+```text
 ┌──────────────────────────────────────────────────────────────────────────────┐
 │                    DEX SIDECAR vs BLOCKCHAIN CHAINS                          │
 ├──────────────────────────────────────────────────────────────────────────────┤
@@ -107,7 +107,7 @@ The Lux exchange ecosystem consists of two complementary systems:
 │                                          │   LP-0010 (D-Chain staking)        │
 │                                                                               │
 └──────────────────────────────────────────────────────────────────────────────┘
-```
+```markdown
 
 ## LP-9000 Series Index
 
@@ -127,13 +127,13 @@ Benchmarks run on Apple M1 Max (2025-12-11):
 
 ### Order Book Performance
 
-```
+```text
 BenchmarkOrderBook-10              1,269,255 orders/sec    787.9 ns/op
 BenchmarkOrderBookParallel-10        684,184 orders/sec   1,462.0 ns/op
 BenchmarkCriticalOrderMatching/100   714,820 orders/sec   1,398.8 ns/op
 BenchmarkCriticalOrderMatching/1000  576,844 orders/sec   1,733.6 ns/op
 BenchmarkCriticalOrderMatching/10000 521,370 orders/sec   1,918.0 ns/op
-```
+```markdown
 
 ### Multi-Backend Comparison
 
@@ -157,7 +157,7 @@ BenchmarkCriticalOrderMatching/10000 521,370 orders/sec   1,918.0 ns/op
 
 ## Architecture
 
-```
+```text
 ┌─────────────────────────────────────────────────────────────────────────────┐
 │                      LUX DEX SIDECAR ARCHITECTURE                            │
 ├─────────────────────────────────────────────────────────────────────────────┤
@@ -222,7 +222,7 @@ BenchmarkCriticalOrderMatching/10000 521,370 orders/sec   1,918.0 ns/op
 │  │          C-Chain (EVM) │ B-Chain (Bridge) │ D-Chain (Staking)          │ │
 │  └────────────────────────────────────────────────────────────────────────┘ │
 └─────────────────────────────────────────────────────────────────────────────┘
-```
+```markdown
 
 ## Implementation Repository
 
@@ -230,7 +230,7 @@ BenchmarkCriticalOrderMatching/10000 521,370 orders/sec   1,918.0 ns/op
 
 ### Directory Structure
 
-```
+```text
 dex/
 ├── cmd/                          # CLI commands (30+)
 │   ├── bench-all/                # Multi-backend benchmark
@@ -292,7 +292,7 @@ dex/
 │
 └── docs/
     └── ARCHITECTURE.md
-```
+```markdown
 
 ## Feature Summary
 
@@ -350,7 +350,7 @@ make build
 
 # Run DEX daemon
 ./build/lxd --config=dex.yaml
-```
+```text
 
 ### Go SDK
 
@@ -367,7 +367,7 @@ order, err := client.PlaceOrder(lxdex.Order{
     Size:     0.1,
     Leverage: 10,
 })
-```
+```text
 
 ### TypeScript SDK
 
@@ -384,7 +384,7 @@ const order = await dex.placeOrder({
   size: 0.1,
   leverage: 10,
 });
-```
+```text
 
 ## Benchmarks
 

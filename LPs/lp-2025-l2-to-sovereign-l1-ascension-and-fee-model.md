@@ -120,3 +120,35 @@ go test ./vms/platformvm -run TestL1Fee
 ## Backwards Compatibility
 
 This LP introduces additive capabilities and preserves existing behavior. Rollout can be staged without breaking prior deployments.
+
+## Test Cases
+
+### Unit Tests
+
+1. **EVM Compatibility**
+   - Verify opcode execution
+   - Test gas metering accuracy
+   - Validate precompile functions
+
+2. **Smart Contract Execution**
+   - Test contract deployment
+   - Verify state changes
+   - Test revert conditions
+
+3. **Token Standards**
+   - Test ERC-20/LRC-20 compliance
+   - Verify transfer mechanics
+   - Test approval workflows
+
+### Integration Tests
+
+1. **DeFi Protocol Integration**
+   - Test swap operations
+   - Verify liquidity provision
+   - Test yield calculations
+
+2. **Cross-Contract Calls**
+   - Test delegate calls
+   - Verify reentrancy protection
+   - Test gas forwarding
+

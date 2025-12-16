@@ -63,7 +63,7 @@ Validators who already stake LUX now earn additional MPC rewards, tightening eco
 
 ## 3  High-level Architecture
 
-```
+```text
              +---------------------------------------+
              |              M-Chain VM               |
              |---------------------------------------|
@@ -79,7 +79,7 @@ Validators who already stake LUX now earn additional MPC rewards, tightening eco
  | X-Chain   |<-------| mpckeyd (per signer)|------->| BTC / ETH |
  | SwapFx    |        +---------------------+        |  XRPL…    |
  +-----------+                                        +-----------+
-```
+```markdown
 
 - Each validator must run `mpckeyd`, holding one or more key-shares.
 - When an X-Chain `SwapTx` enters PENDING state, validators detect the event through a filtered light-client feed, assemble a threshold signature, and collectively submit `SwapSigTx` on M-Chain.
@@ -115,7 +115,7 @@ type KeyGenTx struct {
     AggPubKey    []byte // 32–65 B
     SignerBitmap []byte // bitmask of validator IDs
 }
-```
+```text
 
 Commits to new key; must be signed by ≥ threshold validators listed in `SignerBitmap`.
 
@@ -131,13 +131,13 @@ type SwapSigTx struct {
     SigBitmap  []byte
     ProofHash  [32]byte   // hash(transcripts) – optional audit
 }
-```
+```text
 
 **Validation:**
 ```text
 require AggVerify(AggPubKey[AssetID], SigBitmap, Signature, msgHash(SwapID))
 require bitcount(SigBitmap) >= threshold(AssetID)
-```
+```markdown
 
 Successful inclusion triggers:
 - credit `rewardPerSig` to each signer in the bitmap,
@@ -156,7 +156,7 @@ type DualSigTx struct {
     QuantumBitmap    []byte     // Quantum signers
     ProofHash        [32]byte   // Combined proof hash
 }
-```
+```text
 
 **Validation:**
 ```text
@@ -170,7 +170,7 @@ if quantumPhase >= 2:
     
 require bitcount(ClassicalBitmap) >= threshold(AssetID)
 require bitcount(QuantumBitmap) >= qThreshold(AssetID)
-```
+```text
 
 #### 4.2.6  QuantumPhaseTx
 
@@ -181,7 +181,7 @@ type QuantumPhaseTx struct {
     ActivateAt  uint64  // Block height for activation
     Signature   []byte  // Governance multisig
 }
-```
+```text
 
 #### 4.2.3  SlashTx
 
@@ -191,7 +191,7 @@ type SlashTx struct {
     SwapID   ids.ID
     Evidence []byte // RLP{height, blkHash, swapHeader}
 }
-```
+```text
 
 If now > Swap.expiry and swap still PENDING, all signers in active set lose `slashAmount = stake * 0.2`. 50 % burned, 50 % to reporter.
 
@@ -226,7 +226,7 @@ service MPCKeyd {
   rpc Heartbeat(Ping) returns (Pong);           // liveness
   rpc RotateKey(RotationReq) returns (Ack);     // governance
 }
-```
+```text
 
 Hot-path latency budget: < 200 ms signature generation (GG21 15-of-15 @ ~80 ms measured).
 
@@ -246,7 +246,7 @@ message DualSigReply {
     bytes classical_bitmap = 3;
     bytes quantum_bitmap = 4;
 }
-```
+```text
 
 Quantum signature latency: < 50 ms (Ringtail 15-of-21 @ ~7 ms computation + network).
 
@@ -383,7 +383,7 @@ go build -o bin/lux-mpc-cli ./cmd/lux-mpc-cli
 # Or build all with make
 make build
 make install
-```
+```text
 
 ### Testing
 
@@ -408,7 +408,7 @@ go test -tags=integration ./...
 # Performance benchmarks
 go test ./pkg/crypto/cgg21 -bench=. -benchmem
 go test ./pkg/crypto/ringtail -bench=. -benchmem
-```
+```text
 
 ### Signer Node Setup
 
@@ -426,7 +426,7 @@ mpckeyd status
 
 # Check custody balances
 mpckeyd vault list
-```
+```text
 
 ### Bridge Testing
 
@@ -474,6 +474,37 @@ curl -X POST --data '{
 - **LP-301**: Bridge Protocol (integration point)
 - **LP-322**: CGGMP21 Threshold ECDSA (threshold signature standard)
 - **LP-323**: LSS-MPC Dynamic Resharing (threshold upgrades)
+
+## Test Cases
+
+### Unit Tests
+
+1. **Key Generation**
+   - Test DKG protocol
+   - Verify share distribution
+   - Test threshold parameters
+
+2. **Signing Protocol**
+   - Test partial signature generation
+   - Verify signature aggregation
+   - Test malicious party detection
+
+3. **Key Management**
+   - Test key refresh
+   - Verify resharing protocol
+   - Test party rotation
+
+### Integration Tests
+
+1. **Threshold Operations**
+   - Test multi-party signing
+   - Verify liveness guarantees
+   - Test network partition handling
+
+2. **Cross-Chain Custody**
+   - Test bridged asset signing
+   - Verify multi-chain coordination
+   - Test emergency recovery
 
 ## Copyright
 

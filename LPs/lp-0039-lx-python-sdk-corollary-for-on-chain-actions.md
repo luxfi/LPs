@@ -45,7 +45,7 @@ from lx.utils.signing import (
 from lx.utils.types import (
     List, Optional, Cloid, BuilderInfo, Meta, SpotMeta
 )
-```
+```text
 
 ## Exchange Class Overview
 
@@ -65,25 +65,25 @@ class Exchange(API):
                     'signature': signature, 'vaultAddress': self.vault_address,
                     'expiresAfter': self.expires_after }
         return self.post('/exchange', payload)
-```
+```text
 
 ## Order Placement Flow
 
 1. Convert high-level OrderRequest to on-chain wire format:
    ```python
    wire = order_request_to_order_wire(order_req, asset_id)
-   ```
+   ```text
 2. Build order action payload:
    ```python
    action = order_wires_to_order_action([wire], builder)
-   ```
+   ```text
 3. Sign payload with ECDSA via sign_l1_action:
    ```python
    signature = sign_l1_action(
        self.wallet, action, self.vault_address, timestamp,
        self.expires_after, self.base_url == MAINNET_API_URL
    )
-   ```
+   ```text
 4. Submit via _post_action → JSON‑RPC dex.swap.submit or HTTP REST↔RPC gateway.
 
 ## Modify and Cancel Flows
@@ -100,7 +100,7 @@ return self._post_action(modify_action, sig, timestamp)
 cancel_action = {'type':'cancel','cancels': cancel_wires}
 sig = sign_l1_action(...)
 return self._post_action(cancel_action, sig, timestamp)
-```
+```text
 
 ## Market Order Helpers
 
@@ -109,7 +109,7 @@ Compute slippage-adjusted price via on-chain midprice query:
 px = float(self.info.all_mids()[asset])
 px *= 1±slippage
 round to 6 or 8 decimals
-```
+```text
 
 ## Advanced Actions
 
@@ -181,7 +181,7 @@ signature = sign_l1_action(
 
 # Submit
 response = exchange._post_action(action, signature, timestamp)
-```
+```text
 
 **Testing**:
 ```bash

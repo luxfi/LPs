@@ -61,7 +61,7 @@ interface PaymentArchitecture {
     accepted_collateral: ["LUX", "BTC", "ETH", "Stablecoins"];
   };
 }
-```
+```text
 
 ## Research Findings
 
@@ -104,7 +104,7 @@ class FiatGateway {
     return { charge, tx, status: 'completed' };
   }
 }
-```
+```text
 
 #### Optimization Opportunities
 1. **Batched Settlements**: Reduce gas costs by batching multiple payments
@@ -156,7 +156,7 @@ contract LuxCredit {
         emit CreditLineOpened(msg.sender, creditLimit);
     }
 }
-```
+```text
 
 ### 3. Recurring Payments
 
@@ -209,7 +209,7 @@ contract RecurringPayments {
         sub.nextPayment += sub.interval;
     }
 }
-```
+```text
 
 ### 4. Merchant Integration
 
@@ -251,7 +251,7 @@ class LuxMerchantSDK {
     return payment.status === 'completed' && onChainTx.confirmed;
   }
 }
-```
+```text
 
 ### 5. Compliance Framework
 
@@ -278,7 +278,7 @@ interface ComplianceSystem {
     retention: "As per regulatory requirements";
   };
 }
-```
+```text
 
 ## Recommendations
 

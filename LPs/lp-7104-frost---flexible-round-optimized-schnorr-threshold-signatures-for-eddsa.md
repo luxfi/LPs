@@ -51,7 +51,7 @@ The linearity of the signing equation enables efficient threshold computation wi
 
 #### 1. Key Generation (DKG)
 
-```
+```yaml
 Input: Parties P = {p₁, ..., pₙ}, threshold t
 Output: Share xᵢ for each party, public key Y
 
@@ -73,7 +73,7 @@ Output: (xᵢ, Y)
 
 #### 2. Signing Protocol (2 Rounds)
 
-```
+```text
 Input: Message m, signers S ⊆ P with |S| = t
 Output: Schnorr signature (R, z)
 
@@ -104,7 +104,7 @@ Output: (R, z)
 
 #### 3. Taproot Support (BIP-340)
 
-```
+```text
 Taproot Adjustments:
 1. Even Y-coordinate:
    If Y has odd y-coordinate, negate all shares: xᵢ = -xᵢ
@@ -148,7 +148,7 @@ rhoHash.WriteAny(D[i], E[i])  // May use affine or projective
 dBytes, _ := D[i].MarshalBinary()  // Canonical bytes
 eBytes, _ := E[i].MarshalBinary()
 rhoHash.WriteAny(dBytes, eBytes)
-```
+```text
 
 This ensures all parties compute identical binding values ρ, preventing signature failures.
 
@@ -178,7 +178,7 @@ type TaprootConfig struct {
     Config
     PublicKey    *taproot.PublicKey  // X-only coordinate
 }
-```
+```text
 
 #### Performance Characteristics
 
@@ -217,7 +217,7 @@ Benchmarks (3-of-5 threshold):
 
 ### Integration Architecture
 
-```
+```text
 ┌─────────────────────────────────────────┐
 │            Lux M-Chain MVM              │
 ├─────────────────────────────────────────┤
@@ -326,6 +326,37 @@ FROST provides optimal-round threshold signatures for Schnorr and EdDSA, with na
 8. Boneh, D., Drijvers, M., & Neven, G. (2018). **Compact Multi-signatures for Smaller Blockchains**. ASIACRYPT 2018.
 9. Drijvers, M., et al. (2019). **On the Security of Two-Round Multi-Signatures**. IEEE S&P 2019.
 10. Stinson, D. R., & Strobl, R. (2001). **Provably Secure Distributed Schnorr Signatures**. ICALP 2001.
+
+## Test Cases
+
+### Unit Tests
+
+1. **Key Generation**
+   - Test DKG protocol
+   - Verify share distribution
+   - Test threshold parameters
+
+2. **Signing Protocol**
+   - Test partial signature generation
+   - Verify signature aggregation
+   - Test malicious party detection
+
+3. **Key Management**
+   - Test key refresh
+   - Verify resharing protocol
+   - Test party rotation
+
+### Integration Tests
+
+1. **Threshold Operations**
+   - Test multi-party signing
+   - Verify liveness guarantees
+   - Test network partition handling
+
+2. **Cross-Chain Custody**
+   - Test bridged asset signing
+   - Verify multi-chain coordination
+   - Test emergency recovery
 
 ## Copyright
 

@@ -53,7 +53,7 @@ interface IdentityArchitecture {
     reputation_tracking: true;
   };
 }
-```
+```text
 
 ## Research Findings
 
@@ -111,7 +111,7 @@ contract ZKIdentity {
         );
     }
 }
-```
+```text
 
 ### 2. Self-Sovereign Identity Model
 
@@ -145,7 +145,7 @@ interface LuxDIDDocument {
     recovery: string[];         // Social recovery addresses
   };
 }
-```
+```text
 
 ### 3. Privacy-Preserving Credentials
 
@@ -213,7 +213,7 @@ contract VerifiableCredentials {
         return true;
     }
 }
-```
+```text
 
 ### 4. Cross-Chain Identity Portability
 
@@ -247,7 +247,7 @@ interface IdentityBridge {
     calculation: "Weighted average with decay";
   };
 }
-```
+```text
 
 ### 5. Decentralized KYC Providers
 
@@ -297,7 +297,7 @@ contract KYCRegistry {
         emit AttestationCreated(msg.sender, subject, attestationHash);
     }
 }
-```
+```text
 
 ## Recommendations
 

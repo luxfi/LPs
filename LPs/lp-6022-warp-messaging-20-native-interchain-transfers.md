@@ -96,3 +96,35 @@ The security of Warp 2.0 relies on the economic stake of the Shared Validators. 
 ## Backwards Compatibility
 
 Additive change; existing interfaces remain valid. Adoption is opt‑in and can be rolled out gradually without breaking behavior.
+
+## Test Cases
+
+### Unit Tests
+
+1. **Message Validation**
+   - Test message format
+   - Verify signature validation
+   - Test nonce handling
+
+2. **Asset Locking**
+   - Test lock operations
+   - Verify unlock conditions
+   - Test timeout handling
+
+3. **Cross-Chain Verification**
+   - Test proof verification
+   - Verify merkle proofs
+   - Test state synchronization
+
+### Integration Tests
+
+1. **Bridge Operations**
+   - Test token bridging
+   - Verify finality waiting
+   - Test rollback scenarios
+
+2. **Multi-Chain Coordination**
+   - Test concurrent bridges
+   - Verify ordering guarantees
+   - Test failure recovery
+

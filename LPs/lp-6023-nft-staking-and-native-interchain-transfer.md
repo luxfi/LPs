@@ -96,7 +96,7 @@ cd standard
 forge test --match "NFT"
 # Cross-chain transfer tests
 forge test --match "Teleport"
-```
+```text
 
 ### Example Implementation
 ```solidity
@@ -119,3 +119,35 @@ contract StakableNFT is ERC721, ILRC23Stakable {
 ## Backwards Compatibility
 
 This proposal is additive and does not alter existing formats or APIs. Migration is opt‑in per component.
+
+## Test Cases
+
+### Unit Tests
+
+1. **Message Validation**
+   - Test message format
+   - Verify signature validation
+   - Test nonce handling
+
+2. **Asset Locking**
+   - Test lock operations
+   - Verify unlock conditions
+   - Test timeout handling
+
+3. **Cross-Chain Verification**
+   - Test proof verification
+   - Verify merkle proofs
+   - Test state synchronization
+
+### Integration Tests
+
+1. **Bridge Operations**
+   - Test token bridging
+   - Verify finality waiting
+   - Test rollback scenarios
+
+2. **Multi-Chain Coordination**
+   - Test concurrent bridges
+   - Verify ordering guarantees
+   - Test failure recovery
+

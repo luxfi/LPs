@@ -88,7 +88,7 @@ interface IAlchemistV2 {
     function accounts(address owner) external view returns (int256 debt, address[] memory depositedTokens);
     function positions(address owner, address yieldToken) external view returns (uint256 shares, uint256 lastAccruedWeight);
 }
-```
+```text
 
 **Key Parameters**:
 | Parameter | Default Value | Description |
@@ -125,7 +125,7 @@ interface ITransmuterV2 {
     function syntheticToken() external view returns (address);
     function underlyingToken() external view returns (address);
 }
-```
+```text
 
 **Transmutation Mechanism**:
 1. Users deposit synthetic tokens (alUSD) to queue for exchange
@@ -162,7 +162,7 @@ interface IAlchemicToken is IERC20, IERC3156FlashLender {
     function setWhitelist(address minter, bool state) external;
     function pauseMinter(address minter, bool state) external;
 }
-```
+```text
 
 **Flash Mint Parameters**:
 | Parameter | Default | Description |
@@ -186,7 +186,7 @@ interface ITokenAdapter {
     function wrap(uint256 amount, address recipient) external returns (uint256 yieldTokens);
     function unwrap(uint256 amount, address recipient) external returns (uint256 underlyingTokens);
 }
-```
+```text
 
 ### Lux-Specific Adaptations
 
@@ -204,10 +204,10 @@ contract CrossChainCanonicalAlchemicTokenV2 is CrossChainCanonicalBase, Alchemic
         address[] memory _bridgeTokens
     ) public initializer;
 }
-```
+```text
 
 **Cross-Chain Architecture**:
-```
+```text
 C-Chain (Primary)                    Other Lux Chains
 +------------------+                 +------------------+
 | AlchemistV2      |                 |                  |
@@ -215,7 +215,7 @@ C-Chain (Primary)                    Other Lux Chains
 | AlchemicTokenV2  | <----------->  | chemicTokenV2    |
 | (Canonical)      |   Teleport     | (Bridged)        |
 +------------------+                 +------------------+
-```
+```text
 
 **Teleport Integration** (LP-6022):
 - Synthetic tokens use Warp messaging for cross-chain transfers
@@ -299,7 +299,7 @@ struct AlchemistInitParams {
     uint256 mintingLimitMinimum;          // Minimum reserve
     address whitelist;                    // Whitelist contract
 }
-```
+```text
 
 #### Gas Costs (Estimated)
 
@@ -316,7 +316,7 @@ struct AlchemistInitParams {
 
 ### Yield Strategy Architecture
 
-```
+```text
 User Collateral Flow:
 +----------+    deposit    +------------+    wrap    +---------------+
 | User     | ------------> | Alchemist  | --------> | Yield Token   |
@@ -336,7 +336,7 @@ User Collateral Flow:
                           | User Debt  |           | Transmuter    |
                           | Decreases  | --------> | Buffer        |
                           +------------+           +---------------+
-```
+```text
 
 ## Rationale
 
@@ -406,7 +406,7 @@ function testDepositAndMint() public {
     assertEq(debt, int256(mintAmount));
     assertEq(alUSD.balanceOf(address(this)), mintAmount);
 }
-```
+```text
 
 ### 2. Self-Repaying Loan
 
@@ -425,7 +425,7 @@ function testSelfRepayingLoan() public {
     (int256 debtAfter,) = alchemist.accounts(address(this));
     assertLt(debtAfter, 500e18);  // Debt reduced by harvested yield
 }
-```
+```text
 
 ### 3. Transmuter Exchange
 
@@ -450,7 +450,7 @@ function testTransmuterExchange() public {
     // Verify received USDC
     assertEq(usdc.balanceOf(address(this)), claimable / 1e12);
 }
-```
+```text
 
 ### 4. Cross-Chain Transfer
 
@@ -468,7 +468,7 @@ function testCrossChainTransfer() public {
     // On destination chain: receive and mint bridged alUSD
     // (Handled by CrossChainCanonicalAlchemicTokenV2)
 }
-```
+```text
 
 ## Reference Implementation
 

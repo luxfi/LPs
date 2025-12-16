@@ -60,7 +60,7 @@ go build -o bin/geth ./cmd/geth
 # Or build full node with C-Chain
 cd node
 go build -o build/luxd ./cmd/main.go
-```
+```text
 
 ### Testing
 
@@ -83,7 +83,7 @@ go test -tags=integration ./vms/cchainvm/...
 
 # Performance benchmarks
 go test ./geth/core/state -bench=. -benchmem
-```
+```text
 
 ### API Testing
 
@@ -110,7 +110,7 @@ curl -X POST --data '{
   "method":"eth_sendTransaction",
   "params":[{"from":"0x...","data":"0x..."}]
 }' -H 'content-type:application/json;' http://localhost:9650/ext/bc/C/rpc
-```
+```text
 
 ### File Size Verification
 
@@ -157,6 +157,37 @@ This LP is foundational and does not introduce backwards compatibility issues.
 ## Security Considerations
 
 Security considerations for the C-Chain include ensuring the correctness of the EVM implementation and protecting against known smart contract vulnerabilities.
+
+## Test Cases
+
+### Unit Tests
+
+1. **EVM Compatibility**
+   - Verify opcode execution
+   - Test gas metering accuracy
+   - Validate precompile functions
+
+2. **Smart Contract Execution**
+   - Test contract deployment
+   - Verify state changes
+   - Test revert conditions
+
+3. **Token Standards**
+   - Test ERC-20/LRC-20 compliance
+   - Verify transfer mechanics
+   - Test approval workflows
+
+### Integration Tests
+
+1. **DeFi Protocol Integration**
+   - Test swap operations
+   - Verify liquidity provision
+   - Test yield calculations
+
+2. **Cross-Contract Calls**
+   - Test delegate calls
+   - Verify reentrancy protection
+   - Test gas forwarding
 
 ## Copyright
 

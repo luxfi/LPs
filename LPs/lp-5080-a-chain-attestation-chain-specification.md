@@ -63,7 +63,7 @@ interface IAttestationChain {
     function getDeviceStatus(bytes32 deviceId) external view returns (DeviceStatus memory);
     function updateRootCA(TEEVendor vendor, bytes calldata newRootCA) external onlyGovernance;
 }
-```
+```text
 
 **Simplified Flow:**
 1. Node start-up → signs CPU & GPU quotes
@@ -106,7 +106,7 @@ interface IComputePriceOracle {
     function getEnergyPrice(string calldata region) external view returns (EnergyPrice memory);
     function updatePrices(GPUPrice[] calldata gpu, EnergyPrice[] calldata energy) external onlyOracle;
 }
-```
+```markdown
 
 **Price Discovery:**
 - Off-chain workers post signed quotes
@@ -133,7 +133,7 @@ sequenceDiagram
     HanzoJobMgr-->>Agent: output + scoredReward
     Agent-->>HanzoJobMgr: commitUpdatedWeights(weightsHash,GRPOproof)
     HanzoJobMgr-->>AChain: store new weights + checkpoint
-```
+```solidity
 
 **Key Points:**
 - Budget funded in AI Coin; smart contract escrows and streams micro-payments per proof
@@ -161,7 +161,7 @@ interface IAttestationLightClient {
         bytes calldata signatures
     ) external;
 }
-```
+```text
 
 **Outcome:** Entire Lux ecosystem (and bridged EVM chains) shares single cryptographic root-of-trust for TEE devices.
 
@@ -224,7 +224,7 @@ sequenceDiagram
   AChain-->>OtherChains: root hash via light-client bridge
   AChain-->>Orchestrator: inclusion proof + metering digest
   Orchestrator-->>Client: result CID + PoAI proof
-```
+```solidity
 
 #### 8.1 Attestation Contents
 
@@ -371,7 +371,7 @@ describe("A-Chain Attestation", () => {
         await expect(aChain.verifyAttestation(proof)).toRevert();
     });
 });
-```
+```text
 
 ### Cross-Chain Verification
 
@@ -391,7 +391,7 @@ it("should verify device status from L2", async () => {
     );
     expect(verified).toBe(true);
 });
-```
+```text
 
 ### Oracle Integration
 
@@ -413,7 +413,7 @@ it("should calculate compute costs correctly", async () => {
     const aiCoinAmount = await dex.getAmountOut(totalCost, "USD", "AI");
     expect(aiCoinAmount).toBeGreaterThan(0);
 });
-```
+```text
 
 ## Security Considerations
 

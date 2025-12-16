@@ -54,9 +54,9 @@ CGGMP21 provides unique advantages over previous threshold ECDSA protocols:
 
 ### Precompile Address
 
-```
+```text
 0x020000000000000000000000000000000000000D
-```
+```markdown
 
 ### Input Format
 
@@ -94,7 +94,7 @@ The gas cost is calculated based on the threshold configuration:
 
 ```
 gas = 75,000 + (totalSigners * 10,000)
-```
+```markdown
 
 | Configuration | Total Signers | Gas Cost |
 |---------------|---------------|----------|
@@ -159,7 +159,7 @@ interface ICGGMP21 {
         bytes calldata signature
     ) external view returns (bool valid);
 }
-```
+```text
 
 ### CGGMP21Lib Library
 
@@ -251,7 +251,7 @@ library CGGMP21Lib {
         return publicKey.length == 65 && publicKey[0] == 0x04;
     }
 }
-```
+```text
 
 ### ThresholdWallet Contract
 
@@ -343,7 +343,7 @@ contract ThresholdWallet {
 
     receive() external payable {}
 }
-```
+```text
 
 ## Use Cases
 
@@ -383,7 +383,7 @@ contract InstitutionalCustody {
         IERC20(token).transfer(to, amount);
     }
 }
-```
+```text
 
 ### 2. DAO Treasury Management
 
@@ -425,7 +425,7 @@ contract DAOTreasury {
         require(success, "Execution failed");
     }
 }
-```
+```text
 
 ### 3. Cross-Chain Message Signing
 
@@ -464,7 +464,7 @@ contract ThresholdBridge {
         // Process cross-chain message
     }
 }
-```
+```text
 
 ## Technical Details
 
@@ -517,7 +517,7 @@ This LP introduces a new precompile at an unused address. No backwards compatibi
 Reference implementation tests: `github.com/luxfi/standard/src/precompiles/cggmp21/contract_test.go`
 
 ### Test 1: Valid 3-of-5 Signature
-```
+```yaml
 Input:
   threshold: 3
   totalSigners: 5
@@ -527,17 +527,17 @@ Input:
 
 Expected Output: 0x0000...0001 (valid)
 Gas Used: 125,000
-```
+```text
 
 ### Test 2: Invalid Signature
-```
+```text
 Input: (same as Test 1 with corrupted signature)
 Expected Output: 0x0000...0000 (invalid)
 Gas Used: 125,000
 ```
 
 ### Test 3: Invalid Threshold (t > n)
-```
+```yaml
 Input:
   threshold: 6
   totalSigners: 5
@@ -546,25 +546,25 @@ Expected: Revert with ErrInvalidThreshold
 ```
 
 ### Test 4: Invalid Threshold (t = 0)
-```
+```yaml
 Input:
   threshold: 0
   totalSigners: 5
 
 Expected: Revert with ErrInvalidThreshold
-```
+```text
 
 ### Test 5: Wrong Message Hash
-```
+```text
 Input: (valid signature, different message hash)
 Expected Output: 0x0000...0000 (invalid)
-```
+```text
 
 ### Test 6: Input Too Short
-```
+```yaml
 Input: < 170 bytes
 Expected: Revert with ErrInvalidInputLength
-```
+```text
 
 ## Reference Implementation
 
@@ -599,7 +599,7 @@ func Refresh(config *Config) protocol.StartFunc
 
 // Presignature generation
 func PreSign(config *Config, signers []party.ID) protocol.StartFunc
-```
+```text
 
 ## Security Considerations
 

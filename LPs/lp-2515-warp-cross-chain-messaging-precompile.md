@@ -43,9 +43,9 @@ This separation of concerns allows application-specific protocols to implement a
 
 ### Precompile Address
 
-```
+```text
 0x0200000000000000000000000000000000000005
-```
+```markdown
 
 ### Solidity Interface
 
@@ -92,7 +92,7 @@ interface IWarp {
         external
         returns (bytes32 messageID);
 }
-```
+```text
 
 ### Function Specifications
 
@@ -109,13 +109,13 @@ Returns the 32-byte blockchain identifier of the current chain (txID that create
 Emits a cross-chain message that validators will sign.
 
 **Gas Cost**:
-```
+```yaml
 gas = BASE_COST + (payloadLength * PER_BYTE_COST)
 
 Where:
   BASE_COST = 20,375 gas  (includes LogGas + 3*LogTopicGas + AddWarpMessageGas + WriteGasCostPerSlot)
   PER_BYTE_COST = 8 gas per payload byte (LogDataGas)
-```
+```text
 
 **Message Structure**:
 | Field | Type | Description |
@@ -159,7 +159,7 @@ Retrieves a verified block hash from another chain.
 
 When including signed warp messages in transaction predicates:
 
-```
+```yaml
 gas = SIGNATURE_VERIFICATION_COST
     + (messageBytes * PER_BYTE_COST)
     + (numSigners * PER_SIGNER_COST)
@@ -168,32 +168,32 @@ Where:
   SIGNATURE_VERIFICATION_COST = 200,000 gas
   PER_BYTE_COST = 100 gas per message byte
   PER_SIGNER_COST = 500 gas per validator signer
-```
+```text
 
 ### Message Format
 
 #### Unsigned Warp Message
 
-```
+```text
 UnsignedMessage {
     networkID:     uint32   // 4 bytes - Lux network ID
     sourceChainID: [32]byte // 32 bytes - source blockchain ID
     payload:       []byte   // variable - AddressedCall payload
 }
-```
+```text
 
 #### Addressed Call Payload
 
-```
+```text
 AddressedCall {
     sourceAddress: [20]byte // 20 bytes - origin sender address
     payload:       []byte   // variable - application data
 }
-```
+```text
 
 #### Signed Warp Message
 
-```
+```text
 SignedMessage {
     unsignedMessage: UnsignedMessage
     signature:       BitSetSignature {
@@ -201,7 +201,7 @@ SignedMessage {
         signature: [96]byte  // BLS aggregate signature
     }
 }
-```
+```text
 
 ### BLS Signature Aggregation
 
@@ -213,9 +213,9 @@ Warp uses BLS12-381 multi-signatures:
 4. **Verification**: Destination chain verifies aggregate against validator set
 
 **Signature Verification**:
-```
+```text
 e(signature, G2) == e(H(message), aggregatePublicKey)
-```
+```text
 
 ### Validator Quorum Configuration
 
@@ -225,14 +225,14 @@ const (
     WarpQuorumNumeratorMinimum uint64 = 33   // 33% minimum threshold
     WarpQuorumDenominator      uint64 = 100  // denominator
 )
-```
+```text
 
 **Quorum Calculation**:
-```
+```text
 totalStakeWeight = sum(validator.stake for validator in signers)
 requiredWeight = networkStake * quorumNumerator / quorumDenominator
 valid = totalStakeWeight >= requiredWeight
-```
+```text
 
 ### Chain Configuration
 
@@ -244,7 +244,7 @@ valid = totalStakeWeight >= requiredWeight
     "requirePrimaryNetworkSigners": false
   }
 }
-```
+```markdown
 
 | Parameter | Type | Description |
 |-----------|------|-------------|
@@ -310,7 +310,7 @@ No backwards compatibility issues for contracts compiled before Warp activation.
 IWarp(0x0200...0005).sendWarpMessage(
     abi.encode("Hello from Chain A")
 );
-```
+```text
 
 **Expected**:
 - Returns `messageID` (bytes32)
@@ -325,7 +325,7 @@ IWarp(0x0200...0005).sendWarpMessage(
 ```solidity
 (IWarp.WarpMessage memory msg, bool valid) =
     IWarp(0x0200...0005).getVerifiedWarpMessage(0);
-```
+```markdown
 
 **Expected**:
 - `valid == true`
@@ -340,7 +340,7 @@ IWarp(0x0200...0005).sendWarpMessage(
 **Input**:
 ```solidity
 (, bool valid) = IWarp(0x0200...0005).getVerifiedWarpMessage(0);
-```
+```markdown
 
 **Expected**:
 - `valid == false` (below 67% threshold)
@@ -353,7 +353,7 @@ IWarp(0x0200...0005).sendWarpMessage(
 ```solidity
 (IWarp.WarpBlockHash memory hash, bool valid) =
     IWarp(0x0200...0005).getVerifiedWarpBlockHash(0);
-```
+```markdown
 
 **Expected**:
 - `valid == true`
@@ -365,7 +365,7 @@ IWarp(0x0200...0005).sendWarpMessage(
 **Input**:
 ```solidity
 bytes32 chainID = IWarp(0x0200...0005).getBlockchainID();
-```
+```text
 
 **Expected**:
 - Returns 32-byte blockchain ID
@@ -401,7 +401,7 @@ var Module = modules.Module{
     Contract:     WarpPrecompile,
     Configurator: &configurator{},
 }
-```
+```text
 
 **Gas Constants**:
 ```go
@@ -417,7 +417,7 @@ const (
     GasCostPerWarpMessageBytes      uint64 = 100
     GasCostPerSignatureVerification uint64 = 200_000
 )
-```
+```text
 
 **ABI Functions**:
 ```go
@@ -427,7 +427,7 @@ abiFunctionMap := map[string]contract.RunStatefulPrecompileFunc{
     "getVerifiedWarpMessage":   getVerifiedWarpMessage,
     "sendWarpMessage":          sendWarpMessage,
 }
-```
+```text
 
 ### Dependencies
 
@@ -539,7 +539,7 @@ contract TeleportBridge {
         token.mint(recipient, amount);
     }
 }
-```
+```solidity
 
 ### 2. Cross-Subnet Contract Calls
 
@@ -559,7 +559,7 @@ contract CrossChainExecutor is TrustedSourceWarpReceiver {
         emit RemoteCallExecuted(msg.sourceChainID, target, result);
     }
 }
-```
+```text
 
 ### 3. Multi-Chain Governance
 
@@ -588,7 +588,7 @@ contract MultiChainGovernor {
         }
     }
 }
-```
+```text
 
 ### 4. Cross-Chain State Verification
 
@@ -606,13 +606,13 @@ contract StateVerifier {
         return valid && hash.blockHash == expectedBlockHash;
     }
 }
-```
+```text
 
 ## Integration: Teleport Bridge
 
 The Teleport protocol (LP-6016) uses Warp as its messaging layer:
 
-```
+```text
 Source Chain                    Destination Chain
     |                                  |
     | 1. teleport(destChain, recipient, amount)

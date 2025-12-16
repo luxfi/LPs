@@ -59,7 +59,7 @@ The existing T-Chain infrastructure (LP-13, LP-14) provides the natural committe
 
 ### 1. Architecture Overview
 
-```
+```text
 ┌─────────────────────────────────────────────────────────────────────────────────┐
 │                       LUX NETWORK-WIDE ORACLE ARCHITECTURE                       │
 ├─────────────────────────────────────────────────────────────────────────────────┤
@@ -107,7 +107,7 @@ The existing T-Chain infrastructure (LP-13, LP-14) provides the natural committe
 │  └────────────┘       └────────────┘         └────────────┘                     │
 │                                                                                  │
 └─────────────────────────────────────────────────────────────────────────────────┘
-```
+```markdown
 
 ### 2. Price Feed Payload Format
 
@@ -138,7 +138,7 @@ type PriceFeedPayload struct {
 
 // AttestationType for TeleportAttest
 const AttestationTypePriceFeed = 0x01
-```
+```text
 
 ### 3. Chain-Specific Access Mechanisms
 
@@ -175,7 +175,7 @@ interface PriceResponse {
     sources: number;         // Number of sources
     stale: boolean;          // True if > 2s old
 }
-```
+```text
 
 #### 3.2 C-Chain Oracle Precompile (EVM)
 
@@ -237,7 +237,7 @@ contract LendingPool {
         // ...
     }
 }
-```
+```markdown
 
 **Gas Costs:**
 - `getPrice()`: 2,100 gas (cold) / 100 gas (warm)
@@ -289,7 +289,7 @@ type EnhancedComputePriceOracle struct {
         return gpuPrice.PricePerSec * luxPrice.Price / 1e8, nil
     }
 }
-```
+```text
 
 ### 4. Source Configuration
 
@@ -344,7 +344,7 @@ type CChainSource struct {
 type OrderbookSource struct {
     books OrderbookProvider
 }
-```
+```text
 
 ### 5. Aggregation Strategy
 
@@ -372,11 +372,11 @@ type CircuitBreaker struct {
     Tripped   bool
     Reset     time.Duration // 5 min auto-reset
 }
-```
+```text
 
 ### 6. Attestation Flow
 
-```
+```text
 ┌──────────────────────────────────────────────────────────────────────────────┐
 │                           ATTESTATION FLOW                                    │
 ├──────────────────────────────────────────────────────────────────────────────┤
@@ -420,7 +420,7 @@ type CircuitBreaker struct {
 │     └───────────────────────────────────────────────────────────────────┘    │
 │                                                                               │
 └──────────────────────────────────────────────────────────────────────────────┘
-```
+```text
 
 ### 7. Supported Trading Pairs
 
@@ -494,7 +494,7 @@ go run ./cmd/dex-server/main.go \
     --chainlink-rpc https://mainnet.infura.io/v3/... \
     --cchain-rpc http://127.0.0.1:9650/ext/bc/C/rpc \
     --symbols BTC-USD,ETH-USD,LUX-USD
-```
+```solidity
 
 ## Rationale
 

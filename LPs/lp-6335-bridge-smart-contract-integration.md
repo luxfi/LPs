@@ -46,7 +46,7 @@ Cross-chain bridges are high-value targets with billions lost to exploits. The L
 
 ### 1. Contract Architecture Overview
 
-```
+```text
 +------------------+     +------------------+     +------------------+
 |   BridgeRouter   |---->|   BridgeVault    |---->|  TokenRegistry   |
 |   (Entry Point)  |     |  (Asset Custody) |     | (Asset Mapping)  |
@@ -63,7 +63,7 @@ Cross-chain bridges are high-value targets with billions lost to exploits. The L
 |    T-Chain MPC   |
 | (Threshold Sig)  |
 +------------------+
-```
+```markdown
 
 ### 2. BridgeVault Contract
 
@@ -210,7 +210,7 @@ interface IBridgeVault {
      */
     function depositNonce() external view returns (uint256);
 }
-```
+```text
 
 #### 2.2 Reference Implementation
 
@@ -661,7 +661,7 @@ contract BridgeVault is IBridgeVault, AccessControl, ReentrancyGuard, Pausable {
 interface IEmergencyBrake {
     function isOperationAllowed(address token, bytes32 chainId) external view returns (bool);
 }
-```
+```text
 
 ### 3. BridgeRouter Contract
 
@@ -738,7 +738,7 @@ interface IBridgeRouter {
         bytes32 destinationChainId
     ) external view returns (uint256 fee);
 }
-```
+```text
 
 #### 3.2 Reference Implementation
 
@@ -977,7 +977,7 @@ contract BridgeRouter is IBridgeRouter, AccessControl, ReentrancyGuard, Pausable
 interface ITokenRegistry {
     function isRegistered(address localAddress) external view returns (bool);
 }
-```
+```text
 
 ### 4. TokenRegistry Contract
 
@@ -1055,7 +1055,7 @@ interface ITokenRegistry {
     function getRemoteToken(bytes32 assetId, bytes32 chainId) external view returns (bytes32);
     function isRegistered(address localAddress) external view returns (bool);
 }
-```
+```text
 
 #### 4.2 Reference Implementation
 
@@ -1301,7 +1301,7 @@ contract TokenRegistry is ITokenRegistry, AccessControl {
         tokensByAddress[localAddr].isActive = true;
     }
 }
-```
+```text
 
 ### 5. BridgeGovernor Contract
 
@@ -1349,7 +1349,7 @@ interface IBridgeGovernor {
     function cancel(uint256 proposalId) external;
     function getProposal(uint256 proposalId) external view returns (Proposal memory);
 }
-```
+```text
 
 #### 5.2 Reference Implementation
 
@@ -1466,7 +1466,7 @@ contract BridgeGovernor is IBridgeGovernor, AccessControl {
         delay = newDelay;
     }
 }
-```
+```text
 
 ### 6. EmergencyBrake Contract
 
@@ -1641,7 +1641,7 @@ contract EmergencyBrake is AccessControl {
         return (globalPause, tokenPaused[token], chainPaused[chainId]);
     }
 }
-```
+```text
 
 ### 7. Signature Flow with T-Chain Integration
 
@@ -1977,7 +1977,7 @@ export class LuxBridgeClient {
         return tokenContract.balanceOf(vaultAddress);
     }
 }
-```
+```text
 
 ### 8. Nonce Management
 
@@ -2023,7 +2023,7 @@ Contracts use transparent proxy pattern for upgradeability:
 
 import "@openzeppelin/contracts/proxy/transparent/TransparentUpgradeableProxy.sol";
 import "@openzeppelin/contracts/proxy/transparent/ProxyAdmin.sol";
-```
+```text
 
 ### 11. Multi-Chain Deployment Addresses
 
@@ -2168,7 +2168,7 @@ async function verifyContracts(addresses: Record<string, string>) {
 }
 
 export { deployBridgeContracts, verifyContracts };
-```
+```text
 
 ### Foundry Deployment
 
@@ -2217,7 +2217,7 @@ contract DeployBridge is Script {
         vm.stopBroadcast();
     }
 }
-```
+```solidity
 
 ## Rationale
 
@@ -2569,7 +2569,7 @@ contract BridgeVaultTest is Test {
         );
     }
 }
-```
+```text
 
 ### Integration Tests
 
@@ -2684,7 +2684,7 @@ describe('Bridge Integration', () => {
         ).to.be.revertedWith('Daily limit exceeded');
     });
 });
-```
+```text
 
 ## Reference Implementation
 
@@ -2719,7 +2719,7 @@ forge script script/Deploy.s.sol --rpc-url http://localhost:9630/ext/bc/C/rpc --
 npx hardhat run scripts/deploy.ts --network lux
 # Or with Foundry
 forge script script/Deploy.s.sol --rpc-url http://api.lux.network/ext/bc/C/rpc --broadcast --verify
-```
+```solidity
 
 ## Security Considerations
 

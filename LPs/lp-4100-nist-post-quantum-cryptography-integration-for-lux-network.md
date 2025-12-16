@@ -61,7 +61,7 @@ pub enum HybridMode {
     MlKem768X25519,  // DEFAULT
     MlKem1024X25519,
 }
-```
+```text
 
 ### Key Derivation Function
 

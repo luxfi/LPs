@@ -54,7 +54,7 @@ type VerkleNode interface {
     Delete(key []byte) error
     CreateWitness(keys [][]byte) (*VerkleProof, error)
 }
-```
+```text
 
 ### Proof Format
 
@@ -65,7 +65,7 @@ type VerkleProof struct {
     Values      map[string][]byte   // Revealed values
     Depths      []uint8             // Tree depths
 }
-```
+```text
 
 ### Commitment Schemes
 
@@ -86,7 +86,7 @@ func (c *IPACommitment) Prove(
     // Recursive halving for constant size
     // O(log n) rounds, O(1) proof size
 }
-```
+```text
 
 #### KZG (Kate-Zaverucha-Goldberg)
 
@@ -105,7 +105,7 @@ func (c *KZGCommitment) Prove(
     // Single group element proof
     // Very efficient verification
 }
-```
+```text
 
 ### State Transition
 
@@ -135,7 +135,7 @@ func ExecuteBlock(block *Block, state *VerkleStateDB) (*VerkleWitness, error) {
         Proof:        witness.Proof,
     }, nil
 }
-```
+```text
 
 ### Light Client Protocol
 
@@ -160,7 +160,7 @@ func (c *VerkleLight Client) VerifyTransaction(
 
     return c.verifyExecution(tx, witness)
 }
-```
+```text
 
 ## Rationale
 
@@ -210,7 +210,7 @@ func TestCrossChainProof(t *testing.T) {
     // Check proof size
     assert.Less(t, proof.Size(), 2048)  // <2KB total
 }
-```
+```text
 
 ## Reference Implementation
 
@@ -262,7 +262,7 @@ See [github.com/luxfi/go-verkle](https://github.com/luxfi/go-verkle) for the com
 ### Deployment Configuration
 
 **Mainnet Parameters**:
-```
+```yaml
 Width: 256 (branching factor)
 Commitment Scheme: IPA (default, post-quantum)
 Field: BN254 or Verkle field
@@ -272,7 +272,7 @@ Migration Batch Size: 10,000 keys/transaction
 ```
 
 **Shadow Mode** (dual MPT/Verkle):
-```
+```yaml
 Enabled: True (during transition)
 Validation Interval: Every block
 Dual Root Inclusion: Until block N

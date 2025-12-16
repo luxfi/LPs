@@ -108,3 +108,35 @@ make test
 ## Backwards Compatibility
 
 Additive: existing chains and clients continue to operate. Adoption can occur incrementally with no breaking changes.
+
+## Test Cases
+
+### Unit Tests
+
+1. **Chain State Validation**
+   - Verify state transitions are valid
+   - Test consensus rule enforcement
+   - Validate block structure
+
+2. **Transaction Processing**
+   - Test transaction validation
+   - Verify fee calculation
+   - Test signature verification
+
+3. **Validator Operations**
+   - Test validator registration
+   - Verify staking mechanics
+   - Test delegation operations
+
+### Integration Tests
+
+1. **Network Consensus**
+   - Test consensus across multiple nodes
+   - Verify finality guarantees
+   - Test partition tolerance
+
+2. **Cross-Chain Communication**
+   - Test message passing between chains
+   - Verify atomic operations
+   - Validate state synchronization
+

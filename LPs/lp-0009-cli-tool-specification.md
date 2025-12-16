@@ -23,6 +23,37 @@ This LP defines the official Command-Line Interface (CLI) tools for Lux (for the
 
 By standardizing the CLI, all users from developers to validators have a clear reference on interacting with Lux, and it aids in writing documentation and tutorials consistent with the tool’s behavior.
 
+## Test Cases
+
+### Unit Tests
+
+1. **Component Initialization**
+   - Verify correct initialization of all components
+   - Test configuration validation
+   - Validate error handling for invalid configurations
+
+2. **Core Functionality**
+   - Test primary operations under normal conditions
+   - Verify expected outputs for standard inputs
+   - Test edge cases and boundary conditions
+
+3. **Error Handling**
+   - Verify graceful handling of invalid inputs
+   - Test recovery from transient failures
+   - Validate error messages and codes
+
+### Integration Tests
+
+1. **Cross-Component Integration**
+   - Test interaction between related components
+   - Verify data flow across module boundaries
+   - Validate state consistency
+
+2. **Performance Tests**
+   - Benchmark critical operations
+   - Verify performance under load
+   - Test resource utilization limits
+
 ## Copyright
 
 Copyright and related rights waived via [CC0](../LICENSE.md).
@@ -72,7 +103,7 @@ go build -o bin/lux-cli ./cmd/main.go
 # Or using make (if available)
 make build
 make install  # Install to $GOPATH/bin
-```
+```text
 
 ### Testing
 
@@ -90,7 +121,7 @@ go test ./cmd/keycmd -v
 
 # Integration tests (if available)
 go test -tags=integration ./...
-```
+```text
 
 ### Documentation
 
