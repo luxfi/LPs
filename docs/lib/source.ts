@@ -317,23 +317,23 @@ export const source = {
   },
 
   // Generate page tree for Fumadocs sidebar
-  getPageTree(): any {
+  getPageTree() {
     const categories = this.getCategorizedPages();
 
     return {
       name: 'LPs',
       children: [
         {
-          type: 'page',
+          type: 'page' as const,
           name: 'Overview',
           url: '/docs',
         },
         ...categories.map(cat => ({
-          type: 'folder',
+          type: 'folder' as const,
           name: cat.name,
           description: cat.description,
           children: cat.lps.slice(0, 20).map(lp => ({
-            type: 'page',
+            type: 'page' as const,
             name: `LP-${lp.data.frontmatter.lp}: ${lp.data.title.substring(0, 40)}${lp.data.title.length > 40 ? '...' : ''}`,
             url: `/docs/${lp.slug.join('/')}`,
           })),
