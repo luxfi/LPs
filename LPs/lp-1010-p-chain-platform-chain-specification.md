@@ -49,7 +49,7 @@ interface AddValidatorTx {
     rewardAddress: Address;     // Where to send rewards
     delegationFeeRate: uint32;  // Fee rate for delegators (0-100%)
 }
-```
+```yaml
 
 Constraints:
 - Minimum stake: 2,000 LUX
@@ -66,7 +66,7 @@ interface AddDelegatorTx {
     stakeAmount: uint64;       // Amount to delegate
     rewardAddress: Address;    // Where to send rewards
 }
-```
+```yaml
 
 Constraints:
 - Minimum delegation: 25 LUX
@@ -80,7 +80,7 @@ interface CreateSubnetTx {
     threshold: uint32;         // Required signatures
     metadata: bytes;           // Optional subnet info
 }
-```
+```text
 
 Returns: SubnetID (32 bytes)
 
@@ -92,7 +92,7 @@ interface CreateBlockchainTx {
     genesisData: bytes;       // Initial chain state
     name: string;             // Human-readable name
 }
-```
+```text
 
 Supported VMs:
 - LuxVM (EVM-compatible)
@@ -108,7 +108,7 @@ interface AddSubnetValidatorTx {
     endTime: timestamp;       // Validation end
     weight: uint64;          // Validator weight
 }
-```
+```text
 
 ### Staking Mechanics
 
@@ -120,13 +120,13 @@ Where:
 - Maximum APY: 11% (at 50% network staked)
 - Minimum APY: 7% (at 80% network staked)
 - Rewards decrease as total stake increases
-```
+```text
 
 #### Delegation Rewards
 ```text
 DelegatorReward = ValidatorReward * (1 - delegationFeeRate)
 ValidatorCommission = ValidatorReward * delegationFeeRate
-```
+```text
 
 ### Subnet Architecture
 
@@ -139,7 +139,7 @@ interface Subnet {
     blockchains: BlockchainID[];
     validators: ValidatorSet;
 }
-```
+```text
 
 #### Validator Sets
 - **Primary Network**: All validators must validate
@@ -160,7 +160,7 @@ UTXO States:
 1. Available → Staked (via AddValidator)
 2. Staked → Locked (during validation)
 3. Locked → Available + Rewards (after validation)
-```
+```text
 
 ### Consensus Integration
 
@@ -181,7 +181,7 @@ platform.addValidator(tx: AddValidatorTx): TxID
 platform.addDelegator(tx: AddDelegatorTx): TxID
 platform.createSubnet(tx: CreateSubnetTx): SubnetID
 platform.createBlockchain(tx: CreateBlockchainTx): BlockchainID
-```
+```text
 
 ## Rationale
 
@@ -285,7 +285,7 @@ go build -o build/luxd ./cmd/main.go
 
 # Build with specific features
 go build -ldflags "-X github.com/luxfi/node/version.Current=v1.20.1" -o build/luxd ./cmd/main.go
-```
+```text
 
 ### Testing
 
@@ -308,7 +308,7 @@ go test -race ./vms/platformvm/...
 
 # Run specific test suite
 go test ./vms/platformvm/block/executor -run TestBlockExecution -v
-```
+```text
 
 ### API Testing
 

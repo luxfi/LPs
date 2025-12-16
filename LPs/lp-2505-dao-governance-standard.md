@@ -40,7 +40,7 @@ Existing solutions (Compound Governor, OpenZeppelin Governor) lack:
 
 The DAO framework follows a registry-adapter-extension pattern:
 
-```
+```text
                          +------------------+
                          |    DaoFactory    |  Creates DAO instances
                          +--------+---------+
@@ -64,7 +64,7 @@ The DAO framework follows a registry-adapter-extension pattern:
                          +------------------+
                          |   Extensions     |  Bank, ERC20, NFT, Executor
                          +------------------+
-```
+```markdown
 
 ### 2. DaoRegistry Contract
 
@@ -97,7 +97,7 @@ interface IDaoRegistry {
     function replaceAdapter(bytes32 adapterId, address adapterAddress, uint128 acl, bytes32[] calldata keys, uint256[] calldata values) external;
     function addExtension(bytes32 extensionId, IExtension extension) external;
 }
-```
+```text
 
 ### 3. Voting Adapters
 
@@ -114,7 +114,7 @@ interface IVoting {
     function submitVote(DaoRegistry dao, bytes32 proposalId, uint256 voteValue) external;
     function voteResult(DaoRegistry dao, bytes32 proposalId) external view returns (VotingState);
 }
-```
+```text
 
 Configuration parameters:
 - `voting.votingPeriod`: Duration for voting (default: 7 days)
@@ -142,7 +142,7 @@ interface IOffchainVoting is IVoting {
         VoteResultNode memory node
     ) external;
 }
-```
+```text
 
 #### 3.3 Quadratic Voting Extension
 
@@ -158,7 +158,7 @@ interface IQuadraticVoting is IVoting {
         uint256 credits  // credits^2 tokens spent for sqrt(credits) votes
     ) external;
 }
-```
+```text
 
 ### 4. Governance Token Standard
 
@@ -180,7 +180,7 @@ interface IERC20Votes {
     function getVotes(address account) external view returns (uint256);
     function getPastVotes(address account, uint256 blockNumber) external view returns (uint256);
 }
-```
+```text
 
 #### 4.2 Snapshot-Based Voting Power
 
@@ -196,11 +196,11 @@ library GovernanceHelper {
         uint256 snapshot  // Block number at proposal creation
     ) internal view returns (uint256);
 }
-```
+```text
 
 ### 5. Proposal Lifecycle
 
-```
+```text
    +-----------+     +-----------+     +-----------+     +-----------+
    |  SUBMIT   | --> | SPONSORED | --> |  VOTING   | --> |  GRACE    |
    +-----------+     +-----------+     +-----------+     +-----------+
@@ -215,7 +215,7 @@ library GovernanceHelper {
                           +-----------+
                           | PROCESSED |  Executed or rejected
                           +-----------+
-```
+```text
 
 ### 6. Timelock Controller
 
@@ -243,7 +243,7 @@ interface ITimelockExecutor {
 
     function cancel(bytes32 id) external;
 }
-```
+```text
 
 ### 7. Cross-Chain Governance via Warp
 
@@ -273,7 +273,7 @@ interface ICrossChainGovernance {
         uint32 warpIndex  // Warp message index
     ) external;
 }
-```
+```text
 
 Warp message format for governance:
 ```solidity
@@ -285,7 +285,7 @@ struct WarpGovernanceMessage {
     bytes calldata;
     uint256 nonce;
 }
-```
+```text
 
 ### 8. Threshold Signature Execution
 
@@ -314,7 +314,7 @@ interface IThresholdExecution {
         bytes calldata signature  // 65-byte ECDSA r||s||v
     ) external;
 }
-```
+```text
 
 Precompile addresses:
 - FROST: `0x020000000000000000000000000000000000000C`
@@ -336,7 +336,7 @@ interface IQuantumGovernance {
     // Proposals with quantum finality cannot be reverted
     event ProposalQuantumFinalized(bytes32 indexed proposalId, uint256 qChainBlock);
 }
-```
+```text
 
 ### 10. Zoo Foundation ZIP Compatibility
 
@@ -355,7 +355,7 @@ interface IZIPGovernance {
     // Export DAO decision as ZIP
     function exportAsZIP(bytes32 proposalId) external returns (uint256 zipNumber);
 }
-```
+```text
 
 ## Rationale
 
@@ -418,7 +418,7 @@ describe("DAO Proposal Lifecycle", () => {
         expect(result).to.equal(VotingState.PASS);
     });
 });
-```
+```text
 
 ### 2. Delegation
 
@@ -433,7 +433,7 @@ describe("Voting Delegation", () => {
         expect(votes).to.equal(aliceBalance.add(bobBalance));
     });
 });
-```
+```text
 
 ### 3. Cross-Chain Execution
 
@@ -456,7 +456,7 @@ describe("Cross-Chain Governance", () => {
         await governance.executeCrossChain(proposalId, HANZO_CHAIN_ID, warpIndex);
     });
 });
-```
+```text
 
 ## Reference Implementation
 
@@ -467,7 +467,7 @@ describe("Cross-Chain Governance", () => {
 
 ### Directory Structure
 
-```
+```text
 src/dao/
 ├── contracts/
 │   ├── core/
@@ -495,7 +495,7 @@ src/dao/
 │   └── guards/
 │       ├── AdapterGuard.sol      # Adapter access control
 │       └── MemberGuard.sol       # Member access control
-```
+```text
 
 ### Testing
 

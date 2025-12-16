@@ -92,7 +92,7 @@ contract DeFiAggregator {
         address address;
     }
 }
-```
+```text
 
 ## Rationale
 
@@ -118,7 +118,7 @@ function getUserPortfolio(address user) external view returns (UserPortfolioResu
     
     return abi.decode(result, (UserPortfolioResult));
 }
-```
+```text
 
 ### Inline Queries
 
@@ -141,7 +141,7 @@ function getTokenPrice(address token) external view returns (uint256) {
     
     return result.token.priceUSD;
 }
-```
+```text
 
 ### Query Modifiers
 
@@ -187,7 +187,7 @@ query WatchPrices {
     }
     """
 }
-```
+```text
 
 ### Cross-Chain Aggregation
 
@@ -219,7 +219,7 @@ function getTotalUSDValue(address user, string memory token)
     var result = GetCrossChainBalance.execute(user, token);
     return result.total;
 }
-```
+```text
 
 ### Gas Optimization
 
@@ -241,7 +241,7 @@ function getDefiStats(address user) external view {
     
     // Process results...
 }
-```
+```text
 
 ### Type Safety
 
@@ -256,7 +256,7 @@ uint256 symbol = result.token.symbol; // Error: string to uint256
 
 // Automatic type coercion where safe
 uint256 amount = result.balance; // OK if balance is numeric
-```
+```text
 
 ### Security Features
 
@@ -282,7 +282,7 @@ function secureQuery() external view onlyWithAttestation {
         """
     };
 }
-```
+```text
 
 ## Implementation
 
@@ -333,7 +333,7 @@ contract DeFiAggregator {
         IDex(result.best.protocol).swap(tokenIn, tokenOut, amount);
     }
 }
-```
+```text
 
 ### NFT Marketplace
 ```solidity
@@ -355,7 +355,7 @@ contract NFTMarketplace {
         """
     }
 }
-```
+```text
 
 ### Cross-Chain Bridge
 ```solidity
@@ -379,7 +379,7 @@ contract UniversalBridge {
         """
     }
 }
-```
+```text
 
 ## Test Cases
 
@@ -407,7 +407,7 @@ contract TestBasicQuery {
         assert(result.account.balance >= 0);
     }
 }
-```
+```text
 
 ### 2. Type Safety Enforcement
 
@@ -434,7 +434,7 @@ contract TestTypeSafety {
         string memory name = GetUser.execute(1).user.name;
     }
 }
-```
+```text
 
 ### 3. Cross-Chain Aggregation
 
@@ -468,7 +468,7 @@ contract TestCrossChain {
         assert(result.total == sum);
     }
 }
-```
+```text
 
 ### 4. Caching Behavior
 
@@ -494,7 +494,7 @@ contract TestCaching {
         assert(result1.stats.timestamp == result2.stats.timestamp);
     }
 }
-```
+```text
 
 ### 5. Gas Metering
 
@@ -524,7 +524,7 @@ contract TestGasLimits {
         assert(result.transactions.length <= 1000);
     }
 }
-```
+```text
 
 ### 6. Precompile Integration
 
@@ -544,7 +544,7 @@ contract TestPrecompile {
         assert(result.length > 0);
     }
 }
-```
+```text
 
 ### 7. Error Handling
 
@@ -574,7 +574,7 @@ contract TestErrorHandling {
         GetInvalidField.execute();
     }
 }
-```
+```text
 
 ### 8. Batch Query Execution
 

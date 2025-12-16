@@ -141,7 +141,7 @@ interface IRandomNumberGenerator {
     function updateProviderFee(uint256 newFee) external;
     function withdrawProviderStake() external;
 }
-```
+```text
 
 ### VRF Implementation
 
@@ -222,7 +222,7 @@ contract VRFConsumer {
         processRandomness(randomWords);
     }
 }
-```
+```text
 
 ### Commit-Reveal Scheme
 
@@ -300,7 +300,7 @@ contract CommitRevealLottery {
         rng.revealRandomValue(currentRound, number, nonce);
     }
 }
-```
+```text
 
 ### Threshold Signature RNG
 
@@ -370,7 +370,7 @@ interface IThresholdRNG {
         bytes32 message
     ) external view returns (bool);
 }
-```
+```text
 
 ### TEE-Based RNG
 
@@ -407,7 +407,7 @@ interface ITEERandomness {
         uint256 sessionId
     ) external returns (uint256[] memory randomValues);
 }
-```
+```text
 
 ### Hybrid RNG System
 
@@ -480,7 +480,7 @@ contract HybridRNG is IRandomNumberGenerator {
         emit RandomnessFulfilled(requestId, finalValues, "");
     }
 }
-```
+```text
 
 ### Applications
 
@@ -567,7 +567,7 @@ contract DecentralizedLottery {
         emit WinnerSelected(winner, randomValues[0]);
     }
 }
-```
+```text
 
 ### Security Module
 
@@ -625,7 +625,7 @@ contract RNGSecurity {
         return false;
     }
 }
-```
+```text
 
 ## Rationale
 
@@ -677,7 +677,7 @@ function testVRFRandomness() public {
     
     assertEq(rng.getRandomness(requestId), randomValues);
 }
-```
+```text
 
 ### Commit-Reveal Test
 
@@ -710,7 +710,7 @@ function testCommitReveal() public {
     uint256 finalRandom = commitReveal.finalizeRound(roundId);
     assert(finalRandom != 0);
 }
-```
+```text
 
 ## Implementation
 
@@ -741,7 +741,7 @@ forge build
 forge script script/DeployRNG.s.sol:DeployRNG \
   --rpc-url https://api.avax.network/ext/bc/C/rpc \
   --broadcast
-```
+```text
 
 ### Testing
 
@@ -761,7 +761,7 @@ forge test --match-path test/rng/\* --gas-report
 
 # Coverage
 forge coverage --match-path test/rng/\*
-```
+```markdown
 
 **Test Cases** (see `/test/rng/RandomNumberGenerator.t.sol`):
 - `testVRFRandomness()` - VRF verification

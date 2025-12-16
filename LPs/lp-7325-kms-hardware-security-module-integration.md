@@ -70,7 +70,7 @@ Hardware Security Modules provide:
 
 ### Architecture Overview
 
-```
+```text
 ┌─────────────────────────────────────────────────────────────┐
 │                 Lux Validator Node                          │
 │  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐      │
@@ -100,7 +100,7 @@ Hardware Security Modules provide:
 │ Luna  │ │Cloud│ │  HSM  │ │ FIPS   │    │     KMS      │
 │ HSM   │ │ HSM │ │       │ │        │    │              │
 └───────┘ └─────┘ └───────┘ └────────┘    └──────────────┘
-```
+```markdown
 
 ### Supported HSM Providers
 
@@ -162,7 +162,7 @@ const (
     AlgorithmRSA_2048
     AlgorithmRSA_4096
 )
-```
+```text
 
 #### Configuration
 
@@ -204,7 +204,7 @@ kms:
     backup_provider: thales-luna
     health_check_interval: 30s
     failure_threshold: 3
-```
+```text
 
 ### Integration with Lux Consensus
 
@@ -225,7 +225,7 @@ func (v *Validator) Sign(msg []byte) (*bls.Signature, error) {
     }
     return sig, nil
 }
-```
+```text
 
 #### Q-Chain Threshold Signatures (Ringtail)
 
@@ -245,7 +245,7 @@ func (v *QuasarValidator) ThresholdSign(
         threshold,
     )
 }
-```
+```text
 
 ### Security Considerations
 
@@ -298,7 +298,7 @@ kms:
     strategy: automatic
     health_check_interval: 30s
     failure_threshold: 3
-```
+```text
 
 ### Performance Benchmarks
 
@@ -319,7 +319,7 @@ kms:
 
 ### Repository Structure
 
-```
+```text
 lux/
 ├── kms/                          # Lux KMS implementation
 │   ├── client/                   # Unified KMS client
@@ -339,7 +339,7 @@ lux/
 │   ├── metrics/                 # Prometheus metrics
 │   └── docs/                    # Documentation
 │       └── hsm-providers-comparison.mdx  # Provider comparison
-```
+```text
 
 ### Installation
 
@@ -357,7 +357,7 @@ sudo apt-get install yubihsm-shell
 # Or for development (SoftHSM2)
 sudo apt-get install softhsm2
 softhsm2-util --init-token --slot 0 --label "LuxTest"
-```
+```text
 
 ### Migration Between HSMs
 
@@ -383,7 +383,7 @@ luxd kms set-weight google-cloud-kms 10   # 10% traffic
 luxd kms set-weight google-cloud-kms 50   # 50% traffic
 # Monitor for 24 hours
 luxd kms set-weight google-cloud-kms 100  # Full cutover
-```
+```markdown
 
 ## Cost Analysis
 

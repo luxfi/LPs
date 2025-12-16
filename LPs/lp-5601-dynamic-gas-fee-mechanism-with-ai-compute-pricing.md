@@ -56,7 +56,7 @@ type GasSchedule struct {
     BridgeMessage   Gas  // 50000
     StateProof      Gas  // 10000
 }
-```
+```text
 
 ### Dynamic Base Fee (EIP-1559)
 
@@ -76,7 +76,7 @@ func CalculateBaseFee(parentGasUsed, targetGas Gas, currentBaseFee Price) Price 
         return currentBaseFee - delta
     }
 }
-```
+```text
 
 ### AI Compute Pricing
 
@@ -103,7 +103,7 @@ func CalculateComputeCost(
 
     return uint64(basePrice * duration.Seconds() * multiplier * tokenFactor)
 }
-```
+```text
 
 ### Fee Distribution
 
@@ -148,7 +148,7 @@ func TestDynamicBaseFee(t *testing.T) {
         assert.Equal(t, test.expectedBase, result)
     }
 }
-```
+```text
 
 ## Reference Implementation
 
@@ -196,17 +196,17 @@ See [github.com/luxfi/node/gas](https://github.com/luxfi/node/tree/main/gas) for
 ### Deployment Configuration
 
 **Mainnet Parameters**:
-```
+```yaml
 BaseFeeChangeDenominator: 8
 GasLimitBoundDivisor: 1024
 TargetGasPerBlock: 15,000,000
 EVMBaseCost: 21,000
 AIInferenceBase: 100,000
 AIInferencePerToken: 10
-```
+```text
 
 **Test Network Parameters**:
-```
+```yaml
 TargetGasPerBlock: 5,000,000
 BaseFeeChangeDenominator: 4 (faster adjustment)
 ```

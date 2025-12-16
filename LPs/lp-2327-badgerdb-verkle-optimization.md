@@ -39,7 +39,7 @@ Traditional blockchain databases suffer from severe write amplification when sto
 
 ### 1. Complementary Size Characteristics
 
-```
+```text
 Traditional Database Stack:
 ┌─────────────────────────────────────┐
 │         LSM Tree (Everything)        │ ← Large, frequent compactions
@@ -53,7 +53,7 @@ BadgerDB + Verkle Stack:
 └─────────────────────────┘  └──────────────────────┘
          ↑                            ↑
     Fits in RAM               Sequential writes
-```
+```markdown
 
 ### 2. Write Amplification Reduction
 
@@ -68,11 +68,11 @@ BadgerDB with Verkle trees:
 - Write amplification approaches 1x for proofs
 
 **Calculation**:
-```
+```yaml
 Traditional: 32B key + 512B proof = 544B per entry × 7 levels = 3.8KB written
 BadgerDB: 32B key × 7 levels + 512B proof × 1 = 224B + 512B = 736B written
 Reduction: ~80% less write amplification
-```
+```sql
 
 ### 3. Memory Efficiency
 
@@ -103,7 +103,7 @@ func GenerateVerkleProof(keys [][]byte) {
     // Step 3: Fetch only needed proofs (single value log read each)
     proofs := db.GetValues(structure.RequiredProofs())
 }
-```
+```text
 
 #### State Root Computation
 ```go
@@ -121,7 +121,7 @@ func ComputeStateRoot() {
         iterator.Next()
     }
 }
-```
+```text
 
 ## Implementation Details
 
@@ -154,7 +154,7 @@ opts.ValueLogMaxEntries = 1000000   // 1M entries per file
 // Compression
 opts.Compression = options.Snappy   // Fast compression
 opts.BlockSize = 4096               // 4KB blocks
-```
+```text
 
 ### Performance Characteristics
 
@@ -309,7 +309,7 @@ func TestProofCaching(t *testing.T) {
     require.Equal(t, proof1, proof2)
     require.Less(t, cached, uncached/10)  // Cache should be >10x faster
 }
-```
+```markdown
 
 ### Benchmarks
 
@@ -329,7 +329,7 @@ Traditional LevelDB:  145 seconds
 Traditional RocksDB:  132 seconds
 BadgerDB (standard):   78 seconds
 BadgerDB (optimized):  42 seconds  ← 71% faster than RocksDB
-```
+```markdown
 
 ### Read Performance (1M random key lookups)
 ```
@@ -337,7 +337,7 @@ Traditional LevelDB:  89 seconds
 Traditional RocksDB:  76 seconds
 BadgerDB (standard):   31 seconds
 BadgerDB (optimized):  12 seconds  ← 84% faster than RocksDB
-```
+```markdown
 
 ### Storage Efficiency (10M entries)
 ```
@@ -345,7 +345,7 @@ Traditional LevelDB:  18.2 GB
 Traditional RocksDB:  16.8 GB
 BadgerDB (standard):   12.1 GB
 BadgerDB (optimized):  10.3 GB  ← 39% smaller than RocksDB
-```
+```text
 
 ## Conclusion
 
@@ -381,7 +381,7 @@ func VerifyVerkleProof(key []byte, proof []byte) bool {
     // Verify proof cryptographically
     return verkle.Verify(key, proof, storedProof)
 }
-```
+```text
 
 ### Example 2: Bulk State Updates
 ```go
@@ -396,7 +396,7 @@ func BulkUpdateVerkleState(updates map[string][]byte) error {
     // Single batch commit - minimal write amplification
     return batch.Commit()
 }
-```
+```text
 
 ### Example 3: Memory-Efficient State Iteration
 ```go

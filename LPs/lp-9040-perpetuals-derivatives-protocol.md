@@ -104,19 +104,19 @@ type PerpetualContract struct {
     MaintenanceMargin float64  // Minimum margin requirement
     Status           ContractStatus
 }
-```
+```text
 
 ### 2.2 Mark Price Calculation
 
 Mark price prevents unnecessary liquidations during flash crashes:
 
-```
+```text
 MarkPrice = IndexPrice × (1 + PremiumIndex)
 
 PremiumIndex = TWAP(ImpactMidPrice - IndexPrice) / IndexPrice
 
 ImpactMidPrice = (ImpactBidPrice + ImpactAskPrice) / 2
-```
+```yaml
 
 Where:
 - **ImpactBidPrice**: Price to execute $10K sell order
@@ -149,7 +149,7 @@ const (
     IsolatedMargin                           // Separate margin per position
     PortfolioMargin                          // Risk-based margining (100x max)
 )
-```
+```text
 
 | Mode | Max Leverage | Risk Model | Use Case |
 |------|--------------|------------|----------|
@@ -179,7 +179,7 @@ type MarginAccount struct {
     UnrealizedPnL       *big.Int
     RealizedPnL         *big.Int
 }
-```
+```text
 
 ### 3.3 Margin Requirements
 
@@ -213,7 +213,7 @@ type MarginPosition struct {
     Isolated         bool
     FundingPaid      *big.Int
 }
-```
+```text
 
 ---
 
@@ -239,17 +239,17 @@ type FundingConfig struct {
     InterestRate    float64       // 0.01% base rate
     PremiumDampener float64       // 1.0 (no dampening)
 }
-```
+```text
 
 ### 4.2 Funding Rate Calculation
 
-```
+```yaml
 FundingRate = Premium + InterestRate
 
 Premium = TWAP(MarkPrice - IndexPrice) / IndexPrice
 
 Clamped: -0.75% ≤ FundingRate ≤ +0.75%
-```
+```text
 
 ### 4.3 Funding Payment
 
@@ -267,16 +267,16 @@ type FundingRate struct {
     LongPositions  float64
     ShortPositions float64
 }
-```
+```text
 
 **Payment Flow:**
 - If FundingRate > 0: Longs pay Shorts
 - If FundingRate < 0: Shorts pay Longs
 
-```
+```text
 FundingPayment = PositionValue × FundingRate
 PositionValue = Size × MarkPrice
-```
+```text
 
 ### 4.4 TWAP Tracker
 
@@ -294,7 +294,7 @@ type PriceSample struct {
     Volume    float64    // Optional volume weight
     Timestamp time.Time
 }
-```
+```text
 
 ---
 
@@ -304,11 +304,11 @@ type PriceSample struct {
 
 Liquidation occurs when:
 
-```
+```text
 MarginLevel = Equity / MarginUsed
 
 If MarginLevel < MaintenanceMargin → Liquidation
-```
+```text
 
 ### 5.2 Liquidation Queue
 
@@ -339,7 +339,7 @@ type LiquidationOrder struct {
     LiquidationFee     *big.Int
     InsuranceFundClaim *big.Int
 }
-```
+```text
 
 ### 5.3 Insurance Fund
 
@@ -357,7 +357,7 @@ type InsuranceFund struct {
     CurrentDrawdown float64
     APY           float64
 }
-```
+```text
 
 ### 5.4 Auto-Deleveraging (ADL)
 
@@ -370,7 +370,7 @@ type AutoDeleveragingEngine struct {
     ProfitRanking  map[string]float64  // Trader PnL ranking
     ADLQueue       []*ADLOrder
 }
-```
+```text
 
 ADL prioritizes closing profitable positions in order of:
 1. Highest unrealized PnL percentage
@@ -388,7 +388,7 @@ type SocializedLossEngine struct {
     AffectedPositions    map[string]*big.Int
     DistributionRatio    float64
 }
-```
+```text
 
 ---
 
@@ -410,7 +410,7 @@ type ClearingHouse struct {
     SettlementQueue   []*Settlement
     LastSettlement    time.Time
 }
-```
+```markdown
 
 ### 6.2 Operations
 
@@ -432,7 +432,7 @@ type ClearingHouse struct {
 4. Position created in Clearinghouse
 5. Margin locked from user account
 6. Position tracked for funding/liquidation
-```
+```text
 
 ---
 
@@ -461,7 +461,7 @@ type RiskLimits struct {
     MinOrderSize        *big.Int
     MaxNotionalExposure *big.Int
 }
-```
+```text
 
 ### 7.2 Circuit Breakers
 
@@ -484,7 +484,7 @@ func (cb *CircuitBreaker) Check(price float64) bool {
     }
     return true
 }
-```
+```text
 
 ### 7.3 Risk Checks
 
@@ -512,7 +512,7 @@ type VaultManager struct {
     leaderVaults map[string][]string   // leader -> vault IDs
     engine       *TradingEngine
 }
-```
+```text
 
 ### 8.2 Standard Vault
 
@@ -548,7 +548,7 @@ type VaultConfig struct {
     AllowedAssets     []string
     RebalanceInterval time.Duration
 }
-```
+```text
 
 ### 8.3 Copy Trading Vault
 
@@ -565,7 +565,7 @@ type CopyVault struct {
     State         VaultState
     CreatedAt     time.Time
 }
-```
+```text
 
 ### 8.4 Vault Strategies
 
@@ -587,7 +587,7 @@ type StrategyConfig struct {
     RiskLimit  float64
     Enabled    bool
 }
-```
+```text
 
 Available strategies:
 - **GridTrading**: Automated grid of buy/sell orders
@@ -625,11 +625,11 @@ type LendingAsset struct {
     LiquidationBonus float64
     ReserveFactor    float64
 }
-```
+```text
 
 ### 9.2 Interest Rate Model
 
-```
+```yaml
 UtilizationRate = TotalBorrowed / TotalDeposited
 
 If Utilization < OptimalUtilization (80%):
@@ -638,7 +638,7 @@ Else:
     BorrowRate = BaseRate + Slope1 + ((Utilization - Optimal) / (1 - Optimal)) × Slope2
 
 SupplyRate = BorrowRate × UtilizationRate × (1 - ReserveFactor)
-```
+```solidity
 
 ### 9.3 Collateral Assets
 
@@ -765,7 +765,7 @@ go test -run TestLiquidationEngine ./pkg/lx/
 go test -run TestClearingHouse ./pkg/lx/
 go test -run TestVaultManager ./pkg/lx/
 go test -run TestLendingPool ./pkg/lx/
-```
+```text
 
 ### 12.2 Test Coverage
 
@@ -815,3 +815,35 @@ go test -run TestClearingHouse ./pkg/lx/
 2. [GMX V2 Technical Overview](https://docs.gmx.io/)
 3. [Aave V3 Risk Parameters](https://docs.aave.com/)
 4. [Lux DEX Repository](https://github.com/luxfi/dex)
+
+## Test Cases
+
+### Unit Tests
+
+1. **Core Functionality**
+   - Test primary operations
+   - Verify expected behavior
+   - Test error conditions
+
+2. **Input Validation**
+   - Test boundary conditions
+   - Verify input sanitization
+   - Test malformed inputs
+
+3. **State Management**
+   - Test state transitions
+   - Verify persistence
+   - Test recovery scenarios
+
+### Integration Tests
+
+1. **System Integration**
+   - Test component interaction
+   - Verify end-to-end flows
+   - Test failure scenarios
+
+2. **Performance Validation**
+   - Benchmark critical paths
+   - Test under load
+   - Verify resource limits
+

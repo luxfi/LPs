@@ -190,7 +190,7 @@ interface ITEEManager {
         bytes calldata attestation
     ) external view returns (bool);
 }
-```
+```text
 
 ### Attestation Verification
 
@@ -250,7 +250,7 @@ interface IAttestationVerifier {
         bytes32 expectedMeasurement
     ) external view returns (bool);
 }
-```
+```text
 
 ### Confidential Smart Contracts
 
@@ -331,7 +331,7 @@ contract ConfidentialAuction {
         revealed = true;
     }
 }
-```
+```text
 
 ### Key Management Service
 
@@ -413,7 +413,7 @@ interface ITEEKeyManager {
         bytes[] calldata partialSignatures
     ) external returns (bytes memory signature);
 }
-```
+```text
 
 ### Privacy-Preserving Computation
 
@@ -480,7 +480,7 @@ interface IPrivateComputation {
         bytes32 enclaveId
     ) external returns (bytes32 taskId);
 }
-```
+```text
 
 ### TEE Oracle Service
 
@@ -534,7 +534,7 @@ interface ITEEOracle {
         bytes memory attestation
     );
 }
-```
+```text
 
 ### Integration Examples
 
@@ -615,7 +615,7 @@ contract ConfidentialLending {
         });
     }
 }
-```
+```text
 
 ## Rationale
 
@@ -663,7 +663,7 @@ function testEnclaveRegistration() public {
     assertEq(enclave.status, EnclaveStatus.ACTIVE);
     assertEq(enclave.stake, stakeAmount);
 }
-```
+```text
 
 ### Confidential Computation Test
 
@@ -692,7 +692,7 @@ function testConfidentialComputation() public {
     Task memory task = teeManager.getTask(taskId);
     assertEq(task.status, TaskStatus.COMPLETED);
 }
-```
+```text
 
 ## Implementation
 
@@ -724,7 +724,7 @@ forge build
 forge script script/DeployTEE.s.sol:DeployTEE \
   --rpc-url https://api.avax.network/ext/bc/C/rpc \
   --broadcast
-```
+```text
 
 ### Testing
 
@@ -744,7 +744,7 @@ forge test --match-path test/tee/\* --gas-report
 
 # Coverage
 forge coverage --match-path test/tee/\*
-```
+```markdown
 
 **Test Cases** (see `/test/tee/TEEManager.t.sol`):
 - `testEnclaveRegistration()` - Register SGX/SEV enclaves

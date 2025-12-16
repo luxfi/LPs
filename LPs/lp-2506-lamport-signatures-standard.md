@@ -103,7 +103,7 @@ library LamportLib {
         }
     }
 }
-```
+```solidity
 
 **Gas Cost**: Approximately 19.6M gas per verification (256 keccak256 operations plus storage reads).
 
@@ -149,7 +149,7 @@ abstract contract LamportBase {
         _;
     }
 }
-```
+```text
 
 **Key Rotation**: The `nextPKH` parameter enforces automatic key rotation on each use. The signed message includes `nextPKH` to prevent tampering.
 
@@ -174,7 +174,7 @@ function mk_key_pair(): KeyPair {
 
     return { pri, pub };
 }
-```
+```text
 
 #### Signing
 
@@ -192,7 +192,7 @@ function sign_hash(hmsg: string, pri: RandPair[]): Sig {
     );
     return sig;
 }
-```
+```markdown
 
 #### Verification (Off-chain)
 
@@ -212,7 +212,7 @@ function verify_signed_hash(hmsg: string, sig: Sig, pub: PubPair[]): boolean {
 
     return true;
 }
-```
+```text
 
 #### KeyTracker Class
 
@@ -254,19 +254,19 @@ class KeyTracker {
         // Save to disk...
     }
 }
-```
+```text
 
 ### Merkle Tree Key Aggregation
 
 For multiple signatures without re-deploying contracts, use Merkle tree aggregation:
 
-```
+```text
                     Root Hash
                    /         \
               H(0,1)         H(2,3)
              /     \        /     \
           PKH_0   PKH_1  PKH_2   PKH_3
-```
+```text
 
 **Benefits:**
 - Store single root hash on-chain
@@ -293,7 +293,7 @@ function verifyWithMerkle(
     }
     return leaf == root;
 }
-```
+```markdown
 
 ## Rationale
 
@@ -370,7 +370,7 @@ const sig = sign_hash(msgHash, pri);
 const valid = verify_signed_hash(msgHash, sig, pub);
 
 assert(valid === true);
-```
+```text
 
 ### Test 2: Invalid Signature Detection
 
@@ -384,7 +384,7 @@ sig[0] = "0000...";
 
 const valid = verify_signed_hash(msgHash, sig, pub);
 assert(valid === false);
-```
+```text
 
 ### Test 3: Wrong Message Detection
 
@@ -397,7 +397,7 @@ const sig = sign_hash(msgHash1, pri);
 const valid = verify_signed_hash(msgHash2, sig, pub);
 
 assert(valid === false);
-```
+```text
 
 ### Test 4: PKH Validation
 
@@ -409,7 +409,7 @@ const recomputed = ethers.utils.keccak256(
 );
 
 assert(pkh === recomputed);
-```
+```text
 
 ### Test 5: Key Rotation
 
@@ -429,14 +429,14 @@ function testKeyRotation() public {
     // Verify rotation
     assert(contract.getPKH() == nextPKH);
 }
-```
+```text
 
 ## Reference Implementation
 
 **Location**: `/Users/z/work/lux/standard/src/lamport/`
 
 **File Structure:**
-```
+```text
 src/lamport/
 ├── contracts/
 │   ├── LamportLib.sol      # Core verification library
@@ -455,7 +455,7 @@ src/lamport/
 ├── package.json            # npm dependencies
 ├── truffle-config.js       # Truffle configuration
 └── test.sh                 # Test runner script
-```
+```text
 
 **Dependencies:**
 - `ethers.js` - Ethereum utilities

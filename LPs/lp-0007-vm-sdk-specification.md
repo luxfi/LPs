@@ -84,6 +84,37 @@ go doc ./... | head -100
 - Manages VM lifecycle (start, stop, shutdown)
 - Routes messages to correct VM handler
 
+## Test Cases
+
+### Unit Tests
+
+1. **Component Initialization**
+   - Verify correct initialization of all components
+   - Test configuration validation
+   - Validate error handling for invalid configurations
+
+2. **Core Functionality**
+   - Test primary operations under normal conditions
+   - Verify expected outputs for standard inputs
+   - Test edge cases and boundary conditions
+
+3. **Error Handling**
+   - Verify graceful handling of invalid inputs
+   - Test recovery from transient failures
+   - Validate error messages and codes
+
+### Integration Tests
+
+1. **Cross-Component Integration**
+   - Test interaction between related components
+   - Verify data flow across module boundaries
+   - Validate state consistency
+
+2. **Performance Tests**
+   - Benchmark critical operations
+   - Verify performance under load
+   - Test resource utilization limits
+
 ## Copyright
 
 Copyright and related rights waived via [CC0](../LICENSE.md).

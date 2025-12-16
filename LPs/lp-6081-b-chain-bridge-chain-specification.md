@@ -32,7 +32,7 @@ B-Chain addresses these by providing a dedicated, quantum-safe bridge infrastruc
 
 B-Chain is a specialized Lux subnet optimized for bridge operations:
 
-```
+```text
 ┌─────────────────────────────────────────────────────────┐
 │                    B-Chain Architecture                   │
 ├─────────────────────────┬───────────────────────────────┤
@@ -50,7 +50,7 @@ B-Chain is a specialized Lux subnet optimized for bridge operations:
                     │     Lux Internal Chains   │
                     │  (C, X, P, A, M, Q, Z)    │
                     └───────────────────────────┘
-```
+```markdown
 
 ### Core Components
 
@@ -71,7 +71,7 @@ type CustodyGroup struct {
     ClassicalPubKey *ecdsa.PublicKey
     QuantumPubKey   *ringtail.PublicKey
 }
-```
+```text
 
 #### 2. Dual-Signature Bridge Operations
 
@@ -96,7 +96,7 @@ interface IBridgeChain {
     function completeBridge(BridgeRequest calldata request, DualSignature calldata sig) external;
     function verifyDualSignature(bytes32 messageHash, DualSignature calldata sig) external view returns (bool);
 }
-```
+```text
 
 ### Quantum-Safe Extension
 
@@ -125,7 +125,7 @@ func (b *Bridge) Sign(request BridgeRequest) (*DualSignature, error) {
     
     return sig, nil
 }
-```
+```text
 
 ### Asset Flow
 
@@ -144,7 +144,7 @@ sequenceDiagram
     BChain->>BChain: Dual signature
     BChain->>Target: Mint wrapped asset
     Target->>User: Receive asset
-```
+```text
 
 #### Outbound (Lux → External)
 
@@ -161,7 +161,7 @@ sequenceDiagram
     BChain->>BChain: Generate signatures
     BChain->>ExtChain: Submit release tx
     ExtChain->>User: Receive native asset
-```
+```text
 
 ### Consensus Parameters
 
@@ -184,7 +184,7 @@ var DefaultBridgeParams = Parameters{
     BridgeFeeRate:     30,  // 0.3% in basis points
     RewardSplit:       50,  // 50% to validators, 50% to treasury
 }
-```
+```text
 
 ### State Management
 
@@ -204,7 +204,7 @@ type BridgeState struct {
     ValidatorStats   map[NodeID]*PerformanceMetrics
     SlashingEvents   []SlashingRecord
 }
-```
+```text
 
 ### Security Model
 
@@ -236,7 +236,7 @@ struct FeeConfig {
     uint256 treasuryShare;  // % to insurance fund
     uint256 stakerShare;    // % to all stakers
 }
-```
+```text
 
 ## Rationale
 
@@ -304,7 +304,7 @@ describe("B-Chain Bridge Operations", () => {
         expect(valid).to.be.true;
     });
 });
-```
+```text
 
 ### Security Tests
 

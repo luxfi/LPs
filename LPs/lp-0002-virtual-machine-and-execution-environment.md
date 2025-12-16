@@ -80,7 +80,7 @@ LP-2 specifies the Lux execution model, which is designed to be EVM-compatible w
 cd ~/work/lux/evm
 go test -v ./core/vm ./core/state
 # Comprehensive EVM execution tests
-```
+```text
 
 ### VM Registry and Management
 
@@ -149,7 +149,7 @@ forge build
 forge test --match-contract ERC20Test
 forge test --match-contract ERC721Test
 # Comprehensive Solidity contract tests
-```
+```text
 
 ### Gas Metering and Pricing
 
@@ -188,6 +188,37 @@ RUN_E2E=1 go test -v ./tests/e2e/
 - AVM: ~10,000 transfers/sec
 - EVM: ~1,500 contract calls/sec (single-threaded)
 - Q-Chain: ~500 quantum-verified txs/sec
+
+## Test Cases
+
+### Unit Tests
+
+1. **Component Initialization**
+   - Verify correct initialization of all components
+   - Test configuration validation
+   - Validate error handling for invalid configurations
+
+2. **Core Functionality**
+   - Test primary operations under normal conditions
+   - Verify expected outputs for standard inputs
+   - Test edge cases and boundary conditions
+
+3. **Error Handling**
+   - Verify graceful handling of invalid inputs
+   - Test recovery from transient failures
+   - Validate error messages and codes
+
+### Integration Tests
+
+1. **Cross-Component Integration**
+   - Test interaction between related components
+   - Verify data flow across module boundaries
+   - Validate state consistency
+
+2. **Performance Tests**
+   - Benchmark critical operations
+   - Verify performance under load
+   - Test resource utilization limits
 
 ## Copyright
 

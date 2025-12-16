@@ -89,7 +89,7 @@ As the Lux Network evolves to support advanced cross-chain operations, privacy f
         │                    │ • Lux FHE     │ • Analytics    │
         │                    │ • Homomorphic │ • Indexing     │
         └────────────────────┴───────────────┴────────────────┘
-```
+```markdown
 
 #### Chain Specifications
 
@@ -235,7 +235,7 @@ So from an EVM / DEX engineer point of view:
 │                                                                     └─ Global Finality Achieved  │
 │                                                                             │
 └─────────────────────────────────────────────────────────────────────────────┘
-```
+```text
 
 ### State Transitions
 
@@ -329,7 +329,7 @@ As the foundational LP, this document establishes the initial standards. Future 
 cd ~/work/lux/lps/docs
 pnpm dev      # Development: http://localhost:3002
 pnpm build    # Production build (124 static pages)
-```
+```text
 
 ### Network Architecture Implementation
 
@@ -377,7 +377,7 @@ make validate FILE=LPs/lp-N.md
 
 # Pre-PR checks
 make pre-pr
-```
+```text
 
 **Governance Process**:
 1. Discussion Phase: [`forum.lux.network`](https://forum.lux.network)

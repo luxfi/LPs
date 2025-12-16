@@ -61,7 +61,7 @@ interface CrossChainArchitecture {
     external: ["Ethereum", "BSC", "Lux", "Polygon"];
   };
 }
-```
+```text
 
 ## Research Findings
 
@@ -114,7 +114,7 @@ contract CrossChainMessenger {
         emit MessageSent(messageId, message);
     }
 }
-```
+```text
 
 #### Optimization Opportunities
 1. **Batching**: Bundle multiple messages for efficiency
@@ -149,7 +149,7 @@ interface SecurityModels {
     implementation: "Z-Chain with Plonky2";
   };
 }
-```
+```text
 
 ### 3. Teleporter Protocol Design
 
@@ -207,7 +207,7 @@ contract TeleporterMessenger {
         return messageID;
     }
 }
-```
+```text
 
 ### 4. State Synchronization
 
@@ -260,7 +260,7 @@ contract StateSynchronizer {
         );
     }
 }
-```
+```text
 
 ### 5. Message Ordering and Delivery
 
@@ -291,7 +291,7 @@ interface MessageDelivery {
         implementation: "Two-phase commit with state tracking";
     };
 }
-```
+```text
 
 ## Recommendations
 

@@ -83,7 +83,7 @@ type OrderTx struct {
 }
 
 // Validation: Size>0, Price>0 unless OrderType==market.
-```
+```text
 
 #### 1.2 DexFx extension
 
@@ -118,7 +118,7 @@ service DexService {
   rpc StreamTrades (TradeSub)   returns (stream TradeEvent);
   rpc StreamAccount(AcctSub)    returns (stream AccountUpdate);
 }
-```
+```markdown
 
 Latency target: <25 ms; back-pressure window = 64 MiB.
 
@@ -149,7 +149,7 @@ lux-cli dex place --mkt BTC-USD --side buy --price 63421.5 --size 0.8 --post-onl
 lux-cli dex cancel --order 0xabc123
 lux-cli dex positions
 lux-cli dex funding --market ETH-USD
-```
+```text
 
 ### 8 Governance & Params
 
@@ -236,7 +236,7 @@ func (ob *OrderBook) GetBook(depth uint16) (bids, asks []PriceLevel) {
     }
     return
 }
-```
+```text
 
 **Testing**:
 ```bash

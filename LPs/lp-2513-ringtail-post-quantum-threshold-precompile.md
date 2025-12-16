@@ -75,9 +75,9 @@ Ringtail (ePrint 2024/1113) provides unique properties for quantum-safe threshol
 
 ### Precompile Address
 
-```
+```text
 0x020000000000000000000000000000000000000B
-```
+```markdown
 
 ### Input Format
 
@@ -120,7 +120,7 @@ gas = BASE_COST + (totalParties * PER_PARTY_COST)
 Where:
   BASE_COST = 150,000 gas
   PER_PARTY_COST = 10,000 gas per participant
-```
+```markdown
 
 **Examples:**
 | Configuration | Gas Cost | Use Case |
@@ -283,7 +283,7 @@ abstract contract RingtailThresholdVerifier {
         );
     }
 }
-```
+```text
 
 ### Example Usage
 
@@ -354,7 +354,7 @@ contract QuantumSafeMultisig is RingtailThresholdVerifier {
         payable(to).transfer(amount);
     }
 }
-```
+```text
 
 ## Rationale
 
@@ -417,7 +417,7 @@ The larger signature size is acceptable because:
 
 Ringtail achieves threshold signatures in 2 rounds:
 
-```
+```yaml
 Round 1: Each party broadcasts commitment
          D_i, MACs_i := party.SignRound1(A, sid, PRFKey, T)
 
@@ -426,7 +426,7 @@ Round 2: Each party broadcasts response
 
 Finalize: Combiner aggregates shares
          c, z_sum, Delta := party.SignFinalize(z, A, bTilde)
-```
+```text
 
 This is **optimal** - no threshold scheme can achieve fewer rounds without a trusted dealer.
 
@@ -434,13 +434,13 @@ This is **optimal** - no threshold scheme can achieve fewer rounds without a tru
 
 Ringtail is designed for Quasar (LP-4110) dual-certificate finality:
 
-```
+```text
 Block Finalization:
   1. BLS Certificate: Classical finality (fast, smaller)
   2. Ringtail Certificate: Post-quantum finality (secure)
 
 Both certificates must validate for true quantum-safe finality.
-```
+```text
 
 This provides:
 - **Immediate classical security** via BLS
@@ -461,7 +461,7 @@ function verify(bytes calldata frostSig, bytes calldata ringtailSig) internal vi
     require(verifyFROST(frostSig), "FROST failed");
     require(verifyRingtail(ringtailSig), "Ringtail failed");
 }
-```
+```text
 
 **Phase 2**: Migrate keys to Ringtail-only
 
@@ -472,7 +472,7 @@ function verify(bytes calldata frostSig, bytes calldata ringtailSig) internal vi
 ### Test Vector 1: Valid 2-of-3 Threshold
 
 **Input:**
-```
+```yaml
 threshold: 2
 totalParties: 3
 messageHash: keccak256("Test message for threshold signature")
@@ -485,31 +485,31 @@ signature: <Ringtail signature from 2 of 3 parties>
 ### Test Vector 2: Insufficient Signers (1-of-3)
 
 **Input:**
-```
+```yaml
 threshold: 2
 totalParties: 3
 messageHash: <same as above>
 signature: <Ringtail signature from only 1 party>
-```
+```text
 
 **Expected Output:** `0x...0000` (invalid - threshold not met)
 
 ### Test Vector 3: Invalid Signature Share
 
 **Input:**
-```
+```yaml
 threshold: 2
 totalParties: 3
 messageHash: <valid hash>
 signature: <Ringtail signature with 1 corrupted share>
-```
+```text
 
 **Expected Output:** `0x...0000` (invalid - share verification failed)
 
 ### Test Vector 4: Large Threshold (67-of-100)
 
 **Input:**
-```
+```yaml
 threshold: 67
 totalParties: 100
 messageHash: <valid hash>
@@ -522,12 +522,12 @@ signature: <Ringtail signature from 67 parties>
 ### Test Vector 5: Wrong Message
 
 **Input:**
-```
+```yaml
 threshold: 2
 totalParties: 3
 messageHash: <different hash than signed>
 signature: <valid signature for original message>
-```
+```text
 
 **Expected Output:** `0x...0000` (invalid)
 
@@ -603,12 +603,12 @@ Classical attackers face:
 ### Distributed Key Generation
 
 Ringtail supports DKG without trusted dealer:
-```
+```text
 1. Each party generates share locally
 2. Broadcast commitments with MACs
 3. Verify all commitments
 4. Compute public key from commitments
-```
+```text
 
 No party ever sees the full private key.
 
@@ -657,7 +657,7 @@ function withdraw(bytes calldata sig) external {
     balance[msg.sender] = 0;  // Vulnerable!
     require(ringtail.verify(..., sig), "Invalid sig");
 }
-```
+```text
 
 ## Economic Impact
 

@@ -88,7 +88,7 @@ cd geth
 go test ./core/vm -v
 # Run EIP-specific tests
 go test ./core/vm -run TestEIP1559
-```
+```text
 
 ### Upgrade Activation
 - **Hardfork Coordination**: Node consensus parameters
@@ -135,6 +135,37 @@ cast etherscan-verify <address>
 ## Security Considerations
 
 This policy places a high degree of trust in the security processes of the Ethereum community. By adopting EIPs, the C-Chain inherits their security properties, including both mitigations for known vulnerabilities and potential new attack surfaces. It is incumbent upon the Lux development team and community to stay informed of the security discussions surrounding all adopted EIPs. Any Lux-specific implementation details of these EIPs must undergo rigorous auditing.
+
+## Test Cases
+
+### Unit Tests
+
+1. **EVM Compatibility**
+   - Verify opcode execution
+   - Test gas metering accuracy
+   - Validate precompile functions
+
+2. **Smart Contract Execution**
+   - Test contract deployment
+   - Verify state changes
+   - Test revert conditions
+
+3. **Token Standards**
+   - Test ERC-20/LRC-20 compliance
+   - Verify transfer mechanics
+   - Test approval workflows
+
+### Integration Tests
+
+1. **DeFi Protocol Integration**
+   - Test swap operations
+   - Verify liquidity provision
+   - Test yield calculations
+
+2. **Cross-Contract Calls**
+   - Test delegate calls
+   - Verify reentrancy protection
+   - Test gas forwarding
 
 ## Copyright
 

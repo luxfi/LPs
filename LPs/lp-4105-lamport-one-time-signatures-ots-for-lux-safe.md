@@ -64,7 +64,7 @@ contract LuxSafe is Safe {
     event LamportKeyRegistered(address indexed owner, uint256 keyIndex);
     event LamportKeyUsed(address indexed owner, uint256 keyIndex);
 }
-```
+```text
 
 ### Lamport Key Generation
 
@@ -98,7 +98,7 @@ library LamportKeyGen {
         return kp;
     }
 }
-```
+```text
 
 ### Signature Creation and Verification
 
@@ -146,7 +146,7 @@ contract LamportSignatureValidator {
         return true;
     }
 }
-```
+```text
 
 ### Safe Transaction Execution with Lamport
 
@@ -222,7 +222,7 @@ contract LuxSafe is Safe, LamportSignatureValidator {
         }
     }
 }
-```
+```text
 
 ### Key Management Module
 
@@ -277,7 +277,7 @@ contract LamportKeyManager is ModuleManager {
         emit LamportKeyRegistered(msg.sender, keyIndex);
     }
 }
-```
+```text
 
 ### Gas Optimization Strategies
 
@@ -309,7 +309,7 @@ contract LuxSafeMigration {
         emit MigrationPhaseChanged(_phase);
     }
 }
-```
+```text
 
 ## Implementation Considerations
 
@@ -346,7 +346,7 @@ class LamportKeyManager {
         );
     }
 }
-```
+```markdown
 
 ### User Interface Extensions
 
@@ -434,7 +434,7 @@ TestKeyRotationMechanism          // ✅ Bundle replacement
 TestConcurrentSigningAttempts     // ✅ Parallel key usage prevention
 TestGasOptimizations              // ✅ Batch registration efficiency
 TestSecurityProperties            // ✅ Hash-based security guarantees
-```
+```text
 
 **Test Execution**:
 ```bash
@@ -454,7 +454,7 @@ go test -v ./... -count=1
 # --- PASS: TestKeyExhaustion (1.2ms)
 # ...
 # ok  	github.com/luxfi/node/vms/safe/lamport	42.156s
-```
+```text
 
 ### Integration Tests
 
@@ -513,12 +513,12 @@ contract LuxSafeIntegrationTest {
         assertTrue(true); // No reverts under load
     }
 }
-```
+```text
 
 ### Performance Benchmarks
 
 **Benchmark Results** (Apple M1 Max):
-```
+```markdown
 BenchmarkLamportKeyGeneration        500000   2,145 ns/op    1,024 B/op    12 allocs/op
 BenchmarkLamportSignatureCreation     50000  24,568 ns/op    8,192 B/op    64 allocs/op
 BenchmarkLamportSignatureVerification 40000  31,245 ns/op    4,096 B/op    32 allocs/op
@@ -564,6 +564,37 @@ BenchmarkMerkleProofVerification     100000   9,876 ns/op    2,048 B/op    16 al
 ## Conclusion
 
 By integrating Lamport OTS into Lux Safe, we create the first production-ready quantum-safe multisig wallet. The implementation maintains full backward compatibility while providing a clear migration path to quantum safety. This positions Lux as the leader in practical quantum-resistant blockchain infrastructure.
+
+## Test Cases
+
+### Unit Tests
+
+1. **Cryptographic Primitives**
+   - Test key generation
+   - Verify signature creation
+   - Test signature verification
+
+2. **Post-Quantum Security**
+   - Verify NIST compliance
+   - Test parameter validation
+   - Validate security levels
+
+3. **Performance Benchmarks**
+   - Measure key generation time
+   - Benchmark signing operations
+   - Test verification throughput
+
+### Integration Tests
+
+1. **Hybrid Signature Schemes**
+   - Test classical-PQ combinations
+   - Verify fallback mechanisms
+   - Test key rotation
+
+2. **Network Integration**
+   - Test consensus with PQ signatures
+   - Verify cross-chain compatibility
+   - Test upgrade transitions
 
 ## Copyright
 

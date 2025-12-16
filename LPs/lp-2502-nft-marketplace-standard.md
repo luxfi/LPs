@@ -64,7 +64,7 @@ Seaport is the order-book marketplace protocol from OpenSea supporting:
 - **Conduits**: Approval management for efficient transfers
 
 **Core Contracts**:
-```
+```text
 lib/seaport/contracts/
 ├── Seaport.sol                    # Main marketplace contract
 ├── conduit/
@@ -80,7 +80,7 @@ lib/seaport/contracts/
 │   └── PausableZoneController.sol
 └── helpers/order-validator/
     └── SeaportValidator.sol      # Order validation
-```
+```markdown
 
 **Canonical Addresses** (cross-chain):
 | Contract | Address |
@@ -106,7 +106,7 @@ Sudoswap provides automated market making for NFTs with bonding curves:
 - **ERC-1155 Support**: Multi-token AMM pools
 
 **Core Contracts**:
-```
+```text
 src/sudo2/src/
 ├── LSSVMPair.sol                 # Base pair contract
 ├── LSSVMPairFactory.sol          # Pair deployment factory
@@ -132,7 +132,7 @@ src/sudo2/src/
 └── settings/
     ├── StandardSettings.sol      # Configurable pool settings
     └── StandardSettingsFactory.sol
-```
+```markdown
 
 ### Dependencies
 
@@ -174,7 +174,7 @@ interface IERC2981 {
     function royaltyInfo(uint256 tokenId, uint256 salePrice)
         external view returns (address receiver, uint256 royaltyAmount);
 }
-```
+```text
 
 ### Seaport Integration
 
@@ -211,7 +211,7 @@ struct ConsiderationItem {
     uint256 endAmount;
     address payable recipient;
 }
-```
+```text
 
 #### Order Types
 
@@ -233,7 +233,7 @@ IERC721(nft).setApprovalForAll(conduitAddress, true);
 
 // All Seaport orders use same approval
 // No per-order approvals needed
-```
+```text
 
 ### Sudoswap Adaptations
 
@@ -248,28 +248,28 @@ IERC721(nft).setApprovalForAll(conduitAddress, true);
 #### Bonding Curves
 
 **Linear Curve**:
-```
+```text
 newPrice = currentPrice + delta (buy)
 newPrice = currentPrice - delta (sell)
-```
+```text
 
 **Exponential Curve**:
-```
+```text
 newPrice = currentPrice * (1 + delta/1e18) (buy)
 newPrice = currentPrice / (1 + delta/1e18) (sell)
 ```
 
 **XYK Curve** (Constant Product):
-```
+```text
 x * y = k
 newPrice derived from reserves
 ```
 
 **GDA Curve** (Gradual Dutch Auction):
-```
+```text
 Price decays over time until purchase
 Resets on each sale
-```
+```text
 
 #### Property Checking
 
@@ -282,7 +282,7 @@ interface IPropertyChecker {
         bytes calldata propertyData
     ) external view returns (bool);
 }
-```
+```text
 
 Implementations:
 - `MerklePropertyChecker`: Merkle proof of ID inclusion
@@ -322,7 +322,7 @@ interface ICrossChainNFT {
         bytes calldata warpProof
     ) external;
 }
-```
+```text
 
 #### Supported Chains
 
@@ -337,13 +337,13 @@ interface ICrossChainNFT {
 
 The Zoo NFT marketplace uses these same primitives:
 
-```
+```text
 ~/work/zoo/contracts/
 ├── marketplace/
 │   ├── ZooSeaport.sol        # Seaport wrapper with Zoo fees
 │   ├── ZooSudoPool.sol       # Sudoswap pool factory
 │   └── ZooRoyaltyEngine.sol  # Zoo-specific royalty handling
-```
+```text
 
 **Zoo-Specific Features**:
 - ZOO token fee discounts
@@ -433,7 +433,7 @@ describe("Seaport NFT Marketplace", () => {
         expect(await ethers.provider.getBalance(royaltyRecipient)).to.be.gt(0);
     });
 });
-```
+```text
 
 ### Sudoswap Tests
 
@@ -485,7 +485,7 @@ describe("Sudoswap NFT AMM", () => {
         ).to.be.revertedWith("PropertyCheckFailed");
     });
 });
-```
+```text
 
 ## Reference Implementation
 
@@ -513,7 +513,7 @@ forge test
 
 # Deploy Seaport (uses canonical addresses)
 forge script script/DeploySeaport.s.sol --broadcast
-```
+```text
 
 ### Integration Example
 

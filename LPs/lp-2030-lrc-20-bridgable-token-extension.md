@@ -34,7 +34,7 @@ interface IERC20Bridgable is IERC20Mintable, IERC20Burnable {
      */
     function bridgeMint(address from, uint256 amount) external;
 }
-```
+```text
 
 ## Rationale
 
@@ -56,7 +56,7 @@ Standard tests should cover:
 See the IERC20Bridgable interface in the standard repository:
 ```text
 /standard/src/interfaces/IERC20Bridgable.sol
-```
+```text
 
 ## Implementation
 
@@ -90,7 +90,7 @@ function bridgeMint(address to, uint256 amount) external onlyBridgeRelayer {
     _mint(to, amount);
     emit BridgeMint(to, amount);
 }
-```
+```text
 
 **Testing**:
 ```bash

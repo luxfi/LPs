@@ -41,9 +41,9 @@ SLH-DSA (formerly SPHINCS+) provides unique security properties compared to ML-D
 
 ### Precompile Address
 
-```
+```text
 0x0200000000000000000000000000000000000007
-```
+```markdown
 
 ### Input Format
 
@@ -70,7 +70,7 @@ gas = BASE_COST + (messageLength * PER_BYTE_COST)
 Where:
   BASE_COST = 500,000 gas (higher due to 15ms verification time)
   PER_BYTE_COST = 50 gas (higher due to multiple hash operations)
-```
+```markdown
 
 ### Solidity Interface
 
@@ -89,7 +89,7 @@ interface ISLHDSA {
         bytes calldata signature
     ) external view returns (bool valid);
 }
-```
+```solidity
 
 ## Rationale
 
@@ -164,24 +164,24 @@ Mitigation: Use SLH-DSA selectively for high-value operations only.
 ## Test Cases
 
 ### Test Vector 1: Valid SLH-DSA-192s Signature
-```
+```yaml
 publicKey: 0x<48 bytes of SLH-DSA public key>
 message: "Quantum-resistant hash-based signature"
 signature: 0x<16224 bytes of SLH-DSA signature>
 Expected: 0x...0001 (valid)
 Expected Gas: ~502,100 gas
-```
+```text
 
 ### Test Vector 2: Invalid Signature
-```
+```yaml
 publicKey: 0x<48 bytes>
 message: "Test message"
 signature: 0x<16224 bytes of WRONG signature>
 Expected: 0x...0000 (invalid)
-```
+```text
 
 ### Test Vector 3: Large Message
-```
+```yaml
 publicKey: 0x<48 bytes>
 message: 0x<10KB data>
 signature: 0x<16224 bytes>

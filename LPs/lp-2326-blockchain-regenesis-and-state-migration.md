@@ -96,7 +96,7 @@ The migration to Chain ID 96369 was necessary due to conflicts with Ethereum Imp
 
 ### Regenesis Process Overview
 
-```
+```text
 ┌─────────────────┐
 │  Running Chain  │
 │   (Old State)   │
@@ -122,7 +122,7 @@ The migration to Chain ID 96369 was necessary due to conflicts with Ethereum Imp
 │   New Chain     │
 │  (New State)    │
 └─────────────────┘
-```
+```markdown
 
 ### Phase 1: State Export
 
@@ -136,7 +136,7 @@ cd /Users/z/work/lux/state/scripts
 go run export-state-to-genesis.go \
   /path/to/chaindata \
   /output/genesis-export.json
-```
+```solidity
 
 **What Gets Exported**:
 - Account balances (all addresses with non-zero balance)
@@ -158,7 +158,7 @@ blockchain.ExportCallback(func(block *types.Block) error {
     // Process each block
     return archiveBlock(block)
 }, 0, lastBlockNumber)
-```
+```text
 
 ### Phase 2: Genesis File Creation
 
@@ -201,7 +201,7 @@ blockchain.ExportCallback(func(block *types.Block) error {
     }
   }
 }
-```
+```text
 
 #### 2.2 State Verification
 
@@ -223,7 +223,7 @@ contract_count=$(jq '[.alloc | to_entries[] |
 echo "Total Balance: $total_exported"
 echo "Accounts: $account_count"
 echo "Contracts: $contract_count"
-```
+```text
 
 ### Phase 3: Network Initialization
 
@@ -238,7 +238,7 @@ geth init /path/to/genesis-export.json \
 geth --datadir /path/to/new/datadir \
   console \
   --exec "eth.getBlock(0)"
-```
+```text
 
 #### 3.2 Start Network
 
@@ -250,7 +250,7 @@ geth --datadir /path/to/new/datadir \
   --http.api eth,net,web3 \
   --bootnodes "" \
   console
-```
+```text
 
 #### 3.3 Validator Migration
 
@@ -270,7 +270,7 @@ for _, v := range oldValidators {
         EndTime:   v.EndTime,
     })
 }
-```
+```text
 
 ## Implementation
 
@@ -305,7 +305,7 @@ type ChainExporter interface {
 
     Close() error
 }
-```
+```text
 
 **ChainImporter** - Imports blockchain data into destination VM:
 ```go
@@ -336,7 +336,7 @@ type ChainImporter interface {
 
     Close() error
 }
-```
+```text
 
 **ChainMigrator** - Orchestrates the migration:
 ```go
@@ -353,7 +353,7 @@ type ChainMigrator interface {
     // Verify migration success
     VerifyMigration(source ChainExporter, dest ChainImporter, blockNumber uint64) error
 }
-```
+```text
 
 #### VM-Specific Implementations
 
@@ -412,7 +412,7 @@ ctx := context.Background()
 if err := migrator.Migrate(ctx, exporter, importer, migrationOpts); err != nil {
     log.Fatalf("Migration failed: %v", err)
 }
-```
+```text
 
 ### lux-cli Network Commands
 
@@ -429,7 +429,7 @@ lux network import \
   --db-backend=badgerdb \
   --verify=true \
   --batch-size=1000
-```
+```text
 
 **Node Configuration Flags** (used internally by lux-cli):
 - `genesis-import`: Path to source database
@@ -446,7 +446,7 @@ lux network start \
   --archive-path=/path/to/archive \
   --archive-shared \
   --node-version=v1.20.1
-```
+```text
 
 ## Integration with LP-181 (Epoching)
 
@@ -465,7 +465,7 @@ for !isEpochSealed(currentEpoch) {
 
 // Export state at exact epoch boundary
 exportStateAtHeight(currentEpoch.DChainHeight)
-```
+```text
 
 **Benefits**:
 1. **Validator Set Consistency**: All chains reference same P-Chain epoch
@@ -500,7 +500,7 @@ func (rc *RegensisCoordinator) ExportRegensisChains(epoch uint64) error {
 
     return rc.verifyExports(pChainState, cChainState, xChainState)
 }
-```
+```text
 
 **Q-Chain Deployment** (separate from regenesis):
 ```go
@@ -511,7 +511,7 @@ qChainGenesis := generateFreshGenesis(
     timestamp: time.Now(),
 )
 deployNewChain(qChainGenesis)
-```
+```text
 
 ## Rationale
 
@@ -570,7 +570,7 @@ newGenesisTime := time.Now().Add(24 * time.Hour)
 if newGenesisTime.Sub(oldFinalBlock.Time) > 30*24*time.Hour {
     return ErrTimestampTooFar
 }
-```
+```text
 
 ### Q-Chain Deployment (Not Part of Regenesis)
 
@@ -606,7 +606,7 @@ geth --datadir /test/datadir \
 > eth.getBalance("0x...")  // Check known addresses
 > eth.getCode("0x...")     // Verify contract code
 > debug.trieHash()         // Compare state root
-```
+```solidity
 
 ### Regenesis Checklist
 
@@ -679,7 +679,7 @@ make build-patched
 
 # 5. Coordinate validator upgrade
 # 6. Launch new network
-```
+```text
 
 ### Performance Optimization
 
@@ -710,7 +710,7 @@ func ExportByRange(dbPath string, startAddr, endAddr common.Address) {
         }
     }
 }
-```
+```text
 
 ## Future Enhancements
 
@@ -725,7 +725,7 @@ type IncrementalExport struct {
     NewContracts   []Contract  // Newly deployed contracts
     UpdatedStorage []Storage   // Modified storage
 }
-```
+```text
 
 ### Cross-Chain State Proofs
 
@@ -742,7 +742,7 @@ type CrossChainStateProof struct {
     Timestamp time.Time
     ProofOfConsistency []byte
 }
-```
+```text
 
 ### Automatic Regenesis
 
@@ -756,7 +756,7 @@ func (n *Network) CheckRegenesisSchedule() {
         n.ProposeRegenesis()
     }
 }
-```
+```text
 
 ## References
 
@@ -772,7 +772,7 @@ This section documents the practical workflow for migrating blocks from SubnetEV
 
 ### Overview
 
-```
+```text
 ┌─────────────────────┐
 │  SubnetEVM PebbleDB │  Source: lux-mainnet-96369
 │   (1.08M blocks)    │  Format: Namespaced keys
@@ -791,7 +791,7 @@ This section documents the practical workflow for migrating blocks from SubnetEV
 │  Fresh C-Chain      │  Target: New P-Q network
 │   (BadgerDB)        │  Live with P,C,Q,X chains
 └─────────────────────┘
-```
+```text
 
 ### Step 1: Export Blocks to JSONL
 
@@ -811,7 +811,7 @@ exporter := chainmigrate.NewSubnetEVMExporter(chainmigrate.ExporterConfig{
 
 // Export blocks with normalization
 blocks, errs := exporter.ExportBlocks(ctx, 0, 1082780)
-```
+```text
 
 #### 1.2 CLI Export Command
 
@@ -829,7 +829,7 @@ cd /Users/z/work/lux/genesis
 # Verify export
 wc -l blocks-mainnet-full.jsonl
 # Should output: 1082781 (blocks 0-1082780)
-```
+```text
 
 #### 1.3 Data Normalization During Export
 
@@ -851,7 +851,7 @@ cd /Users/z/work/lux/genesis
 
 # Generate genesis file
 ./scripts/generate-genesis.sh
-```
+```text
 
 #### 2.2 Start Network
 
@@ -863,7 +863,7 @@ cd /Users/z/work/lux/genesis
 curl -s -X POST -H 'Content-Type: application/json' \
   -d '{"jsonrpc":"2.0","id":1,"method":"info.getNetworkID","params":{}}' \
   http://127.0.0.1:9650/ext/info
-```
+```text
 
 ### Step 3: Import Blocks to C-Chain
 
@@ -880,7 +880,7 @@ go build -o bin/lux main.go
   --id=C \
   --input=/Users/z/work/lux/state/blocks-mainnet-full.jsonl \
   --rpc=http://127.0.0.1:9650/ext/bc/C/rpc
-```
+```text
 
 #### 3.2 Monitor Progress
 
@@ -894,7 +894,7 @@ curl -s -X POST -H 'Content-Type: application/json' \
 CURRENT=$(curl -s ... | xargs printf "%d\n")
 TOTAL=1082780
 echo "Progress: $((CURRENT * 100 / TOTAL))%"
-```
+```text
 
 ### Performance Metrics
 
@@ -920,7 +920,7 @@ Each line contains one complete block in Ethereum JSON-RPC format:
   "gasUsed": "0x...",
   "gasLimit": "0x..."
 }
-```
+```text
 
 ### Key Differences: SubnetEVM → Coreth
 
@@ -951,7 +951,7 @@ After import completion:
 curl -s http://127.0.0.1:9650/ext/bc/C/rpc -X POST \
   -H 'Content-Type: application/json' \
   -d '{"method":"eth_syncing","params":[],"id":1,"jsonrpc":"2.0"}'
-```
+```text
 
 #### Block Validation Errors
 SubnetEVM blocks may have different validation rules. Ensure Coreth is configured for SubnetEVM compatibility.
@@ -988,6 +988,37 @@ Based on Ethereum's genesis format and Avalanche's subnet migration patterns. Sp
 - Launching Q-Chain as a new quantum-resistant deployment
 
 The regenesis process migrates C-Chain state from Chain ID 96369, which represents the legitimate continuation of the original Chain ID 7777 lineage.
+
+## Test Cases
+
+### Unit Tests
+
+1. **EVM Compatibility**
+   - Verify opcode execution
+   - Test gas metering accuracy
+   - Validate precompile functions
+
+2. **Smart Contract Execution**
+   - Test contract deployment
+   - Verify state changes
+   - Test revert conditions
+
+3. **Token Standards**
+   - Test ERC-20/LRC-20 compliance
+   - Verify transfer mechanics
+   - Test approval workflows
+
+### Integration Tests
+
+1. **DeFi Protocol Integration**
+   - Test swap operations
+   - Verify liquidity provision
+   - Test yield calculations
+
+2. **Cross-Contract Calls**
+   - Test delegate calls
+   - Verify reentrancy protection
+   - Test gas forwarding
 
 ## Copyright
 

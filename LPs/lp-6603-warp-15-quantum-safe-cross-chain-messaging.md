@@ -22,11 +22,11 @@ tags: [pqc, threshold-crypto, cross-chain, warp, teleport, bridge, encryption, s
 - **Teleport protocol** standardizes 7 cross-chain operation types
 - Backward compatible with Warp 1.0 (BLS still supported during transition)
 
-```
+```text
 Source Chain → [Create TeleportMessage] → [Sign with Ringtail] → Warp Layer → Destination Chain
                      ↓                           ↓
               (optional encrypt)         (2/3 validator threshold)
-```
+```markdown
 
 ---
 
@@ -160,7 +160,7 @@ Three cryptographic upgrades:
 │     └──────────────────────────────────────────────────────────────┘        │
 │                                                                             │
 └─────────────────────────────────────────────────────────────────────────────┘
-```
+```markdown
 
 ### Private Transfer (Encrypted)
 
@@ -201,7 +201,7 @@ Three cryptographic upgrades:
 │     └───────────────────────────────────────────────────────────────┘       │
 │                                                                             │
 └─────────────────────────────────────────────────────────────────────────────┘
-```
+```markdown
 
 ---
 
@@ -223,7 +223,7 @@ const (
     // SigTypeHybrid uses BLS+Ringtail hybrid (deprecated)
     SigTypeHybrid
 )
-```
+```text
 
 #### When to Use Each Type
 
@@ -257,7 +257,7 @@ type RingtailSignature struct {
     // Contains: c (challenge polynomial), z (response vector), Delta (hint vector)
     Signature []byte `serialize:"true"`
 }
-```
+```text
 
 **Cryptographic Parameters** (from [github.com/luxfi/ringtail](https://github.com/luxfi/ringtail)):
 
@@ -299,7 +299,7 @@ type EncryptedWarpPayload struct {
     // RecipientKeyID identifies which ML-KEM public key was used
     RecipientKeyID []byte `serialize:"true"`
 }
-```
+```text
 
 **Constants:**
 
@@ -311,7 +311,7 @@ const (
     AESGCMNonceLen          = 12    // AES-GCM nonce size
     AESGCMTagLen            = 16    // Authentication tag size
 )
-```
+```text
 
 **Why ML-KEM-768?**
 
@@ -340,7 +340,7 @@ type TeleportMessage struct {
     Payload       []byte       `serialize:"true"` // Application data
     Encrypted     bool         `serialize:"true"` // Encryption flag
 }
-```
+```text
 
 **Message Types:**
 
@@ -367,7 +367,7 @@ type TeleportTransferPayload struct {
     Fee       uint64 `serialize:"true"` // Bridge fee
     Memo      []byte `serialize:"true"` // Optional metadata
 }
-```
+```text
 
 ### Attestation Payload
 
@@ -378,7 +378,7 @@ type TeleportAttestPayload struct {
     Data            []byte      `serialize:"true"` // Attestation data
     AttesterID      ids.NodeID  `serialize:"true"` // Who created it
 }
-```
+```text
 
 ---
 
@@ -388,7 +388,7 @@ type TeleportAttestPayload struct {
 
 BridgeVM orchestrates bridge operations using Teleport:
 
-```
+```text
 ┌─────────────────────────────────────────────────────────────┐
 │                      BridgeVM (B-Chain)                      │
 ├─────────────────────────────────────────────────────────────┤
@@ -404,7 +404,7 @@ BridgeVM orchestrates bridge operations using Teleport:
 │  Opt-in (first 100)   Transfer/Swap/etc    Quantum-Safe      │
 │                                                              │
 └─────────────────────────────────────────────────────────────┘
-```
+```text
 
 **Key RPC Endpoints:**
 
@@ -419,7 +419,7 @@ BridgeVM orchestrates bridge operations using Teleport:
 
 ThresholdVM provides MPC signing services:
 
-```
+```text
 ┌─────────────────────────────────────────────────────────────┐
 │                     ThresholdVM (T-Chain)                    │
 ├─────────────────────────────────────────────────────────────┤
@@ -434,7 +434,7 @@ ThresholdVM provides MPC signing services:
 │  Set Changes           Threshold Sig       ECDSA             │
 │                                                              │
 └─────────────────────────────────────────────────────────────┘
-```
+```text
 
 **Supported Protocols:**
 
@@ -477,7 +477,7 @@ msg := warp.NewTeleportMessage(
 
 // Convert to Warp message for signing
 warpMsg, _ := msg.ToWarpMessage(networkID)
-```
+```text
 
 ### Creating a Private Transfer
 
@@ -497,7 +497,7 @@ if err != nil {
 
 // Message is now encrypted, only recipient can decrypt
 warpMsg, _ := privateMsg.ToWarpMessage(networkID)
-```
+```text
 
 ### Decrypting a Private Message
 
@@ -510,7 +510,7 @@ if teleportMsg.Encrypted {
     }
     // plaintext contains the original payload
 }
-```
+```text
 
 ---
 

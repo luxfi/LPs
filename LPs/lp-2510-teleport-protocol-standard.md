@@ -50,7 +50,7 @@ The Lux Network requires robust cross-chain interoperability to:
 
 ### Part 1: Protocol Architecture
 
-```
+```text
                          Teleport Protocol Architecture
 +-----------------------------------------------------------------------------------+
 |                              Lux Network                                          |
@@ -104,7 +104,7 @@ IBC Teleport implements the Inter-Blockchain Communication protocol specificatio
 
 #### 2.2 Protocol Stack
 
-```
+```text
 +---------------------------------------+
 |       Application Layer               |
 | (ICS-20 Transfers, ICS-27 Accounts)   |
@@ -118,7 +118,7 @@ IBC Teleport implements the Inter-Blockchain Communication protocol specificatio
 |      Network Layer (Relayers)         |
 |   (Message Routing, Delivery)         |
 +---------------------------------------+
-```
+```markdown
 
 #### 2.3 Core Types
 
@@ -158,7 +158,7 @@ type Channel struct {
     ConnectionHops []string      // Connection path
     Version        string        // Channel version (e.g., "ics20-1")
 }
-```
+```text
 
 #### 2.4 Multi-Consensus Support
 
@@ -182,7 +182,7 @@ type FungibleTokenPacketData struct {
     Receiver string `json:"receiver"`  // Destination address
     Memo     string `json:"memo,omitempty"` // Optional memo
 }
-```
+```text
 
 **Transfer Flow**:
 1. User initiates transfer on source chain
@@ -217,7 +217,7 @@ src.chain-id = "lux-mainnet-1"
 src.port-id = "transfer"
 dst.chain-id = "cosmoshub-4"
 dst.port-id = "transfer"
-```
+```text
 
 ### Part 3: MPC Bridge Protocol
 
@@ -231,7 +231,7 @@ The MPC Bridge enables cross-chain asset transfers across EVM and non-EVM chains
 
 #### 3.2 System Architecture
 
-```
+```text
 +------------------------------------------------------------------+
 |                        Bridge UI (Next.js)                       |
 |                     http://localhost:3000                        |
@@ -265,7 +265,7 @@ The MPC Bridge enables cross-chain asset transfers across EVM and non-EVM chains
 |  | :4223  |  | :8200 |  | :8501  |  | :5433     |  | :8000    |  |
 |  +--------+  +-------+  +--------+  +----------+  +-----------+  |
 +------------------------------------------------------------------+
-```
+```text
 
 #### 3.3 Supported Chains
 
@@ -315,7 +315,7 @@ security:
   tls_version: "1.3"
   mutual_auth: true
   hsm_integration: true
-```
+```text
 
 #### 3.5 Threshold Signature Protocol
 
@@ -329,7 +329,7 @@ The MPC Bridge uses CGGMP21 (LP-322) for ECDSA threshold signatures:
 - **Identifiable Aborts**: Malicious parties detected and excluded
 
 **Signature Generation Flow**:
-```
+```text
 1. Bridge contract emits deposit event
 2. MPC nodes detect event via blockchain listeners
 3. Nodes verify transaction independently
@@ -337,7 +337,7 @@ The MPC Bridge uses CGGMP21 (LP-322) for ECDSA threshold signatures:
 5. CGGMP21 signing protocol executes
 6. Aggregated signature produced
 7. Signed message relayed to destination chain
-```
+```text
 
 ### Part 4: Smart Contracts
 
@@ -384,7 +384,7 @@ contract ERC20B is ERC20, Ownable, AccessControl {
         return true;
     }
 }
-```
+```text
 
 #### 4.2 Bridge Contract
 
@@ -500,7 +500,7 @@ contract Bridge is Ownable, AccessControl {
         ));
     }
 }
-```
+```text
 
 #### 4.3 Teleport Bridge Precompile
 
@@ -553,7 +553,7 @@ contract TeleportBridgePrecompile {
     uint256 public constant LUX_CCHAIN_CHAIN_ID = 96369;
     uint256 public constant CLAIM_WINDOW = 24 hours;
 }
-```
+```text
 
 #### 4.4 Wrapped Token Standards
 
@@ -656,7 +656,7 @@ The T-Chain handles IBC operations for Cosmos ecosystem connectivity:
 
 #### 7.1 Bridge REST API
 
-```
+```text
 Base URL: http://localhost:5000/api/v1
 
 GET  /status              # Bridge operational status
@@ -666,7 +666,7 @@ POST /quote               # Get transfer quote
 POST /transfer            # Initiate transfer
 GET  /transfer/{id}       # Query transfer status
 GET  /history/{address}   # User transfer history
-```
+```text
 
 **Example: Get Transfer Quote**
 ```json
@@ -689,11 +689,11 @@ Response:
   "estimatedTime": 300,
   "route": "ETH -> LETH via MPC Bridge"
 }
-```
+```text
 
 #### 7.2 IBC Teleport API
 
-```
+```text
 RPC Endpoints:
 POST /teleport/query/connection   # Query connection status
 POST /teleport/query/channel      # Query channel status
@@ -705,7 +705,7 @@ gRPC Services:
 - ibc.core.channel.v1.Query
 - ibc.applications.transfer.v1.Query
 - ibc.applications.transfer.v1.Msg
-```
+```text
 
 ## Rationale
 
@@ -774,7 +774,7 @@ describe("Bridge Contract", () => {
     ).to.be.revertedWith("Invalid MPC signature");
   });
 });
-```
+```text
 
 ### IBC Teleport Tests
 
@@ -803,7 +803,7 @@ func TestPacketTransfer(t *testing.T) {
     commitment := keeper.GetPacketCommitment(ctx, "transfer", "channel-0", 1)
     require.NotNil(t, commitment)
 }
-```
+```text
 
 ## Reference Implementation
 

@@ -51,7 +51,7 @@ An order‑book chain specialized for trading delivers predictable latency and d
 
 ## High-Level Architecture
 
-```
+```text
 ┌─────────────────────────────────────────────────────────────────┐
 │                        X-Chain Architecture                       │
 ├─────────────────────┬─────────────────────┬────────────────────┤
@@ -62,7 +62,7 @@ An order‑book chain specialized for trading delivers predictable latency and d
 │ • 100k+ TPS         │ • Multi-Asset       │ • Cross-chain      │
 │ • Lamport OTS       │ • Fee Mining        │ • Native Bridge    │
 └─────────────────────┴─────────────────────┴────────────────────┘
-```
+```markdown
 
 ## Consensus Mechanism
 
@@ -84,7 +84,7 @@ type LuxDAG struct {
     frontier    set.Set[ids.ID]  // Current frontier vertices
     conflictSet map[ids.ID]set.Set[ids.ID]
 }
-```
+```text
 
 ### Consensus Parameters
 ```go
@@ -96,7 +96,7 @@ const (
     K               = 25     // Sample size
     MaxOutstanding  = 1000   // Max concurrent queries
 )
-```
+```text
 
 ## Transaction Model
 
@@ -117,7 +117,7 @@ type Owner struct {
     Addrs     []ids.ShortID
     SignatureType uint8  // 0: ECDSA, 1: Lamport OTS
 }
-```
+```text
 
 ### Transaction Types
 
@@ -135,7 +135,7 @@ type CreateOrderTx struct {
     PostOnly    bool
     FeeRate     uint32   // Maker/taker fee in bps
 }
-```
+```text
 
 #### 2. CancelOrderTx
 ```go
@@ -144,7 +144,7 @@ type CancelOrderTx struct {
     OrderID     ids.ID
     CancelAll   bool     // Cancel all orders for trader
 }
-```
+```markdown
 
 #### 3. TradeTx (System-generated)
 ```go
@@ -157,7 +157,7 @@ type TradeTx struct {
     Timestamp      uint64
     MatchProof     []byte  // Proof of fair matching
 }
-```
+```text
 
 ## Order Book Implementation
 
@@ -191,7 +191,7 @@ type Order struct {
     Timestamp   uint64
     SignatureType uint8
 }
-```
+```text
 
 ### Matching Engine
 ```go
@@ -223,7 +223,7 @@ func (ob *OrderBook) MatchOrder(order *Order) ([]*Trade, error) {
     
     return trades, nil
 }
-```
+```text
 
 ## Lamport OTS Integration
 
@@ -241,7 +241,7 @@ type LamportSignature struct {
     KeyIndex     uint64
     Timestamp    uint64
 }
-```
+```text
 
 ### Signature Generation
 ```go
@@ -264,7 +264,7 @@ func SignWithLamport(message []byte, keyPair *LamportKeyPair) (*LamportSignature
     keyPair.Used = true
     return sig, nil
 }
-```
+```text
 
 ### Verification
 ```go
@@ -284,7 +284,7 @@ func VerifyLamportSignature(message []byte, sig *LamportSignature,
     
     return true
 }
-```
+```text
 
 ### Key Management Service
 ```go
@@ -309,7 +309,7 @@ func (ks *LamportKeyService) GetSigningKey(trader ids.ShortID) (*LamportKeyPair,
     }
     return key, nil
 }
-```
+```text
 
 ## Performance Optimizations
 
@@ -332,7 +332,7 @@ func (pm *ParallelMatcher) ProcessOrder(order *Order) {
     shardID := pm.hashFunc(order.ID)
     pm.shards[shardID].inbound <- order
 }
-```
+```text
 
 ### Memory Pool Optimization
 ```go
@@ -348,7 +348,7 @@ var (
         },
     }
 )
-```
+```text
 
 ### Batch Settlement
 ```go
@@ -379,7 +379,7 @@ func (x *XChain) SettleBatch(batch *SettlementBatch) error {
     // Commit to chain
     return x.commitTransaction(settlementTx)
 }
-```
+```text
 
 ## API Specification
 
@@ -412,7 +412,7 @@ func (x *XChain) SettleBatch(batch *SettlementBatch) error {
   parameters:
     - market: string
     - limit: number (max: 1000)
-```
+```text
 
 ### WebSocket Streams
 ```javascript
@@ -434,7 +434,7 @@ ws.subscribe({
     channel: "orders",
     address: "X-lux1..."
 });
-```
+```text
 
 ## Cross-Chain Settlement
 
@@ -467,7 +467,7 @@ func (x *XChain) InitiateBridgeTransfer(settlement *CrossChainSettlement) error 
     
     return x.sendToBridge(bridgeMsg)
 }
-```
+```text
 
 ## Security Considerations
 
@@ -509,7 +509,7 @@ func BenchmarkOrderMatching(b *testing.B) {
     }
     // Result: 1,200,000 orders/sec on 32-core machine
 }
-```
+```text
 
 ## Implementation
 
@@ -541,7 +541,7 @@ go build -o build/luxd ./cmd/main.go
 
 # Or build with race detection for testing
 go build -race -o build/luxd-race ./cmd/main.go
-```
+```text
 
 ### Testing
 
@@ -564,7 +564,7 @@ go test ./vms/exchangevm/orderbook -bench=. -benchmem
 
 # Test with race detection
 go test -race ./vms/exchangevm/...
-```
+```text
 
 ### Performance Testing
 
@@ -579,7 +579,7 @@ go tool pprof cpu.prof
 # Memory profiling
 go test ./vms/exchangevm/orderbook -memprofile=mem.prof
 go tool pprof mem.prof
-```
+```text
 
 ### API Testing
 
@@ -599,7 +599,7 @@ curl -X POST --data '{
   "method":"exchangevm.getOrderBook",
   "params":{"pair":"LUX-USDC"}
 }' -H 'content-type:application/json;' http://localhost:9650/ext/bc/X
-```
+```text
 
 ### File Size Verification
 
@@ -620,7 +620,7 @@ curl -X POST --data '{
 
 ### Order Matching Benchmarks (Apple M1 Max)
 
-```
+```text
 1,000 orders: 1.2ms (832K orders/sec)
 10,000 orders: 8.5ms (1.18M orders/sec)
 100,000 orders: 78ms (1.28M orders/sec)
@@ -660,6 +660,37 @@ This LP defines a new chain and does not alter existing ones. Cross‑chain sett
 ## Conclusion
 
 X-Chain represents a breakthrough in decentralized exchange technology, combining the performance of centralized exchanges with the security of blockchain and the future-proofing of quantum-resistant cryptography. By building a purpose-specific chain for trading, we achieve performance impossible on general-purpose blockchains while maintaining complete decentralization.
+
+## Test Cases
+
+### Unit Tests
+
+1. **Order Validation**
+   - Test order structure validation
+   - Verify price precision handling
+   - Test quantity validation
+
+2. **Matching Engine**
+   - Test price-time priority
+   - Verify partial fill handling
+   - Test order cancellation
+
+3. **Settlement**
+   - Test atomic settlement
+   - Verify balance updates
+   - Test fee distribution
+
+### Integration Tests
+
+1. **Order Flow**
+   - Test full order lifecycle
+   - Verify matching correctness
+   - Test concurrent order handling
+
+2. **Cross-Asset Operations**
+   - Test multi-asset swaps
+   - Verify exchange rate accuracy
+   - Test slippage protection
 
 ## Copyright
 

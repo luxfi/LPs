@@ -71,7 +71,7 @@ func SelectCommittee(validators []Validator, k uint32) Committee {
     }
     return Committee{Members: selected[:k]}
 }
-```
+```text
 
 #### Phase 2: Wave (Voting Propagation)
 
@@ -89,7 +89,7 @@ func AggregateRound1(votes []Round1Vote) AggregateSignature {
     // BLS allows O(1) signature aggregation
     return bls.Aggregate(extractSignatures(votes))
 }
-```
+```text
 
 **Round 2: Lattice Confirmation**
 ```go
@@ -99,7 +99,7 @@ type Round2Vote struct {
     Round1Cert  AggregateSignature
     Signature   MLDSASignature  // ~2.5KB for ML-DSA-65
 }
-```
+```text
 
 #### Phase 3: Focus (Confidence Convergence)
 
@@ -121,7 +121,7 @@ func (ct *ConfidenceTracker) Update(vote BlockID) bool {
     ct.confidence = 1
     return false
 }
-```
+```text
 
 #### Phase 4: Prism (DAG Refraction)
 
@@ -139,7 +139,7 @@ func (p *DAGPrism) IsPreferred(v *Vertex) bool {
     // Check if v is on the preferred frontier
     return p.preferred[v.Hash()] && p.stronglyPreferred(v)
 }
-```
+```text
 
 #### Phase 5: Horizon (Finality Anchoring)
 
@@ -159,7 +159,7 @@ type QuantumCertificate struct {
     // Merkle proof for light clients
     MerkleRoot  [32]byte
 }
-```
+```text
 
 ### Consensus Parameters
 
@@ -264,7 +264,7 @@ go test -v ./... -coverprofile=coverage.out
 # ok  	github.com/luxfi/consensus/protocol/quasar	1,234ms
 #
 # coverage: 98.3% of statements
-```
+```text
 
 **Test Categories**:
 
@@ -304,7 +304,7 @@ TestQuasarSubSecondFinality           // ✅ <500ms target
 TestQuasarDynamicParameterAdaptation  // ✅ Auto-tuning timeouts
 TestQuasarDAGMergeConflicts           // ✅ Conflict resolution
 TestQuasarQuantumSignatureVerification // ✅ ML-DSA verification
-```
+```text
 
 **Load Testing** (`aggregator_test.go`):
 ```bash
@@ -312,7 +312,7 @@ TestQuasarQuantumSignatureVerification // ✅ ML-DSA verification
 # Message complexity: O(k) where k=20 (not O(n))
 # Per-validator overhead: <1MB memory
 # CPU usage: <10% on single core per validator
-```
+```text
 
 ### Test 1: Byzantine Committee Members
 ```python
@@ -327,7 +327,7 @@ def test_byzantine_resilience():
     result = run_quasar_consensus(validators, byzantine)
     assert result.finalized_block == honest_block
     assert result.safety_violated == False
-```
+```text
 
 ### Test 2: Quantum Signature Verification
 ```python
@@ -343,7 +343,7 @@ def test_quantum_signatures():
 
     cert = QuantumCertificate(block, agg_sig, ml_sigs)
     assert verify_quantum_certificate(cert) == True
-```
+```text
 
 ### Test 3: Sub-Second Finality
 ```python
@@ -356,7 +356,7 @@ def test_finality_latency():
     latency = time.now() - start
     assert latency < 1000  # milliseconds
     assert certificate.is_final == True
-```
+```text
 
 ## Reference Implementation
 

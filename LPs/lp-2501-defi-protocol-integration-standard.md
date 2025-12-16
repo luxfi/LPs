@@ -85,7 +85,7 @@ The Lux Standard Library curates MIT/GPL-licensed DeFi primitives that provide e
 | `VaultPriceFeed.sol` | `contracts/core/VaultPriceFeed.sol` | Oracle price feeds |
 
 **Directory Structure**:
-```
+```text
 src/gmx2/
 ├── contracts/
 │   ├── core/           # Vault, Router, Position management
@@ -102,7 +102,7 @@ src/gmx2/
 ├── scripts/            # Deployment and utility scripts
 ├── test/               # Test suite
 └── hardhat.config.js   # Build configuration
-```
+```markdown
 
 **Capabilities**:
 - Perpetual futures with up to 50x leverage
@@ -135,7 +135,7 @@ src/gmx2/
 | `CrossChainCanonicalAlchemicTokenV2.sol` | `contracts/CrossChainCanonicalAlchemicTokenV2.sol` | Cross-chain token support |
 
 **Directory Structure**:
-```
+```text
 src/alcx2/
 ├── contracts/
 │   ├── adapters/       # Yield source adapters (Yearn, etc.)
@@ -145,7 +145,7 @@ src/alcx2/
 ├── deployments/        # Deployment artifacts
 ├── test/               # Test suite
 └── hardhat.config.ts   # Build configuration
-```
+```text
 
 **Capabilities**:
 - Self-repaying loans via yield farming
@@ -163,7 +163,7 @@ interface IAlchemistV2 {
     function burn(uint256 amount, address recipient) external;
     function liquidate(address owner, uint256 shares, uint256 minimumAmountOut) external returns (uint256);
 }
-```
+```text
 
 **Lux Adaptations**:
 - Integration with Lux yield sources
@@ -175,10 +175,10 @@ interface IAlchemistV2 {
 OpenZeppelin 5.x removed several legacy utilities. The standard library provides shims for backward compatibility:
 
 **SafeMath Shim**:
-```
+```yaml
 Location: /Users/z/work/lux/standard/src/safe/contracts/external/SafeMath.sol
 License: LGPL-3.0
-```
+```text
 
 **Usage**: Required for contracts targeting Solidity <0.8.0 or requiring explicit overflow checks.
 
@@ -190,20 +190,20 @@ library SafeMath {
     function add(uint256 a, uint256 b) internal pure returns (uint256);
     function div(uint256 a, uint256 b) internal pure returns (uint256);
 }
-```
+```text
 
 **SafeCast Utility**:
-```
+```yaml
 Location: /Users/z/work/lux/standard/src/alcx2/contracts/libraries/SafeCast.sol
 License: GPL-2.0-or-later
-```
+```text
 
 ```solidity
 library SafeCast {
     function toInt256(uint256 y) internal pure returns (int256 z);
     function toUint256(int256 y) internal pure returns (uint256 z);
 }
-```
+```text
 
 **Additional Utilities**:
 - `EnumerableSet.sol` - Set data structures (`src/gmx2/contracts/libraries/utils/`)
@@ -216,10 +216,10 @@ library SafeCast {
 DeFi protocols integrate with Lux threshold signature precompiles for enhanced security:
 
 **FROST Threshold Signatures (LP-7321)**:
-```
+```yaml
 Precompile: 0x020000000000000000000000000000000000000C
 Use Case: Multi-party custody, DAO treasury
-```
+```text
 
 ```solidity
 import {FROSTLib} from "precompiles/frost/IFROST.sol";
@@ -241,13 +241,13 @@ contract ThresholdTreasury {
         // Execute transfer
     }
 }
-```
+```text
 
 **CGGMP21 Threshold ECDSA (LP-7322)**:
 ```
 Precompile: 0x020000000000000000000000000000000000000D
 Use Case: Institutional custody, cross-chain bridges
-```
+```text
 
 ```solidity
 import {CGGMP21Lib} from "precompiles/cggmp21/ICGGMP21.sol";
@@ -269,7 +269,7 @@ contract InstitutionalVault {
         IERC20(token).transfer(msg.sender, amount);
     }
 }
-```
+```text
 
 **Gas Costs**:
 
@@ -283,9 +283,9 @@ contract InstitutionalVault {
 While Compound protocol is not directly included, the standard library provides equivalent patterns:
 
 **Flash Loan Interface** (ERC-3156):
-```
+```text
 Location: /Users/z/work/lux/standard/src/alcx2/contracts/interfaces/IERC3156FlashLender.sol
-```
+```text
 
 ```solidity
 interface IERC3156FlashLender {
@@ -298,12 +298,12 @@ interface IERC3156FlashLender {
         bytes calldata data
     ) external returns (bool);
 }
-```
+```text
 
 **Yield Adapter Pattern**:
-```
+```text
 Location: /Users/z/work/lux/standard/src/alcx2/contracts/interfaces/ITokenAdapter.sol
-```
+```text
 
 ```solidity
 interface ITokenAdapter {
@@ -313,7 +313,7 @@ interface ITokenAdapter {
     function wrap(uint256 amount, address recipient) external returns (uint256);
     function unwrap(uint256 amount, address recipient) external returns (uint256);
 }
-```
+```markdown
 
 ## Rationale
 
@@ -382,7 +382,7 @@ Projects migrating from Ethereum can use the standard library with minimal chang
 cd /Users/z/work/lux/standard/src/gmx2
 npm install
 npx hardhat test
-```
+```text
 
 **Key Test Cases**:
 1. Vault deposit/withdrawal
@@ -397,7 +397,7 @@ npx hardhat test
 cd /Users/z/work/lux/standard/src/alcx2
 yarn install
 yarn test
-```
+```text
 
 **Key Test Cases**:
 1. Deposit collateral
@@ -415,13 +415,13 @@ function testFROSTVaultWithdrawal() public {
     vault.authorizedWithdraw(token, amount, sig);
     assertEq(IERC20(token).balanceOf(recipient), amount);
 }
-```
+```text
 
 ## Reference Implementation
 
 ### Directory Summary
 
-```
+```text
 /Users/z/work/lux/standard/src/
 ├── gmx2/                    # GMX v1 perpetuals (MIT)
 │   ├── contracts/core/      # Vault, Router, OrderBook
@@ -435,7 +435,7 @@ function testFROSTVaultWithdrawal() public {
 │   ├── frost/               # FROST threshold (LP-7321)
 │   └── cggmp21/             # CGGMP21 threshold (LP-7322)
 └── interfaces/              # Common interfaces
-```
+```text
 
 ### Build Commands
 

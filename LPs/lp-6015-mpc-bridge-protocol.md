@@ -214,7 +214,7 @@ cd bridge-ui
 npm install
 npm run build
 npm run dev  # Development server on :3000
-```
+```text
 
 ### Testing
 

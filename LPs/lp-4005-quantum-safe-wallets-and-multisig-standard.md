@@ -74,7 +74,7 @@ LP-5 focuses on the design of Lux’s quantum-safe wallet infrastructure, includ
 ```bash
 cd ~/work/lux/safe/app
 npm install && npm test
-```
+```text
 
 ### Wallet CLI and Key Management
 
@@ -92,6 +92,37 @@ npm install && npm test
 cd ~/work/lux/cli
 make test  # Run full CLI test suite
 ```
+
+## Test Cases
+
+### Unit Tests
+
+1. **Cryptographic Primitives**
+   - Test key generation
+   - Verify signature creation
+   - Test signature verification
+
+2. **Post-Quantum Security**
+   - Verify NIST compliance
+   - Test parameter validation
+   - Validate security levels
+
+3. **Performance Benchmarks**
+   - Measure key generation time
+   - Benchmark signing operations
+   - Test verification throughput
+
+### Integration Tests
+
+1. **Hybrid Signature Schemes**
+   - Test classical-PQ combinations
+   - Verify fallback mechanisms
+   - Test key rotation
+
+2. **Network Integration**
+   - Test consensus with PQ signatures
+   - Verify cross-chain compatibility
+   - Test upgrade transitions
 
 ## Copyright
 

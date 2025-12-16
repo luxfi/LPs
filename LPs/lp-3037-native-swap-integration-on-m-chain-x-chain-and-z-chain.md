@@ -95,7 +95,7 @@ type SwapTx struct {
     FeeBps    uint16
     Recipient [32]byte
 }
-```
+```markdown
 Funds lock to SwapFx until SwapSigTx appears; SwapID = txID.
 
 ### 2.2 SwapSigTx (M-Chain)
@@ -108,7 +108,7 @@ type SwapSigTx struct {
     SigBitmap []byte
     ProofHash [32]byte
 }
-```
+```text
 On seeing SwapTx, validators form threshold signature off-chain and submit SwapSigTx on M-Chain.
 
 ### 3 Transaction Flow
@@ -127,7 +127,7 @@ sequenceDiagram
     BTC-->>User: funds arrive
 
     Note right of Z-Chain: if privacy, zSwapDeposit and zSwapRedeem flows.
-```
+```markdown
 
 ### 4 RPC Mapping
 
@@ -143,7 +143,7 @@ sequenceDiagram
 ```text
 X-Chain Node (luxd + DexFx)  <-->  dexfx plugin verifies SwapTx, watches proofs
 M-Chain Node (luxd + mpckeyd) <-->  mpckeyd holds key shares, exposes gRPC sign_swap
-```
+```text
 
 ### 6 State Diagrams
 
@@ -154,7 +154,7 @@ stateDiagram-v2
     Signed  --> Final: on unlock + relay
     Pending --> Expired: expiry passed
     Signed  --> RevertRefund: on failure
-```
+```text
 
 ### 7 Privacy Add‑On
 
@@ -242,7 +242,7 @@ func (tx *SwapTx) Status() SwapStatus {
 
     return PENDING
 }
-```
+```text
 
 **Testing**:
 ```bash
@@ -272,6 +272,37 @@ go test -run TestSwapLoadTest -timeout=5m ./vms/avm/plugins/swap/...
 1. How to manage fee refund or insurance for failed external TXs?
 2. Optimal expiry windows vs on-chain gas costs?
 3. Z-Chain integration depth vs UX tradeoffs?
+
+## Test Cases
+
+### Unit Tests
+
+1. **Order Validation**
+   - Test order structure validation
+   - Verify price precision handling
+   - Test quantity validation
+
+2. **Matching Engine**
+   - Test price-time priority
+   - Verify partial fill handling
+   - Test order cancellation
+
+3. **Settlement**
+   - Test atomic settlement
+   - Verify balance updates
+   - Test fee distribution
+
+### Integration Tests
+
+1. **Order Flow**
+   - Test full order lifecycle
+   - Verify matching correctness
+   - Test concurrent order handling
+
+2. **Cross-Asset Operations**
+   - Test multi-asset swaps
+   - Verify exchange rate accuracy
+   - Test slippage protection
 
 ## Copyright
 

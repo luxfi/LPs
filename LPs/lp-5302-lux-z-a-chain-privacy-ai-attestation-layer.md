@@ -105,7 +105,7 @@ Z-Chain offers **three privacy tiers**:
 1. User submits shielded transaction T
 2. Sequencer executes T off-chain, generates witness w
 3. Prover generates zk-SNARK proof π:
-   ```
+   ```text
    π ← Prove(ValidExec(T, w, state_old, state_new))
    ```
 4. L1 verifier checks π and updates state commitment
@@ -130,7 +130,7 @@ Z-Chain offers **three privacy tiers**:
 
 **Private NFT Transfer Protocol**:
 
-```
+```text
 commitment_old ← Hash(n, A_sender, salt)
 commitment_new ← Hash(n, A_recv, salt')
 
@@ -206,7 +206,7 @@ commitment_new ← Hash(n, A_recv, salt')
 
 **Attestation Protocol**:
 
-```
+```text
 // Execute transaction in enclave
 result ← ExecuteInEnclave(T)
 
@@ -237,7 +237,7 @@ return (E, Q)
        StakeAmount     uint64        // LUX staked for slashing
        Signature       []byte        // Provider signature
    }
-   ```
+   ```text
 
 2. **SubmitReceiptTx**: Submit AI inference receipt
    ```go
@@ -252,7 +252,7 @@ return (E, Q)
        Fee             uint64        // Fee in LUX
        Signature       []byte        // Provider signature
    }
-   ```
+   ```text
 
 3. **ChallengeTx**: Challenge invalid attestation
    ```go
@@ -263,7 +263,7 @@ return (E, Q)
        StakeAmount     uint64        // Stake for frivolous challenge protection
        Signature       []byte        // Challenger signature
    }
-   ```
+   ```text
 
 4. **SettlementTx**: Resolve challenge
    ```go
@@ -274,7 +274,7 @@ return (E, Q)
        Evidence        []byte        // Resolution proof
        AuditorSig      []byte        // Auditor committee signature
    }
-   ```
+   ```text
 
 #### Receipt Circuit v1 (Groth16)
 
@@ -294,12 +294,12 @@ return (E, Q)
 - `inference_result`: Inference output
 
 **Circuit Constraints**:
-```
+```text
 1. Hash(model_weights) == model_hash
 2. Hash(input_data) == dataset_hash  
 3. Hash(inference_result) == output_hash
 4. [Future v2] inference_result == Model(input_data)
-```
+```text
 
 **Performance**:
 - Constraints: ~280k (hash-only v1)
@@ -323,14 +323,14 @@ return (E, Q)
 - Dynamic difficulty adjustment based on network load
 
 **Economic Model**:
-```
+```yaml
 Mining Reward = Base_Reward × (1 + Complexity_Bonus) × (1 - Challenge_Risk)
 
 Where:
 - Base_Reward: Fixed LUX per attestation
 - Complexity_Bonus: Higher for complex models (transformers > CNNs)
 - Challenge_Risk: Reduced if attestation is challenged
-```
+```solidity
 
 **Slashing Conditions**:
 1. Invalid attestation (failed challenge)
@@ -347,10 +347,10 @@ Where:
 4. **Court Order Keys**: Can view specific addresses (requires governance vote)
 
 **View Key Protocol**:
-```
+```text
 vk = HKDF(sk_user, "view_key", salt)
 PlaintextData = Decrypt(C, vk)
-```
+```text
 
 Auditors receive vk (not sk_user), enabling read-only access without spending authority.
 
@@ -470,7 +470,7 @@ func TestComplianceProof(t *testing.T) {
     verified := zchain.VerifyComplianceProof(proof)
     require.True(t, verified)
 }
-```
+```yaml
 
 ### Integration Tests
 
@@ -501,7 +501,7 @@ interface IZChainPrivacy {
   function withdraw(uint256 amount, bytes calldata zkProof,
     address recipient) external returns (bool);
 }
-```
+```text
 
 ### Go API
 
@@ -526,7 +526,7 @@ func (z *ZChainClient) EncryptedCompute(
     operation string,
     inputs []fhe.Ciphertext,
 ) (result fhe.Ciphertext, err error)
-```
+```solidity
 
 ## Performance Benchmarks
 
@@ -586,7 +586,7 @@ Compared to:
 4. Smart contract verifies certificate without learning user identity
 
 **Certificate Proof**:
-```
+```text
 π_kyc ← Prove(HasValidCertificate(pk_user, provider_id))
 ```
 

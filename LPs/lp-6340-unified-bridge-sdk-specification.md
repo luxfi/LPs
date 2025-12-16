@@ -54,7 +54,7 @@ The Teleport bridge architecture (LP-0332) and smart contract integration (LP-03
 
 ### 1. SDK Architecture Overview
 
-```
+```text
 ┌─────────────────────────────────────────────────────────────────────────────┐
 │                          Application Layer                                   │
 │                   (DeFi Protocols, Wallets, Exchanges)                       │
@@ -91,7 +91,7 @@ The Teleport bridge architecture (LP-0332) and smart contract integration (LP-03
 │        B-Chain (BridgeVM)              T-Chain (ThresholdVM)                 │
 │        Bridge Smart Contracts          MPC Signatures                        │
 └─────────────────────────────────────────────────────────────────────────────┘
-```
+```markdown
 
 ### 2. Core Modules
 
@@ -135,7 +135,7 @@ interface ConnectionManager {
     checkHealth(): Promise<HealthStatus>;
     getLatency(chainId: ChainId): Promise<number>;
 }
-```
+```text
 
 #### 2.2 Signing Module
 
@@ -178,7 +178,7 @@ interface SignatureResult {
     v: number;
     signature: string;          // Concatenated r + s + v
 }
-```
+```text
 
 #### 2.3 Encoding Module
 
@@ -204,7 +204,7 @@ interface Encoder {
     keccak256(data: Uint8Array): string;
     sha256(data: Uint8Array): string;
 }
-```
+```text
 
 #### 2.4 Event System
 
@@ -242,7 +242,7 @@ interface EventSubscription {
     unsubscribe(): void;
     readonly isActive: boolean;
 }
-```
+```text
 
 ### 3. Bridge Client API
 
@@ -277,7 +277,7 @@ interface BridgeClient {
     getTokenBalance(token: string, address: string, chainId: ChainId): Promise<bigint>;
     approveToken(token: string, amount: bigint, chainId: ChainId): Promise<string>;
 }
-```
+```text
 
 ### 4. TypeScript SDK (github.com/luxfi/sdk-ts)
 
@@ -292,7 +292,7 @@ yarn add @luxfi/bridge-sdk
 
 # pnpm
 pnpm add @luxfi/bridge-sdk
-```
+```text
 
 #### 4.2 Setup and Configuration
 
@@ -318,7 +318,7 @@ await bridge.connect();
 // Check connection health
 const health = await bridge.checkHealth();
 console.log('Bridge health:', health);
-```
+```text
 
 #### 4.3 Signer Configuration
 
@@ -346,7 +346,7 @@ const bridge = new BridgeClient({
     luxRpcUrl: 'https://api.lux.network',
     signer: privateKeySigner,
 });
-```
+```markdown
 
 #### 4.4 Deposit Operation (External -> Lux)
 
@@ -422,7 +422,7 @@ async function depositToLux() {
 
     await bridge.disconnect();
 }
-```
+```markdown
 
 #### 4.5 Withdraw Operation (Lux -> External)
 
@@ -476,7 +476,7 @@ async function withdrawFromLux() {
 
     await bridge.disconnect();
 }
-```
+```text
 
 #### 4.6 Cross-Chain Swap
 
@@ -525,7 +525,7 @@ async function crossChainSwap() {
 
     await bridge.disconnect();
 }
-```
+```text
 
 #### 4.7 Event Subscriptions
 
@@ -590,7 +590,7 @@ async function realtimeEvents() {
         }
     }
 }
-```
+```text
 
 ### 5. Go SDK (github.com/luxfi/sdk)
 
@@ -598,7 +598,7 @@ async function realtimeEvents() {
 
 ```bash
 go get github.com/luxfi/sdk@latest
-```
+```text
 
 #### 5.2 Setup and Configuration
 
@@ -638,7 +638,7 @@ func main() {
     }
     log.Printf("Bridge health: %+v", health)
 }
-```
+```text
 
 #### 5.3 Signer Configuration
 
@@ -674,7 +674,7 @@ func setupSigners() {
     })
     _ = client
 }
-```
+```text
 
 #### 5.4 Deposit Operation
 
@@ -787,7 +787,7 @@ func depositToLux() error {
 
     return nil
 }
-```
+```text
 
 #### 5.5 Withdraw Operation
 
@@ -877,7 +877,7 @@ func withdrawFromLux() error {
 
     return nil
 }
-```
+```text
 
 #### 5.6 Integration with luxfi/node
 
@@ -934,7 +934,7 @@ func integrateLuxNode() error {
 
     return nil
 }
-```
+```text
 
 ### 6. Python SDK (github.com/luxfi/sdk-py)
 
@@ -942,7 +942,7 @@ func integrateLuxNode() error {
 
 ```bash
 pip install luxfi-bridge-sdk
-```
+```text
 
 #### 6.2 Setup and Configuration
 
@@ -977,7 +977,7 @@ async def main():
 
 if __name__ == "__main__":
     asyncio.run(main())
-```
+```text
 
 #### 6.3 Async Client with Full Operations
 
@@ -1041,7 +1041,7 @@ async def bridge_operations():
 
 if __name__ == "__main__":
     asyncio.run(bridge_operations())
-```
+```text
 
 #### 6.4 Event Subscriptions
 
@@ -1085,7 +1085,7 @@ async def subscribe_to_events():
 
 if __name__ == "__main__":
     asyncio.run(subscribe_to_events())
-```
+```text
 
 #### 6.5 Context Manager Pattern
 
@@ -1117,7 +1117,7 @@ async def with_context_manager():
 
 if __name__ == "__main__":
     asyncio.run(with_context_manager())
-```
+```text
 
 ### 7. Common Patterns
 
@@ -1167,7 +1167,7 @@ async function handleErrors() {
         }
     }
 }
-```
+```text
 
 **Go:**
 
@@ -1217,7 +1217,7 @@ func handleErrors() {
         }
     }
 }
-```
+```text
 
 **Python:**
 
@@ -1255,7 +1255,7 @@ async def handle_errors():
     except BridgeError as e:
         print(f"Bridge error: {e.message}")
         print(f"Error code: {e.code}")
-```
+```text
 
 #### 7.2 Retry Strategies
 
@@ -1315,7 +1315,7 @@ async function depositWithRetry(params: DepositParams, maxRetries = 3): Promise<
 
     throw lastError;
 }
-```
+```text
 
 **Go:**
 
@@ -1381,7 +1381,7 @@ func depositWithRetry(ctx context.Context, client *bridge.Client, params *bridge
 
     return nil, fmt.Errorf("all %d attempts failed: %w", maxRetries, lastErr)
 }
-```
+```text
 
 #### 7.3 Fee Estimation
 
@@ -1428,7 +1428,7 @@ async function estimateFees() {
 
     await bridge.disconnect();
 }
-```
+```text
 
 ### 8. Integration Guides
 
@@ -1522,7 +1522,7 @@ class CrossChainLending {
         };
     }
 }
-```
+```text
 
 #### 8.2 Wallet Integration
 
@@ -1612,7 +1612,7 @@ class WalletBridgeUI {
         return this.bridge!.trackDeposit(depositId);
     }
 }
-```
+```text
 
 #### 8.3 Exchange Integration
 
@@ -1732,7 +1732,7 @@ class ExchangeBridgeService {
         }
     }
 }
-```
+```text
 
 ### 9. Chain Adapters
 
@@ -1765,7 +1765,7 @@ interface ChainAdapter {
     getBlockNumber(): Promise<number>;
     getGasPrice(): Promise<bigint>;
 }
-```
+```text
 
 **Supported Chains:**
 
@@ -1918,7 +1918,7 @@ interface BridgeError {
     };
     cause?: Error;          // Underlying error if applicable
 }
-```
+```text
 
 **Go Error Structure:**
 
@@ -1966,7 +1966,7 @@ func ErrConnectionTimeout(endpoint string, duration time.Duration) *BridgeError 
         },
     }
 }
-```
+```text
 
 **Python Error Structure:**
 
@@ -2012,7 +2012,7 @@ class RateLimitedError(BridgeError):
         self.message = f"rate limit exceeded, retry after {self.retry_after}s"
         self.retryable = True
         self.details = {"retry_after": str(self.retry_after)}
-```
+```text
 
 ### 12. Retry Strategy Specification
 
@@ -2022,9 +2022,9 @@ Implementations MUST support configurable retry strategies with exponential back
 
 The delay before retry attempt `n` (1-indexed) MUST be calculated as:
 
-```
+```text
 delay_n = min(initial_delay * (multiplier ^ (n - 1)) + jitter, max_delay)
-```
+```text
 
 Where:
 - `initial_delay`: Starting delay (default: 1000ms)
@@ -2043,7 +2043,7 @@ interface RetryConfig {
     jitterEnabled: boolean;     // Enable jitter (default: true)
     retryableCodes: number[];   // Error codes to retry (default: all retryable)
 }
-```
+```text
 
 **Go Implementation:**
 
@@ -2151,7 +2151,7 @@ func ExampleRetry() {
 
     log.Printf("deposit succeeded: %s", result.DepositID)
 }
-```
+```text
 
 **Python Implementation:**
 
@@ -2255,7 +2255,7 @@ async def deposit_with_retry():
     )
 
     print(f"Deposit succeeded: {result.deposit_id}")
-```
+```text
 
 #### 12.3 Retry Decision Matrix
 
@@ -2308,7 +2308,7 @@ interface RateLimiterConfig {
     burstSize: number;          // Maximum burst capacity (default: 20)
     maxWaitingRequests: number; // Queue limit (default: 100)
 }
-```
+```text
 
 #### 13.2 Token Bucket Implementation
 
@@ -2440,7 +2440,7 @@ type State struct {
     WaitingRequests int
     LastRefillTime  time.Time
 }
-```
+```text
 
 **Python Implementation:**
 
@@ -2568,7 +2568,7 @@ class RateLimitedBridgeClient:
         """Rate-limited status query."""
         await self._limiter.acquire()
         return await self._client.get_deposit_status(deposit_id)
-```
+```text
 
 #### 13.3 Per-Chain Rate Limits
 
@@ -2618,7 +2618,7 @@ This section provides test vectors for SDK conformance testing.
     }
   ]
 }
-```
+```text
 
 #### 14.2 Amount Parsing
 
@@ -2658,7 +2658,7 @@ This section provides test vectors for SDK conformance testing.
     }
   ]
 }
-```
+```text
 
 #### 14.3 Fee Estimation Vectors
 
@@ -2693,7 +2693,7 @@ This section provides test vectors for SDK conformance testing.
     }
   ]
 }
-```
+```text
 
 #### 14.4 SDK Usage Test Vectors
 
@@ -2816,7 +2816,7 @@ func TestRateLimiting(t *testing.T) {
         t.Error("request after refill should succeed")
     }
 }
-```
+```text
 
 **Python SDK Test:**
 
@@ -2956,7 +2956,7 @@ async def test_chain_support():
     assert eth_chain is not None, "Ethereum must be supported"
 
     await client.disconnect()
-```
+```text
 
 #### 14.5 Connection Test Vectors
 

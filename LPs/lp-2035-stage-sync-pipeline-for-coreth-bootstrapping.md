@@ -116,7 +116,7 @@ func (sl *StageLoop) Run(ctx context.Context) error {
         }
     }
 }
-```
+```text
 
 **Testing**:
 ```bash
@@ -126,7 +126,7 @@ go test ./evm/stages/... -v -bench=. -benchmem
 # Sync benchmark with metrics
 cd ~/work/lux/node
 go test -run TestStagedSync -bench=BenchmarkStagedSync -benchmem ./evm/stages/...
-```
+```text
 
 ### Performance Metrics
 
@@ -152,7 +152,7 @@ Per-stage latency benchmarks (measured on reference hardware):
 ## Reference Implementation
 
 See prototype code under `node/evm/stages/` in the Lux repo:
-```
+```text
 node/evm/stages/
 ├─ driver.go
 ├─ headers.go

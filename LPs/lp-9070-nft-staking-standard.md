@@ -117,7 +117,7 @@ interface ILuxNFTStaking {
     function getUserStakes(uint256 poolId, address user) external view returns (StakeInfo[] memory);
     function getPoolInfo(uint256 poolId) external view returns (PoolInfo memory);
 }
-```
+```text
 
 ### Boost System Extension
 
@@ -180,7 +180,7 @@ interface INFTStakingBoost is ILuxNFTStaking {
         address user
     ) external view returns (uint256 totalMultiplier);
 }
-```
+```text
 
 ### Lock Period Extension
 
@@ -228,7 +228,7 @@ interface INFTStakingLock is ILuxNFTStaking {
         uint256 tokenId
     ) external view returns (uint256);
 }
-```
+```text
 
 ### Multi-Reward Extension
 
@@ -277,7 +277,7 @@ interface INFTStakingMultiReward is ILuxNFTStaking {
     
     function claimAllRewards(uint256 poolId) external;
 }
-```
+```text
 
 ### Delegation Extension
 
@@ -318,7 +318,7 @@ interface INFTStakingDelegation is ILuxNFTStaking {
         address delegator
     ) external view returns (Delegation[] memory);
 }
-```
+```text
 
 ## Rationale
 
@@ -416,7 +416,7 @@ contract NFTStakingTest {
         assertEq(balanceAfter - balanceBefore, pending);
     }
 }
-```
+```text
 
 ### Boost System Testing
 
@@ -477,7 +477,7 @@ function testLockBonus() public {
     // Now unstake should work
     staking.unstake(poolId, tokenIds, new uint256[](0));
 }
-```
+```text
 
 ## Implementation
 
@@ -501,7 +501,7 @@ forge build
 forge script script/DeployNFTStaking.s.sol:DeployNFTStaking \
   --rpc-url https://api.avax.network/ext/bc/C/rpc \
   --broadcast
-```
+```text
 
 ### Testing
 
@@ -521,7 +521,7 @@ forge test --match-path test/nft-staking/\* --gas-report
 
 # Coverage
 forge coverage --match-path test/nft-staking/\*
-```
+```markdown
 
 **Test Cases** (see `/test/nft-staking/LuxNFTStaking.t.sol`):
 - `testCreatePoolAndStake()` - Pool creation and basic staking
@@ -550,7 +550,7 @@ forge verify-contract \
   --chain-id 43114 \
   --watch 0x<NFT_STAKING_ADDRESS> \
   src/nft-staking/LuxNFTStaking.sol:LuxNFTStaking
-```
+```text
 
 ## Reference Implementation
 
@@ -835,7 +835,7 @@ contract LuxNFTStaking is ILuxNFTStaking, INFTStakingBoost, ReentrancyGuard, Own
         emit EmergencyWithdraw(poolId, msg.sender, tokenIds);
     }
 }
-```
+```text
 
 ## Security Considerations
 
@@ -849,7 +849,7 @@ modifier nonReentrant() {
     _;
     locked = false;
 }
-```
+```text
 
 ### NFT Transfer Safety
 
@@ -857,14 +857,14 @@ Use safe transfer functions:
 ```solidity
 IERC721(collection).safeTransferFrom(from, to, tokenId);
 // Handle onERC721Received callback
-```
+```text
 
 ### Reward Calculation Precision
 
 Prevent rounding errors:
 ```solidity
 uint256 accRewardPerNFT; // Multiplied by 1e12 for precision
-```
+```text
 
 ### Access Control
 

@@ -46,7 +46,7 @@ const (
     LightSync                        // Headers only
     WarpSync                         // From checkpoint
 )
-```
+```text
 
 ### State Snapshot
 
@@ -59,7 +59,7 @@ type StateSnapshot struct {
     Timestamp   uint64
     ChainID     uint64
 }
-```
+```text
 
 ### Fast Sync Protocol
 
@@ -83,7 +83,7 @@ func FastSync(target *StateSnapshot) error {
     // 5. Download recent blocks
     return DownloadBlocks(target.BlockHeight, HEAD)
 }
-```
+```text
 
 ### Pruning Modes
 
@@ -113,7 +113,7 @@ type FreezerConfig struct {
     Threshold  uint64     // When to freeze (90000 blocks)
     Tables     []FreezerTable
 }
-```
+```text
 
 ### State Pruning
 
@@ -138,7 +138,7 @@ func (p *StatePruner) Prune(currentBlock uint64) error {
 
     return nil
 }
-```
+```text
 
 ### Differential Sync
 
@@ -168,7 +168,7 @@ func (d *DiffSync) Apply(base StateDB) error {
     }
     return nil
 }
-```
+```text
 
 ## Rationale
 
@@ -227,7 +227,7 @@ func TestStatePruning(t *testing.T) {
     // Verify old state pruned
     assert.False(t, HasState(500))
 }
-```
+```text
 
 ## Reference Implementation
 
@@ -282,7 +282,7 @@ See [github.com/luxfi/node/sync](https://github.com/luxfi/node/tree/main/sync) f
 ### Deployment Configuration
 
 **Mainnet Parameters**:
-```
+```text
 Sync Mode: auto (chooses best available)
 Snap Pivot Block: Chain head - 1024 blocks
 Warp Checkpoint Interval: 10,000 blocks
@@ -290,19 +290,19 @@ Pruning Mode: full
 Retention Blocks: 131,072 (1 year approx)
 Ancient Threshold: 90,000 blocks
 Freezer Batch Size: 2,048 blocks
-```
+```text
 
 **Validator Node Configuration**:
-```
+```yaml
 Sync Mode: full
 Pruning Mode: archive
 Retention: infinite
 Ancient Store: enabled
 Enable Snapshots: true
-```
+```text
 
 **Light Node Configuration**:
-```
+```text
 Sync Mode: light
 Pruning Mode: fast
 Retention Blocks: 128

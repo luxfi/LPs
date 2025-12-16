@@ -140,7 +140,7 @@ var KnownScenarios = []SignerCompromiseScenario{
         ResponseTime:    1 * time.Hour,
     },
 }
-```
+```text
 
 **Signer Compromise Response Matrix:**
 
@@ -243,7 +243,7 @@ var ContractVulnerabilities = []ContractVulnerabilityClass{
         },
     },
 }
-```
+```text
 
 #### 1.4 Oracle Manipulation Vectors
 
@@ -290,7 +290,7 @@ var OracleAttacks = []OracleAttackVector{
         Mitigation:  "TWAP oracles, price deviation circuit breakers",
     },
 }
-```
+```text
 
 #### 1.5 Network-Level Attacks
 
@@ -356,7 +356,7 @@ var NetworkAttacks = []NetworkAttack{
         Mitigation:  "Rate limiting, request prioritization",
     },
 }
-```
+```text
 
 ### 2. Defense Layers
 
@@ -522,7 +522,7 @@ func (rl *RateLimiter) checkAssetLimit(asset AssetID, amount *big.Int) error {
 
     return nil
 }
-```
+```markdown
 
 #### 2.2 Withdrawal Delays (Time-locks)
 
@@ -704,7 +704,7 @@ func (wm *WithdrawalManager) ChallengeWithdrawal(
 
     return nil
 }
-```
+```text
 
 #### 2.3 Circuit Breakers
 
@@ -933,7 +933,7 @@ func (cb *CircuitBreaker) tripBreaker(name string, action BreakerAction, reason 
         "action", action,
         "reason", reason)
 }
-```
+```text
 
 #### 2.4 Insurance Fund
 
@@ -1091,7 +1091,7 @@ func (f *InsuranceFund) SubmitClaim(
 
     return claim, nil
 }
-```
+```text
 
 ### 3. Emergency Procedures
 
@@ -1254,7 +1254,7 @@ func (pm *PauseManager) IsOperationAllowed(
 
     return true
 }
-```
+```text
 
 #### 3.2 Emergency Key Rotation
 
@@ -1379,7 +1379,7 @@ func (ekr *EmergencyKeyRotation) calculateNewSigners(
 
     return newSigners
 }
-```
+```text
 
 #### 3.3 Fund Recovery Procedures
 
@@ -1595,7 +1595,7 @@ func (frm *FundRecoveryManager) ExecuteRecovery(recoveryID RecoveryID) error {
     procedure.Status = RecoveryCompleted
     return nil
 }
-```
+```text
 
 #### 3.4 Communication Protocols
 
@@ -1844,7 +1844,7 @@ func (ic *IncidentCommunicator) Escalate(incident *Incident) error {
     // Notify escalation contacts
     return ic.notifyEscalation(incident, level)
 }
-```
+```text
 
 #### 3.5 Incident Response Playbook
 
@@ -1891,7 +1891,7 @@ The following playbook defines step-by-step procedures for security incidents:
 
 When signer compromise is suspected or confirmed, execute this protocol:
 
-```
+```text
 Step 1: IMMEDIATE (0-5 minutes)
   - Guardian activates global pause via EmergencyPause(PauseGlobal, "", "Signer compromise suspected", guardian)
   - Log: "EMERGENCY: Key rotation initiated - [KeyID]"
@@ -1933,11 +1933,11 @@ Step 7: SERVICE RESTORATION (2-4 hours)
     c. Third: small withdrawals
     d. Finally: all operations
   - Monitor closely for 24 hours post-restoration
-```
+```text
 
 **Communication Protocol for Security Incidents**
 
-```
+```text
 PHASE 1: INTERNAL NOTIFICATION (0-5 minutes)
   Channel: PagerDuty + Slack #security-incidents
   Audience: Security Team, On-Call Engineers
@@ -1969,7 +1969,7 @@ PHASE 6: RESOLUTION (within 24 hours of resolution)
 PHASE 7: POST-MORTEM (within 7 days)
   Channel: Public Blog, Internal Wiki
   Content: Full technical analysis, lessons learned, improvements
-```
+```text
 
 ### 4. Monitoring and Alerting
 
@@ -2061,7 +2061,7 @@ var DefaultMetricThresholds = []MetricThreshold{
     {"vault_balance_change_1h", 0.10, 0.25, 0},  // 10%/25% change
     {"pending_withdrawal_count", 100, 500, 10 * time.Minute},
 }
-```
+```text
 
 #### 4.2 Off-Chain Monitoring
 
@@ -2182,7 +2182,7 @@ func (m *OffChainMonitor) HealthCheck() *HealthReport {
 
     return report
 }
-```
+```text
 
 #### 4.3 Anomaly Detection
 
@@ -2327,7 +2327,7 @@ func (ad *AnomalyDetector) Detect(metric string, value float64) (*AnomalyResult,
 
     return nil, nil
 }
-```
+```text
 
 ### 5. Governance for Emergency Actions
 
@@ -2441,7 +2441,7 @@ var DefaultEmergencyGovernance = EmergencyGovernanceConfig{
         ActionUpgradeType:         7 * 24 * time.Hour,  // Contract upgrades
     },
 }
-```
+```text
 
 #### 5.2 Governance Contracts Integration
 
@@ -2629,7 +2629,7 @@ contract BridgeEmergencyGovernor {
         // Handle other proposal types...
     }
 }
-```
+```text
 
 ### 6. Post-Incident Procedures
 
@@ -2794,7 +2794,7 @@ var PostMortemTemplate = `
 *Last Updated: {{.PublishedAt.Format "2006-01-02 15:04"}}*
 *Authors: {{range .Authors}}{{.}}, {{end}}*
 `
-```
+```text
 
 #### 6.2 Recovery Verification
 
@@ -2982,7 +2982,7 @@ func (rv *RecoveryVerifier) runAutomatedCheck(name string) (bool, string) {
         return false, "Manual verification required"
     }
 }
-```
+```text
 
 ### 7. Integration with Related LPs
 
@@ -3038,7 +3038,7 @@ func (ti *TChainSecurityIntegration) SecureSignatureRequest(
 
     return ti.tchain.RequestSignature(signReq)
 }
-```
+```markdown
 
 #### 7.2 B-Chain Integration (LP-331)
 
@@ -3101,7 +3101,7 @@ func (bi *BChainSecurityIntegration) ChallengeWithdrawal(
     // Submit challenge via LP-331
     return bi.bchain.ChallengeWithdrawal(withdrawID, reason)
 }
-```
+```markdown
 
 #### 7.3 Dynamic Signer Rotation Integration (LP-333)
 
@@ -3141,7 +3141,7 @@ func (si *SignerRotationSecurityIntegration) HandleCompromiseDetection(
         Priority:        PriorityEmergency,
     })
 }
-```
+```markdown
 
 #### 7.4 Smart Contract Integration (LP-335)
 
@@ -3189,7 +3189,7 @@ func (ci *ContractSecurityIntegration) UpdateMPCSignerAllChains(
 
     return nil
 }
-```
+```text
 
 ## Rationale
 
@@ -3304,7 +3304,7 @@ func TestInsuranceClaim(t *testing.T) {
     expected := big.NewInt(40_000_000) // 50M - (10M - deductible)
     assert.True(t, fund.balance.Cmp(expected) < 0)
 }
-```
+```text
 
 ### Integration Tests
 
@@ -3337,7 +3337,7 @@ func TestFullIncidentResponse(t *testing.T) {
     err := system.pauseMgr.Unpause(PauseGlobal, "", admin)
     require.NoError(t, err)
 }
-```
+```text
 
 ## Reference Implementation
 
@@ -3358,7 +3358,7 @@ import (
 
 // Note: Do NOT use go-ethereum or ava-labs packages.
 // The Lux ecosystem maintains its own forks with necessary modifications.
-```
+```text
 
 ### RPC Configuration
 
@@ -3374,11 +3374,11 @@ const (
     LuxMainnetRPC = "http://localhost:9630/ext/bc/C/rpc"
     LuxTestnetRPC = "http://localhost:9630/ext/bc/C/rpc"
 )
-```
+```text
 
 ### Repository Structure
 
-```
+```text
 github.com/luxfi/bridge/security/
 ├── ratelimit/
 │   ├── limiter.go           # Rate limiting implementation
@@ -3405,7 +3405,7 @@ github.com/luxfi/bridge/security/
 └── postmortem/
     ├── template.go          # Post-mortem templates
     └── process.go           # Post-mortem process
-```
+```text
 
 ### Build and Test
 

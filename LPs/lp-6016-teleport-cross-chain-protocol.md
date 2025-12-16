@@ -51,7 +51,7 @@ Each supported chain implements a Teleport handler that:
 
 #### 3. Message Format
 Teleport messages follow the AWM format with extensions:
-```
+```text
 TeleportMessage {
     version: uint8
     sourceChain: bytes32
@@ -100,7 +100,7 @@ function atomicSwap(
     uint256 amountB,
     address counterparty
 ) external;
-```
+```text
 
 #### Batch Transfers
 Multiple transfers can be bundled:
@@ -108,7 +108,7 @@ Multiple transfers can be bundled:
 function batchTeleport(
     TeleportRequest[] calldata requests
 ) external;
-```
+```text
 
 #### Programmable Transfers
 Execute arbitrary calls on destination:
@@ -120,7 +120,7 @@ function teleportAndCall(
     address target,
     bytes calldata data
 ) external;
-```
+```text
 
 ## Rationale
 
@@ -146,7 +146,7 @@ Teleport is fully backwards compatible with existing Lux chains. Legacy transfer
 
 ```solidity
 function supportsTeleport() external view returns (bool);
-```
+```text
 
 ## Test Cases
 
@@ -246,7 +246,7 @@ npm run build
 # Build relayer
 cd teleport/relayer
 go build -o bin/teleport-relayer ./cmd/relayer
-```
+```text
 
 ### Testing
 

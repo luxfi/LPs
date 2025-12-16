@@ -118,7 +118,7 @@ def calc_next_q(q_current: int, q_desired: int, max_change: int) -> int:
         return q_current + min(q_desired - q_current, max_change)
     else:
         return q_current - min(q_current - q_desired, max_change)
-```
+```latex
 
 The change $|\Delta q| \leq Q$ or the block is invalid.
 
@@ -296,7 +296,7 @@ func TestConvergenceRate(t *testing.T) {
     // Should take ~3,635 blocks
     require.InDelta(t, 3635, blocks, 10)
 }
-```
+```yaml
 
 ### Integration Tests
 
@@ -339,7 +339,7 @@ func VerifyHeader(block *Block, parent *Block) error {
     
     return nil
 }
-```
+```text
 
 ### Dynamic Delay Calculation
 
@@ -376,7 +376,7 @@ func DesiredExcess(desiredDelay uint64) uint64 {
     ln := math.Log(ratio)
     return uint64(float64(UpdateConstant) * ln)
 }
-```
+```text
 
 ### Block Building
 
@@ -415,7 +415,7 @@ func (b *BlockBuilder) BuildBlock(parent *Block, txs []Tx) (*Block, error) {
     
     return block, nil
 }
-```
+```text
 
 ## Use Cases
 
@@ -437,7 +437,7 @@ func (b *BlockBuilder) BuildBlock(parent *Block, txs []Tx) (*Block, error) {
 ```toml
 [c-chain]
 minimum-block-delay = 500  # milliseconds
-```
+```text
 
 **Result**: Network gradually adjusts to 500ms blocks over ~2 hours
 
@@ -465,7 +465,7 @@ func adjustAIChainTiming(observedLatency time.Duration) {
         preferredDelay = 150
     }
 }
-```
+```text
 
 **Benefit**: AI Chain adapts block timing to match network performance
 
@@ -493,7 +493,7 @@ contract BridgeVM {
         }
     }
 }
-```
+```text
 
 **Benefit**: Bridge operations coordinated with epoch timing
 
@@ -516,7 +516,7 @@ async function submitMove(move) {
     await tx.wait(1);
     updateGameState();
 }
-```
+```text
 
 **NFT Marketplace**:
 - Faster bid confirmations
@@ -595,7 +595,7 @@ EPOCH_DURATION_MS = 300000  # 5 minutes
 
 # Ensure epoch duration >> minimum block delay
 assert EPOCH_DURATION_MS > MIN_BLOCK_DELAY * 100
-```
+```text
 
 ### LP-601 (Gas Fees)
 
@@ -619,7 +619,7 @@ func configureChain() {
     config.targetGas = 15_000_000  // 15M gas target
     config.targetDelay = 500       // 500ms target
 }
-```
+```text
 
 ### LP-204 (secp256r1)
 
@@ -645,11 +645,11 @@ func configureChain() {
 
 ### Key Files
 
-```
+```text
 vms/evm/acp226/
 ├── acp226.go       # Core math and delay calculation
 └── acp226_test.go  # Unit tests
-```
+```text
 
 ### Testing
 
@@ -673,7 +673,7 @@ func TestCalculateMinimumDelay(t *testing.T) {
     finalDelay := CalculateMinimumBlockDelay(current)
     assert.InDelta(t, 500, finalDelay, 10) // Within 10ms
 }
-```
+```text
 
 ## Backwards Compatibility
 
@@ -707,7 +707,7 @@ func TestCalculateMinimumDelay(t *testing.T) {
   
   [chains.z-chain]
   target-block-delay = 200  # ZK proofs benefit from fast blocks
-```
+```text
 
 ### Adaptive Algorithms
 
@@ -732,7 +732,7 @@ class AdaptiveBlockTiming:
         else:
             # Maintain current
             return current_delay
-```
+```text
 
 ### Cross-Chain Coordination
 

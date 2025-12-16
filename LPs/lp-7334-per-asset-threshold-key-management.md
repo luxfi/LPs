@@ -52,7 +52,7 @@ type ManagedKey struct {
     LastRotation uint64      // Last key refresh height
     Metadata     KeyMetadata // Extended attributes
 }
-```
+```text
 
 Example configurations demonstrating flexibility:
 
@@ -84,9 +84,9 @@ Example configurations demonstrating flexibility:
 
 Keys follow a hierarchical naming scheme that encodes source chain, asset, and optional variant:
 
-```
+```text
 {source_chain}-{asset_symbol}[-{variant}]
-```
+```text
 
 This naming convention provides:
 - **Uniqueness**: Each key has a globally unique identifier
@@ -140,7 +140,7 @@ Optional suffixes indicate specialized configurations. Variants enable the same 
 
 #### 1.4 Examples
 
-```
+```text
 eth-usdc           # Ethereum USDC, standard tier
 eth-usdc-large     # Ethereum USDC, high-value tier (higher threshold)
 eth-usdc-hot       # Ethereum USDC, liquidity/market-making (lower threshold)
@@ -152,7 +152,7 @@ arb-weth           # Arbitrum wrapped ETH
 base-usdc          # Base USDC
 eth-bayc-nft       # Bored Ape Yacht Club NFTs
 xrpl-xrp           # Native XRP
-```
+```text
 
 #### 1.5 KeyID Validation
 
@@ -172,7 +172,7 @@ func ValidateKeyID(keyID string) error {
     }
     return nil
 }
-```
+```text
 
 ### 2. Threshold Selection Guidelines
 
@@ -191,7 +191,7 @@ func ValidateKeyID(keyID string) error {
 
 The threshold t for a given party count n follows the Byzantine fault tolerance formula:
 
-```
+```text
 t = ceil((2n + 1) / 3)
 ```
 
@@ -250,7 +250,7 @@ var ethUSDCLargeConfig = KeyConfig{
     MaxTxValue:   1_000_000 * 1e6, // $1M
     QuantumBackup: true,           // Ringtail dual-sig enabled
 }
-```
+```text
 
 ### 2.5 Complete Asset Configuration Examples
 
@@ -323,7 +323,7 @@ var btcCustodyConfig = KeyConfig{
         },
     },
 }
-```
+```markdown
 
 #### 2.5.2 Ethereum (ETH) Configuration
 
@@ -362,7 +362,7 @@ var ethLargeConfig = KeyConfig{
         Tags:        []string{"ethereum", "large", "institutional"},
     },
 }
-```
+```text
 
 #### 2.5.3 USDC Configuration
 
@@ -442,7 +442,7 @@ var usdcCustodyConfig = KeyConfig{
         Tags:        []string{"stablecoin", "usdc", "custody", "treasury"},
     },
 }
-```
+```text
 
 #### 2.5.4 USDT Configuration
 
@@ -505,7 +505,7 @@ var bscUsdtConfig = KeyConfig{
         },
     },
 }
-```
+```text
 
 #### 2.5.5 Complete Asset Registry
 
@@ -570,7 +570,7 @@ func GetConfigForValueTier(chain, asset string, valueUSD uint64) (KeyConfig, err
 
     return KeyConfig{}, fmt.Errorf("no suitable key for %s-%s at tier %s", chain, asset, tier)
 }
-```
+```text
 
 ### 3. Key Creation Workflow
 
@@ -589,20 +589,20 @@ type KeyCreateTx struct {
     Metadata      KeyMetadata  // Extended attributes
     GovernanceSig []byte       // Required governance approval
 }
-```
+```text
 
 #### 3.2 Distributed Key Generation Protocol
 
 Key creation follows the CGG21 DKG protocol (or equivalent for other algorithms):
 
-```
+```text
 1. PROPOSE: Governance submits KeyCreateTx with parameters
 2. ACCEPT:  Selected parties acknowledge participation
 3. COMMIT:  Each party commits to DKG round 1 values
 4. SHARE:   Parties exchange encrypted key shares
 5. VERIFY:  All parties verify share consistency
 6. PUBLISH: Aggregate public key committed on-chain
-```
+```text
 
 ```go
 // DKG state machine
@@ -628,11 +628,11 @@ type DKGSession struct {
     StartHeight uint64
     Timeout     uint64
 }
-```
+```text
 
 #### 3.3 Creation RPC Flow
 
-```
+```text
 Client                 T-Chain/M-Chain               Signers
    |                        |                          |
    |--KeyCreateTx---------->|                          |
@@ -649,7 +649,7 @@ Client                 T-Chain/M-Chain               Signers
    |                        |<--AggPubKey--------------|
    |                        |                          |
    |<--KeyCreated-----------|                          |
-```
+```text
 
 ### 4. Key Metadata Storage
 
@@ -696,7 +696,7 @@ const (
     KeyStatusSuspended           // Temporarily disabled
     KeyStatusRevoked             // Permanently disabled
 )
-```
+```text
 
 #### 4.2 Off-Chain Signer State
 
@@ -719,7 +719,7 @@ type NonceState struct {
     Used   bool
     Height uint64 // Block when generated
 }
-```
+```text
 
 ### 5. Signer Assignment Strategies
 
@@ -757,7 +757,7 @@ func SelectSigners(candidates []SignerScore, n int, config KeyConfig) []party.ID
 
     return selected
 }
-```
+```text
 
 #### 5.2 Geographic Diversity
 
@@ -839,7 +839,7 @@ var TierGeoRequirements = map[ValueTier]GeographyConstraint{
     TierVeryLarge: {MinRegions: 5, MaxPerRegion: 2},
     TierCustody: {MinRegions: 6, MaxPerRegion: 2},
 }
-```
+```text
 
 **Geographic Diversity Rationale:**
 
@@ -884,7 +884,7 @@ func (om *OverlapMatrix) CheckNewKey(keyID string, signers []party.ID, existing 
 }
 
 const MaxOverlapRatio = 0.6 // Maximum 60% signer overlap between any two keys
-```
+```text
 
 ### 6. Cross-Key Coordination
 
@@ -929,7 +929,7 @@ func (c *Coordinator) ExecuteMultiKey(session MultiKeySession) ([][]byte, error)
     }
     return results, nil
 }
-```
+```text
 
 #### 6.2 Key Dependency Graph
 
@@ -954,13 +954,13 @@ func ValidateKeyOperation(keyID string, op Operation, deps []KeyDependency) erro
     }
     return nil
 }
-```
+```text
 
 ### 7. Key Lifecycle Management
 
 #### 7.1 State Transitions
 
-```
+```text
                     +-------------+
                     |   PROPOSED  |
                     +------+------+
@@ -982,7 +982,7 @@ func ValidateKeyOperation(keyID string, op Operation, deps []KeyDependency) erro
                     +------+------+
                     |   REVOKED   |
                     +-------------+
-```
+```text
 
 #### 7.2 Key Rotation
 
@@ -1026,7 +1026,7 @@ func (vm *VM) ProcessKeyRotate(tx *KeyRotateTx) error {
 
     return vm.state.StartDKG(session)
 }
-```
+```text
 
 #### 7.3 Automatic Refresh Schedule
 
@@ -1054,7 +1054,7 @@ var RefreshPolicies = map[ValueTier]RefreshPolicy{
     TierVeryLarge: {IntervalBlocks: 7 * 7200, GracePeriod: 1 * 7200},
     TierCustody: {IntervalBlocks: 3 * 7200, GracePeriod: 6 * 3600},
 }
-```
+```text
 
 #### 7.4 Key Rotation Policies
 
@@ -1164,7 +1164,7 @@ var TierRotationPolicies = map[ValueTier]RotationPolicy{
         RequireGovernance:         true,
     },
 }
-```
+```text
 
 ##### 7.4.2 Rotation Triggers
 
@@ -1210,7 +1210,7 @@ func (rm *RotationManager) ShouldRotate(keyID string) (bool, RotationTrigger, er
 
     return false, 0, nil
 }
-```
+```text
 
 ##### 7.4.3 Rotation Execution
 
@@ -1265,7 +1265,7 @@ func (rm *RotationManager) executeProactiveRefresh(key *ManagedKey) error {
     }
     return rm.submitRotation(tx)
 }
-```
+```text
 
 ##### 7.4.4 Rotation Summary by Tier
 
@@ -1306,7 +1306,7 @@ func (vm *VM) ProcessKeySuspend(tx *KeySuspendTx) error {
 
     return nil
 }
-```
+```text
 
 ### 8. Monitoring and Alerting
 
@@ -1345,7 +1345,7 @@ func ComputeKeyHealth(keyID string) KeyHealthMetrics {
 
     return metrics
 }
-```
+```text
 
 #### 8.2 Alert Conditions
 
@@ -1391,7 +1391,7 @@ var DefaultAlertRules = []AlertRule{
         Actions:  []AlertAction{ActionTriggerRefresh, ActionSlack},
     },
 }
-```
+```text
 
 #### 8.3 Dashboard Endpoints
 
@@ -1413,7 +1413,7 @@ type KeyHealthSummary struct {
     LastUsed    uint64  `json:"lastUsedBlock"`
     ValueLocked string  `json:"valueLocked"` // Human-readable USD
 }
-```
+```text
 
 ### 9. RPC API for Key Management
 
@@ -1443,7 +1443,7 @@ service KeyManager {
     rpc ListSigners(ListSignersRequest) returns (ListSignersResponse);
     rpc GetSignerStatus(SignerStatusRequest) returns (SignerStatusResponse);
 }
-```
+```text
 
 #### 9.2 JSON-RPC Methods (under `/ext/bc/T`)
 
@@ -1499,7 +1499,7 @@ service KeyManager {
         "estimatedCompletion": 12345678
     }
 }
-```
+```text
 
 **Sign Request:**
 
@@ -1531,7 +1531,7 @@ service KeyManager {
         "estimatedLatency": 200
     }
 }
-```
+```text
 
 **Get Key Health:**
 
@@ -1579,7 +1579,7 @@ service KeyManager {
         }
     }
 }
-```
+```text
 
 ## Security Considerations
 
@@ -1630,7 +1630,7 @@ func (vm *VM) CheckPermission(caller ids.ShortID, keyID string, required Permiss
     }
     return nil
 }
-```
+```text
 
 ### Quantum Security
 
@@ -1657,7 +1657,7 @@ func VerifyDualSignature(msg []byte, classical, quantum []byte, config QuantumCo
     }
     return nil
 }
-```
+```markdown
 
 ## Backwards Compatibility
 
@@ -1739,7 +1739,7 @@ func TestKeyCreation_DuplicateKeyID(t *testing.T) {
     err := vm.ProcessKeyCreate(tx)
     require.ErrorIs(t, err, ErrKeyExists)
 }
-```
+```text
 
 ### Multi-Key Signing Tests
 
@@ -1780,7 +1780,7 @@ func TestMultiKeySigning_OneKeyFails(t *testing.T) {
     require.Error(t, err)
     require.Contains(t, err.Error(), "suspended")
 }
-```
+```text
 
 ### Key Rotation Tests
 
@@ -1826,7 +1826,7 @@ func TestKeyRotation_ChangeSigners(t *testing.T) {
     require.Equal(t, []party.ID{"p4", "p5", "p6"}, key.PartyIDs)
     // Note: public key changes when signers change
 }
-```
+```text
 
 ### Threshold Tier Tests
 
@@ -1853,7 +1853,7 @@ func TestThresholdTiers(t *testing.T) {
         })
     }
 }
-```
+```text
 
 ## Reference Implementation
 
@@ -1959,7 +1959,7 @@ This LP integrates with several other Lux Proposals:
 
 ### Example Integration Flow
 
-```
+```text
 1. Bridge receives transfer request for 500,000 USDC on Ethereum
 2. This LP's GetConfigForValueTier("eth", "usdc", 500000) returns "eth-usdc-large"
 3. LP-330's T-Chain processes SignRequest for key "eth-usdc-large"

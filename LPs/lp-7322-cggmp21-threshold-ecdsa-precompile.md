@@ -63,9 +63,9 @@ The critical innovation in CGGMP21 is **identifiable aborts**:
 
 ### Precompile Address
 
-```
+```text
 0x020000000000000000000000000000000000000D
-```
+```markdown
 
 ### Input Format
 
@@ -103,7 +103,7 @@ The gas cost is calculated based on the threshold configuration:
 
 ```
 gas = 75,000 + (totalParties × 10,000)
-```
+```markdown
 
 **Cost Examples**:
 | Configuration | Total Parties | Gas Cost |
@@ -147,7 +147,7 @@ interface ICGGMP21 {
         bytes calldata signature
     ) external view returns (bool valid);
 }
-```
+```text
 
 ### CGGMP21Lib Library
 
@@ -199,7 +199,7 @@ library CGGMP21Lib {
         return BASE_GAS + (uint256(totalSigners) * PER_SIGNER_GAS);
     }
 }
-```
+```text
 
 ### CGGMP21Verifier Abstract Contract
 
@@ -241,7 +241,7 @@ abstract contract CGGMP21Verifier {
         emit CGGMP21SignatureVerified(threshold, totalSigners, publicKey, messageHash);
     }
 }
-```
+```text
 
 ## Usage Examples
 
@@ -308,7 +308,7 @@ contract ThresholdWallet is CGGMP21Verifier {
 
     receive() external payable {}
 }
-```
+```text
 
 ### DAO Treasury
 
@@ -348,7 +348,7 @@ contract DAOTreasury is CGGMP21Verifier {
         require(success, "Proposal execution failed");
     }
 }
-```
+```text
 
 ### Cross-Chain Bridge
 
@@ -394,7 +394,7 @@ contract ThresholdBridge is CGGMP21Verifier {
         // Process cross-chain message
     }
 }
-```
+```solidity
 
 ## Technical Specification
 
@@ -508,7 +508,7 @@ bytes32 messageHash = keccak256(abi.encodePacked(
     domainSeparator,
     keccak256(abi.encode(nonce, data))
 ));
-```
+```text
 
 ### Identifiable Abort Handling
 
@@ -525,7 +525,7 @@ When an abort is identified:
 Reference implementation tests: `github.com/luxfi/standard/src/precompiles/cggmp21/contract_test.go`
 
 ### Test 1: Valid 3-of-5 Signature
-```
+```yaml
 Input:
   threshold: 3
   totalParties: 5
@@ -535,17 +535,17 @@ Input:
 
 Expected Output: 0x0000...0001 (valid)
 Gas Used: 125,000
-```
+```text
 
 ### Test 2: Invalid Signature
-```
+```text
 Input: (same as Test 1 but corrupted signature)
 Expected Output: 0x0000...0000 (invalid)
 Gas Used: 125,000
-```
+```text
 
 ### Test 3: Threshold Violation
-```
+```yaml
 Input:
   threshold: 6 (invalid: > totalParties)
   totalParties: 5
@@ -554,14 +554,14 @@ Expected: Revert with "Invalid threshold"
 ```
 
 ### Test 4: Large Threshold (10-of-15)
-```
+```yaml
 Input:
   threshold: 10
   totalParties: 15
 
 Expected Output: 0x0000...0001 (valid)
 Gas Used: 225,000
-```
+```text
 
 ## Reference Implementation
 
@@ -601,7 +601,7 @@ func Presign(config *Config, signers []party.ID, pl *pool.Pool) protocol.StartFu
 // Online signing with presignature
 func PresignOnline(config *Config, preSignature *ecdsa.PreSignature,
                    messageHash []byte, pl *pool.Pool) protocol.StartFunc
-```
+```solidity
 
 **Repository**: https://github.com/luxfi/threshold/tree/main/protocols/cmp
 
@@ -693,7 +693,7 @@ See LP-323 for dynamic threshold and party set changes using LSS-MPC protocol ex
 
 Future LPs may define hybrid schemes combining CGGMP21 with post-quantum signatures:
 
-```
+```text
 HybridSignature = CGGMP21_Signature || PQ_Signature
 ```
 

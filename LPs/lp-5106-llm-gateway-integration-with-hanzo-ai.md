@@ -33,7 +33,7 @@ Hanzo's LLM Gateway provides these capabilities through a battle-tested, provide
 
 ### Integration Architecture
 
-```
+```text
 Lux Network Layer
 ├── Smart Contracts
 │   └── AI Oracle Contracts → Hanzo LLM Gateway
@@ -49,7 +49,7 @@ Hanzo LLM Gateway (HIP-4)
 ├── Model Selection Engine
 ├── Caching Layer
 └── Cost Optimization
-```
+```markdown
 
 ### Smart Contract AI Oracle
 
@@ -88,7 +88,7 @@ interface ILuxAIOracle {
         bytes calldata proof
     ) external view returns (bool);
 }
-```
+```text
 
 ### Validator AI Integration
 
@@ -149,7 +149,7 @@ func (v *AIValidator) OptimizePerformance() error {
     
     return v.applyOptimizations(response)
 }
-```
+```text
 
 ### Developer SDK Integration
 
@@ -227,7 +227,7 @@ class LuxAISDK extends LuxSDK {
     return JSON.parse(response.content);
   }
 }
-```
+```text
 
 ### Cross-Chain AI Analytics
 
@@ -277,7 +277,7 @@ class LuxCrossChainAI implements CrossChainAnalytics {
     };
   }
 }
-```
+```text
 
 ### Configuration Management
 
@@ -309,7 +309,7 @@ ai:
     max_requests_per_minute: 100
     max_tokens_per_request: 4000
     monthly_budget: 1000  # USD
-```
+```text
 
 ### Performance Optimization
 
@@ -355,7 +355,7 @@ func (b *AIBatcher) ProcessBatch() {
     }
     b.batch = nil
 }
-```
+```text
 
 ### Security Considerations
 
@@ -396,7 +396,7 @@ contract SecureAIOracle {
         return verifySignature(proofHash, proof);
     }
 }
-```
+```text
 
 ## Rationale
 
@@ -481,6 +481,37 @@ npm run test:ai-sdk
 2. [LP-10: P-Chain Platform Chain Specification](/docs/lp-10-p-chain-platform-chain-specification-deprecated/)
 3. [LP-103: MPC-LSS Multi-Party Computation](/docs/lp-103-mpc-lss---multi-party-computation-linear-secret-sharing-with-dynamic-resharing/)
 4. [Hanzo LLM Gateway Docs](https://docs.hanzo.ai/llm-gateway)
+
+## Test Cases
+
+### Unit Tests
+
+1. **Attestation Validation**
+   - Test attestation format
+   - Verify signature chains
+   - Test timestamp validation
+
+2. **AI Model Integration**
+   - Test model loading
+   - Verify inference accuracy
+   - Test resource limits
+
+3. **Privacy Preservation**
+   - Test data isolation
+   - Verify access controls
+   - Test audit logging
+
+### Integration Tests
+
+1. **Attestation Flow**
+   - Test end-to-end attestation
+   - Verify chain of custody
+   - Test revocation handling
+
+2. **Compute Verification**
+   - Test proof generation
+   - Verify computation integrity
+   - Test dispute resolution
 
 ## Copyright
 

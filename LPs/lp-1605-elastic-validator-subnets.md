@@ -57,7 +57,7 @@ type Performance struct {
     ResponseTime   time.Duration
     ComputeJobs    uint64  // For AI subnets
 }
-```
+```text
 
 ### Elastic Subnet Configuration
 
@@ -77,7 +77,7 @@ type ElasticSubnet struct {
     MinUptime       float64  // 99.5%
     MinResponseTime time.Duration
 }
-```
+```text
 
 ### Liquid Staking Protocol
 
@@ -121,7 +121,7 @@ contract LiquidStaking {
         _queueUnstaking(msg.sender, amount);
     }
 }
-```
+```text
 
 ### Dynamic Validator Selection
 
@@ -162,7 +162,7 @@ func (s *ElasticSubnet) calculateScore(v Validator) float64 {
 
     return score
 }
-```
+```text
 
 ### Cross-Subnet Validation
 
@@ -195,7 +195,7 @@ func (v *CrossSubnetValidator) ValidateSubnet(
     // Subnet-specific validation logic
     return subnet.Validate(block, v.BaseValidator)
 }
-```
+```text
 
 ### Reward Distribution
 
@@ -231,7 +231,7 @@ func (r *RewardCalculator) Calculate(
 
     return baseReward - commission
 }
-```
+```text
 
 ## Rationale
 
@@ -285,7 +285,7 @@ func TestLiquidStaking(t *testing.T) {
     pending := staking.PendingUnstake(user)
     assert.Equal(t, 500, pending)
 }
-```
+```text
 
 ## Reference Implementation
 
@@ -358,10 +358,10 @@ Base APR: 8%
 Performance Bonus: 2% (for 99.9%+ uptime)
 Liquid Staking Fee: 0.1%
 Commission Range: 0% - 25%
-```
+```text
 
 **Reward Distribution**:
-```
+```text
 Validator Rewards: 70%
 Delegator Rewards: 25%
 Protocol Reserve: 5%

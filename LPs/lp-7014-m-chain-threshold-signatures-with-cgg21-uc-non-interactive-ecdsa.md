@@ -107,6 +107,37 @@ The complete implementation is available at `github.com/luxfi/threshold` with co
 9. NIST Multi‑Party Threshold Crypto Project (2023). **Threshold Schemes and Applications**.  
 10. Komlo, C., & Goldberg, I. (2022). **ROAST: Robust Asynchronous Schnorr Threshold Signatures**.  
 
+## Test Cases
+
+### Unit Tests
+
+1. **Key Generation**
+   - Test DKG protocol
+   - Verify share distribution
+   - Test threshold parameters
+
+2. **Signing Protocol**
+   - Test partial signature generation
+   - Verify signature aggregation
+   - Test malicious party detection
+
+3. **Key Management**
+   - Test key refresh
+   - Verify resharing protocol
+   - Test party rotation
+
+### Integration Tests
+
+1. **Threshold Operations**
+   - Test multi-party signing
+   - Verify liveness guarantees
+   - Test network partition handling
+
+2. **Cross-Chain Custody**
+   - Test bridged asset signing
+   - Verify multi-chain coordination
+   - Test emergency recovery
+
 ## Copyright
 
 Copyright and related rights waived via [CC0](../LICENSE.md).
@@ -155,7 +186,7 @@ go build -o bin/cgg21-keygen ./cmd/keygen
 
 # Or build all tools
 make build
-```
+```text
 
 ### Testing
 
