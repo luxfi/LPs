@@ -3,7 +3,6 @@ import Link from 'next/link';
 import { Logo, LogoWithText } from '@/components/logo';
 import { source, type LPCategory } from '@/lib/source';
 import { ThemeToggle } from '@/components/theme-toggle';
-import { SearchDialog } from '@/components/search-dialog';
 
 type ProposalStatus = 'Final' | 'Draft' | 'Review' | 'Last Call' | 'Withdrawn' | 'Stagnant';
 
@@ -288,11 +287,10 @@ export default function HomePage() {
             <LogoWithText size={18} />
           </Link>
           <div className="flex items-center gap-3">
-            <SearchDialog />
             <ThemeToggle />
             <Link
               href="/docs"
-              className="rounded-full bg-foreground px-4 py-1.5 text-sm font-medium text-background transition-colors hover:bg-foreground/90"
+              className="rounded-full bg-black px-4 py-1.5 text-sm font-medium text-white transition-colors hover:bg-black/90 dark:bg-white dark:text-black dark:hover:bg-white/90"
             >
               Browse
             </Link>
@@ -313,14 +311,8 @@ export default function HomePage() {
             Lux Network: A high-performance, quantum-resistant blockchain platform designed for the AI era. Explore advanced cryptography, privacy-preserving technologies, and decentralized infrastructure standards.
           </p>
           <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
-            <Link
-              href="/docs"
-              className="inline-flex w-full items-center justify-center rounded-full border border-border bg-foreground px-8 py-3 text-sm font-semibold text-background transition-colors hover:bg-foreground/90 sm:w-auto"
-            >
-              Browse proposals
-            </Link>
             <a
-              href="https://github.com/luxfi/lps"
+              href="https://github.com/luxfi/LPs"
               target="_blank"
               rel="noreferrer"
               className="inline-flex w-full items-center justify-center gap-2 rounded-full border border-border bg-muted/50 px-8 py-3 text-sm font-semibold text-foreground backdrop-blur-sm transition-colors hover:bg-muted sm:w-auto"
@@ -328,6 +320,12 @@ export default function HomePage() {
               <GitHubIcon size={16} />
               GitHub
             </a>
+            <Link
+              href="/docs"
+              className="inline-flex w-full items-center justify-center rounded-full bg-black px-8 py-3 text-sm font-semibold text-white transition-colors hover:bg-black/90 dark:bg-white dark:text-black dark:hover:bg-white/90 sm:w-auto"
+            >
+              Browse proposals
+            </Link>
           </div>
         </section>
 
@@ -684,7 +682,7 @@ export default function HomePage() {
                 Read guidelines
               </Link>
               <a
-                href="https://github.com/luxfi/lps"
+                href="https://github.com/luxfi/LPs"
                 target="_blank"
                 rel="noreferrer"
                 className="inline-flex items-center justify-center gap-2 rounded-full border border-background/30 px-8 py-3 text-sm font-semibold transition-colors hover:bg-background/10"
