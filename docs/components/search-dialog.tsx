@@ -1,8 +1,12 @@
 'use client';
 
-import { useCallback, useEffect, useRef, useState } from 'react';
+import * as React from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { useRouter, usePathname } from 'next/navigation';
-import { Search, FileText, Github, MessageSquare, ArrowRight, Hash, BookOpen, Layers, Lock, Coins, Vote, Rocket, FlaskConical, X, Command } from 'lucide-react';
+import { Command as CommandPrimitive } from 'cmdk';
+import * as Dialog from '@radix-ui/react-dialog';
+import { Search, FileText, Github, MessageSquare, ArrowRight, Hash, BookOpen, Layers, Lock, Coins, Vote, Rocket, FlaskConical } from 'lucide-react';
+import { cn } from '@/lib/utils';
 
 interface SearchResult {
   id: string;
@@ -31,8 +35,6 @@ export function SearchDialog() {
   const [query, setQuery] = useState('');
   const [results, setResults] = useState<SearchResult[]>([]);
   const [loading, setLoading] = useState(false);
-  const [selectedIndex, setSelectedIndex] = useState(0);
-  const inputRef = useRef<HTMLInputElement>(null);
   const router = useRouter();
   const pathname = usePathname();
 
@@ -52,52 +54,84 @@ export function SearchDialog() {
         keywords: ['all', 'proposals', 'list', 'browse'],
       },
       {
-        id: 'category-consensus',
-        label: 'Consensus Protocols',
-        description: 'LP-100 to LP-199',
+        id: 'category-core',
+        label: 'Core Architecture',
+        description: 'LP-0 to LP-99 • Network fundamentals',
         icon: <Layers className="h-4 w-4" />,
-        action: () => router.push('/docs#consensus'),
+        action: () => router.push('/docs/category/core'),
+        keywords: ['core', 'architecture', 'network', 'topology', 'nodes'],
+      },
+      {
+        id: 'category-consensus',
+        label: 'Consensus',
+        description: 'LP-100 to LP-199 • Consensus protocols',
+        icon: <Layers className="h-4 w-4" />,
+        action: () => router.push('/docs/category/consensus'),
         keywords: ['consensus', 'snowman', 'avalanche', 'finality'],
       },
       {
         id: 'category-crypto',
         label: 'Cryptography',
-        description: 'LP-200 to LP-299',
+        description: 'LP-200 to LP-299 • Post-quantum security',
         icon: <Lock className="h-4 w-4" />,
-        action: () => router.push('/docs#cryptography'),
-        keywords: ['crypto', 'signature', 'encryption', 'quantum'],
+        action: () => router.push('/docs/category/cryptography'),
+        keywords: ['crypto', 'signature', 'encryption', 'quantum', 'ml-kem'],
       },
       {
         id: 'category-tokens',
         label: 'Token Standards',
-        description: 'LP-300 to LP-399',
+        description: 'LP-300 to LP-399 • LRC specifications',
         icon: <Coins className="h-4 w-4" />,
-        action: () => router.push('/docs#tokens'),
+        action: () => router.push('/docs/category/tokens'),
         keywords: ['token', 'lrc', 'erc', 'nft', 'fungible'],
+      },
+      {
+        id: 'category-defi',
+        label: 'DeFi',
+        description: 'LP-400 to LP-499 • Decentralized finance',
+        icon: <Coins className="h-4 w-4" />,
+        action: () => router.push('/docs/category/defi'),
+        keywords: ['defi', 'amm', 'lending', 'yield', 'staking'],
       },
       {
         id: 'category-governance',
         label: 'Governance',
-        description: 'LP-500 to LP-599',
+        description: 'LP-500 to LP-599 • On-chain governance',
         icon: <Vote className="h-4 w-4" />,
-        action: () => router.push('/docs#governance'),
-        keywords: ['governance', 'vote', 'proposal', 'dao'],
+        action: () => router.push('/docs/category/governance'),
+        keywords: ['governance', 'vote', 'proposal', 'dao', 'treasury'],
       },
       {
         id: 'category-upgrades',
         label: 'Network Upgrades',
-        description: 'LP-600 to LP-699',
+        description: 'LP-600 to LP-699 • Protocol upgrades',
         icon: <Rocket className="h-4 w-4" />,
-        action: () => router.push('/docs#upgrades'),
+        action: () => router.push('/docs/category/upgrades'),
         keywords: ['upgrade', 'fork', 'network', 'activation'],
       },
       {
         id: 'category-research',
         label: 'Research',
-        description: 'LP-700 to LP-999',
+        description: 'LP-700 to LP-799 • Innovation & papers',
         icon: <FlaskConical className="h-4 w-4" />,
-        action: () => router.push('/docs#research'),
-        keywords: ['research', 'paper', 'academic', 'innovation'],
+        action: () => router.push('/docs/category/research'),
+        keywords: ['research', 'paper', 'academic', 'innovation', 'quantum'],
+      },
+      {
+        id: 'category-sustainability',
+        label: 'Sustainability & ESG',
+        description: 'LP-800 to LP-899 • Environmental impact',
+        icon: <Layers className="h-4 w-4" />,
+        action: () => router.push('/docs/category/sustainability'),
+        keywords: ['sustainability', 'esg', 'carbon', 'green', 'environment', 'climate'],
+      },
+      {
+        id: 'category-impact',
+        label: 'Impact & Public Goods',
+        description: 'LP-900 to LP-999 • Social benefit',
+        icon: <Vote className="h-4 w-4" />,
+        action: () => router.push('/docs/category/impact'),
+        keywords: ['impact', 'public goods', 'charity', 'social', 'benefit', 'humanity'],
       },
     ];
 
@@ -109,7 +143,7 @@ export function SearchDialog() {
           label: 'Edit on GitHub',
           description: `Edit LP-${currentLP} source`,
           icon: <Github className="h-4 w-4" />,
-          action: () => window.open(`https://github.com/luxfi/lps/edit/main/LPs/lp-${currentLP}.md`, '_blank'),
+          action: () => window.open(`https://github.com/luxfi/LPs/edit/main/LPs/lp-${currentLP}.md`, '_blank'),
           keywords: ['edit', 'github', 'source', 'modify'],
         },
         {
@@ -117,7 +151,7 @@ export function SearchDialog() {
           label: 'View Raw Markdown',
           description: 'See the raw markdown file',
           icon: <FileText className="h-4 w-4" />,
-          action: () => window.open(`https://raw.githubusercontent.com/luxfi/lps/main/LPs/lp-${currentLP}.md`, '_blank'),
+          action: () => window.open(`https://raw.githubusercontent.com/luxfi/LPs/main/LPs/lp-${currentLP}.md`, '_blank'),
           keywords: ['raw', 'markdown', 'source'],
         },
         {
@@ -160,223 +194,139 @@ export function SearchDialog() {
     return () => clearTimeout(searchTimeout);
   }, [query]);
 
-  // Filter quick actions based on query
-  const filteredActions = query
-    ? quickActions.filter(
-        (action) =>
-          action.label.toLowerCase().includes(query.toLowerCase()) ||
-          action.description.toLowerCase().includes(query.toLowerCase()) ||
-          action.keywords?.some((k) => k.toLowerCase().includes(query.toLowerCase()))
-      )
-    : quickActions;
-
-  // Combined items for navigation
-  const allItems = [...filteredActions.map((a) => ({ type: 'action' as const, ...a })), ...results.map((r) => ({ type: 'result' as const, ...r }))];
-
-  // Keyboard shortcuts
+  // Keyboard shortcut to open
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      // Open with Cmd+K or Ctrl+K
       if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
         e.preventDefault();
-        setOpen(true);
-      }
-      // Close with Escape
-      if (e.key === 'Escape' && open) {
-        setOpen(false);
-        setQuery('');
+        setOpen((prev) => !prev);
       }
     };
 
     document.addEventListener('keydown', handleKeyDown);
     return () => document.removeEventListener('keydown', handleKeyDown);
-  }, [open]);
+  }, []);
 
-  // Navigation within dialog
-  useEffect(() => {
-    if (!open) return;
-
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'ArrowDown') {
-        e.preventDefault();
-        setSelectedIndex((i) => Math.min(i + 1, allItems.length - 1));
-      } else if (e.key === 'ArrowUp') {
-        e.preventDefault();
-        setSelectedIndex((i) => Math.max(i - 1, 0));
-      } else if (e.key === 'Enter' && allItems[selectedIndex]) {
-        e.preventDefault();
-        const item = allItems[selectedIndex];
-        if (item.type === 'action') {
-          item.action();
-        } else {
-          router.push(item.url);
-        }
-        setOpen(false);
-        setQuery('');
-      }
-    };
-
-    document.addEventListener('keydown', handleKeyDown);
-    return () => document.removeEventListener('keydown', handleKeyDown);
-  }, [open, selectedIndex, allItems, router]);
-
-  // Focus input when opened
-  useEffect(() => {
-    if (open && inputRef.current) {
-      inputRef.current.focus();
+  // Reset state when closing
+  const handleOpenChange = (newOpen: boolean) => {
+    setOpen(newOpen);
+    if (!newOpen) {
+      setQuery('');
+      setResults([]);
     }
-  }, [open]);
+  };
 
-  // Reset selection when items change
-  useEffect(() => {
-    setSelectedIndex(0);
-  }, [query, results]);
-
-  if (!open) {
-    return (
-      <button
-        onClick={() => setOpen(true)}
-        className="flex items-center gap-2 rounded-lg border border-border bg-muted/50 px-3 py-1.5 text-sm text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
-      >
-        <Search className="h-4 w-4" />
-        <span className="hidden sm:inline">Search...</span>
-        <kbd className="ml-2 hidden rounded bg-muted px-1.5 py-0.5 text-xs font-medium sm:inline-block">
-          <Command className="inline h-3 w-3" />K
-        </kbd>
-      </button>
-    );
-  }
+  const handleSelect = (callback: () => void) => {
+    callback();
+    handleOpenChange(false);
+  };
 
   return (
     <>
-      {/* Backdrop */}
-      <div className="fixed inset-0 z-50 bg-black/50 backdrop-blur-sm" onClick={() => setOpen(false)} />
-
-      {/* Dialog */}
-      <div className="fixed left-1/2 top-[20%] z-50 w-full max-w-2xl -translate-x-1/2 animate-in fade-in-0 zoom-in-95 slide-in-from-top-2">
-        <div className="overflow-hidden rounded-xl border border-border bg-background shadow-2xl">
-          {/* Search Input */}
-          <div className="flex items-center border-b border-border px-4">
-            <Search className="h-5 w-5 text-muted-foreground" />
-            <input
-              ref={inputRef}
-              type="text"
-              placeholder={isLPPage ? `Search LPs or actions for LP-${currentLP}...` : 'Search proposals, categories, or actions...'}
-              value={query}
-              onChange={(e) => setQuery(e.target.value)}
-              className="flex-1 bg-transparent px-3 py-4 text-base outline-none placeholder:text-muted-foreground"
-            />
-            {query && (
-              <button onClick={() => setQuery('')} className="p-1 hover:bg-muted rounded">
-                <X className="h-4 w-4 text-muted-foreground" />
-              </button>
-            )}
-            <kbd className="ml-2 rounded bg-muted px-2 py-1 text-xs text-muted-foreground">ESC</kbd>
-          </div>
-
-          {/* Results */}
-          <div className="max-h-[60vh] overflow-y-auto p-2">
-            {/* Quick Actions */}
-            {filteredActions.length > 0 && (
-              <div className="mb-2">
-                <div className="px-2 py-1.5 text-xs font-medium text-muted-foreground">
-                  {isLPPage ? 'LP Actions' : 'Quick Actions'}
-                </div>
-                {filteredActions.map((action, index) => (
-                  <button
-                    key={action.id}
-                    onClick={() => {
-                      action.action();
-                      setOpen(false);
-                      setQuery('');
-                    }}
-                    className={`flex w-full items-center gap-3 rounded-lg px-3 py-2.5 text-left transition-colors ${
-                      selectedIndex === index ? 'bg-primary/10 text-primary' : 'hover:bg-muted'
-                    }`}
-                  >
-                    <div className="flex h-8 w-8 items-center justify-center rounded-md bg-muted">
-                      {action.icon}
-                    </div>
-                    <div className="flex-1 min-w-0">
-                      <div className="font-medium truncate">{action.label}</div>
-                      <div className="text-sm text-muted-foreground truncate">{action.description}</div>
-                    </div>
-                    <ArrowRight className="h-4 w-4 text-muted-foreground" />
-                  </button>
-                ))}
+      <Dialog.Root open={open} onOpenChange={handleOpenChange}>
+        <Dialog.Portal>
+          <Dialog.Overlay className="fixed inset-0 z-50 bg-black/50 backdrop-blur-sm data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0" />
+          <Dialog.Content className="fixed left-1/2 top-[20%] z-50 w-full max-w-2xl -translate-x-1/2 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95">
+            <CommandPrimitive
+              className="overflow-hidden rounded-xl border border-border bg-background shadow-2xl"
+              loop
+            >
+              {/* Search Input */}
+              <div className="flex items-center border-b border-border px-4" cmdk-input-wrapper="">
+                <Search className="h-5 w-5 shrink-0 text-muted-foreground" />
+                <CommandPrimitive.Input
+                  placeholder={isLPPage ? `Search LPs or actions for LP-${currentLP}...` : 'Search proposals, categories, or actions...'}
+                  value={query}
+                  onValueChange={setQuery}
+                  className="flex-1 h-12 bg-transparent px-3 py-4 text-base outline-none placeholder:text-muted-foreground"
+                />
+                <kbd className="rounded bg-muted px-2 py-1 text-xs text-muted-foreground">ESC</kbd>
               </div>
-            )}
 
-            {/* Search Results */}
-            {loading && (
-              <div className="px-3 py-8 text-center text-muted-foreground">
-                <div className="inline-block h-5 w-5 animate-spin rounded-full border-2 border-current border-t-transparent" />
-                <p className="mt-2 text-sm">Searching...</p>
-              </div>
-            )}
+              {/* Results List */}
+              <CommandPrimitive.List className="max-h-[60vh] overflow-y-auto p-2">
+                <CommandPrimitive.Empty className="py-6 text-center text-sm text-muted-foreground">
+                  {loading ? (
+                    <div className="flex flex-col items-center">
+                      <div className="h-5 w-5 animate-spin rounded-full border-2 border-current border-t-transparent" />
+                      <p className="mt-2">Searching...</p>
+                    </div>
+                  ) : query.length >= 2 ? (
+                    <div className="flex flex-col items-center">
+                      <BookOpen className="h-8 w-8 opacity-50" />
+                      <p className="mt-2">No results found for "{query}"</p>
+                      <p className="text-xs">Try a different search term</p>
+                    </div>
+                  ) : null}
+                </CommandPrimitive.Empty>
 
-            {!loading && results.length > 0 && (
-              <div>
-                <div className="px-2 py-1.5 text-xs font-medium text-muted-foreground">
-                  Proposals ({results.length})
-                </div>
-                {results.map((result, index) => {
-                  const itemIndex = filteredActions.length + index;
-                  return (
-                    <button
-                      key={result.id}
-                      onClick={() => {
-                        router.push(result.url);
-                        setOpen(false);
-                        setQuery('');
-                      }}
-                      className={`flex w-full items-center gap-3 rounded-lg px-3 py-2.5 text-left transition-colors ${
-                        selectedIndex === itemIndex ? 'bg-primary/10 text-primary' : 'hover:bg-muted'
-                      }`}
+                {/* Quick Actions */}
+                <CommandPrimitive.Group heading={isLPPage ? 'LP Actions' : 'Quick Actions'} className="[&_[cmdk-group-heading]]:px-2 [&_[cmdk-group-heading]]:py-1.5 [&_[cmdk-group-heading]]:text-xs [&_[cmdk-group-heading]]:font-medium [&_[cmdk-group-heading]]:text-muted-foreground">
+                  {quickActions.map((action) => (
+                    <CommandPrimitive.Item
+                      key={action.id}
+                      value={`${action.label} ${action.description} ${action.keywords?.join(' ') || ''}`}
+                      onSelect={() => handleSelect(action.action)}
+                      className="flex items-center gap-3 rounded-lg px-3 py-2.5 text-left cursor-pointer aria-selected:bg-accent aria-selected:text-accent-foreground data-[selected=true]:bg-accent data-[selected=true]:text-accent-foreground hover:bg-muted transition-colors"
                     >
-                      <div className="flex h-8 w-8 items-center justify-center rounded-md bg-muted">
-                        <Hash className="h-4 w-4" />
+                      <div className="flex h-8 w-8 items-center justify-center rounded-md bg-muted shrink-0">
+                        {action.icon}
                       </div>
                       <div className="flex-1 min-w-0">
-                        <div className="font-medium truncate">
-                          {result.structuredData?.lp && <span className="text-primary">LP-{result.structuredData.lp}: </span>}
-                          {result.title}
-                        </div>
-                        <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                          {result.structuredData?.status && (
-                            <span className={`rounded px-1.5 py-0.5 text-xs ${
-                              result.structuredData.status === 'Final' ? 'bg-green-500/10 text-green-500' :
-                              result.structuredData.status === 'Draft' ? 'bg-yellow-500/10 text-yellow-500' :
-                              result.structuredData.status === 'Review' ? 'bg-blue-500/10 text-blue-500' :
-                              'bg-muted text-muted-foreground'
-                            }`}>
-                              {result.structuredData.status}
-                            </span>
-                          )}
-                          {result.structuredData?.category && (
-                            <span className="text-xs">{result.structuredData.category}</span>
-                          )}
-                          <span className="truncate">{result.description}</span>
-                        </div>
+                        <div className="font-medium truncate">{action.label}</div>
+                        <div className="text-sm text-muted-foreground truncate">{action.description}</div>
                       </div>
-                      <ArrowRight className="h-4 w-4 text-muted-foreground flex-shrink-0" />
-                    </button>
-                  );
-                })}
-              </div>
-            )}
+                      <ArrowRight className="h-4 w-4 text-muted-foreground shrink-0" />
+                    </CommandPrimitive.Item>
+                  ))}
+                </CommandPrimitive.Group>
 
-            {!loading && query.length >= 2 && results.length === 0 && filteredActions.length === 0 && (
-              <div className="px-3 py-8 text-center text-muted-foreground">
-                <BookOpen className="mx-auto h-8 w-8 opacity-50" />
-                <p className="mt-2">No results found for "{query}"</p>
-                <p className="text-sm">Try a different search term</p>
-              </div>
-            )}
+                {/* Search Results */}
+                {results.length > 0 && (
+                  <CommandPrimitive.Group heading={`Proposals (${results.length})`} className="[&_[cmdk-group-heading]]:px-2 [&_[cmdk-group-heading]]:py-1.5 [&_[cmdk-group-heading]]:text-xs [&_[cmdk-group-heading]]:font-medium [&_[cmdk-group-heading]]:text-muted-foreground">
+                    {results.map((result) => (
+                      <CommandPrimitive.Item
+                        key={result.id}
+                        value={`${result.title} ${result.description} LP-${result.structuredData?.lp || ''}`}
+                        onSelect={() => handleSelect(() => router.push(result.url))}
+                        className="flex items-center gap-3 rounded-lg px-3 py-2.5 text-left cursor-pointer aria-selected:bg-accent aria-selected:text-accent-foreground data-[selected=true]:bg-accent data-[selected=true]:text-accent-foreground hover:bg-muted transition-colors"
+                      >
+                        <div className="flex h-8 w-8 items-center justify-center rounded-md bg-muted shrink-0">
+                          <Hash className="h-4 w-4" />
+                        </div>
+                        <div className="flex-1 min-w-0">
+                          <div className="font-medium truncate">
+                            {result.structuredData?.lp && <span className="text-primary">LP-{result.structuredData.lp}: </span>}
+                            {result.title}
+                          </div>
+                          <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                            {result.structuredData?.status && (
+                              <span className={cn(
+                                'rounded px-1.5 py-0.5 text-xs',
+                                result.structuredData.status === 'Final' && 'bg-green-500/10 text-green-500',
+                                result.structuredData.status === 'Draft' && 'bg-yellow-500/10 text-yellow-500',
+                                result.structuredData.status === 'Review' && 'bg-blue-500/10 text-blue-500',
+                                !['Final', 'Draft', 'Review'].includes(result.structuredData.status || '') && 'bg-muted text-muted-foreground'
+                              )}>
+                                {result.structuredData.status}
+                              </span>
+                            )}
+                            {result.structuredData?.category && (
+                              <span className="text-xs">{result.structuredData.category}</span>
+                            )}
+                            <span className="truncate">{result.description}</span>
+                          </div>
+                        </div>
+                        <ArrowRight className="h-4 w-4 text-muted-foreground shrink-0" />
+                      </CommandPrimitive.Item>
+                    ))}
+                  </CommandPrimitive.Group>
+                )}
+              </CommandPrimitive.List>
 
-            {!query && (
-              <div className="px-3 py-2 text-xs text-muted-foreground border-t border-border mt-2 pt-2">
-                <div className="flex items-center justify-between">
+              {/* Footer */}
+              {!query && (
+                <div className="px-4 py-2 text-xs text-muted-foreground border-t border-border flex items-center justify-between">
                   <span>
                     <kbd className="rounded bg-muted px-1.5 py-0.5 mr-1">↑</kbd>
                     <kbd className="rounded bg-muted px-1.5 py-0.5 mr-1">↓</kbd>
@@ -391,11 +341,11 @@ export function SearchDialog() {
                     to close
                   </span>
                 </div>
-              </div>
-            )}
-          </div>
-        </div>
-      </div>
+              )}
+            </CommandPrimitive>
+          </Dialog.Content>
+        </Dialog.Portal>
+      </Dialog.Root>
     </>
   );
 }
