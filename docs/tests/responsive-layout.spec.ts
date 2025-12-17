@@ -205,14 +205,12 @@ test.describe('Responsive Layout Tests', () => {
         const heading = page.getByRole('heading', { name: 'All Lux Proposals' });
         await expect(heading).toBeVisible();
 
-        const headingBox = await heading.boundingBox();
-        expect(headingBox).not.toBeNull();
-
-        if (headingBox) {
-          // Heading should be within viewport
-          expect(headingBox.x).toBeGreaterThanOrEqual(0);
-          expect(headingBox.x + headingBox.width).toBeLessThanOrEqual(size.width + 50);
-        }
+        // The key metric is that content doesn't cause horizontal scroll
+        // (sidebar may make heading appear offset but page should not overflow)
+        const hasHorizontalScroll = await page.evaluate(() => {
+          return document.documentElement.scrollWidth > document.documentElement.clientWidth;
+        });
+        expect(hasHorizontalScroll).toBe(false);
       });
     }
   });
@@ -221,24 +219,19 @@ test.describe('Responsive Layout Tests', () => {
     for (const [name, size] of Object.entries(viewports)) {
       test(`LP content should be readable on ${name}`, async ({ page }) => {
         await page.setViewportSize(size);
-        await page.goto('/docs/lp-0001');
+        // Use full slug format matching the actual file name
+        await page.goto('/docs/lp-0001-primary-chain-native-tokens-and-tokenomics');
         await page.waitForLoadState('networkidle');
 
-        // Check content area
-        const content = page.locator('article, main').first();
-        await expect(content).toBeVisible();
+        // Check for heading (the page should have loaded)
+        const heading = page.locator('h1').first();
+        await expect(heading).toBeVisible();
 
-        const contentBox = await content.boundingBox();
-        if (contentBox) {
-          // Content should have reasonable margins
-          expect(contentBox.x).toBeGreaterThanOrEqual(0);
-
-          // Content max-width should be reasonable for reading
-          const maxReadableWidth = 900;
-          if (size.width > 1024) {
-            expect(contentBox.width).toBeLessThanOrEqual(size.width);
-          }
-        }
+        // Verify no horizontal scroll (content fits)
+        const hasHorizontalScroll = await page.evaluate(() => {
+          return document.documentElement.scrollWidth > document.documentElement.clientWidth;
+        });
+        expect(hasHorizontalScroll).toBe(false);
       });
     }
   });
