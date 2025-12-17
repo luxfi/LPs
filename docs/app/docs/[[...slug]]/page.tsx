@@ -4,86 +4,94 @@ import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import Link from 'next/link';
 import { ArrowLeft, ArrowRight, ExternalLink, Calendar, User, Tag } from 'lucide-react';
-import { DocsPage, DocsBody } from 'fumadocs-ui/page';
+import { DocsPage, DocsBody } from '@hanzo/docs-ui/page';
 import { extractHeadings } from '@/lib/toc';
+import { FilteredView } from './filtered-view';
 
 // LP Index/Overview Page Component
 function LPIndexPage() {
   const categories = source.getCategorizedPages();
   const stats = source.getStats();
+  const allPages = source.getAllPages();
 
   return (
-    <div className="max-w-4xl mx-auto">
-      <h1 className="text-3xl font-bold mb-4">All Lux Proposals</h1>
-      <p className="text-muted-foreground mb-8">
-        Browse all {stats.total} proposals organized by category. Use the sidebar to navigate
-        or press <kbd className="px-2 py-0.5 rounded bg-accent text-xs font-mono">Ctrl+K</kbd> to search.
-      </p>
+    <>
+      {/* Client-side filtered view - reads URL params and shows/hides based on filter presence */}
+      <FilteredView allPages={allPages} />
 
-      {/* Quick Stats */}
-      <div className="grid grid-cols-4 gap-4 mb-12 p-4 rounded-lg border border-border bg-card">
-        <div className="text-center">
-          <div className="text-2xl font-bold">{stats.total}</div>
-          <div className="text-xs text-muted-foreground">Total</div>
-        </div>
-        <div className="text-center">
-          <div className="text-2xl font-bold text-green-500">{stats.byStatus['Final'] || 0}</div>
-          <div className="text-xs text-muted-foreground">Final</div>
-        </div>
-        <div className="text-center">
-          <div className="text-2xl font-bold text-blue-500">{stats.byStatus['Review'] || 0}</div>
-          <div className="text-xs text-muted-foreground">Review</div>
-        </div>
-        <div className="text-center">
-          <div className="text-2xl font-bold text-yellow-500">{stats.byStatus['Draft'] || 0}</div>
-          <div className="text-xs text-muted-foreground">Draft</div>
-        </div>
-      </div>
+      {/* Default view - categories (hidden by default, shown when no filter) */}
+      <div className="max-w-4xl mx-auto hidden" id="lp-index">
+        <h1 className="text-3xl font-bold mb-4">All Lux Proposals</h1>
+        <p className="text-muted-foreground mb-8">
+          Browse all {stats.total} proposals organized by category. Use the sidebar to navigate
+          or press <kbd className="px-2 py-0.5 rounded bg-accent text-xs font-mono">Ctrl+K</kbd> to search.
+        </p>
 
-      {/* Categories */}
-      {categories.map((cat) => (
-        <section key={cat.name} className="mb-12">
-          <Link
-            href={`/docs/category/${cat.slug}`}
-            className="flex items-center gap-3 mb-4 group w-fit"
-          >
-            <h2 className="text-xl font-semibold group-hover:text-primary transition-colors">{cat.name}</h2>
-            <span className="text-xs text-muted-foreground px-2 py-1 rounded-full bg-accent group-hover:bg-primary/10 transition-colors">
-              {cat.lps.length} proposals
-            </span>
-            <ArrowRight className="size-4 text-muted-foreground opacity-0 group-hover:opacity-100 transition-opacity" />
-          </Link>
-          <p className="text-sm text-muted-foreground mb-4">{cat.description}</p>
-          <div className="space-y-2">
-            {cat.lps.map((lp) => (
-              <Link
-                key={lp.slug.join('/')}
-                href={`/docs/${lp.slug.join('/')}`}
-                className="flex items-center gap-4 p-3 rounded-lg border border-border hover:border-foreground/20 hover:bg-accent/50 transition-colors group"
-              >
-                <span className="text-sm font-mono text-muted-foreground w-20 shrink-0">
-                  LP-{String(lp.data.frontmatter.lp).padStart(4, '0')}
-                </span>
-                <span className="flex-1 font-medium text-sm truncate group-hover:text-foreground">
-                  {lp.data.title}
-                </span>
-                {lp.data.frontmatter.status && (
-                  <span className={`text-xs px-2 py-0.5 rounded-full shrink-0 ${
-                    lp.data.frontmatter.status === 'Final' ? 'bg-green-500/10 text-green-500' :
-                    lp.data.frontmatter.status === 'Draft' ? 'bg-yellow-500/10 text-yellow-500' :
-                    lp.data.frontmatter.status === 'Review' ? 'bg-blue-500/10 text-blue-500' :
-                    'bg-gray-500/10 text-gray-500'
-                  }`}>
-                    {lp.data.frontmatter.status}
-                  </span>
-                )}
-                <ArrowRight className="size-4 text-muted-foreground opacity-0 group-hover:opacity-100 transition-opacity" />
-              </Link>
-            ))}
+        {/* Quick Stats */}
+        <div className="grid grid-cols-4 gap-4 mb-12 p-4 rounded-lg border border-border bg-card">
+          <div className="text-center">
+            <div className="text-2xl font-bold">{stats.total}</div>
+            <div className="text-xs text-muted-foreground">Total</div>
           </div>
-        </section>
-      ))}
-    </div>
+          <div className="text-center">
+            <div className="text-2xl font-bold text-green-500">{stats.byStatus['Final'] || 0}</div>
+            <div className="text-xs text-muted-foreground">Final</div>
+          </div>
+          <div className="text-center">
+            <div className="text-2xl font-bold text-blue-500">{stats.byStatus['Review'] || 0}</div>
+            <div className="text-xs text-muted-foreground">Review</div>
+          </div>
+          <div className="text-center">
+            <div className="text-2xl font-bold text-yellow-500">{stats.byStatus['Draft'] || 0}</div>
+            <div className="text-xs text-muted-foreground">Draft</div>
+          </div>
+        </div>
+
+        {/* Categories */}
+        {categories.map((cat) => (
+          <section key={cat.name} className="mb-12">
+            <Link
+              href={`/docs/category/${cat.slug}`}
+              className="flex items-center gap-3 mb-4 group w-fit"
+            >
+              <h2 className="text-xl font-semibold group-hover:text-primary transition-colors">{cat.name}</h2>
+              <span className="text-xs text-muted-foreground px-2 py-1 rounded-full bg-accent group-hover:bg-primary/10 transition-colors">
+                {cat.lps.length} proposals
+              </span>
+              <ArrowRight className="size-4 text-muted-foreground opacity-0 group-hover:opacity-100 transition-opacity" />
+            </Link>
+            <p className="text-sm text-muted-foreground mb-4">{cat.description}</p>
+            <div className="space-y-2">
+              {cat.lps.map((lp) => (
+                <Link
+                  key={lp.slug.join('/')}
+                  href={`/docs/${lp.slug.join('/')}`}
+                  className="flex items-center gap-4 p-3 rounded-lg border border-border hover:border-foreground/20 hover:bg-accent/50 transition-colors group"
+                >
+                  <span className="text-sm font-mono text-muted-foreground w-20 shrink-0">
+                    LP-{String(lp.data.frontmatter.lp).padStart(4, '0')}
+                  </span>
+                  <span className="flex-1 font-medium text-sm truncate group-hover:text-foreground">
+                    {lp.data.title}
+                  </span>
+                  {lp.data.frontmatter.status && (
+                    <span className={`text-xs px-2 py-0.5 rounded-full shrink-0 ${
+                      lp.data.frontmatter.status === 'Final' ? 'bg-green-500/10 text-green-500' :
+                      lp.data.frontmatter.status === 'Draft' ? 'bg-yellow-500/10 text-yellow-500' :
+                      lp.data.frontmatter.status === 'Review' ? 'bg-blue-500/10 text-blue-500' :
+                      'bg-gray-500/10 text-gray-500'
+                    }`}>
+                      {lp.data.frontmatter.status}
+                    </span>
+                  )}
+                  <ArrowRight className="size-4 text-muted-foreground opacity-0 group-hover:opacity-100 transition-opacity" />
+                </Link>
+              ))}
+            </div>
+          </section>
+        ))}
+      </div>
+    </>
   );
 }
 
@@ -123,6 +131,42 @@ const markdownComponents = {
   h4: createHeadingComponent(4),
   code: CodeComponent,
 };
+
+// Author link component - parses "Name (@username)" format and links to GitHub
+function AuthorLink({ author }: { author: string }) {
+  // Parse author string - formats: "Name (@username)", "@username", "Name"
+  const match = author.match(/@([a-zA-Z0-9_-]+)/);
+  const username = match ? match[1] : null;
+
+  if (username) {
+    // Extract display name (everything before the @username part)
+    const displayName = author.replace(`(@${username})`, '').replace(`@${username}`, '').trim();
+    const finalDisplay = displayName || `@${username}`;
+
+    return (
+      <a
+        href={`https://github.com/${username}`}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="font-medium hover:text-primary transition-colors"
+      >
+        {finalDisplay}
+      </a>
+    );
+  }
+
+  // No username found - link to luxfi org as fallback
+  return (
+    <a
+      href="https://github.com/luxfi"
+      target="_blank"
+      rel="noopener noreferrer"
+      className="font-medium hover:text-primary transition-colors"
+    >
+      {author}
+    </a>
+  );
+}
 
 // Individual LP Page Component
 function LPDetailPage({ page }: { page: any }) {
@@ -172,13 +216,23 @@ function LPDetailPage({ page }: { page: any }) {
           {frontmatter.type && (
             <div>
               <div className="text-muted-foreground mb-0.5">Type</div>
-              <div className="font-medium">{frontmatter.type}</div>
+              <Link
+                href={`/docs?type=${encodeURIComponent(frontmatter.type)}`}
+                className="font-medium hover:text-primary transition-colors"
+              >
+                {frontmatter.type}
+              </Link>
             </div>
           )}
           {frontmatter.category && (
             <div>
               <div className="text-muted-foreground mb-0.5">Category</div>
-              <div className="font-medium">{frontmatter.category}</div>
+              <Link
+                href={`/docs/category/${frontmatter.category.toLowerCase().replace(/\s+/g, '-')}`}
+                className="font-medium hover:text-primary transition-colors"
+              >
+                {frontmatter.category}
+              </Link>
             </div>
           )}
           {frontmatter.author && (
@@ -186,7 +240,7 @@ function LPDetailPage({ page }: { page: any }) {
               <div className="text-muted-foreground mb-0.5 flex items-center gap-1">
                 <User className="size-3" /> Author
               </div>
-              <div className="font-medium">{frontmatter.author}</div>
+              <AuthorLink author={frontmatter.author} />
             </div>
           )}
           {frontmatter.created && (
@@ -205,12 +259,13 @@ function LPDetailPage({ page }: { page: any }) {
             <Tag className="size-3 text-muted-foreground" />
             <div className="flex flex-wrap gap-1">
               {frontmatter.tags.map((tag: string) => (
-                <span
+                <Link
                   key={tag}
-                  className="text-xs px-2 py-0.5 rounded-full bg-accent text-muted-foreground"
+                  href={`/docs?tag=${encodeURIComponent(tag)}`}
+                  className="text-xs px-2 py-0.5 rounded-full bg-accent text-muted-foreground hover:bg-primary/10 hover:text-primary transition-colors"
                 >
                   {tag}
-                </span>
+                </Link>
               ))}
             </div>
           </div>

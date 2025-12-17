@@ -1,4 +1,4 @@
-import { DocsLayout } from 'fumadocs-ui/layouts/docs';
+import { DocsLayout } from '@hanzo/docs-ui/layouts/docs';
 import type { ReactNode } from 'react';
 import { FileText, GitPullRequest, Users, BookOpen, ExternalLink } from 'lucide-react';
 import { LogoWithText } from '../../components/logo';
@@ -62,7 +62,7 @@ export default function Layout({ children }: { children: ReactNode }) {
               Contribute on GitHub
             </a>
             <a
-              href="https://forum.lux.network"
+              href="https://lux.forum"
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors"
@@ -71,13 +71,13 @@ export default function Layout({ children }: { children: ReactNode }) {
               Discussion Forum
             </a>
             <a
-              href="https://docs.lux.network"
+              href="https://lux.help"
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors"
             >
               <BookOpen className="size-4" />
-              Network Docs
+              Help
             </a>
           </div>
         ),
