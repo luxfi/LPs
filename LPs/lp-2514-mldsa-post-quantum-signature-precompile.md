@@ -317,7 +317,7 @@ signature: 0x<3309 bytes>
 ### Location
 
 ```text
-/Users/z/work/lux/standard/src/precompiles/mldsa/
+/Users/z/work/lux/precompiles/mldsa/
 ```text
 
 ### Key Files
@@ -504,7 +504,7 @@ At 30 gwei gas price and $3,000 LUX:
 - **LP-4200**: Post-Quantum Cryptography Suite for Lux Network
 - **LP-4201**: Hybrid Classical-Quantum Cryptography Transitions
 - **LP-2311**: ML-DSA Signature Verification Precompile (related specification)
-- **Reference Implementation**: `/Users/z/work/lux/standard/src/precompiles/mldsa/`
+- **Reference Implementation**: `/Users/z/work/lux/precompiles/mldsa/`
 
 ## Copyright
 

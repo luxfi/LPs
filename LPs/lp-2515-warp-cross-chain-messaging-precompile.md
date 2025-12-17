@@ -376,7 +376,7 @@ bytes32 chainID = IWarp(0x0200...0005).getBlockchainID();
 
 **Implementation Status**: COMPLETE
 
-**Location**: `/Users/z/work/lux/standard/src/precompiles/warp/`
+**Location**: `/Users/z/work/lux/precompiles/warp/`
 
 ### Core Files
 
@@ -675,7 +675,7 @@ Warp provides optimal cost-finality tradeoff for intra-Lux transfers.
 - [EIP-2930 Access Lists](https://eips.ethereum.org/EIPS/eip-2930)
 
 ### Implementation
-- **Precompile**: [`standard/src/precompiles/warp/`](/Users/z/work/lux/standard/src/precompiles/warp/)
+- **Precompile**: [`precompiles/warp/`](/Users/z/work/lux/precompiles/warp/)
 - **Warp Library**: `github.com/luxfi/warp`
 - **Node Integration**: `github.com/luxfi/node/vms/platformvm/warp`
 

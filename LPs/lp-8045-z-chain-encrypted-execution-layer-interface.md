@@ -150,7 +150,7 @@ Staked validators publish the quote on‑chain; discrepancies are slashable.
 - [`rpc.go`](https://github.com/luxfi/node/blob/main/vms/zvm/rpc.go) - RPC extensions
 
 **Solidity FHE Bindings**:
-- Location: `~/work/lux/standard/src/precompiles/fhe/`
+- Location: `~/work/lux/precompiles/fhe/`
 - [`TFHE.sol`](https://github.com/luxfi/standard/blob/main/src/precompiles/fhe/TFHE.sol) - FHE library
 - [`IFHE.sol`](https://github.com/luxfi/standard/blob/main/src/precompiles/fhe/IFHE.sol) - FHE interface
 

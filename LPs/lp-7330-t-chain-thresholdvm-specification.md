@@ -3011,115 +3011,135 @@ E Commitment:   0x025B6C7D8E9FA0B1C2D3E4F50617283940A1B2C3D4E5F60718293A4B5C6D7E
 
 ### Repository Structure
 
+**ThresholdVM (T-Chain VM)**:
 ```text
 github.com/luxfi/node/vms/thresholdvm/
-├── vm.go                   # ThresholdVM implementation
-├── state.go                # State management
-├── block.go                # Block structure and validation
-├── tx/
-│   ├── keygen.go           # KeyGenTx
-│   ├── sign_request.go     # SignRequestTx
-│   ├── sign_response.go    # SignResponseTx
-│   ├── reshare.go          # ReshareTx
-│   ├── reshare_complete.go # ReshareCompleteTx
-│   └── key_rotate.go       # KeyRotateTx
-├── session/
-│   ├── dkg_session.go      # DKG protocol state machine
-│   ├── sign_session.go     # Signing session management
-│   └── reshare_session.go  # Reshare protocol state machine
-├── protocol/
-│   ├── cggmp21/            # CGGMP21 implementation
-│   ├── frost/              # FROST implementation
-│   └── lss/                # LSS resharing implementation
-├── rpc/
-│   ├── service.go          # JSON-RPC handlers
-│   └── types.go            # RPC request/response types
-└── config.go               # Chain configuration
+├── vm.go           # (43 KB) ThresholdVM core - Initialize, BuildBlock, ParseBlock
+├── executor.go     # (13 KB) Protocol executor - bridges VM to threshold library
+├── protocols.go    # (13 KB) Protocol handlers - LSS, CMP, FROST, BLS, Ringtail
+├── rpc.go          # (27 KB) JSON-RPC API handlers
+├── client.go       # (15 KB) Client for RPC interactions
+├── block.go        # (4 KB) Block structure and validation
+├── codec.go        # Serialization codec
+├── factory.go      # VM factory for registration
+└── warp_integration_test.go  # Integration tests
+```
 
-github.com/luxfi/node/crypto/threshold/
-├── lss/
-│   ├── share.go            # Secret sharing primitives
-│   ├── vss.go              # Verifiable secret sharing
-│   └── reshare.go          # Resharing protocol
-├── cggmp21/
-│   ├── keygen.go           # DKG protocol
-│   ├── sign.go             # Signing protocol
-│   ├── presign.go          # Pre-signing
-│   └── refresh.go          # Key refresh
-└── frost/
-    ├── keygen.go           # DKG protocol
-    ├── sign.go             # Signing protocol
-    └── taproot.go          # BIP-340 support
+**Threshold Cryptography Library** (real implementations):
+```text
+github.com/luxfi/threshold/
+├── protocols/
+│   ├── cmp/           # CGGMP21 threshold ECDSA (LP-7014)
+│   │   ├── keygen/    # 5-round DKG
+│   │   ├── sign/      # 5-round signing
+│   │   ├── presign/   # Presignature generation
+│   │   └── config/    # Configuration types
+│   ├── frost/         # FROST threshold Schnorr (LP-7104)
+│   │   ├── keygen/    # 3-round DKG
+│   │   └── sign/      # 3-round signing
+│   ├── lss/           # Linear Secret Sharing (LP-7103)
+│   │   ├── keygen/    # 3-round DKG
+│   │   ├── sign/      # Threshold signing
+│   │   ├── reshare/   # Dynamic resharing
+│   │   └── dealer/    # Optional trusted dealer
+│   └── doerner/       # DKLS/Doerner 2-party ECDSA
+├── pkg/
+│   ├── party/         # Party identifiers
+│   ├── pool/          # Worker pool for parallel ops
+│   ├── protocol/      # Protocol runner (Handler, StartFunc)
+│   ├── math/curve/    # Elliptic curve abstractions
+│   ├── paillier/      # Paillier encryption
+│   └── zk/            # Zero-knowledge proofs
+└── cmd/               # CLI tools
+```
 
-github.com/luxfi/sdk/multisig/
-├── threshold.go            # High-level threshold API
-├── keygen.go               # Key generation helpers
-├── sign.go                 # Signing helpers
-└── reshare.go              # Resharing helpers
+**TypeScript SDK**:
+```text
+@luxfi/threshold (bridge/pkg/threshold/)
+├── src/
+│   ├── client.ts      # ThresholdClient class
+│   ├── types.ts       # TypeScript types
+│   └── index.ts       # Package exports
+└── test/
+    └── client.test.ts # Test suite
 ```text
 
 ### Key Implementation Files
 
-**vm.go - ThresholdVM Core**
+**executor.go - Protocol Executor (bridges VM to threshold library)**
+
+The executor is the critical integration layer that connects ThresholdVM session management with the real threshold cryptography library at `github.com/luxfi/threshold`:
+
 ```go
-package thresholdvm
+package tvm
 
 import (
-    "github.com/luxfi/ids"
-    "github.com/luxfi/database/manager"
-    "github.com/luxfi/node/snow"
-    "github.com/luxfi/node/snow/engine/common"
-    "github.com/luxfi/node/vms"
-    "github.com/luxfi/threshold/cggmp21"
-    "github.com/luxfi/threshold/frost"
-    "github.com/luxfi/threshold/lss"
+    "github.com/luxfi/threshold/pkg/math/curve"
+    "github.com/luxfi/threshold/pkg/party"
+    "github.com/luxfi/threshold/pkg/pool"
+    "github.com/luxfi/threshold/pkg/protocol"
+    "github.com/luxfi/threshold/protocols/cmp"
+    "github.com/luxfi/threshold/protocols/frost"
+    "github.com/luxfi/threshold/protocols/lss"
 )
 
-var (
-    _ vms.VM = (*VM)(nil)
-)
+// ProtocolExecutor provides StartFunc generators for threshold protocols
+type ProtocolExecutor struct {
+    pool *pool.Pool
+}
+
+// LSSKeygenStartFunc creates LSS key generation protocol
+func (pe *ProtocolExecutor) LSSKeygenStartFunc(selfID party.ID, participants []party.ID, threshold int) protocol.StartFunc {
+    return lss.Keygen(curve.Secp256k1{}, selfID, participants, threshold, pe.pool)
+}
+
+// CMPKeygenStartFunc creates CMP/CGGMP21 key generation protocol
+func (pe *ProtocolExecutor) CMPKeygenStartFunc(selfID party.ID, participants []party.ID, threshold int) protocol.StartFunc {
+    return cmp.Keygen(curve.Secp256k1{}, selfID, participants, threshold, pe.pool)
+}
+
+// FROSTKeygenStartFunc creates FROST key generation protocol
+func (pe *ProtocolExecutor) FROSTKeygenStartFunc(selfID party.ID, participants []party.ID, threshold int) protocol.StartFunc {
+    return frost.Keygen(curve.Secp256k1{}, selfID, participants, threshold)
+}
+
+// CreateHandler creates a protocol handler from a StartFunc
+func (pe *ProtocolExecutor) CreateHandler(startFunc protocol.StartFunc, sessionID []byte) (protocol.Handler, error) {
+    return protocol.NewMultiHandler(startFunc, sessionID)
+}
+```
+
+Key features of executor.go:
+- **StartFunc Generators**: Factory functions for LSS, CMP, FROST keygen/sign/refresh/reshare
+- **KeyShare Wrappers**: `LSSKeyShare`, `CMPKeyShare`, `FROSTKeyShare` implementing the `KeyShare` interface
+- **Handler Management**: `CreateHandler()`, `AcceptMessage()`, `CanAccept()`, `Done()`
+- **Result Extraction**: Methods to extract Config from completed protocols
+
+**vm.go - ThresholdVM Core**
+
+```go
+package tvm
 
 type VM struct {
     ctx    *snow.Context
     state  *ThresholdState
     config *Config
 
-    // Protocol managers
-    cggmp21 *cggmp21.Manager
-    frost   *frost.Manager
-    lss     *lss.Manager
+    // Protocol executor for threshold operations
+    executor *ProtocolExecutor
+
+    // Protocol registry for handler lookup
+    protocols *ProtocolRegistry
 }
 
-func (vm *VM) Initialize(
-    ctx *snow.Context,
-    dbManager manager.Manager,
-    genesisBytes []byte,
-    upgradeBytes []byte,
-    configBytes []byte,
-    toEngine chan<- common.Message,
-    fxs []*common.Fx,
-    appSender common.AppSender,
-) error {
-    // Initialize state
-    vm.state = NewThresholdState(dbManager)
+func (vm *VM) Initialize(...) error {
+    // Initialize protocol executor with worker pool
+    vm.executor = NewProtocolExecutor(pool.NewPool(0))
 
-    // Initialize protocol managers
-    vm.cggmp21 = cggmp21.NewManager(vm.ctx, vm.state)
-    vm.frost = frost.NewManager(vm.ctx, vm.state)
-    vm.lss = lss.NewManager(vm.ctx, vm.state)
+    // Initialize protocol registry
+    vm.protocols = NewProtocolRegistry(vm.executor.pool)
 
-    // Parse genesis
-    genesis, err := ParseGenesis(genesisBytes)
-    if err != nil {
-        return err
-    }
-
-    // Initialize genesis keys
-    for _, key := range genesis.Keys {
-        vm.state.ManagedKeys[key.KeyID] = key
-    }
-
-    return nil
+    // ... rest of initialization
 }
 ```text
 

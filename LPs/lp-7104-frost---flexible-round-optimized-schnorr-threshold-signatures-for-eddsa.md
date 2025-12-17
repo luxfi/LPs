@@ -272,15 +272,92 @@ This LP is additive. Existing ECDSA‑based flows remain unchanged. Adoption can
 The FROST protocol is production-ready in the Lux threshold library:
 - Repository: `github.com/luxfi/threshold`
 - Package: `protocols/frost`
+- Files: 34 Go files across 3 directories
 - Features: Complete Schnorr, EdDSA, and Taproot support
 - Testing: 100% test coverage, zero skips
 - Performance: Sub-100ms signing latency
 
-### Key Files
-- `protocols/frost/keygen/` - DKG implementation
-- `protocols/frost/sign/` - Signing protocol with canonical hashing
-- `protocols/frost/sign/round2.go` - Critical canonical encoding fix
-- `pkg/taproot/` - BIP-340 Taproot support
+### File Inventory
+
+```
+protocols/frost/
+├── frost.go                   # Entry points: Keygen(), Sign()
+├── fix_keygen_shares.go       # Share correction utilities
+├── fix_verification_shares.go # Verification share fixes
+├── test_frost_equation.go     # Equation verification
+├── *_test.go                  # Test suites (34+ test files)
+├── keygen/
+│   ├── keygen.go              # Keygen StartFunc
+│   ├── config.go              # Configuration types
+│   └── round1.go - round3.go  # 3-round DKG protocol
+└── sign/
+    ├── sign.go                # Sign StartFunc
+    ├── types.go               # Signing types
+    └── round1.go - round3.go  # 3-round signing (2 communication + 1 aggregation)
+```
+
+### Key Components
+
+| Component | Path | Purpose |
+|-----------|------|---------|
+| **Keygen** | `protocols/frost/keygen/` | Distributed key generation (3 rounds) |
+| **Sign** | `protocols/frost/sign/` | Threshold signing (3 rounds) |
+| **Config** | `protocols/frost/keygen/config.go` | Configuration and state |
+| **Taproot** | `pkg/taproot/` | BIP-340 x-only keys and signatures |
+
+### Round Details
+
+**Keygen (3 rounds)**:
+- Round 1: Generate polynomial, broadcast commitments
+- Round 2: Distribute shares, verify commitments
+- Round 3: Aggregate shares, output config
+
+**Sign (3 rounds - 2 communication)**:
+- Round 1: Generate and broadcast nonce commitments (Dᵢ, Eᵢ)
+- Round 2: Compute binding values, response zᵢ, broadcast
+- Round 3: Local aggregation to final signature (R, z)
+
+### ThresholdVM Integration
+
+FROST is integrated into T-Chain (ThresholdVM) via:
+
+- **Executor**: `node/vms/thresholdvm/executor.go`
+  - `FROSTKeygenStartFunc()` - Creates FROST keygen protocol runner
+  - `FROSTSignStartFunc()` - Creates FROST signing protocol runner
+  - `FROSTKeyShare` wrapper implements `KeyShare` interface
+
+- **Usage in VM**:
+```go
+executor := NewProtocolExecutor(pool)
+startFunc := executor.FROSTKeygenStartFunc(selfID, participants, threshold)
+handler, err := protocol.NewMultiHandler(startFunc, sessionID)
+```
+
+### Testing
+
+```bash
+# Test keygen protocol
+go test ./protocols/frost/keygen -v
+
+# Test signing
+go test ./protocols/frost/sign -v
+
+# Test full FROST protocol
+go test ./protocols/frost -v
+
+# Performance benchmarks
+go test ./protocols/frost -bench=. -benchmem
+
+# Run specific test (e.g., threshold test)
+go test ./protocols/frost -run Threshold -v
+```
+
+### Related LPs
+
+- **LP-7014**: CMP/CGG21 Protocol (ECDSA threshold)
+- **LP-7103**: LSS Protocol (dynamic resharing)
+- **LP-7330**: T-Chain ThresholdVM (VM integration)
+- **LP-13**: M-Chain Specification
 
 ## Future Enhancements
 

@@ -438,7 +438,7 @@ Full compatibility maintained through:
    - NIST Level 3 security (192-bit equivalent)
    - Integration with Cloudflare CIRCL library
 
-3. **Smart Contract Layer** (`standard/src/precompiles/`):
+3. **Smart Contract Layer** (`precompiles/`):
    - ML-DSA precompile at `0x0200000000000000000000000000000000000006`
    - SLH-DSA precompile at `0x0200000000000000000000000000000000000007`
    - Hybrid signature contract interface

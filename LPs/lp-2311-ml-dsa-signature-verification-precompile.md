@@ -272,7 +272,7 @@ signature: 0x<3309 bytes>
 
 ## Reference Implementation
 
-See: `standard/src/precompiles/mldsa/`
+See: `precompiles/mldsa/`
 
 **Key Files:**
 - `contract.go`: Core precompile implementation
@@ -416,7 +416,7 @@ Higher gas costs for PQ operations generate more fee revenue for validators, cre
 - **Dilithium Specification**: https://pq-crystals.org/dilithium/
 - **CIRCL Library**: https://github.com/cloudflare/circl
 - **LP-4**: Quantum-Resistant Cryptography Integration
-- **Implementation**: `standard/src/precompiles/mldsa/`
+- **Implementation**: `precompiles/mldsa/`
 
 ## Copyright
 
