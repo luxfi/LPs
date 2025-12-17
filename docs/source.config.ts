@@ -11,10 +11,10 @@ export default defineConfig({
         rehypePrettyCode,
         {
           theme: {
-            dark: "one-dark-pro",
-            light: "github-light",
+            dark: "vitesse-black",
+            light: "vitesse-light",
           },
-          keepBackground: false,
+          keepBackground: true,
           defaultLang: "solidity",
         },
       ],
