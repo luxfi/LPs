@@ -1,4 +1,4 @@
-import { DocsLayout } from '@hanzo/docs-ui/layouts/docs';
+import { DocsLayout } from '@hanzo/docs/ui/layouts/docs';
 import type { ReactNode } from 'react';
 import { FileText, GitPullRequest, Users, BookOpen, ExternalLink } from 'lucide-react';
 import { LogoWithText } from '../../components/logo';

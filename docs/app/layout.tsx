@@ -1,5 +1,5 @@
 import './global.css';
-import { RootProvider } from '@hanzo/docs-ui/provider/next';
+import { RootProvider } from '@hanzo/docs/ui/provider/next';
 import { Inter, Roboto_Mono } from 'next/font/google';
 import type { ReactNode } from 'react';
 import { SearchDialog } from '@/components/search-dialog';
