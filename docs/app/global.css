@@ -282,16 +282,17 @@ main article li > ol {
   margin-bottom: 0.5rem !important;
 }
 
-/* Code blocks - pure black, no borders */
+/* Code blocks - pure black, monochrome, beautiful */
 main article pre {
   border-radius: 0.75rem !important;
   padding: 1.25rem 1.5rem !important;
   margin: 1.75rem 0 !important;
   font-size: 0.875rem !important;
-  line-height: 1.65 !important;
+  line-height: 1.7 !important;
   overflow-x: auto !important;
   border: none !important;
   background: #000 !important;
+  color: #e5e5e5 !important;
 }
 
 main article :not(pre) > code {
@@ -300,31 +301,55 @@ main article :not(pre) > code {
   border-radius: 0.375rem !important;
   background: hsl(var(--muted)) !important;
   font-weight: 500 !important;
+  color: inherit !important;
 }
 
 main article pre code {
   padding: 0 !important;
   background: transparent !important;
   font-weight: 400 !important;
+  color: #e5e5e5 !important;
 }
 
-/* Override rehype-pretty-code backgrounds */
+/* MONOCHROME SYNTAX HIGHLIGHTING - Remove all colors */
+main article pre code span,
+main article pre code [style],
+main article pre span[style],
+main article figure[data-rehype-pretty-code-figure] span,
+main article figure[data-rehype-pretty-code-figure] code span {
+  color: #e5e5e5 !important;
+  background: transparent !important;
+  border: none !important;
+}
+
+/* Slightly dimmer for comments */
+main article pre code .comment,
+main article pre code [class*="comment"] {
+  color: #666 !important;
+}
+
+/* Override rehype-pretty-code backgrounds and ALL theme colors */
+main article pre[data-theme],
 main article pre[data-theme="dark"],
-main article figure[data-rehype-pretty-code-figure] pre {
+main article pre[data-theme="light"],
+main article figure[data-rehype-pretty-code-figure] pre,
+main article figure[data-rehype-pretty-code-figure] pre[data-theme] {
   background: #000 !important;
   border: none !important;
+  color: #e5e5e5 !important;
 }
 
 /* Clean code block styling - no additional borders/decorations */
 main article figure[data-rehype-pretty-code-figure] {
   margin: 1.75rem 0 !important;
   border: none !important;
+  background: transparent !important;
 }
 
 /* Code title bar styling */
 main article [data-rehype-pretty-code-title] {
   background: #111 !important;
-  color: hsl(var(--muted-foreground)) !important;
+  color: #888 !important;
   border: none !important;
   border-radius: 0.75rem 0.75rem 0 0 !important;
   padding: 0.625rem 1rem !important;
@@ -337,17 +362,46 @@ main article [data-rehype-pretty-code-title] + pre {
   margin-top: 0 !important;
 }
 
-/* Line numbers and highlighting */
-main article pre code [data-line] {
-  padding: 0 1rem 0 0 !important;
+/* Remove ALL line separators, borders, and grey lines */
+main article pre code [data-line],
+main article pre [data-line],
+main article figure[data-rehype-pretty-code-figure] [data-line] {
+  padding: 0 !important;
+  border: none !important;
   border-left: none !important;
+  border-right: none !important;
+  border-top: none !important;
+  border-bottom: none !important;
+  background: transparent !important;
+  display: block !important;
 }
 
+/* Highlighted lines - subtle white glow */
 main article pre code [data-highlighted-line] {
-  background: rgba(255, 255, 255, 0.05) !important;
-  border-left: 2px solid hsl(var(--primary)) !important;
+  background: rgba(255, 255, 255, 0.06) !important;
+  border-left: 2px solid #555 !important;
   margin-left: -1.5rem !important;
   padding-left: calc(1.5rem - 2px) !important;
+}
+
+/* Nested code/pre - same background */
+main article pre pre,
+main article pre code pre,
+main article code code {
+  background: #000 !important;
+  border: none !important;
+}
+
+/* Line numbers if present - dim them */
+main article pre [data-line-numbers-config] span[data-line]::before {
+  color: #444 !important;
+}
+
+/* Force shiki/rehype-pretty-code token colors to monochrome */
+main article pre [style*="color"],
+main article pre span[style*="color"],
+main article code span[style*="color"] {
+  color: #e5e5e5 !important;
 }
 
 /* Tables - clean and readable */

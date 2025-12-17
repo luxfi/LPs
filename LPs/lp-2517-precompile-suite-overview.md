@@ -249,7 +249,7 @@ function verifyHybrid(
     // Both must pass
     return classical && quantum;
 }
-```text
+```
 
 ### Threshold Wallet Selection
 
@@ -264,7 +264,7 @@ ICGGMP21 cggmp = ICGGMP21(0x020000000000000000000000000000000000000D);
 
 // For post-quantum security
 IRingtail ringtail = IRingtail(0x020000000000000000000000000000000000000B);
-```text
+```
 
 ### Cross-Chain Message Verification
 
