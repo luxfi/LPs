@@ -295,8 +295,8 @@ main article li > ol {
   --code-highlight-bg: rgba(255, 255, 255, 0.08);
   --code-line-number: #666;
   --code-border: rgba(255, 255, 255, 0.08);
-  /* Monospace font stack optimized for ASCII art box-drawing characters */
-  --code-font: "SF Mono", "Monaco", "Inconsolata", "Fira Mono", "Menlo", "Consolas", "DejaVu Sans Mono", "Source Code Pro", ui-monospace, monospace;
+  /* Roboto Mono for code - excellent box-drawing character support */
+  --code-font: var(--font-roboto-mono), "Roboto Mono", "Menlo", "Monaco", "Consolas", ui-monospace, monospace;
 }
 
 /* Pre element - the outer container */

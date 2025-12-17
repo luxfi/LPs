@@ -1,12 +1,18 @@
 import './global.css';
 import { RootProvider } from 'fumadocs-ui/provider/next';
-import { Inter } from 'next/font/google';
+import { Inter, Roboto_Mono } from 'next/font/google';
 import type { ReactNode } from 'react';
 import { SearchDialog } from '@/components/search-dialog';
 
 const inter = Inter({
   subsets: ['latin'],
   variable: '--font-inter',
+  display: 'swap',
+});
+
+const robotoMono = Roboto_Mono({
+  subsets: ['latin'],
+  variable: '--font-roboto-mono',
   display: 'swap',
 });
 
@@ -43,7 +49,7 @@ export const metadata = {
 
 export default function Layout({ children }: { children: ReactNode }) {
   return (
-    <html lang="en" className={`${inter.variable} dark`} suppressHydrationWarning>
+    <html lang="en" className={`${inter.variable} ${robotoMono.variable} dark`} suppressHydrationWarning>
       <head>
         {/* Prevent flash of light mode */}
         <script
