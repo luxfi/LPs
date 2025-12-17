@@ -89,7 +89,7 @@ As the Lux Network evolves to support advanced cross-chain operations, privacy f
         │                    │ • Lux FHE     │ • Analytics    │
         │                    │ • Homomorphic │ • Indexing     │
         └────────────────────┴───────────────┴────────────────┘
-```markdown
+```
 
 #### Chain Specifications
 

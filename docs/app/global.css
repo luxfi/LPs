@@ -287,12 +287,14 @@ main article li > ol {
  * Pure black background with proper monospace for ASCII art
  */
 
-/* CSS Variables for code styling (like shadcn/ui) */
+/* CSS Variables for code styling (shadcn/ui-inspired) */
 :root {
-  --code-bg: #000;
-  --code-fg: #e5e5e5;
-  --code-highlight-bg: rgba(255, 255, 255, 0.06);
-  --code-line-number: #555;
+  /* Slightly brighter black - not pure #000, stands out from page background */
+  --code-bg: #0d0d0d;
+  --code-fg: #e8e8e8;
+  --code-highlight-bg: rgba(255, 255, 255, 0.08);
+  --code-line-number: #666;
+  --code-border: rgba(255, 255, 255, 0.08);
   /* Monospace font stack optimized for ASCII art box-drawing characters */
   --code-font: "SF Mono", "Monaco", "Inconsolata", "Fira Mono", "Menlo", "Consolas", "DejaVu Sans Mono", "Source Code Pro", ui-monospace, monospace;
 }
@@ -302,13 +304,13 @@ main article pre,
 article pre,
 .prose pre,
 pre {
-  border-radius: 0.5rem !important;
-  padding: 1.25rem 1.5rem !important;
-  margin: 1.75rem 0 !important;
+  border-radius: 0.625rem !important;
+  padding: 1.5rem 1.75rem !important;
+  margin: 2rem 0 !important;
   font-size: 0.8125rem !important;
-  line-height: 1.5 !important;
+  line-height: 1.6 !important;
   overflow-x: auto !important;
-  border: none !important;
+  border: 1px solid var(--code-border) !important;
   background: var(--code-bg) !important;
   color: var(--code-fg) !important;
   font-family: var(--code-font) !important;
@@ -325,6 +327,8 @@ pre {
   overflow-wrap: normal !important;
   tab-size: 4 !important;
   -moz-tab-size: 4 !important;
+  /* Better shadow for depth */
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3) !important;
 }
 
 main article :not(pre) > code {
@@ -396,29 +400,36 @@ figure[data-rehype-pretty-code-figure] pre,
   border: none !important;
 }
 
-/* Clean code block styling - no additional borders/decorations */
+/* Clean code block styling - wrapper */
 main article figure[data-rehype-pretty-code-figure],
 figure[data-rehype-pretty-code-figure],
 [data-rehype-pretty-code-figure] {
-  margin: 1.75rem 0 !important;
+  margin: 2rem 0 !important;
   border: none !important;
   background: transparent !important;
+  border-radius: 0.625rem !important;
+  overflow: hidden !important;
 }
 
 /* Code title bar styling */
-main article [data-rehype-pretty-code-title] {
-  background: #111 !important;
-  color: #888 !important;
+main article [data-rehype-pretty-code-title],
+[data-rehype-pretty-code-title] {
+  background: #151515 !important;
+  color: #999 !important;
   border: none !important;
-  border-radius: 0.75rem 0.75rem 0 0 !important;
-  padding: 0.625rem 1rem !important;
+  border-bottom: 1px solid var(--code-border) !important;
+  border-radius: 0.625rem 0.625rem 0 0 !important;
+  padding: 0.75rem 1.25rem !important;
   font-size: 0.8rem !important;
   font-weight: 500 !important;
+  font-family: var(--code-font) !important;
 }
 
-main article [data-rehype-pretty-code-title] + pre {
-  border-radius: 0 0 0.75rem 0.75rem !important;
+main article [data-rehype-pretty-code-title] + pre,
+[data-rehype-pretty-code-title] + pre {
+  border-radius: 0 0 0.625rem 0.625rem !important;
   margin-top: 0 !important;
+  border-top: none !important;
 }
 
 /* Data lines - ensure proper line rendering for ASCII art */
