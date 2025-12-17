@@ -1,10 +1,10 @@
 /**
  * Lux Documentation Theme
- * Tailwind CSS 4 + @hanzo/docs
+ * Tailwind CSS 4 + @hanzo/ui
  */
 
 @import "tailwindcss";
-@import "@hanzo/docs/ui/style.css";
+@import "fumadocs-ui/style.css";
 
 /* Typography plugin for Tailwind CSS 4 */
 @plugin "@tailwindcss/typography";

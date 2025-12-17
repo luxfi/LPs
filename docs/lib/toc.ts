@@ -1,7 +1,9 @@
-import type { TOCItemType } from '@hanzo/docs/core/toc';
-
-// Re-export for convenience
-export type { TOCItemType };
+// TOC item type compatible with @hanzo/ui/docs
+export interface TOCItemType {
+  title: string;
+  url: string;
+  depth: number;
+}
 
 // Legacy interface for our custom TOC component
 export interface TOCItem {
@@ -11,7 +13,7 @@ export interface TOCItem {
 }
 
 // Extract headings from markdown content (server-side utility)
-// Returns fumadocs-compatible TOCItemType format
+// Returns TOCItemType format for sidebar
 export function extractHeadings(content: string): TOCItemType[] {
   const headings: TOCItemType[] = [];
   const lines = content.split('\n');
