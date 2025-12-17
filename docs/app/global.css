@@ -282,7 +282,7 @@ main article li > ol {
   margin-bottom: 0.5rem !important;
 }
 
-/* Code blocks - pure black, monochrome, beautiful */
+/* Code blocks - pure black background with syntax highlighting */
 main article pre {
   border-radius: 0.75rem !important;
   padding: 1.25rem 1.5rem !important;
@@ -292,7 +292,6 @@ main article pre {
   overflow-x: auto !important;
   border: none !important;
   background: #000 !important;
-  color: #e5e5e5 !important;
 }
 
 main article :not(pre) > code {
@@ -308,27 +307,9 @@ main article pre code {
   padding: 0 !important;
   background: transparent !important;
   font-weight: 400 !important;
-  color: #e5e5e5 !important;
 }
 
-/* MONOCHROME SYNTAX HIGHLIGHTING - Remove all colors */
-main article pre code span,
-main article pre code [style],
-main article pre span[style],
-main article figure[data-rehype-pretty-code-figure] span,
-main article figure[data-rehype-pretty-code-figure] code span {
-  color: #e5e5e5 !important;
-  background: transparent !important;
-  border: none !important;
-}
-
-/* Slightly dimmer for comments */
-main article pre code .comment,
-main article pre code [class*="comment"] {
-  color: #666 !important;
-}
-
-/* Override rehype-pretty-code backgrounds and ALL theme colors */
+/* Override rehype-pretty-code backgrounds - keep syntax colors */
 main article pre[data-theme],
 main article pre[data-theme="dark"],
 main article pre[data-theme="light"],
@@ -336,7 +317,6 @@ main article figure[data-rehype-pretty-code-figure] pre,
 main article figure[data-rehype-pretty-code-figure] pre[data-theme] {
   background: #000 !important;
   border: none !important;
-  color: #e5e5e5 !important;
 }
 
 /* Clean code block styling - no additional borders/decorations */
@@ -395,13 +375,6 @@ main article code code {
 /* Line numbers if present - dim them */
 main article pre [data-line-numbers-config] span[data-line]::before {
   color: #444 !important;
-}
-
-/* Force shiki/rehype-pretty-code token colors to monochrome */
-main article pre [style*="color"],
-main article pre span[style*="color"],
-main article code span[style*="color"] {
-  color: #e5e5e5 !important;
 }
 
 /* Tables - clean and readable */
