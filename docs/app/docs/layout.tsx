@@ -2,6 +2,7 @@ import { DocsLayout } from 'fumadocs-ui/layouts/docs';
 import type { ReactNode } from 'react';
 import { FileText, GitPullRequest, Users, BookOpen, ExternalLink } from 'lucide-react';
 import { LogoWithText } from '../../components/logo';
+import { SearchTrigger } from '../../components/search-trigger';
 import { source } from '@/lib/source';
 
 export default function Layout({ children }: { children: ReactNode }) {
@@ -18,27 +19,33 @@ export default function Layout({ children }: { children: ReactNode }) {
       sidebar={{
         defaultOpenLevel: 1,
         banner: (
-          <div className="rounded-lg border border-border bg-card p-4">
-            <div className="flex items-center gap-2 mb-2">
-              <FileText className="size-4" />
-              <span className="text-sm font-semibold">LP Statistics</span>
-            </div>
-            <div className="grid grid-cols-2 gap-2 text-xs">
-              <div>
-                <span className="text-muted-foreground">Total:</span>
-                <span className="ml-1 font-medium">{stats.total}</span>
+          <div className="flex flex-col gap-3">
+            {/* Search Trigger */}
+            <SearchTrigger />
+
+            {/* Statistics */}
+            <div className="rounded-lg border border-border bg-card p-4">
+              <div className="flex items-center gap-2 mb-2">
+                <FileText className="size-4" />
+                <span className="text-sm font-semibold">LP Statistics</span>
               </div>
-              <div>
-                <span className="text-muted-foreground">Final:</span>
-                <span className="ml-1 font-medium text-green-500">{stats.byStatus['Final'] || 0}</span>
-              </div>
-              <div>
-                <span className="text-muted-foreground">Draft:</span>
-                <span className="ml-1 font-medium text-yellow-500">{stats.byStatus['Draft'] || 0}</span>
-              </div>
-              <div>
-                <span className="text-muted-foreground">Review:</span>
-                <span className="ml-1 font-medium text-blue-500">{stats.byStatus['Review'] || 0}</span>
+              <div className="grid grid-cols-2 gap-2 text-xs">
+                <div>
+                  <span className="text-muted-foreground">Total:</span>
+                  <span className="ml-1 font-medium">{stats.total}</span>
+                </div>
+                <div>
+                  <span className="text-muted-foreground">Final:</span>
+                  <span className="ml-1 font-medium text-green-500">{stats.byStatus['Final'] || 0}</span>
+                </div>
+                <div>
+                  <span className="text-muted-foreground">Draft:</span>
+                  <span className="ml-1 font-medium text-yellow-500">{stats.byStatus['Draft'] || 0}</span>
+                </div>
+                <div>
+                  <span className="text-muted-foreground">Review:</span>
+                  <span className="ml-1 font-medium text-blue-500">{stats.byStatus['Review'] || 0}</span>
+                </div>
               </div>
             </div>
           </div>

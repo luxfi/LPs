@@ -145,14 +145,19 @@ main article {
   margin-right: auto !important;
 }
 
-/* Index page layout - centered */
+/* Index page layout - centered with proper top spacing */
 main > div.max-w-4xl {
   margin-left: auto !important;
   margin-right: auto !important;
   padding-left: 2rem !important;
   padding-right: 2rem !important;
-  padding-top: 2rem !important;
+  padding-top: 2.5rem !important;
   max-width: 900px !important;
+}
+
+/* Docs main content - add top margin */
+main article {
+  padding-top: 2.5rem !important;
 }
 
 /* Responsive adjustments */
@@ -277,7 +282,7 @@ main article li > ol {
   margin-bottom: 0.5rem !important;
 }
 
-/* Code blocks - refined */
+/* Code blocks - pure black, no borders */
 main article pre {
   border-radius: 0.75rem !important;
   padding: 1.25rem 1.5rem !important;
@@ -285,7 +290,8 @@ main article pre {
   font-size: 0.875rem !important;
   line-height: 1.65 !important;
   overflow-x: auto !important;
-  border: 1px solid hsl(var(--border) / 0.5) !important;
+  border: none !important;
+  background: #000 !important;
 }
 
 main article :not(pre) > code {
@@ -300,6 +306,48 @@ main article pre code {
   padding: 0 !important;
   background: transparent !important;
   font-weight: 400 !important;
+}
+
+/* Override rehype-pretty-code backgrounds */
+main article pre[data-theme="dark"],
+main article figure[data-rehype-pretty-code-figure] pre {
+  background: #000 !important;
+  border: none !important;
+}
+
+/* Clean code block styling - no additional borders/decorations */
+main article figure[data-rehype-pretty-code-figure] {
+  margin: 1.75rem 0 !important;
+  border: none !important;
+}
+
+/* Code title bar styling */
+main article [data-rehype-pretty-code-title] {
+  background: #111 !important;
+  color: hsl(var(--muted-foreground)) !important;
+  border: none !important;
+  border-radius: 0.75rem 0.75rem 0 0 !important;
+  padding: 0.625rem 1rem !important;
+  font-size: 0.8rem !important;
+  font-weight: 500 !important;
+}
+
+main article [data-rehype-pretty-code-title] + pre {
+  border-radius: 0 0 0.75rem 0.75rem !important;
+  margin-top: 0 !important;
+}
+
+/* Line numbers and highlighting */
+main article pre code [data-line] {
+  padding: 0 1rem 0 0 !important;
+  border-left: none !important;
+}
+
+main article pre code [data-highlighted-line] {
+  background: rgba(255, 255, 255, 0.05) !important;
+  border-left: 2px solid hsl(var(--primary)) !important;
+  margin-left: -1.5rem !important;
+  padding-left: calc(1.5rem - 2px) !important;
 }
 
 /* Tables - clean and readable */
@@ -356,18 +404,29 @@ main article a:not([class]):hover {
   opacity: 0.85 !important;
 }
 
-/* Sidebar refinements */
+/* Sidebar refinements - stable, fixed width, no movement */
 aside[role="complementary"] {
   border-right: 1px solid hsl(var(--border) / 0.5) !important;
   /* Fix sidebar alignment - override items-end that creates left gap */
   align-items: stretch !important;
-  /* Match sidebar width to content width */
+  /* Fixed sidebar width - no transitions that cause movement */
   width: var(--fd-sidebar-width) !important;
+  min-width: var(--fd-sidebar-width) !important;
+  max-width: var(--fd-sidebar-width) !important;
+  flex-shrink: 0 !important;
+  /* Prevent layout shift */
+  position: sticky !important;
+  top: 0 !important;
+  height: 100vh !important;
+  overflow-y: auto !important;
+  /* Disable transitions that cause "movement" feel */
+  transition: none !important;
 }
 
 /* Ensure sidebar children fill full width */
 aside[role="complementary"] > * {
   width: 100% !important;
+  transition: none !important;
 }
 
 /* Remove underline from sidebar bottom section */
@@ -384,6 +443,11 @@ aside[role="complementary"] [class*="theme"] {
 /* Fix sidebar content spacing */
 aside[role="complementary"] nav {
   padding-bottom: 1rem !important;
+}
+
+/* Prevent sidebar tree items from causing layout shifts */
+aside[role="complementary"] [data-state] {
+  transition: none !important;
 }
 
 /* TOC refinements */
