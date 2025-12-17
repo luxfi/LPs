@@ -290,7 +290,7 @@ export default function HomePage() {
             <ThemeToggle />
             <Link
               href="/docs"
-              className="rounded-full bg-black px-4 py-1.5 text-sm font-medium text-white transition-colors hover:bg-black/90 dark:bg-white dark:text-black dark:hover:bg-white/90"
+              className="inline-flex h-8 items-center justify-center rounded-md bg-foreground px-3 text-sm font-medium text-background transition-colors hover:bg-foreground/90"
             >
               Browse
             </Link>
@@ -310,21 +310,24 @@ export default function HomePage() {
           <p className="mx-auto mt-6 max-w-2xl text-lg text-muted-foreground">
             Lux Network: A high-performance, quantum-resistant blockchain platform designed for the AI era. Explore advanced cryptography, privacy-preserving technologies, and decentralized infrastructure standards.
           </p>
-          <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
+          <div className="mt-10 flex items-center justify-center gap-3">
             <a
               href="https://github.com/luxfi/LPs"
               target="_blank"
               rel="noreferrer"
-              className="inline-flex w-full items-center justify-center gap-2 rounded-full border border-border bg-muted/50 px-8 py-3 text-sm font-semibold text-foreground backdrop-blur-sm transition-colors hover:bg-muted sm:w-auto"
+              className="inline-flex h-10 items-center justify-center gap-2 rounded-md border border-border bg-transparent px-4 text-sm font-medium text-foreground transition-colors hover:bg-muted"
             >
               <GitHubIcon size={16} />
               GitHub
             </a>
             <Link
               href="/docs"
-              className="inline-flex w-full items-center justify-center rounded-full bg-black px-8 py-3 text-sm font-semibold text-white transition-colors hover:bg-black/90 dark:bg-white dark:text-black dark:hover:bg-white/90 sm:w-auto"
+              className="inline-flex h-10 items-center justify-center gap-2 rounded-md bg-foreground px-4 text-sm font-medium text-background transition-colors hover:bg-foreground/90"
             >
               Browse proposals
+              <svg className="size-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+              </svg>
             </Link>
           </div>
         </section>
@@ -674,10 +677,10 @@ export default function HomePage() {
             <p className="mt-3 max-w-xl opacity-80">
               Help shape the future of high-performance, quantum-resistant blockchain technology. Explore our contribution guidelines and join the Lux Network ecosystem.
             </p>
-            <div className="mt-8 flex flex-col gap-4 sm:flex-row">
+            <div className="mt-8 flex flex-col gap-3 sm:flex-row">
               <Link
                 href="/docs"
-                className="inline-flex items-center justify-center rounded-full bg-background px-8 py-3 text-center text-sm font-semibold text-foreground transition-colors hover:bg-background/90"
+                className="inline-flex h-10 items-center justify-center rounded-md bg-background px-4 text-sm font-medium text-foreground transition-colors hover:bg-background/90"
               >
                 Read guidelines
               </Link>
@@ -685,7 +688,7 @@ export default function HomePage() {
                 href="https://github.com/luxfi/LPs"
                 target="_blank"
                 rel="noreferrer"
-                className="inline-flex items-center justify-center gap-2 rounded-full border border-background/30 px-8 py-3 text-sm font-semibold transition-colors hover:bg-background/10"
+                className="inline-flex h-10 items-center justify-center gap-2 rounded-md border border-background/30 px-4 text-sm font-medium transition-colors hover:bg-background/10"
               >
                 <GitHubIcon size={16} />
                 Open on GitHub
