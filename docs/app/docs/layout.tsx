@@ -1,8 +1,9 @@
-import { DocsLayout } from '@hanzo/docs/ui/layouts/docs';
+import { DocsLayout } from '@hanzo/ui/docs/layouts/docs';
 import type { ReactNode } from 'react';
 import { FileText, GitPullRequest, Users, BookOpen, ExternalLink } from 'lucide-react';
 import { LogoWithText } from '../../components/logo';
 import { SearchTrigger } from '../../components/search-trigger';
+import { DocsFooter } from '../../components/docs-footer';
 import { source } from '@/lib/source';
 
 export default function Layout({ children }: { children: ReactNode }) {
@@ -10,6 +11,7 @@ export default function Layout({ children }: { children: ReactNode }) {
   const stats = source.getStats();
 
   return (
+    <>
     <DocsLayout
       tree={pageTree}
       nav={{
@@ -103,5 +105,7 @@ export default function Layout({ children }: { children: ReactNode }) {
     >
       {children}
     </DocsLayout>
+    <DocsFooter />
+  </>
   );
 }

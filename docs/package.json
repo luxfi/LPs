@@ -5,14 +5,15 @@
   "scripts": {
     "dev": "next dev --port 3002",
     "prebuild": "node scripts/generate-og.mjs",
-    "build": "TURBOPACK=0 next build",
+    "build": "hanzo-mdx && TURBOPACK=0 next build",
     "export": "TURBOPACK=0 next build",
     "start": "next start",
     "lint": "next lint",
     "generate:og": "node scripts/generate-og.mjs",
     "test": "playwright test",
     "test:ui": "playwright test --ui",
-    "test:debug": "playwright test --debug"
+    "test:debug": "playwright test --debug",
+    "postinstall": "hanzo-mdx"
   },
   "dependencies": {
     "@fontsource/inter": "^5.2.8",
@@ -23,7 +24,8 @@
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "cmdk": "^1.1.1",
-    "@hanzo/docs": "^16.2.5",
+    "@hanzo/mdx": "^14.1.0",
+    "@hanzo/ui": "^5.3.22",
     "gray-matter": "^4.0.3",
     "lucide-react": "^0.468.0",
     "next": "16.0.1",

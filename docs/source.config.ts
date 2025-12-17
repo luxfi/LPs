@@ -1,7 +1,7 @@
 import {
   defineConfig,
   defineDocs,
-} from "@hanzo/docs/mdx/config"
+} from "@hanzo/mdx/config"
 import rehypePrettyCode from "rehype-pretty-code"
 
 export default defineConfig({
