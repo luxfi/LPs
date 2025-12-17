@@ -457,14 +457,14 @@ signature: <valid 10-of-15 signature>
 
 **Implementation Status**: ✅ COMPLETE
 
-See: `standard/src/precompiles/frost/`
+See: `precompiles/frost/`
 
 **Key Files:**
-- [`contract.go`](standard/src/precompiles/frost/contract.go) - Core precompile implementation (167 lines)
-- [`module.go`](standard/src/precompiles/frost/module.go) - Precompile registration
-- [`contract_test.go`](standard/src/precompiles/frost/contract_test.go) - Comprehensive test suite
-- [`IFROST.sol`](standard/src/precompiles/frost/IFROST.sol) - Solidity interface and library (238 lines)
-- [`README.md`](standard/src/precompiles/frost/README.md) - Complete documentation (266 lines)
+- [`contract.go`](precompiles/frost/contract.go) - Core precompile implementation (167 lines)
+- [`module.go`](precompiles/frost/module.go) - Precompile registration
+- [`contract_test.go`](precompiles/frost/contract_test.go) - Comprehensive test suite
+- [`IFROST.sol`](precompiles/frost/IFROST.sol) - Solidity interface and library (238 lines)
+- [`README.md`](precompiles/frost/README.md) - Complete documentation (266 lines)
 
 **Cryptography:**
 - External Package: [`threshold/protocols/frost`](threshold/protocols/frost)
@@ -742,10 +742,10 @@ See **LP-323** (LSS-MPC) for dynamic resharing capabilities:
 - Torben Pryds Pedersen (1991). "A Threshold Cryptosystem without a Trusted Party"
 
 ### Implementation
-- **Precompile**: [`standard/src/precompiles/frost/`](standard/src/precompiles/frost/)
+- **Precompile**: [`precompiles/frost/`](precompiles/frost/)
 - **Threshold Library**: [`threshold/protocols/frost/`](threshold/protocols/frost/)
-- **Tests**: [`standard/src/precompiles/frost/contract_test.go`](standard/src/precompiles/frost/contract_test.go)
-- **Interface**: [`standard/src/precompiles/frost/IFROST.sol`](standard/src/precompiles/frost/IFROST.sol)
+- **Tests**: [`precompiles/frost/contract_test.go`](precompiles/frost/contract_test.go)
+- **Interface**: [`precompiles/frost/IFROST.sol`](precompiles/frost/IFROST.sol)
 
 ### Related LPs
 - **LP-4**: Quantum-Resistant Cryptography Integration

@@ -349,7 +349,7 @@ signature: <Ringtail signature from 67 parties>
 
 **Implementation Status**: ✅ COMPLETE
 
-See: `standard/src/precompiles/ringtail/`
+See: `precompiles/ringtail/`
 
 **Key Files:**
 - `contract.go` - Core precompile implementation (257 lines)
@@ -549,7 +549,7 @@ func verifyRingtail(threshold, totalParties uint32, msgHash []byte, sig []byte) 
 
 - **Ringtail Paper**: "Two-Round Threshold Signatures from LWE" (ePrint 2024/1113)
 - **Ring-LWE**: Lyubashevsky et al., "On Ideal Lattices and Learning with Errors Over Rings"
-- **Implementation**: `github.com/luxfi/ringtail` and `standard/src/precompiles/ringtail/`
+- **Implementation**: `github.com/luxfi/ringtail` and `precompiles/ringtail/`
 - **LP-99**: Quasar Consensus with Dual-Certificate Finality
 - **LP-311**: ML-DSA Precompile (non-threshold PQ signature)
 - **LP-321**: FROST Precompile (classical threshold for comparison)

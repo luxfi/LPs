@@ -137,7 +137,7 @@ go test -v ./core/vm ./core/state
 - [`UniswapV3/`](https://github.com/luxfi/standard/tree/main/src/defi/UniswapV3) - Concentrated liquidity
 - Lending protocols, staking contracts, etc.
 
-**Precompile Interfaces** (`standard/src/precompiles/`):
+**Precompile Interfaces** (`precompiles/`):
 - [`IMLDSA.sol`](https://github.com/luxfi/standard/blob/main/src/precompiles/IMLDSA.sol) - Post-quantum signatures
 - [`ICGGMP21.sol`](https://github.com/luxfi/standard/blob/main/src/precompiles/ICGGMP21.sol) - Threshold signatures
 - [`IWarpMessenger.sol`](https://github.com/luxfi/standard/blob/main/src/precompiles/IWarpMessenger.sol) - Cross-chain messaging

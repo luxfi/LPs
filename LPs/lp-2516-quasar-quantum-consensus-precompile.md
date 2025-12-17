@@ -517,7 +517,7 @@ function testInvalidSignatureRejected() public {
 
 ## Reference Implementation
 
-**Location:** `/Users/z/work/lux/standard/src/precompiles/quasar/`
+**Location:** `/Users/z/work/lux/precompiles/quasar/`
 
 **Key Files:**
 - `contract.go` (357 lines): Core precompile implementations
@@ -621,7 +621,7 @@ Compressed witnesses rely on validator bitfields. Attacks mitigated by:
 - **LP-4**: Quantum-Resistant Cryptography Integration
 - **LP-2311**: ML-DSA Signature Verification Precompile
 - **LP-700**: Quasar Consensus Protocol Specification
-- **Implementation**: `/Users/z/work/lux/standard/src/precompiles/quasar/`
+- **Implementation**: `/Users/z/work/lux/precompiles/quasar/`
 
 ## Copyright
 

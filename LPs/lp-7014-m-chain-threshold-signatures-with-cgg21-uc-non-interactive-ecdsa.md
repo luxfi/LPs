@@ -171,12 +171,33 @@ Use authenticated channels, verify transcripts, and schedule periodic key refres
 
 | Component | Path | Purpose |
 |-----------|------|---------|
-| **DKG Protocol** | `protocols/cmp/dkg/` | Distributed key generation |
-| **Signing** | `protocols/cmp/sign/` | Multi-party ECDSA signing |
-| **Presigning** | `protocols/cmp/presign/` | Offline presignature generation |
-| **Refresh** | `protocols/cmp/refresh/` | Proactive key refresh |
-| **ZK Proofs** | `protocols/cmp/zk/` | Zero-knowledge proof verification |
-| **Paillier** | `crypto/paillier/` | Threshold homomorphic encryption |
+| **Config** | `protocols/cmp/config/` | Configuration types and serialization |
+| **Keygen** | `protocols/cmp/keygen/` | Distributed key generation (5 rounds) |
+| **Sign** | `protocols/cmp/sign/` | Multi-party ECDSA signing (5 rounds) |
+| **Presign** | `protocols/cmp/presign/` | Offline presignature and abort handling |
+| **ZK Proofs** | `pkg/zk/` | Zero-knowledge proof verification |
+| **Paillier** | `pkg/paillier/` | Threshold homomorphic encryption |
+
+### File Inventory
+
+```
+protocols/cmp/
+├── cmp.go                    # Entry points: Keygen(), Sign(), Refresh(), Presign()
+├── cmp_*_test.go             # Test suites (basic, debug, integration, benchmark, etc.)
+├── config/
+│   ├── config.go             # Config struct with PublicPoint, ECDSA, Paillier data
+│   └── marshal.go            # Binary/JSON serialization
+├── keygen/
+│   ├── keygen.go             # StartFunc for key generation
+│   └── round1.go - round5.go # 5-round DKG protocol
+├── sign/
+│   ├── sign.go               # StartFunc for signing
+│   └── round1.go - round5.go # 5-round signing protocol
+└── presign/
+    ├── presign1.go - presign7.go  # Presignature generation (7 rounds)
+    ├── sign1.go, sign2.go         # Online signing with presignature
+    └── abort1.go, abort2.go       # Identifiable abort handling
+```
 
 ### Build Instructions
 
@@ -191,23 +212,29 @@ make build
 ### Testing
 
 ```bash
-# Test DKG protocol
-go test ./protocols/cmp/dkg -v
+# Test keygen protocol
+go test ./protocols/cmp/keygen -v
 
 # Test signing operations
 go test ./protocols/cmp/sign -v
 
-# Test key refresh
-go test ./protocols/cmp/refresh -v
+# Test presign and abort
+go test ./protocols/cmp/presign -v
 
-# Test all crypto
-go test ./crypto/paillier -v
+# Test full CMP protocol (integration)
+go test ./protocols/cmp -v
 
-# Integration tests
-go test -tags=integration ./protocols/cmp/...
+# Test Paillier encryption
+go test ./pkg/paillier -v
+
+# Test ZK proofs
+go test ./pkg/zk/... -v
 
 # Performance benchmarks
-go test ./protocols/cmp/sign -bench=. -benchmem
+go test ./protocols/cmp -bench=. -benchmem
+
+# Quick smoke test (recommended)
+go test ./protocols/cmp -run Quick -v
 ```
 
 ### File Size Verification
@@ -224,13 +251,30 @@ go test ./protocols/cmp/sign -bench=. -benchmem
 - Presign (3-of-5): ~200ms
 - Key Refresh: ~600ms
 
+### ThresholdVM Integration
+
+CMP is integrated into T-Chain (ThresholdVM) via:
+
+- **Executor**: `node/vms/thresholdvm/executor.go`
+  - `CMPKeygenStartFunc()` - Creates CMP keygen protocol runner
+  - `CMPSignStartFunc()` - Creates CMP signing protocol runner
+  - `CMPRefreshStartFunc()` - Creates CMP refresh protocol runner
+  - `CMPKeyShare` wrapper implements `KeyShare` interface
+
+- **Usage in VM**:
+```go
+executor := NewProtocolExecutor(pool)
+startFunc := executor.CMPKeygenStartFunc(selfID, participants, threshold)
+handler, err := protocol.NewTwoRoundHandler(startFunc, sessionID)
+```
+
+See LP-7330 for full ThresholdVM specification.
+
 ### Related LPs
 
 - **LP-13**: M-Chain Specification (uses CGG21)
-- **LP-14**: M-Chain Threshold Signatures (this LP)
-- **LP-322**: CGGMP21 Precompile (precompile version)
-- **LP-323**: LSS-MPC Dynamic Resharing (resharing protocol)
+- **LP-7103**: LSS Dynamic Resharing (alternative protocol)
+- **LP-7104**: FROST Signatures (Schnorr threshold)
+- **LP-7330**: T-Chain ThresholdVM (VM integration)
 - **LP-15**: MPC Bridge Protocol
 - **LP-16**: Teleport Protocol
-- **LP-17**: Bridge Asset Registry
-- **LP-18**: Cross-Chain Message Format

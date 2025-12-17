@@ -192,7 +192,7 @@ Expected Gas: ~1,012,000 gas (500K base + 512K for 10KB message)
 
 **Implementation Status**: ✅ COMPLETE
 
-See: `standard/src/precompiles/slhdsa/`
+See: `precompiles/slhdsa/`
 
 **Key Files:**
 - `contract.go` - Core precompile implementation (114 lines)
@@ -282,7 +282,7 @@ Unlike ML-DSA, SPHINCS+ is **stateless hash-based**:
 
 - **NIST FIPS 205**: https://csrc.nist.gov/pubs/fips/205/final
 - **SPHINCS+ Specification**: https://sphincs.org/
-- **Implementation**: `standard/src/precompiles/slhdsa/`
+- **Implementation**: `precompiles/slhdsa/`
 - **LP-311**: ML-DSA Precompile (complementary PQ signature)
 - **LP-320**: Ringtail Threshold (PQ threshold variant)
 

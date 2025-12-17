@@ -374,8 +374,101 @@ The LSS protocol is fully implemented in the Lux threshold cryptography library:
 - Repository: `github.com/luxfi/threshold`
 - Package: `protocols/lss`
 - Status: Production-ready with comprehensive testing
+- Files: 64 Go files across 9 subdirectories
 - Benchmarks: Available for all operations
-- Documentation: Complete API documentation
+
+### File Inventory
+
+```
+protocols/lss/
+├── lss.go                 # Entry points: Keygen(), Sign(), Refresh()
+├── factory.go             # Protocol factory creation
+├── suite.go               # Test suite utilities
+├── rollback.go            # Rollback/recovery operations
+├── lss_cmp.go             # CMP integration (ECDSA signatures)
+├── lss_frost.go           # FROST integration (Schnorr signatures)
+├── lss_*_test.go          # Test suites (integration, benchmark, threshold)
+├── config/
+│   ├── config.go          # Config struct with shares and verification data
+│   └── marshal.go         # JSON/binary serialization
+├── keygen/
+│   ├── keygen.go          # Distributed key generation StartFunc
+│   └── round1.go - round3.go  # 3-round DKG protocol
+├── sign/
+│   └── sign.go            # Threshold signing protocol
+├── reshare/
+│   └── reshare.go         # Dynamic resharing to new parties/threshold
+├── dealer/
+│   └── dealer.go          # Trusted dealer mode (optional, for testing)
+├── jvss/
+│   └── jvss.go            # Joint Verifiable Secret Sharing
+├── coordinator/
+│   └── coordinator.go     # Protocol coordination utilities
+└── adapters/
+    └── adapters.go        # Protocol adapter interfaces
+```
+
+### Key Components
+
+| Component | Path | Purpose |
+|-----------|------|---------|
+| **Config** | `protocols/lss/config/` | Configuration types and serialization |
+| **Keygen** | `protocols/lss/keygen/` | Distributed key generation (3 rounds) |
+| **Sign** | `protocols/lss/sign/` | Threshold Schnorr signing |
+| **Reshare** | `protocols/lss/reshare/` | Dynamic resharing protocol |
+| **JVSS** | `protocols/lss/jvss/` | Joint Verifiable Secret Sharing |
+| **Dealer** | `protocols/lss/dealer/` | Optional trusted dealer (testing only) |
+| **Adapters** | `protocols/lss/adapters/` | Cross-protocol adapters |
+
+### ThresholdVM Integration
+
+LSS is integrated into T-Chain (ThresholdVM) via:
+
+- **Executor**: `node/vms/thresholdvm/executor.go`
+  - `LSSKeygenStartFunc()` - Creates LSS keygen protocol runner
+  - `LSSSignStartFunc()` - Creates LSS signing protocol runner
+  - `LSSReshareStartFunc()` - Creates LSS reshare protocol runner
+  - `LSSRefreshStartFunc()` - Creates LSS refresh protocol runner
+  - `LSSKeyShare` wrapper implements `KeyShare` interface
+
+- **Usage in VM**:
+```go
+executor := NewProtocolExecutor(pool)
+startFunc := executor.LSSKeygenStartFunc(selfID, participants, threshold)
+handler, err := protocol.NewMultiHandler(startFunc, sessionID)
+```
+
+### Testing
+
+```bash
+# Test keygen protocol
+go test ./protocols/lss/keygen -v
+
+# Test signing
+go test ./protocols/lss/sign -v
+
+# Test resharing
+go test ./protocols/lss/reshare -v
+
+# Test full LSS protocol (integration)
+go test ./protocols/lss -v
+
+# Performance benchmarks
+go test ./protocols/lss -bench=. -benchmem
+
+# Run all tests
+go test ./protocols/lss/... -v
+```
+
+See LP-7330 for full ThresholdVM specification.
+
+### Related LPs
+
+- **LP-7014**: CMP/CGG21 Protocol (ECDSA threshold signatures)
+- **LP-7104**: FROST Protocol (Schnorr threshold signatures)
+- **LP-7330**: T-Chain ThresholdVM (VM integration)
+- **LP-13**: M-Chain Specification (uses LSS)
+- **LP-15**: MPC Bridge Protocol
 
 ## Conclusion
 

@@ -1,5 +1,5 @@
 ---
-lp: 2510
+lp: 2518
 title: Teleport Token Standard
 description: Unified token bridging standard for native and remote tokens across Lux Network chains
 author: Lux Network Team (@luxfi)

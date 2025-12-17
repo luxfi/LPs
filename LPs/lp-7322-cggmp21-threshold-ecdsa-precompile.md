@@ -522,7 +522,7 @@ When an abort is identified:
 
 ## Test Cases
 
-Reference implementation tests: `github.com/luxfi/standard/src/precompiles/cggmp21/contract_test.go`
+Reference implementation tests: `github.com/luxfi/precompiles/cggmp21/contract_test.go`
 
 ### Test 1: Valid 3-of-5 Signature
 ```yaml
@@ -567,7 +567,7 @@ Gas Used: 225,000
 
 ### Precompile Implementation
 
-**Location**: `github.com/luxfi/standard/src/precompiles/cggmp21/`
+**Location**: `github.com/luxfi/precompiles/cggmp21/`
 
 **Files**:
 - `contract.go` - EVM precompile implementation
