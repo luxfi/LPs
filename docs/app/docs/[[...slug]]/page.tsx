@@ -104,10 +104,24 @@ function createHeadingComponent(level: number) {
   return HeadingComponent;
 }
 
+// Custom code component that strips erroneous backticks from inline code
+function CodeComponent({ children, className, ...props }: any) {
+  // Handle inline code (no className) - strip backticks if present
+  if (!className) {
+    let content = typeof children === 'string' ? children : String(children);
+    // Strip leading/trailing backticks that may appear due to GFM table parsing
+    content = content.replace(/^`+|`+$/g, '');
+    return <code {...props}>{content}</code>;
+  }
+  // Code blocks keep className for syntax highlighting
+  return <code className={className} {...props}>{children}</code>;
+}
+
 const markdownComponents = {
   h2: createHeadingComponent(2),
   h3: createHeadingComponent(3),
   h4: createHeadingComponent(4),
+  code: CodeComponent,
 };
 
 // Individual LP Page Component

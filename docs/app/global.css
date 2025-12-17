@@ -303,6 +303,8 @@ main article :not(pre) > code {
   color: inherit !important;
 }
 
+/* Note: Backtick removal for inline code moved to end of file for proper cascade */
+
 main article pre code {
   padding: 0 !important;
   background: transparent !important;
@@ -556,4 +558,14 @@ main.fd-default-layout article {
 
 @utility slide-in-from-top-2 {
   animation: slide-in-from-top 0.15s ease-out;
+}
+
+/*
+ * CRITICAL: Remove Tailwind Typography backticks from ALL inline code
+ * The Typography plugin adds content: "`" to code::before and code::after
+ * This must be placed at the end and use simple selectors to ensure override
+ */
+code::before,
+code::after {
+  content: none !important;
 }
