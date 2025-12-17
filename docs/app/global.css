@@ -282,16 +282,49 @@ main article li > ol {
   margin-bottom: 0.5rem !important;
 }
 
-/* Code blocks - pure black background with syntax highlighting */
-main article pre {
-  border-radius: 0.75rem !important;
+/*
+ * Code Blocks - shadcn/ui-inspired styling
+ * Pure black background with proper monospace for ASCII art
+ */
+
+/* CSS Variables for code styling (like shadcn/ui) */
+:root {
+  --code-bg: #000;
+  --code-fg: #e5e5e5;
+  --code-highlight-bg: rgba(255, 255, 255, 0.06);
+  --code-line-number: #555;
+  /* Monospace font stack optimized for ASCII art box-drawing characters */
+  --code-font: "SF Mono", "Monaco", "Inconsolata", "Fira Mono", "Menlo", "Consolas", "DejaVu Sans Mono", "Source Code Pro", ui-monospace, monospace;
+}
+
+/* Pre element - the outer container */
+main article pre,
+article pre,
+.prose pre,
+pre {
+  border-radius: 0.5rem !important;
   padding: 1.25rem 1.5rem !important;
   margin: 1.75rem 0 !important;
-  font-size: 0.875rem !important;
-  line-height: 1.7 !important;
+  font-size: 0.8125rem !important;
+  line-height: 1.5 !important;
   overflow-x: auto !important;
   border: none !important;
-  background: #000 !important;
+  background: var(--code-bg) !important;
+  color: var(--code-fg) !important;
+  font-family: var(--code-font) !important;
+  /* Critical for ASCII art alignment */
+  font-variant-ligatures: none !important;
+  font-feature-settings: "liga" 0, "calt" 0 !important;
+  letter-spacing: 0 !important;
+  -webkit-font-smoothing: antialiased !important;
+  text-rendering: geometricPrecision !important;
+  /* Preserve exact whitespace */
+  white-space: pre !important;
+  word-wrap: normal !important;
+  word-break: normal !important;
+  overflow-wrap: normal !important;
+  tab-size: 4 !important;
+  -moz-tab-size: 4 !important;
 }
 
 main article :not(pre) > code {
@@ -305,24 +338,68 @@ main article :not(pre) > code {
 
 /* Note: Backtick removal for inline code moved to end of file for proper cascade */
 
-main article pre code {
+/* Code element inside pre - must inherit ALL font settings */
+main article pre code,
+article pre code,
+.prose pre code,
+pre code {
   padding: 0 !important;
   background: transparent !important;
   font-weight: 400 !important;
+  color: var(--code-fg) !important;
+  /* CRITICAL: Inherit ALL font settings from pre */
+  font-family: inherit !important;
+  font-size: inherit !important;
+  line-height: inherit !important;
+  font-variant-ligatures: inherit !important;
+  font-feature-settings: inherit !important;
+  letter-spacing: inherit !important;
+  text-rendering: inherit !important;
+  white-space: inherit !important;
+  word-wrap: inherit !important;
+  word-break: inherit !important;
+  overflow-wrap: inherit !important;
+  tab-size: inherit !important;
+  -moz-tab-size: inherit !important;
+  /* Remove any default styling that might interfere */
+  display: block !important;
+  width: 100% !important;
+  min-width: 100% !important;
 }
 
-/* Override rehype-pretty-code backgrounds - keep syntax colors */
+/* Span elements inside code - ensure consistent font rendering */
+main article pre code span,
+article pre code span,
+.prose pre code span,
+pre code span,
+[data-rehype-pretty-code-figure] span,
+[data-line] span {
+  font-family: inherit !important;
+  font-size: inherit !important;
+  font-variant-ligatures: inherit !important;
+  font-feature-settings: inherit !important;
+  letter-spacing: inherit !important;
+}
+
+/* Override ALL possible backgrounds from themes/plugins */
 main article pre[data-theme],
 main article pre[data-theme="dark"],
 main article pre[data-theme="light"],
+article pre[data-theme],
+.prose pre[data-theme],
+pre[data-theme],
 main article figure[data-rehype-pretty-code-figure] pre,
-main article figure[data-rehype-pretty-code-figure] pre[data-theme] {
-  background: #000 !important;
+main article figure[data-rehype-pretty-code-figure] pre[data-theme],
+figure[data-rehype-pretty-code-figure] pre,
+[data-rehype-pretty-code-figure] pre {
+  background: var(--code-bg) !important;
   border: none !important;
 }
 
 /* Clean code block styling - no additional borders/decorations */
-main article figure[data-rehype-pretty-code-figure] {
+main article figure[data-rehype-pretty-code-figure],
+figure[data-rehype-pretty-code-figure],
+[data-rehype-pretty-code-figure] {
   margin: 1.75rem 0 !important;
   border: none !important;
   background: transparent !important;
@@ -344,24 +421,28 @@ main article [data-rehype-pretty-code-title] + pre {
   margin-top: 0 !important;
 }
 
-/* Remove ALL line separators, borders, and grey lines */
+/* Data lines - ensure proper line rendering for ASCII art */
 main article pre code [data-line],
 main article pre [data-line],
-main article figure[data-rehype-pretty-code-figure] [data-line] {
+main article figure[data-rehype-pretty-code-figure] [data-line],
+[data-rehype-pretty-code-figure] [data-line],
+[data-line] {
   padding: 0 !important;
   border: none !important;
-  border-left: none !important;
-  border-right: none !important;
-  border-top: none !important;
-  border-bottom: none !important;
   background: transparent !important;
   display: block !important;
+  /* Critical: preserve exact whitespace and line structure */
+  white-space: pre !important;
+  min-height: 1.5em !important;
+  /* Ensure full width for proper text layout */
+  width: 100% !important;
 }
 
 /* Highlighted lines - subtle white glow */
-main article pre code [data-highlighted-line] {
-  background: rgba(255, 255, 255, 0.06) !important;
-  border-left: 2px solid #555 !important;
+main article pre code [data-highlighted-line],
+[data-highlighted-line] {
+  background: var(--code-highlight-bg) !important;
+  border-left: 2px solid var(--code-line-number) !important;
   margin-left: -1.5rem !important;
   padding-left: calc(1.5rem - 2px) !important;
 }
