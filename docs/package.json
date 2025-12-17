@@ -17,8 +17,10 @@
   "dependencies": {
     "@fontsource/inter": "^5.2.8",
     "@luxfi/logo": "^1.0.0",
+    "@radix-ui/react-dialog": "^1.1.15",
     "@types/mdx": "^2.0.13",
     "clsx": "^2.1.1",
+    "cmdk": "^1.1.1",
     "fumadocs-core": "^16.2.5",
     "fumadocs-mdx": "^14.1.0",
     "fumadocs-ui": "^16.2.5",

@@ -35,6 +35,7 @@ export interface LPCategory extends CategoryMeta {
 
 // LP category metadata with educational content
 export interface CategoryMeta {
+  slug: string;
   name: string;
   shortDesc: string;
   description: string;
@@ -48,6 +49,7 @@ export interface CategoryMeta {
 // LP number ranges for categories with rich educational content
 const LP_CATEGORIES: CategoryMeta[] = [
   {
+    slug: 'core',
     name: 'Core Architecture',
     shortDesc: 'Network fundamentals',
     description: 'Foundational specifications defining how the Lux Network operates. Covers network topology, node requirements, data structures, and the multi-chain architecture that enables high throughput and low latency.',
@@ -58,6 +60,7 @@ const LP_CATEGORIES: CategoryMeta[] = [
     keyTopics: ['Network topology', 'Node specifications', 'Data structures', 'Multi-chain design'],
   },
   {
+    slug: 'consensus',
     name: 'Consensus',
     shortDesc: 'Consensus protocols',
     description: 'Consensus mechanisms that secure the network. Lux uses a novel family of consensus protocols including Snowman for linear chains and Avalanche for DAG-based consensus, enabling sub-second finality.',
@@ -68,6 +71,7 @@ const LP_CATEGORIES: CategoryMeta[] = [
     keyTopics: ['Snowman consensus', 'Avalanche protocol', 'Byzantine fault tolerance', 'Finality guarantees'],
   },
   {
+    slug: 'cryptography',
     name: 'Cryptography',
     shortDesc: 'Cryptographic standards',
     description: 'Cryptographic primitives and post-quantum security standards. Includes digital signatures (ECDSA, Ed25519, ML-DSA), hash functions, key encapsulation (ML-KEM), and zero-knowledge proofs.',
@@ -78,6 +82,7 @@ const LP_CATEGORIES: CategoryMeta[] = [
     keyTopics: ['Digital signatures', 'Post-quantum crypto', 'ML-KEM/ML-DSA', 'Zero-knowledge proofs'],
   },
   {
+    slug: 'tokens',
     name: 'Token Standards',
     shortDesc: 'LRC token specifications',
     description: 'Standards for fungible and non-fungible tokens on Lux. LRC-20 (fungible), LRC-721 (NFTs), and LRC-1155 (multi-token) maintain ERC compatibility while adding Lux-specific optimizations.',
@@ -88,6 +93,7 @@ const LP_CATEGORIES: CategoryMeta[] = [
     keyTopics: ['LRC-20 fungible', 'LRC-721 NFTs', 'LRC-1155 multi-token', 'Token metadata'],
   },
   {
+    slug: 'defi',
     name: 'DeFi',
     shortDesc: 'Decentralized finance',
     description: 'Protocols for decentralized finance including automated market makers (AMMs), lending/borrowing, yield optimization, and derivatives. Building blocks for permissionless financial infrastructure.',
@@ -98,6 +104,7 @@ const LP_CATEGORIES: CategoryMeta[] = [
     keyTopics: ['AMM protocols', 'Lending markets', 'Yield aggregators', 'Liquid staking'],
   },
   {
+    slug: 'governance',
     name: 'Governance',
     shortDesc: 'On-chain governance',
     description: 'Decentralized governance mechanisms for protocol upgrades, parameter changes, and treasury management. Enables token holders to propose and vote on network changes.',
@@ -108,6 +115,7 @@ const LP_CATEGORIES: CategoryMeta[] = [
     keyTopics: ['Proposal system', 'Voting mechanisms', 'Treasury management', 'Delegation'],
   },
   {
+    slug: 'upgrades',
     name: 'Network Upgrades',
     shortDesc: 'Protocol upgrades',
     description: 'Specifications for network upgrades, hard forks, and feature activations. Coordinates changes across validators and ensures smooth transitions without disrupting operations.',
@@ -118,44 +126,37 @@ const LP_CATEGORIES: CategoryMeta[] = [
     keyTopics: ['Hard fork specs', 'Feature activation', 'Validator coordination', 'Migration guides'],
   },
   {
+    slug: 'research',
     name: 'Research',
     shortDesc: 'Research & innovation',
     description: 'Cutting-edge research including quantum-resistant cryptography, novel consensus mechanisms, scalability solutions, and theoretical foundations for blockchain security.',
-    range: [700, 999],
+    range: [700, 799],
     icon: 'research',
     color: 'pink',
     learnMore: 'Research LPs push the boundaries of blockchain technology. Includes academic papers, proofs of security, and experimental protocols.',
     keyTopics: ['Quantum security', 'Scalability research', 'Formal verification', 'Novel protocols'],
   },
   {
-    name: 'P-Chain',
-    shortDesc: 'Platform chain',
-    description: 'The Platform Chain coordinates validators, manages staking, and handles subnet creation. It\'s the metadata layer that orchestrates the entire Lux ecosystem.',
-    range: [1000, 1999],
-    icon: 'platform',
-    color: 'cyan',
-    learnMore: 'The P-Chain is Lux\'s coordination layer. Validators stake here, subnets are created here, and cross-chain transfers are initiated here.',
-    keyTopics: ['Validator staking', 'Subnet creation', 'Delegation', 'Rewards distribution'],
+    slug: 'sustainability',
+    name: 'Sustainability & ESG',
+    shortDesc: 'Environmental and social impact',
+    description: 'Proposals for environmental sustainability, social responsibility, and governance transparency. Lux Network is committed to carbon-neutral operations and positive environmental impact.',
+    range: [800, 899],
+    icon: 'leaf',
+    color: 'green',
+    learnMore: 'Sustainability LPs ensure Lux Network operates as a force for good. Covers energy efficiency, carbon offsetting, environmental reporting, and social impact metrics aligned with ESG principles.',
+    keyTopics: ['Carbon neutrality', 'Energy efficiency', 'ESG reporting', 'Social impact'],
   },
   {
-    name: 'C-Chain',
-    shortDesc: 'Contract chain',
-    description: 'The Contract Chain runs the Ethereum Virtual Machine (EVM), enabling Solidity smart contracts. Full EVM compatibility means existing Ethereum dApps deploy without modification.',
-    range: [2000, 2999],
-    icon: 'contract',
-    color: 'violet',
-    learnMore: 'The C-Chain is where DeFi lives. EVM compatibility means any Ethereum tool, wallet, or dApp works seamlessly on Lux with faster finality and lower fees.',
-    keyTopics: ['EVM compatibility', 'Smart contracts', 'Gas optimization', 'Precompiles'],
-  },
-  {
-    name: 'X-Chain',
-    shortDesc: 'Exchange chain',
-    description: 'The Exchange Chain uses a DAG-based UTXO model optimized for high-throughput asset transfers. Native support for creating and trading digital assets with instant finality.',
-    range: [3000, 3999],
-    icon: 'exchange',
+    slug: 'impact',
+    name: 'Impact & Public Goods',
+    shortDesc: 'Public goods and social benefit',
+    description: 'Standards for funding public goods, charitable giving, and measuring positive social impact. Building blockchain infrastructure that serves humanity.',
+    range: [900, 999],
+    icon: 'heart',
     color: 'rose',
-    learnMore: 'The X-Chain excels at simple asset transfers. Its DAG structure enables massive parallelization, handling thousands of transactions per second.',
-    keyTopics: ['DAG consensus', 'UTXO model', 'Asset creation', 'Atomic swaps'],
+    learnMore: 'Impact LPs define how Lux Network contributes to public goods and social benefit. Includes treasury allocations for charitable causes, impact measurement frameworks, and partnerships with non-profits.',
+    keyTopics: ['Public goods funding', 'Charitable giving', 'Impact measurement', 'Social benefit'],
   },
 ];
 
@@ -299,6 +300,27 @@ export const source = {
   // Get category metadata by name
   getCategoryByName(name: string): CategoryMeta | undefined {
     return LP_CATEGORIES.find(cat => cat.name.toLowerCase() === name.toLowerCase());
+  },
+
+  // Get category by slug
+  getCategoryBySlug(slug: string): LPCategory | undefined {
+    const allPages = this.getAllPages();
+    const cat = LP_CATEGORIES.find(c => c.slug === slug);
+    if (!cat) return undefined;
+
+    return {
+      ...cat,
+      description: cat.shortDesc,
+      lps: allPages.filter(page => {
+        const lpNum = getLPNumber(page);
+        return lpNum >= cat.range[0] && lpNum <= cat.range[1];
+      }),
+    };
+  },
+
+  // Get all category slugs for static params
+  getAllCategorySlugs(): string[] {
+    return LP_CATEGORIES.map(cat => cat.slug);
   },
 
   getStats(): { total: number; byStatus: Record<string, number>; byType: Record<string, number> } {

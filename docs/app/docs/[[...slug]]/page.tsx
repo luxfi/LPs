@@ -13,7 +13,7 @@ function LPIndexPage() {
   const stats = source.getStats();
 
   return (
-    <div className="max-w-4xl">
+    <div className="max-w-4xl mx-auto">
       <h1 className="text-3xl font-bold mb-4">All Lux Proposals</h1>
       <p className="text-muted-foreground mb-8">
         Browse all {stats.total} proposals organized by category. Use the sidebar to navigate
@@ -43,12 +43,16 @@ function LPIndexPage() {
       {/* Categories */}
       {categories.map((cat) => (
         <section key={cat.name} className="mb-12">
-          <div className="flex items-center gap-3 mb-4">
-            <h2 className="text-xl font-semibold">{cat.name}</h2>
-            <span className="text-xs text-muted-foreground px-2 py-1 rounded-full bg-accent">
+          <Link
+            href={`/docs/category/${cat.slug}`}
+            className="flex items-center gap-3 mb-4 group w-fit"
+          >
+            <h2 className="text-xl font-semibold group-hover:text-primary transition-colors">{cat.name}</h2>
+            <span className="text-xs text-muted-foreground px-2 py-1 rounded-full bg-accent group-hover:bg-primary/10 transition-colors">
               {cat.lps.length} proposals
             </span>
-          </div>
+            <ArrowRight className="size-4 text-muted-foreground opacity-0 group-hover:opacity-100 transition-opacity" />
+          </Link>
           <p className="text-sm text-muted-foreground mb-4">{cat.description}</p>
           <div className="space-y-2">
             {cat.lps.map((lp) => (
