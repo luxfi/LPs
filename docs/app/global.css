@@ -307,8 +307,9 @@ pre {
   border-radius: 0.625rem !important;
   padding: 1.5rem 1.75rem !important;
   margin: 2rem 0 !important;
-  font-size: 0.8125rem !important;
-  line-height: 1.6 !important;
+  font-size: 0.875rem !important;
+  /* CRITICAL for ASCII art: line-height must be exactly 1 for vertical bars to connect */
+  line-height: 1 !important;
   overflow-x: auto !important;
   border: 1px solid var(--code-border) !important;
   background: var(--code-bg) !important;
@@ -316,14 +317,16 @@ pre {
   font-family: var(--code-font) !important;
   /* Critical for ASCII art alignment */
   font-variant-ligatures: none !important;
-  font-feature-settings: "liga" 0, "calt" 0 !important;
+  font-feature-settings: "liga" 0, "calt" 0, "kern" 0 !important;
   letter-spacing: 0 !important;
   -webkit-font-smoothing: antialiased !important;
+  -moz-osx-font-smoothing: grayscale !important;
   text-rendering: geometricPrecision !important;
   /* Preserve exact whitespace */
   white-space: pre !important;
   word-wrap: normal !important;
   word-break: normal !important;
+  word-spacing: 0 !important;
   overflow-wrap: normal !important;
   tab-size: 4 !important;
   -moz-tab-size: 4 !important;
@@ -439,12 +442,17 @@ main article figure[data-rehype-pretty-code-figure] [data-line],
 [data-rehype-pretty-code-figure] [data-line],
 [data-line] {
   padding: 0 !important;
+  margin: 0 !important;
   border: none !important;
   background: transparent !important;
   display: block !important;
   /* Critical: preserve exact whitespace and line structure */
   white-space: pre !important;
-  min-height: 1.5em !important;
+  /* Line height must match pre for vertical alignment */
+  line-height: inherit !important;
+  /* Height should be exactly the font-size for connecting vertical lines */
+  min-height: 1em !important;
+  height: auto !important;
   /* Ensure full width for proper text layout */
   width: 100% !important;
 }
