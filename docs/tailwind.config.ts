@@ -6,7 +6,7 @@ const config: Config = {
     './app/**/*.{ts,tsx}',
     './components/**/*.{ts,tsx}',
     '../LPs/**/*.{md,mdx}',
-    './node_modules/fumadocs-ui/dist/**/*.js',
+    './node_modules/@hanzo/docs/ui/dist/**/*.js',
   ],
   theme: {
     extend: {
