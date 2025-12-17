@@ -4,7 +4,7 @@ import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import Link from 'next/link';
 import { ArrowLeft, ArrowRight, ExternalLink, Calendar, User, Tag } from 'lucide-react';
-import { DocsPage, DocsBody } from '@hanzo/ui/docs/page';
+import { DocsPage, DocsBody } from '@hanzo/ui';
 import { extractHeadings } from '@/lib/toc';
 import { FilteredView } from './filtered-view';
 

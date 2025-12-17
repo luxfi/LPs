@@ -6,7 +6,7 @@ const config: Config = {
     './app/**/*.{ts,tsx}',
     './components/**/*.{ts,tsx}',
     '../LPs/**/*.{md,mdx}',
-    './node_modules/@hanzo/ui/docs/**/*.{js,ts,tsx}',
+    './node_modules/@hanzo/docs-ui/**/*.{js,ts,tsx}',
   ],
   theme: {
     extend: {
