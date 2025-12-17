@@ -1,5 +1,5 @@
 import './global.css';
-import { RootProvider } from 'fumadocs-ui/provider/next';
+import { RootProvider } from '@hanzo/docs-ui/provider/next';
 import { Inter, Roboto_Mono } from 'next/font/google';
 import type { ReactNode } from 'react';
 import { SearchDialog } from '@/components/search-dialog';
@@ -49,18 +49,19 @@ export const metadata = {
 
 export default function Layout({ children }: { children: ReactNode }) {
   return (
-    <html lang="en" className={`${inter.variable} ${robotoMono.variable} dark`} suppressHydrationWarning>
+    <html lang="en" className={`${inter.variable} ${robotoMono.variable}`} suppressHydrationWarning>
       <head>
-        {/* Prevent flash of light mode */}
+        {/* Prevent flash - respect system preference or stored preference */}
         <script
           dangerouslySetInnerHTML={{
             __html: `
               (function() {
                 const stored = localStorage.getItem('lux-lps-theme');
-                if (stored === 'light') {
-                  document.documentElement.classList.remove('dark');
-                } else {
+                const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+                if (stored === 'dark' || (stored !== 'light' && prefersDark)) {
                   document.documentElement.classList.add('dark');
+                } else {
+                  document.documentElement.classList.remove('dark');
                 }
               })();
             `,
@@ -74,7 +75,7 @@ export default function Layout({ children }: { children: ReactNode }) {
           }}
           theme={{
             enabled: true,
-            defaultTheme: 'dark',
+            defaultTheme: 'system',
             storageKey: 'lux-lps-theme',
           }}
         >

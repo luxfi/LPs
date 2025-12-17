@@ -152,6 +152,7 @@
 
 /* Content wrapper (#nd-page) - add padding for fixed TOC since pe-(--fd-toc-width) doesn't work in Tailwind 4 */
 #nd-page {
+  padding-inline-start: 1.5rem !important;
   padding-inline-end: var(--fd-toc-width) !important;
 }
 
@@ -577,7 +578,7 @@ aside[role="complementary"] > * {
   transition: none !important;
 }
 
-/* Remove underline from sidebar bottom section */
+/* Remove all borders from sidebar bottom section */
 aside[role="complementary"] > div:last-child {
   border-top: none !important;
 }
@@ -586,6 +587,17 @@ aside[role="complementary"] > div:last-child {
 aside[role="complementary"] button[aria-label*="Theme"],
 aside[role="complementary"] [class*="theme"] {
   border: none !important;
+}
+
+/* Remove border above theme switcher section in fumadocs sidebar */
+aside[role="complementary"] [class*="footer"],
+aside[role="complementary"] footer,
+aside[role="complementary"] > div:has(button[aria-label*="Theme"]),
+aside[role="complementary"] > div:has([class*="theme"]),
+aside > div:last-child,
+aside > div[class*="flex"][class*="gap"] {
+  border: none !important;
+  border-top: none !important;
 }
 
 /* Fix sidebar content spacing */

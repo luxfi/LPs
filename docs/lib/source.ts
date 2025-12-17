@@ -270,6 +270,22 @@ export const source = {
     );
   },
 
+  getPagesByTag(tag: string): LPPage[] {
+    const tagLower = tag.toLowerCase();
+    return this.getAllPages().filter(page => {
+      const tags = page.data.frontmatter.tags || [];
+      return tags.some((t: string) => t.toLowerCase() === tagLower);
+    });
+  },
+
+  getAllTags(): string[] {
+    const tags = new Set<string>();
+    this.getAllPages().forEach(page => {
+      (page.data.frontmatter.tags || []).forEach((tag: string) => tags.add(tag));
+    });
+    return Array.from(tags).sort();
+  },
+
   getCategorizedPages(): LPCategory[] {
     const allPages = this.getAllPages();
 
