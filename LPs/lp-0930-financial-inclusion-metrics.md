@@ -17,6 +17,16 @@ requires: [800, 900, 901]
 
 This LP establishes the metrics framework for measuring and reporting Lux Network's contribution to financial inclusion. It defines key indicators, data collection methods, and targets aligned with UN Sustainable Development Goals 1 (No Poverty), 8 (Decent Work), and 10 (Reduced Inequalities).
 
+## Motivation
+
+Financial inclusion is central to Lux Network's social mission, yet the term is often used without rigorous definition. Without specific metrics:
+1. **Claims are unverifiable** - "Serving the underserved" means nothing without data
+2. **Progress is unmeasurable** - Cannot improve what isn't tracked
+3. **SDG alignment is superficial** - Must demonstrate actual contribution to targets
+4. **Impact investors require evidence** - Vague claims don't satisfy due diligence
+
+This LP operationalizes financial inclusion with specific, measurable indicators that enable genuine accountability and continuous improvement.
+
 ## Financial Inclusion Framework
 
 ### Definition

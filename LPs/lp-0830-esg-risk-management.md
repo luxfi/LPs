@@ -17,6 +17,16 @@ requires: [800]
 
 This LP establishes the framework for identifying, assessing, mitigating, and monitoring Environmental, Social, and Governance (ESG) risks facing Lux Network. It aligns with TCFD recommendations for climate risk and extends to cover broader ESG risk categories.
 
+## Motivation
+
+ESG risks can materialize as operational, financial, and reputational damage. Without proactive management:
+1. **Physical climate risks** threaten validator infrastructure and network availability
+2. **Transition risks** from policy changes could increase operating costs
+3. **Social risks** from community exclusion or governance failures erode trust
+4. **Regulatory risks** from non-compliance could restrict market access
+
+This LP establishes the systematic processes needed to identify, assess, and mitigate ESG risks before they materialize. By aligning with TCFD, we meet the disclosure expectations of institutional stakeholders and regulators.
+
 ## Risk Governance
 
 ### Oversight Structure

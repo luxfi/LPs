@@ -17,6 +17,16 @@ requires: [800, 900]
 
 This LP defines the methodology for measuring and reporting social impact across the Lux Network ecosystem. It establishes metrics definitions, data collection protocols, calculation methods, and reporting standards aligned with IRIS+ and IMP frameworks.
 
+## Motivation
+
+Good intentions are not enough—impact must be measured rigorously. Without standardized methodology:
+1. **Inconsistent metrics** prevent comparison across time and projects
+2. **Data quality issues** undermine confidence in reported outcomes
+3. **Impact washing** becomes possible when definitions are ambiguous
+4. **Institutional stakeholders** cannot integrate impact data into their frameworks
+
+This LP establishes the measurement infrastructure that makes LP-900's Theory of Change operationally rigorous. By aligning with IRIS+ and IMP, we ensure compatibility with the global impact investing ecosystem.
+
 ## Measurement Framework
 
 ### Guiding Principles

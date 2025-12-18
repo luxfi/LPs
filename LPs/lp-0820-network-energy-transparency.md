@@ -17,6 +17,16 @@ requires: [800, 801]
 
 This LP establishes the transparency standards for reporting Lux Network's energy consumption and environmental metrics. It defines what data is published, how it's calculated, where it's displayed, and how stakeholders can verify claims.
 
+## Motivation
+
+Sustainability claims without transparency are worthless. Stakeholders increasingly demand:
+1. **Real-time visibility** - Not just annual reports, but live metrics
+2. **Methodology disclosure** - Understanding how numbers are calculated
+3. **Independent verification** - Ability to audit claims
+4. **Comparable formats** - Metrics that enable cross-network comparison
+
+This LP transforms Lux Network's environmental performance from a black box into a transparent, verifiable system. It builds the trust foundation necessary for institutional adoption and regulatory compliance.
+
 ## Transparency Principles
 
 1. **Complete**: Report all material energy consumption

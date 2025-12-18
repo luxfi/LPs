@@ -17,6 +17,16 @@ requires: [800, 801]
 
 This LP establishes the policy framework for promoting renewable energy adoption across the Lux Network validator ecosystem. It defines requirements, incentives, and verification mechanisms to achieve the network's goal of 100% renewable energy by 2030.
 
+## Motivation
+
+Validator energy consumption represents the largest component of Lux Network's carbon footprint. Addressing this requires:
+1. **Clear requirements** - Validators need guidance on renewable energy adoption
+2. **Verification standards** - Claims must be auditable to prevent greenwashing
+3. **Economic incentives** - Market mechanisms to reward green validators
+4. **Progressive targets** - Phased approach allowing time for transition
+
+This LP creates the framework for transforming the validator network from a potential liability into a sustainability asset. By achieving 100% renewable energy, Lux becomes infrastructure that actively supports global decarbonization goals.
+
 ## Goals
 
 | Metric | 2025 Target | 2027 Target | 2030 Target |
