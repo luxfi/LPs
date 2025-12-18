@@ -19,6 +19,16 @@ Lux Vision Fund treats environmental integrity as a baseline requirement for eve
 
 **Principle**: Measurable improvement, not vibes.
 
+## Motivation
+
+Environmental claims in investment are often vague, unverifiable, or outright misleading. Many funds claim "green" or "sustainable" investments without rigorous baselines, materiality assessments, or ongoing verification. This undermines trust and dilutes the impact of genuine environmental investments.
+
+This policy establishes:
+1. **Mandatory baselines** - No investment without clear before/after comparison framework
+2. **Materiality focus** - Track only metrics that matter for each project type
+3. **Continuous verification** - Annual reporting with third-party audits for material claims
+4. **Anti-greenwashing** - No public claims without verifiable evidence
+
 ## What Qualifies as "E-Aligned"
 
 ### 1. Baseline First

@@ -19,6 +19,16 @@ Lux Vision Fund treats social benefit as the creation of real economic mobilityâ
 
 **Principle**: Opportunity, dignity, and resilience.
 
+## Motivation
+
+Social impact claims are frequently superficialâ€”counting jobs created without assessing quality, or claiming "financial inclusion" while enabling predatory lending. Traditional impact metrics often miss exploitation, precarity, and the lack of real economic mobility.
+
+This policy establishes:
+1. **Quality over quantity** - Living wages and durable skills, not just job counts
+2. **Protection against exploitation** - Explicit anti-exploitation requirements
+3. **Economic mobility** - Measurable pathways to financial stability
+4. **Community resilience** - Building long-term capacity, not dependency
+
 ## What Qualifies as "S-Aligned"
 
 ### 1. Quality Livelihoods
