@@ -240,6 +240,120 @@ await azorius.executeProposal(
 )
 ```
 
+## Rationale
+
+### Modular Strategy Pattern
+
+Separating voting strategies from the core governance module provides:
+- **Flexibility**: DAOs can choose voting mechanisms appropriate for their needs
+- **Upgradeability**: New strategies can be added without modifying core logic
+- **Composability**: Strategies can be combined or customized
+- **Audit Efficiency**: Each strategy can be audited independently
+
+### Safe Module Architecture
+
+Building Azorius as a Safe module (rather than standalone contract):
+- **Security**: Inherits Safe's battle-tested execution infrastructure
+- **Interoperability**: Works with existing Safe tooling (UI, APIs, integrations)
+- **Treasury Protection**: Execution goes through Safe's multi-sig controls
+- **Upgradability**: Modules can be swapped without changing the Safe
+
+### Timelock Design
+
+The timelock-before-execution pattern:
+- **Attack Prevention**: Gives community time to react to malicious proposals
+- **Transparency**: All pending executions are publicly visible
+- **Emergency Response**: Combined with FreezeGuard enables governance pause
+
+## Backwards Compatibility
+
+### LP-2504 Safe Standard
+
+Azorius is fully compatible with LP-2504:
+- Implements Safe's `IModule` interface
+- Executes through `execTransactionFromModule`
+- Respects Safe's guard system
+
+### LP-2506 Module System
+
+Follows the module patterns defined in LP-2506:
+- Standard initialization interface
+- Compatible with module registry
+- Works with other Lux modules (Fractal, FreezeGuard)
+
+### Compound Governor Compatibility
+
+Maintains familiar patterns from Compound Governor:
+- Similar proposal states
+- Compatible voting types (Against, For, Abstain)
+- Comparable event signatures
+
+## Test Cases
+
+### Proposal Lifecycle Tests
+
+```solidity
+function test_SubmitProposal() public {
+    uint32 proposalId = azorius.submitProposal(
+        strategy,
+        strategyData,
+        transactions,
+        "ipfs://metadata"
+    );
+
+    assertEq(uint(azorius.proposalState(proposalId)), uint(ProposalState.ACTIVE));
+}
+
+function test_VoteAndPass() public {
+    vm.prank(voter);
+    azorius.vote(proposalId, 1); // Vote yes
+
+    // Advance past voting period
+    vm.roll(block.number + votingPeriod + 1);
+
+    assertEq(uint(azorius.proposalState(proposalId)), uint(ProposalState.TIMELOCKED));
+}
+
+function test_ExecuteAfterTimelock() public {
+    // Advance past timelock
+    vm.roll(block.number + timelockPeriod + 1);
+
+    azorius.executeProposal(proposalId, targets, values, data, ops);
+
+    assertEq(uint(azorius.proposalState(proposalId)), uint(ProposalState.EXECUTED));
+}
+
+function test_FailWithoutQuorum() public {
+    // Don't vote at all
+    vm.roll(block.number + votingPeriod + 1);
+
+    assertEq(uint(azorius.proposalState(proposalId)), uint(ProposalState.FAILED));
+}
+```
+
+### Strategy Tests
+
+```solidity
+function test_LinearVotingWeight() public {
+    // Voter with 100 tokens
+    vm.prank(voter);
+    strategy.vote(proposalId, 1);
+
+    (,uint256 yesVotes,) = strategy.getProposalVotes(proposalId);
+    assertEq(yesVotes, 100 ether);
+}
+
+function test_OnlyEnabledStrategies() public {
+    vm.expectRevert("Strategy not enabled");
+    azorius.submitProposal(
+        disabledStrategy,
+        data,
+        transactions,
+        ""
+    );
+}
+```
+
 ## Security Considerations
 
 1. **Timelock**: Always use non-zero timelock for production
