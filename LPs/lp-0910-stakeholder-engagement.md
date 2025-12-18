@@ -17,6 +17,16 @@ requires: [800, 900]
 
 This LP establishes the framework for identifying, prioritizing, and engaging with Lux Network stakeholders. It defines engagement channels, feedback mechanisms, and accountability structures to ensure stakeholder voices inform network governance and development.
 
+## Motivation
+
+Decentralized networks serve many stakeholders with different needs and interests. Without systematic engagement:
+1. **Governance capture** - Decisions favor the loudest voices, not the most affected
+2. **Blind spots emerge** - Critical perspectives go unheard until problems surface
+3. **Community erosion** - Stakeholders disengage when they feel ignored
+4. **Legitimacy questions** - Networks claiming to serve communities must actually listen to them
+
+This LP ensures that Lux Network governance is informed by, and accountable to, the full range of stakeholders it serves.
+
 ## Stakeholder Identification
 
 ### Stakeholder Categories

@@ -17,6 +17,16 @@ requires: [800, 900]
 
 This LP establishes the framework for Lux Network's community development and grants program. It defines funding categories, eligibility criteria, application processes, and impact measurement requirements for ecosystem grants.
 
+## Motivation
+
+Ecosystem development requires strategic capital deployment. Without a structured grants program:
+1. **Funding decisions become ad hoc** - Lacking criteria leads to inconsistent outcomes
+2. **Impact goes unmeasured** - No way to know if grants achieve intended goals
+3. **Community trust erodes** - Opaque processes invite accusations of favoritism
+4. **Resources scatter inefficiently** - Without strategy, grants fail to compound
+
+This LP creates the framework for deploying ecosystem capital in ways that maximize positive impact while maintaining transparency and accountability.
+
 ## Program Overview
 
 ### Mission

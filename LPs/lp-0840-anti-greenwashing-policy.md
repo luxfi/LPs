@@ -17,6 +17,16 @@ requires: [800]
 
 This LP establishes the standards and processes for making sustainability and impact claims. It ensures all environmental and social claims made by Lux Network are accurate, verifiable, and not misleading. This policy prevents greenwashing and maintains stakeholder trust.
 
+## Motivation
+
+Greenwashing has become rampant in the blockchain industry, eroding stakeholder trust. Lux Network must:
+1. **Maintain credibility** by backing every claim with evidence
+2. **Avoid regulatory action** as greenwashing regulations tighten globally
+3. **Protect stakeholders** from making decisions based on misleading information
+4. **Set industry standards** by demonstrating what responsible claims look like
+
+This LP creates the internal controls necessary to ensure that Lux Network's sustainability communications are always accurate, complete, and verifiable. It protects both stakeholders and the network's reputation.
+
 ## Definitions
 
 **Greenwashing**: Making misleading, unsubstantiated, or exaggerated claims about environmental or social benefits.

@@ -17,6 +17,16 @@ requires: [800]
 
 This LP establishes the foundational framework for Lux Network's social impact strategy. It defines our Theory of Change, impact objectives, measurement approach, and reporting commitments. This framework guides all social impact initiatives and ensures they align with our mission to create equitable, accessible financial infrastructure.
 
+## Motivation
+
+Blockchain technology promises to democratize finance, yet most networks lack clear frameworks for measuring whether they deliver on that promise. Without a Theory of Change:
+1. **Impact claims remain vague** - "Financial inclusion" means nothing without measurable outcomes
+2. **Resource allocation lacks direction** - Grants and development efforts scatter without strategy
+3. **Accountability gaps emerge** - No way to verify if the network creates actual social benefit
+4. **Stakeholder trust erodes** - Communities cannot assess whether the network serves their interests
+
+This LP provides the strategic foundation for translating Lux Network's mission into measurable social outcomes aligned with UN Sustainable Development Goals.
+
 ## Theory of Change
 
 ### Vision

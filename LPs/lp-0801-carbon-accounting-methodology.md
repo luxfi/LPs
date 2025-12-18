@@ -17,6 +17,16 @@ requires: [800]
 
 This LP defines the methodology for measuring, calculating, and reporting greenhouse gas (GHG) emissions associated with Lux Network operations. It aligns with the GHG Protocol Corporate Standard and provides specific guidance for blockchain network carbon accounting.
 
+## Motivation
+
+Accurate carbon accounting is foundational to credible sustainability claims. Without rigorous methodology:
+1. **Greenwashing risk** - Vague claims invite skepticism and regulatory action
+2. **Incomparable metrics** - Stakeholders cannot benchmark against other networks
+3. **Ineffective reduction** - Cannot improve what isn't measured
+4. **Investor distrust** - ESG-focused capital requires verified emissions data
+
+This LP establishes the accounting foundation that enables all downstream environmental commitments. By aligning with GHG Protocol, we ensure compatibility with institutional reporting requirements and carbon market mechanisms.
+
 ## Scope
 
 ### Organizational Boundary

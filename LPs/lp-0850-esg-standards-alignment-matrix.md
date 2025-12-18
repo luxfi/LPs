@@ -17,6 +17,16 @@ requires: [800]
 
 This LP provides a comprehensive mapping between Lux Network's ESG framework (LP-800) and established global standards including GRI, SASB, TCFD/ISSB, UN SDGs, ISO certifications, and blockchain-specific frameworks. This matrix enables stakeholders, auditors, and partners to understand how Lux's disclosures align with their reporting requirements.
 
+## Motivation
+
+Different stakeholders require different reporting frameworks. Without clear standards mapping:
+1. **Institutional investors** cannot integrate Lux into ESG-mandated portfolios
+2. **Auditors** cannot efficiently verify compliance
+3. **Partners** cannot assess alignment with their own frameworks
+4. **Regulators** cannot confirm compliance with emerging disclosure requirements
+
+This LP serves as the Rosetta Stone between Lux's internal ESG framework and the global standards ecosystem. It reduces friction for all stakeholders who need to understand our sustainability posture in their own terms.
+
 ## Purpose
 
 External stakeholders require confidence that our ESG claims are:

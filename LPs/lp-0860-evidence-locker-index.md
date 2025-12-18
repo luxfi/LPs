@@ -17,6 +17,16 @@ requires: [800, 850]
 
 This LP serves as the centralized index for all ESG-related evidence artifacts maintained by Lux Network. It catalogs policies, methodologies, reports, attestations, and audit results that support claims made in LP-800 and related ESG proposals. This is the "credibility engine" that makes our ESG framework auditable and verifiable.
 
+## Motivation
+
+ESG claims without accessible evidence are unverifiable. Stakeholders require:
+1. **Centralized access** - One place to find all supporting documentation
+2. **Version control** - Clear audit trails for evolving policies
+3. **Third-party verification** - External attestations for critical claims
+4. **Completeness tracking** - Visibility into documentation gaps
+
+This LP creates the organizational infrastructure that transforms ESG claims into verifiable facts. It is the foundation of trust that enables institutional engagement and regulatory compliance.
+
 ## Purpose
 
 To be credible to institutional stakeholders (banks, LPs, partners), we must provide:

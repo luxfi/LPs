@@ -16,6 +16,16 @@ created: 2025-12-16
 
 This LP establishes the foundational Environmental, Social, and Governance (ESG) framework for Lux Network. It defines our material topics, governance structure, metrics and targets, verification approach, and known tradeoffs. All other ESG-related LPs (LP-801 through LP-999) reference this document as the canonical source for Lux's sustainability commitments.
 
+## Motivation
+
+Blockchain networks face increasing scrutiny over their environmental and social impact. Without a clear ESG framework, networks risk:
+1. **Reputational damage** from perceived environmental harm
+2. **Regulatory challenges** as sustainability requirements expand globally
+3. **Institutional exclusion** from ESG-mandated investment portfolios
+4. **Community erosion** as stakeholders demand accountability
+
+This LP addresses these challenges by establishing clear commitments, measurable targets, and transparent governance structures. It positions Lux Network as infrastructure that accelerates—rather than hinders—the transition to a sustainable economy.
+
 ## Mission and ESG Thesis
 
 Lux Network is committed to building blockchain infrastructure that serves humanity and the planet. We believe decentralized systems should accelerate the transition to a sustainable economy, not hinder it. Our ESG thesis: **infrastructure-level sustainability creates compounding positive impact** because every application built on Lux inherits our environmental and social commitments.
