@@ -386,6 +386,185 @@ pnpm test
 # ✓ supports chain-based protocol selection
 ```
 
+## Rationale
+
+### TypeScript-First Design
+
+Choosing TypeScript provides:
+
+1. **Type Safety**: Compile-time errors for API misuse
+2. **IntelliSense**: Autocomplete for all methods and options
+3. **Documentation**: Types serve as inline documentation
+4. **Ecosystem**: Wide adoption in web3 and DeFi development
+
+### Async/Await API
+
+The async/await pattern provides:
+
+1. **Simplicity**: Clean, readable code without callback hell
+2. **Error Handling**: Native try/catch for error management
+3. **Composability**: Easy to chain operations and use with other async code
+
+### Chain-Based Protocol Selection
+
+Auto-selecting protocols based on target chain:
+
+1. **Developer Experience**: No need to know which protocol to use
+2. **Correctness**: Ensures appropriate curve and signature format
+3. **Flexibility**: Override available when explicit control needed
+
+## Backwards Compatibility
+
+### T-Chain RPC Compatibility
+
+The SDK is compatible with T-Chain RPC versions:
+
+- v1.0.x: Full support for all methods
+- Future versions: Protocol negotiation via health check
+
+### ethers.js Compatibility
+
+Works with ethers.js v6:
+
+- Uses standard types (BigInt, hex strings)
+- Compatible with ethers Transaction and Wallet types
+- Works alongside ethers providers
+
+### Browser Compatibility
+
+Supports modern browsers:
+
+- Chrome 80+, Firefox 75+, Safari 13+
+- React Native with proper polyfills
+- Node.js 16+
+
+### Migration from Direct RPC
+
+Migrating from direct RPC calls:
+
+```typescript
+// Before (direct RPC)
+const result = await fetch(endpoint, {
+  method: 'POST',
+  body: JSON.stringify({
+    jsonrpc: '2.0',
+    method: 'threshold.keygen',
+    params: [{ keyId: 'key1', threshold: 3, parties: 5 }]
+  })
+})
+
+// After (SDK)
+const client = new ThresholdClient({ endpoint })
+const result = await client.keygen({ keyId: 'key1', threshold: 3, totalParties: 5 })
+```
+
+## Test Cases
+
+### Client Tests
+
+```typescript
+describe('ThresholdClient', () => {
+  it('initializes with valid endpoint', () => {
+    const client = new ThresholdClient({ endpoint: 'http://localhost:9650/ext/bc/T' });
+    expect(client).toBeDefined();
+  });
+
+  it('keygen returns session info', async () => {
+    const result = await client.keygen({
+      keyId: 'test-key',
+      threshold: 2,
+      totalParties: 3,
+      protocol: 'lss'
+    });
+    expect(result.sessionId).toBeDefined();
+    expect(result.status).toBe('pending');
+  });
+
+  it('waitForKeygen polls until complete', async () => {
+    const keygen = await client.keygen({ keyId: 'poll-test', threshold: 2, totalParties: 3 });
+    const result = await client.waitForKeygen(keygen.sessionId);
+    expect(result.publicKey).toMatch(/^0x04/);
+    expect(result.publicKey.length).toBe(130);
+  });
+
+  it('sign returns valid signature', async () => {
+    const sig = await client.signAndWait({
+      keyId: 'test-key',
+      messageHash: '0x' + '00'.repeat(32),
+      messageType: 'raw'
+    });
+    expect(sig.r).toBeInstanceOf(BigInt);
+    expect(sig.s).toBeInstanceOf(BigInt);
+    expect(sig.signature).toMatch(/^0x[a-f0-9]+$/);
+  });
+
+  it('handles network errors with retry', async () => {
+    const badClient = new ThresholdClient({
+      endpoint: 'http://invalid:9999',
+      retry: { maxAttempts: 2, baseDelay: 100 }
+    });
+    await expect(badClient.health()).rejects.toThrow(ThresholdError);
+  });
+});
+```
+
+### Protocol Selection Tests
+
+```typescript
+describe('Chain-based protocol selection', () => {
+  it('selects LSS for Ethereum', async () => {
+    const keygen = await client.keygen({ keyId: 'eth-key', chain: 'ethereum' });
+    const key = await client.getKey('eth-key');
+    expect(key.protocol).toBe('lss');
+    expect(key.curve).toBe('secp256k1');
+  });
+
+  it('selects FROST for Bitcoin Taproot', async () => {
+    const keygen = await client.keygen({
+      keyId: 'btc-key',
+      chain: 'bitcoin',
+      options: { taproot: true }
+    });
+    const key = await client.getKey('btc-key');
+    expect(key.protocol).toBe('frost');
+    expect(key.curve).toBe('secp256k1');
+  });
+
+  it('selects FROST with Ed25519 for Solana', async () => {
+    const keygen = await client.keygen({ keyId: 'sol-key', chain: 'solana' });
+    const key = await client.getKey('sol-key');
+    expect(key.protocol).toBe('frost');
+    expect(key.curve).toBe('ed25519');
+  });
+});
+```
+
+### Error Handling Tests
+
+```typescript
+describe('Error handling', () => {
+  it('throws KEY_NOT_FOUND for unknown key', async () => {
+    try {
+      await client.getKey('nonexistent');
+      fail('Should have thrown');
+    } catch (error) {
+      expect(error).toBeInstanceOf(ThresholdError);
+      expect((error as ThresholdError).code).toBe('KEY_NOT_FOUND');
+    }
+  });
+
+  it('throws TIMEOUT when operation exceeds limit', async () => {
+    const slowClient = new ThresholdClient({
+      endpoint,
+      timeout: 1  // 1ms timeout
+    });
+    await expect(slowClient.health()).rejects.toMatchObject({
+      code: 'TIMEOUT'
+    });
+  });
+});
+```
+
 ## Related LPs
 
 - **LP-7330**: T-Chain ThresholdVM Specification (RPC API)

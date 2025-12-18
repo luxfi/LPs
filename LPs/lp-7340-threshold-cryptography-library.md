@@ -286,6 +286,130 @@ func (pe *ProtocolExecutor) FROSTKeygenStartFunc(...) protocol.StartFunc {
 
 The library is exposed via TypeScript SDK at `@luxfi/threshold` (see LP-7341).
 
+## Rationale
+
+### Multi-Protocol Support
+
+Supporting multiple threshold protocols addresses different use cases:
+
+1. **LSS**: Best for general-purpose use with fast keygen
+2. **CMP (CGGMP21)**: UC-secure with identifiable abort for high-security applications
+3. **FROST**: Optimal for Schnorr-based chains (Bitcoin Taproot)
+4. **Doerner**: Efficient 2-party ECDSA for simpler deployments
+5. **Ringtail**: Post-quantum threshold signatures for future-proofing
+
+### Modular Architecture
+
+The modular design provides:
+
+1. **Isolation**: Protocol bugs don't affect other implementations
+2. **Testing**: Each protocol tested independently
+3. **Upgrades**: New protocols can be added without changing existing code
+4. **Selection**: Applications choose optimal protocol for their needs
+
+### Worker Pool Design
+
+Using a shared worker pool enables:
+
+1. **Resource Control**: Limit concurrent cryptographic operations
+2. **Parallelism**: Maximize CPU utilization for expensive operations
+3. **Fairness**: Prevent single operation from monopolizing resources
+
+## Backwards Compatibility
+
+### API Stability
+
+The library maintains backwards compatibility through:
+
+- Stable `protocol.StartFunc` interface
+- Versioned config structures
+- Additive-only changes to public APIs
+
+### Protocol Version Support
+
+- All protocols support version negotiation
+- Older key shares work with newer library versions
+- Explicit migration paths when breaking changes required
+
+### Integration Compatibility
+
+Works seamlessly with:
+
+- ThresholdVM (T-Chain) - primary integration
+- BridgeVM (B-Chain) - cross-chain signing
+- External applications via standard interfaces
+
+## Test Cases
+
+### Protocol Tests
+
+```go
+func TestLSSKeygenSign(t *testing.T) {
+    // Setup 3-of-5 threshold
+    parties := generatePartyIDs(5)
+    threshold := 3
+
+    // Run keygen
+    configs := runKeygen(t, lss.Keygen, parties, threshold)
+
+    // Verify all parties have same public key
+    pubKey := configs[0].PublicPoint
+    for _, cfg := range configs[1:] {
+        assert.True(t, pubKey.Equal(cfg.PublicPoint))
+    }
+
+    // Sign message with threshold parties
+    message := []byte("test message")
+    signers := parties[:threshold]
+    sig := runSign(t, configs, signers, message)
+
+    // Verify signature
+    assert.True(t, verifySignature(pubKey, message, sig))
+}
+
+func TestCMPIdentifiableAbort(t *testing.T) {
+    // Test that malicious party is identified
+    parties := generatePartyIDs(5)
+    configs := runKeygen(t, cmp.Keygen, parties, 3)
+
+    // Inject malicious behavior
+    maliciousParty := parties[0]
+    sig, abortedBy, err := runSignWithMalicious(configs, maliciousParty)
+
+    assert.Error(t, err)
+    assert.Equal(t, maliciousParty, abortedBy)
+}
+
+func TestFROSTTaproot(t *testing.T) {
+    // Test BIP-340 compatible output
+    parties := generatePartyIDs(3)
+    configs := runKeygen(t, frost.Keygen, parties, 2)
+
+    // Verify x-only public key
+    xOnlyPubKey := configs[0].PublicKey.XOnly()
+    assert.Len(t, xOnlyPubKey, 32)
+
+    // Sign and verify with BIP-340
+    message := []byte("taproot test")
+    sig := runSign(t, configs, parties[:2], message)
+    assert.True(t, bip340.Verify(xOnlyPubKey, message, sig))
+}
+```
+
+### Integration Tests
+
+```go
+func TestCrossProtocolCompatibility(t *testing.T) {
+    // LSS and CMP should produce same public key format
+    lssConfigs := runKeygen(t, lss.Keygen, parties, 3)
+    cmpConfigs := runKeygen(t, cmp.Keygen, parties, 3)
+
+    // Both should produce valid secp256k1 points
+    assert.True(t, lssConfigs[0].PublicPoint.IsOnCurve())
+    assert.True(t, cmpConfigs[0].PublicPoint.IsOnCurve())
+}
+```
+
 ## Security Considerations
 
 1. **Memory Safety**: Shares are zeroed after use where possible
