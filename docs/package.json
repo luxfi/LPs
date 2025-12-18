@@ -17,6 +17,9 @@
   },
   "dependencies": {
     "@fontsource/inter": "^5.2.8",
+    "@hanzo/docs": "^16.2.6",
+    "@hanzo/mdx": "^14.2.5",
+    "@hanzo/ui": "^5.3.28",
     "@luxfi/logo": "^1.0.0",
     "@radix-ui/react-dialog": "^1.1.15",
     "@radix-ui/react-slot": "^1.2.4",
@@ -24,8 +27,6 @@
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "cmdk": "^1.1.1",
-    "@hanzo/mdx": "^14.2.0",
-    "@hanzo/ui": "^5.3.28",
     "gray-matter": "^4.0.3",
     "lucide-react": "^0.468.0",
     "next": "16.0.1",
@@ -36,7 +37,7 @@
     "remark-gfm": "^4.0.1",
     "tailwind-merge": "^3.4.0",
     "tailwindcss": "^4.1.16",
-    "zod": "^3.24.1"
+    "zod": "^4.2.1"
   },
   "devDependencies": {
     "@playwright/test": "^1.57.0",
@@ -54,5 +55,10 @@
     "shiki": "^1.27.2",
     "typescript": "^5.7.2"
   },
-  "packageManager": "pnpm@10.12.4"
+  "packageManager": "pnpm@10.12.4",
+  "pnpm": {
+    "overrides": {
+      "zod": "^4.2.1"
+    }
+  }
 }
