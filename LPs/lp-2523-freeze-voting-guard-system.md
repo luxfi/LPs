@@ -280,6 +280,116 @@ await safe.setGuard(freezeGuard.address)
 await freezeVoting.castFreezeVote()
 ```
 
+## Rationale
+
+### Separate Freeze Voting Contracts
+
+Separating freeze voting from the main governance module allows:
+
+1. **Independent Security**: Freeze mechanism can be audited separately
+2. **Flexibility**: Different freeze rules for different DAO types
+3. **Composability**: Multiple voting mechanisms can trigger freeze
+
+### Guard-Based Architecture
+
+Using Safe's guard system provides:
+
+1. **Non-Invasive**: No modifications to existing Safe or Azorius code
+2. **Standardized**: Compatible with Safe ecosystem tooling
+3. **Upgradable**: Guards can be replaced without changing Safe setup
+
+### Time-Based Freeze Periods
+
+Fixed freeze durations provide:
+
+1. **Predictability**: Members know when operations will resume
+2. **Anti-Abuse**: Prevents indefinite governance lockup
+3. **Recovery Time**: Ensures adequate time for response
+
+## Backwards Compatibility
+
+### LP-2504 Safe Standard
+
+Fully compatible with LP-2504:
+
+- Implements Safe's `Guard` interface
+- Uses `checkTransaction` and `checkAfterExecution` hooks
+- Can be set via Safe's `setGuard` function
+
+### LP-2521 Azorius Integration
+
+Works seamlessly with Azorius governance:
+
+- Blocks proposal execution when frozen
+- Uses Azorius voting strategies for freeze weight calculation
+- Compatible with all Azorius proposal types
+
+### Existing DAO Migration
+
+DAOs can add freeze protection without migration:
+
+- Deploy freeze voting and guard contracts
+- Set guard on existing Safe via governance proposal
+- No changes to existing governance module required
+
+## Test Cases
+
+### Freeze Voting Tests
+
+```solidity
+function test_CastFreezeVote() public {
+    vm.prank(voter);
+    freezeVoting.castFreezeVote();
+
+    assertEq(freezeVoting.freezeProposalVoteCount(), voterWeight);
+}
+
+function test_FreezeWhenThresholdReached() public {
+    // Cast enough votes to reach threshold
+    for (uint i = 0; i < voters.length; i++) {
+        vm.prank(voters[i]);
+        freezeVoting.castFreezeVote();
+    }
+
+    assertTrue(freezeVoting.isFrozen());
+}
+
+function test_UnfreezeAfterPeriod() public {
+    // Freeze first
+    freezeVoting.freeze();
+    assertTrue(freezeVoting.isFrozen());
+
+    // Advance past freeze period
+    vm.roll(block.number + freezePeriod + 1);
+
+    assertFalse(freezeVoting.isFrozen());
+}
+```
+
+### Guard Tests
+
+```solidity
+function test_BlockTransactionWhenFrozen() public {
+    freezeVoting.freeze();
+
+    vm.expectRevert("Governance frozen");
+    freezeGuard.checkTransaction(
+        target, value, data, operation,
+        safeTxGas, baseGas, gasPrice, gasToken,
+        refundReceiver, signatures, msg.sender
+    );
+}
+
+function test_AllowTransactionWhenNotFrozen() public {
+    // Should not revert
+    freezeGuard.checkTransaction(
+        target, value, data, operation,
+        safeTxGas, baseGas, gasPrice, gasToken,
+        refundReceiver, signatures, msg.sender
+    );
+}
+```
+
 ## Security Considerations
 
 1. **Threshold Setting**: Set freeze threshold high enough to prevent griefing

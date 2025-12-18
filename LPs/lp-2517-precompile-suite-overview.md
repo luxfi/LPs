@@ -311,6 +311,53 @@ function receiveMessage(
 - **LP-4317**: SLH-DSA Stateless Hash-Based Signatures (FIPS 205)
 - **LP-4318**: ML-KEM Post-Quantum Key Encapsulation (FIPS 203)
 
+## Rationale
+
+### Centralized Index
+
+A single overview document provides several benefits:
+
+1. **Discoverability**: Developers can find all precompiles in one place
+2. **Comparison**: Easy to compare gas costs and features across precompiles
+3. **Planning**: Helps architects choose the right precompile for their use case
+4. **Maintenance**: Central location for status tracking and updates
+
+### Security Classification
+
+Explicitly classifying precompiles by security level:
+
+1. **Awareness**: Developers understand quantum risks
+2. **Migration Planning**: Clear path from classical to post-quantum
+3. **Risk Assessment**: Informed decisions about cryptographic choices
+
+### Gas Cost Transparency
+
+Publishing detailed gas costs enables:
+
+1. **Cost Estimation**: Accurate transaction fee predictions
+2. **Optimization**: Choose most efficient precompile for use case
+3. **Budgeting**: Plan gas costs for complex operations
+
+## Backwards Compatibility
+
+This LP is informational and does not introduce any breaking changes. It documents existing precompiles and their interfaces.
+
+### Precompile Stability
+
+All documented precompiles maintain backwards compatibility:
+
+- Address assignments are permanent
+- Interface changes follow semver principles
+- Deprecated features are marked but not removed
+
+### Cross-Reference Updates
+
+As individual precompile LPs are updated, this overview will be updated to reflect:
+
+- New gas costs
+- Updated security classifications
+- New precompile additions
+
 ## Security Considerations
 
 ### Address Space

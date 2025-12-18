@@ -219,6 +219,113 @@ const strategy = await VotingWeightERC20V1__factory.deploy(
 await azorius.enableStrategy(strategy.address)
 ```
 
+## Rationale
+
+### Modular Strategy Pattern
+
+Separating voting strategies from the governance module provides several benefits:
+
+1. **Upgradability**: New strategies can be deployed without modifying core governance
+2. **Flexibility**: DAOs can switch strategies via governance proposal
+3. **Audit Efficiency**: Each strategy is independently auditable
+4. **Composability**: Strategies can be combined or extended
+
+### Snapshot-Based Voting
+
+Using block-based snapshots for voting power:
+
+1. **Flash Loan Protection**: Prevents manipulation through borrowed tokens
+2. **Predictable Power**: Voting power is fixed at proposal creation
+3. **Delegation Support**: Delegated votes captured at snapshot
+
+### Proposer Adapters
+
+Separating proposal permissions allows:
+
+1. **Role-Based Access**: Hats Protocol integration for role management
+2. **Token Gates**: Different thresholds for different proposal types
+3. **Flexible Permissions**: Combine multiple access conditions
+
+## Backwards Compatibility
+
+### OpenZeppelin Governor Compatibility
+
+The voting strategies maintain compatibility with OpenZeppelin patterns:
+
+- Same vote types (Against, For, Abstain)
+- Compatible quorum calculation methods
+- Similar delegation interfaces
+
+### Compound Governor Compatibility
+
+Maintains familiar patterns from Compound:
+
+- Block-based voting periods
+- Proposer threshold requirements
+- Quorum percentage model
+
+### LP-2521 Azorius Integration
+
+Fully compatible with LP-2521 Azorius module:
+
+- Implements `IBaseStrategy` interface
+- Works with Azorius proposal lifecycle
+- Supports multi-strategy configurations
+
+## Test Cases
+
+### Strategy Tests
+
+```solidity
+function test_VotingWeightCalculation() public {
+    // Setup: User has 100 tokens
+    token.mint(voter, 100 ether);
+
+    vm.prank(voter);
+    strategy.vote(proposalId, uint8(VoteType.For));
+
+    (,uint256 yesVotes,) = strategy.getProposalVotes(proposalId);
+    assertEq(yesVotes, 100 ether);
+}
+
+function test_QuorumReached() public {
+    // Setup: 4% quorum, 10000 total supply
+    // Need 400 tokens to reach quorum
+    token.mint(voter, 400 ether);
+    token.mint(address(1), 9600 ether);
+
+    vm.prank(voter);
+    strategy.vote(proposalId, uint8(VoteType.For));
+
+    assertTrue(strategy.isPassed(proposalId));
+}
+
+function test_ProposerThreshold() public {
+    // Need 1000 tokens to propose
+    token.mint(user, 999 ether);
+
+    vm.prank(user);
+    assertFalse(proposerAdapter.isProposer(user));
+
+    token.mint(user, 1 ether);
+    assertTrue(proposerAdapter.isProposer(user));
+}
+```
+
+### Delegation Tests
+
+```solidity
+function test_DelegatedVotes() public {
+    token.mint(delegator, 100 ether);
+
+    vm.prank(delegator);
+    token.delegate(delegatee);
+
+    assertEq(token.getVotes(delegatee), 100 ether);
+    assertEq(token.getVotes(delegator), 0);
+}
+```
+
 ## Security Considerations
 
 1. **Snapshot Voting**: Use block snapshots to prevent flash loan attacks

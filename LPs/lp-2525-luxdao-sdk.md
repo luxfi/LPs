@@ -406,6 +406,113 @@ pnpm test
 # ✓ Contract factories export correctly
 ```
 
+## Rationale
+
+### TypeScript-First Design
+
+Choosing TypeScript provides:
+
+1. **Type Safety**: Catch errors at compile time
+2. **Developer Experience**: IntelliSense and autocomplete
+3. **Documentation**: Types serve as inline documentation
+4. **Ecosystem**: Wide adoption in web3 development
+
+### Class-Based Architecture
+
+Using classes for main components provides:
+
+1. **Encapsulation**: Internal state management
+2. **Composition**: Combine multiple contract interactions
+3. **Extensibility**: Easy to subclass for custom behavior
+
+### Factory Exports
+
+Exporting contract factories enables:
+
+1. **Direct Access**: Low-level contract interaction when needed
+2. **Deployment**: Deploy new contract instances
+3. **Custom Integration**: Build specialized tooling
+
+## Backwards Compatibility
+
+### ethers.js Compatibility
+
+The SDK is built on ethers.js v6:
+
+- Uses standard Provider and Signer interfaces
+- Compatible with ethers.js utilities
+- Works with any ethers.js-compatible wallet
+
+### Web3 Provider Compatibility
+
+Works with standard Web3 providers:
+
+- MetaMask and injected providers
+- WalletConnect
+- Ledger and hardware wallets
+- Any EIP-1193 provider
+
+### Contract Version Support
+
+Supports all Lux DAO contract versions:
+
+- V1 contracts (current)
+- Automatic version detection
+- Graceful handling of missing features
+
+## Test Cases
+
+### SDK Tests
+
+```typescript
+describe('LuxDAO', () => {
+  it('initializes with valid address', async () => {
+    const dao = new LuxDAO({ provider, daoAddress });
+    expect(dao.address).toBe(daoAddress);
+  });
+
+  it('fetches DAO name', async () => {
+    const name = await dao.getName();
+    expect(typeof name).toBe('string');
+  });
+
+  it('creates proposal', async () => {
+    const tx = await dao.createProposal({
+      title: 'Test',
+      description: 'Test proposal',
+      transactions: [{ to: target, value: 0n, data: '0x', operation: 0 }]
+    });
+    const receipt = await tx.wait();
+    expect(receipt.status).toBe(1);
+  });
+
+  it('casts vote', async () => {
+    const tx = await dao.vote(proposalId, VoteType.For);
+    const receipt = await tx.wait();
+    expect(receipt.status).toBe(1);
+  });
+
+  it('retrieves proposal', async () => {
+    const proposal = await dao.getProposal(proposalId);
+    expect(proposal.id).toBe(proposalId);
+    expect(proposal.state).toBeDefined();
+  });
+});
+
+describe('Azorius', () => {
+  it('checks strategy enabled', async () => {
+    const enabled = await azorius.isStrategyEnabled(strategyAddress);
+    expect(typeof enabled).toBe('boolean');
+  });
+
+  it('gets proposal votes', async () => {
+    const votes = await azorius.getProposalVotes(proposalId);
+    expect(votes.forVotes).toBeInstanceOf(BigInt);
+    expect(votes.againstVotes).toBeInstanceOf(BigInt);
+  });
+});
+```
+
 ## Security Considerations
 
 1. **Signer Security**: Never expose private keys in frontend
