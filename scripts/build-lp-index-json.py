@@ -59,7 +59,7 @@ def collect_lps():
             'github_edit': f"https://github.com/luxfi/LPs/edit/main/LPs/lp-{number:04d}.md",
         }
         items.append(item)
-    items.sort(key=lambda x: x['number'])
+    items.sort(key=lambda x: (x['number'], x['file']))
     return items
 
 
