@@ -17,6 +17,18 @@ requires: [800]
 
 Lux Vision Fund invests only in ESG-aligned opportunities. This LP establishes the master framework governing how Environmental integrity, Social benefit, and Governance accountability are defined, measured, and enforced across all investments. Returns and restoration reinforce each other—by design, not by accident.
 
+## Motivation
+
+Traditional investment frameworks treat ESG as an optional overlay or marketing exercise. This creates misaligned incentives where capital optimizes for short-term returns at the expense of environmental and social outcomes. Lux Vision Fund requires a foundational framework that:
+
+1. **Structurally integrates ESG** - Making impact measurement and accountability core to investment terms, not optional addenda
+2. **Prevents greenwashing** - Requiring verifiable, measurable outcomes before any public claims
+3. **Aligns long-term incentives** - Using tranched capital deployment tied to verified milestones
+4. **Enables transparent reporting** - Building trust with LPs, regulators, and the public through auditable evidence
+5. **Coordinates ecosystem actors** - Defining clear roles for Lux (capital), Hanzo (technology), Zoo (mission), and DAOs (governance)
+
+Without this framework, ESG investments risk becoming performative rather than substantive, undermining both returns and restoration goals.
+
 ## Core Values (Non-Negotiables)
 
 ### 1. Everyone Benefits, Not Just Capital
@@ -178,6 +190,47 @@ We prove outcomes without exposing personal data:
 ## One-Paragraph Summary
 
 > Lux Vision Fund invests only in ESG-aligned opportunities. Environmental integrity is measured against baselines and verified over time; social benefit is defined by economic mobility, access, and resilience; and governance is enforced through on-chain auditability with privacy-preserving controls. Lux provides capital and financial rails, Hanzo builds and verifies high-impact technology, Zoo anchors life-first mission and ethics, and our DAOs steward community ownership of IP so long-tail value accrues to contributors and communities. The result is a thoughtfully designed flywheel where transparency builds trust, trust attracts capital, and capital scales verified outcomes.
+
+## Specification
+
+This LP serves as a meta-framework defining investment policies. The specification is embodied in:
+
+1. **Core Values** (Section above) - Non-negotiable principles
+2. **ESG Pillars** - Environmental, Social, and Governance definitions
+3. **Investment Process** - Five-stage workflow from intake to scale
+4. **Enforcement Mechanisms** - Outcome-gated capital, claims registry, verification
+
+Detailed specifications for each pillar are defined in subsidiary LPs (LP-751, LP-752, LP-753).
+
+## Rationale
+
+The framework design reflects several key decisions:
+
+1. **Tranched capital over lump-sum** - Reduces risk of misuse and creates accountability checkpoints
+2. **Claims registry with evidence hashes** - Enables third-party verification without exposing sensitive data
+3. **Privacy-preserving verification** - Balances transparency with data protection using ZK proofs
+4. **Ecosystem role separation** - Clear boundaries prevent conflicts of interest and enable specialization
+5. **Binding covenants over voluntary guidelines** - Legal enforcement mechanisms complement on-chain accountability
+
+## Backwards Compatibility
+
+This LP establishes a new framework and does not modify existing investment structures. Existing investments may be evaluated against this framework but are not retroactively bound by it.
+
+## Security Considerations
+
+1. **Evidence tampering** - Mitigated through immutable on-chain hashes and third-party attestations
+2. **Verifier collusion** - Multiple independent verifiers required for material claims
+3. **Privacy leakage** - ZK proofs and aggregated statistics prevent individual data exposure
+4. **Governance capture** - DAO voting mechanisms include anti-concentration measures
+
+## Test Cases
+
+As a Meta LP, formal test cases are not applicable. Framework validation is demonstrated through:
+
+1. Successful application to pilot investments
+2. Third-party audit of claims registry integrity
+3. LP and stakeholder satisfaction surveys
+4. Regulatory compliance assessments
 
 ## Changelog
 
