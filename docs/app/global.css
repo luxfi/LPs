@@ -4,7 +4,7 @@
  */
 
 @import "tailwindcss";
-@import "@hanzo/docs-ui/style.css";
+@import "@hanzo/docs/ui/style.css";
 
 /* Typography plugin for Tailwind CSS 4 */
 @plugin "@tailwindcss/typography";

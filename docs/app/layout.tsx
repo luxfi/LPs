@@ -1,5 +1,6 @@
 import './global.css';
-import { RootProvider } from '@hanzo/ui';
+import { RootProvider } from '@hanzo/docs/ui/provider/base';
+import { NextProvider } from '@hanzo/docs/core/framework/next';
 import { Inter, Roboto_Mono } from 'next/font/google';
 import type { ReactNode } from 'react';
 import { SearchDialog } from '@/components/search-dialog';
@@ -69,21 +70,23 @@ export default function Layout({ children }: { children: ReactNode }) {
         />
       </head>
       <body className="min-h-svh bg-background font-sans antialiased">
-        <RootProvider
-          search={{
-            enabled: false,
-          }}
-          theme={{
-            enabled: true,
-            defaultTheme: 'system',
-            storageKey: 'lux-lps-theme',
-          }}
-        >
-          <SearchDialog />
-          <div className="relative flex min-h-svh flex-col bg-background">
-            {children}
-          </div>
-        </RootProvider>
+        <NextProvider>
+          <RootProvider
+            search={{
+              enabled: false,
+            }}
+            theme={{
+              enabled: true,
+              defaultTheme: 'system',
+              storageKey: 'lux-lps-theme',
+            }}
+          >
+            <SearchDialog />
+            <div className="relative flex min-h-svh flex-col bg-background">
+              {children}
+            </div>
+          </RootProvider>
+        </NextProvider>
       </body>
     </html>
   );

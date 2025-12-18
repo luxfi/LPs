@@ -165,7 +165,7 @@ function getAllLPFiles(): string[] {
     const files = fs.readdirSync(LPS_DIR);
     return files
       .filter(file => file.endsWith('.md') || file.endsWith('.mdx'))
-      .filter(file => file.startsWith('lp-') || file === 'index.mdx' || file === 'governance.md');
+      .filter(file => file.startsWith('lp-'));
   } catch (error) {
     console.error('Error reading LPs directory:', error);
     return [];
