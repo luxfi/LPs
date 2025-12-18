@@ -19,6 +19,16 @@ This LP defines the governance structure and accountability architecture for the
 
 **Principle**: Accountability through architecture.
 
+## Motivation
+
+Complex ecosystems often suffer from unclear accountability, conflicts of interest, and governance capture. When roles overlap or boundaries blur, it becomes impossible to hold any single entity accountable for failures. Traditional corporate structures concentrate power and extract value from communities.
+
+This architecture establishes:
+1. **Clear role separation** - Each layer has distinct responsibilities and accountabilities
+2. **Structural accountability** - On-chain verification and third-party audits, not trust
+3. **Community ownership** - DAOs steward IP and governance for long-tail value distribution
+4. **Mission alignment** - Zoo anchors ethical boundaries across the ecosystem
+
 ## Ecosystem Architecture
 
 ### The Four Layers
