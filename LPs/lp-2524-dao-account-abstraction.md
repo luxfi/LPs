@@ -244,6 +244,118 @@ export function useGaslessVote(daoAddress: string) {
 }
 ```
 
+## Rationale
+
+### ERC-4337 Standard
+
+Building on ERC-4337 provides:
+
+1. **Ecosystem Compatibility**: Works with existing bundlers and infrastructure
+2. **Future-Proof**: Aligned with Ethereum's account abstraction roadmap
+3. **Standardization**: Familiar interface for developers
+
+### DAO-Specific Paymaster
+
+A dedicated DAO paymaster enables:
+
+1. **Governance Sponsorship**: DAOs can fund member participation
+2. **Targeted Subsidies**: Only sponsor governance-related transactions
+3. **Budget Control**: Per-DAO and per-user spending limits
+
+### Light Account Integration
+
+Using Light Accounts (vs full Safe) for users provides:
+
+1. **Gas Efficiency**: Simpler account = lower deployment and operation costs
+2. **UX**: Users don't need to manage a full Safe for voting
+3. **Recovery**: Social recovery built into account standard
+
+## Backwards Compatibility
+
+### ERC-4337 Compatibility
+
+Fully compatible with ERC-4337 standard:
+
+- Implements `IPaymaster` interface
+- Works with standard EntryPoint contract
+- Compatible with any ERC-4337 bundler
+
+### LP-2520 DAO Platform Integration
+
+Integrates seamlessly with existing DAO infrastructure:
+
+- Sponsors calls to Azorius governance module
+- Works with existing voting strategies
+- No changes required to core DAO contracts
+
+### Wallet Compatibility
+
+Users can participate using:
+
+- Any ERC-4337 compatible smart account
+- Traditional EOA wallets (without gas sponsorship)
+- Light Accounts deployed by the SDK
+
+## Test Cases
+
+### Paymaster Tests
+
+```solidity
+function test_SponsorVoteTransaction() public {
+    UserOperation memory userOp = buildUserOp(
+        lightAccount,
+        azorius,
+        abi.encodeCall(IAzorius.vote, (proposalId, 1))
+    );
+
+    (bytes memory context, uint256 validationData) = paymaster.validatePaymasterUserOp(
+        userOp,
+        userOpHash,
+        maxCost
+    );
+
+    assertEq(validationData, 0); // Valid
+}
+
+function test_RejectNonWhitelistedDao() public {
+    paymaster.setDaoWhitelist(dao, false);
+
+    UserOperation memory userOp = buildUserOp(lightAccount, dao, callData);
+
+    vm.expectRevert("DAO not whitelisted");
+    paymaster.validatePaymasterUserOp(userOp, userOpHash, maxCost);
+}
+
+function test_EnforceSponsorLimit() public {
+    paymaster.setSponsorLimit(dao, 0.1 ether);
+
+    UserOperation memory userOp = buildExpensiveUserOp();
+
+    vm.expectRevert("Exceeds sponsor limit");
+    paymaster.validatePaymasterUserOp(userOp, userOpHash, 0.2 ether);
+}
+```
+
+### Account Tests
+
+```solidity
+function test_ValidateUserOpSignature() public {
+    UserOperation memory userOp = buildSignedUserOp(ownerKey);
+
+    uint256 validationData = lightAccount.validateUserOp(userOp, userOpHash, 0);
+
+    assertEq(validationData, 0); // Valid signature
+}
+
+function test_RejectInvalidSignature() public {
+    UserOperation memory userOp = buildSignedUserOp(wrongKey);
+
+    uint256 validationData = lightAccount.validateUserOp(userOp, userOpHash, 0);
+
+    assertEq(validationData, 1); // Invalid
+}
+```
+
 ## Security Considerations
 
 1. **Paymaster Funding**: Monitor paymaster balance to prevent DoS
