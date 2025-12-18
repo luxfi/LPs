@@ -178,7 +178,7 @@ recent:
 # -----------------
 # Documentation Site for LPs
 # -----------------
-.PHONY: docs-dev docs-build docs-start docs-kill
+.PHONY: docs-dev docs-build docs-start docs-kill web-build
 
 # Kill any processes using the docs port
 docs-kill:
@@ -193,6 +193,9 @@ docs-build:
 	@echo "Building documentation site..."
 	@cd docs && pnpm install && pnpm build
 	@echo "Documentation site built in docs/out directory"
+
+# Alias for CI compatibility
+web-build: docs-build
 
 docs-start:
 	@echo "Starting production documentation server..."
