@@ -13,6 +13,14 @@ requires: [750, 800, 900]
 
 # LP-760: Lux Network Impact Thesis
 
+## Abstract
+
+Lux Network is the finance layer of a coordinated ecosystem—alongside Hanzo (creation) and Zoo (mission)—designed to deploy capital at scale while generating measurable environmental and social benefit. Our core thesis: proof over promises, and everyone benefits, not just capital.
+
+## Motivation
+
+Capital markets are broken. Short-termism, externality blindness, exclusion, opacity, and extraction dominate. Meanwhile, $130+ trillion in global assets seeks ESG-aligned deployment but lacks verifiable impact, accountability mechanisms, and inclusive design. Lux Network exists to solve this.
+
 ## Executive Summary
 
 Lux Network exists to build financial infrastructure where **returns and restoration reinforce each other**. We are the finance layer of a coordinated ecosystem—alongside Hanzo (creation) and Zoo (mission)—designed to prove that capital can be deployed at scale while generating measurable environmental and social benefit.
