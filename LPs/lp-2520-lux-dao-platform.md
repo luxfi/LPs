@@ -210,6 +210,96 @@ pnpm test:e2e
 cd sdk && pnpm test
 ```
 
+## Rationale
+
+### Modular Architecture
+
+The platform uses a modular architecture to support diverse governance needs:
+- **Azorius Module**: Standard proposal-based governance for most DAOs
+- **Fractal Module**: Hierarchical governance for complex organizations with sub-DAOs
+- **Pluggable Strategies**: Separate voting logic from governance logic
+
+### Safe Integration
+
+Building on Safe (Gnosis Safe) provides:
+- Battle-tested multi-sig infrastructure
+- Existing security audits and ecosystem
+- Compatibility with existing Safe tools and extensions
+
+### On-Chain Metadata
+
+KeyValuePairs contract stores DAO metadata on-chain rather than relying solely on IPFS, ensuring:
+- Permanent, verifiable metadata
+- No dependency on centralized gateways
+- Direct smart contract queries for configuration
+
+## Backwards Compatibility
+
+### LP-2504 Safe Standard
+
+The DAO Platform is fully compatible with LP-2504:
+- All treasuries deploy as Safe multi-sigs
+- Module system uses Safe's `enableModule` pattern
+- Guard system compatible with Safe's guard interface
+
+### Existing DAOs
+
+DAOs created before this specification can:
+- Continue operating without modification
+- Upgrade to new modules via Safe transaction
+- Add freeze guards retroactively
+
+### ERC Standards
+
+Full compatibility with:
+- ERC-20 for governance tokens
+- ERC-721 for NFT-based voting
+- ERC-4337 for account abstraction
+
+## Test Cases
+
+### Smart Contract Tests
+
+```solidity
+// Test proposal creation
+function test_CreateProposal() public {
+    vm.prank(proposer);
+    uint256 proposalId = azorius.submitProposal(
+        targets,
+        values,
+        calldatas,
+        description
+    );
+    assertEq(azorius.state(proposalId), ProposalState.Active);
+}
+
+// Test voting
+function test_CastVote() public {
+    vm.prank(voter);
+    azorius.castVote(proposalId, VoteType.For);
+    (uint256 forVotes,,) = azorius.proposalVotes(proposalId);
+    assertEq(forVotes, voterWeight);
+}
+
+// Test freeze guard
+function test_FreezeExecution() public {
+    freezeGuard.freeze();
+    vm.expectRevert("Governance frozen");
+    azorius.execute(proposalId);
+}
+```
+
+### E2E Tests
+
+```typescript
+test('DAO creation flow', async ({ page }) => {
+  await page.goto('/create');
+  await page.fill('[name="daoName"]', 'Test DAO');
+  await page.click('button:has-text("Deploy")');
+  await expect(page.locator('.dao-address')).toBeVisible();
+});
+```
+
 ## Security Considerations
 
 1. **Multi-sig Treasury**: All treasuries use Safe multi-sig
