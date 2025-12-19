@@ -727,3 +727,127 @@ Total implementation files referenced: 34 files
 - Benchmark data collected on Apple M1 Max
 - Performance characteristics documented with actual timing
 - Gas cost calculations verified against implementation
+
+## Hanzo AI + Zoo Labs Integration - December 2025
+
+### Overview
+
+The LP ecosystem interfaces with three key organizations:
+- **Lux Network**: Core blockchain infrastructure
+- **Hanzo AI**: AI infrastructure, LLMs, MCP, agent frameworks
+- **Zoo Labs Foundation**: Eco/Impact research, Zen LLM family, DeSci
+
+### LP Category Mapping
+
+#### Hanzo AI Focus (AI + AI Standards)
+**Range**: LP-5000 to LP-5999 (A-Chain - AI/Attestation)
+
+| LP | Title | Hanzo Integration |
+|----|-------|-------------------|
+| LP-5000 | A-Chain Core Specification | AI attestation layer |
+| LP-5075 | TEE Integration Standard | Confidential compute |
+| LP-5080 | Attestation Chain Spec | AI verification |
+| LP-5101 | GraphQL Extension | LLM query interface |
+| LP-5102 | Immutable Training Ledger | Model provenance |
+| LP-5106 | LLM Gateway + Hanzo AI | **Primary integration (HIP-4)** |
+| LP-5200 | AI Mining Standard | Compute incentives |
+| LP-5302 | Privacy/AI Attestation | Confidential inference |
+| LP-5601 | AI Compute Gas Pricing | Resource allocation |
+| LP-5607 | GPU Acceleration | Hardware optimization |
+| LP-5610 | AI Confidential Compute | Secure execution tiers |
+
+**Key Integration**: LP-5106 establishes the bridge between Lux and Hanzo:
+- Hanzo LLM Gateway (HIP-4) provides 100+ LLM providers
+- Smart contracts can request AI inference
+- Validators get AI-powered monitoring
+- Developer tools include AI code generation
+
+#### Zoo Labs Focus (Eco/Impact + Frontier LLMs)
+**Range**: LP-0750 to LP-0930 (ESG/Research)
+
+| LP | Title | Zoo Integration |
+|----|-------|-----------------|
+| LP-0750 | Lux Vision Fund ESG Framework | Investment criteria |
+| LP-0751 | Environmental Investment Policy | Green protocols |
+| LP-0752 | Social Benefit Investment | Community impact |
+| LP-0753 | Governance Architecture | DAO structure |
+| LP-0760 | Lux Network Impact Thesis | Mission alignment |
+| LP-0800 | ESG Principles & Commitments | Foundation values |
+| LP-0801 | Carbon Accounting Methodology | Climate action |
+| LP-0810 | Green Compute & Energy | Sustainable infrastructure |
+| LP-0820 | Network Energy Transparency | Reporting standards |
+| LP-0830 | ESG Risk Management | Impact assessment |
+| LP-0840 | Anti-Greenwashing Policy | Authenticity verification |
+| LP-0850 | ESG Standards Alignment | Industry compliance |
+| LP-0860 | Evidence Locker Index | Proof of impact |
+| LP-0900 | Impact Framework & Theory of Change | Measurement methodology |
+| LP-0901 | Impact Measurement | KPIs and metrics |
+| LP-0910 | Stakeholder Engagement | Community governance |
+| LP-0920 | Community Development & Grants | Ecosystem funding |
+| LP-0930 | Financial Inclusion Metrics | Access indicators |
+
+### Zen LLM Family (Zoo Labs)
+
+The Zen model family is Zoo Labs' open-source LLM initiative:
+
+**Important**: Zen models are based on **Qwen3+** (NOT Qwen2)
+
+**Current Structure** (use Zoo for now):
+- ZIPs (Zoo Improvement Proposals) at zips.zoo.ngo
+- Frontier LLM research and experiments
+- DeSci (Decentralized Science) initiatives
+
+**Future RFC Structure for Zen**:
+- Model architecture proposals
+- Training methodology standards
+- Inference optimization protocols
+- Multi-modal integration specs
+- Safety and alignment requirements
+
+### Cross-Ecosystem Integration
+
+```
+┌─────────────────────────────────────────────────────────────────────┐
+│                         LUX BLOCKCHAIN                              │
+│  ┌──────────────┐  ┌──────────────┐  ┌──────────────────────────┐  │
+│  │   A-Chain    │  │   C-Chain    │  │       Other Chains       │  │
+│  │ (Attestation)│  │   (EVM)      │  │ (P,X,Q,B,T,Z-Chains)    │  │
+│  └──────┬───────┘  └──────┬───────┘  └──────────────────────────┘  │
+│         │                 │                                         │
+│         ▼                 ▼                                         │
+│  ┌─────────────────────────────────────────────────────────────┐   │
+│  │                    LP-5106: LLM Gateway                      │   │
+│  │              (Lux ↔ Hanzo AI Integration)                    │   │
+│  └──────────────────────────┬──────────────────────────────────┘   │
+└─────────────────────────────┼───────────────────────────────────────┘
+                              │
+              ┌───────────────┴───────────────┐
+              ▼                               ▼
+┌─────────────────────────┐     ┌─────────────────────────┐
+│       HANZO AI          │     │      ZOO LABS           │
+│                         │     │                         │
+│  • LLM Gateway (HIP-4)  │     │  • ZIPs (zips.zoo.ngo)  │
+│  • MCP Infrastructure   │     │  • ESG/Impact Research  │
+│  • Agent Frameworks     │     │  • Zen LLM Family       │
+│  • Jin Architecture     │     │  • DeSci Initiatives    │
+│  • ACI Network          │     │  • Frontier AI Research │
+└─────────────────────────┘     └─────────────────────────┘
+```
+
+### Implementation Status
+
+| Integration | Status | Notes |
+|-------------|--------|-------|
+| LP-5106 Hanzo Gateway | ✅ Draft | HIP-4 referenced |
+| ESG LPs (750-930) | ✅ Final | Complete documentation |
+| Zoo ZIPs | 🔄 External | zips.zoo.ngo |
+| Zen RFC Structure | 📋 Planned | Use Zoo temporarily |
+
+### Discussion Links
+
+GitHub Discussions created for all LPs at:
+https://github.com/luxfi/LPs/discussions
+
+- 11 category discussions
+- 195 open LP discussions (duplicates closed)
+- Each LP has dedicated discussion thread
