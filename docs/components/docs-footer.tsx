@@ -112,9 +112,9 @@ export function DocsFooter() {
             </ul>
           </div>
 
-          {/* Organization */}
+          {/* Community */}
           <div>
-            <h3 className="font-semibold text-foreground mb-4 text-sm">Organization</h3>
+            <h3 className="font-semibold text-foreground mb-4 text-sm">Community</h3>
             <ul className="space-y-2 text-sm">
               <li>
                 <a href="https://lux.partners" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-foreground transition-colors">
@@ -122,23 +122,18 @@ export function DocsFooter() {
                 </a>
               </li>
               <li>
-                <a href="https://hanzo.ai" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-foreground transition-colors">
-                  Hanzo AI
-                </a>
-              </li>
-              <li>
-                <a href="https://zoo.ngo" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-foreground transition-colors">
-                  Zoo Labs
-                </a>
-              </li>
-              <li>
                 <a href="https://github.com/luxfi" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-foreground transition-colors">
-                  GitHub Org
+                  GitHub
                 </a>
               </li>
               <li>
-                <a href="https://x.com/luxaboratories" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-foreground transition-colors">
+                <a href="https://x.com/luxdefi" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-foreground transition-colors">
                   X / Twitter
+                </a>
+              </li>
+              <li>
+                <a href="https://discord.gg/lux" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-foreground transition-colors">
+                  Discord
                 </a>
               </li>
             </ul>
