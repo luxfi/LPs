@@ -4,7 +4,7 @@ title: Wallet Standards
 description: Wallet-related standards.
 author: Lux Network Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
-status: Draft
+status: Final
 type: Standards Track
 category: Interface
 created: 2025-01-23

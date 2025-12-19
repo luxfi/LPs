@@ -4,7 +4,7 @@ title: Z-Chain ZKVM Architecture
 description: RISC-V based zero-knowledge virtual machine with GPU/FPGA acceleration for private computation rollups
 author: Zach Kelling (@zeekay) and Lux Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
-status: Draft
+status: Final
 type: Standards Track
 category: Core
 created: 2025-12-11
