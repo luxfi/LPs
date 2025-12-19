@@ -4,9 +4,51 @@ Thank you for your interest in contributing to the Lux Network! This guide cover
 
 ## Quick Links
 
-- **Discussions**: [github.com/luxfi/LPs/discussions](https://github.com/luxfi/LPs/discussions)
-- **Issues**: [github.com/luxfi/LPs/issues](https://github.com/luxfi/LPs/issues)
-- **Documentation**: [lps.lux.network/docs](https://lps.lux.network/docs)
+| Resource | URL | Purpose |
+|----------|-----|---------|
+| **Browse LPs** | [lps.lux.network](https://lps.lux.network) | Read all proposals |
+| **Discussions** | [github.com/luxfi/lps/discussions](https://github.com/luxfi/lps/discussions) | Discuss ideas & proposals |
+| **Issues** | [github.com/luxfi/lps/issues](https://github.com/luxfi/lps/issues) | Report problems, suggest edits |
+| **Taxonomy** | [TAXONOMY.md](docs/TAXONOMY.md) | Understanding LP categories |
+| **FAQ** | [FAQ.md](docs/FAQ.md) | Common questions answered |
+| **Discord** | [discord.gg/luxfi](https://discord.gg/luxfi) | Real-time community chat |
+
+## How to Participate
+
+### Discuss & Improve Existing Standards
+
+1. **Comment on Discussions**: Each LP has a linked discussion thread. Share feedback, ask questions, or suggest improvements.
+
+2. **Open an Issue**: Found a problem or have a concrete suggestion?
+   - Go to [Issues](https://github.com/luxfi/lps/issues)
+   - Use descriptive title referencing the LP number (e.g., "LP-110: Clarify validator rotation timing")
+   - Provide specific, actionable feedback
+
+3. **Submit a PR**: For typos, clarifications, or improvements:
+   - Fork the repository
+   - Make your changes
+   - Submit a PR referencing the relevant LP and discussion
+
+### Propose New Standards
+
+See [Creating Your LP](#2-create-your-lp) below. The process is:
+1. **Discuss first** — get community feedback before writing
+2. **Draft your LP** — use the template
+3. **Submit PR** — PR number becomes your LP number
+4. **Iterate** — address feedback until consensus
+
+### Discussion Categories
+
+| Category | Use For |
+|----------|---------|
+| **Consensus** | Photon, Flare, Quasar, finality protocols |
+| **Threshold Crypto** | FROST, CGGMP, Ringtail, distributed signing |
+| **MPC** | Secure computation (NOT signing) |
+| **PQC** | Post-quantum: ML-KEM, ML-DSA, SLH-DSA |
+| **Chains** | P, C, X, T, Q, Z, A, B chain specs |
+| **DeFi** | AMMs, lending, oracles |
+| **Governance** | DAOs, voting, treasury |
+| **Ideas** | New concepts not yet categorized |
 
 ## Getting Started
 
@@ -116,20 +158,86 @@ Each LP can have its own discussion thread. When participating:
 - Reference related LPs or standards
 - Keep discussions focused on the proposal
 
-## LP Categories
+## LP Taxonomy: Research-Grade Subject Model
 
-| Range | Category | Description |
-|-------|----------|-------------|
-| 0-99 | Core Architecture | Network fundamentals |
-| 1000-1999 | Platform Chain | D-Chain (P-Chain) specs |
-| 2000-2999 | EVM/Contracts | C-Chain standards |
-| 3000-3999 | Protocol Extensions | X-Chain exchange |
-| 4000-4999 | Virtual Machines | Q-Chain quantum |
-| 5000-5999 | Interoperability | A-Chain AI/attestation |
-| 6000-6999 | Bridge Protocol | B-Chain bridge |
-| 7000-7999 | Threshold Crypto | T-Chain MPC |
-| 8000-8999 | Advanced Protocol | Z-Chain privacy |
-| 9000-99999 | Extended Specs | DEX, DeFi |
+> **Core Principle**: Subjects describe knowledge. Chains describe deployment.
+
+Lux uses a research-grade taxonomy that separates knowledge domains from execution environments. This is how real research labs organize work — making it citeable by domain and allowing each area to evolve independently.
+
+**For complete taxonomy documentation, see [TAXONOMY.md](docs/TAXONOMY.md).**
+
+### Taxonomy Hierarchy
+
+```
+┌─────────────────────────────────────────────────────────────────┐
+│                    SUBJECTS (Research Domains)                   │
+│  Consensus │ Threshold │ MPC │ KMS │ PQC │ ZKP │ Crypto │ AI    │
+└─────────────────────────────────────────────────────────────────┘
+                              ↓ deployed on
+┌─────────────────────────────────────────────────────────────────┐
+│                    CHAINS (Execution Domains)                    │
+│  P-Chain │ C-Chain │ X-Chain │ T-Chain │ Q-Chain │ Z-Chain │ ...│
+└─────────────────────────────────────────────────────────────────┘
+                              ↓ enables
+┌─────────────────────────────────────────────────────────────────┐
+│                       PRODUCT AREAS                              │
+│  DeFi │ DEX │ Tokens │ Wallets │ Governance │ Privacy │ ...     │
+└─────────────────────────────────────────────────────────────────┘
+```
+
+### Key Distinctions (Academically Defensible)
+
+These separations are **critical for credibility**:
+
+| Distinction | Rationale |
+|-------------|-----------|
+| **Threshold ≠ MPC** | Signing-focused vs general secure computation |
+| **MPC ≠ KMS** | Computation protocols vs governance/ops layer |
+| **ZKP ≠ Privacy** | Proof systems vs confidential compute |
+| **Consensus ≠ Crypto** | Agreement mechanics vs key mechanics |
+| **Subjects ≠ Chains** | Knowledge domains vs deployment environments |
+| **Interop ≠ Bridge** | Messages vs value movement |
+
+### LP Number Ranges
+
+**Subjects (Research Domains)**:
+| Range | Subject | Focus |
+|-------|---------|-------|
+| 100-199 | Consensus | Photon, Flare, Quasar, Snowman, finality |
+| 200-299 | Threshold | FROST, CGGMP, Ringtail, distributed signing |
+| 300-399 | MPC | Secure computation (NOT signing) |
+| 400-499 | PQC | ML-KEM, ML-DSA, SLH-DSA |
+| 500-599 | KMS | K-Chain, HSM, policy engines |
+| 600-699 | Crypto | Hash functions, curves, signatures |
+| 700-999 | Research | ZKP, experimental protocols |
+
+**Chains (Execution Domains)**:
+| Range | Chain | Purpose |
+|-------|-------|---------|
+| 1000-1199 | P-Chain | Platform coordination |
+| 2000-2499 | C-Chain | EVM execution |
+| 3000-3999 | X-Chain | Asset exchange |
+| 4000-4999 | Q-Chain | Quantum-safe |
+| 5000-5999 | A-Chain | AI/Attestation |
+| 6000-6999 | B-Chain | Bridge execution |
+| 7000-7999 | T-Chain | Threshold + MPC |
+| 8000-8999 | Z-Chain | ZK execution |
+
+**Systems & Products**:
+| Range | Category | Focus |
+|-------|----------|-------|
+| 0-99 | Network | Architecture, topology |
+| 2500-2519 | DeFi | AMMs, lending, oracles |
+| 2520-2599 | Governance | DAOs, voting, ESG |
+| 9000-9999 | DEX | Order books, trading |
+
+### Categorization Priority
+
+LPs are assigned to **exactly one category** using this priority:
+
+1. **Tag match** (most accurate — first matching tag wins)
+2. **Number range** (LP series allocation)
+3. **Explicit frontmatter category** (fallback for untagged LPs)
 
 ## Commands Reference
 
@@ -144,19 +252,70 @@ make stats         # Show LP statistics
 make pre-pr        # Run all pre-PR checks
 ```
 
+## LP Lifecycle
+
+```
+┌─────────┐     ┌────────┐     ┌───────────┐     ┌─────────┐
+│  DRAFT  │ ──► │ REVIEW │ ──► │ LAST CALL │ ──► │  FINAL  │
+└─────────┘     └────────┘     └───────────┘     └─────────┘
+     │               │              │
+     │               ▼              ▼
+     │          ┌─────────┐   ┌─────────────┐
+     └────────► │WITHDRAWN│   │  STAGNANT   │
+                └─────────┘   └─────────────┘
+```
+
+| Status | Meaning | Duration |
+|--------|---------|----------|
+| **Draft** | Initial proposal, actively edited | Until ready |
+| **Review** | Open for community feedback | Varies |
+| **Last Call** | Final review period | 14 days |
+| **Final** | Accepted, immutable | Permanent |
+| **Withdrawn** | Abandoned by author | — |
+| **Stagnant** | No activity for 60+ days | — |
+
+### Moving Forward
+
+- **Draft → Review**: Complete all required sections, address initial feedback
+- **Review → Last Call**: Show community support, resolve concerns
+- **Last Call → Final**: No critical objections, implementations exist
+
+### What Editors Check
+
+Editors review for **format and completeness**, not merit:
+
+- ✅ Required sections present
+- ✅ Valid YAML frontmatter
+- ✅ Correct file naming
+- ✅ Clear specifications
+- ✅ No duplicate proposals
+- ❌ Editors do NOT judge technical merit (that's community consensus)
+
 ## Code of Conduct
 
 - Be respectful and inclusive
 - Focus on technical merit
 - No personal attacks
 - Constructive criticism only
+- Assume good faith
 
-## Questions?
+## Getting Help
 
-- Open a [discussion](https://github.com/luxfi/LPs/discussions)
-- Check the [FAQ](docs/FAQ.md)
-- Read existing LPs for examples
+| Need | Go To |
+|------|-------|
+| Process questions | [Discussions](https://github.com/luxfi/lps/discussions) |
+| Technical questions | [Discord #dev-help](https://discord.gg/luxfi) |
+| Bug reports | [Issues](https://github.com/luxfi/lps/issues) |
+| Detailed answers | [FAQ](docs/FAQ.md) |
+| Category definitions | [TAXONOMY.md](docs/TAXONOMY.md) |
+| Examples | Browse existing LPs |
 
 ## License
 
-All LP content is licensed under [CC0](LICENSE.md).
+All LP content is licensed under [CC0](LICENSE.md) (public domain).
+
+By submitting an LP, you agree to waive all copyright claims.
+
+---
+
+**Final Rule**: Subjects describe knowledge. Chains describe deployment.
