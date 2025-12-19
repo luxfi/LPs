@@ -14,7 +14,7 @@ requires: 7013
 
 ## Abstract
 
-This LP defines the overall Lux Bridge protocol using Multi-Party Computation/Threshold Signatures. This LP focuses on the cross-chain bridge processes themselves, abstracted from the specific M-Chain implementation described in [LP-13](/docs/lp-13-m-chain-decentralised-mpc-custody-and-swap-signature-layer/).
+This LP defines the overall Lux Bridge protocol using Multi-Party Computation/Threshold Signatures. This LP focuses on the cross-chain bridge processes themselves, abstracted from the specific T-Chain implementation described in [LP-13](/docs/lp-13-t-chain-decentralised-mpc-custody-and-swap-signature-layer/).
 
 ## Motivation
 
@@ -253,8 +253,8 @@ go test -tags=integration ./...
 
 ### Related LPs
 
-- **LP-13**: M-Chain Specification (custody layer)
-- **LP-14**: M-Chain Threshold Signatures (signing protocol)
+- **LP-13**: T-Chain Specification (custody layer)
+- **LP-14**: T-Chain Threshold Signatures (signing protocol)
 - **LP-15**: MPC Bridge Protocol (this LP)
 - **LP-16**: Teleport Protocol (transfer layer)
 - **LP-17**: Bridge Asset Registry (asset tracking)

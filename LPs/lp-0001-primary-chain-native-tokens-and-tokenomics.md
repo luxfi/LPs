@@ -66,7 +66,7 @@ LP numbers 2 through 9 are reserved for future chain definitions.
 *   **LP-2**: P-Chain
 *   **LP-3**: C-Chain
 *   **LP-4**: X-Chain
-*   **LP-5**: M-Chain
+*   **LP-5**: T-Chain
 *   **LP-6**: Z-Chain
 *   **LP-7**: G-Chain
 

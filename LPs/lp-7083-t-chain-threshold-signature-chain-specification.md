@@ -289,9 +289,9 @@ Design decisions for T-Chain:
 
 ## Backwards Compatibility
 
-The T-Chain supersedes M-Chain MPC functionality from LP-0013/0014. Migration path:
+The T-Chain supersedes T-Chain MPC functionality from LP-0013/0014. Migration path:
 
-1. M-Chain keys can be imported via resharing ceremony
+1. T-Chain keys can be imported via resharing ceremony
 2. Existing bridge integrations continue working
 3. New deployments should use T-Chain directly
 

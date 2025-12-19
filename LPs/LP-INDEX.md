@@ -33,7 +33,7 @@ The Lux Network consists of specialized chains, each optimized for specific func
 | **C-Chain** | Contract | EVM-compatible smart contracts | [LP-0012](/docs/lp-0012-c-chain-contract-chain-specification/), [LP-0026](/docs/lp-0026-c-chain-evm-equivalence-and-core-eips-adoption/) |
 | **G-Chain** | Graph | Universal query & indexing layer | [LP-0098](/docs/lp-0098-luxfi-graphdb-and-graphql-engine-integration/), [LP-0101](/docs/lp-0101-solidity-graphql-extension-for-native-g-chain-integration/) |
 | **K-Chain** | Key Mgmt | Key management services | [LP-0336](/docs/lp-0336-k-chain-keymanagementvm-specification/) |
-| **M-Chain** | MPC/Multisig | Threshold crypto & custody | [LP-0013](/docs/lp-0013-m-chain-decentralised-mpc-custody-and-swap-signature-layer/), [LP-0337](/docs/lp-0337-m-chain-multisigvm-specification/) |
+| **T-Chain** | MPC/Multisig | Threshold crypto & custody | [LP-0013](/docs/lp-0013-t-chain-decentralised-mpc-custody-and-swap-signature-layer/), [LP-0337](/docs/lp-0337-t-chain-multisigvm-specification/) |
 | **Q-Chain** | Quantum | Post-quantum secure consensus | [LP-0099](/docs/lp-0099-q-chain-quantum-secure-consensus-protocol-family-quasar/), [LP-0303](/docs/lp-0303-lux-q-security-post-quantum-p-chain-integration/) |
 | **T-Chain** | Threshold | MPC-as-a-service (ThresholdVM) | [LP-0330](/docs/lp-0330-t-chain-thresholdvm-specification/) |
 | **X-Chain** | Exchange | High-performance trading | [LP-0011](/docs/lp-0011-x-chain-exchange-chain-specification/), [LP-0036](/docs/lp-0036-x-chain-order-book-dex-api-and-rpc-addendum/) |
@@ -47,7 +47,7 @@ The Lux Network consists of specialized chains, each optimized for specific func
 | [LP-0001](/docs/lp-0001-primary-chain-native-tokens-and-tokenomics/) | Primary Chain, Native Tokens, and Tokenomics | `core`, `tokenomics` | Draft |
 | [LP-0002](/docs/lp-0002-virtual-machine-and-execution-environment/) | Virtual Machine and Execution Environment | `core`, `vm` | Final |
 | [LP-0003](/docs/lp-0003-subnet-architecture-and-cross-chain-interoperability/) | Subnet Architecture and Cross-Chain Interoperability | `core`, `subnets`, `cross-chain` | Final |
-| [LP-0010](/docs/lp-0010-p-chain-platform-chain-specification-deprecated/) | P-Chain (Platform Chain) Specification | `core`, `deprecated` | Deprecated |
+| [LP-0010](/docs/lp-0010-p-chain-platfort-chain-specification-deprecated/) | P-Chain (Platform Chain) Specification | `core`, `deprecated` | Deprecated |
 
 ---
 
@@ -81,11 +81,11 @@ LPs for multi-party computation, threshold signatures, and distributed key gener
 
 | LP | Title | Tags | Status |
 |----|-------|------|--------|
-| [LP-0013](/docs/lp-0013-m-chain-decentralised-mpc-custody-and-swap-signature-layer/) | M-Chain Decentralised MPC Custody | `mpc`, `custody`, `m-chain` | Draft |
-| [LP-0014](/docs/lp-0014-m-chain-threshold-signatures-with-cgg21-uc-non-interactive-ecdsa/) | CGG21 Threshold ECDSA | `threshold-crypto`, `cggmp21`, `ecdsa` | Draft |
+| [LP-0013](/docs/lp-0013-t-chain-decentralised-mpc-custody-and-swap-signature-layer/) | T-Chain Decentralised MPC Custody | `mpc`, `custody`, `t-chain` | Draft |
+| [LP-0014](/docs/lp-0014-t-chain-threshold-signatures-with-cgg21-uc-non-interactive-ecdsa/) | CGG21 Threshold ECDSA | `threshold-crypto`, `cggmp21`, `ecdsa` | Draft |
 | [LP-0103](/docs/lp-0103-mpc-lss---multi-party-computation-linear-secret-sharing-with-dynamic-resharing/) | MPC-LSS Dynamic Resharing | `mpc`, `lss`, `resharing` | Draft |
 | [LP-0104](/docs/lp-0104-frost---flexible-round-optimized-schnorr-threshold-signatures-for-eddsa/) | FROST Threshold EdDSA | `threshold-crypto`, `frost`, `eddsa` | Draft |
-| [LP-0319](/docs/lp-0319-m-chain-decentralised-mpc-custody/) | M-Chain Decentralised MPC Custody (v2) | `mpc`, `custody`, `m-chain` | Draft |
+| [LP-0319](/docs/lp-0319-t-chain-decentralised-mpc-custody/) | T-Chain Decentralised MPC Custody (v2) | `mpc`, `custody`, `t-chain` | Draft |
 | [LP-0321](/docs/lp-0321-frost-threshold-signature-precompile/) | FROST Precompile | `threshold-crypto`, `frost`, `precompile` | Draft |
 | [LP-0322](/docs/lp-0322-cggmp21-threshold-ecdsa-precompile/) | CGGMP21 ECDSA Precompile | `threshold-crypto`, `cggmp21`, `precompile` | Draft |
 | [LP-0323](/docs/lp-0323-lss-mpc-dynamic-resharing-extension/) | LSS MPC Dynamic Resharing | `mpc`, `lss`, `resharing` | Draft |
@@ -289,7 +289,7 @@ LPs for decentralized finance protocols and privacy features.
 
 | LP | Title | Tags | Status |
 |----|-------|------|--------|
-| [LP-0037](/docs/lp-0037-native-swap-integration-on-m-chain-x-chain-and-z-chain/) | Native Swap Integration | `defi`, `swap` | Draft |
+| [LP-0037](/docs/lp-0037-native-swap-integration-on-t-chain-x-chain-and-z-chain/) | Native Swap Integration | `defi`, `swap` | Draft |
 | [LP-0045](/docs/lp-0045-z-chain-encrypted-execution-layer-interface/) | Z-Chain Encrypted Execution Layer | `privacy`, `z-chain`, `encryption` | Draft |
 | [LP-0060](/docs/lp-0060-defi-protocols-overview/) | DeFi Protocols Overview | `defi`, `overview` | Draft |
 | [LP-0400](/docs/lp-0400-automated-market-maker-protocol-with-privacy/) | Private AMM Protocol | `defi`, `amm`, `privacy` | Draft |
@@ -413,7 +413,7 @@ Quick links to find LPs by tag:
 | `c-chain` | Contract chain (EVM) | 5 |
 | `b-chain` | Bridge chain | 4 |
 | `t-chain` | Threshold chain | 2 |
-| `m-chain` | MPC chain | 3 |
+| `t-chain` | MPC chain | 3 |
 | `q-chain` | Quantum chain | 2 |
 | `x-chain` | Exchange chain (DEX) | 8 |
 | `z-chain` | Zero-knowledge chain | 3 |

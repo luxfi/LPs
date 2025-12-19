@@ -510,7 +510,7 @@ IBridge(bridge).bridgeMintStealth(
 - **LP-6017**: Bridge Asset Registry
 - **LP-6018**: Cross-Chain Message Format
 - **LP-6019**: Bridge Security Framework
-- **LP-7319**: M-Chain Decentralised MPC Custody
+- **LP-7319**: T-Chain Decentralised MPC Custody
 
 ## Copyright
 

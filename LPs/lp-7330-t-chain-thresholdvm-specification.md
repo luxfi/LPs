@@ -16,11 +16,11 @@ activation:
 tags: [threshold-crypto, mpc, vm]
 ---
 
-> **See also**: [LP-14](/docs/lp-7014-m-chain-threshold-signatures-with-cgg21-uc-non-interactive-ecdsa/), [LP-81](/docs/lp-6081-b-chain-bridge-chain-specification/), [LP-103](/docs/lp-7103-mpc-lss---multi-party-computation-linear-secret-sharing-with-dynamic-resharing/), [LP-104](/docs/lp-7104-frost---flexible-round-optimized-schnorr-threshold-signatures-for-eddsa/), [LP-331](/docs/lp-6331-b-chain-bridgevm-specification/), [LP-332](/docs/lp-6332-teleport-bridge-architecture-unified-cross-chain-protocol/), [LP-333](/docs/lp-7333-dynamic-signer-rotation-with-lss-protocol/), [LP-334](/docs/lp-7334-per-asset-threshold-key-management/), [LP-335](/docs/lp-6335-bridge-smart-contract-integration/), [LP-336](/docs/lp-7336-k-chain-keymanagementvm-specification/), [LP-INDEX](/docs/)
+> **See also**: [LP-14](/docs/lp-7014-t-chain-threshold-signatures-with-cgg21-uc-non-interactive-ecdsa/), [LP-81](/docs/lp-6081-b-chain-bridge-chain-specification/), [LP-103](/docs/lp-7103-mpc-lss---multi-party-computation-linear-secret-sharing-with-dynamic-resharing/), [LP-104](/docs/lp-7104-frost---flexible-round-optimized-schnorr-threshold-signatures-for-eddsa/), [LP-331](/docs/lp-6331-b-chain-bridgevm-specification/), [LP-332](/docs/lp-6332-teleport-bridge-architecture-unified-cross-chain-protocol/), [LP-333](/docs/lp-7333-dynamic-signer-rotation-with-lss-protocol/), [LP-334](/docs/lp-7334-per-asset-threshold-key-management/), [LP-335](/docs/lp-6335-bridge-smart-contract-integration/), [LP-336](/docs/lp-7336-k-chain-keymanagementvm-specification/), [LP-INDEX](/docs/)
 
 ## Abstract
 
-This LP specifies the T-Chain (Threshold Chain), Lux Network's dedicated blockchain for threshold cryptography operations. T-Chain implements the ThresholdVM, a purpose-built virtual machine that manages distributed key shares using Linear Secret Sharing (LSS), supports both CGGMP21 threshold ECDSA and FROST threshold Schnorr signatures, and enables dynamic signer rotation without key reconstruction. Each validator node holds a share of managed keys, ensuring no single party ever possesses the complete private key. T-Chain provides threshold signature services to B-Chain (BridgeVM), M-Chain (MPC custody), and other Lux chain consumers requiring distributed signing authority.
+This LP specifies the T-Chain (Threshold Chain), Lux Network's dedicated blockchain for threshold cryptography operations. T-Chain implements the ThresholdVM, a purpose-built virtual machine that manages distributed key shares using Linear Secret Sharing (LSS), supports both CGGMP21 threshold ECDSA and FROST threshold Schnorr signatures, and enables dynamic signer rotation without key reconstruction. Each validator node holds a share of managed keys, ensuring no single party ever possesses the complete private key. T-Chain provides threshold signature services to B-Chain (BridgeVM), T-Chain (MPC custody), and other Lux chain consumers requiring distributed signing authority.
 
 ## Activation
 
@@ -80,7 +80,7 @@ T-Chain addresses these challenges by providing:
 ### Use Cases
 
 - **B-Chain Bridge Custody**: Threshold control of bridge vault addresses
-- **M-Chain Swap Signatures**: Distributed signing for cross-chain swaps
+- **T-Chain Swap Signatures**: Distributed signing for cross-chain swaps
 - **DAO Treasury Management**: Multi-party control of protocol funds
 - **Validator Key Rotation**: Seamless transition between validator sets
 - **Cross-Chain Oracle Signing**: Threshold attestation for oracle data
@@ -101,7 +101,7 @@ T-Chain is a specialized Lux subnet running the ThresholdVM:
 |  |   Requests        |    |                   |    |                  | |
 |  +-------------------+    +-------------------+    +------------------+ |
 |  | SignRequest       |    | ThresholdVM       |    | B-Chain Bridge   | |
-|  | KeyGenRequest     |    | LSS Key Manager   |    | M-Chain MPC      | |
+|  | KeyGenRequest     |    | LSS Key Manager   |    | T-Chain MPC      | |
 |  | ReshareRequest    |    | Session Orchestr. |    | DAO Contracts    | |
 |  | RefreshRequest    |    | Signature Agg.    |    | Oracle Services  | |
 |  +-------------------+    +-------------------+    +------------------+ |
@@ -266,7 +266,7 @@ type KeyGenTx struct {
 
     // Ownership
     Owner           Address            // Who can request signatures
-    Consumer        ChainID            // Consuming chain (B-Chain, M-Chain, etc.)
+    Consumer        ChainID            // Consuming chain (B-Chain, T-Chain, etc.)
 
     // Metadata
     Purpose         string             // e.g., "eth-usdc-bridge"
@@ -2428,16 +2428,16 @@ type AuthorizationResponse struct {
 }
 ```text
 
-### T-Chain to M-Chain Integration
+### T-Chain to T-Chain Integration
 
-M-Chain (MultisigVM) can delegate signing authority to T-Chain for operations requiring threshold signatures.
+T-Chain (MultisigVM) can delegate signing authority to T-Chain for operations requiring threshold signatures.
 
 **Delegation Pattern**:
-1. M-Chain multisig approves operation
-2. M-Chain submits to T-Chain as authorized requester
-3. T-Chain verifies M-Chain signature on request
+1. T-Chain multisig approves operation
+2. T-Chain submits to T-Chain as authorized requester
+3. T-Chain verifies T-Chain signature on request
 4. T-Chain performs threshold signing
-5. Result returned to M-Chain for execution
+5. Result returned to T-Chain for execution
 
 ### External Chain Integration
 
@@ -2485,7 +2485,7 @@ type CrossChainMessage struct {
 
 ### Interoperability Requirements
 
-1. T-Chain MUST accept Warp messages from registered consumer chains (B-Chain, M-Chain)
+1. T-Chain MUST accept Warp messages from registered consumer chains (B-Chain, T-Chain)
 2. T-Chain MUST validate Warp message signatures before processing
 3. T-Chain MUST return signatures in format compatible with destination chain
 4. External chain integrations MUST verify T-Chain signatures match registered public keys
@@ -2545,17 +2545,17 @@ T-Chain is a new subnet; no backwards compatibility concerns.
 ### Integration with Existing Chains
 
 - **B-Chain**: Uses T-Chain for bridge vault signatures via Warp messaging
-- **M-Chain**: Uses T-Chain for swap signatures
+- **T-Chain**: Uses T-Chain for swap signatures
 - **C-Chain**: Contracts can request signatures via T-Chain precompile
 
-### Migration from M-Chain MPC
+### Migration from T-Chain MPC
 
-Existing M-Chain MPC operations can migrate to T-Chain:
+Existing T-Chain MPC operations can migrate to T-Chain:
 
 1. Register existing keys on T-Chain via `KeyGenTx` with known public keys
 2. Run parallel signing during transition
 3. Update consumers to use T-Chain RPC
-4. Deprecate M-Chain MPC endpoints
+4. Deprecate T-Chain MPC endpoints
 
 ## Test Cases
 

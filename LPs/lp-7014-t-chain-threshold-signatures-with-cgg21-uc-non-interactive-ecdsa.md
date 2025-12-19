@@ -1,8 +1,8 @@
 ---
 lp: 7014
-title: M-Chain Threshold Signatures with CGG21 (UC Non-Interactive ECDSA)
+title: T-Chain Threshold Signatures with CGG21 (UC Non-Interactive ECDSA)
 tags: [threshold-crypto, mpc]
-description: Formal design for integrating the CGG21 threshold ECDSA protocol in Lux's M-Chain (expanding on LP-13).
+description: Formal design for integrating the CGG21 threshold ECDSA protocol in Lux's T-Chain (expanding on LP-13).
 author: Lux Industries Inc.
 discussions-to: https://github.com/luxfi/lps/discussions
 status: Draft
@@ -11,11 +11,11 @@ category: Core
 created: 2025-07-23
 ---
 
-> **See also**: [LP-13](/docs/lp-13-m-chain-decentralised-mpc-custody-and-swap-signature-layer/), [LP-INDEX](/docs/)
+> **See also**: [LP-13](/docs/lp-13-t-chain-decentralised-mpc-custody-and-swap-signature-layer/), [LP-INDEX](/docs/)
 
 ## Abstract
 
-This proposal introduces a formal design for using the Chase–Gennaro–Goldfeder 2021 (CGG21) threshold signature scheme in Lux’s M-Chain (the MPC-based bridge chain). We expand on LP-13 by providing an academic-style rationale for adopting CGG21, an overview of its node-level integration in Lux’s MVM, comparisons with prior threshold schemes (GG18, DKLS19, and Ethereum’s threshold cryptography efforts), and a detailed threat model with security assumptions. We also outline a roadmap for a hybrid post-quantum upgrade, incorporating a subset of Ringtail (a lattice-based threshold signature scheme) participants into the signing group to achieve partial post-quantum protection during the transition.
+This proposal introduces a formal design for using the Chase–Gennaro–Goldfeder 2021 (CGG21) threshold signature scheme in Lux’s T-Chain (the MPC-based bridge chain). We expand on LP-13 by providing an academic-style rationale for adopting CGG21, an overview of its node-level integration in Lux’s MVM, comparisons with prior threshold schemes (GG18, DKLS19, and Ethereum’s threshold cryptography efforts), and a detailed threat model with security assumptions. We also outline a roadmap for a hybrid post-quantum upgrade, incorporating a subset of Ringtail (a lattice-based threshold signature scheme) participants into the signing group to achieve partial post-quantum protection during the transition.
 
 ## Motivation and Rationale for CGG21
 
@@ -25,26 +25,26 @@ Threshold signatures allow a private key’s functionality to be distributed amo
 
 CGG21, formally known as “UC Non-Interactive, Proactive, Threshold ECDSA with Identifiable Aborts,” is a state-of-the-art threshold ECDSA protocol that combines several desirable features [1]:
 
-- **Non‑interactive signing**: Only the final round depends on the message, while prior rounds can be pre‑computed offline. This yields a low-latency signing process suitable for time-sensitive blockchain operations. In practice, Lux’s M-Chain nodes can perform most of the computation before a signature is requested, so signing adds minimal delay.
+- **Non‑interactive signing**: Only the final round depends on the message, while prior rounds can be pre‑computed offline. This yields a low-latency signing process suitable for time-sensitive blockchain operations. In practice, Lux’s T-Chain nodes can perform most of the computation before a signature is requested, so signing adds minimal delay.
 - **Few communication rounds**: CGG21 achieves a signing workflow in as few as 5 rounds (or 8 rounds in an alternate variant), significantly fewer than earlier schemes. Lux’s implementation uses the 5‑round variant to minimize latency, incurring a slight computation overhead only if a signing attempt fails.
 - **Identifiable aborts (accountability)**: A key innovation of CGG21 is the ability to identify misbehaving parties if the protocol fails. In earlier threshold ECDSA protocols like GG18, any dishonest participant could simply abort the signing, causing a denial-of-service without penalty [2]. CGG21 remedies this by pinpointing the culprit when a signature share is invalid or withheld. This identifiable abort property deters sabotage by enabling Lux to slash or replace malicious nodes—a crucial feature for an open network of validators.
-- **Proactive security with key refresh**: The scheme supports periodic distributed key refreshes that do not change the public key but reshuffle the private key shares. This means M-Chain validators can regularly re-randomize their secret shares (e.g., per epoch), so an adversary cannot slowly compromise shares one by one over time. An attacker must corrupt at least \(t\) nodes within one refresh period to break the key, dramatically reducing the risk of key compromise in long-lived signing groups.
-- **Dealerless distributed key generation (DKG)**: CGG21 includes a built-in DKG protocol for key-share distribution. Validators jointly generate the ECDSA private key shares without any trusted dealer, and no single node ever knows the full secret key. This aligns with Lux’s decentralization goals—the M-Chain can initialize or reconfigure signer sets transparently on-chain, avoiding any single point of trust during setup.
+- **Proactive security with key refresh**: The scheme supports periodic distributed key refreshes that do not change the public key but reshuffle the private key shares. This means T-Chain validators can regularly re-randomize their secret shares (e.g., per epoch), so an adversary cannot slowly compromise shares one by one over time. An attacker must corrupt at least \(t\) nodes within one refresh period to break the key, dramatically reducing the risk of key compromise in long-lived signing groups.
+- **Dealerless distributed key generation (DKG)**: CGG21 includes a built-in DKG protocol for key-share distribution. Validators jointly generate the ECDSA private key shares without any trusted dealer, and no single node ever knows the full secret key. This aligns with Lux’s decentralization goals—the T-Chain can initialize or reconfigure signer sets transparently on-chain, avoiding any single point of trust during setup.
 - **Universally Composable (UC) security**: The protocol is proven secure in the rigorous UC framework (in the Global Random Oracle model), meaning it securely realizes an ideal threshold signature functionality under composition with other protocols. Its security relies on standard cryptographic hardness assumptions: Strong RSA, Decisional Diffie-Hellman (DDH), the semantic security of Paillier encryption, and a strengthened form of ECDSA’s unforgeability assumption. These assumptions are well-studied and give confidence that no efficient attack is known under classical computing. In particular, CGG21’s reliance on Paillier (an additively homomorphic encryption) enables the distributed multiplication needed for ECDSA signing, while zero-knowledge techniques and verifiable secret sharing enforce correctness.
 
-Overall, adopting CGG21 in Lux’s bridge architecture provides high security and liveness guarantees (“no surprises” signing that either succeeds or identifies a culprit), suitable performance for real-time signing, and strong theoretical foundations [1]. These advantages justify moving beyond the simpler approaches outlined in LP-13 and embracing an academically vetted scheme that is specifically designed for threshold ECDSA (which, unlike Schnorr-based signatures, is notoriously non-trivial to thresholdize). By using CGG21, Lux positions M-Chain’s multi-party signing at the cutting edge of threshold cryptography research, similar to the “threshold wallets” employed by top custodians.
+Overall, adopting CGG21 in Lux’s bridge architecture provides high security and liveness guarantees (“no surprises” signing that either succeeds or identifies a culprit), suitable performance for real-time signing, and strong theoretical foundations [1]. These advantages justify moving beyond the simpler approaches outlined in LP-13 and embracing an academically vetted scheme that is specifically designed for threshold ECDSA (which, unlike Schnorr-based signatures, is notoriously non-trivial to thresholdize). By using CGG21, Lux positions T-Chain’s multi-party signing at the cutting edge of threshold cryptography research, similar to the “threshold wallets” employed by top custodians.
 
-## Architecture and Implementation in Lux M-Chain MVM
+## Architecture and Implementation in Lux T-Chain MVM
 
-**System Overview:** In Lux’s M-Chain (the MPC bridge chain), a committee of validators collaboratively controls bridge accounts using threshold signatures. The Lux MVM (Multiverse Virtual Machine) node software incorporates the CGG21 protocol at the networking and consensus layer. Each M-Chain node holds an encrypted share of the ECDSA private key for each asset or blockchain being bridged. Neither the Lux platform nor any single node ever reconstructs the full private key—all operations are done via distributed computation.
+**System Overview:** In Lux’s T-Chain (the MPC bridge chain), a committee of validators collaboratively controls bridge accounts using threshold signatures. The Lux MVM (Multiverse Virtual Machine) node software incorporates the CGG21 protocol at the networking and consensus layer. Each T-Chain node holds an encrypted share of the ECDSA private key for each asset or blockchain being bridged. Neither the Lux platform nor any single node ever reconstructs the full private key—all operations are done via distributed computation.
 
 **Key Generation and Management:** When a new signing group is formed (e.g., rotating the bridge key or adding validators), the nodes run CGG21’s distributed key generation sub-protocol [1]. This protocol uses verifiable secret sharing to distribute shares of a fresh ECDSA private key to all \(n\) participants without revealing the key to anyone. Each node \(i\) obtains a private share \(x_i\), and collectively they define a public key \(X = x·G\) on secp256k1 (where \(G\) is the base point). This public key is published on-chain as the address that holds assets or as the trusted signing authority for bridging. The DKG is dealerless aside from network broadcast and produces commitments and proofs to ensure consistency and correctness of shares for all honest parties.
 
 The MVM stores each node’s key share in a secure enclave or keystore. For additional safety, validators may split each share among an HSM and a backup service. Periodic key refresh is triggered by the protocol or governance: nodes engage in a 3‑round share refresh that outputs new shares for the same key [1]. This proactive refresh must occur frequently enough so that an adversary cannot compromise \(t\) nodes between refreshes.
 
-**Signing Process:** To initiate a signing (e.g., releasing funds from the bridge), the M-Chain consensus includes a signing request containing the message hash. Signer nodes then execute the CGG21 signing protocol in two phases [1]:
+**Signing Process:** To initiate a signing (e.g., releasing funds from the bridge), the T-Chain consensus includes a signing request containing the message hash. Signer nodes then execute the CGG21 signing protocol in two phases [1]:
 
-- **Offline Pre‑processing:** Nodes asynchronously run pre-computation rounds before any message is known, generating ephemeral values and Paillier-encryption commitments. Lux’s MVM implements this as background tasks that produce pre-signature tokens—partly computed signature shares tied to random nonces and commitments. These tokens are stored locally and exchanged over the M-Chain’s p2p network.
+- **Offline Pre‑processing:** Nodes asynchronously run pre-computation rounds before any message is known, generating ephemeral values and Paillier-encryption commitments. Lux’s MVM implements this as background tasks that produce pre-signature tokens—partly computed signature shares tied to random nonces and commitments. These tokens are stored locally and exchanged over the T-Chain’s p2p network.
 - **Online Signing:** Upon receiving the real message, each node independently combines its pre-signature token with the message hash to compute a signature share without further interaction. In the final round, nodes broadcast their shares and combine them to form the standard ECDSA \((r,s)\) signature [1]. This one-round online phase yields very low latency, typically a few network ticks.
 - **Abort Handling:** If a node fails or sends an invalid share, CGG21’s identifiable abort feature reveals the culprit via verifiable commitments [1]. Lux logs this event on-chain, enabling slashing or removal of malicious validators. Honest nodes may retry with a fresh token or pause the bridge if the subgroup is too small to satisfy the threshold.
 
@@ -90,7 +90,7 @@ Related implementations:
 
 ## Conclusion
 
-This draft LP specifies the integration of CGG21 threshold ECDSA into Lux's M-Chain, delivering low-latency non-interactive signing, identifiable aborts, proactive key refresh, and strong UC security. Our comparison shows CGG21's advantages over GG18, DKLS19, and early Ethereum threshold deployments. We also chart a path toward hybrid post-quantum threshold signing with Ringtail, ensuring Lux's bridges remain secure against both current and future adversaries.
+This draft LP specifies the integration of CGG21 threshold ECDSA into Lux's T-Chain, delivering low-latency non-interactive signing, identifiable aborts, proactive key refresh, and strong UC security. Our comparison shows CGG21's advantages over GG18, DKLS19, and early Ethereum threshold deployments. We also chart a path toward hybrid post-quantum threshold signing with Ringtail, ensuring Lux's bridges remain secure against both current and future adversaries.
 
 The complete implementation is available at `github.com/luxfi/threshold` with comprehensive test coverage and production-ready code.
 
@@ -272,7 +272,7 @@ See LP-7330 for full ThresholdVM specification.
 
 ### Related LPs
 
-- **LP-13**: M-Chain Specification (uses CGG21)
+- **LP-13**: T-Chain Specification (uses CGG21)
 - **LP-7103**: LSS Dynamic Resharing (alternative protocol)
 - **LP-7104**: FROST Signatures (Schnorr threshold)
 - **LP-7330**: T-Chain ThresholdVM (VM integration)

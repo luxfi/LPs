@@ -1,6 +1,6 @@
 ---
 lp: 3037
-title: Native Swap Integration on M-Chain, X-Chain, and Z-Chain
+title: Native Swap Integration on T-Chain, X-Chain, and Z-Chain
 description: Deep-integration blueprint to migrate legacy swaps REST API (swaps.ts) into fully on-chain M/X/Z chain transactions and RPC
 author: Lux Network Team
 discussions-to: https://github.com/luxfi/lps/discussions
@@ -14,7 +14,7 @@ requires: 6, 32, 33, 34
 
 ## Abstract
 
-This LP provides a deep-integration blueprint to migrate the legacy swaps REST API (`app/server/src/routes/swaps.ts`) into a fully on-chain workflow across M-Chain, X-Chain, and Z-Chain, eliminating centralized swap servers and off-chain key-managers.
+This LP provides a deep-integration blueprint to migrate the legacy swaps REST API (`app/server/src/routes/swaps.ts`) into a fully on-chain workflow across T-Chain, X-Chain, and Z-Chain, eliminating centralized swap servers and off-chain key-managers.
 
 ## Motivation
 
@@ -43,7 +43,7 @@ The existing bridge back-end exposes HTTP routes:
 | Chain   | Role for swaps                                                                                           |
 |---------|----------------------------------------------------------------------------------------------------------|
 | X-Chain | `SwapTx` locks escrow funds; emits SwapID = txID; user intent                                     |
-| M-Chain | `SwapSigTx` contains aggregate MPC signature + proof of quorum; slashing for non-participation     |
+| T-Chain | `SwapSigTx` contains aggregate MPC signature + proof of quorum; slashing for non-participation     |
 | Z-Chain | (optional) privacy layer: `zSwapDeposit` → commitment; `zSwapRedeem` → shielded withdrawal proof     |
 
 ### 3 On-Chain Data Structures
@@ -74,10 +74,10 @@ Pain points:
 | Chain   | Role for swaps                                                                                           |
 |---------|----------------------------------------------------------------------------------------------------------|
 | X-Chain | `SwapTx` locks escrow funds; emits SwapID = txID; user intent                                     |
-| M-Chain | `SwapSigTx` contains aggregate MPC signature + proof of quorum; slashing for non-participation     |
+| T-Chain | `SwapSigTx` contains aggregate MPC signature + proof of quorum; slashing for non-participation     |
 | Z-Chain | (optional) privacy layer: `zSwapDeposit` → commitment; `zSwapRedeem` → shielded withdrawal proof     |
 
-After signing on M-Chain, X-Chain light-client proof unlocks escrow and relays native transaction. Privacy flag routes via Z-Chain.
+After signing on T-Chain, X-Chain light-client proof unlocks escrow and relays native transaction. Privacy flag routes via Z-Chain.
 
 ## 2 On-Chain Data Structures
 
@@ -98,7 +98,7 @@ type SwapTx struct {
 ```markdown
 Funds lock to SwapFx until SwapSigTx appears; SwapID = txID.
 
-### 2.2 SwapSigTx (M-Chain)
+### 2.2 SwapSigTx (T-Chain)
 ```go
 type SwapSigTx struct {
     BaseTx
@@ -109,7 +109,7 @@ type SwapSigTx struct {
     ProofHash [32]byte
 }
 ```text
-On seeing SwapTx, validators form threshold signature off-chain and submit SwapSigTx on M-Chain.
+On seeing SwapTx, validators form threshold signature off-chain and submit SwapSigTx on T-Chain.
 
 ### 3 Transaction Flow
 
@@ -117,11 +117,11 @@ On seeing SwapTx, validators form threshold signature off-chain and submit SwapS
 sequenceDiagram
     User->>Wallet: create swap (BTC→wBTC,0.1)
     Wallet-->>X-Chain: broadcast SwapTx
-    X-Chain->>M-Chain: watch SwapRequested event
-    M-Chain->>MPC Nodes: gather shares
-    MPC Nodes-->>M-Chain: threshold signature
-    M-Chain-->>M-Chain: submit SwapSigTx
-    M-Chain-->>X-Chain: WarpMsg proof
+    X-Chain->>T-Chain: watch SwapRequested event
+    T-Chain->>MPC Nodes: gather shares
+    MPC Nodes-->>T-Chain: threshold signature
+    T-Chain-->>T-Chain: submit SwapSigTx
+    T-Chain-->>X-Chain: WarpMsg proof
     X-Chain-->>X-Chain: unlock escrow, mark FINAL
     X-Chain-->>BTC: broadcast native txn
     BTC-->>User: funds arrive
@@ -135,14 +135,14 @@ sequenceDiagram
 |-----------------------|----------------------------------------|------------------------------|
 | POST /swaps           | dex.swap.submit({txHex})               | X-Chain dex.swap.submit      |
 | GET /swaps/:id        | dex.swap.status({swapID})              | X-Chain dex.swap.status      |
-| POST /swaps/:id/sign  | (no-op, automated on M-Chain)          |                              |
+| POST /swaps/:id/sign  | (no-op, automated on T-Chain)          |                              |
 | POST /swaps/:id/finalize | (no-op, automated on SwapSig detection)|                          |
 
 ### 5 Validator & MPC Stack
 
 ```text
 X-Chain Node (luxd + DexFx)  <-->  dexfx plugin verifies SwapTx, watches proofs
-M-Chain Node (luxd + mpckeyd) <-->  mpckeyd holds key shares, exposes gRPC sign_swap
+T-Chain Node (luxd + mpckeyd) <-->  mpckeyd holds key shares, exposes gRPC sign_swap
 ```text
 
 ### 6 State Diagrams
@@ -165,7 +165,7 @@ Privacy flag triggers Z-Chain peg, shielded mint, and zSwapRedeem → zk-proof w
 | Legacy Server Code     | New On-Chain Location                    |
 |------------------------|-------------------------------------------|
 | DB Swaps table         | dex.swap.history indexer                  |
-| Signature worker       | mpckeyd daemon on M-Chain                 |
+| Signature worker       | mpckeyd daemon on T-Chain                 |
 | REST routes            | JSON-RPC + WS dex.swap.*                  |
 | Polling & webhooks     | WS push feeds and RPC responses           |
 
@@ -202,16 +202,16 @@ MPC signers burn stake on misbehavior; relayer gas paid by fees built into SwapT
 **Location**: `~/work/lux/node/vms/avm/` and `~/work/lux/node/vms/mvm/`
 **GitHub**:
 - [`github.com/luxfi/node/tree/main/vms/avm/plugins/swap`](https://github.com/luxfi/node/tree/main/vms/avm/plugins/swap) - X-Chain swaps
-- [`github.com/luxfi/node/tree/main/vms/mvm`](https://github.com/luxfi/node/tree/main/vms/mvm) - M-Chain MPC signing
+- [`github.com/luxfi/node/tree/main/vms/mvm`](https://github.com/luxfi/node/tree/main/vms/mvm) - T-Chain MPC signing
 
 **Core Swap Components**:
 - [`plugins/swap/swap_tx.go`](https://github.com/luxfi/node/blob/main/vms/avm/plugins/swap/swap_tx.go) - SwapTx codec
 - [`plugins/swap/swap_fx.go`](https://github.com/luxfi/node/blob/main/vms/avm/plugins/swap/swap_fx.go) - SwapFx plugin
 - [`plugins/swap/rpc.go`](https://github.com/luxfi/node/blob/main/vms/avm/plugins/swap/rpc.go) - RPC interface
 
-**M-Chain Signing**:
+**T-Chain Signing**:
 - Location: `~/work/lux/node/vms/mvm/`
-- [`vm.go`](https://github.com/luxfi/node/blob/main/vms/mvm/vm.go) - M-Chain VM
+- [`vm.go`](https://github.com/luxfi/node/blob/main/vms/mvm/vm.go) - T-Chain VM
 - [`service/mpc.go`](https://github.com/luxfi/node/blob/main/vms/mvm/service/mpc.go) - MPC signing coordination
 
 **SwapTx State Machine**:
@@ -228,7 +228,7 @@ const (
 )
 
 func (tx *SwapTx) Status() SwapStatus {
-    // Check if SwapSigTx exists on M-Chain
+    // Check if SwapSigTx exists on T-Chain
     if mproof := getLightClientProof(tx.SwapID); mproof != nil {
         if isExpired(tx) {
             return EXPIRED

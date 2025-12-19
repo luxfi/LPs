@@ -40,7 +40,7 @@ Lux Network mainnet network upgrade applies to **re-launching the original 3 cha
 | **Q-Chain** | Quantum-Resistant | ❌ New deployment | N/A (fresh chain) |
 | **B-Chain** | Cross-Chain Bridges | ❌ New deployment | N/A (future) |
 | **Z-Chain** | Zero-Knowledge Proofs | ❌ New deployment | N/A (future) |
-| **M-Chain** | TBD | ❌ New deployment | N/A (future) |
+| **T-Chain** | TBD | ❌ New deployment | N/A (future) |
 
 **Network upgrade applies to**: P, C, X chains only (original Avalanche-based chains)
 

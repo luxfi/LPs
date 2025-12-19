@@ -12,7 +12,7 @@ requires: 7014
 tags: [mpc, threshold-crypto]
 ---
 
-> **See also**: [LP-14](/docs/lp-14-m-chain-threshold-signatures-with-cgg21-uc-non-interactive-ecdsa/), [LP-13](/docs/lp-13-m-chain-decentralised-mpc-custody-and-swap-signature-layer/), [LP-INDEX](/docs/)
+> **See also**: [LP-14](/docs/lp-14-t-chain-threshold-signatures-with-cgg21-uc-non-interactive-ecdsa/), [LP-13](/docs/lp-13-t-chain-decentralised-mpc-custody-and-swap-signature-layer/), [LP-INDEX](/docs/)
 
 ## Abstract
 
@@ -218,7 +218,7 @@ type Config struct {
 ### Compatibility
 
 LSS integrates with existing Lux infrastructure:
-- Compatible with M-Chain for MPC operations
+- Compatible with T-Chain for MPC operations
 - Works alongside CGG21 for ECDSA when needed
 
 ## Specification
@@ -467,7 +467,7 @@ See LP-7330 for full ThresholdVM specification.
 - **LP-7014**: CMP/CGG21 Protocol (ECDSA threshold signatures)
 - **LP-7104**: FROST Protocol (Schnorr threshold signatures)
 - **LP-7330**: T-Chain ThresholdVM (VM integration)
-- **LP-13**: M-Chain Specification (uses LSS)
+- **LP-13**: T-Chain Specification (uses LSS)
 - **LP-15**: MPC Bridge Protocol
 
 ## Conclusion

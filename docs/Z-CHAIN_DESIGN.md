@@ -65,12 +65,12 @@ contract PrivateVoting {
 - Multi-asset privacy pools
 - Configurable anonymity sets
 
-## Integration with M-Chain (Money Chain)
+## Integration with T-Chain (Money Chain)
 
 ### Cross-Chain Privacy Flow
-1. **Asset Lock on M-Chain**
+1. **Asset Lock on T-Chain**
    - User initiates private transfer
-   - M-Chain locks assets via MPC
+   - T-Chain locks assets via MPC
 
 2. **Proof Generation on Z-Chain**
    - Generate ZK proof of ownership
@@ -78,7 +78,7 @@ contract PrivateVoting {
    - Encrypt recipient information
 
 3. **Settlement**
-   - M-Chain verifies Z-Chain proof
+   - T-Chain verifies Z-Chain proof
    - Assets released to shielded pool
    - Private transfer completed
 
@@ -187,7 +187,7 @@ pub struct ZChainVM {
 
 ### Staking
 - Minimum stake: 100,000 LUX
-- Must also validate M-Chain
+- Must also validate T-Chain
 - Additional rewards for proof generation
 
 ## Roadmap
@@ -195,7 +195,7 @@ pub struct ZChainVM {
 ### Phase 1: zkEVM (Q2 2025)
 - Basic zkEVM implementation
 - Simple private transfers
-- Integration with M-Chain
+- Integration with T-Chain
 
 ### Phase 2: FHE Integration (Q3 2025)
 - FHE primitive operations
@@ -221,4 +221,4 @@ pub struct ZChainVM {
 
 ## Conclusion
 
-The Z-Chain provides Lux Network with state-of-the-art privacy technology, enabling confidential transactions and computation while maintaining compatibility with existing infrastructure through the M-Chain bridge.
+The Z-Chain provides Lux Network with state-of-the-art privacy technology, enabling confidential transactions and computation while maintaining compatibility with existing infrastructure through the T-Chain bridge.

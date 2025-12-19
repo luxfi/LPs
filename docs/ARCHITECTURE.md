@@ -19,7 +19,7 @@ The Lux Network has evolved from its original Avalanche-inspired architecture to
 - **C-Chain**: Maintained EVM compatibility with upgrades
 - **A-Chain**: New AI/Attestation layer
 - **B-Chain**: New dedicated bridge chain
-- **M-Chain**: New MPC custody chain
+- **T-Chain**: New MPC custody chain
 - **Z-Chain**: New privacy layer
 - **G-Chain**: New universal oracle
 
@@ -41,7 +41,7 @@ The Lux Network now consists of eight specialized chains:
 │ • Hardware Registry │ • Threshold Sigs    │ • DeFi Protocols            │
 │ • Oracle Pricing    │ • Quantum-Safe      │ • NFT Standards             │
 ├─────────────────────┼─────────────────────┼─────────────────────────────┤
-│     M-Chain         │     Q-Chain         │         G-Chain             │
+│     T-Chain         │     Q-Chain         │         G-Chain             │
 │      (MPC)          │(Quantum/Platform)   │       (GraphQL)             │
 ├─────────────────────┼─────────────────────┼─────────────────────────────┤
 │ • CGG21 + Ringtail  │ • Quasar Consensus  │ • GraphQL API Layer         │
@@ -88,8 +88,8 @@ The C-Chain provides EVM-compatible smart contract execution:
 - **High Throughput**: Optimized for DeFi transaction volume
 - **Developer Friendly**: Standard Ethereum tooling
 
-### M-Chain (MPC Chain)
-The M-Chain provides decentralized custody and native swaps:
+### T-Chain (MPC Chain)
+The T-Chain provides decentralized custody and native swaps:
 
 - **CGG21 + Ringtail**: Quantum-extended threshold ECDSA
 - **Decentralized Custody**: No single party controls assets
@@ -157,7 +157,7 @@ All chains communicate via the Teleport Protocol and Warp Messaging:
 - **A-Chain ↔ All Chains**: Attestation verification for compute nodes
 - **B-Chain ↔ All Chains**: Asset bridging and transfers
 - **C-Chain ↔ X-Chain**: DeFi liquidity and order execution
-- **M-Chain ↔ B-Chain**: Coordinated custody for bridge operations
+- **T-Chain ↔ B-Chain**: Coordinated custody for bridge operations
 - **Q-Chain ↔ All Chains**: Platform management, validators, governance, and quantum-safe consensus
 - **Z-Chain ↔ All Chains**: Privacy proofs and confidential operations
 - **G-Chain ↔ All Chains**: Oracle data feeds and omnichain analytics
@@ -188,7 +188,7 @@ All chains communicate via the Teleport Protocol and Warp Messaging:
 
 1. **Economic Security**: Staked validators secure all chains
 2. **Cryptographic Security**: 
-   - CGG21 MPC (M-Chain)
+   - CGG21 MPC (T-Chain)
    - ZK-SNARKs/STARKs (Z-Chain)
    - TEE Attestation (A-Chain)
 3. **Hardware Security**: TEE and HSM integration
@@ -196,7 +196,7 @@ All chains communicate via the Teleport Protocol and Warp Messaging:
 
 ## Implementation Phases
 
-### Phase 1: M-Chain (In Progress)
+### Phase 1: T-Chain (In Progress)
 - Migrate from GG18 to CGG21 MPC
 - Implement Teleport Protocol
 - X-Chain settlement integration

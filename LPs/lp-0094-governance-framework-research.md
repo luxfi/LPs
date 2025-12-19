@@ -151,7 +151,7 @@ contract MultiChainGovernance {
         chainWeights[1] = ChainWeight(1, 30, address(0)); // C-Chain: 30%
         chainWeights[2] = ChainWeight(2, 25, address(0)); // X-Chain: 25%
         chainWeights[3] = ChainWeight(3, 20, address(0)); // P-Chain: 20%
-        chainWeights[4] = ChainWeight(4, 15, address(0)); // M-Chain: 15%
+        chainWeights[4] = ChainWeight(4, 15, address(0)); // T-Chain: 15%
         chainWeights[5] = ChainWeight(5, 10, address(0)); // Z-Chain: 10%
     }
     

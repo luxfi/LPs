@@ -20,7 +20,7 @@ This LP defines a standard interface for CREATE2 factory contracts on the Lux Ne
 
 Deterministic contract deployment is essential for:
 
-1. **Cross-Chain Consistency**: Deploy contracts to the same address on P-Chain, X-Chain, C-Chain, M-Chain, and Z-Chain
+1. **Cross-Chain Consistency**: Deploy contracts to the same address on P-Chain, X-Chain, C-Chain, T-Chain, and Z-Chain
 2. **Counterfactual Instantiation**: Interact with contracts before deployment
 3. **Gas Optimization**: Deploy contracts only when needed
 4. **Upgrade Patterns**: Predictable proxy addresses for upgradeable contracts

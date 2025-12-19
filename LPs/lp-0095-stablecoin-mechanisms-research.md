@@ -30,7 +30,7 @@ Native stablecoins are essential for:
 ### Stablecoin Usage in Ecosystem
 - **GitHub**: https://github.com/luxfi/stablecoin
 - **Status**: Research phase
-- **Current stables**: USDC, USDT bridged via M-Chain
+- **Current stables**: USDC, USDT bridged via T-Chain
 
 ### Related Systems
 ```typescript

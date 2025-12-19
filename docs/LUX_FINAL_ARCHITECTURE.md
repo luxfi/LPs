@@ -19,7 +19,7 @@
                     ┌───────────┴────────────┐
                     │   Specialized Chains   │
         ┌───────────┴────────┐      ┌────────┴───────────┐
-        │     M-Chain         │      │     Z-Chain        │
+        │     T-Chain         │      │     Z-Chain        │
         │  (Money/MPC Chain)  │      │  (Zero-Knowledge)  │
         ├─────────────────────┤      ├────────────────────┤
         │ • CGG21 MPC         │      │ • zkEVM/zkVM       │
@@ -36,7 +36,7 @@
 - **X-Chain**: High-speed asset transfers, settlement layer
 - **C-Chain**: EVM compatibility, smart contracts, DeFi
 
-### M-Chain (Money/MPC Chain)
+### T-Chain (Money/MPC Chain)
 **Purpose**: Secure cross-chain asset management and bridging
 
 **Core Functions**:
@@ -48,7 +48,7 @@
 
 **Key Features**:
 ```go
-// M-Chain Core Components
+// T-Chain Core Components
 type MChain struct {
     // MPC for distributed custody
     mpcManager      *CGG21Manager
@@ -72,7 +72,7 @@ type MChain struct {
 - **zkBridge**: Privacy-preserving cross-chain transfers
 - **FHE Support**: Fully homomorphic encryption for private computation
 - **AI Attestations**: TEE/SGX attestations for AI model integrity
-- **Proof Services**: Generate proofs for M-Chain and subnets
+- **Proof Services**: Generate proofs for T-Chain and subnets
 
 **Key Features**:
 ```rust
@@ -96,14 +96,14 @@ pub struct ZChain {
 
 ## Integration Architecture
 
-### M-Chain ↔ X-Chain Settlement
+### T-Chain ↔ X-Chain Settlement
 ```
-User Intent → M-Chain (MPC Lock) → X-Chain (Mint/Burn) → Destination
+User Intent → T-Chain (MPC Lock) → X-Chain (Mint/Burn) → Destination
 ```
 
-### M-Chain ↔ Z-Chain Privacy
+### T-Chain ↔ Z-Chain Privacy
 ```
-Private Transfer → Z-Chain (Generate Proof) → M-Chain (Verify & Execute)
+Private Transfer → Z-Chain (Generate Proof) → T-Chain (Verify & Execute)
 ```
 
 ### AI Subnet ↔ Z-Chain Attestation
@@ -113,7 +113,7 @@ AI Model → TEE Execution → Z-Chain (Attestation) → Subnet Verification
 
 ## Use Cases
 
-### 1. Standard Bridge Transfer (M-Chain)
+### 1. Standard Bridge Transfer (T-Chain)
 ```typescript
 // Public cross-chain transfer
 async function bridgeAssets() {
@@ -124,12 +124,12 @@ async function bridgeAssets() {
         to: "lux-c-chain"
     });
     
-    // M-Chain handles MPC signing and X-Chain settlement
+    // T-Chain handles MPC signing and X-Chain settlement
     await mChain.waitForSettlement(transfer.id);
 }
 ```
 
-### 2. Private Bridge Transfer (M-Chain + Z-Chain)
+### 2. Private Bridge Transfer (T-Chain + Z-Chain)
 ```typescript
 // Private cross-chain transfer
 async function privateBridgeAssets() {
@@ -139,7 +139,7 @@ async function privateBridgeAssets() {
         recipient: stealthAddress
     });
     
-    // Z-Chain generates proof, M-Chain executes
+    // Z-Chain generates proof, T-Chain executes
     const proof = await zChain.generateTransferProof(privateTransfer);
     await mChain.executePrivateTransfer(proof);
 }
@@ -162,7 +162,7 @@ async function attestAIModel() {
 
 ## Validator Architecture
 
-### M-Chain Validators
+### T-Chain Validators
 - **Requirement**: Top 100 LUX stakers who opt-in
 - **Responsibilities**: 
   - Run MPC nodes for key shares
@@ -171,7 +171,7 @@ async function attestAIModel() {
 - **Rewards**: Share of bridge fees
 
 ### Z-Chain Validators
-- **Requirement**: Subset of M-Chain validators with privacy hardware
+- **Requirement**: Subset of T-Chain validators with privacy hardware
 - **Responsibilities**:
   - Generate ZK proofs
   - Run FHE computations
@@ -180,7 +180,7 @@ async function attestAIModel() {
 
 ## Security Model
 
-### M-Chain Security
+### T-Chain Security
 - **Economic**: 2/3+ of top 100 validators required
 - **Cryptographic**: CGG21 threshold signatures
 - **Operational**: Regular key rotation
@@ -200,7 +200,7 @@ async function attestAIModel() {
 
 ## Implementation Priority
 
-1. **Phase 1**: Launch M-Chain
+1. **Phase 1**: Launch T-Chain
    - Migrate bridge from GG18 to CGG21
    - Implement Teleport Protocol
    - X-Chain settlement integration
@@ -217,7 +217,7 @@ async function attestAIModel() {
 
 ## Conclusion
 
-This streamlined architecture with just M-Chain and Z-Chain provides all necessary functionality:
-- M-Chain handles all money/asset operations with MPC security
+This streamlined architecture with just T-Chain and Z-Chain provides all necessary functionality:
+- T-Chain handles all money/asset operations with MPC security
 - Z-Chain provides privacy, proofs, and attestations for AI and other use cases
 - Together they enable secure, private, and attestable cross-chain operations while keeping the system simple and maintainable

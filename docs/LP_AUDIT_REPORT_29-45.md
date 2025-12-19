@@ -95,7 +95,7 @@
 
 ## Files with Issues (3)
 
-### 1. **lp-37.md** - Native Swap Integration on M-Chain, X-Chain, and Z-Chain
+### 1. **lp-37.md** - Native Swap Integration on T-Chain, X-Chain, and Z-Chain
 
 **Status**: ⚠️ **CRITICAL ISSUE - Duplicate/Malformed Content**
 

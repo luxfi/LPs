@@ -11,7 +11,7 @@ category: Core
 created: 2025-01-23
 ---
 
-> **See also**: [LP-0](/docs/lp-0-network-architecture-and-community-framework/), [LP-10](/docs/lp-10-p-chain-platform-chain-specification-deprecated/), [LP-11](/docs/lp-11-x-chain-exchange-chain-specification/), [LP-13](/docs/lp-13-m-chain-decentralised-mpc-custody-and-swap-signature-layer/), [LP-INDEX](/docs/)
+> **See also**: [LP-0](/docs/lp-0-network-architecture-and-community-framework/), [LP-10](/docs/lp-10-p-chain-platfort-chain-specification-deprecated/), [LP-11](/docs/lp-11-x-chain-exchange-chain-specification/), [LP-13](/docs/lp-13-t-chain-decentralised-mpc-custody-and-swap-signature-layer/), [LP-INDEX](/docs/)
 
 ## Abstract
 

@@ -2830,8 +2830,8 @@ MAX_DELAY = 30 days
 
 ### Related LPs
 
-- **[LP-0013](/docs/lp-7013-m-chain-decentralised-mpc-custody-and-swap-signature-layer/)**: M-Chain Specification (legacy MPC custody layer)
-- **[LP-0014](/docs/lp-7014-m-chain-threshold-signatures-with-cgg21-uc-non-interactive-ecdsa/)**: M-Chain Threshold Signatures (CGG21 protocol)
+- **[LP-0013](/docs/lp-7013-t-chain-decentralised-mpc-custody-and-swap-signature-layer/)**: T-Chain Specification (legacy MPC custody layer)
+- **[LP-0014](/docs/lp-7014-t-chain-threshold-signatures-with-cgg21-uc-non-interactive-ecdsa/)**: T-Chain Threshold Signatures (CGG21 protocol)
 - **[LP-0015](/docs/lp-6015-mpc-bridge-protocol/)**: MPC Bridge Protocol (bridge protocol overview)
 - **[LP-0017](/docs/lp-6017-bridge-asset-registry/)**: Bridge Asset Registry (asset tracking)
 - **[LP-0019](/docs/lp-6019-bridge-security-framework/)**: Bridge Security Framework (security requirements)

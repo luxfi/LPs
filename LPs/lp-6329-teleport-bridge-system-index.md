@@ -63,7 +63,7 @@ Chain Legend:
 - P,X,C,Q,T,B: Live at mainnet launch
 - A,Z: Experimental (A behind flag on mainnet, Z devnet-only)
 - K,I: Specification phase, seeking RFC approval
-- No M-Chain: P-Chain/X-Chain provide native multisig
+- No T-Chain: P-Chain/X-Chain provide native multisig
 - No Relayers: B-Chain validators handle cross-chain observation
 ```markdown
 
@@ -129,8 +129,8 @@ Chain Legend:
 
 | LP | Title | Description |
 |----|-------|-------------|
-| [LP-13](/docs/lp-7013-m-chain-decentralised-mpc-custody-and-swap-signature-layer/) | M-Chain MPC Custody | Original MPC custody and swap signature layer |
-| [LP-14](/docs/lp-7014-m-chain-threshold-signatures-with-cgg21-uc-non-interactive-ecdsa/) | CGG21 Threshold ECDSA | UC non-interactive threshold ECDSA with identifiable aborts |
+| [LP-13](/docs/lp-7013-t-chain-decentralised-mpc-custody-and-swap-signature-layer/) | T-Chain MPC Custody | Original MPC custody and swap signature layer |
+| [LP-14](/docs/lp-7014-t-chain-threshold-signatures-with-cgg21-uc-non-interactive-ecdsa/) | CGG21 Threshold ECDSA | UC non-interactive threshold ECDSA with identifiable aborts |
 | [LP-103](/docs/lp-7103-mpc-lss---multi-party-computation-linear-secret-sharing-with-dynamic-resharing/) | LSS Protocol | Linear Secret Sharing with dynamic resharing |
 | [LP-104](/docs/lp-7104-frost---flexible-round-optimized-schnorr-threshold-signatures-for-eddsa/) | FROST | Flexible Round-Optimized Schnorr Threshold Signatures |
 

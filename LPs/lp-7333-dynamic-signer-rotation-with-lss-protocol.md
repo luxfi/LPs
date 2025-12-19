@@ -16,7 +16,7 @@ activation:
 tags: [mpc, threshold-crypto, bridge]
 ---
 
-> **See also**: [LP-103](/docs/lp-7103-mpc-lss---multi-party-computation-linear-secret-sharing-with-dynamic-resharing/), [LP-323](/docs/lp-7323-lss-mpc-dynamic-resharing-extension/), [LP-14](/docs/lp-7014-m-chain-threshold-signatures-with-cgg21-uc-non-interactive-ecdsa/), [LP-330](/docs/lp-7330-t-chain-thresholdvm-specification/), [LP-334](/docs/lp-7334-per-asset-threshold-key-management/), [LP-INDEX](/docs/)
+> **See also**: [LP-103](/docs/lp-7103-mpc-lss---multi-party-computation-linear-secret-sharing-with-dynamic-resharing/), [LP-323](/docs/lp-7323-lss-mpc-dynamic-resharing-extension/), [LP-14](/docs/lp-7014-t-chain-threshold-signatures-with-cgg21-uc-non-interactive-ecdsa/), [LP-330](/docs/lp-7330-t-chain-thresholdvm-specification/), [LP-334](/docs/lp-7334-per-asset-threshold-key-management/), [LP-INDEX](/docs/)
 
 ## Abstract
 
@@ -3126,7 +3126,7 @@ This LP integrates with several related Lux Protocol specifications:
 | LP | Title | Relationship |
 |----|-------|--------------|
 | [LP-0103](/docs/lp-7103-mpc-lss---multi-party-computation-linear-secret-sharing-with-dynamic-resharing/) | MPC LSS | Core LSS mathematics and protocol foundation |
-| [LP-0014](/docs/lp-7014-m-chain-threshold-signatures-with-cgg21-uc-non-interactive-ecdsa/) | CGG21 ECDSA | Threshold ECDSA signing protocol used after reshare |
+| [LP-0014](/docs/lp-7014-t-chain-threshold-signatures-with-cgg21-uc-non-interactive-ecdsa/) | CGG21 ECDSA | Threshold ECDSA signing protocol used after reshare |
 | [LP-0323](/docs/lp-7323-lss-mpc-dynamic-resharing-extension/) | LSS Dynamic Resharing | Extended reshare protocol specification |
 | [LP-0330](/docs/lp-7330-t-chain-thresholdvm-specification/) | T-Chain ThresholdVM | VM that executes reshare transactions |
 | [LP-0334](/docs/lp-7334-per-asset-threshold-key-management/) | Per-Asset Keys | Key configuration and threshold selection |
