@@ -9,7 +9,7 @@ type: Standards Track
 category: Core
 created: 2025-01-29
 requires: 110
-tags: [consensus]
+tags: [consensus, photon, vrf, proposer-selection, luminance, validators]
 ---
 
 ## Abstract

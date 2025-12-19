@@ -80,13 +80,13 @@ const LP_TOPICS: CategoryMeta[] = [
     slug: 'consensus',
     name: 'Consensus Systems',
     shortDesc: 'Agreement & finality',
-    description: 'Agreement, finality, and validator coordination. Photon selection, Flare DAG, Quasar sub-second finality, epoching, and block timing.',
+    description: 'Agreement, finality, and validator coordination. Quasar unified consensus with Photon selection, Wave/FPC voting, Focus convergence, Prism geometry, Horizon predicates, and Flare finalization.',
     range: [100, 199],
-    tags: ['consensus', 'photon', 'flare', 'quasar', 'snowman', 'finality', 'bft', 'validators', 'epoching', 'block-timing', 'sequencer', 'parallel-validation'],
+    tags: ['consensus', 'photon', 'flare', 'quasar', 'wave', 'fpc', 'focus', 'horizon', 'prism', 'snowman', 'finality', 'bft', 'validators', 'epoching', 'block-timing', 'sequencer', 'parallel-validation'],
     icon: 'consensus',
     color: 'purple',
     learnMore: 'Consensus is the physics engine of the network — who agrees and when. Lux achieves sub-second finality with Quasar.',
-    keyTopics: ['Photon selection', 'Flare DAG', 'Quasar finality', 'Epoching', 'Validator rotation'],
+    keyTopics: ['Quasar unified protocol', 'Photon VRF selection', 'Wave/FPC voting', 'Focus convergence', 'Prism DAG geometry', 'Horizon predicates', 'Flare finalization'],
   },
 
   // ============================================================

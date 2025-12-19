@@ -9,7 +9,7 @@ type: Standards Track
 category: Core
 created: 2025-01-29
 requires: 110, 111
-tags: [consensus]
+tags: [consensus, flare, dag, finalization, bft, causal-ordering]
 ---
 
 ## Abstract
