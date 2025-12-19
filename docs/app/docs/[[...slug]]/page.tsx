@@ -2,6 +2,7 @@ import { source } from '@/lib/source';
 import { notFound } from 'next/navigation';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
+import rehypeHighlight from 'rehype-highlight';
 import Link from 'next/link';
 import { ArrowLeft, ArrowRight, ExternalLink, Calendar, User, Tag } from 'lucide-react';
 import { DocsPage, DocsBody } from '@hanzo/docs/ui/page';
@@ -300,6 +301,7 @@ function LPDetailPage({ page }: { page: any }) {
       <DocsBody>
         <ReactMarkdown
           remarkPlugins={[remarkGfm]}
+          rehypePlugins={[rehypeHighlight]}
           components={markdownComponents}
         >
           {page.data.content}
