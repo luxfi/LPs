@@ -2,6 +2,7 @@ import Link from 'next/link';
 import { Logo } from '../../components/logo';
 import {
   FileText,
+  GitFork,
   GitPullRequest,
   MessageSquare,
   CheckCircle,
@@ -11,6 +12,12 @@ import {
   BookOpen,
   AlertCircle,
   Clock,
+  Github,
+  Twitter,
+  Radio,
+  Users,
+  FileQuestion,
+  Layers,
 } from 'lucide-react';
 
 export const metadata = {
@@ -43,10 +50,141 @@ export default function ContributePage() {
       <section className="py-16 px-4 border-b border-border">
         <div className="container mx-auto max-w-4xl">
           <h1 className="text-4xl font-bold mb-4">Contributing to Lux Proposals</h1>
-          <p className="text-xl text-muted-foreground">
+          <p className="text-xl text-muted-foreground mb-8">
             Help shape the future of the Lux Network by submitting proposals,
             reviewing drafts, and participating in discussions.
           </p>
+
+          {/* Primary Action Buttons */}
+          <div className="flex flex-wrap gap-4">
+            <a
+              href="https://github.com/luxfi/lps/fork"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 px-6 py-3 bg-foreground text-background rounded-lg font-semibold hover:bg-foreground/90 transition-colors"
+            >
+              <GitFork className="size-5" />
+              Fork Repository
+            </a>
+            <a
+              href="https://github.com/luxfi/lps/discussions"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 px-6 py-3 border border-border rounded-lg font-semibold hover:bg-card transition-colors"
+            >
+              <MessageSquare className="size-5" />
+              Join Discussions
+            </a>
+            <a
+              href="https://discord.gg/luxfi"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 px-6 py-3 border border-border rounded-lg font-semibold hover:bg-card transition-colors"
+            >
+              <Users className="size-5" />
+              Discord
+            </a>
+          </div>
+        </div>
+      </section>
+
+      {/* Get Involved - Quick Actions */}
+      <section className="py-12 px-4 bg-card border-b border-border">
+        <div className="container mx-auto max-w-4xl">
+          <h2 className="text-xl font-bold mb-6">Get Involved</h2>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            <a
+              href="https://github.com/luxfi/lps/fork"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-3 p-4 rounded-lg border border-border bg-background hover:border-foreground/30 transition-colors group"
+            >
+              <GitFork className="size-6 text-muted-foreground group-hover:text-foreground transition-colors" />
+              <div>
+                <div className="font-semibold">Fork & Contribute</div>
+                <div className="text-xs text-muted-foreground">Start your proposal</div>
+              </div>
+            </a>
+            <a
+              href="https://github.com/luxfi/lps/discussions"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-3 p-4 rounded-lg border border-border bg-background hover:border-foreground/30 transition-colors group"
+            >
+              <Github className="size-6 text-muted-foreground group-hover:text-foreground transition-colors" />
+              <div>
+                <div className="font-semibold">Discussions</div>
+                <div className="text-xs text-muted-foreground">Ask questions, share ideas</div>
+              </div>
+            </a>
+            <a
+              href="https://github.com/luxfi/lps/issues/new"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-3 p-4 rounded-lg border border-border bg-background hover:border-foreground/30 transition-colors group"
+            >
+              <AlertCircle className="size-6 text-muted-foreground group-hover:text-foreground transition-colors" />
+              <div>
+                <div className="font-semibold">Open Issue</div>
+                <div className="text-xs text-muted-foreground">Report or suggest</div>
+              </div>
+            </a>
+            <a
+              href="https://github.com/luxfi/lps/blob/main/docs/TAXONOMY.md"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-3 p-4 rounded-lg border border-border bg-background hover:border-foreground/30 transition-colors group"
+            >
+              <Layers className="size-6 text-muted-foreground group-hover:text-foreground transition-colors" />
+              <div>
+                <div className="font-semibold">Taxonomy</div>
+                <div className="text-xs text-muted-foreground">LP categories guide</div>
+              </div>
+            </a>
+          </div>
+
+          {/* Social Links */}
+          <div className="mt-6 pt-6 border-t border-border">
+            <div className="flex flex-wrap items-center gap-4">
+              <span className="text-sm text-muted-foreground">Follow us:</span>
+              <a
+                href="https://warpcast.com/~/channel/lux"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
+              >
+                <Radio className="size-4" />
+                Warpcast
+              </a>
+              <a
+                href="https://twitter.com/luxdefi"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
+              >
+                <Twitter className="size-4" />
+                @luxdefi
+              </a>
+              <a
+                href="https://github.com/luxfi"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
+              >
+                <Github className="size-4" />
+                GitHub
+              </a>
+              <a
+                href="https://discord.gg/luxfi"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
+              >
+                <Users className="size-4" />
+                Discord
+              </a>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -299,29 +437,68 @@ created: <YYYY-MM-DD>
         <div className="container mx-auto max-w-4xl">
           <h2 className="text-2xl font-bold mb-8">Resources</h2>
 
-          <div className="grid md:grid-cols-3 gap-4">
+          <div className="grid md:grid-cols-3 gap-4 mb-6">
             <a
-              href="https://github.com/luxfi/lps"
+              href="https://github.com/luxfi/lps/fork"
               target="_blank"
               rel="noopener noreferrer"
               className="p-6 rounded-lg border border-border hover:border-foreground/20 transition-colors group"
             >
-              <GitPullRequest className="size-8 mb-4 text-muted-foreground group-hover:text-foreground transition-colors" />
-              <h3 className="font-semibold mb-2">GitHub Repository</h3>
+              <GitFork className="size-8 mb-4 text-muted-foreground group-hover:text-foreground transition-colors" />
+              <h3 className="font-semibold mb-2">Fork Repository</h3>
               <p className="text-sm text-muted-foreground">
-                View source, submit PRs, and track issues
+                Start contributing by forking the LPs repo
               </p>
             </a>
             <a
-              href="https://forum.lux.network"
+              href="https://github.com/luxfi/lps/discussions"
               target="_blank"
               rel="noopener noreferrer"
               className="p-6 rounded-lg border border-border hover:border-foreground/20 transition-colors group"
             >
               <MessageSquare className="size-8 mb-4 text-muted-foreground group-hover:text-foreground transition-colors" />
-              <h3 className="font-semibold mb-2">Discussion Forum</h3>
+              <h3 className="font-semibold mb-2">GitHub Discussions</h3>
               <p className="text-sm text-muted-foreground">
-                Discuss proposals and gather community feedback
+                Discuss proposals, ask questions, share ideas
+              </p>
+            </a>
+            <a
+              href="https://discord.gg/luxfi"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="p-6 rounded-lg border border-border hover:border-foreground/20 transition-colors group"
+            >
+              <Users className="size-8 mb-4 text-muted-foreground group-hover:text-foreground transition-colors" />
+              <h3 className="font-semibold mb-2">Discord Community</h3>
+              <p className="text-sm text-muted-foreground">
+                Real-time chat with developers and community
+              </p>
+            </a>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-4">
+            <a
+              href="https://github.com/luxfi/lps/blob/main/docs/TAXONOMY.md"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="p-6 rounded-lg border border-border hover:border-foreground/20 transition-colors group"
+            >
+              <Layers className="size-8 mb-4 text-muted-foreground group-hover:text-foreground transition-colors" />
+              <h3 className="font-semibold mb-2">LP Taxonomy</h3>
+              <p className="text-sm text-muted-foreground">
+                Understand LP categories and research domains
+              </p>
+            </a>
+            <a
+              href="https://github.com/luxfi/lps/blob/main/docs/FAQ.md"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="p-6 rounded-lg border border-border hover:border-foreground/20 transition-colors group"
+            >
+              <FileQuestion className="size-8 mb-4 text-muted-foreground group-hover:text-foreground transition-colors" />
+              <h3 className="font-semibold mb-2">FAQ</h3>
+              <p className="text-sm text-muted-foreground">
+                Common questions about LPs and process
               </p>
             </a>
             <a
@@ -342,21 +519,32 @@ created: <YYYY-MM-DD>
 
       {/* Footer */}
       <footer className="py-8 px-4 border-t border-border">
-        <div className="container mx-auto flex items-center justify-between text-sm text-muted-foreground">
-          <div className="flex items-center gap-2">
-            <Logo size={20} variant="white" />
-            <span>Lux Network</span>
-          </div>
-          <div className="flex items-center gap-6">
-            <Link href="/" className="hover:text-foreground">
-              Home
-            </Link>
-            <Link href="/docs" className="hover:text-foreground">
-              Browse LPs
-            </Link>
-            <a href="https://github.com/luxfi/lps" target="_blank" rel="noopener noreferrer" className="hover:text-foreground">
-              GitHub
-            </a>
+        <div className="container mx-auto">
+          <div className="flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-muted-foreground">
+            <div className="flex items-center gap-2">
+              <Logo size={20} variant="white" />
+              <span>Lux Network</span>
+            </div>
+            <div className="flex flex-wrap items-center justify-center gap-6">
+              <Link href="/" className="hover:text-foreground transition-colors">
+                Home
+              </Link>
+              <Link href="/docs" className="hover:text-foreground transition-colors">
+                Browse LPs
+              </Link>
+              <a href="https://github.com/luxfi/lps/discussions" target="_blank" rel="noopener noreferrer" className="hover:text-foreground transition-colors">
+                Discussions
+              </a>
+              <a href="https://github.com/luxfi/lps" target="_blank" rel="noopener noreferrer" className="hover:text-foreground transition-colors">
+                GitHub
+              </a>
+              <a href="https://discord.gg/luxfi" target="_blank" rel="noopener noreferrer" className="hover:text-foreground transition-colors">
+                Discord
+              </a>
+              <a href="https://twitter.com/luxdefi" target="_blank" rel="noopener noreferrer" className="hover:text-foreground transition-colors">
+                @luxdefi
+              </a>
+            </div>
           </div>
         </div>
       </footer>
