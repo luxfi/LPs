@@ -61,12 +61,10 @@ export function SiteHeader({ showBrowse = true, showFork = false, showDiscuss = 
         <div className="flex items-center gap-2">
           <button
             onClick={handleSearchClick}
-            className="inline-flex h-8 items-center justify-center gap-2 rounded-md border border-border px-2 text-sm text-muted-foreground transition-colors hover:bg-muted hover:text-foreground sm:w-40 sm:justify-start sm:px-3"
+            className="inline-flex h-8 w-8 items-center justify-center rounded-md text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
             title="Search (⌘K)"
           >
             <Search className="h-4 w-4" />
-            <span className="hidden sm:inline">Search...</span>
-            <kbd className="ml-auto hidden rounded bg-muted px-1.5 py-0.5 text-[10px] font-medium sm:inline">⌘K</kbd>
           </button>
           {showDiscuss && (
             <a
