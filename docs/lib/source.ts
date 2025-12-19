@@ -439,32 +439,39 @@ function getLPNumber(page: LPPage): number {
   return 9999;
 }
 
-// Check if an LP matches a topic via tags or number range
-// NOTE: contentMatch is disabled - too aggressive and matches unrelated LPs
-function lpMatchesTopic(page: LPPage, topic: CategoryMeta): boolean {
+// Determine the PRIMARY category for an LP (each LP belongs to exactly ONE category)
+// Priority: 1) Frontmatter category, 2) Tag match, 3) Number range
+function getPrimaryCategory(page: LPPage): string | null {
   const lpNum = getLPNumber(page);
   const lpTags = (page.data.frontmatter.tags || []).map((t: string) => t.toLowerCase());
   const lpCategory = (page.data.frontmatter.category || '').toLowerCase();
 
-  // Check number range
-  if (topic.range && lpNum >= topic.range[0] && lpNum <= topic.range[1]) {
-    return true;
+  // Priority 1: Explicit frontmatter category
+  if (lpCategory) {
+    const exactMatch = LP_TOPICS.find(t =>
+      t.slug === lpCategory || t.name.toLowerCase() === lpCategory
+    );
+    if (exactMatch) return exactMatch.slug;
   }
 
-  // Check tags overlap
-  if (topic.tags) {
-    const topicTags = topic.tags.map(t => t.toLowerCase());
-    if (lpTags.some(t => topicTags.includes(t))) {
-      return true;
+  // Priority 2: Tag match (first matching tag wins)
+  for (const topic of LP_TOPICS) {
+    if (topic.tags) {
+      const topicTags = topic.tags.map(t => t.toLowerCase());
+      if (lpTags.some(t => topicTags.includes(t))) {
+        return topic.slug;
+      }
     }
   }
 
-  // Check frontmatter category matches topic slug or name
-  if (lpCategory === topic.slug || lpCategory === topic.name.toLowerCase()) {
-    return true;
+  // Priority 3: Number range
+  for (const topic of LP_TOPICS) {
+    if (topic.range && lpNum >= topic.range[0] && lpNum <= topic.range[1]) {
+      return topic.slug;
+    }
   }
 
-  return false;
+  return null;
 }
 
 export const source = {
@@ -615,24 +622,48 @@ export const source = {
   },
 
   // Get categorized pages using topics (tag-based + range-based)
+  // DEDUPLICATED: Each LP appears in exactly ONE category based on priority
   getCategorizedPages(): LPCategory[] {
     const allPages = this.getAllPages();
+
+    // Group LPs by their primary category (each LP in exactly one category)
+    const lpsByCategory = new Map<string, LPPage[]>();
+    LP_TOPICS.forEach(topic => lpsByCategory.set(topic.slug, []));
+
+    allPages.forEach(page => {
+      const primaryCat = getPrimaryCategory(page);
+      if (primaryCat && lpsByCategory.has(primaryCat)) {
+        lpsByCategory.get(primaryCat)!.push(page);
+      }
+    });
 
     return LP_TOPICS.map(topic => ({
       ...topic,
       description: topic.shortDesc,
-      lps: allPages.filter(page => lpMatchesTopic(page, topic)),
+      lps: lpsByCategory.get(topic.slug) || [],
     })).filter(cat => cat.lps.length > 0);
   },
 
   // Get all topics including empty ones
+  // DEDUPLICATED: Each LP appears in exactly ONE category based on priority
   getAllTopics(): LPCategory[] {
     const allPages = this.getAllPages();
+
+    // Group LPs by their primary category (each LP in exactly one category)
+    const lpsByCategory = new Map<string, LPPage[]>();
+    LP_TOPICS.forEach(topic => lpsByCategory.set(topic.slug, []));
+
+    allPages.forEach(page => {
+      const primaryCat = getPrimaryCategory(page);
+      if (primaryCat && lpsByCategory.has(primaryCat)) {
+        lpsByCategory.get(primaryCat)!.push(page);
+      }
+    });
 
     return LP_TOPICS.map(topic => ({
       ...topic,
       description: topic.shortDesc,
-      lps: allPages.filter(page => lpMatchesTopic(page, topic)),
+      lps: lpsByCategory.get(topic.slug) || [],
     }));
   },
 
@@ -652,15 +683,20 @@ export const source = {
   },
 
   // Get topic/category by slug (checks both topics and legacy categories)
+  // DEDUPLICATED: Each LP appears in exactly ONE category based on priority
   getCategoryBySlug(slug: string): LPCategory | undefined {
-    const allPages = this.getAllPages();
     const topic = LP_TOPICS.find(t => t.slug === slug);
     if (!topic) return undefined;
+
+    const allPages = this.getAllPages();
+
+    // Filter LPs where this category is their PRIMARY category
+    const lps = allPages.filter(page => getPrimaryCategory(page) === slug);
 
     return {
       ...topic,
       description: topic.shortDesc,
-      lps: allPages.filter(page => lpMatchesTopic(page, topic)),
+      lps,
     };
   },
 
@@ -706,9 +742,9 @@ export const source = {
       byType[type] = (byType[type] || 0) + 1;
     });
 
-    // Count by topic
+    // Count by topic (deduplicated - each LP counted once)
     LP_TOPICS.forEach(topic => {
-      byTopic[topic.slug] = pages.filter(p => lpMatchesTopic(p, topic)).length;
+      byTopic[topic.slug] = pages.filter(p => getPrimaryCategory(p) === topic.slug).length;
     });
 
     return { total: pages.length, byStatus, byType, byTopic };
