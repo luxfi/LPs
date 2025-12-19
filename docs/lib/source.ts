@@ -160,13 +160,13 @@ const LP_CATEGORIES: CategoryMeta[] = [
   },
   {
     slug: 'platform',
-    name: 'Platform Chain (D-Chain)',
+    name: 'Platform Chain (P-Chain)',
     shortDesc: 'Platform layer specifications',
-    description: 'Specifications for the D-Chain (Platform Chain) including validator management, staking, delegation, and subnet creation. The D-Chain coordinates the entire Lux Network.',
+    description: 'Specifications for the P-Chain (Platform Chain) including validator management, staking, delegation, and subnet creation. The P-Chain coordinates the entire Lux Network.',
     range: [1000, 1999],
     icon: 'platform',
     color: 'violet',
-    learnMore: 'D-Chain is the metadata blockchain that coordinates validators, subnets, and staking across the Lux Network. It manages the lifecycle of all other chains.',
+    learnMore: 'P-Chain is the metadata blockchain that coordinates validators, subnets, and staking across the Lux Network. It manages the lifecycle of all other chains.',
     keyTopics: ['Validator management', 'Staking mechanics', 'Subnet creation', 'Delegation'],
   },
   {
