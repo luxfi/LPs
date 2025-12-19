@@ -360,7 +360,7 @@ LPs for developer tooling, SDKs, and APIs.
 | [LP-0042](/docs/lp-0042-multi-signature-wallet-standard/) | Multi-Signature Wallet Standard | `tools`, `wallet`, `multisig` | Draft |
 | [LP-0050](/docs/lp-0050-developer-tools-overview/) | Developer Tools Overview | `tools`, `overview` | Draft |
 | [LP-0325](/docs/lp-0325-kms-hardware-security-module-integration/) | KMS/HSM Integration | `tools`, `security`, `hsm` | Draft |
-| [LP-0326](/docs/lp-0326-blockchain-regenesis-and-state-migration/) | Blockchain Regenesis and Migration | `tools`, `migration` | Draft |
+| [LP-0326](/docs/lp-0326-blockchain-network upgrade-and-state-migration/) | Blockchain Regenesis and Migration | `tools`, `migration` | Draft |
 | [LP-0327](/docs/lp-0327-badgerdb-verkle-optimization/) | BadgerDB Verkle Optimization | `tools`, `database`, `verkle` | Draft |
 | [LP-0341](/docs/lp-0341-decentralized-secrets-management-infisical-integration/) | Decentralized Secrets Management | `tools`, `secrets`, `security` | Draft |
 

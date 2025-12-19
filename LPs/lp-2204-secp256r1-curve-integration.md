@@ -373,7 +373,7 @@ func SignWithCorpIdentity(userToken, txData []byte) (r, s *big.Int, err error) {
 - **A-Chain (AI VM)**: AI agents sign operations with secp256r1 device keys
 - **B-Chain (Bridge VM)**: Cross-chain messages authenticated via device signatures
 - **C-Chain (EVM)**: Primary implementation of precompile
-- **D-Chain (Platform)**: Validator registration via enterprise HSMs
+- **P-Chain (Platform)**: Validator registration via enterprise HSMs
 - **Z-Chain (ZK VM)**: Zero-knowledge proofs of device-based authentication
 
 **Unified Identity Across Chains**:
@@ -464,8 +464,8 @@ contract QuantumSafeWallet {
 }
 ```text
 
-**Y-Chain Integration**:
-- Y-Chain quantum state manager can orchestrate migration
+** Integration**:
+-  quantum state manager can orchestrate migration
 - Epoch-based transitions (coordinate with LP-181)
 - Gradual rollout to prevent disruption
 

@@ -28,12 +28,12 @@ LP-181 adopts ACP-181's P-Chain epoching scheme for the Lux Network, enabling op
 
 ## Lux Network Context
 
-The Lux Network's multi-chain architecture (including the 6-chain regenesis: A-Chain, B-Chain, C-Chain, D-Chain, Y-Chain, Z-Chain) benefits from epoched P-Chain views through:
+The Lux Network's multi-chain architecture (including the 6-chain network upgrade: A-Chain, B-Chain, C-Chain, P-Chain, X-Chain, Z-Chain) benefits from epoched P-Chain views through:
 
 1. **Optimized Cross-Chain Operations**: Improved communication between chains in the Lux ecosystem
 2. **Reduced Gas Costs**: Significant reduction in ICM verification costs across all chains
 3. **Enhanced Validator Coordination**: Better synchronization across the expanded chain set
-4. **Quantum-Safe Preparation**: Foundation for Y-Chain quantum state management integration
+4. **Quantum-Safe Preparation**: Foundation for  quantum state management integration
 
 ## Motivation
 
@@ -51,12 +51,12 @@ Epoching enables:
 
 An epoch is a contiguous range of blocks sharing:
 - **Epoch Number**: Sequential integer identifier
-- **Epoch P-Chain Height**: Fixed D-Chain (Platform Chain) height for the epoch
+- **Epoch P-Chain Height**: Fixed P-Chain (Platform Chain) height for the epoch
 - **Epoch Start Time**: Timestamp marking epoch beginning
 
 Let $E_N$ denote epoch $N$ with:
 - Start time: $T_{start}^N$
-- D-Chain height: $P_N$ (P-Chain is D-Chain in Lux regenesis)
+- P-Chain height: $P_N$ (Platform Chain)
 - Duration constant: $D$ (configured at network upgrade activation)
 
 ### Epoch Lifecycle
@@ -64,7 +64,7 @@ Let $E_N$ denote epoch $N$ with:
 **Epoch Sealing**: An epoch $E_N$ is sealed by the first block with timestamp $t \geq T_{start}^N + D$.
 
 **Epoch Advancement**: When block $B_{S_N}$ seals epoch $E_N$, the next block begins $E_{N+1}$ with:
-- $P_{N+1}$ = D-Chain height of $B_{S_N}$
+- $P_{N+1}$ = P-Chain height of $B_{S_N}$
 - $T_{start}^{N+1}$ = timestamp of $B_{S_N}$
 - Epoch number increments by 1
 
@@ -75,14 +75,14 @@ Let $E_N$ denote epoch $N$ with:
 const D time.Duration // Configured at upgrade activation
 
 type Epoch struct {
-    DChainHeight uint64    // P-Chain → D-Chain in Lux
+    PChainHeight uint64    // Platform Chain
     Number       uint64
     StartTime    time.Time
 }
 
 type Block interface {
     Timestamp() time.Time
-    DChainHeight() uint64  // Renamed from PChainHeight
+    PChainHeight() uint64  // Renamed from PChainHeight
     Epoch() Epoch
 }
 
@@ -90,7 +90,7 @@ func GetDChainEpoch(parent Block) Epoch {
     if parent.Timestamp().After(parent.Epoch().StartTime.Add(D)) {
         // Parent sealed its epoch - advance to next epoch
         return Epoch{
-            DChainHeight: parent.DChainHeight(),
+            PChainHeight: parent.PChainHeight(),
             Number:       parent.Epoch().Number + 1,
             StartTime:    parent.Timestamp(),
         }
@@ -98,7 +98,7 @@ func GetDChainEpoch(parent Block) Epoch {
     
     // Continue current epoch
     return Epoch{
-        DChainHeight: parent.Epoch().DChainHeight,
+        PChainHeight: parent.Epoch().PChainHeight,
         Number:       parent.Epoch().Number,
         StartTime:    parent.Epoch().StartTime,
     }
@@ -109,17 +109,17 @@ func GetDChainEpoch(parent Block) Epoch {
 
 ### Multi-Chain Integration
 
-**D-Chain (Platform Chain)**:
+**P-Chain (Platform Chain)**:
 - Primary source of validator registry
-- Epoch sealing happens at D-Chain level
-- All chains reference D-Chain epoch heights
+- Epoch sealing happens at P-Chain level
+- All chains reference P-Chain epoch heights
 
 **C-Chain (EVM)**:
 - Uses epoched views for ICM verification
 - Reduced gas costs for cross-chain operations
 - Compatible with ACP-226 dynamic block timing
 
-**Y-Chain (Quantum State)**:
+** (Quantum State)**:
 - Integrates epoch boundaries with quantum checkpoints
 - Synchronizes quantum state verification with validator set updates
 - Enhanced security for quantum-resistant operations
@@ -143,9 +143,9 @@ func GetDChainEpoch(parent Block) Epoch {
 
 **2. Sealing Mechanism**: The first-block-past-deadline approach ensures deterministic epoch transitions. Alternative approaches like slot-based or block-count-based were rejected for their complexity and less predictable behavior.
 
-**3. D-Chain Height Locking**: Locking the D-Chain height at epoch start eliminates expensive traversal during block execution. The trade-off of slightly stale validator data is acceptable given typical epoch durations.
+**3. P-Chain Height Locking**: Locking the P-Chain height at epoch start eliminates expensive traversal during block execution. The trade-off of slightly stale validator data is acceptable given typical epoch durations.
 
-**4. Multi-Chain Coordination**: All Lux chains reference the same D-Chain epoch, ensuring consistent validator views across A, B, C, D, Y, Z chains.
+**4. Multi-Chain Coordination**: All Lux chains reference the same P-Chain epoch, ensuring consistent validator views across A, B, C, D, Y, Z chains.
 
 ### Alternatives Considered
 
@@ -163,7 +163,7 @@ func GetDChainEpoch(parent Block) Epoch {
 func TestEpochAdvancement(t *testing.T) {
     duration := 2 * time.Minute
     epoch := Epoch{
-        DChainHeight: 1000,
+        PChainHeight: 1000,
         Number:       5,
         StartTime:    time.Now(),
     }
@@ -176,7 +176,7 @@ func TestEpochAdvancement(t *testing.T) {
     }
     nextEpoch := GetDChainEpoch(parentWithinEpoch)
     require.Equal(t, epoch.Number, nextEpoch.Number)
-    require.Equal(t, epoch.DChainHeight, nextEpoch.DChainHeight)
+    require.Equal(t, epoch.PChainHeight, nextEpoch.PChainHeight)
 
     // Past epoch duration - should advance
     parentPastEpoch := &mockBlock{
@@ -186,7 +186,7 @@ func TestEpochAdvancement(t *testing.T) {
     }
     nextEpoch = GetDChainEpoch(parentPastEpoch)
     require.Equal(t, epoch.Number+1, nextEpoch.Number)
-    require.Equal(t, uint64(1100), nextEpoch.DChainHeight)
+    require.Equal(t, uint64(1100), nextEpoch.PChainHeight)
 }
 
 // Test: Epoch sealing
@@ -211,7 +211,7 @@ func TestEpochSealing(t *testing.T) {
 
 // Test: Multi-chain epoch consistency
 func TestMultiChainEpochConsistency(t *testing.T) {
-    // All chains should derive same epoch from D-Chain state
+    // All chains should derive same epoch from P-Chain state
     dChainState := &DChainState{Height: 5000, Timestamp: time.Now()}
 
     chains := []string{"A", "B", "C", "Y", "Z"}
@@ -225,16 +225,16 @@ func TestMultiChainEpochConsistency(t *testing.T) {
     // All epochs should be identical
     for i := 1; i < len(epochs); i++ {
         require.Equal(t, epochs[0].Number, epochs[i].Number)
-        require.Equal(t, epochs[0].DChainHeight, epochs[i].DChainHeight)
+        require.Equal(t, epochs[0].PChainHeight, epochs[i].PChainHeight)
     }
 }
 
 // Test: ICM verification with epoched views
 func TestICMVerificationWithEpoch(t *testing.T) {
-    epoch := Epoch{DChainHeight: 2000, Number: 15}
+    epoch := Epoch{PChainHeight: 2000, Number: 15}
 
     // Create ICM message signed by validators at epoch height
-    validators := getValidatorsAtHeight(epoch.DChainHeight)
+    validators := getValidatorsAtHeight(epoch.PChainHeight)
     message := createICMMessage("C", "Y", []byte("test"))
     signature := signWithValidators(message, validators)
 
@@ -243,7 +243,7 @@ func TestICMVerificationWithEpoch(t *testing.T) {
     require.True(t, verified)
 
     // Verification with wrong epoch should fail
-    wrongEpoch := Epoch{DChainHeight: 1500, Number: 10}
+    wrongEpoch := Epoch{PChainHeight: 1500, Number: 10}
     verified = verifyICMWithEpoch(message, signature, wrongEpoch)
     require.False(t, verified)
 }
@@ -264,14 +264,14 @@ Scenarios:
 
 ### Epoch P-Chain Height Skew
 
-Unbounded epoch duration may cause D-Chain height lag. Mitigations:
+Unbounded epoch duration may cause P-Chain height lag. Mitigations:
 1. Monitor epoch advancement for consistent block production
 2. Shorter epoch durations for high-throughput chains
 3. Validator weight change limits at epoch boundaries
 
-### Quantum-Safe Considerations (Y-Chain Integration)
+### Quantum-Safe Considerations ( Integration)
 
-When Y-Chain quantum state checkpoints align with epoch boundaries:
+When  quantum state checkpoints align with epoch boundaries:
 - Validator set changes must account for quantum-resistant signature verification
 - BLS keys may need upgrade to post-quantum alternatives
 - Epoch duration should accommodate quantum checkpoint processing time
@@ -290,16 +290,16 @@ When Y-Chain quantum state checkpoints align with epoch boundaries:
 ## Use Cases
 
 ### 1. ICM (Inter-Chain Messaging) Optimization
-- **Current**: 200k-330k gas for variable-depth D-Chain traversal
+- **Current**: 200k-330k gas for variable-depth P-Chain traversal
 - **With Epoching**: Pre-fetched validator sets, significant gas reduction
 - **Benefit**: More economical cross-chain communication across all Lux chains
 
 ### 2. Improved Relayer Reliability
 - **Problem**: Validator set changes between signature collection and submission
-- **Solution**: Fixed D-Chain height during epoch duration
+- **Solution**: Fixed P-Chain height during epoch duration
 - **Benefit**: More reliable message delivery across chains
 
-### 3. Y-Chain Quantum Checkpoint Coordination
+### 3.  Quantum Checkpoint Coordination
 - **Integration**: Align quantum state snapshots with epoch boundaries
 - **Benefit**: Predictable quantum verification windows
 - **Security**: Enhanced quantum-safe cross-chain operations
@@ -311,16 +311,16 @@ When Y-Chain quantum state checkpoints align with epoch boundaries:
 
 ## Backwards Compatibility
 
-Requires network upgrade. Not backwards compatible. Downstream systems must account for epoched D-Chain views:
+Requires network upgrade. Not backwards compatible. Downstream systems must account for epoched P-Chain views:
 
-- **ICM Message Constructors**: Use epoch D-Chain height, not tip
-- **Block Explorers**: Display both current and epoch D-Chain heights
+- **ICM Message Constructors**: Use epoch P-Chain height, not tip
+- **Block Explorers**: Display both current and epoch P-Chain heights
 - **Relayers**: Implement epoch-aware validator set queries
 - **Indexers**: Track epoch boundaries and validator set changes
 
 ## Future Enhancements
 
-### Post-Quantum Validator Sets (Y-Chain)
+### Post-Quantum Validator Sets ()
 - Integrate with LP-001 (ML-KEM), LP-002 (ML-DSA), LP-003 (SLH-DSA)
 - Support hybrid classical/quantum validator signatures
 - Epoch-based migration to quantum-resistant schemes
@@ -339,7 +339,7 @@ Requires network upgrade. Not backwards compatible. Downstream systems must acco
 
 Based on ACP-181 by Cam Schultz and contributors from Avalanche Labs. Adapted for Lux Network's multi-chain architecture with quantum-safe considerations.
 
-Thanks to Lux Protocol Team for integration testing and Y-Chain quantum coordination design.
+Thanks to Lux Protocol Team for integration testing and  quantum coordination design.
 
 ## References
 

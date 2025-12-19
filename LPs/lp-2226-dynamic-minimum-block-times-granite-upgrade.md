@@ -702,7 +702,7 @@ func TestCalculateMinimumDelay(t *testing.T) {
   [chains.c-chain]
   target-block-delay = 500  # DeFi needs speed
   
-  [chains.d-chain]
+  [chains.p-chain]
   target-block-delay = 2000  # Platform chain is more conservative
   
   [chains.z-chain]
@@ -747,7 +747,7 @@ contract TimingCoordinator {
         require(
             chainTargetDelays[CHAIN_C] >= 100 &&
             chainTargetDelays[CHAIN_C] <= chainTargetDelays[CHAIN_D],
-            "C-Chain must be faster than D-Chain"
+            "C-Chain must be faster than P-Chain"
         );
     }
 }

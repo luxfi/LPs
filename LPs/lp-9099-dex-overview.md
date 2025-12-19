@@ -98,13 +98,13 @@ The Lux exchange ecosystem consists of two complementary systems:
 │   ──────────────────────────             │   ─────────────────────────────   │
 │   lxd daemon                        │   luxd daemon                      │
 │   github.com/luxfi/dex                   │   github.com/luxfi/node            │
-│   Trading engine, orderbooks             │   C-Chain, D-Chain, B-Chain, etc.  │
+│   Trading engine, orderbooks             │   C-Chain, P-Chain, B-Chain, etc.  │
 │   DAG consensus for orders               │   Snowman/DAG for blocks           │
 │   Warp messages → blockchain             │   Native chain transactions        │
 │                                          │                                    │
 │   LP-9000 Series                         │   LP-0011 (X-Chain UTXO)           │
 │                                          │   LP-0012 (C-Chain EVM)            │
-│                                          │   LP-0010 (D-Chain staking)        │
+│                                          │   LP-0010 (P-Chain staking)        │
 │                                                                               │
 └──────────────────────────────────────────────────────────────────────────────┘
 ```markdown
@@ -219,7 +219,7 @@ BenchmarkCriticalOrderMatching/10000 521,370 orders/sec   1,918.0 ns/op
 │                                      ▼                                      │
 │  ┌────────────────────────────────────────────────────────────────────────┐ │
 │  │              LUX BLOCKCHAIN (github.com/luxfi/node)                    │ │
-│  │          C-Chain (EVM) │ B-Chain (Bridge) │ D-Chain (Staking)          │ │
+│  │          C-Chain (EVM) │ B-Chain (Bridge) │ P-Chain (Staking)          │ │
 │  └────────────────────────────────────────────────────────────────────────┘ │
 └─────────────────────────────────────────────────────────────────────────────┘
 ```markdown
@@ -421,7 +421,7 @@ go run ./cmd/fix-benchmark/
 **Blockchain Chains (Separate)**:
 - [LP-0011](/docs/lp-9011-x-chain-exchange-chain-specification/): X-Chain (UTXO assets)
 - [LP-0012](/docs/lp-2012-c-chain-contract-chain-specification/): C-Chain (EVM)
-- [LP-0010](/docs/lp-0010-p-chain-platform-chain-specification-deprecated/): D-Chain (Staking)
+- [LP-0010](/docs/lp-0010-p-chain-platform-chain-specification-deprecated/): P-Chain (Staking)
 
 **Cross-Chain**:
 - [LP-603](/docs/lp-6603-warp-15-quantum-safe-cross-chain-messaging/): Warp Messaging
