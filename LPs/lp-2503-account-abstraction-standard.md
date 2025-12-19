@@ -97,7 +97,7 @@ interface IEntryPoint {
     function depositTo(address account) external payable;
     function withdrawTo(address payable withdrawAddress, uint256 withdrawAmount) external;
 }
-```text
+```
 
 #### 2. UserOperation Struct
 
@@ -115,7 +115,7 @@ struct PackedUserOperation {
     bytes paymasterAndData;   // Paymaster + gas limits + paymaster data
     bytes signature;          // Account signature
 }
-```text
+```
 
 **v0.6 UserOperation** (legacy compatibility):
 
@@ -133,7 +133,7 @@ struct UserOperation {
     bytes paymasterAndData;
     bytes signature;
 }
-```text
+```
 
 #### 3. Account Interface
 
@@ -173,7 +173,7 @@ interface IPaymaster {
         uint256 actualUserOpFeePerGas
     ) external;
 }
-```text
+```
 
 ### Lux Smart Account Implementation
 
@@ -224,7 +224,7 @@ contract SmartAccount is BaseSmartAccount, ModuleManager, FallbackManager {
         }
     }
 }
-```text
+```
 
 #### SmartAccountFactory.sol
 
@@ -248,7 +248,7 @@ contract SmartAccountFactory {
         uint256 index
     ) public returns (address proxy);
 }
-```text
+```
 
 #### Authorization Modules
 
@@ -271,7 +271,7 @@ contract EcdsaOwnershipRegistryModule is BaseAuthorizationModule {
         return 0;
     }
 }
-```text
+```
 
 **PasskeyRegistryModule**: WebAuthn/Passkey (secp256r1)
 
@@ -285,7 +285,7 @@ contract PasskeyRegistryModule is BaseAuthorizationModule {
         // Uses 0x0000000000000000000000000000000000000100
     }
 }
-```text
+```
 
 **SessionKeyManagerModule**: Time-limited session keys
 
@@ -299,7 +299,7 @@ contract SessionKeyManagerModule is BaseAuthorizationModule {
         // Check expiration and allowed targets
     }
 }
-```text
+```
 
 ### Paymaster Implementation
 
@@ -335,7 +335,7 @@ contract VerifyingSingletonPaymaster is BasePaymaster {
         paymasterIdBalances[paymasterId] -= actualGasCost;
     }
 }
-```text
+```
 
 ### Version Compatibility
 
@@ -367,7 +367,7 @@ library UserOperationLib {
     function pack(UserOperation calldata userOp) internal pure returns (bytes memory);
     function hash(UserOperation calldata userOp) internal pure returns (bytes32);
 }
-```text
+```
 
 #### Migration: v0.6 to v0.7
 
@@ -402,7 +402,7 @@ library UserOpMigration {
         v7.signature = v6.signature;
     }
 }
-```text
+```
 
 ### Solidity Version Requirements
 
@@ -431,7 +431,7 @@ bytes2 constant EIP7702_MAGIC = 0x7702;
 function _isEip7702InitCode(bytes calldata initCode) internal pure returns (bool) {
     return initCode.length >= 2 && bytes2(initCode[:2]) == EIP7702_MAGIC;
 }
-```text
+```
 
 This enables EOAs to temporarily act as smart accounts without permanent deployment.
 
@@ -471,7 +471,7 @@ contract FROSTValidationModule is BaseAuthorizationModule {
         return success ? 0 : SIG_VALIDATION_FAILED;
     }
 }
-```text
+```
 
 **Gas cost**: 50,000 base + 5,000 per signer
 
@@ -491,7 +491,7 @@ contract CGGMP21ValidationModule is BaseAuthorizationModule {
         // Gas: 75,000 base + 10,000 per signer
     }
 }
-```text
+```
 
 ### ML-DSA Post-Quantum (LP-2311)
 
@@ -521,7 +521,7 @@ contract MLDSAValidationModule is BaseAuthorizationModule {
         return success ? 0 : SIG_VALIDATION_FAILED;
     }
 }
-```text
+```
 
 **Gas cost**: 100,000 base + 10 per message byte
 
@@ -547,7 +547,7 @@ contract HybridValidationModule is BaseAuthorizationModule {
         return 0;
     }
 }
-```text
+```
 
 ## Rationale
 
@@ -638,7 +638,7 @@ function testBasicExecution() {
     // Verify execution
     assertTrue(target.called);
 }
-```text
+```
 
 ### Test 2: Paymaster Sponsored Transaction
 
@@ -665,7 +665,7 @@ function testPaymasterSponsorship() {
     // User balance unchanged
     assertEq(userBalanceBefore, userBalanceAfter);
 }
-```text
+```
 
 ### Test 3: FROST Threshold Validation
 
@@ -685,7 +685,7 @@ function testFROSTValidation() {
     // Execute
     entryPoint.handleOps(toPackedArray(op), beneficiary);
 }
-```text
+```
 
 ### Test 4: Social Recovery
 

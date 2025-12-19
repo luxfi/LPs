@@ -83,7 +83,7 @@ interface IDataAvailabilityLayer {
     event DataRetrieved(bytes32 indexed commitmentHash, address retriever);
     event DataChallenged(bytes32 indexed commitmentHash, address challenger);
 }
-```text
+```
 
 ### Erasure Coding Implementation
 
@@ -115,7 +115,7 @@ interface IErasureCoding {
     function verifyShardIntegrity(bytes calldata shard, bytes32 commitment, uint256 index) external pure returns (bool);
     function reconstructMissing(bytes[] calldata availableShards, uint256[] calldata indices, CodeParams calldata params) external pure returns (bytes[] memory);
 }
-```text
+```
 
 ### KZG Polynomial Commitments
 
@@ -197,7 +197,7 @@ interface IDataAvailabilitySampling {
     event SampleProvided(bytes32 indexed requestId, address provider);
     event SampleVerified(bytes32 indexed requestId, bool isValid);
 }
-```text
+```
 
 ### Distributed Storage Network
 
@@ -254,7 +254,7 @@ interface IStorageNetwork {
     event DataStored(bytes32 indexed dataHash, bytes32 contractId);
     event StorageProofSubmitted(bytes32 indexed contractId, address node);
 }
-```text
+```
 
 ### AI Model Storage Optimization
 
@@ -397,7 +397,7 @@ describe("Erasure Coding", () => {
         expect(decoded).to.deep.equal(data);
     });
 });
-```text
+```
 
 ### KZG Commitment Tests
 
@@ -435,7 +435,7 @@ describe("KZG Commitments", () => {
         expect(await kzg.batchVerify(proofs, kzgParams)).to.be.true;
     });
 });
-```text
+```
 
 ### Data Availability Sampling Tests
 
@@ -471,7 +471,7 @@ describe("Data Availability Sampling", () => {
         expect(await daLayer.calculateConfidence(100, 100)).to.equal(10000); // 100%
     });
 });
-```text
+```
 
 ### AI Model Storage Tests
 

@@ -58,7 +58,7 @@ ML-DSA (formerly Dilithium) was selected by NIST in 2024 as the primary post-qua
 
 ### Precompile Address
 
-```text
+```
 0x0200000000000000000000000000000000000006
 ```markdown
 
@@ -117,7 +117,7 @@ interface IMLDSA {
         bytes calldata signature
     ) external view returns (bool valid);
 }
-```text
+```
 
 ### Example Usage
 
@@ -210,7 +210,7 @@ function verifySignature(bytes calldata data, bytes calldata sig) {
     }
     revert("Unknown signature type");
 }
-```text
+```
 
 **Phase 2**: Migrate all keys to ML-DSA over time
 
@@ -225,7 +225,7 @@ function verifySignature(bytes calldata data, bytes calldata sig) {
 publicKey: 0x<1952 bytes of ML-DSA public key>
 message: "Hello, quantum-safe world!"
 signature: 0x<3309 bytes of ML-DSA signature>
-```text
+```
 
 **Expected Output:** `0x0000...0001` (valid)
 **Expected Gas:** ~100,270 gas (27 byte message)
@@ -237,7 +237,7 @@ signature: 0x<3309 bytes of ML-DSA signature>
 publicKey: 0x<1952 bytes of ML-DSA public key>
 message: "Hello, quantum-safe world!"
 signature: 0x<3309 bytes of WRONG signature>
-```text
+```
 
 **Expected Output:** `0x0000...0000` (invalid)
 **Expected Gas:** ~100,270 gas (verification still runs)
@@ -249,7 +249,7 @@ signature: 0x<3309 bytes of WRONG signature>
 publicKey: 0x<1952 bytes of ML-DSA public key>
 message: "Tampered message"
 signature: 0x<3309 bytes signature for DIFFERENT message>
-```text
+```
 
 **Expected Output:** `0x0000...0000` (invalid)
 
@@ -266,7 +266,7 @@ signature: 0x<3309 bytes signature for DIFFERENT message>
 publicKey: 0x<1952 bytes>
 message: 0x<10KB of data>
 signature: 0x<3309 bytes>
-```text
+```
 
 **Expected Gas:** ~202,400 gas
 

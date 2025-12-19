@@ -87,7 +87,7 @@ contract LRC20 {
     function approve(address spender, uint256 amount) public returns (bool);
     function transferFrom(address from, address to, uint256 amount) public returns (bool);
 }
-```text
+```
 
 ### Token Implementations
 
@@ -153,13 +153,13 @@ contract Bridge is Ownable, AccessControl {
     function setMPCOracle(address MPCO) public onlyAdmin;
     function setPayoutAddress(address addr, uint256 feeR) public onlyAdmin;
 }
-```text
+```
 
 #### Message Format
 
 Bridge messages are constructed as:
 
-```text
+```
 message = concat(
     amount,                           // uint256 as string
     keccak256(targetAddress),         // bytes32 hex
@@ -168,7 +168,7 @@ message = concat(
     keccak256(chainId),               // bytes32 hex
     vault                             // string
 )
-```text
+```
 
 Signature verification:
 
@@ -178,7 +178,7 @@ bytes32 prefixedHash = keccak256(
 );
 address signer = ecrecover(prefixedHash, v, r, s);
 require(MPCOracleAddrMap[signer].exists, 'BadSig');
-```text
+```
 
 #### Warp Messaging Integration
 
@@ -196,7 +196,7 @@ struct TeleportMessage {
     address recipient;
     bytes data;  // optional
 }
-```text
+```
 
 ### Supported Chain Routes
 
@@ -327,7 +327,7 @@ function testBridgeMint() public {
     // Verify: 99% received (1% fee)
     assertEq(leth.balanceOf(alice), amount * 99 / 100);
 }
-```text
+```
 
 ### Bridge Burn Test
 
@@ -343,7 +343,7 @@ function testBridgeBurn() public {
     assertEq(leth.balanceOf(address(this)), 0.5 ether);
     assertEq(leth.totalSupply(), 0.5 ether);
 }
-```text
+```
 
 ### Replay Protection Test
 
@@ -356,7 +356,7 @@ function testReplayProtection() public {
     vm.expectRevert("DupeTX");
     bridge.bridgeMintStealth(amount, txHash, alice, sig, token, chainId, vault);
 }
-```text
+```
 
 ### Invalid Signature Test
 
@@ -438,7 +438,7 @@ function addMappingStealth(bytes memory _key) internal {
     require(!transactionMap[_key].exists);
     transactionMap[_key].exists = true;
 }
-```text
+```
 
 Each signature can only be used once globally.
 

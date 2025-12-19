@@ -60,7 +60,7 @@ interface IAssetRegistry {
         address feeRecipient;
     }
 }
-```text
+```
 
 2. **Chain Registry**
 ```solidity
@@ -71,7 +71,7 @@ struct ChainInfo {
     address bridgeContract;
     bool isActive;
 }
-```text
+```
 
 ### Asset Registration Process
 
@@ -106,7 +106,7 @@ function deployAsset(
     bytes32 proposalId,
     uint256 targetChainId
 ) external returns (address wrappedAsset);
-```text
+```
 
 ### Registry Queries
 
@@ -127,7 +127,7 @@ function getAssetByWrapped(
 function getAsset(
     bytes32 assetId
 ) external view returns (AssetInfo memory);
-```text
+```
 
 #### Bridge Configuration
 ```solidity
@@ -136,7 +136,7 @@ function getBridgeConfig(
     uint256 sourceChain,
     uint256 targetChain
 ) external view returns (BridgeConfig memory);
-```text
+```
 
 ### Integration Points
 
@@ -157,7 +157,7 @@ interface ITeleportRegistry {
         uint256 targetChain
     ) external view returns (address source, address target);
 }
-```text
+```
 
 ### Governance
 
@@ -172,7 +172,7 @@ function updateBridgeConfig(
     bytes32 assetId,
     BridgeConfig memory newConfig
 ) external onlyConfigManager;
-```text
+```
 
 ## Rationale
 
@@ -298,7 +298,7 @@ forge build
 forge script script/registry/DeployRegistry.s.sol:DeployRegistry \
   --rpc-url http://localhost:9650/ext/bc/C/rpc \
   --broadcast
-```text
+```
 
 ### Testing
 

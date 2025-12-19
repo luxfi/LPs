@@ -99,7 +99,7 @@ K-Chain addresses these challenges by providing a specialized blockchain for cry
 
 K-Chain is a specialized Lux subnet running the KeyManagementVM:
 
-```text
+```
 +-------------------------------------------------------------------------+
 |                        K-Chain Architecture                             |
 +-------------------------------------------------------------------------+
@@ -157,7 +157,7 @@ type KMSState struct {
     CurrentEpoch      uint64                        // Current epoch
     LastKeyRotation   map[KeyID]uint64              // Last rotation per key
 }
-```text
+```
 
 #### 2. ML-KEM Key Types
 
@@ -231,7 +231,7 @@ var MLKEMParameters = map[mlkem.Mode]struct {
 // | ML-KEM-512    | 800 bytes  | 1632 bytes  | 768 bytes  | 32 bytes      |
 // | ML-KEM-768    | 1184 bytes | 2400 bytes  | 1088 bytes | 32 bytes      |
 // | ML-KEM-1024   | 1568 bytes | 3168 bytes  | 1568 bytes | 32 bytes      |
-```text
+```
 
 #### 3. Encryption Key Structure
 
@@ -283,7 +283,7 @@ var SymmetricKeyParams = map[SymmetricAlgorithm]struct {
     CHACHA20POLY1305: {32, 12, 16},  // 256-bit key, 96-bit nonce, 128-bit tag
     AES256GCM_SIV:    {32, 12, 16},  // 256-bit key, 96-bit nonce, 128-bit tag
 }
-```text
+```
 
 #### 4. Secret Storage Structure
 
@@ -335,7 +335,7 @@ const (
     TypeOAuthToken      SecretType = 0x0C  // OAuth access/refresh token
     TypeWebhookSecret   SecretType = 0x0D  // Webhook signing secret
 )
-```text
+```
 
 ### Transaction Types
 
@@ -463,7 +463,7 @@ func (tx *KeyGenTx) Execute(state *KMSState) (*EncapsulationKey, error) {
 
     return key, nil
 }
-```text
+```
 
 #### 2. EncapsulateTx - ML-KEM Encapsulation
 
@@ -578,7 +578,7 @@ func (tx *EncapsulateTx) Execute(state *KMSState) (*EncapsulationResult, error) 
 
     return result, nil
 }
-```text
+```
 
 #### 3. DecapsulateTx - ML-KEM Decapsulation
 
@@ -692,7 +692,7 @@ func (tx *DecapsulateTx) Execute(state *KMSState) ([]byte, error) {
 
     return sharedSecret, nil
 }
-```text
+```
 
 #### 4. StoreSecretTx - Store Encrypted Secret
 
@@ -782,7 +782,7 @@ func (tx *StoreSecretTx) Execute(state *KMSState) (*EncryptedSecret, error) {
 
     return secret, nil
 }
-```text
+```
 
 #### 5. ThresholdDecryptTx - T-Chain Integrated Decryption
 
@@ -991,11 +991,11 @@ type TChainDecryptResponse struct {
     ErrorMessage   string `json:"error,omitempty"`
     SignerCount    uint32 `json:"signerCount"`             // How many signers participated
 }
-```text
+```
 
 #### T-Chain Integration Architecture
 
-```text
+```
 +------------------+                    +------------------+
 |    K-Chain       |                    |    T-Chain       |
 |  KeyManagementVM |                    |   ThresholdVM    |
@@ -1020,7 +1020,7 @@ type TChainDecryptResponse struct {
         |    - Deliver callback                 |
         |                                       |
 +------------------+                    +------------------+
-```text
+```
 
 For detailed T-Chain signer operations, see [LP-330](/docs/lp-7330-t-chain-thresholdvm-specification/).
 
@@ -1315,7 +1315,7 @@ type DecryptionCallback struct {
     SignerCount  uint32         `json:"signerCount"`
     Proof        []byte         `json:"proof"`
 }
-```text
+```
 
 #### Security Properties of Threshold Decryption
 
@@ -1446,7 +1446,7 @@ func (p *AccessPolicy) CheckAccess(requester Address, proof []byte) error {
 
     return nil
 }
-```text
+```
 
 ### Data Encryption Service
 
@@ -1457,7 +1457,7 @@ following NIST SP 800-38D (GCM mode) and RFC 7516 (JSON Web Encryption) design p
 
 ##### Protocol Overview
 
-```text
+```
 +------------------------------------------------------------------+
 |                    ENVELOPE ENCRYPTION PROTOCOL                   |
 +------------------------------------------------------------------+
@@ -1483,7 +1483,7 @@ following NIST SP 800-38D (GCM mode) and RFC 7516 (JSON Web Encryption) design p
 |  5. Output            PT                                         |
 |                                                                  |
 +------------------------------------------------------------------+
-```text
+```
 
 ##### Wire Format
 
@@ -1603,7 +1603,7 @@ func DeserializeEnvelope(data []byte) (*EnvelopeWireFormat, error) {
 
     return env, nil
 }
-```text
+```
 
 ##### AES Key Wrap (RFC 3394)
 
@@ -1712,7 +1712,7 @@ func UnwrapKey(kek, ciphertext []byte) ([]byte, error) {
 
     return result, nil
 }
-```text
+```
 
 ##### Security Requirements
 
@@ -1961,7 +1961,7 @@ func zeroBytes(b []byte) {
         b[i] = 0
     }
 }
-```text
+```
 
 #### Complete Envelope Encryption Example
 
@@ -1991,7 +1991,7 @@ func ExampleEnvelopeEncryption() {
     decrypted, _ := envelope.DecryptData(state, encrypted, owner)
     // decrypted == plaintext
 }
-```text
+```
 
 #### Streaming Encryption for Large Data
 
@@ -2064,7 +2064,7 @@ func (se *StreamingEncryption) EncryptStream(
     metadata.ChunkCount = chunkIndex
     return metadata, nil
 }
-```text
+```
 
 ### IPFS Integration
 
@@ -2141,7 +2141,7 @@ func (ies *IPFSEncryptedStorage) RetrieveDecrypted(
 
     return envelope.DecryptData(ies.KMSState, encrypted, owner)
 }
-```text
+```
 
 ### RPC API Endpoints
 
@@ -2190,7 +2190,7 @@ unauthenticated but may be rate-limited.
     },
     "id": 1
 }
-```text
+```
 
 #### kms_encapsulate - ML-KEM Encapsulation
 
@@ -2221,7 +2221,7 @@ unauthenticated but may be rate-limited.
     },
     "id": 1
 }
-```text
+```
 
 #### kms_decapsulate - ML-KEM Decapsulation
 
@@ -2251,7 +2251,7 @@ unauthenticated but may be rate-limited.
     },
     "id": 1
 }
-```text
+```
 
 #### kms_encrypt - Encrypt Data
 
@@ -2280,7 +2280,7 @@ unauthenticated but may be rate-limited.
     },
     "id": 1
 }
-```text
+```
 
 #### kms_decrypt - Decrypt Data
 
@@ -2309,7 +2309,7 @@ unauthenticated but may be rate-limited.
     },
     "id": 1
 }
-```text
+```
 
 #### kms_storeSecret - Store Encrypted Secret
 
@@ -2347,7 +2347,7 @@ unauthenticated but may be rate-limited.
     },
     "id": 1
 }
-```text
+```
 
 #### kms_retrieveSecret - Retrieve and Decrypt Secret
 
@@ -2376,7 +2376,7 @@ unauthenticated but may be rate-limited.
     },
     "id": 1
 }
-```text
+```
 
 #### kms_rotateKey - Rotate Encryption Key
 
@@ -2406,7 +2406,7 @@ unauthenticated but may be rate-limited.
     },
     "id": 1
 }
-```text
+```
 
 #### kms_createPolicy - Create Access Policy
 
@@ -2443,7 +2443,7 @@ unauthenticated but may be rate-limited.
     },
     "id": 1
 }
-```text
+```
 
 #### kms_thresholdDecrypt - Request T-Chain Threshold Decryption
 
@@ -2475,7 +2475,7 @@ unauthenticated but may be rate-limited.
     },
     "id": 1
 }
-```text
+```
 
 #### Additional RPC Methods
 
@@ -2524,7 +2524,7 @@ unauthenticated but may be rate-limited.
     },
     "id": 1
 }
-```text
+```
 
 #### kms_envelopeEncrypt - Envelope Encryption (DEK/KEK)
 
@@ -2557,7 +2557,7 @@ Complete envelope encryption in one call:
     },
     "id": 1
 }
-```text
+```
 
 #### kms_envelopeDecrypt - Envelope Decryption
 
@@ -2587,7 +2587,7 @@ Complete envelope encryption in one call:
     },
     "id": 1
 }
-```text
+```
 
 #### kms_hybridEncrypt - Hybrid ML-KEM + X25519 Encryption
 
@@ -2624,7 +2624,7 @@ End-to-end hybrid encryption combining post-quantum and classical security:
     },
     "id": 1
 }
-```text
+```
 
 #### RPC Error Codes
 
@@ -2682,9 +2682,9 @@ End-to-end hybrid encryption combining post-quantum and classical security:
 
 Hybrid mode (ML-KEM + X25519) provides defense-in-depth:
 
-```text
+```
 Security(Hybrid) = max(Security(ML-KEM), Security(ECDH))
-```text
+```
 
 If either primitive is broken, the other still provides protection. This is critical during the quantum transition period where:
 - ML-KEM implementation bugs might exist
@@ -2753,7 +2753,7 @@ type SideChannelProtection struct {
         runtime.KeepAlive(data)
     }
 }
-```text
+```
 
 #### Access Control Security
 
@@ -2884,7 +2884,7 @@ func (p *PKCS11Provider) Encapsulate(handle *HSMKeyHandle) (ciphertext, sharedSe
 func (p *PKCS11Provider) Decapsulate(handle *HSMKeyHandle, ciphertext []byte) ([]byte, error) {
     return p.ctx.Decapsulate(p.session, handle.HSMHandle, ciphertext)
 }
-```text
+```
 
 #### YubiHSM 2 Integration
 
@@ -2944,7 +2944,7 @@ func (y *YubiHSMProvider) GenerateMLKEMKey(keyID ids.ID, mode mlkem.Mode) (*HSMK
         Extractable: false,
     }, nil
 }
-```text
+```
 
 #### AWS CloudHSM Integration
 
@@ -3018,7 +3018,7 @@ func (c *CloudHSMProvider) GenerateMLKEMKey(keyID ids.ID, mode mlkem.Mode) (*HSM
     // ML-KEM may require CloudHSM JCE provider with custom algorithm
     return c.pkcs11Provider.GenerateMLKEMKey(keyID, mode)
 }
-```text
+```
 
 #### HSM Configuration
 
@@ -3064,7 +3064,7 @@ const (
 // | CloudHSM   | Level 3    | Via extension  | AWS cloud deployments       |
 // | SoftHSM    | N/A        | Full           | Development and testing     |
 // | Thales Luna| Level 3    | Pending        | Enterprise, high volume     |
-```text
+```
 
 ### FIPS Compliance
 
@@ -3164,7 +3164,7 @@ func runKATTest(mode mlkem.Mode, tv TestVector) error {
 
     return nil
 }
-```text
+```
 
 #### FIPS 203 Parameter Validation
 
@@ -3251,7 +3251,7 @@ func (dk *DecapsulationKey) Decapsulate(ciphertext []byte) ([]byte, error) {
 
     return sharedSecret, nil
 }
-```text
+```
 
 ### Key Derivation Functions
 
@@ -3320,7 +3320,7 @@ func deriveKMAC256(ikm []byte, params *KDFParams) ([]byte, error) {
     customization := append([]byte("K-Chain-KDF-v1"), params.Info...)
     return kmac.NewKMAC256(ikm, params.OutputLength, customization).Sum(nil), nil
 }
-```text
+```
 
 #### Key Derivation Contexts
 
@@ -3392,7 +3392,7 @@ type DerivationEntry struct {
     KDFParams     KDFParams
     DerivedAt     uint64
 }
-```text
+```
 
 ### Consensus Parameters
 
@@ -3426,7 +3426,7 @@ var DefaultKMSParams = Parameters{
     ThresholdDecryptTimeout: 300,         // 5 minutes in blocks
     MaxPendingDecrypts:      100,
 }
-```text
+```
 
 ## Rationale
 
@@ -3664,7 +3664,7 @@ func TestSecretStorage(t *testing.T) {
     require.Len(t, state.AuditLog, 1)
     require.Equal(t, "secret_stored", state.AuditLog[0].Action)
 }
-```text
+```
 
 ### Integration Tests
 
@@ -3724,13 +3724,13 @@ func TestThresholdDecryption(t *testing.T) {
     request = state.PendingDecrypts[request.RequestID]
     require.Equal(t, RequestStatusCompleted, request.Status)
 }
-```text
+```
 
 ## Reference Implementation
 
 ### Repository Structure
 
-```text
+```
 github.com/luxfi/node/vms/kmsvm/
 ├── vm.go                   # KeyManagementVM implementation
 ├── state.go                # State management

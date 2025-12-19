@@ -60,7 +60,7 @@ go build -o bin/geth ./cmd/geth
 # Or build full node with C-Chain
 cd node
 go build -o build/luxd ./cmd/main.go
-```text
+```
 
 ### Testing
 
@@ -83,7 +83,7 @@ go test -tags=integration ./vms/cchainvm/...
 
 # Performance benchmarks
 go test ./geth/core/state -bench=. -benchmem
-```text
+```
 
 ### API Testing
 
@@ -110,7 +110,7 @@ curl -X POST --data '{
   "method":"eth_sendTransaction",
   "params":[{"from":"0x...","data":"0x..."}]
 }' -H 'content-type:application/json;' http://localhost:9650/ext/bc/C/rpc
-```text
+```
 
 ### File Size Verification
 

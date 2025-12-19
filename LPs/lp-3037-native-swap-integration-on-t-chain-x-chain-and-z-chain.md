@@ -108,7 +108,7 @@ type SwapSigTx struct {
     SigBitmap []byte
     ProofHash [32]byte
 }
-```text
+```
 On seeing SwapTx, validators form threshold signature off-chain and submit SwapSigTx on T-Chain.
 
 ### 3 Transaction Flow
@@ -140,10 +140,10 @@ sequenceDiagram
 
 ### 5 Validator & MPC Stack
 
-```text
+```
 X-Chain Node (luxd + DexFx)  <-->  dexfx plugin verifies SwapTx, watches proofs
 T-Chain Node (luxd + mpckeyd) <-->  mpckeyd holds key shares, exposes gRPC sign_swap
-```text
+```
 
 ### 6 State Diagrams
 
@@ -154,7 +154,7 @@ stateDiagram-v2
     Signed  --> Final: on unlock + relay
     Pending --> Expired: expiry passed
     Signed  --> RevertRefund: on failure
-```text
+```
 
 ### 7 Privacy Add‑On
 
@@ -242,7 +242,7 @@ func (tx *SwapTx) Status() SwapStatus {
 
     return PENDING
 }
-```text
+```
 
 **Testing**:
 ```bash

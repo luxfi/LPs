@@ -76,7 +76,7 @@ The canonical reference implementations for LRC standards are maintained in the 
       function transferFrom(address, address, uint256) external returns (bool);
       // ... standard ERC20 events
   }
-  ```text
+  ```
 
 ### LRC-721 Implementation
 - **Location**: `standard/src/ERC721.sol`
@@ -111,7 +111,7 @@ forge test --match "LRC1155"
 
 # Check coverage
 forge coverage
-```text
+```
 
 ### Deployment Examples
 ```bash

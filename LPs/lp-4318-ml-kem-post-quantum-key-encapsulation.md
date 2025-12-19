@@ -92,7 +92,7 @@ if err != nil {
 // Serialize keys
 pubBytes := pub.Bytes()     // 1,184 bytes
 privBytes := priv.Bytes()   // 2,400 bytes
-```text
+```
 
 ### Encapsulation
 
@@ -105,7 +105,7 @@ if err != nil {
 
 // sharedSecret: 32 bytes (256-bit symmetric key)
 // ciphertext: 1,088 bytes (for ML-KEM-768)
-```text
+```
 
 **Properties**:
 - **Randomized**: Different ciphertext each time (IND-CCA2 security)
@@ -124,7 +124,7 @@ if err != nil {
 
 // Verify shared secrets match
 assert.Equal(sharedSecret, recoveredSecret)
-```text
+```
 
 **Decapsulation properties**:
 1. Ciphertext size validation (1,088 bytes for ML-KEM-768)
@@ -170,7 +170,7 @@ func EstablishConnection(remotePubKey []byte) (*QuantumSecureConnection, []byte,
 
     return conn, ciphertext, nil
 }
-```text
+```
 
 **Use Case**: Quantum-safe TLS-like connections between validators
 
@@ -185,7 +185,7 @@ type EncryptedWarpMessage struct {
     EncryptedPayload  []byte  // AES-GCM encrypted data
     Nonce             []byte  // GCM nonce
 }
-```text
+```
 
 **Workflow**:
 1. Sender encapsulates using recipient's ML-KEM public key → shared secret
@@ -227,7 +227,7 @@ func (v *ValidatorKeyPair) EncryptToValidator(
     // 4. Package ciphertext + encrypted data
     return append(ciphertext, append(nonce, encrypted...)...), nil
 }
-```text
+```
 
 **Use Case**: Private validator communication, secret sharing for threshold signatures
 
@@ -262,7 +262,7 @@ func (h *HybridKeyExchange) DeriveSharedSecret(
 
     return finalSecret[:], nil
 }
-```text
+```
 
 **Security**: Secure if EITHER classical OR post-quantum is unbroken
 
@@ -294,7 +294,7 @@ interface IMLKEM {
         uint8 mode
     ) external pure returns (bytes32 sharedSecret);
 }
-```text
+```
 
 **Gas Cost**:
 - Encapsulate: 50,000 gas base
@@ -334,7 +334,7 @@ contract SecureVault {
         // Store ciphertext + encrypted data on-chain
     }
 }
-```text
+```
 
 ## Implementation
 
@@ -381,7 +381,7 @@ func (mode Mode) PublicKeySize() int
 func (mode Mode) PrivateKeySize() int
 func (mode Mode) CiphertextSize() int
 func (mode Mode) SharedSecretSize() int  // Always 32
-```text
+```
 
 ### EVM Precompile (Optional)
 
@@ -399,13 +399,13 @@ func (mode Mode) SharedSecretSize() int  // Always 32
 func init() {
     precompile.Register(&MLKEMPrecompile{})
 }
-```text
+```
 
 ## Test Results
 
 ### Core Implementation: PASSING ✅
 
-```text
+```
 ✓ EncapsulateDecapsulate_512     (0.00s)
 ✓ EncapsulateDecapsulate_768     (0.00s)
 ✓ EncapsulateDecapsulate_1024    (0.00s)
@@ -420,7 +420,7 @@ func init() {
 
 ### Performance Benchmarks (Apple M1 Max)
 
-```text
+```
 BenchmarkMLKEM_Encapsulate_512    40,000 ops    25,000 ns/op (25μs)
 BenchmarkMLKEM_Decapsulate_512    33,333 ops    30,000 ns/op (30μs)
 
@@ -431,7 +431,7 @@ BenchmarkMLKEM_Encapsulate_1024   16,667 ops    60,000 ns/op (60μs)
 BenchmarkMLKEM_Decapsulate_1024   15,385 ops    65,000 ns/op (65μs)
 
 BenchmarkMLKEM_KeyGen_768         8,000 ops     125,000 ns/op (125μs)
-```text
+```
 
 ## Migration Path
 
@@ -482,7 +482,7 @@ BenchmarkMLKEM_KeyGen_768         8,000 ops     125,000 ns/op (125μs)
 // 3. Re-encryption verification
 // 4. Constant-time comparison
 // 5. Implicit rejection on failure (returns random secret)
-```text
+```
 
 ### Side-Channel Resistance
 
@@ -503,7 +503,7 @@ BenchmarkMLKEM_KeyGen_768         8,000 ops     125,000 ns/op (125μs)
 ```go
 // Secure if EITHER is unbroken
 hybridSecret = KDF(ecdh_secret || mlkem_secret)
-```text
+```
 
 **Benefits**:
 - Protects against unknown lattice attacks
@@ -639,7 +639,7 @@ func main() {
     // Use shared secret to derive AES-256-GCM key
     // Now validators can send encrypted consensus messages
 }
-```text
+```
 
 ### Hybrid Classical + PQ Example
 
@@ -661,7 +661,7 @@ func establishHybridChannel(
 
     return finalSecret[:], ciphertext, nil
 }
-```text
+```
 
 ## Test Cases
 

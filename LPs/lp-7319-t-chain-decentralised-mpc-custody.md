@@ -47,7 +47,7 @@ Validators who already stake LUX now earn additional MPC rewards, tightening eco
 
 ## 3  High-level Architecture
 
-```text
+```
              +---------------------------------------+
              |              T-Chain VM               |
              |---------------------------------------|
@@ -99,7 +99,7 @@ type KeyGenTx struct {
     AggPubKey    []byte // 32–65 B
     SignerBitmap []byte // bitmask of validator IDs
 }
-```text
+```
 
 Commits to new key; must be signed by ≥ threshold validators listed in `SignerBitmap`.
 
@@ -115,10 +115,10 @@ type SwapSigTx struct {
     SigBitmap  []byte
     ProofHash  [32]byte   // hash(transcripts) – optional audit
 }
-```text
+```
 
 **Validation:**
-```text
+```
 require AggVerify(AggPubKey[AssetID], SigBitmap, Signature, msgHash(SwapID))
 require bitcount(SigBitmap) >= threshold(AssetID)
 ```markdown
@@ -135,7 +135,7 @@ type SlashTx struct {
     SwapID   ids.ID
     Evidence []byte // RLP{height, blkHash, swapHeader}
 }
-```text
+```
 
 If now > Swap.expiry and swap still PENDING, all signers in active set lose `slashAmount = stake * 0.2`. 50 % burned, 50 % to reporter.
 
@@ -170,7 +170,7 @@ service MPCKeyd {
   rpc Heartbeat(Ping) returns (Pong);           // liveness
   rpc RotateKey(RotationReq) returns (Ack);     // governance
 }
-```text
+```
 
 Hot-path latency budget: < 200 ms signature generation (GG21 15-of-15 @ ~80 ms measured).
 
@@ -279,7 +279,7 @@ Validate inputs, enforce cryptographic best practices, and consider DoS and repl
 ```bash
 cd ~/work/lux/threshold
 go test -v -race ./...  # All tests pass, zero race conditions
-```text
+```
 
 ### MPC Custody Implementation
 

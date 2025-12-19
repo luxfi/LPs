@@ -101,7 +101,7 @@ interface ILuxMulticall {
             uint256 blockTimestamp
         );
 }
-```text
+```
 
 ### Advanced Multicall Features
 
@@ -156,7 +156,7 @@ interface ILuxMulticallAdvanced is ILuxMulticall {
         uint256[] calldata gasLimits
     ) external payable returns (Result[] memory results);
 }
-```text
+```
 
 ### Permit Integration
 
@@ -203,7 +203,7 @@ interface IMulticallPermit is ILuxMulticall {
         Call[] calldata calls
     ) external payable returns (Result[] memory results);
 }
-```text
+```
 
 ### Time-Sensitive Operations
 
@@ -248,7 +248,7 @@ interface IMulticallTimed is ILuxMulticall {
      */
     function executeScheduled(bytes32 scheduleId) external;
 }
-```text
+```
 
 ### Cross-Chain Multicall
 
@@ -290,7 +290,7 @@ interface IMulticallCrossChain is ILuxMulticall {
         bytes32 messageId
     ) external;
 }
-```text
+```
 
 ## Rationale
 
@@ -417,7 +417,7 @@ contract MulticallTest {
         multicall.multicallWithValue{value: 1 ether}(calls);
     }
 }
-```text
+```
 
 ### Conditional Execution
 
@@ -453,7 +453,7 @@ function testConditionalMulticall() public {
     
     advanced.multicallConditional(calls);
 }
-```text
+```
 
 ## Implementation
 
@@ -477,7 +477,7 @@ forge build
 forge script script/DeployMulticall.s.sol:DeployMulticall \
   --rpc-url https://api.avax.network/ext/bc/C/rpc \
   --broadcast
-```text
+```
 
 ### Testing
 
@@ -524,13 +524,13 @@ forge coverage --match-path test/multicall/\*
 ```bash
 # Test multi-step DeFi operation
 forge test test/integration/SwapAndStake.t.sol -vvv
-```text
+```
 
 **Permit + Multicall** (see `/test/integration/PermitMulticall.t.sol`):
 ```bash
 # Test approval + action in one call
 forge test test/integration/PermitMulticall.t.sol -vvv
-```text
+```
 
 ### Contract Verification
 
@@ -540,7 +540,7 @@ forge verify-contract \
   --chain-id 43114 \
   --watch 0x<MULTICALL_ADDRESS> \
   src/multicall/LuxMulticall.sol:LuxMulticall
-```text
+```
 
 ## Reference Implementation
 
@@ -693,7 +693,7 @@ contract LuxMulticall is ILuxMulticall, ILuxMulticallAdvanced {
         // Accept ETH for multicall operations
     }
 }
-```text
+```
 
 ## Security Considerations
 
@@ -707,14 +707,14 @@ modifier nonReentrant() {
     _;
     _reentrancyGuard = false;
 }
-```text
+```
 
 ### Gas Limits
 
 Prevent out-of-gas attacks:
 ```solidity
 require(gasleft() > calls.length * 50000, "Insufficient gas");
-```text
+```
 
 ### Value Handling
 
@@ -725,7 +725,7 @@ for (uint256 i = 0; i < calls.length; i++) {
     totalValue += calls[i].value;
 }
 require(msg.value >= totalValue, "Insufficient value");
-```text
+```
 
 ### Call Validation
 

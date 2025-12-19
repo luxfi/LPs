@@ -95,7 +95,7 @@ interface IL2BlockFormat {
         bytes proof;                  // Merkle proof of changes
     }
 }
-```text
+```
 
 ### Transaction Format
 
@@ -155,7 +155,7 @@ interface ITransactionFormat {
         string acceleratorType;
     }
 }
-```text
+```
 
 ### Compression Schemes
 
@@ -220,7 +220,7 @@ interface ICompressionSchemes {
     function rleEncode(bytes calldata data) external pure returns (bytes memory);
     function huffmanEncode(bytes calldata data) external pure returns (bytes memory);
 }
-```text
+```
 
 ### AI Compute Metadata
 
@@ -274,7 +274,7 @@ interface IAIComputeMetadata {
         bytes calldata testInput
     ) external returns (ModelMetrics memory);
 }
-```text
+```
 
 ### Batch Aggregation
 
@@ -339,7 +339,7 @@ interface IBatchAggregation {
         address[] calldata signers
     ) external view returns (bool);
 }
-```text
+```
 
 ### Cross-Rollup Messaging
 
@@ -395,7 +395,7 @@ interface ICrossRollupMessaging {
         bytes calldata proof
     ) external view returns (bool);
 }
-```text
+```
 
 ### Quantum-Resistant Extensions
 
@@ -454,7 +454,7 @@ interface IQuantumResistant {
         address account
     ) external view returns (bool);
 }
-```text
+```
 
 ### Encoding Specifications
 
@@ -572,7 +572,7 @@ describe("Block Format", () => {
         expect(ratio).to.be.gt(10); // At least 10x compression
     });
 });
-```text
+```
 
 ### Transaction Compression Tests
 
@@ -616,7 +616,7 @@ describe("Transaction Compression", () => {
         }
     });
 });
-```text
+```
 
 ### AI Metadata Tests
 
@@ -664,7 +664,7 @@ describe("AI Compute Metadata", () => {
         expect(await aiMetadata.validateComputeProof(execution, proof)).to.be.true;
     });
 });
-```text
+```
 
 ### Cross-Rollup Tests
 
@@ -700,7 +700,7 @@ describe("Cross-Rollup Messaging", () => {
         expect(batch.aggregatedProof).to.not.be.null;
     });
 });
-```text
+```
 
 ### Quantum Signature Tests
 

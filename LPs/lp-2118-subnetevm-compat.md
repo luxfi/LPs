@@ -51,7 +51,7 @@ type ChainConfig struct {
     // ... existing fields
     LP118Timestamp *uint64 `json:"lp118Timestamp,omitempty"`
 }
-```text
+```
 
 When `LP118Timestamp` is set:
 1. Enables Subnet-EVM transaction format parsing
@@ -128,7 +128,7 @@ func parseTransaction(data []byte, isLP118Active bool) (*Transaction, error) {
     // Fall back to Lux native format
     return parseLuxTx(data)
 }
-```text
+```
 
 #### 2. Precompile Mapping
 

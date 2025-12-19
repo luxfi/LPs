@@ -22,7 +22,7 @@ The Teleport Bridge System spans multiple LPs covering threshold cryptography, b
 
 ## System Overview
 
-```text
+```
 +-------------------------------------------------------------------------+
 |                         Lux Network Chain Architecture                   |
 +-------------------------------------------------------------------------+
@@ -156,7 +156,7 @@ type ManagedKey struct {
     PartyIDs     []party.ID         // Current signer set
     Generation   uint32             // Incremented on reshare
 }
-```text
+```
 
 ### B-Chain (BridgeVM) - LP-0331
 
@@ -176,7 +176,7 @@ type BridgeState struct {
     AssetRegistry      map[AssetID]*AssetInfo
     ChainStates        map[uint64]*ChainState
 }
-```text
+```
 
 ### Teleport Architecture - LP-0332
 
@@ -196,13 +196,13 @@ LSS-based rotation without key reconstruction:
 - **Triggers**: Validator changes, proactive refresh, emergency rotation
 - **Rollback**: Safe reversion to previous generation on failure
 
-```text
+```
 Generation 0: Parties A, B, C (2-of-3)
      |
      | ReshareTx(newParties=[A, B, D, E], threshold=3)
      v
 Generation 1: Parties A, B, D, E (3-of-4)  <- Same public key!
-```text
+```
 
 ### Per-Asset Key Management - LP-0334
 
@@ -280,7 +280,7 @@ Five core contracts for on-chain bridge operations:
     }
   }
 }
-```text
+```
 
 ## Quick Start Guide
 
@@ -298,7 +298,7 @@ cd ~/work/lux/node
   --threshold-config='{"threshold":3,"totalParties":5}' \
   --http-port=9630 \
   --staking-port=9631
-```text
+```
 
 ### 2. Joining the Signer Committee
 
@@ -316,7 +316,7 @@ curl -X POST http://localhost:9630/ext/bc/T/rpc \
       "publicKey": "0x..."
     }
   }'
-```text
+```
 
 ### 3. Initiating a Bridge Transfer
 
@@ -337,7 +337,7 @@ const { depositId } = await bridgeClient.initiateDeposit({
 
 // Monitor status
 const status = await bridgeClient.getBridgeStatus(depositId);
-```text
+```
 
 ### 4. Requesting a Threshold Signature
 
@@ -356,7 +356,7 @@ curl -X POST http://localhost:9630/ext/bc/T/rpc \
       "deadline": 1000
     }
   }'
-```text
+```
 
 ## Repository Map
 
@@ -371,7 +371,7 @@ curl -X POST http://localhost:9630/ext/bc/T/rpc \
 
 ### Key Source Files
 
-```text
+```
 node/vms/thresholdvm/
 ├── vm.go                   # ThresholdVM implementation
 ├── state.go                # State management

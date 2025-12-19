@@ -35,7 +35,7 @@ Guidelines, best practices, and general information:
 
 ## LP Lifecycle
 
-```text
+```
 Draft → Review → Last Call → Final
          ↓           ↓
     Withdrawn    Stagnant

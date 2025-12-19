@@ -73,7 +73,7 @@ Output: (xᵢ, Y)
 
 #### 2. Signing Protocol (2 Rounds)
 
-```text
+```
 Input: Message m, signers S ⊆ P with |S| = t
 Output: Schnorr signature (R, z)
 
@@ -104,7 +104,7 @@ Output: (R, z)
 
 #### 3. Taproot Support (BIP-340)
 
-```text
+```
 Taproot Adjustments:
 1. Even Y-coordinate:
    If Y has odd y-coordinate, negate all shares: xᵢ = -xᵢ
@@ -148,7 +148,7 @@ rhoHash.WriteAny(D[i], E[i])  // May use affine or projective
 dBytes, _ := D[i].MarshalBinary()  // Canonical bytes
 eBytes, _ := E[i].MarshalBinary()
 rhoHash.WriteAny(dBytes, eBytes)
-```text
+```
 
 This ensures all parties compute identical binding values ρ, preventing signature failures.
 
@@ -178,7 +178,7 @@ type TaprootConfig struct {
     Config
     PublicKey    *taproot.PublicKey  // X-only coordinate
 }
-```text
+```
 
 #### Performance Characteristics
 
@@ -217,7 +217,7 @@ Benchmarks (3-of-5 threshold):
 
 ### Integration Architecture
 
-```text
+```
 ┌─────────────────────────────────────────┐
 │            Lux T-Chain MVM              │
 ├─────────────────────────────────────────┤

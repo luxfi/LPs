@@ -134,7 +134,7 @@ interface IProposerAdapterHatsV1 {
 
 ### File Structure
 
-```text
+```
 contracts/contracts/strategies/
 ├── StrategyV1.sol                           # Base strategy
 ├── voting-weight/

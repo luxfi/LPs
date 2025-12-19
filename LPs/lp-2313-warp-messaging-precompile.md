@@ -33,7 +33,7 @@ Cross-chain interoperability requires secure message passing with cryptographic 
 ## Specification
 
 ### Precompile Address
-```text
+```
 0x0200000000000000000000000000000000000008
 ```markdown
 

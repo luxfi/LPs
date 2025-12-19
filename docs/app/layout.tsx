@@ -1,19 +1,19 @@
 import './global.css';
 import { RootProvider } from '@hanzo/docs/ui/provider/base';
 import { NextProvider } from '@hanzo/docs/core/framework/next';
-import { Inter, Roboto_Mono } from 'next/font/google';
+import { Geist, Geist_Mono } from 'next/font/google';
 import type { ReactNode } from 'react';
 import { SearchDialog } from '@/components/search-dialog';
 
-const inter = Inter({
+const geist = Geist({
   subsets: ['latin'],
-  variable: '--font-inter',
+  variable: '--font-geist',
   display: 'swap',
 });
 
-const robotoMono = Roboto_Mono({
+const geistMono = Geist_Mono({
   subsets: ['latin'],
-  variable: '--font-roboto-mono',
+  variable: '--font-geist-mono',
   display: 'swap',
 });
 
@@ -50,7 +50,7 @@ export const metadata = {
 
 export default function Layout({ children }: { children: ReactNode }) {
   return (
-    <html lang="en" className={`${inter.variable} ${robotoMono.variable}`} suppressHydrationWarning>
+    <html lang="en" className={`${geist.variable} ${geistMono.variable}`} suppressHydrationWarning>
       <head>
         {/* Prevent flash - respect system preference or stored preference */}
         <script

@@ -89,7 +89,7 @@ type Order struct {
     Commitment  Hash       // Hidden order hash
     ZKProof     []byte     // Validity proof
 }
-```text
+```
 
 ### GPU-Accelerated Matching
 
@@ -129,7 +129,7 @@ __global__ void match_orders_kernel(
         }
     }
 }
-```text
+```
 
 ### Commit-Reveal MEV Protection
 
@@ -185,7 +185,7 @@ contract CommitRevealDEX {
         delete revealedOrders;
     }
 }
-```text
+```
 
 ### Zero-Knowledge Privacy Layer
 
@@ -233,7 +233,7 @@ impl Circuit<Fr> for TradingCircuit {
         Ok(())
     }
 }
-```text
+```
 
 ### Liquidity Aggregation
 
@@ -272,7 +272,7 @@ func (a *LiquidityAggregator) FindBestPath(
 
     return paths[:10], nil  // Top 10 paths
 }
-```text
+```
 
 ### Cross-Chain Settlement
 
@@ -303,7 +303,7 @@ func (dex *DEX) SettleCrossChain(
 
     return dex.warp.SendMessage(msg)
 }
-```text
+```
 
 ## Rationale
 
@@ -354,7 +354,7 @@ func TestMEVProtection(t *testing.T) {
     err = dex.RevealOrder(order, proof)
     assert.NoError(t, err)
 }
-```text
+```
 
 ## Reference Implementation
 
@@ -433,7 +433,7 @@ Liquidity Pool Fee: 0.05% - 1% (pool-specific)
 Cross-Chain Fee: 0.2%
 Settlement Timeout: 1 hour
 Proof Verification Gas: 50,000
-```text
+```
 
 **Liquidity Aggregation**:
 ```sql
@@ -442,7 +442,7 @@ Price Impact Threshold: 5%
 Update Frequency: Every 10 seconds
 Cache TTL: 30 seconds
 Fallback Strategy: Direct pool only
-```text
+```
 
 **ZK Privacy Parameters**:
 ```yaml
@@ -452,7 +452,7 @@ Field: BN254
 Proof Size: 32 KB
 Proof Generation Time: ~45 ms
 Verification Gas: 150,000
-```text
+```
 
 ### Source Code References
 
@@ -477,7 +477,7 @@ Benchmarks run on Apple M1 Max (2025-12-11):
 
 ### Order Book Performance
 
-```text
+```
 BenchmarkOrderBook-10              1,269,255 orders/sec    787.9 ns/op
 BenchmarkOrderBookParallel-10        684,184 orders/sec   1,462.0 ns/op
 BenchmarkCriticalOrderMatching/100   714,820 orders/sec   1,398.8 ns/op

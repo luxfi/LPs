@@ -54,11 +54,11 @@ var AIVMID = constants.AIVMID // ids.ID{'a', 'i', 'v', 'm'}
 // Create A-Chain VM
 factory := &avm.Factory{}
 vm, err := factory.New(logger)
-```text
+```
 
 ### Directory Structure
 
-```text
+```
 node/vms/aivm/
 ├── attestation/      # TEE attestation logic
 ├── config/           # Chain configuration
@@ -68,7 +68,7 @@ node/vms/aivm/
 ├── factory.go        # VM factory
 ├── vm.go             # Main VM implementation
 └── *_test.go         # Tests
-```text
+```
 
 ### Core Components
 
@@ -90,7 +90,7 @@ type AttestationRegistry struct {
     RootCAs     map[TEEVendor][]byte
     MerkleRoot  [32]byte
 }
-```text
+```
 
 #### 2. Proof of Execution
 
@@ -104,7 +104,7 @@ type ProofOfExecution struct {
     OutputHash  [32]byte
     Timestamp   time.Time
 }
-```text
+```
 
 #### 3. NVTrust Chain-Binding (Double-Spend Prevention)
 
@@ -137,7 +137,7 @@ type SpentKey [32]byte
 
 // SpentSet tracks all minted work to prevent double-spend
 type SpentSet map[SpentKey]bool
-```text
+```
 
 **Verification Flow:**
 
@@ -170,7 +170,7 @@ func (vm *VM) VerifyAndMint(receipt *AttestedReceipt) error {
     reward := calculateReward(receipt.WorkMetrics)
     return vm.mintReward(receipt.Context.DeviceID, reward)
 }
-```text
+```
 
 **Key Invariant:** The same AI work can't be minted on Hanzo, Lux, AND Zoo - only on the chain specified in the pre-committed `WorkContext.ChainID`.
 
@@ -247,7 +247,7 @@ interface IAttestationChain {
     function getDeviceStatus(bytes32 deviceId) external view returns (DeviceStatus memory);
     function updateRootCA(TEEVendor vendor, bytes calldata newRootCA) external onlyGovernance;
 }
-```text
+```
 
 ### Precompiled Contracts
 
@@ -275,7 +275,7 @@ type PricingModel struct {
     MinDuration uint64
     MaxDuration uint64
 }
-```text
+```
 
 ### Task Scheduling
 
@@ -300,7 +300,7 @@ const (
     TaskCompleted
     TaskFailed
 )
-```text
+```
 
 ### API Endpoints
 
@@ -317,14 +317,14 @@ const (
 
 #### REST Endpoints
 
-```text
+```
 POST /ext/bc/A/attestation/verify
 GET  /ext/bc/A/devices/{deviceId}
 POST /ext/bc/A/tasks/submit
 GET  /ext/bc/A/tasks/{taskId}
 GET  /ext/bc/A/providers
 POST /ext/bc/A/providers/register
-```text
+```
 
 ### Oracle-Based Pricing
 
@@ -339,7 +339,7 @@ interface IComputePriceOracle {
     function getGPUPrice(string calldata gpuClass) external view returns (GPUPrice memory);
     function updatePrices(GPUPrice[] calldata prices) external onlyOracle;
 }
-```text
+```
 
 ### Configuration
 
@@ -355,7 +355,7 @@ interface IComputePriceOracle {
     "nvtrustEnabled": true
   }
 }
-```text
+```
 
 ### Performance
 

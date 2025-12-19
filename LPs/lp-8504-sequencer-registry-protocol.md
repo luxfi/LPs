@@ -116,7 +116,7 @@ interface ISequencerRegistry {
     event SequencerSlashed(uint256 indexed sequencerId, uint256 amount);
     event StakeDelegated(uint256 indexed sequencerId, address delegator, uint256 amount);
 }
-```text
+```
 
 ### Selection Mechanisms
 
@@ -187,7 +187,7 @@ interface ISequencerSelection {
     function requestRandomness() external returns (uint256 requestId);
     function fulfillRandomness(uint256 requestId, uint256 randomness) external;
 }
-```text
+```
 
 ### MEV Mitigation
 
@@ -262,7 +262,7 @@ interface IMEVMitigation {
     event TransactionRevealed(bytes32 indexed txId);
     event ThresholdDecrypted(bytes32 indexed txId);
 }
-```text
+```
 
 ### AI Workload Scheduling
 
@@ -337,7 +337,7 @@ interface IAIWorkloadScheduler {
     event JobCompleted(bytes32 indexed jobId, uint256 gasUsed);
     event WorkloadRebalanced(uint256 numMigrations);
 }
-```text
+```
 
 ### Distributed Training Coordination
 
@@ -435,7 +435,7 @@ interface ITrainingCoordination {
     event GradientSubmitted(bytes32 indexed clusterId, uint256 epoch, uint256 sequencerId);
     event WeightsBroadcast(bytes32 indexed clusterId, bytes32 weightsHash);
 }
-```text
+```
 
 ### Performance Monitoring
 
@@ -508,7 +508,7 @@ interface IPerformanceMonitor {
     event SLAViolation(uint256 indexed sequencerId, bytes violations);
     event ReputationUpdated(uint256 indexed sequencerId, uint256 newScore);
 }
-```text
+```
 
 ## Rationale
 
@@ -595,7 +595,7 @@ describe("Sequencer Registry", () => {
         expect(info.stake).to.be.lt(initialStake);
     });
 });
-```text
+```
 
 ### Selection Mechanism Tests
 
@@ -641,7 +641,7 @@ describe("Sequencer Selection", () => {
         expect(winner).to.equal(accounts[1].address);
     });
 });
-```text
+```
 
 ### MEV Mitigation Tests
 
@@ -681,7 +681,7 @@ describe("MEV Mitigation", () => {
         expect(fairOrder).to.deep.equal(fairOrder2);
     });
 });
-```text
+```
 
 ### AI Workload Tests
 
@@ -736,7 +736,7 @@ describe("AI Workload Scheduling", () => {
         expect(Math.abs(newLoad1 - newLoad2)).to.be.lt(Math.abs(load1 - load2));
     });
 });
-```text
+```
 
 ### Distributed Training Tests
 

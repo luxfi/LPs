@@ -103,7 +103,7 @@ go build -o bin/lux-cli ./cmd/main.go
 # Or using make (if available)
 make build
 make install  # Install to $GOPATH/bin
-```text
+```
 
 ### Testing
 
@@ -121,7 +121,7 @@ go test ./cmd/keycmd -v
 
 # Integration tests (if available)
 go test -tags=integration ./...
-```text
+```
 
 ### Documentation
 

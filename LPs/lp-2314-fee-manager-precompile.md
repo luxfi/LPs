@@ -33,7 +33,7 @@ The Fee Manager precompile enables chains to implement custom fee economics with
 ## Specification
 
 ### Precompile Address
-```text
+```
 0x0200000000000000000000000000000000000003
 ```markdown
 
@@ -51,12 +51,12 @@ function setFeeConfig(
     uint256 maxBlockGasCost,
     uint256 blockGasCostStep
 ) external;
-```text
+```
 
 #### getFeeConfig
 ```solidity
 function getFeeConfig() external view returns (FeeConfig memory);
-```text
+```
 
 #### getLastChangedAt
 ```solidity
@@ -253,7 +253,7 @@ abstract contract FeeManagerValidator {
     function requireValidFeeConfig(FeeConfig memory config) internal view;
     function emitFeeConfigChangedEvent(FeeConfig memory newConfig) internal;
 }
-```text
+```
 
 ## Implementation
 
@@ -290,14 +290,14 @@ abstract contract FeeManagerValidator {
 cd ~/work/lux/evm/precompile/contracts/fee-manager
 go test -v ./...
 # Tests: setFeeConfig, getFeeConfig, access control, parameter validation
-```text
+```
 
 **Integration Tests**:
 ```bash
 cd ~/work/lux/node/vms/evm/lp176
 go test -v ./...
 # Tests: Base fee adjustment, target utilization, fee multiplier
-```text
+```
 
 **Solidity Tests**:
 ```bash
@@ -333,7 +333,7 @@ curl -X POST --data '{
   "method":"eth_feeHistory",
   "params":["10", "latest", [25, 50, 75]]
 }' http://localhost:9630/ext/bc/C/rpc
-```text
+```
 
 **Query Precompile Config**:
 ```solidity

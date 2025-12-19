@@ -125,7 +125,7 @@ func (fpc *FPCEngine) Consensus(txID TxID) Opinion {
 
     return opinion
 }
-```text
+```
 
 ### Phase-Shift Threshold Function
 
@@ -150,7 +150,7 @@ func (fpc *FPCEngine) computeThreshold(round int, temperature float64) float64 {
 
     return math.Max(0.51, math.Min(0.99, threshold))
 }
-```text
+```
 
 **Lemma 1**: The phase-shift function prevents metastability by ensuring θ(r) → θ_max as r → ∞.
 
@@ -191,7 +191,7 @@ func cryptoRandInt(min, max int) int {
     val := binary.BigEndian.Uint64(b[:])
     return min + int(val%uint64(max-min))
 }
-```text
+```
 
 ### Query Optimization
 
@@ -240,7 +240,7 @@ func (fpc *FPCEngine) queryWithBackoff(nodes []NodeID, txID TxID, round int) []O
 
     return collected
 }
-```text
+```
 
 ### Confidence Computation
 
@@ -260,7 +260,7 @@ func (fpc *FPCEngine) computeConfidence(agreements int, round int) float64 {
 
     return confidence
 }
-```text
+```
 
 ### Byzantine Fault Tolerance
 
@@ -332,7 +332,7 @@ func (oc *OpinionCache) Get(node NodeID, txID TxID) (Opinion, bool) {
     }
     return Opinion{}, false
 }
-```text
+```
 
 #### 2. Batch Queries
 ```go
@@ -350,7 +350,7 @@ func (fpc *FPCEngine) batchConsensus(txIDs []TxID) []Opinion {
 
     return results
 }
-```text
+```
 
 ## Rationale
 
@@ -402,7 +402,7 @@ func (hc *HybridConsensus) Consensus(tx Transaction) {
 
     return opinion
 }
-```text
+```
 
 ## Test Cases
 
@@ -420,7 +420,7 @@ def test_convergence_rounds():
     # Should converge in O(log n) rounds
     assert mean(rounds_to_consensus) < 5
     assert max(rounds_to_consensus) < 10
-```text
+```
 
 ### Test 2: Byzantine Resilience
 ```python
@@ -438,7 +438,7 @@ def test_byzantine_strategies():
         # Should maintain consensus despite 30% Byzantine
         assert result.agreement_rate > 0.999
         assert result.avg_confidence > 0.99
-```text
+```
 
 ### Test 3: Phase-Shift Effectiveness
 ```python
@@ -452,7 +452,7 @@ def test_phase_shift():
     adaptive_fpc = FPCEngine(theta_min=0.5, theta_max=0.8)
     adaptive_result = run_with_network_partition(adaptive_fpc)
     assert adaptive_result.oscillations == 0
-```text
+```
 
 ## Reference Implementation
 
@@ -549,7 +549,7 @@ cd consensus/core/dag
 go test -v ./... -run Flare
 go test -v ./... -run Finalization
 go test -v ./... -run Vertex
-```text
+```
 
 **Test Coverage** (8 unit tests, 96.4% code coverage):
 - TestFlareCausalOrdering - Validates dependency walking order
@@ -562,12 +562,12 @@ go test -v ./... -run Vertex
 - TestFlarePerformanceUnderLoad - Performance under 1000 TPS
 
 **Benchmark Results** (Apple M1 Max):
-```text
+```
 BenchmarkFlareCausalWalk-10     2,854 ops/sec (350μs/op)
 BenchmarkCertificateDetection-10 8,392 ops/sec (119μs/op)
 BenchmarkVertexFinalization-10   5,621 ops/sec (178μs/op)
 BenchmarkHorizonAdvance-10       12,447 ops/sec (80μs/op)
-```text
+```
 
 **GitHub**: https://github.com/luxfi/node/tree/main/consensus/core/dag
 

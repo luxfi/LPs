@@ -72,7 +72,7 @@ The Teleport Bridge Architecture addresses these challenges by:
 
 The Teleport system operates across two specialized chains within Lux Network:
 
-```text
+```
                      ┌──────────────────────────────────────────────────────┐
                      │                  Lux Primary Network                 │
                      │                                                       │
@@ -175,7 +175,7 @@ The Teleport network requires a minimum of 5 nodes running both BridgeVM and Thr
 
 #### Network Topology
 
-```text
+```
 ┌──────────────────────────────────────────────────────────────────────────────┐
 │                    Teleport Network (5-Node Minimum)                          │
 ├──────────────────────────────────────────────────────────────────────────────┤
@@ -272,7 +272,7 @@ The Teleport network requires a minimum of 5 nodes running both BridgeVM and Thr
     "signatureAggregation": true
   }
 }
-```text
+```
 
 #### Network Bootstrap Script
 
@@ -355,7 +355,7 @@ main() {
 }
 
 main "$@"
-```text
+```
 
 #### VM Aliases Configuration
 
@@ -367,7 +367,7 @@ main "$@"
   "bchain-mainnet": "bridgevm",
   "keychain-mainnet": "keymanagementvm"
 }
-```text
+```
 
 ### Warp Messaging Integration
 
@@ -375,7 +375,7 @@ Teleport uses Lux Warp Messaging for secure cross-chain communication between T-
 
 #### Warp Message Flow
 
-```text
+```
 ┌─────────────────────────────────────────────────────────────────────────────┐
 │                         Warp Messaging Architecture                          │
 ├─────────────────────────────────────────────────────────────────────────────┤
@@ -404,7 +404,7 @@ Teleport uses Lux Warp Messaging for secure cross-chain communication between T-
 │  - Replay protection via message nonces                                      │
 │                                                                              │
 └─────────────────────────────────────────────────────────────────────────────┘
-```text
+```
 
 #### Warp Message Types
 
@@ -481,7 +481,7 @@ func (h *WarpMessageHandler) HandleMessage(msg *warp.Message) error {
 	// 4. Initiate MPC signing
 	return h.vm.ProcessSignatureRequest(&payload)
 }
-```text
+```
 
 #### Warp Configuration
 
@@ -496,7 +496,7 @@ func (h *WarpMessageHandler) HandleMessage(msg *warp.Message) error {
   "allowed-incoming-warp-source-chains": ["B"],
   "outgoing-warp-destinations": ["B", "C"]
 }
-```text
+```
 
 **chains/B/config.json**:
 
@@ -508,7 +508,7 @@ func (h *WarpMessageHandler) HandleMessage(msg *warp.Message) error {
   "allowed-incoming-warp-source-chains": ["T"],
   "outgoing-warp-destinations": ["T", "C"]
 }
-```text
+```
 
 ### T-Chain and B-Chain Coordination
 
@@ -602,7 +602,7 @@ func (c *BridgeCoordinator) HandleSignatureResponse(
 
 	return nil
 }
-```text
+```
 
 ### Key Generation Ceremony
 
@@ -658,7 +658,7 @@ curl -X POST http://node1:9630/ext/bc/T/rpc \
     }
   }'
 # Returns: {"verified": true, "signers": [1, 2, 3, 4, 5]}
-```text
+```
 
 #### DKG Protocol Details
 
@@ -715,13 +715,13 @@ type DKGRound3 struct {
 	PublicKey       curve.Point      // Y = sum(C_j,0)
 	Verification    []byte           // Final verification proof
 }
-```text
+```
 
 ### Bridge Flow: Deposit (External -> Lux)
 
 Complete deposit flow from Ethereum to Lux C-Chain:
 
-```text
+```
 ┌──────────┐     ┌──────────┐     ┌──────────┐     ┌──────────┐     ┌──────────┐
 │   User   │     │ Ethereum │     │ Relayer  │     │ B-Chain  │     │ C-Chain  │
 └────┬─────┘     └────┬─────┘     └────┬─────┘     └────┬─────┘     └────┬─────┘
@@ -918,13 +918,13 @@ contract TeleportVault is ITeleportVault, ReentrancyGuard, Pausable {
         );
     }
 }
-```text
+```
 
 ### Bridge Flow: Withdraw (Lux -> External)
 
 Complete withdrawal flow from Lux C-Chain to Ethereum:
 
-```text
+```
 ┌──────────┐     ┌──────────┐     ┌──────────┐     ┌──────────┐     ┌──────────┐
 │   User   │     │ C-Chain  │     │ B-Chain  │     │ T-Chain  │     │ Ethereum │
 └────┬─────┘     └────┬─────┘     └────┬─────┘     └────┬─────┘     └────┬─────┘
@@ -954,7 +954,7 @@ Complete withdrawal flow from Lux C-Chain to Ethereum:
      │                 │                 │                 │                 │
      │◄────────────────────────────────────────────────────────────────────────
      │  8. Receive native tokens                                             │
-```text
+```
 
 ### Supported Chain Types
 
@@ -1036,7 +1036,7 @@ func (b *BitcoinBridge) SignWithdrawal(
 	}
 	return schnorr.ParseSignature(sig)
 }
-```text
+```
 
 ### SDK Usage
 
@@ -1220,7 +1220,7 @@ async function main(): Promise<void> {
   );
   console.log(`Bridge complete: ${destTxHash}`);
 }
-```text
+```
 
 #### Go SDK
 
@@ -1389,7 +1389,7 @@ func main() {
 	}
 	fmt.Printf("Deposit ID: %s\n", deposit.DepositID)
 }
-```text
+```
 
 ### Deployment Guide
 
@@ -1416,7 +1416,7 @@ mkdir -p /opt/teleport/{config,certs,data,logs}
   --threshold 3 \
   --parties 5 \
   --output /opt/teleport/config
-```text
+```
 
 **Step 2: Deploy Infrastructure**
 
@@ -1429,7 +1429,7 @@ for i in {1..5}; do
   scp -r /opt/teleport node$i:/opt/teleport
   ssh node$i "systemctl enable --now teleport-node"
 done
-```text
+```
 
 **Step 3: Initialize Key Generation**
 
@@ -1456,7 +1456,7 @@ for i in {1..5}; do
     -d '{"jsonrpc":"2.0","id":1,"method":"threshold_getAddress","params":{"keyId":"bridge-main"}}' \
     | jq .
 done
-```text
+```
 
 **Step 4: Deploy Bridge Contracts**
 
@@ -1476,7 +1476,7 @@ forge script script/DeployVault.s.sol \
   --broadcast
 
 # Repeat for other chains...
-```text
+```
 
 **Step 5: Configure Relayers**
 
@@ -1484,7 +1484,7 @@ forge script script/DeployVault.s.sol \
 # Start relayer service
 cd ~/work/lux/bridge/relayer
 ./relayer --config /opt/teleport/config/relayer.json
-```text
+```
 
 #### Testnet Deployment
 
@@ -1505,12 +1505,12 @@ For testnet, use reduced requirements:
     "protocol": "lss"
   }
 }
-```text
+```
 
 ```bash
 # Deploy testnet with 3 nodes
 ./scripts/deploy-testnet.sh --nodes 3 --threshold 2
-```text
+```
 
 #### Monitoring and Operations
 
@@ -1528,7 +1528,7 @@ curl http://localhost:9630/ext/bc/B/rpc \
 # Monitor signing sessions
 curl http://localhost:9630/ext/bc/T/rpc \
   -d '{"jsonrpc":"2.0","id":1,"method":"threshold_getPendingSessions","params":{}}'
-```text
+```
 
 ### Fee Distribution Model
 
@@ -1567,7 +1567,7 @@ func (c *FeeConfig) CalculateFee(amount *big.Int) *big.Int {
 
 	return totalFee
 }
-```text
+```
 
 ## Rationale
 
@@ -1613,12 +1613,12 @@ func (c *FeeConfig) CalculateFee(amount *big.Int) *big.Int {
 
 ### Upgrade Path
 
-```text
+```
 Phase 1 (Current): Deploy T-Chain + B-Chain with CGG21
 Phase 2 (Q1 2025): Enable LSS for dynamic resharing
 Phase 3 (Q2 2025): Add Ringtail dual signatures
 Phase 4 (Q3 2025): Full quantum-safe transition
-```text
+```
 
 ## Reference Implementation
 
@@ -1737,7 +1737,7 @@ See the full test suite in [github.com/luxfi/bridge/tests](https://github.com/lu
 
 ### Revenue Distribution
 
-```text
+```
 50% -> Validator rewards (active signers)
 20% -> Relayer incentives
 20% -> DAO treasury (insurance fund)

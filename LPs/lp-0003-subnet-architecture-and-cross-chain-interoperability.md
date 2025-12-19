@@ -69,7 +69,7 @@ LP-3 introduces Lux’s subnet architecture, wherein the network consists of mul
 ```bash
 cd ~/work/lux/node/chains
 go test -v ./...
-```text
+```
 
 ### Warp Messaging (Cross-Subnet Communication)
 

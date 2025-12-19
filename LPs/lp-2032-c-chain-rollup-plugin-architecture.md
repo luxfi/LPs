@@ -29,7 +29,7 @@ The Lux C-Chain guarantees EVM equivalence with Ethereum (LP-26). To extend this
 ### Repository Layout
 
 Component directories under the C-Chain client:
-```text
+```
 cmd/geth/                # geth CLI entrypoint
 core/                     # Ethereum base-chain implementation
 consensus/                # Base-chain consensus (PoW/PoS)
@@ -54,7 +54,7 @@ go build -tags "rollup_optimism" ./cmd/geth
 
 # Run geth with the OP plugin enabled
 ./geth --rollup.optimism --rollup.config ./config/optimism.toml
-```text
+```
 
 ### CLI Integration
 
@@ -71,7 +71,7 @@ func init() {
         optimism.RegisterCommands(rootCmd)
     }
 }
-```text
+```
 
 ### Configuration
 
@@ -83,7 +83,7 @@ type = "optimism"
 genesis = "./optimism/genesis.json"
 sequencer.enabled = true
 relay.rpc = "https://mainnet.optimism.io"
-```text
+```
 
 ### Rollup Module API
 
@@ -96,7 +96,7 @@ type RollupPlugin interface {
     StartSequencer(ctx context.Context) error
     RegisterRPC(rpcServer *rpc.Server)
 }
-```text
+```
 
 For Optimism, see `rollup/optimism/plugin.go` and subpackages.
 
@@ -117,14 +117,14 @@ The plugin architecture is fully additive. Without the `rollup_*` build tag or `
 ## Reference Implementation
 
 Proof-of-concept module for Optimism integration lives in the `geth` repository under `rollup/optimism/`:
-```text
+```
 geth/rollup/optimism/
 ├─ evm/
 ├─ consensus/
 ├─ payload/
 ├─ rpc/
 └─ plugin.go
-```text
+```
 
 ### References for OP‑Geth Architecture
 
@@ -155,7 +155,7 @@ To support unified node infrastructure, the Lux Node monorepo must embed the OP 
 ```bash
 cd ~/work/lux/geth
 go build -tags "rollup_optimism" -o geth ./cmd/geth
-```text
+```
 
 **Plugin Loading Example**:
 ```go
@@ -164,13 +164,13 @@ if flags.Rollup == "optimism" {
     rollupPlugin := optimism.New(config)
     node.RegisterRollupPlugin(rollupPlugin)
 }
-```text
+```
 
 **Testing**:
 ```bash
 cd ~/work/lux/geth
 go test ./rollup/optimism/... -v
-```text
+```
 
 ### RPC Extensions
 
@@ -193,7 +193,7 @@ Rolling up to Ethereum mainnet incurs L1 gas costs proportional to the data publ
 With EIP‑4844 (proto‑dank sharding), data gas cost falls to ~1.6 gas/byte—reducing cost by ~10×. Under the same assumptions, L1 cost per L2 tx drops to ~$0.015.
 
 Sequencers (node operators) collect these L1 fees by charging an L2 base fee designed to cover L1 gas + operator margin. A typical fee model:
-```text
+```
 L2 base fee = (estimated L1 gas per L2 tx × current gas price) + operator service fee
 ```
 Operator margins should cover infrastructure, storage, and bandwidth costs. Larger batch sizes (e.g. 100–500 tx) or longer aggregation windows reduce per‑tx gas costs.

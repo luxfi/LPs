@@ -53,7 +53,7 @@ enum AuditType {
   OPERATIONAL = "operational",
   PENETRATION = "penetration",
 }
-```text
+```
 
 #### Audit Process
 ```typescript
@@ -82,7 +82,7 @@ interface AuditProcess {
     disclosure: DisclosurePolicy;
   };
 }
-```text
+```
 
 ### Vulnerability Classification
 
@@ -121,7 +121,7 @@ interface SeverityMatrix {
   // Risk rating
   getRiskRating(score: number): Severity;
 }
-```text
+```
 
 ### Smart Contract Security Standards
 
@@ -165,7 +165,7 @@ abstract contract SecurityBase {
     _;
   }
 }
-```text
+```
 
 ### Multi-Chain Security
 
@@ -196,7 +196,7 @@ interface CrossChainSecurity {
     };
   };
 }
-```text
+```
 
 ### Incident Response
 
@@ -241,7 +241,7 @@ interface EmergencyProcedures {
     decisionProcess: DecisionTree;
   };
 }
-```text
+```
 
 ### Continuous Security
 
@@ -277,7 +277,7 @@ interface ContinuousSecurity {
     rules: BountyRules;
   };
 }
-```text
+```
 
 ### Security Tooling
 
@@ -311,7 +311,7 @@ interface SecurityToolRequirements {
     expertise: Expertise[];
   };
 }
-```text
+```
 
 ### Audit Report Standards
 
@@ -349,7 +349,7 @@ interface AuditReport {
     signoff: Approval[];
   };
 }
-```text
+```
 
 ### Disclosure Policy
 
@@ -378,7 +378,7 @@ interface DisclosurePolicy {
     publicRelease: ReleaseStrategy;
   };
 }
-```text
+```
 
 ### Compliance and Standards
 
@@ -407,7 +407,7 @@ interface ComplianceRequirements {
     reporting: ReportingRequirement[];
   };
 }
-```text
+```
 
 ## Rationale
 
@@ -465,7 +465,7 @@ function testReentrancyDetection() {
     f.type === "reentrancy"
   ));
 }
-```text
+```
 
 ### Emergency Response Test
 ```typescript

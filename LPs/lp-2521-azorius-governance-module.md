@@ -90,7 +90,7 @@ interface IModuleAzoriusV1 {
 
 ### Proposal Lifecycle
 
-```text
+```
 ┌──────────┐    ┌──────────┐    ┌───────────┐    ┌───────────┐    ┌──────────┐
 │ SUBMIT   │───▶│  ACTIVE  │───▶│ TIMELOCKED│───▶│EXECUTABLE │───▶│ EXECUTED │
 │          │    │ (voting) │    │  (delay)  │    │           │    │          │
@@ -191,7 +191,7 @@ function executeProposal(...) external {
 
 ### File Location
 
-```text
+```
 contracts/contracts/modules/
 ├── ModuleAzoriusV1.sol       # Main Azorius module
 └── ModuleFractalV1.sol       # Fractal (hierarchical) variant

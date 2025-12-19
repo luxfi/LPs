@@ -97,7 +97,7 @@ interface IZKSwap {
         bytes32 publicSpendKey
     ) external returns (StealthAddress memory);
 }
-```text
+```
 
 ### Ring Signature Implementation
 
@@ -149,7 +149,7 @@ interface IRingSignatures {
         bytes32 keyImage
     ) external view returns (bool used);
 }
-```text
+```
 
 ### Stealth Address System
 
@@ -206,7 +206,7 @@ interface IStealthAddresses {
         bytes32 spendPrivateKey
     ) external pure returns (bytes32 stealthPrivateKey);
 }
-```text
+```
 
 ### Bulletproof Range Proofs
 
@@ -258,7 +258,7 @@ interface IBulletproofs {
         AggregatedBulletproof calldata proof
     ) external view returns (bool valid);
 }
-```text
+```
 
 ### Confidential Asset Swaps
 
@@ -314,7 +314,7 @@ interface IConfidentialAssetSwap {
         ConfidentialTx calldata tx
     ) external view returns (bool valid);
 }
-```text
+```
 
 ### Anonymous Order Book
 
@@ -375,7 +375,7 @@ interface IAnonymousOrderBook {
         address token2
     );
 }
-```text
+```
 
 ### Privacy Mixer Integration
 
@@ -430,7 +430,7 @@ interface IPrivacyMixer {
         bytes32 nullifierHash
     ) external view returns (bool);
 }
-```text
+```
 
 ### Compliance and Auditability
 
@@ -488,7 +488,7 @@ interface IComplianceZKSwap {
         bytes calldata complianceProof
     ) external view returns (bool compliant);
 }
-```text
+```
 
 ## Rationale
 
@@ -555,7 +555,7 @@ function testRingSignature() public {
     assertTrue(valid);
     assertFalse(ring.checkKeyImageUsed(sig.keyImage));
 }
-```text
+```
 
 ### Stealth Address Test
 
@@ -592,7 +592,7 @@ function testStealthAddress() public {
     // Verify we can spend
     assertEq(derivePublicKey(stealthPrivKey), stealthPubKey);
 }
-```text
+```
 
 ### Zero-Knowledge Swap Test
 

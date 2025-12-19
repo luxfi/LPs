@@ -52,7 +52,7 @@ A standard network runner removes ad‑hoc scripts and inconsistencies, enabling
 ```bash
 cd ~/work/lux/netrunner
 go test -v ./...
-```text
+```
 
 **Quick Start**:
 ```bash

@@ -39,7 +39,7 @@ Traditional blockchain databases suffer from severe write amplification when sto
 
 ### 1. Complementary Size Characteristics
 
-```text
+```
 Traditional Database Stack:
 ┌─────────────────────────────────────┐
 │         LSM Tree (Everything)        │ ← Large, frequent compactions
@@ -103,7 +103,7 @@ func GenerateVerkleProof(keys [][]byte) {
     // Step 3: Fetch only needed proofs (single value log read each)
     proofs := db.GetValues(structure.RequiredProofs())
 }
-```text
+```
 
 #### State Root Computation
 ```go
@@ -121,7 +121,7 @@ func ComputeStateRoot() {
         iterator.Next()
     }
 }
-```text
+```
 
 ## Implementation Details
 
@@ -154,7 +154,7 @@ opts.ValueLogMaxEntries = 1000000   // 1M entries per file
 // Compression
 opts.Compression = options.Snappy   // Fast compression
 opts.BlockSize = 4096               // 4KB blocks
-```text
+```
 
 ### Performance Characteristics
 
@@ -345,7 +345,7 @@ Traditional LevelDB:  18.2 GB
 Traditional RocksDB:  16.8 GB
 BadgerDB (standard):   12.1 GB
 BadgerDB (optimized):  10.3 GB  ← 39% smaller than RocksDB
-```text
+```
 
 ## Conclusion
 
@@ -381,7 +381,7 @@ func VerifyVerkleProof(key []byte, proof []byte) bool {
     // Verify proof cryptographically
     return verkle.Verify(key, proof, storedProof)
 }
-```text
+```
 
 ### Example 2: Bulk State Updates
 ```go
@@ -396,7 +396,7 @@ func BulkUpdateVerkleState(updates map[string][]byte) error {
     // Single batch commit - minimal write amplification
     return batch.Commit()
 }
-```text
+```
 
 ### Example 3: Memory-Efficient State Iteration
 ```go

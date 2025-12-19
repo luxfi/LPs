@@ -56,7 +56,7 @@ interface ILRC20 {
     event Transfer(address indexed from, address indexed to, uint256 value);
     event Approval(address indexed owner, address indexed spender, uint256 value);
 }
-```text
+```
 
 ### Confidential Transfer Extension
 
@@ -91,7 +91,7 @@ interface ILRC20Confidential {
     event Shield(address indexed from, bytes32 commitment, uint256 amount);
     event Unshield(address indexed to, bytes32 nullifier, uint256 amount);
 }
-```text
+```
 
 ### AI Compute Token Extension
 
@@ -126,7 +126,7 @@ interface ILRC20AICompute {
     event ComputeReleased(bytes32 indexed allocationId);
     event TrainingRewardsDistributed(bytes32 indexed modelUpdateHash, uint256 totalRewards);
 }
-```text
+```
 
 ### zkSNARK Proof Structure
 
@@ -137,7 +137,7 @@ struct ConfidentialProof {
     uint256[2] c;
     uint256[8] publicSignals;  // [nullifierHash, commitmentHash, recipientHash, ...]
 }
-```text
+```
 
 ## Copyright
 
@@ -241,7 +241,7 @@ describe("LRC20 Confidential Transfers", () => {
         ).to.be.revertedWith("Nullifier already used");
     });
 });
-```text
+```
 
 ### AI Compute Tests
 
@@ -272,7 +272,7 @@ describe("LRC20 AI Compute", () => {
         }
     });
 });
-```text
+```
 
 ## Reference Implementation
 

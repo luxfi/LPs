@@ -9,10 +9,11 @@ export default function NotFound() {
 
   useEffect(() => {
     // Check if this is an old-style LP URL that needs redirecting
-    const path = window.location.pathname
+    const path = window.location.pathname.replace(/\/$/, '') // Remove trailing slash
 
-    // Match patterns like /docs/lp-20, /docs/lp-0020, /docs/LP-20
-    const lpMatch = path.match(/\/docs\/lp-?(\d+)$/i)
+    // Match patterns like /docs/lp-20, /docs/lp-0020, /docs/LP-20, /docs/lp-001
+    // Handles any number of leading zeros: lp-1, lp-01, lp-001, lp-0001
+    const lpMatch = path.match(/\/docs\/lp-?0*(\d+)$/i)
 
     if (lpMatch) {
       const lpNumber = parseInt(lpMatch[1], 10)

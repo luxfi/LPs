@@ -55,7 +55,7 @@ interface GovernanceArchitecture {
     quorum: "10% of supply";
   };
 }
-```text
+```
 
 ## Research Findings
 
@@ -120,7 +120,7 @@ contract QuadraticGovernance {
         return y;
     }
 }
-```text
+```
 
 ### 2. Multi-Chain Governance
 
@@ -170,7 +170,7 @@ contract MultiChainGovernance {
         return weightedVotes;
     }
 }
-```text
+```
 
 ### 3. Delegation Systems
 
@@ -233,7 +233,7 @@ contract LiquidDemocracy {
         return power;
     }
 }
-```text
+```
 
 ### 4. Treasury Management
 
@@ -319,7 +319,7 @@ contract ProgrammableTreasury {
         return totalVested - stream.withdrawn;
     }
 }
-```text
+```
 
 ### 5. Proposal Lifecycle
 
@@ -364,7 +364,7 @@ interface ProposalLifecycle {
     };
   };
 }
-```text
+```
 
 ## Recommendations
 

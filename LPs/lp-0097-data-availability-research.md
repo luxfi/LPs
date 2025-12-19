@@ -56,7 +56,7 @@ interface DataUsageProfile {
     centralized: "High-frequency data";
   };
 }
-```text
+```
 
 ## Research Findings
 
@@ -138,7 +138,7 @@ contract DataAvailabilitySampling {
         emit AvailabilitySampled(commitmentId, msg.sender, chunkIndices.length);
     }
 }
-```text
+```
 
 ### 2. Specialized DA Chain Design
 
@@ -207,7 +207,7 @@ contract ZChainDataAvailability {
         );
     }
 }
-```text
+```
 
 ### 3. Rollup Data Availability
 
@@ -286,7 +286,7 @@ contract RollupDataAvailability {
         }
     }
 }
-```text
+```
 
 ### 4. Hybrid Storage Solutions
 
@@ -360,7 +360,7 @@ contract HybridStorage {
         return _retrieveData(record);
     }
 }
-```text
+```
 
 ### 5. State Rent and Pruning
 
@@ -417,7 +417,7 @@ contract StateRent {
         emit StateEvicted(stateId, entry.owner);
     }
 }
-```text
+```
 
 ## Recommendations
 

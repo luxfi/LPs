@@ -41,7 +41,7 @@ This LP specifies the DEX Trading Engine - the core component of the Lux DEX sid
 
 ## Architecture: DEX Sidecar Network
 
-```text
+```
 ┌──────────────────────────────────────────────────────────────────────┐
 │                         DEX SIDECAR NETWORK                          │
 │                     (Standalone from Lux Node)                       │
@@ -91,7 +91,7 @@ Benchmarks run on Apple M1 Max, 2025-12-11:
 
 ### Order Book Operations
 
-```text
+```
 BenchmarkOrderBook-10              1081490 orders/sec    787.9 ns/op
 BenchmarkOrderBookParallel-10       684184 orders/sec   1462.0 ns/op
 BenchmarkCriticalOrderMatching/100   714820 orders/sec   1398.8 ns/op
@@ -130,7 +130,7 @@ func BenchmarkCriticalOrderMatching(b *testing.B) {
         })
     }
 }
-```text
+```
 
 ## Order Types
 
@@ -170,7 +170,7 @@ const (
     FOK                     // Fill Or Kill
     GTD                     // Good Till Date
 )
-```text
+```
 
 ### Advanced Orders
 
@@ -203,7 +203,7 @@ type TWAPOrder struct {
     Interval    time.Duration `json:"interval"`
     SliceSize   int           `json:"slice_size"`
 }
-```text
+```
 
 ## Matching Engine
 
@@ -253,7 +253,7 @@ func (ob *OrderBook) Match(incoming Order) []Trade {
     
     return trades
 }
-```text
+```
 
 ### Order Book Data Structure
 
@@ -276,7 +276,7 @@ type PriceLevel struct {
     Orders []*Order  // Time-ordered queue
     Total  decimal.Decimal
 }
-```text
+```
 
 ## DAG Consensus Integration
 
@@ -306,7 +306,7 @@ func (dag *DAG) ProcessVertex(v *Vertex) error {
     }
     return nil
 }
-```text
+```
 
 ## Performance Targets
 
@@ -344,7 +344,7 @@ trading_engine:
   mlx:
     enabled: true  # Auto-detect Apple Silicon
     batch_threshold: 100
-```text
+```
 
 ## Error Handling
 
@@ -358,7 +358,7 @@ var (
     ErrSelfTrade           = errors.New("self-trade not allowed")
     ErrMaxOrdersExceeded   = errors.New("max orders exceeded")
 )
-```text
+```
 
 ## Test Cases
 

@@ -36,7 +36,7 @@ The MPC oracle bridge provides:
 
 ### Architecture Overview
 
-```text
+```
 Source Chain                    MPC Oracle Network              Destination Chain
 ┌─────────────┐                 ┌─────────────────┐             ┌─────────────────┐
 │             │                 │                 │             │                 │
@@ -132,7 +132,7 @@ function recoverSigner(bytes32 message, bytes memory sig) internal pure returns 
 function prefixed(bytes32 hash) internal pure returns (bytes32) {
     return keccak256(abi.encodePacked("\x19Ethereum Signed Message:\n32", hash));
 }
-```text
+```
 
 **Message Construction:**
 
@@ -169,7 +169,7 @@ function setMPCOracle(address MPCO) public onlyAdmin {
     addMPCMapping(MPCO);
     emit NewMPCOracleSet(MPCO);
 }
-```text
+```
 
 #### Signature Deduplication
 
@@ -188,7 +188,7 @@ function addMappingStealth(bytes memory _key) internal {
     transactionMap[_key].exists = true;
     emit SigMappingAdded(_key);
 }
-```text
+```
 
 ### Fee Mechanism
 
@@ -238,7 +238,7 @@ For Lux subnet-to-subnet transfers, the bridge integrates with native Warp messa
 │  Bridge.sol    Bridge.sol    Bridge.sol    Bridge.sol          │
 │  ERC20B        ERC20B        ERC20B        ERC20B              │
 └─────────────────────────────────────────────────────────────────┘
-```text
+```
 
 ### Supported Chains
 
@@ -390,7 +390,7 @@ function testFeeCalculation() public {
     assertEq(token.balanceOf(payoutAddr), expectedFee);
     assertEq(token.balanceOf(recipient), expectedNet);
 }
-```text
+```
 
 ### Integration Tests
 
@@ -401,7 +401,7 @@ forge test --match-contract BridgeTest -vvv
 
 # Coverage report
 forge coverage --match-contract Bridge
-```text
+```
 
 ## Reference Implementation
 
@@ -424,7 +424,7 @@ interface IERC20Bridgable {
     event BridgeBurn(address indexed from, uint256 amount);
     event BridgeMint(address indexed to, uint256 amount);
 }
-```text
+```
 
 ### Usage Example
 

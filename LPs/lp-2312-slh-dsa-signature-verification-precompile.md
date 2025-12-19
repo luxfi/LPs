@@ -41,7 +41,7 @@ SLH-DSA (formerly SPHINCS+) provides unique security properties compared to ML-D
 
 ### Precompile Address
 
-```text
+```
 0x0200000000000000000000000000000000000007
 ```markdown
 
@@ -170,7 +170,7 @@ message: "Quantum-resistant hash-based signature"
 signature: 0x<16224 bytes of SLH-DSA signature>
 Expected: 0x...0001 (valid)
 Expected Gas: ~502,100 gas
-```text
+```
 
 ### Test Vector 2: Invalid Signature
 ```yaml
@@ -178,7 +178,7 @@ publicKey: 0x<48 bytes>
 message: "Test message"
 signature: 0x<16224 bytes of WRONG signature>
 Expected: 0x...0000 (invalid)
-```text
+```
 
 ### Test Vector 3: Large Message
 ```yaml

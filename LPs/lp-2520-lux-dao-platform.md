@@ -30,7 +30,7 @@ A unified DAO platform provides:
 
 ### Platform Architecture
 
-```text
+```
 ┌─────────────────────────────────────────────────────────────────┐
 │                        lux.vote Frontend                         │
 │                    (React + Vite + Chakra UI)                    │
@@ -56,7 +56,7 @@ A unified DAO platform provides:
 
 ### Repository Structure
 
-```text
+```
 github.com/luxfi/dao/
 ├── app/                    # React frontend application
 │   ├── src/
@@ -150,7 +150,7 @@ await dao.vote(proposalId, VoteType.For)
 
 ### API Endpoints
 
-```text
+```
 GET  /api/v1/daos                    # List DAOs
 GET  /api/v1/daos/:address           # DAO details
 GET  /api/v1/daos/:address/proposals # DAO proposals

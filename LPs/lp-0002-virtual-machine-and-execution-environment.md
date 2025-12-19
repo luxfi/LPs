@@ -80,7 +80,7 @@ LP-2 specifies the Lux execution model, which is designed to be EVM-compatible w
 cd ~/work/lux/evm
 go test -v ./core/vm ./core/state
 # Comprehensive EVM execution tests
-```text
+```
 
 ### VM Registry and Management
 
@@ -149,7 +149,7 @@ forge build
 forge test --match-contract ERC20Test
 forge test --match-contract ERC721Test
 # Comprehensive Solidity contract tests
-```text
+```
 
 ### Gas Metering and Pricing
 

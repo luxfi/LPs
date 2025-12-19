@@ -192,7 +192,7 @@ interface ISignatureValidator {
 
 // Magic value: 0x1626ba7e
 bytes4 constant EIP1271_MAGIC_VALUE = 0x1626ba7e;
-```text
+```
 
 ### Guard Contracts
 
@@ -209,7 +209,7 @@ abstract contract BaseTransactionGuard is ITransactionGuard {
                interfaceId == type(IERC165).interfaceId;
     }
 }
-```text
+```
 
 #### DelegateCallTransactionGuard.sol
 
@@ -261,7 +261,7 @@ function multiSend(bytes memory transactions) public payable {
         }
     }
 }
-```text
+```
 
 #### MultiSendCallOnly.sol
 
@@ -277,7 +277,7 @@ function signMessage(bytes calldata _data) external authorized {
     signedMessages[msgHash] = 1;
     emit SignMsg(msgHash);
 }
-```text
+```
 
 #### CreateCall.sol
 
@@ -370,7 +370,7 @@ interface IFROSTModule {
         bytes calldata frostSignature
     ) external returns (bool);
 }
-```text
+```
 
 **Benefits**:
 - Single 64-byte signature regardless of threshold
@@ -396,7 +396,7 @@ interface ICrossChainSafeModule {
         bytes calldata encodedTransaction
     ) external returns (bool);
 }
-```text
+```
 
 **Use Cases**:
 - Unified treasury management across subnets
@@ -425,7 +425,7 @@ interface IPostQuantumModule {
         address owner
     ) external view returns (bool);
 }
-```text
+```
 
 **Reference**: See LP-311 (ML-DSA), LP-312 (SLH-DSA), LP-320 (Ringtail Threshold).
 
@@ -527,7 +527,7 @@ Located at `/Users/z/work/lux/standard/src/safe/test/`:
 cd /Users/z/work/lux/standard/src/safe
 npm run build
 npm run test
-```text
+```
 
 ### Test Coverage
 
@@ -565,7 +565,7 @@ describe("Safe", () => {
     expect(await provider.getBalance(recipient.address)).to.equal(parseEther("1"));
   });
 });
-```text
+```
 
 ## Reference Implementation
 
@@ -577,7 +577,7 @@ describe("Safe", () => {
 
 ### Contract Directory Structure
 
-```text
+```
 src/safe/
 ├── contracts/
 │   ├── Safe.sol                          # Core multisig contract

@@ -61,7 +61,7 @@ pub enum HybridMode {
     MlKem768X25519,  // DEFAULT
     MlKem1024X25519,
 }
-```text
+```
 
 ### Key Derivation Function
 
@@ -72,7 +72,7 @@ SP 800-56C Rev. 2 compliant HKDF:
 
 ### Implementation Architecture
 
-```text
+```
 lux-node/
 ├── lux-pqc/           # PQC implementation
 │   ├── kem/           # ML-KEM

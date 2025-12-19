@@ -90,7 +90,7 @@ pk := sk.PublicKey
 // Serialize keys
 privBytes := sk.Bytes()          // 4,000 bytes
 pubBytes := pk.Bytes()            // 1,952 bytes
-```text
+```
 
 ### Signing
 
@@ -102,7 +102,7 @@ if err != nil {
     return err
 }
 // signature is 3,293 bytes for ML-DSA-65
-```text
+```
 
 **Properties**:
 - **Deterministic**: Same (sk, message) always produces same signature
@@ -135,7 +135,7 @@ type ValidatorSignature struct {
     MLDSA   []byte  // 3,293 bytes - quantum-safe
     Mode    uint8   // ML-DSA mode (44/65/87)
 }
-```text
+```
 
 **Verification**: Both signatures must be valid
 - **Classical**: BLS threshold verification
@@ -145,9 +145,9 @@ type ValidatorSignature struct {
 ### Transaction Signing
 
 **Address Format**:
-```text
+```
 lux1mldsa<mode><bech32-encoded-pubkey-hash>
-```text
+```
 
 **Example**: `lux1mldsa65qpr3zvr8j5y5jxm9d8qgtnpwjx7h9k2v`
 
@@ -163,7 +163,7 @@ type MLDSATransaction struct {
     PublicKey   []byte  // 1,952 bytes
     Mode        uint8   // 65
 }
-```text
+```
 
 ### EVM Precompile
 
@@ -183,7 +183,7 @@ interface IMLDSA {
         bytes calldata signature
     ) external view returns (bool valid);
 }
-```text
+```
 
 **Gas Cost**:
 - Base: 100,000 gas
@@ -207,7 +207,7 @@ contract SecureVault {
         // Process withdrawal
     }
 }
-```text
+```
 
 ## Implementation
 
@@ -250,7 +250,7 @@ func (pk *PublicKey) Verify(message, signature []byte, opts crypto.SignerOpts) b
 // Serialization
 func PrivateKeyFromBytes(mode Mode, data []byte) (*PrivateKey, error)
 func PublicKeyFromBytes(data []byte, mode Mode) (*PublicKey, error)
-```text
+```
 
 ### EVM Precompile
 
@@ -271,7 +271,7 @@ func PublicKeyFromBytes(data []byte, mode Mode) (*PublicKey, error)
 func init() {
     precompile.Register(&MLDSAPrecompile{})
 }
-```text
+```
 
 ### Solidity Smart Contracts
 
@@ -297,20 +297,20 @@ contract SecureVault is MLDSAVerifier {
         payable(msg.sender).transfer(address(this).balance);
     }
 }
-```text
+```
 
 **Testing**:
 ```bash
 # Test Solidity contracts using ML-DSA
 cd ~/work/lux/standard
 forge test --match-path test/**/*MLDSA*.t.sol
-```text
+```
 
 ## Test Results
 
 ### Core Implementation: 11/11 PASSING ✅
 
-```text
+```
 ✓ SignVerify                 (0.00s)
 ✓ InvalidSignature           (0.00s)
 ✓ WrongMessage               (0.00s)
@@ -326,11 +326,11 @@ forge test --match-path test/**/*MLDSA*.t.sol
 
 ### Performance Benchmarks (Apple M1 Max)
 
-```text
+```
 BenchmarkMLDSA_Sign_65         2,400 ops    417,000 ns/op
 BenchmarkMLDSA_Verify_65       9,259 ops    108,000 ns/op
 BenchmarkMLDSA_KeyGen_65       8,000 ops    125,000 ns/op
-```text
+```
 
 ## Migration Path
 

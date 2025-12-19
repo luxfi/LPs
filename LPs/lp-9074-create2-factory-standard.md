@@ -109,7 +109,7 @@ interface ICREATE2Factory {
         string memory sourceChain
     );
 }
-```text
+```
 
 ### Extended Factory Features
 
@@ -169,7 +169,7 @@ interface ICREATE2FactoryExtended is ICREATE2Factory {
         address deployedAddress
     ) external;
 }
-```text
+```
 
 ### Salt Generation Standards
 
@@ -205,7 +205,7 @@ library SaltGenerator {
         return keccak256(abi.encodePacked(seed, chainId));
     }
 }
-```text
+```
 
 ### Minimal Proxy Implementation
 
@@ -236,7 +236,7 @@ contract MinimalProxyFactory {
         emit ProxyDeployed(implementation, proxy, salt);
     }
 }
-```text
+```
 
 ### Registry Pattern
 
@@ -300,7 +300,7 @@ contract CREATE2Registry {
         return "Unknown";
     }
 }
-```text
+```
 
 ### Gas-Optimized Factory
 
@@ -348,7 +348,7 @@ contract GasOptimizedCREATE2Factory {
         return deploy(salt, bytecode);
     }
 }
-```text
+```
 
 ### Cross-Chain Deployment Coordinator
 
@@ -386,7 +386,7 @@ interface ICrossChainDeployer {
         string memory chain
     ) external view returns (address);
 }
-```text
+```
 
 ## Rationale
 
@@ -428,7 +428,7 @@ function testDeploy() public {
     assertEq(deployed, predicted);
     assert(deployed.code.length > 0);
 }
-```text
+```
 
 ### Cross-Chain Address Test
 
@@ -446,7 +446,7 @@ function testCrossChainConsistency() public {
     assertEq(cChainAddress, xChainAddress);
     assertEq(xChainAddress, pChainAddress);
 }
-```text
+```
 
 ### Proxy Deployment Test
 
@@ -467,7 +467,7 @@ function testProxyDeployment() public {
     bytes32 storedImpl = vm.load(proxy, implSlot);
     assertEq(address(uint160(uint256(storedImpl))), implementation);
 }
-```text
+```
 
 ## Implementation
 
@@ -492,7 +492,7 @@ forge build
 forge script script/DeployCREATE2.s.sol:DeployCREATE2 \
   --rpc-url https://api.avax.network/ext/bc/C/rpc \
   --broadcast
-```text
+```
 
 ### Testing
 

@@ -1,6 +1,8 @@
 /**
  * Lux Documentation Theme
- * Tailwind CSS 4 + @hanzo/ui
+ * Tailwind CSS 4 + @hanzo/docs (fumadocs-based)
+ *
+ * IMPORTANT: Minimal overrides only - let @hanzo/docs handle layout
  */
 
 @import "tailwindcss";
@@ -12,8 +14,8 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
-  --font-sans: var(--font-inter), system-ui, sans-serif;
-  --font-mono: ui-monospace, monospace;
+  --font-sans: var(--font-geist), system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, monospace;
   --radius: 0.5rem;
 
   /* Colors for button component and other UI elements */
@@ -140,59 +142,16 @@
   }
 }
 
-/* Layout spacing - Apple-inspired clean design */
+/* Layout variables - customize fumadocs defaults */
 :root {
-  /* Fumadocs layout variables */
   --fd-sidebar-width: 260px;
   --fd-toc-width: 220px;
-  --fd-layout-offset: 0px;
-  --fd-content-max-width: 800px;
-  --fd-page-width: 1400px;
 }
 
-/* Content wrapper (#nd-page) - add padding for fixed TOC since pe-(--fd-toc-width) doesn't work in Tailwind 4 */
-#nd-page {
-  padding-inline-start: 1.5rem !important;
-  padding-inline-end: var(--fd-toc-width) !important;
-}
-
-/* Article content - centered within the available space */
-main article {
-  padding: 2rem !important;
-  max-width: var(--fd-content-max-width) !important;
-  width: 100% !important;
-  margin-left: auto !important;
-  margin-right: auto !important;
-}
-
-/* Index page layout - centered with proper top spacing */
-main > div.max-w-4xl {
-  margin-left: auto !important;
-  margin-right: auto !important;
-  padding-left: 2rem !important;
-  padding-right: 2rem !important;
-  padding-top: 2.5rem !important;
-  max-width: 900px !important;
-}
-
-/* Docs main content - add top margin */
-main article {
-  padding-top: 2.5rem !important;
-}
-
-/* Responsive adjustments */
 @media (min-width: 1280px) {
   :root {
     --fd-sidebar-width: 280px;
     --fd-toc-width: 240px;
-  }
-
-  main article {
-    padding: 2.5rem !important;
-  }
-
-  main > div.max-w-4xl {
-    max-width: 1000px !important;
   }
 }
 
@@ -200,445 +159,71 @@ main article {
   :root {
     --fd-toc-width: 200px;
   }
-
-  main article {
-    padding: 1.5rem !important;
-  }
-
-  main > div.max-w-4xl {
-    max-width: 800px !important;
-    padding-left: 1.5rem !important;
-    padding-right: 1.5rem !important;
-  }
 }
 
-@media (max-width: 768px) {
-  /* On mobile, sidebar is hidden so reset padding */
-  main > div.flex.mx-auto {
-    justify-content: flex-start !important;
-  }
-
-  main > div.max-w-4xl {
-    padding-left: 1rem !important;
-    padding-right: 1rem !important;
-    max-width: 100% !important;
-  }
-
-  main article {
-    padding: 1rem !important;
-  }
-
-  main #nd-page {
-    justify-content: flex-start !important;
-  }
-
-  /* Reset TOC padding on mobile since TOC is hidden */
-  #nd-page {
-    padding-inline-end: 0 !important;
-  }
-
-  /* Reset sidebar padding on mobile since sidebar is a drawer */
-  main {
-    padding-left: 0 !important;
-    padding-inline-start: 0 !important;
-  }
-}
-
-/* Typography improvements - Apple-like precision */
-main article h1 {
-  font-size: 2.25rem !important;
-  font-weight: 700 !important;
-  letter-spacing: -0.03em !important;
-  line-height: 1.15 !important;
-  margin-bottom: 1.25rem !important;
-}
-
+/* Typography improvements - LP-specific enhancements */
 main article h2 {
-  font-size: 1.625rem !important;
-  font-weight: 600 !important;
-  letter-spacing: -0.025em !important;
-  line-height: 1.25 !important;
-  margin-top: 3rem !important;
-  margin-bottom: 1rem !important;
-  padding-bottom: 0.75rem !important;
-  border-bottom: 1px solid hsl(var(--border) / 0.4) !important;
-}
-
-main article h3 {
-  font-size: 1.25rem !important;
-  font-weight: 600 !important;
-  letter-spacing: -0.02em !important;
-  margin-top: 2.25rem !important;
-  margin-bottom: 0.75rem !important;
-}
-
-main article h4 {
-  font-size: 1.1rem !important;
-  font-weight: 600 !important;
-  letter-spacing: -0.015em !important;
-  margin-top: 1.75rem !important;
-  margin-bottom: 0.5rem !important;
-}
-
-main article p {
-  line-height: 1.8 !important;
-  margin-bottom: 1.5rem !important;
-}
-
-main article ul,
-main article ol {
-  margin-bottom: 1.5rem !important;
-  padding-left: 1.75rem !important;
-}
-
-main article li {
-  line-height: 1.75 !important;
-  margin-bottom: 0.625rem !important;
-}
-
-main article li > ul,
-main article li > ol {
-  margin-top: 0.5rem !important;
-  margin-bottom: 0.5rem !important;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid hsl(var(--border) / 0.4);
 }
 
 /*
- * Code Blocks - shadcn/ui-inspired styling
- * Pure black background with proper monospace for ASCII art
+ * Code Blocks - dark theme styling
  */
 
-/* CSS Variables for code styling (shadcn/ui-inspired) */
+/* CSS Variables for code styling */
 :root {
-  /* Slightly brighter black - not pure #000, stands out from page background */
   --code-bg: #0d0d0d;
   --code-fg: #e8e8e8;
-  --code-highlight-bg: rgba(255, 255, 255, 0.08);
-  --code-line-number: #666;
   --code-border: rgba(255, 255, 255, 0.08);
-  /* Roboto Mono for code - excellent box-drawing character support */
-  --code-font: var(--font-roboto-mono), "Roboto Mono", "Menlo", "Monaco", "Consolas", ui-monospace, monospace;
+  --code-font: var(--font-geist-mono), ui-monospace, monospace;
 }
 
-/* Pre element - the outer container */
-main article pre,
-article pre,
-.prose pre,
+/* Code blocks */
 pre {
-  border-radius: 0.625rem !important;
-  padding: 1.5rem 1.75rem !important;
-  margin: 2rem 0 !important;
-  font-size: 0.875rem !important;
-  /* CRITICAL for ASCII art: line-height must be exactly 1 for vertical bars to connect */
-  line-height: 1 !important;
-  overflow-x: auto !important;
-  border: 1px solid var(--code-border) !important;
-  background: var(--code-bg) !important;
-  color: var(--code-fg) !important;
-  font-family: var(--code-font) !important;
-  /* Critical for ASCII art alignment */
-  font-variant-ligatures: none !important;
-  font-feature-settings: "liga" 0, "calt" 0, "kern" 0 !important;
-  letter-spacing: 0 !important;
-  -webkit-font-smoothing: antialiased !important;
-  -moz-osx-font-smoothing: grayscale !important;
-  text-rendering: geometricPrecision !important;
-  /* Preserve exact whitespace */
-  white-space: pre !important;
-  word-wrap: normal !important;
-  word-break: normal !important;
-  word-spacing: 0 !important;
-  overflow-wrap: normal !important;
-  tab-size: 4 !important;
-  -moz-tab-size: 4 !important;
-  /* Better shadow for depth */
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3) !important;
+  background: var(--code-bg);
+  color: var(--code-fg);
+  border: 1px solid var(--code-border);
+  border-radius: 0.625rem;
+  font-family: var(--code-font);
+  /* ASCII art support */
+  line-height: 1.2;
+  font-variant-ligatures: none;
 }
 
-main article :not(pre) > code {
-  font-size: 0.875em !important;
-  padding: 0.2em 0.45em !important;
-  border-radius: 0.375rem !important;
-  background: hsl(var(--muted)) !important;
-  font-weight: 500 !important;
-  color: inherit !important;
+/* Inline code */
+:not(pre) > code {
+  background: hsl(var(--muted));
+  border-radius: 0.375rem;
+  padding: 0.2em 0.45em;
+  font-size: 0.875em;
 }
 
-/* Note: Backtick removal for inline code moved to end of file for proper cascade */
-
-/* Code element inside pre - must inherit ALL font settings */
-main article pre code,
-article pre code,
-.prose pre code,
-pre code {
-  padding: 0 !important;
-  background: transparent !important;
-  font-weight: 400 !important;
-  color: var(--code-fg) !important;
-  /* CRITICAL: Inherit ALL font settings from pre */
-  font-family: inherit !important;
-  font-size: inherit !important;
-  line-height: inherit !important;
-  font-variant-ligatures: inherit !important;
-  font-feature-settings: inherit !important;
-  letter-spacing: inherit !important;
-  text-rendering: inherit !important;
-  white-space: inherit !important;
-  word-wrap: inherit !important;
-  word-break: inherit !important;
-  overflow-wrap: inherit !important;
-  tab-size: inherit !important;
-  -moz-tab-size: inherit !important;
-  /* Remove any default styling that might interfere */
-  display: block !important;
-  width: 100% !important;
-  min-width: 100% !important;
-}
-
-/* Span elements inside code - ensure consistent font rendering */
-main article pre code span,
-article pre code span,
-.prose pre code span,
-pre code span,
-[data-rehype-pretty-code-figure] span,
-[data-line] span {
-  font-family: inherit !important;
-  font-size: inherit !important;
-  font-variant-ligatures: inherit !important;
-  font-feature-settings: inherit !important;
-  letter-spacing: inherit !important;
-}
-
-/* Override ALL possible backgrounds from themes/plugins */
-main article pre[data-theme],
-main article pre[data-theme="dark"],
-main article pre[data-theme="light"],
-article pre[data-theme],
-.prose pre[data-theme],
-pre[data-theme],
-main article figure[data-rehype-pretty-code-figure] pre,
-main article figure[data-rehype-pretty-code-figure] pre[data-theme],
-figure[data-rehype-pretty-code-figure] pre,
-[data-rehype-pretty-code-figure] pre {
-  background: var(--code-bg) !important;
-  border: none !important;
-}
-
-/* Clean code block styling - wrapper */
-main article figure[data-rehype-pretty-code-figure],
-figure[data-rehype-pretty-code-figure],
-[data-rehype-pretty-code-figure] {
-  margin: 2rem 0 !important;
-  border: none !important;
-  background: transparent !important;
-  border-radius: 0.625rem !important;
-  overflow: hidden !important;
-}
-
-/* Code title bar styling */
-main article [data-rehype-pretty-code-title],
-[data-rehype-pretty-code-title] {
-  background: #151515 !important;
-  color: #999 !important;
-  border: none !important;
-  border-bottom: 1px solid var(--code-border) !important;
-  border-radius: 0.625rem 0.625rem 0 0 !important;
-  padding: 0.75rem 1.25rem !important;
-  font-size: 0.8rem !important;
-  font-weight: 500 !important;
-  font-family: var(--code-font) !important;
-}
-
-main article [data-rehype-pretty-code-title] + pre,
-[data-rehype-pretty-code-title] + pre {
-  border-radius: 0 0 0.625rem 0.625rem !important;
-  margin-top: 0 !important;
-  border-top: none !important;
-}
-
-/* Data lines - ensure proper line rendering for ASCII art */
-main article pre code [data-line],
-main article pre [data-line],
-main article figure[data-rehype-pretty-code-figure] [data-line],
-[data-rehype-pretty-code-figure] [data-line],
-[data-line] {
-  padding: 0 !important;
-  margin: 0 !important;
-  border: none !important;
-  background: transparent !important;
-  display: block !important;
-  /* Critical: preserve exact whitespace and line structure */
-  white-space: pre !important;
-  /* Line height must match pre for vertical alignment */
-  line-height: inherit !important;
-  /* Height should be exactly the font-size for connecting vertical lines */
-  min-height: 1em !important;
-  height: auto !important;
-  /* Ensure full width for proper text layout */
-  width: 100% !important;
-}
-
-/* Highlighted lines - subtle white glow */
-main article pre code [data-highlighted-line],
-[data-highlighted-line] {
-  background: var(--code-highlight-bg) !important;
-  border-left: 2px solid var(--code-line-number) !important;
-  margin-left: -1.5rem !important;
-  padding-left: calc(1.5rem - 2px) !important;
-}
-
-/* Nested code/pre - same background */
-main article pre pre,
-main article pre code pre,
-main article code code {
-  background: #000 !important;
-  border: none !important;
-}
-
-/* Line numbers if present - dim them */
-main article pre [data-line-numbers-config] span[data-line]::before {
-  color: #444 !important;
-}
-
-/* Tables - clean and readable */
-main article table {
-  width: 100% !important;
-  margin: 2rem 0 !important;
-  border-collapse: collapse !important;
-  font-size: 0.9rem !important;
-  border-radius: 0.5rem !important;
-  overflow: hidden !important;
-}
-
-main article th,
-main article td {
-  padding: 0.875rem 1.125rem !important;
-  border: 1px solid hsl(var(--border) / 0.6) !important;
-  text-align: left !important;
-}
-
+/* Tables */
 main article th {
-  background: hsl(var(--muted) / 0.4) !important;
-  font-weight: 600 !important;
+  background: hsl(var(--muted) / 0.4);
 }
 
 main article tr:hover td {
-  background: hsl(var(--muted) / 0.2) !important;
+  background: hsl(var(--muted) / 0.2);
 }
 
-/* Blockquotes - subtle emphasis */
+/* Blockquotes */
 main article blockquote {
-  border-left: 3px solid hsl(var(--primary) / 0.3) !important;
-  padding: 0.75rem 1.5rem !important;
-  margin: 1.75rem 0 !important;
-  background: hsl(var(--muted) / 0.3) !important;
-  border-radius: 0 0.5rem 0.5rem 0 !important;
+  border-left: 3px solid hsl(var(--primary) / 0.3);
+  background: hsl(var(--muted) / 0.3);
+  border-radius: 0 0.5rem 0.5rem 0;
 }
 
-main article blockquote p {
-  margin-bottom: 0 !important;
-  color: hsl(var(--muted-foreground)) !important;
-}
-
-/* Links - subtle underline */
-main article a:not([class]) {
-  color: hsl(var(--primary)) !important;
-  text-decoration: underline !important;
-  text-underline-offset: 3px !important;
-  text-decoration-thickness: 1px !important;
-  transition: all 0.15s ease !important;
-}
-
-main article a:not([class]):hover {
-  text-decoration-thickness: 2px !important;
-  opacity: 0.85 !important;
-}
-
-/* Sidebar refinements - stable, fixed width, no movement */
+/* Sidebar refinements */
 aside[role="complementary"] {
-  border-right: 1px solid hsl(var(--border) / 0.5) !important;
-  /* Fix sidebar alignment - override items-end that creates left gap */
-  align-items: stretch !important;
-  /* Fixed sidebar width - no transitions that cause movement */
-  width: var(--fd-sidebar-width) !important;
-  min-width: var(--fd-sidebar-width) !important;
-  max-width: var(--fd-sidebar-width) !important;
-  flex-shrink: 0 !important;
-  /* Prevent layout shift */
-  position: sticky !important;
-  top: 0 !important;
-  height: 100vh !important;
-  overflow-y: auto !important;
-  /* Disable transitions that cause "movement" feel */
-  transition: none !important;
-}
-
-/* Ensure sidebar children fill full width */
-aside[role="complementary"] > * {
-  width: 100% !important;
-  transition: none !important;
-}
-
-/* Remove all borders from sidebar bottom section */
-aside[role="complementary"] > div:last-child {
-  border-top: none !important;
-}
-
-/* Sidebar bottom buttons - remove border */
-aside[role="complementary"] button[aria-label*="Theme"],
-aside[role="complementary"] [class*="theme"] {
-  border: none !important;
-}
-
-/* Remove border above theme switcher section in fumadocs sidebar */
-aside[role="complementary"] [class*="footer"],
-aside[role="complementary"] footer,
-aside[role="complementary"] > div:has(button[aria-label*="Theme"]),
-aside[role="complementary"] > div:has([class*="theme"]),
-aside > div:last-child,
-aside > div[class*="flex"][class*="gap"] {
-  border: none !important;
-  border-top: none !important;
-}
-
-/* Fix sidebar content spacing */
-aside[role="complementary"] nav {
-  padding-bottom: 1rem !important;
-}
-
-/* Prevent sidebar tree items from causing layout shifts */
-aside[role="complementary"] [data-state] {
-  transition: none !important;
+  border-right: 1px solid hsl(var(--border) / 0.5);
 }
 
 /* TOC refinements */
 nav[aria-label="Table of Contents"],
 .fd-toc {
-  border-left: 1px solid hsl(var(--border) / 0.3) !important;
-  padding-left: 1.5rem !important;
-}
-
-/* Main content area - ensure proper width */
-.fd-default-layout > div:not([role="complementary"]):not(.fd-toc) {
-  flex: 1 !important;
-  min-width: 0 !important;
-}
-
-/* Fix content container - constrain width to prevent TOC overlap */
-.fd-page-container {
-  max-width: calc(100% - var(--fd-toc-width) - 2rem) !important;
-}
-
-/* Ensure article content doesn't overflow into TOC */
-main.fd-default-layout article {
-  overflow-wrap: break-word !important;
-  word-wrap: break-word !important;
-}
-
-/* On larger screens, ensure proper spacing for TOC */
-@media (min-width: 1280px) {
-  .fd-page-container {
-    max-width: calc(100% - var(--fd-toc-width) - 3rem) !important;
-  }
+  border-left: 1px solid hsl(var(--border) / 0.3);
 }
 
 /* Hide scrollbar utility */

@@ -94,7 +94,7 @@ func (mmr *ChainMMR) GenerateProof(targetHeight uint64) *MMRProof {
     // Generate inclusion proof for specific height
     return generateMMRProof(mmr.peaks, targetHeight)
 }
-```text
+```
 
 #### 2. Post-Quantum Signed Checkpoints
 
@@ -120,7 +120,7 @@ type SignedCheckpoint struct {
     RingtailSig    []byte         // Post-quantum threshold signature
     SignerBitmap   []byte         // Bitmap of signing validators
 }
-```text
+```
 
 #### 3. Dual-Signature Verification
 
@@ -157,7 +157,7 @@ func (q *QuasarConsensus) VerifyCheckpoint(signed *SignedCheckpoint) bool {
     
     return true
 }
-```text
+```
 
 #### 4. Verkle Tree Integration for State Proofs
 
@@ -176,11 +176,11 @@ func (q *QuasarConsensus) VerifyStateProof(proof *StateProof, checkpoint *Checkp
     // Verify state proof against checkpoint's state root
     return q.verkleTree.Verify(proof.StateRoot, proof.Key, proof.Value, proof.Proof)
 }
-```text
+```
 
 #### 5. Checkpoint Processing Flow
 
-```text
+```
 1. Child chain produces blocks and updates its MMR
 2. At checkpoint interval (e.g., every 100 blocks):
    - Generate MMR proof from last checkpoint to current height
@@ -193,7 +193,7 @@ func (q *QuasarConsensus) VerifyStateProof(proof *StateProof, checkpoint *Checkp
    - QSF fee payment
 5. If valid, Q-Chain includes checkpoint in next block
 6. Q-Chain updates its global state with new chain head
-```text
+```
 
 #### 6. Security Properties
 
@@ -246,7 +246,7 @@ func (p *PhotonConsensus) Query(validators []Validator) bool {
     }
     return false
 }
-```text
+```
 
 ### 2. Wave – Thresholding Consensus  
 
@@ -273,7 +273,7 @@ func (w *WaveConsensus) Query(validators []Validator, choices []ID) ID {
     }
     return nil
 }
-```text
+```
 
 ### 3. Nova – DAG Finalizer
 
@@ -296,7 +296,7 @@ func (n *NovaConsensus) FinalizeVertex(v Vertex) bool {
     }
     return false
 }
-```text
+```
 
 ### 4. Nebula – DAG Consensus
 
@@ -318,7 +318,7 @@ func (n *NebulaEngine) ProcessTransaction(tx Transaction) {
         n.broadcast(tx)
     }
 }
-```text
+```
 
 ### 5. Prism – Voting-Based Consensus
 
@@ -338,7 +338,7 @@ func (p *PrismEngine) ProcessVote(vote Vote) {
         p.executeProposal(vote.ProposalID)
     }
 }
-```text
+```
 
 ### 6. Quasar – Quantum-Secure Overlay
 
@@ -373,7 +373,7 @@ func (q *QuasarConsensus) Finalize(block Block) (*DualCertificate, error) {
         return &DualCertificate{blsCert, rtCert}, nil
     }
 }
-```text
+```
 
 ## Platform Management Capabilities
 
@@ -390,7 +390,7 @@ type ValidatorTx struct {
     RewardAddress   Address
     ProofOfStake    DualSignature  // BLS + Ringtail
 }
-```text
+```
 
 ### Staking Operations
 - **Minimum Stake**: 2,000 LUX
@@ -407,7 +407,7 @@ type CreateSubnetTx struct {
     SubnetAuth      DualCertificate
     VMType          string  // "EVM", "WASM", "Custom"
 }
-```text
+```
 
 ### Governance Functions
 - **Proposal Submission**: Quantum-signed governance proposals
@@ -437,7 +437,7 @@ func IsBlockFinal(block Block, cert DualCertificate) bool {
     return verifyBLS(cert.BLSCert, block) && 
            verifyRingtail(cert.RingtailCert, block)
 }
-```text
+```
 
 ### Security Analysis
 
@@ -463,7 +463,7 @@ T+295ms: BLS aggregation complete
 T+350ms: Block finalized
 
 Attack Window: < 50ms
-```text
+```
 
 Even with a large-scale quantum computer, breaking BLS12-381 would require:
 - ~2,330 logical qubits
@@ -474,7 +474,7 @@ Even with a large-scale quantum computer, breaking BLS12-381 would require:
 
 ### Directory Structure
 
-```text
+```
 /quasar/
 ├── choices/          # Consensus decision states
 ├── consensus/        # Core algorithms
@@ -493,7 +493,7 @@ Even with a large-scale quantum computer, breaking BLS12-381 would require:
 │   └── sender/       # Outbound messages
 ├── validators/       # Validator management
 └── uptime/           # Liveness tracking
-```text
+```
 
 ### Key Components
 
@@ -514,7 +514,7 @@ type Engine interface {
     HandleMessage(peer ID, msg Message) error
     Gossip() []Message
 }
-```text
+```
 
 #### Cryptographic Layer
 
@@ -552,7 +552,7 @@ func (r *RingtailThreshold) Combine() ([]byte, error) {
     sig := ringtail.CombineShares(r.shares, r.threshold)
     return sig.Marshal()
 }
-```text
+```
 
 ## Consensus Flow
 
@@ -572,7 +572,7 @@ func (q *QChain) SubmitTransaction(tx Transaction) error {
     
     return nil
 }
-```text
+```
 
 ### 2. Block Proposal
 ```go
@@ -603,7 +603,7 @@ func (q *QChain) ProposeBlock() (*Block, error) {
     
     return block, nil
 }
-```text
+```
 
 ### 3. Share Collection
 ```go
@@ -627,7 +627,7 @@ func (q *QChain) CollectShares(block Block) error {
     
     return ErrTimeout
 }
-```text
+```
 
 ### 4. Certificate Aggregation
 ```go
@@ -660,7 +660,7 @@ func (q *QChain) AggregateCertificates(block Block) (*DualCertificate, error) {
         RingtailCert: rtCert,
     }, nil
 }
-```text
+```
 
 ### 5. Consensus Voting
 ```go
@@ -689,7 +689,7 @@ func (q *QChain) VoteOnBlock(block Block, cert DualCertificate) error {
     
     return ErrNoConsensus
 }
-```text
+```
 
 ### 6. Finalization
 ```go
@@ -716,7 +716,7 @@ func (q *QChain) FinalizeBlock(block Block) error {
     
     return nil
 }
-```text
+```
 
 ## Performance Characteristics
 
@@ -738,7 +738,7 @@ var MainnetParams = Parameters{
     BlockTime:        500 * time.Millisecond,
     FinalityTarget:   350 * time.Millisecond,
 }
-```text
+```
 
 ### Performance Metrics
 
@@ -753,7 +753,7 @@ var MainnetParams = Parameters{
 
 ### Latency Breakdown
 
-```text
+```
 Block Proposal
      │
      ├─► BLS Collection ────────────────► 295ms
@@ -767,7 +767,7 @@ Block Proposal
            └─► Combination (~7ms)
                                           ______
                               Total: ~350ms
-```text
+```
 
 ## Security Considerations
 
@@ -816,7 +816,7 @@ function slash(validator address, reason SlashingReason) {
     // Emit event for transparency
     emit ValidatorSlashed(validator, reason, penalty);
 }
-```text
+```
 
 ## Network Deployment
 
@@ -848,7 +848,7 @@ func (cm *ChainManager) LaunchChain(config ChainConfig) error {
     cm.chains[config.ChainID] = quasar
     return quasar.Start()
 }
-```text
+```
 
 ### Configuration Examples
 
@@ -861,7 +861,7 @@ FinancialChainParams = Parameters{
     QThreshold:      20,   // 20 of 30
     QuasarTimeout:   30 * time.Millisecond,  // Tighter deadline
 }
-```text
+```
 
 #### High-Throughput Gaming Chain
 ```go
@@ -872,7 +872,7 @@ GamingChainParams = Parameters{
     QThreshold:      11,   // 11 of 15
     QuasarTimeout:   100 * time.Millisecond, // Relaxed deadline
 }
-```text
+```
 
 ## Future Enhancements
 
@@ -920,7 +920,7 @@ tail -f ~/.luxd/logs/q-chain/quasar.log
 [QUASAR] Aggregated cert size=2.9KB
 [CONSENSUS] Block 1000 dual-cert finalized latency=302ms
 [QUASAR] Quantum-secure finality achieved ✓
-```text
+```
 
 ### Developer Integration
 

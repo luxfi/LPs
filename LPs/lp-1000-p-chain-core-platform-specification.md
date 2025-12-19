@@ -54,11 +54,11 @@ var PlatformVMID = constants.PlatformVMID // ids.ID{'p', 'l', 'a', 't', 'f', 'o'
 // Create P-Chain VM
 factory := &pvm.Factory{}
 vm, err := factory.New(logger)
-```text
+```
 
 ### Directory Structure
 
-```text
+```
 node/vms/platformvm/
 ├── block/            # Block definitions and execution
 ├── config/           # Chain configuration
@@ -70,7 +70,7 @@ node/vms/platformvm/
 ├── factory.go        # VM factory
 ├── vm.go             # Main VM implementation
 └── *_test.go         # Tests
-```text
+```
 
 ### Core Responsibilities
 
@@ -111,7 +111,7 @@ Where:
 - Maximum APY: 11% (at 50% network staked)
 - Minimum APY: 7% (at 80% network staked)
 - Rewards decrease as total stake increases
-```text
+```
 
 ### API Endpoints
 
@@ -129,7 +129,7 @@ Where:
 
 #### REST Endpoints
 
-```text
+```
 GET  /ext/bc/P/validators/current
 GET  /ext/bc/P/validators/pending
 GET  /ext/bc/P/stake/{address}
@@ -137,7 +137,7 @@ POST /ext/bc/P/validators/add
 POST /ext/bc/P/delegators/add
 POST /ext/bc/P/subnets/create
 POST /ext/bc/P/blockchains/create
-```text
+```
 
 ### Subnet Architecture
 
@@ -149,7 +149,7 @@ type Subnet struct {
     Blockchains  []BlockchainID
     Validators   ValidatorSet
 }
-```text
+```
 
 **Subnet Properties**:
 - **Primary Network**: All validators must validate
@@ -163,12 +163,12 @@ P-Chain uses a UTXO model for:
 - Managing locked outputs
 - Handling rewards distribution
 
-```text
+```
 UTXO States:
 1. Available → Staked (via AddValidator)
 2. Staked → Locked (during validation)
 3. Locked → Available + Rewards (after validation)
-```text
+```
 
 ### Consensus Integration
 
@@ -195,7 +195,7 @@ P-Chain uses Lux consensus (linear chain):
     }
   }
 }
-```text
+```
 
 ## Rationale
 

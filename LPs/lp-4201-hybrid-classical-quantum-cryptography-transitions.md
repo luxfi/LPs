@@ -50,11 +50,11 @@ const (
     ValidationTRANSITION ValidationMode = 0x02  // Context-dependent
     ValidationQUANTUM    ValidationMode = 0x03  // Quantum-only
 )
-```text
+```
 
 #### Security Model
 
-```text
+```
 Threat Analysis:
 - Classical Attacker: Protected by ECDSA-256
 - Quantum Attacker: Protected by ML-DSA-65
@@ -63,7 +63,7 @@ Threat Analysis:
 Formal Security Proof:
 P(break_hybrid) = P(break_classical) * P(break_quantum)
                 <= 2^-128 * 2^-192 = 2^-320 (for AND mode)
-```text
+```
 
 ### 2. Migration Phases
 
@@ -179,7 +179,7 @@ Final State:
     - Quantum operations optimized
     - Hardware acceleration deployed
     - Batch verification enabled
-```text
+```
 
 ### 3. Key Migration Protocols
 
@@ -214,7 +214,7 @@ func MigrateKey(account Account, newQuantumKey QuantumKey) (*KeyMigration, error
     // 4. Broadcast and wait for confirmation
     return BroadcastAndConfirm(tx)
 }
-```text
+```
 
 #### Emergency Recovery
 
@@ -258,7 +258,7 @@ contract EmergencyRecovery {
         delete recoveryQueue[msg.sender];
     }
 }
-```text
+```
 
 ### 4. Compatibility Layer
 
@@ -295,7 +295,7 @@ message TransactionV3 {
     bytes quantum_signature = 5;  // ML-DSA only
     bytes quantum_proof = 6;      // Additional quantum proofs
 }
-```text
+```
 
 #### Wallet Compatibility
 
@@ -337,7 +337,7 @@ class HybridWallet {
         this.mode = SignatureMode.HYBRID_AND;
     }
 }
-```text
+```
 
 ### 5. Performance Optimizations
 
@@ -454,7 +454,7 @@ cd consensus/protocol/quasar
 go test -v ./... -run Hybrid
 go test -v ./... -run Migration
 go test -v ./... -run Signature
-```text
+```
 
 **Test Coverage** (15 unit tests, 97.5% code coverage):
 - TestHybridSignatureGeneration - Dual-signature creation (BLS + ML-DSA)
@@ -474,7 +474,7 @@ go test -v ./... -run Signature
 - TestRingtailIntegration - Privacy layer with hybrid sigs
 
 **Benchmark Results** (Apple M1 Max):
-```text
+```
 BenchmarkHybridSignGeneration-10      1,847 ops/sec (541μs/op)
 BenchmarkDualSignValidation-10        2,123 ops/sec (471μs/op)
 BenchmarkBatchHybridVerify-10         4,256 ops/sec (235μs/op)

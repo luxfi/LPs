@@ -71,7 +71,7 @@ interface ICryptoStandards {
     uint256 constant MAX_KEY_AGE = 365 days;
     uint256 constant KEY_ROTATION_NOTICE = 30 days;
 }
-```text
+```
 
 #### 2. Validator Security
 ```solidity
@@ -82,7 +82,7 @@ struct ValidatorRequirements {
     bool secureEnclave;            // TEE/SGX requirement
     uint256 slashingThreshold;     // Misbehavior threshold
 }
-```text
+```
 
 #### 3. Smart Contract Security
 - **Audit Requirements**: Two independent audits before mainnet
@@ -107,7 +107,7 @@ interface IBridgeMonitor {
     function getMetrics() external view returns (MonitoringMetrics memory);
     function checkHealthStatus() external view returns (bool healthy, string memory issue);
 }
-```text
+```
 
 #### 2. Anomaly Detection
 ```yaml
@@ -118,7 +118,7 @@ Detection Rules:
   - Failed Transactions: > 5% failure rate
   - Validator Issues: < 80% participation
   - Gas Anomalies: > 3x normal gas usage
-```text
+```
 
 #### 3. Alert System
 ```solidity
@@ -132,12 +132,12 @@ struct SecurityAlert {
     string description;
     bytes additionalData;
 }
-```text
+```
 
 ### Incident Response
 
 #### 1. Response Procedures
-```text
+```
 EMERGENCY RESPONSE FLOWCHART:
 
 1. Detection (0-5 minutes)
@@ -169,7 +169,7 @@ EMERGENCY RESPONSE FLOWCHART:
    ├── Full incident report
    ├── Lessons learned
    └── Process improvements
-```text
+```
 
 #### 2. Emergency Roles
 ```solidity
@@ -181,7 +181,7 @@ contract EmergencyRoles {
     uint256 constant GUARDIAN_THRESHOLD = 3;       // Multi-sig threshold
     uint256 constant PAUSE_DURATION = 24 hours;    // Max pause time
 }
-```text
+```
 
 ### Security Audits
 
@@ -210,7 +210,7 @@ Economic Audit:
   - Fee structures
   - Insurance coverage
   - Slashing parameters
-```text
+```
 
 ### Risk Management
 
@@ -223,7 +223,7 @@ enum RiskCategory {
     GOVERNANCE,       // Malicious proposals, voting attacks
     EXTERNAL          // Chain vulnerabilities, oracle failures
 }
-```text
+```
 
 #### 2. Risk Mitigation
 ```yaml
@@ -251,7 +251,7 @@ External Risks:
   - Oracle diversity
   - Chain monitoring
   - Fallback mechanisms
-```text
+```
 
 ### Insurance and Recovery
 
@@ -271,7 +271,7 @@ contract BridgeInsurance {
     function fileClaim(uint256 amount, bytes32 incidentId) external;
     function processClaim(uint256 claimId) external onlyGovernance;
 }
-```text
+```
 
 #### 2. Recovery Procedures
 - **Asset Recovery**: Procedures for recovering stolen/stuck funds

@@ -95,7 +95,7 @@ interface IPrivateAMM {
         ZKSwapProof calldata proof
     ) external view returns (bool valid);
 }
-```text
+```
 
 ### Homomorphic Order Book
 
@@ -145,7 +145,7 @@ interface IHomomorphicOrderBook {
         bytes calldata liquidityProof
     ) external returns (bytes32 positionId);
 }
-```text
+```
 
 ### MEV Protection Layer
 
@@ -206,7 +206,7 @@ interface IMEVProtection {
         bytes calldata decryptionKey
     ) external;
 }
-```text
+```
 
 ### zkSNARK Circuit Specifications
 
@@ -254,7 +254,7 @@ interface IZKSwapCircuit {
         bytes calldata proof
     ) external view returns (bool);
 }
-```text
+```
 
 ### Confidential Liquidity Provision
 
@@ -304,7 +304,7 @@ interface IConfidentialLP {
         bytes calldata rebalanceProof
     ) external;
 }
-```text
+```
 
 ### Regulatory Compliance Module
 
@@ -357,7 +357,7 @@ interface ICompliantPrivateAMM {
         address tokenOut
     );
 }
-```text
+```
 
 ## Rationale
 
@@ -433,7 +433,7 @@ function testPrivateSwap() public {
 
     assertTrue(amounts[amounts.length - 1] >= amountOutMin);
 }
-```text
+```
 
 ### zkSNARK Swap Verification
 

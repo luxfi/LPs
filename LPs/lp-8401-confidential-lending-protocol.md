@@ -110,7 +110,7 @@ interface IConfidentialLending {
         bytes calldata withdrawProof
     ) external;
 }
-```text
+```
 
 ### Zero-Knowledge Credit Scoring
 
@@ -167,7 +167,7 @@ interface IZKCreditScoring {
         bytes calldata attestationProof
     ) external;
 }
-```text
+```
 
 ### Confidential Collateral Management
 
@@ -231,7 +231,7 @@ interface IConfidentialCollateral {
         bytes calldata redemptionProof
     ) external;
 }
-```text
+```
 
 ### Private Interest Rate Discovery
 
@@ -289,7 +289,7 @@ interface IPrivateRateDiscovery {
         uint256[] calldata weights
     ) external view returns (bytes encryptedWeightedRate);
 }
-```text
+```
 
 ### Secure Multi-Party Computation
 
@@ -343,7 +343,7 @@ interface IMPCLending {
         bytes calldata proof
     ) external view returns (bool valid);
 }
-```text
+```
 
 ### Private Yield Strategies
 
@@ -399,7 +399,7 @@ interface IPrivateYield {
         bytes calldata apyProof
     ) external view returns (uint256 obfuscatedAPY);
 }
-```text
+```
 
 ### Regulatory Compliance
 
@@ -447,7 +447,7 @@ interface ICompliantPrivateLending {
         uint256 collateral
     );
 }
-```text
+```
 
 ## Rationale
 
@@ -507,7 +507,7 @@ function testPrivateBorrow() public {
     // Verify loan created
     assertTrue(loanId != bytes32(0));
 }
-```text
+```
 
 ### Confidential Collateral Test
 

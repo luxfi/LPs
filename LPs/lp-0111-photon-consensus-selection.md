@@ -115,7 +115,7 @@ func (at *AdaptiveTimeout) ComputeTimeout(recentLatencies []time.Duration) time.
     // Bound within [min, max]
     return max(at.minTimeout, min(at.maxTimeout, timeout))
 }
-```text
+```
 
 ### Core Protocol Loop
 
@@ -179,7 +179,7 @@ func (s *PhotonPlusPlus) RecordPoll(votes []Vote) {
     // Update preference
     s.updatePreference(winner)
 }
-```text
+```
 
 ### Weighted Sampling
 
@@ -214,7 +214,7 @@ func WeightedSample(validators []Validator, k int) []Validator {
 
     return selected
 }
-```text
+```
 
 **Lemma 2**: Weighted sampling maintains Byzantine fault tolerance if the adversary controls less than 1/3 of total stake.
 
@@ -238,7 +238,7 @@ type PhotonBlock struct {
     ChitCount   uint32  // Number of chits received
     Confidence  uint32  // Consecutive rounds of success
 }
-```text
+```
 
 ### Finalization Rules
 
@@ -306,7 +306,7 @@ const (
     PhotonV1   BlockVersion = 1  // Original
     PhotonPlusV2 BlockVersion = 2  // With VRF
 )
-```text
+```
 
 Migration strategy:
 1. Soft fork to recognize v2 blocks
@@ -333,7 +333,7 @@ def test_vrf_fairness():
     assert abs(selections[0] - 1667) < 100  # 16.67%
     assert abs(selections[1] - 3333) < 100  # 33.33%
     assert abs(selections[2] - 5000) < 100  # 50.00%
-```text
+```
 
 ### Test 2: Adaptive Timeout
 ```python
@@ -347,7 +347,7 @@ def test_adaptive_timeout():
     # Slow network
     timeout.update([2000, 2500, 3000, 2200, 2800])
     assert 7000 < timeout.compute() < 10000  # Should increase
-```text
+```
 
 ### Test 3: Byzantine Resilience
 ```python
@@ -363,7 +363,7 @@ def test_byzantine_block_withholding():
     result = photon_pp.record_poll(votes)
     assert result.finalized == True
     assert result.confidence >= BETA_VIRTUOUS
-```text
+```
 
 ## Reference Implementation
 
@@ -453,7 +453,7 @@ cd consensus/protocol/photon
 go test -v ./... -run Photon
 go test -v ./... -run Luminance
 go test -v ./... -run VRF
-```text
+```
 
 **Test Coverage** (12 unit tests, 97% code coverage):
 - TestPhotonCommitteeSelection - Validates weighted committee formation
@@ -470,7 +470,7 @@ go test -v ./... -run VRF
 - TestConfidenceConvergence - Block acceptance convergence
 
 **Benchmark Results** (Apple M1 Max):
-```text
+```
 BenchmarkPhotoCommitteeSelection-10  5,248 ops/sec (190μs/op)
 BenchmarkVRFGeneration-10            8,932 ops/sec (112μs/op)
 BenchmarkAdaptiveTimeout-10         12,847 ops/sec (78μs/op)

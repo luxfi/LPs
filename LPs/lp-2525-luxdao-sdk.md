@@ -30,7 +30,7 @@ A TypeScript SDK enables:
 
 ### Package Location
 
-```text
+```
 @luxdao/sdk (dao/sdk/)
 ├── src/
 │   ├── index.ts           # Package exports

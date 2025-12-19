@@ -1,8 +1,32 @@
 import React from 'react';
 import Link from 'next/link';
-import { Logo, LogoWithText } from '@/components/logo';
+import {
+  GitFork,
+  MessageSquare,
+  ArrowRight,
+  Github,
+  Twitter,
+  Facebook,
+  Instagram,
+  Linkedin,
+  Youtube,
+  Layers,
+  Network,
+  Lock,
+  Coins,
+  TrendingUp,
+  Vote,
+  Zap,
+  FlaskConical,
+  LayoutGrid,
+  FileCode,
+  ArrowLeftRight,
+  Radio,
+  CheckCircle
+} from 'lucide-react';
+import { Logo } from '@/components/logo';
 import { source, type LPCategory } from '@/lib/source';
-import { ThemeToggle } from '@/components/theme-toggle';
+import { HomeHeader } from '@/components/home-header';
 
 type ProposalStatus = 'Final' | 'Draft' | 'Review' | 'Last Call' | 'Withdrawn' | 'Stagnant';
 
@@ -22,53 +46,17 @@ function StatusBadge({ status }: { status: ProposalStatus }) {
   );
 }
 
-function GitHubIcon({ size = 16 }: { size?: number }) {
-  return (
-    <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor">
-      <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
-    </svg>
-  );
-}
-
 function SocialIcon({ icon, size = 14 }: { icon: string; size?: number }) {
-  const icons: Record<string, React.ReactElement> = {
-    warpcast: (
-      <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor">
-        <path d="M18.24 2.4H5.76C3.87 2.4 2.4 3.87 2.4 5.76v12.48c0 1.89 1.47 3.36 3.36 3.36h12.48c1.89 0 3.36-1.47 3.36-3.36V5.76c0-1.89-1.47-3.36-3.36-3.36zm-2.22 14.28h-1.44v-4.68L12 14.76l-2.58-2.76v4.68H7.98V7.32h1.44l2.58 2.76 2.58-2.76h1.44v9.36z"/>
-      </svg>
-    ),
-    github: (
-      <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor">
-        <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
-      </svg>
-    ),
-    x: (
-      <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor">
-        <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
-      </svg>
-    ),
-    facebook: (
-      <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor">
-        <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
-      </svg>
-    ),
-    instagram: (
-      <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor">
-        <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
-      </svg>
-    ),
-    linkedin: (
-      <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor">
-        <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
-      </svg>
-    ),
-    youtube: (
-      <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor">
-        <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
-      </svg>
-    ),
+  const iconMap: Record<string, React.ReactElement> = {
+    warpcast: <Radio size={size} />,
+    github: <Github size={size} />,
+    x: <Twitter size={size} />,
+    facebook: <Facebook size={size} />,
+    instagram: <Instagram size={size} />,
+    linkedin: <Linkedin size={size} />,
+    youtube: <Youtube size={size} />,
   };
-  return icons[icon] || null;
+  return iconMap[icon] || null;
 }
 
 // Category icons with consistent styling
@@ -87,70 +75,23 @@ function CategoryIcon({ icon, color }: { icon: string; color: string }) {
     rose: 'text-rose-600 dark:text-rose-400 bg-rose-500/10',
   };
 
-  const icons: Record<string, React.ReactElement> = {
-    layers: (
-      <svg className="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-        <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
-      </svg>
-    ),
-    consensus: (
-      <svg className="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-        <circle cx="12" cy="12" r="3"/><circle cx="12" cy="4" r="2"/><circle cx="12" cy="20" r="2"/>
-        <circle cx="4" cy="12" r="2"/><circle cx="20" cy="12" r="2"/>
-        <path d="M12 7v2M12 15v2M7 12h2M15 12h2"/>
-      </svg>
-    ),
-    lock: (
-      <svg className="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-        <rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/>
-      </svg>
-    ),
-    token: (
-      <svg className="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-        <circle cx="12" cy="12" r="9"/><path d="M12 6v12M8 10h8M8 14h8"/>
-      </svg>
-    ),
-    chart: (
-      <svg className="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-        <path d="M3 3v18h18"/><path d="M18 17l-5-5-4 4-3-3"/>
-      </svg>
-    ),
-    vote: (
-      <svg className="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-        <path d="M9 12l2 2 4-4"/><rect x="3" y="3" width="18" height="18" rx="2"/>
-      </svg>
-    ),
-    upgrade: (
-      <svg className="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-        <path d="M12 2v6M12 22v-6M4.93 4.93l4.24 4.24M14.83 14.83l4.24 4.24M2 12h6M22 12h-6M4.93 19.07l4.24-4.24M14.83 9.17l4.24-4.24"/>
-      </svg>
-    ),
-    research: (
-      <svg className="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-        <circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/><path d="M11 8v6M8 11h6"/>
-      </svg>
-    ),
-    platform: (
-      <svg className="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-        <rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 3v18M3 9h18"/>
-      </svg>
-    ),
-    contract: (
-      <svg className="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-        <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/>
-        <path d="M14 2v6h6M16 13H8M16 17H8M10 9H8"/>
-      </svg>
-    ),
-    exchange: (
-      <svg className="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-        <path d="M7 16V4M7 4L3 8M7 4l4 4M17 8v12M17 20l4-4M17 20l-4-4"/>
-      </svg>
-    ),
+  const iconMap: Record<string, React.ReactElement> = {
+    layers: <Layers className="h-6 w-6" />,
+    consensus: <Network className="h-6 w-6" />,
+    lock: <Lock className="h-6 w-6" />,
+    token: <Coins className="h-6 w-6" />,
+    chart: <TrendingUp className="h-6 w-6" />,
+    vote: <Vote className="h-6 w-6" />,
+    upgrade: <Zap className="h-6 w-6" />,
+    research: <FlaskConical className="h-6 w-6" />,
+    platform: <LayoutGrid className="h-6 w-6" />,
+    contract: <FileCode className="h-6 w-6" />,
+    exchange: <ArrowLeftRight className="h-6 w-6" />,
   };
 
   return (
     <div className={`flex h-12 w-12 items-center justify-center rounded-xl ${colorClasses[color] || colorClasses.blue}`}>
-      {icons[icon] || icons.layers}
+      {iconMap[icon] || <Layers className="h-6 w-6" />}
     </div>
   );
 }
@@ -190,14 +131,14 @@ const footerLinks = {
       { title: 'Careers', href: 'https://docs.google.com/document/d/1SCt0Hg7EIs06TootKCA1am1xo4mcXoKF/edit' },
       { title: 'Partnerships', href: 'https://apply.lux.partners' },
       { title: 'Press', href: 'mailto:ai@lux.partners?subject=Press' },
-      { title: 'Help', href: 'mailto:ai@lux.partners?subject=Help' },
+      { title: 'Help', href: 'https://lux.help' },
     ],
   },
   community: {
     title: 'Community',
     links: [
       { title: 'Lux Channel', href: 'https://warpcast.com/~/channel/lux', icon: 'warpcast' },
-      { title: 'Discussions', href: 'https://github.com/orgs/luxfi/discussions', icon: 'github' },
+      { title: 'LP Discussions', href: 'https://github.com/luxfi/lps/discussions', icon: 'github' },
       { title: '@luxdefi', href: 'https://twitter.com/luxdefi', icon: 'x' },
       { title: '@luxdefi', href: 'https://facebook.com/luxdefi', icon: 'facebook' },
       { title: '@luxdefi', href: 'https://instagram.com/luxdefi', icon: 'instagram' },
@@ -265,7 +206,7 @@ export default function HomePage() {
   // Get finalized standards
   const finalizedLPs = allPages
     .filter(lp => lp.data.frontmatter.status === 'Final')
-    .slice(0, 4);
+    .slice(0, 6);
 
   // Category stats helper
   const getCategoryStats = (cat: LPCategory) => {
@@ -274,29 +215,16 @@ export default function HomePage() {
     return { final, draft, total: cat.lps.length };
   };
 
-  // Group categories by type for balanced 6-category sections
+  // Group categories by type for balanced sections
   const foundationalCategories = allCategories.filter(c => ['Core Architecture', 'Consensus', 'Cryptography', 'Token Standards', 'DeFi', 'Governance'].includes(c.name));
-  const advancedCategories = allCategories.filter(c => ['Network Upgrades', 'Research', 'P-Chain', 'C-Chain', 'X-Chain'].includes(c.name));
+  const advancedCategories = allCategories.filter(c => ['Network Upgrades', 'Research', 'Sustainability & ESG', 'Impact & Public Goods'].includes(c.name));
+  const chainCategories = allCategories.filter(c => ['Platform Chain (P-Chain)', 'EVM & Smart Contracts', 'Virtual Machines & Subnets', 'Interoperability', 'Bridge Protocols', 'Threshold Cryptography (T-Chain)'].includes(c.name));
+  const extendedCategories = allCategories.filter(c => ['Protocol Extensions', 'Advanced Protocols', 'Extended Specifications'].includes(c.name));
 
   return (
     <div className="min-h-screen bg-background text-foreground">
       {/* Header */}
-      <header className="sticky top-0 z-50 border-b border-border bg-background/80 backdrop-blur-xl">
-        <div className="mx-auto flex h-14 max-w-6xl items-center justify-between px-4 sm:px-6 lg:px-8">
-          <Link href="/" className="flex items-center gap-2">
-            <LogoWithText size={18} />
-          </Link>
-          <div className="flex items-center gap-3">
-            <ThemeToggle />
-            <Link
-              href="/docs"
-              className="inline-flex h-8 items-center justify-center rounded-md bg-foreground px-3 text-sm font-medium text-background transition-colors hover:bg-foreground/90"
-            >
-              Browse
-            </Link>
-          </div>
-        </div>
-      </header>
+      <HomeHeader />
 
       <main>
         {/* Hero */}
@@ -317,7 +245,7 @@ export default function HomePage() {
               rel="noreferrer"
               className="inline-flex h-10 items-center justify-center gap-2 rounded-md border border-border bg-transparent px-4 text-sm font-medium text-foreground transition-colors hover:bg-muted"
             >
-              <GitHubIcon size={16} />
+              <Github size={16} />
               GitHub
             </a>
             <Link
@@ -325,9 +253,7 @@ export default function HomePage() {
               className="inline-flex h-10 items-center justify-center gap-2 rounded-md bg-foreground px-4 text-sm font-medium text-background transition-colors hover:bg-foreground/90"
             >
               Browse proposals
-              <svg className="size-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                <path strokeLinecap="round" strokeLinejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" />
-              </svg>
+              <ArrowRight className="size-4" />
             </Link>
           </div>
         </section>
@@ -357,7 +283,7 @@ export default function HomePage() {
             <h2 className="text-2xl font-bold sm:text-3xl">Advanced Cryptography & Privacy Technologies</h2>
             <p className="mt-3 text-muted-foreground">Cutting-edge security innovations powering the quantum-safe, AI-ready blockchain</p>
           </div>
-          <div className="mt-10 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="mt-10 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {learningTopics.map((topic) => (
               <div
                 key={topic.title}
@@ -393,9 +319,15 @@ export default function HomePage() {
                   >
                     <div className="flex items-start justify-between">
                       <CategoryIcon icon={cat.icon} color={cat.color} />
-                      <span className="rounded-full bg-muted px-2 py-0.5 font-mono text-xs text-muted-foreground">
-                        {cat.range[0]}-{cat.range[1]}
-                      </span>
+                      {cat.range ? (
+                        <span className="rounded-full bg-muted px-2 py-0.5 font-mono text-xs text-muted-foreground">
+                          {cat.range[0]}-{cat.range[1]}
+                        </span>
+                      ) : (
+                        <span className="rounded-full bg-muted px-2 py-0.5 font-mono text-xs text-muted-foreground">
+                          {cat.lps.length} LPs
+                        </span>
+                      )}
                     </div>
                     <h3 className="mt-4 text-lg font-semibold">{cat.name}</h3>
                     <p className="mt-2 flex-1 text-sm text-muted-foreground leading-relaxed">
@@ -437,11 +369,11 @@ export default function HomePage() {
           <div className="flex items-center justify-between">
             <div>
               <h2 className="text-2xl font-bold">Advanced Technology</h2>
-              <p className="mt-1 text-muted-foreground">Quantum-resistant cryptography and multi-chain architecture</p>
+              <p className="mt-1 text-muted-foreground">Research, sustainability, and network evolution</p>
             </div>
           </div>
-          <div className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-3">
-            {advancedCategories.slice(0, 3).map((cat) => {
+          <div className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            {advancedCategories.map((cat) => {
               const catStats = getCategoryStats(cat);
               return (
                 <Link
@@ -451,9 +383,15 @@ export default function HomePage() {
                 >
                   <div className="flex items-start justify-between">
                     <CategoryIcon icon={cat.icon} color={cat.color} />
-                    <span className="rounded-full bg-muted px-2 py-0.5 font-mono text-xs text-muted-foreground">
-                      {cat.range[0]}-{cat.range[1]}
-                    </span>
+                    {cat.range ? (
+                      <span className="rounded-full bg-muted px-2 py-0.5 font-mono text-xs text-muted-foreground">
+                        {cat.range[0]}-{cat.range[1]}
+                      </span>
+                    ) : (
+                      <span className="rounded-full bg-muted px-2 py-0.5 font-mono text-xs text-muted-foreground">
+                        {cat.lps.length} LPs
+                      </span>
+                    )}
                   </div>
                   <h3 className="mt-4 text-lg font-semibold">{cat.name}</h3>
                   <p className="mt-2 flex-1 text-sm text-muted-foreground leading-relaxed">
@@ -498,8 +436,8 @@ export default function HomePage() {
                 <p className="mt-1 text-muted-foreground">Specialized blockchain networks for diverse applications</p>
               </div>
             </div>
-            <div className="mt-8 grid grid-cols-1 gap-6 lg:grid-cols-3">
-              {advancedCategories.slice(3).map((cat) => {
+            <div className="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+              {chainCategories.map((cat) => {
                 const catStats = getCategoryStats(cat);
                 return (
                   <Link
@@ -509,9 +447,15 @@ export default function HomePage() {
                   >
                     <div className="flex items-start justify-between">
                       <CategoryIcon icon={cat.icon} color={cat.color} />
-                      <span className="rounded-full bg-muted px-2 py-0.5 font-mono text-xs text-muted-foreground">
-                        {cat.range[0]}-{cat.range[1]}
-                      </span>
+                      {cat.range ? (
+                        <span className="rounded-full bg-muted px-2 py-0.5 font-mono text-xs text-muted-foreground">
+                          {cat.range[0]}-{cat.range[1]}
+                        </span>
+                      ) : (
+                        <span className="rounded-full bg-muted px-2 py-0.5 font-mono text-xs text-muted-foreground">
+                          {cat.lps.length} LPs
+                        </span>
+                      )}
                     </div>
                     <h3 className="mt-4 text-lg font-semibold">{cat.name}</h3>
                     <p className="mt-2 text-sm text-muted-foreground leading-relaxed">
@@ -551,6 +495,71 @@ export default function HomePage() {
           </div>
         </section>
 
+        {/* Extended Protocols */}
+        {extendedCategories.length > 0 && (
+          <section className="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-20 lg:px-8">
+            <div className="flex items-center justify-between">
+              <div>
+                <h2 className="text-2xl font-bold">Extended Protocols</h2>
+                <p className="mt-1 text-muted-foreground">Advanced and experimental specifications</p>
+              </div>
+            </div>
+            <div className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-3">
+              {extendedCategories.map((cat) => {
+                const catStats = getCategoryStats(cat);
+                return (
+                  <Link
+                    key={cat.name}
+                    href="/docs"
+                    className="group flex flex-col rounded-xl border border-border bg-card p-6 transition-all hover:border-border/80 hover:shadow-md"
+                  >
+                    <div className="flex items-start justify-between">
+                      <CategoryIcon icon={cat.icon} color={cat.color} />
+                      {cat.range ? (
+                        <span className="rounded-full bg-muted px-2 py-0.5 font-mono text-xs text-muted-foreground">
+                          {cat.range[0]}-{cat.range[1]}
+                        </span>
+                      ) : (
+                        <span className="rounded-full bg-muted px-2 py-0.5 font-mono text-xs text-muted-foreground">
+                          {cat.lps.length} LPs
+                        </span>
+                      )}
+                    </div>
+                    <h3 className="mt-4 text-lg font-semibold">{cat.name}</h3>
+                    <p className="mt-2 flex-1 text-sm text-muted-foreground leading-relaxed">
+                      {cat.description}
+                    </p>
+                    <div className="mt-4 flex flex-wrap gap-1">
+                      {cat.keyTopics.slice(0, 3).map((topic) => (
+                        <span key={topic} className="rounded-full bg-muted px-2 py-0.5 text-xs text-muted-foreground">
+                          {topic}
+                        </span>
+                      ))}
+                    </div>
+                    <div className="mt-4 flex items-center gap-3 border-t border-border pt-4 text-xs">
+                      {catStats.total > 0 ? (
+                        <>
+                          <span className="flex items-center gap-1">
+                            <span className="inline-block h-2 w-2 rounded-full bg-emerald-500"></span>
+                            {catStats.final} final
+                          </span>
+                          <span className="flex items-center gap-1">
+                            <span className="inline-block h-2 w-2 rounded-full bg-muted-foreground/50"></span>
+                            {catStats.draft} draft
+                          </span>
+                          <span className="ml-auto font-medium">{catStats.total} LPs</span>
+                        </>
+                      ) : (
+                        <span className="text-muted-foreground/60">Coming soon</span>
+                      )}
+                    </div>
+                  </Link>
+                );
+              })}
+            </div>
+          </section>
+        )}
+
         {/* Finalized Standards */}
         {finalizedLPs.length > 0 && (
           <section className="bg-emerald-500/5">
@@ -564,7 +573,7 @@ export default function HomePage() {
                   View all {stats.byStatus['Final'] || 0} &rarr;
                 </Link>
               </div>
-              <div className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2">
+              <div className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
                 {finalizedLPs.map((lp) => {
                   const lpNum = String(lp.data.frontmatter.lp || '0').padStart(4, '0');
                   return (
@@ -574,10 +583,7 @@ export default function HomePage() {
                       className="group flex items-start gap-4 rounded-xl border border-emerald-500/20 bg-card p-5 transition-all hover:border-emerald-500/40 hover:shadow-sm"
                     >
                       <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-lg bg-emerald-500/10 text-emerald-600 dark:text-emerald-400">
-                        <svg className="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                          <path d="M9 12l2 2 4-4"/>
-                          <circle cx="12" cy="12" r="10"/>
-                        </svg>
+                        <CheckCircle className="h-6 w-6" />
                       </div>
                       <div className="min-w-0 flex-1">
                         <div className="flex items-center gap-2">
@@ -679,19 +685,28 @@ export default function HomePage() {
             </p>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
               <Link
-                href="/docs"
+                href="/docs/lp-1"
                 className="inline-flex h-10 items-center justify-center rounded-md bg-background px-4 text-sm font-medium text-foreground transition-colors hover:bg-background/90"
               >
-                Read guidelines
+                LP-1 Contribution Guide
               </Link>
               <a
-                href="https://github.com/luxfi/LPs"
+                href="https://github.com/luxfi/lps/fork"
                 target="_blank"
                 rel="noreferrer"
                 className="inline-flex h-10 items-center justify-center gap-2 rounded-md border border-background/30 px-4 text-sm font-medium transition-colors hover:bg-background/10"
               >
-                <GitHubIcon size={16} />
-                Open on GitHub
+                <GitFork className="h-4 w-4" />
+                Fork &amp; Contribute
+              </a>
+              <a
+                href="https://github.com/luxfi/lps/discussions"
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex h-10 items-center justify-center gap-2 rounded-md border border-background/30 px-4 text-sm font-medium transition-colors hover:bg-background/10"
+              >
+                <MessageSquare className="h-4 w-4" />
+                Discuss
               </a>
             </div>
           </div>
@@ -747,7 +762,7 @@ export default function HomePage() {
               </a>
             </div>
             <p className="text-sm text-muted-foreground">
-              Copyright &copy; 2020 - {new Date().getFullYear()} Lux Industries Inc. All rights reserved.
+              BSD-3-Clause &copy; 2020 - {new Date().getFullYear()} Lux Industries Inc.
             </p>
           </div>
         </div>

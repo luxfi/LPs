@@ -114,7 +114,7 @@ pk := sk.PublicKey
 // Serialize keys
 privBytes := sk.Bytes()          // 64 bytes
 pubBytes := pk.Bytes()            // 32 bytes
-```text
+```
 
 ### Signing
 
@@ -126,7 +126,7 @@ if err != nil {
     return err
 }
 // signature is 17,088 bytes for SHA2-128f
-```text
+```
 
 **Properties**:
 - **Deterministic**: Same (sk, message) always produces same signature
@@ -142,7 +142,7 @@ valid := pk.Verify(message, signature, nil)
 if !valid {
     return errors.New("invalid signature")
 }
-```text
+```
 
 **Verification checks**:
 1. Signature size matches parameter set
@@ -163,7 +163,7 @@ type CriticalValidatorRegistration struct {
     SLHDSA          []byte         // 17,088 bytes - long-term security
     Mode            uint8          // SLH-DSA mode
 }
-```text
+```
 
 **Use Case**: Validators with multi-year stake periods use SLH-DSA for maximum long-term security assurance.
 
@@ -180,7 +180,7 @@ type GovernanceProposal struct {
     PublicKey       []byte  // 32 bytes
     Mode            uint8   // SHA2_128f
 }
-```text
+```
 
 **Rationale**: Governance decisions have long-lasting effects and require maximum security assurance.
 
@@ -192,7 +192,7 @@ Subject: Lux Network Root CA
 Public Key Algorithm: SLH-DSA-SHA2-256s
 Signature Algorithm: SLH-DSA-SHA2-256s
 Validity: 10 years
-```text
+```
 
 **Use Case**: Root CAs issue long-lived certificates and require conservative security guarantees.
 
@@ -216,7 +216,7 @@ interface ISLHDSA {
         uint8 mode
     ) external view returns (bool valid);
 }
-```text
+```
 
 **Gas Cost**:
 - Base: 500,000 gas (expensive due to computation)
@@ -244,7 +244,7 @@ contract GovernanceVault {
         // Process governance proposal
     }
 }
-```text
+```
 
 ## Implementation
 
@@ -299,7 +299,7 @@ func PublicKeyFromBytes(data []byte, mode Mode) (*PublicKey, error)
 func GetPublicKeySize(mode Mode) int
 func GetPrivateKeySize(mode Mode) int
 func GetSignatureSize(mode Mode) int
-```text
+```
 
 ### EVM Precompile
 
@@ -317,13 +317,13 @@ func GetSignatureSize(mode Mode) int
 func init() {
     precompile.Register(&SLHDSAPrecompile{})
 }
-```text
+```
 
 ## Test Results
 
 ### Core Implementation: 15/15 PASSING ✅
 
-```text
+```
 ✓ SignVerify_SHA2_128s           (0.20s)
 ✓ SignVerify_SHAKE_128s          (1.02s)
 ✓ SignVerify_SHA2_256s           (0.36s)
@@ -339,12 +339,12 @@ func init() {
 ✓ GetPublicKeySize               (0.00s)
 ✓ GetSignatureSize               (0.00s)
 ✓ DeterministicSigning           (0.37s)
-```text
+```
 
 ### Performance Benchmarks (Apple M1 Max)
 
 #### SHA2 Variants
-```text
+```
 BenchmarkSLHDSA_Sign_SHA2_128s      3 ops    309,000,000 ns/op (309ms)
 BenchmarkSLHDSA_Sign_SHA2_128f    100 ops     10,000,000 ns/op (10ms)
 BenchmarkSLHDSA_Sign_SHA2_256s      2 ops    603,000,000 ns/op (603ms)
@@ -356,7 +356,7 @@ BenchmarkSLHDSA_KeyGen_SHA2_128f    285 ops   35,000,000 ns/op (35ms)
 ```
 
 #### SHAKE Variants (Slower)
-```text
+```
 BenchmarkSLHDSA_Sign_SHAKE_128s      1 op   1,020,000,000 ns/op (1.02s)
 BenchmarkSLHDSA_Sign_SHAKE_128f     26 ops    38,000,000 ns/op (38ms)
 ```
@@ -563,7 +563,7 @@ func main() {
     fmt.Printf("Private key: %d bytes\n", len(privKeyBytes))
     // Output: Private key: 64 bytes
 }
-```text
+```
 
 ### Governance Proposal Example
 

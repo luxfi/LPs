@@ -37,7 +37,7 @@ A comprehensive DEX specification provides:
 
 ### DEX Architecture
 
-```text
+```
 ┌─────────────────────────────────────────────────────────────────┐
 │                     Lux DEX Architecture                        │
 ├──────────────────────┬──────────────────────────────────────────┤
@@ -98,7 +98,7 @@ type TradingPair struct {
     BaseAsset   ids.ID
     QuoteAsset  ids.ID
 }
-```text
+```
 
 #### Matching Engine
 
@@ -110,7 +110,7 @@ type MatchingEngine interface {
     GetBestBid(pair TradingPair) (*PriceLevel, error)
     GetBestAsk(pair TradingPair) (*PriceLevel, error)
 }
-```text
+```
 
 **Matching Rules**:
 - Price-time priority (FIFO)
@@ -155,7 +155,7 @@ interface ILuxPool {
         uint128 amount
     ) external returns (uint256 amount0, uint256 amount1);
 }
-```text
+```
 
 #### Concentrated Liquidity
 
@@ -167,7 +167,7 @@ struct Position {
     uint128 tokensOwed0;
     uint128 tokensOwed1;
 }
-```text
+```
 
 **Fee Tiers**:
 - 0.01% (1 bps) - Stablecoin pairs
@@ -191,7 +191,7 @@ interface ILiquidityMining {
     function getReward() external;
     function earned(address account) external view returns (uint256);
 }
-```text
+```
 
 ### Cross-Chain Trading
 
@@ -207,7 +207,7 @@ type AtomicSwap struct {
     ResponderAsset  Asset
     Status          SwapStatus
 }
-```text
+```
 
 #### Bridge Trading
 
@@ -228,7 +228,7 @@ interface ICrossChainSwap {
         bytes calldata bridgeProof
     ) external;
 }
-```text
+```
 
 ### Fee Structure
 
@@ -278,7 +278,7 @@ POST /ext/bc/C/dex/liquidity/add
 POST /ext/bc/C/dex/liquidity/remove
 GET /ext/bc/C/dex/pools
 GET /ext/bc/C/dex/quote/{pair}
-```text
+```
 
 ### WebSocket Feeds
 
@@ -291,7 +291,7 @@ ws://node/ext/bc/X/dex/ws
 - trades:{pair}        # Trade stream
 - ticker:{pair}        # Price ticker
 - user:{address}       # User orders/trades
-```text
+```
 
 ### Configuration
 
@@ -316,7 +316,7 @@ ws://node/ext/bc/X/dex/ws
     }
   }
 }
-```text
+```
 
 ### Performance
 

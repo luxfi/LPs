@@ -46,7 +46,7 @@ This LP establishes AIVM as a first-class VM in the Lux ecosystem, enabling trus
 
 ### 1. Architecture Overview
 
-```text
+```
 ┌─────────────────────────────────────────────────────────────────┐
 │                         AIVM (AI Virtual Machine)               │
 │  ┌─────────────────┐  ┌─────────────────┐  ┌────────────────┐  │
@@ -81,7 +81,7 @@ AIVMName = "aivm"
 
 // Factory registration
 n.VMManager.RegisterFactory(ctx, constants.AIVMID, &aivm.Factory{})
-```text
+```
 
 **Reference Implementation:**
 - [`node/vms/aivm/factory.go`](https://github.com/luxfi/node/blob/main/vms/aivm/factory.go)
@@ -111,7 +111,7 @@ type Config struct {
     EpochDuration    string `json:"epochDuration"`    // Default: "1h"
     MerkleAnchorFreq int    `json:"merkleAnchorFreq"` // Default: 100 blocks
 }
-```text
+```
 
 ### 4. GPU Attestation (nvtrust)
 
@@ -132,7 +132,7 @@ type DeviceStatus struct {
     Mode       string `json:"mode"`        // "CC" or "Standard"
     HardwareCC bool   `json:"hardwareCC"`  // True for CC-capable GPUs
 }
-```text
+```
 
 **Supported GPU Types:**
 
@@ -174,7 +174,7 @@ if provider.GPUAttestation != nil {
             status.TrustScore, vm.config.MinTrustScore)
     }
 }
-```text
+```
 
 ### 6. Task Management
 
@@ -200,7 +200,7 @@ type TaskResult struct {
     Proof       []byte          `json:"proof"`
     Error       string          `json:"error,omitempty"`
 }
-```text
+```
 
 ### 7. RPC API
 
@@ -241,7 +241,7 @@ type Block struct {
     MerkleRoot   [32]byte      `json:"merkleRoot"`
     ProviderRegs []ProviderReg `json:"providerRegs,omitempty"`
 }
-```text
+```
 
 ### 9. Merkle Anchoring
 
@@ -251,7 +251,7 @@ Periodic merkle roots are anchored to Q-Chain:
 // Every MerkleAnchorFreq blocks (default: 100)
 merkleRoot := vm.GetMerkleRoot()
 // Anchor to Q-Chain for permanent record
-```text
+```
 
 ## Rationale
 

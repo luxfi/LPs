@@ -30,7 +30,7 @@ Account abstraction enables:
 
 ### Architecture
 
-```text
+```
 ┌─────────────────────────────────────────────────────────────────┐
 │                        User Operation                            │
 │                    (vote, propose, delegate)                     │
@@ -143,7 +143,7 @@ interface ILightAccountValidator {
 
 ### File Structure
 
-```text
+```
 contracts/contracts/account-abstraction/
 ├── PaymasterV1.sol           # DAO gas sponsorship paymaster
 ├── BasePaymaster.sol         # Abstract paymaster base

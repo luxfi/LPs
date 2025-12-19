@@ -207,7 +207,7 @@ go build -o bin/cgg21-keygen ./cmd/keygen
 
 # Or build all tools
 make build
-```text
+```
 
 ### Testing
 

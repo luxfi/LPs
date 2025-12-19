@@ -90,7 +90,7 @@ func AggregateSignatures(
         PublicKey: bls.AggregatePublicKeys(sigs),
     }, nil
 }
-```text
+```
 
 ### Message Verification
 
@@ -118,7 +118,7 @@ func VerifyMessage(
 
     return nil
 }
-```text
+```
 
 ### State Proof Integration
 
@@ -132,7 +132,7 @@ type StateProof struct {
     VerkleProof   *verkle.Proof  // Constant 1KB
     Signature     *BLSSignature
 }
-```text
+```
 
 ## Rationale
 
@@ -231,10 +231,10 @@ Message TTL: 24 hours
 Max Messages per Block: 1000
 Signature Aggregation Timeout: 5 seconds
 Proof Size Target: <1.5 KB
-```text
+```
 
 **Testnet Parameters**:
-```text
+```
 BLS Threshold: 51% (for faster testing)
 Message TTL: 12 hours
 Max Messages per Block: 5000

@@ -63,7 +63,7 @@ The critical innovation in CGGMP21 is **identifiable aborts**:
 
 ### Precompile Address
 
-```text
+```
 0x020000000000000000000000000000000000000D
 ```markdown
 
@@ -147,7 +147,7 @@ interface ICGGMP21 {
         bytes calldata signature
     ) external view returns (bool valid);
 }
-```text
+```
 
 ### CGGMP21Lib Library
 
@@ -199,7 +199,7 @@ library CGGMP21Lib {
         return BASE_GAS + (uint256(totalSigners) * PER_SIGNER_GAS);
     }
 }
-```text
+```
 
 ### CGGMP21Verifier Abstract Contract
 
@@ -241,7 +241,7 @@ abstract contract CGGMP21Verifier {
         emit CGGMP21SignatureVerified(threshold, totalSigners, publicKey, messageHash);
     }
 }
-```text
+```
 
 ## Usage Examples
 
@@ -308,7 +308,7 @@ contract ThresholdWallet is CGGMP21Verifier {
 
     receive() external payable {}
 }
-```text
+```
 
 ### DAO Treasury
 
@@ -348,7 +348,7 @@ contract DAOTreasury is CGGMP21Verifier {
         require(success, "Proposal execution failed");
     }
 }
-```text
+```
 
 ### Cross-Chain Bridge
 
@@ -508,7 +508,7 @@ bytes32 messageHash = keccak256(abi.encodePacked(
     domainSeparator,
     keccak256(abi.encode(nonce, data))
 ));
-```text
+```
 
 ### Identifiable Abort Handling
 
@@ -535,14 +535,14 @@ Input:
 
 Expected Output: 0x0000...0001 (valid)
 Gas Used: 125,000
-```text
+```
 
 ### Test 2: Invalid Signature
-```text
+```
 Input: (same as Test 1 but corrupted signature)
 Expected Output: 0x0000...0000 (invalid)
 Gas Used: 125,000
-```text
+```
 
 ### Test 3: Threshold Violation
 ```yaml
@@ -561,7 +561,7 @@ Input:
 
 Expected Output: 0x0000...0001 (valid)
 Gas Used: 225,000
-```text
+```
 
 ## Reference Implementation
 
@@ -693,7 +693,7 @@ See LP-323 for dynamic threshold and party set changes using LSS-MPC protocol ex
 
 Future LPs may define hybrid schemes combining CGGMP21 with post-quantum signatures:
 
-```text
+```
 HybridSignature = CGGMP21_Signature || PQ_Signature
 ```
 
