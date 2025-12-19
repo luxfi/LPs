@@ -64,13 +64,13 @@ export default function Layout({ children }: { children: ReactNode }) {
               Contribute on GitHub
             </a>
             <a
-              href="https://lux.forum"
+              href="https://github.com/luxfi/lps/discussions"
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors"
             >
               <Users className="size-4" />
-              Discussion Forum
+              Discussions
             </a>
             <a
               href="https://lux.help"

@@ -272,17 +272,28 @@ function LPDetailPage({ page }: { page: any }) {
         )}
 
         {/* External Links */}
-        {frontmatter['discussions-to'] && (
+        <div className="flex flex-wrap items-center gap-4 mt-3">
+          {frontmatter['discussions-to'] && (
+            <a
+              href={frontmatter['discussions-to']}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1 text-xs text-muted-foreground hover:text-foreground transition-colors"
+            >
+              <ExternalLink className="size-3" />
+              Discussions
+            </a>
+          )}
           <a
-            href={frontmatter['discussions-to']}
+            href={`https://github.com/luxfi/lps/edit/main/LPs/${page.slug.join('/')}.md`}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-1 mt-3 text-xs text-muted-foreground hover:text-foreground"
+            className="inline-flex items-center gap-1 text-xs text-muted-foreground hover:text-foreground transition-colors"
           >
             <ExternalLink className="size-3" />
-            Join Discussion
+            Edit on GitHub
           </a>
-        )}
+        </div>
       </div>
 
       {/* Content */}
