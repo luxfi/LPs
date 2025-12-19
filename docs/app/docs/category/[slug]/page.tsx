@@ -71,6 +71,9 @@ export default async function CategoryPage({
   const colors = colorMap[category.color] || colorMap.blue;
   const icon = iconMap[category.icon] || iconMap.layers;
 
+  // Get adjacent categories for navigation
+  const { prev, next } = source.getAdjacentCategories(slug);
+
   // Group LPs by status
   const lpsByStatus = {
     final: category.lps.filter(lp => lp.data.frontmatter.status === 'Final'),
@@ -215,16 +218,47 @@ export default async function CategoryPage({
         </div>
       )}
 
-      {/* Navigation */}
+      {/* Category Navigation */}
       <div className="mt-12 pt-6 border-t border-border">
-        <div className="flex justify-between">
+        <div className="flex justify-between items-start gap-4">
+          {prev ? (
+            <Link
+              href={`/docs/category/${prev.slug}`}
+              className="group flex-1 p-4 rounded-lg border border-border hover:border-foreground/20 hover:bg-accent/50 transition-colors"
+            >
+              <div className="flex items-center gap-2 text-xs text-muted-foreground mb-1">
+                <ArrowLeft className="size-3" />
+                Previous
+              </div>
+              <div className="font-medium group-hover:text-foreground">{prev.name}</div>
+              <div className="text-xs text-muted-foreground mt-1">{prev.lps.length} proposals</div>
+            </Link>
+          ) : (
+            <div className="flex-1" />
+          )}
+
           <Link
             href="/docs"
-            className="text-sm text-muted-foreground hover:text-foreground flex items-center gap-1"
+            className="shrink-0 px-4 py-2 text-sm text-muted-foreground hover:text-foreground border border-border rounded-lg hover:bg-accent/50 transition-colors"
           >
-            <ArrowLeft className="size-3" />
-            Back to All Proposals
+            All Categories
           </Link>
+
+          {next ? (
+            <Link
+              href={`/docs/category/${next.slug}`}
+              className="group flex-1 p-4 rounded-lg border border-border hover:border-foreground/20 hover:bg-accent/50 transition-colors text-right"
+            >
+              <div className="flex items-center justify-end gap-2 text-xs text-muted-foreground mb-1">
+                Next
+                <ArrowRight className="size-3" />
+              </div>
+              <div className="font-medium group-hover:text-foreground">{next.name}</div>
+              <div className="text-xs text-muted-foreground mt-1">{next.lps.length} proposals</div>
+            </Link>
+          ) : (
+            <div className="flex-1" />
+          )}
         </div>
       </div>
     </div>

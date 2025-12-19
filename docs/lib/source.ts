@@ -674,6 +674,20 @@ export const source = {
     return LP_TOPICS.map(t => t.slug);
   },
 
+  getAdjacentCategories(slug: string): { prev: LPCategory | null; next: LPCategory | null } {
+    const categories = this.getCategorizedPages();
+    const index = categories.findIndex(c => c.slug === slug);
+
+    if (index === -1) {
+      return { prev: null, next: null };
+    }
+
+    return {
+      prev: index > 0 ? categories[index - 1] : categories[categories.length - 1],
+      next: index < categories.length - 1 ? categories[index + 1] : categories[0],
+    };
+  },
+
   getStats(): {
     total: number;
     byStatus: Record<string, number>;
