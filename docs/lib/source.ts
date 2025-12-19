@@ -585,13 +585,17 @@ function readLPFile(filename: string): LPPage | null {
     const fileContents = fs.readFileSync(filePath, 'utf8');
     const { data, content } = matter(fileContents);
 
-    const slug = filename.replace(/\.mdx?$/, '').split('/');
-
     // Extract LP number from filename (preferred - avoids YAML octal parsing issues)
     // YAML interprets numbers with leading zeros as octal (e.g., 0111 = 73 decimal)
     // Filename extraction is reliable: lp-0111-... → 111
     const lpMatch = filename.match(/lp-(\d+)/);
     const lpNumber = lpMatch ? parseInt(lpMatch[1], 10) : (data.lp || null);
+
+    // Generate slug based on LP number only (e.g., "lp-9000" not "lp-9000-dex-core-specification")
+    // This ensures consistent URLs: /docs/lp-9000 regardless of title in filename
+    const slug = lpNumber !== null
+      ? [`lp-${String(lpNumber).padStart(4, '0')}`]
+      : filename.replace(/\.mdx?$/, '').split('/');
 
     // Convert Date objects to strings
     const processedData: Record<string, any> = {};
@@ -670,9 +674,26 @@ export const source = {
       return null;
     }
 
-    const slug = slugParam;
-    const filename = `${slug.join('/')}.md`;
-    const mdxFilename = `${slug.join('/')}.mdx`;
+    const slug = slugParam[0];
+
+    // Extract LP number from slug (e.g., "lp-9000" → 9000)
+    const lpMatch = slug.match(/lp-0*(\d+)/i);
+    if (lpMatch) {
+      const lpNumber = parseInt(lpMatch[1], 10);
+      // Find the file that starts with this LP number
+      const files = getAllLPFiles();
+      const matchingFile = files.find(file => {
+        const fileMatch = file.match(/lp-0*(\d+)/i);
+        return fileMatch && parseInt(fileMatch[1], 10) === lpNumber;
+      });
+      if (matchingFile) {
+        return readLPFile(matchingFile);
+      }
+    }
+
+    // Fallback: try exact filename match (for non-standard filenames)
+    const filename = `${slug}.md`;
+    const mdxFilename = `${slug}.mdx`;
 
     let page = readLPFile(filename);
     if (!page) {
@@ -684,9 +705,16 @@ export const source = {
 
   generateParams(): { slug: string[] }[] {
     const files = getAllLPFiles();
-    return files.map(file => ({
-      slug: file.replace(/\.mdx?$/, '').split('/'),
-    }));
+    // Generate numeric-only slugs (e.g., lp-9000, not lp-9000-dex-core-specification)
+    const slugs = new Set<string>();
+    files.forEach(file => {
+      const lpMatch = file.match(/lp-(\d+)/);
+      if (lpMatch) {
+        const lpNumber = parseInt(lpMatch[1], 10);
+        slugs.add(`lp-${String(lpNumber).padStart(4, '0')}`);
+      }
+    });
+    return Array.from(slugs).map(slug => ({ slug: [slug] }));
   },
 
   getAllPages(): LPPage[] {
