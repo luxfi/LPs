@@ -49,331 +49,518 @@ export interface CategoryMeta {
   keyTopics: string[];
 }
 
-// Topic definitions - tag-based categories that aggregate LPs by subject matter
-// Topics match LPs via: tags, frontmatter category, or LP number range
-// NOTE: contentMatch is disabled - too aggressive, matches unrelated LPs
+// ============================================================================
+// LP TOPIC TAXONOMY - Research-Grade Subject Model
+// ============================================================================
+// CORE PRINCIPLE: Subjects describe knowledge. Chains describe deployment.
+//
+// This taxonomy separates:
+// - SUBJECTS (research domains): Consensus, Threshold, MPC, ZKP, PQC, etc.
+// - CHAINS (execution domains): C-Chain, T-Chain, Q-Chain, Z-Chain, etc.
+// - PRODUCT AREAS: DeFi, DEX, Wallets, Governance, etc.
+//
+// MPC ≠ Threshold ≠ KMS ≠ ZKP ≠ Consensus ≠ Crypto (generic)
+// They overlap in implementation, but they are DISTINCT research domains.
+//
+// ORDER MATTERS: More specific subjects come FIRST for priority matching
+// Priority: 1) Tag match, 2) Number range, 3) Explicit frontmatter category
+// ============================================================================
+
 const LP_TOPICS: CategoryMeta[] = [
-  // === GOVERNANCE & DAO ===
-  {
-    slug: 'governance',
-    name: 'Governance & DAO',
-    shortDesc: 'On-chain governance and DAOs',
-    description: 'Decentralized governance mechanisms, DAO frameworks, voting systems, treasury management, and proposal processes. Enables community-driven protocol evolution.',
-    range: [2520, 2599], // DAO platform specs
-    tags: ['governance', 'dao', 'voting', 'proposal', 'treasury', 'delegation', 'accountability'],
-    // No contentMatch - too broad
-    icon: 'vote',
-    color: 'indigo',
-    learnMore: 'Governance LPs define how the community makes decisions. Includes DAO contracts, voting mechanisms, treasury management, and delegation systems.',
-    keyTopics: ['DAO frameworks', 'Voting mechanisms', 'Treasury management', 'Delegation', 'Proposal systems'],
-  },
-  // === CORE ARCHITECTURE ===
-  {
-    slug: 'core',
-    name: 'Core Architecture',
-    shortDesc: 'Network fundamentals',
-    description: 'Foundational specifications defining how the Lux Network operates. Covers network topology, node requirements, data structures, and the multi-chain architecture.',
-    range: [0, 99],
-    tags: ['core', 'architecture', 'network', 'topology', 'nodes'],
-    icon: 'layers',
-    color: 'blue',
-    learnMore: 'Core architecture LPs define the backbone of Lux Network, including how nodes communicate, validate transactions, and maintain consensus.',
-    keyTopics: ['Network topology', 'Node specifications', 'Data structures', 'Multi-chain design'],
-  },
-  // === CONSENSUS ===
+  // ============================================================================
+  // SECTION 1: SUBJECTS (Research Domains)
+  // ============================================================================
+  // These are the core knowledge areas - how cryptographers and researchers think
+
+  // ============================================================
+  // 1.1 CONSENSUS SYSTEMS — Agreement, finality, validator coordination
+  // ============================================================
+  // Answers: "Who agrees and when?" NOT "How keys are held"
   {
     slug: 'consensus',
-    name: 'Consensus',
-    shortDesc: 'Consensus protocols',
-    description: 'Consensus mechanisms that secure the network. Includes Snowman for linear chains, DAG-based consensus, and sub-second finality protocols.',
+    name: 'Consensus Systems',
+    shortDesc: 'Agreement & finality',
+    description: 'Agreement, finality, and validator coordination. Photon selection, Flare DAG, Quasar sub-second finality, epoching, and block timing.',
     range: [100, 199],
-    tags: ['consensus', 'snowman', 'avalanche', 'finality', 'bft', 'quasar', 'photon'],
+    tags: ['consensus', 'photon', 'flare', 'quasar', 'snowman', 'finality', 'bft', 'validators', 'epoching', 'block-timing', 'sequencer', 'parallel-validation'],
     icon: 'consensus',
     color: 'purple',
-    learnMore: 'Consensus protocols determine how nodes agree on the state of the blockchain. Lux achieves finality in under 2 seconds.',
-    keyTopics: ['Snowman consensus', 'Quasar protocol', 'Byzantine fault tolerance', 'Finality guarantees'],
+    learnMore: 'Consensus is the physics engine of the network — who agrees and when. Lux achieves sub-second finality with Quasar.',
+    keyTopics: ['Photon selection', 'Flare DAG', 'Quasar finality', 'Epoching', 'Validator rotation'],
   },
-  // === CRYPTOGRAPHY ===
+
+  // ============================================================
+  // 1.2 THRESHOLD CRYPTOGRAPHY — Distributed signing and key control
+  // ============================================================
+  // This is signing-focused cryptography. Ringtail lives here.
+  // EXPLICITLY NOT: Generic MPC computation, Custody UX, KMS policy
   {
-    slug: 'cryptography',
-    name: 'Cryptography',
-    shortDesc: 'Cryptographic standards',
-    description: 'Cryptographic primitives and post-quantum security. Includes digital signatures, key encapsulation, hash functions, and zero-knowledge proofs.',
-    range: [200, 299],
-    tags: ['crypto', 'cryptography', 'signature', 'encryption', 'quantum', 'ml-kem', 'ml-dsa', 'zk', 'zkp'],
-    icon: 'lock',
-    color: 'emerald',
-    learnMore: 'Cryptography secures transactions and protects assets. Lux pioneers post-quantum cryptography for future-proof security.',
-    keyTopics: ['Digital signatures', 'Post-quantum crypto', 'ML-KEM/ML-DSA', 'Zero-knowledge proofs'],
+    slug: 'threshold',
+    name: 'Threshold Cryptography',
+    shortDesc: 'Distributed signing',
+    description: 'Distributed signing and key control. FROST, CGGMP, Ringtail, threshold ECDSA/Schnorr, resharing protocols, and signer rotation.',
+    tags: ['threshold', 'threshold-crypto', 'frost', 'cggmp', 'cggmp21', 'ringtail', 'tss', 'resharing', 'signer-rotation', 'threshold-ecdsa', 'threshold-schnorr'],
+    icon: 'key',
+    color: 'yellow',
+    learnMore: 'Threshold cryptography enables distributed signing — multiple parties sign without any single party holding the full key.',
+    keyTopics: ['FROST', 'CGGMP', 'Ringtail', 'Threshold ECDSA', 'Dynamic resharing'],
   },
-  // === TOKEN STANDARDS ===
+
+  // ============================================================
+  // 1.3 MULTI-PARTY COMPUTATION (MPC) — General secure computation
+  // ============================================================
+  // Answers: "What can we compute without revealing inputs?"
+  // Related but SEPARATE from Threshold (overlaps in math, not scope)
   {
-    slug: 'tokens',
-    name: 'Token Standards',
-    shortDesc: 'LRC token specifications',
-    description: 'Standards for fungible and non-fungible tokens. LRC-20, LRC-721, LRC-1155 maintain ERC compatibility with Lux optimizations.',
-    range: [300, 399],
-    tags: ['token', 'lrc', 'erc', 'nft', 'fungible', 'lrc-20', 'lrc-721', 'lrc-1155'],
-    icon: 'token',
-    color: 'amber',
-    learnMore: 'Token standards define how digital assets are created, transferred, and managed. ERC-compatible for seamless migration.',
-    keyTopics: ['LRC-20 fungible', 'LRC-721 NFTs', 'LRC-1155 multi-token', 'Token metadata'],
-  },
-  // === DEFI ===
-  {
-    slug: 'defi',
-    name: 'DeFi',
-    shortDesc: 'Decentralized finance',
-    description: 'Protocols for decentralized finance including AMMs, lending, yield optimization, staking, and derivatives.',
-    range: [400, 499],
-    tags: ['defi', 'amm', 'lending', 'yield', 'staking', 'swap', 'liquidity', 'dex'],
-    // No contentMatch - too broad
-    icon: 'chart',
-    color: 'green',
-    learnMore: 'DeFi eliminates intermediaries from financial services. Enables trustless trading, lending, and yield generation.',
-    keyTopics: ['AMM protocols', 'Lending markets', 'Yield aggregators', 'Liquid staking', 'DEX'],
-  },
-  // === NETWORK UPGRADES ===
-  {
-    slug: 'upgrades',
-    name: 'Network Upgrades',
-    shortDesc: 'Protocol upgrades',
-    description: 'Specifications for network upgrades, hard forks, and feature activations. Coordinates changes across validators.',
-    range: [600, 699],
-    tags: ['upgrade', 'fork', 'activation', 'migration'],
-    icon: 'upgrade',
+    slug: 'mpc',
+    name: 'Multi-Party Computation',
+    shortDesc: 'Secure computation',
+    description: 'General-purpose secure computation across parties. MPC protocols, secure function evaluation, distributed computation, and privacy-preserving compute.',
+    tags: ['mpc', 'secure-computation', 'distributed-computation', 'privacy-preserving-compute', 'mpc-bridge', 'mpc-custody'],
+    icon: 'compute',
     color: 'orange',
-    learnMore: 'Network upgrades introduce new features. Coordinated activation ensures all nodes upgrade together.',
-    keyTopics: ['Hard fork specs', 'Feature activation', 'Validator coordination', 'Migration guides'],
+    learnMore: 'MPC answers "what can we compute without revealing inputs" — general secure computation beyond just signing.',
+    keyTopics: ['Secure function evaluation', 'Distributed computation', 'MPC protocols', 'Privacy-preserving compute'],
   },
-  // === RESEARCH ===
+
+  // ============================================================
+  // 1.4 KEY MANAGEMENT SYSTEMS (KMS) — Operational control of crypto material
+  // ============================================================
+  // This is NEITHER MPC nor Threshold — it's governance + ops for keys
   {
-    slug: 'research',
-    name: 'Research',
-    shortDesc: 'Research & innovation',
-    description: 'Cutting-edge research including quantum-resistant cryptography, novel consensus, scalability solutions, and formal verification.',
-    range: [700, 799],
-    tags: ['research', 'paper', 'academic', 'innovation', 'theory'],
-    icon: 'research',
-    color: 'pink',
-    learnMore: 'Research LPs push the boundaries of blockchain technology. Includes academic papers and experimental protocols.',
-    keyTopics: ['Quantum security', 'Scalability research', 'Formal verification', 'Novel protocols'],
+    slug: 'kms',
+    name: 'Key Management',
+    shortDesc: 'Key lifecycle & policy',
+    description: 'Operational control of cryptographic material. K-Chain, HSM integration, key lifecycle, policy engines, access control, and custody enforcement.',
+    tags: ['kms', 'key-management', 'k-chain', 'hsm', 'key-lifecycle', 'policy-engine', 'access-control', 'rotation-rules', 'custody-enforcement', 'custody'],
+    icon: 'lock',
+    color: 'slate',
+    learnMore: 'KMS is the governance + ops layer for keys — policy engines, lifecycle management, and custody enforcement.',
+    keyTopics: ['K-Chain', 'HSM integration', 'Policy engines', 'Key rotation', 'Custody enforcement'],
   },
-  // === SUSTAINABILITY & ESG ===
+
+  // ============================================================
+  // 1.5 POST-QUANTUM CRYPTOGRAPHY (PQC) — Future-resistant primitives
+  // ============================================================
+  // About hardness assumptions, NOT protocol topology
+  // Separate from Threshold, MPC, ZKP
   {
-    slug: 'sustainability',
-    name: 'Sustainability & ESG',
-    shortDesc: 'Environmental and social impact',
-    description: 'Environmental sustainability, social responsibility, and governance transparency. Carbon-neutral operations and ESG compliance.',
-    range: [800, 899],
-    tags: ['sustainability', 'esg', 'carbon', 'green', 'environment', 'climate', 'energy'],
-    icon: 'leaf',
-    color: 'green',
-    learnMore: 'Sustainability LPs ensure Lux operates as a force for good. Covers energy efficiency and ESG reporting.',
-    keyTopics: ['Carbon neutrality', 'Energy efficiency', 'ESG reporting', 'Social impact'],
+    slug: 'pqc',
+    name: 'Post-Quantum Cryptography',
+    shortDesc: 'Quantum-resistant',
+    description: 'Future-resistant cryptographic primitives. ML-KEM (Kyber), ML-DSA (Dilithium), SLH-DSA (SPHINCS+), Lamport OTS, and hybrid transitions.',
+    tags: ['pqc', 'post-quantum', 'quantum', 'ml-kem', 'ml-dsa', 'slh-dsa', 'dilithium', 'kyber', 'lamport', 'fips-203', 'fips-204', 'fips-205', 'cryptographic-agility', 'hybrid-transition'],
+    icon: 'shield',
+    color: 'emerald',
+    learnMore: 'PQC is about hardness assumptions — quantum-resistant primitives based on NIST FIPS 203-205 standards.',
+    keyTopics: ['ML-KEM', 'ML-DSA', 'SLH-DSA', 'Lamport OTS', 'Hybrid transitions'],
   },
-  // === IMPACT & PUBLIC GOODS ===
+
+  // ============================================================
+  // 1.6 ZERO-KNOWLEDGE PROOF SYSTEMS (ZKP) — Verifiability without disclosure
+  // ============================================================
+  // Answers: "How to prove correctness without revealing state?"
+  // EXPLICITLY NOT: MPC, Threshold signing, Encryption-only systems
   {
-    slug: 'impact',
-    name: 'Impact & Public Goods',
-    shortDesc: 'Public goods and social benefit',
-    description: 'Standards for funding public goods, charitable giving, and measuring positive social impact.',
-    range: [900, 999],
-    tags: ['impact', 'public-goods', 'charity', 'social', 'benefit', 'grants'],
-    icon: 'heart',
-    color: 'rose',
-    learnMore: 'Impact LPs define how Lux contributes to public goods and social benefit.',
-    keyTopics: ['Public goods funding', 'Charitable giving', 'Impact measurement', 'Community grants'],
+    slug: 'zkp',
+    name: 'Zero-Knowledge Proofs',
+    shortDesc: 'Verifiable privacy',
+    description: 'Verifiability without disclosure. ZK proofs, zkVMs, SNARKs, STARKs, validity proofs, and privacy-preserving execution.',
+    tags: ['zk', 'zkp', 'zkvm', 'snark', 'stark', 'validity-proof', 'circuit', 'groth16', 'plonk', 'recursive-proofs'],
+    icon: 'eye-off',
+    color: 'indigo',
+    learnMore: 'ZKP answers "how to prove correctness without revealing state" — verifiability with privacy.',
+    keyTopics: ['ZK-SNARKs', 'ZK-STARKs', 'zkVM execution', 'Validity proofs', 'Circuit design'],
   },
-  // === PLATFORM CHAIN ===
+
+  // ============================================================
+  // 1.7 CRYPTOGRAPHY (Foundational) — Shared primitives & abstractions
+  // ============================================================
+  // The toolbox, not the system: hash functions, curves, RNG, signature verification
   {
-    slug: 'platform',
-    name: 'Platform Chain (P-Chain)',
-    shortDesc: 'Platform layer specifications',
-    description: 'P-Chain specifications including validator management, staking, delegation, and subnet creation.',
-    range: [1000, 1999],
-    tags: ['p-chain', 'platform', 'validator', 'staking', 'delegation', 'subnet'],
+    slug: 'crypto',
+    name: 'Cryptography',
+    shortDesc: 'Primitives & curves',
+    description: 'Foundational cryptographic primitives. Hash functions, elliptic curves, RNG, signature verification, and crypto libraries.',
+    tags: ['crypto', 'cryptography', 'hash', 'curve', 'rng', 'signature', 'secp256k1', 'secp256r1', 'bls', 'ed25519', 'encryption'],
+    icon: 'lock',
+    color: 'gray',
+    learnMore: 'Foundational crypto is the toolbox — primitives and abstractions used by higher-level systems.',
+    keyTopics: ['Hash functions', 'Elliptic curves', 'Signature schemes', 'BLS', 'Ed25519'],
+  },
+
+  // ============================================================
+  // 1.8 AI & ATTESTATION SYSTEMS — Verification of computation
+  // ============================================================
+  // A new research vertical, not an add-on
+  {
+    slug: 'ai',
+    name: 'AI & Attestation',
+    shortDesc: 'AI verification',
+    description: 'Verification of computation, models, and agents. AI mining, training ledgers, attestations, LLM integration, and confidential AI compute.',
+    tags: ['ai', 'attestation', 'ai-mining', 'llm', 'training-ledger', 'confidential-ai', 'gpu', 'inference', 'model', 'agent', 'ml', 'model-verification'],
+    icon: 'brain',
+    color: 'violet',
+    learnMore: 'AI & Attestation is a new research vertical — verification of computation, models, and AI agents.',
+    keyTopics: ['AI mining', 'Training ledgers', 'Attestations', 'LLM integration', 'Confidential AI'],
+  },
+
+  // ============================================================================
+  // SECTION 2: CHAINS (Execution Domains)
+  // ============================================================================
+  // Chains are PRODUCTS that deploy SUBJECTS. They aggregate research domains.
+
+  // ============================================================
+  // 2.1 P-CHAIN — Platform coordination
+  // ============================================================
+  {
+    slug: 'p-chain',
+    name: 'P-Chain',
+    shortDesc: 'Platform coordination',
+    description: 'Platform chain for validator management, staking, delegation, subnet creation, and network coordination.',
+    range: [1000, 1199],
+    tags: ['p-chain', 'platform', 'staking', 'delegation', 'subnet', 'validator-management'],
     icon: 'platform',
     color: 'violet',
-    learnMore: 'P-Chain is the metadata blockchain that coordinates validators and subnets across the network.',
-    keyTopics: ['Validator management', 'Staking mechanics', 'Subnet creation', 'Delegation'],
+    learnMore: 'P-Chain is the metadata blockchain coordinating validators and subnets across the Lux network.',
+    keyTopics: ['Validator management', 'Staking', 'Delegation', 'Subnet creation'],
   },
-  // === EVM & SMART CONTRACTS ===
+
+  // ============================================================
+  // 2.2 C-CHAIN — EVM execution
+  // ============================================================
   {
-    slug: 'evm',
-    name: 'EVM & Smart Contracts',
-    shortDesc: 'C-Chain and EVM specs',
-    description: 'C-Chain EVM specifications, precompiled contracts, gas optimization, and smart contract standards.',
-    range: [2000, 2999],
-    tags: ['evm', 'c-chain', 'precompile', 'solidity', 'smart-contract', 'gas'],
+    slug: 'c-chain',
+    name: 'C-Chain',
+    shortDesc: 'EVM execution',
+    description: 'Contract chain for EVM execution. Precompiled contracts, gas optimization, Solidity standards, and smart contract patterns.',
+    range: [2000, 2499],
+    tags: ['c-chain', 'evm', 'precompile', 'solidity', 'smart-contract', 'smart-contracts', 'gas', 'coreth'],
     icon: 'code',
     color: 'cyan',
-    learnMore: 'C-Chain runs the EVM with enhanced performance. Precompiles add native functionality.',
-    keyTopics: ['EVM precompiles', 'Gas optimization', 'Contract standards', 'C-Chain specs'],
+    learnMore: 'C-Chain runs the EVM with enhanced performance. Precompiles add native cryptographic functionality.',
+    keyTopics: ['EVM precompiles', 'Gas optimization', 'Contract standards', 'Solidity patterns'],
   },
-  // === PROTOCOL EXTENSIONS ===
+
+  // ============================================================
+  // 2.3 X-CHAIN — Asset exchange
+  // ============================================================
   {
-    slug: 'protocol',
-    name: 'Protocol Extensions',
-    shortDesc: 'Protocol-level extensions',
-    description: 'Extensions to core protocols including messaging, state management, and cross-VM communication.',
+    slug: 'x-chain',
+    name: 'X-Chain',
+    shortDesc: 'Asset exchange',
+    description: 'Exchange chain for native asset issuance, UTXO transactions, atomic swaps, and high-throughput transfers.',
     range: [3000, 3999],
-    tags: ['protocol', 'extension', 'state', 'messaging'],
-    icon: 'extension',
-    color: 'teal',
-    learnMore: 'Protocol extensions add new capabilities to the base layer.',
-    keyTopics: ['State management', 'Protocol messaging', 'Cross-VM calls', 'Extensions'],
+    tags: ['x-chain', 'utxo', 'asset', 'atomic-swap'],
+    icon: 'exchange',
+    color: 'sky',
+    learnMore: 'X-Chain handles high-throughput asset transfers with UTXO model for parallel processing.',
+    keyTopics: ['Asset issuance', 'UTXO model', 'Atomic swaps', 'Exchange semantics'],
   },
-  // === VIRTUAL MACHINES & SUBNETS ===
+
+  // ============================================================
+  // 2.4 T-CHAIN — Threshold + MPC execution
+  // ============================================================
   {
-    slug: 'vms',
-    name: 'Virtual Machines & Subnets',
-    shortDesc: 'Custom VMs and subnets',
-    description: 'Custom virtual machines, subnet configurations, and specialized execution environments.',
-    range: [4000, 4999],
-    tags: ['vm', 'subnet', 'chain', 'execution'],
-    icon: 'vm',
-    color: 'fuchsia',
-    learnMore: 'Custom VMs allow specialized blockchains. Subnets provide isolated execution environments.',
-    keyTopics: ['Custom VMs', 'Subnet configs', 'Execution environments', 'Chain creation'],
+    slug: 't-chain',
+    name: 'T-Chain',
+    shortDesc: 'Threshold execution',
+    description: 'Threshold chain for distributed signing and MPC custody. Deploys threshold cryptography and MPC research.',
+    range: [7000, 7999],
+    tags: ['t-chain'],
+    icon: 'key',
+    color: 'yellow',
+    learnMore: 'T-Chain is the execution environment for threshold cryptography and MPC protocols.',
+    keyTopics: ['Threshold execution', 'MPC custody', 'Distributed signing', 'Per-asset keys'],
   },
-  // === INTEROPERABILITY ===
+
+  // ============================================================
+  // 2.5 Q-CHAIN — PQC execution
+  // ============================================================
+  {
+    slug: 'q-chain',
+    name: 'Q-Chain',
+    shortDesc: 'Quantum-safe execution',
+    description: 'Quantum chain for post-quantum cryptographic operations. Deploys PQC research with NIST algorithms.',
+    range: [4000, 4999],
+    tags: ['q-chain', 'quantum-chain', 'quantum-safe'],
+    icon: 'shield',
+    color: 'emerald',
+    learnMore: 'Q-Chain is the execution environment for quantum-safe transaction processing.',
+    keyTopics: ['PQC execution', 'Quantum safety', 'Cryptographic agility'],
+  },
+
+  // ============================================================
+  // 2.6 Z-CHAIN — ZKP execution (research phase)
+  // ============================================================
+  {
+    slug: 'z-chain',
+    name: 'Z-Chain',
+    shortDesc: 'ZK execution',
+    description: 'Zero-knowledge chain for zkVM execution and validity proofs. Deploys ZKP research (research phase).',
+    range: [8000, 8999],
+    tags: ['z-chain'],
+    icon: 'eye-off',
+    color: 'indigo',
+    learnMore: 'Z-Chain (research phase) is the execution environment for zero-knowledge proofs.',
+    keyTopics: ['zkVM execution', 'Validity proofs', 'Private computation'],
+  },
+
+  // ============================================================
+  // 2.7 A-CHAIN — AI execution
+  // ============================================================
+  {
+    slug: 'a-chain',
+    name: 'A-Chain',
+    shortDesc: 'AI execution',
+    description: 'Attestation chain for AI workloads. Deploys AI & attestation research: model inference, training ledgers, and verification.',
+    range: [5000, 5999],
+    tags: ['a-chain'],
+    icon: 'brain',
+    color: 'violet',
+    learnMore: 'A-Chain is the execution environment for AI workloads and attestations.',
+    keyTopics: ['AI execution', 'Model inference', 'Training provenance'],
+  },
+
+  // ============================================================
+  // 2.8 B-CHAIN — Bridging execution
+  // ============================================================
+  {
+    slug: 'b-chain',
+    name: 'B-Chain',
+    shortDesc: 'Bridge execution',
+    description: 'Bridge chain for cross-chain asset movement. BridgeVM, Teleport protocol, and bridge security.',
+    range: [6000, 6999],
+    tags: ['b-chain', 'bridgevm', 'bridge-chain'],
+    icon: 'bridge',
+    color: 'lime',
+    learnMore: 'B-Chain is the dedicated bridging infrastructure for secure cross-chain operations.',
+    keyTopics: ['BridgeVM', 'Teleport', 'Asset registry', 'Bridge security'],
+  },
+
+  // ============================================================================
+  // SECTION 3: SYSTEMS (Protocol Infrastructure)
+  // ============================================================================
+
+  // ============================================================
+  // 3.1 BRIDGING SYSTEMS — Asset movement between domains
+  // ============================================================
+  // Bridge is a SYSTEM, not just messaging. Uses MPC, Threshold, Consensus.
+  {
+    slug: 'bridge',
+    name: 'Bridging Systems',
+    shortDesc: 'Asset movement',
+    description: 'Asset movement between domains. Teleport, BridgeVM, asset registry, bridge security, and emergency recovery.',
+    tags: ['bridge', 'teleport', 'teleporter', 'bridge-security', 'asset-registry', 'bridge-sdk'],
+    icon: 'bridge',
+    color: 'lime',
+    learnMore: 'Bridges move assets between chains. Most exploits happen here — Lux treats this as infrastructure.',
+    keyTopics: ['Teleport protocol', 'Bridge security', 'Asset registry', 'Emergency recovery'],
+  },
+
+  // ============================================================
+  // 3.2 INTEROPERABILITY — Information movement
+  // ============================================================
+  // Interop ≠ Bridge. This is about MESSAGES, not VALUE.
   {
     slug: 'interop',
     name: 'Interoperability',
-    shortDesc: 'Cross-chain communication',
-    description: 'Cross-chain communication, asset transfers, and multi-chain coordination. ICM and warp messaging.',
-    range: [5000, 5999],
-    tags: ['interop', 'cross-chain', 'icm', 'warp', 'messaging'],
+    shortDesc: 'Cross-chain messaging',
+    description: 'Information movement, not value. Warp protocol, ICM, message formats, and relayer infrastructure.',
+    tags: ['interop', 'warp', 'icm', 'cross-chain', 'message-format', 'interchain', 'relayer'],
     icon: 'link',
     color: 'sky',
-    learnMore: 'Interoperability LPs define how assets and messages flow between chains.',
-    keyTopics: ['ICM messaging', 'Warp protocol', 'Asset transfers', 'Multi-chain'],
+    learnMore: 'Interop is about messages, not assets. Warp and ICM enable secure cross-chain communication.',
+    keyTopics: ['Warp messaging', 'ICM protocol', 'Message formats', 'Native transfers'],
   },
-  // === BRIDGE PROTOCOLS ===
+
+  // ============================================================
+  // 3.3 NETWORK — The system as a whole
+  // ============================================================
   {
-    slug: 'bridge',
-    name: 'Bridge Protocols',
-    shortDesc: 'Cross-chain bridges',
-    description: 'Bridge implementations connecting Lux to Ethereum, Bitcoin, Solana, and other networks.',
-    range: [6000, 6999],
-    tags: ['bridge', 'ethereum', 'bitcoin', 'relayer', 'custody'],
-    icon: 'bridge',
-    color: 'lime',
-    learnMore: 'Bridge protocols enable trustless asset transfers between Lux and external blockchains.',
-    keyTopics: ['Ethereum bridge', 'Bitcoin integration', 'Light clients', 'Relayers'],
+    slug: 'network',
+    name: 'Network',
+    shortDesc: 'Architecture & tokenomics',
+    description: 'The Lux system as a whole: architecture, economic model, topology, and how chains fit together.',
+    range: [0, 99],
+    tags: ['network', 'architecture', 'topology', 'tokenomics', 'economics', 'incentives'],
+    icon: 'globe',
+    color: 'blue',
+    learnMore: 'Network describes Lux as a whole — the blueprint, not node infra or consensus.',
+    keyTopics: ['Network architecture', 'Tokenomics', 'Multi-chain topology', 'Standards framework'],
   },
-  // === THRESHOLD CRYPTOGRAPHY ===
+
+  // ============================================================
+  // 3.4 NODE — Infrastructure substrate
+  // ============================================================
   {
-    slug: 'threshold',
-    name: 'Threshold Cryptography (T-Chain)',
-    shortDesc: 'Threshold signatures and MPC',
-    description: 'Threshold signature schemes, T-Chain specifications, and multi-party computation for secure key management.',
-    range: [7000, 7999],
-    tags: ['threshold', 'mpc', 't-chain', 'frost', 'tss', 'custody', 'key-management'],
-    icon: 'key',
-    color: 'yellow',
-    learnMore: 'T-Chain provides threshold cryptography services. Multiple parties cooperatively sign without any single party holding the key.',
-    keyTopics: ['Threshold signatures', 'MPC protocols', 'FROST', 'Distributed custody'],
-  },
-  // === ADVANCED PROTOCOLS ===
-  {
-    slug: 'advanced',
-    name: 'Advanced Protocols',
-    shortDesc: 'Advanced specifications',
-    description: 'Advanced protocols including zero-knowledge proofs, privacy features, MEV protection, and cutting-edge cryptography.',
-    range: [8000, 8999],
-    tags: ['zk', 'privacy', 'mev', 'rollup', 'l2', 'zkvm'],
-    icon: 'advanced',
+    slug: 'node',
+    name: 'Node Infrastructure',
+    shortDesc: 'Node lifecycle',
+    description: 'Node lifecycle, state sync, pruning, snapshots, plugin architecture, VM loading, and database.',
+    tags: ['node', 'sync', 'pruning', 'snapshot', 'plugin', 'database', 'storage', 'vm-loader', 'network-runner', 'testing-framework'],
+    icon: 'server',
     color: 'slate',
-    learnMore: 'Advanced LPs push blockchain technology boundaries. Includes privacy-preserving computations and MEV mitigation.',
-    keyTopics: ['Zero-knowledge', 'Privacy features', 'MEV protection', 'L2/Rollups'],
+    learnMore: 'Node infrastructure is the minimum system required to participate in Lux.',
+    keyTopics: ['Node lifecycle', 'State sync', 'Plugin architecture', 'VM loading'],
   },
-  // === DEX & TRADING ===
+
+  // ============================================================================
+  // SECTION 4: PRODUCT AREAS
+  // ============================================================================
+
+  // ============================================================
+  // 4.1 MARKETS & DEFI
+  // ============================================================
+  {
+    slug: 'defi',
+    name: 'Markets & DeFi',
+    shortDesc: 'Decentralized finance',
+    description: 'DeFi protocols: AMMs, lending, perpetuals, derivatives, yield optimization, and oracles.',
+    range: [2500, 2519],
+    tags: ['defi', 'amm', 'lending', 'yield', 'swap', 'liquidity', 'perpetuals', 'derivatives', 'compound', 'alchemix', 'oracle', 'self-repaying'],
+    icon: 'chart',
+    color: 'green',
+    learnMore: 'DeFi on Lux is safer and faster due to infrastructure-first design.',
+    keyTopics: ['AMM protocols', 'Lending markets', 'Perpetuals', 'Oracles'],
+  },
+
+  // ============================================================
+  // 4.2 DEX & TRADING
+  // ============================================================
   {
     slug: 'dex',
     name: 'DEX & Trading',
-    shortDesc: 'Decentralized exchanges',
-    description: 'Decentralized exchange protocols, trading engines, order books, perpetuals, and high-frequency trading infrastructure.',
-    range: [9000, 9099],
-    tags: ['dex', 'trading', 'orderbook', 'perpetuals', 'hft', 'exchange'],
-    icon: 'chart',
-    color: 'emerald',
-    learnMore: 'DEX LPs define decentralized trading infrastructure. Includes order matching, perpetuals, and HFT venues.',
-    keyTopics: ['Order matching', 'Perpetuals', 'HFT infrastructure', 'Liquidity'],
+    shortDesc: 'High-performance DEX',
+    description: 'DEX infrastructure: order books, matching engines, HFT venues, CLOB, and trading APIs.',
+    range: [9000, 9999],
+    tags: ['dex', 'trading', 'orderbook', 'clob', 'hft', 'exchange', 'matching-engine', 'venue'],
+    icon: 'exchange',
+    color: 'teal',
+    learnMore: 'High-performance decentralized exchange infrastructure with HFT-grade matching.',
+    keyTopics: ['Order books', 'CLOB', 'HFT venues', 'Matching engines'],
   },
-  // === EXTENDED SPECIFICATIONS ===
+
+  // ============================================================
+  // 4.3 ASSETS & TOKENS
+  // ============================================================
   {
-    slug: 'extended',
-    name: 'Extended Specifications',
-    shortDesc: 'Extended and experimental',
-    description: 'Extended specifications for experimental features, future upgrades, and specialized use cases.',
-    range: [9100, 99999],
-    tags: ['experimental', 'future', 'incubation'],
-    icon: 'flask',
-    color: 'neutral',
-    learnMore: 'Extended LPs cover experimental and future-facing specifications.',
-    keyTopics: ['Experimental', 'Future upgrades', 'Specialized use cases', 'Incubation'],
+    slug: 'tokens',
+    name: 'Assets & Tokens',
+    shortDesc: 'Token standards',
+    description: 'Token standards: LRC-20, LRC-721, LRC-1155, extensions, and NFT staking.',
+    tags: ['token', 'tokens', 'lrc', 'lrc-20', 'lrc-721', 'lrc-1155', 'nft', 'fungible', 'token-standard', 'erc20b', 'burnable', 'mintable', 'bridgable'],
+    icon: 'token',
+    color: 'amber',
+    learnMore: 'Token standards define how digital assets are created and managed. ERC-compatible.',
+    keyTopics: ['LRC-20', 'LRC-721', 'LRC-1155', 'Token extensions'],
   },
-  // === SDK & DEV TOOLS ===
+
+  // ============================================================
+  // 4.4 WALLETS & IDENTITY
+  // ============================================================
   {
-    slug: 'dev-tools',
-    name: 'SDK & Developer Tools',
-    shortDesc: 'Development tools and SDKs',
-    description: 'SDKs, CLIs, testing frameworks, and developer tooling for building on Lux Network.',
-    tags: ['sdk', 'dev-tools', 'cli', 'testing', 'tooling', 'api'],
-    icon: 'code',
-    color: 'blue',
-    learnMore: 'Developer tools make building on Lux accessible. Includes SDKs, CLIs, and testing frameworks.',
-    keyTopics: ['SDKs', 'CLI tools', 'Testing frameworks', 'APIs'],
-  },
-  // === WALLET ===
-  {
-    slug: 'wallet',
-    name: 'Wallet Standards',
-    shortDesc: 'Wallet specifications',
-    description: 'Wallet standards including HD wallets, multi-signature schemes, hardware wallet integration, and account abstraction.',
-    tags: ['wallet', 'multisig', 'hd-wallet', 'account-abstraction'],
+    slug: 'wallets',
+    name: 'Wallets & Identity',
+    shortDesc: 'Wallet & DID',
+    description: 'Wallet standards, multisig, Safe integration, account abstraction, DIDs, and verifiable credentials.',
+    tags: ['wallet', 'multisig', 'safe', 'account-abstraction', 'smart-wallet', 'erc-4337', 'paymaster', 'did', 'identity', 'credential', 'kyc', 'ssi'],
     icon: 'wallet',
     color: 'purple',
-    learnMore: 'Wallet standards define how users interact with their assets securely.',
-    keyTopics: ['HD wallets', 'Multi-signature', 'Hardware wallets', 'Account abstraction'],
+    learnMore: 'This layer connects users, institutions, DAOs, and AI agents to Lux securely.',
+    keyTopics: ['HD wallets', 'Multisig', 'Account abstraction', 'DIDs'],
   },
-  // === SECURITY ===
+
+  // ============================================================
+  // 4.5 GOVERNANCE & IMPACT
+  // ============================================================
+  {
+    slug: 'governance',
+    name: 'Governance & Impact',
+    shortDesc: 'DAO & ESG',
+    description: 'On-chain governance, DAO frameworks, voting, ESG compliance, sustainability, and public goods.',
+    range: [2520, 2599],
+    tags: ['governance', 'dao', 'voting', 'proposal', 'treasury', 'azorius', 'meta', 'esg', 'sustainability', 'carbon', 'green', 'impact', 'public-goods', 'grants', 'sdg'],
+    icon: 'vote',
+    color: 'indigo',
+    learnMore: 'Lux explicitly models governance, ESG compliance, and public goods.',
+    keyTopics: ['DAO frameworks', 'Voting mechanisms', 'ESG compliance', 'Public goods'],
+  },
+
+  // ============================================================
+  // 4.6 PRIVACY
+  // ============================================================
+  {
+    slug: 'privacy',
+    name: 'Privacy',
+    shortDesc: 'Confidential compute',
+    description: 'Privacy-preserving protocols: FHE, TEE integration, confidential contracts, and MEV protection.',
+    tags: ['privacy', 'fhe', 'tee', 'confidential-compute', 'confidential', 'mev', 'mev-protection'],
+    icon: 'shield',
+    color: 'slate',
+    learnMore: 'Privacy enables confidential transactions and private smart contracts.',
+    keyTopics: ['FHE', 'TEE integration', 'Confidential contracts', 'MEV protection'],
+  },
+
+  // ============================================================
+  // 4.7 DEVELOPER PLATFORM
+  // ============================================================
+  {
+    slug: 'dev-platform',
+    name: 'Developer Platform',
+    shortDesc: 'SDKs & tooling',
+    description: 'SDKs, CLIs, GraphQL, testing frameworks, indexing, and developer tooling.',
+    tags: ['sdk', 'dev-tools', 'cli', 'testing', 'tooling', 'api', 'indexing', 'graphql', 'typescript', 'library', 'standard-library', 'developer'],
+    icon: 'code',
+    color: 'blue',
+    learnMore: 'Developer platform makes building on Lux accessible.',
+    keyTopics: ['SDKs', 'CLI tools', 'GraphQL', 'Testing frameworks'],
+  },
+
+  // ============================================================
+  // 4.8 SECURITY
+  // ============================================================
   {
     slug: 'security',
     name: 'Security',
-    shortDesc: 'Security standards',
-    description: 'Security auditing frameworks, vulnerability disclosure, bug bounties, and security best practices.',
-    tags: ['security', 'audit', 'vulnerability', 'bug-bounty'],
+    shortDesc: 'Audits & safety',
+    description: 'Security auditing, vulnerability disclosure, bug bounties, and best practices.',
+    tags: ['security', 'audit', 'vulnerability', 'bug-bounty', 'safety'],
     icon: 'shield',
     color: 'red',
-    learnMore: 'Security LPs ensure the network and applications are safe. Includes audit frameworks and disclosure processes.',
-    keyTopics: ['Security audits', 'Vulnerability disclosure', 'Bug bounties', 'Best practices'],
+    learnMore: 'Security LPs ensure the network and applications are safe.',
+    keyTopics: ['Security audits', 'Vulnerability disclosure', 'Bug bounties'],
   },
-  // === IDENTITY ===
+
+  // ============================================================
+  // 4.9 RESEARCH
+  // ============================================================
   {
-    slug: 'identity',
-    name: 'Identity & DIDs',
-    shortDesc: 'Decentralized identity',
-    description: 'Decentralized identity standards, DIDs, verifiable credentials, and identity management.',
-    tags: ['identity', 'did', 'credential', 'kyc', 'ssi'],
-    icon: 'user',
-    color: 'indigo',
-    learnMore: 'Identity LPs enable self-sovereign identity and verifiable credentials on Lux.',
-    keyTopics: ['DIDs', 'Verifiable credentials', 'Identity management', 'SSI'],
+    slug: 'research',
+    name: 'Research',
+    shortDesc: 'Ongoing research',
+    description: 'Research track: novel consensus, scalability, FHE, data availability, and experimental protocols.',
+    range: [700, 999],
+    tags: ['research', 'paper', 'academic', 'innovation', 'theory', 'index', 'data-availability', 'stablecoin', 'payments', 'experimental'],
+    icon: 'flask',
+    color: 'pink',
+    learnMore: 'Research track signals "We are still building the future."',
+    keyTopics: ['Novel protocols', 'FHE research', 'Data availability', 'Stablecoin mechanisms'],
   },
-  // === INTERFACE ===
+
+  // ============================================================
+  // 4.10 SCALING
+  // ============================================================
   {
-    slug: 'interface',
-    name: 'Interface & APIs',
-    shortDesc: 'APIs, SDKs, and tools',
-    description: 'Developer interfaces including APIs, SDKs, CLI tools, testing frameworks, and application integrations. Defines how developers interact with the network.',
-    tags: ['interface', 'api', 'sdk', 'cli', 'rpc', 'graphql'],
-    icon: 'code',
-    color: 'sky',
-    learnMore: 'Interface LPs define developer-facing APIs, SDKs, command-line tools, and integration standards.',
-    keyTopics: ['RPC APIs', 'SDKs', 'CLI tools', 'Testing frameworks', 'GraphQL'],
+    slug: 'scaling',
+    name: 'Scaling',
+    shortDesc: 'L2 & throughput',
+    description: 'Scalability solutions: Layer 2, rollups, state channels, and data availability.',
+    tags: ['scaling', 'l2', 'rollup', 'layer2', 'throughput', 'fraud-proof'],
+    icon: 'layers',
+    color: 'orange',
+    learnMore: 'Scaling LPs define how Lux achieves high throughput.',
+    keyTopics: ['Rollups', 'State channels', 'Data availability', 'Fraud proofs'],
   },
 ];
 
@@ -400,9 +587,11 @@ function readLPFile(filename: string): LPPage | null {
 
     const slug = filename.replace(/\.mdx?$/, '').split('/');
 
-    // Extract LP number from filename or frontmatter
+    // Extract LP number from filename (preferred - avoids YAML octal parsing issues)
+    // YAML interprets numbers with leading zeros as octal (e.g., 0111 = 73 decimal)
+    // Filename extraction is reliable: lp-0111-... → 111
     const lpMatch = filename.match(/lp-(\d+)/);
-    const lpNumber = data.lp || (lpMatch ? parseInt(lpMatch[1], 10) : null);
+    const lpNumber = lpMatch ? parseInt(lpMatch[1], 10) : (data.lp || null);
 
     // Convert Date objects to strings
     const processedData: Record<string, any> = {};
@@ -440,21 +629,14 @@ function getLPNumber(page: LPPage): number {
 }
 
 // Determine the PRIMARY category for an LP (each LP belongs to exactly ONE category)
-// Priority: 1) Frontmatter category, 2) Tag match, 3) Number range
+// Priority: 1) Tag match, 2) Number range, 3) Explicit frontmatter category
+// NOTE: Tags take precedence because many LPs have legacy "category: Core" that should be ignored
 function getPrimaryCategory(page: LPPage): string | null {
   const lpNum = getLPNumber(page);
   const lpTags = (page.data.frontmatter.tags || []).map((t: string) => t.toLowerCase());
   const lpCategory = (page.data.frontmatter.category || '').toLowerCase();
 
-  // Priority 1: Explicit frontmatter category
-  if (lpCategory) {
-    const exactMatch = LP_TOPICS.find(t =>
-      t.slug === lpCategory || t.name.toLowerCase() === lpCategory
-    );
-    if (exactMatch) return exactMatch.slug;
-  }
-
-  // Priority 2: Tag match (first matching tag wins)
+  // Priority 1: Tag match (first matching tag wins - most accurate categorization)
   for (const topic of LP_TOPICS) {
     if (topic.tags) {
       const topicTags = topic.tags.map(t => t.toLowerCase());
@@ -464,11 +646,19 @@ function getPrimaryCategory(page: LPPage): string | null {
     }
   }
 
-  // Priority 3: Number range
+  // Priority 2: Number range (LP series)
   for (const topic of LP_TOPICS) {
     if (topic.range && lpNum >= topic.range[0] && lpNum <= topic.range[1]) {
       return topic.slug;
     }
+  }
+
+  // Priority 3: Explicit frontmatter category (fallback for untagged LPs)
+  if (lpCategory) {
+    const exactMatch = LP_TOPICS.find(t =>
+      t.slug === lpCategory || t.name.toLowerCase() === lpCategory
+    );
+    if (exactMatch) return exactMatch.slug;
   }
 
   return null;
