@@ -245,7 +245,7 @@ This LP introduces internal database changes that are transparent to higher laye
 - **State Interface**: No changes to StateDB interface
 - **RPC Compatibility**: All existing RPC methods continue to work
 - **Proof Format**: Verkle proof format follows EIP-6800 specification
-- **Migration**: Existing state can be migrated via regenesis (LP-326)
+- **Migration**: Existing state can be migrated via network upgrade (LP-326)
 
 **Migration Path**:
 1. Export existing MPT state to genesis format

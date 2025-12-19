@@ -1,6 +1,6 @@
 ---
 lp: 2326
-title: Blockchain Regenesis and State Migration
+title: Network Upgrade and State Migration
 description: Standard procedure for exporting chain state and creating new genesis files for network upgrades
 author: Lux Core Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
@@ -14,11 +14,11 @@ tags: [core, dev-tools]
 
 ## Abstract
 
-This LP specifies the standard procedure for blockchain regenesis—the process of exporting the complete state of a running blockchain and importing it as the genesis state of a new network. Regenesis enables major network upgrades, chain consolidation, and architecture migrations while preserving all account balances, smart contract storage, and deployed code.
+This LP specifies the standard procedure for blockchain network upgrade—the process of exporting the complete state of a running blockchain and importing it as the genesis state of a new network. Network upgrade enables major network upgrades, chain consolidation, and architecture migrations while preserving all account balances, smart contract storage, and deployed code.
 
 ## Motivation
 
-### Why Regenesis is Necessary
+### Why Network upgrade is Necessary
 
 Blockchain networks occasionally require fundamental changes that cannot be accomplished through standard upgrades:
 
@@ -28,11 +28,11 @@ Blockchain networks occasionally require fundamental changes that cannot be acco
 4. **Protocol Breaking Changes**: Implementing incompatible improvements
 5. **Network ID Changes**: Moving to new network configuration with different parameters
 
-### Lux Mainnet Regenesis Scope
+### Lux Mainnet Network upgrade Scope
 
-Lux Network mainnet regenesis applies to **re-launching the original 3 chains** (P, C, X). **Q-Chain and future chains (B, Z, M) are new deployments**, not part of regenesis:
+Lux Network mainnet network upgrade applies to **re-launching the original 3 chains** (P, C, X). **Q-Chain and future chains (B, Z, M) are new deployments**, not part of network upgrade:
 
-| Chain | Purpose | Regenesis Status | State Migration |
+| Chain | Purpose | Network upgrade Status | State Migration |
 |-------|---------|------------------|----------------|
 | **P-Chain** | Platform/Validators | ✅ Re-launch | **Full genesis state** |
 | **C-Chain** | EVM Smart Contracts | ✅ Re-launch | **Full EVM state** |
@@ -42,9 +42,9 @@ Lux Network mainnet regenesis applies to **re-launching the original 3 chains** 
 | **Z-Chain** | Zero-Knowledge Proofs | ❌ New deployment | N/A (future) |
 | **M-Chain** | TBD | ❌ New deployment | N/A (future) |
 
-**Regenesis applies to**: P, C, X chains only (original Avalanche-based chains)
+**Network upgrade applies to**: P, C, X chains only (original Avalanche-based chains)
 
-**State preservation in mainnet regenesis**:
+**State preservation in mainnet network upgrade**:
 
 **P-Chain Genesis State** (full migration):
 - 100 genesis validators with 1 billion LUX each
@@ -62,7 +62,7 @@ Lux Network mainnet regenesis applies to **re-launching the original 3 chains** 
 - Asset state and UTXO set
 - Initial token distribution
 
-**Non-mainnet networks**: Deploy all chains fresh (no regenesis needed)
+**Non-mainnet networks**: Deploy all chains fresh (no network upgrade needed)
 
 ### C-Chain ID History: 7777 → 96369
 
@@ -76,7 +76,7 @@ The C-Chain has undergone a Chain ID migration to resolve EIP conflicts:
 **State Preservation**:
 - Original Chain ID 7777 data preserved at [github.com/luxfi/state](https://github.com/luxfi/state)
 - All historical network data archived and accessible
-- **Regenesis migrates Chain ID 96369 state** (which correctly continued the 7777 lineage)
+- **Network upgrade migrates Chain ID 96369 state** (which correctly continued the 7777 lineage)
 - Chain ID 96369 contains all state from the original 7777 chain plus subsequent blocks
 
 **EIP Conflict Resolution**:
@@ -86,15 +86,15 @@ The migration to Chain ID 96369 was necessary due to conflicts with Ethereum Imp
 3. Unique identification in multi-chain ecosystem
 4. Wallet and tooling compatibility
 
-**Implications for Regenesis**:
-- Current regenesis exports state from **Chain ID 96369**
+**Implications for Network upgrade**:
+- Current network upgrade exports state from **Chain ID 96369**
 - Genesis file reflects Chain ID 96369 in configuration
 - All account balances, contracts, and storage from 96369 are migrated
 - Historical Chain ID 7777 data remains available in [luxfi/state](https://github.com/luxfi/state) repository
 
 ## Specification
 
-### Regenesis Process Overview
+### Network upgrade Process Overview
 
 ```text
 ┌─────────────────┐
@@ -278,7 +278,7 @@ for _, v := range oldValidators {
 
 Location: `/Users/z/work/lux/node/chainmigrate/`
 
-The Lux blockchain uses a generic **Chain Migration Framework** with VM-specific importer/exporter interfaces for regenesis:
+The Lux blockchain uses a generic **Chain Migration Framework** with VM-specific importer/exporter interfaces for network upgrade:
 
 #### Core Interfaces
 
@@ -401,7 +401,7 @@ migrationOpts := chainmigrate.MigrationOptions{
     BatchSize:       100,
     MigrateState:    true,
     StateHeight:     1074616,
-    RegenesisMode:   true,
+    Network upgradeMode:   true,
     VerifyEachBlock: true,
 }
 
@@ -450,9 +450,9 @@ lux network start \
 
 ## Integration with LP-181 (Epoching)
 
-Regenesis respects epoch boundaries from LP-181:
+Network upgrade respects epoch boundaries from LP-181:
 
-### Epoch-Aligned Regenesis
+### Epoch-Aligned Network upgrade
 
 ```go
 // Get current epoch
@@ -469,17 +469,17 @@ exportStateAtHeight(currentEpoch.DChainHeight)
 
 **Benefits**:
 1. **Validator Set Consistency**: All chains reference same P-Chain epoch
-2. **Cross-Chain Sync**: Regenesis chains (P, C, X) coordinate at same epoch
-3. **Predictable Timing**: Known in advance when regenesis will occur
+2. **Cross-Chain Sync**: Network upgrade chains (P, C, X) coordinate at same epoch
+3. **Predictable Timing**: Known in advance when network upgrade will occur
 4. **Clean Separation**: Q-Chain and future chains deploy fresh (no migration complexity)
 
-### Regenesis Coordination
+### Network upgrade Coordination
 
-**Only P, C, X chains participate in regenesis** (Q-Chain is new deployment):
+**Only P, C, X chains participate in network upgrade** (Q-Chain is new deployment):
 
 ```go
 type RegensisCoordinator struct {
-    chains map[string]*Chain // P, C, X only (regenesis chains)
+    chains map[string]*Chain // P, C, X only (network upgrade chains)
     targetEpoch uint64
 }
 
@@ -502,9 +502,9 @@ func (rc *RegensisCoordinator) ExportRegensisChains(epoch uint64) error {
 }
 ```text
 
-**Q-Chain Deployment** (separate from regenesis):
+**Q-Chain Deployment** (separate from network upgrade):
 ```go
-// Q-Chain is a fresh deployment, not part of regenesis
+// Q-Chain is a fresh deployment, not part of network upgrade
 qChainGenesis := generateFreshGenesis(
     chainID: "Q",
     networkID: 96369,
@@ -572,16 +572,16 @@ if newGenesisTime.Sub(oldFinalBlock.Time) > 30*24*time.Hour {
 }
 ```text
 
-### Q-Chain Deployment (Not Part of Regenesis)
+### Q-Chain Deployment (Not Part of Network upgrade)
 
-Q-Chain is a **new chain**, not part of the regenesis process:
+Q-Chain is a **new chain**, not part of the network upgrade process:
 
 1. **Fresh Genesis**: Q-Chain deploys with clean state (no migration)
 2. **Quantum Operations**: Built-in support for ML-DSA, ML-KEM from genesis
 3. **No State Migration**: Q-Chain starts fresh on mainnet
-4. **Independent Deployment**: Can deploy Q-Chain on any network without regenesis
+4. **Independent Deployment**: Can deploy Q-Chain on any network without network upgrade
 
-**For non-mainnet networks**: All chains (P, C, X, Q) deploy fresh with no regenesis needed.
+**For non-mainnet networks**: All chains (P, C, X, Q) deploy fresh with no network upgrade needed.
 
 ## Testing
 
@@ -608,9 +608,9 @@ geth --datadir /test/datadir \
 > debug.trieHash()         // Compare state root
 ```solidity
 
-### Regenesis Checklist
+### Network upgrade Checklist
 
-**Mainnet Regenesis** (P, C, X chains only):
+**Mainnet Network upgrade** (P, C, X chains only):
 - [ ] Export C-Chain EVM state (primary state migration)
 - [ ] Verify total balance conservation on C-Chain
 - [ ] Verify contract count matches
@@ -625,17 +625,17 @@ geth --datadir /test/datadir \
 - [ ] Prepare rollback plan
 - [ ] Schedule maintenance window
 - [ ] Notify community and exchanges
-- [ ] Execute production regenesis
-- [ ] Monitor network health post-regenesis
+- [ ] Execute production network upgrade
+- [ ] Monitor network health post-network upgrade
 
-**New Chain Deployment** (Q, B, Z, M - not part of regenesis):
+**New Chain Deployment** (Q, B, Z, M - not part of network upgrade):
 - [ ] Deploy Q-Chain from fresh genesis
 - [ ] No state migration needed (new chain)
 - [ ] Standard deployment procedure for other networks
 
 ## Backwards Compatibility
 
-Regenesis is **not backwards compatible**. It creates a new network with new genesis.
+Network upgrade is **not backwards compatible**. It creates a new network with new genesis.
 
 ### Migration Path
 
@@ -655,7 +655,7 @@ Maintain archive nodes for old network:
 
 ## Operational Procedures
 
-### Emergency Regenesis
+### Emergency Network upgrade
 
 In case of critical bug or security incident:
 
@@ -674,8 +674,8 @@ go run export-state-to-genesis.go \
 # 3. Create patched node binary
 make build-patched
 
-# 4. Test regenesis on isolated network
-./test-regenesis.sh
+# 4. Test network upgrade on isolated network
+./test-network upgrade.sh
 
 # 5. Coordinate validator upgrade
 # 6. Launch new network
@@ -714,7 +714,7 @@ func ExportByRange(dbPath string, startAddr, endAddr common.Address) {
 
 ## Future Enhancements
 
-### Incremental Regenesis
+### Incremental Network upgrade
 
 Instead of full state export, export only changes:
 
@@ -744,16 +744,16 @@ type CrossChainStateProof struct {
 }
 ```text
 
-### Automatic Regenesis
+### Automatic Network upgrade
 
-Scheduled regenesis for regular maintenance:
+Scheduled network upgrade for regular maintenance:
 
 ```go
-const RegenesisInterval = 365 * 24 * time.Hour // Annual
+const Network upgradeInterval = 365 * 24 * time.Hour // Annual
 
-func (n *Network) CheckRegenesisSchedule() {
-    if time.Since(n.GenesisTime) > RegenesisInterval {
-        n.ProposeRegenesis()
+func (n *Network) CheckNetwork upgradeSchedule() {
+    if time.Since(n.GenesisTime) > Network upgradeInterval {
+        n.ProposeNetwork upgrade()
     }
 }
 ```text
@@ -982,12 +982,12 @@ luxd --http-port=9650 ...
 ## Acknowledgements
 
 Based on Ethereum's genesis format and Avalanche's subnet migration patterns. Special thanks to the Lux Core Team for:
-- Implementing mainnet regenesis (P, C, X chains) with C-Chain EVM state migration
+- Implementing mainnet network upgrade (P, C, X chains) with C-Chain EVM state migration
 - Managing the 2024 Chain ID migration (7777 → 96369) to resolve EIP conflicts
 - Preserving all historical Chain ID 7777 data in the [luxfi/state](https://github.com/luxfi/state) repository
 - Launching Q-Chain as a new quantum-resistant deployment
 
-The regenesis process migrates C-Chain state from Chain ID 96369, which represents the legitimate continuation of the original Chain ID 7777 lineage.
+The network upgrade process migrates C-Chain state from Chain ID 96369, which represents the legitimate continuation of the original Chain ID 7777 lineage.
 
 ## Test Cases
 

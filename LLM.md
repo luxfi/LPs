@@ -312,7 +312,7 @@ The Lux Network has adopted three Avalanche Community Proposals (ACPs) as part o
 **Purpose**: Optimizes validator set retrievals through epoched P-Chain views
 
 **Key Features**:
-- Epochs fix D-Chain (P-Chain) height for predictable validator sets
+- Epochs fix P-Chain height for predictable validator sets
 - Reduces ICM (Inter-Chain Messaging) gas costs significantly
 - Improves relayer reliability with predictable validator set windows
 - Enables pre-fetching of validator sets at epoch boundaries
