@@ -91,7 +91,7 @@ interface ILuxMultiSig {
     function isOwner(address owner) external view returns (bool);
     function required() external view returns (uint256);
 }
-```text
+```
 
 ### Transaction Structure
 
@@ -115,7 +115,7 @@ struct TransactionRequest {
     uint256 delay;           // Optional execution delay
     bytes32 salt;            // For deterministic addresses
 }
-```text
+```
 
 ### Advanced Features
 
@@ -148,7 +148,7 @@ interface ITimeLockMultiSig is ILuxMultiSig {
     function cancelTransaction(uint256 transactionId) external;
     function getTimeLock(uint256 transactionId) external view returns (TimeLock memory);
 }
-```text
+```
 
 #### Quantum-Safe Multi-Sig
 ```solidity
@@ -190,7 +190,7 @@ interface IQuantumSafeMultiSig is ILuxMultiSig {
         bytes32 publicKeyHash
     ) external view returns (bool);
 }
-```text
+```
 
 ### Role-Based Access Control
 
@@ -221,7 +221,7 @@ interface IRoleBasedMultiSig is ILuxMultiSig {
     function getRoleConfig(Role role) external view returns (RoleConfig memory);
     function setRoleConfig(Role role, RoleConfig memory config) external;
 }
-```text
+```
 
 ### Cross-Chain Multi-Sig
 
@@ -269,7 +269,7 @@ interface ICrossChainMultiSig is ILuxMultiSig {
         address[][] memory confirmers
     );
 }
-```text
+```
 
 ### Wallet Factory
 
@@ -307,7 +307,7 @@ interface IMultiSigFactory {
     
     function getWallets(address owner) external view returns (address[] memory);
 }
-```text
+```
 
 ### Recovery Mechanisms
 
@@ -351,7 +351,7 @@ interface IRecoverableMultiSig is ILuxMultiSig {
     function removeGuardian(address guardian) external;
     function getGuardians() external view returns (address[] memory);
 }
-```text
+```
 
 ### Gas Optimization
 
@@ -376,7 +376,7 @@ library MultiSigStorage {
         }
     }
 }
-```text
+```
 
 ## Rationale
 
@@ -441,7 +441,7 @@ function testBasicMultiSig() public {
     (,,,bool executed,) = wallet.getTransaction(txId);
     assertTrue(executed);
 }
-```text
+```
 
 ### Time-Lock Test
 ```solidity
@@ -470,7 +470,7 @@ function testTimeLock() public {
     // Now execution succeeds
     wallet.executeTransaction(txId);
 }
-```text
+```
 
 ### Quantum-Safe Test
 ```solidity
@@ -497,7 +497,7 @@ function testQuantumSafe() public {
     QuantumSafeOwner memory owner = wallet.getQuantumOwner(msg.sender);
     assertEq(owner.signatureType, SignatureType.SPHINCS_PLUS);
 }
-```text
+```
 
 ## Reference Implementation
 
@@ -554,7 +554,7 @@ function createDeterministicWallet(
 
     emit WalletCreated(wallet, owners, required, salt);
 }
-```text
+```
 
 **Testing**:
 ```bash

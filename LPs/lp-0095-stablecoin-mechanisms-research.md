@@ -56,7 +56,7 @@ interface StablecoinArchitecture {
     chains: ["Ethereum", "BSC", "Polygon"];
   };
 }
-```text
+```
 
 ## Research Findings
 
@@ -142,7 +142,7 @@ contract LuxUSD {
         emit Liquidation(user, msg.sender, debtToRepay, collateralToSeize);
     }
 }
-```text
+```
 
 ### 2. Algorithmic Stability Mechanisms
 
@@ -207,7 +207,7 @@ contract AlgorithmicStable {
         emit BondsIssued(bondsToIssue, bondPrice);
     }
 }
-```text
+```
 
 ### 3. Multi-Collateral Stability
 
@@ -262,7 +262,7 @@ contract MultiChainStable {
         userDebt[msg.sender] += mintAmount;
     }
 }
-```text
+```
 
 ### 4. Yield-Bearing Stablecoins
 
@@ -317,7 +317,7 @@ contract YieldStable {
         _burn(address(this), repayAmount);
     }
 }
-```text
+```
 
 ### 5. Privacy-Preserving Stablecoins
 
@@ -379,7 +379,7 @@ contract PrivateStable {
         emit PrivateTransfer(nullifier, newCommitment);
     }
 }
-```text
+```
 
 ## Recommendations
 

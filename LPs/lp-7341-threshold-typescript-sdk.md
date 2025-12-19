@@ -30,7 +30,7 @@ A TypeScript SDK enables:
 
 ### Package Location
 
-```text
+```
 @luxfi/threshold (bridge/pkg/threshold/)
 ├── src/
 │   ├── index.ts       # Package exports

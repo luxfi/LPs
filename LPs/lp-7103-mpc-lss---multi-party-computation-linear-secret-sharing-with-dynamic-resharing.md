@@ -161,7 +161,7 @@ type Config struct {
     PartyIDs        []party.ID
     Generation      uint32       // Incremented on reshare
 }
-```text
+```
 
 #### Security Parameters
 

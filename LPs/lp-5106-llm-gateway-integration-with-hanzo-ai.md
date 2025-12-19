@@ -33,7 +33,7 @@ Hanzo's LLM Gateway provides these capabilities through a battle-tested, provide
 
 ### Integration Architecture
 
-```text
+```
 Lux Network Layer
 ├── Smart Contracts
 │   └── AI Oracle Contracts → Hanzo LLM Gateway
@@ -88,7 +88,7 @@ interface ILuxAIOracle {
         bytes calldata proof
     ) external view returns (bool);
 }
-```text
+```
 
 ### Validator AI Integration
 
@@ -149,7 +149,7 @@ func (v *AIValidator) OptimizePerformance() error {
     
     return v.applyOptimizations(response)
 }
-```text
+```
 
 ### Developer SDK Integration
 
@@ -227,7 +227,7 @@ class LuxAISDK extends LuxSDK {
     return JSON.parse(response.content);
   }
 }
-```text
+```
 
 ### Cross-Chain AI Analytics
 
@@ -277,7 +277,7 @@ class LuxCrossChainAI implements CrossChainAnalytics {
     };
   }
 }
-```text
+```
 
 ### Configuration Management
 
@@ -309,7 +309,7 @@ ai:
     max_requests_per_minute: 100
     max_tokens_per_request: 4000
     monthly_budget: 1000  # USD
-```text
+```
 
 ### Performance Optimization
 
@@ -355,7 +355,7 @@ func (b *AIBatcher) ProcessBatch() {
     }
     b.batch = nil
 }
-```text
+```
 
 ### Security Considerations
 
@@ -396,7 +396,7 @@ contract SecureAIOracle {
         return verifySignature(proofHash, proof);
     }
 }
-```text
+```
 
 ## Rationale
 

@@ -60,7 +60,7 @@ ML-DSA was selected by NIST in August 2024 as the primary post-quantum digital s
 
 ### Precompile Address
 
-```text
+```
 0x0200000000000000000000000000000000000006
 ```markdown
 
@@ -143,7 +143,7 @@ interface IMLDSA {
         bytes calldata signature
     ) external view returns (bool valid);
 }
-```text
+```
 
 ### Library Support
 
@@ -241,7 +241,7 @@ contract HybridVerifier {
         }
     }
 }
-```text
+```
 
 **Recommended Migration Timeline:**
 1. **Phase 1**: Support both ECDSA and ML-DSA signatures
@@ -257,7 +257,7 @@ contract HybridVerifier {
 publicKey: 0x<1952 bytes ML-DSA-65 public key>
 message: "Hello, quantum-safe world!"
 signature: 0x<3309 bytes ML-DSA-65 signature>
-```text
+```
 
 **Expected Output:** `0x0000...0001` (valid)
 **Expected Gas:** ~100,270 (27 byte message)
@@ -269,7 +269,7 @@ signature: 0x<3309 bytes ML-DSA-65 signature>
 publicKey: 0x<1952 bytes valid public key>
 message: "Hello, quantum-safe world!"
 signature: 0x<3309 bytes CORRUPTED signature>
-```text
+```
 
 **Expected Output:** `0x0000...0000` (invalid)
 
@@ -280,7 +280,7 @@ signature: 0x<3309 bytes CORRUPTED signature>
 publicKey: 0x<1952 bytes public key>
 message: "Different message"
 signature: 0x<3309 bytes signature for ORIGINAL message>
-```text
+```
 
 **Expected Output:** `0x0000...0000` (invalid)
 
@@ -291,7 +291,7 @@ signature: 0x<3309 bytes signature for ORIGINAL message>
 publicKey: 0x<1952 bytes public key>
 message: "" (empty)
 signature: 0x<3309 bytes signature for empty message>
-```text
+```
 
 **Expected Output:** `0x0000...0001` (valid if signature matches)
 
@@ -308,7 +308,7 @@ signature: 0x<3309 bytes signature for empty message>
 publicKey: 0x<1952 bytes>
 message: 0x<10,240 bytes of data>
 signature: 0x<3309 bytes>
-```text
+```
 
 **Expected Gas:** ~202,400
 
@@ -316,9 +316,9 @@ signature: 0x<3309 bytes>
 
 ### Location
 
-```text
+```
 /Users/z/work/lux/precompiles/mldsa/
-```text
+```
 
 ### Key Files
 
@@ -374,7 +374,7 @@ func (p *mldsaVerifyPrecompile) Run(
     }
     return result, suppliedGas - gasCost, nil
 }
-```text
+```
 
 ## Security Considerations
 

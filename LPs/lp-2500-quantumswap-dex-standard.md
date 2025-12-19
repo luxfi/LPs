@@ -58,7 +58,7 @@ Uniswap v4's hook system improves AMM flexibility but cannot overcome fundamenta
 
 ### 1. Architecture Overview
 
-```text
+```
 +------------------------------------------------------------------+
 |                    QuantumSwap DEX Architecture                   |
 |  +---------------+  +----------------+  +---------------------+   |
@@ -130,7 +130,7 @@ type PriceLevel struct {
     Orders []*Order // Time-ordered queue
     Total  *big.Int // Sum of quantities
 }
-```text
+```
 
 ### 4. Matching Engine
 
@@ -170,7 +170,7 @@ func (e *Engine) Match(order *Order) ([]Trade, error) {
 
     return trades, nil
 }
-```text
+```
 
 ### 5. Consensus Integration
 
@@ -190,7 +190,7 @@ type DexBlock struct {
 
 // FPC provides 1ms finality for DEX blocks
 // Orders submitted in block N are final by block N+1
-```text
+```
 
 **Finality Guarantees**:
 - Block production: 250ms
@@ -220,7 +220,7 @@ func (s *QZMQSocket) SubmitOrder(order *Order) error {
     encrypted := s.encrypt(order.Encode())
     return s.inner.Send(encrypted, 0)
 }
-```text
+```
 
 **Cryptographic Primitives**:
 - Key Exchange: ML-KEM-768 (FIPS 203)
@@ -280,7 +280,7 @@ var FeeTiers = []FeeTier{
     {MinVolume: 10_000_000, MakerFee: 0, TakerFee: 3},   // 0.03%
     {MinVolume: 100_000_000, MakerFee: -1, TakerFee: 2}, // -0.01% maker rebate
 }
-```text
+```
 
 ## Comparison: QuantumSwap vs Uniswap v4
 
@@ -314,7 +314,7 @@ interface IAMMBridge {
     function syncPrice(address pair, uint256 clobPrice) external;
     function arbitrage(address pair, uint256 amount, bool buyOnClob) external;
 }
-```text
+```
 
 ## Rationale
 

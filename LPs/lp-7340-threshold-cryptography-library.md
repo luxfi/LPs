@@ -30,7 +30,7 @@ A dedicated, well-tested threshold cryptography library provides:
 
 ### Package Structure
 
-```text
+```
 github.com/luxfi/threshold/
 ├── protocols/
 │   ├── cmp/           # CGGMP21 threshold ECDSA (LP-7014)

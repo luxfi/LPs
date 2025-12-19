@@ -45,7 +45,7 @@ contract PChainAnchor {
         bytes32[] calldata path
     ) external view returns (bool);
 }
-```text
+```
 
 ### 2. Off-Chain Relayer
 
@@ -114,7 +114,7 @@ function verifyProof(
 
     return _verifyMerkleProof(leaf, proof, path, root);
 }
-```text
+```
 
 **Testing**:
 ```bash

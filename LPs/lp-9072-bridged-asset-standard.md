@@ -91,7 +91,7 @@ interface ILuxBridgedAsset is ILRC20 {
     function isBridged() external view returns (bool);
     function getDailyBridged(address user) external view returns (uint256);
 }
-```text
+```
 
 ### Multi-Bridge Support
 
@@ -138,7 +138,7 @@ interface IMultiBridgeAsset is ILuxBridgedAsset {
     function getBridgeEndpoints() external view returns (BridgeEndpoint[] memory);
     function getBridgeBalance(address bridge) external view returns (uint256);
 }
-```text
+```
 
 ### Proof of Reserve Extension
 
@@ -175,7 +175,7 @@ interface IBridgedAssetReserve is ILuxBridgedAsset {
     
     function getLatestProof() external view returns (ReserveProof memory);
 }
-```text
+```
 
 ### Fee Management Extension
 
@@ -219,7 +219,7 @@ interface IBridgedAssetFees is ILuxBridgedAsset {
     
     function getFeeConfig() external view returns (FeeConfig memory);
 }
-```text
+```
 
 ### Emergency Controls
 
@@ -271,7 +271,7 @@ interface IBridgedAssetEmergency is ILuxBridgedAsset {
     
     function getEmergencyState() external view returns (EmergencyState memory);
 }
-```text
+```
 
 ## Rationale
 
@@ -372,7 +372,7 @@ contract BridgedAssetTest {
         bridgedToken.mint(address(this), 11 * 10**8);
     }
 }
-```text
+```
 
 ### Reserve Proof Testing
 
@@ -396,7 +396,7 @@ function testReserveProof() public {
     assertTrue(reserveToken.verifyReserves());
     assertEq(reserveToken.getReserveRatio(), 100); // 100% backed
 }
-```text
+```
 
 ## Implementation
 
@@ -436,7 +436,7 @@ forge create src/tokens/LuxBridgedAsset.sol:LuxBridgedAsset \
     0x<ORIGIN_BTC_ADDRESS> \
     0 \
   --rpc-url https://api.avax.network/ext/bc/C/rpc
-```text
+```
 
 ### Testing
 
@@ -490,7 +490,7 @@ forge coverage --match-path test/tokens/\*
 ```bash
 # Test bridge integration
 forge test test/integration/BridgeIntegration.t.sol -vvv
-```text
+```
 
 ### Contract Verification
 
@@ -500,7 +500,7 @@ forge verify-contract \
   --chain-id 43114 \
   --watch 0x<BRIDGED_ASSET_ADDRESS> \
   src/tokens/LuxBridgedAsset.sol:LuxBridgedAsset
-```text
+```
 
 ## Reference Implementation
 
@@ -698,7 +698,7 @@ contract LuxBridgedAsset is ERC20, ILuxBridgedAsset, IBridgedAssetFees, Ownable 
         return dailyBridged[user];
     }
 }
-```text
+```
 
 ## Security Considerations
 
@@ -710,21 +710,21 @@ modifier onlyBridge() {
     require(msg.sender == bridgeConfig.bridge, "Not bridge");
     _;
 }
-```text
+```
 
 ### Supply Verification
 
 Regular reserve proofs ensure backing:
 ```solidity
 require(totalLocked >= totalSupply(), "Undercollateralized");
-```text
+```
 
 ### Rate Limiting
 
 Implement daily limits to prevent attacks:
 ```solidity
 require(dailyBridged[user] + amount <= dailyLimit, "Limit exceeded");
-```text
+```
 
 ### Emergency Procedures
 

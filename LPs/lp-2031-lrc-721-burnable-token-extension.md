@@ -29,7 +29,7 @@ interface IERC721Burnable is IERC721 {
      */
     function burn(uint256 tokenId) external;
 }
-```text
+```
 
 ## Rationale
 
@@ -49,9 +49,9 @@ Standard tests should cover:
 ## Reference Implementation
 
 See the IERC721Burnable interface in the standard repository:
-```text
+```
 /standard/src/interfaces/IERC721Burnable.sol
-```text
+```
 
 ## Implementation
 
@@ -89,7 +89,7 @@ function _burn(uint256 tokenId) internal {
     // Emit transfer to zero address
     emit Transfer(owner, address(0), tokenId);
 }
-```text
+```
 
 **Testing**:
 ```bash

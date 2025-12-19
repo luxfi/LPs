@@ -16,7 +16,6 @@ export default function Layout({ children }: { children: ReactNode }) {
       tree={pageTree}
       nav={{
         title: <LogoWithText size={24} />,
-        transparentMode: 'top',
       }}
       sidebar={{
         defaultOpenLevel: 1,

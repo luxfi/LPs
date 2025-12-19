@@ -78,7 +78,7 @@ Matches RIP-7212 for cross-ecosystem compatibility. Libraries developed for Ethe
 ### Function Interface
 
 **Input**: 160 bytes
-```text
+```
 [32 bytes] message hash
 [32 bytes] r (signature component)
 [32 bytes] s (signature component)  
@@ -275,7 +275,7 @@ contract BiometricWallet {
         require(success, "Transaction failed");
     }
 }
-```text
+```
 
 ## Use Cases
 
@@ -307,7 +307,7 @@ const signature = await navigator.credentials.get({
 
 // Submit to blockchain (only 3,450 gas for verification!)
 await wallet.executeWithBiometric(target, data, signature.r, signature.s);
-```text
+```
 
 **Benefits**:
 - No private key exposure
@@ -342,7 +342,7 @@ func SignWithCorpIdentity(userToken, txData []byte) (r, s *big.Int, err error) {
     r, s, err = hsmProvider.Sign(employeeID, hash[:])
     return
 }
-```text
+```
 
 **Benefits**:
 - Compliance with corporate security policies
@@ -393,7 +393,7 @@ contract CrossChainIdentity {
         ICM.sendCrossChain(destChainId, abi.encode(pubKey, messageHash));
     }
 }
-```text
+```
 
 ## Security Considerations
 
@@ -462,7 +462,7 @@ contract QuantumSafeWallet {
         }
     }
 }
-```text
+```
 
 ** Integration**:
 -  quantum state manager can orchestrate migration
@@ -541,7 +541,7 @@ func RunSecp256r1(input []byte) ([]byte, error) {
     
     return []byte{}, nil
 }
-```text
+```
 
 ## Future Enhancements
 
@@ -576,7 +576,7 @@ function verifyP256(bytes32 hash, bytes32 r, bytes32 s, bytes32 x, bytes32 y)
     // Expensive field operations
     // Multiple modular inversions
 }
-```text
+```
 
 **With LP-204**:
 ```solidity

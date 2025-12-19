@@ -89,7 +89,7 @@ interface ILuxRollup {
     event StateRootChallenged(uint256 indexed batchNumber, address challenger);
     event StateRootFinalized(uint256 indexed batchNumber, bytes32 stateRoot);
 }
-```text
+```
 
 ### AI Compute Rollup Extensions
 
@@ -136,7 +136,7 @@ interface IAIComputeRollup is ILuxRollup {
     event ComputeResultSubmitted(bytes32 indexed taskId, bytes32 outputHash);
     event ModelRegistered(bytes32 indexed modelHash, address indexed owner);
 }
-```text
+```
 
 ### Distributed Training Rollup Extensions
 
@@ -190,7 +190,7 @@ interface IDistributedTrainingRollup is ILuxRollup {
     event GradientSubmitted(bytes32 indexed jobId, address indexed worker, uint256 round);
     event ModelUpdated(bytes32 indexed jobId, uint256 round, bytes32 newWeightsHash);
 }
-```text
+```
 
 ### State Transition Function
 
@@ -213,7 +213,7 @@ interface IStateTransition {
     function verifyInclusion(bytes32 root, bytes calldata proof, bytes calldata leaf) external pure returns (bool);
     function computeMerkleRoot(bytes[] calldata leaves) external pure returns (bytes32);
 }
-```text
+```
 
 ### Cross-Layer Message Passing
 
@@ -247,7 +247,7 @@ interface IMessageBridge {
     function getMessageStatus(bytes32 messageHash) external view returns (uint8);
     function isMessageExecuted(bytes32 messageHash) external view returns (bool);
 }
-```text
+```
 
 ## Rationale
 
@@ -335,7 +335,7 @@ describe("L2 Rollup Framework", () => {
             .to.equal(BatchStatus.Rejected);
     });
 });
-```text
+```
 
 ### AI Compute Tests
 
@@ -376,7 +376,7 @@ describe("AI Compute Rollup", () => {
         expect(await rollup.getTaskResult(task.taskId)).to.equal(result.outputHash);
     });
 });
-```text
+```
 
 ### Distributed Training Tests
 

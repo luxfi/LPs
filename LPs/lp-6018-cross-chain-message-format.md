@@ -32,7 +32,7 @@ Without standardization, each bridge implementation would create incompatible fo
 ### Message Structure
 
 #### Base Message Format
-```text
+```
 CrossChainMessage {
     header: MessageHeader
     payload: MessagePayload
@@ -41,7 +41,7 @@ CrossChainMessage {
 ```
 
 #### Message Header
-```text
+```
 MessageHeader {
     version: uint8              // Protocol version (currently 1)
     messageType: uint8          // Message type identifier
@@ -129,7 +129,7 @@ Messages use a compact binary encoding:
 3. **Arrays**: Count-prefixed with uint16
 
 #### Encoding Example
-```text
+```
 // Header (88 bytes)
 [version(1)] [type(1)] [sourceChain(32)] [destChain(32)] 
 [nonce(8)] [timestamp(8)] [expiry(8)]
@@ -174,7 +174,7 @@ function validateMessage(
     
     return (true, "");
 }
-```text
+```
 
 ### Cross-Chain Identifiers
 
@@ -186,7 +186,7 @@ Examples:
 - Ethereum Mainnet: keccak256("EVM", 1, 0)
 - Lux C-Chain: keccak256("EVM", 43114, 0)
 - Bitcoin: keccak256("Bitcoin", 0, 0)
-```text
+```
 
 #### Address Format
 Addresses are encoded based on chain type:
@@ -230,7 +230,7 @@ function teleportAsset(
     // AWM handles message relay
     warpMessenger.sendMessage(destChain, encode(message));
 }
-```text
+```
 
 ## Rationale
 
@@ -338,7 +338,7 @@ go build -o build/luxd ./cmd/main.go
 # Build warp client library
 cd sdk/warp
 go build ./...
-```text
+```
 
 ### Testing
 
@@ -358,7 +358,7 @@ go test ./vms/platformvm/warp/validator -v
 
 # Integration tests
 go test -tags=integration ./vms/platformvm/warp/...
-```text
+```
 
 ### Message Format Testing
 

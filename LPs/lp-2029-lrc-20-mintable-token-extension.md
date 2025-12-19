@@ -29,7 +29,7 @@ interface IERC20Mintable {
      */
     function mint(address to, uint256 amount) external;
 }
-```text
+```
 
 ## Rationale
 
@@ -49,9 +49,9 @@ Standard tests should cover:
 ## Reference Implementation
 
 See the IERC20Mintable interface in the standard repository:
-```text
+```
 /standard/src/interfaces/IERC20Mintable.sol
-```text
+```
 
 ## Implementation
 
@@ -78,7 +78,7 @@ function mint(address to, uint256 amount) external onlyMinter {
 
     emit Transfer(address(0), to, amount);
 }
-```text
+```
 
 **Testing**:
 ```bash

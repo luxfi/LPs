@@ -63,7 +63,7 @@ interface IAttestationChain {
     function getDeviceStatus(bytes32 deviceId) external view returns (DeviceStatus memory);
     function updateRootCA(TEEVendor vendor, bytes calldata newRootCA) external onlyGovernance;
 }
-```text
+```
 
 **Simplified Flow:**
 1. Node start-up → signs CPU & GPU quotes
@@ -161,7 +161,7 @@ interface IAttestationLightClient {
         bytes calldata signatures
     ) external;
 }
-```text
+```
 
 **Outcome:** Entire Lux ecosystem (and bridged EVM chains) shares single cryptographic root-of-trust for TEE devices.
 
@@ -371,7 +371,7 @@ describe("A-Chain Attestation", () => {
         await expect(aChain.verifyAttestation(proof)).toRevert();
     });
 });
-```text
+```
 
 ### Cross-Chain Verification
 
@@ -391,7 +391,7 @@ it("should verify device status from L2", async () => {
     );
     expect(verified).toBe(true);
 });
-```text
+```
 
 ### Oracle Integration
 
@@ -413,7 +413,7 @@ it("should calculate compute costs correctly", async () => {
     const aiCoinAmount = await dex.getAmountOut(totalCost, "USD", "AI");
     expect(aiCoinAmount).toBeGreaterThan(0);
 });
-```text
+```
 
 ## Security Considerations
 

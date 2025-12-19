@@ -95,7 +95,7 @@ interface IValidityProofSystem {
     event BatchVerified(bytes32 indexed batchRoot, uint256 numProofs);
     event ProofComposed(bytes32 indexed composedHash, uint256 numComponents);
 }
-```text
+```
 
 ### STARK Proof System
 
@@ -160,7 +160,7 @@ interface ISTARKProofs {
         STARKProof calldata proof
     ) external view returns (bool);
 }
-```text
+```
 
 ### SNARK Proof Systems
 
@@ -233,7 +233,7 @@ interface ISNARKProofs {
         bytes calldata outerCircuit
     ) external returns (bytes memory);
 }
-```text
+```
 
 ### AI Circuit Library
 
@@ -306,7 +306,7 @@ interface IAICircuits {
         uint256 outputBits
     ) external pure returns (bytes memory);
 }
-```text
+```
 
 ### Proof Aggregation
 
@@ -361,7 +361,7 @@ interface IProofAggregation {
         bytes calldata compressed
     ) external pure returns (ValidityProof memory);
 }
-```text
+```
 
 ## Rationale
 
@@ -429,7 +429,7 @@ describe("Validity Proofs", () => {
         expect(await stark.verifySTARK(proof, publicInput, config)).to.be.true;
     });
 });
-```text
+```
 
 ### AI Circuit Tests
 
@@ -468,7 +468,7 @@ describe("AI Circuits", () => {
         expect(await verifyInferenceProof(proof)).to.be.true;
     });
 });
-```text
+```
 
 ### Proof Aggregation Tests
 

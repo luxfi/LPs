@@ -58,7 +58,7 @@ FROST (Flexible Round-Optimized Schnorr Threshold) provides unique advantages:
 
 ### Precompile Address
 
-```text
+```
 0x020000000000000000000000000000000000000C
 ```markdown
 
@@ -211,7 +211,7 @@ abstract contract FROSTVerifier {
         FROSTLib.verifyOrRevert(threshold, totalSigners, publicKey, messageHash, signature);
     }
 }
-```text
+```
 
 ### Example Usage
 
@@ -264,7 +264,7 @@ contract DAOGovernance is FROSTVerifier {
         // Execute proposal - council approved
     }
 }
-```text
+```
 
 ## Rationale
 
@@ -314,7 +314,7 @@ The premium is justified by:
 
 FROST achieves threshold signatures in 2 rounds:
 
-```text
+```
 Setup (one-time):
   - Distributed key generation (DKG)
   - Each party holds share of private key
@@ -331,7 +331,7 @@ Round 2 (Response):
   - Each signer computes response z = d + (e·ρ) + (λ·s·c)
   - Aggregator combines: s = Σ(z), R = Σ(D + ρ·E)
   - Output signature: (R, s)
-```text
+```
 
 This is **optimal** - no threshold scheme can do better than 2 rounds without a trusted dealer.
 
@@ -350,7 +350,7 @@ bytes calldata frostSig = /* threshold signature */;
 bool valid = FROST.verify(3, 5, taprootPubKey, txHash, frostSig);
 
 // This signature is valid on Bitcoin mainnet!
-```text
+```
 
 Use cases:
 - **Multi-chain custody**: Same threshold key controls Bitcoin + EVM assets
@@ -377,7 +377,7 @@ function verify(bytes calldata sig) internal view returns (bool) {
     }
     revert("Unknown signature type");
 }
-```text
+```
 
 **Phase 2**: Transition keys to FROST-only
 
@@ -408,7 +408,7 @@ totalSigners: 5
 publicKey: <same as above>
 messageHash: <same as above>
 signature: 0x<64 bytes of INVALID signature>
-```text
+```
 
 **Expected Output:** `0x...0000` (invalid)
 **Expected Gas:** 75,000 gas (verification still runs)
@@ -422,7 +422,7 @@ totalSigners: 5
 publicKey: <valid key>
 messageHash: 0x<DIFFERENT hash than signed>
 signature: <valid signature for different message>
-```text
+```
 
 **Expected Output:** `0x...0000` (invalid)
 
@@ -481,7 +481,7 @@ See: `precompiles/frost/`
 - Threshold parameter validation
 - Gas cost verification
 - Edge cases (1-of-1, n-of-n)
-```text
+```
 
 ## Security Considerations
 
@@ -515,14 +515,14 @@ For quantum resistance, use **Ringtail** (LP-320) or LSS-MPC (LP-323).
 
 FROST supports DKG without trusted dealer:
 
-```text
+```
 1. Each party i generates random polynomial f_i(x) of degree t-1
 2. Broadcast commitments: C_i,k = f_i(k)·G for k = 0..t-1
 3. Send shares: s_i,j = f_i(j) to party j (secure channel)
 4. Verify shares: s_i,j·G = Σ(C_i,k · j^k)
 5. Compute key share: SK_i = Σ(s_j,i), PK_i = SK_i·G
 6. Aggregated public key: PK = Σ(C_j,0)
-```text
+```
 
 No party ever sees the full private key.
 
@@ -541,7 +541,7 @@ for each signature {
     d, e := generateFreshNonces()
     sig := sign(msg, d, e)
 }
-```text
+```
 
 Reusing nonces allows **private key recovery** from two signatures.
 
@@ -564,7 +564,7 @@ verifyFROST(..., messageHash, signature);
 
 // ❌ WRONG: Sign raw data (vulnerable to collision attacks)
 verifyFROST(..., rawData, signature);
-```text
+```
 
 Use domain separation to prevent cross-protocol attacks:
 
@@ -575,7 +575,7 @@ bytes32 messageHash = keccak256(abi.encodePacked(
     contractAddress,
     data
 ));
-```text
+```
 
 ### Integration Security
 
@@ -601,7 +601,7 @@ function withdraw(bytes calldata sig) external nonReentrant {
     (bool success,) = msg.sender.call{value: amount}("");
     require(success);
 }
-```text
+```
 
 ## Economic Impact
 
@@ -678,7 +678,7 @@ import "github.com/luxfi/threshold/protocols/frost"
 // - frost.Verify() - Standard Schnorr verification
 // - frost.Refresh() - Share refreshing
 // - frost.KeygenTaproot() - Bitcoin Taproot keys
-```text
+```
 
 **Library Features:**
 - Two-round signing protocol (commitment + response)

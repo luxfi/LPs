@@ -105,7 +105,7 @@ interface IFraudProofSystem {
     event OneStepProofSubmitted(bytes32 indexed challengeId, address submitter);
     event ChallengeResolved(bytes32 indexed challengeId, address winner);
 }
-```text
+```
 
 ### Interactive Bisection Protocol
 
@@ -168,7 +168,7 @@ interface IBisectionProtocol {
     event SegmentSelected(bytes32 indexed challengeId, uint256 startStep, uint256 endStep);
     event BisectionComplete(bytes32 indexed challengeId, uint256 disputedStep);
 }
-```text
+```
 
 ### One-Step Verification
 
@@ -220,7 +220,7 @@ interface IOneStepVerifier {
     function calculateStateRoot(MachineState calldata state) external pure returns (bytes32);
     function updateMemoryRoot(bytes32 oldRoot, uint256 address, bytes32 value) external pure returns (bytes32);
 }
-```text
+```
 
 ### AI Computation Fraud Proofs
 
@@ -303,7 +303,7 @@ interface IAIFraudProofs {
     event GradientDisputed(bytes32 indexed modelHash, uint256 epoch);
     event MatrixOperationVerified(bytes32 indexed opHash, bool valid);
 }
-```text
+```
 
 ### Challenge Game Manager
 
@@ -373,7 +373,7 @@ interface IChallengeGameManager {
     event MoveMade(bytes32 indexed gameId, uint256 moveNumber, address player);
     event GameResolved(bytes32 indexed gameId, address winner, uint256 reward);
 }
-```text
+```
 
 ### Economic Security Module
 
@@ -437,7 +437,7 @@ interface IEconomicSecurity {
     event Slashed(address indexed violator, uint256 amount, bytes32 reason);
     event RewardClaimed(address indexed claimer, uint256 amount);
 }
-```text
+```
 
 ## Rationale
 
@@ -532,7 +532,7 @@ describe("Bisection Protocol", () => {
         expect(challenge.status).to.equal(ChallengeStatus.ChallengerWon);
     });
 });
-```text
+```
 
 ### One-Step Verification Tests
 
@@ -575,7 +575,7 @@ describe("One-Step Verifier", () => {
         expect(await verifier.verifyOneStep(proof)).to.be.true;
     });
 });
-```text
+```
 
 ### AI Fraud Proof Tests
 
@@ -650,7 +650,7 @@ describe("AI Fraud Proofs", () => {
         expect(result).to.be.false;
     });
 });
-```text
+```
 
 ### Economic Security Tests
 

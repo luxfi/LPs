@@ -74,7 +74,7 @@ LP-5 focuses on the design of Lux’s quantum-safe wallet infrastructure, includ
 ```bash
 cd ~/work/lux/safe/app
 npm install && npm test
-```text
+```
 
 ### Wallet CLI and Key Management
 

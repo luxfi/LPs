@@ -53,11 +53,11 @@ var ThresholdVMID = constants.ThresholdVMID // ids.ID{'t', 'h', 'r', 'e', 's', '
 // Create T-Chain VM
 factory := &tvm.Factory{}
 vm, err := factory.New(logger)
-```text
+```
 
 ### Directory Structure
 
-```text
+```
 node/vms/thresholdvm/
 ├── cggmp/            # CGGMP21 implementation
 ├── frost/            # FROST signatures
@@ -68,7 +68,7 @@ node/vms/thresholdvm/
 ├── vm.go             # Main VM implementation
 ├── types.go          # Core types
 └── *_test.go         # Tests
-```text
+```
 
 ### Supported Protocols
 
@@ -90,7 +90,7 @@ partialSig, err := session.Sign(keyShare, message)
 
 // Combine signatures
 fullSig, err := session.CombineSignatures(partialSigs)
-```text
+```
 
 #### FROST - Threshold Schnorr/BLS
 
@@ -110,7 +110,7 @@ partialSig, err := session.SignBLS(keyShare, message)
 
 // Sign with Schnorr
 partialSig, err := session.SignSchnorr(keyShare, message)
-```text
+```
 
 #### Ringtail - Post-Quantum Threshold
 
@@ -127,7 +127,7 @@ keyShare, err := session.KeyGen(partyID)
 
 // Sign with post-quantum security
 partialSig, err := session.Sign(keyShare, message)
-```text
+```
 
 ### Key Management
 
@@ -151,7 +151,7 @@ const (
     ProtocolFROST
     ProtocolRingtail
 )
-```text
+```
 
 #### Key Ceremonies
 
@@ -190,13 +190,13 @@ signedMsg, err := tvm.ThresholdSignWarp(warpMsg, keyID)
 
 // Verify threshold-signed Warp message
 valid, err := tvm.VerifyThresholdWarp(signedMsg)
-```text
+```
 
 ### Bridge Integration
 
 The T-Chain provides MPC security for the B-Chain bridge:
 
-```text
+```
 ┌─────────────┐     ┌─────────────┐     ┌─────────────┐
 │   B-Chain   │────▶│   T-Chain   │────▶│  External   │
 │  (Bridge)   │     │ (Threshold) │     │   Chain     │
@@ -210,7 +210,7 @@ The T-Chain provides MPC security for the B-Chain bridge:
        │                   │                   │
        │   Signature OK    │                   │
        │◀──────────────────│                   │
-```text
+```
 
 ### Configuration
 
@@ -226,7 +226,7 @@ The T-Chain provides MPC security for the B-Chain bridge:
     "enableRingtail": true
   }
 }
-```text
+```
 
 ### API Endpoints
 
@@ -242,13 +242,13 @@ The T-Chain provides MPC security for the B-Chain bridge:
 
 #### REST Endpoints
 
-```text
+```
 POST /ext/bc/T/threshold/dkg/init
 GET  /ext/bc/T/threshold/keys/{keyId}
 POST /ext/bc/T/threshold/sign
 GET  /ext/bc/T/threshold/signature/{sigId}
 POST /ext/bc/T/threshold/reshare
-```text
+```
 
 ### Security Model
 

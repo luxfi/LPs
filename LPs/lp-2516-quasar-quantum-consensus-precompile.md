@@ -54,7 +54,7 @@ Fast Probabilistic Consensus (FPC) achieves 1ms finality by:
 
 Q-Chain serves as the quantum finality layer for all Lux chains:
 
-```text
+```
 +------------------------------------------------------------------+
 |  Q-Chain (Quantum Finality Layer)                                |
 |  Stores quantum-final block tips via Quasar (BLS/Ringtail)       |
@@ -233,7 +233,7 @@ interface ICompressedVerify {
         uint32 validatorBits
     ) external view returns (bool valid);
 }
-```text
+```
 
 ### QuasarLib Helper Library
 
@@ -286,7 +286,7 @@ library QuasarLib {
         return countValidators(validatorBits) >= VALIDATOR_THRESHOLD;
     }
 }
-```text
+```
 
 ## Architecture
 
@@ -294,7 +294,7 @@ library QuasarLib {
 
 Quasar implements FPC for 1ms block finality:
 
-```text
+```
 Round 0 (Proposal):
   Proposer → Block + BLS signature → Broadcast
 
@@ -304,7 +304,7 @@ Round 1 (Vote):
 Finality (1ms):
   threshold >= 2/3 → Block final
   threshold < 2/3 → Next round
-```text
+```
 
 **Key Parameters:**
 - **K**: Minimum 3 validators for quorum
@@ -320,11 +320,11 @@ Validators maintain two key pairs:
 2. **Ringtail Key Pair**: For quantum-safe signatures
 
 **Signature Strategy:**
-```text
+```
 Normal Operation:     BLS only (5,000 gas, fast)
 High-Value Blocks:    Hybrid BLS+Ringtail (10,000 gas, quantum-safe)
 Long-Term Finality:   Ringtail only (8,000 gas, stored on Q-Chain)
-```text
+```
 
 ### Q-Chain Role
 
@@ -340,7 +340,7 @@ type QChainFinalityRecord struct {
     RingtailSig    []byte        // Ringtail threshold signature
     ValidatorBits  uint32        // Participating validator bitfield
 }
-```text
+```
 
 **Finality Flow:**
 1. C-Chain block reaches local finality
@@ -447,7 +447,7 @@ function testBLSVerification() public {
     bool valid = QuasarLib.verifyBLS(pubKey, msgHash, sig);
     assertTrue(valid);
 }
-```text
+```
 
 **Expected Gas:** 5,000
 
@@ -465,7 +465,7 @@ function testCompressedWitness() public {
     );
     assertTrue(success);
 }
-```text
+```
 
 **Expected Gas:** 1,000
 
@@ -487,7 +487,7 @@ function testHybridVerification() public {
     assertTrue(success);
     assertEq(result[0], 0x01);
 }
-```text
+```
 
 **Expected Gas:** 10,000
 
@@ -503,7 +503,7 @@ function testValidatorThreshold() public {
     uint32 atThreshold = 0x003FFFFF; // 22 bits set
     assertTrue(QuasarLib.isThresholdMet(atThreshold));
 }
-```text
+```
 
 ### Test 5: Invalid Signature Rejection
 

@@ -88,7 +88,7 @@ cd geth
 go test ./core/vm -v
 # Run EIP-specific tests
 go test ./core/vm -run TestEIP1559
-```text
+```
 
 ### Upgrade Activation
 - **Hardfork Coordination**: Node consensus parameters

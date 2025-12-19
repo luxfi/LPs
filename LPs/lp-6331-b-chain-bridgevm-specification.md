@@ -94,7 +94,7 @@ Implementations claiming conformance to this specification:
 
 ### Architecture Overview
 
-```text
+```
 +-------------------------------------------------------------------------+
 |                         Teleport Network (5+ nodes)                      |
 +-------------------------------------------------------------------------+
@@ -175,7 +175,7 @@ const (
     ChainTypeCosmos  ChainType = 2
     ChainTypeSolana  ChainType = 3
 )
-```text
+```
 
 #### Block Structure
 
@@ -205,7 +205,7 @@ type BridgeBlockHeader struct {
     ProposerID      ids.NodeID
     ProposerSig     []byte
 }
-```text
+```
 
 #### State Model
 
@@ -314,7 +314,7 @@ const (
     StatusFailed     BridgeStatus = 5
     StatusRefunded   BridgeStatus = 6
 )
-```text
+```
 
 ### Transaction Types
 
@@ -411,7 +411,7 @@ func (tx *DepositObservedTx) Verify(state *BridgeState) error {
 
     return nil
 }
-```text
+```
 
 #### 2. WithdrawRequestTx
 
@@ -495,7 +495,7 @@ func (tx *WithdrawRequestTx) Verify(state *BridgeState) error {
 
     return nil
 }
-```text
+```
 
 #### 3. WithdrawExecuteTx
 
@@ -579,7 +579,7 @@ func (tx *WithdrawExecuteTx) Verify(state *BridgeState) error {
 
     return nil
 }
-```text
+```
 
 #### 4. SwapRequestTx
 
@@ -617,7 +617,7 @@ type SwapRequestTx struct {
 
     Signature       []byte
 }
-```text
+```
 
 #### 5. SwapExecuteTx
 
@@ -642,7 +642,7 @@ type SwapExecuteTx struct {
     ExecutorAddress common.Address
     ExecutorSig     []byte
 }
-```text
+```
 
 #### 6. ChainRegistrationTx
 
@@ -699,7 +699,7 @@ func (tx *ChainRegistrationTx) Verify(state *BridgeState) error {
 
     return nil
 }
-```text
+```
 
 #### 7. AssetRegistrationTx
 
@@ -733,7 +733,7 @@ type AssetRegistrationTx struct {
     // Governance approval
     GovernanceProof GovernanceProof
 }
-```text
+```
 
 #### 8. RelayerRewardTx
 
@@ -756,7 +756,7 @@ type RelayerRewardTx struct {
     // Signed by reward distributor
     DistributorSig  []byte
 }
-```text
+```
 
 ### Bridge State Machine
 
@@ -764,7 +764,7 @@ The B-Chain manages bridge operations through comprehensive state machines for d
 
 #### Deposit State Machine
 
-```text
+```
                               External Chain                           B-Chain
                      +-----------------------------+      +--------------------------------+
                      |                             |      |                                |
@@ -815,11 +815,11 @@ The B-Chain manages bridge operations through comprehensive state machines for d
                                                          |      +----------------+        |
                                                          |                                |
                                                          +--------------------------------+
-```text
+```
 
 #### Withdrawal State Machine
 
-```text
+```
                               Lux Network                              External Chain
                      +--------------------------------+      +---------------------------+
                      |                                |      |                           |
@@ -862,11 +862,11 @@ The B-Chain manages bridge operations through comprehensive state machines for d
                      |      +----------------+        |      |                           |
                      |                                |      |                           |
                      +--------------------------------+      +---------------------------+
-```text
+```
 
 #### Consolidated State Diagram
 
-```text
+```
                     +-----------+
                     |  PENDING  |
                     +-----+-----+
@@ -894,7 +894,7 @@ The B-Chain manages bridge operations through comprehensive state machines for d
                     +-----v-----+            +-----+-----+
                     | COMPLETED |            | REFUNDED  |
                     +-----------+            +-----------+
-```text
+```
 
 #### Mermaid State Diagrams
 
@@ -912,7 +912,7 @@ stateDiagram-v2
     FAILED --> REFUNDED: Manual intervention
     COMPLETED --> [*]
     REFUNDED --> [*]
-```text
+```
 
 **Withdrawal Flow State Machine**:
 
@@ -929,7 +929,7 @@ stateDiagram-v2
     FAILED --> REFUNDED: Tokens returned to user
     COMPLETED --> [*]
     REFUNDED --> [*]
-```text
+```
 
 **Cross-Chain Swap State Machine**:
 
@@ -947,7 +947,7 @@ stateDiagram-v2
     PARTIAL_REFUND --> [*]
     COMPLETED --> [*]
     REFUNDED --> [*]
-```text
+```
 
 #### State Transition Logic
 
@@ -1019,7 +1019,7 @@ func (sm *BridgeStateMachine) processDeposit(deposit *DepositRecord) {
         }
     }
 }
-```text
+```
 
 ### External Chain Watchers
 
@@ -1053,7 +1053,7 @@ type WatcherState struct {
     PendingDeposits    map[DepositID]*DepositEvent
     LastHeartbeat      time.Time
 }
-```text
+```
 
 #### EVM Chain Watcher
 
@@ -1139,7 +1139,7 @@ func (w *EVMWatcher) parseDepositLog(log types.Log) (*DepositEvent, error) {
         Recipient:     event.Recipient[:],
     }, nil
 }
-```text
+```
 
 #### Bitcoin Watcher
 
@@ -1217,7 +1217,7 @@ func (w *BTCWatcher) scanForDeposits() ([]*DepositEvent, error) {
 
     return deposits, nil
 }
-```text
+```
 
 #### Cosmos IBC Watcher
 
@@ -1387,7 +1387,7 @@ func (w *CosmosWatcher) VerifyIBCProof(
         proof,
     )
 }
-```text
+```
 
 ### Signature Request Flow to T-Chain
 
@@ -1472,7 +1472,7 @@ func (c *TChainClient) waitForSignature(txID ids.ID, deadline uint64) (*Signatur
         }
     }
 }
-```text
+```
 
 #### Warp Message Integration
 
@@ -1522,7 +1522,7 @@ func (b *BridgeVM) SendWarpMessage(msg *WarpBridgeMessage) error {
     // Submit to P-Chain for aggregation
     return b.warpClient.SendMessage(warpMsg)
 }
-```text
+```
 
 ### Supported Chains Configuration
 
@@ -1593,7 +1593,7 @@ var DefaultChainConfigs = []ChainConfig{
         Enabled:        true,
     },
 }
-```text
+```
 
 ### Asset Registry Integration
 
@@ -1649,7 +1649,7 @@ func (c *AssetRegistryClient) ValidateTransfer(
 
     return nil
 }
-```text
+```
 
 ### Fee Model
 
@@ -1800,7 +1800,7 @@ func (fd *FeeDistribution) ClaimRelayerReward(relayer common.Address) (*big.Int,
     fd.relayerRewards[relayer] = big.NewInt(0)
     return reward, nil
 }
-```text
+```
 
 #### Fee Calculation Formulas
 
@@ -1839,7 +1839,7 @@ Distribution:
   Protocol:  $1.07 (30%)
   Validator: $0.71 (20%)
   Insurance: $0.35 (10%)
-```text
+```
 
 ### Wire Format Specification
 
@@ -1857,7 +1857,7 @@ Ver:    Protocol version (0x01 for this specification)
 Type:   Message type (see table below)
 Length: Payload length in bytes (big-endian uint32)
 Flags:  Reserved for future use (MUST be 0x0000)
-```text
+```
 
 #### Message Types
 
@@ -1874,7 +1874,7 @@ Flags:  Reserved for future use (MUST be 0x0000)
 
 #### DepositObserved Wire Format (Type 0xB1)
 
-```text
+```
 +--------+--------+--------+--------+--------+--------+--------+--------+
 |                    Header (8 bytes - see above)                       |
 +--------+--------+--------+--------+--------+--------+--------+--------+
@@ -1906,7 +1906,7 @@ Total minimum size: 8 + 8 + 32 + 8 + 2 + 32 + 32 + 1 + 20 + 20 + 1 + 20 + 65 = 2
 
 #### WithdrawRequest Wire Format (Type 0xB2)
 
-```text
+```
 +--------+--------+--------+--------+--------+--------+--------+--------+
 |                    Header (8 bytes)                                   |
 +--------+--------+--------+--------+--------+--------+--------+--------+
@@ -1930,11 +1930,11 @@ Total minimum size: 8 + 8 + 32 + 8 + 2 + 32 + 32 + 1 + 20 + 20 + 1 + 20 + 65 = 2
 +--------+--------+--------+--------+--------+--------+--------+--------+
 
 Total minimum size: 8 + 8 + 1 + 20 + 32 + 32 + 32 + 8 + 8 + 20 + 65 = 234 bytes
-```text
+```
 
 #### MPCSignature Wire Format
 
-```text
+```
 +--------+--------+--------+--------+--------+--------+--------+--------+
 |                    R (32 bytes, uint256 BE)                           |
 +--------+--------+--------+--------+--------+--------+--------+--------+
@@ -1950,7 +1950,7 @@ Total minimum size: 8 + 8 + 1 + 20 + 32 + 32 + 32 + 8 + 8 + 20 + 65 = 234 bytes
 +--------+--------+--------+--------+--------+--------+--------+--------+
 
 Minimum size (without Ringtail): 32 + 32 + 1 + 1 + 8 + 32 + 1 = 107 bytes
-```text
+```
 
 ### Relayer Protocol
 
@@ -1985,7 +1985,7 @@ const (
     MinRelayerUptime    = 95           // 95% uptime requirement
     ObservationTimeout  = 30           // Seconds to submit observation
 )
-```text
+```
 
 #### Observation Requirements
 
@@ -1998,7 +1998,7 @@ Relayers **MUST** follow these requirements when observing deposits:
 
 #### Observation Submission Protocol
 
-```text
+```
 Relayer                          B-Chain                         T-Chain
    |                                |                               |
    |-- 1. Detect deposit event ---->|                               |
@@ -2020,7 +2020,7 @@ Relayer                          B-Chain                         T-Chain
    |                                |<-- 9. MPC signature ----------|
    |                                |                               |
    |<-- 10. Deposit confirmed ------|                               |
-```text
+```
 
 #### Relayer Rewards and Penalties
 
@@ -2060,7 +2060,7 @@ const (
     RelayerSlashed    RelayerStatus = 2
     RelayerExiting    RelayerStatus = 3
 )
-```text
+```
 
 ### RPC API Endpoints
 
@@ -2308,7 +2308,7 @@ func (api *BridgeAPI) Fees(
         EstimatedTime: api.estimateTime(sourceChainID, destChainID),
     }, nil
 }
-```text
+```
 
 #### Additional RPC Methods
 
@@ -2420,7 +2420,7 @@ func (api *BridgeAPI) GetChainHeight(ctx context.Context, chainID uint64) (*Chai
         LastUpdate:      state.LastUpdate,
     }, nil
 }
-```text
+```
 
 #### WebSocket Subscriptions
 
@@ -2484,7 +2484,7 @@ type WithdrawNotification struct {
     DestTxHash      *common.Hash    `json:"destTxHash,omitempty"`
     BlockNumber     uint64          `json:"blockNumber"`
 }
-```text
+```
 
 #### RPC Method Summary
 
@@ -2579,7 +2579,7 @@ func (vm *BridgeVM) SubmitFraudProof(proof *FraudProof) error {
 
     return nil
 }
-```text
+```
 
 #### Challenge Period
 
@@ -2606,7 +2606,7 @@ func (vm *BridgeVM) GetChallengeBlocks(amount *big.Int, assetID AssetID) uint64 
 
     return DefaultChallengeBlocks
 }
-```text
+```
 
 ## Rationale
 
@@ -2777,7 +2777,7 @@ func TestFraudProofSubmission(t *testing.T) {
     relayer := vm.state.RelayerRegistry[fakeDeposit.RelayerAddress]
     require.True(t, relayer.Slashed)
 }
-```text
+```
 
 ### Integration Tests
 
@@ -2854,7 +2854,7 @@ func TestCrossChainSwap(t *testing.T) {
     require.NoError(t, err)
     require.True(t, balance.Cmp(big.NewInt(1e8)) >= 0)
 }
-```text
+```
 
 ### Stress Tests
 
@@ -2898,7 +2898,7 @@ func TestHighVolumeBridging(t *testing.T) {
         return stats.CompletedDeposits >= numDeposits
     }, 30*time.Minute, 30*time.Second)
 }
-```text
+```
 
 ### Test Vectors
 
@@ -2926,7 +2926,7 @@ DepositID:    0xa1b2c3d4e5f6789012345678901234567890123456789012345678901234abcd
 ```
 
 **Expected Wire Format** (hex):
-```text
+```
 01b1000000f9000000                             # Header: v1, type B1, len 249, flags 0
 0000000000000001                               # SourceChainID: 1
 8f2c7e9d3a1b5c4e6f8a0b2d4e6f8a0b2d4e6f8a0b2d4e6f8a0b2d4e6f8a0b2d  # SourceTxHash
@@ -2939,7 +2939,7 @@ DepositID:    0xa1b2c3d4e5f6789012345678901234567890123456789012345678901234abcd
 [proof bytes]                                   # Merkle proof
 [relayer addr]                                  # Relayer address
 [65 bytes sig]                                  # ECDSA signature
-```text
+```
 
 #### Test Vector 2: Withdrawal Request
 
@@ -2960,7 +2960,7 @@ Sender:            0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC
 ```yaml
 Input bytes:  0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC || 0x000000000000002a || 0x0000000000000001 || [assetID]
 WithdrawID:   0xfedcba0987654321fedcba0987654321fedcba0987654321fedcba0987654321
-```text
+```
 
 **Expected Fee Breakdown**:
 ```yaml
@@ -2974,13 +2974,13 @@ Distribution:
   Protocol:     1500000 (30%)
   Validator:    1000000 (20%)
   Insurance:    500000  (10%)
-```text
+```
 
 #### Test Vector 3: MPC Signature
 
 **Input**: Sign withdrawal message for Ethereum release
 
-```text
+```
 Message to sign (EIP-712 typed data hash):
   Domain:       "LuxBridge", version 1, chainId 1
   WithdrawID:   0xfedcba0987654321fedcba0987654321fedcba0987654321fedcba0987654321
@@ -3000,13 +3000,13 @@ V: 27
 SignerBitmap: 0b00000111 (signers 0, 1, 2 participated)
 TChainBlockHash: 0xabcd1234...
 TChainProof: [merkle proof bytes]
-```text
+```
 
 #### Test Vector 4: Cross-Chain Swap
 
 **Input**: Swap ETH USDC for LUX WBTC
 
-```text
+```
 Source Chain:       Ethereum (1)
 Dest Chain:         Lux C-Chain (96369)
 Source Asset:       USDC (0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48)
@@ -3014,7 +3014,7 @@ Dest Asset:         WBTC on Lux
 Input Amount:       50000000000 (50000 USDC)
 Min Output:         100000000 (1 BTC, assuming ~$50k/BTC)
 Max Slippage:       100 (1%)
-```text
+```
 
 **Expected SwapID**:
 ```yaml
@@ -3028,7 +3028,7 @@ BaseFee:        0.001 LUX
 PercentageFee:  50000 * 0.003 = 150 USDC
 ChainFee:       ~5 USDC (both chains)
 TotalFee:       ~155 USDC
-```text
+```
 
 #### Test Vector 5: Bitcoin Deposit (P2TR)
 
@@ -3040,13 +3040,13 @@ Output Index:       0
 Value:              10000000 satoshis (0.1 BTC)
 Vault Address:      bc1p5d7rjq7g6rdk2yhzks9smlaqtedr4dekq08ge8ztwac72sfr9rusxg3297
 OP_RETURN data:     0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC (Lux recipient)
-```text
+```
 
 **Expected DepositID**:
 ```yaml
 DepositID: keccak256(0 || txid || outputIndex)
          = 0x9876543210fedcba9876543210fedcba9876543210fedcba9876543210fedcba
-```text
+```
 
 **SPV Proof Structure**:
 ```yaml
@@ -3054,7 +3054,7 @@ BlockHeader:    80 bytes (Bitcoin block header)
 MerkleProof:    [hash1, hash2, ...] (path to tx in merkle tree)
 TxIndex:        position in block
 Confirmations:  6 required
-```text
+```
 
 ## Reference Implementation
 
@@ -3070,7 +3070,7 @@ Confirmations:  6 required
 
 ### Directory Structure
 
-```text
+```
 node/vms/bridgevm/
 |-- vm.go                    # Main VM implementation
 |-- block.go                 # Block structure and processing
@@ -3102,7 +3102,7 @@ node/vms/bridgevm/
 |-- metrics/
     |-- prometheus.go        # Prometheus metrics
     |-- health.go            # Health check endpoints
-```text
+```
 
 ### Build and Test
 

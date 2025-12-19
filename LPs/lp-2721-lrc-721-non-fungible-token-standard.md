@@ -63,7 +63,7 @@ interface ILRC721 {
     event Approval(address indexed owner, address indexed approved, uint256 indexed tokenId);
     event ApprovalForAll(address indexed owner, address indexed operator, bool approved);
 }
-```text
+```
 
 ### AI Model NFT Extension
 
@@ -118,7 +118,7 @@ interface ILRC721AIModel {
     event ModelUpdated(uint256 indexed tokenId, bytes32 oldHash, bytes32 newHash);
     event ProvenanceVerified(uint256 indexed tokenId, address verifier);
 }
-```text
+```
 
 ### Privacy-Preserving Ownership Extension
 
@@ -154,7 +154,7 @@ interface ILRC721Private {
     event StealthTransfer(uint256 indexed tokenId, bytes32 stealthAddress);
     event OwnershipRevealed(uint256 indexed tokenId, address owner);
 }
-```text
+```
 
 ### Provenance Verification Structure
 
@@ -166,7 +166,7 @@ struct ProvenanceProof {
     address[] signers;            // Contributors who signed
     uint256 timestamp;             // Proof generation time
 }
-```text
+```
 
 ## Rationale
 
@@ -297,7 +297,7 @@ describe("LRC721 AI Model NFTs", () => {
         expect(isValid).to.be.true;
     });
 });
-```text
+```
 
 ### Privacy Tests
 
@@ -340,7 +340,7 @@ describe("LRC721 Private Ownership", () => {
         expect(claimed).to.equal(tokenId);
     });
 });
-```text
+```
 
 ## Implementation
 
@@ -371,7 +371,7 @@ cd ~/work/lux/standard
 forge test --match-contract ERC721Test
 forge test --match-contract LRC721AIModelTest
 forge test --match-contract LRC721PrivateTest
-```text
+```
 
 ### AI Model NFT Implementation
 
@@ -397,7 +397,7 @@ function mintModelNFT(
     modelMetadata[tokenId] = metadata;
     trainingProvenance[tokenId] = provenance;
 }
-```text
+```
 
 ### Privacy-Preserving Ownership
 
@@ -423,7 +423,7 @@ function transferToStealth(
     // Emit event with recovery data
     emit StealthTransfer(tokenId, ephemeralKey);
 }
-```text
+```
 
 ### Marketplace Integration
 
@@ -433,7 +433,7 @@ function transferToStealth(
 function tokenURI(uint256 tokenId) public view override returns (string memory) {
     return string(abi.encodePacked(baseURI, tokenId.toString(), ".json"));
 }
-```text
+```
 
 **Royalty Support** (EIP-2981):
 ```solidity

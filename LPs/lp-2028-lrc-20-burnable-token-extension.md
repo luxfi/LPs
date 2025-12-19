@@ -66,7 +66,7 @@ interface IERC20Burnable {
 3. **Error Handling**: Use descriptive revert messages:
    ```solidity
    require(balanceOf[msg.sender] >= amount, "ERC20: burn amount exceeds balance");
-   ```text
+   ```
 
 ## Rationale
 
@@ -85,18 +85,18 @@ This is a backwards-compatible extension. Contracts may implement burnable behav
    burn(100)
    // Result: balance = 900, totalSupply = 9900
    // Events: Transfer(user, 0x0, 100), Burn(user, 100)
-   ```text
+   ```
 
 2. **Burn Exceeds Balance**
    ```javascript
    // Balance = 100
    burn(200) // Should revert: "ERC20: burn amount exceeds balance"
-   ```text
+   ```
 
 3. **Burn Zero Amount**
    ```javascript
    burn(0) // Should succeed with no state changes
-   ```text
+   ```
 
 ### BurnFrom Function Tests
 1. **Successful BurnFrom**
@@ -105,28 +105,28 @@ This is a backwards-compatible extension. Contracts may implement burnable behav
    // Alice balance = 1000
    burnFrom(alice, 200) // Called by Bob
    // Result: Alice balance = 800, Bob's allowance = 300
-   ```text
+   ```
 
 2. **BurnFrom Exceeds Allowance**
    ```javascript
    // Allowance = 100
    burnFrom(alice, 200) // Should revert: "ERC20: insufficient allowance"
-   ```text
+   ```
 
 3. **BurnFrom with Max Allowance**
    ```javascript
    // Allowance = type(uint256).max
    burnFrom(alice, 100)
    // Allowance should remain at max (no decrement)
-   ```text
+   ```
 
 ## Reference Implementation
 
 ### Interface
 See the IERC20Burnable interface in the standard repository:
-```text
+```
 /standard/src/interfaces/IERC20Burnable.sol
-```text
+```
 
 ### Example Implementation
 ```solidity
@@ -158,7 +158,7 @@ contract BurnableToken is ERC20, IERC20Burnable {
         emit Burn(account, amount);
     }
 }
-```text
+```
 
 ## Security Considerations
 
@@ -200,7 +200,7 @@ forge test --match "Burn"
 
 # Test burn functionality
 forge test test/ERC20Burnable.sol -v
-```text
+```
 
 ### Test Cases
 - **Basic Burn**: `test_burn_reduces_balance`
@@ -219,7 +219,7 @@ forge create src/ERC20Burnable.sol:BurnableToken \
 # Test burn on-chain
 cast send <contract> "burn(uint256)" 1000000000000000000 \
   --rpc-url http://localhost:9650/ext/bc/C
-```text
+```
 
 ### Use Cases
 1. **Deflationary Tokens**: Programmatic supply reduction

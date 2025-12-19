@@ -30,7 +30,7 @@ Emergency controls are essential for:
 
 ### Architecture
 
-```text
+```
 ┌──────────────────────────────────────────────────────────────┐
 │                         Safe Wallet                           │
 ├──────────────────────────────────────────────────────────────┤
@@ -180,7 +180,7 @@ interface IFreezeVotingStandaloneV1 is IFreezeVotingBase {
 
 ### File Structure
 
-```text
+```
 contracts/contracts/
 ├── freeze-guard/
 │   ├── FreezeGuardAzoriusV1.sol     # Guards Azorius execution
@@ -194,7 +194,7 @@ contracts/contracts/
 
 ### Freeze Lifecycle
 
-```text
+```
 Normal Operation
       │
       ▼

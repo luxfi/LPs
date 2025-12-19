@@ -54,11 +54,11 @@ var ZKVMID = constants.ZKVMID // ids.ID{'z', 'k', 'v', 'm'}
 // Create Z-Chain VM
 factory := &zvm.Factory{}
 vm, err := factory.New(logger)
-```text
+```
 
 ### Directory Structure
 
-```text
+```
 node/vms/zkvm/
 ├── accel/            # Hardware acceleration
 │   ├── accel.go      # Acceleration interface
@@ -73,7 +73,7 @@ node/vms/zkvm/
 ├── factory.go        # VM factory
 ├── vm.go             # Main VM implementation
 └── *_test.go         # Tests
-```text
+```
 
 ### Proof Systems
 
@@ -97,7 +97,7 @@ type Accelerator interface {
     Poseidon(inputs []FieldElement) (FieldElement, error)
     Benchmark() (*BenchmarkResult, error)
 }
-```text
+```
 
 #### Platform Support
 
@@ -124,7 +124,7 @@ func GetAccelerator() Accelerator {
     }
     return NewGoAccelerator()
 }
-```text
+```
 
 ### Transaction Types
 
@@ -161,7 +161,7 @@ func (z *ZKVM) SubmitProof(proof *ZKProof) (ids.ID, error) {
     // Store on chain
     return z.state.StoreProof(proof)
 }
-```text
+```
 
 #### Circuit Registration
 
@@ -176,7 +176,7 @@ type Circuit struct {
     Public      uint32
     Private     uint32
 }
-```text
+```
 
 ### Privacy Features
 
@@ -189,7 +189,7 @@ type PrivateTransfer struct {
     Proof       []byte    // ZK proof of valid transfer
     EncOutput   []byte    // Encrypted output for recipient
 }
-```text
+```
 
 #### Encrypted Data
 
@@ -200,7 +200,7 @@ type EncryptedData struct {
     Tag         [16]byte
     PublicKey   [32]byte
 }
-```text
+```
 
 ### FHE Operations
 
@@ -218,7 +218,7 @@ type FHEOperation struct {
     Output      []byte     // Encrypted output
     Proof       []byte     // Correctness proof
 }
-```text
+```
 
 ### API Endpoints
 
@@ -235,14 +235,14 @@ type FHEOperation struct {
 
 #### REST Endpoints
 
-```text
+```
 POST /ext/bc/Z/zk/proof/submit
 POST /ext/bc/Z/zk/proof/verify
 GET  /ext/bc/Z/zk/circuits/{circuitId}
 POST /ext/bc/Z/zk/circuits/register
 POST /ext/bc/Z/zk/private/transfer
 POST /ext/bc/Z/zk/fhe/compute
-```text
+```
 
 ### Precompiled Contracts
 
@@ -271,7 +271,7 @@ POST /ext/bc/Z/zk/fhe/compute
     "privacyEnabled": true
   }
 }
-```text
+```
 
 ### Performance
 

@@ -42,7 +42,7 @@ The design draws inspiration from Succinct SP1's RISC-V approach while implement
 
 ### 1. ZKVM Architecture Overview
 
-```text
+```
 ┌─────────────────────────────────────────────────────────────────────────────┐
 │                          Z-Chain ZKVM Architecture                          │
 ├─────────────────────────────────────────────────────────────────────────────┤
@@ -115,7 +115,7 @@ pub enum ZKOpcode {
     Hint        = 0x0B40,  // hint rd, imm (prover hint)
     Verify      = 0x0B41,  // verify rd, rs1 (recursive verify)
 }
-```text
+```
 
 #### 2.3 Memory Model
 
@@ -152,7 +152,7 @@ interface ZKVMMemoryLayout {
         size: 1024 * 1024 * 1024, // 1 GB for ciphertexts
     };
 }
-```text
+```
 
 ### 3. Proving System
 
@@ -194,7 +194,7 @@ interface AIRConstraints {
 
     // Total: ~850 constraints per cycle
 }
-```text
+```
 
 #### 3.2 Proof Compression (STARK → SNARK)
 
@@ -220,13 +220,13 @@ interface IZKVMVerifier {
 
     // Gas cost: ~200k for Groth16 wrapper verification
 }
-```text
+```
 
 ### 4. GPU Acceleration (Phase 1)
 
 #### 4.1 CUDA Prover Architecture
 
-```text
+```
 ┌─────────────────────────────────────────────────────────────────┐
 │                    GPU Prover (CUDA)                            │
 ├─────────────────────────────────────────────────────────────────┤
@@ -260,7 +260,7 @@ interface IZKVMVerifier {
 │  - End-to-end: 100-1000 proofs/sec (depending on program size)  │
 │                                                                 │
 └─────────────────────────────────────────────────────────────────┘
-```text
+```
 
 #### 4.2 CUDA Kernel Specifications
 
@@ -296,7 +296,7 @@ __global__ void merkle_build_kernel(
     // Bottom-up parallel tree construction
     // O(log n) depth, O(n) work
 }
-```text
+```
 
 #### 4.3 GPU Memory Management
 
@@ -331,13 +331,13 @@ impl Default for GPUProverConfig {
         }
     }
 }
-```text
+```
 
 ### 5. FPGA Acceleration (Phase 2)
 
 #### 5.1 FPGA Architecture Target
 
-```text
+```
 ┌─────────────────────────────────────────────────────────────────┐
 │               FPGA Prover (AMD Versal / Intel Agilex)           │
 ├─────────────────────────────────────────────────────────────────┤
@@ -371,7 +371,7 @@ impl Default for GPUProverConfig {
 │  - Latency: <1ms per proof (deterministic)                      │
 │                                                                 │
 └─────────────────────────────────────────────────────────────────┘
-```text
+```
 
 #### 5.2 Hardware Design Specifications
 
@@ -412,7 +412,7 @@ module poseidon2_core #(
     // Unrolled external rounds, iterative internal rounds
     // ~30 cycle latency, 1 hash per cycle throughput
 endmodule
-```text
+```
 
 #### 5.3 FPGA Deployment Targets
 
@@ -461,7 +461,7 @@ impl Default for LuxFHEConfig {
         }
     }
 }
-```text
+```
 
 #### 6.2 FHE Precompile Integration
 
@@ -488,7 +488,7 @@ interface ZKVMFHEOps {
     fhe_encrypt(plaintext: u64, pk: PublicKey): Ciphertext;
     fhe_decrypt(ct: Ciphertext, sk: SecretKey): u64;  // Only in decryption oracle
 }
-```text
+```
 
 #### 6.3 FHE Circuit Compilation
 
@@ -518,13 +518,13 @@ impl Default for FHECircuitCosts {
         }
     }
 }
-```text
+```
 
 ### 7. Privacy Rollup Architecture
 
 #### 7.1 Rollup State Model
 
-```text
+```
 ┌─────────────────────────────────────────────────────────────────┐
 │                    Z-Chain Privacy Rollup                       │
 ├─────────────────────────────────────────────────────────────────┤
@@ -559,7 +559,7 @@ impl Default for FHECircuitCosts {
 │  └─────────────────────────────────────────────────────────────┘│
 │                                                                 │
 └─────────────────────────────────────────────────────────────────┘
-```text
+```
 
 #### 7.2 Batch Proof Generation
 
@@ -594,7 +594,7 @@ interface BatchConfig {
     targetProofTime: 10;        // Seconds
     compressionLevel: "snark";  // stark | snark | aggregated
 }
-```text
+```
 
 ### 8. Cross-Chain Interoperability
 
@@ -636,7 +636,7 @@ interface IZChainBridge {
         CrossChainMessage calldata message
     ) external view returns (bool);
 }
-```text
+```
 
 #### 8.3 Q-Chain Quantum Security Integration
 
@@ -658,7 +658,7 @@ interface QuantumSecureProof {
     // 1. Verify ZKVM proof (classical)
     // 2. Verify Q-Chain certificate (quantum-secure)
 }
-```text
+```
 
 ### 9. API Specifications
 
@@ -695,7 +695,7 @@ interface ZKVMRPCMethods {
     zkvm_encryptInput(plaintext: bytes, publicKey: bytes): Ciphertext;
     zkvm_requestDecrypt(ciphertext: bytes, callback: address): RequestId;
 }
-```text
+```
 
 #### 9.2 SDK Interface
 
@@ -746,7 +746,7 @@ pub fn private_transfer(
         change_commitment: change_note,
     }
 }
-```text
+```
 
 ## Rationale
 
@@ -839,7 +839,7 @@ fn test_fhe_operations_in_zkvm() {
     let result = fhe.decrypt(&output.ciphertexts[0]);
     assert_eq!(result, 1); // a > b
 }
-```text
+```
 
 ### Integration Tests
 
@@ -860,7 +860,7 @@ fn test_batch_proof_settlement() {
     assert!(receipt.success);
     assert_eq!(c_chain.get_state_root(), proof.new_state_root);
 }
-```text
+```
 
 ## Reference Implementation
 
@@ -872,7 +872,7 @@ fn test_batch_proof_settlement() {
 
 ### Directory Structure
 
-```text
+```
 zkvm/
 ├── core/
 │   ├── src/

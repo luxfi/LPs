@@ -70,7 +70,7 @@ pub struct TrainingOp {
     // Updated priors
     pub prior_update: PriorDelta,
 }
-```text
+```
 
 ### Immutable Training Ledger
 
@@ -103,7 +103,7 @@ pub struct TrainingBlock {
     // Block signature (post-quantum)
     pub signature: MLDSASignature,
 }
-```text
+```
 
 ### Privacy-Preserving Training
 
@@ -133,7 +133,7 @@ impl UserModel {
         }
     }
 }
-```text
+```
 
 #### Homomorphic Aggregation
 ```rust
@@ -152,7 +152,7 @@ pub fn aggregate_user_updates(
         contributor_count: updates.len(),
     }
 }
-```text
+```
 
 ### Smart Contract Interface
 
@@ -189,7 +189,7 @@ interface IUserModelLedger {
         uint256[] calldata opIds
     ) external returns (uint256 rewards);
 }
-```text
+```
 
 ### Model Evolution and Priors
 
@@ -224,7 +224,7 @@ pub struct GenerationPriors {
     // Performance baselines
     pub baselines: PerformanceMetrics,
 }
-```text
+```
 
 ### Cross-Chain Synchronization
 
@@ -243,7 +243,7 @@ message UserModelSync {
     string source_chain = 4;
     string target_chain = 5;
 }
-```text
+```
 
 ## Implementation
 

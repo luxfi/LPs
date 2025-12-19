@@ -15,7 +15,7 @@ function LPIndexPage() {
   const allPages = source.getAllPages();
 
   return (
-    <>
+    <div className="pt-6 pb-12 px-6 md:px-8">
       {/* Client-side filtered view - reads URL params and shows/hides based on filter presence */}
       <FilteredView allPages={allPages} />
 
@@ -91,7 +91,7 @@ function LPIndexPage() {
           </section>
         ))}
       </div>
-    </>
+    </div>
   );
 }
 

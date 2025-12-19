@@ -91,7 +91,7 @@ T-Chain addresses these challenges by providing:
 
 T-Chain is a specialized Lux subnet running the ThresholdVM:
 
-```text
+```
 +-------------------------------------------------------------------------+
 |                         T-Chain Architecture                            |
 +-------------------------------------------------------------------------+
@@ -145,7 +145,7 @@ type ThresholdState struct {
     RewardPool      *big.Int                  // Accumulated signing rewards
     SlashingQueue   []SlashingEvent           // Pending slashing events
 }
-```text
+```
 
 #### 2. Managed Key Structure
 
@@ -193,7 +193,7 @@ const (
     ED25519    CurveType = 0x02  // Solana, Cardano
     P256       CurveType = 0x03  // NIST P-256
 )
-```text
+```
 
 #### 3. Threshold Configuration
 
@@ -229,7 +229,7 @@ var RecommendedThresholds = map[string]ThresholdConfig{
     "enterprise": {Threshold: 7, TotalParties: 10},  // 7-of-10
     "bridge":     {Threshold: 11, TotalParties: 15}, // 11-of-15
 }
-```text
+```
 
 ### Transaction Types
 
@@ -324,7 +324,7 @@ func (tx *KeyGenTx) Execute(state *ThresholdState, signers []Signer) (*ManagedKe
 
     return nil, nil // Key created when DKG completes
 }
-```text
+```
 
 #### 2. SignRequestTx - Signature Request
 
@@ -410,7 +410,7 @@ func (tx *SignRequestTx) Execute(state *ThresholdState) (*SignSession, error) {
     state.ActiveSessions[session.SessionID] = session
     return session, nil
 }
-```text
+```
 
 #### 3. SignResponseTx - Submit Signature Share
 
@@ -496,7 +496,7 @@ func (tx *SignResponseTx) Execute(state *ThresholdState) (*Signature, error) {
 
     return nil, nil
 }
-```text
+```
 
 #### 4. ReshareTx - Initiate Resharing
 
@@ -593,7 +593,7 @@ func (tx *ReshareTx) Execute(state *ThresholdState) (*ReshareSession, error) {
 
     return session, nil
 }
-```text
+```
 
 #### 5. ReshareCompleteTx - Finalize Resharing
 
@@ -666,7 +666,7 @@ func (tx *ReshareCompleteTx) Execute(state *ThresholdState) error {
 
     return nil
 }
-```text
+```
 
 #### 6. KeyRotateTx - Emergency Rotation
 
@@ -712,13 +712,13 @@ func (tx *KeyRotateTx) Execute(state *ThresholdState) error {
 
     return keygenTx.Execute(state, nil)
 }
-```text
+```
 
 ### State Machine
 
 #### Key Lifecycle States
 
-```text
+```
                                 +-------------+
                                 |   PENDING   |  KeyGenTx submitted
                                 +------+------+
@@ -743,11 +743,11 @@ func (tx *KeyRotateTx) Execute(state *ThresholdState) error {
                                 +------+------+
                                 | DEPRECATED  |
                                 +-------------+
-```text
+```
 
 #### Signing Session States
 
-```text
+```
                                 +-------------+
              SignRequestTx ---->| COMMITMENT  |  Round 1: collect nonce commitments
                                 +------+------+
@@ -772,7 +772,7 @@ func (tx *KeyRotateTx) Execute(state *ThresholdState) error {
                          v                           v
                   Callback to consumer        Identifiable abort
                                               (slash misbehaving signer)
-```text
+```
 
 ### LSS Protocol Integration
 
@@ -883,7 +883,7 @@ func (vss *FeldmanVSS) VerifyShare(share *Share, commitments []curve.Point) bool
 
     return sharePoint.Equal(expected)
 }
-```text
+```
 
 ### CGGMP21 Protocol Support
 
@@ -951,7 +951,7 @@ func (m *MtAProtocol) Execute(
 
     return alpha, beta, nil
 }
-```text
+```
 
 #### CGGMP21 Manager Implementation
 
@@ -1036,7 +1036,7 @@ func (m *CGGMP21Manager) ExecuteSign(
 
     return sig, nil
 }
-```text
+```
 
 ### FROST Protocol Support
 
@@ -1129,7 +1129,7 @@ func (s *FROSTDKGSession) Execute(
         Index:       s.myIndex,
     }, nil
 }
-```text
+```
 
 #### FROST Manager Implementation
 
@@ -1237,7 +1237,7 @@ func (m *FROSTManager) ExecuteSignTaproot(
         S: sig.S,
     }, nil
 }
-```text
+```
 
 ### Dynamic Resharing Mechanism
 
@@ -1309,7 +1309,7 @@ func (p *ReshareProtocol) ExecuteReshare(
 //   Before: 2-of-3 (A, B, C)
 //   After:  2-of-3 (A, B, D)
 //   Overlap: A, B (C replaced by D)
-```text
+```
 
 ### Validator-to-Signer Mapping
 
@@ -1385,7 +1385,7 @@ func (r *SignerRegistry) ValidatorSync(validators []Validator) error {
 
     return nil
 }
-```text
+```
 
 ### RPC API Endpoints
 
@@ -1423,7 +1423,7 @@ T-Chain exposes JSON-RPC endpoints under `/ext/bc/T`:
     },
     "id": 1
 }
-```text
+```
 
 #### threshold_sign - Request Threshold Signature
 
@@ -1456,7 +1456,7 @@ T-Chain exposes JSON-RPC endpoints under `/ext/bc/T`:
     },
     "id": 1
 }
-```text
+```
 
 #### threshold_reshare - Trigger Key Resharing
 
@@ -1488,7 +1488,7 @@ T-Chain exposes JSON-RPC endpoints under `/ext/bc/T`:
     },
     "id": 1
 }
-```text
+```
 
 #### threshold_getAddress - Get MPC Public Key/Address
 
@@ -1519,7 +1519,7 @@ T-Chain exposes JSON-RPC endpoints under `/ext/bc/T`:
     },
     "id": 1
 }
-```text
+```
 
 #### threshold_getKeyStatus - Query Key State
 
@@ -1555,7 +1555,7 @@ T-Chain exposes JSON-RPC endpoints under `/ext/bc/T`:
     },
     "id": 1
 }
-```text
+```
 
 #### threshold_listKeys - List Managed Keys
 
@@ -1603,7 +1603,7 @@ T-Chain exposes JSON-RPC endpoints under `/ext/bc/T`:
     },
     "id": 1
 }
-```text
+```
 
 #### threshold_getSession - Get Signing Session Status
 
@@ -1639,7 +1639,7 @@ T-Chain exposes JSON-RPC endpoints under `/ext/bc/T`:
     },
     "id": 1
 }
-```text
+```
 
 #### threshold_getReshareSession - Get Reshare Session Status
 
@@ -1676,7 +1676,7 @@ T-Chain exposes JSON-RPC endpoints under `/ext/bc/T`:
     },
     "id": 1
 }
-```text
+```
 
 #### threshold_getSignerInfo - Get Signer Details
 
@@ -1717,7 +1717,7 @@ T-Chain exposes JSON-RPC endpoints under `/ext/bc/T`:
     },
     "id": 1
 }
-```text
+```
 
 #### threshold_listSigners - List Registered Signers
 
@@ -1762,7 +1762,7 @@ T-Chain exposes JSON-RPC endpoints under `/ext/bc/T`:
     },
     "id": 1
 }
-```text
+```
 
 #### threshold_refresh - Trigger Proactive Share Refresh
 
@@ -1790,7 +1790,7 @@ T-Chain exposes JSON-RPC endpoints under `/ext/bc/T`:
     },
     "id": 1
 }
-```text
+```
 
 #### threshold_getSignature - Retrieve Completed Signature
 
@@ -1979,7 +1979,7 @@ var DefaultThresholdParams = Parameters{
     MinSignerStake:     10000 * units.LUX,
     MaxKeysPerSigner:   50,
 }
-```text
+```
 
 ## IANA-Style Protocol Registries
 
@@ -2052,7 +2052,7 @@ This section defines the binary encoding for T-Chain protocol messages. All mult
 
 ### Common Header Format
 
-```text
+```
  0                   1                   2                   3
  0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1
 +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
@@ -2070,7 +2070,7 @@ This section defines the binary encoding for T-Chain protocol messages. All mult
 +                        Sender ID (20 bytes)                   +
 |                                                               |
 +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-```text
+```
 
 | Field | Size | Description |
 |:------|:-----|:------------|
@@ -2098,7 +2098,7 @@ This section defines the binary encoding for T-Chain protocol messages. All mult
 
 ### DKG Round 1 Payload (Commitment)
 
-```text
+```
 +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
 |  Algorithm ID |   Curve ID    |    Threshold  |  Total Parties|
 +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
@@ -2120,7 +2120,7 @@ This section defines the binary encoding for T-Chain protocol messages. All mult
 
 ### Sign Commitment Payload (FROST Round 1)
 
-```text
+```
 +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
 |                    Party Index (2 bytes)                      |
 +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
@@ -2136,7 +2136,7 @@ This section defines the binary encoding for T-Chain protocol messages. All mult
 
 ### Sign Share Payload (Round 2)
 
-```text
+```
 +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
 |                    Party Index (2 bytes)                      |
 +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
@@ -2152,7 +2152,7 @@ This section defines the binary encoding for T-Chain protocol messages. All mult
 
 ### Abort Payload (Identifiable Abort)
 
-```text
+```
 +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
 |   Abort Reason|                    Reserved                   |
 +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
@@ -2204,7 +2204,7 @@ func (s *BoundShare) Verify(expectedGen uint32) error {
     }
     return nil
 }
-```text
+```
 
 ### T2: Rogue Key Attack on FROST DKG
 
@@ -2231,17 +2231,17 @@ type DKGCommitReveal struct {
     // Proof of knowledge prevents rogue key
     ProofOfKnowledge *SchnorrProof
 }
-```text
+```
 
 ### T3: Nonce Reuse in Threshold ECDSA
 
 **Threat**: If the same nonce k is used for two different messages, the private key can be recovered.
 
 **Analysis**: Given signatures (r, s1) and (r, s2) on messages m1 and m2 with same nonce:
-```text
+```
 k = (m1 - m2) / (s1 - s2) mod n
 x = (s1 * k - m1) / r mod n
-```text
+```
 
 **Mitigation**:
 - CGGMP21 MUST use pre-signed nonces computed during keygen
@@ -2306,7 +2306,7 @@ func (r *RateLimiter) Allow(keyID KeyID, block uint64) bool {
     r.RequestsPerBlock[keyID]++
     return true
 }
-```text
+```
 
 ### T6: Sybil Attack on Signer Selection
 
@@ -2338,7 +2338,7 @@ This section defines how T-Chain interoperates with other Lux chains and externa
 
 T-Chain provides threshold signatures to B-Chain (BridgeVM) for cross-chain asset custody. Communication occurs via Lux Warp Messaging.
 
-```text
+```
 +-------------+     Warp Message      +-------------+
 |   B-Chain   | --------------------> |   T-Chain   |
 |  (BridgeVM) |   SignRequest         | (ThresholdVM|
@@ -2346,7 +2346,7 @@ T-Chain provides threshold signatures to B-Chain (BridgeVM) for cross-chain asse
        ^                                     |
        |          Warp Message               |
        +--------- SignatureResult -----------+
-```text
+```
 
 **Request Flow**:
 1. B-Chain BridgeVM constructs withdrawal message
@@ -2382,13 +2382,13 @@ type BridgeSignResponse struct {
     Success       bool
     Error         string        // If failed
 }
-```text
+```
 
 ### T-Chain to K-Chain Integration
 
 K-Chain (KeyManagementVM) stores key metadata and access control policies. T-Chain queries K-Chain for authorization decisions.
 
-```text
+```
 +-------------+     Query Policy      +-------------+
 |   T-Chain   | --------------------> |   K-Chain   |
 | (ThresholdVM|                       |  (KeyMgmtVM)|
@@ -2396,7 +2396,7 @@ K-Chain (KeyManagementVM) stores key metadata and access control policies. T-Cha
        ^                                     |
        |          Authorization              |
        +----------- Response ---------------+
-```text
+```
 
 **Authorization Flow**:
 1. T-Chain receives `SignRequest` for key K
@@ -2426,7 +2426,7 @@ type AuthorizationResponse struct {
     RateLimit   *RateLimitStatus
     Expiry      uint64     // Authorization expires at block
 }
-```text
+```
 
 ### T-Chain to T-Chain Integration
 
@@ -2459,14 +2459,14 @@ interface ITChainVerifier {
         bytes32 keyId
     ) external view returns (bytes memory);
 }
-```text
+```
 
 **Bitcoin Taproot Integration**:
-```text
+```
 T-Chain FROST signature -> 64-byte Schnorr signature
                         -> Taproot witness spend
                         -> Bitcoin transaction broadcast
-```text
+```
 
 ### Cross-Chain Message Format
 
@@ -2481,7 +2481,7 @@ type CrossChainMessage struct {
     Payload     []byte
     Signature   []byte   // BLS aggregate from source chain validators
 }
-```text
+```
 
 ### Interoperability Requirements
 
@@ -2694,7 +2694,7 @@ func TestProactiveRefresh(t *testing.T) {
     require.NoError(t, err)
     require.True(t, ecdsa.Verify(originalPubKey, message[:], sig))
 }
-```text
+```
 
 ### Integration Tests
 
@@ -2751,7 +2751,7 @@ func TestCrossChainReshare(t *testing.T) {
         }
     }
 }
-```text
+```
 
 ### Stress Tests
 
@@ -2805,7 +2805,7 @@ func TestLargeSignerSet(t *testing.T) {
     require.NoError(t, err)
     require.True(t, ecdsa.Verify(key.PublicKey, message[:], sig))
 }
-```text
+```
 
 ### Test Vectors
 
@@ -2833,7 +2833,7 @@ Lambda_1 (for x=1): 2
 Lambda_2 (for x=2): -1 (mod n)
 
 # Verification: s = Lambda_1 * Share_1 + Lambda_2 * Share_2
-```text
+```
 
 #### Test Vector 2: Feldman VSS Commitments
 
@@ -2916,7 +2916,7 @@ Signature (R, z):
   z: 0x11111111111111111111111111111111111111111111111111111111111110
 
 # Verification: z * G == R + c * Y
-```text
+```
 
 #### Test Vector 4: CGGMP21 Paillier MtA
 
@@ -2942,7 +2942,7 @@ alpha = Dec(response) (mod n)
 
 # Verification
 alpha + beta == a * b (mod curve order)
-```text
+```
 
 #### Test Vector 5: Wire Format Encoding
 
@@ -2970,7 +2970,7 @@ E Commitment:   0x025B6C7D8E9FA0B1C2D3E4F50617283940A1B2C3D4E5F60718293A4B5C6D7E
 0001
 024D5A86F273D2EA73FC50F70A7B9C8D7E6F5049382D3C4B5A6978877665544332
 025B6C7D8E9FA0B1C2D3E4F50617283940A1B2C3D4E5F60718293A4B5C6D7E8F90
-```text
+```
 
 #### Test Vector 6: RPC Request/Response
 
@@ -3005,14 +3005,14 @@ E Commitment:   0x025B6C7D8E9FA0B1C2D3E4F50617283940A1B2C3D4E5F60718293A4B5C6D7E
     },
     "id": 1
 }
-```text
+```
 
 ## Reference Implementation
 
 ### Repository Structure
 
 **ThresholdVM (T-Chain VM)**:
-```text
+```
 github.com/luxfi/node/vms/thresholdvm/
 ├── vm.go           # (43 KB) ThresholdVM core - Initialize, BuildBlock, ParseBlock
 ├── executor.go     # (13 KB) Protocol executor - bridges VM to threshold library
@@ -3026,7 +3026,7 @@ github.com/luxfi/node/vms/thresholdvm/
 ```
 
 **Threshold Cryptography Library** (real implementations):
-```text
+```
 github.com/luxfi/threshold/
 ├── protocols/
 │   ├── cmp/           # CGGMP21 threshold ECDSA (LP-7014)
@@ -3054,7 +3054,7 @@ github.com/luxfi/threshold/
 ```
 
 **TypeScript SDK**:
-```text
+```
 @luxfi/threshold (bridge/pkg/threshold/)
 ├── src/
 │   ├── client.ts      # ThresholdClient class
@@ -3062,7 +3062,7 @@ github.com/luxfi/threshold/
 │   └── index.ts       # Package exports
 └── test/
     └── client.test.ts # Test suite
-```text
+```
 
 ### Key Implementation Files
 
@@ -3141,7 +3141,7 @@ func (vm *VM) Initialize(...) error {
 
     // ... rest of initialization
 }
-```text
+```
 
 ## Security Considerations
 
@@ -3313,7 +3313,7 @@ func (vm *VM) Initialize(...) error {
 
 ### Timeline Visualization
 
-```text
+```
 2025 Q1     2025 Q2     2025 Q3     2025 Q4     2026 Q1
 |-----------|-----------|-----------|-----------|-----------|
 [=== Phase 1: Core Protocol ===]

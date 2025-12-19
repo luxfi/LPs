@@ -1,9 +1,13 @@
 import { source } from '@/lib/source';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
-import { ArrowLeft, ArrowRight, Layers, Lock, Coins, BarChart3, Vote, Rocket, FlaskConical, Cpu } from 'lucide-react';
+import {
+  ArrowLeft, ArrowRight, Layers, Lock, Coins, BarChart3, Vote, Rocket,
+  FlaskConical, Cpu, Code, Link2, Key, Shield, Wallet, User, Leaf, Heart,
+  Boxes, Zap, FileCode
+} from 'lucide-react';
 
-// Icon mapping
+// Icon mapping - expanded for all topics
 const iconMap: Record<string, React.ReactNode> = {
   layers: <Layers className="size-6" />,
   consensus: <Cpu className="size-6" />,
@@ -13,6 +17,20 @@ const iconMap: Record<string, React.ReactNode> = {
   vote: <Vote className="size-6" />,
   upgrade: <Rocket className="size-6" />,
   research: <FlaskConical className="size-6" />,
+  code: <Code className="size-6" />,
+  link: <Link2 className="size-6" />,
+  bridge: <Link2 className="size-6" />,
+  key: <Key className="size-6" />,
+  shield: <Shield className="size-6" />,
+  wallet: <Wallet className="size-6" />,
+  user: <User className="size-6" />,
+  leaf: <Leaf className="size-6" />,
+  heart: <Heart className="size-6" />,
+  platform: <Boxes className="size-6" />,
+  vm: <FileCode className="size-6" />,
+  extension: <Zap className="size-6" />,
+  advanced: <Cpu className="size-6" />,
+  flask: <FlaskConical className="size-6" />,
 };
 
 // Color mapping for backgrounds and accents
@@ -25,6 +43,17 @@ const colorMap: Record<string, { bg: string; text: string; border: string; badge
   indigo: { bg: 'bg-indigo-500/10', text: 'text-indigo-500', border: 'border-indigo-500/20', badge: 'bg-indigo-500/20 text-indigo-400' },
   orange: { bg: 'bg-orange-500/10', text: 'text-orange-500', border: 'border-orange-500/20', badge: 'bg-orange-500/20 text-orange-400' },
   pink: { bg: 'bg-pink-500/10', text: 'text-pink-500', border: 'border-pink-500/20', badge: 'bg-pink-500/20 text-pink-400' },
+  violet: { bg: 'bg-violet-500/10', text: 'text-violet-500', border: 'border-violet-500/20', badge: 'bg-violet-500/20 text-violet-400' },
+  cyan: { bg: 'bg-cyan-500/10', text: 'text-cyan-500', border: 'border-cyan-500/20', badge: 'bg-cyan-500/20 text-cyan-400' },
+  teal: { bg: 'bg-teal-500/10', text: 'text-teal-500', border: 'border-teal-500/20', badge: 'bg-teal-500/20 text-teal-400' },
+  fuchsia: { bg: 'bg-fuchsia-500/10', text: 'text-fuchsia-500', border: 'border-fuchsia-500/20', badge: 'bg-fuchsia-500/20 text-fuchsia-400' },
+  sky: { bg: 'bg-sky-500/10', text: 'text-sky-500', border: 'border-sky-500/20', badge: 'bg-sky-500/20 text-sky-400' },
+  lime: { bg: 'bg-lime-500/10', text: 'text-lime-500', border: 'border-lime-500/20', badge: 'bg-lime-500/20 text-lime-400' },
+  yellow: { bg: 'bg-yellow-500/10', text: 'text-yellow-500', border: 'border-yellow-500/20', badge: 'bg-yellow-500/20 text-yellow-400' },
+  rose: { bg: 'bg-rose-500/10', text: 'text-rose-500', border: 'border-rose-500/20', badge: 'bg-rose-500/20 text-rose-400' },
+  red: { bg: 'bg-red-500/10', text: 'text-red-500', border: 'border-red-500/20', badge: 'bg-red-500/20 text-red-400' },
+  slate: { bg: 'bg-slate-500/10', text: 'text-slate-500', border: 'border-slate-500/20', badge: 'bg-slate-500/20 text-slate-400' },
+  neutral: { bg: 'bg-neutral-500/10', text: 'text-neutral-500', border: 'border-neutral-500/20', badge: 'bg-neutral-500/20 text-neutral-400' },
 };
 
 export default async function CategoryPage({
@@ -51,6 +80,7 @@ export default async function CategoryPage({
   };
 
   return (
+    <div className="pt-6 pb-12 px-6 md:px-8">
     <div className="max-w-4xl">
       {/* Breadcrumb */}
       <div className="mb-6">
@@ -70,11 +100,18 @@ export default async function CategoryPage({
             {icon}
           </div>
           <div className="flex-1">
-            <div className="flex items-center gap-3 mb-2">
+            <div className="flex items-center gap-3 mb-2 flex-wrap">
               <h1 className="text-2xl font-bold">{category.name}</h1>
-              <span className={`text-xs px-2 py-1 rounded-full ${colors.badge}`}>
-                LP-{category.range[0]} to LP-{category.range[1]}
-              </span>
+              {/* Show range badge if range exists, otherwise show tag count */}
+              {category.range ? (
+                <span className={`text-xs px-2 py-1 rounded-full ${colors.badge}`}>
+                  LP-{category.range[0]} to LP-{category.range[1]}
+                </span>
+              ) : (
+                <span className={`text-xs px-2 py-1 rounded-full ${colors.badge}`}>
+                  {category.lps.length} proposals
+                </span>
+              )}
             </div>
             <p className="text-muted-foreground mb-4">
               {category.description}
@@ -85,8 +122,26 @@ export default async function CategoryPage({
           </div>
         </div>
 
+        {/* Matching Tags */}
+        {category.tags && category.tags.length > 0 && (
+          <div className="mt-6 pt-4 border-t border-border/50">
+            <div className="text-xs font-medium text-muted-foreground mb-2">Matching Tags</div>
+            <div className="flex flex-wrap gap-2">
+              {category.tags.map((tag) => (
+                <Link
+                  key={tag}
+                  href={`/docs?tag=${encodeURIComponent(tag)}`}
+                  className="text-xs px-2 py-1 rounded-full bg-background/50 text-foreground/80 border border-border/50 hover:bg-primary/10 hover:text-primary transition-colors"
+                >
+                  #{tag}
+                </Link>
+              ))}
+            </div>
+          </div>
+        )}
+
         {/* Key Topics */}
-        <div className="mt-6 pt-4 border-t border-border/50">
+        <div className="mt-4 pt-4 border-t border-border/50">
           <div className="text-xs font-medium text-muted-foreground mb-2">Key Topics</div>
           <div className="flex flex-wrap gap-2">
             {category.keyTopics.map((topic) => (
@@ -156,7 +211,7 @@ export default async function CategoryPage({
       ) : (
         <div className="text-center py-12 text-muted-foreground">
           <p className="mb-2">No proposals in this category yet.</p>
-          <p className="text-sm">Be the first to propose a LP in the {category.name} range!</p>
+          <p className="text-sm">Be the first to propose a LP in the {category.name} area!</p>
         </div>
       )}
 
@@ -172,6 +227,7 @@ export default async function CategoryPage({
           </Link>
         </div>
       </div>
+    </div>
     </div>
   );
 }

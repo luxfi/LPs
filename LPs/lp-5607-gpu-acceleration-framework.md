@@ -67,7 +67,7 @@ template<typename Func, typename... Args>
 void launch_kernel(Func kernel, dim3 grid, dim3 block, Args... args);
 
 }
-```text
+```
 
 ### Consensus Acceleration
 
@@ -147,7 +147,7 @@ public:
         return x;
     }
 };
-```text
+```
 
 ### AI Inference Acceleration
 
@@ -184,7 +184,7 @@ private:
         return output.to_vector();
     }
 };
-```text
+```
 
 ### Cryptographic Operations
 
@@ -205,7 +205,7 @@ __global__ void generate_verkle_proofs(
         proofs + idx * PROOF_SIZE
     );
 }
-```text
+```
 
 ### Go Integration
 
@@ -252,7 +252,7 @@ func (g *GPUAccelerator) VerifySignatures(
 
     return result == 1, nil
 }
-```text
+```
 
 ## Rationale
 
@@ -297,7 +297,7 @@ func TestGPUSignatureVerification(t *testing.T) {
     speedup := float64(cpuTime) / float64(gpuTime)
     assert.Greater(t, speedup, 10.0)  // At least 10x speedup
 }
-```text
+```
 
 ## Reference Implementation
 
@@ -366,7 +366,7 @@ CUDA: Requires sm_70 or newer (Volta+)
 MLX: Requires macOS 12+, Apple Silicon
 ROCm: Requires RDNA or CDNA architecture
 fallback: CPU (always available)
-```text
+```
 
 **Resource Limits**:
 ```yaml

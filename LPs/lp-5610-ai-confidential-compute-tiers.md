@@ -44,7 +44,7 @@ This LP establishes clear definitions, hardware requirements, and trust scores f
 
 ### 1. CC Tier Hierarchy
 
-```text
+```
 ┌─────────────────────────────────────────────────────────────────────────────────────────┐
 │                           AI CONFIDENTIAL COMPUTE TIERS                                 │
 ├─────────────────────────────────────────────────────────────────────────────────────────┤
@@ -124,7 +124,7 @@ This LP establishes clear definitions, hardware requirements, and trust scores f
 **Trust Score Range**: 90-100
 
 **Attestation Flow**:
-```text
+```
 GPU Boot → Secure Firmware Load → Generate GPU Quote →
   Submit to Attestation Verifier → Verify Certificate Chain →
     Bind to Chain ID → Register Provider with Tier 1
@@ -158,7 +158,7 @@ GPU Boot → Secure Firmware Load → Generate GPU Quote →
 **Trust Score Range**: 70-89
 
 **Attestation Flow**:
-```text
+```
 CPU Boot → Load Confidential VM → Generate SEV/TDX/CCA Report →
   Attach GPU → Verify CPU Report → Bind to Chain ID →
     Register Provider with Tier 2
@@ -198,7 +198,7 @@ CPU Boot → Load Confidential VM → Generate SEV/TDX/CCA Report →
 **Trust Score Range**: 50-69
 
 **Attestation Flow**:
-```text
+```
 Device Boot → Secure Enclave Init → Load AI Model in TEE →
   Generate Attestation Token → Submit to Attestation Verifier →
     Verify Device Certificate → Bind to Chain ID →
@@ -283,7 +283,7 @@ func CalculateTrustScore(provider *Provider) uint8 {
 
     return min(score, 100)
 }
-```text
+```
 
 ### 4. Attestation Protocol
 
@@ -395,7 +395,7 @@ func VerifyTier3Attestation(att *DeviceTEEAttestation) (bool, error) {
         return false, ErrUnknownPlatform
     }
 }
-```text
+```
 
 ### 5. Task Matching
 
@@ -447,7 +447,7 @@ func MatchTaskToProvider(task *AITask, providers []*Provider) *Provider {
 
     return nil
 }
-```text
+```
 
 ### 6. Economic Model
 
@@ -484,7 +484,7 @@ func CalculateMiningReward(task *AITask, provider *Provider) uint64 {
 
     return baseReward * tierMultiplier / 100 * (100 + trustBonus) / 100
 }
-```text
+```
 
 ### 7. Solidity Interface
 
@@ -554,7 +554,7 @@ interface ICCTierRegistry {
         bytes calldata attestation
     ) external view returns (bool valid, uint8 trustScore);
 }
-```text
+```
 
 ### 8. Integration with AIVM (LP-2001)
 
@@ -588,7 +588,7 @@ type CCAttestation struct {
     TrustScore uint8  `json:"trustScore"`
     Timestamp  int64  `json:"timestamp"`
 }
-```text
+```
 
 ## Rationale
 
@@ -669,7 +669,7 @@ func TestTrustScoreCalculation(t *testing.T) {
     require.GreaterOrEqual(t, score, uint8(90))
     require.LessOrEqual(t, score, uint8(100))
 }
-```text
+```
 
 ### Integration Tests
 

@@ -96,7 +96,7 @@ type Plugin interface {
     OnBlockAccepted(blockID ids.ID) error
     OnConsensusStateUpdate() error
 }
-```text
+```
 
 **Plugin Capabilities**:
 - Block observation hooks

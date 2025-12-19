@@ -54,11 +54,11 @@ var XVMID = constants.XVMID // ids.ID{'a', 'v', 'm'}
 // Create X-Chain VM
 factory := &xvm.Factory{}
 vm, err := factory.New(logger)
-```text
+```
 
 ### Directory Structure
 
-```text
+```
 node/vms/exchangevm/
 ├── block/            # DAG vertex definitions
 ├── config/           # Chain configuration
@@ -77,7 +77,7 @@ dex/pkg/lx/           # DEX implementation
 ├── orderbook_server.go
 ├── x_chain_integration.go
 └── types.go
-```text
+```
 
 ### DAG Consensus
 
@@ -97,7 +97,7 @@ const (
     BetaRogue       = 30     // Confidence threshold for rogue
     K               = 25     // Sample size
 )
-```text
+```
 
 ### UTXO Model
 
@@ -111,7 +111,7 @@ type UTXO struct {
     Locktime    uint64
     Threshold   uint32
 }
-```text
+```
 
 ### Transaction Types
 
@@ -148,7 +148,7 @@ type Order struct {
     Remaining   uint64
     Timestamp   uint64
 }
-```text
+```
 
 ### Matching Engine
 
@@ -159,7 +159,7 @@ func (ob *OrderBook) MatchOrder(order *Order) ([]*Trade, error) {
     // 2. Earlier timestamp at same price
     // 3. Partial fills supported
 }
-```text
+```
 
 **Matching Rules**:
 - Price-time priority (FIFO)
@@ -199,7 +199,7 @@ POST /ext/bc/X/transactions/send
 GET  /ext/bc/X/orderbook/{pair}
 POST /ext/bc/X/orders/create
 DELETE /ext/bc/X/orders/{orderID}
-```text
+```
 
 ### Asset Creation
 
@@ -211,7 +211,7 @@ type CreateAssetTx struct {
     Denomination byte
     States       []State
 }
-```text
+```
 
 ### Cross-Chain Operations
 
@@ -223,7 +223,7 @@ type ImportTx struct {
     SourceChain ids.ID
     ImportedIns []*UTXO
 }
-```text
+```
 
 #### Export to P-Chain
 
@@ -233,7 +233,7 @@ type ExportTx struct {
     DestinationChain ids.ID
     ExportedOuts     []*TransferOutput
 }
-```text
+```
 
 ### Configuration
 
@@ -248,7 +248,7 @@ type ExportTx struct {
     "enableLamportOTS": true
   }
 }
-```text
+```
 
 ### Performance
 

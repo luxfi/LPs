@@ -28,7 +28,7 @@ By merging P-Chain with OP Stack, Lux achieves:
 
 ### 1. Big-Picture Topology
 
-```text
+```
 Ethereum L1
 │   ▲              ▲
 │   │ (ETH deposits│L2 outputs, fraud/zk proofs)
@@ -45,7 +45,7 @@ Ethereum L1
 │ C-Chain (EVM) │ X-Chain   │ T-Chain    │ Z-Chain    │
 │               │ (AMM)     │ (MPC)      │ (zk/FHE)   │
 └───────────────┴───────────┴────────────┴────────────┘
-```text
+```
 
 ### 2. P-Chain Component Changes
 
@@ -106,7 +106,7 @@ func (pr *ProposerRotation) NextProposer() ids.NodeID {
         }
     }
 }
-```text
+```
 
 **Testing**:
 ```bash

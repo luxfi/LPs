@@ -45,7 +45,7 @@ This LP addresses these gaps by establishing a quantum-safe mining protocol at t
 
 ### 1. Architecture Overview
 
-```text
+```
 ┌─────────────────────────────────────────────────────────────────┐
 │                    Hanzo Networks (L1)                          │
 │  ┌─────────────┐  ┌─────────────┐  ┌──────────────────────┐    │
@@ -100,7 +100,7 @@ pub struct LedgerEntry {
     pub timestamp: u64,         // Unix timestamp
     pub signature: Vec<u8>,     // ML-DSA signature
 }
-```text
+```
 
 **Reference Implementation:**
 - [`hanzo-mining/src/ledger.rs`](https://github.com/hanzoai/node/blob/main/hanzo-libs/hanzo-mining/src/ledger.rs)
@@ -127,7 +127,7 @@ pub enum ChainId {
     ZooEVM = 200200,   // Zoo EVM L2
     LuxCChain = 96369, // Lux C-Chain
 }
-```text
+```
 
 **Reference Implementation:**
 - [`hanzo-mining/src/evm.rs`](https://github.com/hanzoai/node/blob/main/hanzo-libs/hanzo-mining/src/evm.rs)
@@ -158,7 +158,7 @@ interface IAIMining {
     /// @notice Get pending teleport transfers
     function pendingTeleports(address recipient) external view returns (bytes32[] memory);
 }
-```text
+```
 
 **Reference Implementation:**
 - [`lux/precompiles/AIMining.sol`](https://github.com/luxfi/standard/blob/main/src/precompiles/AIMining.sol)
@@ -192,7 +192,7 @@ pub struct WorkContext {
     pub nonce: [u8; 32],           // Unique per job
     pub timestamp: u64,            // Unix timestamp
 }
-```text
+```
 
 This context is passed into the GPU's NVTrust enclave as job metadata. The miner has effectively said: *"This work is for this chain, this job, with this model + input."*
 
@@ -220,7 +220,7 @@ pub struct WorkMetrics {
     pub compute_time_ms: u64,      // Execution time
     pub memory_used_mb: u64,       // Peak VRAM usage
 }
-```text
+```
 
 The NVTrust enclave signs `WorkReceipt` with its attested key:
 
@@ -230,7 +230,7 @@ pub struct AttestedReceipt {
     pub nvtrust_signature: Vec<u8>,  // Rooted in NVIDIA hardware attestation
     pub spdm_evidence: SPDMEvidence, // SPDM measurement response
 }
-```text
+```
 
 This is cryptographic proof that: *"This exact device ran this exact workload with this exact context."*
 
@@ -344,7 +344,7 @@ Test vectors are provided in the reference implementation:
 ```bash
 cd hanzo-libs/hanzo-mining
 cargo test
-```text
+```
 
 **Key Test Cases:**
 1. `test_wallet_creation` - ML-DSA key generation
@@ -406,7 +406,7 @@ ML-DSA provides NIST Level 3 (128-bit) quantum security. Key sizes are larger th
 | Supply Cap | 21M BTC | 1B AI (per chain) |
 
 **Halving Formula:**
-```text
+```
 R(epoch) = 79.4 × 2^(-epoch) AI per block
 ```
 
