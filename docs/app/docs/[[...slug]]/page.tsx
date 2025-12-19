@@ -3,6 +3,8 @@ import { notFound } from 'next/navigation';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import rehypeHighlight from 'rehype-highlight';
+// @ts-expect-error - no types available
+import solidity from 'highlightjs-solidity';
 import Link from 'next/link';
 import { ArrowLeft, ArrowRight, ExternalLink, Calendar, User, Tag } from 'lucide-react';
 import { DocsPage, DocsBody } from '@hanzo/docs/ui/page';
@@ -301,7 +303,7 @@ function LPDetailPage({ page }: { page: any }) {
       <DocsBody>
         <ReactMarkdown
           remarkPlugins={[remarkGfm]}
-          rehypePlugins={[rehypeHighlight]}
+          rehypePlugins={[[rehypeHighlight, { languages: { solidity: solidity.solidity, yul: solidity.yul } }]]}
           components={markdownComponents}
         >
           {page.data.content}
