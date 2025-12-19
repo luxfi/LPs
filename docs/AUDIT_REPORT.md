@@ -20,7 +20,7 @@
 
 ### PASSED CHECKS (6 files)
 
-#### ✅ lp-4-r2.md (M-Chain – Decentralised MPC Custody)
+#### ✅ lp-4-r2.md (T-Chain – Decentralised MPC Custody)
 - **Status**: Superseded (correct)
 - **YAML**: Valid
 - **Sections**: All required sections present

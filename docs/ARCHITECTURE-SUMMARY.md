@@ -12,7 +12,7 @@ The Lux Network implements a clear 5-chain architecture with distinct separation
 3. **C-Chain (Contract)**: EVM compatibility, smart contracts, OP-Stack L2 support
 
 ### Specialized Chains (2 chains)
-4. **M-Chain (Money/MPC)**: Secure cross-chain bridge with CGG21 MPC
+4. **T-Chain (Money/MPC)**: Secure cross-chain bridge with CGG21 MPC
 5. **Z-Chain (Zero-Knowledge)**: Privacy, ZK proofs, omnichain root (Yggdrasil)
 
 ### SDK Layer
@@ -20,7 +20,7 @@ The Lux Network implements a clear 5-chain architecture with distinct separation
 
 ## Key Architectural Decisions
 
-### 1. M-Chain for Dedicated MPC Bridge
+### 1. T-Chain for Dedicated MPC Bridge
 **Rationale**: Separation of concerns - keep bridge security isolated from exchange operations.
 
 **Implementation**:
@@ -66,8 +66,8 @@ The Lux Network implements a clear 5-chain architecture with distinct separation
 
 ### Cross-Chain Asset Transfer
 ```
-External Chain → M-Chain (MPC Lock) → X-Chain (Mint) → C-Chain/Subnets
-External Chain ← M-Chain (MPC Release) ← X-Chain (Burn) ← C-Chain/Subnets
+External Chain → T-Chain (MPC Lock) → X-Chain (Mint) → C-Chain/Subnets
+External Chain ← T-Chain (MPC Release) ← X-Chain (Burn) ← C-Chain/Subnets
 ```
 
 ### Private Transaction
@@ -91,7 +91,7 @@ App → Bridge SDK → Smart Routing → M/X/Z Chains → Result
 
 ### NFT Bridge
 ```
-External NFT → M-Chain (Lock) → X-Chain (Mint UTXO) → Transfer to C → ERC-721/1155
+External NFT → T-Chain (Lock) → X-Chain (Mint UTXO) → Transfer to C → ERC-721/1155
 X-Chain NFT → Burn on X → Mint on C → ERC-721/1155
 ```
 
@@ -102,7 +102,7 @@ X-Chain NFT → Burn on X → Mint on C → ERC-721/1155
 - **Hardware**: 8 cores, 16GB RAM, 1TB storage
 - **Responsibilities**: Validate P/X/C chains
 
-### M-Chain Validators (Top 100)
+### T-Chain Validators (Top 100)
 - **Stake**: Must be in top 100 by stake
 - **Additional Role**: Run MPC nodes for bridge
 - **Hardware**: 16 cores, 32GB RAM, 2TB storage
@@ -115,7 +115,7 @@ X-Chain NFT → Burn on X → Mint on C → ERC-721/1155
 
 ## Performance Targets
 
-| Metric | X-Chain | C-Chain | M-Chain | Z-Chain |
+| Metric | X-Chain | C-Chain | T-Chain | Z-Chain |
 |--------|---------|---------|---------|---------|
 | TPS | 100,000 (exchange) | 1,000 | 10,000 | 500 |
 | Finality | 1s (200ms soft) | 2s | 2s | 3s |
@@ -158,5 +158,5 @@ The architecture balances:
 - **P-Chain**: Network coordination and governance
 - **X-Chain**: Maximum performance for assets and trading  
 - **C-Chain**: Maximum compatibility with Ethereum ecosystem
-- **M-Chain**: Maximum security for bridge operations
+- **T-Chain**: Maximum security for bridge operations
 - **Z-Chain**: Maximum privacy with ZK capabilities

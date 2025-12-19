@@ -33,7 +33,7 @@ implementation: https://github.com/luxfi/dex
 | Full Oracle (LX) | [`dex/pkg/lx/oracle.go`](https://github.com/luxfi/dex/blob/main/pkg/lx/oracle.go) | ✅ Complete |
 | Alpaca Source | [`dex/pkg/lx/alpaca_source.go`](https://github.com/luxfi/dex/blob/main/pkg/lx/alpaca_source.go) | ✅ Complete |
 
-> **See also**: [LP-11](/docs/lp-9011-x-chain-exchange-chain-specification/), [LP-12](/docs/lp-2012-c-chain-contract-chain-specification/), [LP-36](/docs/lp-3036-x-chain-order-book-dex-api-and-rpc-addendum/), [LP-13](/docs/lp-7013-m-chain-decentralised-mpc-custody-and-swap-signature-layer/), [LP-80](/docs/lp-5080-a-chain-attestation-chain-specification/), [LP-608](/docs/lp-0608-high-performance-dex-protocol/), [LP-INDEX](/docs/)
+> **See also**: [LP-11](/docs/lp-9011-x-chain-exchange-chain-specification/), [LP-12](/docs/lp-2012-c-chain-contract-chain-specification/), [LP-36](/docs/lp-3036-x-chain-order-book-dex-api-and-rpc-addendum/), [LP-13](/docs/lp-7013-t-chain-decentralised-mpc-custody-and-swap-signature-layer/), [LP-80](/docs/lp-5080-a-chain-attestation-chain-specification/), [LP-608](/docs/lp-0608-high-performance-dex-protocol/), [LP-INDEX](/docs/)
 
 ## Abstract
 
@@ -560,7 +560,7 @@ func TestWarpPriceAttestation(t *testing.T) {
 
 - **LP-11**: X-Chain Exchange Chain Specification
 - **LP-12**: C-Chain Contract Chain Specification
-- **LP-13**: M-Chain MPC Custody Layer (T-Chain signers)
+- **LP-13**: T-Chain MPC Custody Layer (T-Chain signers)
 - **LP-14**: CGG21 Threshold Signatures
 - **LP-36**: X-Chain Order-Book DEX API
 - **LP-80**: A-Chain Attestation Specification

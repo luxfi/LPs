@@ -25,7 +25,7 @@ implementation: https://github.com/luxfi/dex
 | C++ Orderbook | [`dex/pkg/orderbook/cpp_orderbook.go`](https://github.com/luxfi/dex/blob/main/pkg/orderbook/cpp_orderbook.go) | ✅ Complete |
 | Types | [`dex/pkg/lx/types.go`](https://github.com/luxfi/dex/blob/main/pkg/lx/types.go) | ✅ Complete |
 
-> **See also**: [LP-0](/docs/lp-0-network-architecture-and-community-framework/), [LP-10](/docs/lp-10-p-chain-platform-chain-specification-deprecated/), [LP-12](/docs/lp-12-c-chain-contract-chain-specification/), [LP-13](/docs/lp-13-m-chain-decentralised-mpc-custody-and-swap-signature-layer/), [LP-36](/docs/lp-36-x-chain-order-book-dex-api-and-rpc-addendum/), [LP-105](/docs/lp-105-lamport-one-time-signatures-ots-for-lux-safe/), [LP-INDEX](/docs/)
+> **See also**: [LP-0](/docs/lp-0-network-architecture-and-community-framework/), [LP-10](/docs/lp-10-p-chain-platfort-chain-specification-deprecated/), [LP-12](/docs/lp-12-c-chain-contract-chain-specification/), [LP-13](/docs/lp-13-t-chain-decentralised-mpc-custody-and-swap-signature-layer/), [LP-36](/docs/lp-36-x-chain-order-book-dex-api-and-rpc-addendum/), [LP-105](/docs/lp-105-lamport-one-time-signatures-ots-for-lux-safe/), [LP-INDEX](/docs/)
 
 ## Abstract
 

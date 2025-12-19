@@ -12,7 +12,7 @@ requires: 7014, 7103
 tags: [threshold-crypto, mpc]
 ---
 
-> **See also**: [LP-14](/docs/lp-14-m-chain-threshold-signatures-with-cgg21-uc-non-interactive-ecdsa/), [LP-103](/docs/lp-103-mpc-lss---multi-party-computation-linear-secret-sharing-with-dynamic-resharing/), [LP-INDEX](/docs/)
+> **See also**: [LP-14](/docs/lp-14-t-chain-threshold-signatures-with-cgg21-uc-non-interactive-ecdsa/), [LP-103](/docs/lp-103-mpc-lss---multi-party-computation-linear-secret-sharing-with-dynamic-resharing/), [LP-INDEX](/docs/)
 
 ## Abstract
 
@@ -219,7 +219,7 @@ Benchmarks (3-of-5 threshold):
 
 ```text
 ┌─────────────────────────────────────────┐
-│            Lux M-Chain MVM              │
+│            Lux T-Chain MVM              │
 ├─────────────────────────────────────────┤
 │      Threshold Signature Manager         │
 ├──────────┬──────────┬──────────┬────────┤
@@ -357,7 +357,7 @@ go test ./protocols/frost -run Threshold -v
 - **LP-7014**: CMP/CGG21 Protocol (ECDSA threshold)
 - **LP-7103**: LSS Protocol (dynamic resharing)
 - **LP-7330**: T-Chain ThresholdVM (VM integration)
-- **LP-13**: M-Chain Specification
+- **LP-13**: T-Chain Specification
 
 ## Future Enhancements
 

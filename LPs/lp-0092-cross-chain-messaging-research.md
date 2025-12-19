@@ -27,7 +27,7 @@ Effective cross-chain messaging is crucial for:
 
 ## Current Implementation
 
-### M-Chain Bridge Repository
+### T-Chain Bridge Repository
 - **GitHub**: https://github.com/luxfi/bridge
 - **Technology**: MPC-based message passing
 - **Status**: Production on testnet
@@ -57,7 +57,7 @@ interface CrossChainArchitecture {
   };
   
   supported_chains: {
-    internal: ["P-Chain", "X-Chain", "C-Chain", "M-Chain", "Z-Chain"];
+    internal: ["P-Chain", "X-Chain", "C-Chain", "T-Chain", "Z-Chain"];
     external: ["Ethereum", "BSC", "Lux", "Polygon"];
   };
 }
@@ -128,7 +128,7 @@ interface SecurityModels {
   mpc_based: {
     pros: ["No single point of failure", "Flexible threshold", "Chain agnostic"];
     cons: ["Complex key management", "Slower consensus", "Liveness assumptions"];
-    implementation: "M-Chain with CGG21";
+    implementation: "T-Chain with CGG21";
   };
   
   light_client: {
@@ -306,7 +306,7 @@ recommended_architecture:
     cost: "Minimal"
   
   external_chains:  # To/from external blockchains
-    protocol: "M-Chain MPC Bridge"
+    protocol: "T-Chain MPC Bridge"
     security: "Threshold signatures"
     latency: "2-5 minutes"
     cost: "Variable based on destination"

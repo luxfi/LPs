@@ -1,6 +1,6 @@
 ---
 lp: 7013
-title: M-Chain – Decentralised MPC Custody & Swap-Signature Layer
+title: T-Chain – Decentralised MPC Custody & Swap-Signature Layer
 tags: [mpc, threshold-crypto, bridge]
 description: Purpose-built subnet providing threshold-signature custody, on-chain swap-signature proofs, slashing and reward logic, and light-client proofs for bridge operations.
 author: Lux Protocol Team (@luxfi)
@@ -14,7 +14,7 @@ requires: 1, 2, 3, 5, 6
 supersedes: 4-r2
 ---
 
-> **See also**: [LP-0](/docs/lp-0-network-architecture-and-community-framework/), [LP-10](/docs/lp-10-p-chain-platform-chain-specification-deprecated/), [LP-11](/docs/lp-11-x-chain-exchange-chain-specification/), [LP-12](/docs/lp-12-c-chain-contract-chain-specification/), [LP-14](/docs/lp-14-m-chain-threshold-signatures-with-cgg21-uc-non-interactive-ecdsa/), [LP-INDEX](/docs/)
+> **See also**: [LP-0](/docs/lp-0-network-architecture-and-community-framework/), [LP-10](/docs/lp-10-p-chain-platfort-chain-specification-deprecated/), [LP-11](/docs/lp-11-x-chain-exchange-chain-specification/), [LP-12](/docs/lp-12-c-chain-contract-chain-specification/), [LP-14](/docs/lp-14-t-chain-threshold-signatures-with-cgg21-uc-non-interactive-ecdsa/), [LP-INDEX](/docs/)
 
 ## Abstract
 
@@ -42,11 +42,11 @@ See section “8 Security Considerations” and “8.1 Quantum Security Consider
 
 ## 1  Abstract
 
-M-Chain is a purpose-built subnet that provides:
+T-Chain is a purpose-built subnet that provides:
 1. Threshold-signature custody for all externally-bridged assets (BTC Taproot MuSig2, ETH/Arb/OP ECDSA-GG21, XRPL Ed25519-FROST, etc.).
 2. SwapSigTx issuance—i.e. deterministic, on-chain proof that the quorum of custodial signers has produced a valid spend-signature for a given SwapTx on X-Chain.
 3. Autonomous slashing & reward accounting for MPC signers based on service-level compliance.
-4. A light-client proof format (MProof) consumable by X-Chain and Z-Chain without full M-Chain sync.
+4. A light-client proof format (MProof) consumable by X-Chain and Z-Chain without full T-Chain sync.
 
 This LP formalises the VM, transaction formats, validator duties, RPCs and economic parameters that replace the legacy off-chain bridge back-end (`swaps.ts`) with fully decentralised, auditable on-chain logic.
 
@@ -65,7 +65,7 @@ Validators who already stake LUX now earn additional MPC rewards, tightening eco
 
 ```text
              +---------------------------------------+
-             |              M-Chain VM               |
+             |              T-Chain VM               |
              |---------------------------------------|
              |  • KeyShareRegistry (G1, G2, PK)      |
              |  • SwapSigTx verifier                 |
@@ -82,9 +82,9 @@ Validators who already stake LUX now earn additional MPC rewards, tightening eco
 ```markdown
 
 - Each validator must run `mpckeyd`, holding one or more key-shares.
-- When an X-Chain `SwapTx` enters PENDING state, validators detect the event through a filtered light-client feed, assemble a threshold signature, and collectively submit `SwapSigTx` on M-Chain.
+- When an X-Chain `SwapTx` enters PENDING state, validators detect the event through a filtered light-client feed, assemble a threshold signature, and collectively submit `SwapSigTx` on T-Chain.
 - Failure to sign before expiry incurs an automated slashing penalty booked by the VM.
-- X-Chain trusts M-Chain via a Merkle-mount light-client proof (MProof) – no full sync required.
+- X-Chain trusts T-Chain via a Merkle-mount light-client proof (MProof) – no full sync required.
 
 ## 4  Specification
 
@@ -292,7 +292,7 @@ With daily 10 000 swaps × avg fee $4, signers earn ~ 20 000 LUX/mo, creating a 
 
 ### 8.1  Quantum Security Considerations
 
-M-Chain implements a phased approach to quantum resistance:
+T-Chain implements a phased approach to quantum resistance:
 
 **Phase 0 (Classical Only)**
 - Current state using CGG21 threshold ECDSA
@@ -350,7 +350,7 @@ Result: trust-minimised, stateless, real-time swaps with optional Z‑Chain priv
 
 ## Implementation
 
-### M-Chain VM (MPC Custody & Bridge)
+### T-Chain VM (MPC Custody & Bridge)
 
 - **GitHub**: https://github.com/luxfi/mpc
 - **Local**: `mpc/`
@@ -464,9 +464,9 @@ curl -X POST --data '{
 
 ### Related LPs
 
-- **LP-5**: M-Chain Identifier (defines chain ID 'M')
-- **LP-13**: M-Chain Specification (this LP)
-- **LP-14**: M-Chain Threshold Signatures (CGG21 details)
+- **LP-5**: T-Chain Identifier (defines chain ID 'M')
+- **LP-13**: T-Chain Specification (this LP)
+- **LP-14**: T-Chain Threshold Signatures (CGG21 details)
 - **LP-15**: MPC Bridge Protocol (bridge-specific)
 - **LP-16**: Teleport Protocol (cross-chain transfers)
 - **LP-17**: Bridge Asset Registry (asset tracking)

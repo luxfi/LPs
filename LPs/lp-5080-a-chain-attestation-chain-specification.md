@@ -492,7 +492,7 @@ This design enables Lux to scale to many AI-centric chains without duplicating t
 
 ## References
 
-- [LP-10: P-Chain Specification](/docs/lp-10-p-chain-platform-chain-specification-deprecated/)
+- [LP-10: P-Chain Specification](/docs/lp-10-p-chain-platfort-chain-specification-deprecated/)
 - [LP-11: X-Chain Specification](/docs/lp-11-x-chain-exchange-chain-specification/)
 - [LP-12: C-Chain Specification](/docs/lp-12-c-chain-contract-chain-specification/)
 - [LP-75: TEE Integration Standard](/docs/lp-75-tee-integration-standard/)

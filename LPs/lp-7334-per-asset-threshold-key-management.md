@@ -12,7 +12,7 @@ requires: 7013, 7014, 6015, 6017, 7330, 7333
 tags: [mpc, threshold-crypto, bridge]
 ---
 
-> **See also**: [LP-13](/docs/lp-7013-m-chain-decentralised-mpc-custody-and-swap-signature-layer/), [LP-14](/docs/lp-7014-m-chain-threshold-signatures-with-cgg21-uc-non-interactive-ecdsa/), [LP-15](/docs/lp-6015-mpc-bridge-protocol/), [LP-17](/docs/lp-6017-bridge-asset-registry/), [LP-330](/docs/lp-7330-t-chain-thresholdvm-specification/), [LP-333](/docs/lp-7333-dynamic-signer-rotation-with-lss-protocol/), [LP-INDEX](/docs/)
+> **See also**: [LP-13](/docs/lp-7013-t-chain-decentralised-mpc-custody-and-swap-signature-layer/), [LP-14](/docs/lp-7014-t-chain-threshold-signatures-with-cgg21-uc-non-interactive-ecdsa/), [LP-15](/docs/lp-6015-mpc-bridge-protocol/), [LP-17](/docs/lp-6017-bridge-asset-registry/), [LP-330](/docs/lp-7330-t-chain-thresholdvm-specification/), [LP-333](/docs/lp-7333-dynamic-signer-rotation-with-lss-protocol/), [LP-INDEX](/docs/)
 >
 > **Related LPs**:
 > - **LP-330**: T-Chain ThresholdVM Specification - defines the underlying threshold signature infrastructure
@@ -20,7 +20,7 @@ tags: [mpc, threshold-crypto, bridge]
 
 ## Abstract
 
-This proposal specifies a per-asset threshold key management system for Lux's T-Chain (Threshold Chain) and M-Chain MPC custody layer. Each `ManagedKey` operates independently with its own threshold (t), total party count (n), and signer set, allowing distinct security configurations per bridged asset. High-value assets (e.g., BTC, large USDC pools) use higher thresholds (4-of-7 or 5-of-9) for stronger security, while lower-value or high-frequency assets use reduced thresholds (2-of-3) for faster signing latency. This design isolates key compromise risks, enables flexible governance per asset class, and optimizes performance based on asset risk profiles. The specification covers key naming conventions, threshold selection guidelines, key lifecycle management, signer assignment strategies, cross-key coordination, monitoring, and a complete RPC API for key management operations.
+This proposal specifies a per-asset threshold key management system for Lux's T-Chain (Threshold Chain) and T-Chain MPC custody layer. Each `ManagedKey` operates independently with its own threshold (t), total party count (n), and signer set, allowing distinct security configurations per bridged asset. High-value assets (e.g., BTC, large USDC pools) use higher thresholds (4-of-7 or 5-of-9) for stronger security, while lower-value or high-frequency assets use reduced thresholds (2-of-3) for faster signing latency. This design isolates key compromise risks, enables flexible governance per asset class, and optimizes performance based on asset risk profiles. The specification covers key naming conventions, threshold selection guidelines, key lifecycle management, signer assignment strategies, cross-key coordination, monitoring, and a complete RPC API for key management operations.
 
 ## Motivation
 
@@ -633,7 +633,7 @@ type DKGSession struct {
 #### 3.3 Creation RPC Flow
 
 ```text
-Client                 T-Chain/M-Chain               Signers
+Client                 T-Chain/T-Chain               Signers
    |                        |                          |
    |--KeyCreateTx---------->|                          |
    |                        |--DKGInit---------------->|
@@ -1661,7 +1661,7 @@ func VerifyDualSignature(msg []byte, classical, quantum []byte, config QuantumCo
 
 ## Backwards Compatibility
 
-This LP is additive to existing M-Chain and T-Chain functionality:
+This LP is additive to existing T-Chain and T-Chain functionality:
 
 1. **Existing Keys**: Keys created before this specification continue to function. They are implicitly assigned `KeyID` based on their asset and default metadata.
 
@@ -1933,7 +1933,7 @@ This LP integrates with several other Lux Proposals:
 
 | LP | Title | Relationship |
 |----|-------|--------------|
-| LP-0013 | M-Chain Decentralised MPC Custody | Foundation for threshold custody operations |
+| LP-0013 | T-Chain Decentralised MPC Custody | Foundation for threshold custody operations |
 | LP-0014 | CGG21 UC Non-Interactive ECDSA | Threshold ECDSA protocol used for EVM chains |
 | LP-0015 | MPC Bridge Protocol | Bridge signing integration |
 | LP-0017 | Bridge Asset Registry | Asset metadata and configuration source |

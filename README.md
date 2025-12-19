@@ -128,7 +128,7 @@ Lux Network operates an **8-chain architecture** with specialized chains for dif
 | LP | Title | Status |
 |:---|:------|:------:|
 | [1000](./LPs/lp-1000-p-chain-core-platform-specification.md) | **Core Platform Specification** | ✅ |
-| [1010](./LPs/lp-1010-p-chain-platform-chain-specification.md) | Platform Chain Specification | ✅ |
+| [1010](./LPs/lp-1010-p-chain-platfort-chain-specification.md) | Platform Chain Specification | ✅ |
 | [1024](./LPs/lp-1024-parallel-validation-and-shared-mempool.md) | Parallel Validation & Shared Mempool | 📝 |
 | [1033](./LPs/lp-1033-p-chain-state-rollup-to-c-chain-evm.md) | State Rollup to C-Chain EVM | 📝 |
 | [1034](./LPs/lp-1034-p-chain-as-superchain-l2-op-stack-rollup-integration.md) | Superchain L2 (OP Stack) | 📝 |
@@ -189,7 +189,7 @@ Lux Network operates an **8-chain architecture** with specialized chains for dif
 | [3000](./LPs/lp-3000-x-chain-exchange-specification.md) | **Exchange Specification** | ✅ |
 | [3011](./LPs/lp-3011-x-chain-exchange-chain-specification.md) | Exchange Chain Specification | ✅ |
 | [3036](./LPs/lp-3036-x-chain-order-book-dex-api-and-rpc-addendum.md) | Order-Book DEX API & RPC | ✅ |
-| [3037](./LPs/lp-3037-native-swap-integration-on-m-chain-x-chain-and-z-chain.md) | Native Swap Integration | ✅ |
+| [3037](./LPs/lp-3037-native-swap-integration-on-t-chain-x-chain-and-z-chain.md) | Native Swap Integration | ✅ |
 
 ### 🟢 Q-Chain — Quantum (4xxx Series)
 
@@ -302,11 +302,11 @@ Lux Network operates an **8-chain architecture** with specialized chains for dif
 #### 🔑 MPC & Key Management
 | LP | Title | Status |
 |:---|:------|:------:|
-| [7013](./LPs/lp-7013-m-chain-decentralised-mpc-custody-and-swap-signature-layer.md) | MPC Custody & Swap-Sig | ✅ |
-| [7014](./LPs/lp-7014-m-chain-threshold-signatures-with-cgg21-uc-non-interactive-ecdsa.md) | CGG21 Threshold Sigs | ✅ |
+| [7013](./LPs/lp-7013-t-chain-decentralised-mpc-custody-and-swap-signature-layer.md) | MPC Custody & Swap-Sig | ✅ |
+| [7014](./LPs/lp-7014-t-chain-threshold-signatures-with-cgg21-uc-non-interactive-ecdsa.md) | CGG21 Threshold Sigs | ✅ |
 | [7083](./LPs/lp-7083-t-chain-threshold-signature-chain-specification.md) | Threshold Sig Chain | ✅ |
 | [7103](./LPs/lp-7103-mpc-lss---multi-party-computation-linear-secret-sharing-with-dynamic-resharing.md) | MPC-LSS Resharing | ✅ |
-| [7319](./LPs/lp-7319-m-chain-decentralised-mpc-custody.md) | M-Chain MPC Custody | ⚠️ |
+| [7319](./LPs/lp-7319-t-chain-decentralised-mpc-custody.md) | T-Chain MPC Custody | ⚠️ |
 | [7323](./LPs/lp-7323-lss-mpc-dynamic-resharing-extension.md) | LSS-MPC Extension | ✅ |
 | [7325](./LPs/lp-7325-kms-hardware-security-module-integration.md) | KMS/HSM Integration | ✅ |
 | [7333](./LPs/lp-7333-dynamic-signer-rotation-with-lss-protocol.md) | Dynamic Signer Rotation | ✅ |

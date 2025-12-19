@@ -71,7 +71,7 @@ As the Lux Network evolves to support advanced cross-chain operations, privacy f
                     ┌───────────┴────────────┐
                     │   Specialized Chains   │
         ┌───────────┴────────┬──────┴────────┬────────────────┐
-        │     A-Chain        │   B-Chain     │   M-Chain      │
+        │     A-Chain        │   B-Chain     │   T-Chain      │
         │ (AI/Attestation)   │ (Bridge Layer)│    (MPC)       │
         ├────────────────────┼───────────────┼────────────────┤
         │ • TEE Attestation  │ • Cross-Chain │ • CGG21 + Ring │
@@ -291,7 +291,7 @@ As the foundational LP, this document establishes the initial standards. Future 
 
 ### Network Security
 - Multi-chain architecture isolates risks between chains
-- Specialized validators for high-security operations (M-Chain, Z-Chain)
+- Specialized validators for high-security operations (T-Chain, Z-Chain)
 - Economic incentives align validator behavior with network security
 
 

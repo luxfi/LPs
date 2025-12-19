@@ -1,6 +1,6 @@
 ---
 lp: 7319
-title: M-Chain – Decentralised MPC Custody & Swap-Signature Layer
+title: T-Chain – Decentralised MPC Custody & Swap-Signature Layer
 description: Purpose-built subnet providing threshold-signature custody, on-chain swap-signature proofs, slashing and reward logic, and light-client proofs for bridge operations.
 author: Lux Protocol Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
@@ -14,7 +14,7 @@ superseded-by: 13
 tags: [mpc, threshold-crypto, bridge]
 ---
 
-> **Note**: This LP has been superseded by [LP-13](/docs/lp-13/), which consolidates all M-Chain specifications into a single comprehensive document.
+> **Note**: This LP has been superseded by [LP-13](/docs/lp-13/), which consolidates all T-Chain specifications into a single comprehensive document.
 
 ## Abstract
 
@@ -26,11 +26,11 @@ See section “2 Motivation”; the goals, risks, and drivers are captured there
 
 ## 1  Abstract
 
-M-Chain is a purpose-built subnet that provides:
+T-Chain is a purpose-built subnet that provides:
 1. Threshold-signature custody for all externally-bridged assets (BTC Taproot MuSig2, ETH/Arb/OP ECDSA-GG21, XRPL Ed25519-FROST, etc.).
 2. SwapSigTx issuance—i.e. deterministic, on-chain proof that the quorum of custodial signers has produced a valid spend-signature for a given SwapTx on X-Chain.
 3. Autonomous slashing & reward accounting for MPC signers based on service-level compliance.
-4. A light-client proof format (MProof) consumable by X-Chain and Z-Chain without full M-Chain sync.
+4. A light-client proof format (MProof) consumable by X-Chain and Z-Chain without full T-Chain sync.
 
 This LP formalises the VM, transaction formats, validator duties, RPCs and economic parameters that replace the legacy off-chain bridge back-end (`swaps.ts`) with fully decentralised, auditable on-chain logic.
 
@@ -49,7 +49,7 @@ Validators who already stake LUX now earn additional MPC rewards, tightening eco
 
 ```text
              +---------------------------------------+
-             |              M-Chain VM               |
+             |              T-Chain VM               |
              |---------------------------------------|
              |  • KeyShareRegistry (G1, G2, PK)      |
              |  • SwapSigTx verifier                 |
@@ -66,9 +66,9 @@ Validators who already stake LUX now earn additional MPC rewards, tightening eco
 ```markdown
 
 - Each validator must run `mpckeyd`, holding one or more key-shares.
-- When an X-Chain `SwapTx` enters PENDING state, validators detect the event through a filtered light-client feed, assemble a threshold signature, and collectively submit `SwapSigTx` on M-Chain.
+- When an X-Chain `SwapTx` enters PENDING state, validators detect the event through a filtered light-client feed, assemble a threshold signature, and collectively submit `SwapSigTx` on T-Chain.
 - Failure to sign before expiry incurs an automated slashing penalty booked by the VM.
-- X-Chain trusts M-Chain via a Merkle-mount light-client proof (MProof) – no full sync required.
+- X-Chain trusts T-Chain via a Merkle-mount light-client proof (MProof) – no full sync required.
 
 ## 4  Specification
 
