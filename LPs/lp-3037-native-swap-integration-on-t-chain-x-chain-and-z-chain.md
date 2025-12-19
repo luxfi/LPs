@@ -49,11 +49,6 @@ The existing bridge back-end exposes HTTP routes:
 ### 3 On-Chain Data Structures
 
 #### 3.1 SwapTx (X-Chain)
-```go
-type SwapTx struct {
-    BaseTx
-    SrcChain  uint32
-    DstChain  uint32
 
 | Method            | Path                     | Purpose                                                   |
 |-------------------|--------------------------|-----------------------------------------------------------|
@@ -95,7 +90,8 @@ type SwapTx struct {
     FeeBps    uint16
     Recipient [32]byte
 }
-```markdown
+```
+
 Funds lock to SwapFx until SwapSigTx appears; SwapID = txID.
 
 ### 2.2 SwapSigTx (T-Chain)
@@ -127,7 +123,7 @@ sequenceDiagram
     BTC-->>User: funds arrive
 
     Note right of Z-Chain: if privacy, zSwapDeposit and zSwapRedeem flows.
-```markdown
+```
 
 ### 4 RPC Mapping
 

@@ -234,6 +234,7 @@ interface ILRC1155Fractional {
     event TokenFractionalized(uint256 indexed parentId, uint256 indexed fractionalId, uint256 totalShares);
     event FractionalRedeemed(uint256 indexed fractionalId, address redeemer, uint256 amount);
 }
+```
 
 ## Rationale
 
