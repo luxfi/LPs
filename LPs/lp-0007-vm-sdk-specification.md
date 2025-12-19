@@ -5,7 +5,7 @@ tags: [vm, dev-tools, sdk]
 description: Defines the Virtual Machine SDK for Lux.
 author: Lux Network Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
-status: Draft
+status: Final
 type: Standards Track
 category: Core
 created: 2025-01-23

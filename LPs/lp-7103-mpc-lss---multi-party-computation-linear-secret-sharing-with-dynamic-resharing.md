@@ -4,7 +4,7 @@ title: MPC-LSS - Multi-Party Computation Linear Secret Sharing with Dynamic Resh
 description: Formal specification for the MPC-enhanced Linear Secret Sharing protocol in Lux, enabling dynamic threshold cryptography with advanced resharing capabilities
 author: Lux Industries Inc., Vishnu (@vishnu)
 discussions-to: https://github.com/luxfi/lps/discussions
-status: Draft
+status: Final
 type: Standards Track
 category: Core
 created: 2025-08-14
