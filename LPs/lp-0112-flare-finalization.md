@@ -1,5 +1,5 @@
 ---
-lp: 0112
+lp: 112
 title: flare dag finalization protocol
 description: DAG finalization via cascading accept protocol with causal ordering
 author: Lux Network Team (@luxfi)

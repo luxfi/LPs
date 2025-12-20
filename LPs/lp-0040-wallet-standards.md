@@ -1,5 +1,5 @@
 ---
-lp: 0040
+lp: 40
 title: Wallet Standards
 description: Wallet-related standards.
 author: Lux Network Team (@luxfi)

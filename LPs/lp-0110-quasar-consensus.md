@@ -1,5 +1,5 @@
 ---
-lp: 0110
+lp: 110
 title: Quasar Unified Consensus Protocol
 description: Physics-inspired consensus engine unifying Photon selection, Wave voting, Focus convergence, Prism geometry, Horizon predicates, and Flare finalization
 author: Lux Network Team (@luxfi)

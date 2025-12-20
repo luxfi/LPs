@@ -1,5 +1,5 @@
 ---
-lp: 0003
+lp: 3
 title: Lux Subnet Architecture and Cross-Chain Interoperability
 tags: [cross-chain, scaling, core]
 description: Introduces Lux's subnet architecture, wherein the network consists of multiple parallel blockchains ("subnets") that can each host specialized applications, yet remain interconnected through a common platform.

@@ -1,5 +1,5 @@
 ---
-lp: 0113
+lp: 113
 title: Wave FPC Threshold Voting Protocol
 description: Fast Probabilistic Consensus with phase-dependent threshold selection for Byzantine fault-tolerant voting
 author: Lux Network Team (@luxfi)

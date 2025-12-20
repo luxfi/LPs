@@ -1,5 +1,5 @@
 ---
-lp: 0006
+lp: 6
 title: Network Runner & Testing Framework
 tags: [dev-tools, testing]
 description: Specifies the Lux Network Runner and testing frameworks.

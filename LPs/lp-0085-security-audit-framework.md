@@ -1,5 +1,5 @@
 ---
-lp: 0085
+lp: 85
 title: Security Audit Framework
 description: Defines the security audit standards and requirements for Lux Network protocols
 author: Lux Network Team (@luxfi)

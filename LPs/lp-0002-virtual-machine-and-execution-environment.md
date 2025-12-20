@@ -1,5 +1,5 @@
 ---
-lp: 0002
+lp: 2
 title: Lux Virtual Machine and Execution Environment
 tags: [vm, evm, core]
 description: Specifies the Lux execution model, which is designed to be EVM-compatible while allowing future extensibility for new virtual machines.

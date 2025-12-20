@@ -1,5 +1,5 @@
 ---
-lp: 0070
+lp: 70
 title: Key Management System
 description: Defines the pluggable key storage backend architecture with distributed secrets via K-Chain
 author: Lux Network Team (@luxfi)

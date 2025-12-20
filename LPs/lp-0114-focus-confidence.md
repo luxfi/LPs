@@ -1,5 +1,5 @@
 ---
-lp: 0114
+lp: 114
 title: Focus Confidence Accumulation Protocol
 description: Confidence accumulation by counting consecutive successes to signal local finality
 author: Lux Network Team (@luxfi)

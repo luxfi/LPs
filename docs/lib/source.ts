@@ -637,6 +637,26 @@ function getLPNumber(page: LPPage): number {
   return 9999;
 }
 
+// Tags that indicate a research/experimental LP (should sort to end of category)
+const RESEARCH_TAGS = ['research', 'paper', 'academic', 'experimental', 'theory', 'index'];
+
+function isResearchLP(page: LPPage): boolean {
+  const tags = (page.data.frontmatter.tags || []).map((t: string) => t.toLowerCase());
+  return RESEARCH_TAGS.some(rt => tags.includes(rt));
+}
+
+// Sort LPs: non-research first (by number), then research (by number)
+function sortLPsWithResearchLast(lps: LPPage[]): void {
+  lps.sort((a, b) => {
+    const aIsResearch = isResearchLP(a);
+    const bIsResearch = isResearchLP(b);
+    if (aIsResearch !== bIsResearch) {
+      return aIsResearch ? 1 : -1; // Research goes to end
+    }
+    return getLPNumber(a) - getLPNumber(b); // Otherwise sort by number
+  });
+}
+
 // Determine the PRIMARY category for an LP (each LP belongs to exactly ONE category)
 // Priority: 1) Tag match, 2) Number range, 3) Explicit frontmatter category
 // NOTE: Tags take precedence because many LPs have legacy "category: Core" that should be ignored
@@ -846,6 +866,7 @@ export const source = {
 
   // Get categorized pages using topics (tag-based + range-based)
   // DEDUPLICATED: Each LP appears in exactly ONE category based on priority
+  // ORDERING: Within each category, research-tagged LPs appear at the end
   getCategorizedPages(): LPCategory[] {
     const allPages = this.getAllPages();
 
@@ -860,6 +881,9 @@ export const source = {
       }
     });
 
+    // Sort each category: non-research LPs first (by number), then research LPs (by number)
+    lpsByCategory.forEach((lps) => sortLPsWithResearchLast(lps));
+
     return LP_TOPICS.map(topic => ({
       ...topic,
       description: topic.shortDesc,
@@ -869,6 +893,7 @@ export const source = {
 
   // Get all topics including empty ones
   // DEDUPLICATED: Each LP appears in exactly ONE category based on priority
+  // ORDERING: Within each category, research-tagged LPs appear at the end
   getAllTopics(): LPCategory[] {
     const allPages = this.getAllPages();
 
@@ -882,6 +907,9 @@ export const source = {
         lpsByCategory.get(primaryCat)!.push(page);
       }
     });
+
+    // Sort each category: non-research LPs first (by number), then research LPs (by number)
+    lpsByCategory.forEach((lps) => sortLPsWithResearchLast(lps));
 
     return LP_TOPICS.map(topic => ({
       ...topic,
@@ -907,6 +935,7 @@ export const source = {
 
   // Get topic/category by slug (checks both topics and legacy categories)
   // DEDUPLICATED: Each LP appears in exactly ONE category based on priority
+  // ORDERING: Within each category, research-tagged LPs appear at the end
   getCategoryBySlug(slug: string): LPCategory | undefined {
     const topic = LP_TOPICS.find(t => t.slug === slug);
     if (!topic) return undefined;
@@ -915,6 +944,9 @@ export const source = {
 
     // Filter LPs where this category is their PRIMARY category
     const lps = allPages.filter(page => getPrimaryCategory(page) === slug);
+
+    // Sort: non-research LPs first (by number), then research LPs (by number)
+    sortLPsWithResearchLast(lps);
 
     return {
       ...topic,

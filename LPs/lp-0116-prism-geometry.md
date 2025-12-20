@@ -1,5 +1,5 @@
 ---
-lp: 0116
+lp: 116
 title: Prism DAG Geometry Protocol
 tags: [consensus, prism, dag, geometry, frontier, antichain]
 description: DAG geometry primitives for frontiers, cuts, and refractions in partial order consensus.

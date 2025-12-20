@@ -1,5 +1,5 @@
 ---
-lp: 0099
+lp: 99
 title: LP Numbering Scheme and Chain Organization
 tags: [meta, governance, organization]
 description: Defines the LP numbering scheme organizing proposals by chain and category
