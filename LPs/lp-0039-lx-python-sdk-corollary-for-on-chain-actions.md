@@ -1,5 +1,5 @@
 ---
-lp: 0039
+lp: 39
 title: LX Python SDK Corollary for On-Chain Actions
 description: Breakdown of Python client (lx.api.Exchange) methods and mapping to on-chain Dex actions
 author: Lux Network Team

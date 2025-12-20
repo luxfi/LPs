@@ -1,9 +1,9 @@
 ---
-lp: 0001
+lp: 1
 title: Primary Chain, Native Tokens, and Tokenomics
-tags: [core, tokenomics]
+tags: [core, tokenomics, token]
 description: Defines Lux native currency (LUX), tokenomics, and core chain identifiers for the network.
-author: ''
+author: Lux Network Team (@luxfi)
 status: Final
 type: Standards Track
 category: Core
@@ -22,8 +22,9 @@ Lux requires a canonical definition of its native currency and a consistent sche
 ## Specification
 
 - Native token ticker: `LUX`.
-- Total supply: 1,000,000,000 LUX at genesis; distribution as defined below.
-- Chain identifiers: single‑character codes reserved network‑wide — `P`, `C`, `X`, `M`, `Z`, `G`.
+- Total supply: 10,000,000,000 LUX (10B) at genesis; distribution as defined below.
+- Decimals: 6 (MicroLux base unit, like USDC).
+- Chain identifiers: single‑character codes reserved network‑wide — `P`, `C`, `X`, `A`, `B`, `T`, `Q`, `Z`.
 - Fees: All on‑chain transaction fees are denominated in LUX.
 - Governance: LUX may be used in protocol governance per future LPs.
 
@@ -41,34 +42,53 @@ LUX is the primary currency of the Lux Network and is used for:
 
 ### Tokenomics
 
-*   **Total Supply**: 1,000,000,000 LUX
-*   **Initial Distribution**:
-    *   **Team**: 15%
-    *   **Investors**: 20%
-    *   **Ecosystem Fund**: 30%
-    *   **Community**: 35%
+*   **Total Supply**: 10,000,000,000 LUX (10 Billion)
+*   **Chain Allocations**:
+    *   **P-Chain**: 1.5B (15%) — Staking and governance
+    *   **X-Chain**: 2B (20%) — Exchanges and liquidity
+    *   **C-Chain**: 3B (30%) — Smart contracts and DeFi
+    *   **A-Chain**: 1.5B (15%) — AI and attestation operations
+    *   **B-Chain**: 1B (10%) — Bridge liquidity
+    *   **Z-Chain**: 1B (10%) — Privacy and ZK operations
+
+### Staking Requirements
+
+*   **Minimum Validator Stake**: 1,000,000 LUX (1M)
+*   **Minimum Delegator Stake**: 25,000 LUX (25K)
+*   **Max Delegation Ratio**: 10x validator stake
+*   **NFT Staking Tiers**:
+    *   Genesis NFT: 500K LUX minimum, 2x rewards (limited to 100 validators)
+    *   Pioneer NFT: 750K LUX minimum, 1.5x rewards (limited to 500 validators)
+    *   Standard: 1M LUX minimum, 1x rewards (unlimited)
+*   **Bridge Validators (B-Chain)**: 100M LUX minimum + KYC verification
 
 ## Chain Identification
 
 The following single-character identifiers are assigned to the core chains of the Lux Network:
 
-*   **P**: The Primary Network Chain.
-*   **C**: The Contract Chain (C-Chain).
-*   **X**: The Exchange Chain (X-Chain).
-*   **M**: The MPC (Multi-Party Computation) Chain.
-*   **Z**: The Z-Chain for privacy features.
-*   **G**: The Graph Chain (G-Chain), a universal omnichain oracle.
+*   **P**: Platform Chain — Validator management, staking, subnet coordination
+*   **C**: Contract Chain — EVM execution, smart contracts, DeFi
+*   **X**: Exchange Chain — UTXO-based asset exchange, high-throughput transfers
+*   **A**: Attestation Chain — AI workloads, model verification, training ledgers
+*   **B**: Bridge Chain — Cross-chain asset movement, bridging infrastructure
+*   **T**: Threshold Chain — MPC custody, threshold signatures, distributed signing
+*   **Q**: Quantum Chain — Post-quantum cryptography, quantum-safe operations
+*   **Z**: Zero-Knowledge Chain — ZK proofs, privacy, confidential compute
 
-## Reserved LPs for Chains
+## Reserved LP Ranges for Chains
 
-LP numbers 2 through 9 are reserved for future chain definitions.
+Per LP-99, LP numbers are organized by chain:
 
-*   **LP-2**: P-Chain
-*   **LP-3**: C-Chain
-*   **LP-4**: X-Chain
-*   **LP-5**: T-Chain
-*   **LP-6**: Z-Chain
-*   **LP-7**: G-Chain
+*   **0000-0999**: Core/Meta — Network-wide specs, governance, tooling
+*   **1000-1999**: P-Chain — Platform, validators, staking
+*   **2000-2999**: C-Chain — EVM, smart contracts, DeFi
+*   **3000-3999**: X-Chain — Exchange, UTXO, trading
+*   **4000-4999**: Q-Chain — Quantum-resistant cryptography
+*   **5000-5999**: A-Chain — AI, attestation, compute
+*   **6000-6999**: B-Chain — Bridge, cross-chain
+*   **7000-7999**: T-Chain — Threshold, MPC, custody
+*   **8000-8999**: Z-Chain — ZK proofs, privacy, FHE
+*   **9000-9999**: DEX/Finance — Trading protocols, DeFi standards
 
 ## Rationale
 
@@ -92,29 +112,20 @@ This is a foundational specification. No prior on‑chain deployments are change
 
 ## Implementation
 
-### Genesis Configuration
+### Tokenomics Configuration
 
-**Genesis Files**: `~/work/lux/node/genesis/`
-**GitHub**: [`github.com/luxfi/node/tree/main/genesis`](https://github.com/luxfi/node/tree/main/genesis)
+**Location**: `~/work/lux/node/config/`
+**GitHub**: [`github.com/luxfi/node/tree/main/config`](https://github.com/luxfi/node/tree/main/config)
 
 **Key Files**:
-- [`genesis.go`](https://github.com/luxfi/node/blob/main/genesis/genesis.go) - Genesis block generation (Total supply: 1B LUX)
-- [`config.go`](https://github.com/luxfi/node/blob/main/genesis/config.go) - Network configuration and chain IDs
+- [`tokenomics.go`](https://github.com/luxfi/node/blob/main/config/tokenomics.go) - Complete tokenomics configuration
+- [`flags.go`](https://github.com/luxfi/node/blob/main/config/flags.go) - Network configuration flags
 
 **Testing**:
 ```bash
-cd ~/work/lux/node/genesis
+cd ~/work/lux/node/config
 go test -v ./...
 ```
-
-### Chain ID Constants
-
-**Location**: `~/work/lux/node/ids/` and `~/work/lux/node/utils/constants/`
-**GitHub**: [`github.com/luxfi/node/tree/main/utils/constants`](https://github.com/luxfi/node/tree/main/utils/constants)
-
-**Files**:
-- [`network_ids.go`](https://github.com/luxfi/node/blob/main/utils/constants/network_ids.go) - Network ID definitions
-- [`vm_ids.go`](https://github.com/luxfi/node/blob/main/utils/constants/vm_ids.go) - Chain VM identifiers
 
 ### LUX Token Implementation
 
@@ -135,6 +146,14 @@ go test -v ./...
 - [`validator/validator.go`](https://github.com/luxfi/node/blob/main/vms/platformvm/validator/validator.go) - Validator management
 - [`reward/calculator.go`](https://github.com/luxfi/node/blob/main/vms/platformvm/reward/calculator.go) - Staking rewards
 - [`state/state.go`](https://github.com/luxfi/node/blob/main/vms/platformvm/state/state.go) - Staking state
+
+### Gas Configuration
+
+**Location**: `~/work/lux/node/gas/`
+**GitHub**: [`github.com/luxfi/node/tree/main/gas`](https://github.com/luxfi/node/tree/main/gas)
+
+**Files**:
+- [`gas.go`](https://github.com/luxfi/node/blob/main/gas/gas.go) - Gas pricing and limits
 
 ### API Endpoints
 

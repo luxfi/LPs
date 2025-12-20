@@ -1,5 +1,5 @@
 ---
-lp: 0009
+lp: 9
 title: CLI Tool Specification
 tags: [dev-tools, cli]
 description: Defines the official Command-Line Interface (CLI) tools for Lux.

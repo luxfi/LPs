@@ -1,5 +1,5 @@
 ---
-lp: 0042
+lp: 42
 title: Multi-Signature Wallet Standard
 description: Defines the standard for multi-signature wallets on Lux Network with quantum-safe options
 author: Lux Network Team (@luxfi)

@@ -1,5 +1,5 @@
 ---
-lp: 0097
+lp: 97
 title: Data Availability Research
 description: Research on data availability solutions and storage optimization for Lux Network
 author: Lux Network Team (@luxfi)

@@ -1,5 +1,5 @@
 ---
-lp: 0000
+lp: 0
 title: Lux Network Architecture & Standards Framework
 tags: [network, architecture, meta, governance, standards]
 description: Foundational document establishing Lux Network's mission, the LP standards process, multi-chain architecture, and research domains.

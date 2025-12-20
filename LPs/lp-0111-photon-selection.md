@@ -1,5 +1,5 @@
 ---
-lp: 0111
+lp: 111
 title: photon consensus selection
 description: Performance-based peer selection with luminance tracking for optimal consensus participation
 author: Lux Network Team (@luxfi)

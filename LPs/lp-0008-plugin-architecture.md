@@ -1,5 +1,5 @@
 ---
-lp: 0008
+lp: 8
 title: Plugin Architecture
 tags: [vm, core, dev-tools]
 description: Describes a Plugin Architecture for Lux nodes.
