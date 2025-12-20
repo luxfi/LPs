@@ -5,9 +5,10 @@ tags: [core, mpc, threshold, signatures, chain]
 description: Specification for the T-Chain (Threshold VM) providing distributed key generation and threshold signatures for the Lux Network
 author: Lux Network Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
-status: Final
+status: Superseded
 type: Standards Track
 category: Core
+superseded-by: 7000
 created: 2025-12-11
 requires: 7013, 7014, 6015, 6081
 ---
