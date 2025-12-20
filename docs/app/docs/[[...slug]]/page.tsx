@@ -58,14 +58,14 @@ function LPIndexPage() {
   const allPages = source.getAllPages();
 
   return (
-    <div className="pt-6 pb-12 px-6 md:px-8">
+    <div className="w-full min-w-0 pt-6 pb-12 px-4 sm:px-6 md:px-8">
       {/* Client-side filtered view - reads URL params and shows/hides based on filter presence */}
       <FilteredView allPages={allPages} />
 
       {/* Default view - categories (hidden by default, shown when no filter) */}
-      <div className="max-w-4xl mx-auto hidden" id="lp-index">
-        <h1 className="text-3xl font-bold mb-4">All Lux Proposals</h1>
-        <p className="text-muted-foreground mb-8">
+      <div className="w-full max-w-4xl mx-auto hidden" id="lp-index">
+        <h1 className="text-2xl sm:text-3xl font-bold mb-4">All Lux Proposals</h1>
+        <p className="text-muted-foreground mb-8 text-sm sm:text-base">
           Browse all {stats.total} proposals organized by category. Use the sidebar to navigate
           or press <kbd className="px-2 py-0.5 rounded bg-accent text-xs font-mono">Ctrl+K</kbd> to search.
         </p>

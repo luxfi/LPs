@@ -295,6 +295,17 @@ nav[aria-label="Table of Contents"],
   flex-shrink: 0;
 }
 
+/* Mobile content fix - place content in the correct grid column */
+@media (max-width: 767px) {
+  /* The fumadocs grid has 3 columns: sidebar | content | toc */
+  /* On mobile, content div needs to span the middle (375px) column */
+  #nd-docs-layout > div:not([id]) {
+    grid-column: 2 !important;
+    width: 100% !important;
+    min-width: 0 !important;
+  }
+}
+
 /* Sidebar footer: theme toggle row + links column */
 #nd-sidebar .flex.flex-col.border-t {
   flex-direction: column !important;
