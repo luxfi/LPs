@@ -31,21 +31,21 @@ function LPIndexPage() {
         </p>
 
         {/* Quick Stats */}
-        <div className="grid grid-cols-4 gap-4 mb-12 p-4 rounded-lg border border-border bg-card">
-          <div className="text-center">
-            <div className="text-2xl font-bold">{stats.total}</div>
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 mb-12 p-4 rounded-lg border border-border bg-card">
+          <div className="text-center p-2">
+            <div className="text-xl sm:text-2xl font-bold">{stats.total}</div>
             <div className="text-xs text-muted-foreground">Total</div>
           </div>
-          <div className="text-center">
-            <div className="text-2xl font-bold text-green-500">{stats.byStatus['Final'] || 0}</div>
+          <div className="text-center p-2">
+            <div className="text-xl sm:text-2xl font-bold text-green-500">{stats.byStatus['Final'] || 0}</div>
             <div className="text-xs text-muted-foreground">Final</div>
           </div>
-          <div className="text-center">
-            <div className="text-2xl font-bold text-blue-500">{stats.byStatus['Review'] || 0}</div>
+          <div className="text-center p-2">
+            <div className="text-xl sm:text-2xl font-bold text-blue-500">{stats.byStatus['Review'] || 0}</div>
             <div className="text-xs text-muted-foreground">Review</div>
           </div>
-          <div className="text-center">
-            <div className="text-2xl font-bold text-yellow-500">{stats.byStatus['Draft'] || 0}</div>
+          <div className="text-center p-2">
+            <div className="text-xl sm:text-2xl font-bold text-yellow-500">{stats.byStatus['Draft'] || 0}</div>
             <div className="text-xs text-muted-foreground">Draft</div>
           </div>
         </div>
@@ -214,8 +214,8 @@ function LPDetailPage({ page }: { page: any }) {
           <p className="text-sm text-muted-foreground">{page.data.description}</p>
         )}
 
-        {/* Metadata Grid - Tighter */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mt-4 p-3 rounded-lg bg-card border border-border text-xs">
+        {/* Metadata Grid */}
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mt-4 p-3 rounded-lg bg-card border border-border text-xs">
           {frontmatter.type && (
             <div>
               <div className="text-muted-foreground mb-0.5">Type</div>

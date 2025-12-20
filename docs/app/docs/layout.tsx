@@ -11,7 +11,6 @@ export default function Layout({ children }: { children: ReactNode }) {
   const stats = source.getStats();
 
   return (
-    <>
     <DocsLayout
       tree={pageTree}
       nav={{
@@ -52,7 +51,7 @@ export default function Layout({ children }: { children: ReactNode }) {
           </div>
         ),
         footer: (
-          <div className="flex flex-col gap-3 p-4 text-xs border-t border-border">
+          <div className="flex flex-col gap-2 p-4 text-xs border-t border-border">
             <a
               href="https://github.com/luxfi/lps"
               target="_blank"
@@ -104,7 +103,5 @@ export default function Layout({ children }: { children: ReactNode }) {
     >
       {children}
     </DocsLayout>
-    <DocsFooter />
-  </>
   );
 }

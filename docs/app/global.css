@@ -256,10 +256,73 @@ aside[role="complementary"] {
   border-right: 1px solid hsl(var(--border) / 0.5);
 }
 
+/* Extend sidebar background to full height */
+#nd-docs-layout {
+  min-height: 100dvh;
+}
+
+/* Sidebar should extend to bottom */
+#nd-sidebar {
+  min-height: 100%;
+}
+
+/* TOC (right sidebar) - ensure proper positioning */
+#nd-toc {
+  min-height: calc(100dvh - var(--fd-docs-row-1, 0px));
+}
+
 /* TOC refinements */
 nav[aria-label="Table of Contents"],
 .fd-toc {
   border-left: 1px solid hsl(var(--border) / 0.3);
+}
+
+/* Bold sidebar section headers for better visual hierarchy */
+#nd-sidebar button[aria-expanded] {
+  font-weight: 600;
+  color: hsl(var(--foreground));
+}
+
+.dark #nd-sidebar button[aria-expanded] {
+  color: white;
+}
+
+/* Fixed sidebar width - consistent across all pages */
+#nd-sidebar {
+  width: var(--fd-sidebar-width) !important;
+  min-width: var(--fd-sidebar-width) !important;
+  max-width: var(--fd-sidebar-width) !important;
+  flex-shrink: 0;
+}
+
+/* Sidebar footer: theme toggle row + links column */
+#nd-sidebar .flex.flex-col.border-t {
+  flex-direction: column !important;
+  gap: 0.75rem;
+}
+
+/* Theme toggle row - horizontal layout */
+#nd-sidebar .flex.flex-col.border-t > .flex.items-center {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+}
+
+/* Remove auto margin from theme toggle button */
+#nd-sidebar .flex.flex-col.border-t .ms-auto {
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+  margin-inline-start: 0 !important;
+}
+
+/* Footer links - vertical with line breaks */
+#nd-sidebar .flex.flex-col.border-t > .flex.flex-col {
+  flex-direction: column !important;
+  gap: 0.5rem;
+  border-top: none !important;
+  padding: 0 !important;
 }
 
 /* Hide scrollbar utility */
