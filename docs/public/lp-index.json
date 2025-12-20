@@ -68,6 +68,7 @@
   "2032": "lp-2032-c-chain-rollup-plugin-architecture",
   "2035": "lp-2035-stage-sync-pipeline-for-coreth-bootstrapping",
   "2076": "lp-2076-random-number-generation-standard",
+  "2099": "lp-2099-cchain-upgrade-mapping",
   "2118": "lp-2118-subnetevm-compat",
   "2155": "lp-2155-lrc-1155-multi-token-standard",
   "2176": "lp-2176-dynamic-gas-pricing",

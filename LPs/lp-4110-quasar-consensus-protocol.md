@@ -443,6 +443,107 @@ Response: {"round1": {...}, "round2": {...}}
 3. **Key Management**: Private key extraction
    - Mitigation: HSM/TEE key storage
 
+## Epoch-Based Ringtail Key Management
+
+### Overview
+
+Quasar uses epoch-based Ringtail key management to rotate lattice-based threshold keys when the validator set changes. This provides forward security and invalidates any quantum attack progress on previous keys.
+
+### Key Epoch Parameters
+
+| Constant | Value | Purpose |
+|----------|-------|---------|
+| `MinEpochDuration` | 1 hour | Minimum time between key rotations (rate limiting) |
+| `MaxEpochDuration` | 24 hours | Maximum time keys can be used (forced rotation) |
+| `HistoryLimit` | 3 epochs | Number of historical epochs preserved for verification |
+
+### Epoch Counter
+
+The epoch uses `uint64` which supports 18,446,744,073,709,551,615 values. At 1 epoch per hour:
+- **2.1 trillion years** of epochs before overflow
+- Effectively unlimited for all practical purposes
+
+### EpochManager Integration
+
+```go
+type EpochManager struct {
+    currentEpoch      uint64
+    currentKeys       *EpochKeys
+    lastKeygenTime    time.Time
+    epochHistory      map[uint64]*EpochKeys  // Cross-epoch verification
+    historyLimit      int
+    currentValidators []string
+    threshold         int
+}
+
+type EpochKeys struct {
+    Epoch           uint64
+    CreatedAt       time.Time
+    ExpiresAt       time.Time
+    ValidatorSet    []string
+    Threshold       int
+    TotalParties    int
+    GroupKey        *ringtailThreshold.GroupKey
+    Shares          map[string]*ringtailThreshold.KeyShare
+    Signers         map[string]*ringtailThreshold.Signer
+}
+```
+
+### Key Rotation Triggers
+
+1. **Validator Set Change**: When validators are added/removed (rate-limited to 1/hour)
+2. **Forced Expiration**: After `MaxEpochDuration` (24 hours) even if validator set unchanged
+3. **Manual Rotation**: Via `RotateEpoch(validators, force=true)`
+
+### Cross-Epoch Verification
+
+Signatures from previous epochs remain verifiable until history is pruned:
+
+```go
+func (em *EpochManager) VerifySignatureForEpoch(message string, sig *Signature, epoch uint64) bool {
+    keys, exists := em.epochHistory[epoch]
+    if !exists || keys.GroupKey == nil || sig == nil {
+        return false
+    }
+    return ringtailThreshold.Verify(keys.GroupKey, message, sig)
+}
+```
+
+### Dual Signing Flow
+
+Validators sign blocks with both BLS (1 round) and Ringtail (2 rounds) in parallel:
+
+1. **Round 1**: BLS share + Ringtail D matrices computed simultaneously
+2. **BLS Done**: Aggregated immediately after Round 1
+3. **Round 2**: Ringtail z shares computed
+4. **Finalize**: Ringtail signature aggregated
+
+```go
+// DualSignRound1 returns BLS share + Ringtail Round1 data
+func (h *Hybrid) DualSignRound1(ctx context.Context, validatorID string, message []byte,
+    sessionID int, prfKey []byte) (*HybridSignature, *ringtailThreshold.Round1Data, error)
+```
+
+### Implementation Files
+
+| File | Purpose |
+|------|---------|
+| `consensus/protocol/quasar/epoch.go` | EpochManager implementation |
+| `consensus/protocol/quasar/epoch_test.go` | Epoch tests (8 tests) |
+| `consensus/protocol/quasar/core.go` | Quasar integration with epoch rotation |
+| `consensus/protocol/quasar/dual_threshold_test.go` | Dual BLS+Ringtail signing tests |
+
+### Test Coverage
+
+Additional tests for epoch management:
+- `TestEpochManager_Initialize` - First epoch creation
+- `TestEpochManager_RotateEpoch` - Key rotation on validator change
+- `TestEpochManager_RateLimiting` - 1-hour rate limit enforcement
+- `TestEpochManager_HistoryPreservation` - Cross-epoch verification
+- `TestQuasar_AddValidator_RateLimited` - Integration with Quasar
+- `TestQuasar_EpochSigningAfterRotation` - Epoch 0 sigs verify after rotation
+- `TestDualSigningFlow` - Full BLS + Ringtail 2-round protocol
+
 ## References
 
 [1] "A Novel Metastable Consensus Protocol Family for Cryptocurrencies". 2018. https://arxiv.org/abs/1906.08936
