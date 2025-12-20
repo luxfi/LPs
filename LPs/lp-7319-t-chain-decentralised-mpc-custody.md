@@ -10,7 +10,7 @@ category: Core
 created: 2025-07-24
 replaces: 4-r1
 requires: 1, 2, 3, 5, 6
-superseded-by: 13
+superseded-by: 7013
 tags: [mpc, threshold-crypto, bridge]
 ---
 

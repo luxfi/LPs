@@ -4,7 +4,8 @@ title: Quasar Consensus Protocol
 description: Quantum-finality consensus with 2-round BLS+Lattice signatures for sub-second finality
 author: Lux Network Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
-status: Draft
+status: Superseded
+superseded-by: 110
 type: Standards Track
 category: Core
 created: 2025-01-29
