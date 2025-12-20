@@ -68,6 +68,42 @@ export interface CategoryMeta {
 
 const LP_TOPICS: CategoryMeta[] = [
   // ============================================================================
+  // PRIORITY ORDER: Network → Tokens → Consensus → Other Subjects/Chains
+  // ============================================================================
+  // LP-0000 (Network overview) comes first, LP-0001 (Tokens) second, then Consensus
+
+  // ============================================================
+  // 0.1 NETWORK — The system as a whole (LP-0 lives here)
+  // ============================================================
+  {
+    slug: 'network',
+    name: 'Network',
+    shortDesc: 'Architecture & standards',
+    description: 'The Lux system as a whole: architecture, economic model, topology, standards process, and how chains fit together.',
+    range: [0, 99],
+    tags: ['network', 'architecture', 'topology', 'economics', 'incentives', 'meta', 'governance', 'standards'],
+    icon: 'globe',
+    color: 'blue',
+    learnMore: 'Network describes Lux as a whole — the blueprint, mission, and standards framework.',
+    keyTopics: ['Network architecture', 'Standards process', 'Multi-chain topology', 'Mission & ethos'],
+  },
+
+  // ============================================================
+  // 0.2 ASSETS & TOKENS — Token standards (LP-1 tokenomics lives here)
+  // ============================================================
+  {
+    slug: 'tokens',
+    name: 'Assets & Tokens',
+    shortDesc: 'Token standards',
+    description: 'Token standards: LUX native token, tokenomics, LRC-20, LRC-721, LRC-1155, extensions, and NFT staking.',
+    tags: ['token', 'tokens', 'tokenomics', 'lrc', 'lrc-20', 'lrc-721', 'lrc-1155', 'nft', 'fungible', 'token-standard', 'erc20b', 'burnable', 'mintable', 'bridgable'],
+    icon: 'token',
+    color: 'amber',
+    learnMore: 'Token standards define how digital assets are created and managed. ERC-compatible.',
+    keyTopics: ['LUX token', 'Tokenomics', 'LRC-20', 'LRC-721', 'LRC-1155'],
+  },
+
+  // ============================================================================
   // SECTION 1: SUBJECTS (Research Domains)
   // ============================================================================
   // These are the core knowledge areas - how cryptographers and researchers think
@@ -375,23 +411,7 @@ const LP_TOPICS: CategoryMeta[] = [
   },
 
   // ============================================================
-  // 3.3 NETWORK — The system as a whole
-  // ============================================================
-  {
-    slug: 'network',
-    name: 'Network',
-    shortDesc: 'Architecture & tokenomics',
-    description: 'The Lux system as a whole: architecture, economic model, topology, and how chains fit together.',
-    range: [0, 99],
-    tags: ['network', 'architecture', 'topology', 'tokenomics', 'economics', 'incentives'],
-    icon: 'globe',
-    color: 'blue',
-    learnMore: 'Network describes Lux as a whole — the blueprint, not node infra or consensus.',
-    keyTopics: ['Network architecture', 'Tokenomics', 'Multi-chain topology', 'Standards framework'],
-  },
-
-  // ============================================================
-  // 3.4 NODE — Infrastructure substrate
+  // 3.3 NODE — Infrastructure substrate
   // ============================================================
   {
     slug: 'node',
@@ -442,22 +462,7 @@ const LP_TOPICS: CategoryMeta[] = [
   },
 
   // ============================================================
-  // 4.3 ASSETS & TOKENS
-  // ============================================================
-  {
-    slug: 'tokens',
-    name: 'Assets & Tokens',
-    shortDesc: 'Token standards',
-    description: 'Token standards: LRC-20, LRC-721, LRC-1155, extensions, and NFT staking.',
-    tags: ['token', 'tokens', 'lrc', 'lrc-20', 'lrc-721', 'lrc-1155', 'nft', 'fungible', 'token-standard', 'erc20b', 'burnable', 'mintable', 'bridgable'],
-    icon: 'token',
-    color: 'amber',
-    learnMore: 'Token standards define how digital assets are created and managed. ERC-compatible.',
-    keyTopics: ['LRC-20', 'LRC-721', 'LRC-1155', 'Token extensions'],
-  },
-
-  // ============================================================
-  // 4.4 WALLETS & IDENTITY
+  // 4.3 WALLETS & IDENTITY
   // ============================================================
   {
     slug: 'wallets',
