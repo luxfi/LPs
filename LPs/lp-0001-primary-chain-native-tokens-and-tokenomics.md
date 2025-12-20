@@ -22,7 +22,7 @@ Lux requires a canonical definition of its native currency and a consistent sche
 ## Specification
 
 - Native token ticker: `LUX`.
-- Total supply: 10,000,000,000 LUX (10B) at genesis; distribution as defined below.
+- Total supply: 2,000,000,000,000 LUX (2T) at genesis; distribution as defined below.
 - Decimals: 6 (MicroLux base unit, like USDC).
 - Chain identifiers: single‑character codes reserved network‑wide — `P`, `C`, `X`, `A`, `B`, `T`, `Q`, `Z`.
 - Fees: All on‑chain transaction fees are denominated in LUX.
@@ -42,14 +42,14 @@ LUX is the primary currency of the Lux Network and is used for:
 
 ### Tokenomics
 
-*   **Total Supply**: 10,000,000,000 LUX (10 Billion)
+*   **Total Supply**: 2,000,000,000,000 LUX (2 Trillion)
 *   **Chain Allocations**:
-    *   **P-Chain**: 1.5B (15%) — Staking and governance
-    *   **X-Chain**: 2B (20%) — Exchanges and liquidity
-    *   **C-Chain**: 3B (30%) — Smart contracts and DeFi
-    *   **A-Chain**: 1.5B (15%) — AI and attestation operations
-    *   **B-Chain**: 1B (10%) — Bridge liquidity
-    *   **Z-Chain**: 1B (10%) — Privacy and ZK operations
+    *   **P-Chain**: 300B (15%) — Staking and governance
+    *   **X-Chain**: 400B (20%) — Exchanges and liquidity
+    *   **C-Chain**: 600B (30%) — Smart contracts and DeFi
+    *   **A-Chain**: 300B (15%) — AI and attestation operations
+    *   **B-Chain**: 200B (10%) — Bridge liquidity
+    *   **Z-Chain**: 200B (10%) — Privacy and ZK operations
 
 ### Staking Requirements
 
