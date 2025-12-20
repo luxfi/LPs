@@ -116,7 +116,7 @@ MarkPrice = IndexPrice × (1 + PremiumIndex)
 PremiumIndex = TWAP(ImpactMidPrice - IndexPrice) / IndexPrice
 
 ImpactMidPrice = (ImpactBidPrice + ImpactAskPrice) / 2
-```yaml
+```
 
 Where:
 - **ImpactBidPrice**: Price to execute $10K sell order
@@ -243,7 +243,7 @@ type FundingConfig struct {
 
 ### 4.2 Funding Rate Calculation
 
-```yaml
+```
 FundingRate = Premium + InterestRate
 
 Premium = TWAP(MarkPrice - IndexPrice) / IndexPrice
@@ -410,7 +410,7 @@ type ClearingHouse struct {
     SettlementQueue   []*Settlement
     LastSettlement    time.Time
 }
-```markdown
+```
 
 ### 6.2 Operations
 
@@ -629,7 +629,7 @@ type LendingAsset struct {
 
 ### 9.2 Interest Rate Model
 
-```yaml
+```
 UtilizationRate = TotalBorrowed / TotalDeposited
 
 If Utilization < OptimalUtilization (80%):

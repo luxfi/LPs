@@ -84,7 +84,7 @@ Matches RIP-7212 for cross-ecosystem compatibility. Libraries developed for Ethe
 [32 bytes] s (signature component)  
 [32 bytes] x (public key coordinate)
 [32 bytes] y (public key coordinate)
-```markdown
+```
 
 **Output**:
 - **Success**: 32 bytes `0x0000000000000000000000000000000000000000000000000000000000000001`
@@ -205,7 +205,7 @@ func TestNISTVectors(t *testing.T) {
         })
     }
 }
-```yaml
+```
 
 ### Integration Tests
 

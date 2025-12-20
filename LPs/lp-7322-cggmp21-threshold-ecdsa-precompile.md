@@ -65,7 +65,7 @@ The critical innovation in CGGMP21 is **identifiable aborts**:
 
 ```
 0x020000000000000000000000000000000000000D
-```markdown
+```
 
 ### Input Format
 
@@ -103,7 +103,7 @@ The gas cost is calculated based on the threshold configuration:
 
 ```
 gas = 75,000 + (totalParties × 10,000)
-```markdown
+```
 
 **Cost Examples**:
 | Configuration | Total Parties | Gas Cost |
@@ -525,7 +525,7 @@ When an abort is identified:
 Reference implementation tests: `github.com/luxfi/precompiles/cggmp21/contract_test.go`
 
 ### Test 1: Valid 3-of-5 Signature
-```yaml
+```
 Input:
   threshold: 3
   totalParties: 5
@@ -545,7 +545,7 @@ Gas Used: 125,000
 ```
 
 ### Test 3: Threshold Violation
-```yaml
+```
 Input:
   threshold: 6 (invalid: > totalParties)
   totalParties: 5
@@ -554,7 +554,7 @@ Expected: Revert with "Invalid threshold"
 ```
 
 ### Test 4: Large Threshold (10-of-15)
-```yaml
+```
 Input:
   threshold: 10
   totalParties: 15

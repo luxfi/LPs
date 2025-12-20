@@ -109,7 +109,7 @@ bool batch_verify_signatures(
     // Reduce results
     return reduce_all(d_results, n);
 }
-```markdown
+```
 
 #### MLX Implementation (Apple Silicon)
 
@@ -361,7 +361,7 @@ See [github.com/luxfi/gpu-compute](https://github.com/luxfi/gpu-compute) for the
 ### Deployment Configuration
 
 **GPU Support Detection**:
-```yaml
+```
 CUDA: Requires sm_70 or newer (Volta+)
 MLX: Requires macOS 12+, Apple Silicon
 ROCm: Requires RDNA or CDNA architecture
@@ -369,7 +369,7 @@ fallback: CPU (always available)
 ```
 
 **Resource Limits**:
-```yaml
+```
 Max GPU Memory: 80% of available
 Thread Pool Size: 4 * num_gpus
 Queue Depth: 256 tasks
@@ -378,7 +378,7 @@ Thermal Throttle: 85°C (pause work)
 ```
 
 **Configuration File** (`config/gpu.yaml`):
-```yaml
+```
 gpu:
   enabled: true
   backends:

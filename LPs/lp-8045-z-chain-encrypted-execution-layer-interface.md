@@ -126,7 +126,7 @@ All new methods follow the standard JSON‑RPC rules (positional or named params
 │ CPU‑TEE CVM  │◄──────────►│ Blackwell GPU │
 │  (TDX/SNP)   │            │   CC‑On mode  │
 └──────────────┘            └──────────────┘
-```markdown
+```
 
 - **TEE‑Manager**: Maintains queue of FHE jobs, loads CUDA kernels compiled with -DGPU_CC, watches for timeouts, and hands results back to the EVM host function invoked by precompile 0xF021/0xF022.
 - **Key storage**: Each validator’s FHE secret‑key share is sealed inside the CPU‑TEE; GPU kernels never access raw shares, only ciphertext operands.

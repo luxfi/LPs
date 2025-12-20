@@ -93,7 +93,7 @@ Create your LP:
 ```bash
 cd ~/work/lux/lps
 make new  # Interactive wizard
-```markdown
+```
 
 Submit via Pull Request:
 - File: `LPs/lp-draft.md`
@@ -137,7 +137,7 @@ Final LPs activate via:
 All LPs must include:
 
 **YAML Frontmatter**
-```yaml
+```
 ---
 lp: <number>
 title: <short descriptive title>
@@ -150,7 +150,7 @@ category: Core|Networking|Interface|LRC|Bridge
 created: <YYYY-MM-DD>
 requires: <LP numbers>  # optional
 ---
-```markdown
+```
 
 **Content Sections**
 1. **Abstract** (~200 words overview)

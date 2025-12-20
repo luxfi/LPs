@@ -152,7 +152,7 @@ interface IKZGCommitments {
     function dataToPolynomial(bytes calldata data) external pure returns (Polynomial memory);
     function polynomialToData(Polynomial calldata poly) external pure returns (bytes memory);
 }
-```markdown
+```
 
 ### Data Availability Sampling (DAS)
 
@@ -311,7 +311,7 @@ interface IAIModelStorage {
     event CheckpointSaved(bytes32 indexed modelHash, uint256 checkpoint);
     event ModelUpdated(bytes32 indexed oldHash, bytes32 indexed newHash);
 }
-```markdown
+```
 
 ## Rationale
 

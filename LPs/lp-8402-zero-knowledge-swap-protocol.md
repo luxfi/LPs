@@ -745,7 +745,7 @@ This LP introduces a new ZK swap protocol compatible with existing infrastructur
 - Privacy guarantee: k-anonymity where k = ring size (16)
 
 **Gas Costs**:
-```yaml
+```
 Ring signature verification: 75,000 gas
 Bulletproof verification: 50,000 gas (aggregated)
 Stealth address validation: 20,000 gas

@@ -192,7 +192,7 @@ Capital is deployed in tranches tied to verified environmental milestones:
 
 Every environmental claim is logged:
 
-```yaml
+```
 claim_id: "E-2025-001"
 project: "Project Alpha"
 claim: "50% reduction in carbon intensity vs 2024 baseline"

@@ -117,7 +117,7 @@ valid := pk.Verify(message, signature, nil)
 if !valid {
     return errors.New("invalid signature")
 }
-```markdown
+```
 
 **Verification checks**:
 1. Signature size = 3,293 bytes (for ML-DSA-65)

@@ -192,7 +192,7 @@ function sign_hash(hmsg: string, pri: RandPair[]): Sig {
     );
     return sig;
 }
-```markdown
+```
 
 #### Verification (Off-chain)
 
@@ -293,7 +293,7 @@ function verifyWithMerkle(
     }
     return leaf == root;
 }
-```markdown
+```
 
 ## Rationale
 

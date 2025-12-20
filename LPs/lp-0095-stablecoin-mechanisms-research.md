@@ -385,7 +385,7 @@ contract PrivateStable {
 
 ### 1. Stablecoin Architecture
 
-```yaml
+```
 recommended_architecture:
   primary_mechanism:
     type: "Collateralized with zero interest"

@@ -187,7 +187,7 @@ type GovernanceProposal struct {
 ### Root Certificate Authority
 
 **Root CA Certificate**:
-```yaml
+```
 Subject: Lux Network Root CA
 Public Key Algorithm: SLH-DSA-SHA2-256s
 Signature Algorithm: SLH-DSA-SHA2-256s

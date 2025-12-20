@@ -76,7 +76,7 @@ B-Chain is the **critical interconnect** for Lux's multi-network ecosystem:
 │                                                          │
 │  External Chains: Ethereum │ Bitcoin │ Cosmos          │
 └─────────────────────────────────────────────────────────┘
-```markdown
+```
 
 ## Specification
 
@@ -134,7 +134,7 @@ Verifying π costs only 50k gas regardless of n (batch size).
 All bridge operations have **timeout refunds**:
 ```
 Refund if t > t_lock + Δt_timeout
-```markdown
+```
 
 Default timeouts:
 - Lux ↔ L2/L3: 2 minutes
@@ -151,7 +151,7 @@ Default timeouts:
 **ZK Fraud Proofs**:
 ```
 π_fraud ← Prove(Invalid(r) | block_data)
-```markdown
+```
 
 Circuit proves one of:
 - Invalid signature on block header
@@ -207,7 +207,7 @@ Slash = min(
         0.1 × bridge_TVL
     )
 )
-```markdown
+```
 
 ### PQC Integration
 
@@ -232,7 +232,7 @@ committee_sig = {
 
 // Verification
 Valid ← VerifyBLS(bls_agg) ∧ VerifyRingtail(ringtail_agg)
-```markdown
+```
 
 **Migration Timeline**:
 - **Phase 1** (2025): BLS primary, Ringtail optional
@@ -363,7 +363,7 @@ func TestFraudProof(t *testing.T) {
     require.NoError(t, err)
     require.True(t, success)
 }
-```yaml
+```
 
 ### Integration Tests
 

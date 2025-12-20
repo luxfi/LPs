@@ -51,7 +51,7 @@ The linearity of the signing equation enables efficient threshold computation wi
 
 #### 1. Key Generation (DKG)
 
-```yaml
+```
 Input: Parties P = {p₁, ..., pₙ}, threshold t
 Output: Share xᵢ for each party, public key Y
 

@@ -28,7 +28,7 @@ The primary motivation for this proposal is to establish a robust and predictabl
 
 All Standards-Track LPs that introduce consensus-breaking changes MUST include the following `activation` block in their front-matter:
 
-```yaml
+```
 activation:
   flag: <lp-number-title>       # A unique identifier for the feature flag.
   hfName: "<fork-name>"         # An optional name for the hard fork.

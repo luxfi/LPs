@@ -370,7 +370,7 @@ interface ProposalLifecycle {
 
 ### 1. Governance Architecture
 
-```yaml
+```
 recommended_architecture:
   voting_mechanism:
     primary: "Token-weighted with quadratic options"

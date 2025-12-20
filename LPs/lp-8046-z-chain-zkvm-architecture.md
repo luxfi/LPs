@@ -70,7 +70,7 @@ The design draws inspiration from Succinct SP1's RISC-V approach while implement
 │  └────────────────────────────────────────────────────────────────────────┘ │
 │                                                                             │
 └─────────────────────────────────────────────────────────────────────────────┘
-```markdown
+```
 
 ### 2. RISC-V Instruction Set
 

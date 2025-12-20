@@ -76,7 +76,7 @@ const (
 
 #### Algorithm Lifecycle
 
-```yaml
+```
 Lifecycle States:
   Proposed:
     - Submitted for review
@@ -222,7 +222,7 @@ func (e *EmergencyProtocol) HandleCompromise(
 
 #### Quantum Threat Escalation
 
-```yaml
+```
 Quantum Threat Levels:
   Green (Safe):
     - No immediate threat

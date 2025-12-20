@@ -50,7 +50,7 @@ B-Chain is a specialized Lux subnet optimized for bridge operations:
                     │     Lux Internal Chains   │
                     │  (C, X, P, A, M, Q, Z)    │
                     └───────────────────────────┘
-```markdown
+```
 
 ### Core Components
 

@@ -45,7 +45,7 @@ This separation of concerns allows application-specific protocols to implement a
 
 ```
 0x0200000000000000000000000000000000000005
-```markdown
+```
 
 ### Solidity Interface
 
@@ -109,7 +109,7 @@ Returns the 32-byte blockchain identifier of the current chain (txID that create
 Emits a cross-chain message that validators will sign.
 
 **Gas Cost**:
-```yaml
+```
 gas = BASE_COST + (payloadLength * PER_BYTE_COST)
 
 Where:
@@ -159,7 +159,7 @@ Retrieves a verified block hash from another chain.
 
 When including signed warp messages in transaction predicates:
 
-```yaml
+```
 gas = SIGNATURE_VERIFICATION_COST
     + (messageBytes * PER_BYTE_COST)
     + (numSigners * PER_SIGNER_COST)
@@ -244,7 +244,7 @@ valid = totalStakeWeight >= requiredWeight
     "requirePrimaryNetworkSigners": false
   }
 }
-```markdown
+```
 
 | Parameter | Type | Description |
 |-----------|------|-------------|
@@ -325,7 +325,7 @@ IWarp(0x0200...0005).sendWarpMessage(
 ```solidity
 (IWarp.WarpMessage memory msg, bool valid) =
     IWarp(0x0200...0005).getVerifiedWarpMessage(0);
-```markdown
+```
 
 **Expected**:
 - `valid == true`
@@ -340,7 +340,7 @@ IWarp(0x0200...0005).sendWarpMessage(
 **Input**:
 ```solidity
 (, bool valid) = IWarp(0x0200...0005).getVerifiedWarpMessage(0);
-```markdown
+```
 
 **Expected**:
 - `valid == false` (below 67% threshold)
@@ -353,7 +353,7 @@ IWarp(0x0200...0005).sendWarpMessage(
 ```solidity
 (IWarp.WarpBlockHash memory hash, bool valid) =
     IWarp(0x0200...0005).getVerifiedWarpBlockHash(0);
-```markdown
+```
 
 **Expected**:
 - `valid == true`

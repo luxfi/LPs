@@ -323,7 +323,7 @@ var btcCustodyConfig = KeyConfig{
         },
     },
 }
-```markdown
+```
 
 #### 2.5.2 Ethereum (ETH) Configuration
 
@@ -1657,7 +1657,7 @@ func VerifyDualSignature(msg []byte, classical, quantum []byte, config QuantumCo
     }
     return nil
 }
-```markdown
+```
 
 ## Backwards Compatibility
 

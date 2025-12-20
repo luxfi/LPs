@@ -461,7 +461,7 @@ function testZKSwapProof() public {
 
     assertTrue(success);
 }
-```markdown
+```
 
 ## Backwards Compatibility
 

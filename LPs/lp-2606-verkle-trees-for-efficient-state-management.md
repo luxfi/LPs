@@ -262,7 +262,7 @@ See [github.com/luxfi/go-verkle](https://github.com/luxfi/go-verkle) for the com
 ### Deployment Configuration
 
 **Mainnet Parameters**:
-```yaml
+```
 Width: 256 (branching factor)
 Commitment Scheme: IPA (default, post-quantum)
 Field: BN254 or Verkle field
@@ -272,7 +272,7 @@ Migration Batch Size: 10,000 keys/transaction
 ```
 
 **Shadow Mode** (dual MPT/Verkle):
-```yaml
+```
 Enabled: True (during transition)
 Validation Interval: Every block
 Dual Root Inclusion: Until block N

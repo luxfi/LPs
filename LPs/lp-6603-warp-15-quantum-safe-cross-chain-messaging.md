@@ -26,7 +26,7 @@ tags: [pqc, threshold-crypto, cross-chain, warp, teleport, bridge, encryption, s
 Source Chain → [Create TeleportMessage] → [Sign with Ringtail] → Warp Layer → Destination Chain
                      ↓                           ↓
               (optional encrypt)         (2/3 validator threshold)
-```markdown
+```
 
 ---
 
@@ -160,7 +160,7 @@ Three cryptographic upgrades:
 │     └──────────────────────────────────────────────────────────────┘        │
 │                                                                             │
 └─────────────────────────────────────────────────────────────────────────────┘
-```markdown
+```
 
 ### Private Transfer (Encrypted)
 
@@ -201,7 +201,7 @@ Three cryptographic upgrades:
 │     └───────────────────────────────────────────────────────────────┘       │
 │                                                                             │
 └─────────────────────────────────────────────────────────────────────────────┘
-```markdown
+```
 
 ---
 

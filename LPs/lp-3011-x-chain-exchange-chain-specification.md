@@ -62,7 +62,7 @@ An order‑book chain specialized for trading delivers predictable latency and d
 │ • 100k+ TPS         │ • Multi-Asset       │ • Cross-chain      │
 │ • Lamport OTS       │ • Fee Mining        │ • Native Bridge    │
 └─────────────────────┴─────────────────────┴────────────────────┘
-```markdown
+```
 
 ## Consensus Mechanism
 
@@ -144,7 +144,7 @@ type CancelOrderTx struct {
     OrderID     ids.ID
     CancelAll   bool     // Cancel all orders for trader
 }
-```markdown
+```
 
 #### 3. TradeTx (System-generated)
 ```go
@@ -384,7 +384,7 @@ func (x *XChain) SettleBatch(batch *SettlementBatch) error {
 ## API Specification
 
 ### REST API Endpoints
-```yaml
+```
 /v1/markets:
   GET: List all trading pairs
   

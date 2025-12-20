@@ -296,7 +296,7 @@ func TestConvergenceRate(t *testing.T) {
     // Should take ~3,635 blocks
     require.InDelta(t, 3635, blocks, 10)
 }
-```yaml
+```
 
 ### Integration Tests
 

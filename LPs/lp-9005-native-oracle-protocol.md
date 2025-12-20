@@ -107,7 +107,7 @@ The existing T-Chain infrastructure (LP-13, LP-14) provides the natural committe
 │  └────────────┘       └────────────┘         └────────────┘                     │
 │                                                                                  │
 └─────────────────────────────────────────────────────────────────────────────────┘
-```markdown
+```
 
 ### 2. Price Feed Payload Format
 
@@ -237,7 +237,7 @@ contract LendingPool {
         // ...
     }
 }
-```markdown
+```
 
 **Gas Costs:**
 - `getPrice()`: 2,100 gas (cold) / 100 gas (warm)

@@ -92,7 +92,7 @@ Output:
   - Master secret unchanged
   - No party learns full key
   - t-security maintained throughout
-```markdown
+```
 
 #### Four-Step Protocol (Section 4 of LSS Paper)
 
@@ -113,7 +113,7 @@ Interpolate using Lagrange: a·w = Σ(λ_i · a_i · w_i)
 
 **Step 3: Inverse Blinding**
 Compute `z = (q·w)^(-1)` and distribute shares:
-```sql
+```
 Interpolate q·w = Σ(λ_j · q_j · w_j)
 Compute z = (q·w)^(-1)
 Create z_j shares for each new party j
@@ -125,7 +125,7 @@ Each new party computes their share:
 a'_j = (a·w) · q_j · z_j
 
 Verification: Lagrange interpolation of {a'_j} = a (original secret)
-```markdown
+```
 
 ### Interface Specifications
 
@@ -147,7 +147,7 @@ func DynamicReshareCMP(
 // - Requires at least t old parties to participate
 // - Output configs maintain same public key
 // - Cryptographic verification of resharing correctness
-```markdown
+```
 
 **Implementation:** [`threshold/protocols/lss/lss_cmp.go`](https://github.com/luxfi/threshold/blob/main/protocols/lss/lss_cmp.go)
 
@@ -173,7 +173,7 @@ func DynamicReshareFROST(
 // - Maintains FROST verification shares
 // - Preserves public key across resharing
 // - Suitable for Bitcoin Taproot, Solana validators
-```markdown
+```
 
 **Implementation:** [`threshold/protocols/lss/lss_frost.go`](https://github.com/luxfi/threshold/blob/main/protocols/lss/lss_frost.go)
 
@@ -192,7 +192,7 @@ newThreshold := 3
 
 newConfigs, err := lss.DynamicReshareCMP(oldConfigs, newPartyIDs, newThreshold, pool)
 // Result: 7 parties can now sign, still need 3 signatures
-```markdown
+```
 
 #### Contract Signing Group (Remove Parties)
 ```go
@@ -214,7 +214,7 @@ newThreshold := 4
 
 newConfigs, err := lss.DynamicReshareCMP(oldConfigs, newPartyIDs, newThreshold, pool)
 // Result: 6 parties, now need 4 signatures instead of 3
-```markdown
+```
 
 #### Proactive Refresh (No Membership Change)
 ```go
@@ -271,7 +271,7 @@ FROST provides 2-round Schnorr threshold signatures. LSS extends it with:
 - Proactive share refreshing
 
 **Use Case:** Bitcoin Taproot multisig bridge
-```yaml
+```
 Initial: 5-of-8 bridge guardians
 Guardian rotation: 5-of-9 (add 1, remove 1)
 Emergency: 7-of-9 (increase security threshold)
@@ -329,7 +329,7 @@ Let Π be a (t,n)-threshold signature scheme with security parameter λ. The LSS
 LSS enables **proactive security** - regular share refreshing defeats slow key compromise:
 
 **Attack Scenario Without LSS:**
-```yaml
+```
 Year 0: Adversary compromises 1 share
 Year 1: Compromises 1 more share
 Year 2: Compromises 1 more share (reaches threshold t=3)
@@ -483,7 +483,7 @@ Result: Adversary never reaches threshold
 - Proven secure in LSS paper
 
 **How It Works:**
-```yaml
+```
 Blind: a·w (random w masks a)
 Inverse blind: (q·w)^(-1) (removes w without revealing a)
 Final share: a'_j = (a·w)·q_j·z_j where z = (q·w)^(-1)
@@ -535,7 +535,7 @@ for range ticker.C {
     refreshedConfigs, _ := lss.DynamicReshareCMP(currentConfigs, sameParties, sameThreshold, pool)
     currentConfigs = refreshedConfigs
 }
-```markdown
+```
 
 ## Reference Implementation
 

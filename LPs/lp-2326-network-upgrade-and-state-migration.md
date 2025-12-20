@@ -122,7 +122,7 @@ The migration to Chain ID 96369 was necessary due to conflicts with Ethereum Imp
 │   New Chain     │
 │  (New State)    │
 └─────────────────┘
-```markdown
+```
 
 ### Phase 1: State Export
 

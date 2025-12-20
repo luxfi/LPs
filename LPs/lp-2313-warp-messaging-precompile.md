@@ -35,7 +35,7 @@ Cross-chain interoperability requires secure message passing with cryptographic 
 ### Precompile Address
 ```
 0x0200000000000000000000000000000000000008
-```markdown
+```
 
 ### Input Format
 
@@ -58,7 +58,7 @@ gas = BASE_COST + (numSigners * SIGNER_COST)
 Where:
   BASE_COST = 50,000 gas
   SIGNER_COST = 1,000 gas per validator
-```markdown
+```
 
 ## Reference Implementation
 
@@ -105,12 +105,12 @@ See: `node/vms/platformvm/warp/`
 
 ### Test Vector 1: Valid Warp Message
 **Input:**
-```yaml
+```
 messageHash: 0x<keccak256 of message payload>
 netID: <source network ID>
 aggregateSignature: 0x<BLS aggregate signature>
 bitset: <bitmap of signers>
-```markdown
+```
 **Expected Output:** `0x...0001` (valid)
 **Expected Gas:** ~60,000 (50k base + 10k for typical validator set)
 

@@ -78,7 +78,7 @@ func SelectProposer(height uint64, validators []Validator) (ids.NodeID, []byte) 
 
     return bestProposer, bestProof
 }
-```markdown
+```
 
 **Theorem 1 (Fairness)**: The probability of validator v being selected as proposer is proportional to their stake weight: P(v) = stake(v) / Σstake(i).
 
@@ -267,7 +267,7 @@ func (s *PhotonPlusPlus) finalize(blockID ids.ID) {
         s.notifyFinalized(block)
     }
 }
-```markdown
+```
 
 ## Rationale
 
@@ -412,7 +412,7 @@ go test -v ./... -coverprofile=coverage.out
 #
 # ok  	github.com/luxfi/consensus/protocol/photon	1,043ms
 # coverage: 97.2% of statements
-```markdown
+```
 
 **API Endpoints**:
 - `GET /ext/info/photon/luminance/{nodeID}` - Query node performance metrics

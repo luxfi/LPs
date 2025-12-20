@@ -107,7 +107,7 @@ service DexService {
   rpc StreamTrades (TradeSub)   returns (stream TradeEvent);
   rpc StreamAccount(AcctSub)    returns (stream AccountUpdate);
 }
-```markdown
+```
 
 Latency target: <25 ms; back-pressure window = 64 MiB.
 

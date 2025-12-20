@@ -52,7 +52,7 @@ Layer 4: Governance Security
 - Emergency procedures
 - Upgrade processes
 - Incident response
-```markdown
+```
 
 ### Security Requirements
 
@@ -110,7 +110,7 @@ interface IBridgeMonitor {
 ```
 
 #### 2. Anomaly Detection
-```yaml
+```
 Detection Rules:
   - Unusual Volume: > 5x daily average
   - Large Transfer: > $10M single transaction
@@ -192,7 +192,7 @@ contract EmergencyRoles {
 - **Post-Incident**: Targeted audit after any security event
 
 #### 2. Audit Scope
-```yaml
+```
 Code Audit:
   - Smart contracts
   - Off-chain components
@@ -226,7 +226,7 @@ enum RiskCategory {
 ```
 
 #### 2. Risk Mitigation
-```yaml
+```
 Cryptographic Risks:
   - Multi-party computation
   - Key rotation policies

@@ -109,7 +109,7 @@ The Teleport system operates across two specialized chains within Lux Network:
               │ Same MPC    │          │ Taproot     │          │ IBC Light   │
               │ Address!    │          │ MuSig2      │          │ Client      │
               └─────────────┘          └─────────────┘          └─────────────┘
-```markdown
+```
 
 #### T-Chain (ThresholdVM)
 
@@ -204,7 +204,7 @@ The Teleport network requires a minimum of 5 nodes running both BridgeVM and Thr
 │  Warp Messaging: Enabled for T-Chain <-> B-Chain communication               │
 │                                                                               │
 └──────────────────────────────────────────────────────────────────────────────┘
-```markdown
+```
 
 #### Node Configuration Files
 

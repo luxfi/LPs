@@ -85,7 +85,7 @@ contract Bridge is Ownable, AccessControl {
     function setMPCOracle(address MPCO) external onlyAdmin;
     function setPayoutAddress(address addr, uint256 feeR) external onlyAdmin;
 }
-```markdown
+```
 
 **Key Features:**
 
@@ -202,7 +202,7 @@ amt = amt.sub(fee);
 // Distribute
 varStruct.token.mint(payoutAddr, fee);      // Fee to payout address
 varStruct.token.mint(toTargetAddr, amt);    // Net amount to recipient
-```markdown
+```
 
 **Fee Configuration:**
 
@@ -289,7 +289,7 @@ function bridgeMintStealth(
     // Record signature as used
     return signer;
 }
-```markdown
+```
 
 **Flow:**
 1. User or relayer calls `bridgeMintStealth()` with MPC signature

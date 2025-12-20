@@ -423,7 +423,7 @@ contract StateRent {
 
 ### 1. DA Architecture for Lux
 
-```yaml
+```
 recommended_architecture:
   primary_da_solution:
     chain: "Z-Chain specialized for DA"

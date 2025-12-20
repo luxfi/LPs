@@ -64,7 +64,7 @@ Given a secret `s` and threshold `t`:
 
 LSS implements fully distributed key generation without any trusted dealer:
 
-```yaml
+```
 Input: Parties P = {p₁, ..., pₙ}, threshold t
 Output: Share sᵢ for each party, public key Y
 
@@ -98,7 +98,7 @@ This DKG protocol ensures:
 
 #### 2. Signing
 
-```yaml
+```
 Input: Message m, signers S ⊆ P with |S| ≥ t
 Output: Schnorr signature (R, z)
 
@@ -125,7 +125,7 @@ Output: Schnorr signature (R, z)
 
 #### 3. Dynamic Resharing (Unique to LSS)
 
-```yaml
+```
 Input: Old parties P_old, new parties P_new, new threshold t_new
 Output: New shares for P_new, same public key Y
 

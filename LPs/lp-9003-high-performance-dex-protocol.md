@@ -436,7 +436,7 @@ Proof Verification Gas: 50,000
 ```
 
 **Liquidity Aggregation**:
-```sql
+```
 Max Hop Depth: 4 pools
 Price Impact Threshold: 5%
 Update Frequency: Every 10 seconds
@@ -445,7 +445,7 @@ Fallback Strategy: Direct pool only
 ```
 
 **ZK Privacy Parameters**:
-```yaml
+```
 Circuit: Halo2 (~32KB proofs)
 Hash Function: Poseidon (14 rounds)
 Field: BN254

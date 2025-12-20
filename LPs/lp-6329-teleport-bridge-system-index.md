@@ -65,7 +65,7 @@ Chain Legend:
 - K,I: Specification phase, seeking RFC approval
 - No T-Chain: P-Chain/X-Chain provide native multisig
 - No Relayers: B-Chain validators handle cross-chain observation
-```markdown
+```
 
 ## Component LPs
 

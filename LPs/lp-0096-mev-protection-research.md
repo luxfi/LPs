@@ -378,7 +378,7 @@ contract CrossChainMEVProtection {
 
 ### 1. MEV Protection Architecture
 
-```yaml
+```
 recommended_architecture:
   network_level:
     mempool: "Threshold encrypted"

@@ -100,7 +100,7 @@ Hardware Security Modules provide:
 │ Luna  │ │Cloud│ │  HSM  │ │ FIPS   │    │     KMS      │
 │ HSM   │ │ HSM │ │       │ │        │    │              │
 └───────┘ └─────┘ └───────┘ └────────┘    └──────────────┘
-```markdown
+```
 
 ### Supported HSM Providers
 
@@ -166,7 +166,7 @@ const (
 
 #### Configuration
 
-```yaml
+```
 # Lux KMS Configuration
 kms:
   provider: aws-cloudhsm  # or: thales-luna, google-cloud-kms, fortanix,
@@ -281,7 +281,7 @@ func (v *QuasarValidator) ThresholdSign(
 
 #### Multi-HSM High Availability
 
-```yaml
+```
 kms:
   mode: multi-hsm
 
@@ -383,7 +383,7 @@ luxd kms set-weight google-cloud-kms 10   # 10% traffic
 luxd kms set-weight google-cloud-kms 50   # 50% traffic
 # Monitor for 24 hours
 luxd kms set-weight google-cloud-kms 100  # Full cutover
-```markdown
+```
 
 ## Cost Analysis
 

@@ -49,7 +49,7 @@ interface AddValidatorTx {
     rewardAddress: Address;     // Where to send rewards
     delegationFeeRate: uint32;  // Fee rate for delegators (0-100%)
 }
-```yaml
+```
 
 Constraints:
 - Minimum stake: 2,000 LUX
@@ -66,7 +66,7 @@ interface AddDelegatorTx {
     stakeAmount: uint64;       // Amount to delegate
     rewardAddress: Address;    // Where to send rewards
 }
-```yaml
+```
 
 Constraints:
 - Minimum delegation: 25 LUX

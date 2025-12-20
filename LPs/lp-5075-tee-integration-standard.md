@@ -744,7 +744,7 @@ forge test --match-path test/tee/\* --gas-report
 
 # Coverage
 forge coverage --match-path test/tee/\*
-```markdown
+```
 
 **Test Cases** (see `/test/tee/TEEManager.t.sol`):
 - `testEnclaveRegistration()` - Register SGX/SEV enclaves

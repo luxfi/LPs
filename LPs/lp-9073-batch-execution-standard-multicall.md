@@ -497,7 +497,7 @@ forge test --match-path test/multicall/\* --gas-report
 
 # Coverage
 forge coverage --match-path test/multicall/\*
-```markdown
+```
 
 **Test Cases** (see `/test/multicall/LuxMulticall.t.sol`):
 - `testBasicMulticall()` - Multi-operation batching

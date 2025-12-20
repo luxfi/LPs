@@ -509,7 +509,7 @@ forge test --match-path test/media-nft/\* --gas-report
 
 # Coverage
 forge coverage --match-path test/media-nft/\*
-```markdown
+```
 
 **Test Cases** (see `/test/media-nft/LuxMedia.t.sol`):
 - `testMintMedia()` - Mint with metadata and bid shares

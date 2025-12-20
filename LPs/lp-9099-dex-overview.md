@@ -37,7 +37,7 @@ documentation: https://dex.lux.network
 ║     1,000,000+ orders/sec │ 597ns latency │ 50ms finality                     ║
 ║                                                                               ║
 ╚═══════════════════════════════════════════════════════════════════════════════╝
-```markdown
+```
 
 ## Abstract
 
@@ -76,7 +76,7 @@ The Lux exchange ecosystem consists of two complementary systems:
                     │   Routes to DEX or AMM based    │
                     │   on liquidity & best price     │
                     └─────────────────────────────────┘
-```markdown
+```
 
 ### Domain Architecture
 
@@ -107,7 +107,7 @@ The Lux exchange ecosystem consists of two complementary systems:
 │                                          │   LP-0010 (P-Chain staking)        │
 │                                                                               │
 └──────────────────────────────────────────────────────────────────────────────┘
-```markdown
+```
 
 ## LP-9000 Series Index
 
@@ -133,7 +133,7 @@ BenchmarkOrderBookParallel-10        684,184 orders/sec   1,462.0 ns/op
 BenchmarkCriticalOrderMatching/100   714,820 orders/sec   1,398.8 ns/op
 BenchmarkCriticalOrderMatching/1000  576,844 orders/sec   1,733.6 ns/op
 BenchmarkCriticalOrderMatching/10000 521,370 orders/sec   1,918.0 ns/op
-```markdown
+```
 
 ### Multi-Backend Comparison
 
@@ -222,7 +222,7 @@ BenchmarkCriticalOrderMatching/10000 521,370 orders/sec   1,918.0 ns/op
 │  │          C-Chain (EVM) │ B-Chain (Bridge) │ P-Chain (Staking)          │ │
 │  └────────────────────────────────────────────────────────────────────────┘ │
 └─────────────────────────────────────────────────────────────────────────────┘
-```markdown
+```
 
 ## Implementation Repository
 
@@ -292,7 +292,7 @@ dex/
 │
 └── docs/
     └── ARCHITECTURE.md
-```markdown
+```
 
 ## Feature Summary
 

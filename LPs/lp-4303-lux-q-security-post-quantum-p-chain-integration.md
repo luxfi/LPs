@@ -152,7 +152,7 @@ Vertex:
   - txs: [Transaction list]
   - validatorSig: Dilithium signature
   - weight: Stake weight of validator
-```markdown
+```
 
 ### Migration Timeline
 
@@ -197,7 +197,7 @@ func ThresholdSignDilithium(
 
 ### Validator Configuration
 
-```yaml
+```
 # config.yaml
 quantum:
   enabled: true

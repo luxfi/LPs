@@ -521,7 +521,7 @@ forge test --match-path test/nft-staking/\* --gas-report
 
 # Coverage
 forge coverage --match-path test/nft-staking/\*
-```markdown
+```
 
 **Test Cases** (see `/test/nft-staking/LuxNFTStaking.t.sol`):
 - `testCreatePoolAndStake()` - Pool creation and basic staking

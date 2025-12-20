@@ -55,7 +55,7 @@ interface IERC20Burnable {
      */
     function burnFrom(address account, uint256 amount) external;
 }
-```markdown
+```
 
 ### Implementation Notes
 
