@@ -439,6 +439,55 @@ Implementation uses:
 4. **Backup shares redundantly** (liveness requirement)
 5. **Use hardware security** (HSM/TEE when possible)
 
+### Epoch-Based Key Rotation (LP-1181 Integration)
+
+Ringtail keys are managed via epoch-based rotation in Quasar consensus:
+
+| Constant | Value | Purpose |
+|----------|-------|---------|
+| `MinEpochDuration` | 1 hour | Minimum time between key rotations (rate limiting) |
+| `MaxEpochDuration` | 24 hours | Maximum time keys can be used (forced rotation) |
+| `HistoryLimit` | 3 epochs | Number of historical epochs preserved for verification |
+
+**Key Rotation Triggers:**
+1. **Validator Set Change**: When validators are added/removed (rate-limited to 1/hour)
+2. **Forced Expiration**: After 24 hours even if validator set unchanged
+3. **Manual Rotation**: Via `RotateEpoch(validators, force=true)`
+
+**Epoch Counter Limits:**
+- Uses `uint64` supporting 18 quintillion values
+- At 1 epoch/hour: **2.1 trillion years** before overflow
+- Effectively unlimited for all practical purposes
+
+**Cross-Epoch Verification:**
+Signatures from previous epochs remain verifiable until history is pruned (default: last 3 epochs).
+
+```go
+// EpochManager manages Ringtail key epochs for the validator set.
+type EpochManager struct {
+    currentEpoch      uint64
+    currentKeys       *EpochKeys
+    lastKeygenTime    time.Time
+    epochHistory      map[uint64]*EpochKeys  // Cross-epoch verification
+    historyLimit      int
+    currentValidators []string
+    threshold         int
+}
+
+func (em *EpochManager) VerifySignatureForEpoch(message string, sig *Signature, epoch uint64) bool {
+    keys, exists := em.epochHistory[epoch]
+    if !exists || keys.GroupKey == nil || sig == nil {
+        return false
+    }
+    return ringtailThreshold.Verify(keys.GroupKey, message, sig)
+}
+```
+
+**Implementation Files:**
+- `consensus/protocol/quasar/epoch.go` - EpochManager
+- `consensus/protocol/quasar/epoch_test.go` - Tests (8 tests)
+- `ringtail/sign/sign.go` - Non-destructive Verify function
+
 ### Integration Security
 
 When using Ringtail in smart contracts:
@@ -497,10 +546,12 @@ For Quasar consensus validators:
    - Could add: 192-bit or 256-bit variants
    - Trade-off: Higher security vs performance cost
 
-2. **Distributed key refresh?**
-   - Periodic share rotation without re-keying
-   - Forward security vs complexity
-   - Proactive security model
+2. **~~Distributed key refresh?~~** ✅ IMPLEMENTED (LP-1181)
+   - Epoch-based key rotation implemented via `EpochManager`
+   - Rate-limited to 1 rotation per hour minimum
+   - Forced rotation after 24 hours maximum
+   - Cross-epoch verification preserves last 3 epochs
+   - Forward security achieved via regular rotation
 
 3. **Hardware acceleration?**
    - Lattice operations could be hardware-accelerated

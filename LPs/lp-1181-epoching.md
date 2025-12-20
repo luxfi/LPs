@@ -318,10 +318,128 @@ Requires network upgrade. Not backwards compatible. Downstream systems must acco
 - **Relayers**: Implement epoch-aware validator set queries
 - **Indexers**: Track epoch boundaries and validator set changes
 
+## Ringtail Key Epoch Management (LP-7324 Integration)
+
+### Overview
+
+The EpochManager provides epoch-based Ringtail key management for the Quasar consensus validator set. Fresh lattice-based threshold keys are generated when validators change, with rate limiting to prevent excessive key churn while still rotating frequently enough to frustrate quantum attacks.
+
+### Ringtail Epoch Constants
+
+| Constant | Value | Purpose |
+|----------|-------|---------|
+| `MinEpochDuration` | 1 hour | Minimum time between key rotations (rate limiting) |
+| `MaxEpochDuration` | 24 hours | Maximum time keys can be used (forced rotation) |
+| `HistoryLimit` | 3 epochs | Number of historical epochs preserved for verification |
+
+### Epoch Counter Limits
+
+The epoch uses `uint64` which supports values up to 18,446,744,073,709,551,615. At 1 epoch per hour:
+- **2.1 trillion years** of epochs before overflow
+- Effectively unlimited for all practical purposes
+
+### Key Rotation Behavior
+
+```go
+// EpochManager manages Ringtail key epochs for the validator set.
+type EpochManager struct {
+    currentEpoch      uint64
+    currentKeys       *EpochKeys
+    lastKeygenTime    time.Time
+    epochHistory      map[uint64]*EpochKeys  // For cross-epoch verification
+    historyLimit      int                     // How many old epochs to keep
+    currentValidators []string
+    threshold         int
+}
+
+// EpochKeys holds the Ringtail keys for a specific epoch.
+type EpochKeys struct {
+    Epoch           uint64
+    CreatedAt       time.Time
+    ExpiresAt       time.Time
+    ValidatorSet    []string
+    Threshold       int
+    TotalParties    int
+    GroupKey        *ringtailThreshold.GroupKey
+    Shares          map[string]*ringtailThreshold.KeyShare
+    Signers         map[string]*ringtailThreshold.Signer
+}
+```
+
+### Rate Limiting
+
+Key rotations are rate-limited to at most once per hour:
+
+```go
+// RotateEpoch returns ErrEpochRateLimited if called within MinEpochDuration
+if elapsed := now.Sub(em.lastKeygenTime); elapsed < MinEpochDuration {
+    return nil, fmt.Errorf("%w: %v remaining", ErrEpochRateLimited, remaining)
+}
+
+// Returns ErrNoValidatorChange if validator set hasn't changed (unless force=true)
+if !force && em.validatorSetUnchanged(validators) {
+    return nil, ErrNoValidatorChange
+}
+```
+
+### Epoch History Preservation
+
+Historical epochs are preserved for signature verification during transitions:
+- Signatures from old epochs remain verifiable until history is pruned
+- Default keeps last 3 epochs
+- Pruning removes epochs older than `currentEpoch - historyLimit + 1`
+
+### Cross-Epoch Signature Verification
+
+```go
+// VerifySignatureForEpoch verifies a Ringtail signature using the epoch's keys.
+func (em *EpochManager) VerifySignatureForEpoch(message string, sig *Signature, epoch uint64) bool {
+    keys, exists := em.epochHistory[epoch]
+    if !exists || keys.GroupKey == nil || sig == nil {
+        return false
+    }
+    return ringtailThreshold.Verify(keys.GroupKey, message, sig)
+}
+```
+
+### Integration with Quasar Consensus
+
+The EpochManager integrates with Quasar's validator management:
+
+```go
+// AddValidator rotates Ringtail keys when validator set changes
+func (q *Quasar) AddValidator(validatorID string, share *ringtailThreshold.KeyShare) error {
+    keys, err := q.epochManager.RotateEpoch(validators, false)
+    if errors.Is(err, ErrEpochRateLimited) || errors.Is(err, ErrNoValidatorChange) {
+        // Not an error - just rate limited or no change
+        rotated = false
+        err = nil
+    }
+    // Update BLS and Ringtail validator sets in sync
+    return q.syncValidatorSets()
+}
+```
+
+### Security Benefits
+
+1. **Key Freshness**: Regular rotation invalidates any quantum attack progress
+2. **Rate Limiting**: Prevents DoS via excessive key generation
+3. **History Preservation**: Cross-epoch verification during transitions
+4. **Synchronized Sets**: BLS and Ringtail validator sets stay aligned
+
+### Implementation Files
+
+| File | Purpose |
+|------|---------|
+| `consensus/protocol/quasar/epoch.go` | EpochManager implementation |
+| `consensus/protocol/quasar/epoch_test.go` | Epoch tests (8 tests) |
+| `consensus/protocol/quasar/core.go` | Quasar integration |
+| `ringtail/sign/sign.go` | Non-destructive Verify function |
+
 ## Future Enhancements
 
-### Post-Quantum Validator Sets ()
-- Integrate with LP-001 (ML-KEM), LP-002 (ML-DSA), LP-003 (SLH-DSA)
+### Post-Quantum Validator Sets
+- Integrate with LP-4316 (ML-DSA), LP-4317 (SLH-DSA), LP-4318 (ML-KEM)
 - Support hybrid classical/quantum validator signatures
 - Epoch-based migration to quantum-resistant schemes
 

@@ -1,5 +1,5 @@
 ---
-lp: 99
+lp: 2099
 title: C-Chain Network Upgrade Mapping
 description: Comprehensive mapping of C-Chain network upgrades to LPs and Ethereum equivalents
 author: Lux Core Team (@luxfi)

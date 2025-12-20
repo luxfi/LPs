@@ -71,22 +71,22 @@ function LPIndexPage() {
         </p>
 
         {/* Quick Stats */}
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 mb-12 p-4 rounded-lg border border-border bg-card">
-          <div className="text-center p-2">
-            <div className="text-xl sm:text-2xl font-bold">{stats.total}</div>
-            <div className="text-xs text-muted-foreground">Total</div>
+        <div className="flex flex-wrap gap-4 mb-12 p-4 rounded-lg border border-border bg-card">
+          <div className="flex items-center gap-2">
+            <span className="text-2xl font-bold">{stats.total}</span>
+            <span className="text-xs text-muted-foreground">Total</span>
           </div>
-          <div className="text-center p-2">
-            <div className="text-xl sm:text-2xl font-bold text-green-500">{stats.byStatus['Final'] || 0}</div>
-            <div className="text-xs text-muted-foreground">Final</div>
+          <div className="flex items-center gap-2">
+            <span className="text-2xl font-bold text-green-500">{stats.byStatus['Final'] || 0}</span>
+            <span className="text-xs text-muted-foreground">Final</span>
           </div>
-          <div className="text-center p-2">
-            <div className="text-xl sm:text-2xl font-bold text-blue-500">{stats.byStatus['Review'] || 0}</div>
-            <div className="text-xs text-muted-foreground">Review</div>
+          <div className="flex items-center gap-2">
+            <span className="text-2xl font-bold text-blue-500">{stats.byStatus['Review'] || 0}</span>
+            <span className="text-xs text-muted-foreground">Review</span>
           </div>
-          <div className="text-center p-2">
-            <div className="text-xl sm:text-2xl font-bold text-yellow-500">{stats.byStatus['Draft'] || 0}</div>
-            <div className="text-xs text-muted-foreground">Draft</div>
+          <div className="flex items-center gap-2">
+            <span className="text-2xl font-bold text-yellow-500">{stats.byStatus['Draft'] || 0}</span>
+            <span className="text-xs text-muted-foreground">Draft</span>
           </div>
         </div>
 
