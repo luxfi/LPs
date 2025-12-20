@@ -44,7 +44,7 @@ LUX is the primary currency of the Lux Network and is used for:
 
 *   **Total Supply**: 2,000,000,000,000 LUX (2 Trillion)
 *   **Chain Allocations**:
-    *   **C-Chain**: 2T — Primary chain for smart contracts, DeFi, and accounts
+    *   **C-Chain**: 1.8T — Primary chain for smart contracts, DeFi, and accounts
     *   **P-Chain**: 100B — Staking and validator coordination
     *   **X-Chain**: 100B — Settlement layer and asset exchange
     *   **Other Chains** (A, B, T, Q, Z): Specialized execution chains without native balances
