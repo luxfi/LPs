@@ -55,7 +55,7 @@ Ringtail provides unique properties for quantum-safe threshold signatures:
 
 ```
 0x020000000000000000000000000000000000000B
-```markdown
+```
 
 ### Input Format
 
@@ -92,7 +92,7 @@ gas = BASE_COST + (totalParties * PER_PARTY_COST)
 Where:
   BASE_COST = 150,000 gas
   PER_PARTY_COST = 10,000 gas per participant
-```markdown
+```
 
 **Examples:**
 - 3-of-5 threshold: 150,000 + (5 × 10,000) = 200,000 gas
@@ -257,7 +257,7 @@ The gas formula accounts for:
 
 Ringtail achieves threshold signatures in 2 rounds:
 
-```yaml
+```
 Round 1: Each party broadcasts commitment
 Round 2: Each party broadcasts response
 Result: Aggregated threshold signature
@@ -298,7 +298,7 @@ function verify(bytes calldata frostSig, bytes calldata ringtailSig) {
 ### Test Vector 1: Valid 2-of-3 Threshold
 
 **Input:**
-```yaml
+```
 threshold: 2
 totalParties: 3
 messageHash: keccak256("Test message for threshold signature")
@@ -311,7 +311,7 @@ signature: <Ringtail signature from 2 of 3 parties>
 ### Test Vector 2: Insufficient Signers (1-of-3)
 
 **Input:**
-```yaml
+```
 threshold: 2
 totalParties: 3
 messageHash: <same as above>
@@ -323,7 +323,7 @@ signature: <Ringtail signature from only 1 party>
 ### Test Vector 3: Invalid Signature Share
 
 **Input:**
-```yaml
+```
 threshold: 2
 totalParties: 3
 messageHash: <valid hash>
@@ -335,7 +335,7 @@ signature: <Ringtail signature with 1 corrupted share>
 ### Test Vector 4: Large Threshold (67-of-100)
 
 **Input:**
-```yaml
+```
 threshold: 67
 totalParties: 100
 messageHash: <valid hash>

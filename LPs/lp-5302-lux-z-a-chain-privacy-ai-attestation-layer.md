@@ -323,7 +323,7 @@ return (E, Q)
 - Dynamic difficulty adjustment based on network load
 
 **Economic Model**:
-```yaml
+```
 Mining Reward = Base_Reward × (1 + Complexity_Bonus) × (1 - Challenge_Risk)
 
 Where:
@@ -470,7 +470,7 @@ func TestComplianceProof(t *testing.T) {
     verified := zchain.VerifyComplianceProof(proof)
     require.True(t, verified)
 }
-```yaml
+```
 
 ### Integration Tests
 

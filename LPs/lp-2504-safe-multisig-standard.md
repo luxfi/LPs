@@ -331,7 +331,7 @@ Minimal token callback support.
     "solc": "0.7.6"
   }
 }
-```markdown
+```
 
 ### Solidity Version
 
@@ -479,7 +479,7 @@ uint256 result = a.add(b);
 // After (OZ 5.x / Solidity 0.8+)
 // Native overflow checking
 uint256 result = a + b;
-```markdown
+```
 
 **Note**: Safe's use of `SafeMath` is for compatibility with Solidity `>=0.7.0`. Migration to Solidity 0.8+ removes this dependency.
 

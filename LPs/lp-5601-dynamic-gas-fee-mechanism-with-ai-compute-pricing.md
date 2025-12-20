@@ -196,7 +196,7 @@ See [github.com/luxfi/node/gas](https://github.com/luxfi/node/tree/main/gas) for
 ### Deployment Configuration
 
 **Mainnet Parameters**:
-```yaml
+```
 BaseFeeChangeDenominator: 8
 GasLimitBoundDivisor: 1024
 TargetGasPerBlock: 15,000,000
@@ -206,7 +206,7 @@ AIInferencePerToken: 10
 ```
 
 **Test Network Parameters**:
-```yaml
+```
 TargetGasPerBlock: 5,000,000
 BaseFeeChangeDenominator: 4 (faster adjustment)
 ```

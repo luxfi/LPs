@@ -297,7 +297,7 @@ interface MessageDelivery {
 
 ### 1. Hybrid Architecture
 
-```yaml
+```
 recommended_architecture:
   internal_chains:  # Between Lux chains
     protocol: "Teleporter"

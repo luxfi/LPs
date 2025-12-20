@@ -455,7 +455,7 @@ The dual-certificate design provides defense in depth:
 
 Q-Chain's rapid finality creates an impossibly narrow attack window:
 
-```yaml
+```
 Timeline:
 T+0ms:   Block proposed
 T+50ms:  Ringtail timeout (mainnet)
@@ -784,7 +784,7 @@ type SecurityParams struct {
     // Lux specific
     SafetyProbability float64 // 1 - ε where ε ≈ 10^-10
 }
-```markdown
+```
 
 ### Post-Quantum Security
 

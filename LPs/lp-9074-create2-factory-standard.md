@@ -512,7 +512,7 @@ forge test --match-path test/create2/\* --gas-report
 
 # Coverage
 forge coverage --match-path test/create2/\*
-```markdown
+```
 
 **Test Cases** (see `/test/create2/CREATE2Factory.t.sol`):
 - `testDeploy()` - Basic deterministic deployment

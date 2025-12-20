@@ -267,7 +267,7 @@ contract QuantumSafeDeFi {
 
 ### Performance Considerations
 
-```yaml
+```
 Benchmarks (AMD EPYC 7763, single-threaded):
 
 ML-KEM-768:

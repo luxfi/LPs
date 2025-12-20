@@ -67,7 +67,7 @@ This LP addresses these gaps by establishing a quantum-safe mining protocol at t
    │ EVM L2  │       │ EVM L2  │       │ C-Chain │
    │ (36963) │       │(200200) │       │ (43114) │
    └─────────┘       └─────────┘       └─────────┘
-```markdown
+```
 
 ### 2. ML-DSA Mining Wallet
 
@@ -82,7 +82,7 @@ Mining wallets MUST use ML-DSA (Module-Lattice Digital Signature Algorithm) per 
 **Address Derivation:**
 ```
 address = "0x" + hex(BLAKE3(public_key)[0:20])
-```markdown
+```
 
 **Reference Implementation:**
 - [`hanzo-mining/src/wallet.rs`](https://github.com/hanzoai/node/blob/main/hanzo-libs/hanzo-mining/src/wallet.rs)

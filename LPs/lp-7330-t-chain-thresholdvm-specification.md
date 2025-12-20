@@ -115,7 +115,7 @@ T-Chain is a specialized Lux subnet running the ThresholdVM:
 |  +-------------------------------------------------------------------+ |
 |                                                                         |
 +-------------------------------------------------------------------------+
-```markdown
+```
 
 ### Core Components
 
@@ -823,7 +823,7 @@ func (lss *LSSScheme) ReconstructSecret(shares []*Share) (*big.Int, error) {
 
     return s, nil
 }
-```markdown
+```
 
 #### Verifiable Secret Sharing (VSS)
 
@@ -1841,7 +1841,7 @@ T-Chain exposes JSON-RPC endpoints under `/ext/bc/T`:
     },
     "id": 1
 }
-```markdown
+```
 
 #### Additional RPC Method Summary
 
@@ -1939,7 +1939,7 @@ type TimingProtection struct {
         return baseDelay + time.Duration(jitter)*time.Millisecond
     }
 }
-```markdown
+```
 
 #### Slashing Conditions
 
@@ -2265,7 +2265,7 @@ func (n *BoundNonce) MarkUsed() error {
     n.Used = true
     return nil
 }
-```markdown
+```
 
 ### T4: Grinding Attack on Session ID Selection
 
@@ -2813,7 +2813,7 @@ This section provides concrete test vectors for implementers to verify correctne
 
 #### Test Vector 1: LSS Share Generation (2-of-3)
 
-```yaml
+```
 # Shamir Secret Sharing over secp256k1 order
 Field Order (n): 0xFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEBAAEDCE6AF48A03BBFD25E8CD0364141
 
@@ -2837,7 +2837,7 @@ Lambda_2 (for x=2): -1 (mod n)
 
 #### Test Vector 2: Feldman VSS Commitments
 
-```yaml
+```
 # Generator G (secp256k1)
 G_x: 0x79BE667EF9DCBBAC55A06295CE870B07029BFCDB2DCE28D959F2815B16F81798
 G_y: 0x483ADA7726A3C4655DA4FBFC0E1108A8FD17B448A68554199C47D08FFB10D4B8
@@ -2860,7 +2860,7 @@ C_1:
 
 #### Test Vector 3: FROST Signing (2-of-3 on secp256k1)
 
-```yaml
+```
 # Group public key Y (aggregated from DKG)
 Y_x: 0x4F355BDCB7CC0AF728EF3CCEB9615D90684BB5B2CA5F859AB0F0B704075871AA
 Y_y: 0x385B83C3D5BE3A8C6AF2FA0B62E7D5E8F9E7D8C6B5A4B3A2918273645546373A
@@ -2920,7 +2920,7 @@ Signature (R, z):
 
 #### Test Vector 4: CGGMP21 Paillier MtA
 
-```yaml
+```
 # Paillier modulus N (2048-bit, truncated for display)
 N: 0xC5B2...7F3D (2048 bits)
 
@@ -2946,7 +2946,7 @@ alpha + beta == a * b (mod curve order)
 
 #### Test Vector 5: Wire Format Encoding
 
-```yaml
+```
 # SignCommitment message for FROST Round 1
 
 # Header (64 bytes)

@@ -174,7 +174,7 @@ func TestCrossChainMessage(t *testing.T) {
     })
     assert.NoError(t, err)
 }
-```markdown
+```
 
 ## Reference Implementation
 

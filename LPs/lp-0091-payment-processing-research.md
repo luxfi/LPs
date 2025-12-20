@@ -284,7 +284,7 @@ interface ComplianceSystem {
 
 ### 1. Architecture Improvements
 
-```yaml
+```
 recommended_architecture:
   payment_gateway:
     primary: "Build Lux-native gateway"

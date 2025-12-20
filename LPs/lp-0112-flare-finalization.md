@@ -303,7 +303,7 @@ func (fpc *FPCEngine) simulateByzantine(
         Confidence: averageConfidence(results),
     }
 }
-```markdown
+```
 
 **Theorem 2**: FPC tolerates up to f < n/3 Byzantine nodes with overwhelming probability.
 
@@ -508,7 +508,7 @@ go test -v ./... -coverprofile=coverage.out
 #
 # ok  	github.com/luxfi/consensus/core/dag	567ms
 # coverage: 96.4% of statements
-```markdown
+```
 
 **API Endpoints**:
 - `GET /ext/info/dag/vertex/{vertexID}` - Query finalization status

@@ -42,7 +42,7 @@ rollup/                   # Rollup plugin modules
 │  ├─ rpc/                # OP RPC namespaces (eth_getBlockProof, etc.)
 │  └─ cli/                # OP CLI commands (genesis, dev, attach)
 └─ <rollup-name>/         # Future rollup modules
-```markdown
+```
 
 ### Build and Feature Flags
 

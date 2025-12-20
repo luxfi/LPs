@@ -100,7 +100,7 @@ contract LuxETH is ERC20B {
 
     constructor() ERC20B(_name, _symbol) {}
 }
-```markdown
+```
 
 #### LBTC (Lux-wrapped BTC)
 
@@ -407,7 +407,7 @@ forge create src/teleport/Bridge.sol:Bridge \
 forge create src/tokens/LETH.sol:LuxETH \
   --rpc-url https://api.lux.network/ext/bc/C/rpc \
   --broadcast
-```markdown
+```
 
 ### Deployed Addresses
 

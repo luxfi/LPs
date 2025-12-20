@@ -49,7 +49,7 @@ Hanzo LLM Gateway (HIP-4)
 ├── Model Selection Engine
 ├── Caching Layer
 └── Cost Optimization
-```markdown
+```
 
 ### Smart Contract AI Oracle
 
@@ -281,7 +281,7 @@ class LuxCrossChainAI implements CrossChainAnalytics {
 
 ### Configuration Management
 
-```yaml
+```
 # lux-node-config.yaml
 ai:
   enabled: true

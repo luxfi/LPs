@@ -371,7 +371,7 @@ The resharing protocol transitions from (t_old, n_old) to (t_new, n_new) without
 
 The reshare protocol is specified as a deterministic finite state machine (DFA):
 
-```yaml
+```
 M = (Q, Sigma, delta, q_0, F)
 
 Where:
@@ -383,7 +383,7 @@ Where:
 
 **State Transition Function delta:**
 
-```yaml
+```
 delta: Q x Sigma -> Q
 
 delta(IDLE, init)              = INIT       if valid_init_tx
@@ -588,7 +588,7 @@ const (
     TriggerProactiveRefresh ReshareTriggerType = 2 // Scheduled security refresh
     TriggerEmergency        ReshareTriggerType = 3 // Security incident response
 )
-```markdown
+```
 
 **Validation Rules:**
 1. KeyID must reference an existing managed key
@@ -996,7 +996,7 @@ func (gm *GenerationManager) Rollback(keyID ids.ID, toGeneration uint32) error {
     gm.activeGeneration[keyID] = toGeneration
     return nil
 }
-```markdown
+```
 
 #### 3.3 Atomic Rollback Protocol
 
@@ -1180,7 +1180,7 @@ $ lux bridge join --node-id=NodeID-xxxxx --stake=100000000
 
 # CLI calls bridge_registerValidator RPC
 # Key shard saved to ~/.lux/keys/bridge-shard.key
-```markdown
+```
 
 #### 4.3 Slot Replacement (Only Reshare Trigger)
 
@@ -2223,7 +2223,7 @@ func MigrateLegacyKey(ctx context.Context, vm *VM, legacy *LegacyKeyMigration) (
         RunTestReshare:      true,  // This will generate commitments
     })
 }
-```markdown
+```
 
 #### CLI Commands (lux-cli)
 
@@ -2537,7 +2537,7 @@ C'_1 = a'_1 * G  (new random coefficient)
 #### Test Vector 2: Threshold Change 2-of-3 to 3-of-5
 
 **Initial State:**
-```yaml
+```
 Secret s = 0x123456789ABCDEF0123456789ABCDEF0123456789ABCDEF0123456789ABCDEF0
 Threshold: t_old = 2
 Parties: n_old = 3, indices {1, 2, 3}
@@ -2551,7 +2551,7 @@ shares:
 ```
 
 **Reshare Parameters:**
-```yaml
+```
 New threshold: t_new = 3
 New parties: n_new = 5, indices {1, 2, 3, 4, 5}
 New polynomial degree: t_new - 1 = 2
@@ -2569,7 +2569,7 @@ C'_2 = a'_2 * G   (new coefficient, didn't exist before)
 ```
 
 **Verification Formula for New Party j:**
-```yaml
+```
 expected_j = C'_0 + j*C'_1 + j^2*C'_2
 actual_j = new_share_j * G
 Verify: expected_j == actual_j for all j in {1,2,3,4,5}
@@ -2642,7 +2642,7 @@ ReshareVerifyTx from Party 4:
 
 For secret reconstruction from parties {1, 3, 5} at x=0:
 
-```yaml
+```
 lambda_1 = (0-3)(0-5) / (1-3)(1-5) = 15 / 8
          = 15 * modInverse(8, n) mod n
          = 15 * 0xDFFFFFFF... mod n
@@ -3005,7 +3005,7 @@ Reshare protocol messages are transmitted over the Lux P2P network using the sta
 
 Encrypted shares use ECIES with the following parameters:
 
-```yaml
+```
 Curve:          secp256k1
 KDF:            HKDF-SHA256
 Cipher:         AES-256-GCM
@@ -3044,7 +3044,7 @@ Decryption:
 
 Regular resharing defeats mobile adversaries:
 
-```sql
+```
 Without Proactive Resharing:
   Year 0: Adversary compromises share 1
   Year 1: Compromises share 2

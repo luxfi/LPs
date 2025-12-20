@@ -60,7 +60,7 @@ ML-DSA (formerly Dilithium) was selected by NIST in 2024 as the primary post-qua
 
 ```
 0x0200000000000000000000000000000000000006
-```markdown
+```
 
 ### Input Format
 
@@ -89,7 +89,7 @@ gas = BASE_COST + (messageLength * PER_BYTE_COST)
 Where:
   BASE_COST = 100,000 gas
   PER_BYTE_COST = 10 gas
-```markdown
+```
 
 **Examples:**
 - Empty message: 100,000 gas
@@ -140,7 +140,7 @@ contract QuantumSafeVault {
         // ...
     }
 }
-```markdown
+```
 
 ## Rationale
 
@@ -221,7 +221,7 @@ function verifySignature(bytes calldata data, bytes calldata sig) {
 ### Test Vector 1: Valid Signature
 
 **Input:**
-```yaml
+```
 publicKey: 0x<1952 bytes of ML-DSA public key>
 message: "Hello, quantum-safe world!"
 signature: 0x<3309 bytes of ML-DSA signature>
@@ -233,7 +233,7 @@ signature: 0x<3309 bytes of ML-DSA signature>
 ### Test Vector 2: Invalid Signature
 
 **Input:**
-```yaml
+```
 publicKey: 0x<1952 bytes of ML-DSA public key>
 message: "Hello, quantum-safe world!"
 signature: 0x<3309 bytes of WRONG signature>
@@ -245,7 +245,7 @@ signature: 0x<3309 bytes of WRONG signature>
 ### Test Vector 3: Tampered Message
 
 **Input:**
-```yaml
+```
 publicKey: 0x<1952 bytes of ML-DSA public key>
 message: "Tampered message"
 signature: 0x<3309 bytes signature for DIFFERENT message>
@@ -262,7 +262,7 @@ signature: 0x<3309 bytes signature for DIFFERENT message>
 ### Test Vector 5: Large Message
 
 **Input:**
-```yaml
+```
 publicKey: 0x<1952 bytes>
 message: 0x<10KB of data>
 signature: 0x<3309 bytes>

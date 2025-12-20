@@ -68,7 +68,7 @@ Integration with Lux precompiles enables:
 
 The singleton EntryPoint processes UserOperations and manages deposits:
 
-```yaml
+```
 Address: 0x0000000071727De22E5E9d8BAf0edAc6f37da032 (v0.7)
 ```
 
@@ -147,7 +147,7 @@ interface IAccount {
         uint256 missingAccountFunds
     ) external returns (uint256 validationData);
 }
-```markdown
+```
 
 **validationData encoding:**
 - Bits 0-159: `aggregator` address (0 = valid, 1 = signature failed)

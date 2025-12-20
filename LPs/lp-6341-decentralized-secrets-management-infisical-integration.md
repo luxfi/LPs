@@ -121,7 +121,7 @@ This platform addresses these challenges:
 |  +--------------------+    +--------------------+    +-----------------+ |
 |                                                                          |
 +-------------------------------------------------------------------------+
-```markdown
+```
 
 ### Data Model
 
@@ -2624,7 +2624,7 @@ helm install lux-secrets-operator luxfi/secrets-operator \
 
 **Operator RBAC:**
 
-```yaml
+```
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
@@ -2663,7 +2663,7 @@ subjects:
     namespace: lux-system
 ```
 
-```yaml
+```
 # CRD: SecretSync
 apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
@@ -2850,7 +2850,7 @@ func (r *SecretSyncReconciler) Reconcile(ctx context.Context, req ctrl.Request) 
 
 #### GitHub Actions
 
-```yaml
+```
 # .github/workflows/deploy.yml
 name: Deploy with Secrets
 
@@ -2956,7 +2956,7 @@ func main() {
 
 #### GitLab CI Integration
 
-```yaml
+```
 # .gitlab-ci.yml
 image: alpine:latest
 

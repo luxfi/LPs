@@ -35,7 +35,7 @@ documentation: https://dex.lux.network
   ║                                                                              ║
   ║            🌍 GLOBAL HFT TRADING VENUES - SUB-MICROSECOND LATENCY 🌍          ║
   ╚═══════════════════════════════════════════════════════════════════════╝
-```markdown
+```
 
 ## Abstract
 
@@ -138,7 +138,7 @@ Lux DEX operates as its own daemon/network that:
 │  Kansas City    London LD4            Tokyo TY3      Zurich ZH1        │
 │                                                                         │
 └─────────────────────────────────────────────────────────────────────────┘
-```markdown
+```
 
 ### Key Architectural Principles
 
@@ -208,7 +208,7 @@ Kansas City is the **optimal first venue** for North America:
                     │           Dallas                  │     │
                     │                         Miami ○   │     │
                     └─────────────────────────────────────────┘
-```markdown
+```
 
 **Kansas City Advantages**:
 - **Central Location**: Optimal latency to both coasts
@@ -293,7 +293,7 @@ Venues determined by community governance and trading demand:
 
     ● = Tier 1 (Live/Planned 2025)
     ○ = Tier 2/3 (Community-driven expansion)
-```markdown
+```
 
 ---
 
@@ -342,7 +342,7 @@ Venues determined by community governance and trading demand:
 │  └──────────────────────────────────────────────────────────┘  │
 │                                                                  │
 └─────────────────────────────────────────────────────────────────┘
-```markdown
+```
 
 ### Colocation Tiers
 
@@ -387,7 +387,7 @@ Venues determined by community governance and trading demand:
     │ KANSAS CITY  │
     │   (NA Hub)   │
     └──────────────┘
-```markdown
+```
 
 ### Redundancy Requirements
 
@@ -469,7 +469,7 @@ Week 1-4:   Kansas City venue buildout
 Week 5-8:   Hardware installation & testing
 Week 9-12:  Beta testing with market makers
 Week 13-16: Public launch NA-1
-```markdown
+```
 
 **Deliverables**:
 - [ ] Kansas City venue operational
@@ -484,7 +484,7 @@ Month 1-2:  London LD4 buildout
 Month 3-4:  Frankfurt FR2 buildout (parallel)
 Month 5:    EU backbone operational
 Month 6:    Zurich ZH4 expansion
-```markdown
+```
 
 **Deliverables**:
 - [ ] London venue operational

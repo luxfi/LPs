@@ -761,7 +761,7 @@ forge test --match-path test/rng/\* --gas-report
 
 # Coverage
 forge coverage --match-path test/rng/\*
-```markdown
+```
 
 **Test Cases** (see `/test/rng/RandomNumberGenerator.t.sol`):
 - `testVRFRandomness()` - VRF verification

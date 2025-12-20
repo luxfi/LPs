@@ -102,7 +102,7 @@ src/gmx2/
 ├── scripts/            # Deployment and utility scripts
 ├── test/               # Test suite
 └── hardhat.config.js   # Build configuration
-```markdown
+```
 
 **Capabilities**:
 - Perpetual futures with up to 50x leverage
@@ -175,7 +175,7 @@ interface IAlchemistV2 {
 OpenZeppelin 5.x removed several legacy utilities. The standard library provides shims for backward compatibility:
 
 **SafeMath Shim**:
-```yaml
+```
 Location: /Users/z/work/lux/standard/src/safe/contracts/external/SafeMath.sol
 License: LGPL-3.0
 ```
@@ -193,7 +193,7 @@ library SafeMath {
 ```
 
 **SafeCast Utility**:
-```yaml
+```
 Location: /Users/z/work/lux/standard/src/alcx2/contracts/libraries/SafeCast.sol
 License: GPL-2.0-or-later
 ```
@@ -216,7 +216,7 @@ library SafeCast {
 DeFi protocols integrate with Lux threshold signature precompiles for enhanced security:
 
 **FROST Threshold Signatures (LP-7321)**:
-```yaml
+```
 Precompile: 0x020000000000000000000000000000000000000C
 Use Case: Multi-party custody, DAO treasury
 ```
@@ -313,7 +313,7 @@ interface ITokenAdapter {
     function wrap(uint256 amount, address recipient) external returns (uint256);
     function unwrap(uint256 amount, address recipient) external returns (uint256);
 }
-```markdown
+```
 
 ## Rationale
 

@@ -146,7 +146,7 @@ Green Certified validators receive priority in:
 
 All validators must submit:
 
-```yaml
+```
 validator_id: "NodeID-..."
 reporting_year: 2025
 energy_disclosure:

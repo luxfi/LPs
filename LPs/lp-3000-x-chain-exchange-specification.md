@@ -192,7 +192,7 @@ func (ob *OrderBook) MatchOrder(order *Order) ([]*Trade, error) {
 
 #### REST Endpoints
 
-```sql
+```
 GET  /ext/bc/X/utxos/{address}
 GET  /ext/bc/X/assets/{assetID}
 POST /ext/bc/X/transactions/send

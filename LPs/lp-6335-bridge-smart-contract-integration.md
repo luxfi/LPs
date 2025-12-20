@@ -63,7 +63,7 @@ Cross-chain bridges are high-value targets with billions lost to exploits. The L
 |    T-Chain MPC   |
 | (Threshold Sig)  |
 +------------------+
-```markdown
+```
 
 ### 2. BridgeVault Contract
 

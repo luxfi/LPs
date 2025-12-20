@@ -125,7 +125,7 @@ K-Chain is a specialized Lux subnet running the KeyManagementVM:
 |                    +----------------------+                             |
 |                                                                         |
 +-------------------------------------------------------------------------+
-```markdown
+```
 
 ### Core Components
 
@@ -3222,7 +3222,7 @@ func ValidateParams(mode mlkem.Mode) error {
 
     return nil
 }
-```markdown
+```
 
 #### Decapsulation Failure Handling (FIPS 203 Section 6.3)
 

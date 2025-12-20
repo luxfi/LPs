@@ -293,7 +293,7 @@ Freezer Batch Size: 2,048 blocks
 ```
 
 **Validator Node Configuration**:
-```yaml
+```
 Sync Mode: full
 Pruning Mode: archive
 Retention: infinite

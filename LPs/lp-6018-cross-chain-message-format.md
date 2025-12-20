@@ -63,7 +63,7 @@ enum MessageType {
     REGISTRY_UPDATE = 0x05,    // Asset registry update
     EMERGENCY = 0x06           // Emergency action
 }
-```markdown
+```
 
 ### Payload Formats
 
@@ -77,7 +77,7 @@ AssetTransferPayload {
     fee: uint256              // Bridge fee
     data: bytes               // Optional callback data
 }
-```markdown
+```
 
 #### Contract Call Payload
 ```solidity
@@ -88,7 +88,7 @@ ContractCallPayload {
     gasLimit: uint256         // Gas limit for execution
     sender: bytes             // Original sender
 }
-```markdown
+```
 
 #### Batch Transfer Payload
 ```
@@ -96,7 +96,7 @@ BatchTransferPayload {
     transfers: AssetTransfer[] // Array of transfers
     atomicExecution: bool      // All or nothing execution
 }
-```markdown
+```
 
 ### Message Proof
 
@@ -107,7 +107,7 @@ MessageProof {
     signatures: Signature[]    // Array of signatures
     metadata: bytes           // Additional proof data
 }
-```markdown
+```
 
 #### Signature Format
 ```
@@ -117,7 +117,7 @@ Signature {
     r: bytes32               // Signature r value
     s: bytes32               // Signature s value
 }
-```markdown
+```
 
 ### Encoding Specification
 
@@ -141,7 +141,7 @@ Messages use a compact binary encoding:
 // Proof
 [proofType(1)] [signatureCount(2)] [signatures(...)] 
 [metadataLen(2)] [metadata(...)]
-```markdown
+```
 
 ### Message Validation
 
@@ -179,7 +179,7 @@ function validateMessage(
 ### Cross-Chain Identifiers
 
 #### Chain ID Format
-```yaml
+```
 ChainID = keccak256(abi.encode(networkType, networkId, subnetId))
 
 Examples:
@@ -213,7 +213,7 @@ function bridgeAsset(
     bytes32 messageHash = keccak256(encode(message));
     // MPC nodes sign messageHash
 }
-```markdown
+```
 
 #### With Teleport (LP-16)
 ```solidity

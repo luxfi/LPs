@@ -69,7 +69,7 @@ P(break_hybrid) = P(break_classical) * P(break_quantum)
 
 #### Phase 0: Preparation (Months -3 to 0)
 
-```yaml
+```
 Preparation:
   Infrastructure:
     - Deploy post-quantum libraries
@@ -85,7 +85,7 @@ Preparation:
     - Quantum threat assessment
     - Network readiness metrics
     - Compatibility testing
-```markdown
+```
 
 #### Phase 1: Soft Fork Activation (Months 1-3)
 
@@ -115,7 +115,7 @@ func (p *Phase1Rules) ValidateTransaction(tx *Transaction) error {
     }
     return nil
 }
-```markdown
+```
 
 #### Phase 2: Mandatory Hybrid (Months 4-6)
 
@@ -132,7 +132,7 @@ type Phase2Rules struct {
 func (p *Phase2Rules) EnforceHybrid(height uint64) bool {
     return height > p.ActivationHeight + p.GracePeriodBlocks
 }
-```markdown
+```
 
 #### Phase 3: Quantum Primary (Months 7-9)
 
@@ -159,11 +159,11 @@ contract Phase3Migration {
         emit AccountUpgraded(msg.sender, quantumPubKey);
     }
 }
-```markdown
+```
 
 #### Phase 4: Quantum Native (Month 10+)
 
-```yaml
+```
 Final State:
   New Accounts:
     - Quantum-only signatures

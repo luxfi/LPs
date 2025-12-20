@@ -146,7 +146,7 @@ interface IMPCBridgeRegistry {
     function validateAsset(bytes32 assetId) external view returns (bool);
     function getAssetLimits(bytes32 assetId) external view returns (uint256 min, uint256 max);
 }
-```markdown
+```
 
 #### With Teleport (LP-16)
 ```solidity

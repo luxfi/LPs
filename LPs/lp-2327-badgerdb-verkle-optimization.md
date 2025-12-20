@@ -53,7 +53,7 @@ BadgerDB + Verkle Stack:
 └─────────────────────────┘  └──────────────────────┘
          ↑                            ↑
     Fits in RAM               Sequential writes
-```markdown
+```
 
 ### 2. Write Amplification Reduction
 
@@ -68,11 +68,11 @@ BadgerDB with Verkle trees:
 - Write amplification approaches 1x for proofs
 
 **Calculation**:
-```yaml
+```
 Traditional: 32B key + 512B proof = 544B per entry × 7 levels = 3.8KB written
 BadgerDB: 32B key × 7 levels + 512B proof × 1 = 224B + 512B = 736B written
 Reduction: ~80% less write amplification
-```sql
+```
 
 ### 3. Memory Efficiency
 
@@ -309,7 +309,7 @@ func TestProofCaching(t *testing.T) {
     require.Equal(t, proof1, proof2)
     require.Less(t, cached, uncached/10)  // Cache should be >10x faster
 }
-```markdown
+```
 
 ### Benchmarks
 
@@ -329,7 +329,7 @@ Traditional LevelDB:  145 seconds
 Traditional RocksDB:  132 seconds
 BadgerDB (standard):   78 seconds
 BadgerDB (optimized):  42 seconds  ← 71% faster than RocksDB
-```markdown
+```
 
 ### Read Performance (1M random key lookups)
 ```
@@ -337,7 +337,7 @@ Traditional LevelDB:  89 seconds
 Traditional RocksDB:  76 seconds
 BadgerDB (standard):   31 seconds
 BadgerDB (optimized):  12 seconds  ← 84% faster than RocksDB
-```markdown
+```
 
 ### Storage Efficiency (10M entries)
 ```

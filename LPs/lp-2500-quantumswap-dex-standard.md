@@ -81,7 +81,7 @@ Uniswap v4's hook system improves AMM flexibility but cannot overcome fundamenta
 |                    | 1ms Finality      |                          |
 |                    +-------------------+                          |
 +------------------------------------------------------------------+
-```markdown
+```
 
 ### 2. Performance Specifications
 
@@ -246,7 +246,7 @@ interface IFrostCustody {
         uint8[] calldata signerIndices
     ) external returns (bytes32 orderId);
 }
-```markdown
+```
 
 ### 8. RPC API
 

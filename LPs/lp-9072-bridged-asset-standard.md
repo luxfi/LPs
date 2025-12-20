@@ -456,7 +456,7 @@ forge test --match-path test/tokens/\* --gas-report
 
 # Coverage
 forge coverage --match-path test/tokens/\*
-```markdown
+```
 
 **Test Cases** (see `/test/tokens/BridgedAsset.t.sol`):
 - `testMintBridgedTokens()` - Bridge-in minting

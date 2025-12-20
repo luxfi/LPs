@@ -104,7 +104,7 @@ interface IPrivateStaking {
         bytes calldata proof
     ) external view returns (bool eligible);
 }
-```markdown
+```
 
 ### Verifiable Delay Functions (VDF)
 
@@ -335,7 +335,7 @@ interface IPrivateSlashing {
         bytes calldata proof
     ) external view returns (bool valid);
 }
-```markdown
+```
 
 ### Distributed Key Generation (DKG)
 
@@ -638,7 +638,7 @@ function testPrivateRewardClaim() public {
     uint256 decryptedAmount = decryptReward(encryptedReward, privateKey);
     assertEq(decryptedAmount, expectedReward);
 }
-```markdown
+```
 
 ## Backwards Compatibility
 

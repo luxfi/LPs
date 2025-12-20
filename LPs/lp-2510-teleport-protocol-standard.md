@@ -118,7 +118,7 @@ IBC Teleport implements the Inter-Blockchain Communication protocol specificatio
 |      Network Layer (Relayers)         |
 |   (Message Routing, Delivery)         |
 +---------------------------------------+
-```markdown
+```
 
 #### 2.3 Core Types
 
@@ -289,7 +289,7 @@ The MPC Bridge enables cross-chain asset transfers across EVM and non-EVM chains
 
 #### 3.4 MPC Node Configuration
 
-```yaml
+```
 # config.yaml
 mpc:
   threshold: 2          # Minimum signatures required

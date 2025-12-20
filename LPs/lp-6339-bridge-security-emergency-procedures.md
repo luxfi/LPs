@@ -522,7 +522,7 @@ func (rl *RateLimiter) checkAssetLimit(asset AssetID, amount *big.Int) error {
 
     return nil
 }
-```markdown
+```
 
 #### 2.2 Withdrawal Delays (Time-locks)
 
@@ -3038,7 +3038,7 @@ func (ti *TChainSecurityIntegration) SecureSignatureRequest(
 
     return ti.tchain.RequestSignature(signReq)
 }
-```markdown
+```
 
 #### 7.2 B-Chain Integration (LP-331)
 
@@ -3101,7 +3101,7 @@ func (bi *BChainSecurityIntegration) ChallengeWithdrawal(
     // Submit challenge via LP-331
     return bi.bchain.ChallengeWithdrawal(withdrawID, reason)
 }
-```markdown
+```
 
 #### 7.3 Dynamic Signer Rotation Integration (LP-333)
 
@@ -3141,7 +3141,7 @@ func (si *SignerRotationSecurityIntegration) HandleCompromiseDetection(
         Priority:        PriorityEmergency,
     })
 }
-```markdown
+```
 
 #### 7.4 Smart Contract Integration (LP-335)
 

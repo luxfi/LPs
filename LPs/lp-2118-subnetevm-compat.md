@@ -159,7 +159,7 @@ func (b *SubnetEVMBlock) ToLuxBlock() *LuxBlock {
         // ... map remaining fields
     }
 }
-```yaml
+```
 
 ## Test Cases
 

@@ -63,7 +63,7 @@ Validators who already stake LUX now earn additional MPC rewards, tightening eco
  | X-Chain   |<-------| mpckeyd (per signer)|------->| BTC / ETH |
  | SwapFx    |        +---------------------+        |  XRPL…    |
  +-----------+                                        +-----------+
-```markdown
+```
 
 - Each validator must run `mpckeyd`, holding one or more key-shares.
 - When an X-Chain `SwapTx` enters PENDING state, validators detect the event through a filtered light-client feed, assemble a threshold signature, and collectively submit `SwapSigTx` on T-Chain.
@@ -121,7 +121,7 @@ type SwapSigTx struct {
 ```
 require AggVerify(AggPubKey[AssetID], SigBitmap, Signature, msgHash(SwapID))
 require bitcount(SigBitmap) >= threshold(AssetID)
-```markdown
+```
 
 Successful inclusion triggers:
 - credit `rewardPerSig` to each signer in the bitmap,

@@ -60,7 +60,7 @@ FROST (Flexible Round-Optimized Schnorr Threshold) provides unique advantages:
 
 ```
 0x020000000000000000000000000000000000000C
-```markdown
+```
 
 ### Input Format
 
@@ -98,7 +98,7 @@ gas = BASE_COST + (totalSigners * PER_SIGNER_COST)
 Where:
   BASE_COST = 50,000 gas
   PER_SIGNER_COST = 5,000 gas per participant
-```markdown
+```
 
 **Examples:**
 - 2-of-3 threshold: 50,000 + (3 × 5,000) = 65,000 gas
@@ -388,7 +388,7 @@ function verify(bytes calldata sig) internal view returns (bool) {
 ### Test Vector 1: Valid 3-of-5 Threshold
 
 **Input:**
-```yaml
+```
 threshold: 3
 totalSigners: 5
 publicKey: 0x9f86d081884c7d659a2feaa0c55ad015a3bf4f1b2b0b822cd15d6c15b0f00a08
@@ -402,7 +402,7 @@ signature: 0x<64 bytes of valid Schnorr signature>
 ### Test Vector 2: Invalid Signature
 
 **Input:**
-```yaml
+```
 threshold: 3
 totalSigners: 5
 publicKey: <same as above>
@@ -416,7 +416,7 @@ signature: 0x<64 bytes of INVALID signature>
 ### Test Vector 3: Tampered Message
 
 **Input:**
-```yaml
+```
 threshold: 3
 totalSigners: 5
 publicKey: <valid key>
@@ -429,7 +429,7 @@ signature: <valid signature for different message>
 ### Test Vector 4: Invalid Threshold Parameters
 
 **Input:**
-```yaml
+```
 threshold: 6
 totalSigners: 5
 publicKey: <valid key>
@@ -442,7 +442,7 @@ signature: <valid signature>
 ### Test Vector 5: Large Threshold (10-of-15)
 
 **Input:**
-```yaml
+```
 threshold: 10
 totalSigners: 15
 publicKey: <valid key>
@@ -708,7 +708,7 @@ import "github.com/luxfi/threshold/protocols/frost"
 
 The precompile verifies standard Schnorr signatures:
 
-```yaml
+```
 Given:
   - Public key P (32 bytes x-coordinate)
   - Message hash m (32 bytes)

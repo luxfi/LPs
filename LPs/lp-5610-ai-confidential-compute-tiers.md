@@ -128,7 +128,7 @@ This LP establishes clear definitions, hardware requirements, and trust scores f
 GPU Boot → Secure Firmware Load → Generate GPU Quote →
   Submit to Attestation Verifier → Verify Certificate Chain →
     Bind to Chain ID → Register Provider with Tier 1
-```markdown
+```
 
 **Use Cases**:
 - Model weight protection (LLM inference with private weights)
@@ -162,7 +162,7 @@ GPU Boot → Secure Firmware Load → Generate GPU Quote →
 CPU Boot → Load Confidential VM → Generate SEV/TDX/CCA Report →
   Attach GPU → Verify CPU Report → Bind to Chain ID →
     Register Provider with Tier 2
-```markdown
+```
 
 **Limitations**:
 - GPU memory not encrypted at rest
@@ -203,7 +203,7 @@ Device Boot → Secure Enclave Init → Load AI Model in TEE →
   Generate Attestation Token → Submit to Attestation Verifier →
     Verify Device Certificate → Bind to Chain ID →
       Register Provider with Tier 3
-```markdown
+```
 
 **Limitations**:
 - Limited compute power vs data center
@@ -328,7 +328,7 @@ func VerifyTier1Attestation(att *NVTrustAttestation) (bool, error) {
 
     return true, nil
 }
-```markdown
+```
 
 #### 4.2 Tier 2 Attestation (SEV-SNP/TDX/CCA)
 
@@ -360,7 +360,7 @@ func VerifyTier2Attestation(att *ConfidentialVMAttestation) (bool, error) {
         return false, ErrUnknownTEEType
     }
 }
-```markdown
+```
 
 #### 4.3 Tier 3 Attestation (Device TEE)
 

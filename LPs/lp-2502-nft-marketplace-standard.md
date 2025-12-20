@@ -80,7 +80,7 @@ lib/seaport/contracts/
 │   └── PausableZoneController.sol
 └── helpers/order-validator/
     └── SeaportValidator.sol      # Order validation
-```markdown
+```
 
 **Canonical Addresses** (cross-chain):
 | Contract | Address |
@@ -132,7 +132,7 @@ src/sudo2/src/
 └── settings/
     ├── StandardSettings.sol      # Configurable pool settings
     └── StandardSettingsFactory.sol
-```markdown
+```
 
 ### Dependencies
 

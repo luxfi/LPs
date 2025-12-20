@@ -106,7 +106,7 @@ interface IComputePriceOracle {
     function getEnergyPrice(string calldata region) external view returns (EnergyPrice memory);
     function updatePrices(GPUPrice[] calldata gpu, EnergyPrice[] calldata energy) external onlyOracle;
 }
-```markdown
+```
 
 **Price Discovery:**
 - Off-chain workers post signed quotes

@@ -63,7 +63,7 @@ Q-Chain serves as the quantum finality layer for all Lux chains:
     +------+   +------+   +------+   +------+   +------+
     |P-Chain|  |C-Chain|  |X-Chain|  |A-Chain|  |Subnets|
     +-------+  +-------+  +-------+  +-------+  +-------+
-```markdown
+```
 
 Each chain submits block tips to Q-Chain for quantum-safe finalization. Once finalized on Q-Chain, blocks inherit quantum resistance across all chains.
 
@@ -376,7 +376,7 @@ contract LXDEXSettlement is QuasarVerifier {
         _executeSettlement();
     }
 }
-```markdown
+```
 
 **Performance:**
 - Order matching: 2ns (GPU) / 487ns (CPU)

@@ -68,7 +68,7 @@ This LP establishes AIVM as a first-class VM in the Lux ecosystem, enabling trus
 │                    │   (Merkle Root)   │                        │
 │                    └───────────────────┘                        │
 └─────────────────────────────────────────────────────────────────┘
-```markdown
+```
 
 ### 2. VM Registration
 

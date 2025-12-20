@@ -104,7 +104,7 @@ node/vms/platformvm/
 
 ### Staking Rewards
 
-```yaml
+```
 Annual Percentage Yield (APY) = f(totalStaked, supplyRemaining)
 
 Where:

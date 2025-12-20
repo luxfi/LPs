@@ -66,7 +66,7 @@ lib/compound/
 │   └── bulkers/                     # Batch operations
 │       ├── BaseBulker.sol
 │       └── MainnetBulker.sol
-```markdown
+```
 
 ### Key Contracts
 

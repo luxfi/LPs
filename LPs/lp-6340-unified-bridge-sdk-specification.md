@@ -91,7 +91,7 @@ The Teleport bridge architecture (LP-0332) and smart contract integration (LP-03
 │        B-Chain (BridgeVM)              T-Chain (ThresholdVM)                 │
 │        Bridge Smart Contracts          MPC Signatures                        │
 └─────────────────────────────────────────────────────────────────────────────┘
-```markdown
+```
 
 ### 2. Core Modules
 
@@ -346,7 +346,7 @@ const bridge = new BridgeClient({
     luxRpcUrl: 'https://api.lux.network',
     signer: privateKeySigner,
 });
-```markdown
+```
 
 #### 4.4 Deposit Operation (External -> Lux)
 
@@ -422,7 +422,7 @@ async function depositToLux() {
 
     await bridge.disconnect();
 }
-```markdown
+```
 
 #### 4.5 Withdraw Operation (Lux -> External)
 

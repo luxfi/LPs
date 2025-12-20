@@ -35,7 +35,7 @@ The Fee Manager precompile enables chains to implement custom fee economics with
 ### Precompile Address
 ```
 0x0200000000000000000000000000000000000003
-```markdown
+```
 
 ### Functions
 
@@ -128,7 +128,7 @@ setFeeConfig(
     maxBlockGasCost: 1000 gwei,
     blockGasCostStep: 200 wei
 )
-```markdown
+```
 **Expected:** Success, fee config updated
 **Expected Gas:** ~20,000 (write cost)
 **Expected Event:** FeeConfigChanged emitted
@@ -304,7 +304,7 @@ go test -v ./...
 cd ~/work/lux/standard
 forge test --match-contract FeeManagerTest
 # Tests: Configuration updates, unauthorized access, rate limiting
-```markdown
+```
 
 ### Gas Costs
 

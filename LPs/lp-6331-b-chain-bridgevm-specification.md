@@ -127,7 +127,7 @@ Implementations claiming conformance to this specification:
 |                                                                          |
 |  Same MPC address works on all EVM chains (deterministic derivation)    |
 +-------------------------------------------------------------------------+
-```markdown
+```
 
 ### VM Architecture
 
@@ -1806,7 +1806,7 @@ func (fd *FeeDistribution) ClaimRelayerReward(relayer common.Address) (*big.Int,
 
 The total fee for a bridge operation is calculated as:
 
-```yaml
+```
 TotalFee = BaseFee + PercentageFee + ChainFee
 
 Where:
@@ -1827,7 +1827,7 @@ Fee Distribution:
 ```
 
 **Example Calculation** (1000 USDC withdrawal to Ethereum):
-```yaml
+```
 Amount          = 1000 USDC
 BaseFee         = 0.001 LUX = ~$0.05
 PercentageFee   = 1000 * 20 / 10000 = 2 USDC
@@ -1847,7 +1847,7 @@ All bridge messages use a compact binary encoding for on-chain storage and cross
 
 #### Message Header (8 bytes)
 
-```yaml
+```
 +--------+--------+--------+--------+--------+--------+--------+--------+
 |  Ver   |  Type  |          Length (4 bytes)          |    Flags       |
 +--------+--------+--------+--------+--------+--------+--------+--------+
@@ -2908,7 +2908,7 @@ This section provides concrete test vectors for implementers to validate their i
 
 **Input**: Ethereum USDC deposit to Lux recipient
 
-```yaml
+```
 Source Chain:      Ethereum (ChainID: 1)
 Source Tx Hash:    0x8f2c7e9d3a1b5c4e6f8a0b2d4e6f8a0b2d4e6f8a0b2d4e6f8a0b2d4e6f8a0b2d
 Source Block:      19500000
@@ -2920,7 +2920,7 @@ Recipient:         0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC
 ```
 
 **Expected DepositID** (keccak256 of chainID || txHash || logIndex):
-```yaml
+```
 Input bytes:  0x0000000000000001 || 0x8f2c7e9d3a1b5c4e6f8a0b2d4e6f8a0b2d4e6f8a0b2d4e6f8a0b2d4e6f8a0b2d || 0x0003
 DepositID:    0xa1b2c3d4e5f6789012345678901234567890123456789012345678901234abcd
 ```
@@ -2945,7 +2945,7 @@ DepositID:    0xa1b2c3d4e5f6789012345678901234567890123456789012345678901234abcd
 
 **Input**: Withdraw wrapped USDC from Lux to Ethereum
 
-```yaml
+```
 Destination Chain: Ethereum (ChainID: 1)
 Recipient:         0x742d35Cc6634C0532925a3b844Bc9e7595f8a1b2
 AssetID:           0xabcdef1234567890abcdef1234567890abcdef1234567890abcdef1234567890
@@ -2957,13 +2957,13 @@ Sender:            0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC
 ```
 
 **Expected WithdrawID** (keccak256 of sender || nonce || destChain || assetID):
-```yaml
+```
 Input bytes:  0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC || 0x000000000000002a || 0x0000000000000001 || [assetID]
 WithdrawID:   0xfedcba0987654321fedcba0987654321fedcba0987654321fedcba0987654321
 ```
 
 **Expected Fee Breakdown**:
-```yaml
+```
 BaseFee:        1000000000000000 wei (0.001 LUX)
 PercentageFee:  500000000 * 20 / 10000 = 1000000 (1 USDC, 0.2%)
 ChainFee:       ~3000000 (estimated Ethereum gas)
@@ -2992,7 +2992,7 @@ Signing message hash: 0x1234567890abcdef1234567890abcdef1234567890abcdef12345678
 ```
 
 **Expected MPC Signature** (CGG21 ECDSA):
-```yaml
+```
 R: 0x2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d7e8f9a0b1c2d3e4f5a6b7c8d9e0f1a2b3c
 S: 0x1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d7e8f9a0b1c2d3e4f5a6b7c8d9e0f1a2b
 V: 27
@@ -3017,13 +3017,13 @@ Max Slippage:       100 (1%)
 ```
 
 **Expected SwapID**:
-```yaml
+```
 SwapID: keccak256(sourceChain || destChain || sourceAsset || destAsset || sender || nonce)
       = 0x5678901234abcdef5678901234abcdef5678901234abcdef5678901234abcdef
 ```
 
 **Expected Fee** (swap = 30 bp):
-```yaml
+```
 BaseFee:        0.001 LUX
 PercentageFee:  50000 * 0.003 = 150 USDC
 ChainFee:       ~5 USDC (both chains)
@@ -3034,7 +3034,7 @@ TotalFee:       ~155 USDC
 
 **Input**: Bitcoin deposit to MPC Taproot vault
 
-```yaml
+```
 Bitcoin TxID:       a1b2c3d4e5f6789012345678901234567890123456789012345678901234abcd
 Output Index:       0
 Value:              10000000 satoshis (0.1 BTC)
@@ -3043,13 +3043,13 @@ OP_RETURN data:     0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC (Lux recipient)
 ```
 
 **Expected DepositID**:
-```yaml
+```
 DepositID: keccak256(0 || txid || outputIndex)
          = 0x9876543210fedcba9876543210fedcba9876543210fedcba9876543210fedcba
 ```
 
 **SPV Proof Structure**:
-```yaml
+```
 BlockHeader:    80 bytes (Bitcoin block header)
 MerkleProof:    [hash1, hash2, ...] (path to tx in merkle tree)
 TxIndex:        position in block

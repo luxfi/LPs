@@ -83,7 +83,7 @@ This LP specifies the DEX Trading Engine - the core component of the Lux DEX sid
 │  │       (C-Chain for EVM, B-Chain for Bridge, etc.)               │ │
 │  └─────────────────────────────────────────────────────────────────┘ │
 └──────────────────────────────────────────────────────────────────────┘
-```markdown
+```
 
 ## Benchmark Results (Actual)
 
@@ -97,7 +97,7 @@ BenchmarkOrderBookParallel-10       684184 orders/sec   1462.0 ns/op
 BenchmarkCriticalOrderMatching/100   714820 orders/sec   1398.8 ns/op
 BenchmarkCriticalOrderMatching/1000  576844 orders/sec   1733.6 ns/op
 BenchmarkCriticalOrderMatching/10000 521370 orders/sec   1918.0 ns/op
-```markdown
+```
 
 ### Multi-Backend Comparison
 
@@ -320,7 +320,7 @@ func (dag *DAG) ProcessVertex(v *Vertex) error {
 
 ## Configuration
 
-```yaml
+```
 # dex.yaml
 trading_engine:
   backend: "go"  # go, cgo, mlx, fpga
