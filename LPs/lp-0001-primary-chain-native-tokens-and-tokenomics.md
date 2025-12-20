@@ -23,7 +23,7 @@ Lux requires a canonical definition of its native currency and a consistent sche
 
 - Native token ticker: `LUX`.
 - Total supply: 2,000,000,000,000 LUX (2T) at genesis; distribution as defined below.
-- Decimals: 6 (MicroLux base unit, like USDC).
+- Decimals: 18 on C-Chain (EVM-compatible), 6 on P/X-Chains (native UTXO).
 - Chain identifiers: single‑character codes reserved network‑wide — `P`, `C`, `X`, `A`, `B`, `T`, `Q`, `Z`.
 - Fees: All on‑chain transaction fees are denominated in LUX.
 - Governance: LUX may be used in protocol governance per future LPs.
