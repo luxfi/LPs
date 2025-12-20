@@ -1,404 +1,491 @@
 ---
 lp: 0000
-title: Lux Network Architecture & Community Framework
-tags: [core, consensus]
-description: Defines the overall architecture of the Lux multi-chain network and the governance/process framework for the community.
+title: Lux Network Architecture & Standards Framework
+tags: [network, architecture, meta, governance, standards]
+description: Foundational document establishing Lux Network's mission, the LP standards process, multi-chain architecture, and research domains.
 author: Lux Network Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
 status: Final
 type: Meta
 created: 2025-01-23
-updated: 2025-07-25
-activation:
-  flag: lp0-architecture-framework
-  hfName: ""
-  activationHeight: "N/A"
+updated: 2025-12-19
 ---
 
 ## Abstract
 
-## Activation
+LP-0000 is the genesis document for Lux Network — establishing our mission, the standards process, and the technical architecture that makes it possible.
 
-| Parameter          | Value                                           |
-|--------------------|-------------------------------------------------|
-| Flag string        | `lp0-architecture-framework`                    |
-| Default in code    | N/A                                             |
-| Deployment branch  | N/A                                             |
-| Roll-out criteria  | N/A                                             |
-| Back-off plan      | N/A                                             |
+Lux is a multi-chain blockchain platform designed for institutional-grade applications requiring quantum-resistant security, sub-second finality, and seamless cross-chain interoperability. The network achieves this through a modular architecture where specialized chains handle distinct workloads (execution, bridging, AI, threshold cryptography) while sharing security through unified consensus.
 
-A short (~200 word) description of the technical issue being addressed. This should be a very terse and human-readable version of the specification section. Someone should be able to read only the abstract to get the gist of what this specification does.
+This document defines:
+1. **Mission & Ethos**: Why Lux exists and our core principles
+2. **Standards Process**: How LPs (Lux Proposals) govern the network's evolution
+3. **Architecture Overview**: The multi-chain topology and consensus model
+4. **Research Domains**: The technical subjects that LPs address
 
-LP‑0 establishes the foundational blueprint for Lux, defining both its heterogeneous multi‑chain architecture and the community‑driven improvement process.
+## Part 1: Mission & Ethos
 
-Lux cleanly decouples execution semantics from consensus and security, enabling each blockchain “subnet” to run its own virtual machine (e.g., EVM or alternative VMs) while leveraging a shared security and transport layer for cross‑chain communication[1][2]. This architectural separation addresses scalability through workload partitioning (“divide‑and‑conquer”) and modular isolation, optimizing performance for specialized applications[3].
+### Why Lux Exists
 
-Interoperability is protocol‑native: subnets exchange messages trustlessly via secure primitives inspired by Polkadot’s Cross‑Chain Message Passing and Cosmos IBC[4][5]. Each subnet benefits from shared security guarantees and can interoperate regardless of its underlying consensus or VM.
+Blockchain infrastructure today faces four fundamental challenges:
 
-Governance and evolution follow a meta‑proposal model modeled after Ethereum’s EIP process. Any community member may draft, review, and ratify LPs through open discussion and structured stages, ensuring transparency, inclusivity, and rigorous technical scrutiny[6][7].
+1. **Quantum Vulnerability**: Existing networks rely on cryptography that quantum computers will break
+2. **Fragmentation**: Different chains for different use cases with no secure interoperability
+3. **Institutional Gaps**: Missing infrastructure for compliance, custody, and enterprise integration
+4. **Impact Blindness**: Networks that ignore environmental sustainability and social responsibility
 
-In summary, Lux’s architecture combines a modular, scalable multi‑chain framework with a formalized, community‑centric governance process, providing a coherent foundation for all subsequent LPs.
+Lux addresses these by building **infrastructure-first** — treating consensus, cryptography, bridging, custody, and **impact** as foundational systems rather than afterthoughts.
 
-## Motivation
+### Impact-First Development
 
-As the Lux Network evolves to support advanced cross-chain operations, privacy features, and a growing ecosystem of applications, we need:
+Lux integrates environmental and social impact into its core architecture, not as an afterthought but as a design principle:
 
-1. **Clear Architecture Documentation**: A comprehensive reference for developers, validators, and users to understand how all components work together
-2. **Community Contribution Framework**: Structured processes to leverage open-source collaboration for accelerating growth and innovation
-3. **Unified Vision**: A single source of truth for the network's design principles and future direction
+- **Sustainable Consensus**: Quasar achieves finality without energy-intensive proof-of-work
+- **Carbon Transparency**: On-chain accounting for network energy consumption (see LP-801)
+- **Green Compute**: Validator incentives aligned with renewable energy usage (see LP-810)
+- **Public Goods**: Treasury allocation for ecosystem grants and community development (see LP-920)
+- **Financial Inclusion**: Infrastructure designed for global accessibility (see LP-930)
 
-## Specification
+The complete Impact Framework is defined in the ESG LP series (LP-750 to LP-930), including:
+- **LP-760**: Lux Network Impact Thesis
+- **LP-800**: ESG Principles & Commitments
+- **LP-900**: Impact Framework & Theory of Change
 
-### Part 1: Network Architecture
+### Financial Inclusion Mission
 
-#### Architecture Overview
+Nearly **800 million Muslims** worldwide remain unbanked — excluded from traditional financial systems that conflict with Islamic finance principles (prohibition of interest/riba). Billions more across marginalized communities lack access to banking infrastructure entirely: the rural poor, refugees, the undocumented, and those in economies with unstable currencies.
 
-```
-┌─────────────────────────────────────────────────────────────────────┐
-│                    Lux Network Architecture 2.0                       │
-├─────────────────────────────────────────────────────────────────────┤
-│                          Primary Network                              │
-├─────────────────────┬─────────────────────┬─────────────────────────┤
-│      Q-Chain       │      X-Chain         │       C-Chain           │
-│    (Root PQC)     │    (Exchange)        │     (Contract)          │
-├─────────────────────┼─────────────────────┼─────────────────────────┤
-│ • Quasar Consensus │ • CEX (Hyperliquid)  │ • EVM Compatible        │
-│ • Verkle + Witness │ • 1B+ trades/sec     │ • Uniswap AMM DEX       │
-│ • BLS + Ringtail   │ • KCMO Datacenter    │ • DeFi Ecosystem        │
-│ • Platform Mgmt    │ • FIX Protocol       │ • OP-Stack Ready        │
-└─────────────────────┴─────────────────────┴─────────────────────────┘
-                                │
-                    ┌───────────┴────────────┐
-                    │   Specialized Chains   │
-        ┌───────────┴────────┬──────┴────────┬────────────────┐
-        │     A-Chain        │   B-Chain     │   T-Chain      │
-        │ (AI/Attestation)   │ (Bridge Layer)│    (MPC)       │
-        ├────────────────────┼───────────────┼────────────────┤
-        │ • TEE Attestation  │ • Cross-Chain │ • CGG21 + Ring │
-        │ • Proof-of-AI      │ • Overlay     │ • Threshold Sig│
-        │ • LUX Gas Token    │ • MPC Sigs    │ • Key Manager  │
-        │ • GRPO Learning    │ • Multi-Asset │ • Asset Swaps  │
-        └────────────────────┴───────────────┴────────────────┘
-                                │
-        ┌───────────┴────────┬──────┴────────┬────────────────┐
-        │     Reserved       │   Z-Chain     │   G-Chain      │
-        │                    │ (ZK Co-Proc)  │   (Graph)      │  
-        ├────────────────────┼───────────────┼────────────────┤
-        │                    │ • ZK Processor│ • Oracle Data  │
-        │                    │ • fheEVM      │ • Graph DB     │
-        │                    │ • Lux FHE     │ • Analytics    │
-        │                    │ • Homomorphic │ • Indexing     │
-        └────────────────────┴───────────────┴────────────────┘
-```
+Lux addresses this through:
 
-#### Chain Specifications
+- **Sharia-Compliant DeFi**: Native support for profit-sharing (Mudarabah), cost-plus financing (Murabaha), and Islamic lending patterns without interest
+- **Low-Barrier Access**: Sub-cent transaction fees and mobile-first wallets enabling participation without bank accounts
+- **Stablecoin Infrastructure**: Censorship-resistant value storage for populations facing currency collapse or capital controls
+- **Remittance Corridors**: Near-instant, low-cost cross-border transfers for migrant worker communities
+- **Identity Primitives**: Self-sovereign identity enabling the undocumented to build financial history
 
-**Lux 2.0 (Current Architecture):**
+Beyond access, Lux invests in **human capital development**:
 
-The Lux ecosystem has four main strata:
+- **Web3 Training Programs**: Partnership-funded bootcamps for blockchain development, smart contract auditing, and DeFi operations
+- **Protocol Scholarships**: Grants for underrepresented developers to contribute to core protocol development
+- **Regional Developer Hubs**: Infrastructure support for tech communities in underserved regions
+- **Open Educational Resources**: Free, multilingual documentation and tutorials
 
-1. **X-Chain (Liquidity Layer)**
-EVM chain with:
-- LUX + all ERC-20 native assets,
-- AMM pools Pool(T, S) for native_asset/security_token pairs,
-- LP tokens used as collateral,
-- Security Fee (σ) contracts (SecurityAnchor).
+Our thesis: financial infrastructure and technical education together create compounding opportunity — access to capital enables entrepreneurship, technical skills enable economic mobility, and both together transform communities.
 
-2. **P-Chain (Registry & Staking)**
-Minimal control plane:
-- Tracks LUX staking for PQC validators,
-- Registers all chains and their security_token relationships,
-- Stores basic config (σ, cadence c, chain type).
+See **LP-760 (Network Impact Thesis)** and **LP-930 (Financial Inclusion Metrics)** for detailed frameworks.
 
-3. **Q-Chain (Root PQC)**
-A specific Post-Quantum Chain with global scope:
-- Validated by LUX-staked validators (registered on P-Chain),
-- Stores checkpoints from all chains (or from sector PQCs that aggregate them),
-- Runs the QSF fee market in LUX (EIP-1559-style baseFee per byte),
-- Acts as canonical root of finality for the entire ecosystem.
+### Ecosystem Partners
 
-4. **PQC family (PQC₁, PQC₂, …)**
-Additional chains that:
-- Also run the Lux PQ consensus,
-- May be specialized per sector / jurisdiction / application (e.g., "Defense PQC", "Settlement PQC-EU"),
-- Can themselves act as finality anchors for downstream chains (L2s, LSCs),
-- Ultimately checkpoint upwards to Q-Chain for global finality.
+Lux operates alongside two aligned organizations that extend the network's capabilities:
 
-The recursive picture:
+**Zoo Labs Foundation** (zoo.ngo)
+A non-profit open research network advancing decentralized AI and decentralized science (DeSci). Zoo operates a flagship Layer 2 on Lux Network, providing:
 
-          Q-Chain (PQC_0)
-         /        |      \
-   PQC_1         PQC_2    …
-    |              |
-  L2 / LSCs      L2 / LSCs
-    |              |
-  Appchains      Appchains
+- **ZIPs** (Zoo Improvement Proposals): Governance at zips.zoo.ngo
+- **Zen LLM Family**: Open-source large language models (built on Qwen3+)
+- **Frontier AI Research**: Cutting-edge experiments in DeAI
+- **DeSci Infrastructure**: Tools for reproducible, transparent scientific research
+- **Impact Research**: ESG methodologies and measurement frameworks
 
-But all liquidity is still flat on X-Chain; only the security / finality graph is hierarchical.
+Zoo Labs' L2 demonstrates Lux's multi-chain architecture while advancing mission-aligned AI research.
 
-**Note:** Lux 1.0 was based on Lux architecture with P-Chain (Platform), X-Chain (Exchange), and C-Chain (Contract). Lux 2.0 features a complete rewrite with our Quasar consensus protocol family, verkle trees, FPC, and witness support. P-Chain functionality has been absorbed into Q-Chain with quantum-secure consensus. The new X-Chain is a colocated high-performance DEX achieving 1B+ trades/sec.
+**Hanzo AI** (hanzo.ai | hanzo.network)
+A Techstars '17 backed AI company building frontier AI infrastructure, including:
 
-### Data Flow and Security vs Liquidity Layers
+- **Hanzo Network**: AI-native blockchain for model verification and inference consensus
+- **LLM Gateway (HIP-4)**: Access to 100+ LLM providers via unified API
+- **MCP Infrastructure**: Model Context Protocol for AI agent coordination
+- **Jin Architecture**: Unified multimodal AI framework
+- **Agent Frameworks**: Enterprise-grade AI agent orchestration
 
-#### Data Flow
+Hanzo provides the AI infrastructure that powers LP-5106 (LLM Gateway Integration), enabling smart contracts to access AI inference, validators to leverage AI monitoring, and developers to use AI-assisted tooling.
 
-- **LSC / L2 / Appchain:**
-  - Runs its own consensus (Avalanche-style, EVM chain, rollup, etc.).
-  - Maintains:
-    - SecurityAnchor(T,S) on X-Chain for σ,
-    - Possibly LSCStaking on X-Chain for LP-based collateral.
-  - Periodically creates a Checkpoint(T) (height, stateRoot, proof).
-  - To PQC (child / sector) or Q-Chain (root):
-    - Sends Checkpoint(T) as a tx to its parent PQC.
-    - Parent PQC:
-      - Verifies proof,
-      - Charges QSF (in security_token or LUX, depending on layer),
-      - Embeds checkpoint in a block.
-  - Upwards Recursion:
-    - PQC_n regularly sends its own checkpoint to Q-Chain (or to PQC_{n-1} then Q-Chain).
-    - Q-Chain stores final root checkpoints.
+Together, Lux (blockchain infrastructure), Zoo Labs (open research), and Hanzo (AI infrastructure) form a vertically-integrated stack for building the decentralized intelligent economy.
 
-#### Security vs Liquidity Layers
+### Core Principles
 
-- **Security tree:**
-  - PQCs (including Q-Chain) + LSCs define a DAG / tree of "who finalizes whom".
-- **Liquidity surface:**
-  - All ERC-20 tokens and LPs live on X-Chain.
-  - SecurityAnchor contracts implement σ as swap+burn+POL.
-  - Arbitrage / routers see everything as just AMM pairs across a single chain.
+**1. Security by Default**
+- Post-quantum cryptography (ML-KEM, ML-DSA, SLH-DSA) as first-class primitives
+- Threshold signatures for distributed custody without single points of failure
+- Formal verification where possible, extensive testing always
 
-So from an EVM / DEX engineer point of view:
-  - PQC vs non-PQC doesn't change how the DEX works. It only changes:
-    - Which chain emits which Checkpoint,
-    - How often they checkpoint,
-    - What "layer" of finality they're tied into.
+**2. Modularity**
+- Chains are specialized, not monolithic
+- Consensus, execution, and cryptography are cleanly separated
+- Components can be upgraded independently
 
-### Roles and Types Table
+**3. Interoperability**
+- Native cross-chain messaging via Warp protocol
+- Asset movement through dedicated bridging infrastructure
+- No "walled garden" — chains communicate trustlessly
 
-| Role | Type | Description | Consensus | Security Token | Finality Anchor |
-|------|------|-------------|-----------|----------------|-----------------|
-| ROOT_PQC | Q-Chain | Global root of finality | Quasar (PQ) | LUX | None (root) |
-| PQC | Sector PQC | Regional/domain-specific PQC | Quasar (PQ) | LUX or derived | Q-Chain |
-| LSC | Liquidity-Secured Chain | Classical consensus with liquidity backing | Various | LP tokens | PQC or Q-Chain |
-| L2-classic | Classical L2 | Traditional rollup/validium | Various | Native | PQC or Q-Chain |
-| X-Chain | Liquidity Layer | High-performance DEX | EVM | LUX | N/A (liquidity) |
-| P-Chain | Registry & Staking | Validator management | Minimal | LUX | N/A (control) |
+**4. Open Development**
+- All specifications are public LPs
+- Reference implementations are open source
+- Community governance through structured proposal process
 
-### Chain Type Definitions
+**5. Institutional Grade**
+- Sub-second finality for real-world applications
+- Compliance primitives (attestations, identity, audit trails)
+- Enterprise-ready custody and key management
 
-- **ROOT_PQC (Q-Chain)**: The canonical global finality chain with quantum-resistant consensus and global QSF fee market.
-- **PQC (Post-Quantum Chain)**: Any chain running Lux PQ consensus that can accept checkpoints from downstream chains and emit checkpoints to upstream PQCs.
-- **LSC (Liquidity-Secured Chain)**: Chains secured by liquidity providers via SecurityAnchor contracts on X-Chain.
-- **L2-classic**: Traditional Layer 2 solutions (rollups, validiums) that checkpoint to PQCs.
-- **X-Chain**: The liquidity layer where all assets and AMM pools reside.
-- **P-Chain**: The registry and staking control plane for validator management.
+**6. Impact & Sustainability**
+- ESG-compliant by design, not by accident
+- Carbon-aware consensus and compute allocation
+- Public goods funding through protocol-level mechanisms
+- Measurable impact metrics aligned with UN SDGs
 
-### Checkpoint Flow State Machine
+## Part 2: The LP Standards Process
+
+### What is an LP?
+
+An LP (Lux Proposal) is a design document describing a feature, standard, or process for Lux Network. LPs are the primary mechanism for:
+
+- Proposing new technical standards
+- Documenting design decisions
+- Collecting community input
+- Coordinating network upgrades
+
+### LP Types
+
+| Type | Purpose | Examples |
+|------|---------|----------|
+| **Standards Track** | Technical specifications requiring implementation | Consensus protocols, token standards, precompiles |
+| **Meta** | Process and governance | This document, contribution guidelines |
+| **Informational** | Guidelines and best practices | Security recommendations, design patterns |
+
+### Standards Track Categories
+
+| Category | Description | LP Range |
+|----------|-------------|----------|
+| **Consensus** | Agreement, finality, validators | 100-199 |
+| **Network** | P2P, messaging, topology | 200-499 |
+| **P-Chain** | Platform coordination | 1000-1199 |
+| **C-Chain** | EVM execution, precompiles | 2000-2499 |
+| **X-Chain** | Asset exchange | 3000-3999 |
+| **Q-Chain** | Post-quantum operations | 4000-4999 |
+| **A-Chain** | AI and attestation | 5000-5999 |
+| **B-Chain** | Bridging | 6000-6999 |
+| **T-Chain** | Threshold cryptography | 7000-7999 |
+| **Z-Chain** | Zero-knowledge proofs | 8000-8999 |
+| **DEX** | Trading infrastructure | 9000-9999 |
+
+### LP Lifecycle
 
 ```
-┌─────────────────────────────────────────────────────────────────────────────┐
-│                    CHECKPOINT FLOW STATE MACHINE                             │
-├─────────────────────────────────────────────────────────────────────────────┤
-│                                                                             │
-│  [Appchain/L2/LSC]     [Sector PQC]     [Q-Chain (Root PQC)]              │
-│      │                     │                     │                           │
-│      ├─ Produce Blocks ────►│                     │                           │
-│      │                     │                     │                           │
-│      ├─ Update MMR      ───►│                     │                           │
-│      │                     │                     │                           │
-│      ├─ Generate Checkpoint (every N blocks)                                  │
-│      │                     │                     │                           │
-│      ├─ Sign with Dual PQ Sigs (BLS+Ringtail)                               │
-│      │                     │                     │                           │
-│      └─ Submit Checkpoint ─────────────────►│                     │                           │
-│                                          │                     │                           │
-│                                          ├─ Verify MMR Proof ───►│                           │
-│                                          │                     │                           │
-│                                          ├─ Verify Dual Sigs ───►│                           │
-│                                          │                     │                           │
-│                                          ├─ Charge QSF Fee ─────►│                           │
-│                                          │                     │                           │
-│                                          ├─ Embed in Block ─────►│                           │
-│                                          │                     │                           │
-│                                          ├─ Update State ───────►│                           │
-│                                          │                     │                           │
-│                                          ├─ Generate PQC Checkpoint (if Sector PQC)   │
-│                                          │                     │                           │
-│                                          └─ Submit to Q-Chain ───────────────────────►│
-│                                                                     │                           │
-│                                                                     ├─ Verify Sector Checkpoint  │
-│                                                                     │                           │
-│                                                                     ├─ Charge QSF Fee           │
-│                                                                     │                           │
-│                                                                     ├─ Embed in Q-Block         │
-│                                                                     │                           │
-│                                                                     └─ Global Finality Achieved  │
-│                                                                             │
-└─────────────────────────────────────────────────────────────────────────────┘
+┌─────────┐    ┌─────────┐    ┌───────────┐    ┌─────────┐
+│  Draft  │───▶│ Review  │───▶│ Last Call │───▶│  Final  │
+└─────────┘    └─────────┘    └───────────┘    └─────────┘
+     │              │              │
+     ▼              ▼              ▼
+┌───────────┐  ┌───────────┐  ┌───────────┐
+│ Withdrawn │  │ Stagnant  │  │ Superseded│
+└───────────┘  └───────────┘  └───────────┘
 ```
 
-### State Transitions
+**Draft**: Initial submission, open for revision
+**Review**: Formal technical and community review
+**Last Call**: 14-day final comment period before finalization
+**Final**: Ratified and ready for implementation
 
-1. **Block Production**: Child chain produces blocks and updates its MMR
-2. **Checkpoint Generation**: At interval, generate MMR proof and create checkpoint
-3. **Dual Signing**: Sign checkpoint with both BLS and Ringtail signatures
-4. **Submission**: Submit signed checkpoint to parent PQC
-5. **Parent Validation**: Parent PQC verifies proofs, signatures, and fees
-6. **Inclusion**: Parent embeds checkpoint in its own block
-7. **Recursive Checkpointing**: Sector PQCs create their own checkpoints for Q-Chain
-8. **Global Finality**: Q-Chain includes final checkpoint, achieving global finality
+### Creating an LP
 
-### Failure Modes and Recovery
-
-- **Invalid Checkpoint**: Rejected with specific error code, child chain must resubmit
-- **Signature Failure**: Slashing conditions triggered for malicious validators
-- **QSF Fee Shortage**: Checkpoint held until sufficient fees provided
-- **Network Partition**: Checkpoints queue and process when connectivity restored
-- **Validator Set Change**: New checkpoints use updated validator set after epoch transition
-
-This state machine ensures cryptographically secure, economically incentivized, and post-quantum resistant checkpoint flow throughout the Lux ecosystem.
-
-### Part 2: Community Contribution Framework
-
-See the [LP Index](/docs/) for a complete list of LPs.
-
-#### LP Process
-
-1. **Idea Discussion**: Post on forum.lux.network
-2. **Draft LP**: Use `./scripts/new-lp.sh` or `make new`
-3. **Submit PR**: PR number becomes LP number
-4. **Review Process**: Technical and community review
-5. **Implementation**: Build reference implementation
-6. **Finalization**: Move to Final status
-
-#### Governance
-
-- **LP Governance**: Proposals require 10M LUX, 7-day voting, 75% approval.
-- **Network Governance**: Parameter changes via governance proposals.
-
-## Rationale
-
-This LP serves as the pedagogical introduction to Lux, referencing fundamental distributed systems concepts (nodes, consensus, finality) and how they come together in the Lux Network. It provides a single, high-level document to understand the entire ecosystem and how to contribute to it.
-
-## Backwards Compatibility
-
-As the foundational LP, this document establishes the initial standards. Future changes to this meta-LP will:
-- Maintain compatibility with existing LP processes
-- Provide migration paths for any structural changes
-- Announce deprecations with sufficient notice
-
-## Security Considerations
-
-### Network Security
-- Multi-chain architecture isolates risks between chains
-- Specialized validators for high-security operations (T-Chain, Z-Chain)
-- Economic incentives align validator behavior with network security
-
-
-### Contribution Security
-- All code contributions undergo security review
-- Responsible disclosure process for vulnerabilities
-- External audits required for consensus-critical changes
-
-## References
-
-- [1] G. Wood, “Polkadot: Vision for a Heterogeneous Multi‑chain Framework,” Whitepaper, 2016.
-- [2] J. Kwon & E. Buchman, “Cosmos: A Network of Distributed Ledgers,” Whitepaper, 2016.
-- [3] Ethereum Foundation, “EIP‑1: EIP Purpose and Guidelines,” GitHub, 2015.
-- [4] G. Wood et al., “Polkadot White Paper,” Polkadot Wiki, 2020.
-- [5] Cosmos Network, “Inter‑Blockchain Communication (IBC) Protocol,” Cosmos SDK Docs.
-- [6] Ethereum Foundation, “Ethereum Improvement Proposal Process,” eips.ethereum.org.
-- [7] Polkadot Wiki, “Polkadot Governance Overview.”
-
-## Implementation
-
-### LP Repository and Governance Framework
-
-**GitHub**: [`github.com/luxfi/lps`](https://github.com/luxfi/lps)
-**Local Path**: `~/work/lux/lps/`
-
-**Key Components**:
-- [`LPs/`](https://github.com/luxfi/lps/tree/main/LPs/) - All LP specifications (119 total)
-- [`TEMPLATE.md`](https://github.com/luxfi/lps/blob/main/LPs/TEMPLATE.md) - Template for new LPs
-- [`Makefile`](https://github.com/luxfi/lps/blob/main/Makefile) - LP validation and management
-- [`docs/`](https://github.com/luxfi/lps/tree/main/docs/) - Documentation site (Next.js)
-- [`scripts/`](https://github.com/luxfi/lps/tree/main/scripts/) - Automation utilities
-
-**Documentation Site**:
-```bash
-cd ~/work/lux/lps/docs
-pnpm dev      # Development: http://localhost:3002
-pnpm build    # Production build (124 static pages)
-```
-
-### Network Architecture Implementation
-
-**Core Node**: [`github.com/luxfi/node`](https://github.com/luxfi/node)
-**Local Path**: `~/work/lux/node/`
-
-**Chain Implementations**:
-- **Q-Chain** (Quasar): `~/work/lux/node/vms/quantumvm/`
-  - Hybrid BFT + Post-Quantum consensus
-  - Ringtail ring signatures
-  - Verkle trie + witness support
-
-- **X-Chain** (Exchange): `~/work/lux/node/vms/avm/`
-  - DAG consensus
-  - UTXO model
-  - High-throughput asset exchange
-
-- **C-Chain** (Contract): `~/work/lux/evm/`
-  - EVM-compatible execution
-  - UniswapV2/V3 DEX integration
-  - OP-Stack compatibility
-
-**Consensus Engines**: `~/work/lux/consensus/`
-- `engine/bft/` - Byzantine Fault Tolerant (21 files)
-- `engine/chain/` - Linear consensus (11 files)
-- `engine/dag/` - Directed Acyclic Graph (8 files)
-- `engine/pq/` - Post-Quantum consensus (6 files)
-- `protocol/quasar/` - Hybrid consensus (8 files)
-
-**Cross-Chain Messaging**:
-- `~/work/lux/node/vms/platformvm/warp/` - Warp messaging protocol
-- `~/work/lux/bridge/` - Cross-chain bridge implementations
-
-### Community Contribution Tools
-
-**LP Management**:
 ```bash
 cd ~/work/lux/lps
 
-# Create new LP
+# Create new LP via interactive wizard
 make new
 
 # Validate LP format
 make validate FILE=LPs/lp-N.md
 
-# Pre-PR checks
+# Run all pre-PR checks
 make pre-pr
 ```
 
-**Governance Process**:
-1. Discussion Phase: [`forum.lux.network`](https://forum.lux.network)
-2. Draft Submission: Create PR with `lp-draft.md`
-3. Review: Community feedback and technical review
-4. Last Call: 14-day final comment period
-5. Final: Ratification and implementation
+### Required Sections
 
-### Architecture Verification
+Every LP must include:
 
-**Network Structure**:
-- Primary Network: Q, X, C chains (mandatory)
-- Specialized Chains: A (AI), B (Bridge), M (MPC)
-- All chains share security and cross-chain messaging
+1. **Abstract**: ~200 word summary
+2. **Motivation**: Why this LP is needed
+3. **Specification**: Technical details
+4. **Rationale**: Design decisions explained
+5. **Backwards Compatibility**: Migration considerations
+6. **Security Considerations**: Risk analysis
+7. **Test Cases**: For Standards Track
+8. **Reference Implementation**: Recommended
 
-**Running Local Network**:
-```bash
-cd ~/work/lux/netrunner
-RUN_E2E=1 go test -v ./tests/e2e/
-# Bootstraps all chains in <60 seconds
+### Governance
+
+- **Discussion**: Forum at forum.lux.network
+- **Submission**: PR to github.com/luxfi/lps
+- **Review**: Technical editors verify format, community evaluates merit
+- **On-chain**: Critical changes require governance vote (10M LUX threshold, 75% approval)
+
+## Part 3: Network Architecture
+
+### Multi-Chain Topology
+
+Lux implements a heterogeneous multi-chain architecture where each chain runs a specialized Virtual Machine (VM) optimized for its workload.
+
 ```
+┌─────────────────────────────────────────────────────────────────────┐
+│                         PRIMARY NETWORK                              │
+├─────────────────────┬─────────────────────┬─────────────────────────┤
+│      P-Chain        │      C-Chain        │       X-Chain           │
+│    (Platform)       │     (Contract)      │      (Exchange)         │
+├─────────────────────┼─────────────────────┼─────────────────────────┤
+│ • Validator mgmt    │ • EVM execution     │ • Asset transfers       │
+│ • Staking           │ • Smart contracts   │ • UTXO model            │
+│ • Chain creation    │ • DeFi protocols    │ • High throughput       │
+│ • Network config    │ • Precompiles       │ • Atomic swaps          │
+└─────────────────────┴─────────────────────┴─────────────────────────┘
+                                │
+           ┌────────────────────┼────────────────────┐
+           │                    │                    │
+┌──────────▼──────────┐ ┌───────▼───────┐ ┌─────────▼─────────┐
+│      T-Chain        │ │    Q-Chain    │ │      B-Chain      │
+│    (Threshold)      │ │   (Quantum)   │ │     (Bridge)      │
+├─────────────────────┤ ├───────────────┤ ├───────────────────┤
+│ • FROST/CGGMP       │ │ • ML-KEM      │ │ • Cross-chain     │
+│ • Ringtail          │ │ • ML-DSA      │ │ • Asset registry  │
+│ • MPC custody       │ │ • SLH-DSA     │ │ • Teleport        │
+│ • Key management    │ │ • Quantum-safe│ │ • Message relay   │
+└─────────────────────┘ └───────────────┘ └───────────────────┘
+           │                    │                    │
+┌──────────▼──────────┐ ┌───────▼───────┐ ┌─────────▼─────────┐
+│      A-Chain        │ │    Z-Chain    │ │      D-Chain      │
+│  (AI/Attestation)   │ │     (ZK)      │ │      (DEX)        │
+├─────────────────────┤ ├───────────────┤ ├───────────────────┤
+│ • Model verification│ │ • zkVM        │ │ • Order books     │
+│ • Training ledgers  │ │ • SNARKs      │ │ • Matching engine │
+│ • TEE attestation   │ │ • Validity    │ │ • Perpetuals      │
+│ • Confidential AI   │ │ • Private exec│ │ • HFT support     │
+└─────────────────────┘ └───────────────┘ └───────────────────┘
+```
+
+### Virtual Machine Implementation
+
+Each chain runs a dedicated VM from the node codebase:
+
+| Chain | VM | Location | Purpose |
+|-------|-----|----------|---------|
+| P-Chain | platformvm | `vms/platformvm/` | Validator sets, staking, L1/L2/L3 chains |
+| C-Chain | cchainvm | `vms/cchainvm/` | EVM-compatible smart contracts |
+| X-Chain | exchangevm | `vms/exchangevm/` | UTXO-based asset exchange |
+| T-Chain | thresholdvm | `vms/thresholdvm/` | Threshold signatures |
+| Q-Chain | quantumvm | `vms/quantumvm/` | Post-quantum cryptography |
+| B-Chain | bridgevm | `vms/bridgevm/` | Cross-chain bridging |
+| A-Chain | aivm | `vms/aivm/` | AI attestation |
+| Z-Chain | zkvm | `vms/zkvm/` | Zero-knowledge proofs |
+| D-Chain | dexvm | `vms/dexvm/` | Decentralized exchange |
+| K-Chain | kchainvm | `vms/kchainvm/` | Key management |
+| G-Chain | graphvm | `vms/graphvm/` | GraphQL indexing |
+
+### Quasar Consensus
+
+Lux uses **Quasar**, a unified consensus protocol achieving sub-second finality through a physics-inspired multi-phase architecture:
+
+```
+┌─────────┐    ┌─────────┐    ┌─────────┐
+│ PHOTON  │───▶│  WAVE   │───▶│  FOCUS  │
+│ Select  │    │  Vote   │    │ Converge│
+└─────────┘    └─────────┘    └────┬────┘
+                                   │
+                                   ▼
+┌─────────┐    ┌─────────┐    ┌─────────┐
+│  FLARE  │◀───│ HORIZON │◀───│  PRISM  │
+│ Commit  │    │ Finality│    │   DAG   │
+└─────────┘    └─────────┘    └─────────┘
+```
+
+| Component | Function | LP |
+|-----------|----------|-----|
+| **Photon** | VRF-based proposer selection weighted by stake and performance | LP-111 |
+| **Wave** | FPC threshold voting with phase-dependent thresholds | LP-113 |
+| **Focus** | Confidence accumulation through consecutive successes | LP-114 |
+| **Prism** | DAG geometry: frontiers, cuts, and slicing | LP-116 |
+| **Horizon** | Finality predicates: certificates and skip detection | LP-115 |
+| **Flare** | Cascading finalization in causal order | LP-112 |
+
+**Performance Characteristics**:
+- Time to finality: 400-800ms
+- Message complexity: O(kn) where k=20 samples
+- Byzantine tolerance: f < n/3
+- Rounds to finality: 3-5 typical
+
+See LP-110 for the complete Quasar specification.
+
+### Cross-Chain Communication
+
+**Warp Messaging**: Native cross-chain message protocol
+- BLS aggregate signatures for efficient verification
+- Validator set attestation
+- Low-latency message delivery
+
+**Teleport Protocol**: Asset bridging via B-Chain
+- MPC-secured custody
+- Asset registry for canonical mappings
+- Emergency recovery mechanisms
+
+**ICM (Inter-Chain Messaging)**: Application-level messaging
+- Standardized message formats
+- Relayer infrastructure
+- Fee abstraction
+
+## Part 4: Research Domains
+
+LPs are organized by research domain — distinct knowledge areas that may span multiple chains.
+
+### Subjects (Research Domains)
+
+| Subject | Description | Key LPs |
+|---------|-------------|---------|
+| **Consensus Systems** | Agreement, finality, validators | LP-110 to LP-116 |
+| **Threshold Cryptography** | FROST, CGGMP, Ringtail, distributed signing | LP-7100+ |
+| **Multi-Party Computation** | General secure computation | LP-7000+ |
+| **Key Management** | K-Chain, HSM, policy engines | LP-7300+ |
+| **Post-Quantum Cryptography** | ML-KEM, ML-DSA, SLH-DSA | LP-311, LP-312, LP-313 |
+| **Zero-Knowledge Proofs** | SNARKs, STARKs, zkVM | LP-8000+ |
+| **Cryptography** | Curves, hashes, signatures | LP-200+ |
+| **AI & Attestation** | Model verification, training ledgers | LP-5000+ |
+| **Bridging Systems** | Asset movement, Teleport | LP-6000+ |
+| **Interoperability** | Warp, ICM, message formats | LP-600+ |
+
+### Product Areas
+
+| Area | Description | Key LPs |
+|------|-------------|---------|
+| **Markets & DeFi** | AMMs, lending, derivatives | LP-2500+ |
+| **DEX & Trading** | Order books, matching, HFT | LP-9000+ |
+| **Assets & Tokens** | LRC-20, LRC-721, LRC-1155 | LP-20, LP-721, LP-1155 |
+| **Wallets & Identity** | Multisig, AA, DIDs | LP-2600+ |
+| **Governance & Impact** | DAOs, voting, ESG, sustainability | LP-750 to LP-930 |
+| **Privacy** | FHE, TEE, confidential compute | LP-8300+ |
+| **Developer Platform** | SDKs, CLIs, testing | LP-5100+ |
+| **Security** | Audits, bug bounties | LP-5400+ |
+
+### Impact & ESG Framework
+
+Lux maintains a comprehensive impact framework documented across dedicated LPs:
+
+| LP | Title | Purpose |
+|----|-------|---------|
+| **LP-750** | Vision Fund ESG Framework | Investment criteria and screening |
+| **LP-760** | Network Impact Thesis | Why impact matters for Lux |
+| **LP-800** | ESG Principles | Core sustainability commitments |
+| **LP-801** | Carbon Accounting | Methodology for emissions tracking |
+| **LP-810** | Green Compute | Energy-efficient infrastructure |
+| **LP-820** | Energy Transparency | Public reporting standards |
+| **LP-830** | ESG Risk Management | Risk assessment framework |
+| **LP-840** | Anti-Greenwashing | Authenticity verification |
+| **LP-900** | Impact Framework | Theory of change and measurement |
+| **LP-920** | Grants Program | Community development funding |
+| **LP-930** | Financial Inclusion | Accessibility metrics |
+
+### Standards Progression
+
+The LP system defines standards from low-level primitives to application protocols:
+
+```
+┌─────────────────────────────────────────────────────────────────┐
+│                    STANDARDS HIERARCHY                           │
+├─────────────────────────────────────────────────────────────────┤
+│                                                                 │
+│  Layer 5: Applications                                          │
+│  ├── DeFi protocols (AMM, lending, derivatives)                 │
+│  ├── DEX specifications (orderbook, matching)                   │
+│  └── Consumer apps (wallets, identity)                          │
+│                                                                 │
+│  Layer 4: Token Standards                                       │
+│  ├── LRC-20: Fungible tokens                                    │
+│  ├── LRC-721: Non-fungible tokens                               │
+│  └── LRC-1155: Multi-token standard                             │
+│                                                                 │
+│  Layer 3: Chain Standards                                       │
+│  ├── C-Chain precompiles (secp256r1, PQC, threshold)           │
+│  ├── Cross-chain messaging (Warp, ICM)                          │
+│  └── Bridge protocols (Teleport, asset registry)                │
+│                                                                 │
+│  Layer 2: Consensus & Network                                   │
+│  ├── Quasar consensus (Photon, Wave, Focus, Prism, Horizon)    │
+│  ├── P2P networking (gossip, peer discovery)                    │
+│  └── Validator management (staking, delegation)                 │
+│                                                                 │
+│  Layer 1: Cryptographic Primitives                              │
+│  ├── Post-quantum (ML-KEM, ML-DSA, SLH-DSA)                    │
+│  ├── Threshold (FROST, CGGMP, Ringtail)                        │
+│  └── Classical (BLS, Ed25519, secp256k1)                       │
+│                                                                 │
+└─────────────────────────────────────────────────────────────────┘
+```
+
+## Implementation
+
+### Repository Structure
+
+**LPs Repository**: `github.com/luxfi/lps`
+```
+lps/
+├── LPs/                 # All LP specifications
+│   ├── TEMPLATE.md     # Template for new LPs
+│   └── lp-*.md         # Individual proposals
+├── docs/               # Documentation site (Next.js)
+├── scripts/            # Validation and management tools
+└── Makefile            # Common operations
+```
+
+**Node Implementation**: `github.com/luxfi/node`
+```
+node/
+├── vms/                # Virtual machine implementations
+│   ├── platformvm/    # P-Chain
+│   ├── cchainvm/      # C-Chain (EVM)
+│   ├── exchangevm/    # X-Chain
+│   ├── thresholdvm/   # T-Chain
+│   ├── quantumvm/     # Q-Chain
+│   ├── bridgevm/      # B-Chain
+│   ├── aivm/          # A-Chain
+│   ├── zkvm/          # Z-Chain
+│   ├── dexvm/         # DEX chain
+│   └── ...
+├── consensus/          # Quasar consensus engine
+├── network/            # P2P networking
+├── chains/             # Chain management
+└── genesis/            # Network genesis
+```
+
+### Quick Start
+
+```bash
+# Clone and explore LPs
+git clone https://github.com/luxfi/lps
+cd lps
+make help
+
+# Run documentation site
+cd docs && pnpm dev
+
+# Create new LP
+make new
+```
+
+## Security Considerations
+
+1. **Multi-chain Isolation**: Chains are isolated; bugs in one VM don't affect others
+2. **Consensus Security**: Quasar achieves BFT guarantees with f < n/3 Byzantine tolerance
+3. **Cryptographic Agility**: PQC support enables transition before quantum threats materialize
+4. **Review Process**: All consensus-critical LPs require external audit
+
+## References
+
+- [1] Lux Network Documentation: docs.lux.network
+- [2] LP Repository: github.com/luxfi/lps
+- [3] Node Implementation: github.com/luxfi/node
+- [4] Consensus Library: github.com/luxfi/consensus
+- [5] Ethereum EIP Process: eips.ethereum.org
+- [6] NIST Post-Quantum Standards: FIPS 203, 204, 205
 
 ## Copyright
 

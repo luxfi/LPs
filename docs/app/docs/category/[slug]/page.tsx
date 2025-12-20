@@ -160,21 +160,21 @@ export default async function CategoryPage({
       </div>
 
       {/* Stats */}
-      <div className="grid grid-cols-4 gap-4 mb-8 p-4 rounded-lg border border-border bg-card">
-        <div className="text-center">
-          <div className="text-2xl font-bold">{category.lps.length}</div>
+      <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 mb-8 p-4 rounded-lg border border-border bg-card">
+        <div className="text-center p-2">
+          <div className="text-xl sm:text-2xl font-bold">{category.lps.length}</div>
           <div className="text-xs text-muted-foreground">Total</div>
         </div>
-        <div className="text-center">
-          <div className="text-2xl font-bold text-green-500">{lpsByStatus.final.length}</div>
+        <div className="text-center p-2">
+          <div className="text-xl sm:text-2xl font-bold text-green-500">{lpsByStatus.final.length}</div>
           <div className="text-xs text-muted-foreground">Final</div>
         </div>
-        <div className="text-center">
-          <div className="text-2xl font-bold text-blue-500">{lpsByStatus.review.length}</div>
+        <div className="text-center p-2">
+          <div className="text-xl sm:text-2xl font-bold text-blue-500">{lpsByStatus.review.length}</div>
           <div className="text-xs text-muted-foreground">Review</div>
         </div>
-        <div className="text-center">
-          <div className="text-2xl font-bold text-yellow-500">{lpsByStatus.draft.length}</div>
+        <div className="text-center p-2">
+          <div className="text-xl sm:text-2xl font-bold text-yellow-500">{lpsByStatus.draft.length}</div>
           <div className="text-xs text-muted-foreground">Draft</div>
         </div>
       </div>
