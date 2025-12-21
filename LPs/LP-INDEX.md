@@ -240,6 +240,27 @@ The **LP-9000 Series** is Lux's comprehensive decentralized exchange infrastruct
 | [LP-9003](/docs/lp-9003-high-performance-dex-protocol/) | High-Performance DEX (GPU/FPGA) | LP-0608 | `dex`, `fpga`, `performance` | Implemented |
 | [LP-9004](/docs/lp-9004-perpetuals-derivatives-protocol/) | Perpetuals & Derivatives Protocol | LP-0609 | `dex`, `perpetuals`, `margin` | Implemented |
 | [LP-9005](/docs/lp-9005-native-oracle-protocol/) | Native Oracle Protocol | LP-0610 | `dex`, `oracle`, `price-feed` | Implemented |
+| [LP-9010](/docs/lp-9010-dex-precompile/) | **DEX Precompile - Native HFT** | - | `dex`, `precompile`, `hft` | Draft |
+| [LP-9011](/docs/lp-9011-oracle-precompile/) | **Oracle Precompile - Multi-Source** | - | `oracle`, `precompile`, `chainlink`, `pyth` | Draft |
+| [LP-9012](/docs/lp-9012-bridge-aggregator/) | **Bridge Aggregator - Omnichain** | - | `bridge`, `cross-chain`, `axelar`, `layerzero` | Draft |
+| [LP-9013](/docs/lp-9013-crosschain-defi-router/) | **CrossChainDeFiRouter** | - | `defi`, `cross-chain`, `router`, `omnichain` | Draft |
+| [LP-9014](/docs/lp-9014-quantumswap-hft/) | **QuantumSwap HFT Integration** | - | `dex`, `hft`, `quantumswap`, `434M-ops` | Draft |
+| [LP-9015](/docs/lp-9015-precompile-registry/) | **Precompile Registry** | - | `precompile`, `registry`, `infrastructure` | Draft |
+
+#### Production Operations (LP-9016 - LP-9025)
+
+| LP | Title | Tags | Status |
+|----|-------|------|--------|
+| [LP-9016](/docs/lp-9016-emergency-procedures/) | **Emergency Procedures & Circuit Breakers** | `security`, `emergency`, `circuit-breaker` | Draft |
+| [LP-9017](/docs/lp-9017-risk-management/) | **Risk Management Framework** | `risk`, `flash-loan`, `slippage`, `protection` | Draft |
+| [LP-9018](/docs/lp-9018-liquidity-mining/) | **Liquidity Mining & Incentives** | `liquidity`, `mining`, `incentives`, `rewards` | Draft |
+| [LP-9019](/docs/lp-9019-fee-distribution/) | **Fee Distribution System** | `fees`, `revenue`, `treasury`, `buyback` | Draft |
+| [LP-9020](/docs/lp-9020-performance-benchmarks/) | **Performance Benchmarks & Stress Testing** | `performance`, `benchmarks`, `stress-testing` | Draft |
+| [LP-9021](/docs/lp-9021-monitoring-alerting/) | **Monitoring & Alerting Standards** | `monitoring`, `alerting`, `metrics`, `observability` | Draft |
+| [LP-9022](/docs/lp-9022-upgrade-procedures/) | **Upgrade & Migration Procedures** | `upgrades`, `migration`, `proxy`, `versioning` | Draft |
+| [LP-9023](/docs/lp-9023-integration-testing/) | **Integration Testing Requirements** | `testing`, `ci-cd`, `coverage`, `fuzz` | Draft |
+| [LP-9024](/docs/lp-9024-security-audit-requirements/) | **Security Audit Requirements for DeFi** | `security`, `audit`, `bug-bounty`, `formal-verification` | Draft |
+| [LP-9025](/docs/lp-9025-mev-protection/) | **MEV Protection & Fair Ordering** | `mev`, `front-running`, `sandwich`, `fair-ordering` | Draft |
 
 ### Performance: Over 9000x Faster
 
