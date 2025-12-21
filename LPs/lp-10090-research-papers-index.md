@@ -1,5 +1,5 @@
 ---
-lp: 90
+lp: 10090
 title: Research Papers Index
 description: Index of research papers, experimental proposals, and forward-looking explorations for the Lux ecosystem.
 author: Lux Network Team (@luxfi)

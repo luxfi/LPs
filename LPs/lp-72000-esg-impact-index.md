@@ -1,5 +1,5 @@
 ---
-lp: 12000
+lp: 72000
 title: ESG and Impact Index
 description: Index of environmental, social, governance, and impact measurement standards
 author: Lux Core Team

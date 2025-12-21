@@ -1,5 +1,5 @@
 ---
-lp: 92
+lp: 10092
 title: Cross-Chain Messaging Research  
 description: Research on cross-chain messaging protocols and implementations for Lux Network
 author: Lux Network Team (@luxfi)
