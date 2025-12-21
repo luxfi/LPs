@@ -9,7 +9,7 @@ status: Final
 type: Standards Track
 category: Bridge
 created: 2025-12-14
-requires: [3, 321, 322]
+requires: [3, 7321, 7322]
 activation:
   flag: lp2510-teleport-protocol
   hfName: "Teleport"
