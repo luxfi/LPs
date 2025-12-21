@@ -484,21 +484,50 @@ To add a new LP:
 3. Update this index
 4. Submit PR
 
-### LP Numbering Conventions
+### LP Numbering Conventions (Per LP-0099 v2)
 
-| Range | Category |
-|-------|----------|
-| 0000-0099 | Core Protocol |
-| 0100-0199 | Research & Cryptography |
-| 0200-0299 | Post-Quantum Crypto |
-| 0300-0399 | Chain Specs & Precompiles |
-| 0400-0499 | DeFi & Privacy |
-| 0500-0599 | Layer 2 & Scaling |
-| 0600-0699 | Networking & Performance |
-| 0700-0999 | Token Standards (LRC) |
-| 2000-2999 | AI & Compute |
-| **9000-9099** | **DEX & Trading (X-Chain)** ⚡ |
+#### Tier Overview
+
+| Tier | Range | Domain | Purpose |
+|------|-------|--------|---------|
+| 1 | **0xxx-2xxx** | Foundation | Core protocol, P-Chain, C-Chain |
+| 2 | **3xxx** | Web3/DeFi | AMM, lending, yield, wallets |
+| 3 | **4xxx-8xxx** | Security Chains | Q/A/B/T/Z-Chains |
+| 4 | **9xxx** | Trading | CEX/DEX/HFT, oracles ⚡ |
+| 5 | **10xxx-12xxx** | Institutional | Funds, DAOs, ESG |
+| 6 | **50xxx+** | Research | Academic, experimental |
+
+#### Chain Mapping
+
+| Range | Chain | Purpose |
+|-------|-------|---------|
+| **0xxx** | Core/Meta | Network architecture, consensus, dev tools |
+| **1xxx** | P-Chain | Validators, staking, subnets |
+| **2xxx** | C-Chain | EVM, contracts, LRC tokens |
+| **3xxx** | DeFi/Web3 | AMM, lending, yield (replaces X-Chain) |
+| **4xxx** | Q-Chain | Post-quantum cryptography |
+| **5xxx** | A-Chain | AI attestation, TEE |
+| **6xxx** | B-Chain | Bridge, Warp, Teleport |
+| **7xxx** | T-Chain | MPC, threshold signatures |
+| **8xxx** | Z-Chain | Privacy, ZK proofs |
+| **9xxx** | Trading | CEX/DEX/HFT ⚡ |
+| **10xxx** | Funds | Lux Fund, treasuries |
+| **11xxx** | DAO | Governance, voting |
+| **12xxx** | ESG | Impact, carbon, social |
+| **50xxx+** | Research | Papers, experiments |
+
+#### User Learning Paths
+
+```
+Developer:  0000 → 0009 → 2000 → 2300 → 3000 → 9000
+Validator:  0000 → 1000 → 1100 → 0110 → 4000
+Trader:     0001 → 3000 → 9000 → 9400 → 9500
+Investor:   0001 → 10000 → 11000 → 12000
+Security:   4000 → 7000 → 8000 → 5000 → 6000
+```
+
+See [LP-0099](/docs/lp-0099-lp-numbering-scheme-and-chain-organization/) for the complete numbering scheme.
 
 ---
 
-*Last Updated: 2025-12-11*
+*Last Updated: 2025-12-21*
