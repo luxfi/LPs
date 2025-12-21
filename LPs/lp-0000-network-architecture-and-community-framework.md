@@ -191,14 +191,10 @@ An LP (Lux Proposal) is a design document describing a feature, standard, or pro
 ### LP Lifecycle
 
 ```
-┌─────────┐    ┌─────────┐    ┌───────────┐    ┌─────────┐
-│  Draft  │───▶│ Review  │───▶│ Last Call │───▶│  Final  │
-└─────────┘    └─────────┘    └───────────┘    └─────────┘
-     │              │              │
-     ▼              ▼              ▼
-┌───────────┐  ┌───────────┐  ┌───────────┐
-│ Withdrawn │  │ Stagnant  │  │ Superseded│
-└───────────┘  └───────────┘  └───────────┘
+ Draft ----> Review ----> Last Call ----> Final
+   |           |             |
+   v           v             v
+Withdrawn   Stagnant     Superseded
 ```
 
 **Draft**: Initial submission, open for revision
@@ -248,39 +244,41 @@ Every LP must include:
 Lux implements a heterogeneous multi-chain architecture where each chain runs a specialized Virtual Machine (VM) optimized for its workload.
 
 ```
-┌─────────────────────────────────────────────────────────────────────┐
-│                         PRIMARY NETWORK                              │
-├─────────────────────┬─────────────────────┬─────────────────────────┤
-│      P-Chain        │      C-Chain        │       X-Chain           │
-│    (Platform)       │     (Contract)      │      (Exchange)         │
-├─────────────────────┼─────────────────────┼─────────────────────────┤
-│ • Validator mgmt    │ • EVM execution     │ • Asset transfers       │
-│ • Staking           │ • Smart contracts   │ • UTXO model            │
-│ • Chain creation    │ • DeFi protocols    │ • High throughput       │
-│ • Network config    │ • Precompiles       │ • Atomic swaps          │
-└─────────────────────┴─────────────────────┴─────────────────────────┘
-                                │
-           ┌────────────────────┼────────────────────┐
-           │                    │                    │
-┌──────────▼──────────┐ ┌───────▼───────┐ ┌─────────▼─────────┐
-│      T-Chain        │ │    Q-Chain    │ │      B-Chain      │
-│    (Threshold)      │ │   (Quantum)   │ │     (Bridge)      │
-├─────────────────────┤ ├───────────────┤ ├───────────────────┤
-│ • FROST/CGGMP       │ │ • ML-KEM      │ │ • Cross-chain     │
-│ • Ringtail          │ │ • ML-DSA      │ │ • Asset registry  │
-│ • MPC custody       │ │ • SLH-DSA     │ │ • Teleport        │
-│ • Key management    │ │ • Quantum-safe│ │ • Message relay   │
-└─────────────────────┘ └───────────────┘ └───────────────────┘
-           │                    │                    │
-┌──────────▼──────────┐ ┌───────▼───────┐ ┌─────────▼─────────┐
-│      A-Chain        │ │    Z-Chain    │ │      D-Chain      │
-│  (AI/Attestation)   │ │     (ZK)      │ │      (DEX)        │
-├─────────────────────┤ ├───────────────┤ ├───────────────────┤
-│ • Model verification│ │ • zkVM        │ │ • Order books     │
-│ • Training ledgers  │ │ • SNARKs      │ │ • Matching engine │
-│ • TEE attestation   │ │ • Validity    │ │ • Perpetuals      │
-│ • Confidential AI   │ │ • Private exec│ │ • HFT support     │
-└─────────────────────┘ └───────────────┘ └───────────────────┘
++=====================================================================+
+|                         PRIMARY NETWORK                             |
++---------------------+---------------------+-------------------------+
+|      P-Chain        |      C-Chain        |       X-Chain           |
+|    (Platform)       |     (Contract)      |      (Exchange)         |
++---------------------+---------------------+-------------------------+
+| - Validator mgmt    | - EVM execution     | - Asset transfers       |
+| - Staking           | - Smart contracts   | - UTXO model            |
+| - Chain creation    | - DeFi protocols    | - High throughput       |
+| - Network config    | - Precompiles       | - Atomic swaps          |
++---------------------+---------------------+-------------------------+
+                              |
+            +-----------------+-----------------+
+            |                 |                 |
+            v                 v                 v
++---------------------+ +--------------+ +------------------+
+|      T-Chain        | |   Q-Chain    | |     B-Chain      |
+|    (Threshold)      | |  (Quantum)   | |    (Bridge)      |
++---------------------+ +--------------+ +------------------+
+| - FROST/CGGMP       | | - ML-KEM     | | - Cross-chain    |
+| - Ringtail          | | - ML-DSA     | | - Asset registry |
+| - MPC custody       | | - SLH-DSA    | | - Teleport       |
+| - Key management    | | - Quantum-safe| | - Message relay  |
++---------------------+ +--------------+ +------------------+
+            |                 |                 |
+            v                 v                 v
++---------------------+ +--------------+ +------------------+
+|      A-Chain        | |   Z-Chain    | |     D-Chain      |
+|  (AI/Attestation)   | |    (ZK)      | |     (DEX)        |
++---------------------+ +--------------+ +------------------+
+| - Model verification| | - zkVM       | | - Order books    |
+| - Training ledgers  | | - SNARKs     | | - Matching engine|
+| - TEE attestation   | | - Validity   | | - Perpetuals     |
+| - Confidential AI   | | - Private exec| | - HFT support    |
++---------------------+ +--------------+ +------------------+
 ```
 
 ### Virtual Machine Implementation
@@ -306,16 +304,12 @@ Each chain runs a dedicated VM from the node codebase:
 Lux uses **Quasar**, a unified consensus protocol achieving sub-second finality through a physics-inspired multi-phase architecture:
 
 ```
-┌─────────┐    ┌─────────┐    ┌─────────┐
-│ PHOTON  │───▶│  WAVE   │───▶│  FOCUS  │
-│ Select  │    │  Vote   │    │ Converge│
-└─────────┘    └─────────┘    └────┬────┘
-                                   │
-                                   ▼
-┌─────────┐    ┌─────────┐    ┌─────────┐
-│  FLARE  │◀───│ HORIZON │◀───│  PRISM  │
-│ Commit  │    │ Finality│    │   DAG   │
-└─────────┘    └─────────┘    └─────────┘
+PHOTON ------> WAVE ------> FOCUS
+(Select)      (Vote)      (Converge)
+                              |
+                              v
+ FLARE <------ HORIZON <---- PRISM
+(Commit)      (Finality)    (DAG)
 ```
 
 | Component | Function | LP |
@@ -407,36 +401,36 @@ Lux maintains a comprehensive impact framework documented across dedicated LPs:
 The LP system defines standards from low-level primitives to application protocols:
 
 ```
-┌─────────────────────────────────────────────────────────────────┐
-│                    STANDARDS HIERARCHY                           │
-├─────────────────────────────────────────────────────────────────┤
-│                                                                 │
-│  Layer 5: Applications                                          │
-│  ├── DeFi protocols (AMM, lending, derivatives)                 │
-│  ├── DEX specifications (orderbook, matching)                   │
-│  └── Consumer apps (wallets, identity)                          │
-│                                                                 │
-│  Layer 4: Token Standards                                       │
-│  ├── LRC-20: Fungible tokens                                    │
-│  ├── LRC-721: Non-fungible tokens                               │
-│  └── LRC-1155: Multi-token standard                             │
-│                                                                 │
-│  Layer 3: Chain Standards                                       │
-│  ├── C-Chain precompiles (secp256r1, PQC, threshold)           │
-│  ├── Cross-chain messaging (Warp, ICM)                          │
-│  └── Bridge protocols (Teleport, asset registry)                │
-│                                                                 │
-│  Layer 2: Consensus & Network                                   │
-│  ├── Quasar consensus (Photon, Wave, Focus, Prism, Horizon)    │
-│  ├── P2P networking (gossip, peer discovery)                    │
-│  └── Validator management (staking, delegation)                 │
-│                                                                 │
-│  Layer 1: Cryptographic Primitives                              │
-│  ├── Post-quantum (ML-KEM, ML-DSA, SLH-DSA)                    │
-│  ├── Threshold (FROST, CGGMP, Ringtail)                        │
-│  └── Classical (BLS, Ed25519, secp256k1)                       │
-│                                                                 │
-└─────────────────────────────────────────────────────────────────┘
++=================================================================+
+|                    STANDARDS HIERARCHY                          |
++=================================================================+
+
+  Layer 5: Applications
+    - DeFi protocols (AMM, lending, derivatives)
+    - DEX specifications (orderbook, matching)
+    - Consumer apps (wallets, identity)
+
+  Layer 4: Token Standards
+    - LRC-20: Fungible tokens
+    - LRC-721: Non-fungible tokens
+    - LRC-1155: Multi-token standard
+
+  Layer 3: Chain Standards
+    - C-Chain precompiles (secp256r1, PQC, threshold)
+    - Cross-chain messaging (Warp, ICM)
+    - Bridge protocols (Teleport, asset registry)
+
+  Layer 2: Consensus & Network
+    - Quasar consensus (Photon, Wave, Focus, Prism, Horizon)
+    - P2P networking (gossip, peer discovery)
+    - Validator management (staking, delegation)
+
+  Layer 1: Cryptographic Primitives
+    - Post-quantum (ML-KEM, ML-DSA, SLH-DSA)
+    - Threshold (FROST, CGGMP, Ringtail)
+    - Classical (BLS, Ed25519, secp256k1)
+
++=================================================================+
 ```
 
 ## Implementation
