@@ -23,6 +23,24 @@ This document defines:
 3. **Architecture Overview**: The multi-chain topology and consensus model
 4. **Research Domains**: The technical subjects that LPs address
 
+## Motivation
+
+Every blockchain ecosystem requires a canonical reference document that establishes foundational principles, governance processes, and architectural decisions. Without such a document:
+
+- New contributors lack context for design decisions
+- Standards become inconsistent across proposals
+- Architectural evolution lacks coordination
+- Mission alignment drifts over time
+
+LP-0000 addresses this by serving as the **genesis specification** — the document from which all other LPs derive authority and context. It establishes:
+
+1. **Why we build**: Mission, principles, and impact commitments
+2. **How we coordinate**: The LP standards process and governance
+3. **What we build**: Multi-chain architecture and chain responsibilities
+4. **Where knowledge lives**: Research domain organization
+
+This document is intentionally comprehensive. Other LPs can be terse, referencing LP-0000 for shared context.
+
 ## Part 1: Mission & Ethos
 
 ### Why Lux Exists
