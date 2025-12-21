@@ -483,6 +483,15 @@ Investor:    0000 → 70000 → 71000 → 72000
 | 4xxx (Q-Chain) | 1500-1699 | Q merged into PXQ |
 | 5xxx (A-Chain) | 4xxx-5xxx | AI moved down |
 
+### Legacy Ranges (Preserved for Backward Compatibility)
+
+| Legacy LP | Current Status | Notes |
+|-----------|---------------|-------|
+| LP-50000 | Research Index (Legacy) | Preserved; see LP-10090 for new research index |
+| LP-70000 | Fund Management Index | Active in Tier 8 |
+| LP-71000 | DAO Governance Index | Active in Tier 8 |
+| LP-72000 | ESG Impact Index | Active in Tier 8 |
+
 ---
 
 ## Security Considerations
