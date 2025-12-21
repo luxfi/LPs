@@ -45,28 +45,28 @@ This applies to:
 ### Dependency Hierarchy
 
 ```
-┌─────────────────────────────────────────────────────────────┐
-│                    LUX NODE BINARY (41 MB)                  │
-├─────────────────────────────────────────────────────────────┤
-│  LUXFI INTERNAL (30 packages)         ← Full control       │
-│  ├── luxfi/node        Core validator                      │
-│  ├── luxfi/geth        Streamlined EVM                     │
-│  ├── luxfi/coreth      C-Chain integration                 │
-│  ├── luxfi/consensus   BFT engine (no snow deps)           │
-│  ├── luxfi/crypto      PQ-ready cryptography               │
-│  ├── luxfi/threshold   TSS/MPC protocols                   │
-│  ├── luxfi/database    Pluggable backends                  │
-│  └── ... (22 more)                                         │
-├─────────────────────────────────────────────────────────────┤
-│  GOLANG STDLIB (curated)              ← Minimal surface    │
-│  ├── golang.org/x/sys                                      │
-│  ├── golang.org/x/net                                      │
-│  ├── golang.org/x/crypto                                   │
-│  └── google.golang.org/grpc                                │
-├─────────────────────────────────────────────────────────────┤
-│  EXTERNAL (50 packages)               ← Audited, pinned    │
-│  └── Zero database deps in default build                   │
-└─────────────────────────────────────────────────────────────┘
++---------------------------------------------------------------+
+|                    LUX NODE BINARY (41 MB)                    |
++---------------------------------------------------------------+
+|  LUXFI INTERNAL (30 packages)              [Full control]     |
+|    - luxfi/node        Core validator                         |
+|    - luxfi/geth        Streamlined EVM                        |
+|    - luxfi/coreth      C-Chain integration                    |
+|    - luxfi/consensus   BFT engine (no snow deps)              |
+|    - luxfi/crypto      PQ-ready cryptography                  |
+|    - luxfi/threshold   TSS/MPC protocols                      |
+|    - luxfi/database    Pluggable backends                     |
+|    - ... (22 more)                                            |
++---------------------------------------------------------------+
+|  GOLANG STDLIB (curated)                   [Minimal surface]  |
+|    - golang.org/x/sys                                         |
+|    - golang.org/x/net                                         |
+|    - golang.org/x/crypto                                      |
+|    - google.golang.org/grpc                                   |
++---------------------------------------------------------------+
+|  EXTERNAL (50 packages)                    [Audited, pinned]  |
+|    - Zero database deps in default build                      |
++---------------------------------------------------------------+
 ```
 
 ---
