@@ -1,5 +1,5 @@
 ---
-lp: 11000
+lp: 71000
 title: DAO and Governance Index
 description: Index of DAO frameworks, voting mechanisms, and governance standards
 author: Lux Core Team

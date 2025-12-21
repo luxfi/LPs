@@ -1,5 +1,5 @@
 ---
-lp: 10000
+lp: 70000
 title: Fund Management Index
 description: Index of fund management, treasury, and institutional investment LPs
 author: Lux Core Team

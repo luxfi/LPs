@@ -1,5 +1,5 @@
 ---
-lp: 93
+lp: 10093
 title: Decentralized Identity Research
 description: Research on decentralized identity solutions and privacy-preserving KYC for Lux Network
 author: Lux Network Team (@luxfi)

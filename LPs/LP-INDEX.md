@@ -387,22 +387,39 @@ LPs for developer tooling, SDKs, and APIs.
 
 ---
 
-## Research & Meta
+## Research (10xxx+ Series)
 
 > **Tags**: `research`, `meta`, `informational`
+> **Note**: Research = Base + 10000 (per LP-0099 v3)
 
-Research papers, informational documents, and meta LPs.
+Research papers, informational documents, and experimental protocols. Research LPs mirror base categories at +10000 offset.
 
 | LP | Title | Tags | Status |
 |----|-------|------|--------|
 | [LP-0085](/docs/lp-0085-security-audit-framework/) | Security Audit Framework | `meta`, `security` | Draft |
-| [LP-0090](/docs/lp-0090-research-papers-index/) | Research Papers Index | `research`, `index` | Draft |
-| [LP-0091](/docs/lp-0091-payment-processing-research/) | Payment Processing Research | `research`, `payments` | Informational |
-| [LP-0093](/docs/lp-0093-decentralized-identity-research/) | Decentralized Identity Research | `research`, `identity` | Informational |
-| [LP-0094](/docs/lp-0094-governance-framework-research/) | Governance Framework Research | `research`, `governance` | Informational |
-| [LP-0095](/docs/lp-0095-stablecoin-mechanisms-research/) | Stablecoin Mechanisms Research | `research`, `stablecoin` | Informational |
-| [LP-0096](/docs/lp-0096-mev-protection-research/) | MEV Protection Research | `research`, `mev` | Informational |
-| [LP-0097](/docs/lp-0097-data-availability-research/) | Data Availability Research | `research`, `data-availability` | Informational |
+| [LP-10090](/docs/lp-10090-research-papers-index/) | Research Papers Index | `research`, `index` | Draft |
+| [LP-10091](/docs/lp-10091-payment-processing-research/) | Payment Processing Research | `research`, `payments` | Informational |
+| [LP-10092](/docs/lp-10092-cross-chain-messaging-research/) | Cross-Chain Messaging Research | `research`, `cross-chain` | Informational |
+| [LP-10093](/docs/lp-10093-decentralized-identity-research/) | Decentralized Identity Research | `research`, `identity` | Informational |
+| [LP-10094](/docs/lp-10094-governance-framework-research/) | Governance Framework Research | `research`, `governance` | Informational |
+| [LP-10095](/docs/lp-10095-stablecoin-mechanisms-research/) | Stablecoin Mechanisms Research | `research`, `stablecoin` | Informational |
+| [LP-10096](/docs/lp-10096-mev-protection-research/) | MEV Protection Research | `research`, `mev` | Informational |
+| [LP-10097](/docs/lp-10097-data-availability-research/) | Data Availability Research | `research`, `data-availability` | Informational |
+
+### Research Range Mapping
+
+| Research Range | Mirrors | Domain |
+|---------------|---------|--------|
+| 10xxx | 0xxx | Core Research |
+| 11xxx | 1xxx | Consensus Research |
+| 12xxx | 2xxx | EVM Research |
+| 13xxx | 3xxx | DeFi Research |
+| 14xxx | 4xxx | PQC Research |
+| 15xxx | 5xxx | AI Research |
+| 16xxx | 6xxx | Bridge Research |
+| 17xxx | 7xxx | MPC Research |
+| 18xxx | 8xxx | Privacy Research |
+| 19xxx | 9xxx | Trading Research |
 
 ---
 
@@ -484,46 +501,58 @@ To add a new LP:
 3. Update this index
 4. Submit PR
 
-### LP Numbering Conventions (Per LP-0099 v2)
+### LP Numbering Conventions (Per LP-0099 v3.3)
 
 #### Tier Overview
 
 | Tier | Range | Domain | Purpose |
 |------|-------|--------|---------|
-| 1 | **0xxx-2xxx** | Foundation | Core protocol, P-Chain, C-Chain |
-| 2 | **3xxx** | Web3/DeFi | AMM, lending, yield, wallets |
-| 3 | **4xxx-8xxx** | Security Chains | Q/A/B/T/Z-Chains |
-| 4 | **9xxx** | Trading | CEX/DEX/HFT, oracles ⚡ |
-| 5 | **10xxx-12xxx** | Institutional | Funds, DAOs, ESG |
-| 6 | **50xxx+** | Research | Academic, experimental |
+| 0 | **0xxx** | Meta | What Lux is |
+| 1 | **1xxx** | PXQ Platform | P/X/Q-Chain substrate |
+| 2 | **2xxx** | Cryptography | Chain-agnostic math |
+| 3 | **3xxx** | Web3/DeFi | EVM + Solidity devs |
+| 4 | **4xxx-5xxx** | AI/Attestation | A-Chain compute |
+| 5 | **6xxx-8xxx** | Security Chains | B/T/Z-Chains |
+| 6 | **9xxx** | Trading | CEX/DEX/HFT ⚡ |
+| 7 | **10xxx-19xxx** | Research | Base + 10000 |
+| 8 | **70xxx-72xxx** | Institutional | Funds, DAOs, ESG |
 
 #### Chain Mapping
 
 | Range | Chain | Purpose |
 |-------|-------|---------|
-| **0xxx** | Core/Meta | Network architecture, consensus, dev tools |
-| **1xxx** | P-Chain | Validators, staking, subnets |
-| **2xxx** | C-Chain | EVM, contracts, LRC tokens |
-| **3xxx** | DeFi/Web3 | AMM, lending, yield (replaces X-Chain) |
-| **4xxx** | Q-Chain | Post-quantum cryptography |
-| **5xxx** | A-Chain | AI attestation, TEE |
+| **0xxx** | Core/Meta | Network architecture, governance |
+| **1xxx** | PXQ | P-Chain + X-Chain + Q-Chain (platform substrate) |
+| **2xxx** | Crypto | Primitives, algorithms, schemes (chain-agnostic) |
+| **3xxx** | C-Chain | EVM, tokens, AMM, lending, DeFi |
+| **4xxx-5xxx** | A-Chain | AI, TEE, attestation, compute |
 | **6xxx** | B-Chain | Bridge, Warp, Teleport |
-| **7xxx** | T-Chain | MPC, threshold signatures |
-| **8xxx** | Z-Chain | Privacy, ZK proofs |
+| **7xxx** | T-Chain | MPC networks, threshold signing |
+| **8xxx** | Z-Chain | ZK, FHE, private compute (isolated) |
 | **9xxx** | Trading | CEX/DEX/HFT ⚡ |
-| **10xxx** | Funds | Lux Fund, treasuries |
-| **11xxx** | DAO | Governance, voting |
-| **12xxx** | ESG | Impact, carbon, social |
-| **50xxx+** | Research | Papers, experiments |
+| **10xxx-19xxx** | Research | Base + 10000 (mirrors 0-9xxx) |
+| **70xxx-72xxx** | Institutional | Funds, DAO, ESG |
+
+#### Decision Rules
+
+| If your spec is about... | Range |
+|--------------------------|-------|
+| Math / schemes / primitives | **2xxx** |
+| EVM / Solidity / DeFi apps | **3xxx** |
+| MPC as a running network | **7xxx** |
+| ZK / FHE / private compute | **8xxx** |
+| Trading latency / orderbooks | **9xxx** |
+| Unfinished / experimental | **+10000** |
 
 #### User Learning Paths
 
 ```
-Developer:  0000 → 0009 → 2000 → 2300 → 3000 → 9000
-Validator:  0000 → 1000 → 1100 → 0110 → 4000
-Trader:     0001 → 3000 → 9000 → 9400 → 9500
-Investor:   0001 → 10000 → 11000 → 12000
-Security:   4000 → 7000 → 8000 → 5000 → 6000
+Developer:   0000 → 3000 → 3100 → 3300 → 9000
+Validator:   0000 → 1000 → 1100 → 0110 → 1500
+Trader:      0000 → 3300 → 9000 → 9400 → 9500
+Security:    2000 → 2200 → 7000 → 8000 → 6000
+Researcher:  10090 → 12xxx → 17xxx → 18xxx
+Investor:    0000 → 70000 → 71000 → 72000
 ```
 
 See [LP-0099](/docs/lp-0099-lp-numbering-scheme-and-chain-organization/) for the complete numbering scheme.

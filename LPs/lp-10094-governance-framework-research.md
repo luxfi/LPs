@@ -1,5 +1,5 @@
 ---
-lp: 94
+lp: 10094
 title: Governance Framework Research
 description: Research on decentralized governance models and implementation strategies for Lux Network
 author: Lux Network Team (@luxfi)
