@@ -138,6 +138,8 @@ LPs for cryptographic primitives and EVM infrastructure.
 |----|-------|------|--------|
 | [LP-2326](/docs/lp-2326-network-upgrade-and-state-migration/) | Network Upgrade and State Migration | `evm`, `migration` | Draft |
 | [LP-2327](/docs/lp-2327-badgerdb-verkle-optimization/) | BadgerDB Verkle Optimization | `database`, `verkle` | Draft |
+| [LP-2604](/docs/lp-2604-state-sync-and-pruning-protocol/) | State Sync and Pruning Protocol | `state`, `sync`, `pruning` | Draft |
+| [LP-2606](/docs/lp-2606-verkle-trees-for-efficient-state-management/) | Verkle Trees for Efficient State Management | `verkle`, `state`, `proofs` | Draft |
 
 ---
 
