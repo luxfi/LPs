@@ -7,7 +7,7 @@ status: Final
 type: Meta
 created: 2025-12-21
 tags: [learning-path, privacy, zk, fhe, z-chain]
-order: 170
+order: 27
 tier: core
 ---
 

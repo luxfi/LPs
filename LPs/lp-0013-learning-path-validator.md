@@ -7,7 +7,7 @@ status: Final
 type: Meta
 created: 2025-12-21
 tags: [learning-path, validator, infrastructure, operator]
-order: 130
+order: 23
 tier: core
 ---
 

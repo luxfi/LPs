@@ -7,7 +7,7 @@ status: Final
 type: Meta
 created: 2025-12-21
 tags: [governance, meta, process, standards]
-order: 3
+order: 2
 tier: core
 ---
 

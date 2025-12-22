@@ -7,7 +7,7 @@ status: Final
 type: Meta
 created: 2025-12-21
 tags: [learning-path, developer, web3, defi, solidity]
-order: 120
+order: 22
 tier: core
 ---
 
