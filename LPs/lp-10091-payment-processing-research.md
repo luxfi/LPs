@@ -9,6 +9,7 @@ type: Informational
 created: 2025-01-23
 requires: 1, 2300, 40
 tags: [research, defi]
+order: 111
 ---
 
 ## Abstract

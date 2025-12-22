@@ -4,10 +4,12 @@ title: MEV Protection & Fair Ordering
 description: Comprehensive MEV protection mechanisms, fair ordering protocols, and transaction privacy for DeFi
 author: Lux Core Team
 status: Draft
+tags: [dex, trading]
 type: Standards Track
 category: Core
 created: 2025-01-15
 requires: [9010, 9017]
+order: 25
 ---
 
 # LP-9025: MEV Protection & Fair Ordering

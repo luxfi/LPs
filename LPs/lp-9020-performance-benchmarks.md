@@ -4,10 +4,12 @@ title: Performance Benchmarks & Stress Testing
 description: Performance requirements, benchmarks, and stress testing standards for production DeFi
 author: Lux Core Team
 status: Draft
+tags: [dex, trading]
 type: Standards Track
 category: Core
 created: 2025-01-15
 requires: [9010, 9014, 9016]
+order: 20
 ---
 
 # LP-9020: Performance Benchmarks & Stress Testing

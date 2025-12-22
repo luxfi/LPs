@@ -9,6 +9,7 @@ type: Informational
 created: 2025-01-23
 requires: 0, 9011, 2012
 tags: [research, defi, security]
+order: 116
 ---
 
 ## Abstract

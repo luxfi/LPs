@@ -4,10 +4,12 @@ title: Upgrade & Migration Procedures
 description: Safe upgrade patterns, migration procedures, and versioning standards for production DeFi
 author: Lux Core Team
 status: Draft
+tags: [dex, trading]
 type: Standards Track
 category: Core
 created: 2025-01-15
 requires: [9016, 9021]
+order: 22
 ---
 
 # LP-9022: Upgrade & Migration Procedures

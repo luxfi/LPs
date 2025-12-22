@@ -13,6 +13,7 @@ activation:
   flag: lp1155-multi-token-standard
   hfName: ""
   activationHeight: "0"
+order: 155
 ---
 
 > **See also**: [LP-12: C-Chain (Contract Chain) Specification](/docs/lp-12/), [LP-20: LRC-20 Fungible Token Standard](/docs/lp-20/), [LP-721: LRC-721 Non-Fungible Token Standard](/docs/lp-721/)

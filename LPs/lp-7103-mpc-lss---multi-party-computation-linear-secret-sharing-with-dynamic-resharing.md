@@ -10,6 +10,7 @@ category: Core
 created: 2025-08-14
 requires: 7014
 tags: [mpc, threshold-crypto]
+order: 103
 ---
 
 > **See also**: [LP-14](/docs/lp-14-t-chain-threshold-signatures-with-cgg21-uc-non-interactive-ecdsa/), [LP-13](/docs/lp-13-t-chain-decentralised-mpc-custody-and-swap-signature-layer/), [LP-INDEX](/docs/)

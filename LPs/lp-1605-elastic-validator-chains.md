@@ -10,6 +10,7 @@ category: Core
 created: 2025-01-09
 requires: 601, 6602
 tags: [consensus, scaling]
+order: 605
 ---
 
 # LP-605: Elastic Validator Chains

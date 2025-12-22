@@ -11,6 +11,7 @@ category: Core
 created: 2025-12-21
 requires: 9000, 9010, 2517
 implementation: https://github.com/luxfi/standard/src/liquidity/precompiles/IOracle.sol
+order: 11
 ---
 
 > **Documentation**: [docs.lux.network/oracle](https://docs.lux.network/oracle)

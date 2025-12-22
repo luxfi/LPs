@@ -10,6 +10,7 @@ category: LRC
 created: 2025-12-17
 requires: 2504, 2506
 tags: [dao, governance, azorius, module]
+order: 521
 ---
 
 ## Abstract

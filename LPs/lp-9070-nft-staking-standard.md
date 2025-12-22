@@ -10,6 +10,7 @@ category: LRC
 created: 2025-01-23
 requires: 2721, 2155, 2300
 tags: [lrc, defi, nft]
+order: 70
 ---
 
 ## Abstract

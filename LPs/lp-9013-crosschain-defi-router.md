@@ -11,6 +11,7 @@ category: LRC
 created: 2025-12-21
 requires: 9010, 9011, 9012, 2517
 implementation: https://github.com/luxfi/standard/src/liquidity/CrossChainDeFiRouter.sol
+order: 13
 ---
 
 > **Documentation**: [docs.lux.network/defi](https://docs.lux.network/defi)

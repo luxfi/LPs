@@ -10,6 +10,7 @@ category: Core
 created: 2025-10-28
 requires: 7013, 7014, 6015
 tags: [bridge, cross-chain]
+order: 301
 ---
 
 # LP-301: Lux B-Chain - Cross-Chain Bridge Protocol

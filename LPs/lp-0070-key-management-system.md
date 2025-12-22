@@ -10,6 +10,7 @@ category: Core
 created: 2025-01-23
 tags: [security, cryptography, key-management, threshold-crypto, ml-kem]
 requires: 0042
+order: 70
 ---
 
 ## Abstract

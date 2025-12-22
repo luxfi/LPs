@@ -9,6 +9,7 @@ status: Draft
 type: Meta
 created: 2025-12-17
 requires: [800, 801]
+order: 10
 ---
 
 # LP-810: Green Compute & Energy Procurement

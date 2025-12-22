@@ -10,6 +10,7 @@ category: LRC
 created: 2025-01-24
 requires: 2300, 69
 tags: [defi, privacy, staking]
+order: 403
 ---
 
 ## Abstract

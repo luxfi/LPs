@@ -10,6 +10,7 @@ category: Networking
 created: 2025-12-11
 requires: 6602, 7330, 6331, 6332, 7333
 tags: [pqc, threshold-crypto, cross-chain, warp, teleport, bridge, encryption, signatures]
+order: 603
 ---
 
 # LP-603: Warp 1.5 - Quantum-Safe Cross-Chain Messaging

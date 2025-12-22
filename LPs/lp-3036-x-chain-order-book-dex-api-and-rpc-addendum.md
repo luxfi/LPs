@@ -12,6 +12,7 @@ updated: 2025-12-11
 tags: [defi, core]
 requires: 6
 implementation: https://github.com/luxfi/dex
+order: 36
 ---
 
 ## Implementation Status

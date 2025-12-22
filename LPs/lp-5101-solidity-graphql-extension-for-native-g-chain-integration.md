@@ -10,6 +10,7 @@ category: Core
 created: 2025-01-28
 requires: 2012, 2026, 98
 tags: [evm, dev-tools, indexing]
+order: 101
 ---
 
 > **See also**: [LP-12: C-Chain Specification](/docs/lp-12-c-chain-contract-chain-specification/), [LP-26: C-Chain EVM Equivalence](/docs/lp-26-c-chain-evm-equivalence-and-core-eips-adoption/), [LP-98: G-Chain GraphQL Specification](/docs/lp-98-luxfi-graphdb-and-graphql-engine-integration/)

@@ -9,6 +9,7 @@ type: Informational
 created: 2025-11-14
 requires: 2311, 2312, 2313, 2314, 7321, 7322, 7324
 tags: [precompile, evm, index]
+order: 517
 ---
 
 ## Abstract

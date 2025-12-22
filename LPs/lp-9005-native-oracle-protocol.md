@@ -14,6 +14,7 @@ requires: 9001, 9002, LP-12, LP-13, LP-80
 supersedes: 0610
 series: LP-9000 DEX Series
 implementation: https://github.com/luxfi/dex
+order: 5
 ---
 
 > **Part of LP-9000 Series**: This LP is part of the [LP-9000 DEX Series](/docs/lp-9000-dex-overview/) - Lux's standalone sidecar exchange network.

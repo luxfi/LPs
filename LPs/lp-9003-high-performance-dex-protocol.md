@@ -15,6 +15,7 @@ series: LP-9000 DEX Series
 tags: [defi, scaling, lp-9000-series]
 implementation: https://github.com/luxfi/dex
 documentation: https://dex.lux.network
+order: 3
 ---
 
 > **Documentation**: [dex.lux.network](https://dex.lux.network)

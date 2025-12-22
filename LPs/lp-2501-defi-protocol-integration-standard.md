@@ -5,10 +5,12 @@ description: Standard DeFi protocol integrations for the Lux Standard Library wi
 author: Lux Network Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
 status: Draft
+tags: [c-chain, evm]
 type: Standards Track
 category: LRC
 created: 2025-12-14
 requires: 2000, 7321, 7322
+order: 501
 ---
 
 # LP-2501: DeFi Protocol Integration Standard

@@ -10,6 +10,7 @@ category: Core
 created: 2025-07-24
 tags: [l2, scaling]
 requires: 32, 33
+order: 34
 ---
 
 ## Abstract

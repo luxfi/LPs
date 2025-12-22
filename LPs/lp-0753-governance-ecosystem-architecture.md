@@ -9,6 +9,7 @@ status: Draft
 type: Meta
 created: 2025-12-17
 requires: [750, 800]
+order: 53
 ---
 
 # LP-753: Governance & Ecosystem Architecture

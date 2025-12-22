@@ -9,6 +9,7 @@ status: Draft
 type: Meta
 created: 2025-12-17
 requires: [800]
+order: 40
 ---
 
 # LP-840: Impact Disclosure & Anti-Greenwashing Policy

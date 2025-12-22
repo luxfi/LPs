@@ -10,6 +10,7 @@ category: LRC
 created: 2025-12-17
 requires: 2507
 tags: [dao, governance, voting, strategies]
+order: 522
 ---
 
 ## Abstract

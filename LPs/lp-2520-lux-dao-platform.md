@@ -10,6 +10,7 @@ category: LRC
 created: 2025-12-17
 requires: 2504
 tags: [dao, governance, platform]
+order: 520
 ---
 
 ## Abstract

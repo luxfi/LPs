@@ -1,5 +1,5 @@
 ---
-lp: 6
+lp: 40
 title: Network Runner & Testing Framework
 tags: [dev-tools, testing]
 description: Specifies the Lux Network Runner and testing frameworks.
@@ -9,6 +9,7 @@ status: Final
 type: Standards Track
 category: Interface
 created: 2025-01-23
+order: 40
 ---
 
 ## Abstract

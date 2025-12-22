@@ -14,6 +14,7 @@ activation:
   flag: lp5-quantum-safe-wallets
   hfName: ""
   activationHeight: "0"
+order: 5
 ---
 
 > **See also**: [LP-4: Quantum-Resistant Cryptography Integration in Lux](/docs/lp-4-quantum-resistant-cryptography-integration-in-lux/)

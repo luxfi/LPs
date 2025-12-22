@@ -7,6 +7,7 @@ status: Draft
 type: Meta
 created: 2025-12-21
 tags: [dao, governance, voting, index]
+order: 20
 ---
 
 # LP-11000: DAO and Governance Index

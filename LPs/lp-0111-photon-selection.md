@@ -10,6 +10,7 @@ category: Core
 created: 2025-01-29
 requires: 110
 tags: [consensus, photon, vrf, proposer-selection, luminance, validators]
+order: 11
 ---
 
 ## Abstract

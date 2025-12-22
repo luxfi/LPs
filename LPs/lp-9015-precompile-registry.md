@@ -11,6 +11,7 @@ category: Core
 created: 2025-12-21
 requires: 2517, 9010, 9011
 implementation: https://github.com/luxfi/standard/src/liquidity/precompiles/PrecompileRegistry.sol
+order: 15
 ---
 
 > **Documentation**: [docs.lux.network/precompiles](https://docs.lux.network/precompiles)

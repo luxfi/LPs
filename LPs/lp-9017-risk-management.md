@@ -4,10 +4,12 @@ title: Risk Management Framework
 description: Comprehensive risk management for DeFi protocols including position limits, flash loan protection, and slippage controls
 author: Lux Core Team
 status: Draft
+tags: [dex, trading]
 type: Standards Track
 category: Core
 created: 2025-01-15
 requires: [9010, 9011, 9012, 9016]
+order: 17
 ---
 
 # LP-9017: Risk Management Framework

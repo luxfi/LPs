@@ -1,5 +1,5 @@
 ---
-lp: 3000
+lp: 3100
 order: 20000
 title: X-Chain - Core Exchange Specification
 tags: [core, exchange, utxo, trading, x-chain]

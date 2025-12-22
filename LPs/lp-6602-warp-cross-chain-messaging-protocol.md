@@ -10,6 +10,7 @@ category: Networking
 created: 2025-01-09
 requires: 6603
 tags: [warp, cross-chain]
+order: 602
 ---
 
 # LP-602: Warp Cross-Chain Messaging Protocol

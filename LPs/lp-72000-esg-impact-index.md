@@ -7,6 +7,7 @@ status: Draft
 type: Meta
 created: 2025-12-21
 tags: [esg, impact, carbon, sustainability, index]
+order: 20
 ---
 
 # LP-72000: ESG and Impact Index

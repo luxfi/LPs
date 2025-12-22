@@ -14,6 +14,7 @@ activation:
   flag: lp2510-teleport-protocol
   hfName: "Teleport"
   activationHeight: "TBD"
+order: 510
 ---
 
 ## Abstract

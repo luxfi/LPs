@@ -9,6 +9,7 @@ status: Draft
 type: Meta
 created: 2025-12-17
 requires: [800, 900]
+order: 1
 ---
 
 # LP-901: Impact Measurement Methodology

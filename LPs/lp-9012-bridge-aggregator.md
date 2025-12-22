@@ -11,6 +11,7 @@ category: Core
 created: 2025-12-21
 requires: 6000, 6301, 6602, 2507
 implementation: https://github.com/luxfi/standard/src/liquidity/bridges/IBridgeAggregator.sol
+order: 12
 ---
 
 > **Documentation**: [docs.lux.network/bridges](https://docs.lux.network/bridges)

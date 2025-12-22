@@ -10,6 +10,7 @@ category: Core
 created: 2025-12-11
 requires: 7013, 7014, 6015, 6017, 7330, 7333
 tags: [mpc, threshold-crypto, bridge]
+order: 334
 ---
 
 > **See also**: [LP-13](/docs/lp-7013-t-chain-decentralised-mpc-custody-and-swap-signature-layer/), [LP-14](/docs/lp-7014-t-chain-threshold-signatures-with-cgg21-uc-non-interactive-ecdsa/), [LP-15](/docs/lp-6015-mpc-bridge-protocol/), [LP-17](/docs/lp-6017-bridge-asset-registry/), [LP-330](/docs/lp-7330-t-chain-thresholdvm-specification/), [LP-333](/docs/lp-7333-dynamic-signer-rotation-with-lss-protocol/), [LP-INDEX](/docs/)

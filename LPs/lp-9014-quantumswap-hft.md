@@ -11,6 +11,7 @@ category: Core
 created: 2025-12-21
 requires: 9000, 9010, 3000
 implementation: https://github.com/luxfi/standard/src/liquidity/dex/QuantumSwap.sol
+order: 14
 ---
 
 > **Documentation**: [quantumswap.lux.network](https://quantumswap.lux.network)

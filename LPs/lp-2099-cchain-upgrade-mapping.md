@@ -5,9 +5,11 @@ description: Comprehensive mapping of C-Chain network upgrades to LPs and Ethere
 author: Lux Core Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
 status: Final
+tags: [c-chain, evm]
 type: Informational
 created: 2025-12-17
 updated: 2025-12-17
+order: 99
 ---
 
 ## Abstract

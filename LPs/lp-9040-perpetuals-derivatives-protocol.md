@@ -14,6 +14,7 @@ supersedes: 0609
 series: LP-9000 DEX Series
 tags: [defi, derivatives, lp-9000-series]
 implementation: https://github.com/luxfi/dex
+order: 40
 ---
 
 > **Part of LP-9000 Series**: This LP is part of the [LP-9000 DEX Series](/docs/lp-9000-dex-overview/) - Lux's standalone sidecar exchange network.

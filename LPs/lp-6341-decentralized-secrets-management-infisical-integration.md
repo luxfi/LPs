@@ -14,6 +14,7 @@ activation:
   hfName: "Vault"
   activationHeight: "0"
 tags: [security, dev-tools]
+order: 341
 ---
 
 > **See also**: [LP-330](/docs/lp-7330-t-chain-thresholdvm-specification/), [LP-336](/docs/lp-7336-k-chain-keymanagementvm-specification/), [LP-INDEX](/docs/)

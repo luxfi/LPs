@@ -7,6 +7,7 @@ status: Draft
 type: Meta
 created: 2025-12-21
 tags: [research, academic, frontier, experimental, index]
+order: 20
 ---
 
 # LP-50000: Research Papers Index

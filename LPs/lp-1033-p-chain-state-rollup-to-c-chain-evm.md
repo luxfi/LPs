@@ -10,6 +10,7 @@ category: Core
 created: 2025-07-24
 tags: [l2, evm, core]
 requires: 2026, 32
+order: 33
 ---
 
 ## Abstract

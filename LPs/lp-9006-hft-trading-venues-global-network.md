@@ -14,6 +14,7 @@ requires: 9000, 9001, 9003
 series: LP-9000 DEX Series
 implementation: https://github.com/luxfi/dex
 documentation: https://dex.lux.network
+order: 6
 ---
 
 > **Documentation**: [dex.lux.network](https://dex.lux.network)

@@ -13,6 +13,7 @@ updated: 2025-12-11
 implementation: https://github.com/luxfi/dex
 documentation: https://dex.lux.network
 series: LP-9000 DEX Series
+order: 1
 ---
 
 > **Documentation**: [dex.lux.network](https://dex.lux.network)

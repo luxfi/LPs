@@ -10,6 +10,7 @@ category: Core
 created: 2025-11-22
 requires: 303
 tags: [pqc]
+order: 316
 ---
 
 # LP-316: ML-DSA Post-Quantum Digital Signatures

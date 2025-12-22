@@ -10,6 +10,7 @@ category: Interface
 created: 2025-12-17
 requires: 7330, 7340
 tags: [sdk, typescript, threshold-crypto]
+order: 341
 ---
 
 ## Abstract

@@ -10,6 +10,7 @@ category: Core
 created: 2025-01-09
 requires: 6603
 tags: [core, scaling]
+order: 604
 ---
 
 # LP-604: State Sync and Pruning Protocol

@@ -11,6 +11,7 @@ category: Core
 created: 2025-01-23
 updated: 2025-12-11
 implementation: https://github.com/luxfi/dex
+order: 11
 ---
 
 ## Implementation Status

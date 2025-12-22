@@ -10,6 +10,7 @@ category: Core
 created: 2025-01-09
 requires: 600
 tags: [ai, gas, evm]
+order: 601
 ---
 
 # LP-601: Dynamic Gas Fee Mechanism with AI Compute Pricing

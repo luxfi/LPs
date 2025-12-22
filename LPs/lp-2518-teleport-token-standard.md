@@ -10,6 +10,7 @@ category: LRC
 created: 2025-12-14
 requires: 6016, 6017, 6022
 tags: [teleport, bridge, tokens, cross-chain]
+order: 518
 ---
 
 ## Abstract
