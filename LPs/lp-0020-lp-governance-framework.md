@@ -257,6 +257,15 @@ make pre-pr        # Pre-PR checks
 
 ---
 
+## Rationale
+
+The LP process is modeled after Ethereum's EIP system, which has proven effective for decentralized protocol governance. Key design choices:
+
+- **Numbered proposals**: Enables stable references and citations
+- **Status lifecycle**: Prevents premature finalization while allowing progress
+- **Editor review**: Ensures quality without gatekeeping ideas
+- **Community consensus**: Final authority rests with stakeholders, not editors
+
 ## Backwards Compatibility
 
 This LP establishes the governance framework. It does not break any existing processes.
