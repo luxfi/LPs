@@ -1,7 +1,7 @@
 ---
 lp: 753
 title: Governance & Ecosystem Architecture
-tags: [investment, governance, accountability, ecosystem]
+tags: [investment, accountability, ecosystem]
 description: Governance structure and accountability architecture for the Lux-Hanzo-Zoo ecosystem.
 author: Lux Network Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
@@ -129,7 +129,7 @@ This architecture establishes:
 | **Finance** | Audit trail, fund accounting |
 | **Creation** | Technical review, safety testing |
 | **Mission** | Ethics review, impact assessment |
-| **Ownership** | Community attestation, governance votes |
+| **Ownership** | Community attestation votes |
 
 ## Governance Bodies
 

@@ -1,7 +1,7 @@
 ---
 lp: 900
 title: Impact Framework & Theory of Change
-tags: [esg, impact, social, governance, stakeholders]
+tags: [esg, impact, social, stakeholders]
 description: Foundational framework for measuring and reporting Lux Network's societal impact.
 author: Lux Network Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
@@ -36,7 +36,7 @@ A world where financial infrastructure is accessible, transparent, and empowerin
 
 ### Mission
 
-Build blockchain infrastructure that democratizes access to financial services, enables transparent governance, and creates measurable positive outcomes for communities worldwide.
+Build blockchain infrastructure that democratizes access to financial services, enables transparent and creates measurable positive outcomes for communities worldwide.
 
 ### Theory of Change Model
 
@@ -159,7 +159,7 @@ INPUTS → ACTIVITIES → OUTPUTS → OUTCOMES → IMPACT
 
 | Stakeholder | Interest | Engagement Method |
 |-------------|----------|-------------------|
-| **Token holders** | Value, governance | Governance participation, rewards |
+| **Token holders** | Value | Governance participation, rewards |
 | **Validators** | Rewards, influence | Delegation, LP process |
 | **Developers** | Tools, opportunity | Grants, documentation |
 | **Users** | Access, low cost | Applications, support |

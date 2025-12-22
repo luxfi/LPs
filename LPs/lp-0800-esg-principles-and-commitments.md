@@ -1,7 +1,7 @@
 ---
 lp: 800
 title: ESG Principles and Commitments
-tags: [esg, sustainability, governance]
+tags: [esg, sustainability]
 description: Foundational ESG framework defining Lux Network's environmental, social, and governance commitments.
 author: Lux Network Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
@@ -15,7 +15,7 @@ order: 800
 
 ## Abstract
 
-This LP establishes the foundational Environmental, Social, and Governance (ESG) framework for Lux Network. It defines our material topics, governance structure, metrics and targets, verification approach, and known tradeoffs. All other ESG-related LPs (LP-801 through LP-999) reference this document as the canonical source for Lux's sustainability commitments.
+This LP establishes the foundational Environmental, Social, and Governance (ESG) framework for Lux Network. It defines our material topics structure, metrics and targets, verification approach, and known tradeoffs. All other ESG-related LPs (LP-801 through LP-999) reference this document as the canonical source for Lux's sustainability commitments.
 
 ## Motivation
 

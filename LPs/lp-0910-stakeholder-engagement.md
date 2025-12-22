@@ -1,7 +1,7 @@
 ---
 lp: 910
 title: Stakeholder Engagement
-tags: [esg, impact, governance, stakeholders, community]
+tags: [esg, impact, stakeholders, community]
 description: Framework for meaningful engagement with Lux Network stakeholders.
 author: Lux Network Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
