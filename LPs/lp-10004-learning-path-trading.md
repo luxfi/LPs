@@ -1,5 +1,5 @@
 ---
-lp: 14
+lp: 10004
 title: Learning Path - Trading & Market Infrastructure
 description: Build HFT-grade trading systems, DEXs, and market infrastructure on Lux
 author: Lux Core Team

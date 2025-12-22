@@ -1,7 +1,7 @@
 ---
-lp: 2
+lp: 3000
 title: Lux Virtual Machine and Execution Environment
-tags: [network, vm, evm, core]
+tags: [c-chain, vm, evm, core]
 description: Specifies the Lux execution model, which is designed to be EVM-compatible while allowing future extensibility for new virtual machines.
 author: Lux Network Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
@@ -10,7 +10,7 @@ type: Standards Track
 category: Core
 created: 2025-01-25
 updated: 2025-07-25
-order: 4
+order: 100
 tier: core
 activation:
   flag: lp2-lux-vm-execution

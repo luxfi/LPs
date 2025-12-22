@@ -1,17 +1,17 @@
 ---
-lp: 20
+lp: 2
 title: LP Governance Framework
 description: How Lux Proposals work - submission, review, and activation process
 author: Lux Core Team
 status: Final
 type: Meta
 created: 2025-12-21
-tags: [governance, meta, process, standards]
+tags: [network, governance, meta, process, standards]
 order: 2
 tier: core
 ---
 
-# LP-0020: LP Governance Framework
+# LP-0002: LP Governance Framework
 
 ## Abstract
 

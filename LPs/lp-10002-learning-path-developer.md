@@ -1,5 +1,5 @@
 ---
-lp: 12
+lp: 10002
 title: Learning Path - Smart Contract Developer
 description: Build dApps, DeFi protocols, and Web3 applications on Lux
 author: Lux Core Team

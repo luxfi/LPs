@@ -1,5 +1,5 @@
 ---
-lp: 18
+lp: 10008
 title: Learning Path - Investor & Institutional
 description: Understanding value accrual and capital deployment in Lux Network
 author: Lux Core Team

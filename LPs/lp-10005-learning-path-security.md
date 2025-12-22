@@ -1,5 +1,5 @@
 ---
-lp: 15
+lp: 10005
 title: Learning Path - Security & Auditor
 description: System-level threat modeling and security analysis for Lux Network
 author: Lux Core Team

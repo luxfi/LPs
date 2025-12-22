@@ -1,5 +1,5 @@
 ---
-lp: 16
+lp: 10006
 title: Learning Path - MPC & Threshold Custody
 description: Keys, custody, signing networks, and institutional security
 author: Lux Core Team
