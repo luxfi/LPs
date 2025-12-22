@@ -7,7 +7,7 @@ author: Lux Network Team (@luxfi)
 discussions-to: https://forum.lux.network/t/lp-9006-hft-venues
 status: Draft
 type: Standards Track
-category: Infrastructure
+category: Core
 created: 2025-12-11
 updated: 2025-12-11
 requires: 9000, 9001, 9003

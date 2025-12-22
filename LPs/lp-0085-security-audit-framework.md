@@ -6,7 +6,7 @@ author: Lux Network Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
 status: Draft
 type: Standards Track
-category: Meta
+category: Core
 created: 2025-01-23
 tags: [security, dev-tools]
 order: 400
