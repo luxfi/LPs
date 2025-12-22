@@ -7,7 +7,7 @@ status: Final
 type: Meta
 created: 2025-12-21
 tags: [core, security, supply-chain, dependencies, implementation]
-order: 5
+order: 60
 tier: core
 requires: [4]
 ---
