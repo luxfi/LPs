@@ -1,48 +1,34 @@
 ---
-lp: 4
-title: Supply Chain Control and Fork Philosophy
-description: Why Lux forks all dependencies, maintains full control, and the technical superiority this enables
+lp: 5
+title: Supply Chain Control
+description: How Lux maintains complete control over its software dependencies through strategic forking and internal management
 author: Lux Core Team
 status: Final
 type: Meta
 created: 2025-12-21
-tags: [core, security, architecture, supply-chain, dependencies]
-order: 40
+tags: [core, security, supply-chain, dependencies, implementation]
+order: 50
 tier: core
+requires: [4]
 ---
 
-# LP-0004: Supply Chain Control and Fork Philosophy
+# LP-0005: Supply Chain Control
 
 ## Abstract
 
-Lux Network maintains complete control over its software supply chain through strategic forking and internal package management. This document explains the philosophy, quantifies the technical advantages, and establishes this as a core architectural principle.
+This LP documents the implementation of Lux Network's supply chain control strategy as outlined in LP-4. It provides concrete metrics, package inventories, and verification procedures for maintaining dependency sovereignty.
 
 ## Motivation
 
-Modern blockchain infrastructure depends on hundreds of external packages. Each dependency introduces:
-- **Security risk**: CVEs, malicious updates, maintainer compromise
-- **Performance constraints**: Generic solutions vs optimized implementations  
-- **Feature limitations**: Upstream priorities differ from ours
-- **Audit complexity**: More code = more attack surface
-
-Lux solves this by forking critical dependencies into the `luxfi/` namespace, maintaining them internally, and aggressively pruning unnecessary code.
-
-**Result**: 53% smaller binary, 51% fewer modules, 3x more features, zero external database dependencies.
+LP-4 establishes *why* we fork dependencies. This document specifies *how* we implement and verify that control:
+- Quantified metrics for binary size and module counts
+- Complete inventory of internal packages
+- Dependency hierarchy documentation
+- Verification test cases
 
 ---
 
 ## Specification
-
-### Core Principle
-
-> **Every critical dependency is forked, audited, and maintained internally.**
-
-This applies to:
-- Consensus engines
-- Cryptographic libraries
-- Database backends
-- Networking stacks
-- EVM execution layers
 
 ### Dependency Hierarchy
 
@@ -251,48 +237,6 @@ When a CVE is disclosed:
 
 ---
 
-## Rationale
-
-### Why Fork Everything?
-
-1. **Feature velocity**: Ship what Avalanche will never merge
-2. **Security**: Immediate CVE response
-3. **Performance**: Optimizations impossible upstream
-4. **Audit**: Clean, bounded dependency tree
-5. **Quantum readiness**: PQC integrated at L1
-
-### Maintenance Cost Justification
-
-The cost of maintaining forks is offset by:
-
-| Benefit | Value |
-|---------|-------|
-| Ship exclusive features | 24+ precompiles |
-| Immediate security patches | Hours vs weeks |
-| Performance optimizations | 53% smaller binary |
-| Clean audit scope | 51% fewer modules |
-| Zero legacy cruft | Pure, modern codebase |
-
-### What We Don't Fork
-
-Only generic, stable, well-audited packages:
-- Go stdlib extensions (golang.org/x/*)
-- Protocol buffers (google.golang.org/protobuf)
-- gRPC (google.golang.org/grpc)
-
----
-
-## Backwards Compatibility
-
-This is a foundational architectural decision. All Lux software follows this principle.
-
-New dependencies require:
-1. Security audit
-2. Justification for not forking
-3. Core team approval
-
----
-
 ## Test Cases
 
 ### Binary Size Verification
@@ -331,34 +275,17 @@ The supply chain control is implemented across:
 
 ---
 
+## Backwards Compatibility
+
+This LP documents existing implementation. No changes required.
+
 ## Security Considerations
 
-This LP itself is a security measure. By documenting the supply chain philosophy:
+This LP itself is a security measure. By documenting the supply chain:
 1. Auditors understand the dependency model
 2. Contributors follow the forking policy
 3. Security researchers have clear scope
 4. CVE response procedures are defined
-
----
-
-## Summary
-
-Lux delivers:
-
-| Metric | Value |
-|--------|-------|
-| Binary size | **53% smaller** |
-| Dependencies | **51% fewer** |
-| Precompiles | **3x more** |
-| PQ cryptography | **Native** |
-| DeFi at L1 | **Native** |
-| AI infrastructure | **Native** |
-| Security patches | **Immediate** |
-| Legacy cruft | **Zero** |
-
-**The maintenance cost of forking is an investment in sovereignty, security, and speed.**
-
----
 
 ## Copyright
 

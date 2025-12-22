@@ -10,6 +10,8 @@ type: Standards Track
 category: Core
 created: 2025-01-25
 updated: 2025-07-25
+order: 200
+tier: core
 activation:
   flag: lp2-lux-vm-execution
   hfName: ""

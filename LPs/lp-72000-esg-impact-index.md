@@ -9,7 +9,7 @@ created: 2025-12-21
 tags: [esg, impact, carbon, sustainability, index]
 ---
 
-# LP-12000: ESG and Impact Index
+# LP-72000: ESG and Impact Index
 
 ## Abstract
 

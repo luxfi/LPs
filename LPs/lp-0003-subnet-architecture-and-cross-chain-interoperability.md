@@ -9,6 +9,8 @@ status: Final
 type: Standards Track
 category: Core
 created: 2025-01-26
+order: 300
+tier: core
 activation:
   flag: lp3-subnet-architecture
   hfName: ""
