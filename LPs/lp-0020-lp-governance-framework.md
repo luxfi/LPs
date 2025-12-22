@@ -1,19 +1,41 @@
 ---
+lp: 20
 title: LP Governance Framework
 description: How Lux Proposals work - submission, review, and activation process
+author: Lux Core Team
+status: Final
+type: Meta
+created: 2025-12-21
+tags: [governance, meta, process, standards]
+order: 20
+tier: core
 ---
 
-# LP Governance Framework
+# LP-0020: LP Governance Framework
 
-The Lux Proposal (LP) system is the primary mechanism for proposing, discussing, and implementing changes to the Lux Network. This document explains how the governance process works.
+## Abstract
 
-## What is an LP?
+The Lux Proposal (LP) system is the primary mechanism for proposing, discussing, and implementing changes to the Lux Network. This document defines the governance process, LP types, lifecycle stages, and community participation guidelines.
+
+## Motivation
+
+A clear, transparent governance process enables:
+- **Open participation**: Anyone can propose changes
+- **Rough consensus**: Decisions through technical merit and community support
+- **Implementation focus**: Working code over documentation
+- **Transparency**: All processes are public
+
+---
+
+## Specification
+
+### What is an LP?
 
 A **Lux Proposal (LP)** is a design document providing information to the Lux community, describing a new feature, process, or environment change. LPs are the primary mechanism for proposing major new features, collecting community input on an issue, and documenting design decisions.
 
-## LP Types
+### LP Types
 
-### Standards Track
+#### Standards Track
 Technical specifications that require implementation:
 - **Core**: Consensus, network rules, protocol changes
 - **Networking**: P2P protocols, network layer specifications
@@ -21,63 +43,39 @@ Technical specifications that require implementation:
 - **LRC**: Application standards (tokens, NFTs, DeFi)
 - **Bridge**: Cross-chain protocols and interoperability
 
-### Meta
+#### Meta
 Process and governance proposals that affect how LPs work:
 - LP process improvements
 - Editor guidelines
 - Community governance structures
 
-### Informational
+#### Informational
 Guidelines, best practices, and general information:
 - Design patterns
 - Implementation guides
 - Educational content
 
-## LP Lifecycle
+### LP Lifecycle
 
 ```
-Draft → Review → Last Call → Final
-         ↓           ↓
-    Withdrawn    Stagnant
+Draft --> Review --> Last Call --> Final
+            |            |
+        Withdrawn    Stagnant
 ```
 
-### Status Definitions
+#### Status Definitions
 
-**Draft**
-- Initial submission
-- Work in progress
-- Open to major changes
-- Discussed on forums and GitHub
+| Status | Description |
+|--------|-------------|
+| **Draft** | Initial submission, work in progress, open to major changes |
+| **Review** | Editors reviewing, community feedback, implementation in progress |
+| **Last Call** | Final 14-day review period, no substantial changes |
+| **Final** | Accepted, implementation deployed, no further changes |
+| **Stagnant** | No activity for 6+ months, can be revived |
+| **Withdrawn** | Author abandons proposal, can be adopted by new champion |
+| **Superseded** | Replaced by newer LP, historical reference only |
 
-**Review**
-- Editors reviewing for technical soundness
-- Community providing feedback
-- Implementation in progress
-- Minor changes allowed
-
-**Last Call**
-- Final review period (14 days minimum)
-- No substantial changes
-- Community last chance for feedback
-- Implementation complete
-
-**Final**
-- Accepted and merged
-- Implementation deployed
-- No further changes (requires new LP to modify)
-
-**Stagnant**
-- No activity for 6+ months
-- Can be revived
-- Needs champion to continue
-
-**Withdrawn**
-- Author abandons proposal
-- Can be adopted by new champion
-
-**Superseded**
-- Replaced by newer LP
-- Historical reference only
+---
 
 ## Submission Process
 
@@ -131,13 +129,12 @@ Final LPs activate via:
 - Soft fork (backward-compatible)
 - Opt-in adoption (application standards)
 
+---
+
 ## LP Requirements
 
-### Required Sections
-All LPs must include:
-
-**YAML Frontmatter**
-```
+### Required YAML Frontmatter
+```yaml
 ---
 lp: <number>
 title: <short descriptive title>
@@ -152,7 +149,7 @@ requires: <LP numbers>  # optional
 ---
 ```
 
-**Content Sections**
+### Required Content Sections
 1. **Abstract** (~200 words overview)
 2. **Motivation** (why this LP is needed)
 3. **Specification** (technical details)
@@ -162,6 +159,8 @@ requires: <LP numbers>  # optional
 7. **Reference Implementation** (optional but recommended)
 8. **Security Considerations**
 9. **Copyright** (must be CC0)
+
+---
 
 ## LP Editors
 
@@ -181,6 +180,8 @@ Editors are selected based on:
 - Technical expertise
 - Availability and commitment
 - Community trust
+
+---
 
 ## Governance Principles
 
@@ -210,6 +211,8 @@ All processes are public:
 - Forums for discussion
 - Open meetings for decisions
 
+---
+
 ## Special Processes
 
 ### Emergency Proposals
@@ -233,6 +236,8 @@ Application-level standards need:
 - Community adoption
 - ERC compatibility (where applicable)
 
+---
+
 ## Tools and Resources
 
 ### LP Repository
@@ -242,55 +247,25 @@ Application-level standards need:
 
 ### Commands
 ```bash
-# Create new LP
-make new
-
-# Validate LP
-make validate FILE=LPs/lp-N.md
-
-# Validate all
-make validate-all
-
-# Check links
-make check-links
-
-# Update index
-make update-index
-
-# Pre-PR checks
-make pre-pr
+make new           # Create new LP
+make validate      # Validate LP
+make validate-all  # Validate all
+make check-links   # Check links
+make update-index  # Update index
+make pre-pr        # Pre-PR checks
 ```
 
-### Templates
-- `LPs/TEMPLATE.md` - Standard LP template
-- `LPs/lp-0.md` - Network architecture example
-- `LPs/lp-311-mldsa.md` - Technical specification example
+---
 
-## FAQ
+## Backwards Compatibility
 
-**Q: How long does the LP process take?**
-A: Varies widely. Simple proposals: 2-3 months. Complex changes: 6-12 months.
+This LP establishes the governance framework. It does not break any existing processes.
 
-**Q: Can I submit an LP without code?**
-A: Yes, but implementation strengthens your proposal significantly.
+## Security Considerations
 
-**Q: What if my LP is rejected?**
-A: Gather feedback, revise, and resubmit. Or champion someone else's similar proposal.
-
-**Q: Do I need to be a developer?**
-A: Not required, but technical understanding helps. Find a technical co-author.
-
-**Q: How are conflicts resolved?**
-A: Through discussion and rough consensus. Editors mediate, community decides.
-
-**Q: Can LPs be updated after Final status?**
-A: No. Submit a new LP that supersedes the old one.
-
-## Related Documents
-
-- [LP-0](/docs/lp-0/) - Network Architecture & Governance Framework
-- [CONTRIBUTING.md](../CONTRIBUTING.md) - Contribution guidelines
-- [README.md](../README.md) - Repository overview
+- Emergency LP process ensures rapid security response
+- Private disclosure protects users during fix development
+- Editor review prevents malicious proposals
 
 ## Copyright
 
