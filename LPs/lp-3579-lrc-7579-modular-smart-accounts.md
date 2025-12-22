@@ -10,7 +10,7 @@ category: LRC
 created: 2025-01-23
 requires: 3337, 3271
 tags: [lrc, account-abstraction, wallet]
-order: 620
+order: 520
 ---
 
 # LP-3579: LRC-7579 Minimal Modular Smart Accounts

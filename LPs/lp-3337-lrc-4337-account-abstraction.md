@@ -14,7 +14,7 @@ activation:
   hfName: "Quantum"
   activationHeight: "0"
 tags: [erc-4337, account-abstraction, smart-wallet, paymaster]
-order: 600
+order: 500
 ---
 
 ## Abstract

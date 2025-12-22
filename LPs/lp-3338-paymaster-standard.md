@@ -9,7 +9,7 @@ type: Standards Track
 category: LRC
 created: 2025-01-23
 tags: [lrc, account-abstraction, evm]
-order: 610
+order: 510
 ---
 
 ## Abstract

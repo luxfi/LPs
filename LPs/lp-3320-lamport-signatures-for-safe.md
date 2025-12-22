@@ -10,7 +10,7 @@ category: Core
 created: 2025-12-14
 requires: 4004
 tags: [pqc, standard-library, hash-based]
-order: 640
+order: 540
 ---
 
 ## Abstract

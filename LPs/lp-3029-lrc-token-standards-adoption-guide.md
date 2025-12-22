@@ -10,7 +10,7 @@ category: LRC
 created: 2025-07-22
 tags: [lrc, token-standard]
 requires: 1
-order: 290
+order: 190
 ---
 
 ## Abstract

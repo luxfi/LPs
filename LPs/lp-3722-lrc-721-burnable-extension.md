@@ -10,7 +10,7 @@ category: LRC
 created: 2025-07-23
 tags: [lrc, token-standard, nft]
 requires:
-order: 310
+order: 210
 ---
 
 ## Abstract

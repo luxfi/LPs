@@ -10,7 +10,7 @@ category: LRC
 created: 2025-01-23
 requires: 3020, 3009
 tags: [lrc, payments, ai-agent, http]
-order: 285
+order: 185
 ---
 
 # LP-3028: x402 Payment Protocol
