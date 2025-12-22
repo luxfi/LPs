@@ -497,6 +497,28 @@ interface IncidentResponse {
 | Dashboards | Grafana | Active-passive |
 | Anomaly Detection | Custom ML pipeline | 2x replicated |
 
+## Rationale
+
+The monitoring and alerting standards defined in this LP reflect industry best practices adapted for DeFi-specific requirements. Key design decisions:
+
+1. **Real-time collection** for price and volume metrics enables rapid response to market anomalies
+2. **Prometheus-compatible format** ensures compatibility with existing tooling ecosystems
+3. **Tiered alerting severity** prevents alert fatigue while ensuring critical issues receive immediate attention
+4. **ML-based anomaly detection** catches novel attack patterns that rule-based systems miss
+5. **Structured logging** enables efficient querying and compliance reporting
+
+The 1-minute collection interval for TVL balances freshness with resource efficiency, while real-time collection for transaction metrics captures time-sensitive events.
+
+## Backwards Compatibility
+
+This LP is additive and does not break existing monitoring implementations. Protocols can adopt these standards incrementally:
+
+- **Metrics Format**: OpenMetrics/Prometheus format is backwards-compatible with StatsD and other legacy systems through exporters
+- **Log Format**: JSON structured logging is parseable by all major log aggregation systems
+- **Alerting Rules**: PromQL-based rules can be translated to other alerting systems
+
+Existing monitoring dashboards continue to function. New dashboards following this specification can be deployed alongside legacy dashboards during migration.
+
 ## Security Considerations
 
 1. **Access control** - Role-based dashboard access

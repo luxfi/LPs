@@ -566,6 +566,32 @@ contract RollbackManager {
 | | Rollback point valid | 7 day window |
 | | Documentation updated | Complete |
 
+## Rationale
+
+The upgrade patterns and migration procedures reflect lessons learned from major DeFi incidents:
+
+1. **48-hour timelock** prevents flash-upgrade attacks and gives users time to exit if they disagree with changes
+2. **Multi-sig requirements** eliminate single points of failure in upgrade authorization
+3. **Step-by-step migration** enables partial rollbacks instead of all-or-nothing upgrades
+4. **State snapshots** before migration provide verified recovery points
+5. **Semantic versioning** enables compatibility checking between contract versions
+
+The UUPS pattern is preferred over Transparent Proxy for gas efficiency in production, while Transparent Proxy provides clearer separation of concerns for simpler deployments.
+
+## Backwards Compatibility
+
+This LP maintains compatibility with existing upgrade patterns:
+
+- **OpenZeppelin Proxies**: Full compatibility with TransparentUpgradeableProxy and UUPSUpgradeable
+- **Existing timelocks**: Can wrap existing timelock controllers or integrate with Compound Governor
+- **Multi-sig wallets**: Compatible with Gnosis Safe and other standard multi-sig implementations
+
+Migration from legacy upgrade patterns:
+1. Deploy new UpgradeManager contract
+2. Transfer ProxyAdmin ownership to UpgradeManager
+3. Register existing implementations in VersionRegistry
+4. Continue using same proxy contracts
+
 ## Security Considerations
 
 1. **Timelock protection** - Minimum 48hr delay for upgrades

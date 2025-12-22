@@ -433,6 +433,14 @@ interface IIncidentCommunication {
 | Recovery time objective | < 4 hours |
 | Recovery point objective | Zero data loss |
 
+## Rationale
+
+Emergency procedures must balance speed of response with security controls. The tiered escalation system ensures minor issues don't trigger unnecessary shutdowns while critical threats receive immediate attention. Multi-sig requirements prevent single points of failure while time-locks provide review windows for non-urgent changes.
+
+## Backwards Compatibility
+
+Emergency procedures are additive infrastructure that works alongside existing protocol contracts. Circuit breakers and pause mechanisms are designed to be non-invasive until triggered, ensuring normal operation is unaffected.
+
 ## Security Considerations
 
 1. **Multi-sig requirements** - Critical actions require 3-of-5 or higher

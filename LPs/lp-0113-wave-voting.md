@@ -318,6 +318,10 @@ def test_no_oscillation():
 
 **Repository**: https://github.com/luxfi/consensus/tree/main/protocol/wave
 
+## Backwards Compatibility
+
+Wave FPC is a new consensus component that integrates with the existing Quasar protocol stack. It does not modify existing consensus interfaces and is designed to be backward compatible with validators running previous versions during the transition period.
+
 ## Security Considerations
 
 1. **Sample Bias**: Must use cryptographic randomness for sampling

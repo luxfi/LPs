@@ -485,6 +485,14 @@ interface IIncentivePrograms {
 | Long-tail | 30 | Limited |
 | Single-sided | 20 | No |
 
+## Rationale
+
+Liquidity mining incentives are calibrated to bootstrap protocol liquidity while avoiding unsustainable emissions. Tiered multipliers reward longer commitment, and pool weighting prioritizes high-utility pairs. Anti-gaming measures ensure rewards reach genuine liquidity providers.
+
+## Backwards Compatibility
+
+Liquidity mining contracts are standalone and integrate with existing AMM pools without modification. Reward distribution uses standard token transfer interfaces.
+
 ## Security Considerations
 
 1. **Sybil resistance** - Anti-sybil detection for airdrops

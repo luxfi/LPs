@@ -914,6 +914,10 @@ dex/
 └── protocol/          # QZMQ messaging
 ```
 
+## Backwards Compatibility
+
+QuantumSwap HFT integration builds on existing DEX infrastructure (LP-9000 series). It extends rather than replaces current trading protocols, ensuring existing integrations continue to function while enabling high-frequency capabilities.
+
 ## Security Considerations
 
 ### Order Protection

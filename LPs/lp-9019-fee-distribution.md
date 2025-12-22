@@ -491,6 +491,14 @@ interface IFeeAnalytics {
 | Bridge | 0.05% | 50% Validators, 30% Protocol, 20% Insurance |
 | NFT Market | 2.5% | 50% Creator, 30% Protocol, 20% Platform |
 
+## Rationale
+
+Fee distribution is designed to align incentives across all protocol participants. LP rewards encourage liquidity provision, protocol fees fund development, staker rewards secure the network, and insurance reserves protect users. Transparent on-chain distribution ensures verifiable fairness.
+
+## Backwards Compatibility
+
+Fee distribution mechanisms integrate with existing protocol contracts through standardized interfaces. Fee collection points are additive and don't modify core contract logic.
+
 ## Security Considerations
 
 1. **Multi-sig treasury** - 3-of-5 for withdrawals
