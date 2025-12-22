@@ -1,7 +1,7 @@
 ---
 lp: 830
 title: ESG Risk Management
-tags: [sustainability, risk, governance, compliance]
+tags: [esg, sustainability, risk, governance, compliance]
 description: Framework for identifying, assessing, and managing ESG-related risks.
 author: Lux Network Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
@@ -9,7 +9,7 @@ status: Draft
 type: Meta
 created: 2025-12-17
 requires: [800]
-order: 30
+order: 830
 ---
 
 # LP-830: ESG Risk Management

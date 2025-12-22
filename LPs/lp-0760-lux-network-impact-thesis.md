@@ -1,7 +1,7 @@
 ---
 lp: 760
 title: Lux Network Impact Thesis
-tags: [impact, vision, ecosystem, thesis]
+tags: [esg, impact, vision, ecosystem, thesis]
 description: Unified impact thesis for Lux Network and its role in the Lux-Hanzo-Zoo ecosystem.
 author: Lux Network Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
@@ -9,7 +9,7 @@ status: Draft
 type: Meta
 created: 2025-12-17
 requires: [750, 800, 900]
-order: 60
+order: 760
 ---
 
 # LP-760: Lux Network Impact Thesis

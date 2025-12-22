@@ -1,7 +1,7 @@
 ---
 lp: 920
 title: Community Development & Grants
-tags: [impact, grants, community, funding]
+tags: [esg, impact, grants, community, funding]
 description: Framework for ecosystem grants and community development initiatives.
 author: Lux Network Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
@@ -9,7 +9,7 @@ status: Draft
 type: Meta
 created: 2025-12-17
 requires: [800, 900]
-order: 20
+order: 920
 ---
 
 # LP-920: Community Development & Grants

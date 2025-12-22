@@ -1,7 +1,7 @@
 ---
 lp: 901
 title: Impact Measurement Methodology
-tags: [impact, metrics, measurement, reporting]
+tags: [esg, impact, metrics, measurement, reporting]
 description: Methodology for measuring, tracking, and reporting social impact across the Lux ecosystem.
 author: Lux Network Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
@@ -9,7 +9,7 @@ status: Draft
 type: Meta
 created: 2025-12-17
 requires: [800, 900]
-order: 1
+order: 901
 ---
 
 # LP-901: Impact Measurement Methodology

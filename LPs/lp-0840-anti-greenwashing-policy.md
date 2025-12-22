@@ -1,7 +1,7 @@
 ---
 lp: 840
 title: Impact Disclosure & Anti-Greenwashing Policy
-tags: [sustainability, transparency, compliance, claims]
+tags: [esg, sustainability, transparency, compliance, claims]
 description: Standards for making accurate, verifiable sustainability claims and avoiding greenwashing.
 author: Lux Network Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
@@ -9,7 +9,7 @@ status: Draft
 type: Meta
 created: 2025-12-17
 requires: [800]
-order: 40
+order: 840
 ---
 
 # LP-840: Impact Disclosure & Anti-Greenwashing Policy
