@@ -19,6 +19,10 @@ tier: core
 
 This path covers ZK systems from theory to production.
 
+## Motivation
+
+Privacy-preserving computation requires understanding zero-knowledge proofs, confidential transactions, and secure execution. This path covers the theory and implementation.
+
 ## Audience
 
 Cryptographers, privacy engineers, ZK protocol developers.

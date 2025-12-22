@@ -19,6 +19,10 @@ tier: core
 
 This path covers infrastructure engineering from validators to chains.
 
+## Motivation
+
+Running infrastructure requires deep understanding of consensus, networking, and operational security. Validators secure the network and must be prepared for all failure modes.
+
 ## Audience
 
 Infrastructure engineers, node operators, DevOps, platform teams.

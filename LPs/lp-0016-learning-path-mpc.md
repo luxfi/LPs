@@ -19,6 +19,10 @@ tier: core
 
 This path covers MPC systems from primitives to production custody.
 
+## Motivation
+
+Threshold cryptography enables distributed custody without single points of failure. This path covers the mathematical and practical aspects of MPC systems.
+
 ## Audience
 
 Security engineers, custodians, institutional developers.

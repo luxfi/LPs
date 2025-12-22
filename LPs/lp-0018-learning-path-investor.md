@@ -19,6 +19,10 @@ tier: core
 
 This path provides capital deployment understanding without deep technical requirements.
 
+## Motivation
+
+Informed investment requires understanding tokenomics, governance, and ecosystem dynamics. This path provides the analytical framework for evaluating opportunities.
+
 ## Audience
 
 Funds, allocators, board members, institutional partners.
