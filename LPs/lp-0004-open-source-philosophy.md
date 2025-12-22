@@ -7,7 +7,7 @@ status: Final
 type: Meta
 created: 2025-12-21
 tags: [core, philosophy, open-source, sovereignty, principles]
-order: 40
+order: 4
 tier: core
 ---
 

@@ -9,7 +9,7 @@ type: Standards Track
 category: Core
 created: 2025-07-24
 discussions-to: https://github.com/luxfi/lps/discussions
-order: 10
+order: 1
 tier: core
 ---
 
