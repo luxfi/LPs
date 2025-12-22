@@ -1,5 +1,6 @@
 ---
 lp: 3000
+order: 20000
 title: X-Chain - Core Exchange Specification
 tags: [core, exchange, utxo, trading, x-chain]
 description: Core specification for the X-Chain (Exchange Chain), Lux Network's high-performance UTXO-based trading chain
