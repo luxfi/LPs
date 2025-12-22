@@ -8,7 +8,7 @@ status: Draft
 type: Standards Track
 category: Core
 created: 2025-01-24
-requires: 200
+requires:
 tags: [pqc, core]
 order: 201
 ---

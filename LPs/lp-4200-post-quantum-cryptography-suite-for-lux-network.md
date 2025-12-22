@@ -8,7 +8,7 @@ status: Draft
 type: Standards Track
 category: Core
 created: 2025-01-24
-requires: 700
+requires:
 tags: [pqc, core]
 order: 200
 ---
@@ -337,13 +337,13 @@ Complete implementation available at: https://github.com/luxfi/crypto
 ## References
 
 ### Related Lux Proposals
-- [LP-318: ML-KEM Post-Quantum Key Encapsulation](lp-318-ml-kem-post-quantum-key-encapsulation.md)
-- [LP-316: ML-DSA Post-Quantum Digital Signatures](lp-316-ml-dsa-post-quantum-digital-signatures.md)
-- [LP-317: SLH-DSA Stateless Hash-Based Digital Signatures](lp-317-slh-dsa-stateless-hash-based-digital-signatures.md)
-- [LP-311: ML-DSA Signature Verification Precompile](lp-311-ml-dsa-signature-verification-precompile.md)
-- [LP-312: SLH-DSA Signature Verification Precompile](lp-312-slh-dsa-signature-verification-precompile.md)
-- [LP-201: Hybrid Classical-Quantum Cryptography Transitions](lp-201-hybrid-classical-quantum-cryptography-transitions.md)
-- [LP-202: Cryptographic Agility Framework](lp-202-cryptographic-agility-framework.md)
+- [LP-318](lp-318-ml-kem-post-quantum-key-encapsulation.md)
+- [LP-316](lp-316-ml-dsa-post-quantum-digital-signatures.md)
+- [LP-317](lp-317-slh-dsa-stateless-hash-based-digital-signatures.md)
+- [LP-311](lp-311-ml-dsa-signature-verification-precompile.md)
+- [LP-312](lp-312-slh-dsa-signature-verification-precompile.md)
+- [LP-201](lp-201-hybrid-classical-quantum-cryptography-transitions.md)
+- [LP-202](lp-202-cryptographic-agility-framework.md)
 
 ### NIST Standards
 1. [FIPS 203: Module-Lattice-Based Key-Encapsulation Mechanism](https://doi.org/10.6028/NIST.FIPS.203)

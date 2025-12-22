@@ -9,7 +9,7 @@ type: Standards Track
 category: Networking
 created: 2025-07-22
 tags: [warp, cross-chain]
-requires: 21
+requires:
 order: 22
 ---
 

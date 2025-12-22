@@ -8,7 +8,7 @@ status: Draft
 type: Standards Track
 category: LRC
 created: 2025-01-24
-requires: 2300, 400
+requires: 3020
 tags: [defi, privacy, zk]
 order: 9402
 ---

@@ -8,7 +8,7 @@ status: Final
 type: Standards Track
 category: Core
 created: 2025-11-22
-requires: 2012, 176
+requires: 1212
 tags: [consensus, core]
 order: 426
 ---
@@ -761,9 +761,9 @@ Based on ACP-226 by Stephen Buttolph and Michael Kaplan. Thanks to Luigi D'Onori
 ## References
 
 - [ACP-226 Original Specification](https://github.com/avalanche-foundation/ACPs/tree/main/ACPs/226-dynamic-minimum-block-times)
-- [LP-181: P-Chain Epoched Views](lp-181-epoching.md)
-- [LP-601: Dynamic Gas Fee Mechanism with AI Compute Pricing](lp-601-dynamic-gas-fee-mechanism-with-ai-compute-pricing.md)
-- [LP-204: secp256r1 Curve Integration](lp-204-secp256r1-curve-integration.md)
+- [LP-181](lp-181-epoching.md)
+- [LP-601](lp-601-dynamic-gas-fee-mechanism-with-ai-compute-pricing.md)
+- [LP-204](lp-204-secp256r1-curve-integration.md)
 - [ACP-176: Dynamic Fees](https://github.com/avalanche-foundation/ACPs/tree/main/ACPs/176-dynamic-fees)
 
 ## Copyright

@@ -8,7 +8,7 @@ status: Draft
 type: Standards Track
 category: Core
 created: 2025-01-09
-requires: 601, 6602
+requires: 110, 6602
 tags: [consensus, scaling]
 order: 605
 ---

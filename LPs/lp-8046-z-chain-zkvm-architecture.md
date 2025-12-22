@@ -8,7 +8,7 @@ status: Final
 type: Standards Track
 category: Core
 created: 2025-12-11
-requires: 8045, 0302, 0503
+requires: 8045, 1000
 tags: [privacy, zk, zkvm, core]
 order: 46
 ---

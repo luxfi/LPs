@@ -8,7 +8,7 @@ status: Draft
 type: Standards Track
 category: Core
 created: 2025-09-24
-requires: 500, 501, 502, 503, 504
+requires: 1000, 1000, 1000, 1000, 1000
 tags: [l2, core]
 order: 505
 ---

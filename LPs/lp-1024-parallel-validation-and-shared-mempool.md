@@ -9,7 +9,7 @@ type: Standards Track
 category: Core
 created: 2025-07-22
 tags: [consensus, scaling]
-requires: 22
+requires: 2
 order: 24
 ---
 

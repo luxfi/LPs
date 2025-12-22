@@ -9,7 +9,7 @@ type: Standards Track
 category: Core
 created: 2025-07-25
 tags: [defi, cross-chain, mpc]
-requires: 6, 32, 33, 34
+requires: 6, 3, 3, 3
 order: 1137
 ---
 

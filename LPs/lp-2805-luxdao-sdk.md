@@ -8,7 +8,7 @@ status: Draft
 type: Standards Track
 category: Interface
 created: 2025-12-17
-requires: 2506, 2507
+requires: 2802, 2803
 tags: [dao, sdk, typescript]
 order: 2805
 ---

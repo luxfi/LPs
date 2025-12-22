@@ -9,7 +9,7 @@ status: Draft
 type: Standards Track
 category: Core
 created: 2025-12-21
-requires: 2517, 9010, 9011
+requires: 3020, 9010, 9011
 implementation: https://github.com/luxfi/standard/src/liquidity/precompiles/PrecompileRegistry.sol
 order: 15
 ---

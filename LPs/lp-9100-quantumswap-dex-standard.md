@@ -8,7 +8,7 @@ status: Draft
 type: Standards Track
 category: Core
 created: 2024-12-14
-requires: 2001, 110
+requires: 3020, 110
 tags: [dex, trading, clob, post-quantum]
 activation:
   flag: lp-2500-quantumswap

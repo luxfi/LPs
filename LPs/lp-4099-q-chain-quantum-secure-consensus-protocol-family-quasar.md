@@ -9,7 +9,7 @@ type: Standards Track
 category: Core
 created: 2025-08-05
 updated: 2025-07-25
-requires: 4, 5, 10, 75
+requires: 4, 5, 0, 70
 tags: [pqc, consensus, core]
 order: 99
 ---

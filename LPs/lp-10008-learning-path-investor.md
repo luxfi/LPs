@@ -77,16 +77,16 @@ After completing this path, you will understand:
 
 | Order | LP | Title | Time | Depth |
 |-------|-----|-------|------|-------|
-| 9 | [LP-70000](/docs/lp-70000-fund-management-index/) | Fund Management | 20 min | Deep |
-| 10 | [LP-71000](/docs/lp-71000-dao-governance-index/) | DAO Governance | 20 min | Deep |
+| 9 | [LP-2860](/docs/lp-2860-fund-management-index/) | Fund Management | 20 min | Deep |
+| 10 | [LP-2850](/docs/lp-2850-dao-governance-index/) | DAO Governance | 20 min | Deep |
 
 ### Stage 6: ESG & Impact
 
 | Order | LP | Title | Time | Depth |
 |-------|-----|-------|------|-------|
-| 11 | [LP-72000](/docs/lp-72000-esg-impact-index/) | ESG Framework | 20 min | Deep |
+| 11 | [LP-2995](/docs/lp-2995-esg-impact-index/) | ESG Framework | 20 min | Deep |
 | 12 | [LP-72100](/docs/lp-72100/) | Carbon Accounting | 15 min | Medium |
-| 13 | [LP-72200](/docs/lp-72200/) | Green Compute | 15 min | Medium |
+| 13 | [LP-2920](/docs/lp-2920/) | Green Compute | 15 min | Medium |
 
 ---
 

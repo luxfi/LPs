@@ -8,7 +8,7 @@ status: Final
 type: Standards Track
 category: Core
 created: 2025-10-28
-requires: 204, 301, 302
+requires:
 tags: [pqc, consensus, core]
 order: 303
 ---

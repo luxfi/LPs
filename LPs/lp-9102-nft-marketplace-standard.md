@@ -8,7 +8,7 @@ status: Draft
 type: Standards Track
 category: LRC
 created: 2025-12-14
-requires: [2155]
+requires: []
 tags: [lrc, nft, marketplace, defi]
 activation:
   flag: lp2502-nft-marketplace-standard
@@ -17,7 +17,7 @@ activation:
 order: 9102
 ---
 
-> **See also**: [LP-2155: LRC-1155 Multi-Token Standard](./lp-2155-lrc-1155-multi-token-standard.md), [LP-6022: Warp Messaging 2.0](./lp-6022-warp-messaging-20-native-interchain-transfers.md)
+> **See also**: [LP-3155](./lp-3155-lrc-1155-multi-token-standard.md), [LP-6022](./lp-6022-warp-messaging-20-native-interchain-transfers.md)
 
 ## Abstract
 
@@ -629,8 +629,8 @@ contract NFTMarketplace {
 6. [ERC-1155: Multi Token Standard](https://eips.ethereum.org/EIPS/eip-1155)
 7. [ERC-2981: NFT Royalty Standard](https://eips.ethereum.org/EIPS/eip-2981)
 8. [Manifold Royalty Registry](https://royaltyregistry.xyz/)
-9. [LP-6022: Warp Messaging 2.0](./lp-6022-warp-messaging-20-native-interchain-transfers.md)
-10. [LP-2155: LRC-1155 Multi-Token Standard](./lp-2155-lrc-1155-multi-token-standard.md)
+9. [LP-6022](./lp-6022-warp-messaging-20-native-interchain-transfers.md)
+10. [LP-3155](./lp-3155-lrc-1155-multi-token-standard.md)
 
 ## Copyright
 

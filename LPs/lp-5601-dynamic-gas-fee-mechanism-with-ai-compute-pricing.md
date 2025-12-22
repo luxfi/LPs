@@ -8,7 +8,7 @@ status: Draft
 type: Standards Track
 category: Core
 created: 2025-01-09
-requires: 600
+requires: 110
 tags: [ai, gas, evm]
 order: 601
 ---

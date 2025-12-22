@@ -9,7 +9,7 @@ type: Standards Track
 category: Core
 created: 2025-07-24
 tags: [evm, dev-tools]
-requires: 2026, 34
+requires: 1, 3
 order: 235
 ---
 

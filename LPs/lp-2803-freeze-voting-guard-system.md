@@ -8,7 +8,7 @@ status: Draft
 type: Standards Track
 category: LRC
 created: 2025-12-17
-requires: 2504, 2507
+requires: 2800, 2803
 tags: [dao, governance, security, freeze]
 order: 2803
 ---

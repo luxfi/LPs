@@ -8,7 +8,7 @@ status: Draft
 type: Standards Track
 category: Core
 created: 2025-12-11
-requires: 7013, 7014, 6015, 6016, 6017, 6018, 6081, 301, 7319, 7322
+requires: 7013, 7014, 6015, 6016, 6017, 6018, 6081, 7319, 7322
 replaces: 81, 301
 activation:
   flag: lp331-bridgevm

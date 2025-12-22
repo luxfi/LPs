@@ -152,13 +152,13 @@ Lux Request for Comments (LRC) token standards, similar to ERC.
 | LP | Title | Tags | Status |
 |----|-------|------|--------|
 | [LP-2300](/docs/lp-2300-lrc-20-fungible-token-standard/) | **LRC-20 Fungible Token Standard** | `lrc`, `lrc-20`, `fungible` | Final |
-| [LP-2721](/docs/lp-2721-lrc-721-non-fungible-token-standard/) | **LRC-721 Non-Fungible Token Standard** | `lrc`, `lrc-721`, `nft` | Final |
-| [LP-2155](/docs/lp-2155-lrc-1155-multi-token-standard/) | **LRC-1155 Multi-Token Standard** | `lrc`, `lrc-1155`, `multi-token` | Final |
-| [LP-2027](/docs/lp-2027-lrc-token-standards-adoption/) | LRC Token Standards Adoption | `lrc`, `standards` | Draft |
-| [LP-2028](/docs/lp-2028-lrc-20-burnable-token-extension/) | LRC-20 Burnable Extension | `lrc`, `lrc-20`, `burnable` | Draft |
-| [LP-2029](/docs/lp-2029-lrc-20-mintable-token-extension/) | LRC-20 Mintable Extension | `lrc`, `lrc-20`, `mintable` | Draft |
-| [LP-2030](/docs/lp-2030-lrc-20-bridgable-token-extension/) | LRC-20 Bridgable Extension | `lrc`, `lrc-20`, `bridge` | Draft |
-| [LP-2031](/docs/lp-2031-lrc-721-burnable-token-extension/) | LRC-721 Burnable Extension | `lrc`, `lrc-721`, `nft`, `burnable` | Draft |
+| [LP-3721](/docs/lp-3721-lrc-721-non-fungible-token-standard/) | **LRC-721 Non-Fungible Token Standard** | `lrc`, `lrc-721`, `nft` | Final |
+| [LP-3155](/docs/lp-3155-lrc-1155-multi-token-standard/) | **LRC-1155 Multi-Token Standard** | `lrc`, `lrc-1155`, `multi-token` | Final |
+| [LP-3027](/docs/lp-3027-lrc-token-standards-adoption/) | LRC Token Standards Adoption | `lrc`, `standards` | Draft |
+| [LP-3028](/docs/lp-3028-lrc-20-burnable-token-extension/) | LRC-20 Burnable Extension | `lrc`, `lrc-20`, `burnable` | Draft |
+| [LP-3029](/docs/lp-3029-lrc-20-mintable-token-extension/) | LRC-20 Mintable Extension | `lrc`, `lrc-20`, `mintable` | Draft |
+| [LP-3030](/docs/lp-3030-lrc-20-bridgable-token-extension/) | LRC-20 Bridgable Extension | `lrc`, `lrc-20`, `bridge` | Draft |
+| [LP-3031](/docs/lp-3031-lrc-721-burnable-token-extension/) | LRC-721 Burnable Extension | `lrc`, `lrc-721`, `nft`, `burnable` | Draft |
 | [LP-2518](/docs/lp-2518-teleport-token-standard/) | Teleport Token Standard | `lrc`, `teleport`, `cross-chain` | Draft |
 
 ### DeFi Protocol Standards (2500-2509)
@@ -453,13 +453,13 @@ LPs for fund management, DAO governance, and ESG frameworks.
 
 | LP | Title | Tags | Status |
 |----|-------|------|--------|
-| [LP-70000](/docs/lp-70000-fund-management-index/) | Fund Management Index | `fund`, `index` | Draft |
+| [LP-2860](/docs/lp-2860-fund-management-index/) | Fund Management Index | `fund`, `index` | Draft |
 
 ### DAO Governance (71xxx)
 
 | LP | Title | Tags | Status |
 |----|-------|------|--------|
-| [LP-71000](/docs/lp-71000-dao-governance-index/) | DAO Governance Index | `dao`, `governance`, `index` | Draft |
+| [LP-2850](/docs/lp-2850-dao-governance-index/) | DAO Governance Index | `dao`, `governance`, `index` | Draft |
 
 ### DAO Platform (2520-2525)
 
@@ -476,7 +476,7 @@ LPs for fund management, DAO governance, and ESG frameworks.
 
 | LP | Title | Tags | Status |
 |----|-------|------|--------|
-| [LP-72000](/docs/lp-72000-esg-impact-index/) | ESG & Impact Index | `esg`, `impact`, `index` | Draft |
+| [LP-2995](/docs/lp-2995-esg-impact-index/) | ESG & Impact Index | `esg`, `impact`, `index` | Draft |
 
 ---
 

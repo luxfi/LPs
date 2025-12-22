@@ -8,7 +8,7 @@ status: Draft
 type: Standards Track
 category: LRC
 created: 2025-12-17
-requires: 2504, 2506
+requires: 2800, 2802
 tags: [dao, governance, azorius, module]
 order: 2801
 ---

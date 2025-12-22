@@ -8,7 +8,7 @@ status: Draft
 type: Standards Track
 category: Core
 created: 2025-12-14
-requires: 2001, 5075, 5302
+requires: 3020, 5075, 5302
 tags: [ai, confidential-compute, tee, gpu]
 activation:
   flag: lp-5610-cc-tiers

@@ -9,7 +9,7 @@ tags: [c-chain, evm]
 type: Standards Track
 category: LRC
 created: 2025-12-14
-requires: 2000, 7321, 7322
+requires: 3020, 7321, 7322
 order: 9101
 ---
 
