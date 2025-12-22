@@ -63,7 +63,7 @@ After completing this path, you will understand:
 
 | Order | LP | Title | Time | Depth |
 |-------|-----|-------|------|-------|
-| 5 | [LP-3000](/docs/lp-3000/) | DeFi Overview | 15 min | Skim |
+| 5 | [LP-3600](/docs/lp-3000/) | DeFi Overview | 15 min | Skim |
 | 6 | [LP-3300](/docs/lp-3300/) | AMM Economics | 15 min | Skim |
 
 ### Stage 4: Trading Liquidity
