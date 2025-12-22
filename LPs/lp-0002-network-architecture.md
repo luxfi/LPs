@@ -1,5 +1,5 @@
 ---
-lp: 3
+lp: 2
 title: Recursive Network Architecture and Cross-Chain Interoperability
 tags: [network, cross-chain, scaling, core, architecture]
 description: Introduces Lux's recursive network architecture, wherein the network consists of multiple parallel chains that can each host specialized applications while remaining interconnected through native cross-chain messaging.
@@ -13,7 +13,7 @@ order: 2
 tier: core
 ---
 
-# LP-0003: Recursive Network Architecture and Cross-Chain Interoperability
+# LP-0002: Recursive Network Architecture and Cross-Chain Interoperability
 
 ## Abstract
 
