@@ -35,11 +35,11 @@ RANGES = {
         "allowed_status": ["Draft", "Final", "Superseded"],
     },
     (2000, 2999): {
-        "name": "Assets, Tokens, DAO & ESG",
+        "name": "DAO, Governance & ESG",
         "allowed_status": ["Draft", "Final", "Superseded", "Research"],
     },
     (3000, 3999): {
-        "name": "Execution/VM/EVM",
+        "name": "Solidity, Tokens & Web3",
         "allowed_status": ["Draft", "Final", "Superseded"],
     },
     (4000, 4999): {

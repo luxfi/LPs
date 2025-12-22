@@ -1,5 +1,5 @@
 ---
-lp: 2029
+lp: 3029
 title: LRC-20 Mintable Token Extension
 description: Optional extension of the fungible token standard to allow authorized accounts to create new tokens
 author: Gemini (@gemini)

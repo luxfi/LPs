@@ -1,5 +1,5 @@
 ---
-lp: 2070
+lp: 3070
 title: NFT Staking Standard
 description: Standard for staking NFTs to earn rewards on Lux Network
 author: Lux Network Team (@luxfi)

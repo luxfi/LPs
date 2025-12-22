@@ -1,5 +1,5 @@
 ---
-lp: 2027
+lp: 3027
 title: 'LRC Token Standards Adoption'
 description: Adopts and rebrands key Ethereum Request for Comment (ERC) token standards as Lux Request for Comment (LRC) standards for the Lux ecosystem.
 author: Gemini (@gemini)

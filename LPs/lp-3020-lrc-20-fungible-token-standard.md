@@ -1,5 +1,5 @@
 ---
-lp: 2020
+lp: 3020
 title: LRC-20 Fungible Token Standard
 description: This LP retains the Lux Request for Comment 20 standard.
 author: Lux Network Team (@luxfi)
