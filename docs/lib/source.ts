@@ -93,18 +93,34 @@ const LP_TOPICS: CategoryMeta[] = [
   },
 
   // ============================================================
-  // 0.2 ASSETS & TOKENS — Token standards (LP-1 tokenomics lives here)
+  // 0.2 LRC STANDARDS — Application-layer token standards (like ERC on Ethereum)
+  // ============================================================
+  // LRCs are the key interface standards that define how tokens behave
+  {
+    slug: 'lrc',
+    name: 'LRC Standards',
+    shortDesc: 'Token interface standards',
+    description: 'Lux Request for Comments (LRC) - application-layer standards defining token interfaces. LRC-20 (fungible), LRC-721 (NFT), LRC-1155 (multi-token), and extensions.',
+    tags: ['token-standard', 'lrc-20', 'lrc-721', 'lrc-1155'],
+    icon: 'token',
+    color: 'amber',
+    learnMore: 'LRCs define how tokens work on Lux. Like ERCs on Ethereum, they ensure interoperability across wallets, exchanges, and DeFi protocols.',
+    keyTopics: ['LRC-20 Fungible', 'LRC-721 NFT', 'LRC-1155 Multi-Token', 'Burnable', 'Mintable', 'Bridgable'],
+  },
+
+  // ============================================================
+  // 0.3 ASSETS & TOKENS — Native token, tokenomics, NFTs
   // ============================================================
   {
     slug: 'tokens',
     name: 'Assets & Tokens',
-    shortDesc: 'Token standards',
-    description: 'Token standards: LUX native token, tokenomics, LRC-20, LRC-721, LRC-1155, extensions, and NFT staking.',
-    tags: ['token', 'tokens', 'tokenomics', 'lrc', 'lrc-20', 'lrc-721', 'lrc-1155', 'nft', 'fungible', 'token-standard', 'erc20b', 'burnable', 'mintable', 'bridgable'],
-    icon: 'token',
-    color: 'amber',
-    learnMore: 'Token standards define how digital assets are created and managed. ERC-compatible.',
-    keyTopics: ['LUX token', 'Tokenomics', 'LRC-20', 'LRC-721', 'LRC-1155'],
+    shortDesc: 'Tokenomics & assets',
+    description: 'LUX native token economics, asset issuance, NFT marketplaces, and token-related protocols beyond core LRC standards.',
+    tags: ['token', 'tokens', 'tokenomics', 'lrc', 'nft', 'fungible', 'erc20b', 'burnable', 'mintable', 'bridgable', 'marketplace'],
+    icon: 'coins',
+    color: 'yellow',
+    learnMore: 'Assets & Tokens covers the economic layer: LUX tokenomics, asset creation, and NFT infrastructure.',
+    keyTopics: ['LUX token', 'Tokenomics', 'NFT Marketplace', 'Asset Issuance'],
   },
 
   // ============================================================================
@@ -577,13 +593,17 @@ const LP_TOPICS: CategoryMeta[] = [
 const LP_CATEGORIES: CategoryMeta[] = LP_TOPICS.filter(t => t.range !== undefined);
 
 // Category aliases for backward compatibility and common alternative names
+// NOTE: 'lrc' is now a real category, not an alias
 const CATEGORY_ALIASES: Record<string, string> = {
-  'lrc': 'tokens',           // LRC token standards → tokens category
-  'erc': 'tokens',           // ERC compatibility
-  'lrc-20': 'tokens',
-  'lrc-721': 'tokens',
-  'lrc-1155': 'tokens',
-  'nft': 'tokens',
+  'erc': 'lrc',              // ERC compatibility → LRC standards
+  'erc-20': 'lrc',
+  'erc-721': 'lrc',
+  'erc-1155': 'lrc',
+  'lrc-20': 'lrc',           // Specific LRC versions → LRC category
+  'lrc-721': 'lrc',
+  'lrc-1155': 'lrc',
+  'token-standard': 'lrc',
+  'nft': 'tokens',           // NFT → tokens (not standards)
   'fungible': 'tokens',
   'dao': 'governance',       // DAO → governance category
   'esg': 'governance',       // ESG → governance category

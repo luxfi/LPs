@@ -4,7 +4,7 @@ import Link from 'next/link';
 import {
   ArrowLeft, ArrowRight, Layers, Lock, Coins, BarChart3, Vote, Rocket,
   FlaskConical, Cpu, Code, Link2, Key, Shield, Wallet, User, Leaf, Heart,
-  Boxes, Zap, FileCode
+  Boxes, Zap, FileCode, CircleDollarSign
 } from 'lucide-react';
 
 // Icon mapping - expanded for all topics
@@ -13,6 +13,7 @@ const iconMap: Record<string, React.ReactNode> = {
   consensus: <Cpu className="size-6" />,
   lock: <Lock className="size-6" />,
   token: <Coins className="size-6" />,
+  coins: <CircleDollarSign className="size-6" />,
   chart: <BarChart3 className="size-6" />,
   vote: <Vote className="size-6" />,
   upgrade: <Rocket className="size-6" />,
