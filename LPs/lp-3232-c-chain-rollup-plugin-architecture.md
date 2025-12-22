@@ -9,7 +9,7 @@ type: Standards Track
 category: Core
 created: 2025-07-23
 tags: [l2, evm, scaling]
-requires: 2026
+requires: 1
 order: 232
 ---
 

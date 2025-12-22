@@ -8,7 +8,7 @@ status: Draft
 type: Standards Track
 category: Core
 created: 2025-12-11
-requires: 7013, 7014, 6015, 6016, 6081, 7103, 301
+requires: 7013, 7014, 6015, 6016, 6081, 7103
 tags: [teleport, bridge, cross-chain]
 order: 332
 ---

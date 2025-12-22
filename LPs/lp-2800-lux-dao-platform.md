@@ -8,7 +8,7 @@ status: Draft
 type: Standards Track
 category: LRC
 created: 2025-12-17
-requires: 2504
+requires: 2800
 tags: [dao, governance, platform]
 order: 2800
 ---

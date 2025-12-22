@@ -9,7 +9,7 @@ type: Standards Track
 category: LRC
 created: 2025-07-22
 tags: [lrc, token-standard]
-requires: 2026
+requires: 1
 order: 2027
 ---
 
@@ -39,7 +39,7 @@ This LP formally adopts and rebrands the core Ethereum token standards as Lux Re
 | LRC-20Bridgable  | IERC20Bridgable  | [LP-30](/docs/lp-30-lrc-20-bridgable-token-extension/)    |
 | LRC-721          | ERC-721     | [LP-721](/docs/lp-721-lrc-721-non-fungible-token-standard/)  |
 | LRC-721Burnable  | IERC721Burnable  | [LP-31](/docs/lp-31-lrc-721-burnable-token-extension/)    |
-| LRC-1155         | ERC-1155    | [LP-1155](/docs/lp-2155-lrc-1155-multi-token-standard/)|
+| LRC-1155         | ERC-1155    | [LP-1155](/docs/lp-3155-lrc-1155-multi-token-standard/)|
 
 ## Rationale
 

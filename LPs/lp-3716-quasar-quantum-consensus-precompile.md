@@ -8,7 +8,7 @@ status: Draft
 type: Standards Track
 category: Core
 created: 2025-12-14
-requires: 4, 2311
+requires: 4
 activation:
   flag: lp2516-quasar-precompile
   hfName: "Quasar"

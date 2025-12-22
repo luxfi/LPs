@@ -8,7 +8,7 @@ discussions-to: https://github.com/luxfi/lps/discussions
 status: Draft
 type: Meta
 created: 2025-12-17
-requires: [750, 800, 900]
+requires: 2900, 2920, 2990
 order: 2910
 ---
 

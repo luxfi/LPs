@@ -16,7 +16,7 @@ requires: [4]
 
 ## Abstract
 
-This document defines Lux Network's open source strategy, including our approach to strategic forking, upstream contribution policies, and community engagement. Building on the principles established in [LP-4: Philosophy](./lp-0004-philosophy.md), this LP provides the practical framework for open source development.
+This document defines Lux Network's open source strategy, including our approach to strategic forking, upstream contribution policies, and community engagement. Building on the principles established in [LP-4](./lp-0004-philosophy.md), this LP provides the practical framework for open source development.
 
 ## Motivation
 

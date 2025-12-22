@@ -702,13 +702,13 @@ The LGPL-3.0 license permits:
 
 ### Related LPs
 
-- [LP-40: Wallet Standards](./lp-0040-wallet-standards.md)
-- [LP-42: Multi-Signature Wallet Standard](./lp-0042-multi-signature-wallet-standard.md)
-- [LP-104: FROST Threshold Signatures](./lp-104.md)
-- [LP-311: ML-DSA Digital Signatures](./lp-311.md)
-- [LP-320: Ringtail Threshold Signatures](./lp-320.md)
-- [LP-321: FROST Threshold Signature Precompile](./lp-321.md)
-- [LP-603: Warp Messaging Protocol](./lp-603.md)
+- [LP-40](./lp-0040-wallet-standards.md)
+- [LP-42](./lp-0042-multi-signature-wallet-standard.md)
+- [LP-104](./lp-104.md)
+- [LP-311](./lp-311.md)
+- [LP-320](./lp-320.md)
+- [LP-321](./lp-321.md)
+- [LP-603](./lp-603.md)
 
 ### External Resources
 

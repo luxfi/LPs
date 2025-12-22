@@ -9,7 +9,7 @@ status: Draft
 type: Standards Track
 category: Core
 created: 2025-12-21
-requires: 9000, 9003, 2517
+requires: 9000, 9003, 3020
 implementation: https://github.com/luxfi/standard/src/liquidity/precompiles/IDEX.sol
 order: 10
 ---

@@ -8,7 +8,7 @@ status: Draft
 type: Standards Track
 category: Core
 created: 2025-12-14
-requires: 2311, 7321, 7322
+requires: 7321, 7322
 activation:
   flag: lp2503-account-abstraction
   hfName: "Quantum"

@@ -489,7 +489,7 @@
       "tags": "[core, ai, attestation, tee, a-chain]",
       "created": "2025-12-11",
       "updated": "",
-      "requires": "0, 99, 75",
+      "requires": "0, 99, 70",
       "replaces": "",
       "discussions_to": "https://github.com/luxfi/lps/discussions"
     },
@@ -509,7 +509,7 @@
       "tags": "[core, bridge, cross-chain, mpc, b-chain]",
       "created": "2025-12-11",
       "updated": "",
-      "requires": "0, 99, 83",
+      "requires": "0, 99",
       "replaces": "",
       "discussions_to": "https://github.com/luxfi/lps/discussions"
     },
@@ -829,7 +829,7 @@
       "tags": "[defi, dex, precompile, hft, orderbook, trading]",
       "created": "2025-12-21",
       "updated": "",
-      "requires": "9000, 9003, 2517",
+      "requires": "9000, 9003, 3020",
       "replaces": "",
       "discussions_to": "https://github.com/luxfi/lps/discussions"
     },
@@ -869,7 +869,7 @@
       "tags": "[defi, oracle, precompile, chainlink, pyth, pricing]",
       "created": "2025-12-21",
       "updated": "",
-      "requires": "9000, 9010, 2517",
+      "requires": "9000, 9010, 3020",
       "replaces": "",
       "discussions_to": "https://github.com/luxfi/lps/discussions"
     },
@@ -909,7 +909,7 @@
       "tags": "[defi, bridge, cross-chain, axelar, layerzero, wormhole, warp]",
       "created": "2025-12-21",
       "updated": "",
-      "requires": "6000, 6301, 6602, 2507",
+      "requires": "6000, 6301, 6602, 2803",
       "replaces": "",
       "discussions_to": "https://github.com/luxfi/lps/discussions"
     },
@@ -969,7 +969,7 @@
       "tags": "[defi, cross-chain, router, swap, limit-order, omnichain]",
       "created": "2025-12-21",
       "updated": "",
-      "requires": "9010, 9011, 9012, 2517",
+      "requires": "9010, 9011, 9012, 3020",
       "replaces": "",
       "discussions_to": "https://github.com/luxfi/lps/discussions"
     },
@@ -1089,7 +1089,7 @@
       "tags": "[precompile, registry, defi, core, infrastructure]",
       "created": "2025-12-21",
       "updated": "",
-      "requires": "2517, 9010, 9011",
+      "requires": "3020, 9010, 9011",
       "replaces": "",
       "discussions_to": "https://github.com/luxfi/lps/discussions"
     },
@@ -1389,7 +1389,7 @@
       "tags": "[warp, cross-chain]",
       "created": "2025-07-22",
       "updated": "",
-      "requires": "21",
+      "requires": "",
       "replaces": "",
       "discussions_to": "https://github.com/luxfi/lps/discussions"
     },
@@ -1429,7 +1429,7 @@
       "tags": "[lrc, defi, cross-chain]",
       "created": "2025-07-22",
       "updated": "",
-      "requires": "21",
+      "requires": "",
       "replaces": "",
       "discussions_to": "https://github.com/luxfi/lps/discussions"
     },
@@ -1469,7 +1469,7 @@
       "tags": "[consensus, scaling]",
       "created": "2025-07-22",
       "updated": "",
-      "requires": "22",
+      "requires": "2",
       "replaces": "",
       "discussions_to": "https://github.com/luxfi/lps/discussions"
     },
@@ -1529,7 +1529,7 @@
       "tags": "[l2, evm, core]",
       "created": "2025-07-24",
       "updated": "",
-      "requires": "2026, 32",
+      "requires": "1, 3",
       "replaces": "",
       "discussions_to": "https://github.com/luxfi/lps/discussions"
     },
@@ -1549,7 +1549,7 @@
       "tags": "[l2, scaling]",
       "created": "2025-07-24",
       "updated": "",
-      "requires": "32, 33",
+      "requires": "3, 3",
       "replaces": "",
       "discussions_to": "https://github.com/luxfi/lps/discussions"
     },
@@ -1569,7 +1569,7 @@
       "tags": "[dev-tools, sdk]",
       "created": "2025-07-25",
       "updated": "",
-      "requires": "3036, 38",
+      "requires": "39",
       "replaces": "",
       "discussions_to": "https://github.com/luxfi/lps/discussions"
     },
@@ -1649,7 +1649,7 @@
       "tags": "[wallet, threshold-crypto]",
       "created": "2025-01-23",
       "updated": "",
-      "requires": "1, 2300, 40",
+      "requires": "1, 3020, 40",
       "replaces": "",
       "discussions_to": "https://github.com/luxfi/lps/discussions"
     },
@@ -1689,7 +1689,7 @@
       "tags": "[privacy, zk, zkvm, core]",
       "created": "2025-12-11",
       "updated": "",
-      "requires": "8045, 0302, 0503",
+      "requires": "8045, 1000",
       "replaces": "",
       "discussions_to": "https://github.com/luxfi/lps/discussions"
     },
@@ -1809,7 +1809,7 @@
       "tags": "[security, privacy]",
       "created": "2025-01-23",
       "updated": "",
-      "requires": "1, 76",
+      "requires": "1",
       "replaces": "",
       "discussions_to": "https://github.com/luxfi/lps/discussions"
     },
@@ -1829,7 +1829,7 @@
       "tags": "[core, ai, attestation]",
       "created": "2025-07-25",
       "updated": "",
-      "requires": "10, 9011, 2012, 75",
+      "requires": "0, 9011, 1212, 70",
       "replaces": "",
       "discussions_to": "https://github.com/luxfi/lps/discussions"
     },
@@ -1849,7 +1849,7 @@
       "tags": "[bridge, core, mpc]",
       "created": "2025-07-25",
       "updated": "",
-      "requires": "7013, 7014, 6015, 75",
+      "requires": "7013, 7014, 6015, 70",
       "replaces": "",
       "discussions_to": "https://github.com/luxfi/lps/discussions"
     },
@@ -1869,7 +1869,7 @@
       "tags": "[core, quantum, cryptography, chain]",
       "created": "2025-12-11",
       "updated": "",
-      "requires": "4, 5, 10",
+      "requires": "4, 5, 0",
       "replaces": "",
       "discussions_to": "https://github.com/luxfi/lps/discussions"
     },
@@ -1949,7 +1949,7 @@
       "tags": "[pqc, consensus, core]",
       "created": "2025-08-05",
       "updated": "2025-07-25",
-      "requires": "4, 5, 10, 75",
+      "requires": "4, 5, 0, 70",
       "replaces": "",
       "discussions_to": "https://github.com/luxfi/lps/discussions"
     },
@@ -2009,7 +2009,7 @@
       "tags": "[evm, dev-tools, indexing]",
       "created": "2025-01-28",
       "updated": "",
-      "requires": "2012, 2026, 98",
+      "requires": "1212, 1, 98",
       "replaces": "",
       "discussions_to": "https://github.com/luxfi/lps/discussions"
     },
@@ -2169,7 +2169,7 @@
       "tags": "[research, defi]",
       "created": "2025-01-23",
       "updated": "",
-      "requires": "1, 2300, 40",
+      "requires": "1, 3020, 40",
       "replaces": "",
       "discussions_to": "https://github.com/luxfi/lps/discussions"
     },
@@ -2209,7 +2209,7 @@
       "tags": "[research, identity]",
       "created": "2025-01-23",
       "updated": "",
-      "requires": "7014, 40, 66",
+      "requires": "7014, 40",
       "replaces": "",
       "discussions_to": "https://github.com/luxfi/lps/discussions"
     },
@@ -2229,7 +2229,7 @@
       "tags": "[research, governance]",
       "created": "2025-01-23",
       "updated": "",
-      "requires": "0, 1, 10",
+      "requires": "0, 1, 0",
       "replaces": "",
       "discussions_to": "https://github.com/luxfi/lps/discussions"
     },
@@ -2249,7 +2249,7 @@
       "tags": "[research, defi]",
       "created": "2025-01-23",
       "updated": "",
-      "requires": "1, 2300, 9060",
+      "requires": "1, 3020, 9060",
       "replaces": "",
       "discussions_to": "https://github.com/luxfi/lps/discussions"
     },
@@ -2269,7 +2269,7 @@
       "tags": "[research, defi, security]",
       "created": "2025-01-23",
       "updated": "",
-      "requires": "0, 9011, 2012",
+      "requires": "0, 9011, 1212",
       "replaces": "",
       "discussions_to": "https://github.com/luxfi/lps/discussions"
     },
@@ -2289,7 +2289,7 @@
       "tags": "[research, l2]",
       "created": "2025-01-23",
       "updated": "",
-      "requires": "0, 10, 2012, 7014",
+      "requires": "0, 0, 1212, 7014",
       "replaces": "",
       "discussions_to": "https://github.com/luxfi/lps/discussions"
     },
@@ -2309,7 +2309,7 @@
       "tags": "[consensus, core]",
       "created": "2025-11-22",
       "updated": "",
-      "requires": "10",
+      "requires": "0",
       "replaces": "",
       "discussions_to": "https://github.com/luxfi/lps/discussions"
     },
@@ -2329,7 +2329,7 @@
       "tags": "[pqc, core]",
       "created": "2025-01-24",
       "updated": "",
-      "requires": "700",
+      "requires": "",
       "replaces": "",
       "discussions_to": "https://forum.lux.network/t/lp-200-post-quantum-cryptography"
     },
@@ -2369,7 +2369,7 @@
       "tags": "[ai, vm]",
       "created": "2024-12-11",
       "updated": "",
-      "requires": "2000",
+      "requires": "3020",
       "replaces": "",
       "discussions_to": "https://github.com/luxfi/lps/discussions"
     },
@@ -2389,7 +2389,7 @@
       "tags": "[pqc, core]",
       "created": "2025-01-24",
       "updated": "",
-      "requires": "200",
+      "requires": "",
       "replaces": "",
       "discussions_to": "https://forum.lux.network/t/lp-201-hybrid-cryptography"
     },
@@ -2409,7 +2409,7 @@
       "tags": "[pqc, core, security]",
       "created": "2025-01-24",
       "updated": "",
-      "requires": "200, 201",
+      "requires": "",
       "replaces": "",
       "discussions_to": "https://forum.lux.network/t/lp-202-crypto-agility"
     },
@@ -2449,7 +2449,7 @@
       "tags": "[l2, evm, scaling]",
       "created": "2025-07-23",
       "updated": "",
-      "requires": "2026",
+      "requires": "1",
       "replaces": "",
       "discussions_to": "https://github.com/luxfi/lps/discussions"
     },
@@ -2469,7 +2469,7 @@
       "tags": "[evm, dev-tools]",
       "created": "2025-07-24",
       "updated": "",
-      "requires": "2026, 34",
+      "requires": "1, 3",
       "replaces": "",
       "discussions_to": "https://github.com/luxfi/lps/discussions"
     },
@@ -2489,7 +2489,7 @@
       "tags": "[evm, security]",
       "created": "2025-01-23",
       "updated": "",
-      "requires": "1, 75",
+      "requires": "1, 70",
       "replaces": "",
       "discussions_to": "https://github.com/luxfi/lps/discussions"
     },
@@ -2549,7 +2549,7 @@
       "tags": "[privacy, ai, attestation]",
       "created": "2025-10-28",
       "updated": "",
-      "requires": "301",
+      "requires": "",
       "replaces": "",
       "discussions_to": "https://github.com/luxfi/lps/discussions"
     },
@@ -2569,7 +2569,7 @@
       "tags": "[pqc, consensus, core]",
       "created": "2025-10-28",
       "updated": "",
-      "requires": "204, 301, 302",
+      "requires": "",
       "replaces": "",
       "discussions_to": "https://github.com/luxfi/lps/discussions"
     },
@@ -2589,7 +2589,7 @@
       "tags": "[cross-chain, warp]",
       "created": "2025-11-22",
       "updated": "",
-      "requires": "313",
+      "requires": "3513",
       "replaces": "",
       "discussions_to": "https://github.com/luxfi/lps/discussions"
     },
@@ -2609,7 +2609,7 @@
       "tags": "[pqc]",
       "created": "2025-11-22",
       "updated": "",
-      "requires": "303",
+      "requires": "",
       "replaces": "",
       "discussions_to": "https://github.com/luxfi/lps/discussions"
     },
@@ -2629,7 +2629,7 @@
       "tags": "[pqc]",
       "created": "2025-11-22",
       "updated": "",
-      "requires": "303, 312",
+      "requires": "3512",
       "replaces": "",
       "discussions_to": "https://github.com/luxfi/lps/discussions"
     },
@@ -2669,7 +2669,7 @@
       "tags": "[pqc, encryption]",
       "created": "2025-11-22",
       "updated": "",
-      "requires": "303",
+      "requires": "",
       "replaces": "",
       "discussions_to": "https://github.com/luxfi/lps/discussions"
     },
@@ -2769,7 +2769,7 @@
       "tags": "[pqc, threshold-crypto, precompile]",
       "created": "2025-11-13",
       "updated": "",
-      "requires": "4, 311",
+      "requires": "4, 3511",
       "replaces": "",
       "discussions_to": "https://github.com/luxfi/lps/discussions"
     },
@@ -2789,7 +2789,7 @@
       "tags": "[security, mpc]",
       "created": "2025-11-22",
       "updated": "",
-      "requires": "320, 7321, 7322, 7323",
+      "requires": "7321, 7322, 7323",
       "replaces": "",
       "discussions_to": "https://github.com/luxfi/lps/discussions"
     },
@@ -2849,7 +2849,7 @@
       "tags": "[bridge, mpc, vm]",
       "created": "2025-12-11",
       "updated": "",
-      "requires": "7013, 7014, 6015, 6016, 6017, 6018, 6081, 301, 7319, 7322",
+      "requires": "7013, 7014, 6015, 6016, 6017, 6018, 6081, 7319, 7322",
       "replaces": "81, 301",
       "discussions_to": "https://github.com/luxfi/lps/discussions"
     },
@@ -2869,7 +2869,7 @@
       "tags": "[teleport, bridge, cross-chain]",
       "created": "2025-12-11",
       "updated": "",
-      "requires": "7013, 7014, 6015, 6016, 6081, 7103, 301",
+      "requires": "7013, 7014, 6015, 6016, 6081, 7103",
       "replaces": "",
       "discussions_to": "https://github.com/luxfi/lps/discussions"
     },
@@ -2929,7 +2929,7 @@
       "tags": "[bridge, evm]",
       "created": "2025-12-11",
       "updated": "",
-      "requires": "7013, 7014, 6015, 6017, 6019, 301, 7330, 6331, 6332",
+      "requires": "7013, 7014, 6015, 6017, 6019, 7330, 6331, 6332",
       "replaces": "",
       "discussions_to": "https://github.com/luxfi/lps/discussions"
     },
@@ -3069,7 +3069,7 @@
       "tags": "[evm, gas]",
       "created": "2025-01-15",
       "updated": "",
-      "requires": "2012",
+      "requires": "1212",
       "replaces": "",
       "discussions_to": "https://github.com/luxfi/lps/discussions"
     },
@@ -3089,7 +3089,7 @@
       "tags": "[precompile, evm]",
       "created": "2025-11-22",
       "updated": "",
-      "requires": "2012",
+      "requires": "1212",
       "replaces": "",
       "discussions_to": "https://github.com/luxfi/lps/discussions"
     },
@@ -3109,7 +3109,7 @@
       "tags": "[consensus, core]",
       "created": "2025-11-22",
       "updated": "",
-      "requires": "2012, 176",
+      "requires": "1212",
       "replaces": "",
       "discussions_to": "https://github.com/luxfi/lps/discussions"
     },
@@ -3129,7 +3129,7 @@
       "tags": "[l2, scaling]",
       "created": "2025-09-24",
       "updated": "",
-      "requires": "2300, 100, 5101, 102",
+      "requires": "3020, 5101",
       "replaces": "",
       "discussions_to": "https://github.com/luxfi/lps/discussions"
     },
@@ -3149,7 +3149,7 @@
       "tags": "[l2, scaling]",
       "created": "2025-09-24",
       "updated": "",
-      "requires": "500",
+      "requires": "1000",
       "replaces": "",
       "discussions_to": "https://github.com/luxfi/lps/discussions"
     },
@@ -3169,7 +3169,7 @@
       "tags": "[l2, security]",
       "created": "2025-09-24",
       "updated": "",
-      "requires": "500, 501",
+      "requires": "1000, 1000",
       "replaces": "",
       "discussions_to": "https://github.com/luxfi/lps/discussions"
     },
@@ -3189,7 +3189,7 @@
       "tags": "[l2, zk]",
       "created": "2025-09-24",
       "updated": "",
-      "requires": "500, 501",
+      "requires": "1000, 1000",
       "replaces": "",
       "discussions_to": "https://github.com/luxfi/lps/discussions"
     },
@@ -3209,7 +3209,7 @@
       "tags": "[l2, consensus]",
       "created": "2025-09-24",
       "updated": "",
-      "requires": "500, 501, 502, 503",
+      "requires": "1000, 1000, 1000, 1000",
       "replaces": "",
       "discussions_to": "https://github.com/luxfi/lps/discussions"
     },
@@ -3229,7 +3229,7 @@
       "tags": "[l2, core]",
       "created": "2025-09-24",
       "updated": "",
-      "requires": "500, 501, 502, 503, 504",
+      "requires": "1000, 1000, 1000, 1000, 1000",
       "replaces": "",
       "discussions_to": "https://github.com/luxfi/lps/discussions"
     },
@@ -3269,7 +3269,7 @@
       "tags": "[pqc, precompile, evm]",
       "created": "2025-11-13",
       "updated": "",
-      "requires": "4, 311",
+      "requires": "4, 3511",
       "replaces": "",
       "discussions_to": "https://github.com/luxfi/lps/discussions"
     },
@@ -3289,7 +3289,7 @@
       "tags": "[warp, precompile, cross-chain]",
       "created": "2025-11-14",
       "updated": "",
-      "requires": "22",
+      "requires": "2",
       "replaces": "",
       "discussions_to": "https://github.com/luxfi/lps/discussions"
     },
@@ -3349,7 +3349,7 @@
       "tags": "[core, dev-tools]",
       "created": "2025-11-22",
       "updated": "",
-      "requires": "181",
+      "requires": "",
       "replaces": "",
       "discussions_to": "https://github.com/luxfi/lps/discussions"
     },
@@ -3389,7 +3389,7 @@
       "tags": "[ai, gas, evm]",
       "created": "2025-01-09",
       "updated": "",
-      "requires": "600",
+      "requires": "110",
       "replaces": "",
       "discussions_to": "https://forum.lux.network/t/lp-601-dynamic-gas-fees"
     },
@@ -3449,7 +3449,7 @@
       "tags": "[consensus, scaling]",
       "created": "2025-01-09",
       "updated": "",
-      "requires": "601, 6602",
+      "requires": "110, 6602",
       "replaces": "",
       "discussions_to": "https://forum.lux.network/t/lp-605-elastic-validators"
     },
@@ -3469,7 +3469,7 @@
       "tags": "[ai, scaling]",
       "created": "2025-01-09",
       "updated": "",
-      "requires": "601",
+      "requires": "110",
       "replaces": "",
       "discussions_to": "https://forum.lux.network/t/lp-607-gpu-acceleration"
     },
@@ -3489,7 +3489,7 @@
       "tags": "[ai, confidential-compute, tee, gpu]",
       "created": "2025-12-14",
       "updated": "",
-      "requires": "2001, 5075, 5302",
+      "requires": "3020, 5075, 5302",
       "replaces": "",
       "discussions_to": "https://github.com/luxfi/lps/discussions"
     },
@@ -3529,7 +3529,7 @@
       "tags": "[warp, precompile, cross-chain, bls, teleport]",
       "created": "2025-12-14",
       "updated": "",
-      "requires": "181, 2313",
+      "requires": "",
       "replaces": "",
       "discussions_to": "https://github.com/luxfi/lps/discussions"
     },
@@ -3549,7 +3549,7 @@
       "tags": "[pqc, precompile, consensus, q-chain]",
       "created": "2025-12-14",
       "updated": "",
-      "requires": "4, 2311",
+      "requires": "4",
       "replaces": "",
       "discussions_to": "https://github.com/luxfi/lps/discussions"
     },
@@ -3569,7 +3569,7 @@
       "tags": "[precompile, evm, index]",
       "created": "2025-11-14",
       "updated": "",
-      "requires": "2311, 2312, 2313, 2314, 7321, 7322, 7324",
+      "requires": "7321, 7322, 7324",
       "replaces": "",
       "discussions_to": "https://github.com/luxfi/lps/discussions"
     },
@@ -3689,7 +3689,7 @@
       "tags": "[defi, cross-chain, mpc]",
       "created": "2025-07-25",
       "updated": "",
-      "requires": "6, 32, 33, 34",
+      "requires": "6, 3, 3, 3",
       "replaces": "",
       "discussions_to": "https://github.com/luxfi/lps/discussions"
     },
@@ -3789,7 +3789,7 @@
       "tags": "[lrc, token-standard]",
       "created": "2025-07-22",
       "updated": "",
-      "requires": "2026",
+      "requires": "1",
       "replaces": "",
       "discussions_to": "https://github.com/luxfi/lps/discussions"
     },
@@ -3809,7 +3809,7 @@
       "tags": "[lrc, token-standard, evm]",
       "created": "2025-07-23",
       "updated": "",
-      "requires": "2300",
+      "requires": "3020",
       "replaces": "",
       "discussions_to": "https://github.com/luxfi/lps/discussions"
     },
@@ -3829,7 +3829,7 @@
       "tags": "[lrc, token-standard, evm]",
       "created": "2025-07-23",
       "updated": "",
-      "requires": "2300",
+      "requires": "3020",
       "replaces": "",
       "discussions_to": "https://github.com/luxfi/lps/discussions"
     },
@@ -3849,27 +3849,7 @@
       "tags": "[lrc, bridge, token-standard]",
       "created": "2025-07-23",
       "updated": "",
-      "requires": "2300, 28",
-      "replaces": "",
-      "discussions_to": "https://github.com/luxfi/lps/discussions"
-    },
-    {
-      "lp": 3031,
-      "slug": "lp-3031-lrc-721-burnable-token-extension",
-      "file": "LPs/lp-3031-lrc-721-burnable-token-extension.md",
-      "title": "LRC-721 Burnable Token Extension",
-      "description": "Optional extension of the non-fungible token standard to allow holders to destroy their tokens",
-      "author": "Gemini (@gemini)",
-      "status": "Draft",
-      "type": "Standards Track",
-      "category": "LRC",
-      "tier": "",
-      "order": 2031,
-      "tier_rank": 99,
-      "tags": "[lrc, token-standard, nft]",
-      "created": "2025-07-23",
-      "updated": "",
-      "requires": "2721",
+      "requires": "3020",
       "replaces": "",
       "discussions_to": "https://github.com/luxfi/lps/discussions"
     },
@@ -3889,7 +3869,7 @@
       "tags": "[lrc, defi, nft]",
       "created": "2025-01-23",
       "updated": "",
-      "requires": "2721, 2155, 2300",
+      "requires": "3020",
       "replaces": "",
       "discussions_to": "https://github.com/luxfi/lps/discussions"
     },
@@ -3909,7 +3889,7 @@
       "tags": "[lrc, nft]",
       "created": "2025-01-23",
       "updated": "",
-      "requires": "2721, 2300",
+      "requires": "3020",
       "replaces": "",
       "discussions_to": "https://github.com/luxfi/lps/discussions"
     },
@@ -3929,7 +3909,7 @@
       "tags": "[bridge, lrc]",
       "created": "2025-01-23",
       "updated": "",
-      "requires": "2300, 7013",
+      "requires": "3020, 7013",
       "replaces": "",
       "discussions_to": "https://github.com/luxfi/lps/discussions"
     },
@@ -4009,7 +3989,7 @@
       "tags": "[dao, governance, platform]",
       "created": "2025-12-17",
       "updated": "",
-      "requires": "2504",
+      "requires": "2800",
       "replaces": "",
       "discussions_to": "https://github.com/luxfi/lps/discussions"
     },
@@ -4029,7 +4009,7 @@
       "tags": "[dao, governance, azorius, module]",
       "created": "2025-12-17",
       "updated": "",
-      "requires": "2504, 2506",
+      "requires": "2800, 2802",
       "replaces": "",
       "discussions_to": "https://github.com/luxfi/lps/discussions"
     },
@@ -4049,7 +4029,7 @@
       "tags": "[dao, governance, voting, strategies]",
       "created": "2025-12-17",
       "updated": "",
-      "requires": "2507",
+      "requires": "2803",
       "replaces": "",
       "discussions_to": "https://github.com/luxfi/lps/discussions"
     },
@@ -4069,7 +4049,7 @@
       "tags": "[dao, governance, security, freeze]",
       "created": "2025-12-17",
       "updated": "",
-      "requires": "2504, 2507",
+      "requires": "2800, 2803",
       "replaces": "",
       "discussions_to": "https://github.com/luxfi/lps/discussions"
     },
@@ -4089,7 +4069,7 @@
       "tags": "[dao, account-abstraction, paymaster, erc-4337]",
       "created": "2025-12-17",
       "updated": "",
-      "requires": "2506",
+      "requires": "2802",
       "replaces": "",
       "discussions_to": "https://github.com/luxfi/lps/discussions"
     },
@@ -4109,7 +4089,7 @@
       "tags": "[dao, sdk, typescript]",
       "created": "2025-12-17",
       "updated": "",
-      "requires": "2506, 2507",
+      "requires": "2802, 2803",
       "replaces": "",
       "discussions_to": "https://github.com/luxfi/lps/discussions"
     },
@@ -4149,7 +4129,7 @@
       "tags": "[investment, esg, impact]",
       "created": "2025-12-17",
       "updated": "",
-      "requires": "[800]",
+      "requires": "2920",
       "replaces": "",
       "discussions_to": "https://github.com/luxfi/lps/discussions"
     },
@@ -4169,7 +4149,7 @@
       "tags": "[investment, environment, carbon, sustainability]",
       "created": "2025-12-17",
       "updated": "",
-      "requires": "[750, 800]",
+      "requires": "2900, 2920",
       "replaces": "",
       "discussions_to": "https://github.com/luxfi/lps/discussions"
     },
@@ -4189,7 +4169,7 @@
       "tags": "[investment, social, impact, inclusion]",
       "created": "2025-12-17",
       "updated": "",
-      "requires": "[750, 800]",
+      "requires": "2900, 2920",
       "replaces": "",
       "discussions_to": "https://github.com/luxfi/lps/discussions"
     },
@@ -4209,7 +4189,7 @@
       "tags": "[investment, accountability, ecosystem]",
       "created": "2025-12-17",
       "updated": "",
-      "requires": "[750, 800]",
+      "requires": "2900, 2920",
       "replaces": "",
       "discussions_to": "https://github.com/luxfi/lps/discussions"
     },
@@ -4229,7 +4209,7 @@
       "tags": "[esg, impact, vision, ecosystem, thesis]",
       "created": "2025-12-17",
       "updated": "",
-      "requires": "[750, 800, 900]",
+      "requires": "2900, 2920, 2990",
       "replaces": "",
       "discussions_to": "https://github.com/luxfi/lps/discussions"
     },
@@ -4269,7 +4249,7 @@
       "tags": "[esg, sustainability, carbon, emissions, ghg-protocol]",
       "created": "2025-12-17",
       "updated": "",
-      "requires": "[800]",
+      "requires": "2920",
       "replaces": "",
       "discussions_to": "https://github.com/luxfi/lps/discussions"
     },
@@ -4289,7 +4269,7 @@
       "tags": "[esg, sustainability, energy, renewable, validators]",
       "created": "2025-12-17",
       "updated": "",
-      "requires": "[800, 801]",
+      "requires": "2920, 2921",
       "replaces": "",
       "discussions_to": "https://github.com/luxfi/lps/discussions"
     },
@@ -4309,7 +4289,7 @@
       "tags": "[esg, sustainability, energy, transparency, metrics]",
       "created": "2025-12-17",
       "updated": "",
-      "requires": "[800, 801]",
+      "requires": "2920, 2921",
       "replaces": "",
       "discussions_to": "https://github.com/luxfi/lps/discussions"
     },
@@ -4329,7 +4309,7 @@
       "tags": "[esg, sustainability, risk, compliance]",
       "created": "2025-12-17",
       "updated": "",
-      "requires": "[800]",
+      "requires": "2920",
       "replaces": "",
       "discussions_to": "https://github.com/luxfi/lps/discussions"
     },
@@ -4349,7 +4329,7 @@
       "tags": "[esg, sustainability, transparency, compliance, claims]",
       "created": "2025-12-17",
       "updated": "",
-      "requires": "[800]",
+      "requires": "2920",
       "replaces": "",
       "discussions_to": "https://github.com/luxfi/lps/discussions"
     },
@@ -4369,7 +4349,7 @@
       "tags": "[esg, sustainability, esg, compliance, standards]",
       "created": "2025-12-16",
       "updated": "",
-      "requires": "[800]",
+      "requires": "2920",
       "replaces": "",
       "discussions_to": "https://github.com/luxfi/lps/discussions"
     },
@@ -4389,7 +4369,7 @@
       "tags": "[esg, sustainability, esg, compliance, evidence, audit]",
       "created": "2025-12-16",
       "updated": "",
-      "requires": "[800, 850]",
+      "requires": "2920, 2950",
       "replaces": "",
       "discussions_to": "https://github.com/luxfi/lps/discussions"
     },
@@ -4409,7 +4389,7 @@
       "tags": "[esg, impact, social, stakeholders]",
       "created": "2025-12-17",
       "updated": "",
-      "requires": "[800]",
+      "requires": "2920",
       "replaces": "",
       "discussions_to": "https://github.com/luxfi/lps/discussions"
     },
@@ -4429,7 +4409,7 @@
       "tags": "[esg, impact, metrics, measurement, reporting]",
       "created": "2025-12-17",
       "updated": "",
-      "requires": "[800, 900]",
+      "requires": "2920, 2990",
       "replaces": "",
       "discussions_to": "https://github.com/luxfi/lps/discussions"
     },
@@ -4449,7 +4429,7 @@
       "tags": "[esg, impact, stakeholders, community]",
       "created": "2025-12-17",
       "updated": "",
-      "requires": "[800, 900]",
+      "requires": "2920, 2990",
       "replaces": "",
       "discussions_to": "https://github.com/luxfi/lps/discussions"
     },
@@ -4469,7 +4449,7 @@
       "tags": "[esg, impact, grants, community, funding]",
       "created": "2025-12-17",
       "updated": "",
-      "requires": "[800, 900]",
+      "requires": "2920, 2990",
       "replaces": "",
       "discussions_to": "https://github.com/luxfi/lps/discussions"
     },
@@ -4489,7 +4469,7 @@
       "tags": "[esg, impact, financial-inclusion, metrics, sdg]",
       "created": "2025-12-17",
       "updated": "",
-      "requires": "[800, 900, 901]",
+      "requires": "2920, 2990, 2991",
       "replaces": "",
       "discussions_to": "https://github.com/luxfi/lps/discussions"
     },
@@ -4529,7 +4509,7 @@
       "tags": "[erc-4337, account-abstraction, smart-wallet, paymaster]",
       "created": "2025-12-14",
       "updated": "",
-      "requires": "2311, 7321, 7322",
+      "requires": "7321, 7322",
       "replaces": "",
       "discussions_to": "https://github.com/luxfi/lps/discussions"
     },
@@ -4589,7 +4569,7 @@
       "tags": "[dex, trading, clob, post-quantum]",
       "created": "2024-12-14",
       "updated": "",
-      "requires": "2001, 110",
+      "requires": "3020, 110",
       "replaces": "",
       "discussions_to": "https://github.com/luxfi/lps/discussions"
     },
@@ -4609,7 +4589,7 @@
       "tags": "[c-chain, evm]",
       "created": "2025-12-14",
       "updated": "",
-      "requires": "2000, 7321, 7322",
+      "requires": "3020, 7321, 7322",
       "replaces": "",
       "discussions_to": "https://github.com/luxfi/lps/discussions"
     },
@@ -4629,7 +4609,7 @@
       "tags": "[lrc, nft, marketplace, defi]",
       "created": "2025-12-14",
       "updated": "",
-      "requires": "[2155]",
+      "requires": "[]",
       "replaces": "",
       "discussions_to": "https://github.com/luxfi/lps/discussions"
     },
@@ -4649,7 +4629,7 @@
       "tags": "[bridge, teleport, cross-chain, mpc, erc20b]",
       "created": "2025-12-14",
       "updated": "",
-      "requires": "2030, 6016",
+      "requires": "[6016]",
       "replaces": "",
       "discussions_to": "https://github.com/luxfi/lps/discussions"
     },
@@ -4669,7 +4649,7 @@
       "tags": "[c-chain, evm]",
       "created": "2025-12-14",
       "updated": "",
-      "requires": "2000, 6022",
+      "requires": "3020, 6022",
       "replaces": "",
       "discussions_to": "https://github.com/luxfi/lps/discussions"
     },
@@ -4689,7 +4669,7 @@
       "tags": "[defi, lending, compound]",
       "created": "2025-12-14",
       "updated": "",
-      "requires": "2000",
+      "requires": "3020",
       "replaces": "",
       "discussions_to": "https://github.com/luxfi/lps/discussions"
     },
@@ -4729,7 +4709,7 @@
       "tags": "[defi, privacy]",
       "created": "2025-01-24",
       "updated": "",
-      "requires": "2300, 2",
+      "requires": "3020, 2",
       "replaces": "",
       "discussions_to": "https://github.com/luxfi/lps/discussions"
     },
@@ -4749,7 +4729,7 @@
       "tags": "[defi, privacy]",
       "created": "2025-01-24",
       "updated": "",
-      "requires": "2300, 64, 67",
+      "requires": "3020",
       "replaces": "",
       "discussions_to": "https://github.com/luxfi/lps/discussions"
     },
@@ -4769,7 +4749,7 @@
       "tags": "[defi, privacy, zk]",
       "created": "2025-01-24",
       "updated": "",
-      "requires": "2300, 400",
+      "requires": "3020",
       "replaces": "",
       "discussions_to": "https://github.com/luxfi/lps/discussions"
     },
@@ -4789,7 +4769,27 @@
       "tags": "[defi, privacy, staking]",
       "created": "2025-01-24",
       "updated": "",
-      "requires": "2300, 69",
+      "requires": "3020",
+      "replaces": "",
+      "discussions_to": "https://github.com/luxfi/lps/discussions"
+    },
+    {
+      "lp": 3031,
+      "slug": "lp-3031-lrc-721-burnable-token-extension",
+      "file": "LPs/lp-3031-lrc-721-burnable-token-extension.md",
+      "title": "LRC-721 Burnable Token Extension",
+      "description": "Optional extension of the non-fungible token standard to allow holders to destroy their tokens",
+      "author": "Gemini (@gemini)",
+      "status": "Draft",
+      "type": "Standards Track",
+      "category": "LRC",
+      "tier": "",
+      "order": 30310,
+      "tier_rank": 99,
+      "tags": "[lrc, token-standard, nft]",
+      "created": "2025-07-23",
+      "updated": "",
+      "requires": "",
       "replaces": "",
       "discussions_to": "https://github.com/luxfi/lps/discussions"
     }

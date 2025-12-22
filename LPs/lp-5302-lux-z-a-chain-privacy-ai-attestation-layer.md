@@ -8,7 +8,7 @@ status: Final
 type: Standards Track
 category: Core
 created: 2025-10-28
-requires: 301
+requires:
 tags: [privacy, ai, attestation]
 order: 302
 ---

@@ -8,7 +8,7 @@ status: Draft
 type: Standards Track
 category: Core
 created: 2025-01-23
-requires: 1, 76
+requires: 1
 tags: [security, privacy]
 order: 75
 ---

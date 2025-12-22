@@ -197,9 +197,9 @@ Lux Network is organized into **eight tiers**, each serving a distinct purpose:
 | 3 | [LP-1000](/docs/lp-1000-p-chain-core-platform-specification/) | Platform economics |
 | 4 | LP-3000 | DeFi surface area |
 | 5 | [LP-9000](/docs/lp-9000-dex-core-specification/) | Trading liquidity |
-| 6 | [LP-70000](/docs/lp-70000-fund-management-index/) | Fund management |
-| 7 | [LP-71000](/docs/lp-71000-dao-governance-index/) | DAO governance |
-| 8 | [LP-72000](/docs/lp-72000-esg-impact-index/) | ESG & impact |
+| 6 | [LP-2860](/docs/lp-2860-fund-management-index/) | Fund management |
+| 7 | [LP-2850](/docs/lp-2850-dao-governance-index/) | DAO governance |
+| 8 | [LP-2995](/docs/lp-2995-esg-impact-index/) | ESG & impact |
 
 ---
 
@@ -255,9 +255,9 @@ Investor:    0000 → 70000 → 71000 → 72000
 | **[LP-0099](/docs/lp-0099-lp-numbering-scheme-and-chain-organization/)** | Master numbering scheme v3.3 |
 | **[LP-INDEX](./LP-INDEX.md)** | Complete index of all LPs |
 | **[LP-50000](/docs/lp-50000-research-index/)** | Research papers index |
-| **[LP-70000](/docs/lp-70000-fund-management-index/)** | Fund management |
-| **[LP-71000](/docs/lp-71000-dao-governance-index/)** | DAO governance |
-| **[LP-72000](/docs/lp-72000-esg-impact-index/)** | ESG & impact |
+| **[LP-2860](/docs/lp-2860-fund-management-index/)** | Fund management |
+| **[LP-2850](/docs/lp-2850-dao-governance-index/)** | DAO governance |
+| **[LP-2995](/docs/lp-2995-esg-impact-index/)** | ESG & impact |
 
 ---
 

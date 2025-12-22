@@ -8,7 +8,7 @@ status: Final
 type: Standards Track
 category: Core
 created: 2025-11-22
-requires: 303, 312
+requires: 3512
 tags: [pqc]
 order: 317
 ---
@@ -626,11 +626,11 @@ Copyright and related rights waived via [CC0](https://creativecommons.org/public
 ## References
 
 ### Related Lux Proposals
-- [LP-200: Post-Quantum Cryptography Suite](lp-200-post-quantum-cryptography-suite-for-lux-network.md) - Parent specification
-- [LP-316: ML-DSA Post-Quantum Digital Signatures](lp-316-ml-dsa-post-quantum-digital-signatures.md) - Lattice-based alternative
-- [LP-318: ML-KEM Post-Quantum Key Encapsulation](lp-318-ml-kem-post-quantum-key-encapsulation.md) - Complementary key exchange
-- [LP-312: SLH-DSA Signature Verification Precompile](lp-312-slh-dsa-signature-verification-precompile.md) - EVM precompile implementation
-- [LP-201: Hybrid Classical-Quantum Transitions](lp-201-hybrid-classical-quantum-cryptography-transitions.md) - Migration strategy
+- [LP-200](lp-200-post-quantum-cryptography-suite-for-lux-network.md) - Parent specification
+- [LP-316](lp-316-ml-dsa-post-quantum-digital-signatures.md) - Lattice-based alternative
+- [LP-318](lp-318-ml-kem-post-quantum-key-encapsulation.md) - Complementary key exchange
+- [LP-312](lp-312-slh-dsa-signature-verification-precompile.md) - EVM precompile implementation
+- [LP-201](lp-201-hybrid-classical-quantum-cryptography-transitions.md) - Migration strategy
 
 ### Standards and Specifications
 1. **FIPS 205**: [Stateless Hash-Based Digital Signature Standard](https://csrc.nist.gov/pubs/fips/205/final)

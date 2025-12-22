@@ -8,7 +8,7 @@ status: Draft
 type: Standards Track
 category: Core
 created: 2025-11-22
-requires: 313
+requires: 3513
 tags: [cross-chain, warp]
 order: 315
 ---

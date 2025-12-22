@@ -9,7 +9,7 @@ type: Standards Track
 category: Core
 created: 2025-07-24
 tags: [l2, scaling]
-requires: 32, 33
+requires: 3, 3
 order: 34
 ---
 

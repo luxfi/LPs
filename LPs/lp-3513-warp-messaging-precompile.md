@@ -8,7 +8,7 @@ status: Draft
 type: Standards Track
 category: Core
 created: 2025-11-14
-requires: 22
+requires: 2
 activation:
   flag: lp313-warp-precompile
   hfName: "Teleport"

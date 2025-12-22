@@ -9,7 +9,7 @@ type: Standards Track
 category: LRC
 created: 2025-07-22
 tags: [lrc, defi, cross-chain]
-requires: 21
+requires:
 order: 23
 ---
 

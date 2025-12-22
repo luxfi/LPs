@@ -8,7 +8,7 @@ status: Draft
 type: Standards Track
 category: Core
 created: 2025-11-13
-requires: 4, 311
+requires: 4, 3511
 activation:
   flag: lp324-ringtail-precompile
   hfName: "Quantum"

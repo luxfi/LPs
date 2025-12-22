@@ -8,7 +8,7 @@ status: Draft
 type: Standards Track
 category: Core
 created: 2025-01-23
-requires: 1, 75
+requires: 1, 70
 tags: [evm, security]
 order: 276
 ---

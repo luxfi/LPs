@@ -8,7 +8,7 @@ status: Draft
 type: Standards Track
 category: LRC
 created: 2025-01-24
-requires: 2300, 69
+requires: 3020
 tags: [defi, privacy, staking]
 order: 9403
 ---

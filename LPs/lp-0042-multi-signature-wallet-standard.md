@@ -9,7 +9,7 @@ type: Standards Track
 category: LRC
 created: 2025-01-23
 tags: [wallet, threshold-crypto]
-requires: 1, 2300, 40
+requires: 1, 3020, 40
 order: 42
 ---
 

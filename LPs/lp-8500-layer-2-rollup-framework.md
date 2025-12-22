@@ -8,7 +8,7 @@ status: Draft
 type: Standards Track
 category: Core
 created: 2025-09-24
-requires: 2300, 100, 5101, 102
+requires: 3020, 5101
 tags: [l2, scaling]
 order: 500
 ---

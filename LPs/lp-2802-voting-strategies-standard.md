@@ -8,7 +8,7 @@ status: Draft
 type: Standards Track
 category: LRC
 created: 2025-12-17
-requires: 2507
+requires: 2803
 tags: [dao, governance, voting, strategies]
 order: 2802
 ---

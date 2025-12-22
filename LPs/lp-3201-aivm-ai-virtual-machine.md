@@ -8,7 +8,7 @@ status: Draft
 type: Standards Track
 category: Core
 created: 2024-12-11
-requires: 2000
+requires: 3020
 tags: [ai, vm]
 activation:
   flag: lp-2001-aivm

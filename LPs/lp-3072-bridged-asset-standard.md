@@ -8,7 +8,7 @@ status: Draft
 type: Standards Track
 category: LRC
 created: 2025-01-23
-requires: 2300, 7013
+requires: 3020, 7013
 tags: [bridge, lrc]
 order: 2072
 ---

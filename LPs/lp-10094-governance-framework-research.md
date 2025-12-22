@@ -7,7 +7,7 @@ discussions-to: https://github.com/luxfi/lps/discussions
 status: Draft
 type: Informational
 created: 2025-01-23
-requires: 0, 1, 10
+requires: 0, 1, 0
 tags: [research, governance]
 order: 114
 ---

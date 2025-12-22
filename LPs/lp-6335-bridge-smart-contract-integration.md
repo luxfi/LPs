@@ -8,7 +8,7 @@ status: Draft
 type: Standards Track
 category: Bridge
 created: 2025-12-11
-requires: 7013, 7014, 6015, 6017, 6019, 301, 7330, 6331, 6332
+requires: 7013, 7014, 6015, 6017, 6019, 7330, 6331, 6332
 tags: [bridge, evm]
 order: 335
 ---

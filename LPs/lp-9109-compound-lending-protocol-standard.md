@@ -8,7 +8,7 @@ status: Draft
 type: Standards Track
 category: LRC
 created: 2025-12-14
-requires: 2000
+requires: 3020
 tags: [defi, lending, compound]
 order: 9109
 ---
@@ -474,7 +474,7 @@ This LP specification is released under CC0.
 
 - [Compound V3 Documentation](https://docs.compound.finance/)
 - [Compound V3 GitHub](https://github.com/compound-finance/comet)
-- [LP-2000: C-Chain EVM Specification](./lp-2000-c-chain-evm-specification.md)
+- [LP-2000](./lp-2000-c-chain-evm-specification.md)
 - [Compound V3 Audits](https://github.com/compound-finance/comet/tree/main/audits)
 
 ## Copyright

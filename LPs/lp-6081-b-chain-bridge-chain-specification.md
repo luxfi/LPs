@@ -8,7 +8,7 @@ status: Draft
 type: Standards Track
 category: Core
 created: 2025-07-25
-requires: 7013, 7014, 6015, 75
+requires: 7013, 7014, 6015, 70
 tags: [bridge, core, mpc]
 order: 81
 ---

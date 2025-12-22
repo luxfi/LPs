@@ -508,7 +508,7 @@ Default 1% fee structure:
 | LP-6019 | Bridge Security Framework | Security requirements |
 | LP-6022 | Warp Messaging 2.0 | Native interchain transfers |
 | LP-9072 | Bridged Asset Standard | General bridged asset interface |
-| LP-2030 | LRC-20 Bridgable Token Extension | Bridgeable token extensions |
+| LP-3030 | LRC-20 Bridgable Token Extension | Bridgeable token extensions |
 
 ## Copyright
 
