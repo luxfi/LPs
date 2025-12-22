@@ -6,7 +6,7 @@ author: Lux Core Team
 status: Final
 type: Meta
 created: 2025-12-21
-tags: [core, security, supply-chain, dependencies, implementation]
+tags: [network, core, security, supply-chain, dependencies, implementation]
 order: 10
 tier: core
 requires: [4]
