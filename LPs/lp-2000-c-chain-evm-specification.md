@@ -1,5 +1,6 @@
 ---
 lp: 2000
+order: 30000
 title: C-Chain - Core EVM Specification
 tags: [core, evm, smart-contracts, c-chain]
 description: Core specification for the C-Chain (Contract Chain), Lux Network's EVM-compatible smart contract chain
