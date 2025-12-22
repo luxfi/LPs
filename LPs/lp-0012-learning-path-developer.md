@@ -19,6 +19,10 @@ tier: core
 
 This path takes you from EVM basics to production DeFi on Lux.
 
+## Motivation
+
+Smart contract development on Lux requires understanding EVM compatibility, precompiles, and cross-chain patterns. This path builds the skills needed to ship production-ready contracts.
+
 ## Audience
 
 Solidity developers, Web3 teams, protocol engineers.

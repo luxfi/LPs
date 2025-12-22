@@ -19,6 +19,10 @@ tier: core
 
 This is the foundational path. Everyone starts here regardless of role. It provides the mental model of the system.
 
+## Motivation
+
+Understanding core protocol fundamentals is prerequisite for all other learning paths. Without a solid mental model of network architecture, consensus, and chain relationships, advanced topics become disconnected facts rather than coherent knowledge.
+
 ## Audience
 
 All roles: developers, validators, traders, investors, researchers.

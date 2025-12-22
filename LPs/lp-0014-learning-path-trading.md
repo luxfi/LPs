@@ -19,6 +19,10 @@ tier: core
 
 This path covers market infrastructure from order books to HFT venues.
 
+## Motivation
+
+High-performance trading on Lux requires understanding DEX architecture, order flow, and MEV protection. This path prepares traders and market makers for competitive execution.
+
 ## Audience
 
 Quantitative traders, exchange operators, prop desks, market makers.

@@ -19,6 +19,10 @@ tier: core
 
 This path provides clean separation of theory vs production for academic exploration.
 
+## Motivation
+
+Advancing the field requires deep understanding of current limitations and open problems. This path prepares researchers to contribute novel solutions.
+
 ## Audience
 
 Academics, PhD researchers, frontier protocol teams, R&D labs.

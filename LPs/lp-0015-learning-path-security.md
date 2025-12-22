@@ -19,6 +19,10 @@ tier: core
 
 This path provides system-level threat modeling capabilities.
 
+## Motivation
+
+Security auditing requires systematic understanding of attack vectors, vulnerability patterns, and defensive practices. This path trains auditors to protect the ecosystem.
+
 ## Audience
 
 Security auditors, red teams, cryptographers, protocol researchers.
