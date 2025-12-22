@@ -1,5 +1,5 @@
 ---
-lp: 10
+lp: 10000
 title: Learning Paths Index
 description: Canonical learning paths for developers, validators, traders, investors, and researchers
 author: Lux Core Team

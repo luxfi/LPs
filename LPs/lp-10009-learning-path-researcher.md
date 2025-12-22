@@ -1,5 +1,5 @@
 ---
-lp: 19
+lp: 10009
 title: Learning Path - Researcher
 description: Academic research, experimental protocols, and frontier exploration
 author: Lux Core Team
