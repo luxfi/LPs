@@ -7,7 +7,7 @@ status: Final
 type: Meta
 created: 2025-12-21
 tags: [learning-path, index]
-order: 100
+order: 20
 tier: core
 ---
 

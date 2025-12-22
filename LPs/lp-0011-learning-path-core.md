@@ -7,7 +7,7 @@ status: Final
 type: Meta
 created: 2025-12-21
 tags: [learning-path, core, beginner]
-order: 110
+order: 21
 tier: core
 ---
 

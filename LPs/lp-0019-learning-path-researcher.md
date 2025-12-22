@@ -7,7 +7,7 @@ status: Final
 type: Meta
 created: 2025-12-21
 tags: [learning-path, research, academic, experimental]
-order: 190
+order: 29
 tier: core
 ---
 

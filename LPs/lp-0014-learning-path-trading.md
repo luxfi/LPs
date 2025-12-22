@@ -7,7 +7,7 @@ status: Final
 type: Meta
 created: 2025-12-21
 tags: [learning-path, trading, dex, hft, markets]
-order: 140
+order: 24
 tier: core
 ---
 
