@@ -585,6 +585,33 @@ interface MEVMetrics {
 | Advanced | + Private mempool, encryption | +2 blocks | Medium |
 | Maximum | + Threshold encryption, TEE | +3 blocks | High |
 
+## Rationale
+
+The MEV protection mechanisms address the largest source of value extraction from DeFi users:
+
+1. **Commit-reveal** prevents front-running by hiding order details until execution is committed
+2. **Batch auctions** eliminate ordering games by executing all orders at a single clearing price
+3. **Private mempools** prevent validators and searchers from viewing pending transactions
+4. **MEV-aware routing** incorporates extraction risk into path optimization
+5. **Tiered protection levels** allow users to trade off latency for protection
+
+Studies show MEV extraction exceeds $600M annually on Ethereum alone. These protections aim to return that value to users.
+
+## Backwards Compatibility
+
+MEV protection integrates with existing infrastructure:
+
+- **Standard DEX interfaces**: All protected swaps use ERC-20 approve/transfer patterns
+- **Router compatibility**: MEVAwareRouter implements ISwapRouter interface
+- **Wallet integration**: Works with existing wallet signing flows
+- **Block builders**: Compatible with Flashbots, MEV Boost, and similar systems
+
+Migration path for existing protocols:
+1. Deploy MEV protection contracts alongside existing router
+2. Update frontend to offer protection toggle
+3. Gradually migrate volume to protected routes
+4. Maintain legacy router for backward compatibility
+
 ## Security Considerations
 
 1. **Encryption key management** - Distributed threshold

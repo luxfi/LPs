@@ -423,6 +423,14 @@ const performanceAlerts: AlertRule[] = [
 4. Failover completes in < 5 seconds
 5. Gas costs within 110% of targets
 
+## Rationale
+
+Performance benchmarks establish verifiable baselines for protocol reliability. Target metrics are derived from competitive analysis and user experience requirements. Continuous benchmarking prevents performance regression and guides optimization efforts.
+
+## Backwards Compatibility
+
+Benchmarking infrastructure is observational and doesn't modify protocol behavior. Performance improvements may change gas costs, which are documented with each upgrade.
+
 ## Security Considerations
 
 1. **DoS protection** - Rate limiting under load

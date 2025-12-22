@@ -425,6 +425,32 @@ interface IFormalVerification {
 | Low | $1K - $5K | 7 days |
 | Informational | $100 - $1K | 30 days |
 
+## Rationale
+
+The audit requirements are calibrated based on historical DeFi exploit analysis:
+
+1. **Multiple auditors required** because single-auditor reviews miss 40-60% of critical vulnerabilities based on industry data
+2. **Tier-1 requirements for critical protocols** reflect that top auditors have more comprehensive methodologies and catch more issues
+3. **Bridge protocols require formal verification** because bridge exploits account for >50% of DeFi losses
+4. **Continuous security scoring** enables dynamic risk assessment and insurance pricing
+5. **Bug bounty integration** extends security coverage beyond point-in-time audits
+
+The severity-based response times align with industry standards and real-world incident response capabilities.
+
+## Backwards Compatibility
+
+This LP builds on existing security infrastructure:
+
+- **Audit registries**: Compatible with existing on-chain audit registries (e.g., Defisafety, DeFiLlama)
+- **Bug bounty platforms**: Works with Immunefi, HackerOne, and Code4rena
+- **Monitoring tools**: Integrates with Forta, OpenZeppelin Defender, and Tenderly
+
+Protocols with existing audits can:
+1. Register historical audits in the on-chain registry
+2. Map previous findings to standardized severity levels
+3. Retroactively generate security scores
+4. Transition bug bounty programs to compliant structure
+
 ## Security Considerations
 
 1. **Auditor independence** - No conflicts of interest

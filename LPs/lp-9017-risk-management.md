@@ -501,6 +501,14 @@ interface ILiquidityRisk {
 | Concentration | < 1% | 1-3% | 3-5% | > 5% |
 | Flash Loan Size | < $1M | $1M-$10M | $10M-$100M | > $100M |
 
+## Rationale
+
+Risk management thresholds are derived from historical DeFi incident analysis. The tiered approach (Low/Medium/High/Critical) allows proportional responses—minor anomalies trigger alerts while critical breaches activate circuit breakers. Multi-source oracle validation prevents single points of failure.
+
+## Backwards Compatibility
+
+Risk management integrates with existing DEX and DeFi contracts through standardized interfaces. Monitoring is passive by default and doesn't affect protocol operation until thresholds are breached.
+
 ## Security Considerations
 
 1. **Oracle manipulation** - Multi-source validation

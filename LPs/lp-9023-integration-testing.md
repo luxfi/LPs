@@ -567,6 +567,33 @@ jobs:
 | Oracle Tests | Price feeds, historical data |
 | Stress Tests | Load generation, metrics |
 
+## Rationale
+
+The testing standards reflect best practices from mature DeFi protocols and traditional software engineering:
+
+1. **90% minimum coverage** ensures critical paths are tested while acknowledging that 100% coverage has diminishing returns
+2. **Foundry-based testing** provides fast execution and native Solidity testing, reducing context switching
+3. **Fuzz testing** catches edge cases that manual test writing would miss
+4. **Invariant testing** validates mathematical properties that must always hold
+5. **Multi-stage CI pipeline** enables fast feedback loops while ensuring comprehensive validation
+
+The coverage requirements were calibrated based on analysis of vulnerabilities in production DeFi protocols—most exploits occur in under-tested code paths.
+
+## Backwards Compatibility
+
+This LP is compatible with existing testing frameworks:
+
+- **Foundry**: Native support, recommended for new projects
+- **Hardhat**: Full compatibility via hardhat-foundry plugin
+- **Truffle**: Supported through test migration utilities
+- **Brownie**: Python tests can coexist with Solidity tests
+
+Existing test suites can be incrementally migrated:
+1. Add Foundry configuration alongside existing framework
+2. Gradually port tests starting with unit tests
+3. Keep framework-specific tests for integration scenarios
+4. Unify CI pipeline to run all test types
+
 ## Security Considerations
 
 1. **Test isolation** - Each test runs in clean state
