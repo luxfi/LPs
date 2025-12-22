@@ -576,6 +576,31 @@ const LP_TOPICS: CategoryMeta[] = [
 // Keep the old LP_CATEGORIES for backward compatibility (number-range only)
 const LP_CATEGORIES: CategoryMeta[] = LP_TOPICS.filter(t => t.range !== undefined);
 
+// Category aliases for backward compatibility and common alternative names
+const CATEGORY_ALIASES: Record<string, string> = {
+  'lrc': 'tokens',           // LRC token standards → tokens category
+  'erc': 'tokens',           // ERC compatibility
+  'lrc-20': 'tokens',
+  'lrc-721': 'tokens',
+  'lrc-1155': 'tokens',
+  'nft': 'tokens',
+  'fungible': 'tokens',
+  'dao': 'governance',       // DAO → governance category
+  'esg': 'governance',       // ESG → governance category
+  'voting': 'governance',
+  'zk': 'zkp',               // ZK → ZKP category
+  'zero-knowledge': 'zkp',
+  'quantum': 'pqc',          // Quantum → PQC category
+  'post-quantum': 'pqc',
+  'mev': 'privacy',          // MEV → privacy category
+  'tss': 'threshold',        // TSS → threshold category
+  'frost': 'threshold',
+  'cggmp': 'threshold',
+  'teleport': 'bridge',      // Teleport → bridge category
+  'warp': 'interop',         // Warp → interop category
+  'icm': 'interop',
+};
+
 function getAllLPFiles(): string[] {
   try {
     const files = fs.readdirSync(LPS_DIR);
@@ -950,14 +975,17 @@ export const source = {
   // Get topic/category by slug (checks both topics and legacy categories)
   // DEDUPLICATED: Each LP appears in exactly ONE category based on priority
   // ORDERING: Within each category, research-tagged LPs appear at the end
+  // Supports aliases: 'lrc' → 'tokens', 'dao' → 'governance', etc.
   getCategoryBySlug(slug: string): LPCategory | undefined {
-    const topic = LP_TOPICS.find(t => t.slug === slug);
+    // Resolve alias to canonical slug
+    const canonicalSlug = CATEGORY_ALIASES[slug.toLowerCase()] || slug;
+    const topic = LP_TOPICS.find(t => t.slug === canonicalSlug);
     if (!topic) return undefined;
 
     const allPages = this.getAllPages();
 
     // Filter LPs where this category is their PRIMARY category
-    const lps = allPages.filter(page => getPrimaryCategory(page) === slug);
+    const lps = allPages.filter(page => getPrimaryCategory(page) === canonicalSlug);
 
     // Sort: non-research LPs first (by number), then research LPs (by number)
     sortLPsWithResearchLast(lps);
@@ -974,9 +1002,11 @@ export const source = {
     return LP_TOPICS.find(t => t.name.toLowerCase() === name.toLowerCase());
   },
 
-  // Get all topic/category slugs for static params
+  // Get all topic/category slugs for static params (includes aliases)
   getAllCategorySlugs(): string[] {
-    return LP_TOPICS.map(t => t.slug);
+    const topicSlugs = LP_TOPICS.map(t => t.slug);
+    const aliasSlugs = Object.keys(CATEGORY_ALIASES);
+    return [...topicSlugs, ...aliasSlugs];
   },
 
   getAdjacentCategories(slug: string): { prev: LPCategory | null; next: LPCategory | null } {
