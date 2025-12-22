@@ -9,7 +9,7 @@ status: Draft
 type: Meta
 created: 2025-12-17
 requires: [800]
-order: 50
+order: 750
 ---
 
 # LP-750: Lux Vision Fund ESG Investment Framework

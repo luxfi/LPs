@@ -9,7 +9,7 @@ status: Draft
 type: Meta
 created: 2025-12-17
 requires: [750, 800]
-order: 51
+order: 751
 ---
 
 # LP-751: Environmental Integrity Investment Policy

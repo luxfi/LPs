@@ -6,7 +6,7 @@ author: Lux Core Team
 status: Final
 type: Meta
 created: 2025-12-21
-tags: [learning-path, investor, institutional, esg, governance]
+tags: [learning-path, investor, institutional, esg]
 order: 28
 tier: core
 ---
@@ -21,7 +21,7 @@ This path provides capital deployment understanding without deep technical requi
 
 ## Motivation
 
-Informed investment requires understanding tokenomics, governance, and ecosystem dynamics. This path provides the analytical framework for evaluating opportunities.
+Informed investment requires understanding tokenomics, and ecosystem dynamics. This path provides the analytical framework for evaluating opportunities.
 
 ## Audience
 

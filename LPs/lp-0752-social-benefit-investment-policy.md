@@ -9,7 +9,7 @@ status: Draft
 type: Meta
 created: 2025-12-17
 requires: [750, 800]
-order: 52
+order: 752
 ---
 
 # LP-752: Social Benefit Investment Policy

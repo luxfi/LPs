@@ -1,7 +1,7 @@
 ---
 lp: 801
 title: Carbon Accounting Methodology
-tags: [sustainability, carbon, emissions, ghg-protocol]
+tags: [esg, sustainability, carbon, emissions, ghg-protocol]
 description: Methodology for measuring and reporting Lux Network's greenhouse gas emissions.
 author: Lux Network Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
@@ -9,7 +9,7 @@ status: Draft
 type: Meta
 created: 2025-12-17
 requires: [800]
-order: 1
+order: 801
 ---
 
 # LP-801: Carbon Accounting Methodology

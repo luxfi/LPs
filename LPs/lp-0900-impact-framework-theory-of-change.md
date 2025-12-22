@@ -1,7 +1,7 @@
 ---
 lp: 900
 title: Impact Framework & Theory of Change
-tags: [impact, social, governance, stakeholders]
+tags: [esg, impact, social, governance, stakeholders]
 description: Foundational framework for measuring and reporting Lux Network's societal impact.
 author: Lux Network Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
@@ -9,7 +9,7 @@ status: Draft
 type: Meta
 created: 2025-12-17
 requires: [800]
-order: 0
+order: 900
 ---
 
 # LP-900: Impact Framework & Theory of Change
