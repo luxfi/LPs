@@ -7,6 +7,8 @@ status: Final
 type: Meta
 created: 2025-12-21
 tags: [core, security, architecture, supply-chain, dependencies]
+order: 40
+tier: core
 ---
 
 # LP-0004: Supply Chain Control and Fork Philosophy

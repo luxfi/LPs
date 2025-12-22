@@ -7,6 +7,8 @@ status: Final
 type: Meta
 created: 2025-12-21
 tags: [learning-path, investor, institutional, esg, governance]
+order: 180
+tier: core
 ---
 
 # LP-0018: Learning Path - Investor & Institutional

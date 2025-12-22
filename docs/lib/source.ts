@@ -17,6 +17,10 @@ export interface LPMetadata {
   requires?: string | number | number[];
   related?: number[]; // Cross-links to related LPs
   tags?: string[];
+  // Display ordering fields (LP number is canonical ID, order is display position)
+  order?: number;   // Display order (spaced by 10s for insertability, e.g., 10, 20, 30...)
+  tier?: string;    // Optional grouping: 'core' | 'chain' | 'product' | 'research'
+  track?: string;   // Optional learning track: 'consensus' | 'crypto' | 'defi' | etc.
   [key: string]: any;
 }
 
@@ -637,6 +641,15 @@ function getLPNumber(page: LPPage): number {
   return 9999;
 }
 
+// Get display order for sorting: uses explicit 'order' field if present,
+// otherwise falls back to lp * 10 (preserves existing order as baseline)
+function getLPOrder(page: LPPage): number {
+  const order = page.data.frontmatter.order;
+  if (typeof order === 'number') return order;
+  // Fallback: multiply LP number by 10 for default spacing
+  return getLPNumber(page) * 10;
+}
+
 // Tags that indicate a research/experimental LP (should sort to end of category)
 const RESEARCH_TAGS = ['research', 'paper', 'academic', 'experimental', 'theory', 'index'];
 
@@ -645,7 +658,8 @@ function isResearchLP(page: LPPage): boolean {
   return RESEARCH_TAGS.some(rt => tags.includes(rt));
 }
 
-// Sort LPs: non-research first (by number), then research (by number)
+// Sort LPs: non-research first (by order), then research (by order)
+// Uses 'order' field if present, otherwise falls back to lp * 10
 function sortLPsWithResearchLast(lps: LPPage[]): void {
   lps.sort((a, b) => {
     const aIsResearch = isResearchLP(a);
@@ -653,7 +667,7 @@ function sortLPsWithResearchLast(lps: LPPage[]): void {
     if (aIsResearch !== bIsResearch) {
       return aIsResearch ? 1 : -1; // Research goes to end
     }
-    return getLPNumber(a) - getLPNumber(b); // Otherwise sort by number
+    return getLPOrder(a) - getLPOrder(b); // Sort by display order
   });
 }
 
@@ -747,7 +761,7 @@ export const source = {
     return files
       .map(readLPFile)
       .filter((page): page is LPPage => page !== null)
-      .sort((a, b) => getLPNumber(a) - getLPNumber(b));
+      .sort((a, b) => getLPOrder(a) - getLPOrder(b));
   },
 
   getPagesByStatus(status: string): LPPage[] {

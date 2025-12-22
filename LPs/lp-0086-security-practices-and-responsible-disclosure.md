@@ -7,6 +7,8 @@ status: Final
 type: Meta
 created: 2025-12-21
 tags: [security, disclosure, bug-bounty, cve]
+order: 860
+tier: core
 ---
 
 # LP-0086: Security Practices and Responsible Disclosure
