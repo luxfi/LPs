@@ -4,7 +4,7 @@ title: LRC-1363 Payable Token
 description: Token with transferAndCall for single-transaction token payments
 author: Lux Core Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
-status: Draft
+status: Final
 type: Standards Track
 category: LRC
 created: 2025-01-23

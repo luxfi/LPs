@@ -4,7 +4,7 @@ title: LRC-5528 Refundable Token
 description: Tokens with built-in escrow and refund mechanics for reversible payments
 author: Lux Core Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
-status: Draft
+status: Final
 type: Standards Track
 category: LRC
 created: 2025-01-23

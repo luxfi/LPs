@@ -4,7 +4,7 @@ title: LRC-5169 Client Script URI
 description: Standard for associating executable scripts with smart contracts
 author: Lux Core Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
-status: Draft
+status: Final
 type: Informational
 category: LRC
 created: 2025-01-23

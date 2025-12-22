@@ -4,7 +4,7 @@ title: x402 Payment Protocol
 description: HTTP 402 Payment Required standard for AI-native internet payments
 author: Lux Core Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
-status: Draft
+status: Final
 type: Standards Track
 category: LRC
 created: 2025-01-23

@@ -4,7 +4,7 @@ title: Safe Multisig Standard
 tags: [wallet, multisig, security, custody]
 description: Safe (formerly Gnosis Safe) multisig wallet integration for institutional-grade custody on Lux Network.
 author: Lux Network Team (@luxfi)
-status: Draft
+status: Final
 type: Standards Track
 category: LRC
 created: 2025-12-14
