@@ -3,7 +3,7 @@ lp: 10009
 title: Learning Path - Researcher
 description: Academic research, experimental protocols, and frontier exploration
 author: Lux Core Team
-status: Research
+status: Draft
 type: Meta
 created: 2025-12-21
 tags: [learning-path, research, academic, experimental]
@@ -127,7 +127,7 @@ To add a research LP:
 
 1. Identify production LP it relates to
 2. Add 10000 to get research LP number
-3. Use `status: Research` or `status: Draft`
+3. Use `status: Draft` or `status: Draft`
 4. Reference production LPs in motivation
 
 ---

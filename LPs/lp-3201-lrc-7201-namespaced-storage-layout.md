@@ -142,6 +142,10 @@ struct MyStorage {
 - Struct-based access is type-safe
 - NatSpec annotation aids tooling
 
+## Backwards Compatibility
+
+This standard is fully backwards compatible with existing contracts and infrastructure. The standard is additive and does not modify existing functionality.
+
 ## Security Considerations
 
 - Namespace uniqueness critical

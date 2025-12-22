@@ -295,6 +295,10 @@ Site → Delivers content
 - Facilitators abstract blockchain complexity
 - Compatible with existing HTTP infrastructure
 
+## Backwards Compatibility
+
+The x402 protocol is designed to be backwards compatible with existing HTTP infrastructure. Services not implementing x402 continue to function normally. The protocol leverages the previously unused HTTP 402 status code and standard HTTP headers.
+
 ## Security Considerations
 
 - Authorization time bounds prevent replay

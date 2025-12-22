@@ -249,6 +249,10 @@ escrowId = token.escrowTransfer(service, monthlyFee, 14 days);
 - Dispute mechanism for edge cases
 - Partial refunds for split resolutions
 
+## Backwards Compatibility
+
+This standard is fully backwards compatible with existing contracts and infrastructure. The standard is additive and does not modify existing functionality.
+
 ## Security Considerations
 
 - Escrow funds locked in contract

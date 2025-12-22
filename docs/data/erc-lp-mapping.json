@@ -1,0 +1,358 @@
+{
+  "metadata": {
+    "description": "ERC/EIP to LP (Lux Proposal) mapping index",
+    "version": "1.0.0",
+    "lastUpdated": "2025-12-22",
+    "totalMappings": 78
+  },
+  "ercToLp": {
+    "ERC-20": {
+      "lp": "LP-3020",
+      "lrc": "LRC-20",
+      "title": "Fungible Token Standard",
+      "path": "/docs/lp-3020-lrc-20-fungible-token-standard/",
+      "status": "Final",
+      "extensions": [
+        {"lp": "LP-3021", "title": "Burnable Extension", "path": "/docs/lp-3021-lrc-20-burnable-extension/"},
+        {"lp": "LP-3022", "title": "Mintable Extension", "path": "/docs/lp-3022-lrc-20-mintable-extension/"},
+        {"lp": "LP-3023", "title": "Bridgable Extension", "path": "/docs/lp-3023-lrc-20-bridgable-extension/"},
+        {"lp": "LP-3025", "title": "Votes Extension", "path": "/docs/lp-3025-lrc-20-votes-extension/"}
+      ]
+    },
+    "ERC-165": {
+      "lp": "LP-3165",
+      "lrc": "LRC-165",
+      "title": "Interface Detection",
+      "path": "/docs/lp-3165-lrc-165-interface-detection/",
+      "status": "Final"
+    },
+    "ERC-173": {
+      "lp": "LP-3173",
+      "lrc": "LRC-173",
+      "title": "Contract Ownership",
+      "path": "/docs/lp-3173-lrc-173-contract-ownership/",
+      "status": "Final"
+    },
+    "ERC-721": {
+      "lp": "LP-3721",
+      "lrc": "LRC-721",
+      "title": "Non-Fungible Token Standard",
+      "path": "/docs/lp-3721-lrc-721-non-fungible-token-standard/",
+      "status": "Final",
+      "extensions": [
+        {"lp": "LP-3722", "title": "Burnable Extension", "path": "/docs/lp-3722-lrc-721-burnable-extension/"},
+        {"lp": "LP-3723", "title": "Enumerable Extension", "path": "/docs/lp-3723-lrc-721-enumerable-extension/"}
+      ]
+    },
+    "ERC-777": {
+      "lp": "LP-3777",
+      "lrc": "LRC-777",
+      "title": "Advanced Token Standard",
+      "path": "/docs/lp-3777-lrc-777-advanced-token/",
+      "status": "Final"
+    },
+    "ERC-1155": {
+      "lp": "LP-3155",
+      "lrc": "LRC-1155",
+      "title": "Multi-Token Standard",
+      "path": "/docs/lp-3155-lrc-1155-multi-token-standard/",
+      "status": "Final",
+      "extensions": [
+        {"lp": "LP-3157", "title": "Supply Extension", "path": "/docs/lp-3157-lrc-1155-supply-extension/"}
+      ]
+    },
+    "ERC-1271": {
+      "lp": "LP-3271",
+      "lrc": "LRC-1271",
+      "title": "Signature Validation",
+      "path": "/docs/lp-3271-lrc-1271-signature-validation/",
+      "status": "Final"
+    },
+    "ERC-1363": {
+      "lp": "LP-3363",
+      "lrc": "LRC-1363",
+      "title": "Payable Token",
+      "path": "/docs/lp-3363-lrc-1363-payable-token/",
+      "status": "Final"
+    },
+    "ERC-1967": {
+      "lp": "LP-3967",
+      "lrc": "LRC-1967",
+      "title": "Proxy Storage Slots",
+      "path": "/docs/lp-3967-lrc-1967-proxy-storage-slots/",
+      "status": "Final"
+    },
+    "ERC-2612": {
+      "lp": "LP-3612",
+      "lrc": "LRC-2612",
+      "title": "Permit Extension",
+      "path": "/docs/lp-3612-lrc-2612-permit-extension/",
+      "status": "Final"
+    },
+    "ERC-2981": {
+      "lp": "LP-3981",
+      "lrc": "LRC-2981",
+      "title": "NFT Royalties",
+      "path": "/docs/lp-3981-lrc-2981-nft-royalties/",
+      "status": "Final"
+    },
+    "ERC-3009": {
+      "lp": "LP-3009",
+      "lrc": "LRC-3009",
+      "title": "Transfer With Authorization",
+      "path": "/docs/lp-3009-lrc-3009-transfer-with-authorization/",
+      "status": "Final"
+    },
+    "ERC-3156": {
+      "lp": "LP-3156",
+      "lrc": "LRC-3156",
+      "title": "Flash Loans",
+      "path": "/docs/lp-3156-lrc-3156-flash-loans/",
+      "status": "Draft"
+    },
+    "ERC-3525": {
+      "lp": "LP-3525",
+      "lrc": "LRC-3525",
+      "title": "Semi-Fungible Token",
+      "path": "/docs/lp-3525-lrc-3525-semi-fungible-token/",
+      "status": "Final"
+    },
+    "ERC-4337": {
+      "lp": "LP-3337",
+      "lrc": "LRC-4337",
+      "title": "Account Abstraction",
+      "path": "/docs/lp-3337-lrc-4337-account-abstraction/",
+      "status": "Final",
+      "extensions": [
+        {"lp": "LP-3338", "title": "Paymaster Standard", "path": "/docs/lp-3338-paymaster-standard/"}
+      ]
+    },
+    "ERC-4626": {
+      "lp": "LP-3626",
+      "lrc": "LRC-4626",
+      "title": "Tokenized Vault",
+      "path": "/docs/lp-3626-lrc-4626-tokenized-vault/",
+      "status": "Final",
+      "extensions": [
+        {"lp": "LP-3627", "title": "Multi-Vault Extensions", "path": "/docs/lp-3627-lrc-4626-multi-vault-extensions/"}
+      ]
+    },
+    "ERC-4675": {
+      "lp": "LP-3675",
+      "lrc": "LRC-4675",
+      "title": "Multi-Fractional NFT",
+      "path": "/docs/lp-3675-lrc-4675-multi-fractional-nft/",
+      "status": "Final"
+    },
+    "ERC-5169": {
+      "lp": "LP-3169",
+      "lrc": "LRC-5169",
+      "title": "Client Script URI",
+      "path": "/docs/lp-3169-lrc-5169-client-script-uri/",
+      "status": "Final"
+    },
+    "ERC-5192": {
+      "lp": "LP-3192",
+      "lrc": "LRC-5192",
+      "title": "Soulbound Tokens",
+      "path": "/docs/lp-3192-lrc-5192-soulbound-tokens/",
+      "status": "Final"
+    },
+    "ERC-5528": {
+      "lp": "LP-3528",
+      "lrc": "LRC-5528",
+      "title": "Refundable Token",
+      "path": "/docs/lp-3528-lrc-5528-refundable-token/",
+      "status": "Final"
+    },
+    "ERC-6551": {
+      "lp": "LP-3551",
+      "lrc": "LRC-6551",
+      "title": "Token Bound Accounts",
+      "path": "/docs/lp-3551-lrc-6551-token-bound-accounts/",
+      "status": "Final"
+    },
+    "ERC-6909": {
+      "lp": "LP-3909",
+      "lrc": "LRC-6909",
+      "title": "Minimal Multi-Token",
+      "path": "/docs/lp-3909-lrc-6909-minimal-multi-token/",
+      "status": "Final"
+    },
+    "ERC-7201": {
+      "lp": "LP-3201",
+      "lrc": "LRC-7201",
+      "title": "Namespaced Storage Layout",
+      "path": "/docs/lp-3201-lrc-7201-namespaced-storage-layout/",
+      "status": "Final"
+    },
+    "ERC-7572": {
+      "lp": "LP-3572",
+      "lrc": "LRC-7572",
+      "title": "Contract-level Metadata",
+      "path": "/docs/lp-3572-lrc-7572-contract-level-metadata/",
+      "status": "Final"
+    },
+    "ERC-7579": {
+      "lp": "LP-3579",
+      "lrc": "LRC-7579",
+      "title": "Modular Smart Accounts",
+      "path": "/docs/lp-3579-lrc-7579-modular-smart-accounts/",
+      "status": "Final"
+    }
+  },
+  "eipToLp": {
+    "EIP-2935": {
+      "lp": "LP-3704",
+      "title": "Historical Block Hashes",
+      "path": "/docs/lp-3704-historical-block-hashes/",
+      "category": "Verkle/Stateless",
+      "status": "Final"
+    },
+    "EIP-4762": {
+      "lp": "LP-3703",
+      "title": "Statelessness Gas Costs",
+      "path": "/docs/lp-3703-statelessness-gas-costs/",
+      "category": "Verkle/Stateless",
+      "status": "Final"
+    },
+    "EIP-6800": {
+      "lp": "LP-3702",
+      "title": "Verkle State Transition",
+      "path": "/docs/lp-3702-verkle-state-transition/",
+      "category": "Verkle/Stateless",
+      "status": "Final"
+    },
+    "EIP-7251": {
+      "lp": "LP-3672",
+      "title": "Maximum Effective Balance Increase",
+      "path": "/docs/lp-3672-max-effective-balance/",
+      "category": "Pectra Upgrade",
+      "status": "Final"
+    },
+    "EIP-7623": {
+      "lp": "LP-3673",
+      "title": "Calldata Cost Increase",
+      "path": "/docs/lp-3673-calldata-cost-increase/",
+      "category": "Pectra Upgrade",
+      "status": "Final"
+    },
+    "EIP-7685": {
+      "lp": "LP-3671",
+      "title": "Execution Layer Requests",
+      "path": "/docs/lp-3671-execution-layer-requests/",
+      "category": "Pectra Upgrade",
+      "status": "Final"
+    },
+    "EIP-7691": {
+      "lp": "LP-3674",
+      "title": "Blob Throughput Increase",
+      "path": "/docs/lp-3674-blob-throughput-increase/",
+      "category": "Pectra Upgrade",
+      "status": "Final"
+    },
+    "EIP-7702": {
+      "lp": "LP-3670",
+      "title": "EOA Account Code",
+      "path": "/docs/lp-3670-eoa-account-code/",
+      "category": "Pectra Upgrade",
+      "status": "Final"
+    }
+  },
+  "lpToErc": {
+    "LP-3009": {"erc": "ERC-3009", "lrc": "LRC-3009"},
+    "LP-3020": {"erc": "ERC-20", "lrc": "LRC-20"},
+    "LP-3021": {"erc": "ERC-20", "lrc": "LRC-20", "type": "extension"},
+    "LP-3022": {"erc": "ERC-20", "lrc": "LRC-20", "type": "extension"},
+    "LP-3023": {"erc": "ERC-20", "lrc": "LRC-20", "type": "extension"},
+    "LP-3025": {"erc": "ERC-20", "lrc": "LRC-20", "type": "extension"},
+    "LP-3155": {"erc": "ERC-1155", "lrc": "LRC-1155"},
+    "LP-3156": {"erc": "ERC-3156", "lrc": "LRC-3156"},
+    "LP-3157": {"erc": "ERC-1155", "lrc": "LRC-1155", "type": "extension"},
+    "LP-3165": {"erc": "ERC-165", "lrc": "LRC-165"},
+    "LP-3169": {"erc": "ERC-5169", "lrc": "LRC-5169"},
+    "LP-3173": {"erc": "ERC-173", "lrc": "LRC-173"},
+    "LP-3192": {"erc": "ERC-5192", "lrc": "LRC-5192"},
+    "LP-3201": {"erc": "ERC-7201", "lrc": "LRC-7201"},
+    "LP-3271": {"erc": "ERC-1271", "lrc": "LRC-1271"},
+    "LP-3337": {"erc": "ERC-4337", "lrc": "LRC-4337"},
+    "LP-3338": {"erc": "ERC-4337", "lrc": "LRC-4337", "type": "extension"},
+    "LP-3363": {"erc": "ERC-1363", "lrc": "LRC-1363"},
+    "LP-3525": {"erc": "ERC-3525", "lrc": "LRC-3525"},
+    "LP-3528": {"erc": "ERC-5528", "lrc": "LRC-5528"},
+    "LP-3551": {"erc": "ERC-6551", "lrc": "LRC-6551"},
+    "LP-3572": {"erc": "ERC-7572", "lrc": "LRC-7572"},
+    "LP-3579": {"erc": "ERC-7579", "lrc": "LRC-7579"},
+    "LP-3612": {"erc": "ERC-2612", "lrc": "LRC-2612"},
+    "LP-3626": {"erc": "ERC-4626", "lrc": "LRC-4626"},
+    "LP-3627": {"erc": "ERC-4626", "lrc": "LRC-4626", "type": "extension"},
+    "LP-3670": {"eip": "EIP-7702"},
+    "LP-3671": {"eip": "EIP-7685"},
+    "LP-3672": {"eip": "EIP-7251"},
+    "LP-3673": {"eip": "EIP-7623"},
+    "LP-3674": {"eip": "EIP-7691"},
+    "LP-3675": {"erc": "ERC-4675", "lrc": "LRC-4675"},
+    "LP-3702": {"eip": "EIP-6800"},
+    "LP-3703": {"eip": "EIP-4762"},
+    "LP-3704": {"eip": "EIP-2935"},
+    "LP-3721": {"erc": "ERC-721", "lrc": "LRC-721"},
+    "LP-3722": {"erc": "ERC-721", "lrc": "LRC-721", "type": "extension"},
+    "LP-3723": {"erc": "ERC-721", "lrc": "LRC-721", "type": "extension"},
+    "LP-3777": {"erc": "ERC-777", "lrc": "LRC-777"},
+    "LP-3909": {"erc": "ERC-6909", "lrc": "LRC-6909"},
+    "LP-3967": {"erc": "ERC-1967", "lrc": "LRC-1967"},
+    "LP-3981": {"erc": "ERC-2981", "lrc": "LRC-2981"}
+  },
+  "categories": {
+    "tokenStandards": {
+      "fungible": ["LP-3020", "LP-3021", "LP-3022", "LP-3023", "LP-3025", "LP-3777"],
+      "nonFungible": ["LP-3721", "LP-3722", "LP-3723", "LP-3981"],
+      "multiToken": ["LP-3155", "LP-3157", "LP-3909"],
+      "semiFungible": ["LP-3525", "LP-3675"],
+      "soulbound": ["LP-3192"]
+    },
+    "accountAbstraction": ["LP-3337", "LP-3338", "LP-3579"],
+    "defiPrimitives": ["LP-3626", "LP-3627", "LP-3156", "LP-3363"],
+    "infrastructure": ["LP-3165", "LP-3173", "LP-3271", "LP-3967", "LP-3201"],
+    "gaslessTransactions": ["LP-3009", "LP-3612", "LP-3028"],
+    "verkleStateless": ["LP-3701", "LP-3702", "LP-3703", "LP-3704"],
+    "pectraUpgrade": ["LP-3670", "LP-3671", "LP-3672", "LP-3673", "LP-3674"],
+    "tokenBound": ["LP-3551"],
+    "metadata": ["LP-3169", "LP-3572"]
+  },
+  "quickLookup": {
+    "20": "LP-3020",
+    "165": "LP-3165",
+    "173": "LP-3173",
+    "721": "LP-3721",
+    "777": "LP-3777",
+    "1155": "LP-3155",
+    "1271": "LP-3271",
+    "1363": "LP-3363",
+    "1967": "LP-3967",
+    "2612": "LP-3612",
+    "2935": "LP-3704",
+    "2981": "LP-3981",
+    "3009": "LP-3009",
+    "3156": "LP-3156",
+    "3525": "LP-3525",
+    "4337": "LP-3337",
+    "4626": "LP-3626",
+    "4675": "LP-3675",
+    "4762": "LP-3703",
+    "5169": "LP-3169",
+    "5192": "LP-3192",
+    "5528": "LP-3528",
+    "6551": "LP-3551",
+    "6800": "LP-3702",
+    "6909": "LP-3909",
+    "7201": "LP-3201",
+    "7251": "LP-3672",
+    "7572": "LP-3572",
+    "7579": "LP-3579",
+    "7623": "LP-3673",
+    "7685": "LP-3671",
+    "7691": "LP-3674",
+    "7702": "LP-3670"
+  }
+}

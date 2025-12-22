@@ -36,6 +36,16 @@ jobs:
         uses: pnpm/action-setup@v4
         with:
           version: 9
+      - name: Install dependencies
+        working-directory: ./docs
+        run: pnpm install
       - name: Build web bundle
         run: make web-build
-
+      - name: Install Playwright browsers
+        working-directory: ./docs
+        run: pnpm exec playwright install --with-deps chromium
+      - name: Run Playwright tests
+        working-directory: ./docs
+        run: pnpm test
+        env:
+          CI: true

@@ -219,6 +219,10 @@ fractions.fractionalize(
 - Per-token metadata for clear identification
 - Buyout mechanism for liquidity events
 
+## Backwards Compatibility
+
+This standard is fully backwards compatible with existing contracts and infrastructure. The standard is additive and does not modify existing functionality.
+
 ## Security Considerations
 
 - NFT custody during fractionalization

@@ -207,6 +207,10 @@ function batchTransferWithAuth(
 - Time bounds prevent stale authorizations
 - Recipient-initiated variant prevents frontrunning
 
+## Backwards Compatibility
+
+This standard is fully backwards compatible with existing ERC-20 tokens. The authorization mechanism is additive and does not modify core transfer behavior. Tokens can implement this standard alongside existing transfer functions.
+
 ## Security Considerations
 
 - Replay protection via nonce tracking

@@ -186,6 +186,10 @@ contract OptionsToken is LRC3525Token {
 - Compatible with LRC-721 for NFT infrastructure
 - Value transfers enable fractional trades
 
+## Backwards Compatibility
+
+This standard is fully backwards compatible with existing contracts and infrastructure. The standard is additive and does not modify existing functionality.
+
 ## Security Considerations
 
 - Slot validation prevents cross-class transfers
