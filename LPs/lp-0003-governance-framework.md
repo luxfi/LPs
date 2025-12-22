@@ -1,5 +1,5 @@
 ---
-lp: 2
+lp: 3
 title: LP Governance Framework
 description: How Lux Proposals work - submission, review, and activation process
 author: Lux Core Team
@@ -11,7 +11,7 @@ order: 3
 tier: core
 ---
 
-# LP-0002: LP Governance Framework
+# LP-0003: LP Governance Framework
 
 ## Abstract
 

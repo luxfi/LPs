@@ -1,23 +1,23 @@
 ---
 lp: 4
-title: Open Source Philosophy
-description: Lux's commitment to open source development, forking strategy, and software sovereignty
+title: Philosophy
+description: Lux Network's core principles, values, and foundational beliefs
 author: Lux Core Team
 status: Final
 type: Meta
 created: 2025-12-21
-tags: [network, core, philosophy, open-source, sovereignty, principles]
+tags: [network, core, philosophy, principles, values]
 order: 4
 tier: core
 ---
 
-# LP-0004: Open Source Philosophy
+# LP-0004: Philosophy
 
 ## Abstract
 
 Lux Network is built on a foundation of open source principles and software sovereignty. This document articulates our philosophy of strategic forking, explains why we maintain complete control over critical dependencies, and establishes the guiding principles for our open source strategy.
 
-For implementation details, metrics, and verification procedures, see [LP-5: Supply Chain Control](./lp-0005-supply-chain-control.md).
+For implementation details, metrics, and verification procedures, see [LP-7: Supply Chain Control](./lp-0007-supply-chain-control.md).
 
 ---
 
