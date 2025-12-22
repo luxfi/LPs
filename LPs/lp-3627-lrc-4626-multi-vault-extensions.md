@@ -1,22 +1,22 @@
 ---
-lp: 3052
-title: LRC-1967 Proxy Storage Slots
-description: LRC-1967 Proxy Storage Slots for Lux Network
+lp: 3627
+title: LRC-4626 Multi-Vault Extensions
+description: LRC-4626 Multi-Vault Extensions for Lux Network
 author: Lux Network Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
 status: Draft
 type: Standards Track
 category: LRC
 created: 2025-01-23
-tags: [lrc, token-standard, evm, proxy]
-order: 3052
+tags: [lrc, token-standard, defi, vault]
+order: 3627
 ---
 
 ## Abstract
-LRC-1967 (mirrors ERC-1967) standardizes proxy storage slots for upgradeable contracts.
+Extensions for multi-asset and multi-strategy vault implementations.
 
 ## Specification
-Defines standard storage slots for implementation, admin, and beacon addresses.
+Extends LRC-4626 with support for multiple underlying assets and yield strategies.
 
 
 ## Motivation

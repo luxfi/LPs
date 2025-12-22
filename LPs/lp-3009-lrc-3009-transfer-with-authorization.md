@@ -1,5 +1,5 @@
 ---
-lp: 3027
+lp: 3009
 title: LRC-3009 Transfer With Authorization
 description: Gasless token transfers via cryptographic signatures (meta-transactions)
 author: Lux Core Team (@luxfi)
@@ -8,12 +8,12 @@ status: Draft
 type: Standards Track
 category: LRC
 created: 2025-01-23
-requires: 3020, 3024
+requires: 3020, 3612
 tags: [lrc, token-standard, meta-tx, gasless]
-order: 27
+order: 3009
 ---
 
-# LP-3027: LRC-3009 Transfer With Authorization
+# LP-3009: LRC-3009 Transfer With Authorization
 
 ## Abstract
 
@@ -218,7 +218,7 @@ function batchTransferWithAuth(
 
 - [ERC-3009: Transfer With Authorization](https://eips.ethereum.org/EIPS/eip-3009)
 - [x402 Payment Protocol](https://x402.org)
-- [LP-3024: LRC-2612 Permit](./lp-3024-lrc-2612-permit-extension.md)
+- [LP-3612: LRC-2612 Permit](./lp-3612-lrc-2612-permit-extension.md)
 
 ## Copyright
 

@@ -1,22 +1,22 @@
 ---
-lp: 3220
-title: LRC-5192 Soulbound Tokens
-description: LRC-5192 Soulbound Tokens for Lux Network
+lp: 3777
+title: LRC-777 Advanced Token
+description: LRC-777 Advanced Token for Lux Network
 author: Lux Network Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
 status: Draft
 type: Standards Track
 category: LRC
 created: 2025-01-23
-tags: [lrc, token-standard, nft, soulbound]
-order: 3220
+tags: [lrc, token-standard, evm]
+order: 3777
 ---
 
 ## Abstract
-LRC-5192 (mirrors ERC-5192) defines minimal soulbound (non-transferable) NFTs.
+LRC-777 (mirrors ERC-777) provides advanced token functionality with hooks.
 
 ## Specification
-Adds `locked(uint256 tokenId)` to indicate non-transferability.
+Token standard with send/receive hooks and operator permissions.
 
 
 ## Motivation

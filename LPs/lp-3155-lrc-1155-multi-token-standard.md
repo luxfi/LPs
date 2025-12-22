@@ -1,5 +1,5 @@
 ---
-lp: 3100
+lp: 3155
 title: LRC-1155 Multi-Token Standard
 description: Another special number, corresponding to Ethereum's ERC-1155 multi-token standard.
 author: Lux Network Team (@luxfi)
@@ -13,7 +13,7 @@ activation:
   flag: lp1155-multi-token-standard
   hfName: ""
   activationHeight: "0"
-order: 2155
+order: 3155
 ---
 
 > **See also**: [LP-12: C-Chain (Contract Chain) Specification](/docs/lp-12/), [LP-20: LRC-20 Fungible Token Standard](/docs/lp-20/), [LP-721: LRC-721 Non-Fungible Token Standard](/docs/lp-721/)

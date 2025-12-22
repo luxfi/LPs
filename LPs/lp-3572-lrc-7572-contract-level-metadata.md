@@ -1,5 +1,5 @@
 ---
-lp: 3055
+lp: 3572
 title: LRC-7572 Contract-level Metadata
 description: Standard for contract-level metadata separate from token metadata
 author: Lux Core Team (@luxfi)
@@ -9,10 +9,10 @@ type: Informational
 category: LRC
 created: 2025-01-23
 tags: [lrc, infrastructure, research]
-order: 55
+order: 3572
 ---
 
-# LP-3055: LRC-7572 Contract-level Metadata
+# LP-3572: LRC-7572 Contract-level Metadata
 
 ## Abstract
 

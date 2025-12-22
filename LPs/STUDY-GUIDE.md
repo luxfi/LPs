@@ -104,9 +104,9 @@ Lux Network is organized into **eight tiers**, each serving a distinct purpose:
 |------|-----|-------|
 | 1 | Core Path | (Complete steps above) |
 | 2 | LP-3000–3099 | EVM execution & gas model |
-| 3 | LP-3100–3199 | Token standards (LRC-20/721/1155) |
-| 4 | LP-3300–3399 | DeFi: AMMs & liquidity |
-| 5 | LP-3400–3499 | DeFi: Lending, vaults, yield |
+| 3 | LP-3155–3199 | Token standards (LRC-20/721/1155) |
+| 4 | LP-3337–3399 | DeFi: AMMs & liquidity |
+| 5 | LP-3626–3499 | DeFi: Lending, vaults, yield |
 | 6 | LP-3700–3799 | Wallets & identity |
 
 **Acceleration**: LP-9300+ — precompiles (DEX, Oracle, Crypto)

@@ -1,7 +1,7 @@
 ---
-lp: 3203
-title: LRC-2981 NFT Royalties
-description: LRC-2981 NFT Royalties for Lux Network
+lp: 3723
+title: LRC-721 Enumerable Extension
+description: LRC-721 Enumerable Extension for Lux Network
 author: Lux Network Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
 status: Draft
@@ -9,14 +9,14 @@ type: Standards Track
 category: LRC
 created: 2025-01-23
 tags: [lrc, token-standard, nft]
-order: 3203
+order: 3723
 ---
 
 ## Abstract
-LRC-2981 (mirrors ERC-2981) standardizes NFT royalty information.
+LRC-721 Enumerable extension for iterating over all tokens and owner tokens.
 
 ## Specification
-Implements `royaltyInfo(tokenId, salePrice)` returning receiver and royalty amount.
+Implements `totalSupply()`, `tokenByIndex()`, and `tokenOfOwnerByIndex()`.
 
 
 ## Motivation

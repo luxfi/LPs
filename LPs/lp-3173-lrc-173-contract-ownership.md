@@ -1,22 +1,22 @@
 ---
-lp: 3150
-title: LRC-6909 Minimal Multi-Token
-description: LRC-6909 Minimal Multi-Token for Lux Network
+lp: 3173
+title: LRC-173 Contract Ownership
+description: LRC-173 Contract Ownership for Lux Network
 author: Lux Network Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
 status: Draft
 type: Standards Track
 category: LRC
 created: 2025-01-23
-tags: [lrc, token-standard]
-order: 3150
+tags: [lrc, token-standard, evm]
+order: 3173
 ---
 
 ## Abstract
-LRC-6909 (mirrors ERC-6909) provides a gas-efficient minimal multi-token interface.
+LRC-173 (mirrors ERC-173) provides standard contract ownership interface.
 
 ## Specification
-Simplified multi-token standard with reduced gas costs compared to LRC-1155.
+Implements `owner()`, `transferOwnership(address)`, and `OwnershipTransferred` event.
 
 
 ## Motivation

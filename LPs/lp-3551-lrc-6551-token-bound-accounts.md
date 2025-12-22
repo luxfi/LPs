@@ -1,22 +1,22 @@
 ---
-lp: 3051
-title: LRC-173 Contract Ownership
-description: LRC-173 Contract Ownership for Lux Network
+lp: 3551
+title: LRC-6551 Token Bound Accounts
+description: LRC-6551 Token Bound Accounts for Lux Network
 author: Lux Network Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
 status: Draft
 type: Standards Track
 category: LRC
 created: 2025-01-23
-tags: [lrc, token-standard, evm]
-order: 3051
+tags: [lrc, token-standard, nft, smart-wallet]
+order: 3551
 ---
 
 ## Abstract
-LRC-173 (mirrors ERC-173) provides standard contract ownership interface.
+LRC-6551 (mirrors ERC-6551) enables NFTs to own assets as smart contract wallets.
 
 ## Specification
-Implements `owner()`, `transferOwnership(address)`, and `OwnershipTransferred` event.
+Every NFT gets a deterministic smart contract account that can hold assets.
 
 
 ## Motivation

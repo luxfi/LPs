@@ -1,5 +1,5 @@
 ---
-lp: 3053
+lp: 3201
 title: LRC-7201 Namespaced Storage Layout
 description: Standard storage layout for upgradeable contracts avoiding slot collisions
 author: Lux Core Team (@luxfi)
@@ -8,12 +8,12 @@ status: Draft
 type: Standards Track
 category: LRC
 created: 2025-01-23
-requires: 3052
+requires: 3967
 tags: [lrc, infrastructure, proxy]
-order: 53
+order: 3201
 ---
 
-# LP-3053: LRC-7201 Namespaced Storage Layout
+# LP-3722: LRC-7201 Namespaced Storage Layout
 
 ## Abstract
 
@@ -151,7 +151,7 @@ struct MyStorage {
 ## References
 
 - [ERC-7201: Namespaced Storage Layout](https://eips.ethereum.org/EIPS/eip-7201)
-- [LP-3052: LRC-1967 Proxy Storage Slots](./lp-3052-lrc-1967-proxy-storage-slots.md)
+- [LP-3967: LRC-1967 Proxy Storage Slots](./lp-3967-lrc-1967-proxy-storage-slots.md)
 
 ## Copyright
 

@@ -1,22 +1,22 @@
 ---
-lp: 3301
-title: Paymaster Standard
-description: Paymaster Standard for Lux Network
+lp: 3626
+title: LRC-4626 Tokenized Vault
+description: LRC-4626 Tokenized Vault for Lux Network
 author: Lux Network Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
 status: Draft
 type: Standards Track
 category: LRC
 created: 2025-01-23
-tags: [lrc, account-abstraction, evm]
-order: 3301
+tags: [lrc, token-standard, defi, vault]
+order: 3626
 ---
 
 ## Abstract
-Standard interface for paymasters that sponsor gas fees for users.
+LRC-4626 (mirrors ERC-4626) standardizes tokenized yield-bearing vaults.
 
 ## Specification
-Defines paymaster interface for ERC-4337 account abstraction infrastructure.
+Defines deposit/withdraw/mint/redeem interface with share accounting for DeFi vaults.
 
 
 ## Motivation

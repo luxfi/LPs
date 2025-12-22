@@ -1,5 +1,5 @@
 ---
-lp: 3024
+lp: 3612
 title: LRC-2612 Permit Extension
 description: LRC-2612 Permit Extension for Lux Network
 author: Lux Network Team (@luxfi)
@@ -9,7 +9,7 @@ type: Standards Track
 category: LRC
 created: 2025-01-23
 tags: [lrc, token-standard, evm]
-order: 3024
+order: 3612
 ---
 
 ## Abstract
