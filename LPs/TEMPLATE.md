@@ -10,6 +10,10 @@ category: <Core, Networking, Interface, LRC> (*only required for Standards Track
 created: <date created on, in ISO 8601 (yyyy-mm-dd) format>
 requires: <LP number(s)> (*optional; remove if none)
 replaces: <LP number(s)> (*optional; remove if none)
+tags: [<tag1>, <tag2>] (*optional; used for categorization)
+order: <display order> (*optional; for sidebar sorting, spaced by 10s e.g., 10, 20, 30)
+tier: <core|chain|product|research> (*optional; grouping tier)
+track: <consensus|crypto|defi|...> (*optional; learning track)
 activation:
   flag: <lp-number-title>
   hfName: "<fork-name>"

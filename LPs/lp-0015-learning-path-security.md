@@ -7,6 +7,8 @@ status: Final
 type: Meta
 created: 2025-12-21
 tags: [learning-path, security, audit, cryptography]
+order: 150
+tier: core
 ---
 
 # LP-0015: Learning Path - Security & Auditor

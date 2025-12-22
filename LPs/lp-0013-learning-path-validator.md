@@ -7,6 +7,8 @@ status: Final
 type: Meta
 created: 2025-12-21
 tags: [learning-path, validator, infrastructure, operator]
+order: 130
+tier: core
 ---
 
 # LP-0013: Learning Path - Platform Engineer & Validator

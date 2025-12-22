@@ -7,6 +7,8 @@ status: Final
 type: Meta
 created: 2025-12-21
 tags: [learning-path, mpc, threshold, custody, t-chain]
+order: 160
+tier: core
 ---
 
 # LP-0016: Learning Path - MPC & Threshold Custody

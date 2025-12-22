@@ -7,6 +7,8 @@ status: Final
 type: Meta
 created: 2025-12-21
 tags: [learning-path, trading, dex, hft, markets]
+order: 140
+tier: core
 ---
 
 # LP-0014: Learning Path - Trading & Market Infrastructure
