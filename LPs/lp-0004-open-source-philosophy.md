@@ -6,7 +6,7 @@ author: Lux Core Team
 status: Final
 type: Meta
 created: 2025-12-21
-tags: [core, philosophy, open-source, sovereignty, principles]
+tags: [network, core, philosophy, open-source, sovereignty, principles]
 order: 3
 tier: core
 ---

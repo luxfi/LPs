@@ -1,7 +1,7 @@
 ---
 lp: 2
 title: Lux Virtual Machine and Execution Environment
-tags: [vm, evm, core]
+tags: [network, vm, evm, core]
 description: Specifies the Lux execution model, which is designed to be EVM-compatible while allowing future extensibility for new virtual machines.
 author: Lux Network Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
