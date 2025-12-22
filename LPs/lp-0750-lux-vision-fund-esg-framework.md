@@ -1,7 +1,7 @@
 ---
 lp: 750
 title: Lux Vision Fund ESG Investment Framework
-tags: [investment, esg, impact, governance]
+tags: [investment, esg, impact]
 description: Master framework for ESG-aligned investments through Lux Vision Fund.
 author: Lux Network Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions

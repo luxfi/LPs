@@ -229,7 +229,7 @@ $130+ trillion in global assets under management increasingly seeks ESG-aligned 
 | **Technology failure** | Multi-layer verification, redundancy |
 | **Regulatory change** | Conservative compliance, engagement |
 | **Market conditions** | Diversification, long-term view |
-| **Coordination failure** | Clear governance, aligned incentives |
+| **Coordination failure** | Clear aligned incentives |
 
 ## Alignment with Global Frameworks
 
