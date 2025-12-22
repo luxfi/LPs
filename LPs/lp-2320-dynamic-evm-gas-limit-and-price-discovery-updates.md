@@ -62,7 +62,7 @@ Key components:
 
 **3. Exponential Adjustment**: The exponential adjustment curve (from LP-176) provides smooth transitions while preventing rapid oscillations that could destabilize fee markets.
 
-**4. Per-Chain Configuration**: Each chain (C-Chain, subnets) can configure its own gas parameters based on specific performance requirements and use cases.
+**4. Per-Chain Configuration**: Each chain (C-Chain, chains) can configure its own gas parameters based on specific performance requirements and use cases.
 
 ### Alternatives Considered
 

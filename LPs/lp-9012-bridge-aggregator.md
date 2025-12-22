@@ -584,7 +584,7 @@ library BridgeLib {
 ├─────────────────┬──────────┬──────────┬───────────┬────────────────────┤
 │ Protocol        │ Speed    │ Security │ Cost      │ Best For           │
 ├─────────────────┼──────────┼──────────┼───────────┼────────────────────┤
-│ Lux Warp        │ ~1s      │ Native   │ Lowest    │ Lux subnet         │
+│ Lux Warp        │ ~1s      │ Native   │ Lowest    │ Lux chain         │
 │ Axelar GMP      │ ~5min    │ High     │ Medium    │ EVM chains         │
 │ LayerZero V2    │ ~2min    │ High     │ Medium    │ OFT tokens         │
 │ Wormhole CCTP   │ ~15min   │ Highest  │ Low       │ USDC transfers     │

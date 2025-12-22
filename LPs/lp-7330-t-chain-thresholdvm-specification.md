@@ -89,7 +89,7 @@ T-Chain addresses these challenges by providing:
 
 ### Chain Architecture
 
-T-Chain is a specialized Lux subnet running the ThresholdVM:
+T-Chain is a specialized Lux chain running the ThresholdVM:
 
 ```
 +-------------------------------------------------------------------------+
@@ -2540,7 +2540,7 @@ Supporting both protocols enables T-Chain to serve as universal threshold servic
 
 ## Backwards Compatibility
 
-T-Chain is a new subnet; no backwards compatibility concerns.
+T-Chain is a new chain; no backwards compatibility concerns.
 
 ### Integration with Existing Chains
 

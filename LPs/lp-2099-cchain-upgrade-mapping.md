@@ -47,7 +47,7 @@ Understanding the relationship between network upgrades, LPs, and Ethereum hard 
 
 | Upgrade | Primary LP | Related LPs | Description |
 |---------|-----------|-------------|-------------|
-| Cortina | LP-118 | - | Subnet-EVM compatibility upgrade |
+| Cortina | LP-118 | - | chain-EVM compatibility upgrade |
 | Durango | LP-2515 | LP-605 | Warp cross-chain messaging |
 | Etna | LP-2320 | LP-601 | Dynamic gas limit and price discovery |
 | Fortuna | LP-176 | LP-2320 | Dynamic EVM gas pricing mechanism |
@@ -61,7 +61,7 @@ The C-Chain header format has evolved with each upgrade phase. The header field 
 |---------------|---------------|--------------|
 | Genesis-AP3 | 16 | Core 15 + BaseFee |
 | Apricot Phase 4+ | 17-19 | + ExtDataHash, ExtDataGasUsed, BlockGasCost |
-| Durango+ | 19 | Full SubnetEVM header |
+| Durango+ | 19 | Full chainEVM header |
 
 #### Field Order (Coreth Format)
 ```
@@ -113,7 +113,7 @@ Position 18:    BlockGasCost (*big.Int, optional)
 {
   "config": {
     "chainId": 96368,
-    "subnetEVMTimestamp": 0,
+    "chainEVMTimestamp": 0,
     "durangoTimestamp": 0,
     "etnaTimestamp": 253399622400
   }
@@ -160,7 +160,7 @@ Position 18:    BlockGasCost (*big.Int, optional)
 
 #### Cortina (v1.10.0) - LP-118
 - Gas limit increased to 15M
-- Subnet-EVM compatibility improvements
+- chain-EVM compatibility improvements
 
 #### Durango (v1.11.0)
 - Lux Warp Messaging activation

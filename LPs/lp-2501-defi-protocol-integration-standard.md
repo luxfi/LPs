@@ -510,7 +510,7 @@ For DeFi protocols using threshold signatures:
 ## Open Questions
 
 1. **Compound v3 Integration**: Should Compound v3 (MIT-licensed) be added when production-ready?
-2. **Cross-Chain Alchemix**: How should alUSD/alETH bridge to Lux subnets?
+2. **Cross-Chain Alchemix**: How should alUSD/alETH bridge to Lux chains?
 3. **GMX v1 Upgrades**: Path for receiving upstream security patches?
 
 ## Related LPs

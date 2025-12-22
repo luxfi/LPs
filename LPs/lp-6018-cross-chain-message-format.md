@@ -180,7 +180,7 @@ function validateMessage(
 
 #### Chain ID Format
 ```
-ChainID = keccak256(abi.encode(networkType, networkId, subnetId))
+ChainID = keccak256(abi.encode(networkType, networkId, chainId))
 
 Examples:
 - Ethereum Mainnet: keccak256("EVM", 1, 0)

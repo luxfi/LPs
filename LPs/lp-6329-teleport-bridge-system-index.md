@@ -73,7 +73,7 @@ Chain Legend:
 
 | Chain | Description | Multisig Support | Status |
 |-------|-------------|------------------|--------|
-| **P-Chain** | Platform chain for validators, subnets, staking | Native N-of-M multisig for governance | **Live** |
+| **P-Chain** | Platform chain for validators, chains, staking | Native N-of-M multisig for governance | **Live** |
 | **X-Chain** | Exchange chain for UTXO-based transfers | Native UTXO multisig | **Live** |
 | **C-Chain** | EVM-compatible contract chain | Smart contract multisig (Gnosis Safe) | **Live** |
 | **Q-Chain** | Query/Index chain | Standard | **Live** |

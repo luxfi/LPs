@@ -61,7 +61,7 @@ Q-Chain serves as the quantum finality layer for all Lux chains:
 +------------------------------------------------------------------+
            |          |          |          |          |
     +------+   +------+   +------+   +------+   +------+
-    |P-Chain|  |C-Chain|  |X-Chain|  |A-Chain|  |Subnets|
+    |P-Chain|  |C-Chain|  |X-Chain|  |A-Chain|  |chains|
     +-------+  +-------+  +-------+  +-------+  +-------+
 ```
 
@@ -410,7 +410,7 @@ Each precompile serves a distinct purpose:
 ### Why K=3 Minimum?
 
 K=3 provides sufficient randomness for FPC while enabling:
-- Small subnet validation
+- Small chain validation
 - Fast convergence (fewer messages)
 - Minimal trust assumptions
 

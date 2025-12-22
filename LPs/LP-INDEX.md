@@ -45,7 +45,7 @@ The Lux Network consists of specialized chains, each optimized for specific func
 | [LP-0000](/docs/lp-0000-network-architecture-and-community-framework/) | Network Architecture & Community Framework | `core`, `architecture` | Final |
 | [LP-0001](/docs/lp-0001-primary-chain-native-tokens-and-tokenomics/) | Primary Chain, Native Tokens, and Tokenomics | `core`, `tokenomics` | Draft |
 | [LP-0002](/docs/lp-0002-virtual-machine-and-execution-environment/) | Virtual Machine and Execution Environment | `core`, `vm` | Final |
-| [LP-0003](/docs/lp-0003-subnet-architecture-and-cross-chain-interoperability/) | Subnet Architecture and Cross-Chain Interoperability | `core`, `subnets`, `cross-chain` | Final |
+| [LP-0003](/docs/lp-0003-chain-architecture-and-cross-chain-interoperability/) | recursive network architecture and Cross-Chain Interoperability | `core`, `chains`, `cross-chain` | Final |
 | [LP-0004](/docs/lp-0004-supply-chain-control-and-fork-philosophy/) | Supply Chain Control and Fork Philosophy | `core`, `governance` | Final |
 | [LP-0099](/docs/lp-0099-lp-numbering-scheme-and-chain-organization/) | LP Numbering Scheme and Chain Organization (v3.3) | `meta`, `governance` | Final |
 
@@ -68,7 +68,7 @@ LPs for consensus mechanisms including the Quasar protocol family.
 | [LP-0116](/docs/lp-0116-prism-geometry/) | Prism Geometry Protocol | `consensus`, `prism` | Draft |
 | [LP-1024](/docs/lp-1024-parallel-validation-and-shared-mempool/) | Parallel Validation and Shared Mempool | `consensus`, `validation` | Draft |
 | [LP-1181](/docs/lp-1181-epoching/) | P-Chain Epoched Views | `consensus`, `epoching`, `granite` | Draft |
-| [LP-2118](/docs/lp-2118-subnetevm-compat/) | SubnetEVM Compatibility | `consensus`, `subnets`, `evm` | Draft |
+| [LP-2118](/docs/lp-2118-chainevm-compat/) | chainEVM Compatibility | `consensus`, `chains`, `evm` | Draft |
 | [LP-2226](/docs/lp-2226-dynamic-minimum-block-times-granite-upgrade/) | Dynamic Block Times (Granite) | `consensus`, `granite`, `timing` | Draft |
 
 ---
@@ -87,7 +87,7 @@ LPs for P-Chain platform infrastructure.
 | [LP-1033](/docs/lp-1033-p-chain-state-rollup-to-c-chain-evm/) | P-Chain State Rollup to C-Chain EVM | `p-chain`, `rollup` | Draft |
 | [LP-1034](/docs/lp-1034-p-chain-as-superchain-l2-op-stack-rollup-integration/) | P-Chain as Superchain L2 (OP Stack) | `p-chain`, `l2`, `op-stack` | Draft |
 | [LP-1181](/docs/lp-1181-epoching/) | P-Chain Epoched Views (LP-181) | `p-chain`, `epoching` | Draft |
-| [LP-1605](/docs/lp-1605-elastic-validator-subnets/) | Elastic Validator Subnets | `p-chain`, `subnets`, `validators` | Draft |
+| [LP-1605](/docs/lp-1605-elastic-validator-chains/) | Elastic Validator chains | `p-chain`, `chains`, `validators` | Draft |
 
 ---
 

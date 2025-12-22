@@ -13,7 +13,7 @@ tags: [l2, scaling]
 
 ## Abstract
 
-This LP specifies the mechanism by which a Lux L2 (Subnet) can "ascend" to become a sovereign L1 network, with minimal dependency on the Lux Primary Network. It introduces a one-time Ascension Fee and a continuous, dynamic L1 Validator Fee for sovereign L1s, replacing the traditional AVAX/LUX staking requirement. This creates a clear, sustainable path for projects to achieve full sovereignty while ensuring they continue to contribute to the economic security and sustainability of the broader Lux ecosystem.
+This LP specifies the mechanism by which a Lux L2 (chain) can "ascend" to become a sovereign L1 network, with minimal dependency on the Lux Primary Network. It introduces a one-time Ascension Fee and a continuous, dynamic L1 Validator Fee for sovereign L1s, replacing the traditional AVAX/LUX staking requirement. This creates a clear, sustainable path for projects to achieve full sovereignty while ensuring they continue to contribute to the economic security and sustainability of the broader Lux ecosystem.
 
 ## Motivation
 

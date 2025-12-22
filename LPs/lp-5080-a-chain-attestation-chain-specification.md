@@ -21,7 +21,7 @@ This LP specifies the A-Chain (Attestation Chain), Lux Network's attestation lay
 As Lux Network evolves to support AI workloads, decentralized compute, and trusted execution, a unified attestation layer becomes critical for:
 
 1. **Security**: Single root of trust for all TEE devices across the network
-2. **Interoperability**: Any Lux subnet can verify device trustworthiness
+2. **Interoperability**: Any Lux chain can verify device trustworthiness
 3. **Efficiency**: Avoid duplicate attestation registries across chains
 4. **Economics**: Clear separation between security (LUX) and application tokens
 
@@ -143,7 +143,7 @@ sequenceDiagram
 ### 5. Omnichain Cryptographic Roots
 
 1. **Attestation root set** lives on A-Chain
-2. Other Lux subnets reference the Merkle root of the AR via IBC-style "light client" contracts
+2. Other Lux chains reference the Merkle root of the AR via IBC-style "light client" contracts
 3. Periodic headers from A-Chain → committed on P-Chain for network-wide finality
 4. Any chain can verify `{device_id,status}` in O(log n) via Merkle proof
 
@@ -293,7 +293,7 @@ Staked LUX sits in A-Chain smart-contract; slashing tx triggered automatically b
 | Phase | Deliverable | Tech Stack |
 |-------|-------------|------------|
 | M0 – Prep | Merge finished luxfi/db layer, Pebble+Badger tests green | Go 1.22, Pebble v0.14, Badger v4 |
-| M1 – A-Chain genesis | Minimal PoS chain with LUX staking, attestation tx type, root relayer to Hanzo L1 | Cosmos-SDK or Subnet-EVM with custom precompile |
+| M1 – A-Chain genesis | Minimal PoS chain with LUX staking, attestation tx type, root relayer to Hanzo L1 | Cosmos-SDK or chain-EVM with custom precompile |
 | M2 – Enclave SDK | Rust/Go wasi runtime, metering syscalls, quote wrapper library | SGX/DCAP, SEV-SNP |
 | M3 – Orchestrator MVP | Match engine + AI coin escrow, PoAI verification against A-Chain SPV | Hanzo Network L1 (Rust, Tendermint-lite) |
 | M4 – Oracle basket | Deployed Chainlink jobs, push feeds to A-Chain | Solidity, CCIP |
@@ -448,7 +448,7 @@ it("should calculate compute costs correctly", async () => {
 - Automated oracle system
 
 ### Phase 3: Cross-Chain Integration
-- Light clients on all Lux subnets
+- Light clients on all Lux chains
 - Merkle proof optimization
 - Batch attestation support
 

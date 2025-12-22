@@ -478,7 +478,7 @@ contract QuantumSafeWallet {
 
 **Network Upgrade Required**:
 - C-Chain and EVM L1s need coordinated upgrade
-- Individual subnets can adopt independently
+- Individual chains can adopt independently
 - Compatible with ProposerVM and other consensus layers
 
 **Cross-Ecosystem Compatibility**:

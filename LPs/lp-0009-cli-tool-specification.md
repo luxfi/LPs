@@ -88,7 +88,7 @@ The CLI implementation is in the `lux-cli` repository:
 | **Blockchain Commands** | `cli/cmd/blockchaincmd/` | Create, configure, and manage blockchains |
 | **Key Management** | `cli/cmd/keycmd/` | Wallet, key, and identity operations |
 | **Network Commands** | `cli/cmd/l1cmd/` | Layer 1 network operations |
-| **L3 Commands** | `cli/cmd/l3cmd/` | Layer 3 subnet management |
+| **L3 Commands** | `cli/cmd/l3cmd/` | Layer 3 chain management |
 | **Flags** | `cli/cmd/flags/` | Standard flag definitions |
 | **Configuration** | `cli/cmd/configcmd/` | Network and node configuration |
 | **Contracts** | `cli/cmd/contractcmd/` | Smart contract deployment and interaction |

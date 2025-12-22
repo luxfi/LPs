@@ -13,7 +13,7 @@ created: 2025-01-23
 
 ## Abstract
 
-The Teleport Cross-Chain Protocol enables instant, secure transfers of assets between Lux's various chains (P-Chain, X-Chain, C-Chain, and custom subnets) without requiring external bridge infrastructure. Teleport leverages Lux's native consensus mechanisms and the Lux Warp Messaging (AWM) protocol to provide atomic cross-chain operations with minimal latency and maximum security.
+The Teleport Cross-Chain Protocol enables instant, secure transfers of assets between Lux's various chains (P-Chain, X-Chain, C-Chain, and custom chains) without requiring external bridge infrastructure. Teleport leverages Lux's native consensus mechanisms and the Lux Warp Messaging (AWM) protocol to provide atomic cross-chain operations with minimal latency and maximum security.
 
 ## Motivation
 
@@ -166,7 +166,7 @@ function supportsTeleport() external view returns (bool);
    - Verify balance changes
 
 2. **Token Transfer**
-   - Transfer ERC-20 from C-Chain to subnet
+   - Transfer ERC-20 from C-Chain to chain
    - Verify token mappings
 
 3. **Atomic Swap**

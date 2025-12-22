@@ -1,6 +1,6 @@
 ---
 lp: 1605
-title: Elastic Validator Subnets
+title: Elastic Validator Chains
 description: Dynamic validator sets with liquid staking and performance-based rewards
 author: Lux Core Team (@luxfi)
 discussions-to: https://forum.lux.network/t/lp-605-elastic-validators
@@ -12,11 +12,11 @@ requires: 601, 6602
 tags: [consensus, scaling]
 ---
 
-# LP-605: Elastic Validator Subnets
+# LP-605: Elastic Validator Chains
 
 ## Abstract
 
-This proposal standardizes elastic validator management across Lux subnets, enabling dynamic validator sets, liquid staking derivatives, and performance-based rewards. The system allows validators to participate in multiple subnets simultaneously while maintaining security through BLS aggregation and slashing conditions.
+This proposal standardizes elastic validator management across Lux chains, enabling dynamic validator sets, liquid staking derivatives, and performance-based rewards. The system allows validators to participate in multiple chains simultaneously while maintaining security through BLS aggregation and slashing conditions.
 
 ## Motivation
 
@@ -24,13 +24,13 @@ Current validator systems face limitations:
 - Fixed validator sets reduce network flexibility
 - Staking locks liquidity for extended periods
 - Uniform rewards ignore performance differences
-- Subnet validation requires separate stakes
+- chain validation requires separate stakes
 
 This proposal enables:
 - Dynamic validator rotation based on performance
 - Liquid staking tokens maintaining capital efficiency
 - Performance-weighted reward distribution
-- Cross-subnet validation with single stake
+- Cross-chain validation with single stake
 
 ## Specification
 
@@ -46,7 +46,7 @@ type Validator struct {
     EndTime      uint64
     BLSPublicKey []byte
     Performance  Performance
-    Subnets      []SubnetID     // Multiple subnet participation
+    chains      []chainID     // Multiple chain participation
     Commission   uint32         // 0-10000 (0-100%)
 }
 
@@ -55,15 +55,15 @@ type Performance struct {
     BlocksMissed    uint64
     Uptime         float64
     ResponseTime   time.Duration
-    ComputeJobs    uint64  // For AI subnets
+    ComputeJobs    uint64  // For AI chains
 }
 ```
 
-### Elastic Subnet Configuration
+### Elastic chain Configuration
 
 ```go
-type ElasticSubnet struct {
-    ID              SubnetID
+type Elasticchain struct {
+    ID              chainID
     MinValidators   uint32
     MaxValidators   uint32
     TargetValidators uint32
@@ -126,7 +126,7 @@ contract LiquidStaking {
 ### Dynamic Validator Selection
 
 ```go
-func (s *ElasticSubnet) SelectValidators(
+func (s *Elasticchain) SelectValidators(
     candidates []Validator,
 ) []Validator {
     // Sort by performance score
@@ -147,7 +147,7 @@ func (s *ElasticSubnet) SelectValidators(
     return selected
 }
 
-func (s *ElasticSubnet) calculateScore(v Validator) float64 {
+func (s *Elasticchain) calculateScore(v Validator) float64 {
     uptimeWeight := 0.4
     performanceWeight := 0.3
     stakeWeight := 0.2
@@ -164,36 +164,36 @@ func (s *ElasticSubnet) calculateScore(v Validator) float64 {
 }
 ```
 
-### Cross-Subnet Validation
+### Cross-chain Validation
 
 ```go
-type CrossSubnetValidator struct {
+type CrosschainValidator struct {
     BaseValidator Validator
-    SubnetStakes map[SubnetID]SubnetStake
+    chainstakes map[chainID]chainstake
 }
 
-type SubnetStake struct {
-    SubnetID      SubnetID
+type chainstake struct {
+    chainID      chainID
     Weight        uint64
     CustomParams  map[string]interface{}
 }
 
-func (v *CrossSubnetValidator) ValidateSubnet(
-    subnet SubnetID,
+func (v *CrosschainValidator) Validatechain(
+    chain chainID,
     block *Block,
 ) error {
-    stake, exists := v.SubnetStakes[subnet]
+    stake, exists := v.chainstakes[chain]
     if !exists {
-        return ErrNotSubnetValidator
+        return ErrNotchainValidator
     }
 
     // Verify stake weight sufficient
-    if stake.Weight < subnet.MinStakeWeight() {
+    if stake.Weight < chain.MinStakeWeight() {
         return ErrInsufficientStake
     }
 
-    // Subnet-specific validation logic
-    return subnet.Validate(block, v.BaseValidator)
+    // chain-specific validation logic
+    return chain.Validate(block, v.BaseValidator)
 }
 ```
 
@@ -203,7 +203,7 @@ func (v *CrossSubnetValidator) ValidateSubnet(
 type RewardCalculator struct {
     BaseAPR          float64  // 8%
     PerformanceBonus float64  // +2%
-    SubnetMultiplier map[SubnetID]float64
+    chainMultiplier map[chainID]float64
 }
 
 func (r *RewardCalculator) Calculate(
@@ -220,9 +220,9 @@ func (r *RewardCalculator) Calculate(
                            (1 + r.PerformanceBonus))
     }
 
-    // Subnet participation bonus
-    for _, subnet := range validator.Subnets {
-        multiplier := r.SubnetMultiplier[subnet]
+    // chain participation bonus
+    for _, chain := range validator.chains {
+        multiplier := r.chainMultiplier[chain]
         baseReward = uint64(float64(baseReward) * multiplier)
     }
 
@@ -237,32 +237,32 @@ func (r *RewardCalculator) Calculate(
 
 Key design decisions:
 
-1. **Elastic Sizing**: Subnets scale based on actual load
+1. **Elastic Sizing**: chains scale based on actual load
 2. **Liquid Staking**: Maintains capital efficiency while securing network
 3. **Performance Metrics**: Rewards quality over quantity
-4. **Cross-Subnet**: Single stake secures multiple subnets
+4. **Cross-chain**: Single stake secures multiple chains
 
 ## Backwards Compatibility
 
-Existing validators continue operating normally. New features are opt-in through subnet configuration upgrades.
+Existing validators continue operating normally. New features are opt-in through chain configuration upgrades.
 
 ## Test Cases
 
 ```go
 func TestElasticScaling(t *testing.T) {
-    subnet := NewElasticSubnet(ElasticConfig{
+    chain := NewElasticchain(ElasticConfig{
         MinValidators: 5,
         MaxValidators: 100,
         ScaleUpThreshold: 0.8,
     })
 
     // Simulate high load
-    subnet.SetLoad(0.9)
-    newSize := subnet.calculateTargetSize()
-    assert.Greater(t, newSize, subnet.CurrentSize())
+    chain.SetLoad(0.9)
+    newSize := chain.calculateTargetSize()
+    assert.Greater(t, newSize, chain.CurrentSize())
 
     // Scale up
-    validators := subnet.SelectValidators(candidates)
+    validators := chain.SelectValidators(candidates)
     assert.Equal(t, newSize, len(validators))
 }
 
@@ -304,7 +304,7 @@ See [github.com/luxfi/node/validator](https://github.com/luxfi/node/tree/main/va
 **Liquid Staking** (`standard/src/contracts/staking/`):
 - `LiquidStaking.sol` - ERC-4626 vault implementation
 - `LiquidToken.sol` - sLX token contract
-- `StakingPool.sol` - Multi-subnet staking pool
+- `StakingPool.sol` - Multi-chain staking pool
 
 **Rewards** (`node/vms/platformvm/reward/`):
 - `calculator.go` - Reward calculation engine
@@ -326,29 +326,29 @@ See [github.com/luxfi/node/validator](https://github.com/luxfi/node/tree/main/va
 - TestRewardCalculation (APR with bonuses)
 - TestLiquidStakingMint (share calculation)
 - TestLiquidStakingBurn (redemption mechanics)
-- TestCrossSubnetValidation (multi-subnet staking)
+- TestCrosschainValidation (multi-chain staking)
 
 **Integration Tests**:
-- Full subnet lifecycle (create → activate → deactivate)
+- Full chain lifecycle (create → activate → deactivate)
 - Validator rotation during epoch transitions
 - Performance bonus application at reward time
 - Liquid token price discovery (accrual)
 - Slashing for byzantine validators (10% loss)
-- Cross-subnet validator operations
+- Cross-chain validator operations
 
 **Performance Benchmarks** (Apple M1 Max):
 - Validator selection: ~2.5 ms (for 1000 candidates)
 - Performance score calculation: ~100 ns per validator
 - Reward calculation: ~50 μs per validator
 - Liquid staking mint: ~15 μs per operation
-- Cross-subnet validation: <100 ns overhead
+- Cross-chain validation: <100 ns overhead
 
 ### Deployment Configuration
 
 **Mainnet Parameters**:
 ```
-Min Validators per Subnet: 5
-Max Validators per Subnet: 1000
+Min Validators per chain: 5
+Max Validators per chain: 1000
 Target Validators: 50-100
 Scale Up Threshold: 80% capacity
 Scale Down Threshold: 20% capacity
@@ -391,7 +391,7 @@ All implementation files verified to exist:
 | Validator Rotation | <1 min | Smooth transitions |
 | Performance Calculation | <100ms | Per epoch |
 | Liquid Staking | Instant | No delays |
-| Cross-Subnet Overhead | <5% | Minimal impact |
+| Cross-chain Overhead | <5% | Minimal impact |
 
 ## Copyright
 

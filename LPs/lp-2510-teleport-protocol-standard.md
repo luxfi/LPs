@@ -890,7 +890,7 @@ func TestPacketTransfer(t *testing.T) {
 
 ## Related LPs
 
-- **LP-3**: Subnet Architecture and Cross-Chain Interoperability
+- **LP-3**: recursive network architecture and Cross-Chain Interoperability
 - **LP-321**: FROST Threshold Signatures (Schnorr)
 - **LP-322**: CGGMP21 Threshold Signatures (ECDSA)
 - **LP-0000**: Network Architecture (B-Chain, T-Chain)

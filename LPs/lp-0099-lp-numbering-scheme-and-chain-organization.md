@@ -50,7 +50,7 @@ A consistent numbering scheme enables:
 
 | Range | Purpose | Examples |
 |-------|---------|----------|
-| 0000-0009 | Core Architecture | Network, tokenomics, VM, subnets |
+| 0000-0009 | Core Architecture | Network, tokenomics, VM, chains |
 | 0010-0049 | Developer Tools | CLI, SDK, testing, plugins |
 | 0050-0089 | Wallet & Security | Wallet standards, key management |
 | 0090-0099 | Meta/Governance | This document, numbering scheme |
@@ -69,7 +69,7 @@ A consistent numbering scheme enables:
 |-------|-------|---------|
 | 1000-1099 | P-Chain Core | Validators, staking, registry |
 | 1100-1199 | P-Chain Staking | Validator requirements, rewards |
-| 1200-1299 | P-Chain Subnets | Subnet creation, management |
+| 1200-1299 | P-Chain chains | chain creation, management |
 | 1300-1399 | X-Chain Core | Native assets, settlement, transfers |
 | 1400-1499 | X-Chain Assets | Asset standards (non-DeFi) |
 | 1500-1599 | Q-Chain Core | Root security, PQ finality |

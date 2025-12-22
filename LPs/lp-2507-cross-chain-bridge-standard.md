@@ -23,7 +23,7 @@ Cross-chain interoperability is essential for the Lux ecosystem. Users need to m
 1. **Lux C-Chain and Ethereum**: Bridge LUX, WETH, stablecoins, and other ERC-20 tokens
 2. **Lux and Hanzo EVM**: Enable AI-focused applications to access Lux liquidity
 3. **Lux and Zoo EVM**: Connect decentralized science and research networks
-4. **Lux subnets**: Native Warp messaging for intra-network transfers (LP-6016)
+4. **Lux chains**: Native Warp messaging for intra-network transfers (LP-6016)
 
 The MPC oracle bridge provides:
 
@@ -213,13 +213,13 @@ varStruct.token.mint(toTargetAddr, amt);    // Net amount to recipient
 
 ### Warp Messaging Integration
 
-For Lux subnet-to-subnet transfers, the bridge integrates with native Warp messaging (LP-6016):
+For Lux chain-to-chain transfers, the bridge integrates with native Warp messaging (LP-6016):
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
 │                    Lux Network (Native Warp)                    │
 ├─────────────────────────────────────────────────────────────────┤
-│  C-Chain ◄────► X-Chain ◄────► Subnets                         │
+│  C-Chain ◄────► X-Chain ◄────► chains                         │
 │     │              │              │                             │
 │  Teleport      Teleport      Teleport                          │
 │  Handler       Handler       Handler                            │

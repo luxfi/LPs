@@ -15,7 +15,7 @@ supersedes: 10
 
 ## Abstract
 
-LP-1000 specifies the P-Chain (Platform Chain), Lux Network's metadata and coordination blockchain. The P-Chain manages validator sets, staking operations, subnet coordination, and chain creation. It operates using Lux consensus optimized for platform operations.
+LP-1000 specifies the P-Chain (Platform Chain), Lux Network's metadata and coordination blockchain. The P-Chain manages validator sets, staking operations, chain coordination, and chain creation. It operates using Lux consensus optimized for platform operations.
 
 ## Motivation
 
@@ -23,7 +23,7 @@ A dedicated platform chain provides:
 
 1. **Validator Management**: Centralized tracking of all network validators
 2. **Staking Operations**: Handle staking, delegation, and rewards
-3. **Subnet Coordination**: Manage subnet creation and membership
+3. **chain Coordination**: Manage chain creation and membership
 4. **Chain Creation**: Enable permissionless blockchain deployment
 
 ## Specification
@@ -76,7 +76,7 @@ node/vms/platformvm/
 
 1. **Validator Management**: Track and coordinate all network validators
 2. **Staking Operations**: Handle staking, delegation, and rewards
-3. **Subnet Coordination**: Manage subnet creation and membership
+3. **chain Coordination**: Manage chain creation and membership
 4. **Chain Creation**: Enable permissionless blockchain deployment
 
 ### Transaction Types
@@ -85,11 +85,11 @@ node/vms/platformvm/
 |------|-------------|
 | `AddValidatorTx` | Add a validator to the primary network |
 | `AddDelegatorTx` | Delegate stake to a validator |
-| `CreateSubnetTx` | Create a new subnet |
+| `CreateChainTx` | Create a new chain |
 | `CreateBlockchainTx` | Create a new blockchain |
-| `AddSubnetValidatorTx` | Add validator to subnet |
-| `RemoveSubnetValidatorTx` | Remove validator from subnet |
-| `TransformSubnetTx` | Transform subnet to elastic subnet |
+| `AddChainValidatorTx` | Add validator to chain |
+| `RemoveChainValidatorTx` | Remove validator from chain |
+| `TransformChainTx` | Transform chain to elastic chain |
 
 ### Staking Parameters
 
@@ -124,7 +124,7 @@ Where:
 | `platform.getStake` | Get stake information |
 | `platform.addValidator` | Add validator transaction |
 | `platform.addDelegator` | Add delegator transaction |
-| `platform.createSubnet` | Create subnet transaction |
+| `platform.createChain` | Create chain transaction |
 | `platform.createBlockchain` | Create blockchain transaction |
 
 #### REST Endpoints
@@ -135,14 +135,14 @@ GET  /ext/bc/P/validators/pending
 GET  /ext/bc/P/stake/{address}
 POST /ext/bc/P/validators/add
 POST /ext/bc/P/delegators/add
-POST /ext/bc/P/subnets/create
+POST /ext/bc/P/chains/register
 POST /ext/bc/P/blockchains/create
 ```
 
-### Subnet Architecture
+### recursive network architecture
 
 ```go
-type Subnet struct {
+type chain struct {
     ID           ids.ID
     ControlKeys  []Address
     Threshold    uint32
@@ -151,9 +151,9 @@ type Subnet struct {
 }
 ```
 
-**Subnet Properties**:
+**chain Properties**:
 - **Primary Network**: All validators must validate
-- **Subnets**: Subset of primary validators
+- **chains**: Subset of primary validators
 - **Weight**: Determines influence in consensus
 
 ### UTXO Model
@@ -217,7 +217,7 @@ See `github.com/luxfi/node/vms/platformvm/*_test.go`:
 ```go
 func TestAddValidatorTx(t *testing.T)
 func TestAddDelegatorTx(t *testing.T)
-func TestCreateSubnetTx(t *testing.T)
+func TestCreateChainTx(t *testing.T)
 func TestCreateBlockchainTx(t *testing.T)
 func TestRewardCalculation(t *testing.T)
 func TestUTXOStateTransitions(t *testing.T)
@@ -246,7 +246,7 @@ func TestUTXOStateTransitions(t *testing.T)
 | LP-0010 | P-Chain Platform Specification | Superseded by this LP |
 | LP-1100 | Validator Management | Sub-specification |
 | LP-1200 | Staking Mechanics | Sub-specification |
-| LP-1300 | Subnet Management | Sub-specification |
+| LP-1300 | chain Management | Sub-specification |
 
 ## Copyright
 

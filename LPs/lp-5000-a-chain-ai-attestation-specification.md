@@ -22,7 +22,7 @@ LP-5000 specifies the A-Chain (AI Virtual Machine), Lux Network's attestation la
 A unified attestation layer provides:
 
 1. **Security**: Single root of trust for all TEE devices
-2. **Interoperability**: Any Lux subnet can verify device trustworthiness
+2. **Interoperability**: Any Lux chain can verify device trustworthiness
 3. **AI Compute**: Native support for AI workloads verification
 4. **Economics**: Clear separation between security (LUX) and application tokens
 

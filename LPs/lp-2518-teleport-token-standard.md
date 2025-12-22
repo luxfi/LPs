@@ -182,7 +182,7 @@ require(MPCOracleAddrMap[signer].exists, 'BadSig');
 
 #### Warp Messaging Integration
 
-For subnet-to-subnet transfers, Teleport integrates with Lux Warp Messaging (LP-6022):
+For chain-to-chain transfers, Teleport integrates with Lux Warp Messaging (LP-6022):
 
 ```solidity
 struct TeleportMessage {

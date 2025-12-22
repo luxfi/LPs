@@ -23,7 +23,7 @@ By implementing GraphQL as a dedicated chain (G-Chain) with BadgerDB storage, Lu
 
 ## Motivation
 
-Blockchain dApps and infrastructure need fast, expressive access to cross-chain state (assets, addresses, validators, transactions, subnets, etc.). External indexers introduce trust assumptions, latency, and version skew. On-chain contracts cannot efficiently traverse large graphs in Solidity. This LP solves both problems by:
+Blockchain dApps and infrastructure need fast, expressive access to cross-chain state (assets, addresses, validators, transactions, chains, etc.). External indexers introduce trust assumptions, latency, and version skew. On-chain contracts cannot efficiently traverse large graphs in Solidity. This LP solves both problems by:
 
 1. Providing a deterministic, high-performance BadgerDB backend that scales to chain-wide data.
 2. Exposing a GraphQL interface for rich queries with quantum-safe authentication.
@@ -71,7 +71,7 @@ This decentralized approach ensures:
 ### 4. Node Integration
 
 - **C‑Chain Hooks**: Registers graph precompiles via LuxGo config; precompiles have read‑write access to the GraphDB instance.
-- **P‑Chain and X‑Chain Hooks**: Implements deterministic block event listeners that update the graph (e.g. new subnets, UTXO events) by calling graphdb APIs directly during block processing.
+- **P‑Chain and X‑Chain Hooks**: Implements deterministic block event listeners that update the graph (e.g. new chains, UTXO events) by calling graphdb APIs directly during block processing.
 - **State Commitments**: Maintains a Verkle trie commitment to the graph state; the current root is published in block metadata to enable succinct on‑chain proofs and light‑client verification.
 
 ## Rationale
