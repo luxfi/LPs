@@ -1,5 +1,5 @@
 ---
-lp: 3026
+lp: 3363
 title: LRC-1363 Payable Token
 description: Token with transferAndCall for single-transaction token payments
 author: Lux Core Team (@luxfi)
@@ -10,10 +10,10 @@ category: LRC
 created: 2025-01-23
 requires: 3020
 tags: [lrc, token-standard, defi]
-order: 26
+order: 3363
 ---
 
-# LP-3026: LRC-1363 Payable Token
+# LP-3363: LRC-1363 Payable Token
 
 ## Abstract
 

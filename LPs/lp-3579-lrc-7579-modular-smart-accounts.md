@@ -1,6 +1,6 @@
 ---
-lp: 3303
-title: LRC-7579 Minimal Modular Smart Accounts
+lp: 3579
+title: LRC-7579 Modular Smart Accounts
 description: Standard interface for modular smart account plugins
 author: Lux Core Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
@@ -8,12 +8,12 @@ status: Draft
 type: Standards Track
 category: LRC
 created: 2025-01-23
-requires: 3300, 3302
+requires: 3337, 3271
 tags: [lrc, account-abstraction, wallet]
-order: 303
+order: 3579
 ---
 
-# LP-3303: LRC-7579 Minimal Modular Smart Accounts
+# LP-3579: LRC-7579 Minimal Modular Smart Accounts
 
 ## Abstract
 
@@ -244,7 +244,7 @@ account.installModule(4, complianceHook, policies);
 ## References
 
 - [ERC-7579: Minimal Modular Smart Accounts](https://eips.ethereum.org/EIPS/eip-7579)
-- [LP-3300: LRC-4337 Account Abstraction](./lp-3300-lrc-4337-account-abstraction.md)
+- [LP-3337: LRC-4337 Account Abstraction](./lp-3337-lrc-4337-account-abstraction.md)
 
 ## Copyright
 

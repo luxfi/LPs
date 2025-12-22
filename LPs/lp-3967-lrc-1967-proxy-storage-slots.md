@@ -1,22 +1,22 @@
 ---
-lp: 3302
-title: LRC-1271 Signature Validation
-description: LRC-1271 Signature Validation for Lux Network
+lp: 3967
+title: LRC-1967 Proxy Storage Slots
+description: LRC-1967 Proxy Storage Slots for Lux Network
 author: Lux Network Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
 status: Draft
 type: Standards Track
 category: LRC
 created: 2025-01-23
-tags: [lrc, token-standard, smart-wallet]
-order: 3302
+tags: [lrc, token-standard, evm, proxy]
+order: 3967
 ---
 
 ## Abstract
-LRC-1271 (mirrors ERC-1271) standardizes signature validation for smart contracts.
+LRC-1967 (mirrors ERC-1967) standardizes proxy storage slots for upgradeable contracts.
 
 ## Specification
-Implements `isValidSignature(hash, signature)` for contract-based accounts.
+Defines standard storage slots for implementation, admin, and beacon addresses.
 
 
 ## Motivation

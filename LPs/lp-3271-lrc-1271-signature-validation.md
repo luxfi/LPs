@@ -1,22 +1,22 @@
 ---
-lp: 3401
-title: LRC-4626 Multi-Vault Extensions
-description: LRC-4626 Multi-Vault Extensions for Lux Network
+lp: 3271
+title: LRC-1271 Signature Validation
+description: LRC-1271 Signature Validation for Lux Network
 author: Lux Network Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
 status: Draft
 type: Standards Track
 category: LRC
 created: 2025-01-23
-tags: [lrc, token-standard, defi, vault]
-order: 3401
+tags: [lrc, token-standard, smart-wallet]
+order: 3271
 ---
 
 ## Abstract
-Extensions for multi-asset and multi-strategy vault implementations.
+LRC-1271 (mirrors ERC-1271) standardizes signature validation for smart contracts.
 
 ## Specification
-Extends LRC-4626 with support for multiple underlying assets and yield strategies.
+Implements `isValidSignature(hash, signature)` for contract-based accounts.
 
 
 ## Motivation

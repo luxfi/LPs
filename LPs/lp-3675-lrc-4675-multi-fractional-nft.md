@@ -1,5 +1,5 @@
 ---
-lp: 3204
+lp: 3675
 title: LRC-4675 Multi-Fractional NFT
 description: NFTs divisible into fungible ERC-20 shares with ownership tracking
 author: Lux Core Team (@luxfi)
@@ -8,12 +8,12 @@ status: Draft
 type: Standards Track
 category: LRC
 created: 2025-01-23
-requires: 3020, 3200
+requires: 3020, 3721
 tags: [lrc, nft, fractionalization, defi]
-order: 204
+order: 3675
 ---
 
-# LP-3204: LRC-4675 Multi-Fractional NFT
+# LP-3675: LRC-4675 Multi-Fractional NFT
 
 ## Abstract
 
@@ -229,8 +229,8 @@ fractions.fractionalize(
 ## References
 
 - [ERC-4675: Multi-Fractional NFT](https://eips.ethereum.org/EIPS/eip-4675)
-- [LP-3200: LRC-721](./lp-3200-lrc-721-non-fungible-token-standard.md)
-- [LP-3100: LRC-1155](./lp-3100-lrc-1155-multi-token-standard.md)
+- [LP-3721: LRC-721](./lp-3721-lrc-721-non-fungible-token-standard.md)
+- [LP-3155: LRC-1155](./lp-3155-lrc-1155-multi-token-standard.md)
 
 ## Copyright
 

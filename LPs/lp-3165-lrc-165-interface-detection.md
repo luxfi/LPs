@@ -1,5 +1,5 @@
 ---
-lp: 3050
+lp: 3165
 title: LRC-165 Interface Detection
 description: LRC-165 Interface Detection for Lux Network
 author: Lux Network Team (@luxfi)
@@ -9,7 +9,7 @@ type: Standards Track
 category: LRC
 created: 2025-01-23
 tags: [lrc, token-standard, evm]
-order: 3050
+order: 3165
 ---
 
 ## Abstract

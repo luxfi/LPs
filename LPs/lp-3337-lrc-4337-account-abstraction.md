@@ -1,5 +1,5 @@
 ---
-lp: 3300
+lp: 3337
 title: LRC-4337 Account Abstraction
 description: ERC-4337 Account Abstraction implementation enabling smart contract wallets with sponsored transactions
 author: Lux Core Team (@luxfi)
@@ -14,7 +14,7 @@ activation:
   hfName: "Quantum"
   activationHeight: "0"
 tags: [erc-4337, account-abstraction, smart-wallet, paymaster]
-order: 3103
+order: 3337
 ---
 
 ## Abstract

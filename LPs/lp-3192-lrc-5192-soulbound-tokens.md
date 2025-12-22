@@ -1,22 +1,22 @@
 ---
-lp: 3400
-title: LRC-4626 Tokenized Vault
-description: LRC-4626 Tokenized Vault for Lux Network
+lp: 3192
+title: LRC-5192 Soulbound Tokens
+description: LRC-5192 Soulbound Tokens for Lux Network
 author: Lux Network Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
 status: Draft
 type: Standards Track
 category: LRC
 created: 2025-01-23
-tags: [lrc, token-standard, defi, vault]
-order: 3400
+tags: [lrc, token-standard, nft, soulbound]
+order: 3192
 ---
 
 ## Abstract
-LRC-4626 (mirrors ERC-4626) standardizes tokenized yield-bearing vaults.
+LRC-5192 (mirrors ERC-5192) defines minimal soulbound (non-transferable) NFTs.
 
 ## Specification
-Defines deposit/withdraw/mint/redeem interface with share accounting for DeFi vaults.
+Adds `locked(uint256 tokenId)` to indicate non-transferability.
 
 
 ## Motivation

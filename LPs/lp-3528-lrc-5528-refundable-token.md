@@ -1,6 +1,6 @@
 ---
-lp: 3030
-title: LRC-5528 Refundable Fungible Token
+lp: 3528
+title: LRC-5528 Refundable Token
 description: Tokens with built-in escrow and refund mechanics for reversible payments
 author: Lux Core Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
@@ -10,10 +10,10 @@ category: LRC
 created: 2025-01-23
 requires: 3020
 tags: [lrc, token-standard, escrow, payments]
-order: 30
+order: 3528
 ---
 
-# LP-3030: LRC-5528 Refundable Fungible Token
+# LP-3528: LRC-5528 Refundable Fungible Token
 
 ## Abstract
 

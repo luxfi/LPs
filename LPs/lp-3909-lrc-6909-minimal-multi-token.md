@@ -1,22 +1,22 @@
 ---
-lp: 3230
-title: LRC-6551 Token Bound Accounts
-description: LRC-6551 Token Bound Accounts for Lux Network
+lp: 3909
+title: LRC-6909 Minimal Multi-Token
+description: LRC-6909 Minimal Multi-Token for Lux Network
 author: Lux Network Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
 status: Draft
 type: Standards Track
 category: LRC
 created: 2025-01-23
-tags: [lrc, token-standard, nft, smart-wallet]
-order: 3230
+tags: [lrc, token-standard]
+order: 3909
 ---
 
 ## Abstract
-LRC-6551 (mirrors ERC-6551) enables NFTs to own assets as smart contract wallets.
+LRC-6909 (mirrors ERC-6909) provides a gas-efficient minimal multi-token interface.
 
 ## Specification
-Every NFT gets a deterministic smart contract account that can hold assets.
+Simplified multi-token standard with reduced gas costs compared to LRC-1155.
 
 
 ## Motivation

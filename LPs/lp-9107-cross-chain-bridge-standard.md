@@ -344,7 +344,7 @@ A percentage-based fee model was chosen because:
 
 This standard is compatible with:
 
-- **LP-3030**: LRC-20 Bridgable Token Extension (extends interface)
+- **LP-3528**: LRC-20 Bridgable Token Extension (extends interface)
 - **LP-6016**: Teleport Cross-Chain Protocol (native Warp integration)
 - **LP-6017**: Bridge Asset Registry (asset tracking)
 - **LP-6018**: Cross-Chain Message Format (message structure)
@@ -506,7 +506,7 @@ IBridge(bridge).bridgeMintStealth(
 
 ## Related LPs
 
-- **LP-3030**: LRC-20 Bridgable Token Extension
+- **LP-3528**: LRC-20 Bridgable Token Extension
 - **LP-6016**: Teleport Cross-Chain Protocol
 - **LP-6017**: Bridge Asset Registry
 - **LP-6018**: Cross-Chain Message Format

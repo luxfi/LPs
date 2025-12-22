@@ -152,12 +152,12 @@ Lux Request for Comments (LRC) token standards, similar to ERC.
 | LP | Title | Tags | Status |
 |----|-------|------|--------|
 | [LP-2300](/docs/lp-2300-lrc-20-fungible-token-standard/) | **LRC-20 Fungible Token Standard** | `lrc`, `lrc-20`, `fungible` | Final |
-| [LP-3200](/docs/lp-3721-lrc-721-non-fungible-token-standard/) | **LRC-721 Non-Fungible Token Standard** | `lrc`, `lrc-721`, `nft` | Final |
-| [LP-3100](/docs/lp-3155-lrc-1155-multi-token-standard/) | **LRC-1155 Multi-Token Standard** | `lrc`, `lrc-1155`, `multi-token` | Final |
-| [LP-3022](/docs/lp-3027-lrc-token-standards-adoption/) | LRC Token Standards Adoption | `lrc`, `standards` | Draft |
+| [LP-3721](/docs/lp-3721-lrc-721-non-fungible-token-standard/) | **LRC-721 Non-Fungible Token Standard** | `lrc`, `lrc-721`, `nft` | Final |
+| [LP-3155](/docs/lp-3155-lrc-1155-multi-token-standard/) | **LRC-1155 Multi-Token Standard** | `lrc`, `lrc-1155`, `multi-token` | Final |
+| [LP-3022](/docs/lp-3009-lrc-token-standards-adoption/) | LRC Token Standards Adoption | `lrc`, `standards` | Draft |
 | [LP-3021](/docs/lp-3028-lrc-20-burnable-token-extension/) | LRC-20 Burnable Extension | `lrc`, `lrc-20`, `burnable` | Draft |
 | [LP-3022](/docs/lp-3029-lrc-20-mintable-token-extension/) | LRC-20 Mintable Extension | `lrc`, `lrc-20`, `mintable` | Draft |
-| [LP-3023](/docs/lp-3030-lrc-20-bridgable-token-extension/) | LRC-20 Bridgable Extension | `lrc`, `lrc-20`, `bridge` | Draft |
+| [LP-3023](/docs/lp-3528-lrc-20-bridgable-token-extension/) | LRC-20 Bridgable Extension | `lrc`, `lrc-20`, `bridge` | Draft |
 | [LP-3610](/docs/lp-3031-lrc-721-burnable-token-extension/) | LRC-721 Burnable Extension | `lrc`, `lrc-721`, `nft`, `burnable` | Draft |
 | [LP-2518](/docs/lp-2518-teleport-token-standard/) | Teleport Token Standard | `lrc`, `teleport`, `cross-chain` | Draft |
 

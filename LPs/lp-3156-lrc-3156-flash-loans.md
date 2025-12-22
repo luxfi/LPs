@@ -1,22 +1,22 @@
 ---
-lp: 3101
-title: LRC-1155 Supply Extension
-description: LRC-1155 Supply Extension for Lux Network
+lp: 3156
+title: LRC-3156 Flash Loans
+description: LRC-3156 Flash Loans for Lux Network
 author: Lux Network Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
 status: Draft
 type: Standards Track
 category: LRC
 created: 2025-01-23
-tags: [lrc, token-standard, nft]
-order: 3101
+tags: [lrc, token-standard, defi]
+order: 3156
 ---
 
 ## Abstract
-Extension tracking total supply for each token ID in LRC-1155 contracts.
+LRC-3156 (mirrors ERC-3156) standardizes flash loan interfaces.
 
 ## Specification
-Implements `totalSupply(uint256 id)` and `exists(uint256 id)` functions.
+Defines `flashLoan()` and `FlashBorrower` interface for atomic borrowing.
 
 
 ## Motivation

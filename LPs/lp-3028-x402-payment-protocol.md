@@ -8,7 +8,7 @@ status: Draft
 type: Standards Track
 category: LRC
 created: 2025-01-23
-requires: 3020, 3027
+requires: 3020, 3009
 tags: [lrc, payments, ai-agent, http]
 order: 28
 ---
@@ -306,7 +306,7 @@ Site → Delivers content
 
 - [x402 Protocol](https://x402.org)
 - [Coinbase x402](https://github.com/coinbase/x402)
-- [LP-3027: LRC-3009](./lp-3027-lrc-3009-transfer-authorization.md)
+- [LP-3009: LRC-3009](./lp-3009-lrc-3009-transfer-authorization.md)
 - [ERC-3009](https://eips.ethereum.org/EIPS/eip-3009)
 
 ## Copyright

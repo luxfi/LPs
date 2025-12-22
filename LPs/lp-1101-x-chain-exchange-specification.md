@@ -312,10 +312,10 @@ cd dex && go test ./pkg/lx/... -v
 | LP | Title | Relationship |
 |----|-------|--------------|
 | LP-0011 | X-Chain Specification | Superseded by this LP |
-| LP-3100 | Order Book | Sub-specification |
-| LP-3200 | UTXO Management | Sub-specification |
-| LP-3300 | Asset Creation | Sub-specification |
-| LP-3400 | Trading Mechanics | Sub-specification |
+| LP-3155 | Order Book | Sub-specification |
+| LP-3721 | UTXO Management | Sub-specification |
+| LP-3337 | Asset Creation | Sub-specification |
+| LP-3626 | Trading Mechanics | Sub-specification |
 | LP-9000 | DEX Core | DEX protocol layer |
 
 ## Copyright

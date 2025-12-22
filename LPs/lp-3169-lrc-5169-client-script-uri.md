@@ -1,5 +1,5 @@
 ---
-lp: 3054
+lp: 3169
 title: LRC-5169 Client Script URI
 description: Standard for associating executable scripts with smart contracts
 author: Lux Core Team (@luxfi)
@@ -9,10 +9,10 @@ type: Informational
 category: LRC
 created: 2025-01-23
 tags: [lrc, infrastructure, research]
-order: 54
+order: 3169
 ---
 
-# LP-3054: LRC-5169 Client Script URI
+# LP-3169: LRC-5169 Client Script URI
 
 ## Abstract
 

@@ -17,7 +17,7 @@ activation:
 order: 9102
 ---
 
-> **See also**: [LP-3100](./lp-3155-lrc-1155-multi-token-standard.md), [LP-6022](./lp-6022-warp-messaging-20-native-interchain-transfers.md)
+> **See also**: [LP-3155](./lp-3155-lrc-1155-multi-token-standard.md), [LP-6022](./lp-6022-warp-messaging-20-native-interchain-transfers.md)
 
 ## Abstract
 
@@ -630,7 +630,7 @@ contract NFTMarketplace {
 7. [ERC-2981: NFT Royalty Standard](https://eips.ethereum.org/EIPS/eip-2981)
 8. [Manifold Royalty Registry](https://royaltyregistry.xyz/)
 9. [LP-6022](./lp-6022-warp-messaging-20-native-interchain-transfers.md)
-10. [LP-3100](./lp-3155-lrc-1155-multi-token-standard.md)
+10. [LP-3155](./lp-3155-lrc-1155-multi-token-standard.md)
 
 ## Copyright
 

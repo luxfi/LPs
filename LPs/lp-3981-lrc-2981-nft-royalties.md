@@ -1,22 +1,22 @@
 ---
-lp: 3420
-title: LRC-777 Advanced Token
-description: LRC-777 Advanced Token for Lux Network
+lp: 3981
+title: LRC-2981 NFT Royalties
+description: LRC-2981 NFT Royalties for Lux Network
 author: Lux Network Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
 status: Draft
 type: Standards Track
 category: LRC
 created: 2025-01-23
-tags: [lrc, token-standard, evm]
-order: 3420
+tags: [lrc, token-standard, nft]
+order: 3981
 ---
 
 ## Abstract
-LRC-777 (mirrors ERC-777) provides advanced token functionality with hooks.
+LRC-2981 (mirrors ERC-2981) standardizes NFT royalty information.
 
 ## Specification
-Token standard with send/receive hooks and operator permissions.
+Implements `royaltyInfo(tokenId, salePrice)` returning receiver and royalty amount.
 
 
 ## Motivation

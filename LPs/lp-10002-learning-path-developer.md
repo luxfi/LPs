@@ -55,7 +55,7 @@ After completing this path, you will be able to:
 
 | Order | LP | Title | Time | Depth |
 |-------|-----|-------|------|-------|
-| 4 | [LP-3100](/docs/lp-3100/) | LRC-20 Fungible Tokens | 25 min | Deep |
+| 4 | [LP-3155](/docs/lp-3155/) | LRC-20 Fungible Tokens | 25 min | Deep |
 | 5 | [LP-0721](/docs/lp-0721-lrc-721-non-fungible-token-standard/) | LRC-721 NFTs | 20 min | Deep |
 | 6 | [LP-1155](/docs/lp-1155-lrc-1155-multi-token-standard/) | LRC-1155 Multi-Token | 15 min | Medium |
 
@@ -63,8 +63,8 @@ After completing this path, you will be able to:
 
 | Order | LP | Title | Time | Depth |
 |-------|-----|-------|------|-------|
-| 7 | [LP-3300](/docs/lp-3300/) | AMM Protocols | 30 min | Deep |
-| 8 | [LP-3400](/docs/lp-3400/) | Lending Protocols | 30 min | Deep |
+| 7 | [LP-3337](/docs/lp-3337/) | AMM Protocols | 30 min | Deep |
+| 8 | [LP-3626](/docs/lp-3626/) | Lending Protocols | 30 min | Deep |
 | 9 | [LP-3500](/docs/lp-3500/) | Yield & Vaults | 20 min | Medium |
 | 10 | [LP-3600](/docs/lp-3600/) | Stablecoins | 20 min | Medium |
 
@@ -73,7 +73,7 @@ After completing this path, you will be able to:
 | Order | LP | Title | Time | Depth |
 |-------|-----|-------|------|-------|
 | 11 | [LP-3700](/docs/lp-3700/) | Wallet Standards | 20 min | Medium |
-| 12 | [LP-3200](/docs/lp-3200/) | Account Abstraction | 25 min | Medium |
+| 12 | [LP-3721](/docs/lp-3721/) | Account Abstraction | 25 min | Medium |
 
 ### Stage 5: Precompile Acceleration (Advanced)
 

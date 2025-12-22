@@ -1,22 +1,22 @@
 ---
-lp: 3202
-title: LRC-721 Enumerable Extension
-description: LRC-721 Enumerable Extension for Lux Network
+lp: 3338
+title: Paymaster Standard
+description: Paymaster Standard for Lux Network
 author: Lux Network Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
 status: Draft
 type: Standards Track
 category: LRC
 created: 2025-01-23
-tags: [lrc, token-standard, nft]
-order: 3202
+tags: [lrc, account-abstraction, evm]
+order: 3338
 ---
 
 ## Abstract
-LRC-721 Enumerable extension for iterating over all tokens and owner tokens.
+Standard interface for paymasters that sponsor gas fees for users.
 
 ## Specification
-Implements `totalSupply()`, `tokenByIndex()`, and `tokenOfOwnerByIndex()`.
+Defines paymaster interface for ERC-4337 account abstraction infrastructure.
 
 
 ## Motivation

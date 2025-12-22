@@ -1,5 +1,5 @@
 ---
-lp: 3102
+lp: 3525
 title: LRC-3525 Semi-Fungible Token
 description: Token standard for financial instruments with slot-based fungibility
 author: Lux Core Team (@luxfi)
@@ -8,12 +8,12 @@ status: Draft
 type: Standards Track
 category: LRC
 created: 2025-01-23
-requires: 3020, 3200
+requires: 3020, 3721
 tags: [lrc, token-standard, defi]
-order: 102
+order: 3525
 ---
 
-# LP-3102: LRC-3525 Semi-Fungible Token
+# LP-3525: LRC-3525 Semi-Fungible Token
 
 ## Abstract
 
