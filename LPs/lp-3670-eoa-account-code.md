@@ -9,7 +9,7 @@ type: Standards Track
 category: Core
 created: 2025-01-23
 tags: [core, evm, account-abstraction]
-order: 670
+order: 1000
 ---
 
 # LP-3670: EOA Account Code (EIP-7702)

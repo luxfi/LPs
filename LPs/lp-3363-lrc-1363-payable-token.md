@@ -10,7 +10,7 @@ category: LRC
 created: 2025-01-23
 requires: 3020
 tags: [lrc, token-standard, defi]
-order: 3363
+order: 270
 ---
 
 # LP-3363: LRC-1363 Payable Token

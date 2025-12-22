@@ -10,7 +10,7 @@ category: LRC
 created: 2025-07-23
 tags: [lrc, token-standard, evm]
 requires: 3020
-order: 2028
+order: 210
 ---
 
 ## Abstract

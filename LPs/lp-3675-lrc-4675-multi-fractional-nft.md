@@ -10,7 +10,7 @@ category: LRC
 created: 2025-01-23
 requires: 3020, 3721
 tags: [lrc, nft, fractionalization, defi]
-order: 3675
+order: 440
 ---
 
 # LP-3675: LRC-4675 Multi-Fractional NFT

@@ -10,7 +10,7 @@ category: Core
 created: 2025-01-23
 requires: 3702
 tags: [core, evm, verkle, gas]
-order: 703
+order: 830
 ---
 
 # LP-3703: Statelessness Gas Costs

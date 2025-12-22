@@ -9,7 +9,7 @@ type: Informational
 category: Core
 created: 2025-01-23
 tags: [core, scaling, research]
-order: 674
+order: 1020
 ---
 
 # LP-3674: Blob Throughput Increase

@@ -9,7 +9,7 @@ type: Standards Track
 category: LRC
 created: 2025-01-23
 tags: [lrc, token-standard, nft, soulbound]
-order: 3192
+order: 340
 ---
 
 ## Abstract

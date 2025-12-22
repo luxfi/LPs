@@ -9,7 +9,7 @@ type: Informational
 category: LRC
 created: 2025-01-23
 tags: [lrc, infrastructure, research]
-order: 3572
+order: 370
 ---
 
 # LP-3572: LRC-7572 Contract-level Metadata

@@ -9,7 +9,7 @@ type: Standards Track
 category: LRC
 created: 2025-01-23
 tags: [lrc, token-standard, governance]
-order: 3025
+order: 240
 ---
 
 ## Abstract

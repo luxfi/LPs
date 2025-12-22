@@ -10,7 +10,7 @@ category: Core
 created: 2025-01-23
 requires: 3701
 tags: [core, evm, verkle, stateless]
-order: 702
+order: 820
 ---
 
 # LP-3702: Verkle State Transition

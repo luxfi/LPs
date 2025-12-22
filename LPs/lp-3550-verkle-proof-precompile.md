@@ -10,7 +10,7 @@ category: Core
 created: 2025-01-23
 requires: 3701, 3702
 tags: [core, precompile, verkle]
-order: 550
+order: 745
 ---
 
 # LP-3550: Verkle Proof Verification Precompile

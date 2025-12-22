@@ -9,7 +9,7 @@ type: Informational
 category: Core
 created: 2025-01-23
 tags: [core, consensus, research]
-order: 672
+order: 1010
 ---
 
 # LP-3672: Maximum Effective Balance Increase

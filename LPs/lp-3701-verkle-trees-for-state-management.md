@@ -9,7 +9,7 @@ type: Standards Track
 category: Core
 created: 2025-01-09
 tags: [core, scaling]
-order: 806
+order: 810
 ---
 
 # LP-606: Verkle Trees for Efficient State Management

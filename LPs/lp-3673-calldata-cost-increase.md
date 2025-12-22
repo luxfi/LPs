@@ -9,7 +9,7 @@ type: Informational
 category: Core
 created: 2025-01-23
 tags: [core, gas, research]
-order: 673
+order: 1015
 ---
 
 # LP-3673: Calldata Cost Increase

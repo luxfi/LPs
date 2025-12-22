@@ -9,7 +9,7 @@ tags: [c-chain, evm]
 type: Informational
 created: 2025-12-17
 updated: 2025-12-17
-order: 299
+order: 950
 ---
 
 ## Abstract

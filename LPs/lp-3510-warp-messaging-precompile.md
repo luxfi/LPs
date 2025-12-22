@@ -14,7 +14,7 @@ activation:
   hfName: "Teleport"
   activationHeight: "0"
 tags: [warp, precompile, cross-chain]
-order: 513
+order: 720
 ---
 
 ## Abstract
