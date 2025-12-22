@@ -4,7 +4,7 @@ title: LRC-2612 Permit Extension
 description: LRC-2612 Permit Extension for Lux Network
 author: Lux Network Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
-status: Draft
+status: Final
 type: Standards Track
 category: LRC
 created: 2025-01-23

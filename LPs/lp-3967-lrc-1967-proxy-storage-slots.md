@@ -4,7 +4,7 @@ title: LRC-1967 Proxy Storage Slots
 description: LRC-1967 Proxy Storage Slots for Lux Network
 author: Lux Network Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
-status: Draft
+status: Final
 type: Standards Track
 category: LRC
 created: 2025-01-23

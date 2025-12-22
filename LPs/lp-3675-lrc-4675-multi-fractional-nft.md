@@ -4,7 +4,7 @@ title: LRC-4675 Multi-Fractional NFT
 description: NFTs divisible into fungible ERC-20 shares with ownership tracking
 author: Lux Core Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
-status: Draft
+status: Final
 type: Standards Track
 category: LRC
 created: 2025-01-23

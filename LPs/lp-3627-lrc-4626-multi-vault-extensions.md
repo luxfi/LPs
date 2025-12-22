@@ -4,7 +4,7 @@ title: LRC-4626 Multi-Vault Extensions
 description: LRC-4626 Multi-Vault Extensions for Lux Network
 author: Lux Network Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
-status: Draft
+status: Final
 type: Standards Track
 category: LRC
 created: 2025-01-23
