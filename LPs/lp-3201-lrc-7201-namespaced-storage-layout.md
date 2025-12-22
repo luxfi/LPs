@@ -10,7 +10,7 @@ category: LRC
 created: 2025-01-23
 requires: 3967
 tags: [lrc, infrastructure, proxy]
-order: 3201
+order: 140
 ---
 
 # LP-3722: LRC-7201 Namespaced Storage Layout

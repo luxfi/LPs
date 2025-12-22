@@ -9,7 +9,7 @@ type: Standards Track
 category: Core
 created: 2025-01-23
 tags: [core, evm, consensus]
-order: 671
+order: 1005
 ---
 
 # LP-3671: Execution Layer Requests

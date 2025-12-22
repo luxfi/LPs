@@ -9,7 +9,7 @@ type: Standards Track
 category: LRC
 created: 2025-01-23
 tags: [lrc, token-standard, defi]
-order: 3156
+order: 520
 ---
 
 ## Abstract

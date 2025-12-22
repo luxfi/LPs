@@ -10,7 +10,7 @@ category: LRC
 created: 2025-01-23
 requires: 3020, 3612
 tags: [lrc, token-standard, meta-tx, gasless]
-order: 3009
+order: 260
 ---
 
 # LP-3009: LRC-3009 Transfer With Authorization

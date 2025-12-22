@@ -9,7 +9,7 @@ type: Standards Track
 category: LRC
 created: 2025-01-23
 tags: [lrc, token-standard, nft, smart-wallet]
-order: 3551
+order: 350
 ---
 
 ## Abstract

@@ -9,7 +9,7 @@ type: Standards Track
 category: Core
 created: 2025-01-22
 tags: [core, scaling]
-order: 527
+order: 985
 ---
 
 # LP-327: BadgerDB + Verkle Tree Optimization Strategy

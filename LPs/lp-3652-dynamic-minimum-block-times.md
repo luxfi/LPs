@@ -10,7 +10,7 @@ category: Core
 created: 2025-11-22
 requires: 1212
 tags: [consensus, core]
-order: 426
+order: 970
 ---
 
 # LP-226: Dynamic Minimum Block Times (Granite Upgrade)

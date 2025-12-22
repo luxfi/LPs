@@ -10,7 +10,7 @@ category: Core
 created: 2025-01-23
 requires: 3702
 tags: [core, evm, stateless]
-order: 704
+order: 840
 ---
 
 # LP-3704: Historical Block Hashes in State

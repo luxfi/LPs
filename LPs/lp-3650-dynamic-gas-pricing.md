@@ -10,7 +10,7 @@ category: Core
 created: 2025-01-15
 requires: 1212
 tags: [evm, gas]
-order: 376
+order: 960
 ---
 
 # LP-176: Dynamic EVM Gas Limit and Price Discovery

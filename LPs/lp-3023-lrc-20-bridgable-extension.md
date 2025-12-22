@@ -10,7 +10,7 @@ category: LRC
 created: 2025-07-23
 tags: [lrc, bridge, token-standard]
 requires: 3020
-order: 2030
+order: 230
 ---
 
 ## Abstract

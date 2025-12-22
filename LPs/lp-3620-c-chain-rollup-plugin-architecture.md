@@ -10,7 +10,7 @@ category: Core
 created: 2025-07-23
 tags: [l2, evm, scaling]
 requires: 1
-order: 232
+order: 930
 ---
 
 ## Abstract
