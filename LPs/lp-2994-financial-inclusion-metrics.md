@@ -1,5 +1,5 @@
 ---
-lp: 72330
+lp: 2994
 title: Financial Inclusion Metrics
 tags: [esg, impact, financial-inclusion, metrics, sdg]
 description: Metrics framework for measuring Lux Network's contribution to financial inclusion.
@@ -9,7 +9,7 @@ status: Draft
 type: Meta
 created: 2025-12-17
 requires: [800, 900, 901]
-order: 72330
+order: 2994
 ---
 
 # LP-930: Financial Inclusion Metrics

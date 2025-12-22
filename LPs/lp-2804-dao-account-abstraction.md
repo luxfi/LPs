@@ -1,5 +1,5 @@
 ---
-lp: 71024
+lp: 2804
 title: DAO Account Abstraction
 description: Account abstraction contracts for gasless DAO interactions and smart account integration
 author: Lux Industries Inc.
@@ -10,7 +10,7 @@ category: LRC
 created: 2025-12-17
 requires: 2506
 tags: [dao, account-abstraction, paymaster, erc-4337]
-order: 71024
+order: 2804
 ---
 
 ## Abstract

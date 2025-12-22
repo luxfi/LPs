@@ -1,5 +1,5 @@
 ---
-lp: 71022
+lp: 2802
 title: Voting Strategies Standard
 description: Modular voting strategy contracts for Lux DAO governance
 author: Lux Industries Inc.
@@ -10,7 +10,7 @@ category: LRC
 created: 2025-12-17
 requires: 2507
 tags: [dao, governance, voting, strategies]
-order: 71022
+order: 2802
 ---
 
 ## Abstract

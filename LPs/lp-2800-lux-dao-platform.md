@@ -1,5 +1,5 @@
 ---
-lp: 71020
+lp: 2800
 title: Lux DAO Platform (lux.vote)
 description: Decentralized governance platform for creating and managing DAOs on Lux Network
 author: Lux Industries Inc.
@@ -10,7 +10,7 @@ category: LRC
 created: 2025-12-17
 requires: 2504
 tags: [dao, governance, platform]
-order: 71020
+order: 2800
 ---
 
 ## Abstract

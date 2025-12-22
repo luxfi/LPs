@@ -1,5 +1,5 @@
 ---
-lp: 72301
+lp: 2991
 title: Impact Measurement Methodology
 tags: [esg, impact, metrics, measurement, reporting]
 description: Methodology for measuring, tracking, and reporting social impact across the Lux ecosystem.
@@ -9,7 +9,7 @@ status: Draft
 type: Meta
 created: 2025-12-17
 requires: [800, 900]
-order: 72301
+order: 2991
 ---
 
 # LP-901: Impact Measurement Methodology

@@ -1,5 +1,5 @@
 ---
-lp: 72220
+lp: 2940
 title: Network Energy Transparency
 tags: [esg, sustainability, energy, transparency, metrics]
 description: Standards for transparent reporting of Lux Network energy consumption and carbon metrics.
@@ -9,7 +9,7 @@ status: Draft
 type: Meta
 created: 2025-12-17
 requires: [800, 801]
-order: 72220
+order: 2940
 ---
 
 # LP-820: Network Energy Transparency

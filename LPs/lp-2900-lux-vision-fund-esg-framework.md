@@ -1,5 +1,5 @@
 ---
-lp: 72150
+lp: 2900
 title: Lux Vision Fund ESG Investment Framework
 tags: [investment, esg, impact]
 description: Master framework for ESG-aligned investments through Lux Vision Fund.
@@ -9,7 +9,7 @@ status: Draft
 type: Meta
 created: 2025-12-17
 requires: [800]
-order: 72150
+order: 2900
 ---
 
 # LP-750: Lux Vision Fund ESG Investment Framework

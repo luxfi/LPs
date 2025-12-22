@@ -1,5 +1,5 @@
 ---
-lp: 72320
+lp: 2993
 title: Community Development & Grants
 tags: [esg, impact, grants, community, funding]
 description: Framework for ecosystem grants and community development initiatives.
@@ -9,7 +9,7 @@ status: Draft
 type: Meta
 created: 2025-12-17
 requires: [800, 900]
-order: 72320
+order: 2993
 ---
 
 # LP-920: Community Development & Grants

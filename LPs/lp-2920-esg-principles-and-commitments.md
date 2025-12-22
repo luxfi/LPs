@@ -1,5 +1,5 @@
 ---
-lp: 72200
+lp: 2920
 title: ESG Principles and Commitments
 tags: [esg, sustainability]
 description: Foundational ESG framework defining Lux Network's environmental, social, and governance commitments.
@@ -8,7 +8,7 @@ discussions-to: https://github.com/luxfi/lps/discussions
 status: Draft
 type: Meta
 created: 2025-12-16
-order: 72200
+order: 2920
 ---
 
 # LP-800: ESG Principles and Commitments

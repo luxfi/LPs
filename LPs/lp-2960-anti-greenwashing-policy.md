@@ -1,5 +1,5 @@
 ---
-lp: 72240
+lp: 2960
 title: Impact Disclosure & Anti-Greenwashing Policy
 tags: [esg, sustainability, transparency, compliance, claims]
 description: Standards for making accurate, verifiable sustainability claims and avoiding greenwashing.
@@ -9,7 +9,7 @@ status: Draft
 type: Meta
 created: 2025-12-17
 requires: [800]
-order: 72240
+order: 2960
 ---
 
 # LP-840: Impact Disclosure & Anti-Greenwashing Policy

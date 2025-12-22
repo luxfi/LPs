@@ -1,5 +1,5 @@
 ---
-lp: 72230
+lp: 2950
 title: ESG Risk Management
 tags: [esg, sustainability, risk, compliance]
 description: Framework for identifying, assessing, and managing ESG-related risks.
@@ -9,7 +9,7 @@ status: Draft
 type: Meta
 created: 2025-12-17
 requires: [800]
-order: 72230
+order: 2950
 ---
 
 # LP-830: ESG Risk Management
