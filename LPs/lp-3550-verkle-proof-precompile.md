@@ -131,6 +131,10 @@ Precompile chosen over library:
 - Native curve operations
 - Consistent implementation
 
+## Backwards Compatibility
+
+This standard is fully backwards compatible with existing contracts and infrastructure. The standard is additive and does not modify existing functionality.
+
 ## Security Considerations
 
 - Input validation prevents malformed proofs

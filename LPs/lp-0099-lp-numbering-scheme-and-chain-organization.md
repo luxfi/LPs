@@ -339,8 +339,8 @@ Each LP MUST declare exactly one status:
 rules:
   range_check:
     - "LP 0-99 MUST have status: Final"
-    - "LP 10000+ MUST have status: Research"
-    - "LP 50000+ MUST have status: Research"
+    - "LP 10000+ MUST have status: Draft"
+    - "LP 50000+ MUST have status: Draft"
     - "LP outside defined range is INVALID"
   
   status_check:

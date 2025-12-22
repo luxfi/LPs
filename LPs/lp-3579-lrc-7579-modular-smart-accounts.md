@@ -234,6 +234,10 @@ account.installModule(4, complianceHook, policies);
 - Hook system provides execution control
 - Fallback handlers enable extensibility
 
+## Backwards Compatibility
+
+This standard is fully backwards compatible with existing contracts and infrastructure. The standard is additive and does not modify existing functionality.
+
 ## Security Considerations
 
 - Module installation must be protected

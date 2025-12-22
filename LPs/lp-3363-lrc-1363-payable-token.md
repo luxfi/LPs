@@ -167,6 +167,10 @@ contract StakingPool is ILRC1363Receiver {
 - Callback pattern proven (ERC-721)
 - Backwards compatible with LRC-20
 
+## Backwards Compatibility
+
+This standard is fully backwards compatible with existing contracts and infrastructure. The standard is additive and does not modify existing functionality.
+
 ## Security Considerations
 
 - Reentrancy guard required in receivers
