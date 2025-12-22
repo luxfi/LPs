@@ -6,7 +6,7 @@ author: Lux Partners (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
 status: Draft
 type: Standards Track
-category: SDK
+category: Interface
 created: 2025-12-11
 requires: 6332, 6335
 tags: [bridge, dev-tools, sdk]
