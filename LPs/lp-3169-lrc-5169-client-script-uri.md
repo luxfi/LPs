@@ -9,7 +9,7 @@ type: Informational
 category: LRC
 created: 2025-01-23
 tags: [lrc, infrastructure, research]
-order: 360
+order: 260
 ---
 
 # LP-3169: LRC-5169 Client Script URI

@@ -14,7 +14,7 @@ activation:
   flag: lp20-lrc20-fungible-token
   hfName: ""
   activationHeight: "0"
-order: 200
+order: 100
 ---
 
 > **See also**: [LP-12: C-Chain (Contract Chain) Specification](/docs/lp-12-c-chain-contract-chain-specification/), [LP-721: LRC-721 Non-Fungible Token Standard](/docs/lp-721-lrc-721-non-fungible-token-standard/), [LP-1155: LRC-1155 Multi-Token Standard](/docs/lp-3155-lrc-1155-multi-token-standard/)

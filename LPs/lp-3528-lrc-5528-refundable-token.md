@@ -10,7 +10,7 @@ category: LRC
 created: 2025-01-23
 requires: 3020
 tags: [lrc, token-standard, escrow, payments]
-order: 530
+order: 430
 ---
 
 # LP-3528: LRC-5528 Refundable Fungible Token

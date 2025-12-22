@@ -14,7 +14,7 @@ activation:
   flag: lp721-lrc721-nft-standard
   hfName: ""
   activationHeight: "0"
-order: 300
+order: 200
 ---
 
 > **See also**: [LP-12: C-Chain (Contract Chain) Specification](/docs/lp-12-c-chain-contract-chain-specification/), [LP-20: LRC-20 Fungible Token Standard](/docs/lp-20-lrc-20-fungible-token-standard/), [LP-1155: LRC-1155 Multi-Token Standard](/docs/lp-3155-lrc-1155-multi-token-standard/)

@@ -10,7 +10,7 @@ category: LRC
 created: 2025-01-23
 requires: 3020, 3721
 tags: [lrc, token-standard, defi]
-order: 420
+order: 320
 ---
 
 # LP-3525: LRC-3525 Semi-Fungible Token
