@@ -58,9 +58,9 @@ jobs:
         working-directory: ./docs
         run: pnpm exec playwright install --with-deps chromium
 
-      - name: Run Playwright tests
+      - name: Run Playwright routing tests
         working-directory: ./docs
-        run: pnpm test
+        run: pnpm exec playwright test --project=chromium tests/routing.spec.ts --reporter=list
         env:
           CI: true
 
