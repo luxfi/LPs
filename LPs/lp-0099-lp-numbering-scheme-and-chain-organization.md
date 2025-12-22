@@ -52,8 +52,8 @@ This LP is the **canonical governance anchor** for all Lux Proposals. It defines
 | **0–99** | Constitutional / Meta | Final only |
 | **100–999** | Core Protocols | Draft, Final |
 | **1000–1999** | Chain Specifications | Draft, Final |
-| **2000–2999** | Assets, Tokens, DAO & ESG | Draft, Final |
-| **3000–3999** | Execution / VM / EVM | Draft, Final |
+| **2000–2999** | DAO, Governance & ESG | Draft, Final, Research |
+| **3000–3999** | Solidity, Tokens & Web3 | Draft, Final |
 | **4000–4999** | Cryptography / PQC | Draft, Final |
 | **5000–5999** | AI / Attestation | Draft, Final |
 | **6000–6999** | Bridges & Interop | Draft, Final |
@@ -135,43 +135,45 @@ Each LP MUST declare exactly one status:
 
 ---
 
-#### 2000–2999: Assets, Tokens, DAO & ESG
+#### 2000–2999: DAO, Governance & ESG
 
-**Purpose**: Token standards, asset specs, governance, and sustainability (chain-agnostic).
+**Purpose**: On-chain governance, DAOs, treasury, and sustainability (non-normative).
 
 | Sub-range | Purpose |
 |-----------|---------|
-| 2000–2099 | LRC-20 (fungible tokens) |
-| 2100–2199 | LRC-1155 (multi-token) |
-| 2200–2299 | Token extensions |
-| 2700–2799 | LRC-721 (NFTs) |
+| 2000–2099 | DAO platforms |
+| 2100–2199 | Voting systems |
+| 2200–2299 | Treasury management |
+| 2300–2799 | (Reserved) |
 | 2800–2849 | DAO governance (Azorius, voting) |
-| 2850–2899 | DAO indexes |
+| 2850–2899 | Fund management indexes |
 | 2900–2989 | ESG framework (carbon, green compute) |
 | 2990–2999 | ESG impact & measurement |
 
-**Rule**: Token standards, DAO, and ESG are domain specs—not chain specs.
+**Rule**: Governance and ESG are domain specs. Token standards go in 3xxx.
 
 ---
 
-#### 3000–3999: Execution / VM / EVM
+#### 3000–3999: Solidity, Tokens & Web3
 
-**Purpose**: Virtual machines, precompiles, gas, execution.
+**Purpose**: Token standards (LRC-20/721/1155), Solidity contracts, Web3 interfaces.
 
 | Sub-range | Purpose |
 |-----------|---------|
-| 3000–3099 | VM architecture |
-| 3100–3199 | Account abstraction, multisig |
-| 3200–3299 | State management |
-| 3300–3399 | Gas pricing |
-| 3400–3499 | Curves, cryptography precompiles |
+| 3000–3019 | Token index, standards overview |
+| 3020–3069 | LRC-20 (fungible tokens) |
+| 3070–3099 | Token extensions (staking, media) |
+| 3100–3154 | Account abstraction, multisig |
+| 3155–3199 | LRC-1155 (multi-token) |
+| 3200–3399 | Contract patterns, security |
+| 3400–3499 | Precompiles (curves, crypto) |
 | 3500–3599 | Signature precompiles |
 | 3600–3699 | Messaging precompiles |
-| 3700–3799 | Utility precompiles |
-| 3800–3899 | State sync, pruning |
-| 3900–3999 | (Reserved) |
+| 3700–3720 | Teleport, bridged assets |
+| 3721–3799 | LRC-721 (NFTs) |
+| 3800–3999 | Web3 extensions |
 
-**Rule**: If it's VM/execution layer, it's 3xxx.
+**Rule**: All Solidity/token/Web3 standards go in 3xxx.
 
 ---
 

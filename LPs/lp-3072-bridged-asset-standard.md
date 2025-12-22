@@ -1,5 +1,5 @@
 ---
-lp: 2072
+lp: 3072
 title: Bridged Asset Standard
 description: Standard for bridged tokens from external chains to Lux Network
 author: Lux Network Team (@luxfi)

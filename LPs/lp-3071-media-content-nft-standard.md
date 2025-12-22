@@ -1,5 +1,5 @@
 ---
-lp: 2071
+lp: 3071
 title: Media Content NFT Standard
 description: Standard for media and content NFTs with licensing, royalties, and metadata on Lux Network
 author: Lux Network Team (@luxfi)

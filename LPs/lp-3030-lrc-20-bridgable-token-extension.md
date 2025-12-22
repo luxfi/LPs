@@ -1,5 +1,5 @@
 ---
-lp: 2030
+lp: 3030
 title: LRC-20 Bridgable Token Extension
 description: Optional extension of the fungible token standard to support native bridging operations via burn and mint
 author: Gemini (@gemini)
