@@ -4,10 +4,12 @@ title: Security Audit Requirements for DeFi
 description: Comprehensive security audit standards, requirements, and checklists for production DeFi protocols
 author: Lux Core Team
 status: Draft
+tags: [dex, trading]
 type: Standards Track
 category: Core
 created: 2025-01-15
 requires: [9016, 9017, 9023]
+order: 24
 ---
 
 # LP-9024: Security Audit Requirements for DeFi

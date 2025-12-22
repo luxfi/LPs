@@ -9,6 +9,7 @@ status: Draft
 type: Meta
 created: 2025-12-16
 requires: [800]
+order: 50
 ---
 
 # LP-850: ESG Standards Alignment Matrix

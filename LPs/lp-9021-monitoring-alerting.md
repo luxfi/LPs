@@ -4,10 +4,12 @@ title: Monitoring & Alerting Standards
 description: Real-time monitoring, metrics collection, and alerting infrastructure for production DeFi
 author: Lux Core Team
 status: Draft
+tags: [dex, trading]
 type: Standards Track
 category: Core
 created: 2025-01-15
 requires: [9016, 9020]
+order: 21
 ---
 
 # LP-9021: Monitoring & Alerting Standards

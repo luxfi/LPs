@@ -14,6 +14,7 @@ activation:
   hfName: "Quantum"
   activationHeight: "0"
 tags: [mpc, threshold-crypto]
+order: 323
 ---
 
 ## Abstract

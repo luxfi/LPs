@@ -10,6 +10,7 @@ category: Core
 created: 2025-01-29
 requires: 110
 tags: [consensus, wave, fpc, voting, threshold, bft, probabilistic]
+order: 13
 ---
 
 ## Abstract

@@ -14,6 +14,7 @@ activation:
   hfName: "Sentinel"
   activationHeight: "0"
 tags: [bridge, security]
+order: 339
 ---
 
 > **See also**: [LP-330](/docs/lp-7330-t-chain-thresholdvm-specification/), [LP-331](/docs/lp-6331-b-chain-bridgevm-specification/), [LP-333](/docs/lp-7333-dynamic-signer-rotation-with-lss-protocol/), [LP-335](/docs/lp-6335-bridge-smart-contract-integration/), [LP-INDEX](/docs/)

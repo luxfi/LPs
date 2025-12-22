@@ -7,6 +7,7 @@ status: Draft
 type: Meta
 created: 2025-12-21
 tags: [funds, treasury, institutional, index]
+order: 20
 ---
 
 # LP-10000: Fund Management Index

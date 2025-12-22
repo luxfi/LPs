@@ -9,6 +9,7 @@ status: Draft
 type: Standards Track
 category: Core
 created: 2025-07-23
+order: 14
 ---
 
 > **See also**: [LP-13](/docs/lp-13-t-chain-decentralised-mpc-custody-and-swap-signature-layer/), [LP-INDEX](/docs/)

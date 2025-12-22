@@ -14,6 +14,7 @@ activation:
   hfName: "Quantum"
   activationHeight: "0"
 tags: [pqc, precompile, evm]
+order: 311
 ---
 
 ## Abstract

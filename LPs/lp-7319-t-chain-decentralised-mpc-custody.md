@@ -12,6 +12,7 @@ replaces: 4-r1
 requires: 1, 2, 3, 5, 6
 superseded-by: 7013
 tags: [mpc, threshold-crypto, bridge]
+order: 319
 ---
 
 > **Note**: This LP has been superseded by [LP-13](/docs/lp-13/), which consolidates all T-Chain specifications into a single comprehensive document.

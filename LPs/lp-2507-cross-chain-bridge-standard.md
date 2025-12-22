@@ -10,6 +10,7 @@ category: Bridge
 created: 2025-12-14
 requires: 2030, 6016
 tags: [bridge, teleport, cross-chain, mpc, erc20b]
+order: 507
 ---
 
 ## Abstract

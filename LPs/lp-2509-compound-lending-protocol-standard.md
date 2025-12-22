@@ -10,6 +10,7 @@ category: LRC
 created: 2025-12-14
 requires: 2000
 tags: [defi, lending, compound]
+order: 509
 ---
 
 ## Abstract

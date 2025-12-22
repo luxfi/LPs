@@ -10,6 +10,7 @@ category: Core
 created: 2025-10-28
 requires: 204, 301, 302
 tags: [pqc, consensus, core]
+order: 303
 ---
 
 # LP-303: Lux Q-Security - Post-Quantum P-Chain Integration

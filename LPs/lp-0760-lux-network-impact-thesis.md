@@ -9,6 +9,7 @@ status: Draft
 type: Meta
 created: 2025-12-17
 requires: [750, 800, 900]
+order: 60
 ---
 
 # LP-760: Lux Network Impact Thesis

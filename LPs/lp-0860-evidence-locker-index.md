@@ -9,6 +9,7 @@ status: Draft
 type: Meta
 created: 2025-12-16
 requires: [800, 850]
+order: 60
 ---
 
 # LP-860: Evidence Locker Index

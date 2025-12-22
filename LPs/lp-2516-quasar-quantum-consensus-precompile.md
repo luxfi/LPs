@@ -14,6 +14,7 @@ activation:
   hfName: "Quasar"
   activationHeight: "0"
 tags: [pqc, precompile, consensus, q-chain]
+order: 516
 ---
 
 ## Abstract

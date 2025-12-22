@@ -8,6 +8,7 @@ discussions-to: https://github.com/luxfi/lps/discussions
 status: Draft
 type: Meta
 created: 2025-12-16
+order: 0
 ---
 
 # LP-800: ESG Principles and Commitments

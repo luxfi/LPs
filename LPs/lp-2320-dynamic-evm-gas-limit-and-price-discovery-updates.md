@@ -15,6 +15,7 @@ activation:
   hfName: "Granite"
   activationHeight: "0"
 tags: [evm, gas]
+order: 320
 ---
 
 ## Abstract

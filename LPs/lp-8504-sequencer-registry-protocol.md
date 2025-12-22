@@ -10,6 +10,7 @@ category: Core
 created: 2025-09-24
 requires: 500, 501, 502, 503
 tags: [l2, consensus]
+order: 504
 ---
 
 ## Abstract

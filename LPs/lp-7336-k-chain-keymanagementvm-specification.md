@@ -14,6 +14,7 @@ activation:
   hfName: "KeyVault"
   activationHeight: "0"
 tags: [mpc, vm, security]
+order: 336
 ---
 
 > **See also**: [LP-103](/docs/lp-7103-mpc-lss---multi-party-computation-linear-secret-sharing-with-dynamic-resharing/), [LP-104](/docs/lp-7104-frost---flexible-round-optimized-schnorr-threshold-signatures-for-eddsa/), [LP-330](/docs/lp-7330-t-chain-thresholdvm-specification/), [LP-332](/docs/lp-6332-teleport-bridge-architecture-unified-cross-chain-protocol/), [LP-334](/docs/lp-7334-per-asset-threshold-key-management/), [LP-INDEX](/docs/)

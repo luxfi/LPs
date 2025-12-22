@@ -9,6 +9,7 @@ type: Standards Track
 category: Core
 created: 2025-07-22
 tags: [l2, scaling]
+order: 25
 ---
 
 ## Abstract

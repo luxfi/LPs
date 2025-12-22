@@ -12,6 +12,7 @@ created: 2025-01-23
 updated: 2025-07-25
 requires: 1, 2, 3, 5, 6
 supersedes: 4-r2
+order: 13
 ---
 
 > **See also**: [LP-0](/docs/lp-0-network-architecture-and-community-framework/), [LP-10](/docs/lp-10-p-chain-platfort-chain-specification-deprecated/), [LP-11](/docs/lp-11-x-chain-exchange-chain-specification/), [LP-12](/docs/lp-12-c-chain-contract-chain-specification/), [LP-14](/docs/lp-14-t-chain-threshold-signatures-with-cgg21-uc-non-interactive-ecdsa/), [LP-INDEX](/docs/)

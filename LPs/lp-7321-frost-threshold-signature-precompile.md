@@ -14,6 +14,7 @@ activation:
   hfName: "Quantum"
   activationHeight: "0"
 tags: [threshold-crypto, precompile]
+order: 321
 ---
 
 ## Abstract

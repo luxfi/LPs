@@ -10,6 +10,7 @@ category: LRC
 created: 2025-01-23
 requires: 2300, 7013
 tags: [bridge, lrc]
+order: 72
 ---
 
 ## Abstract

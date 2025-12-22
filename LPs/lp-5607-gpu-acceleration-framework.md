@@ -10,6 +10,7 @@ category: Core
 created: 2025-01-09
 requires: 601
 tags: [ai, scaling]
+order: 607
 ---
 
 # LP-607: GPU Acceleration Framework

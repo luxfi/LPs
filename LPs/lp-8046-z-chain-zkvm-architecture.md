@@ -10,6 +10,7 @@ category: Core
 created: 2025-12-11
 requires: 8045, 0302, 0503
 tags: [privacy, zk, zkvm, core]
+order: 46
 ---
 
 > **See also**: [LP-45](/docs/lp-8045-z-chain-encrypted-execution-layer-interface/), [LP-302](/docs/lp-0302-lux-z-a-chain-privacy-ai-attestation-layer/), [LP-503](/docs/lp-0503-validity-proof-system/)

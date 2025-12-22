@@ -14,6 +14,7 @@ activation:
   hfName: "Photon"
   activationHeight: "0"
 tags: [mpc, threshold-crypto, bridge]
+order: 333
 ---
 
 > **See also**: [LP-103](/docs/lp-7103-mpc-lss---multi-party-computation-linear-secret-sharing-with-dynamic-resharing/), [LP-323](/docs/lp-7323-lss-mpc-dynamic-resharing-extension/), [LP-14](/docs/lp-7014-t-chain-threshold-signatures-with-cgg21-uc-non-interactive-ecdsa/), [LP-330](/docs/lp-7330-t-chain-thresholdvm-specification/), [LP-334](/docs/lp-7334-per-asset-threshold-key-management/), [LP-INDEX](/docs/)

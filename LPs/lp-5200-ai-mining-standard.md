@@ -14,6 +14,7 @@ activation:
   flag: lp-2000-ai-mining
   hfName: "ai-mining"
   activationHeight: "0"
+order: 200
 ---
 
 ## Abstract

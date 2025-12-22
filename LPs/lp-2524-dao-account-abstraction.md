@@ -10,6 +10,7 @@ category: LRC
 created: 2025-12-17
 requires: 2506
 tags: [dao, account-abstraction, paymaster, erc-4337]
+order: 524
 ---
 
 ## Abstract

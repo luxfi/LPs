@@ -10,6 +10,7 @@ category: Core
 created: 2025-11-22
 requires: 313
 tags: [cross-chain, warp]
+order: 315
 ---
 
 # LP-315: Enhanced Cross-Chain Communication Protocol

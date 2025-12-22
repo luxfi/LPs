@@ -14,6 +14,7 @@ activation:
   hfName: "Quantum"
   activationHeight: "0"
 tags: [pqc, precompile, evm, fips-204, dilithium]
+order: 514
 ---
 
 ## Abstract

@@ -10,6 +10,7 @@ category: Core
 created: 2025-01-29
 requires: 110
 tags: [consensus, horizon, dag, finality, predicates, reachability]
+order: 15
 ---
 
 ## Abstract

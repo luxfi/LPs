@@ -10,6 +10,7 @@ category: Core
 created: 2025-11-22
 requires: 2012
 tags: [precompile, evm]
+order: 204
 ---
 
 # LP-204: Precompile for secp256r1 Curve Support (Granite Upgrade)

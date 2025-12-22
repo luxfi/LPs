@@ -11,6 +11,7 @@ category: Core
 created: 2025-01-29
 requires: 4, 5
 tags: [consensus, pqc]
+order: 110
 ---
 
 ## Abstract

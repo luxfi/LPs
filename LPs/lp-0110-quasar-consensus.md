@@ -9,6 +9,7 @@ type: Standards Track
 category: Core
 created: 2025-01-29
 tags: [consensus, quasar, finality, bft, snowman, photon, wave, focus, prism, horizon, flare]
+order: 10
 ---
 
 ## Abstract

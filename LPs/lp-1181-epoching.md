@@ -10,6 +10,7 @@ category: Core
 created: 2025-11-22
 requires: 10
 tags: [consensus, core]
+order: 181
 ---
 
 # LP-181: P-Chain Epoched Views (Granite Upgrade)

@@ -13,6 +13,7 @@ activation:
   flag: lp4-quantum-resistance
   hfName: ""
   activationHeight: "0"
+order: 4
 ---
 
 > **See also**: [LP-5: Lux Quantum-Safe Wallets and Multisig Standard](/docs/lp-5-quantum-safe-wallets-and-multisig-standard/)

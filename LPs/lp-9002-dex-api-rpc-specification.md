@@ -15,6 +15,7 @@ supersedes: 3036
 series: LP-9000 DEX Series
 implementation: https://github.com/luxfi/dex
 documentation: https://dex.lux.network
+order: 2
 ---
 
 > **Documentation**: [dex.lux.network](https://dex.lux.network)

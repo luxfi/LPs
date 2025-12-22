@@ -14,6 +14,7 @@ activation:
   flag: lp-2500-quantumswap
   hfName: "quantumswap"
   activationHeight: "0"
+order: 500
 ---
 
 ## Abstract

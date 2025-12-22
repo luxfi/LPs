@@ -9,6 +9,7 @@ status: Draft
 type: Meta
 created: 2025-12-17
 requires: [800]
+order: 1
 ---
 
 # LP-801: Carbon Accounting Methodology

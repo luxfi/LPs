@@ -10,6 +10,7 @@ type: Standards Track
 category: Core
 created: 2025-01-23
 updated: 2025-12-11
+order: 10
 ---
 
 > **See also**: [LP-0](/docs/lp-0000-network-architecture-and-community-framework/), [LP-11](/docs/lp-9011-x-chain-exchange-chain-specification/), [LP-12](/docs/lp-2012-c-chain-contract-chain-specification/), [LP-99](/docs/lp-0099-q-chain-quantum-secure-consensus-protocol-family-quasar/)

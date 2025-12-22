@@ -10,6 +10,7 @@ category: LRC
 created: 2025-12-14
 discussions-to: https://github.com/luxfi/lps/discussions
 requires: 40, 42
+order: 504
 ---
 
 ## Abstract

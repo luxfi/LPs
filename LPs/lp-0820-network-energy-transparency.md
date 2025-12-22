@@ -9,6 +9,7 @@ status: Draft
 type: Meta
 created: 2025-12-17
 requires: [800, 801]
+order: 20
 ---
 
 # LP-820: Network Energy Transparency

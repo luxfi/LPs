@@ -10,6 +10,7 @@ category: Core
 created: 2025-01-28
 requires: 4, 5
 tags: [pqc, wallet]
+order: 105
 ---
 
 > **See also**: [LP-4: Quantum-Resistant Cryptography](/docs/lp-4-quantum-resistant-cryptography-integration-in-lux/), [LP-5: Quantum-Safe Wallets](/docs/lp-5-quantum-safe-wallets-and-multisig-standard/), [LP-11: X-Chain Lamport OTS](/docs/lp-11-x-chain-exchange-chain-specification/)

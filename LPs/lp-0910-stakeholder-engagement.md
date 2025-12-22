@@ -9,6 +9,7 @@ status: Draft
 type: Meta
 created: 2025-12-17
 requires: [800, 900]
+order: 10
 ---
 
 # LP-910: Stakeholder Engagement

@@ -10,6 +10,7 @@ category: Interface
 created: 2025-07-24
 requires: 8046
 tags: [privacy, zk, core]
+order: 45
 ---
 
 > **See also**: [LP-46](/docs/lp-8046-z-chain-zkvm-architecture/) (ZKVM Architecture), [LP-302](/docs/lp-0302-lux-z-a-chain-privacy-ai-attestation-layer/), [LP-503](/docs/lp-0503-validity-proof-system/)

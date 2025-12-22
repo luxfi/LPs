@@ -10,6 +10,7 @@ category: Core
 created: 2025-01-29
 requires: 0110, 0113
 tags: [consensus, focus, confidence, finality, beta-threshold]
+order: 14
 ---
 
 ## Abstract

@@ -1,5 +1,5 @@
 ---
-lp: 7
+lp: 3001
 title: VM SDK Specification
 tags: [vm, dev-tools, sdk]
 description: Defines the Virtual Machine SDK for Lux.
@@ -9,6 +9,7 @@ status: Final
 type: Standards Track
 category: Core
 created: 2025-01-23
+order: 1
 ---
 
 ## Abstract

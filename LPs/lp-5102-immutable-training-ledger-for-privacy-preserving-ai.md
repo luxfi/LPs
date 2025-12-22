@@ -9,6 +9,7 @@ status: Draft
 created: 2024-12-20
 requires: LP-100
 tags: [ai, privacy]
+order: 102
 ---
 
 # LP-102: Immutable Training Ledger for Privacy-Preserving AI

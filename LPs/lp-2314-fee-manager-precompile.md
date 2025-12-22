@@ -13,6 +13,7 @@ activation:
   hfName: "Genesis"
   activationHeight: "0"
 tags: [precompile, gas, evm]
+order: 314
 ---
 
 ## Abstract

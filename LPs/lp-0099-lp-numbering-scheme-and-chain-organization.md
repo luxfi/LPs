@@ -4,9 +4,11 @@ title: LP Numbering Scheme and Chain Organization
 description: Defines the official LP numbering scheme with chain separation, cryptographic primitives, and research categories
 author: Lux Core Team
 status: Final
+tags: [network, core]
 type: Meta
 created: 2025-01-15
 updated: 2025-12-21
+order: 99
 ---
 
 # LP-0099: LP Numbering Scheme and Chain Organization (v3.3)

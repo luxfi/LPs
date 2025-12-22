@@ -5,10 +5,12 @@ description: Standard for executing multiple contract calls in a single transact
 author: Lux Network Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
 status: Draft
+tags: [dex, trading]
 type: Standards Track
 category: LRC
 created: 2025-01-23
 requires: tags:, evm, dev-tools
+order: 73
 ---
 
 ## Abstract

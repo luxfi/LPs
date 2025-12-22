@@ -5,10 +5,12 @@ description: Self-repaying loans protocol enabling users to mint synthetic token
 author: Lux Network Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
 status: Draft
+tags: [c-chain, evm]
 type: Standards Track
 category: LRC
 created: 2025-12-14
 requires: 2000, 6022
+order: 508
 ---
 
 ## Abstract

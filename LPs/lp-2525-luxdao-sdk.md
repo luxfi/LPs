@@ -10,6 +10,7 @@ category: Interface
 created: 2025-12-17
 requires: 2506, 2507
 tags: [dao, sdk, typescript]
+order: 525
 ---
 
 ## Abstract

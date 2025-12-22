@@ -10,6 +10,7 @@ category: Core
 created: 2025-07-25
 requires: 10, 9011, 2012, 75
 tags: [core, ai, attestation]
+order: 80
 ---
 
 ## Abstract
