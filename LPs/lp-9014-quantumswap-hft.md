@@ -9,7 +9,7 @@ status: Draft
 type: Standards Track
 category: Core
 created: 2025-12-21
-requires: 9000, 9010, 3000
+requires: 9000, 9010, 3600
 implementation: https://github.com/luxfi/standard/src/liquidity/dex/QuantumSwap.sol
 order: 14
 ---

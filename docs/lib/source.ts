@@ -96,31 +96,66 @@ const LP_TOPICS: CategoryMeta[] = [
   // 0.2 LRC STANDARDS — Application-layer token standards (like ERC on Ethereum)
   // ============================================================
   // LRCs are the key interface standards that define how tokens behave
+  // Range: 3000-3499 (LRC-20: 3020-3049, LRC-1155: 3100-3149, LRC-721: 3200-3299, etc.)
   {
     slug: 'lrc',
     name: 'LRC Standards',
-    shortDesc: 'Token interface standards',
-    description: 'Lux Request for Comments (LRC) - application-layer standards defining token interfaces. LRC-20 (fungible), LRC-721 (NFT), LRC-1155 (multi-token), and extensions.',
-    tags: ['token-standard', 'lrc-20', 'lrc-721', 'lrc-1155'],
+    shortDesc: 'ERC-compatible token standards',
+    description: 'Lux Request for Comments (LRC) - full ERC compatibility. LRC-20/721/1155/4626/4337/2981 and all major token standards with extensions.',
+    range: [3000, 3499],
+    tags: ['token-standard', 'lrc-20', 'lrc-721', 'lrc-1155', 'lrc-4626', 'lrc-4337', 'lrc-2981', 'lrc-165', 'lrc-173', 'lrc-2612', 'lrc-3156', 'lrc-6909', 'lrc-5192', 'lrc-6551', 'lrc-1271', 'lrc-777', 'vault', 'account-abstraction', 'paymaster', 'flash-loan', 'soulbound', 'royalty', 'permit'],
     icon: 'token',
     color: 'amber',
-    learnMore: 'LRCs define how tokens work on Lux. Like ERCs on Ethereum, they ensure interoperability across wallets, exchanges, and DeFi protocols.',
-    keyTopics: ['LRC-20 Fungible', 'LRC-721 NFT', 'LRC-1155 Multi-Token', 'Burnable', 'Mintable', 'Bridgable'],
+    learnMore: 'LRCs mirror ERCs for full EVM compatibility: fungible tokens (LRC-20), NFTs (LRC-721), multi-tokens (LRC-1155), vaults (LRC-4626), account abstraction (LRC-4337), and more.',
+    keyTopics: ['LRC-20 Fungible', 'LRC-721 NFT', 'LRC-1155 Multi-Token', 'LRC-4626 Vaults', 'LRC-4337 Account Abstraction', 'LRC-2981 Royalties', 'LRC-3156 Flash Loans'],
   },
 
   // ============================================================
-  // 0.3 ASSETS & TOKENS — Native token, tokenomics, NFTs
+  // 0.3 PRECOMPILES — Native EVM precompiled contracts
+  // ============================================================
+  {
+    slug: 'precompiles',
+    name: 'Precompiles',
+    shortDesc: 'Native EVM contracts',
+    description: 'Precompiled contracts for cryptography, messaging, and chain-specific operations. ML-DSA, SLH-DSA, Warp messaging, fee management.',
+    range: [3500, 3599],
+    tags: ['precompile', 'precompiled'],
+    icon: 'code',
+    color: 'cyan',
+    learnMore: 'Precompiles are native contracts at reserved addresses, enabling efficient cryptographic operations and cross-chain messaging.',
+    keyTopics: ['ML-DSA Signatures', 'SLH-DSA Signatures', 'Warp Messaging', 'Fee Manager', 'Quasar Consensus'],
+  },
+
+  // ============================================================
+  // 0.4 EVM & EXECUTION — Virtual machine and runtime
+  // ============================================================
+  {
+    slug: 'evm',
+    name: 'EVM & Execution',
+    shortDesc: 'VM & runtime',
+    description: 'Virtual machine specifications, execution environment, gas pricing, state management, and chain upgrades.',
+    range: [3600, 3799],
+    tags: ['evm', 'vm', 'execution', 'gas', 'state', 'upgrade', 'verkle', 'sync'],
+    icon: 'cpu',
+    color: 'slate',
+    learnMore: 'The EVM execution layer handles smart contract runtime, gas mechanics, state sync, and network upgrades.',
+    keyTopics: ['VM Specification', 'Gas Pricing', 'State Sync', 'Verkle Trees', 'Chain Upgrades'],
+  },
+
+  // ============================================================
+  // 0.5 ASSETS & TOKENS — Native token, tokenomics, NFTs
   // ============================================================
   {
     slug: 'tokens',
     name: 'Assets & Tokens',
     shortDesc: 'Tokenomics & assets',
-    description: 'LUX native token economics, asset issuance, NFT marketplaces, and token-related protocols beyond core LRC standards.',
-    tags: ['token', 'tokens', 'tokenomics', 'lrc', 'nft', 'fungible', 'erc20b', 'burnable', 'mintable', 'bridgable', 'marketplace'],
+    description: 'LUX native token economics, asset issuance, NFT marketplaces, and cross-chain asset protocols.',
+    range: [3800, 3899],
+    tags: ['token', 'tokens', 'tokenomics', 'lrc', 'nft', 'fungible', 'marketplace', 'teleport', 'bridged-asset'],
     icon: 'coins',
     color: 'yellow',
-    learnMore: 'Assets & Tokens covers the economic layer: LUX tokenomics, asset creation, and NFT infrastructure.',
-    keyTopics: ['LUX token', 'Tokenomics', 'NFT Marketplace', 'Asset Issuance'],
+    learnMore: 'Assets & Tokens covers the economic layer: LUX tokenomics, bridged assets, and cross-chain token protocols.',
+    keyTopics: ['LUX token', 'Tokenomics', 'Bridged Assets', 'Teleport Standard'],
   },
 
   // ============================================================================

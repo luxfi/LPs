@@ -9,7 +9,7 @@ status: Final
 type: Standards Track
 category: LRC
 created: 2025-12-11
-requires: 0, 99, 3000
+requires: 0, 99, 3600
 implementation: https://github.com/luxfi/dex
 documentation: https://dex.lux.network
 order: 0

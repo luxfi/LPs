@@ -47,7 +47,7 @@ After completing this path, you will be able to:
 
 | Order | LP | Title | Time | Depth |
 |-------|-----|-------|------|-------|
-| 1 | [LP-3000](/docs/lp-3000/) | C-Chain Core Specification | 30 min | Deep |
+| 1 | [LP-3600](/docs/lp-3000/) | C-Chain Core Specification | 30 min | Deep |
 | 2 | [LP-3800](/docs/lp-3800/) | Gas & Fee Model | 20 min | Medium |
 | 3 | [LP-0176](/docs/lp-0176-dynamic-gas-pricing/) | Dynamic Gas Pricing | 15 min | Medium |
 
