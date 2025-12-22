@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-LP-lint: Machine-enforceable validation rules per LP-0099 v5.0
+LP-lint: Machine-enforceable validation rules per LP-0099 v5.1
 
 Rules:
 1. Range check - LP must be in correct range for its domain
@@ -35,8 +35,8 @@ RANGES = {
         "allowed_status": ["Draft", "Final", "Superseded"],
     },
     (2000, 2999): {
-        "name": "Assets & Tokens",
-        "allowed_status": ["Draft", "Final", "Superseded"],
+        "name": "Assets, Tokens, DAO & ESG",
+        "allowed_status": ["Draft", "Final", "Superseded", "Research"],
     },
     (3000, 3999): {
         "name": "Execution/VM/EVM",
@@ -74,21 +74,6 @@ RANGES = {
     (50000, 59999): {
         "name": "Research Indexes",
         "allowed_status": ["Research"],
-        "forbidden_status": ["Final"],
-    },
-    (70000, 70999): {
-        "name": "Fund Management",
-        "allowed_status": ["Draft", "Research"],
-        "forbidden_status": ["Final"],
-    },
-    (71000, 71999): {
-        "name": "DAO Governance",
-        "allowed_status": ["Draft", "Research"],
-        "forbidden_status": ["Final"],
-    },
-    (72000, 72999): {
-        "name": "ESG/Impact",
-        "allowed_status": ["Draft", "Research"],
         "forbidden_status": ["Final"],
     },
 }
@@ -227,7 +212,7 @@ def check_duplicates(lp_files):
 
 def main():
     print("=" * 60)
-    print("LP-lint: Canonical Validation (LP-0099 v5.0)")
+    print("LP-lint: Canonical Validation (LP-0099 v5.1)")
     print("=" * 60)
     
     all_errors = []

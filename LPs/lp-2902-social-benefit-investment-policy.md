@@ -1,5 +1,5 @@
 ---
-lp: 72152
+lp: 2902
 title: Social Benefit Investment Policy
 tags: [investment, social, impact, inclusion]
 description: Investment policy for social benefit - opportunity, dignity, and resilience.
@@ -9,7 +9,7 @@ status: Draft
 type: Meta
 created: 2025-12-17
 requires: [750, 800]
-order: 72152
+order: 2902
 ---
 
 # LP-752: Social Benefit Investment Policy

@@ -1,5 +1,5 @@
 ---
-lp: 72151
+lp: 2901
 title: Environmental Integrity Investment Policy
 tags: [investment, environment, carbon, sustainability]
 description: Investment policy for environmental integrity - measurable improvement, not vibes.
@@ -9,7 +9,7 @@ status: Draft
 type: Meta
 created: 2025-12-17
 requires: [750, 800]
-order: 72151
+order: 2901
 ---
 
 # LP-751: Environmental Integrity Investment Policy

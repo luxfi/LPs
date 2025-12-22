@@ -1,5 +1,5 @@
 ---
-lp: 71021
+lp: 2801
 title: Azorius Governance Module
 description: Modular on-chain governance module for Lux DAOs with proposal lifecycle management
 author: Lux Industries Inc.
@@ -10,7 +10,7 @@ category: LRC
 created: 2025-12-17
 requires: 2504, 2506
 tags: [dao, governance, azorius, module]
-order: 71021
+order: 2801
 ---
 
 ## Abstract

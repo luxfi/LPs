@@ -1,5 +1,5 @@
 ---
-lp: 72160
+lp: 2910
 title: Lux Network Impact Thesis
 tags: [esg, impact, vision, ecosystem, thesis]
 description: Unified impact thesis for Lux Network and its role in the Lux-Hanzo-Zoo ecosystem.
@@ -9,7 +9,7 @@ status: Draft
 type: Meta
 created: 2025-12-17
 requires: [750, 800, 900]
-order: 72160
+order: 2910
 ---
 
 # LP-760: Lux Network Impact Thesis

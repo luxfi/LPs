@@ -1,5 +1,5 @@
 ---
-lp: 72300
+lp: 2990
 title: Impact Framework & Theory of Change
 tags: [esg, impact, social, stakeholders]
 description: Foundational framework for measuring and reporting Lux Network's societal impact.
@@ -9,7 +9,7 @@ status: Draft
 type: Meta
 created: 2025-12-17
 requires: [800]
-order: 72300
+order: 2990
 ---
 
 # LP-900: Impact Framework & Theory of Change

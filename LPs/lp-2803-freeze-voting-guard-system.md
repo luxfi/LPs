@@ -1,5 +1,5 @@
 ---
-lp: 71023
+lp: 2803
 title: Freeze Voting & Guard System
 description: Emergency governance controls for Lux DAOs with freeze voting and guard mechanisms
 author: Lux Industries Inc.
@@ -10,7 +10,7 @@ category: LRC
 created: 2025-12-17
 requires: 2504, 2507
 tags: [dao, governance, security, freeze]
-order: 71023
+order: 2803
 ---
 
 ## Abstract

@@ -1,5 +1,5 @@
 ---
-lp: 71025
+lp: 2805
 title: "@luxdao/sdk TypeScript SDK"
 description: TypeScript SDK for interacting with Lux DAO contracts and governance
 author: Lux Industries Inc.
@@ -10,7 +10,7 @@ category: Interface
 created: 2025-12-17
 requires: 2506, 2507
 tags: [dao, sdk, typescript]
-order: 71025
+order: 2805
 ---
 
 ## Abstract

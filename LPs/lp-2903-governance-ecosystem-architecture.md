@@ -1,5 +1,5 @@
 ---
-lp: 72153
+lp: 2903
 title: Governance & Ecosystem Architecture
 tags: [investment, accountability, ecosystem]
 description: Governance structure and accountability architecture for the Lux-Hanzo-Zoo ecosystem.
@@ -9,7 +9,7 @@ status: Draft
 type: Meta
 created: 2025-12-17
 requires: [750, 800]
-order: 72153
+order: 2903
 ---
 
 # LP-753: Governance & Ecosystem Architecture

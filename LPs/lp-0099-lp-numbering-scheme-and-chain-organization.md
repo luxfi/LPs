@@ -52,7 +52,7 @@ This LP is the **canonical governance anchor** for all Lux Proposals. It defines
 | **0–99** | Constitutional / Meta | Final only |
 | **100–999** | Core Protocols | Draft, Final |
 | **1000–1999** | Chain Specifications | Draft, Final |
-| **2000–2999** | Assets & Tokens | Draft, Final |
+| **2000–2999** | Assets, Tokens, DAO & ESG | Draft, Final |
 | **3000–3999** | Execution / VM / EVM | Draft, Final |
 | **4000–4999** | Cryptography / PQC | Draft, Final |
 | **5000–5999** | AI / Attestation | Draft, Final |
@@ -62,7 +62,6 @@ This LP is the **canonical governance anchor** for all Lux Proposals. It defines
 | **9000–9999** | DeFi / Markets | Draft, Final |
 | **10000–19999** | Learning Paths | Research only |
 | **50000–59999** | Research Indexes | Research only |
-| **70000–79999** | Governance Indexes | Research only |
 
 **Rule**: LPs outside their designated range are INVALID.
 
@@ -82,7 +81,6 @@ Each LP MUST declare exactly one status:
 **Hard Rules**:
 - Learning Paths (10000+) can NEVER be Final
 - Research Indexes (50000+) can NEVER be Final
-- Governance Indexes (70000+) can NEVER be Final
 - Only ranges 0–9999 can reach Final status
 
 ---
@@ -137,9 +135,9 @@ Each LP MUST declare exactly one status:
 
 ---
 
-#### 2000–2999: Assets & Tokens
+#### 2000–2999: Assets, Tokens, DAO & ESG
 
-**Purpose**: Token standards, asset specs (chain-agnostic).
+**Purpose**: Token standards, asset specs, governance, and sustainability (chain-agnostic).
 
 | Sub-range | Purpose |
 |-----------|---------|
@@ -147,9 +145,12 @@ Each LP MUST declare exactly one status:
 | 2100–2199 | LRC-1155 (multi-token) |
 | 2200–2299 | Token extensions |
 | 2700–2799 | LRC-721 (NFTs) |
-| 2800–2999 | Asset extensions |
+| 2800–2849 | DAO governance (Azorius, voting) |
+| 2850–2899 | DAO indexes |
+| 2900–2989 | ESG framework (carbon, green compute) |
+| 2990–2999 | ESG impact & measurement |
 
-**Rule**: Token standards are domain specs, not chain specs.
+**Rule**: Token standards, DAO, and ESG are domain specs—not chain specs.
 
 ---
 
@@ -297,16 +298,13 @@ Each LP MUST declare exactly one status:
 
 ---
 
-#### 50000+: Research & Governance Indexes
+#### 50000+: Research Indexes
 
-**Purpose**: Non-binding references.
+**Purpose**: Non-binding references and research papers.
 
 | Range | Purpose |
 |-------|---------|
 | 50000–59999 | Research papers |
-| 70000–70999 | Fund management |
-| 71000–71999 | DAO governance |
-| 72000–72999 | ESG & impact |
 
 **Status**: Research only. NEVER Final.
 
@@ -319,7 +317,7 @@ Each LP MUST declare exactly one status:
 | Network identity, LP process | 0–99 | Yes (must be) |
 | Consensus, validators, epochs | 100–999 | Yes |
 | P/X/C chain core identity | 1000–1999 | Yes |
-| Token standards (LRC-20/721) | 2000–2999 | Yes |
+| Tokens, DAO, ESG | 2000–2999 | Yes |
 | VM, precompiles, execution | 3000–3999 | Yes |
 | Post-quantum cryptography | 4000–4999 | Yes |
 | AI, attestation, TEE | 5000–5999 | Yes |
@@ -355,21 +353,17 @@ rules:
 
 ---
 
-## Migration from v4.0
+## Migration History
 
-The following LPs require renumbering:
+### v5.1 (Current)
+- DAO (71xxx) → 2800-2849
+- ESG (72xxx) → 2900-2999
+- Removed 70000-79999 range
 
-| Issue | Count | Action |
-|-------|-------|--------|
-| ESG in 150-330 | 18 | Move to 72xxx |
-| X-Chain in 2xxx | 4 | Move to 1xxx |
-| Tokens in 3xxx | 12 | Move to 2xxx |
-| DeFi in 3xxx | 10 | Move to 9xxx |
-| DAO in 3xxx | 6 | Move to 71xxx |
-| DeFi in 8xxx | 4 | Move to 9xxx |
-| Duplicate LP-40 | 1 | Renumber to LP-41 |
-
-See `docs/LP-RENUMBERING-DIFF.md` for complete migration table.
+### v5.0
+- Applied canonical renumbering
+- ESG, DeFi, tokens moved to proper ranges
+- See `docs/LP-RENUMBERING-DIFF.md`
 
 ---
 

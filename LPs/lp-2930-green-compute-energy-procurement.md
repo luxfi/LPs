@@ -1,5 +1,5 @@
 ---
-lp: 72210
+lp: 2930
 title: Green Compute & Energy Procurement
 tags: [esg, sustainability, energy, renewable, validators]
 description: Policy and incentives for renewable energy adoption across the Lux validator network.
@@ -9,7 +9,7 @@ status: Draft
 type: Meta
 created: 2025-12-17
 requires: [800, 801]
-order: 72210
+order: 2930
 ---
 
 # LP-810: Green Compute & Energy Procurement

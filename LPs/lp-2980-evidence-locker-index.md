@@ -1,5 +1,5 @@
 ---
-lp: 72260
+lp: 2980
 title: Evidence Locker Index
 tags: [esg, sustainability, esg, compliance, evidence, audit]
 description: Centralized index of all ESG evidence artifacts, policies, reports, and attestations.
@@ -9,7 +9,7 @@ status: Draft
 type: Meta
 created: 2025-12-16
 requires: [800, 850]
-order: 72260
+order: 2980
 ---
 
 # LP-860: Evidence Locker Index

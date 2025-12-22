@@ -1,5 +1,5 @@
 ---
-lp: 72310
+lp: 2992
 title: Stakeholder Engagement
 tags: [esg, impact, stakeholders, community]
 description: Framework for meaningful engagement with Lux Network stakeholders.
@@ -9,7 +9,7 @@ status: Draft
 type: Meta
 created: 2025-12-17
 requires: [800, 900]
-order: 72310
+order: 2992
 ---
 
 # LP-910: Stakeholder Engagement

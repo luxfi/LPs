@@ -1,5 +1,5 @@
 ---
-lp: 70000
+lp: 2860
 title: Fund Management Index
 description: Index of fund management, treasury, and institutional investment LPs
 author: Lux Core Team
@@ -10,7 +10,7 @@ tags: [funds, treasury, institutional, index]
 order: 20
 ---
 
-# LP-10000: Fund Management Index
+# LP-2860: Fund Management Index
 
 ## Abstract
 

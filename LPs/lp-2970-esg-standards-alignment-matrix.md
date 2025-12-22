@@ -1,5 +1,5 @@
 ---
-lp: 72250
+lp: 2970
 title: ESG Standards Alignment Matrix
 tags: [esg, sustainability, esg, compliance, standards]
 description: Mapping Lux Network's ESG framework to global reporting standards and frameworks.
@@ -9,7 +9,7 @@ status: Draft
 type: Meta
 created: 2025-12-16
 requires: [800]
-order: 72250
+order: 2970
 ---
 
 # LP-850: ESG Standards Alignment Matrix

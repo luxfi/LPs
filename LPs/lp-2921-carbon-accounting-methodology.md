@@ -1,5 +1,5 @@
 ---
-lp: 72201
+lp: 2921
 title: Carbon Accounting Methodology
 tags: [esg, sustainability, carbon, emissions, ghg-protocol]
 description: Methodology for measuring and reporting Lux Network's greenhouse gas emissions.
@@ -9,7 +9,7 @@ status: Draft
 type: Meta
 created: 2025-12-17
 requires: [800]
-order: 72201
+order: 2921
 ---
 
 # LP-801: Carbon Accounting Methodology
