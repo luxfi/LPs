@@ -14,7 +14,7 @@ activation:
   flag: lp2502-nft-marketplace-standard
   hfName: ""
   activationHeight: "0"
-order: 9102
+order: 297
 ---
 
 > **See also**: [LP-3155](./lp-3155-lrc-1155-multi-token-standard.md), [LP-6022](./lp-6022-warp-messaging-20-native-interchain-transfers.md)

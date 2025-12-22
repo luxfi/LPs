@@ -8,9 +8,9 @@ status: Draft
 type: Standards Track
 category: LRC
 created: 2025-07-22
-tags: [lrc, defi, cross-chain]
+tags: [lrc, defi, cross-chain, nft]
 requires:
-order: 23
+order: 285
 ---
 
 ## Abstract

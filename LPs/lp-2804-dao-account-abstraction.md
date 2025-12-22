@@ -9,7 +9,7 @@ type: Standards Track
 category: LRC
 created: 2025-12-17
 requires: 2802
-tags: [dao, account-abstraction, paymaster, erc-4337]
+tags: [dao, governance, smart-account, erc-4337]
 order: 2804
 ---
 
