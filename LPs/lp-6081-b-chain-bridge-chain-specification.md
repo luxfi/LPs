@@ -30,7 +30,7 @@ B-Chain addresses these by providing a dedicated, quantum-safe bridge infrastruc
 
 ### Chain Architecture
 
-B-Chain is a specialized Lux subnet optimized for bridge operations:
+B-Chain is a specialized Lux chain optimized for bridge operations:
 
 ```
 ┌─────────────────────────────────────────────────────────┐

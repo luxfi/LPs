@@ -101,7 +101,7 @@ Return values are JSON (hex‑encoded 0x… bytes where appropriate).
 | zchain_getTeeQuote          | validatorID                | {quote, expires}                        | GPU SPDM attestation in COSE format                                      |
 | zchain_getTeeStatus         | validatorID                | {ready,qDepth,gpuModel}                 | Health of validator’s Blackwell TEE                                       |
 | zchain_pushTeeQuote         | {quote}                    | bool                                    | Validators upload refreshed quotes every epoch                           |
-| zchain_getSubnetParams      | –                          | {k,alpha,betaVirt,betaRogue}            | Returns Lux consensus sampling parameters                                      |
+| zchain_getchainParams      | –                          | {k,alpha,betaVirt,betaRogue}            | Returns Lux consensus sampling parameters                                      |
 
 All new methods follow the standard JSON‑RPC rules (positional or named params, integer fields hex‑encoded, error codes -320xx reserved).
 

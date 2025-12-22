@@ -768,13 +768,13 @@ func (n *Network) CheckNetwork upgradeSchedule() {
 
 ## Practical JSONL Export/Import Workflow
 
-This section documents the practical workflow for migrating blocks from SubnetEVM (PebbleDB) to a fresh C-Chain via JSONL intermediate format.
+This section documents the practical workflow for migrating blocks from chainEVM (PebbleDB) to a fresh C-Chain via JSONL intermediate format.
 
 ### Overview
 
 ```
 ┌─────────────────────┐
-│  SubnetEVM PebbleDB │  Source: lux-mainnet-96369
+│  chainEVM PebbleDB │  Source: lux-mainnet-96369
 │   (1.08M blocks)    │  Format: Namespaced keys
 └──────────┬──────────┘
            │
@@ -800,9 +800,9 @@ This section documents the practical workflow for migrating blocks from SubnetEV
 The export uses VM-specific `ChainExporter` implementations that normalize data to JSONL:
 
 ```go
-// SubnetEVM Exporter implements ChainExporter
-exporter := chainmigrate.NewSubnetEVMExporter(chainmigrate.ExporterConfig{
-    ChainType:    chainmigrate.ChainTypeSubnetEVM,
+// chainEVM Exporter implements ChainExporter
+exporter := chainmigrate.NewchainEVMExporter(chainmigrate.ExporterConfig{
+    ChainType:    chainmigrate.ChainTypechainEVM,
     DatabasePath: "/Users/z/work/lux/state/chaindata/lux-mainnet-96369/db/pebbledb",
     DatabaseType: "pebble",
     ExportState:  true,
@@ -820,7 +820,7 @@ cd /Users/z/work/lux/genesis
 
 # Export using genesis CLI (uses ChainExporter internally)
 ./bin/genesis export \
-  --source-type=subnet-evm \
+  --source-type=chain-evm \
   --source-path=/Users/z/work/lux/state/chaindata/lux-mainnet-96369/db/pebbledb \
   --start=0 \
   --end=1082780 \
@@ -833,10 +833,10 @@ wc -l blocks-mainnet-full.jsonl
 
 #### 1.3 Data Normalization During Export
 
-The ChainExporter normalizes SubnetEVM data for C-Chain compatibility:
-- **Headers**: 17-field SubnetEVM → 21-field Coreth (adds Cancun fields)
+The ChainExporter normalizes chainEVM data for C-Chain compatibility:
+- **Headers**: 17-field chainEVM → 21-field Coreth (adds Cancun fields)
 - **Keys**: Strips 32-byte namespace prefix
-- **State**: Converts SubnetEVM trie format
+- **State**: Converts chainEVM trie format
 - **Transactions**: Preserves full transaction data with receipts
 
 ### Step 2: Launch Fresh P-Q Network
@@ -922,9 +922,9 @@ Each line contains one complete block in Ethereum JSON-RPC format:
 }
 ```
 
-### Key Differences: SubnetEVM → Coreth
+### Key Differences: chainEVM → Coreth
 
-| Aspect | SubnetEVM | Coreth |
+| Aspect | chainEVM | Coreth |
 |--------|-----------|--------|
 | Database | PebbleDB | BadgerDB |
 | Key Format | Namespaced (32-byte prefix) | Plain |
@@ -954,7 +954,7 @@ curl -s http://127.0.0.1:9650/ext/bc/C/rpc -X POST \
 ```
 
 #### Block Validation Errors
-SubnetEVM blocks may have different validation rules. Ensure Coreth is configured for SubnetEVM compatibility.
+chainEVM blocks may have different validation rules. Ensure Coreth is configured for chainEVM compatibility.
 
 #### Memory Issues
 For large imports, increase node memory:
@@ -981,7 +981,7 @@ luxd --http-port=9650 ...
 
 ## Acknowledgements
 
-Based on Ethereum's genesis format and Avalanche's subnet migration patterns. Special thanks to the Lux Core Team for:
+Based on Ethereum's genesis format and Avalanche's chain migration patterns. Special thanks to the Lux Core Team for:
 - Implementing mainnet network upgrade (P, C, X chains) with C-Chain EVM state migration
 - Managing the 2024 Chain ID migration (7777 → 96369) to resolve EIP conflicts
 - Preserving all historical Chain ID 7777 data in the [luxfi/state](https://github.com/luxfi/state) repository

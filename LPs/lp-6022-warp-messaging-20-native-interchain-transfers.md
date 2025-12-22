@@ -84,7 +84,7 @@ forge test --match "Warp"  # Warp messaging tests
 ### Configuration
 - Shared validator threshold: 2/3 of stake-weighted validators
 - Message timeout: Configurable per chain
-- Attestation gossip: P2P subnet coordination
+- Attestation gossip: P2P chain coordination
 
 ### GitHub References
 - **Node Implementation**: https://github.com/luxfi/node/tree/main/vms/evm/precompiles

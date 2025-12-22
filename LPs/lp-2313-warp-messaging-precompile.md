@@ -18,7 +18,7 @@ tags: [warp, precompile, cross-chain]
 
 ## Abstract
 
-This LP specifies the Warp Messaging precompile at address `0x0200000000000000000000000000000000000008`, which enables cross-chain message verification using BLS signature aggregation. The precompile verifies validator-signed messages for secure inter-chain communication, asset transfers, and state synchronization across Lux chains and subnets.
+This LP specifies the Warp Messaging precompile at address `0x0200000000000000000000000000000000000008`, which enables cross-chain message verification using BLS signature aggregation. The precompile verifies validator-signed messages for secure inter-chain communication, asset transfers, and state synchronization across Lux chains and chains.
 
 ## Motivation
 
@@ -42,7 +42,7 @@ Cross-chain interoperability requires secure message passing with cryptographic 
 | Offset | Length | Field | Description |
 |--------|--------|-------|-------------|
 | 0      | 32     | `messageHash` | Keccak256 hash of the message |
-| 32     | 32     | `netID` | Source network/subnet ID |
+| 32     | 32     | `netID` | Source network/chain ID |
 | 64     | 96     | `aggregateSignature` | BLS aggregate signature |
 | 160    | 32     | `bitsetLength` | Number of validators in bitset |
 | 192    | variable | `bitset` | Packed bitset of signers |
@@ -144,7 +144,7 @@ bitset: <bitmap of signers>
 ### Replay Protection
 - **Network ID**: Included in signed message digest
 - **Direction**: Prevents messages from one chain being replayed on another
-- **Subnet Support**: Each subnet has unique network ID in genesis
+- **chain Support**: Each chain has unique network ID in genesis
 - **Atomic Swap Chains**: Different chains have different source netIDs
 
 ### Message Format Validation
@@ -166,7 +166,7 @@ interface IWarp {
     /**
      * @dev Verify a Warp message with BLS signature aggregation
      * @param messageHash The Keccak256 hash of the message
-     * @param netID Source network/subnet ID
+     * @param netID Source network/chain ID
      * @param aggregateSignature The BLS aggregate signature
      * @param bitsetLength Number of validators in the bitset
      * @param bitset Packed bitset indicating which validators signed

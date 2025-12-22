@@ -331,7 +331,7 @@ interface ICrossChainNFT {
 | C-Chain | 96369 | Primary |
 | Hanzo EVM | 36963 | Supported |
 | Zoo EVM | 200200 | Supported |
-| Subnets | Various | Via Warp |
+| chains | Various | Via Warp |
 
 ### Zoo Ecosystem Integration
 

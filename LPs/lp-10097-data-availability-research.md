@@ -30,7 +30,7 @@ Data availability is crucial for:
 ### Data Storage in Lux
 - **C-Chain**: Full EVM state storage
 - **X-Chain**: UTXO model with pruning
-- **P-Chain**: Validator and subnet data
+- **P-Chain**: Validator and chain data
 - **Storage Costs**: Growing with adoption
 
 ### Current Data Patterns

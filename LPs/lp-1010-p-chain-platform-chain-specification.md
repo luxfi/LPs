@@ -14,11 +14,11 @@ updated: 2025-12-11
 
 > **See also**: [LP-0](/docs/lp-0000-network-architecture-and-community-framework/), [LP-11](/docs/lp-9011-x-chain-exchange-chain-specification/), [LP-12](/docs/lp-2012-c-chain-contract-chain-specification/), [LP-99](/docs/lp-0099-q-chain-quantum-secure-consensus-protocol-family-quasar/)
 
-> **Note**: P-Chain handles classical platform operations (validators, staking, subnets). Q-Chain (LP-99) provides separate quantum-secure consensus for post-quantum finality. Both chains operate independently in the Lux multi-chain architecture.
+> **Note**: P-Chain handles classical platform operations (validators, staking, chains). Q-Chain (LP-99) provides separate quantum-secure consensus for post-quantum finality. Both chains operate independently in the Lux multi-chain architecture.
 
 ## Abstract
 
-This LP specifies the Platform Chain, which is the metadata and coordination chain of Lux (analogous to Lux’s P-Chain). The LP will detail the P-Chain’s responsibilities: coordinating validators and staking, tracking active subnets/chains, and allowing the creation of new blockchains.
+This LP specifies the Platform Chain, which is the metadata and coordination chain of Lux (analogous to Lux’s P-Chain). The LP will detail the P-Chain’s responsibilities: coordinating validators and staking, tracking active chains/chains, and allowing the creation of new blockchains.
 
 ## Motivation
 
@@ -28,13 +28,13 @@ A separate chain for platform metadata is beneficial to offload governance and c
 
 ### Overview
 
-The P-Chain serves as Lux Network's metadata blockchain, managing the validator set, tracking subnets, and coordinating the network's proof-of-stake consensus. It operates using a linear chain structure optimized for platform operations rather than high transaction throughput.
+The P-Chain serves as Lux Network's metadata blockchain, managing the validator set, tracking chains, and coordinating the network's proof-of-stake consensus. It operates using a linear chain structure optimized for platform operations rather than high transaction throughput.
 
 ### Core Responsibilities
 
 1. **Validator Management**: Track and coordinate all network validators
 2. **Staking Operations**: Handle staking, delegation, and rewards
-3. **Subnet Coordination**: Manage subnet creation and membership
+3. **chain Coordination**: Manage chain creation and membership
 4. **Chain Creation**: Enable permissionless blockchain deployment
 
 ### Transaction Types
@@ -73,21 +73,21 @@ Constraints:
 - Must end before or when validator ends
 - Total delegated cannot exceed validator stake * 5
 
-#### 3. Create Subnet Transaction
+#### 3. Create chain Transaction
 ```typescript
-interface CreateSubnetTx {
-    controlKeys: Address[];     // Who can modify subnet
+interface CreateChainTx {
+    controlKeys: Address[];     // Who can modify chain
     threshold: uint32;         // Required signatures
-    metadata: bytes;           // Optional subnet info
+    metadata: bytes;           // Optional chain info
 }
 ```
 
-Returns: SubnetID (32 bytes)
+Returns: chainID (32 bytes)
 
 #### 4. Create Blockchain Transaction
 ```typescript
 interface CreateBlockchainTx {
-    subnetID: SubnetID;        // Which subnet hosts chain
+    chainID: chainID;        // Which chain hosts chain
     vmID: VMID;               // Virtual machine type
     genesisData: bytes;       // Initial chain state
     name: string;             // Human-readable name
@@ -99,11 +99,11 @@ Supported VMs:
 - LinearVM (Linear chain)
 - Custom VMs (Via plugin system)
 
-#### 5. Add Subnet Validator Transaction
+#### 5. Add chain Validator Transaction
 ```typescript
-interface AddSubnetValidatorTx {
+interface AddChainValidatorTx {
     nodeID: NodeID;           // Node to add
-    subnetID: SubnetID;       // Target subnet
+    chainID: chainID;       // Target chain
     startTime: timestamp;     // Validation start
     endTime: timestamp;       // Validation end
     weight: uint64;          // Validator weight
@@ -128,12 +128,12 @@ DelegatorReward = ValidatorReward * (1 - delegationFeeRate)
 ValidatorCommission = ValidatorReward * delegationFeeRate
 ```
 
-### Subnet Architecture
+### recursive network architecture
 
-#### Subnet Properties
+#### chain Properties
 ```typescript
-interface Subnet {
-    id: SubnetID;
+interface chain {
+    id: chainID;
     controlKeys: Address[];
     threshold: uint32;
     blockchains: BlockchainID[];
@@ -143,7 +143,7 @@ interface Subnet {
 
 #### Validator Sets
 - **Primary Network**: All validators must validate
-- **Subnet**: Subset of primary validators
+- **chain**: Subset of primary validators
 - **Weight**: Determines influence in consensus
 
 ### State Management
@@ -173,19 +173,19 @@ P-Chain uses Lux consensus (linear chain):
 
 #### Platform API
 ```typescript
-platform.getValidators(subnetID?: SubnetID): Validator[]
-platform.getCurrentValidators(subnetID?: SubnetID): Validator[]
-platform.getPendingValidators(subnetID?: SubnetID): Validator[]
+platform.getValidators(chainID?: chainID): Validator[]
+platform.getCurrentValidators(chainID?: chainID): Validator[]
+platform.getPendingValidators(chainID?: chainID): Validator[]
 platform.getStake(addresses: Address[]): StakeInfo
 platform.addValidator(tx: AddValidatorTx): TxID
 platform.addDelegator(tx: AddDelegatorTx): TxID
-platform.createSubnet(tx: CreateSubnetTx): SubnetID
+platform.createChain(tx: CreateChainTx): chainID
 platform.createBlockchain(tx: CreateBlockchainTx): BlockchainID
 ```
 
 ## Rationale
 
-By reading this LP, one learns about proof-of-stake validator logic (quorums, staking periods) and subnet management in a multi-chain environment.
+By reading this LP, one learns about proof-of-stake validator logic (quorums, staking periods) and chain management in a multi-chain environment.
 
 ## Backwards Compatibility
 
@@ -203,10 +203,10 @@ This LP is foundational and does not introduce backwards compatibility issues.
 - **Long Range Attacks**: Mitigated by finality and checkpointing
 - **Delegation Limits**: 5x cap prevents excessive concentration
 
-### Subnet Security
-- **Validator Overlap**: Subnets must share validators with primary network
-- **Control Key Management**: Multi-sig required for subnet modifications
-- **Resource Isolation**: Subnet issues don't affect primary network
+### chain Security
+- **Validator Overlap**: chains must share validators with primary network
+- **Control Key Management**: Multi-sig required for chain modifications
+- **Resource Isolation**: chain issues don't affect primary network
 
 ### Operational Security
 - **Time Synchronization**: Critical for staking start/end times
@@ -226,14 +226,14 @@ This LP is foundational and does not introduce backwards compatibility issues.
    - Reject delegation exceeding 5x
    - Proper reward distribution
 
-### Subnet Operations
-1. **Create Subnet**
+### chain Operations
+1. **Create chain**
    - Valid control keys and threshold
-   - Subnet ID generation
+   - chain ID generation
    - Blockchain addition
 
-2. **Subnet Validation**
-   - Add subnet validator
+2. **chain Validation**
+   - Add chain validator
    - Verify primary network membership
    - Weight calculations
 
@@ -271,7 +271,7 @@ This LP is foundational and does not introduce backwards compatibility issues.
 |-----------|------|---------|
 | **VM Core** | `vms/platformvm/vm.go` | Platform VM implementation |
 | **State Management** | `vms/platformvm/state/` | Validator and staking state |
-| **Transaction Types** | `vms/platformvm/txs/` | Validator, delegator, subnet transactions |
+| **Transaction Types** | `vms/platformvm/txs/` | Validator, delegator, chain transactions |
 | **Rewards** | `vms/platformvm/reward/` | Reward calculation engine |
 | **Warp** | `vms/platformvm/warp/` | Cross-chain messaging |
 | **Block Executor** | `vms/platformvm/block/executor/` | Block validation and execution |

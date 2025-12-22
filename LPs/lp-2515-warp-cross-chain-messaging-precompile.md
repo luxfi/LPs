@@ -18,7 +18,7 @@ tags: [warp, precompile, cross-chain, bls, teleport]
 
 ## Abstract
 
-This LP specifies the Warp Messaging precompile at address `0x0200000000000000000000000000000000000005`, which enables native cross-chain communication between Lux subnets and L1 chains without external bridge infrastructure. The precompile provides four core functions: `sendWarpMessage` for emitting cross-chain messages, `getVerifiedWarpMessage` for retrieving validator-attested messages, `getVerifiedWarpBlockHash` for cross-chain block hash verification, and `getBlockchainID` for chain identification. Messages are secured through BLS signature aggregation with configurable validator quorum thresholds (default 67%).
+This LP specifies the Warp Messaging precompile at address `0x0200000000000000000000000000000000000005`, which enables native cross-chain communication between Lux chains and L1 chains without external bridge infrastructure. The precompile provides four core functions: `sendWarpMessage` for emitting cross-chain messages, `getVerifiedWarpMessage` for retrieving validator-attested messages, `getVerifiedWarpBlockHash` for cross-chain block hash verification, and `getBlockchainID` for chain identification. Messages are secured through BLS signature aggregation with configurable validator quorum thresholds (default 67%).
 
 ## Motivation
 
@@ -27,7 +27,7 @@ Cross-chain interoperability is fundamental to the Lux multi-chain ecosystem. Tr
 1. **Native Validator Security**: Messages are signed by the source chain's validator set using BLS multi-signatures, inheriting the full security of the Lux consensus
 2. **No External Dependencies**: Eliminates reliance on external bridge operators, oracles, or custodians
 3. **Efficient Verification**: BLS signature aggregation reduces O(n) signature verification to O(1)
-4. **Subnet Interoperability**: Enables direct communication between any Lux subnets without intermediaries
+4. **chain Interoperability**: Enables direct communication between any Lux chains without intermediaries
 5. **Teleport Integration**: Provides the cryptographic foundation for the Teleport cross-chain transfer protocol (LP-6016)
 
 ### Design Philosophy
@@ -541,9 +541,9 @@ contract TeleportBridge {
 }
 ```solidity
 
-### 2. Cross-Subnet Contract Calls
+### 2. Cross-chain Contract Calls
 
-Execute contract functions across subnets:
+Execute contract functions across chains:
 
 ```solidity
 contract CrossChainExecutor is TrustedSourceWarpReceiver {

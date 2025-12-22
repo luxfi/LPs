@@ -14,14 +14,14 @@ requires: 2026, 32
 
 ## Abstract
 
-This LP specifies how to roll up validator-set and subnet-state roots from the P-Chain onto the C-Chain (EVM) via on-chain commitments and light-client-style proofs. By anchoring P-Chain state in EVM contracts, smart contracts on the C-Chain can verify proofs of P-Chain state (e.g., validator sets, staking balances, subnet activations) without running a full P-Chain node.
+This LP specifies how to roll up validator-set and chain-state roots from the P-Chain onto the C-Chain (EVM) via on-chain commitments and light-client-style proofs. By anchoring P-Chain state in EVM contracts, smart contracts on the C-Chain can verify proofs of P-Chain state (e.g., validator sets, staking balances, chain activations) without running a full P-Chain node.
 
 ## Motivation
 
-The P-Chain (Platform Chain) manages validator sets, subnets, and staking, while the C-Chain (Contract Chain) provides EVM execution. Many L2 rollups, DeFi protocols, and governance modules require trust-minimized access to P-Chain state (e.g., validator eligibility, slashing events). Embedding P-Chain state roots and proof verification on the C-Chain:
+The P-Chain (Platform Chain) manages validator sets, chains, and staking, while the C-Chain (Contract Chain) provides EVM execution. Many L2 rollups, DeFi protocols, and governance modules require trust-minimized access to P-Chain state (e.g., validator eligibility, slashing events). Embedding P-Chain state roots and proof verification on the C-Chain:
 
 - Enables EVM contracts to enforce P-Chain-based access control and consensus logic
-- Eliminates the need for centralized or off-chain oracles for validator/subnet data
+- Eliminates the need for centralized or off-chain oracles for validator/chain data
 - Simplifies integration of rollup sequencers that must respect P-Chain staking rules
 
 ## Specification
@@ -61,7 +61,7 @@ The relayer should only commit roots after finality (e.g., sufficiently many Lux
 
 Smart contracts import `PChainAnchor` and call `verifyProof` to:
 
-- Check that a P-Chain staking balance or subnet activation is valid
+- Check that a P-Chain staking balance or chain activation is valid
 - Ensure a validator’s signature or slashing event occurred
 
 Proofs follow a standard Merkle Patricia inclusion proof format, using precompiled SHA3 and RLP decoding when needed.

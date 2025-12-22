@@ -1,7 +1,7 @@
 ---
 lp: 2118
-title: Subnet-EVM Compatibility Layer
-description: Provides compatibility layer for legacy Avalanche Subnet-EVM chains migrating to Lux Network
+title: chain-EVM Compatibility Layer
+description: Provides compatibility layer for legacy Avalanche chain-EVM chains migrating to Lux Network
 author: Lux Network Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
 status: Final
@@ -11,7 +11,7 @@ created: 2025-01-15
 tags: [evm, scaling]
 ---
 
-# LP-118: Subnet-EVM Compatibility Layer
+# LP-118: chain-EVM Compatibility Layer
 
 **Status**: Final
 **Type**: Standards Track
@@ -20,11 +20,11 @@ tags: [evm, scaling]
 
 ## Abstract
 
-LP-118 provides a compatibility layer for legacy Avalanche Subnet-EVM chains migrating to the Lux Network. It ensures seamless transition while maintaining deterministic behavior and state consistency.
+LP-118 provides a compatibility layer for legacy Avalanche chain-EVM chains migrating to the Lux Network. It ensures seamless transition while maintaining deterministic behavior and state consistency.
 
 ## Motivation
 
-Many existing blockchain applications are built on Avalanche's Subnet-EVM. LP-118 enables these chains to migrate to Lux without requiring application-level changes, preserving:
+Many existing blockchain applications are built on Avalanche's chain-EVM. LP-118 enables these chains to migrate to Lux without requiring application-level changes, preserving:
 
 1. **Existing State**: All account balances and contract storage
 2. **Transaction Format**: Compatible with existing wallets and tools
@@ -37,9 +37,9 @@ Many existing blockchain applications are built on Avalanche's Subnet-EVM. LP-11
 
 LP-118 ensures compatibility with:
 
-- **Subnet-EVM v0.5.x**: Primary target version
-- **Precompiles**: All standard Subnet-EVM precompiles
-- **Warp Messaging**: Cross-subnet communication
+- **chain-EVM v0.5.x**: Primary target version
+- **Precompiles**: All standard chain-EVM precompiles
+- **Warp Messaging**: Cross-chain communication
 - **Upgrades**: Durango, Etna network upgrades
 
 ### Activation
@@ -54,15 +54,15 @@ type ChainConfig struct {
 ```
 
 When `LP118Timestamp` is set:
-1. Enables Subnet-EVM transaction format parsing
+1. Enables chain-EVM transaction format parsing
 2. Activates compatible precompile set
-3. Maintains Subnet-EVM fee calculation rules
-4. Preserves Subnet-EVM block format
+3. Maintains chain-EVM fee calculation rules
+4. Preserves chain-EVM block format
 
 ### Migration Path
 
 **Phase 1**: Read-only compatibility
-- Lux nodes can read Subnet-EVM chain state
+- Lux nodes can read chain-EVM chain state
 - Historical blocks validated correctly
 - No state modifications
 
@@ -89,7 +89,7 @@ When `LP118Timestamp` is set:
 
 **3. Precompile Mapping**: Direct address mapping ensures existing contracts work without modification. Enhanced precompiles in Lux (like Warp) maintain backward compatibility while offering new features.
 
-**4. Transaction Format Detection**: The format detection order (Subnet-EVM first, then Lux) ensures legacy transactions are always correctly parsed while allowing native transactions.
+**4. Transaction Format Detection**: The format detection order (chain-EVM first, then Lux) ensures legacy transactions are always correctly parsed while allowing native transactions.
 
 ### Alternatives Considered
 
@@ -110,7 +110,7 @@ Files:
 
 Key areas:
 - `vm.go` - VM initialization with compat mode
-- `config.go` - Subnet-EVM config parsing
+- `config.go` - chain-EVM config parsing
 - `upgrade/` - Legacy upgrade handling
 
 ### Key Components
@@ -120,8 +120,8 @@ Key areas:
 ```go
 func parseTransaction(data []byte, isLP118Active bool) (*Transaction, error) {
     if isLP118Active {
-        // Try Subnet-EVM format first
-        if tx, err := parseSubnetEVMTx(data); err == nil {
+        // Try chain-EVM format first
+        if tx, err := parseChainVMTx(data); err == nil {
             return tx, nil
         }
     }
@@ -132,7 +132,7 @@ func parseTransaction(data []byte, isLP118Active bool) (*Transaction, error) {
 
 #### 2. Precompile Mapping
 
-| Subnet-EVM Address | Lux Equivalent | Notes |
+| chain-EVM Address | Lux Equivalent | Notes |
 |--------------------|----------------|-------|
 | `0x0200000000000000000000000000000000000000` | Native Minter | Mapped 1:1 |
 | `0x0200000000000000000000000000000000000001` | Contract Deployer Allowlist | Mapped 1:1 |
@@ -143,16 +143,16 @@ func parseTransaction(data []byte, isLP118Active bool) (*Transaction, error) {
 
 #### 3. Block Format Translation
 
-Subnet-EVM blocks are translated to Lux format:
+chain-EVM blocks are translated to Lux format:
 
 ```go
-type SubnetEVMBlock struct {
-    Header       SubnetEVMHeader
-    Transactions []*SubnetEVMTx
-    // ... Subnet-EVM specific fields
+type ChainVMBlock struct {
+    Header       ChainVMHeader
+    Transactions []*ChainVMTx
+    // ... chain-EVM specific fields
 }
 
-func (b *SubnetEVMBlock) ToLuxBlock() *LuxBlock {
+func (b *ChainVMBlock) ToLuxBlock() *LuxBlock {
     return &LuxBlock{
         Header:       translateHeader(b.Header),
         Transactions: translateTxs(b.Transactions),
@@ -165,20 +165,20 @@ func (b *SubnetEVMBlock) ToLuxBlock() *LuxBlock {
 
 ### Compatibility Tests
 
-**Location**: `tests/e2e/subnetevm_compat_test.go`
+**Location**: `tests/e2e/ChainVM_compat_test.go`
 
 Test scenarios:
-- Import existing Subnet-EVM genesis
+- Import existing chain-EVM genesis
 - Validate historical blocks
 - Execute legacy transactions
-- Call Subnet-EVM precompiles
+- Call chain-EVM precompiles
 - Warp message compatibility
 
 ### Migration Tests
 
 Scenarios:
-1. **Genesis Import**: Load Subnet-EVM genesis into Lux
-2. **Chain Replay**: Replay Subnet-EVM blocks
+1. **Genesis Import**: Load chain-EVM genesis into Lux
+2. **Chain Replay**: Replay chain-EVM blocks
 3. **Mixed Transactions**: Process both formats in same block
 4. **Precompile Calls**: Verify identical behavior
 5. **State Continuity**: Ensure no state divergence
@@ -188,11 +188,11 @@ Scenarios:
 ```go
 // Test: Transaction format detection
 func TestTransactionFormatDetection(t *testing.T) {
-    // Subnet-EVM format transaction
-    subnetTx := createSubnetEVMTx()
-    tx, err := parseTransaction(subnetTx.Bytes(), true)
+    // chain-EVM format transaction
+    chainTx := createChainVMTx()
+    tx, err := parseTransaction(chainTx.Bytes(), true)
     require.NoError(t, err)
-    require.Equal(t, subnetTx.Hash(), tx.Hash())
+    require.Equal(t, chainTx.Hash(), tx.Hash())
 
     // Lux native format transaction
     luxTx := createLuxTx()
@@ -214,26 +214,26 @@ func TestPrecompileMapping(t *testing.T) {
         precompile := GetPrecompile(addr)
         require.NotNil(t, precompile)
 
-        // Verify behavior matches Subnet-EVM
+        // Verify behavior matches chain-EVM
         result, err := precompile.Run(testInput)
         require.NoError(t, err)
-        require.Equal(t, expectedSubnetEVMResult, result)
+        require.Equal(t, expectedChainVMResult, result)
     }
 }
 
 // Test: Block format translation
 func TestBlockTranslation(t *testing.T) {
-    subnetBlock := loadSubnetEVMBlock(t, "testdata/subnet_block.json")
-    luxBlock := subnetBlock.ToLuxBlock()
+    chainBlock := loadChainVMBlock(t, "testdata/chain_block.json")
+    luxBlock := chainBlock.ToLuxBlock()
 
     // Verify state root matches
-    require.Equal(t, subnetBlock.Root(), luxBlock.Root())
+    require.Equal(t, chainBlock.Root(), luxBlock.Root())
 
     // Verify transaction count matches
-    require.Equal(t, len(subnetBlock.Transactions), len(luxBlock.Transactions))
+    require.Equal(t, len(chainBlock.Transactions), len(luxBlock.Transactions))
 
     // Verify deterministic translation
-    luxBlock2 := subnetBlock.ToLuxBlock()
+    luxBlock2 := chainBlock.ToLuxBlock()
     require.Equal(t, luxBlock.Hash(), luxBlock2.Hash())
 }
 
@@ -275,11 +275,11 @@ func TestLP118Activation(t *testing.T) {
 
 ## Backwards Compatibility
 
-LP-118 is designed for forward compatibility only. Subnet-EVM chains can migrate to Lux, but not vice versa. This is intentional to prevent fragmentation.
+LP-118 is designed for forward compatibility only. chain-EVM chains can migrate to Lux, but not vice versa. This is intentional to prevent fragmentation.
 
 ## References
 
-- [Avalanche Subnet-EVM](https://github.com/ava-labs/subnet-evm)
+- [Avalanche chain-EVM](https://github.com/ava-labs/chain-evm)
 - [Lux EVM Implementation](https://github.com/luxfi/evm)
 - [Precompile Documentation](https://docs.lux.network/precompiles)
 

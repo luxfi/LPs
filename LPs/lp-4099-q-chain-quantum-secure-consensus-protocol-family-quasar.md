@@ -15,7 +15,7 @@ tags: [pqc, consensus, core]
 
 ## Abstract
 
-This LP introduces **Q-Chain** and the **Quasar consensus protocol family**, Lux Network's quantum-secure blockchain that serves as the platform management chain in Lux 2.0, replacing P-Chain from Lux 1.0. Q-Chain achieves both fast classical consensus and post-quantum finality via an integrated hybrid consensus framework. Beyond quantum security, Q-Chain manages validator coordination, staking operations, subnet creation, and network governance. It supports linear and DAG-based transaction processing through multiple consensus engines, and provides **dual-certificate finality** combining BLS-based classical finalization and Ringtail-based quantum-resistant threshold signatures. The protocol achieves sub-second finality while maintaining security against both classical and quantum adversaries.
+This LP introduces **Q-Chain** and the **Quasar consensus protocol family**, Lux Network's quantum-secure blockchain that serves as the platform management chain in Lux 2.0, replacing P-Chain from Lux 1.0. Q-Chain achieves both fast classical consensus and post-quantum finality via an integrated hybrid consensus framework. Beyond quantum security, Q-Chain manages validator coordination, staking operations, chain creation, and network governance. It supports linear and DAG-based transaction processing through multiple consensus engines, and provides **dual-certificate finality** combining BLS-based classical finalization and Ringtail-based quantum-resistant threshold signatures. The protocol achieves sub-second finality while maintaining security against both classical and quantum adversaries.
 
 ## Motivation
 
@@ -398,13 +398,13 @@ type ValidatorTx struct {
 - **Rewards**: Automatic distribution with quantum-secure signatures
 - **Slashing**: Quantum-resistant penalty mechanisms
 
-### Subnet Creation and Management
+### chain Creation and Management
 ```go
-type CreateSubnetTx struct {
+type CreateChainTx struct {
     Owners          []Address
     Threshold       uint32
     ControlKeys     []PublicKey
-    SubnetAuth      DualCertificate
+    chainAuth      DualCertificate
     VMType          string  // "EVM", "WASM", "Custom"
 }
 ```

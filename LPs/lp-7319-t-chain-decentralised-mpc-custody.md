@@ -1,7 +1,7 @@
 ---
 lp: 7319
 title: T-Chain – Decentralised MPC Custody & Swap-Signature Layer
-description: Purpose-built subnet providing threshold-signature custody, on-chain swap-signature proofs, slashing and reward logic, and light-client proofs for bridge operations.
+description: Purpose-built chain providing threshold-signature custody, on-chain swap-signature proofs, slashing and reward logic, and light-client proofs for bridge operations.
 author: Lux Protocol Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
 status: Superseded
@@ -26,7 +26,7 @@ See section “2 Motivation”; the goals, risks, and drivers are captured there
 
 ## 1  Abstract
 
-T-Chain is a purpose-built subnet that provides:
+T-Chain is a purpose-built chain that provides:
 1. Threshold-signature custody for all externally-bridged assets (BTC Taproot MuSig2, ETH/Arb/OP ECDSA-GG21, XRPL Ed25519-FROST, etc.).
 2. SwapSigTx issuance—i.e. deterministic, on-chain proof that the quorum of custodial signers has produced a valid spend-signature for a given SwapTx on X-Chain.
 3. Autonomous slashing & reward accounting for MPC signers based on service-level compliance.

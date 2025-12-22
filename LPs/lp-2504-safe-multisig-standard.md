@@ -24,7 +24,7 @@ Multi-signature wallets are essential infrastructure for secure asset management
 2. **Battle-Tested Security**: Safe has undergone multiple audits and secures significant TVL across chains
 3. **Modular Architecture**: Extensible via modules and guards without modifying core contracts
 4. **Standards Compliance**: Full support for EIP-712 typed data signing and EIP-1271 contract signatures
-5. **Cross-Chain Requirements**: Lux's multi-chain architecture demands Safe compatibility across C-Chain, subnets, and via Warp messaging
+5. **Cross-Chain Requirements**: Lux's multi-chain architecture demands Safe compatibility across C-Chain, chains, and via Warp messaging
 
 ### Why Safe over Custom Solutions
 
@@ -399,7 +399,7 @@ interface ICrossChainSafeModule {
 ```
 
 **Use Cases**:
-- Unified treasury management across subnets
+- Unified treasury management across chains
 - Cross-chain governance execution
 - Multi-chain protocol administration
 

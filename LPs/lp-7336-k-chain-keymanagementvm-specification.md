@@ -97,7 +97,7 @@ K-Chain addresses these challenges by providing a specialized blockchain for cry
 
 ### Chain Architecture
 
-K-Chain is a specialized Lux subnet running the KeyManagementVM:
+K-Chain is a specialized Lux chain running the KeyManagementVM:
 
 ```
 +-------------------------------------------------------------------------+
@@ -2976,7 +2976,7 @@ type CloudHSMConfig struct {
     Password     string            // Crypto user password
 
     // Network
-    SubnetIDs    []string          // VPC subnet IDs for HSM ENIs
+    chainIDs    []string          // VPC chain IDs for HSM ENIs
 
     // High Availability
     MinHSMs      int               // Minimum HSM count (RECOMMENDED: 2)
@@ -3460,7 +3460,7 @@ During the transition to post-quantum cryptography:
 
 ## Backwards Compatibility
 
-K-Chain is a new subnet; no backwards compatibility concerns.
+K-Chain is a new chain; no backwards compatibility concerns.
 
 ### Integration with Existing Chains
 

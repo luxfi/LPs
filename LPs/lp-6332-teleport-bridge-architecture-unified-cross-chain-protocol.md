@@ -113,7 +113,7 @@ The Teleport system operates across two specialized chains within Lux Network:
 
 #### T-Chain (ThresholdVM)
 
-T-Chain is a specialized subnet providing MPC key management. See [LP-330](/docs/lp-7330-t-chain-thresholdvm-specification/) for complete specification.
+T-Chain is a specialized chain providing MPC key management. See [LP-330](/docs/lp-7330-t-chain-thresholdvm-specification/) for complete specification.
 
 **Chain Parameters:**
 - **Chain ID**: `T` (Threshold)
@@ -399,7 +399,7 @@ Teleport uses Lux Warp Messaging for secure cross-chain communication between T-
 │  └────────────────────┘                                                      │
 │                                                                              │
 │  Warp Message Security:                                                      │
-│  - BLS aggregate signatures from subnet validators                           │
+│  - BLS aggregate signatures from chain validators                           │
 │  - Source chain verification via P-Chain state                               │
 │  - Replay protection via message nonces                                      │
 │                                                                              │

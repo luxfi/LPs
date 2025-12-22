@@ -17,7 +17,7 @@ tier: core
 
 **"How does Lux actually run?"**
 
-This path covers infrastructure engineering from validators to subnets.
+This path covers infrastructure engineering from validators to chains.
 
 ## Audience
 
@@ -32,7 +32,7 @@ Complete [LP-0011: Core Protocol Path](/docs/lp-0011-learning-path-core/) first.
 After completing this path, you will be able to:
 - Run and maintain validator nodes
 - Understand staking economics
-- Deploy and manage subnets
+- Deploy and manage chains
 - Reason about consensus behavior
 - Implement cryptographic operations
 
@@ -71,12 +71,12 @@ After completing this path, you will be able to:
 | 10 | [LP-2100](/docs/lp-2100/) | Signatures | 25 min | Deep |
 | 11 | [LP-2200](/docs/lp-2200/) | PQC Algorithms | 25 min | Medium |
 
-### Stage 5: Subnets & Scaling
+### Stage 5: chains & Scaling
 
 | Order | LP | Title | Time | Depth |
 |-------|-----|-------|------|-------|
-| 12 | [LP-0003](/docs/lp-0003-subnet-architecture-and-cross-chain-interoperability/) | Subnet Architecture | 30 min | Deep |
-| 13 | [LP-0605](/docs/lp-0605-elastic-validator-subnets/) | Elastic Validator Subnets | 20 min | Medium |
+| 12 | [LP-0003](/docs/lp-0003-chain-architecture-and-cross-chain-interoperability/) | recursive network architecture | 30 min | Deep |
+| 13 | [LP-0605](/docs/lp-0605-elastic-validator-chains/) | Elastic Validator chains | 20 min | Medium |
 
 ### Stage 6: Upgrades & Operations
 

@@ -66,7 +66,7 @@ LUX is the primary currency of the Lux Network and is used for:
 
 The following single-character identifiers are assigned to the core chains of the Lux Network:
 
-*   **P**: Platform Chain — Validator management, staking, subnet coordination
+*   **P**: Platform Chain — Validator management, staking, chain coordination
 *   **C**: Contract Chain — EVM execution, smart contracts, DeFi
 *   **X**: Exchange Chain — UTXO-based asset exchange, high-throughput transfers
 *   **A**: Attestation Chain — AI workloads, model verification, training ledgers
