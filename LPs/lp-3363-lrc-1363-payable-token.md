@@ -171,6 +171,37 @@ contract StakingPool is ILRC1363Receiver {
 
 This standard is fully backwards compatible with existing contracts and infrastructure. The standard is additive and does not modify existing functionality.
 
+## Reference Implementation
+
+**Repository**: [https://github.com/luxfi/standard](https://github.com/luxfi/standard)
+**Local Path**: `/Users/z/work/lux/standard/`
+
+### Contracts
+
+| Contract | Description |
+|----------|-------------|
+| [`lib/openzeppelin-contracts/contracts/token/ERC20/extensions/ERC1363.sol`](https://github.com/luxfi/standard/blob/main/lib/openzeppelin-contracts/contracts/token/ERC20/extensions/ERC1363.sol) | ERC20 with transfer callbacks |
+
+### Interfaces
+
+- [`lib/openzeppelin-contracts/contracts/interfaces/IERC1363.sol`](https://github.com/luxfi/standard/blob/main/lib/openzeppelin-contracts/contracts/interfaces/IERC1363.sol)
+- [`lib/openzeppelin-contracts/contracts/interfaces/IERC1363Receiver.sol`](https://github.com/luxfi/standard/blob/main/lib/openzeppelin-contracts/contracts/interfaces/IERC1363Receiver.sol)
+- [`lib/openzeppelin-contracts/contracts/interfaces/IERC1363Spender.sol`](https://github.com/luxfi/standard/blob/main/lib/openzeppelin-contracts/contracts/interfaces/IERC1363Spender.sol)
+
+### Build and Test
+
+```bash
+cd /Users/z/work/lux/standard/
+
+# Build all contracts
+forge build
+
+# Run tests
+forge test -vvv
+
+# Gas report
+forge test --gas-report
+```
 ## Security Considerations
 
 - Reentrancy guard required in receivers

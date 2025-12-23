@@ -31,6 +31,38 @@ Mirrors the corresponding Ethereum standard for maximum compatibility.
 
 Fully compatible with existing ERC implementations.
 
+## Reference Implementation
+
+**Repository**: [https://github.com/luxfi/standard](https://github.com/luxfi/standard)
+**Local Path**: `/Users/z/work/lux/standard/`
+
+### Contracts
+
+| Contract | Description |
+|----------|-------------|
+| [`src/tokens/ERC6551Registry.sol`](https://github.com/luxfi/standard/blob/main/src/tokens/ERC6551Registry.sol) | TBA registry (if exists) |
+
+### Interfaces
+
+- [`lib/openzeppelin-contracts/contracts/interfaces/IERC6551Registry.sol`](https://github.com/luxfi/standard/blob/main/lib/openzeppelin-contracts/contracts/interfaces/IERC6551Registry.sol)
+- [`lib/openzeppelin-contracts/contracts/interfaces/IERC6551Account.sol`](https://github.com/luxfi/standard/blob/main/lib/openzeppelin-contracts/contracts/interfaces/IERC6551Account.sol)
+
+**Note**: ERC-6551 enables NFTs to own assets. Each NFT gets a deterministic smart contract account.
+
+### Build and Test
+
+```bash
+cd /Users/z/work/lux/standard/
+
+# Build all contracts
+forge build
+
+# Run tests
+forge test -vvv
+
+# Gas report
+forge test --gas-report
+```
 ## Security Considerations
 
 Implementations should follow established security best practices for the corresponding ERC.
