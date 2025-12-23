@@ -47,6 +47,17 @@ Fully compatible with existing ERC implementations.
 
 - [`lib/openzeppelin-contracts/contracts/token/ERC20/extensions/IERC20Permit.sol`](https://github.com/luxfi/standard/blob/main/lib/openzeppelin-contracts/contracts/token/ERC20/extensions/IERC20Permit.sol)
 
+
+### Upgradeable Variants
+
+For proxy-based upgradeable contracts:
+
+| Contract | Description |
+|----------|-------------|
+| [`ERC20PermitUpgradeable.sol`](https://github.com/luxfi/standard/blob/main/lib/openzeppelin-contracts-upgradeable/contracts/token/ERC20/extensions/ERC20PermitUpgradeable.sol) | Upgradeable permit |
+
+**Usage**: Initialize in `initialize()` instead of constructor. See [OpenZeppelin Upgrades](https://docs.openzeppelin.com/upgrades).
+
 ### Build and Test
 
 ```bash

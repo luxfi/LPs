@@ -46,6 +46,18 @@ Fully compatible with existing ERC implementations.
 
 - [`lib/openzeppelin-contracts/contracts/interfaces/IERC2981.sol`](https://github.com/luxfi/standard/blob/main/lib/openzeppelin-contracts/contracts/interfaces/IERC2981.sol)
 
+
+### Upgradeable Variants
+
+For proxy-based upgradeable contracts:
+
+| Contract | Description |
+|----------|-------------|
+| [`ERC721RoyaltyUpgradeable.sol`](https://github.com/luxfi/standard/blob/main/lib/openzeppelin-contracts-upgradeable/contracts/token/ERC721/extensions/ERC721RoyaltyUpgradeable.sol) | Upgradeable royalties (721) |
+| [`ERC2981Upgradeable.sol`](https://github.com/luxfi/standard/blob/main/lib/openzeppelin-contracts-upgradeable/contracts/token/common/ERC2981Upgradeable.sol) | Upgradeable ERC-2981 base |
+
+**Usage**: Initialize in `initialize()` instead of constructor. See [OpenZeppelin Upgrades](https://docs.openzeppelin.com/upgrades).
+
 ### Build and Test
 
 ```bash

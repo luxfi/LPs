@@ -47,6 +47,17 @@ Fully compatible with existing ERC implementations.
 
 - [`lib/openzeppelin-contracts/contracts/governance/utils/IVotes.sol`](https://github.com/luxfi/standard/blob/main/lib/openzeppelin-contracts/contracts/governance/utils/IVotes.sol)
 
+
+### Upgradeable Variants
+
+For proxy-based upgradeable contracts:
+
+| Contract | Description |
+|----------|-------------|
+| [`ERC20VotesUpgradeable.sol`](https://github.com/luxfi/standard/blob/main/lib/openzeppelin-contracts-upgradeable/contracts/token/ERC20/extensions/ERC20VotesUpgradeable.sol) | Upgradeable votes |
+
+**Usage**: Initialize in `initialize()` instead of constructor. See [OpenZeppelin Upgrades](https://docs.openzeppelin.com/upgrades).
+
 ### Build and Test
 
 ```bash

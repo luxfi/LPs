@@ -47,6 +47,17 @@ Fully compatible with existing ERC implementations.
 
 - [`lib/openzeppelin-contracts/contracts/token/ERC721/extensions/IERC721Enumerable.sol`](https://github.com/luxfi/standard/blob/main/lib/openzeppelin-contracts/contracts/token/ERC721/extensions/IERC721Enumerable.sol)
 
+
+### Upgradeable Variants
+
+For proxy-based upgradeable contracts:
+
+| Contract | Description |
+|----------|-------------|
+| [`ERC721EnumerableUpgradeable.sol`](https://github.com/luxfi/standard/blob/main/lib/openzeppelin-contracts-upgradeable/contracts/token/ERC721/extensions/ERC721EnumerableUpgradeable.sol) | Upgradeable enumerable |
+
+**Usage**: Initialize in `initialize()` instead of constructor. See [OpenZeppelin Upgrades](https://docs.openzeppelin.com/upgrades).
+
 ### Build and Test
 
 ```bash

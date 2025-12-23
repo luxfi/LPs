@@ -208,6 +208,17 @@ The provenance system ensures:
 
 Additive change with no breaking effects; rollout is optional and incremental.
 
+
+### Upgradeable Variants
+
+For proxy-based upgradeable contracts:
+
+| Contract | Description |
+|----------|-------------|
+| [`ERC721Upgradeable.sol`](https://github.com/luxfi/standard/blob/main/lib/openzeppelin-contracts-upgradeable/contracts/token/ERC721/ERC721Upgradeable.sol) | Upgradeable ERC-721 base |
+
+**Usage**: Initialize in `initialize()` instead of constructor. See [OpenZeppelin Upgrades](https://docs.openzeppelin.com/upgrades).
+
 ## Security Considerations
 
 ### Standard NFT Security

@@ -47,6 +47,17 @@ Fully compatible with existing ERC implementations.
 
 - [`lib/openzeppelin-contracts/contracts/utils/introspection/IERC165.sol`](https://github.com/luxfi/standard/blob/main/lib/openzeppelin-contracts/contracts/utils/introspection/IERC165.sol)
 
+
+### Upgradeable Variants
+
+For proxy-based upgradeable contracts:
+
+| Contract | Description |
+|----------|-------------|
+| [`ERC165Upgradeable.sol`](https://github.com/luxfi/standard/blob/main/lib/openzeppelin-contracts-upgradeable/contracts/utils/introspection/ERC165Upgradeable.sol) | Upgradeable ERC-165 |
+
+**Usage**: Initialize in `initialize()` instead of constructor. See [OpenZeppelin Upgrades](https://docs.openzeppelin.com/upgrades).
+
 ### Build and Test
 
 ```bash

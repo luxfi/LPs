@@ -161,6 +161,17 @@ contract BurnableToken is ERC20, IERC20Burnable {
 }
 ```
 
+
+### Upgradeable Variants
+
+For proxy-based upgradeable contracts:
+
+| Contract | Description |
+|----------|-------------|
+| [`ERC20BurnableUpgradeable.sol`](https://github.com/luxfi/standard/blob/main/lib/openzeppelin-contracts-upgradeable/contracts/token/ERC20/extensions/ERC20BurnableUpgradeable.sol) | Upgradeable burnable |
+
+**Usage**: Initialize in `initialize()` instead of constructor. See [OpenZeppelin Upgrades](https://docs.openzeppelin.com/upgrades).
+
 ## Security Considerations
 
 - Ensure accurate allowance checks in burnFrom to prevent unauthorized burns.
