@@ -568,92 +568,34 @@ describe("Safe", () => {
 });
 ```
 
+
 ## Reference Implementation
 
-### Source Code
+**Repository**: [https://github.com/luxfi/standard](https://github.com/luxfi/standard)
+**Local Path**: `/Users/z/work/lux/standard/`
 
-**Location**: `/Users/z/work/lux/standard/src/safe/`
-**Upstream**: [github.com/safe-global/safe-smart-account](https://github.com/safe-global/safe-smart-account)
-**Version**: 1.4.1-build.0
+### Contracts
 
-### Contract Directory Structure
+| Contract | Description |
+|----------|-------------|
+| [`src/safe/contracts/Safe.sol`](https://github.com/luxfi/standard/blob/main/src/safe/contracts/Safe.sol) | Safe core contract |
+| [`src/safe/contracts/base/ModuleManager.sol`](https://github.com/luxfi/standard/blob/main/src/safe/contracts/base/ModuleManager.sol) | Module management |
+| [`src/safe/contracts/base/OwnerManager.sol`](https://github.com/luxfi/standard/blob/main/src/safe/contracts/base/OwnerManager.sol) | Owner management |
 
+### Build and Test
+
+```bash
+cd /Users/z/work/lux/standard
+
+# Build all contracts
+forge build
+
+# Run tests
+forge test -vvv
+
+# Gas report
+forge test --gas-report
 ```
-src/safe/
-├── contracts/
-│   ├── Safe.sol                          # Core multisig contract
-│   ├── SafeL2.sol                        # L2-optimized variant
-│   ├── accessors/
-│   │   └── SimulateTxAccessor.sol        # Transaction simulation
-│   ├── base/
-│   │   ├── Executor.sol                  # Transaction execution
-│   │   ├── FallbackManager.sol           # Fallback handler management
-│   │   ├── GuardManager.sol              # Guard management
-│   │   ├── ModuleManager.sol             # Module management
-│   │   └── OwnerManager.sol              # Owner management
-│   ├── common/
-│   │   ├── NativeCurrencyPaymentFallback.sol
-│   │   ├── SecuredTokenTransfer.sol
-│   │   ├── SelfAuthorized.sol
-│   │   ├── SignatureDecoder.sol
-│   │   ├── Singleton.sol
-│   │   └── StorageAccessible.sol
-│   ├── examples/guards/
-│   │   ├── BaseGuard.sol
-│   │   ├── DebugTransactionGuard.sol
-│   │   ├── DelegateCallTransactionGuard.sol
-│   │   ├── OnlyOwnersGuard.sol
-│   │   └── ReentrancyTransactionGuard.sol
-│   ├── external/
-│   │   └── SafeMath.sol                  # Math library (pre-0.8)
-│   ├── handler/
-│   │   ├── CompatibilityFallbackHandler.sol
-│   │   ├── HandlerContext.sol
-│   │   └── TokenCallbackHandler.sol
-│   ├── interfaces/
-│   │   ├── ISafe.sol
-│   │   ├── IModuleManager.sol
-│   │   ├── IOwnerManager.sol
-│   │   ├── IGuardManager.sol
-│   │   ├── IFallbackManager.sol
-│   │   ├── ISignatureValidator.sol
-│   │   └── [token interfaces]
-│   ├── libraries/
-│   │   ├── CreateCall.sol
-│   │   ├── Enum.sol
-│   │   ├── ErrorMessage.sol
-│   │   ├── MultiSend.sol
-│   │   ├── MultiSendCallOnly.sol
-│   │   ├── SafeMigration.sol
-│   │   ├── SafeStorage.sol
-│   │   ├── SafeToL2Migration.sol
-│   │   ├── SafeToL2Setup.sol
-│   │   └── SignMessageLib.sol
-│   ├── proxies/
-│   │   ├── IProxyCreationCallback.sol
-│   │   ├── SafeProxy.sol
-│   │   └── SafeProxyFactory.sol
-│   └── test/                             # Test contracts
-├── certora/                              # Formal verification
-│   ├── conf/
-│   ├── harnesses/
-│   └── specs/
-├── test/                                 # Test suite
-├── docs/                                 # Documentation
-└── README.md
-```
-
-### Gas Costs
-
-| Operation | Gas Cost | Notes |
-|-----------|----------|-------|
-| Safe deployment (proxy) | ~60,000 | Via factory |
-| Safe deployment (full) | ~2,000,000 | Direct deployment |
-| Execute transaction (2-of-3) | ~100,000 | Base + signatures |
-| Add owner | ~50,000 | Storage update |
-| Enable module | ~50,000 | Storage update |
-| Set guard | ~25,000 | Storage update |
-| MultiSend (5 txs) | ~200,000 | Batch execution |
 
 ## Security Considerations
 
