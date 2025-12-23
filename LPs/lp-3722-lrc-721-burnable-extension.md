@@ -106,6 +106,17 @@ forge coverage --match-contract ERC721Burnable
 | burn (owner) | ~45,000 | Token removal + event |
 | burn (approved) | ~48,000 | Approval check + removal |
 
+
+### Upgradeable Variants
+
+For proxy-based upgradeable contracts:
+
+| Contract | Description |
+|----------|-------------|
+| [`ERC721BurnableUpgradeable.sol`](https://github.com/luxfi/standard/blob/main/lib/openzeppelin-contracts-upgradeable/contracts/token/ERC721/extensions/ERC721BurnableUpgradeable.sol) | Upgradeable burnable |
+
+**Usage**: Initialize in `initialize()` instead of constructor. See [OpenZeppelin Upgrades](https://docs.openzeppelin.com/upgrades).
+
 ## Security Considerations
 
 - Ensure only token owner or approved operator can call burn.
