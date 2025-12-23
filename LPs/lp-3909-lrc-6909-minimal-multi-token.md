@@ -31,6 +31,33 @@ Mirrors the corresponding Ethereum standard for maximum compatibility.
 
 Fully compatible with existing ERC implementations.
 
+## Reference Implementation
+
+**Repository**: [https://github.com/luxfi/standard](https://github.com/luxfi/standard)
+**Local Path**: `/Users/z/work/lux/standard/`
+
+### Contracts
+
+| Contract | Description |
+|----------|-------------|
+| [`lib/solmate/src/tokens/ERC6909.sol`](https://github.com/luxfi/standard/blob/main/lib/solmate/src/tokens/ERC6909.sol) | Solmate minimal multi-token (if available) |
+
+**Note**: ERC-6909 is a gas-optimized alternative to ERC-1155.
+
+### Build and Test
+
+```bash
+cd /Users/z/work/lux/standard/
+
+# Build all contracts
+forge build
+
+# Run tests
+forge test -vvv
+
+# Gas report
+forge test --gas-report
+```
 ## Security Considerations
 
 Implementations should follow established security best practices for the corresponding ERC.

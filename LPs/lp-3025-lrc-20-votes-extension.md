@@ -31,6 +31,36 @@ Mirrors the corresponding Ethereum standard for maximum compatibility.
 
 Fully compatible with existing ERC implementations.
 
+## Reference Implementation
+
+**Repository**: [https://github.com/luxfi/standard](https://github.com/luxfi/standard)
+**Local Path**: `/Users/z/work/lux/standard/`
+
+### Contracts
+
+| Contract | Description |
+|----------|-------------|
+| [`lib/openzeppelin-contracts/contracts/token/ERC20/extensions/ERC20Votes.sol`](https://github.com/luxfi/standard/blob/main/lib/openzeppelin-contracts/contracts/token/ERC20/extensions/ERC20Votes.sol) | ERC20 with voting/delegation |
+| [`lib/openzeppelin-contracts/contracts/governance/utils/IVotes.sol`](https://github.com/luxfi/standard/blob/main/lib/openzeppelin-contracts/contracts/governance/utils/IVotes.sol) | Votes interface |
+
+### Interfaces
+
+- [`lib/openzeppelin-contracts/contracts/governance/utils/IVotes.sol`](https://github.com/luxfi/standard/blob/main/lib/openzeppelin-contracts/contracts/governance/utils/IVotes.sol)
+
+### Build and Test
+
+```bash
+cd /Users/z/work/lux/standard/
+
+# Build all contracts
+forge build
+
+# Run tests
+forge test -vvv
+
+# Gas report
+forge test --gas-report
+```
 ## Security Considerations
 
 Implementations should follow established security best practices for the corresponding ERC.
