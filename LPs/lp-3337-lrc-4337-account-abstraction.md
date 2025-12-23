@@ -709,41 +709,38 @@ function testSocialRecovery() {
 }
 ```
 
+
 ## Reference Implementation
 
-### Core Contracts
+**Repository**: [https://github.com/luxfi/standard](https://github.com/luxfi/standard)
+**Local Path**: `/Users/z/work/lux/standard/`
 
-| File | Location | Description |
-|------|----------|-------------|
-| `SmartAccount.sol` | `src/eoa/contracts/smart-account/` | Main smart account |
-| `BaseSmartAccount.sol` | `src/eoa/contracts/smart-account/` | Base implementation |
-| `SmartAccountFactory.sol` | `src/eoa/contracts/smart-account/factory/` | CREATE2 factory |
-| `Proxy.sol` | `src/eoa/contracts/smart-account/` | EIP-1967 proxy |
+### Contracts
 
-### Modules
+| Contract | Description |
+|----------|-------------|
+| [`lib/account-abstraction/contracts/core/EntryPoint.sol`](https://github.com/luxfi/standard/blob/main/lib/account-abstraction/contracts/core/EntryPoint.sol) | ERC-4337 EntryPoint |
+| [`lib/account-abstraction/contracts/accounts/SimpleAccount.sol`](https://github.com/luxfi/standard/blob/main/lib/account-abstraction/contracts/accounts/SimpleAccount.sol) | Simple account implementation |
 
-| File | Location | Description |
-|------|----------|-------------|
-| `EcdsaOwnershipRegistryModule.sol` | `src/eoa/.../modules/` | ECDSA validation |
-| `PasskeyRegistryModule.sol` | `src/eoa/.../modules/` | WebAuthn/Passkey |
-| `SessionKeyManagerModule.sol` | `src/eoa/.../modules/` | Session keys |
-| `MultichainECDSAValidator.sol` | `src/eoa/.../modules/` | Cross-chain ECDSA |
+### Interfaces
 
-### Paymasters
+- [`lib/account-abstraction/contracts/interfaces/IAccount.sol`](https://github.com/luxfi/standard/blob/main/lib/account-abstraction/contracts/interfaces/IAccount.sol)
+- [`lib/account-abstraction/contracts/interfaces/IEntryPoint.sol`](https://github.com/luxfi/standard/blob/main/lib/account-abstraction/contracts/interfaces/IEntryPoint.sol)
 
-| File | Location | Description |
-|------|----------|-------------|
-| `BasePaymaster.sol` | `src/eoa/.../paymasters/` | Paymaster base |
-| `VerifyingSingletonPaymaster.sol` | `src/eoa/.../paymasters/verifying/` | Verified sponsor |
+### Build and Test
 
-### Account Abstraction Library
+```bash
+cd /Users/z/work/lux/standard
 
-| File | Location | Description |
-|------|----------|-------------|
-| `EntryPoint.sol` | `lib/account-abstraction/contracts/core/` | v0.7/0.9 EntryPoint |
-| `PackedUserOperation.sol` | `lib/account-abstraction/contracts/interfaces/` | v0.7 struct |
-| `UserOperation.sol` | `lib/account-abstraction/contracts/interfaces/` | v0.6 shim |
-| `UserOperation06.sol` | `lib/account-abstraction/contracts/legacy/v06/` | v0.6 legacy |
+# Build all contracts
+forge build
+
+# Run tests
+forge test -vvv
+
+# Gas report
+forge test --gas-report
+```
 
 ## Security Considerations
 

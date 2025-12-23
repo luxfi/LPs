@@ -31,6 +31,37 @@ Mirrors the corresponding Ethereum standard for maximum compatibility.
 
 Fully compatible with existing ERC implementations.
 
+
+## Reference Implementation
+
+**Repository**: [https://github.com/luxfi/standard](https://github.com/luxfi/standard)
+**Local Path**: `/Users/z/work/lux/standard/`
+
+### Contracts
+
+| Contract | Description |
+|----------|-------------|
+| [`lib/account-abstraction/contracts/core/BasePaymaster.sol`](https://github.com/luxfi/standard/blob/main/lib/account-abstraction/contracts/core/BasePaymaster.sol) | Base paymaster |
+
+### Interfaces
+
+- [`lib/account-abstraction/contracts/interfaces/IPaymaster.sol`](https://github.com/luxfi/standard/blob/main/lib/account-abstraction/contracts/interfaces/IPaymaster.sol)
+
+### Build and Test
+
+```bash
+cd /Users/z/work/lux/standard
+
+# Build all contracts
+forge build
+
+# Run tests
+forge test -vvv
+
+# Gas report
+forge test --gas-report
+```
+
 ## Security Considerations
 
 Implementations should follow established security best practices for the corresponding ERC.
