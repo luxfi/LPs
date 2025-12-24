@@ -344,7 +344,8 @@ recommended_architecture:
 ## Implementation Roadmap
 
 ### Phase 1: Core DID (Q1 2025)
-- [ ] DID method specification
+- [x] DID method specification (W3C DID Core compliant)
+- [x] On-chain identity contracts (DIDRegistry, DIDResolver)
 - [ ] Z-Chain identity contracts
 - [ ] Basic wallet integration
 
@@ -358,8 +359,57 @@ recommended_architecture:
 - [ ] DeFi integration
 - [ ] Gaming identity
 
+## Reference Implementation
+
+The W3C DID specification has been implemented in the Lux standard library:
+
+| Component | Location | Status |
+|-----------|----------|--------|
+| DID Interface | `standard/contracts/identity/interfaces/IDID.sol` | ✅ Implemented |
+| DID Registry | `standard/contracts/identity/DIDRegistry.sol` | ✅ Implemented |
+| DID Resolver | `standard/contracts/identity/DIDResolver.sol` | ✅ Implemented |
+| Omnichain Resolver | `standard/contracts/identity/DIDResolver.sol` | ✅ Implemented |
+| Karma Integration | `standard/contracts/governance/Karma.sol` | ✅ Integrated |
+
+### Key Implementation Features
+
+1. **W3C DID Core Compliance**
+   - Full DID document structure with verification methods
+   - Service endpoint management
+   - Controller-based access control
+
+2. **Supported DID Methods**
+   ```
+   did:lux:<identifier>
+   did:lux:mainnet:<address>
+   did:lux:testnet:<address>
+   did:hanzo:<username>
+   did:hanzo:eth:<address>
+   ```
+
+3. **Verification Method Types**
+   - Ed25519VerificationKey2020
+   - EcdsaSecp256k1VerificationKey2019
+   - EcdsaSecp256k1RecoveryMethod2020 (Ethereum-style)
+   - MlDsa44VerificationKey2024 (Post-quantum)
+   - MlDsa65VerificationKey2024 (Post-quantum)
+   - SlhDsa128VerificationKey2024 (Post-quantum)
+
+4. **Integration with Governance**
+   - Karma.sol now supports DIDRegistry verification
+   - `linkDIDFromRegistry()` for self-service DID linking
+   - `hasVerifiedDID()` for checking on-chain verification
+
+### Rust Reference Implementation
+
+The Solidity contracts are ported from the Hanzo DID Rust crate:
+- **Repository**: `hanzo/rust-sdk/crates/hanzo-did`
+- **Features**: DID parsing, DID Document, verification methods, services, omnichain variants
+
 ## Related Repositories
 
+- **Lux Standard Library**: https://github.com/luxfi/standard
+- **Hanzo DID (Rust)**: https://github.com/hanzo-ai/rust-sdk/tree/main/crates/hanzo-did
 - **Z-Chain**: https://github.com/luxfi/z-chain
 - **Identity SDK**: https://github.com/luxfi/identity-sdk
 - **Compliance Tools**: https://github.com/luxfi/compliance
