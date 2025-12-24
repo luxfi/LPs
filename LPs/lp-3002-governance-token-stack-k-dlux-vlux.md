@@ -4,7 +4,7 @@ title: Governance Token Stack — K, DLUX, VLUX
 description: Soul-bound reputation (K), rebasing governance (DLUX), and vote-locked voting power (VLUX)
 author: Lux Core Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
-status: Draft
+status: Final
 type: Standards Track
 category: LRC
 created: 2025-12-23
@@ -360,15 +360,40 @@ interface IDLUXEmissionRegistry {
 
 ### Contract Locations
 
+Implementation repository: [`luxfi/standard`](https://github.com/luxfi/standard)
+
 | Contract | Path | Status |
 |----------|------|--------|
-| Karma.sol | `contracts/governance/Karma.sol` | Planned |
-| DLUX.sol | `contracts/governance/DLUX.sol` | Planned |
-| vLUX.sol | `contracts/governance/vLUX.sol` | Exists |
-| VotingPower.sol | `contracts/governance/VotingPower.sol` | Planned |
+| Karma.sol | `contracts/governance/Karma.sol` | ✅ Implemented |
+| DLUX.sol | `contracts/governance/DLUX.sol` | ✅ Implemented |
+| vLUX.sol | `contracts/governance/vLUX.sol` | ✅ Implemented |
+| VotingPower.sol | `contracts/governance/VotingPower.sol` | ✅ Implemented |
 | NFTStaking.sol | `contracts/staking/NFTStaking.sol` | Planned |
 | EmissionRegistry.sol | `contracts/governance/EmissionRegistry.sol` | Planned |
-| Governor.sol | `contracts/governance/Governor.sol` | Exists |
+| Governor.sol | `contracts/governance/Governor.sol` | ✅ Implemented |
+| sLUX.sol | `contracts/staking/sLUX.sol` | ✅ Implemented |
+
+### Implementation Notes
+
+**Karma.sol** (10.3 KB):
+- Soul-bound reputation with DID linking
+- ATTESTOR_ROLE and SLASHER_ROLE access control
+- Inactivity decay after 365 days (10% per year)
+- Max 1000 K per account soft cap
+
+**DLUX.sol** (19.7 KB):
+- OHM-style rebasing with 8-hour epochs
+- Demurrage: 0.1% per day on unstaked balance
+- Five tiers: Bronze, Silver, Gold, Diamond, Quantum
+- Lock periods from none (Bronze) to 365 days (Quantum)
+- Rebase boost from 1.0x to 2.0x based on tier
+
+**VotingPower.sol** (10.3 KB):
+- VLUX = DLUX × f(K) × time_multiplier
+- f(K) = sqrt(K / 100) for Karma scaling
+- Time multiplier: 1 + (lock_months × 0.1), max 4.0x
+- Quadratic voting support
+- Historical snapshots for governance proposals
 
 ### Deployment Order
 
