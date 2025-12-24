@@ -264,6 +264,62 @@ function x402Paywall(config: PaywallConfig) {
 }
 ```
 
+## DID Integration
+
+x402 integrates with the W3C DID system for identity-based payments:
+
+### DID Service Endpoints
+
+DIDs can advertise x402 payment capabilities:
+
+```json
+{
+  "id": "did:lux:merchant#x402-payment",
+  "type": "X402PaymentEndpoint",
+  "serviceEndpoint": "https://api.merchant.lux/x402",
+  "acceptedTokens": ["LUX", "USDC"],
+  "facilitator": "did:lux:hanzo-facilitator",
+  "minPayment": "100000"
+}
+```
+
+### Resolution Flow
+
+```
+Client                    DID Resolver              Merchant
+   |                           |                        |
+   |-- Resolve did:lux:bob --->|                        |
+   |                           |                        |
+   |<-- DID Document -----------|                        |
+   |   (includes x402 service)  |                        |
+   |                           |                        |
+   |-------------- GET /resource ---------------------->|
+   |                           |                        |
+   |<------------- 402 Payment Required ----------------|
+   |              X-Payment-Request                     |
+   |                           |                        |
+```
+
+### IX402DIDService Interface
+
+```solidity
+interface IX402DIDService {
+    struct X402Config {
+        string endpoint;           // Payment verification endpoint
+        string[] acceptedTokens;   // Accepted payment tokens
+        string facilitatorDID;     // Facilitator DID (optional)
+        uint256 minPayment;        // Minimum payment amount
+        bytes32 resourceHash;      // Protected resource identifier
+    }
+
+    function setX402Config(string calldata did, X402Config calldata config) external;
+    function getX402Config(string calldata did) external view returns (X402Config memory);
+    function supportsX402(string calldata did) external view returns (bool);
+}
+```
+
+See [LP-10093: Decentralized Identity Research](./lp-10093-decentralized-identity-research.md) for full DID specification.
+
 ## Use Cases
 
 ### AI Data Marketplace

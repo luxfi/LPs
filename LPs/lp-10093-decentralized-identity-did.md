@@ -1,20 +1,21 @@
 ---
 lp: 10093
-title: Decentralized Identity Research
-description: Research on decentralized identity solutions and privacy-preserving KYC for Lux Network
+title: W3C Decentralized Identity (DID) Standard
+description: W3C DID Core specification implementation with premium registry, x402 integration, and multi-network support
 author: Lux Network Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
-status: Draft
-type: Informational
+status: Final
+type: Standards Track
+category: LRC
 created: 2025-01-23
-requires: 7014, 40
-tags: [research, identity]
+requires: 7014, 40, 3028
+tags: [lrc, identity, did, w3c, x402]
 order: 113
 ---
 
 ## Abstract
 
-This research LP explores decentralized identity (DID) solutions for the Lux Network, focusing on privacy-preserving KYC, self-sovereign identity, and cross-chain identity portability. It examines how Z-Chain's privacy features can enable compliant yet private identity verification, and analyzes current implementations in the Lux ecosystem.
+This LP specifies the W3C Decentralized Identity (DID) implementation for the Lux Network, providing on-chain DID registration, resolution, and management. It includes a premium registry with tiered pricing for short identifiers, x402 payment protocol integration for monetized identity services, and multi-network deployment across Lux, Hanzo, and Zoo chains.
 
 ## Motivation
 
@@ -369,7 +370,62 @@ The W3C DID specification has been implemented in the Lux standard library:
 | DID Registry | `standard/contracts/identity/DIDRegistry.sol` | ✅ Implemented |
 | DID Resolver | `standard/contracts/identity/DIDResolver.sol` | ✅ Implemented |
 | Omnichain Resolver | `standard/contracts/identity/DIDResolver.sol` | ✅ Implemented |
+| Premium DID Registry | `standard/contracts/identity/PremiumDIDRegistry.sol` | ✅ Implemented |
+| x402 DID Service | `standard/contracts/identity/interfaces/IDID.sol` | ✅ Implemented |
 | Karma Integration | `standard/contracts/governance/Karma.sol` | ✅ Integrated |
+
+### Premium DID Registry
+
+The Premium DID Registry enables paid registration for short identifiers with tiered pricing:
+
+| Length | Tier | Price (Native) | Example |
+|--------|------|----------------|---------|
+| 1 char | Ultra Premium | 1000 tokens | `did:lux:a` |
+| 2 chars | Super Premium | 100 tokens | `did:lux:ai` |
+| 3 chars | Premium | 10 tokens | `did:lux:bob` |
+| 4 chars | Standard | 1 token | `did:lux:john` |
+| 5+ chars | Basic | 0.1 tokens | `did:lux:alice` |
+
+Features:
+- Annual renewal with 30-day grace period
+- Network-specific deployment (Lux, Hanzo, Zoo)
+- Treasury fee collection and withdrawal
+- Reserved identifier protection for registrars
+
+### x402 Payment Protocol Integration
+
+DIDs can advertise x402 payment capabilities through service endpoints:
+
+```json
+{
+  "id": "did:lux:alice#x402-payment",
+  "type": "X402PaymentEndpoint",
+  "serviceEndpoint": "https://pay.alice.lux/x402",
+  "acceptedTokens": ["LUX", "USDC", "ETH"],
+  "facilitator": "did:lux:hanzo-facilitator"
+}
+```
+
+Service Types for x402:
+- `X402PaymentEndpoint` - Payment verification endpoint
+- `X402Facilitator` - Facilitator service
+- `X402Resource` - Protected resource
+
+See [LP-3028: x402 Payment Protocol](./lp-3028-x402-payment-protocol.md) for protocol details.
+
+### Multi-Network Deployment
+
+The DID registry supports deployment across multiple networks:
+
+| Network | Method | Chain ID | Status |
+|---------|--------|----------|--------|
+| Lux Mainnet | `did:lux` | 96369 | ✅ Ready |
+| Lux Testnet | `did:lux` | 96368 | ✅ Ready |
+| Hanzo | `did:hanzo` | TBD | 🔄 Planned |
+| Zoo Mainnet | `did:zoo` | 200200 | 🔄 Planned |
+| Zoo Testnet | `did:zoo` | 200201 | 🔄 Planned |
+
+Each network has its own DID registry with cross-chain resolution via Warp messaging.
 
 ### Key Implementation Features
 
