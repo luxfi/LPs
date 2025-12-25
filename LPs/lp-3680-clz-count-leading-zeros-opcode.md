@@ -67,11 +67,13 @@ LP-3680 introduces the CLZ (Count Leading Zeros) opcode to the Lux EVM, providin
 
 | Property | Value |
 |----------|-------|
-| Opcode | `0x1F` |
+| Opcode | `0x1E` |
 | Mnemonic | `CLZ` |
 | Stack Input | 1 (256-bit value) |
 | Stack Output | 1 (count of leading zeros) |
 | Gas Cost | 5 |
+
+**Implementation Status**: ✅ Implemented in [`geth/core/vm/opcodes.go`](https://github.com/luxfi/geth)
 
 ### Semantics
 
@@ -142,7 +144,7 @@ The CLZ (Count Leading Zeros) operation was selected as a dedicated opcode for s
 
 ### Opcode Number Selection
 
-The opcode `0x1F` was chosen to align with Ethereum's EIP-7939, ensuring compatibility with the broader EVM ecosystem. This positioning places CLZ near other arithmetic operations (ADD=0x01, MUL=0x02) in the opcode space.
+The opcode `0x1E` was chosen to align with Ethereum's EIP-7939, ensuring compatibility with the broader EVM ecosystem. This positioning places CLZ near other arithmetic operations (ADD=0x01, MUL=0x02) in the opcode space.
 
 ### Gas Cost Determination
 
