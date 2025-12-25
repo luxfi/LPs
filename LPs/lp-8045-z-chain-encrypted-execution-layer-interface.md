@@ -8,7 +8,7 @@ status: Draft
 type: Standards Track
 category: Interface
 created: 2025-07-24
-requires: 8046
+requires: 8000
 tags: [privacy, zk, core]
 order: 45
 ---

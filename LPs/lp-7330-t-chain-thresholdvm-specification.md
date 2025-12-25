@@ -8,7 +8,7 @@ status: Final
 type: Standards Track
 category: Core
 created: 2025-12-11
-requires: 7014, 6081, 7103, 7104, 7321, 7322, 7323
+requires: 7014, 6000, 7103, 7104, 7321, 7322, 7323
 activation:
   flag: lp330-t-chain
   hfName: "Threshold"

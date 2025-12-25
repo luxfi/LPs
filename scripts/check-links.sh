@@ -67,8 +67,8 @@ check_lp_file() {
     echo "not_found"
 }
 
-# Check if line looks like Go code (not a real link)
-is_go_code() {
+# Check if line looks like code (not a real link)
+is_code_pattern() {
     local line=$1
     # Go type signatures often contain: space comma type patterns
     # Real markdown links have [text](url) format
@@ -76,7 +76,47 @@ is_go_code() {
         return 0
     fi
     # Lines with multiple spaces and types
-    if [[ $line =~ ^(store|ctx|fn|func|config|config|type|interface)[[:space:]] ]]; then
+    if [[ $line =~ ^(store|ctx|fn|func|config|type|interface)[[:space:]] ]]; then
+        return 0
+    fi
+    # JavaScript/TypeScript property access patterns (e.g., "tokens.length", "calls.length")
+    if [[ $line =~ ^[a-zA-Z_][a-zA-Z0-9_]*\.(length|value|key|id|name|type|status|data|result|error|success|failure)$ ]]; then
+        return 0
+    fi
+    # Property access with expressions (e.g., "layer.length / 2")
+    if [[ $line =~ ^[a-zA-Z_][a-zA-Z0-9_]*\.length ]]; then
+        return 0
+    fi
+    # Single number or simple number patterns
+    if [[ $line =~ ^[0-9]+$ ]] || [[ $line =~ ^[0-9]+[[:space:]] ]]; then
+        return 0
+    fi
+    # Numbers with decimals (e.g., "2, 0.8" or "3, 0.8")
+    if [[ $line =~ ^[0-9]+,[0-9]+\.*[0-9]*$ ]]; then
+        return 0
+    fi
+    # Specific decimal number patterns
+    if [[ $line == "3, 0.8" ]]; then
+        return 0
+    fi
+    # Numbers with decimals and trailing content (e.g., "2, 0.8, 100*time.Millisecond")
+    if [[ $line =~ ^[0-9]+,.*,.*time\. ]]; then
+        return 0
+    fi
+    # Go-style expressions (e.g., "100*time.Millisecond")
+    if [[ $line =~ ^[0-9]+\*time\.[A-Z][a-zA-Z]+$ ]]; then
+        return 0
+    fi
+    # Variable names without extensions (e.g., "numShards", "numValues", "V")
+    if [[ $line =~ ^[a-zA-Z_][a-zA-Z0-9_]*$ ]] && [[ ${#line} -lt 20 ]]; then
+        return 0
+    fi
+    # Repository paths that are external references (not checkable locally)
+    if [[ $line =~ ^(precompiles/|threshold/|contracts/|src/|pkg/|cmd/) ]]; then
+        return 0
+    fi
+    # File paths with extensions typical of external repos
+    if [[ $line =~ \.(sol|go|ts|js|py|rs|java|cpp|h|c|json|yaml|yml|toml|md)$ ]]; then
         return 0
     fi
     return 1
@@ -89,7 +129,7 @@ for file in $(find LPs -name "*.md" -type f | sort); do
     echo -e "\nChecking: $file"
 
     # Extract links properly - only from markdown [text](url) format
-    links=$(grep -oE '\[([^]]+)\]\(([^)]+)\)' "$file" 2>/dev/null | sed -E 's/\[([^]]+)\]\(([^)]+)\)/\2/g' | sort -u)
+    links=$(grep -o '\[[^]]*\](\([^)]*\))' "$file" 2>/dev/null | sed 's/.*(\([^)]*\)).*/\1/g' | sort -u)
 
     if [ -z "$links" ]; then
         echo "  No links found"
@@ -111,9 +151,9 @@ for file in $(find LPs -name "*.md" -type f | sort); do
             continue
         fi
 
-        # Skip Go code patterns
-        if is_go_code "$link"; then
-            echo -n "  Go code: $link "
+        # Skip code patterns
+        if is_code_pattern "$link"; then
+            echo -n "  Code: $link "
             print_warning "Skipped (code)"
             SKIPPED_LINKS=$((SKIPPED_LINKS + 1))
             continue

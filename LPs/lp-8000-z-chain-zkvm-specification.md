@@ -10,7 +10,7 @@ type: Standards Track
 category: Core
 created: 2025-12-11
 requires: 0, 99
-supersedes: 8046
+# supersedes removed - file deleted
 order: 0
 ---
 
