@@ -4,12 +4,12 @@ title: Post-Quantum Cryptography Suite for Lux Network
 description: Comprehensive specification for NIST-standardized post-quantum cryptographic algorithms
 author: Lux Industries Inc (@luxfi)
 discussions-to: https://forum.lux.network/t/lp-200-post-quantum-cryptography
-status: Draft
+status: Final
 type: Standards Track
 category: Core
 created: 2025-01-24
 requires:
-tags: [pqc, core]
+tags: [pqc, core, ml-dsa, slh-dsa, ml-kem]
 order: 200
 ---
 
