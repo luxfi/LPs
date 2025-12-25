@@ -1,5 +1,5 @@
 ---
-lp: 3271
+lp: 4271
 title: LRC-1271 Signature Validation
 description: LRC-1271 Signature Validation for Lux Network
 author: Lux Network Team (@luxfi)

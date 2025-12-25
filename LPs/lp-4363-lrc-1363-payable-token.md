@@ -1,5 +1,5 @@
 ---
-lp: 3363
+lp: 4363
 title: LRC-1363 Payable Token
 description: Token with transferAndCall for single-transaction token payments
 author: Lux Core Team (@luxfi)

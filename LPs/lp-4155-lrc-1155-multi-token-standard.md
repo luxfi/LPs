@@ -1,5 +1,5 @@
 ---
-lp: 3155
+lp: 4155
 title: LRC-1155 Multi-Token Standard
 description: Another special number, corresponding to Ethereum's ERC-1155 multi-token standard.
 author: Lux Network Team (@luxfi)

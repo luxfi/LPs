@@ -1,22 +1,22 @@
 ---
-lp: 3157
-title: LRC-1155 Supply Extension
-description: LRC-1155 Supply Extension for Lux Network
+lp: 9909
+title: LRC-6909 Minimal Multi-Token
+description: LRC-6909 Minimal Multi-Token for Lux Network
 author: Lux Network Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
 status: Final
 type: Standards Track
 category: LRC
 created: 2025-01-23
-tags: [lrc, token-standard, nft]
-order: 310
+tags: [lrc, token-standard]
+order: 330
 ---
 
 ## Abstract
-Extension tracking total supply for each token ID in LRC-1155 contracts.
+LRC-6909 (mirrors ERC-6909) provides a gas-efficient minimal multi-token interface.
 
 ## Specification
-Implements `totalSupply(uint256 id)` and `exists(uint256 id)` functions.
+Simplified multi-token standard with reduced gas costs compared to LRC-1155.
 
 
 ## Motivation
@@ -40,18 +40,9 @@ Fully compatible with existing ERC implementations.
 
 | Contract | Description |
 |----------|-------------|
-| [`lib/openzeppelin-contracts/contracts/token/ERC1155/extensions/ERC1155Supply.sol`](https://github.com/luxfi/standard/blob/main/lib/openzeppelin-contracts/contracts/token/ERC1155/extensions/ERC1155Supply.sol) | ERC1155 with totalSupply tracking |
+| [`lib/solmate/src/tokens/ERC6909.sol`](https://github.com/luxfi/standard/blob/main/lib/solmate/src/tokens/ERC6909.sol) | Solmate minimal multi-token (if available) |
 
-
-### Upgradeable Variants
-
-For proxy-based upgradeable contracts:
-
-| Contract | Description |
-|----------|-------------|
-| [`ERC1155SupplyUpgradeable.sol`](https://github.com/luxfi/standard/blob/main/lib/openzeppelin-contracts-upgradeable/contracts/token/ERC1155/extensions/ERC1155SupplyUpgradeable.sol) | Upgradeable supply tracking |
-
-**Usage**: Initialize in `initialize()` instead of constructor. See [OpenZeppelin Upgrades](https://docs.openzeppelin.com/upgrades).
+**Note**: ERC-6909 is a gas-optimized alternative to ERC-1155.
 
 ### Build and Test
 

@@ -8,7 +8,7 @@ status: Final
 type: Standards Track
 category: LRC
 created: 2025-12-25
-requires: [3020, 3156]
+requires: [3020, 6156]
 tags: [lrc-20, token, flash-mint, flash-loan, defi]
 order: 3027
 ---

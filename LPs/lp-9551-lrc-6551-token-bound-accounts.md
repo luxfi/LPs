@@ -1,22 +1,22 @@
 ---
-lp: 3967
-title: LRC-1967 Proxy Storage Slots
-description: LRC-1967 Proxy Storage Slots for Lux Network
+lp: 9551
+title: LRC-6551 Token Bound Accounts
+description: LRC-6551 Token Bound Accounts for Lux Network
 author: Lux Network Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
 status: Final
 type: Standards Track
 category: LRC
 created: 2025-01-23
-tags: [lrc, token-standard, evm, proxy]
-order: 630
+tags: [lrc, token-standard, nft, smart-wallet]
+order: 250
 ---
 
 ## Abstract
-LRC-1967 (mirrors ERC-1967) standardizes proxy storage slots for upgradeable contracts.
+LRC-6551 (mirrors ERC-6551) enables NFTs to own assets as smart contract wallets.
 
 ## Specification
-Defines standard storage slots for implementation, admin, and beacon addresses.
+Every NFT gets a deterministic smart contract account that can hold assets.
 
 
 ## Motivation
@@ -31,7 +31,6 @@ Mirrors the corresponding Ethereum standard for maximum compatibility.
 
 Fully compatible with existing ERC implementations.
 
-
 ## Reference Implementation
 
 **Repository**: [https://github.com/luxfi/standard](https://github.com/luxfi/standard)
@@ -41,13 +40,19 @@ Fully compatible with existing ERC implementations.
 
 | Contract | Description |
 |----------|-------------|
-| [`lib/openzeppelin-contracts/contracts/proxy/ERC1967/ERC1967Proxy.sol`](https://github.com/luxfi/standard/blob/main/lib/openzeppelin-contracts/contracts/proxy/ERC1967/ERC1967Proxy.sol) | OpenZeppelin ERC-1967 Proxy |
-| [`lib/openzeppelin-contracts/contracts/proxy/ERC1967/ERC1967Utils.sol`](https://github.com/luxfi/standard/blob/main/lib/openzeppelin-contracts/contracts/proxy/ERC1967/ERC1967Utils.sol) | Proxy utilities |
+| [`src/tokens/ERC6551Registry.sol`](https://github.com/luxfi/standard/blob/main/src/tokens/ERC6551Registry.sol) | TBA registry (if exists) |
+
+### Interfaces
+
+- [`lib/openzeppelin-contracts/contracts/interfaces/IERC6551Registry.sol`](https://github.com/luxfi/standard/blob/main/lib/openzeppelin-contracts/contracts/interfaces/IERC6551Registry.sol)
+- [`lib/openzeppelin-contracts/contracts/interfaces/IERC6551Account.sol`](https://github.com/luxfi/standard/blob/main/lib/openzeppelin-contracts/contracts/interfaces/IERC6551Account.sol)
+
+**Note**: ERC-6551 enables NFTs to own assets. Each NFT gets a deterministic smart contract account.
 
 ### Build and Test
 
 ```bash
-cd /Users/z/work/lux/standard
+cd /Users/z/work/lux/standard/
 
 # Build all contracts
 forge build
@@ -58,7 +63,6 @@ forge test -vvv
 # Gas report
 forge test --gas-report
 ```
-
 ## Security Considerations
 
 Implementations should follow established security best practices for the corresponding ERC.
