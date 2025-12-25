@@ -4,7 +4,7 @@ title: CGGMP21 Threshold ECDSA Precompile
 description: Native precompile for UC-secure threshold ECDSA with identifiable aborts
 author: Lux Core Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
-status: Draft
+status: Final
 type: Standards Track
 category: Core
 created: 2025-11-22
