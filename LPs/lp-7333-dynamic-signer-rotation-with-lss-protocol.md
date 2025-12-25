@@ -4,7 +4,7 @@ title: Dynamic Signer Rotation with LSS Protocol
 description: Validator-integrated dynamic signer rotation protocol enabling live resharing of threshold keys without reconstructing the master secret
 author: Lux Core Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
-status: Final
+status: Draft
 type: Standards Track
 category: Core
 created: 2025-12-11

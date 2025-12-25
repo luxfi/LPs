@@ -3,7 +3,7 @@ lp: 10001
 title: Learning Path - Core Protocol
 description: Essential foundation for understanding Lux Network - required for all roles
 author: Lux Core Team
-status: Final
+status: Draft
 type: Meta
 created: 2025-12-21
 tags: [learning-path, core, beginner]

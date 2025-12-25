@@ -4,7 +4,7 @@ title: CLZ (Count Leading Zeros) Opcode
 description: Native EVM opcode for efficient bit-counting operations supporting PQ signatures and ZK proofs
 author: Lux Core Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
-status: Final
+status: Draft
 type: Standards Track
 category: Core
 created: 2025-12-24

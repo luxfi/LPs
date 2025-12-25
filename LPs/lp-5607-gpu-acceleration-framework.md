@@ -4,7 +4,7 @@ title: GPU Acceleration Framework
 description: Unified GPU compute interface for consensus, AI inference, and cryptographic operations
 author: Lux Core Team (@luxfi)
 discussions-to: https://forum.lux.network/t/lp-607-gpu-acceleration
-status: Final
+status: Draft
 type: Standards Track
 category: Core
 created: 2025-01-09

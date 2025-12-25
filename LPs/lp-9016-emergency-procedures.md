@@ -3,7 +3,7 @@ lp: 9016
 title: Emergency Procedures & Circuit Breakers
 description: Production-grade emergency response system for DeFi protocols handling billions in liquidity
 author: Lux Core Team
-status: Final
+status: Draft
 tags: [dex, trading]
 type: Standards Track
 category: Core

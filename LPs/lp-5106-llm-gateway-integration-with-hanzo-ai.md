@@ -5,7 +5,7 @@ description: Specifies Lux ↔ Hanzo LLM Gateway integration enabling AI access 
 author: Lux Team, Hanzo Team
 type: Standards Track
 category: Interface
-status: Final
+status: Draft
 created: 2025-01-09
 requires: [5101, 5102]
 tags: [ai, dev-tools]

@@ -4,7 +4,7 @@ title: Verifiable Random Function (VRF) Precompile
 description: Native EVM precompile for cryptographic VRF operations supporting randomness for consensus and applications
 author: Lux Core Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
-status: Final
+status: Draft
 type: Standards Track
 category: Core
 created: 2025-12-24

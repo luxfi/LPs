@@ -4,7 +4,7 @@ title: Verkle State Transition (EIP-6800)
 description: Ethereum state transition to Verkle trees enabling stateless clients
 author: Lux Core Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
-status: Final
+status: Draft
 type: Standards Track
 category: Core
 created: 2025-01-23

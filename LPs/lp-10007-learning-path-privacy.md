@@ -3,7 +3,7 @@ lp: 10007
 title: Learning Path - Privacy & Zero-Knowledge
 description: Encrypted execution, ZK proofs, and private compute on Z-Chain
 author: Lux Core Team
-status: Final
+status: Draft
 type: Meta
 created: 2025-12-21
 tags: [learning-path, privacy, zk, fhe, z-chain]

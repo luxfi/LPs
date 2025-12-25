@@ -51,6 +51,13 @@ import { DocsPage, DocsBody } from '@hanzo/docs/ui/page';
 import { extractHeadings } from '@/lib/toc';
 import { FilteredView } from './filtered-view';
 
+// Format LP number without leading zeros for display (LP-0 instead of LP-0000)
+function formatLPNumber(lp: number | string | undefined): string {
+  if (lp === undefined || lp === null) return 'LP-0';
+  const num = typeof lp === 'string' ? parseInt(lp, 10) : lp;
+  return `LP-${num}`;
+}
+
 // LP Index/Overview Page Component
 function LPIndexPage() {
   const categories = source.getCategorizedPages();
@@ -111,8 +118,8 @@ function LPIndexPage() {
                   href={`/docs/${lp.slug.join('/')}`}
                   className="flex items-center gap-4 p-3 rounded-lg border border-border hover:border-foreground/20 hover:bg-accent/50 transition-colors group"
                 >
-                  <span className="text-sm font-mono text-muted-foreground w-20 shrink-0">
-                    LP-{String(lp.data.frontmatter.lp).padStart(4, '0')}
+                  <span className="text-sm font-mono text-muted-foreground w-16 shrink-0">
+                    {formatLPNumber(lp.data.frontmatter.lp)}
                   </span>
                   <span className="flex-1 font-medium text-sm truncate group-hover:text-foreground">
                     {lp.data.title}
@@ -233,7 +240,7 @@ function LPDetailPage({ page }: { page: any }) {
         <div className="flex items-start justify-between gap-4 mb-3">
           <div>
             <span className="text-xs font-mono text-muted-foreground">
-              LP-{String(frontmatter.lp).padStart(4, '0')}
+              {formatLPNumber(frontmatter.lp)}
             </span>
             <h1 className="text-2xl font-bold mt-1">{page.data.title}</h1>
           </div>

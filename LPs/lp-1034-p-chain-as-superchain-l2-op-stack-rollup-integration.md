@@ -4,7 +4,7 @@ title: P-Chain as Superchain L2 – OP Stack Rollup Integration
 description: Blueprint for integrating the P-Chain as an OP Stack rollup into the Ethereum Superchain while preserving Lux Consensus
 author: Zach Kelling (@zeekay) and Lux Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
-status: Final
+status: Draft
 type: Standards Track
 category: Core
 created: 2025-07-24

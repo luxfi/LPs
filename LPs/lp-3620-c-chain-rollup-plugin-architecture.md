@@ -4,7 +4,7 @@ title: C-Chain Rollup Plugin Architecture
 description: A plugin-based architecture for integrating Optimism and other rollup stacks into the Lux C-Chain (geth) client
 author: Lux Network Team
 discussions-to: https://github.com/luxfi/lps/discussions
-status: Final
+status: Draft
 type: Standards Track
 category: Core
 created: 2025-07-23

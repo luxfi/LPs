@@ -5,7 +5,7 @@ tags: [dex, hft, trading, infrastructure, colocation, lp-9000-series]
 description: Global high-frequency trading venue deployment strategy with sub-microsecond latency edge-to-edge coverage - OVER 9000x FASTER
 author: Lux Network Team (@luxfi)
 discussions-to: https://forum.lux.network/t/lp-9006-hft-venues
-status: Final
+status: Draft
 type: Standards Track
 category: Core
 created: 2025-12-11

@@ -4,7 +4,7 @@ title: Stablecoin Mechanisms Research
 description: Research on stablecoin designs and stability mechanisms for Lux Network
 author: Lux Network Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
-status: Final
+status: Draft
 type: Informational
 created: 2025-01-23
 requires: 1, 3020, 9060

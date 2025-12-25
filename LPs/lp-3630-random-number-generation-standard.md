@@ -4,7 +4,7 @@ title: Random Number Generation Standard
 description: Defines standard interfaces for secure random number generation on Lux Network
 author: Lux Network Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
-status: Final
+status: Draft
 type: Standards Track
 category: Core
 created: 2025-01-23

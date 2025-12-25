@@ -4,7 +4,7 @@ title: Cross-Chain Messaging Research
 description: Research on cross-chain messaging protocols and implementations for Lux Network
 author: Lux Network Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
-status: Final
+status: Draft
 type: Informational
 created: 2025-01-23
 requires: 0, 7013, 7014

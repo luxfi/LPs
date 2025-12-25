@@ -4,7 +4,7 @@ title: 'Parallel Validation and Shared Mempool'
 description: An enhancement to the Lux node software to allow a single validator to concurrently validate multiple Lux-family chains and participate in a shared mempool.
 author: Gemini (@gemini)
 discussions-to: https://github.com/luxfi/lps/discussions
-status: Final
+status: Draft
 type: Standards Track
 category: Core
 created: 2025-07-22

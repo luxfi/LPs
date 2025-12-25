@@ -4,7 +4,7 @@ title: Dynamic Gas Fee Mechanism with AI Compute Pricing
 description: Unified gas calculation and dynamic fee markets with EIP-1559/4844 compatibility plus AI compute resource pricing
 author: Lux Core Team (@luxfi)
 discussions-to: https://forum.lux.network/t/lp-601-dynamic-gas-fees
-status: Final
+status: Draft
 type: Standards Track
 category: Core
 created: 2025-01-09

@@ -4,7 +4,7 @@ title: Dynamic Minimum Block Times
 description: Dynamic minimum block delay system enabling sub-second blocks and adaptive performance tuning
 author: Lux Protocol Team (@luxfi), Stephen Buttolph, Michael Kaplan
 discussions-to: https://github.com/luxfi/lps/discussions
-status: Final
+status: Draft
 type: Standards Track
 category: Core
 created: 2025-11-22

@@ -5,7 +5,7 @@ tags: [cross-chain, warp, bridge]
 description: Standardizes the message format for cross-chain communications.
 author: Lux Network Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
-status: Final
+status: Draft
 type: Standards Track
 category: Bridge
 created: 2025-01-23

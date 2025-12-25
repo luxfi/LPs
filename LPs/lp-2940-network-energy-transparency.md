@@ -5,7 +5,7 @@ tags: [esg, sustainability, energy, transparency, metrics]
 description: Standards for transparent reporting of Lux Network energy consumption and carbon metrics.
 author: Lux Network Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
-status: Final
+status: Draft
 type: Meta
 created: 2025-12-17
 requires: 2920, 2921

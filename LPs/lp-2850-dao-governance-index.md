@@ -3,7 +3,7 @@ lp: 2850
 title: DAO and Governance Index
 description: Index of DAO frameworks, voting mechanisms, and governance standards
 author: Lux Core Team
-status: Final
+status: Draft
 type: Meta
 created: 2025-12-21
 tags: [dao, governance, voting, index]

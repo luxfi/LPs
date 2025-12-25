@@ -4,7 +4,7 @@ title: W3C Decentralized Identity (DID) Standard
 description: W3C DID Core specification implementation with premium registry, x402 integration, and multi-network support
 author: Lux Network Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
-status: Final
+status: Draft
 type: Standards Track
 category: LRC
 created: 2025-01-23

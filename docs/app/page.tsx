@@ -30,6 +30,13 @@ import { HomeHeader } from '@/components/home-header';
 
 type ProposalStatus = 'Final' | 'Draft' | 'Review' | 'Last Call' | 'Withdrawn' | 'Stagnant';
 
+// Format LP number without leading zeros for display (LP-0 instead of LP-0000)
+function formatLPNumber(lp: number | string | undefined): string {
+  if (lp === undefined || lp === null) return 'LP-0';
+  const num = typeof lp === 'string' ? parseInt(lp, 10) : lp;
+  return `LP-${num}`;
+}
+
 function StatusBadge({ status }: { status: ProposalStatus }) {
   const styles: Record<string, string> = {
     Final: 'bg-emerald-500/20 text-emerald-600 dark:text-emerald-400 border-emerald-500/30',
@@ -575,7 +582,6 @@ export default function HomePage() {
               </div>
               <div className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
                 {finalizedLPs.map((lp) => {
-                  const lpNum = String(lp.data.frontmatter.lp || '0').padStart(4, '0');
                   return (
                     <Link
                       key={lp.slug.join('/')}
@@ -587,7 +593,7 @@ export default function HomePage() {
                       </div>
                       <div className="min-w-0 flex-1">
                         <div className="flex items-center gap-2">
-                          <span className="font-mono text-sm text-muted-foreground">LP-{lpNum}</span>
+                          <span className="font-mono text-sm text-muted-foreground">{formatLPNumber(lp.data.frontmatter.lp)}</span>
                         </div>
                         <h3 className="mt-1 font-semibold leading-snug line-clamp-1 group-hover:text-muted-foreground">
                           {lp.data.title}
@@ -620,7 +626,6 @@ export default function HomePage() {
             </div>
             <div className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
               {recentLPs.map((lp) => {
-                const lpNum = String(lp.data.frontmatter.lp || '0').padStart(4, '0');
                 const status = (lp.data.frontmatter.status || 'Draft') as ProposalStatus;
                 const created = lp.data.frontmatter.created;
                 return (
@@ -630,7 +635,7 @@ export default function HomePage() {
                     className="group rounded-xl border border-border bg-card p-5 transition-all hover:border-border/80 hover:shadow-sm"
                   >
                     <div className="flex items-center justify-between">
-                      <span className="font-mono text-sm text-muted-foreground">LP-{lpNum}</span>
+                      <span className="font-mono text-sm text-muted-foreground">{formatLPNumber(lp.data.frontmatter.lp)}</span>
                       <StatusBadge status={status} />
                     </div>
                     <h3 className="mt-3 font-semibold leading-snug line-clamp-2 group-hover:text-muted-foreground">

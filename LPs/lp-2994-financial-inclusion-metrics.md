@@ -5,7 +5,7 @@ tags: [esg, impact, financial-inclusion, metrics, sdg]
 description: Metrics framework for measuring Lux Network's contribution to financial inclusion.
 author: Lux Network Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
-status: Final
+status: Draft
 type: Meta
 created: 2025-12-17
 requires: 2920, 2990, 2991

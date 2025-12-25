@@ -4,7 +4,7 @@ title: Automated Market Maker Protocol with Privacy
 description: Privacy-preserving AMM protocol with zkSNARK proofs for confidential swaps and MEV protection
 author: Lux Network Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
-status: Final
+status: Draft
 type: Standards Track
 category: LRC
 created: 2025-01-24

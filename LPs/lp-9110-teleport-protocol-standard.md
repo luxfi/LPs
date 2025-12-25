@@ -5,7 +5,7 @@ tags: [bridge, cross-chain, mpc, ibc, core]
 description: Defines the Teleport bridging protocol for the Lux Network, encompassing both IBC Teleport for Cosmos ecosystem compatibility and MPC Bridge for multi-chain EVM bridging with threshold signatures.
 author: Lux Network Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
-status: Final
+status: Draft
 type: Standards Track
 category: Bridge
 created: 2025-12-14

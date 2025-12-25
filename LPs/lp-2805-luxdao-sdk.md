@@ -4,7 +4,7 @@ title: "@luxdao/sdk TypeScript SDK"
 description: TypeScript SDK for interacting with Lux DAO contracts and governance
 author: Lux Industries Inc.
 discussions-to: https://github.com/luxfi/lps/discussions
-status: Final
+status: Draft
 type: Standards Track
 category: Interface
 created: 2025-12-17

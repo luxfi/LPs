@@ -4,7 +4,7 @@ title: Flare DAG Finalization Protocol
 description: DAG finalization via cascading accept protocol with causal ordering
 author: Lux Network Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
-status: Final
+status: Draft
 type: Standards Track
 category: Core
 created: 2025-01-29

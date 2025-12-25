@@ -5,7 +5,7 @@ tags: [esg, impact, metrics, measurement, reporting]
 description: Methodology for measuring, tracking, and reporting social impact across the Lux ecosystem.
 author: Lux Network Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
-status: Final
+status: Draft
 type: Meta
 created: 2025-12-17
 requires: 2920, 2990

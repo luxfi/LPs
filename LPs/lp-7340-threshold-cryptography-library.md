@@ -4,7 +4,7 @@ title: Threshold Cryptography Library (github.com/luxfi/threshold)
 description: Core Go library implementing LSS, CMP, FROST, Doerner, and Ringtail threshold cryptography protocols
 author: Lux Industries Inc.
 discussions-to: https://github.com/luxfi/lps/discussions
-status: Final
+status: Draft
 type: Standards Track
 category: Core
 created: 2025-12-17

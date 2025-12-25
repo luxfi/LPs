@@ -5,7 +5,7 @@ tags: [core, ai, attestation, tee, a-chain]
 description: Core specification for the A-Chain (AI Virtual Machine), Lux Network's attestation and AI compute chain
 author: Lux Network Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
-status: Final
+status: Draft
 type: Standards Track
 category: Core
 created: 2025-12-11

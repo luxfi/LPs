@@ -3,7 +3,7 @@ lp: 2860
 title: Fund Management Index
 description: Index of fund management, treasury, and institutional investment LPs
 author: Lux Core Team
-status: Final
+status: Draft
 type: Meta
 created: 2025-12-21
 tags: [funds, treasury, institutional, index]

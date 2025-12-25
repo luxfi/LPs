@@ -5,7 +5,7 @@ tags: [defi, dex, precompile, hft, orderbook, trading]
 description: Native EVM precompile for high-frequency trading with 434M orders/sec throughput
 author: Lux Network Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
-status: Final
+status: Draft
 type: Standards Track
 category: Core
 created: 2025-12-21

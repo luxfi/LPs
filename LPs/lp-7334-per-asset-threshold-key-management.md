@@ -4,7 +4,7 @@ title: Per-Asset Threshold Key Management
 description: Framework for independent threshold signature configurations per bridged asset, enabling risk-based security and optimized performance.
 author: Lux Protocol Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
-status: Final
+status: Draft
 type: Standards Track
 category: Core
 created: 2025-12-11

@@ -5,7 +5,7 @@ tags: [investment, environment, carbon, sustainability]
 description: Investment policy for environmental integrity - measurable improvement, not vibes.
 author: Lux Network Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
-status: Final
+status: Draft
 type: Meta
 created: 2025-12-17
 requires: 2900, 2920

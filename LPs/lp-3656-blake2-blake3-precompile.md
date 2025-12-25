@@ -4,7 +4,7 @@ title: Blake2/Blake3 Cryptographic Hash Precompile
 description: Native EVM precompile for Blake2b, Blake2s, and Blake3 hash functions with keyed and XOF modes
 author: Lux Core Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
-status: Final
+status: Draft
 type: Standards Track
 category: Core
 created: 2025-12-24
