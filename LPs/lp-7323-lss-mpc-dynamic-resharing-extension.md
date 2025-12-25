@@ -4,7 +4,7 @@ title: LSS-MPC Dynamic Resharing Extension
 description: Dynamic resharing protocol extension for threshold signature schemes (CGGMP21, FROST)
 author: Lux Core Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
-status: Draft
+status: Final
 type: Standards Track
 category: Core
 created: 2025-11-22
