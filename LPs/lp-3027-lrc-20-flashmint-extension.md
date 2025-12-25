@@ -190,6 +190,20 @@ Default fee of 0 because:
 
 `maxFlashLoan` prevents supply overflow by limiting flash mint to `type(uint256).max - totalSupply()`.
 
+## Backwards Compatibility
+
+This extension is fully backwards compatible with LRC-20:
+
+- **Interface**: Extends `ILRC20` without modifying core functions
+- **Storage**: Uses separate storage slots for flash mint parameters
+- **Events**: Inherits LRC-20 events; no new events required
+- **EIP-3156**: Compatible with EIP-3156 flash loan standard
+
+Existing LRC-20 implementations can be upgraded by:
+1. Inheriting `LRC20FlashMint` instead of `LRC20`
+2. Overriding `_flashFee()` and `_flashFeeReceiver()` if custom fees desired
+3. Adding reentrancy protection in callback receivers
+
 ## Use Cases
 
 1. **Arbitrage**: Flash mint stablecoins for cross-DEX arbitrage

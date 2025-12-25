@@ -10,13 +10,13 @@ type: Standards Track
 category: LRC
 created: 2025-12-21
 requires: 9010, 9011, 9012, 3020
-implementation: https://github.com/luxfi/standard/src/liquidity/CrossChainDeFiRouter.sol
+implementation: https://github.com/luxfi/standard/contracts/liquidity/CrossChainDeFiRouter.sol
 order: 13
 ---
 
 > **Documentation**: [docs.lux.network/defi](https://docs.lux.network/defi)
 >
-> **Source**: [github.com/luxfi/standard](https://github.com/luxfi/standard/tree/main/src/liquidity)
+> **Source**: [github.com/luxfi/standard](https://github.com/luxfi/standard/tree/main/contracts/liquidity)
 
 ## Abstract
 
@@ -722,10 +722,10 @@ function testCrossChainLimitOrder() public {
 
 ## Reference Implementation
 
-**Location**: `/Users/z/work/lux/standard/src/liquidity/CrossChainDeFiRouter.sol`
+**Location**: `/Users/z/work/lux/standard/contracts/liquidity/CrossChainDeFiRouter.sol`
 
 ```
-src/liquidity/
+contracts/liquidity/
 ├── CrossChainDeFiRouter.sol    # Main router (this LP)
 ├── precompiles/
 │   ├── IDEX.sol                # LP-9010

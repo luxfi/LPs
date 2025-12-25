@@ -225,6 +225,20 @@ Uses `SafeERC20` to:
 - Donation accounting
 - Admin recovery operations
 
+## Backwards Compatibility
+
+This extension is fully backwards compatible with LRC-20:
+
+- **Interface**: Extends `ILRC20` without modifying core functions
+- **Storage**: Uses separate storage slot for underlying token
+- **Events**: Adds `Deposit` and `Withdrawal` events
+- **EIP-20**: Compatible with all EIP-20 clients and tools
+
+Existing LRC-20 implementations can be wrapped by:
+1. Deploying `LRC20Wrapper` with the original token as underlying
+2. Original token remains accessible for legacy operations
+3. Wrapper and original can coexist
+
 ## Use Cases
 
 1. **WLUX**: Wrap native LUX for DeFi compatibility
