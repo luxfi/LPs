@@ -65,7 +65,7 @@ contract LuxSafe is Safe {
     event LamportKeyRegistered(address indexed owner, uint256 keyIndex);
     event LamportKeyUsed(address indexed owner, uint256 keyIndex);
 }
-```
+```solidity
 
 ### Lamport Key Generation
 
@@ -147,7 +147,7 @@ contract LamportSignatureValidator {
         return true;
     }
 }
-```
+```solidity
 
 ### Safe Transaction Execution with Lamport
 
@@ -278,7 +278,7 @@ contract LamportKeyManager is ModuleManager {
         emit LamportKeyRegistered(msg.sender, keyIndex);
     }
 }
-```
+```solidity
 
 ### Gas Optimization Strategies
 
@@ -347,7 +347,7 @@ class LamportKeyManager {
         );
     }
 }
-```
+```solidity
 
 ### User Interface Extensions
 
@@ -455,7 +455,7 @@ go test -v ./... -count=1
 # --- PASS: TestKeyExhaustion (1.2ms)
 # ...
 # ok  	github.com/luxfi/node/vms/safe/lamport	42.156s
-```
+```solidity
 
 ### Integration Tests
 
@@ -519,7 +519,7 @@ contract LuxSafeIntegrationTest {
 ### Performance Benchmarks
 
 **Benchmark Results** (Apple M1 Max):
-```
+```markdown
 BenchmarkLamportKeyGeneration        500000   2,145 ns/op    1,024 B/op    12 allocs/op
 BenchmarkLamportSignatureCreation     50000  24,568 ns/op    8,192 B/op    64 allocs/op
 BenchmarkLamportSignatureVerification 40000  31,245 ns/op    4,096 B/op    32 allocs/op

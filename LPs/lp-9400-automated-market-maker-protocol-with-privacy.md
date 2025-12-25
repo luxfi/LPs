@@ -96,7 +96,7 @@ interface IPrivateAMM {
         ZKSwapProof calldata proof
     ) external view returns (bool valid);
 }
-```
+```solidity
 
 ### Homomorphic Order Book
 
@@ -207,7 +207,7 @@ interface IMEVProtection {
         bytes calldata decryptionKey
     ) external;
 }
-```
+```solidity
 
 ### zkSNARK Circuit Specifications
 
@@ -305,7 +305,7 @@ interface IConfidentialLP {
         bytes calldata rebalanceProof
     ) external;
 }
-```
+```solidity
 
 ### Regulatory Compliance Module
 
@@ -434,7 +434,7 @@ function testPrivateSwap() public {
 
     assertTrue(amounts[amounts.length - 1] >= amountOutMin);
 }
-```
+```solidity
 
 ### zkSNARK Swap Verification
 
@@ -513,7 +513,7 @@ function emergencyReveal(bytes32 txId) external onlyGovernance {
 function pausePrivateSwaps() external onlyGovernance {
     // Emergency pause for private operations
 }
-```
+```solidity
 
 ## Implementation
 
@@ -576,4 +576,4 @@ function pausePrivateSwaps() external onlyGovernance {
 
 ## Copyright
 
-Copyright and related rights waived via [CC0](../LICENSE.md).
+Copyright and related rights waived via [CC0](../LICENSE.md).```

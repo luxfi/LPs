@@ -100,7 +100,7 @@ Q-Security provides post-quantum protection across Lux's **6-chain mainnet archi
 
 Traditional threshold signatures (BLS, ECDSA) vulnerable to quantum attacks. Lux implements **lattice-based threshold Dilithium**:
 
-```
+```solidity
 // Each validator i holds secret share s_i
 // Threshold: t = 2/3n validators required
 
@@ -137,7 +137,7 @@ Valid ← Verify(pk, message, σ)
 ### Integration with Consensus
 
 **Snowman Consensus** (linear chain):
-```
+```markdown
 Block Header:
   - prevHash: Hash(previous block)
   - height: Block number
@@ -147,7 +147,7 @@ Block Header:
 ```
 
 **Avalanche Consensus** (DAG):
-```
+```markdown
 Vertex:
   - parents: {Hash(parent1), Hash(parent2), ...}
   - txs: [Transaction list]
@@ -194,7 +194,7 @@ func ThresholdSignDilithium(
     message []byte,
     threshold int,
 ) (signature []byte, err error)
-```
+```solidity
 
 ### Validator Configuration
 
@@ -209,7 +209,7 @@ quantum:
   # Hybrid mode
   hybridMode: true
   ecdsaKeyFile: "/path/to/ecdsa.key"
-```
+```go
 
 ## Performance Benchmarks
 
@@ -531,7 +531,7 @@ func BenchmarkBatchVerify(b *testing.B) {
     }
 }
 // Result: ~12ms for 100 signatures (120µs average vs 500µs individual)
-```
+```solidity
 
 ## References
 
@@ -551,3 +551,4 @@ Code: Apache 2.0
 *LP-303 Created: October 28, 2025*
 *Status: Active*
 *Contact: research@lux.network*
+```

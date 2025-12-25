@@ -91,7 +91,7 @@ func AggregateSignatures(
         PublicKey: bls.AggregatePublicKeys(sigs),
     }, nil
 }
-```
+```go
 
 ### Message Verification
 
@@ -133,7 +133,7 @@ type StateProof struct {
     VerkleProof   *verkle.Proof  // Constant 1KB
     Signature     *BLSSignature
 }
-```
+```go
 
 ## Rationale
 
@@ -226,7 +226,7 @@ See [github.com/luxfi/node/warp](https://github.com/luxfi/node/tree/main/warp) f
 ### Deployment Configuration
 
 **Mainnet Parameters**:
-```
+```solidity
 BLS Threshold: 67% (2/3 majority)
 Message TTL: 24 hours
 Max Messages per Block: 1000
@@ -235,7 +235,7 @@ Proof Size Target: <1.5 KB
 ```
 
 **Testnet Parameters**:
-```
+```solidity
 BLS Threshold: 51% (for faster testing)
 Message TTL: 12 hours
 Max Messages per Block: 5000

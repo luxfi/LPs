@@ -44,7 +44,7 @@ Applications need to:
 ### Address Range
 
 All Lux precompiles use the address range:
-```
+```solidity
 0x0200000000000000000000000000000000000001  to
 0x0200000000000000000000000000000000000FFF
 ```
@@ -215,7 +215,7 @@ library PrecompileRegistry {
         return "Unknown";
     }
 }
-```
+```solidity
 
 ### PrecompileChecker Contract
 
@@ -305,7 +305,7 @@ contract PrecompileChecker {
 
 ### Complete Precompile Address Map
 
-```
+```solidity
 ┌─────────────────────────────────────────────────────────────────────────────────────┐
 │                           Lux Precompile Address Map                                │
 ├─────────────────────────────────────────────────────────────────────────────────────┤
@@ -418,7 +418,7 @@ contract MyContract {
         // Use DEX...
     }
 }
-```
+```solidity
 
 ## Test Cases
 
@@ -445,7 +445,7 @@ function testPrecompileCategories() public {
         "Cryptography"
     );
 }
-```
+```solidity
 
 ### Availability Check
 
@@ -464,7 +464,7 @@ function testDeFiAvailability() public {
 
 **Location**: `/Users/z/work/lux/standard/contracts/liquidity/precompiles/PrecompileRegistry.sol`
 
-```
+```solidity
 contracts/liquidity/precompiles/
 ├── PrecompileRegistry.sol   # Registry library (this LP)
 ├── IDEX.sol                 # LP-9010
@@ -483,7 +483,7 @@ require(
     PrecompileRegistry.isPrecompile(addr),
     "Not a precompile"
 );
-```
+```solidity
 
 ### Upgrade Safety
 
@@ -505,3 +505,4 @@ Critical operations should verify precompile availability before use.
 ## Copyright
 
 Copyright and related rights waived via [CC0](https://creativecommons.org/publicdomain/zero/1.0/).
+```

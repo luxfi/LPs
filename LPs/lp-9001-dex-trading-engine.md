@@ -42,7 +42,7 @@ This LP specifies the DEX Trading Engine - the core component of the Lux DEX sid
 
 ## Architecture: DEX Sidecar Network
 
-```
+```solidity
 ┌──────────────────────────────────────────────────────────────────────┐
 │                         DEX SIDECAR NETWORK                          │
 │                     (Standalone from Lux Node)                       │
@@ -92,7 +92,7 @@ Benchmarks run on Apple M1 Max, 2025-12-11:
 
 ### Order Book Operations
 
-```
+```markdown
 BenchmarkOrderBook-10              1081490 orders/sec    787.9 ns/op
 BenchmarkOrderBookParallel-10       684184 orders/sec   1462.0 ns/op
 BenchmarkCriticalOrderMatching/100   714820 orders/sec   1398.8 ns/op
@@ -131,7 +131,7 @@ func BenchmarkCriticalOrderMatching(b *testing.B) {
         })
     }
 }
-```
+```go
 
 ## Order Types
 
@@ -204,7 +204,7 @@ type TWAPOrder struct {
     Interval    time.Duration `json:"interval"`
     SliceSize   int           `json:"slice_size"`
 }
-```
+```solidity
 
 ## Matching Engine
 
@@ -277,7 +277,7 @@ type PriceLevel struct {
     Orders []*Order  // Time-ordered queue
     Total  decimal.Decimal
 }
-```
+```go
 
 ## DAG Consensus Integration
 
@@ -321,7 +321,7 @@ func (dag *DAG) ProcessVertex(v *Vertex) error {
 
 ## Configuration
 
-```
+```solidity
 # dex.yaml
 trading_engine:
   backend: "go"  # go, cgo, mlx, fpga
@@ -359,7 +359,7 @@ var (
     ErrSelfTrade           = errors.New("self-trade not allowed")
     ErrMaxOrdersExceeded   = errors.New("max orders exceeded")
 )
-```
+```go
 
 ## Test Cases
 

@@ -54,7 +54,7 @@ Lux Network accounts for emissions from:
 #### Energy Consumption Estimation
 
 **Formula:**
-```
+```solidity
 E_network = Σ (N_validators × P_average × H_operating × PUE)
 ```
 
@@ -75,12 +75,12 @@ Where:
 #### Emissions Calculation
 
 **Location-based method:**
-```
+```solidity
 CO2e_location = E_consumed × EF_grid
 ```
 
 **Market-based method:**
-```
+```solidity
 CO2e_market = E_consumed × EF_supplier - RECs_retired
 ```
 
@@ -154,7 +154,7 @@ However, we report:
 ### Per-Transaction Metrics
 
 **Formula:**
-```
+```solidity
 I_tx = (Scope2_network + Scope3_relevant) / N_transactions
 ```
 
@@ -165,7 +165,7 @@ I_tx = (Scope2_network + Scope3_relevant) / N_transactions
 ### Per-TVL Metrics
 
 **Formula:**
-```
+```solidity
 I_tvl = Total_emissions / TVL_average
 ```
 

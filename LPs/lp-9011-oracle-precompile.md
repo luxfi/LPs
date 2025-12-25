@@ -46,7 +46,7 @@ Current DeFi applications face challenges with oracle integration:
 
 ### Precompile Address
 
-```
+```solidity
 0x0200000000000000000000000000000000000011
 ```
 
@@ -267,7 +267,7 @@ interface IOracle {
         OracleSource source2
     );
 }
-```
+```solidity
 
 ### OracleLib Helper Library
 
@@ -375,7 +375,7 @@ abstract contract ChainlinkCompatible {
         return ORACLE.description(feedId);
     }
 }
-```
+```solidity
 
 ### PythCompatible Wrapper
 
@@ -441,7 +441,7 @@ abstract contract PythCompatible {
 
 ### Oracle Source Configuration
 
-```
+```solidity
 ┌─────────────────────────────────────────────────────────────────┐
 │                     Oracle Source Priority                      │
 ├─────────────────────┬───────────────────────────────────────────┤
@@ -496,7 +496,7 @@ AggregatorV3Interface feed = AggregatorV3Interface(feedAddress);
 
 // After: Oracle precompile (Chainlink compatible)
 (, int256 answer,,,) = OracleLib.ORACLE.latestRoundData(feedId);
-```
+```solidity
 
 ### Pyth Migration
 
@@ -532,7 +532,7 @@ function testAggregatedPrice() public view {
     assertGe(agg.price, agg.minPrice);
     assertLe(agg.price, agg.maxPrice);
 }
-```
+```solidity
 
 ### TWAP Calculation
 
@@ -556,7 +556,7 @@ function testNativeTWAP() public view {
 
 **Location**: `/Users/z/work/lux/standard/contracts/liquidity/precompiles/IOracle.sol`
 
-```
+```solidity
 contracts/liquidity/precompiles/
 ├── IOracle.sol           # Interface definition (this LP)
 ├── OraclePrecompile.go   # Go precompile implementation

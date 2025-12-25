@@ -95,7 +95,7 @@ func (mmr *ChainMMR) GenerateProof(targetHeight uint64) *MMRProof {
     // Generate inclusion proof for specific height
     return generateMMRProof(mmr.peaks, targetHeight)
 }
-```
+```go
 
 #### 2. Post-Quantum Signed Checkpoints
 
@@ -158,7 +158,7 @@ func (q *QuasarConsensus) VerifyCheckpoint(signed *SignedCheckpoint) bool {
     
     return true
 }
-```
+```go
 
 #### 4. Verkle Tree Integration for State Proofs
 
@@ -194,7 +194,7 @@ func (q *QuasarConsensus) VerifyStateProof(proof *StateProof, checkpoint *Checkp
    - QSF fee payment
 5. If valid, Q-Chain includes checkpoint in next block
 6. Q-Chain updates its global state with new chain head
-```
+```go
 
 #### 6. Security Properties
 
@@ -274,7 +274,7 @@ func (w *WaveConsensus) Query(validators []Validator, choices []ID) ID {
     }
     return nil
 }
-```
+```go
 
 ### 3. Nova – DAG Finalizer
 
@@ -319,7 +319,7 @@ func (n *NebulaEngine) ProcessTransaction(tx Transaction) {
         n.broadcast(tx)
     }
 }
-```
+```go
 
 ### 5. Prism – Voting-Based Consensus
 
@@ -374,7 +374,7 @@ func (q *QuasarConsensus) Finalize(block Block) (*DualCertificate, error) {
         return &DualCertificate{blsCert, rtCert}, nil
     }
 }
-```
+```go
 
 ## Platform Management Capabilities
 
@@ -408,7 +408,7 @@ type CreateChainTx struct {
     chainAuth      DualCertificate
     VMType          string  // "EVM", "WASM", "Custom"
 }
-```
+```go
 
 ### Governance Functions
 - **Proposal Submission**: Quantum-signed governance proposals
@@ -456,7 +456,7 @@ The dual-certificate design provides defense in depth:
 
 Q-Chain's rapid finality creates an impossibly narrow attack window:
 
-```
+```markdown
 Timeline:
 T+0ms:   Block proposed
 T+50ms:  Ringtail timeout (mainnet)
@@ -475,7 +475,7 @@ Even with a large-scale quantum computer, breaking BLS12-381 would require:
 
 ### Directory Structure
 
-```
+```solidity
 /quasar/
 ├── choices/          # Consensus decision states
 ├── consensus/        # Core algorithms
@@ -515,7 +515,7 @@ type Engine interface {
     HandleMessage(peer ID, msg Message) error
     Gossip() []Message
 }
-```
+```go
 
 #### Cryptographic Layer
 
@@ -573,7 +573,7 @@ func (q *QChain) SubmitTransaction(tx Transaction) error {
     
     return nil
 }
-```
+```solidity
 
 ### 2. Block Proposal
 ```go
@@ -628,7 +628,7 @@ func (q *QChain) CollectShares(block Block) error {
     
     return ErrTimeout
 }
-```
+```solidity
 
 ### 4. Certificate Aggregation
 ```go
@@ -690,7 +690,7 @@ func (q *QChain) VoteOnBlock(block Block, cert DualCertificate) error {
     
     return ErrNoConsensus
 }
-```
+```sql
 
 ### 6. Finalization
 ```go
@@ -739,7 +739,7 @@ var MainnetParams = Parameters{
     BlockTime:        500 * time.Millisecond,
     FinalityTarget:   350 * time.Millisecond,
 }
-```
+```solidity
 
 ### Performance Metrics
 
@@ -768,7 +768,7 @@ Block Proposal
            └─► Combination (~7ms)
                                           ______
                               Total: ~350ms
-```
+```go
 
 ## Security Considerations
 
@@ -817,7 +817,7 @@ function slash(validator address, reason SlashingReason) {
     // Emit event for transparency
     emit ValidatorSlashed(validator, reason, penalty);
 }
-```
+```go
 
 ## Network Deployment
 
@@ -862,7 +862,7 @@ FinancialChainParams = Parameters{
     QThreshold:      20,   // 20 of 30
     QuasarTimeout:   30 * time.Millisecond,  // Tighter deadline
 }
-```
+```solidity
 
 #### High-Throughput Gaming Chain
 ```go
@@ -921,7 +921,7 @@ tail -f ~/.luxd/logs/q-chain/quasar.log
 [QUASAR] Aggregated cert size=2.9KB
 [CONSENSUS] Block 1000 dual-cert finalized latency=302ms
 [QUASAR] Quantum-secure finality achieved ✓
-```
+```solidity
 
 ### Developer Integration
 

@@ -75,7 +75,7 @@ This design was chosen over a single MPC-for-all solution to enhance the user ex
 ```bash
 cd standard
 forge test --match "Warp"  # Warp messaging tests
-```
+```solidity
 
 ### Integration Points
 - **C-Chain Integration**: LP-26 (EVM equivalence)
@@ -129,3 +129,4 @@ Additive change; existing interfaces remain valid. Adoption is opt‑in and can 
    - Verify ordering guarantees
    - Test failure recovery
 
+```

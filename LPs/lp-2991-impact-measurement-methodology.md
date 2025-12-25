@@ -63,7 +63,7 @@ This LP establishes the measurement infrastructure that makes LP-900's Theory of
 | **Data Source** | On-chain + geolocation |
 
 **Calculation**:
-```
+```solidity
 FI-01 = Count(unique_addresses WHERE country IN emerging_markets AND tx_count >= 1 in period)
 ```
 
@@ -85,7 +85,7 @@ FI-01 = Count(unique_addresses WHERE country IN emerging_markets AND tx_count >=
 | **Data Source** | On-chain |
 
 **Calculation**:
-```
+```solidity
 FI-02 = Sum(tx_fees_USD) / Count(standard_transfers)
 ```
 
@@ -119,7 +119,7 @@ FI-02 = Sum(tx_fees_USD) / Count(standard_transfers)
 | **Data Source** | On-chain |
 
 **Calculation**:
-```
+```solidity
 EE-01 = Sum(validator_rewards * price_USD)
 ```
 

@@ -92,7 +92,7 @@ interface ILuxBridgedAsset is ILRC20 {
     function isBridged() external view returns (bool);
     function getDailyBridged(address user) external view returns (uint256);
 }
-```
+```solidity
 
 ### Multi-Bridge Support
 
@@ -176,7 +176,7 @@ interface IBridgedAssetReserve is ILuxBridgedAsset {
     
     function getLatestProof() external view returns (ReserveProof memory);
 }
-```
+```solidity
 
 ### Fee Management Extension
 
@@ -272,7 +272,7 @@ interface IBridgedAssetEmergency is ILuxBridgedAsset {
     
     function getEmergencyState() external view returns (EmergencyState memory);
 }
-```
+```solidity
 
 ## Rationale
 
@@ -397,7 +397,7 @@ function testReserveProof() public {
     assertTrue(reserveToken.verifyReserves());
     assertEq(reserveToken.getReserveRatio(), 100); // 100% backed
 }
-```
+```bash
 
 ## Implementation
 
@@ -457,7 +457,7 @@ forge test --match-path test/tokens/\* --gas-report
 
 # Coverage
 forge coverage --match-path test/tokens/\*
-```
+```solidity
 
 **Test Cases** (see `/test/tokens/BridgedAsset.t.sol`):
 - `testMintBridgedTokens()` - Bridge-in minting
@@ -501,7 +501,7 @@ forge verify-contract \
   --chain-id 43114 \
   --watch 0x<BRIDGED_ASSET_ADDRESS> \
   src/tokens/LuxBridgedAsset.sol:LuxBridgedAsset
-```
+```solidity
 
 ## Reference Implementation
 
@@ -711,7 +711,7 @@ modifier onlyBridge() {
     require(msg.sender == bridgeConfig.bridge, "Not bridge");
     _;
 }
-```
+```solidity
 
 ### Supply Verification
 
@@ -725,7 +725,7 @@ require(totalLocked >= totalSupply(), "Undercollateralized");
 Implement daily limits to prevent attacks:
 ```solidity
 require(dailyBridged[user] + amount <= dailyLimit, "Limit exceeded");
-```
+```solidity
 
 ### Emergency Procedures
 

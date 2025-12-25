@@ -55,7 +55,7 @@ The Teleport bridge architecture (LP-0332) and smart contract integration (LP-03
 
 ### 1. SDK Architecture Overview
 
-```
+```solidity
 ┌─────────────────────────────────────────────────────────────────────────────┐
 │                          Application Layer                                   │
 │                   (DeFi Protocols, Wallets, Exchanges)                       │
@@ -136,7 +136,7 @@ interface ConnectionManager {
     checkHealth(): Promise<HealthStatus>;
     getLatency(chainId: ChainId): Promise<number>;
 }
-```
+```solidity
 
 #### 2.2 Signing Module
 
@@ -205,7 +205,7 @@ interface Encoder {
     keccak256(data: Uint8Array): string;
     sha256(data: Uint8Array): string;
 }
-```
+```solidity
 
 #### 2.4 Event System
 
@@ -278,7 +278,7 @@ interface BridgeClient {
     getTokenBalance(token: string, address: string, chainId: ChainId): Promise<bigint>;
     approveToken(token: string, amount: bigint, chainId: ChainId): Promise<string>;
 }
-```
+```solidity
 
 ### 4. TypeScript SDK (github.com/luxfi/sdk-ts)
 
@@ -319,7 +319,7 @@ await bridge.connect();
 // Check connection health
 const health = await bridge.checkHealth();
 console.log('Bridge health:', health);
-```
+```solidity
 
 #### 4.3 Signer Configuration
 
@@ -423,7 +423,7 @@ async function depositToLux() {
 
     await bridge.disconnect();
 }
-```
+```solidity
 
 #### 4.5 Withdraw Operation (Lux -> External)
 
@@ -526,7 +526,7 @@ async function crossChainSwap() {
 
     await bridge.disconnect();
 }
-```
+```solidity
 
 #### 4.7 Event Subscriptions
 
@@ -599,7 +599,7 @@ async function realtimeEvents() {
 
 ```bash
 go get github.com/luxfi/sdk@latest
-```
+```go
 
 #### 5.2 Setup and Configuration
 
@@ -675,7 +675,7 @@ func setupSigners() {
     })
     _ = client
 }
-```
+```go
 
 #### 5.4 Deposit Operation
 
@@ -878,7 +878,7 @@ func withdrawFromLux() error {
 
     return nil
 }
-```
+```go
 
 #### 5.6 Integration with luxfi/node
 
@@ -943,7 +943,7 @@ func integrateLuxNode() error {
 
 ```bash
 pip install luxfi-bridge-sdk
-```
+```python
 
 #### 6.2 Setup and Configuration
 
@@ -1042,7 +1042,7 @@ async def bridge_operations():
 
 if __name__ == "__main__":
     asyncio.run(bridge_operations())
-```
+```solidity
 
 #### 6.4 Event Subscriptions
 
@@ -1118,7 +1118,7 @@ async def with_context_manager():
 
 if __name__ == "__main__":
     asyncio.run(with_context_manager())
-```
+```solidity
 
 ### 7. Common Patterns
 
@@ -1218,7 +1218,7 @@ func handleErrors() {
         }
     }
 }
-```
+```python
 
 **Python:**
 
@@ -1316,7 +1316,7 @@ async function depositWithRetry(params: DepositParams, maxRetries = 3): Promise<
 
     throw lastError;
 }
-```
+```go
 
 **Go:**
 
@@ -1429,7 +1429,7 @@ async function estimateFees() {
 
     await bridge.disconnect();
 }
-```
+```solidity
 
 ### 8. Integration Guides
 
@@ -1613,7 +1613,7 @@ class WalletBridgeUI {
         return this.bridge!.trackDeposit(depositId);
     }
 }
-```
+```solidity
 
 #### 8.3 Exchange Integration
 
@@ -1766,7 +1766,7 @@ interface ChainAdapter {
     getBlockNumber(): Promise<number>;
     getGasPrice(): Promise<bigint>;
 }
-```
+```solidity
 
 **Supported Chains:**
 
@@ -1967,7 +1967,7 @@ func ErrConnectionTimeout(endpoint string, duration time.Duration) *BridgeError 
         },
     }
 }
-```
+```python
 
 **Python Error Structure:**
 
@@ -2023,7 +2023,7 @@ Implementations MUST support configurable retry strategies with exponential back
 
 The delay before retry attempt `n` (1-indexed) MUST be calculated as:
 
-```
+```solidity
 delay_n = min(initial_delay * (multiplier ^ (n - 1)) + jitter, max_delay)
 ```
 
@@ -2044,7 +2044,7 @@ interface RetryConfig {
     jitterEnabled: boolean;     // Enable jitter (default: true)
     retryableCodes: number[];   // Error codes to retry (default: all retryable)
 }
-```
+```go
 
 **Go Implementation:**
 
@@ -2254,7 +2254,7 @@ async def deposit_with_retry():
     )
 
     print(f"Deposit succeeded: {result.deposit_id}")
-```
+```solidity
 
 #### 12.3 Retry Decision Matrix
 
@@ -2439,7 +2439,7 @@ type State struct {
     WaitingRequests int
     LastRefillTime  time.Time
 }
-```
+```python
 
 **Python Implementation:**
 
@@ -2615,7 +2615,7 @@ This section provides test vectors for SDK conformance testing.
     }
   ]
 }
-```
+```solidity
 
 #### 14.2 Amount Parsing
 
@@ -2690,7 +2690,7 @@ This section provides test vectors for SDK conformance testing.
     }
   ]
 }
-```
+```go
 
 #### 14.4 SDK Usage Test Vectors
 
@@ -2946,7 +2946,7 @@ async def test_chain_support():
     assert eth_chain is not None, "Ethereum must be supported"
 
     await client.disconnect()
-```
+```solidity
 
 #### 14.5 Connection Test Vectors
 

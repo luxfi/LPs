@@ -67,7 +67,7 @@ interface ILRC1363 is ILRC20 {
         bytes calldata data
     ) external returns (bool);
 }
-```
+```solidity
 
 ### Receiver Interface
 
@@ -125,7 +125,7 @@ contract LRC1363Token is LRC20, ILRC1363 {
         }
     }
 }
-```
+```sql
 
 ### Magic Values
 
@@ -147,7 +147,7 @@ contract Merchant is ILRC1363Receiver {
         return this.onTransferReceived.selector;
     }
 }
-```
+```solidity
 
 ### Staking
 ```solidity
@@ -201,7 +201,7 @@ forge test -vvv
 
 # Gas report
 forge test --gas-report
-```
+```solidity
 ## Security Considerations
 
 - Reentrancy guard required in receivers
@@ -215,3 +215,4 @@ forge test --gas-report
 ## Copyright
 
 Copyright and related rights waived via [CC0](../LICENSE.md).
+```

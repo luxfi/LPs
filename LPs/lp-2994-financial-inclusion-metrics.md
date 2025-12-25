@@ -120,7 +120,7 @@ Lux Network contributes to financial inclusion by:
 | **Target 2030** | <$0.001 |
 
 **Calculation**:
-```
+```solidity
 AFF-01 = Mean(tx_fee_USD) WHERE tx_type = 'transfer'
 ```
 
@@ -136,7 +136,7 @@ AFF-01 = Mean(tx_fee_USD) WHERE tx_type = 'transfer'
 | **Target** | <1% for amounts >$20 |
 
 **Calculation**:
-```
+```solidity
 AFF-02 = Mean(tx_fee / tx_value) × 100
 ```
 
@@ -201,7 +201,7 @@ AFF-02 = Mean(tx_fee / tx_value) × 100
 | **Target** | >40% |
 
 **Calculation**:
-```
+```solidity
 USE-03 = Count(active_month_3) / Count(new_month_0) × 100
 ```
 
@@ -228,7 +228,7 @@ USE-03 = Count(active_month_3) / Count(new_month_0) × 100
 | **Frequency** | Annual |
 
 **Methodology**:
-```
+```solidity
 Savings = Volume × (Alternative_fee% - Lux_fee%)
 ```
 

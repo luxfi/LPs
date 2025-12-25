@@ -54,7 +54,7 @@ var AIVMID = constants.AIVMID // ids.ID{'a', 'i', 'v', 'm'}
 // Create A-Chain VM
 factory := &avm.Factory{}
 vm, err := factory.New(logger)
-```
+```solidity
 
 ### Directory Structure
 
@@ -68,7 +68,7 @@ node/vms/aivm/
 ├── factory.go        # VM factory
 ├── vm.go             # Main VM implementation
 └── *_test.go         # Tests
-```
+```go
 
 ### Core Components
 
@@ -104,7 +104,7 @@ type ProofOfExecution struct {
     OutputHash  [32]byte
     Timestamp   time.Time
 }
-```
+```solidity
 
 #### 3. NVTrust Chain-Binding (Double-Spend Prevention)
 
@@ -170,7 +170,7 @@ func (vm *VM) VerifyAndMint(receipt *AttestedReceipt) error {
     reward := calculateReward(receipt.WorkMetrics)
     return vm.mintReward(receipt.Context.DeviceID, reward)
 }
-```
+```solidity
 
 **Key Invariant:** The same AI work can't be minted on Hanzo, Lux, AND Zoo - only on the chain specified in the pre-committed `WorkContext.ChainID`.
 
@@ -275,7 +275,7 @@ type PricingModel struct {
     MinDuration uint64
     MaxDuration uint64
 }
-```
+```go
 
 ### Task Scheduling
 
@@ -317,7 +317,7 @@ const (
 
 #### REST Endpoints
 
-```
+```solidity
 POST /ext/bc/A/attestation/verify
 GET  /ext/bc/A/devices/{deviceId}
 POST /ext/bc/A/tasks/submit
@@ -339,7 +339,7 @@ interface IComputePriceOracle {
     function getGPUPrice(string calldata gpuClass) external view returns (GPUPrice memory);
     function updatePrices(GPUPrice[] calldata prices) external onlyOracle;
 }
-```
+```solidity
 
 ### Configuration
 
@@ -389,7 +389,7 @@ func TestDeviceRegistry(t *testing.T)
 func TestTaskScheduling(t *testing.T)
 func TestProofOfExecution(t *testing.T)
 func TestNVTrustIntegration(t *testing.T)
-```
+```solidity
 
 ## Reference Implementation
 
@@ -422,3 +422,4 @@ func TestNVTrustIntegration(t *testing.T)
 ## Copyright
 
 Copyright and related rights waived via [CC0](https://creativecommons.org/publicdomain/zero/1.0/).
+```

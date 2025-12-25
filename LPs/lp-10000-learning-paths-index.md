@@ -46,7 +46,7 @@ The Lux LP system contains 200+ proposals. Without guided paths, newcomers get l
 
 ### Everyone Starts Here: Core Protocol Path
 
-```
+```solidity
 LP-0000 → LP-0001 → LP-0099 → LP-0100 → LP-1000
 Network   Tokens   Taxonomy  Consensus  P-Chain
 ```
@@ -72,7 +72,7 @@ Network   Tokens   Taxonomy  Consensus  P-Chain
 
 ## Visual Map
 
-```
+```solidity
                     ┌─────────────┐
                     │  LP-0011    │
                     │  Core Path  │

@@ -105,7 +105,7 @@ interface IPrivateStaking {
         bytes calldata proof
     ) external view returns (bool eligible);
 }
-```
+```solidity
 
 ### Verifiable Delay Functions (VDF)
 
@@ -222,7 +222,7 @@ interface IAnonymousValidators {
         uint256 count
     ) external returns (bytes32[] memory selected);
 }
-```
+```solidity
 
 ### Private Delegation System
 
@@ -336,7 +336,7 @@ interface IPrivateSlashing {
         bytes calldata proof
     ) external view returns (bool valid);
 }
-```
+```solidity
 
 ### Distributed Key Generation (DKG)
 
@@ -453,7 +453,7 @@ interface IPrivateRewardDistribution {
         bytes calldata proof
     ) external view returns (bool included);
 }
-```
+```solidity
 
 ### Governance Privacy
 
@@ -576,7 +576,7 @@ function testPrivateStaking() public {
 
     assertTrue(stakeId != bytes32(0));
 }
-```
+```solidity
 
 ### VDF Randomness Test
 
@@ -639,7 +639,7 @@ function testPrivateRewardClaim() public {
     uint256 decryptedAmount = decryptReward(encryptedReward, privateKey);
     assertEq(decryptedAmount, expectedReward);
 }
-```
+```solidity
 
 ## Backwards Compatibility
 
@@ -796,7 +796,7 @@ Delegation: 100,000 gas
 Reward claim: 80,000 gas
 Slashing: 120,000 gas
 DKG share submission: 50,000 gas
-```
+```solidity
 
 **Configuration**:
 - Epoch length: Configurable (default: 432000 blocks)
@@ -819,4 +819,4 @@ DKG share submission: 50,000 gas
 
 ## Copyright
 
-Copyright and related rights waived via [CC0](../LICENSE.md).
+Copyright and related rights waived via [CC0](../LICENSE.md).```

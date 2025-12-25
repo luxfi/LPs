@@ -31,7 +31,7 @@ A TypeScript SDK enables:
 
 ### Package Location
 
-```
+```solidity
 @luxfi/threshold (bridge/pkg/threshold/)
 ├── src/
 │   ├── index.ts       # Package exports
@@ -49,7 +49,7 @@ A TypeScript SDK enables:
 npm install @luxfi/threshold
 # or
 pnpm add @luxfi/threshold
-```
+```solidity
 
 ### ThresholdClient
 
@@ -78,7 +78,7 @@ interface ThresholdClientOptions {
     maxDelay?: number       // default: 10000ms
   }
 }
-```
+```solidity
 
 ### Core Methods
 
@@ -121,7 +121,7 @@ const btcKey = await client.keygen({
   chain: 'bitcoin',
   options: { taproot: true }  // BIP-340 x-only keys
 })
-```
+```solidity
 
 #### Signing
 
@@ -148,7 +148,7 @@ const signature = await client.signAndWait({
   messageHash: '0x...',
   messageType: 'eth_sign'
 })
-```
+```solidity
 
 #### Key Information
 
@@ -172,7 +172,7 @@ const reshare = await client.reshare({
 })
 
 await client.waitForReshare(reshare.sessionId)
-```
+```solidity
 
 #### Key Refresh
 
@@ -243,7 +243,7 @@ interface SessionInfo {
   progress?: number
   error?: string
 }
-```
+```solidity
 
 ### Error Handling
 
@@ -278,7 +278,7 @@ const keys = await client.listKeys({
   protocol: 'lss',
   limit: 100
 })
-```
+```solidity
 
 #### Session Monitoring
 
@@ -300,7 +300,7 @@ const health = await client.health()
 console.log(health.status)       // 'healthy'
 console.log(health.protocols)    // ['lss', 'cggmp21', 'frost']
 console.log(health.signerCount)  // 5
-```
+```solidity
 
 #### Network Statistics
 
@@ -348,7 +348,7 @@ async function bridgeWithdraw(
     ethers.Transaction.from(withdrawalTx).serialized
   )
 }
-```
+```solidity
 
 ### Solana Integration
 
@@ -385,7 +385,7 @@ pnpm test
 # ✓ handles network errors with retry
 # ✓ validates input parameters
 # ✓ supports chain-based protocol selection
-```
+```sql
 
 ## Rationale
 
@@ -507,7 +507,7 @@ describe('ThresholdClient', () => {
     await expect(badClient.health()).rejects.toThrow(ThresholdError);
   });
 });
-```
+```sql
 
 ### Protocol Selection Tests
 
@@ -564,7 +564,7 @@ describe('Error handling', () => {
     });
   });
 });
-```
+```solidity
 
 ## Related LPs
 
@@ -585,3 +585,4 @@ describe('Error handling', () => {
 ## Copyright
 
 Copyright and related rights waived via [CC0](../LICENSE.md).
+```

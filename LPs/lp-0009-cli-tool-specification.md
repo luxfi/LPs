@@ -104,7 +104,7 @@ go build -o bin/lux-cli ./cmd/main.go
 # Or using make (if available)
 make build
 make install  # Install to $GOPATH/bin
-```
+```bash
 
 ### Testing
 
@@ -150,7 +150,7 @@ go vet ./...
 
 # Full validation
 go test -race ./...
-```
+```solidity
 
 ### File Size Verification
 
@@ -164,3 +164,4 @@ go test -race ./...
 - **LP-7**: VM SDK Specification (CLI manages VM creation)
 - **LP-8**: Standard Library (CLI uses standard library functions)
 - **LP-10 through LP-18**: Various chain and bridge implementations (CLI provides interfaces)
+```

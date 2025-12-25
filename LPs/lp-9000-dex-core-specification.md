@@ -38,7 +38,7 @@ A comprehensive DEX specification provides:
 
 ### DEX Architecture
 
-```
+```solidity
 ┌─────────────────────────────────────────────────────────────────┐
 │                     Lux DEX Architecture                        │
 ├──────────────────────┬──────────────────────────────────────────┤
@@ -99,7 +99,7 @@ type TradingPair struct {
     BaseAsset   ids.ID
     QuoteAsset  ids.ID
 }
-```
+```solidity
 
 #### Matching Engine
 
@@ -156,7 +156,7 @@ interface ILuxPool {
         uint128 amount
     ) external returns (uint256 amount0, uint256 amount1);
 }
-```
+```solidity
 
 #### Concentrated Liquidity
 
@@ -192,7 +192,7 @@ interface ILiquidityMining {
     function getReward() external;
     function earned(address account) external view returns (uint256);
 }
-```
+```go
 
 ### Cross-Chain Trading
 
@@ -229,7 +229,7 @@ interface ICrossChainSwap {
         bytes calldata bridgeProof
     ) external;
 }
-```
+```solidity
 
 ### Fee Structure
 
@@ -292,7 +292,7 @@ ws://node/ext/bc/X/dex/ws
 - trades:{pair}        # Trade stream
 - ticker:{pair}        # Price ticker
 - user:{address}       # User orders/trades
-```
+```solidity
 
 ### Configuration
 
@@ -352,7 +352,7 @@ cd standard && forge test --match-contract PoolTest
 
 # Integration tests
 go test ./integration/dex/... -v
-```
+```solidity
 
 ## Reference Implementation
 
@@ -382,3 +382,4 @@ go test ./integration/dex/... -v
 ## Copyright
 
 Copyright and related rights waived via [CC0](https://creativecommons.org/publicdomain/zero/1.0/).
+```

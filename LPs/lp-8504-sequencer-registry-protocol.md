@@ -117,7 +117,7 @@ interface ISequencerRegistry {
     event SequencerSlashed(uint256 indexed sequencerId, uint256 amount);
     event StakeDelegated(uint256 indexed sequencerId, address delegator, uint256 amount);
 }
-```
+```solidity
 
 ### Selection Mechanisms
 
@@ -263,7 +263,7 @@ interface IMEVMitigation {
     event TransactionRevealed(bytes32 indexed txId);
     event ThresholdDecrypted(bytes32 indexed txId);
 }
-```
+```solidity
 
 ### AI Workload Scheduling
 
@@ -436,7 +436,7 @@ interface ITrainingCoordination {
     event GradientSubmitted(bytes32 indexed clusterId, uint256 epoch, uint256 sequencerId);
     event WeightsBroadcast(bytes32 indexed clusterId, bytes32 weightsHash);
 }
-```
+```solidity
 
 ### Performance Monitoring
 
@@ -596,7 +596,7 @@ describe("Sequencer Registry", () => {
         expect(info.stake).to.be.lt(initialStake);
     });
 });
-```
+```sql
 
 ### Selection Mechanism Tests
 
@@ -682,7 +682,7 @@ describe("MEV Mitigation", () => {
         expect(fairOrder).to.deep.equal(fairOrder2);
     });
 });
-```
+```solidity
 
 ### AI Workload Tests
 
@@ -796,7 +796,7 @@ describe("Distributed Training", () => {
         expect(cluster.sequencerIds).to.include(6);
     });
 });
-```
+```solidity
 
 ## Reference Implementation
 
@@ -957,4 +957,4 @@ Key components:
 
 ## Copyright
 
-Copyright and related rights waived via [CC0](https://creativecommons.org/publicdomain/zero/1.0/).
+Copyright and related rights waived via [CC0](https://creativecommons.org/publicdomain/zero/1.0/).```

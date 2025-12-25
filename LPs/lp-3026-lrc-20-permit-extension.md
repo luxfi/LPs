@@ -76,7 +76,7 @@ interface ILRC20Permit is ILRC20 {
      */
     function DOMAIN_SEPARATOR() external view returns (bytes32);
 }
-```
+```solidity
 
 ### EIP-712 Typed Data
 
@@ -152,7 +152,7 @@ abstract contract LRC20Permit is LRC20, EIP712 {
         }
     }
 }
-```
+```solidity
 
 ## Rationale
 
@@ -195,3 +195,4 @@ This extension is fully compatible with LRC-20 (LP-3020). Standard `approve()` f
 
 **Document Maintainer**: Lux Industries
 **Last Updated**: 2025-12-25
+```

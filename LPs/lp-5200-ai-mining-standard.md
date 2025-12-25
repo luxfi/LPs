@@ -46,7 +46,7 @@ This LP addresses these gaps by establishing a quantum-safe mining protocol at t
 
 ### 1. Architecture Overview
 
-```
+```solidity
 ┌─────────────────────────────────────────────────────────────────┐
 │                    Hanzo Networks (L1)                          │
 │  ┌─────────────┐  ┌─────────────┐  ┌──────────────────────┐    │
@@ -81,7 +81,7 @@ Mining wallets MUST use ML-DSA (Module-Lattice Digital Signature Algorithm) per 
 | Level 5       | ML-DSA-87   | 2,592 bytes     | 4,627 bytes    |
 
 **Address Derivation:**
-```
+```solidity
 address = "0x" + hex(BLAKE3(public_key)[0:20])
 ```
 
@@ -101,7 +101,7 @@ pub struct LedgerEntry {
     pub timestamp: u64,         // Unix timestamp
     pub signature: Vec<u8>,     // ML-DSA signature
 }
-```
+```solidity
 
 **Reference Implementation:**
 - [`hanzo-mining/src/ledger.rs`](https://github.com/hanzoai/node/blob/main/hanzo-libs/hanzo-mining/src/ledger.rs)
@@ -159,7 +159,7 @@ interface IAIMining {
     /// @notice Get pending teleport transfers
     function pendingTeleports(address recipient) external view returns (bytes32[] memory);
 }
-```
+```solidity
 
 **Reference Implementation:**
 - [`lux/precompiles/AIMining.sol`](~/work/lux/standard/contracts/precompiles/AIMining.sol)
@@ -221,7 +221,7 @@ pub struct WorkMetrics {
     pub compute_time_ms: u64,      // Execution time
     pub memory_used_mb: u64,       // Peak VRAM usage
 }
-```
+```markdown
 
 The NVTrust enclave signs `WorkReceipt` with its attested key:
 
@@ -345,7 +345,7 @@ Test vectors are provided in the reference implementation:
 ```bash
 cd hanzo-libs/hanzo-mining
 cargo test
-```
+```solidity
 
 **Key Test Cases:**
 1. `test_wallet_creation` - ML-DSA key generation
@@ -409,7 +409,7 @@ ML-DSA provides NIST Level 3 (128-bit) quantum security. Key sizes are larger th
 **Halving Formula:**
 ```
 R(epoch) = 79.4 × 2^(-epoch) AI per block
-```
+```solidity
 
 **Epoch Timeline:**
 | Epoch | Blocks | Years | Reward/Block | Cumulative Supply |
@@ -477,3 +477,4 @@ New chains added via governance vote. Each chain deploys independent AI token co
 ## Copyright
 
 Copyright and related rights waived via [CC0](https://creativecommons.org/publicdomain/zero/1.0/).
+```

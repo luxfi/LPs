@@ -81,7 +81,7 @@ interface ILRC3525 is ILRC165, ILRC721 {
         address operator
     ) external view returns (uint256);
 }
-```
+```solidity
 
 ### Slot Metadata
 
@@ -139,7 +139,7 @@ contract LRC3525Token is ERC721, ILRC3525 {
         return toTokenId;
     }
 }
-```
+```solidity
 
 ## Use Cases
 
@@ -178,7 +178,7 @@ contract OptionsToken is LRC3525Token {
     
     mapping(uint256 => OptionSeries) public options;
 }
-```
+```solidity
 
 ## Rationale
 
@@ -203,3 +203,4 @@ This standard is fully backwards compatible with existing contracts and infrastr
 ## Copyright
 
 Copyright and related rights waived via [CC0](../LICENSE.md).
+```

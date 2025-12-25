@@ -33,7 +33,7 @@ Warp messaging requires collecting signatures from multiple validators to achiev
 
 ```go
 const SignatureHandlerID = 0x12345678
-```
+```markdown
 
 All Warp signature requests use this handler ID in the P2P protocol.
 
@@ -51,7 +51,7 @@ Binary format (length-prefixed fields):
 | Justification Len| Justification    |
 | (4 bytes, BE)    | (variable)       |
 +------------------+------------------+
-```
+```go
 
 Go representation:
 
@@ -66,7 +66,7 @@ type SignatureRequest struct {
 
 Binary format:
 
-```
+```solidity
 +------------------+
 | Signature Bytes  |
 | (96 bytes)       |
@@ -79,7 +79,7 @@ Go representation:
 type SignatureResponse struct {
     Signature []byte // BLS signature (96 bytes)
 }
-```
+```solidity
 
 ### Interfaces
 
@@ -101,7 +101,7 @@ Handles incoming signature requests:
 type SignatureHandler interface {
     Request(ctx context.Context, nodeID ids.NodeID, deadline time.Time, requestBytes []byte) ([]byte, error)
 }
-```
+```solidity
 
 #### Signer
 
@@ -134,7 +134,7 @@ func (s *SignatureAggregator) AggregateSignatures(
     validators []*Validator,
     quorumNum, quorumDen uint64,
 ) (*Message, *big.Int, *big.Int, error)
-```
+```solidity
 
 Aggregation continues until:
 - Quorum weight is achieved (success)
@@ -221,3 +221,4 @@ The binary format is backwards compatible. The package location change requires 
 ## Copyright
 
 Copyright and related rights waived via [CC0](https://creativecommons.org/publicdomain/zero/1.0/).
+```

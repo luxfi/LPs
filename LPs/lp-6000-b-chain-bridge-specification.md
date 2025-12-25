@@ -54,7 +54,7 @@ var BridgeVMID = constants.BridgeVMID // ids.ID{'b', 'r', 'i', 'd', 'g', 'e', 'v
 // Create B-Chain VM
 factory := &bvm.Factory{}
 vm, err := factory.New(logger)
-```
+```solidity
 
 ### Directory Structure
 
@@ -68,7 +68,7 @@ node/vms/bridgevm/
 ├── factory.go        # VM factory
 ├── vm.go             # Main VM implementation
 └── *_test.go         # Tests
-```
+```solidity
 
 ### Architecture
 
@@ -90,7 +90,7 @@ node/vms/bridgevm/
                      │     Lux Internal Chains   │
                      │  (P, C, X, Q, A, T, Z)    │
                      └───────────────────────────┘
-```
+```go
 
 ### Core Components
 
@@ -136,7 +136,7 @@ interface IBridgeChain {
     function completeBridge(BridgeRequest calldata request, DualSignature calldata sig) external;
     function verifyDualSignature(bytes32 messageHash, DualSignature calldata sig) external view returns (bool);
 }
-```
+```solidity
 
 ### Quantum-Safe Extension
 
@@ -177,7 +177,7 @@ func (b *Bridge) Sign(request BridgeRequest) (*DualSignature, error) {
 
 #### Inbound (External → Lux)
 
-```
+```solidity
 User → Lock on External Chain
      → Event emission
      → B-Chain MPC validation
@@ -188,7 +188,7 @@ User → Lock on External Chain
 
 #### Outbound (Lux → External)
 
-```
+```markdown
 User → Burn wrapped asset on Lux chain
      → B-Chain receives burn proof
      → MPC signature generation
@@ -221,7 +221,7 @@ var DefaultBridgeParams = Parameters{
     MinStake:          100_000 * units.LUX,
     BridgeFeeRate:     30,   // 0.3% in basis points
 }
-```
+```go
 
 ### Warp Messaging Integration
 
@@ -257,7 +257,7 @@ func (b *Bridge) SendWarpMessage(dest ids.ID, payload []byte) error {
 
 #### REST Endpoints
 
-```
+```solidity
 POST /ext/bc/B/bridge/initiate
 GET  /ext/bc/B/bridge/status/{txId}
 GET  /ext/bc/B/bridge/assets
@@ -280,7 +280,7 @@ POST /ext/bc/B/bridge/complete
     "warpEnabled": true
   }
 }
-```
+```go
 
 ### Performance
 

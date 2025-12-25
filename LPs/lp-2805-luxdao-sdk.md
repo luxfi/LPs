@@ -31,7 +31,7 @@ A TypeScript SDK enables:
 
 ### Package Location
 
-```
+```solidity
 @luxdao/sdk (dao/sdk/)
 ├── src/
 │   ├── index.ts           # Package exports
@@ -54,7 +54,7 @@ A TypeScript SDK enables:
 npm install @luxdao/sdk
 # or
 pnpm add @luxdao/sdk
-```
+```solidity
 
 ### Core Classes
 
@@ -148,7 +148,7 @@ class Azorius {
   async isStrategyEnabled(strategy: string): Promise<boolean>
   async getStrategies(): Promise<string[]>
 }
-```
+```solidity
 
 #### VotingStrategy
 
@@ -194,7 +194,7 @@ class FreezeGuard {
   async getFreezePeriod(): Promise<number>
   async getFreezeProposalPeriod(): Promise<number>
 }
-```
+```solidity
 
 ### Types
 
@@ -302,7 +302,7 @@ export {
   SystemDeployerV1__factory,
   KeyValuePairsV1__factory
 } from './typechain-types'
-```
+```solidity
 
 ### Usage Examples
 
@@ -359,7 +359,7 @@ await dao.vote(proposalId, VoteType.For)
 const proposal = await dao.getProposal(proposalId)
 console.log('State:', proposal.state)
 console.log('For votes:', proposal.forVotes.toString())
-```
+```solidity
 
 #### Delegate Voting Power
 
@@ -388,7 +388,7 @@ const voteCount = await freezeGuard.getFreezeProposalVoteCount()
 const threshold = await freezeGuard.getFreezeVotesThreshold()
 
 console.log(`Freeze votes: ${voteCount}/${threshold}`)
-```
+```solidity
 
 ### Testing
 
@@ -512,7 +512,7 @@ describe('Azorius', () => {
     expect(votes.againstVotes).toBeInstanceOf(BigInt);
   });
 });
-```
+```solidity
 
 ## Security Considerations
 
@@ -532,3 +532,4 @@ describe('Azorius', () => {
 ## Copyright
 
 Copyright and related rights waived via [CC0](../LICENSE.md).
+```

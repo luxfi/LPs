@@ -56,7 +56,7 @@ type Authorization struct {
     Nonce     uint64
     V, R, S   *big.Int        // Signature from EOA
 }
-```
+```go
 
 ### Authorization Signature
 
@@ -104,7 +104,7 @@ func (evm *EVM) ProcessSetCodeTx(tx *SetCodeTransaction) error {
     // Execute transaction with EOA having contract code
     return evm.Call(...)
 }
-```
+```solidity
 
 ### Delegation Persistence
 
@@ -141,7 +141,7 @@ contract BatchExecutor {
         }
     }
 }
-```
+```solidity
 
 ### Gas Sponsorship
 ```solidity

@@ -173,7 +173,7 @@ This LP ensures that Lux Network governance is informed by, and accountable to, 
 
 #### Triage Process
 
-```
+```markdown
 Feedback received
     ↓
 Initial categorization
@@ -272,7 +272,7 @@ Formal channel for stakeholders to raise concerns, complaints, or grievances.
 
 ### Process
 
-```
+```solidity
 1. Submission (form, email, or representative)
     ↓
 2. Acknowledgment (within 48 hours)

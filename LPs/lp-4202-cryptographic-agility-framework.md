@@ -73,7 +73,7 @@ const (
     FamilySymmetric     AlgorithmFamily = 0x06  // AES, ChaCha20
     FamilyExperimental  AlgorithmFamily = 0xFF  // Research algorithms
 )
-```
+```solidity
 
 #### Algorithm Lifecycle
 
@@ -103,7 +103,7 @@ Lifecycle States:
     - No longer validated
     - Historical verification only
     - Archive mode required
-```
+```go
 
 ### 2. Agile Signature Scheme
 
@@ -165,7 +165,7 @@ func (v *AgileValidator) Validate(
     
     return nil
 }
-```
+```go
 
 ### 3. Emergency Response Protocol
 
@@ -223,7 +223,7 @@ func (e *EmergencyProtocol) HandleCompromise(
 
 #### Quantum Threat Escalation
 
-```
+```markdown
 Quantum Threat Levels:
   Green (Safe):
     - No immediate threat
@@ -296,7 +296,7 @@ func (s *AdaptiveSelector) SelectOptimal(
     
     return s.selectBest(scores)
 }
-```
+```go
 
 #### Hardware Acceleration Registry
 
@@ -347,7 +347,7 @@ contract RegionalCompliance {
         return performRegionalChecks(tx, region);
     }
 }
-```
+```solidity
 
 #### AI/ML Integration Points
 
@@ -435,7 +435,7 @@ func TestCryptoAgility(t *testing.T) {
     sig := SignWithMultiple([]AlgorithmID{ML_DSA_65, SLH_DSA_192})
     assert.True(t, ValidateAgile(sig))
 }
-```
+```solidity
 
 ## Security Considerations
 
@@ -464,4 +464,4 @@ func TestCryptoAgility(t *testing.T) {
 
 ## Copyright
 
-Copyright and related rights waived via [CC0](../LICENSE.md).
+Copyright and related rights waived via [CC0](../LICENSE.md).```

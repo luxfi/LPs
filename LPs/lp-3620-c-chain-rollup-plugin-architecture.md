@@ -30,7 +30,7 @@ The Lux C-Chain guarantees EVM equivalence with Ethereum (LP-26). To extend this
 ### Repository Layout
 
 Component directories under the C-Chain client:
-```
+```solidity
 cmd/geth/                # geth CLI entrypoint
 core/                     # Ethereum base-chain implementation
 consensus/                # Base-chain consensus (PoW/PoS)
@@ -55,7 +55,7 @@ go build -tags "rollup_optimism" ./cmd/geth
 
 # Run geth with the OP plugin enabled
 ./geth --rollup.optimism --rollup.config ./config/optimism.toml
-```
+```go
 
 ### CLI Integration
 
@@ -84,7 +84,7 @@ type = "optimism"
 genesis = "./optimism/genesis.json"
 sequencer.enabled = true
 relay.rpc = "https://mainnet.optimism.io"
-```
+```solidity
 
 ### Rollup Module API
 
@@ -118,7 +118,7 @@ The plugin architecture is fully additive. Without the `rollup_*` build tag or `
 ## Reference Implementation
 
 Proof-of-concept module for Optimism integration lives in the `geth` repository under `rollup/optimism/`:
-```
+```solidity
 geth/rollup/optimism/
 ├─ evm/
 ├─ consensus/
@@ -156,7 +156,7 @@ To support unified node infrastructure, the Lux Node monorepo must embed the OP 
 ```bash
 cd ~/work/lux/geth
 go build -tags "rollup_optimism" -o geth ./cmd/geth
-```
+```solidity
 
 **Plugin Loading Example**:
 ```go
@@ -171,7 +171,7 @@ if flags.Rollup == "optimism" {
 ```bash
 cd ~/work/lux/geth
 go test ./rollup/optimism/... -v
-```
+```solidity
 
 ### RPC Extensions
 
@@ -196,7 +196,7 @@ With EIP‑4844 (proto‑dank sharding), data gas cost falls to ~1.6 gas/byte�
 Sequencers (node operators) collect these L1 fees by charging an L2 base fee designed to cover L1 gas + operator margin. A typical fee model:
 ```
 L2 base fee = (estimated L1 gas per L2 tx × current gas price) + operator service fee
-```
+```markdown
 Operator margins should cover infrastructure, storage, and bandwidth costs. Larger batch sizes (e.g. 100–500 tx) or longer aggregation windows reduce per‑tx gas costs.
 
 ## Open Questions (optional)
@@ -208,4 +208,4 @@ Operator margins should cover infrastructure, storage, and bandwidth costs. Larg
 
 ## Copyright
 
-Copyright and related rights waived via [CC0](https://creativecommons.org/publicdomain/zero/1.0/).
+Copyright and related rights waived via [CC0](https://creativecommons.org/publicdomain/zero/1.0/).```

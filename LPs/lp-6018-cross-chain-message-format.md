@@ -33,7 +33,7 @@ Without standardization, each bridge implementation would create incompatible fo
 ### Message Structure
 
 #### Base Message Format
-```
+```markdown
 CrossChainMessage {
     header: MessageHeader
     payload: MessagePayload
@@ -42,7 +42,7 @@ CrossChainMessage {
 ```
 
 #### Message Header
-```
+```markdown
 MessageHeader {
     version: uint8              // Protocol version (currently 1)
     messageType: uint8          // Message type identifier
@@ -64,7 +64,7 @@ enum MessageType {
     REGISTRY_UPDATE = 0x05,    // Asset registry update
     EMERGENCY = 0x06           // Emergency action
 }
-```
+```solidity
 
 ### Payload Formats
 
@@ -78,7 +78,7 @@ AssetTransferPayload {
     fee: uint256              // Bridge fee
     data: bytes               // Optional callback data
 }
-```
+```solidity
 
 #### Contract Call Payload
 ```solidity
@@ -92,7 +92,7 @@ ContractCallPayload {
 ```
 
 #### Batch Transfer Payload
-```
+```markdown
 BatchTransferPayload {
     transfers: AssetTransfer[] // Array of transfers
     atomicExecution: bool      // All or nothing execution
@@ -102,7 +102,7 @@ BatchTransferPayload {
 ### Message Proof
 
 #### Proof Structure
-```
+```markdown
 MessageProof {
     proofType: uint8          // Proof type identifier
     signatures: Signature[]    // Array of signatures
@@ -111,7 +111,7 @@ MessageProof {
 ```
 
 #### Signature Format
-```
+```markdown
 Signature {
     signer: bytes20           // Signer identifier
     v: uint8                  // Recovery parameter
@@ -130,7 +130,7 @@ Messages use a compact binary encoding:
 3. **Arrays**: Count-prefixed with uint16
 
 #### Encoding Example
-```
+```solidity
 // Header (88 bytes)
 [version(1)] [type(1)] [sourceChain(32)] [destChain(32)] 
 [nonce(8)] [timestamp(8)] [expiry(8)]
@@ -175,7 +175,7 @@ function validateMessage(
     
     return (true, "");
 }
-```
+```solidity
 
 ### Cross-Chain Identifiers
 
@@ -187,7 +187,7 @@ Examples:
 - Ethereum Mainnet: keccak256("EVM", 1, 0)
 - Lux C-Chain: keccak256("EVM", 43114, 0)
 - Bitcoin: keccak256("Bitcoin", 0, 0)
-```
+```solidity
 
 #### Address Format
 Addresses are encoded based on chain type:
@@ -231,7 +231,7 @@ function teleportAsset(
     // AWM handles message relay
     warpMessenger.sendMessage(destChain, encode(message));
 }
-```
+```solidity
 
 ## Rationale
 
@@ -359,7 +359,7 @@ go test ./vms/platformvm/warp/validator -v
 
 # Integration tests
 go test -tags=integration ./vms/platformvm/warp/...
-```
+```solidity
 
 ### Message Format Testing
 

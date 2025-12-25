@@ -66,7 +66,7 @@ forge test -vvv
 
 # Gas report
 forge test --gas-report
-```
+```solidity
 
 ## Security Considerations
 
@@ -75,3 +75,4 @@ Implementations should follow established security best practices for the corres
 ## Copyright
 
 Copyright and related rights waived via [CC0](../LICENSE.md).
+```

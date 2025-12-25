@@ -51,7 +51,7 @@ The Lux Network requires robust cross-chain interoperability to:
 
 ### Part 1: Protocol Architecture
 
-```
+```markdown
                          Teleport Protocol Architecture
 +-----------------------------------------------------------------------------------+
 |                              Lux Network                                          |
@@ -105,7 +105,7 @@ IBC Teleport implements the Inter-Blockchain Communication protocol specificatio
 
 #### 2.2 Protocol Stack
 
-```
+```solidity
 +---------------------------------------+
 |       Application Layer               |
 | (ICS-20 Transfers, ICS-27 Accounts)   |
@@ -159,7 +159,7 @@ type Channel struct {
     ConnectionHops []string      // Connection path
     Version        string        // Channel version (e.g., "ics20-1")
 }
-```
+```go
 
 #### 2.4 Multi-Consensus Support
 
@@ -218,7 +218,7 @@ src.chain-id = "lux-mainnet-1"
 src.port-id = "transfer"
 dst.chain-id = "cosmoshub-4"
 dst.port-id = "transfer"
-```
+```solidity
 
 ### Part 3: MPC Bridge Protocol
 
@@ -266,7 +266,7 @@ The MPC Bridge enables cross-chain asset transfers across EVM and non-EVM chains
 |  | :4223  |  | :8200 |  | :8501  |  | :5433     |  | :8000    |  |
 |  +--------+  +-------+  +--------+  +----------+  +-----------+  |
 +------------------------------------------------------------------+
-```
+```solidity
 
 #### 3.3 Supported Chains
 
@@ -316,7 +316,7 @@ security:
   tls_version: "1.3"
   mutual_auth: true
   hsm_integration: true
-```
+```solidity
 
 #### 3.5 Threshold Signature Protocol
 
@@ -385,7 +385,7 @@ contract ERC20B is ERC20, Ownable, AccessControl {
         return true;
     }
 }
-```
+```solidity
 
 #### 4.2 Bridge Contract
 
@@ -554,7 +554,7 @@ contract TeleportBridgePrecompile {
     uint256 public constant LUX_CCHAIN_CHAIN_ID = 96369;
     uint256 public constant CLAIM_WINDOW = 24 hours;
 }
-```
+```solidity
 
 #### 4.4 Wrapped Token Standards
 
@@ -667,7 +667,7 @@ POST /quote               # Get transfer quote
 POST /transfer            # Initiate transfer
 GET  /transfer/{id}       # Query transfer status
 GET  /history/{address}   # User transfer history
-```
+```solidity
 
 **Example: Get Transfer Quote**
 ```json
@@ -694,7 +694,7 @@ Response:
 
 #### 7.2 IBC Teleport API
 
-```
+```solidity
 RPC Endpoints:
 POST /teleport/query/connection   # Query connection status
 POST /teleport/query/channel      # Query channel status
@@ -775,7 +775,7 @@ describe("Bridge Contract", () => {
     ).to.be.revertedWith("Invalid MPC signature");
   });
 });
-```
+```go
 
 ### IBC Teleport Tests
 
@@ -926,7 +926,7 @@ cd app/bridge && pnpm dev  # Start UI
 # Contract Tests
 cd ~/work/lux/bridge/contracts
 npx hardhat test
-```
+```solidity
 
 ### Deployment Checklist
 
@@ -943,3 +943,4 @@ npx hardhat test
 ## Copyright
 
 Copyright and related rights waived via [CC0](../LICENSE.md).
+```

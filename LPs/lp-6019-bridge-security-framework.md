@@ -53,7 +53,7 @@ Layer 4: Governance Security
 - Emergency procedures
 - Upgrade processes
 - Incident response
-```
+```solidity
 
 ### Security Requirements
 
@@ -83,7 +83,7 @@ struct ValidatorRequirements {
     bool secureEnclave;            // TEE/SGX requirement
     uint256 slashingThreshold;     // Misbehavior threshold
 }
-```
+```solidity
 
 #### 3. Smart Contract Security
 - **Audit Requirements**: Two independent audits before mainnet
@@ -111,7 +111,7 @@ interface IBridgeMonitor {
 ```
 
 #### 2. Anomaly Detection
-```
+```markdown
 Detection Rules:
   - Unusual Volume: > 5x daily average
   - Large Transfer: > $10M single transaction
@@ -133,7 +133,7 @@ struct SecurityAlert {
     string description;
     bytes additionalData;
 }
-```
+```solidity
 
 ### Incident Response
 
@@ -170,7 +170,7 @@ EMERGENCY RESPONSE FLOWCHART:
    ├── Full incident report
    ├── Lessons learned
    └── Process improvements
-```
+```solidity
 
 #### 2. Emergency Roles
 ```solidity
@@ -193,7 +193,7 @@ contract EmergencyRoles {
 - **Post-Incident**: Targeted audit after any security event
 
 #### 2. Audit Scope
-```
+```markdown
 Code Audit:
   - Smart contracts
   - Off-chain components
@@ -224,7 +224,7 @@ enum RiskCategory {
     GOVERNANCE,       // Malicious proposals, voting attacks
     EXTERNAL          // Chain vulnerabilities, oracle failures
 }
-```
+```solidity
 
 #### 2. Risk Mitigation
 ```
@@ -252,7 +252,7 @@ External Risks:
   - Oracle diversity
   - Chain monitoring
   - Fallback mechanisms
-```
+```solidity
 
 ### Insurance and Recovery
 
@@ -364,7 +364,7 @@ This security framework is designed to be applied to existing bridges:
 ```bash
 cd bridge
 docker-compose -f compose.local.yml up -d  # Start local bridge
-```
+```sql
 
 ## Security Considerations
 
@@ -387,4 +387,4 @@ This entire LP is about security considerations. Key meta-considerations include
 
 ## Copyright
 
-Copyright and related rights waived via [CC0](../LICENSE.md).
+Copyright and related rights waived via [CC0](../LICENSE.md).```

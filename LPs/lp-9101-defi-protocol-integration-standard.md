@@ -87,7 +87,7 @@ The Lux Standard Library curates MIT/GPL-licensed DeFi primitives that provide e
 | `VaultPriceFeed.sol` | `contracts/core/VaultPriceFeed.sol` | Oracle price feeds |
 
 **Directory Structure**:
-```
+```solidity
 src/gmx2/
 ├── contracts/
 │   ├── core/           # Vault, Router, Position management
@@ -137,7 +137,7 @@ src/gmx2/
 | `CrossChainCanonicalAlchemicTokenV2.sol` | `contracts/CrossChainCanonicalAlchemicTokenV2.sol` | Cross-chain token support |
 
 **Directory Structure**:
-```
+```solidity
 src/alcx2/
 ├── contracts/
 │   ├── adapters/       # Yield source adapters (Yearn, etc.)
@@ -165,7 +165,7 @@ interface IAlchemistV2 {
     function burn(uint256 amount, address recipient) external;
     function liquidate(address owner, uint256 shares, uint256 minimumAmountOut) external returns (uint256);
 }
-```
+```solidity
 
 **Lux Adaptations**:
 - Integration with Lux yield sources
@@ -180,7 +180,7 @@ OpenZeppelin 5.x removed several legacy utilities. The standard library provides
 ```
 Location: /Users/z/work/lux/standard/src/safe/contracts/external/SafeMath.sol
 License: LGPL-3.0
-```
+```solidity
 
 **Usage**: Required for contracts targeting Solidity <0.8.0 or requiring explicit overflow checks.
 
@@ -195,17 +195,15 @@ library SafeMath {
 ```
 
 **SafeCast Utility**:
-```
+```markdown
 Location: /Users/z/work/lux/standard/src/alcx2/contracts/libraries/SafeCast.sol
 License: GPL-2.0-or-later
-```
-
-```solidity
+solidity
 library SafeCast {
     function toInt256(uint256 y) internal pure returns (int256 z);
     function toUint256(int256 y) internal pure returns (uint256 z);
 }
-```
+```solidity
 
 **Additional Utilities**:
 - `EnumerableSet.sol` - Set data structures (`src/gmx2/contracts/libraries/utils/`)
@@ -221,9 +219,7 @@ DeFi protocols integrate with Lux threshold signature precompiles for enhanced s
 ```
 Precompile: 0x020000000000000000000000000000000000000C
 Use Case: Multi-party custody, DAO treasury
-```
-
-```solidity
+solidity
 import {FROSTLib} from "precompiles/frost/IFROST.sol";
 
 contract ThresholdTreasury {
@@ -246,12 +242,10 @@ contract ThresholdTreasury {
 ```
 
 **CGGMP21 Threshold ECDSA (LP-7322)**:
-```
+```markdown
 Precompile: 0x020000000000000000000000000000000000000D
 Use Case: Institutional custody, cross-chain bridges
-```
-
-```solidity
+solidity
 import {CGGMP21Lib} from "precompiles/cggmp21/ICGGMP21.sol";
 
 contract InstitutionalVault {
@@ -271,7 +265,7 @@ contract InstitutionalVault {
         IERC20(token).transfer(msg.sender, amount);
     }
 }
-```
+```solidity
 
 **Gas Costs**:
 
@@ -287,9 +281,7 @@ While Compound protocol is not directly included, the standard library provides 
 **Flash Loan Interface** (ERC-3156):
 ```
 Location: /Users/z/work/lux/standard/src/alcx2/contracts/interfaces/IERC3156FlashLender.sol
-```
-
-```solidity
+solidity
 interface IERC3156FlashLender {
     function maxFlashLoan(address token) external view returns (uint256);
     function flashFee(address token, uint256 amount) external view returns (uint256);
@@ -303,11 +295,9 @@ interface IERC3156FlashLender {
 ```
 
 **Yield Adapter Pattern**:
-```
-Location: /Users/z/work/lux/standard/src/alcx2/contracts/interfaces/ITokenAdapter.sol
-```
-
 ```solidity
+Location: /Users/z/work/lux/standard/src/alcx2/contracts/interfaces/ITokenAdapter.sol
+solidity
 interface ITokenAdapter {
     function token() external view returns (address);
     function underlyingToken() external view returns (address);
@@ -315,7 +305,7 @@ interface ITokenAdapter {
     function wrap(uint256 amount, address recipient) external returns (uint256);
     function unwrap(uint256 amount, address recipient) external returns (uint256);
 }
-```
+```bash
 
 ## Rationale
 
@@ -399,7 +389,7 @@ npx hardhat test
 cd /Users/z/work/lux/standard/src/alcx2
 yarn install
 yarn test
-```
+```solidity
 
 **Key Test Cases**:
 1. Deposit collateral
@@ -423,7 +413,7 @@ function testFROSTVaultWithdrawal() public {
 
 ### Directory Summary
 
-```
+```solidity
 /Users/z/work/lux/standard/src/
 ├── gmx2/                    # GMX v1 perpetuals (MIT)
 │   ├── contracts/core/      # Vault, Router, OrderBook
@@ -455,7 +445,7 @@ yarn compile
 # Full standard library
 cd /Users/z/work/lux/standard
 forge build
-```
+```solidity
 
 ## Security Considerations
 
@@ -541,3 +531,4 @@ For DeFi protocols using threshold signatures:
 ## Copyright
 
 Copyright and related rights waived via [CC0](https://creativecommons.org/publicdomain/zero/1.0/).
+```

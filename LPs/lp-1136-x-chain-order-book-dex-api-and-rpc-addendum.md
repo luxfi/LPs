@@ -73,7 +73,7 @@ type OrderTx struct {
 }
 
 // Validation: Size>0, Price>0 unless OrderType==market.
-```
+```sql
 
 #### 1.2 DexFx extension
 
@@ -133,7 +133,7 @@ Priority = (gasFeeCap μLux × weightFee) + makerBonus – cancelWeight. Fast‑
 
 ### 7 CLI Enhancements
 
-```
+```solidity
 lux-cli dex markets
 lux-cli dex place --mkt BTC-USD --side buy --price 63421.5 --size 0.8 --post-only
 lux-cli dex cancel --order 0xabc123
@@ -226,7 +226,7 @@ func (ob *OrderBook) GetBook(depth uint16) (bids, asks []PriceLevel) {
     }
     return
 }
-```
+```bash
 
 **Testing**:
 ```bash

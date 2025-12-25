@@ -192,7 +192,7 @@ An LP (Lux Proposal) is a design document describing a feature, standard, or pro
 
 ### LP Lifecycle
 
-```
+```markdown
  Draft ----> Review ----> Last Call ----> Final
    |           |             |
    v           v             v
@@ -217,7 +217,7 @@ make validate FILE=LPs/lp-N.md
 
 # Run all pre-PR checks
 make pre-pr
-```
+```solidity
 
 ### Required Sections
 
@@ -281,7 +281,7 @@ Lux implements a heterogeneous multi-chain architecture where each chain runs a 
 | - TEE attestation   | | - Validity   | | - Perpetuals     |
 | - Confidential AI   | | - Private exec| | - HFT support    |
 +---------------------+ +--------------+ +------------------+
-```
+```sql
 
 ### Virtual Machine Implementation
 
@@ -402,7 +402,7 @@ Lux maintains a comprehensive impact framework documented across dedicated LPs:
 
 The LP system defines standards from low-level primitives to application protocols:
 
-```
+```solidity
 +=================================================================+
 |                    STANDARDS HIERARCHY                          |
 +=================================================================+
@@ -440,7 +440,7 @@ The LP system defines standards from low-level primitives to application protoco
 ### Repository Structure
 
 **LPs Repository**: `github.com/luxfi/lps`
-```
+```solidity
 lps/
 ├── LPs/                 # All LP specifications
 │   ├── TEMPLATE.md     # Template for new LPs
@@ -451,7 +451,7 @@ lps/
 ```
 
 **Node Implementation**: `github.com/luxfi/node`
-```
+```solidity
 node/
 ├── vms/                # Virtual machine implementations
 │   ├── platformvm/    # P-Chain
@@ -483,7 +483,7 @@ cd docs && pnpm dev
 
 # Create new LP
 make new
-```
+```solidity
 
 ## Security Considerations
 
@@ -504,3 +504,4 @@ make new
 ## Copyright
 
 Copyright and related rights waived via [CC0](../LICENSE.md).
+```

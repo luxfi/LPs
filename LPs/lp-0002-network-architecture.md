@@ -36,7 +36,7 @@ Single-chain architectures face fundamental scalability limits. Rather than forc
 
 Lux organizes chains into a recursive structure:
 
-```
+```solidity
 ┌─────────────────────────────────────────────────────────────────────┐
 │                         LUX NETWORK                                 │
 ├─────────────────────────────────────────────────────────────────────┤
@@ -82,7 +82,7 @@ The architecture is recursive because:
 
 Lux implements native cross-chain messaging via the Warp protocol:
 
-```
+```markdown
 Chain A                    P-Chain                    Chain B
    │                          │                          │
    │  1. Create message       │                          │
@@ -115,7 +115,7 @@ type WarpMessage struct {
     Nonce          uint64
     Signature      []byte  // Aggregated BLS
 }
-```
+```bash
 
 ---
 

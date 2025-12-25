@@ -45,7 +45,7 @@ This LP establishes clear definitions, hardware requirements, and trust scores f
 
 ### 1. CC Tier Hierarchy
 
-```
+```solidity
 ┌─────────────────────────────────────────────────────────────────────────────────────────┐
 │                           AI CONFIDENTIAL COMPUTE TIERS                                 │
 ├─────────────────────────────────────────────────────────────────────────────────────────┤
@@ -129,7 +129,7 @@ This LP establishes clear definitions, hardware requirements, and trust scores f
 GPU Boot → Secure Firmware Load → Generate GPU Quote →
   Submit to Attestation Verifier → Verify Certificate Chain →
     Bind to Chain ID → Register Provider with Tier 1
-```
+```solidity
 
 **Use Cases**:
 - Model weight protection (LLM inference with private weights)
@@ -163,7 +163,7 @@ GPU Boot → Secure Firmware Load → Generate GPU Quote →
 CPU Boot → Load Confidential VM → Generate SEV/TDX/CCA Report →
   Attach GPU → Verify CPU Report → Bind to Chain ID →
     Register Provider with Tier 2
-```
+```solidity
 
 **Limitations**:
 - GPU memory not encrypted at rest
@@ -204,7 +204,7 @@ Device Boot → Secure Enclave Init → Load AI Model in TEE →
   Generate Attestation Token → Submit to Attestation Verifier →
     Verify Device Certificate → Bind to Chain ID →
       Register Provider with Tier 3
-```
+```go
 
 **Limitations**:
 - Limited compute power vs data center
@@ -329,7 +329,7 @@ func VerifyTier1Attestation(att *NVTrustAttestation) (bool, error) {
 
     return true, nil
 }
-```
+```go
 
 #### 4.2 Tier 2 Attestation (SEV-SNP/TDX/CCA)
 
@@ -396,7 +396,7 @@ func VerifyTier3Attestation(att *DeviceTEEAttestation) (bool, error) {
         return false, ErrUnknownPlatform
     }
 }
-```
+```go
 
 ### 5. Task Matching
 
@@ -485,7 +485,7 @@ func CalculateMiningReward(task *AITask, provider *Provider) uint64 {
 
     return baseReward * tierMultiplier / 100 * (100 + trustBonus) / 100
 }
-```
+```solidity
 
 ### 7. Solidity Interface
 
@@ -589,7 +589,7 @@ type CCAttestation struct {
     TrustScore uint8  `json:"trustScore"`
     Timestamp  int64  `json:"timestamp"`
 }
-```
+```go
 
 ## Rationale
 
@@ -694,7 +694,7 @@ func TestTaskMatchingByCCTier(t *testing.T) {
     matched = MatchTaskToProvider(task2, providers)
     require.True(t, matched == tier1 || matched == tier2)
 }
-```
+```solidity
 
 ## Reference Implementation
 
@@ -768,3 +768,4 @@ Higher CC tiers command premium fees:
 ## Copyright
 
 Copyright and related rights waived via [CC0](https://creativecommons.org/publicdomain/zero/1.0/).
+```

@@ -193,7 +193,7 @@ interface ISignatureValidator {
 
 // Magic value: 0x1626ba7e
 bytes4 constant EIP1271_MAGIC_VALUE = 0x1626ba7e;
-```
+```solidity
 
 ### Guard Contracts
 
@@ -262,7 +262,7 @@ function multiSend(bytes memory transactions) public payable {
         }
     }
 }
-```
+```solidity
 
 #### MultiSendCallOnly.sol
 
@@ -332,7 +332,7 @@ Minimal token callback support.
     "solc": "0.7.6"
   }
 }
-```
+```solidity
 
 ### Solidity Version
 
@@ -397,7 +397,7 @@ interface ICrossChainSafeModule {
         bytes calldata encodedTransaction
     ) external returns (bool);
 }
-```
+```solidity
 
 **Use Cases**:
 - Unified treasury management across chains
@@ -480,7 +480,7 @@ uint256 result = a.add(b);
 // After (OZ 5.x / Solidity 0.8+)
 // Native overflow checking
 uint256 result = a + b;
-```
+```solidity
 
 **Note**: Safe's use of `SafeMath` is for compatibility with Solidity `>=0.7.0`. Migration to Solidity 0.8+ removes this dependency.
 
@@ -566,7 +566,7 @@ describe("Safe", () => {
     expect(await provider.getBalance(recipient.address)).to.equal(parseEther("1"));
   });
 });
-```
+```bash
 
 ## Reference Implementation
 

@@ -56,7 +56,7 @@ interface GovernanceArchitecture {
     quorum: "10% of supply";
   };
 }
-```
+```solidity
 
 ## Research Findings
 
@@ -171,7 +171,7 @@ contract MultiChainGovernance {
         return weightedVotes;
     }
 }
-```
+```solidity
 
 ### 3. Delegation Systems
 
@@ -320,7 +320,7 @@ contract ProgrammableTreasury {
         return totalVested - stream.withdrawn;
     }
 }
-```
+```solidity
 
 ### 5. Proposal Lifecycle
 
@@ -371,7 +371,7 @@ interface ProposalLifecycle {
 
 ### 1. Governance Architecture
 
-```
+```solidity
 recommended_architecture:
   voting_mechanism:
     primary: "Token-weighted with quadratic options"

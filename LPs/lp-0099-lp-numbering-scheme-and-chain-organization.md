@@ -351,7 +351,7 @@ rules:
     - "Final LPs MUST have reference implementation OR test vectors"
     - "Superseded LPs MUST reference replacement LP"
     - "No duplicate LP numbers allowed"
-```
+```solidity
 
 ---
 
@@ -391,3 +391,4 @@ Indirect impact: Clear LP organization prevents:
 ## Copyright
 
 Copyright and related rights waived via [CC0](https://creativecommons.org/publicdomain/zero/1.0/).
+```

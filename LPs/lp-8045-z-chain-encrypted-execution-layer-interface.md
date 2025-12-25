@@ -115,7 +115,7 @@ All new methods follow the standard JSON‑RPC rules (positional or named params
 
 #### 3.2  Runtime components per validator
 
-```
+```solidity
 ┌───────────────────────────────┐
 │  luxd (Z‑Chain node)          │
 │   ├─ Lux consensus        │
@@ -179,7 +179,7 @@ func FHEAdd(input []byte) ([]byte, error) {
 
     return result, nil
 }
-```
+```solidity
 
 **Testing**:
 ```bash

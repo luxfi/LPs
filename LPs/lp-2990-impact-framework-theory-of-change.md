@@ -40,7 +40,7 @@ Build blockchain infrastructure that democratizes access to financial services, 
 
 ### Theory of Change Model
 
-```
+```solidity
 INPUTS → ACTIVITIES → OUTPUTS → OUTCOMES → IMPACT
 ```
 

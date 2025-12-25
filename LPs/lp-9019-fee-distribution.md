@@ -73,7 +73,7 @@ interface IFeeCollector {
     event FeesDistributed(address indexed token, uint256 lpShare, uint256 stakerShare, uint256 treasuryShare);
     event BuybackExecuted(address indexed token, uint256 amountIn, uint256 amountBurned);
 }
-```
+```solidity
 
 ### 2. Fee Distribution Implementation
 
@@ -278,7 +278,7 @@ interface IDEX {
     function swap(address tokenIn, address tokenOut, uint256 amountIn, uint256 minOut, address to) external returns (uint256);
     function quote(address tokenIn, address tokenOut, uint256 amountIn) external view returns (uint256);
 }
-```
+```solidity
 
 ### 4. Revenue Sharing for veToken Holders
 
@@ -454,7 +454,7 @@ contract Treasury {
         }
     }
 }
-```
+```solidity
 
 ### 6. Fee Transparency Dashboard
 

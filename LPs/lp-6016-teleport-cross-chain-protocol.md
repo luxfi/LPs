@@ -52,7 +52,7 @@ Each supported chain implements a Teleport handler that:
 
 #### 3. Message Format
 Teleport messages follow the AWM format with extensions:
-```
+```markdown
 TeleportMessage {
     version: uint8
     sourceChain: bytes32
@@ -101,7 +101,7 @@ function atomicSwap(
     uint256 amountB,
     address counterparty
 ) external;
-```
+```solidity
 
 #### Batch Transfers
 Multiple transfers can be bundled:
@@ -121,7 +121,7 @@ function teleportAndCall(
     address target,
     bytes calldata data
 ) external;
-```
+```solidity
 
 ## Rationale
 
@@ -247,7 +247,7 @@ npm run build
 # Build relayer
 cd teleport/relayer
 go build -o bin/teleport-relayer ./cmd/relayer
-```
+```bash
 
 ### Testing
 

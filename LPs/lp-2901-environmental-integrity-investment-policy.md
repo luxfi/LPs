@@ -64,7 +64,7 @@ We track only the few environmental variables that actually matter for that proj
 
 We consider environmental impact across the full lifecycle:
 
-```
+```markdown
 Supply Chain → Manufacturing → Operations → Use Phase → End-of-Life
       ↑              ↑             ↑            ↑            ↑
    Material     Embodied      Operational   Customer    Disposal/
@@ -193,7 +193,7 @@ Capital is deployed in tranches tied to verified environmental milestones:
 
 Every environmental claim is logged:
 
-```
+```solidity
 claim_id: "E-2025-001"
 project: "Project Alpha"
 claim: "50% reduction in carbon intensity vs 2024 baseline"

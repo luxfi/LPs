@@ -90,7 +90,7 @@ interface IUpgradeManager {
     event UpgradeExecuted(bytes32 indexed proposalId, address indexed newImpl);
     event UpgradeRolledBack(bytes32 indexed proposalId, string reason);
 }
-```
+```solidity
 
 ### 2. Transparent Proxy Pattern
 
@@ -250,7 +250,7 @@ abstract contract DeFiUpgradeable is UUPSUpgradeable, AccessControlUpgradeable {
 interface IVersioned {
     function version() external view returns (uint256);
 }
-```
+```solidity
 
 ### 4. Data Migration Framework
 
@@ -474,7 +474,7 @@ contract VersionRegistry {
         return versionHistory[proxy][index];
     }
 }
-```
+```solidity
 
 ### 6. Rollback Procedures
 

@@ -88,7 +88,7 @@ contract LRC20 {
     function approve(address spender, uint256 amount) public returns (bool);
     function transferFrom(address from, address to, uint256 amount) public returns (bool);
 }
-```
+```solidity
 
 ### Token Implementations
 
@@ -154,7 +154,7 @@ contract Bridge is Ownable, AccessControl {
     function setMPCOracle(address MPCO) public onlyAdmin;
     function setPayoutAddress(address addr, uint256 feeR) public onlyAdmin;
 }
-```
+```solidity
 
 #### Message Format
 
@@ -169,7 +169,7 @@ message = concat(
     keccak256(chainId),               // bytes32 hex
     vault                             // string
 )
-```
+```markdown
 
 Signature verification:
 
@@ -197,7 +197,7 @@ struct TeleportMessage {
     address recipient;
     bytes data;  // optional
 }
-```
+```solidity
 
 ### Supported Chain Routes
 
@@ -344,7 +344,7 @@ function testBridgeBurn() public {
     assertEq(leth.balanceOf(address(this)), 0.5 ether);
     assertEq(leth.totalSupply(), 0.5 ether);
 }
-```
+```solidity
 
 ### Replay Protection Test
 
@@ -408,7 +408,7 @@ forge create src/teleport/Bridge.sol:Bridge \
 forge create src/tokens/LETH.sol:LuxETH \
   --rpc-url https://api.lux.network/ext/bc/C/rpc \
   --broadcast
-```
+```solidity
 
 ### Deployed Addresses
 
@@ -449,7 +449,7 @@ Messages include hashed chain ID:
 
 ```solidity
 varStruct.toChainIdHash = keccak256(abi.encodePacked(chainId));
-```
+```markdown
 
 Prevents cross-chain replay even with identical transaction parameters.
 
@@ -513,3 +513,4 @@ Default 1% fee structure:
 ## Copyright
 
 Copyright and related rights waived via [CC0](../LICENSE.md).
+```

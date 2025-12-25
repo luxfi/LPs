@@ -155,7 +155,7 @@ SHAKE128 is optimal for zero-knowledge circuits:
 
 ### Gas Calculation
 
-```
+```markdown
 Base cost + (input_bytes / 32) * 6 + (output_bytes / 8)
 
 Where base costs are:
@@ -170,7 +170,7 @@ Where base costs are:
 ### Data Encoding
 
 **Standard Hash Input:**
-```
+```solidity
 | Offset | Length | Description |
 |--------|--------|-------------|
 | 0 | 4 | Data length |
@@ -178,7 +178,7 @@ Where base costs are:
 ```
 
 **SHAKE/XOF Input:**
-```
+```solidity
 | Offset | Length | Description |
 |--------|--------|-------------|
 | 0 | 4 | Data length |
@@ -187,7 +187,7 @@ Where base costs are:
 ```
 
 **cSHAKE Input:**
-```
+```solidity
 | Offset | Length | Description |
 |--------|--------|-------------|
 | 0 | 4 | Data length |
@@ -206,7 +206,7 @@ Where base costs are:
 Computes SHA3-256 hash per FIPS 202.
 
 **Input:**
-```
+```solidity
 | Offset | Length | Description |
 |--------|--------|-------------|
 | 0 | 4 | Data length (N) |
@@ -214,7 +214,7 @@ Computes SHA3-256 hash per FIPS 202.
 ```
 
 **Output:**
-```
+```solidity
 | Offset | Length | Description |
 |--------|--------|-------------|
 | 0 | 32 | SHA3-256 digest |
@@ -237,7 +237,7 @@ Computes Keccak-256 (Ethereum's hash function).
 Extensible-output functions for variable-length digests.
 
 **Input:**
-```
+```solidity
 | Offset | Length | Description |
 |--------|--------|-------------|
 | 0 | 4 | Data length (N) |
@@ -246,7 +246,7 @@ Extensible-output functions for variable-length digests.
 ```
 
 **Output:**
-```
+```solidity
 | Offset | Length | Description |
 |--------|--------|-------------|
 | 0 | L | SHAKE output |
@@ -273,7 +273,7 @@ SHAKE with domain separation.
 Keccak Message Authentication Code.
 
 **Input:**
-```
+```solidity
 | Offset | Length | Description |
 |--------|--------|-------------|
 | 0 | 4 | Key length (K) |
@@ -286,7 +286,7 @@ Keccak Message Authentication Code.
 ```
 
 **Output:**
-```
+```solidity
 | Offset | Length | Description |
 |--------|--------|-------------|
 | 0 | L | MAC output |
@@ -297,14 +297,14 @@ Keccak Message Authentication Code.
 Applies Keccak-f[1600] permutation to 1600-bit state.
 
 **Input:**
-```
+```solidity
 | Offset | Length | Description |
 |--------|--------|-------------|
 | 0 | 200 | 25 × 64-bit lanes (little-endian) |
 ```
 
 **Output:**
-```
+```solidity
 | Offset | Length | Description |
 |--------|--------|-------------|
 | 0 | 200 | Permuted state |
@@ -319,7 +319,7 @@ Applies Keccak-f[1600] permutation to 1600-bit state.
 
 ### Architecture Overview
 
-```
+```solidity
 ┌─────────────────────────────────────────────────────────────────────┐
 │                  SHA-3/Keccak Precompile (0x0315)                    │
 ├─────────────────────────────────────────────────────────────────────┤
@@ -350,7 +350,7 @@ Applies Keccak-f[1600] permutation to 1600-bit state.
 
 ### File Inventory
 
-```
+```solidity
 evm/precompile/contracts/sha3/
 ├── sha3.go                 (10 KB)  # Main precompile implementation
 ├── sha3_test.go            (8 KB)   # Unit tests
@@ -450,7 +450,7 @@ interface ISHA3 {
     /// @return permuted Permuted state
     function keccakF1600(bytes calldata state) external view returns (bytes memory permuted);
 }
-```
+```solidity
 
 ### Go Implementation
 
@@ -693,7 +693,7 @@ func keccakF1600(state *[25]uint64) {
 
 ### Cross-Chain Compatibility
 
-```
+```solidity
 ┌─────────────────────────────────────────────────────────────────────┐
 │                     SHA-3 Cross-Chain Usage                          │
 ├─────────────────────────────────────────────────────────────────────┤
@@ -765,7 +765,7 @@ Use cSHAKE for domain separation:
 bytes memory a = cshake128(data, "", "Domain A", 32);
 bytes memory b = cshake128(data, "", "Domain B", 32);
 // a != b guaranteed
-```
+```go
 
 ## Test Cases
 
@@ -839,7 +839,7 @@ func BenchmarkSHAKE128_1KB(b *testing.B) {
     }
 }
 // BenchmarkSHAKE128_1KB-8    987,654 ns/op    360 gas (40 + 32*6 + 128)
-```
+```solidity
 
 ## Backwards Compatibility
 
@@ -856,3 +856,4 @@ No backwards compatibility issues. This LP introduces a new precompile at an unu
 ## Copyright
 
 Copyright and related rights waived via [CC0](https://creativecommons.org/publicdomain/zero/1.0/).
+```

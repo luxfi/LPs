@@ -66,7 +66,7 @@ The C-Chain header format has evolved with each upgrade phase. The header field 
 | Durango+ | 19 | Full chainEVM header |
 
 #### Field Order (Coreth Format)
-```
+```markdown
 Position 0-14:  Core Ethereum fields (ParentHash through Nonce)
 Position 15:    ExtDataHash (common.Hash, REQUIRED)
 Position 16:    BaseFee (*big.Int, optional)
@@ -75,7 +75,7 @@ Position 18:    BlockGasCost (*big.Int, optional)
 ```
 
 #### Field Order (Geth Format)
-```
+```markdown
 Position 0-14:  Core Ethereum fields (ParentHash through Nonce)
 Position 15:    BaseFee (*big.Int, optional)
 Position 16:    ExtDataHash (*common.Hash, optional)
@@ -108,7 +108,7 @@ Position 18:    BlockGasCost (*big.Int, optional)
     "graniteTimestamp": 253399622400
   }
 }
-```
+```solidity
 
 #### Testnet (Chain ID: 96368)
 ```json

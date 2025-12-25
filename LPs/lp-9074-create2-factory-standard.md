@@ -110,7 +110,7 @@ interface ICREATE2Factory {
         string memory sourceChain
     );
 }
-```
+```solidity
 
 ### Extended Factory Features
 
@@ -206,7 +206,7 @@ library SaltGenerator {
         return keccak256(abi.encodePacked(seed, chainId));
     }
 }
-```
+```solidity
 
 ### Minimal Proxy Implementation
 
@@ -301,7 +301,7 @@ contract CREATE2Registry {
         return "Unknown";
     }
 }
-```
+```solidity
 
 ### Gas-Optimized Factory
 
@@ -387,7 +387,7 @@ interface ICrossChainDeployer {
         string memory chain
     ) external view returns (address);
 }
-```
+```solidity
 
 ## Rationale
 
@@ -447,7 +447,7 @@ function testCrossChainConsistency() public {
     assertEq(cChainAddress, xChainAddress);
     assertEq(xChainAddress, pChainAddress);
 }
-```
+```solidity
 
 ### Proxy Deployment Test
 
@@ -493,7 +493,7 @@ forge build
 forge script script/DeployCREATE2.s.sol:DeployCREATE2 \
   --rpc-url https://api.avax.network/ext/bc/C/rpc \
   --broadcast
-```
+```bash
 
 ### Testing
 
@@ -542,7 +542,7 @@ forge verify-contract \
   --chain-id 43114 \
   --watch 0x<CREATE2_ADDRESS> \
   src/create2/CREATE2Factory.sol:CREATE2Factory
-```
+```solidity
 
 ## Reference Implementation
 
@@ -575,4 +575,4 @@ Key features:
 
 ## Copyright
 
-Copyright and related rights waived via [CC0](../LICENSE.md).
+Copyright and related rights waived via [CC0](../LICENSE.md).```

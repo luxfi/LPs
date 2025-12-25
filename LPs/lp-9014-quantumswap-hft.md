@@ -49,7 +49,7 @@ Modern DeFi demands institutional-grade performance:
 
 ### Architecture
 
-```
+```solidity
 ┌─────────────────────────────────────────────────────────────────────────────┐
 │                         QuantumSwap Architecture                            │
 ├─────────────────────────────────────────────────────────────────────────────┤
@@ -806,7 +806,7 @@ contract QuantumSwap is Ownable, ReentrancyGuard {
 
     event MarketMakingStopped(bytes32 indexed configId);
 }
-```
+```solidity
 
 ### Performance Specifications
 
@@ -836,7 +836,7 @@ contract QuantumSwap is Ownable, ReentrancyGuard {
 │  └── Settlement:            Atomic (no partial fills)                      │
 │                                                                             │
 └─────────────────────────────────────────────────────────────────────────────┘
-```
+```solidity
 
 ## Rationale
 
@@ -895,7 +895,7 @@ function testTWAP() public {
     assertTrue(state.active);
     assertEq(state.slices, 12);
 }
-```
+```solidity
 
 ## Reference Implementation
 
@@ -913,7 +913,7 @@ dex/
 ├── orderbook/         # B+ tree order book
 ├── consensus/         # FPC integration
 └── protocol/          # QZMQ messaging
-```
+```solidity
 
 ## Backwards Compatibility
 
@@ -961,3 +961,4 @@ Sub-nanosecond matching enables:
 ## Copyright
 
 Copyright and related rights waived via [CC0](https://creativecommons.org/publicdomain/zero/1.0/).
+```

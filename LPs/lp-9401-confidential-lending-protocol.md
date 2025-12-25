@@ -111,7 +111,7 @@ interface IConfidentialLending {
         bytes calldata withdrawProof
     ) external;
 }
-```
+```solidity
 
 ### Zero-Knowledge Credit Scoring
 
@@ -232,7 +232,7 @@ interface IConfidentialCollateral {
         bytes calldata redemptionProof
     ) external;
 }
-```
+```solidity
 
 ### Private Interest Rate Discovery
 
@@ -344,7 +344,7 @@ interface IMPCLending {
         bytes calldata proof
     ) external view returns (bool valid);
 }
-```
+```solidity
 
 ### Private Yield Strategies
 
@@ -448,7 +448,7 @@ interface ICompliantPrivateLending {
         uint256 collateral
     );
 }
-```
+```solidity
 
 ## Rationale
 
@@ -544,7 +544,7 @@ function testConfidentialCollateral() public {
 
     assertTrue(sufficient);
 }
-```
+```solidity
 
 ## Backwards Compatibility
 
@@ -669,4 +669,4 @@ This LP introduces a new lending protocol that operates independently from exist
 
 ## Copyright
 
-Copyright and related rights waived via [CC0](../LICENSE.md).
+Copyright and related rights waived via [CC0](../LICENSE.md).```

@@ -64,7 +64,7 @@ interface ILRC20Wrapper is ILRC20 {
      */
     function withdrawTo(address account, uint256 amount) external returns (bool);
 }
-```
+```solidity
 
 ### Implementation
 
@@ -200,7 +200,7 @@ contract WLUX is LRC20 {
         deposit();
     }
 }
-```
+```solidity
 
 ## Rationale
 
@@ -268,3 +268,4 @@ Existing LRC-20 implementations can be wrapped by:
 
 **Document Maintainer**: Lux Industries
 **Last Updated**: 2025-12-25
+```

@@ -106,7 +106,7 @@ interface IFraudProofSystem {
     event OneStepProofSubmitted(bytes32 indexed challengeId, address submitter);
     event ChallengeResolved(bytes32 indexed challengeId, address winner);
 }
-```
+```solidity
 
 ### Interactive Bisection Protocol
 
@@ -221,7 +221,7 @@ interface IOneStepVerifier {
     function calculateStateRoot(MachineState calldata state) external pure returns (bytes32);
     function updateMemoryRoot(bytes32 oldRoot, uint256 address, bytes32 value) external pure returns (bytes32);
 }
-```
+```solidity
 
 ### AI Computation Fraud Proofs
 
@@ -374,7 +374,7 @@ interface IChallengeGameManager {
     event MoveMade(bytes32 indexed gameId, uint256 moveNumber, address player);
     event GameResolved(bytes32 indexed gameId, address winner, uint256 reward);
 }
-```
+```solidity
 
 ### Economic Security Module
 
@@ -533,7 +533,7 @@ describe("Bisection Protocol", () => {
         expect(challenge.status).to.equal(ChallengeStatus.ChallengerWon);
     });
 });
-```
+```solidity
 
 ### One-Step Verification Tests
 
@@ -651,7 +651,7 @@ describe("AI Fraud Proofs", () => {
         expect(result).to.be.false;
     });
 });
-```
+```solidity
 
 ### Economic Security Tests
 

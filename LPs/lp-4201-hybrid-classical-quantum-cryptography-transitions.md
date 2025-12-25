@@ -51,7 +51,7 @@ const (
     ValidationTRANSITION ValidationMode = 0x02  // Context-dependent
     ValidationQUANTUM    ValidationMode = 0x03  // Quantum-only
 )
-```
+```solidity
 
 #### Security Model
 
@@ -64,7 +64,7 @@ Threat Analysis:
 Formal Security Proof:
 P(break_hybrid) = P(break_classical) * P(break_quantum)
                 <= 2^-128 * 2^-192 = 2^-320 (for AND mode)
-```
+```sql
 
 ### 2. Migration Phases
 
@@ -116,7 +116,7 @@ func (p *Phase1Rules) ValidateTransaction(tx *Transaction) error {
     }
     return nil
 }
-```
+```go
 
 #### Phase 2: Mandatory Hybrid (Months 4-6)
 
@@ -160,7 +160,7 @@ contract Phase3Migration {
         emit AccountUpgraded(msg.sender, quantumPubKey);
     }
 }
-```
+```solidity
 
 #### Phase 4: Quantum Native (Month 10+)
 
@@ -180,7 +180,7 @@ Final State:
     - Quantum operations optimized
     - Hardware acceleration deployed
     - Batch verification enabled
-```
+```go
 
 ### 3. Key Migration Protocols
 
@@ -259,7 +259,7 @@ contract EmergencyRecovery {
         delete recoveryQueue[msg.sender];
     }
 }
-```
+```solidity
 
 ### 4. Compatibility Layer
 
@@ -338,7 +338,7 @@ class HybridWallet {
         this.mode = SignatureMode.HYBRID_AND;
     }
 }
-```
+```solidity
 
 ### 5. Performance Optimizations
 
@@ -475,7 +475,7 @@ go test -v ./... -run Signature
 - TestRingtailIntegration - Privacy layer with hybrid sigs
 
 **Benchmark Results** (Apple M1 Max):
-```
+```markdown
 BenchmarkHybridSignGeneration-10      1,847 ops/sec (541μs/op)
 BenchmarkDualSignValidation-10        2,123 ops/sec (471μs/op)
 BenchmarkBatchHybridVerify-10         4,256 ops/sec (235μs/op)
@@ -531,7 +531,7 @@ func TestHybridMigration(t *testing.T) {
     time.Sleep(7 * 24 * time.Hour)
     assert.True(t, CompleteRecovery(recovery))
 }
-```
+```solidity
 
 ## Security Considerations
 
@@ -550,4 +550,4 @@ func TestHybridMigration(t *testing.T) {
 
 ## Copyright
 
-Copyright and related rights waived via [CC0](../LICENSE.md).
+Copyright and related rights waived via [CC0](../LICENSE.md).```

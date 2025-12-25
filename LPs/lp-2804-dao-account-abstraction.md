@@ -31,7 +31,7 @@ Account abstraction enables:
 
 ### Architecture
 
-```
+```solidity
 ┌─────────────────────────────────────────────────────────────────┐
 │                        User Operation                            │
 │                    (vote, propose, delegate)                     │
@@ -86,7 +86,7 @@ interface IPaymasterV1 {
     function withdrawTo(address payable _to, uint256 _amount) external;
     function getDeposit() external view returns (uint256);
 }
-```
+```solidity
 
 ### Base Paymaster
 
@@ -140,7 +140,7 @@ interface ILightAccountValidator {
     function owner() external view returns (address);
     function transferOwnership(address newOwner) external;
 }
-```
+```solidity
 
 ### File Structure
 
@@ -149,7 +149,7 @@ contracts/contracts/account-abstraction/
 ├── PaymasterV1.sol           # DAO gas sponsorship paymaster
 ├── BasePaymaster.sol         # Abstract paymaster base
 └── LightAccountValidator.sol # ERC-4337 account validation
-```
+```solidity
 
 ### Sponsored Operations
 
@@ -189,7 +189,7 @@ event DaoWhitelisted(address indexed dao, bool whitelisted);
 event SponsorLimitUpdated(address indexed dao, uint256 newLimit);
 event Deposited(address indexed depositor, uint256 amount);
 event Withdrawn(address indexed to, uint256 amount);
-```
+```solidity
 
 ## Usage Example
 
@@ -243,7 +243,7 @@ export function useGaslessVote(daoAddress: string) {
 
   return { vote }
 }
-```
+```solidity
 
 ## Rationale
 
@@ -355,7 +355,7 @@ function test_RejectInvalidSignature() public {
 
     assertEq(validationData, 1); // Invalid
 }
-```
+```solidity
 
 ## Security Considerations
 
@@ -379,3 +379,4 @@ function test_RejectInvalidSignature() public {
 ## Copyright
 
 Copyright and related rights waived via [CC0](../LICENSE.md).
+```

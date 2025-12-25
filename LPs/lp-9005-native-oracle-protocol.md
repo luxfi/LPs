@@ -59,7 +59,7 @@ The existing T-Chain infrastructure (LP-13, LP-14) provides the natural committe
 
 ### 1. Architecture Overview
 
-```
+```solidity
 ┌─────────────────────────────────────────────────────────────────────────────────┐
 │                       LUX NETWORK-WIDE ORACLE ARCHITECTURE                       │
 ├─────────────────────────────────────────────────────────────────────────────────┤
@@ -138,7 +138,7 @@ type PriceFeedPayload struct {
 
 // AttestationType for TeleportAttest
 const AttestationTypePriceFeed = 0x01
-```
+```solidity
 
 ### 3. Chain-Specific Access Mechanisms
 
@@ -237,7 +237,7 @@ contract LendingPool {
         // ...
     }
 }
-```
+```solidity
 
 **Gas Costs:**
 - `getPrice()`: 2,100 gas (cold) / 100 gas (warm)
@@ -344,7 +344,7 @@ type CChainSource struct {
 type OrderbookSource struct {
     books OrderbookProvider
 }
-```
+```go
 
 ### 5. Aggregation Strategy
 
@@ -420,7 +420,7 @@ type CircuitBreaker struct {
 │     └───────────────────────────────────────────────────────────────────┘    │
 │                                                                               │
 └──────────────────────────────────────────────────────────────────────────────┘
-```
+```solidity
 
 ### 7. Supported Trading Pairs
 

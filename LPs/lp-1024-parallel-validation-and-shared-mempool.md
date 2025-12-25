@@ -93,7 +93,7 @@ make test
 
 # Benchmark multi-chain performance
 ./build/node --validate-chains=X,C,Q
-```
+```solidity
 
 ### Resource Management
 - **CPU Isolation**: Per-chain consensus threads
@@ -141,3 +141,4 @@ Additive: existing chains and clients continue to operate. Adoption can occur in
    - Verify atomic operations
    - Validate state synchronization
 
+```

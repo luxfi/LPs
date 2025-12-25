@@ -65,7 +65,7 @@ type KeyBackend interface {
     // Signing
     Sign(ctx context.Context, name string, request SignRequest) (*SignResponse, error)
 }
-```
+```solidity
 
 ### Supported Backends
 
@@ -100,7 +100,7 @@ K-Chain implements distributed key management using Shamir Secret Sharing and th
     │  Share 1/3   │   │  Share 2/3   │   │  Share 3/3   │
     │  Port 9630   │   │  Port 9631   │   │  Port 9632   │
     └──────────────┘   └──────────────┘   └──────────────┘
-```
+```solidity
 
 #### K-Chain RPC API
 
@@ -132,7 +132,7 @@ The K-Chain backend exposes a JSON-RPC 2.0 API on port 963N (default 9630).
   },
   "id": 1
 }
-```
+```solidity
 
 **kchain.getKeyByName** - Get key by name
 ```json
@@ -162,7 +162,7 @@ The K-Chain backend exposes a JSON-RPC 2.0 API on port 963N (default 9630).
   },
   "id": 1
 }
-```
+```sql
 
 **kchain.updateKey** - Update key metadata
 ```json
@@ -191,7 +191,7 @@ The K-Chain backend exposes a JSON-RPC 2.0 API on port 963N (default 9630).
   },
   "id": 1
 }
-```
+```solidity
 
 ##### Cryptographic Operations
 
@@ -221,7 +221,7 @@ The K-Chain backend exposes a JSON-RPC 2.0 API on port 963N (default 9630).
   },
   "id": 1
 }
-```
+```solidity
 
 **kchain.sign** - Sign data
 ```json
@@ -250,7 +250,7 @@ The K-Chain backend exposes a JSON-RPC 2.0 API on port 963N (default 9630).
   },
   "id": 1
 }
-```
+```solidity
 
 **kchain.getPublicKey** - Retrieve public key
 ```json
@@ -273,7 +273,7 @@ The K-Chain backend exposes a JSON-RPC 2.0 API on port 963N (default 9630).
   "params": {},
   "id": 1
 }
-```
+```solidity
 
 ##### Threshold Operations
 
@@ -309,7 +309,7 @@ The K-Chain backend exposes a JSON-RPC 2.0 API on port 963N (default 9630).
   },
   "id": 1
 }
-```
+```solidity
 
 **kchain.thresholdSign** - Threshold signature without reconstruction
 ```json
@@ -338,7 +338,7 @@ The K-Chain backend exposes a JSON-RPC 2.0 API on port 963N (default 9630).
   },
   "id": 1
 }
-```
+```solidity
 
 ### Supported Cryptographic Algorithms
 
@@ -370,7 +370,7 @@ Keys are organized in sets derived from a single BIP39 mnemonic:
 │   ├── private.bin
 │   └── public.bin
 └── metadata.json     # Key metadata
-```
+```go
 
 ### Session Management
 
@@ -441,7 +441,7 @@ lux key kchain gather <name>        # Gather shares
 lux key kchain sign <name> <data>   # Threshold sign
 lux key kchain reshare <name>       # Rotate shares
 lux key kchain status               # Show K-Chain status
-```
+```solidity
 
 ## Rationale
 
@@ -497,3 +497,4 @@ This LP introduces new key management capabilities without breaking existing fun
 ## Copyright
 
 Copyright and related rights waived via [CC0](https://creativecommons.org/publicdomain/zero/1.0/).
+```

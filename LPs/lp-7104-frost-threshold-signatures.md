@@ -52,7 +52,7 @@ The linearity of the signing equation enables efficient threshold computation wi
 
 #### 1. Key Generation (DKG)
 
-```
+```markdown
 Input: Parties P = {p₁, ..., pₙ}, threshold t
 Output: Share xᵢ for each party, public key Y
 
@@ -74,7 +74,7 @@ Output: (xᵢ, Y)
 
 #### 2. Signing Protocol (2 Rounds)
 
-```
+```markdown
 Input: Message m, signers S ⊆ P with |S| = t
 Output: Schnorr signature (R, z)
 
@@ -105,7 +105,7 @@ Output: (R, z)
 
 #### 3. Taproot Support (BIP-340)
 
-```
+```markdown
 Taproot Adjustments:
 1. Even Y-coordinate:
    If Y has odd y-coordinate, negate all shares: xᵢ = -xᵢ
@@ -149,7 +149,7 @@ rhoHash.WriteAny(D[i], E[i])  // May use affine or projective
 dBytes, _ := D[i].MarshalBinary()  // Canonical bytes
 eBytes, _ := E[i].MarshalBinary()
 rhoHash.WriteAny(dBytes, eBytes)
-```
+```solidity
 
 This ensures all parties compute identical binding values ρ, preventing signature failures.
 
@@ -218,7 +218,7 @@ Benchmarks (3-of-5 threshold):
 
 ### Integration Architecture
 
-```
+```solidity
 ┌─────────────────────────────────────────┐
 │            Lux T-Chain MVM              │
 ├─────────────────────────────────────────┤
@@ -280,7 +280,7 @@ The FROST protocol is production-ready in the Lux threshold library:
 
 ### File Inventory
 
-```
+```solidity
 protocols/frost/
 ├── frost.go                   # Entry points: Keygen(), Sign()
 ├── fix_keygen_shares.go       # Share correction utilities
@@ -332,7 +332,7 @@ FROST is integrated into T-Chain (ThresholdVM) via:
 executor := NewProtocolExecutor(pool)
 startFunc := executor.FROSTKeygenStartFunc(selfID, participants, threshold)
 handler, err := protocol.NewMultiHandler(startFunc, sessionID)
-```
+```solidity
 
 ### Testing
 

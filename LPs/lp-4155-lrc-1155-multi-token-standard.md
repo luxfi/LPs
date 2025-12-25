@@ -59,7 +59,7 @@ interface ILRC1155 {
     function isApprovedForAll(address owner, address operator) external view returns (bool);
     function uri(uint256 id) external view returns (string memory);
 }
-```
+```solidity
 
 ### Batch Confidential Operations Extension
 
@@ -181,7 +181,7 @@ interface ILRC1155AISharding {
     event TrainingSessionStarted(bytes32 indexed sessionId, uint256 modelId);
     event ShardUpdated(bytes32 indexed sessionId, uint256 shardId, address trainer);
 }
-```
+```solidity
 
 ### Recursive zkSNARK Proof Structure
 
@@ -235,7 +235,7 @@ interface ILRC1155Fractional {
     event TokenFractionalized(uint256 indexed parentId, uint256 indexed fractionalId, uint256 totalShares);
     event FractionalRedeemed(uint256 indexed fractionalId, address redeemer, uint256 amount);
 }
-```
+```solidity
 
 ## Rationale
 
@@ -463,7 +463,7 @@ describe("LRC1155 AI Model Sharding", () => {
         expect(newModelId).to.be.gt(modelId);
     });
 });
-```
+```sql
 
 ### Fractional Ownership Tests
 
@@ -530,7 +530,7 @@ cd ~/work/lux/standard
 forge test --match-contract ERC1155Test
 forge test --match-contract LRC1155ModelShardTest
 forge test --match-contract LRC1155FederatedTest
-```
+```solidity
 
 ### Batch Operations
 
@@ -577,7 +577,7 @@ function mintModelShards(
         });
     }
 }
-```
+```solidity
 
 **Shard Reconstruction**:
 - Requires all shards to reconstruct model
@@ -640,7 +640,7 @@ function uri(uint256 tokenId) public view returns (string memory) {
         ".json"
     ));
 }
-```
+```solidity
 
 **Collection Metadata**:
 - Supports OpenSea collection-level metadata
@@ -671,4 +671,4 @@ Key components:
 
 ## Copyright
 
-Copyright and related rights waived via [CC0](../LICENSE.md).
+Copyright and related rights waived via [CC0](../LICENSE.md).```

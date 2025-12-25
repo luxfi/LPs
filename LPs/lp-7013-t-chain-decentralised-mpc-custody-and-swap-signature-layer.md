@@ -63,7 +63,7 @@ Validators who already stake LUX now earn additional MPC rewards, tightening eco
 
 ## 3  High-level Architecture
 
-```
+```solidity
              +---------------------------------------+
              |              T-Chain VM               |
              |---------------------------------------|
@@ -115,7 +115,7 @@ type KeyGenTx struct {
     AggPubKey    []byte // 32–65 B
     SignerBitmap []byte // bitmask of validator IDs
 }
-```
+```go
 
 Commits to new key; must be signed by ≥ threshold validators listed in `SignerBitmap`.
 
@@ -134,7 +134,7 @@ type SwapSigTx struct {
 ```
 
 **Validation:**
-```
+```solidity
 require AggVerify(AggPubKey[AssetID], SigBitmap, Signature, msgHash(SwapID))
 require bitcount(SigBitmap) >= threshold(AssetID)
 ```
@@ -156,7 +156,7 @@ type DualSigTx struct {
     QuantumBitmap    []byte     // Quantum signers
     ProofHash        [32]byte   // Combined proof hash
 }
-```
+```solidity
 
 **Validation:**
 ```
@@ -170,7 +170,7 @@ if quantumPhase >= 2:
     
 require bitcount(ClassicalBitmap) >= threshold(AssetID)
 require bitcount(QuantumBitmap) >= qThreshold(AssetID)
-```
+```go
 
 #### 4.2.6  QuantumPhaseTx
 
@@ -191,7 +191,7 @@ type SlashTx struct {
     SwapID   ids.ID
     Evidence []byte // RLP{height, blkHash, swapHeader}
 }
-```
+```markdown
 
 If now > Swap.expiry and swap still PENDING, all signers in active set lose `slashAmount = stake * 0.2`. 50 % burned, 50 % to reporter.
 
@@ -246,7 +246,7 @@ message DualSigReply {
     bytes classical_bitmap = 3;
     bytes quantum_bitmap = 4;
 }
-```
+```bash
 
 Quantum signature latency: < 50 ms (Ringtail 15-of-21 @ ~7 ms computation + network).
 
@@ -408,7 +408,7 @@ go test -tags=integration ./...
 # Performance benchmarks
 go test ./pkg/crypto/cgg21 -bench=. -benchmem
 go test ./pkg/crypto/ringtail -bench=. -benchmem
-```
+```solidity
 
 ### Signer Node Setup
 
@@ -446,7 +446,7 @@ curl -X POST --data '{
   "method":"mpc.verifySignature",
   "params":{"signature":"0x...","message":"0x..."}
 }' -H 'content-type:application/json;' http://localhost:8080/rpc
-```
+```solidity
 
 ### File Size Verification
 
@@ -509,3 +509,4 @@ curl -X POST --data '{
 ## Copyright
 
 Copyright and related rights waived via [CC0](../LICENSE.md).
+```
