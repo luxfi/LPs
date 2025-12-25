@@ -6,7 +6,7 @@ author: Lux Network Team
 type: Standards Track
 category: Core
 status: Draft
-created: 2024-12-20
+created: 2025-01-15
 requires: LP-100
 tags: [ai, privacy]
 order: 102

@@ -10,7 +10,6 @@ category: LRC
 created: 2025-12-11
 updated: 2025-12-11
 requires: 9001, 9005
-supersedes: 0609
 series: LP-9000 DEX Series
 tags: [defi, derivatives, lp-9000-series]
 implementation: https://github.com/luxfi/dex
