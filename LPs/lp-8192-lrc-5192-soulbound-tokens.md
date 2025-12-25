@@ -1,22 +1,22 @@
 ---
-lp: 3627
-title: LRC-4626 Multi-Vault Extensions
-description: LRC-4626 Multi-Vault Extensions for Lux Network
+lp: 8192
+title: LRC-5192 Soulbound Tokens
+description: LRC-5192 Soulbound Tokens for Lux Network
 author: Lux Network Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
 status: Final
 type: Standards Track
 category: LRC
 created: 2025-01-23
-tags: [lrc, token-standard, defi, vault]
-order: 410
+tags: [lrc, token-standard, nft, soulbound]
+order: 240
 ---
 
 ## Abstract
-Extensions for multi-asset and multi-strategy vault implementations.
+LRC-5192 (mirrors ERC-5192) defines minimal soulbound (non-transferable) NFTs.
 
 ## Specification
-Extends LRC-4626 with support for multiple underlying assets and yield strategies.
+Adds `locked(uint256 tokenId)` to indicate non-transferability.
 
 
 ## Motivation

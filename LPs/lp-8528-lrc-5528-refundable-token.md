@@ -1,5 +1,5 @@
 ---
-lp: 3528
+lp: 8528
 title: LRC-5528 Refundable Token
 description: Tokens with built-in escrow and refund mechanics for reversible payments
 author: Lux Core Team (@luxfi)

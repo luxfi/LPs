@@ -1,7 +1,7 @@
 ---
-lp: 3981
-title: LRC-2981 NFT Royalties
-description: LRC-2981 NFT Royalties for Lux Network
+lp: 4157
+title: LRC-1155 Supply Extension
+description: LRC-1155 Supply Extension for Lux Network
 author: Lux Network Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
 status: Final
@@ -9,14 +9,14 @@ type: Standards Track
 category: LRC
 created: 2025-01-23
 tags: [lrc, token-standard, nft]
-order: 230
+order: 310
 ---
 
 ## Abstract
-LRC-2981 (mirrors ERC-2981) standardizes NFT royalty information.
+Extension tracking total supply for each token ID in LRC-1155 contracts.
 
 ## Specification
-Implements `royaltyInfo(tokenId, salePrice)` returning receiver and royalty amount.
+Implements `totalSupply(uint256 id)` and `exists(uint256 id)` functions.
 
 
 ## Motivation
@@ -40,11 +40,7 @@ Fully compatible with existing ERC implementations.
 
 | Contract | Description |
 |----------|-------------|
-| [`lib/openzeppelin-contracts/contracts/token/common/ERC2981.sol`](https://github.com/luxfi/standard/blob/main/lib/openzeppelin-contracts/contracts/token/common/ERC2981.sol) | NFT royalty standard |
-
-### Interfaces
-
-- [`lib/openzeppelin-contracts/contracts/interfaces/IERC2981.sol`](https://github.com/luxfi/standard/blob/main/lib/openzeppelin-contracts/contracts/interfaces/IERC2981.sol)
+| [`lib/openzeppelin-contracts/contracts/token/ERC1155/extensions/ERC1155Supply.sol`](https://github.com/luxfi/standard/blob/main/lib/openzeppelin-contracts/contracts/token/ERC1155/extensions/ERC1155Supply.sol) | ERC1155 with totalSupply tracking |
 
 
 ### Upgradeable Variants
@@ -53,8 +49,7 @@ For proxy-based upgradeable contracts:
 
 | Contract | Description |
 |----------|-------------|
-| [`ERC721RoyaltyUpgradeable.sol`](https://github.com/luxfi/standard/blob/main/lib/openzeppelin-contracts-upgradeable/contracts/token/ERC721/extensions/ERC721RoyaltyUpgradeable.sol) | Upgradeable royalties (721) |
-| [`ERC2981Upgradeable.sol`](https://github.com/luxfi/standard/blob/main/lib/openzeppelin-contracts-upgradeable/contracts/token/common/ERC2981Upgradeable.sol) | Upgradeable ERC-2981 base |
+| [`ERC1155SupplyUpgradeable.sol`](https://github.com/luxfi/standard/blob/main/lib/openzeppelin-contracts-upgradeable/contracts/token/ERC1155/extensions/ERC1155SupplyUpgradeable.sol) | Upgradeable supply tracking |
 
 **Usage**: Initialize in `initialize()` instead of constructor. See [OpenZeppelin Upgrades](https://docs.openzeppelin.com/upgrades).
 

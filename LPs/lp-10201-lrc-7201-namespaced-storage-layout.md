@@ -1,5 +1,5 @@
 ---
-lp: 3201
+lp: 10201
 title: LRC-7201 Namespaced Storage Layout
 description: Standard storage layout for upgradeable contracts avoiding slot collisions
 author: Lux Core Team (@luxfi)
@@ -8,7 +8,7 @@ status: Final
 type: Standards Track
 category: LRC
 created: 2025-01-23
-requires: 3967
+requires: 4967
 tags: [lrc, infrastructure, proxy]
 order: 640
 ---

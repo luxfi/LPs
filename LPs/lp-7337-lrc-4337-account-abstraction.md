@@ -1,5 +1,5 @@
 ---
-lp: 3337
+lp: 7337
 title: LRC-4337 Account Abstraction
 description: ERC-4337 Account Abstraction implementation enabling smart contract wallets with sponsored transactions
 author: Lux Core Team (@luxfi)

@@ -149,6 +149,32 @@ Aggregation continues until:
 | 3 | SignError | Signing failed |
 | 4 | NotFound | Message not found |
 
+## Rationale
+
+### Binary Message Format
+
+Using a compact binary format (vs JSON) provides:
+
+1. **Bandwidth Efficiency**: 96-byte signatures are optimal for BLS
+2. **Parsing Speed**: Fixed-width fields enable zero-copy parsing
+3. **Determinism**: Binary serialization is unambiguous
+4. **Cryptographic Safety**: No string encoding edge cases
+
+### Handler ID Convention
+
+Using `0x12345678` as the handler ID follows the p2p protocol convention where:
+- IDs are allocated sequentially
+- Application-specific handlers use high values
+- Allows easy identification in network diagnostics
+
+### Parallel Aggregation
+
+Collecting signatures in parallel (vs sequentially) reduces latency:
+
+- Reduces worst-case latency from O(n) to O(1)
+- Handles validator failures gracefully with timeouts
+- Enables dynamic quorum adjustment based on available validators
+
 ## Implementation
 
 As of warp v1.18.0, this protocol is implemented in `github.com/luxfi/warp`:

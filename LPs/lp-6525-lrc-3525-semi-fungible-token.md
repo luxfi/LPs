@@ -1,5 +1,5 @@
 ---
-lp: 3525
+lp: 6525
 title: LRC-3525 Semi-Fungible Token
 description: Token standard for financial instruments with slot-based fungibility
 author: Lux Core Team (@luxfi)

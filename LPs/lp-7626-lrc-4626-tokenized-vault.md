@@ -1,5 +1,5 @@
 ---
-lp: 3626
+lp: 7626
 title: LRC-4626 Tokenized Vault
 description: LRC-4626 Tokenized Vault for Lux Network
 author: Lux Network Team (@luxfi)
