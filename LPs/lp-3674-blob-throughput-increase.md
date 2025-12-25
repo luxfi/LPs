@@ -4,7 +4,7 @@ title: Blob Throughput Increase (EIP-7691)
 description: Increase target and max blobs per block for higher DA throughput
 author: Lux Core Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
-status: Draft
+status: Review
 type: Informational
 category: Core
 created: 2025-01-23

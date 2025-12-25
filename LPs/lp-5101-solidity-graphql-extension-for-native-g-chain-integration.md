@@ -4,7 +4,7 @@ title: Solidity GraphQL Extension for Native G-Chain Integration
 description: Extends Solidity with embedded GraphQL syntax for seamless cross-chain queries from C-Chain smart contracts
 author: Lux Network Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
-status: Draft
+status: Review
 type: Standards Track
 category: Core
 created: 2025-01-28

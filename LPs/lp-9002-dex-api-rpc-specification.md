@@ -4,7 +4,7 @@ title: DEX API & RPC Specification
 description: JSON-RPC, gRPC, WebSocket, and FIX protocol APIs for the Lux DEX sidecar network
 author: Zach Kelling (@zeekay) and Lux Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
-status: Draft
+status: Review
 type: Standards Track
 category: Interface
 created: 2025-07-24

@@ -4,7 +4,7 @@ title: Data Availability Layer
 description: Decentralized data availability layer for L2 rollups with erasure coding and KZG commitments
 author: Lux Network Team (@luxfi), Hanzo AI (@hanzoai), Zoo Protocol (@zooprotocol)
 discussions-to: https://github.com/luxfi/lps/discussions
-status: Draft
+status: Review
 type: Standards Track
 category: Core
 created: 2025-09-24

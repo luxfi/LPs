@@ -4,7 +4,7 @@ title: Batch Execution Standard (Multicall)
 description: Standard for executing multiple contract calls in a single transaction on Lux Network
 author: Lux Network Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
-status: Draft
+status: Review
 tags: [dex, trading]
 type: Standards Track
 category: LRC

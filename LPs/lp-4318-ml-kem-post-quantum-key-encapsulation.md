@@ -4,7 +4,7 @@ title: ML-KEM Post-Quantum Key Encapsulation
 description: NIST FIPS 203 ML-KEM (CRYSTALS-Kyber) post-quantum key encapsulation mechanism for secure key exchange
 author: Lux Partners (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
-status: Draft
+status: Review
 type: Standards Track
 category: Core
 created: 2025-11-22

@@ -4,7 +4,7 @@ title: BadgerDB Verkle Optimization
 description: Synergistic optimization combining BadgerDB key-value separation with Verkle trees for state management
 author: Lux Core Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
-status: Draft
+status: Review
 type: Standards Track
 category: Core
 created: 2025-01-22

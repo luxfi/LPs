@@ -5,7 +5,7 @@ tags: [pqc, wallet, threshold-crypto]
 description: Focuses on the design of Lux's quantum-safe wallet infrastructure, including a new multisignature (multisig) standard that remains secure against quantum adversaries.
 author: Lux Network Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
-status: Draft
+status: Review
 requires: 4
 type: Standards Track
 category: Core

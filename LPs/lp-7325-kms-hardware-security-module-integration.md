@@ -4,7 +4,7 @@ title: Lux KMS Hardware Security Module Integration
 description: Unified key management system with multi-provider HSM support for validator security
 author: Lux Core Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
-status: Draft
+status: Review
 type: Standards Track
 category: Core
 created: 2025-11-22

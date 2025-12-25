@@ -5,7 +5,7 @@ tags: [pqc, core]
 description: Proposes integrating quantum-resistant cryptographic primitives into the Lux protocol to future-proof the network against quantum computer attacks.
 author: Lux Network Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
-status: Draft
+status: Review
 type: Standards Track
 category: Core
 created: 2025-01-27

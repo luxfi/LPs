@@ -4,7 +4,7 @@ title: photon consensus selection
 description: Performance-based peer selection with luminance tracking for optimal consensus participation
 author: Lux Network Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
-status: Draft
+status: Review
 type: Standards Track
 category: Core
 created: 2025-01-29

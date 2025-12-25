@@ -4,7 +4,7 @@ title: EOA Account Code (EIP-7702)
 description: Set code for EOAs enabling smart account features without migration
 author: Lux Core Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
-status: Draft
+status: Review
 type: Standards Track
 category: Core
 created: 2025-01-23

@@ -4,7 +4,7 @@ title: ECIES (Elliptic Curve Integrated Encryption Scheme) Precompile
 description: Native EVM precompile for ECIES hybrid encryption compatible with Ethereum and cross-chain messaging
 author: Lux Crypto Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions/3663
-status: Draft
+status: Review
 type: Standards Track
 category: Core
 created: 2025-12-24

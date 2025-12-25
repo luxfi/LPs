@@ -145,13 +145,13 @@
 
 /* Layout variables - customize fumadocs defaults */
 :root {
-  --fd-sidebar-width: 260px;
+  --fd-sidebar-width: 300px;
   --fd-toc-width: 220px;
 }
 
 @media (min-width: 1280px) {
   :root {
-    --fd-sidebar-width: 280px;
+    --fd-sidebar-width: 320px;
     --fd-toc-width: 240px;
   }
 }

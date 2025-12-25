@@ -3,7 +3,7 @@ lp: 9019
 title: Fee Distribution System
 description: Protocol fee collection, distribution, and revenue sharing mechanisms for Lux DeFi
 author: Lux Core Team
-status: Draft
+status: Review
 tags: [dex, trading]
 type: Standards Track
 category: Core

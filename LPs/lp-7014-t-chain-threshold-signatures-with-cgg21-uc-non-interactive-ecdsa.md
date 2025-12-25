@@ -5,7 +5,7 @@ tags: [threshold-crypto, mpc]
 description: Formal design for integrating the CGG21 threshold ECDSA protocol in Lux's T-Chain (expanding on LP-13).
 author: Lux Industries Inc.
 discussions-to: https://github.com/luxfi/lps/discussions
-status: Draft
+status: Review
 type: Standards Track
 category: Core
 created: 2025-07-23
