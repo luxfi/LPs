@@ -714,8 +714,8 @@ Copyright and related rights waived via [CC0](https://creativecommons.org/public
 3. **CIRCL Library**: [Cloudflare Cryptographic Library](https://github.com/cloudflare/circl)
 
 ### Implementation Files
-4. **Implementation**: `crypto/mlkem/`
-5. **Precompile**: `evm/precompile/contracts/mlkem/`
+4. **Core Library**: [`crypto/mlkem/`](https://github.com/luxfi/crypto/tree/main/mlkem)
+5. **EVM Precompile**: [`precompiles/mlkem/`](https://github.com/luxfi/precompiles/tree/main/mlkem) at `0x0200000000000000000000000000000000000007`
 
 ## Appendix A: Key Size Comparison
 
