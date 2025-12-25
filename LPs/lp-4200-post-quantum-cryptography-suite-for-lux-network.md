@@ -337,13 +337,13 @@ Complete implementation available at: https://github.com/luxfi/crypto
 ## References
 
 ### Related Lux Proposals
-- [LP-318](lp-4318-ml-kem-post-quantum-key-encapsulation.md)
-- [LP-316](lp-4316-ml-dsa-post-quantum-digital-signatures.md)
-- [LP-317](lp-317-slh-dsa-stateless-hash-based-digital-signatures.md)
-- [LP-311](lp-311-ml-dsa-signature-verification-precompile.md)
-- [LP-312](lp-312-slh-dsa-signature-verification-precompile.md)
-- [LP-201](lp-201-hybrid-classical-quantum-cryptography-transitions.md)
-- [LP-202](lp-202-cryptographic-agility-framework.md)
+- [LP-318](./lp-4318-ml-kem-post-quantum-key-encapsulation.md
+- [LP-316](./lp-4316-ml-dsa-post-quantum-digital-signatures.md
+- [LP-317](./lp-4317-slh-dsa-stateless-hash-based-digital-signatures.md
+- [LP-311](./lp-4316-ml-dsa-post-quantum-digital-signatures.md
+- [LP-312](./lp-4317-slh-dsa-stateless-hash-based-digital-signatures.md
+- [LP-201](./lp-4201-hybrid-classical-quantum-cryptography-transitions.md
+- [LP-202](../lp-4201-hybrid-classical-quantum-cryptography-transitions.md
 
 ### NIST Standards
 1. [FIPS 203: Module-Lattice-Based Key-Encapsulation Mechanism](https://doi.org/10.6028/NIST.FIPS.203)

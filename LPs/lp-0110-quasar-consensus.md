@@ -4,7 +4,7 @@ title: Quasar Unified Consensus Protocol
 description: Physics-inspired consensus engine unifying Photon selection, Wave voting, Focus convergence, Prism geometry, Horizon predicates, and Flare finalization
 author: Lux Network Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
-status: Draft
+status: Final
 type: Standards Track
 category: Core
 created: 2025-01-29

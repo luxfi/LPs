@@ -4,7 +4,8 @@ title: A-Chain (Attestation Chain) Specification
 description: Defines the A-Chain for network-wide trusted execution verification and two-token economics
 author: Lux Network Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
-status: Draft
+status: Superseded
+superseded-by: 5000
 type: Standards Track
 category: Core
 created: 2025-07-25

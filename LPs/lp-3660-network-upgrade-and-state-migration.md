@@ -761,7 +761,7 @@ func (n *Network) CheckNetwork upgradeSchedule() {
 
 ## References
 
-1. [LP-181](lp-181-epoching.md)
+1. [LP-181](https://github.com/avalanche-foundation/ACPs/tree/main/ACPs/181-p-chain-epoched-views
 2. [Lux State Package](https://github.com/luxfi/state) - Historical Chain ID 7777 data archive
 3. [EIP-155: Simple replay attack protection](https://eips.ethereum.org/EIPS/eip-155) - Chain ID uniqueness specification
 4. [Geth Genesis Format](https://geth.ethereum.org/docs/fundamentals/private-network)

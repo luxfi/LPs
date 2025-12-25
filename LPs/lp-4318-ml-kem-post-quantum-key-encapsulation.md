@@ -702,11 +702,11 @@ Copyright and related rights waived via [CC0](https://creativecommons.org/public
 ## References
 
 ### Related Lux Proposals
-- [LP-200](lp-200-post-quantum-cryptography-suite-for-lux-network.md) - Parent specification
-- [LP-316](lp-4316-ml-dsa-post-quantum-digital-signatures.md) - Complementary signature scheme
-- [LP-317](lp-317-slh-dsa-stateless-hash-based-digital-signatures.md) - Alternative signature scheme
-- [LP-201](lp-201-hybrid-classical-quantum-cryptography-transitions.md) - Migration strategy
-- [LP-202](lp-202-cryptographic-agility-framework.md) - Algorithm flexibility
+- [LP-200](./lp-4200-post-quantum-cryptography-suite-for-lux-network.md - Parent specification
+- [LP-316](./lp-4316-ml-dsa-post-quantum-digital-signatures.md - Complementary signature scheme
+- [LP-317](./lp-4317-slh-dsa-stateless-hash-based-digital-signatures.md - Alternative signature scheme
+- [LP-201](./lp-4201-hybrid-classical-quantum-cryptography-transitions.md - Migration strategy
+- [LP-202](../lp-4201-hybrid-classical-quantum-cryptography-transitions.md - Algorithm flexibility
 
 ### Standards and Specifications
 1. **FIPS 203**: [Module-Lattice-Based Key-Encapsulation Mechanism Standard](https://csrc.nist.gov/pubs/fips/203/final)
