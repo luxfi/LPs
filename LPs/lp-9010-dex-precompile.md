@@ -10,13 +10,13 @@ type: Standards Track
 category: Core
 created: 2025-12-21
 requires: 9000, 9003, 3020
-implementation: https://github.com/luxfi/standard/src/liquidity/precompiles/IDEX.sol
+implementation: https://github.com/luxfi/standard/tree/main/contracts/liquidity/precompiles/IDEX.sol
 order: 10
 ---
 
 > **Documentation**: [dex.lux.network](https://dex.lux.network)
 >
-> **Source**: [github.com/luxfi/standard](https://github.com/luxfi/standard/tree/main/src/liquidity/precompiles)
+> **Source**: [github.com/luxfi/standard](https://github.com/luxfi/standard/tree/main/contracts/liquidity/precompiles)
 >
 > **DEX Core**: [github.com/luxfi/dex](https://github.com/luxfi/dex)
 
@@ -471,10 +471,10 @@ function testOrderBookDepth() public view {
 
 ### Core Implementation
 
-**Location**: `/Users/z/work/lux/standard/src/liquidity/precompiles/IDEX.sol`
+**Location**: `~/work/lux/standard/contracts/liquidity/precompiles/IDEX.sol`
 
 ```
-src/liquidity/precompiles/
+contracts/liquidity/precompiles/
 ├── IDEX.sol           # Interface definition (this LP)
 ├── DEXPrecompile.go   # Go precompile implementation
 └── README.md          # Documentation

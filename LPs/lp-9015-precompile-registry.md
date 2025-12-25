@@ -10,13 +10,13 @@ type: Standards Track
 category: Core
 created: 2025-12-21
 requires: 3020, 9010, 9011
-implementation: https://github.com/luxfi/standard/src/liquidity/precompiles/PrecompileRegistry.sol
+implementation: https://github.com/luxfi/standard/contracts/liquidity/precompiles/PrecompileRegistry.sol
 order: 15
 ---
 
 > **Documentation**: [docs.lux.network/precompiles](https://docs.lux.network/precompiles)
 >
-> **Source**: [github.com/luxfi/standard](https://github.com/luxfi/standard/tree/main/src/liquidity/precompiles)
+> **Source**: [github.com/luxfi/standard](https://github.com/luxfi/standard/tree/main/contracts/liquidity/precompiles)
 
 ## Abstract
 
@@ -462,10 +462,10 @@ function testDeFiAvailability() public {
 
 ## Reference Implementation
 
-**Location**: `/Users/z/work/lux/standard/src/liquidity/precompiles/PrecompileRegistry.sol`
+**Location**: `/Users/z/work/lux/standard/contracts/liquidity/precompiles/PrecompileRegistry.sol`
 
 ```
-src/liquidity/precompiles/
+contracts/liquidity/precompiles/
 ├── PrecompileRegistry.sol   # Registry library (this LP)
 ├── IDEX.sol                 # LP-9010
 ├── IOracle.sol              # LP-9011

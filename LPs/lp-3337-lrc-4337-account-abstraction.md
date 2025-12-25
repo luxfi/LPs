@@ -19,7 +19,7 @@ order: 500
 
 ## Abstract
 
-This LP specifies the Account Abstraction implementation for Lux Network based on ERC-4337. The standard enables smart contract wallets that support gasless transactions via paymasters, social recovery, session keys, and modular validation logic. The implementation at `standard/src/eoa/` provides v0.6-compatible smart accounts with a migration path to v0.7 PackedUserOperation format. Integration with Lux post-quantum precompiles enables quantum-resistant wallet validation via FROST/CGGMP21 threshold signatures and ML-DSA post-quantum signatures.
+This LP specifies the Account Abstraction implementation for Lux Network based on ERC-4337. The standard enables smart contract wallets that support gasless transactions via paymasters, social recovery, session keys, and modular validation logic. The implementation at `standard/contracts/account/` provides v0.6-compatible smart accounts with a migration path to v0.7 PackedUserOperation format. Integration with Lux post-quantum precompiles enables quantum-resistant wallet validation via FROST/CGGMP21 threshold signatures and ML-DSA post-quantum signatures.
 
 ## Activation
 
@@ -178,7 +178,7 @@ interface IPaymaster {
 
 ### Lux Smart Account Implementation
 
-Location: `standard/src/eoa/contracts/smart-account/`
+Location: `standard/contracts/account/contracts/smart-account/`
 
 #### SmartAccount.sol
 
@@ -713,19 +713,16 @@ function testSocialRecovery() {
 ## Reference Implementation
 
 **Repository**: [https://github.com/luxfi/standard](https://github.com/luxfi/standard)
-**Local Path**: `/Users/z/work/lux/standard/`
+**Local Path**: `~/work/lux/standard/contracts/account/`
 
 ### Contracts
 
 | Contract | Description |
 |----------|-------------|
-| [`lib/account-abstraction/contracts/core/EntryPoint.sol`](https://github.com/luxfi/standard/blob/main/lib/account-abstraction/contracts/core/EntryPoint.sol) | ERC-4337 EntryPoint |
-| [`lib/account-abstraction/contracts/accounts/SimpleAccount.sol`](https://github.com/luxfi/standard/blob/main/lib/account-abstraction/contracts/accounts/SimpleAccount.sol) | Simple account implementation |
-
-### Interfaces
-
-- [`lib/account-abstraction/contracts/interfaces/IAccount.sol`](https://github.com/luxfi/standard/blob/main/lib/account-abstraction/contracts/interfaces/IAccount.sol)
-- [`lib/account-abstraction/contracts/interfaces/IEntryPoint.sol`](https://github.com/luxfi/standard/blob/main/lib/account-abstraction/contracts/interfaces/IEntryPoint.sol)
+| [`Account.sol`](contracts/account/Account.sol) | Core account implementation |
+| [`EOA.sol`](contracts/account/EOA.sol) | EOA proxy implementation |
+| [`EOAFactory.sol`](contracts/account/EOAFactory.sol) | Factory for EOA proxies |
+| [`EOAPaymaster.sol`](contracts/account/EOAPaymaster.sol) | Paymaster for gasless transactions |
 
 ### Build and Test
 
@@ -828,7 +825,7 @@ Bundlers profit from:
 - **LP-7321**: FROST Threshold Signature Precompile
 - **LP-7322**: CGGMP21 Threshold ECDSA Precompile
 - **LP-2204**: secp256r1 Curve Integration
-- **Implementation**: `standard/src/eoa/`
+- **Implementation**: `standard/contracts/account/`
 
 ## Copyright
 

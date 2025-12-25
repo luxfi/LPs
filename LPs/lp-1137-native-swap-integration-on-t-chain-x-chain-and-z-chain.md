@@ -196,24 +196,12 @@ MPC signers burn stake on misbehavior; relayer gas paid by fees built into SwapT
 
 ### On-Chain Swap Architecture
 
-**Location**: `~/work/lux/node/vms/avm/` and `~/work/lux/node/vms/mvm/`
-**GitHub**:
-- [`github.com/luxfi/node/tree/main/vms/avm/plugins/swap`](https://github.com/luxfi/node/tree/main/vms/avm/plugins/swap) - X-Chain swaps
-- [`github.com/luxfi/node/tree/main/vms/mvm`](https://github.com/luxfi/node/tree/main/vms/mvm) - T-Chain MPC signing
+**Location**: `~/work/lux/node/vms/avm/` and `~/work/lux/node/vms/`
 
-**Core Swap Components**:
-- [`plugins/swap/swap_tx.go`](https://github.com/luxfi/node/blob/main/vms/avm/plugins/swap/swap_tx.go) - SwapTx codec
-- [`plugins/swap/swap_fx.go`](https://github.com/luxfi/node/blob/main/vms/avm/plugins/swap/swap_fx.go) - SwapFx plugin
-- [`plugins/swap/rpc.go`](https://github.com/luxfi/node/blob/main/vms/avm/plugins/swap/rpc.go) - RPC interface
-
-**T-Chain Signing**:
-- Location: `~/work/lux/node/vms/mvm/`
-- [`vm.go`](https://github.com/luxfi/node/blob/main/vms/mvm/vm.go) - T-Chain VM
-- [`service/mpc.go`](https://github.com/luxfi/node/blob/main/vms/mvm/service/mpc.go) - MPC signing coordination
+**T-Chain Signing**: See [LP-7319: T-Chain MPC Custody](/docs/lp-7319-t-chain-decentralised-mpc-custody/) for MPC signing coordination.
 
 **SwapTx State Machine**:
 ```go
-// From plugins/swap/swap_fx.go
 type SwapStatus uint8
 
 const (

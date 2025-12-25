@@ -17,9 +17,9 @@ implementation: https://github.com/luxfi/dex
 order: 40
 ---
 
-> **Part of LP-9000 Series**: This LP is part of the [LP-9000 DEX Series](/docs/lp-9000-dex-overview/) - Lux's standalone sidecar exchange network.
+> **Part of LP-9000 Series**: This LP is part of the [LP-9000 DEX Series](/docs/lp-9000-dex-core-specification/) - Lux's standalone sidecar exchange network.
 
-> **LP-9000 Series**: [LP-9000 Overview](/docs/lp-9000-dex-overview/) | [LP-9001 Trading Engine](/docs/lp-9001-dex-trading-engine/) | [LP-9002 API](/docs/lp-9002-dex-api-rpc-specification/) | [LP-9003 Performance](/docs/lp-9003-high-performance-dex-protocol/) | [LP-9005 Oracle](/docs/lp-9005-native-oracle-protocol/)
+> **LP-9000 Series**: [LP-9000 Core](/docs/lp-9000-dex-core-specification/) | [LP-9001 Trading Engine](/docs/lp-9001-dex-trading-engine/) | [LP-9002 API](/docs/lp-9002-dex-api-rpc-specification/) | [LP-9003 Performance](/docs/lp-9003-high-performance-dex-protocol/) | [LP-9005 Oracle](/docs/lp-9005-native-oracle-protocol/)
 
 # LP-9004: Perpetuals & Derivatives Protocol
 
@@ -42,14 +42,14 @@ This LP specifies the perpetual futures and derivatives trading protocol for the
 
 | Component | Source | Status |
 |-----------|--------|--------|
-| Margin Trading | [`dex/pkg/lx/margin_trading.go`](https://github.com/luxfi/dex/blob/main/pkg/lx/margin_trading.go) | ✅ Complete |
-| Liquidation Engine | [`dex/pkg/lx/liquidation_engine.go`](https://github.com/luxfi/dex/blob/main/pkg/lx/liquidation_engine.go) | ✅ Complete |
+| Margin Trading | [`dex/pkg/lx/margin.go`](https://github.com/luxfi/dex/blob/main/pkg/lx/margin.go) | ✅ Complete |
+| Liquidation Engine | [`dex/pkg/lx/liquidation.go`](https://github.com/luxfi/dex/blob/main/pkg/lx/liquidation.go) | ✅ Complete |
 | Funding Engine | [`dex/pkg/lx/funding.go`](https://github.com/luxfi/dex/blob/main/pkg/lx/funding.go) | ✅ Complete |
 | Clearinghouse | [`dex/pkg/lx/clearinghouse.go`](https://github.com/luxfi/dex/blob/main/pkg/lx/clearinghouse.go) | ✅ Complete |
 | Risk Engine | [`dex/pkg/lx/risk_engine.go`](https://github.com/luxfi/dex/blob/main/pkg/lx/risk_engine.go) | ✅ Complete |
 | Vaults | [`dex/pkg/lx/vaults.go`](https://github.com/luxfi/dex/blob/main/pkg/lx/vaults.go) | ✅ Complete |
 | Vault Strategies | [`dex/pkg/lx/vault_strategy.go`](https://github.com/luxfi/dex/blob/main/pkg/lx/vault_strategy.go) | ✅ Complete |
-| Lending Pool | [`dex/pkg/lx/lending_pool.go`](https://github.com/luxfi/dex/blob/main/pkg/lx/lending_pool.go) | ✅ Complete |
+| Lending Pool | [`dex/pkg/lx/lending.go`](https://github.com/luxfi/dex/blob/main/pkg/lx/lending.go) | ✅ Complete |
 | Staking | [`dex/pkg/lx/staking.go`](https://github.com/luxfi/dex/blob/main/pkg/lx/staking.go) | ✅ Complete |
 | Perpetual Types | [`dex/pkg/lx/perp_types.go`](https://github.com/luxfi/dex/blob/main/pkg/lx/perp_types.go) | ✅ Complete |
 

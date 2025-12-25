@@ -10,13 +10,13 @@ type: Standards Track
 category: Core
 created: 2025-12-21
 requires: 6000, 6301, 6602, 2803
-implementation: https://github.com/luxfi/standard/src/liquidity/bridges/IBridgeAggregator.sol
+implementation: https://github.com/luxfi/standard/contracts/liquidity/bridges/IBridgeAggregator.sol
 order: 12
 ---
 
 > **Documentation**: [docs.lux.network/bridges](https://docs.lux.network/bridges)
 >
-> **Source**: [github.com/luxfi/standard](https://github.com/luxfi/standard/tree/main/src/liquidity/bridges)
+> **Source**: [github.com/luxfi/standard](https://github.com/luxfi/standard/tree/main/contracts/liquidity/bridges)
 
 ## Abstract
 
@@ -696,10 +696,10 @@ function testBridge() public {
 
 ## Reference Implementation
 
-**Location**: `/Users/z/work/lux/standard/src/liquidity/bridges/`
+**Location**: `/Users/z/work/lux/standard/contracts/liquidity/bridges/`
 
 ```
-src/liquidity/bridges/
+contracts/liquidity/bridges/
 ├── IBridgeAggregator.sol   # Interface (this LP)
 ├── BridgeAggregator.sol    # Implementation
 ├── adapters/
