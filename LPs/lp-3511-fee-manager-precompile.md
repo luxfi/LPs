@@ -4,7 +4,7 @@ title: Fee Manager Precompile
 description: Native precompile for dynamic fee configuration and EIP-1559 management
 author: Lux Core Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
-status: Final
+status: Review
 type: Standards Track
 category: Core
 created: 2025-11-14

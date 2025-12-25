@@ -5,7 +5,7 @@ tags: [core, consensus, staking, validators, p-chain]
 description: Core specification for the P-Chain (Platform Chain), the metadata and coordination chain of Lux Network
 author: Lux Network Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
-status: Draft
+status: Review
 type: Standards Track
 category: Core
 created: 2025-12-11
