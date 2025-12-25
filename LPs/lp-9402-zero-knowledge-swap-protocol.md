@@ -4,7 +4,7 @@ title: Zero-Knowledge Swap Protocol
 description: Pure zero-knowledge swap implementation with stealth addresses and ring signatures
 author: Lux Network Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
-status: Final
+status: Draft
 type: Standards Track
 category: LRC
 created: 2025-01-24

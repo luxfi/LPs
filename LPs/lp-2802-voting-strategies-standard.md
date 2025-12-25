@@ -4,7 +4,7 @@ title: Voting Strategies Standard
 description: Modular voting strategy contracts for Lux DAO governance
 author: Lux Industries Inc.
 discussions-to: https://github.com/luxfi/lps/discussions
-status: Final
+status: Draft
 type: Standards Track
 category: LRC
 created: 2025-12-17

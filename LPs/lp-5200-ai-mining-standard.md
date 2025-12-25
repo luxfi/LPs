@@ -4,7 +4,7 @@ title: AI Mining Standard
 description: Quantum-safe AI mining protocol with cross-chain Teleport integration for Lux ecosystem
 author: Hanzo AI (@hanzoai), Lux Network (@luxfi), Zoo Labs (@zoolabs)
 discussions-to: https://github.com/luxfi/lps/discussions
-status: Final
+status: Draft
 type: Standards Track
 category: Core
 created: 2025-01-15

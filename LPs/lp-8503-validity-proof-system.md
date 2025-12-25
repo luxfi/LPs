@@ -4,7 +4,7 @@ title: Validity Proof System
 description: Zero-knowledge validity proof system for ZK-rollups with STARK/SNARK support
 author: Lux Network Team (@luxfi), Hanzo AI (@hanzoai), Zoo Protocol (@zooprotocol)
 discussions-to: https://github.com/luxfi/lps/discussions
-status: Final
+status: Draft
 type: Standards Track
 category: Core
 created: 2025-09-24

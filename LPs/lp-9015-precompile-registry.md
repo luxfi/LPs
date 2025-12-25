@@ -5,7 +5,7 @@ tags: [precompile, registry, defi, core, infrastructure]
 description: Central registry of all Lux DeFi and cryptographic precompile addresses
 author: Lux Network Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
-status: Final
+status: Draft
 type: Standards Track
 category: Core
 created: 2025-12-21

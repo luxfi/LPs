@@ -4,7 +4,7 @@ title: Lux DAO Platform (lux.vote)
 description: Decentralized governance platform for creating and managing DAOs on Lux Network
 author: Lux Industries Inc.
 discussions-to: https://github.com/luxfi/lps/discussions
-status: Final
+status: Draft
 type: Standards Track
 category: LRC
 created: 2025-12-17

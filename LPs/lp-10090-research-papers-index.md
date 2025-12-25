@@ -4,7 +4,7 @@ title: Research Papers Index
 description: Index of research papers, experimental proposals, and forward-looking explorations for the Lux ecosystem.
 author: Lux Network Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
-status: Final
+status: Draft
 type: Meta
 created: 2025-01-23
 updated: 2025-07-25

@@ -4,7 +4,7 @@ title: LRC-7572 Contract-level Metadata
 description: Standard for contract-level metadata separate from token metadata
 author: Lux Core Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
-status: Final
+status: Draft
 type: Informational
 category: LRC
 created: 2025-01-23

@@ -5,7 +5,7 @@ tags: [esg, sustainability, esg, compliance, evidence, audit]
 description: Centralized index of all ESG evidence artifacts, policies, reports, and attestations.
 author: Lux Network Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
-status: Final
+status: Draft
 type: Meta
 created: 2025-12-16
 requires: 2920, 2950

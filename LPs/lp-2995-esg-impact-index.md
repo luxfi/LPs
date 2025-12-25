@@ -3,7 +3,7 @@ lp: 2995
 title: ESG and Impact Index
 description: Index of environmental, social, governance, and impact measurement standards
 author: Lux Core Team
-status: Final
+status: Draft
 type: Meta
 created: 2025-12-21
 tags: [esg, impact, carbon, sustainability, index]

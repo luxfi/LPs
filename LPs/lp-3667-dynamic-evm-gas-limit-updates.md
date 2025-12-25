@@ -4,7 +4,7 @@ title: Dynamic EVM Gas Limit Updates
 description: Dynamic gas limit adjustments and EIP-1559 fee mechanism for Lux C-Chain
 author: Lux Core Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
-status: Final
+status: Draft
 type: Standards Track
 category: Core
 created: 2024-10-15

@@ -4,7 +4,7 @@ title: Cross-Chain Bridge Standard
 description: Defines the ERC20B bridgeable token standard and MPC oracle bridge architecture for cross-chain asset transfers
 author: Lux Network Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
-status: Final
+status: Draft
 type: Standards Track
 category: Bridge
 created: 2025-12-14

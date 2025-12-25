@@ -4,7 +4,7 @@ title: Sequencer Registry Protocol
 description: Decentralized sequencer registry with stake-based selection and rotation mechanisms
 author: Lux Network Team (@luxfi), Hanzo AI (@hanzoai), Zoo Protocol (@zooprotocol)
 discussions-to: https://github.com/luxfi/lps/discussions
-status: Final
+status: Draft
 type: Standards Track
 category: Core
 created: 2025-09-24

@@ -4,7 +4,7 @@ title: Lux Q-Security - Post-Quantum P-Chain Integration
 description: Post-quantum secure consensus layer integrated into P-Chain using ML-DSA (Dilithium), ML-KEM (Kyber), and BLS+Ringtail hybrid signatures
 author: Lux Partners (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
-status: Final
+status: Draft
 type: Standards Track
 category: Core
 created: 2025-10-28

@@ -4,7 +4,7 @@ title: Statelessness Gas Costs (EIP-4762)
 description: Gas cost adjustments for Verkle tree and stateless client access patterns
 author: Lux Core Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
-status: Final
+status: Draft
 type: Standards Track
 category: Core
 created: 2025-01-23

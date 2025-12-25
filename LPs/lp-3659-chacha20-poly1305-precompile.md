@@ -4,7 +4,7 @@ title: ChaCha20-Poly1305 AEAD Precompile
 description: Native EVM precompile for ChaCha20-Poly1305 authenticated encryption and XChaCha20 extended nonce variant
 author: Lux Core Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
-status: Final
+status: Draft
 type: Standards Track
 category: Core
 created: 2025-12-24

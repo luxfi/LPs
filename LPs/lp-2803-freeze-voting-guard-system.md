@@ -4,7 +4,7 @@ title: Freeze Voting & Guard System
 description: Emergency governance controls for Lux DAOs with freeze voting and guard mechanisms
 author: Lux Industries Inc.
 discussions-to: https://github.com/luxfi/lps/discussions
-status: Final
+status: Draft
 type: Standards Track
 category: LRC
 created: 2025-12-17

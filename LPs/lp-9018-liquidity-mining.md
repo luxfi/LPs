@@ -3,7 +3,7 @@ lp: 9018
 title: Liquidity Mining & Incentives
 description: Token incentive programs for bootstrapping and sustaining liquidity in Lux DeFi protocols
 author: Lux Core Team
-status: Final
+status: Draft
 tags: [dex, trading]
 type: Standards Track
 category: LRC

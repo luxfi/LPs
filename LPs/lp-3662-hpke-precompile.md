@@ -4,7 +4,7 @@ title: HPKE (Hybrid Public Key Encryption) Precompile
 description: Native EVM precompile for RFC 9180 Hybrid Public Key Encryption
 author: Lux Crypto Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions/3662
-status: Final
+status: Draft
 type: Standards Track
 category: Core
 created: 2025-12-24

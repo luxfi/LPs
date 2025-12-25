@@ -4,7 +4,7 @@ title: "@luxfi/threshold TypeScript SDK"
 description: TypeScript SDK for interacting with T-Chain threshold signature services
 author: Lux Industries Inc.
 discussions-to: https://github.com/luxfi/lps/discussions
-status: Final
+status: Draft
 type: Standards Track
 category: Interface
 created: 2025-12-17

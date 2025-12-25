@@ -5,7 +5,7 @@ tags: [esg, sustainability]
 description: Foundational ESG framework defining Lux Network's environmental, social, and governance commitments.
 author: Lux Network Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
-status: Final
+status: Draft
 type: Meta
 created: 2025-12-16
 order: 2920

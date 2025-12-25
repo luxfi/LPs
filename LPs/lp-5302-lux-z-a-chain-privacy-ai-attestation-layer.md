@@ -4,7 +4,7 @@ title: Lux Z/A-Chain - Privacy & AI Attestation Layer
 description: Dual-purpose L1 chain for privacy-focused ZK computation and AI attestation verification
 author: Lux Partners (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
-status: Final
+status: Draft
 type: Standards Track
 category: Core
 created: 2025-10-28

@@ -5,7 +5,7 @@ tags: [defi, cross-chain, router, swap, limit-order, omnichain]
 description: Unified router combining DEX, Oracle, and Bridge precompiles for omnichain DeFi operations
 author: Lux Network Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
-status: Final
+status: Draft
 type: Standards Track
 category: LRC
 created: 2025-12-21

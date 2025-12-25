@@ -4,7 +4,7 @@ title: High-Performance DEX Protocol
 description: Multi-backend acceleration (Go, C++, GPU, FPGA) with 597ns latency and 1M+ orders/sec
 author: Lux Core Team (@luxfi)
 discussions-to: https://forum.lux.network/t/lp-9003-dex-protocol
-status: Final
+status: Draft
 type: Standards Track
 category: LRC
 created: 2025-01-09

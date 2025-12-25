@@ -4,7 +4,7 @@ title: MPC-LSS Linear Secret Sharing
 description: Linear Secret Sharing with dynamic resharing for threshold cryptography
 author: Lux Industries Inc., Vishnu (@vishnu)
 discussions-to: https://github.com/luxfi/lps/discussions
-status: Final
+status: Draft
 type: Standards Track
 category: Core
 created: 2025-08-14

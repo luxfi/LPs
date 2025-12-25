@@ -5,7 +5,7 @@ tags: [defi, trading, lp-9000-series]
 description: High-performance orderbook trading engine - the core of Lux DEX sidecar network
 author: Lux Network Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
-status: Final
+status: Draft
 type: Standards Track
 category: LRC
 created: 2025-01-23

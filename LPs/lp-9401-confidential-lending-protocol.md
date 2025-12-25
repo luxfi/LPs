@@ -4,7 +4,7 @@ title: Confidential Lending Protocol
 description: Privacy-preserving lending protocol with zero-knowledge credit scoring and confidential collateral
 author: Lux Network Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
-status: Final
+status: Draft
 type: Standards Track
 category: LRC
 created: 2025-01-24

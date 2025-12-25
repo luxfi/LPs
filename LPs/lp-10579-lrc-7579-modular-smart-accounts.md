@@ -4,7 +4,7 @@ title: LRC-7579 Modular Smart Accounts
 description: Standard interface for modular smart account plugins
 author: Lux Core Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
-status: Final
+status: Draft
 type: Standards Track
 category: LRC
 created: 2025-01-23
