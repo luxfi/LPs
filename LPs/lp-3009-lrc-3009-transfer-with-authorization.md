@@ -8,7 +8,7 @@ status: Final
 type: Standards Track
 category: LRC
 created: 2025-01-23
-requires: 3020, 3612
+requires: 3020, 3026
 tags: [lrc, token-standard, meta-tx, gasless]
 order: 160
 ---
@@ -222,7 +222,7 @@ This standard is fully backwards compatible with existing ERC-20 tokens. The aut
 
 - [ERC-3009: Transfer With Authorization](https://eips.ethereum.org/EIPS/eip-3009)
 - [x402 Payment Protocol](https://x402.org)
-- [LP-3612: LRC-2612 Permit](./lp-3612-lrc-2612-permit-extension.md)
+- [LP-3026: LRC-2612 Permit](./lp-3026-lrc-2612-permit-extension.md)
 
 ## Copyright
 

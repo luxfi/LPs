@@ -9,6 +9,7 @@ type: Standards Track
 category: Core
 created: 2025-12-24
 requires: 3652, 3654, 3659
+tags: [precompile, cryptography]
 ---
 
 ## Abstract

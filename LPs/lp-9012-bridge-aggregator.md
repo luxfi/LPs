@@ -9,7 +9,7 @@ status: Draft
 type: Standards Track
 category: Core
 created: 2025-12-21
-requires: 6000, 6301, 6602, 2803
+requires: 6000, 9110, 6602, 2803
 implementation: https://github.com/luxfi/standard/contracts/liquidity/bridges/IBridgeAggregator.sol
 order: 12
 ---
@@ -741,7 +741,7 @@ By aggregating volume, protocols may offer better rates for high-volume routes.
 ## Related LPs
 
 - **LP-6000**: B-Chain Bridge Specification
-- **LP-6301**: Cross-Chain Bridge Protocol
+- **LP-9110**: Cross-Chain Bridge Protocol
 - **LP-6602**: Warp Messaging Protocol
 - **LP-9013**: CrossChainDeFiRouter (consumer)
 
