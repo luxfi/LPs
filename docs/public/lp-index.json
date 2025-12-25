@@ -1589,7 +1589,7 @@
       "tags": "[privacy, zk, core]",
       "created": "2025-07-24",
       "updated": "",
-      "requires": "8046",
+      "requires": "8000",
       "replaces": "",
       "discussions_to": "https://github.com/luxfi/lps/discussions"
     },
@@ -1829,7 +1829,7 @@
       "tags": "[evm, dev-tools, indexing]",
       "created": "2025-01-28",
       "updated": "",
-      "requires": "1212, 1, 98",
+      "requires": "1200, 1, 98",
       "replaces": "",
       "discussions_to": "https://github.com/luxfi/lps/discussions"
     },
@@ -1847,7 +1847,7 @@
       "order": 102,
       "tier_rank": 99,
       "tags": "[ai, privacy]",
-      "created": "2024-12-20",
+      "created": "2025-01-15",
       "updated": "",
       "requires": "LP-100",
       "replaces": "",
@@ -2089,7 +2089,7 @@
       "tags": "[research, defi, security]",
       "created": "2025-01-23",
       "updated": "",
-      "requires": "0, 9011, 1212",
+      "requires": "1200",
       "replaces": "",
       "discussions_to": "https://github.com/luxfi/lps/discussions"
     },
@@ -2109,7 +2109,7 @@
       "tags": "[research, l2]",
       "created": "2025-01-23",
       "updated": "",
-      "requires": "0, 0, 1212, 7014",
+      "requires": "1200, 7014",
       "replaces": "",
       "discussions_to": "https://github.com/luxfi/lps/discussions"
     },
@@ -2367,7 +2367,7 @@
       "order": 200,
       "tier_rank": 99,
       "tags": "[ai, consensus]",
-      "created": "2024-11-30",
+      "created": "2025-01-15",
       "updated": "",
       "requires": "0004, 0005",
       "replaces": "",
@@ -2949,7 +2949,7 @@
       "tags": "[teleport, bridge, cross-chain]",
       "created": "2025-12-11",
       "updated": "",
-      "requires": "7013, 7014, 6015, 6017, 6081, 7103, 7104",
+      "requires": "7013, 7014, 6015, 6017, 6000, 7103, 7104",
       "replaces": "",
       "discussions_to": "https://github.com/luxfi/lps/discussions"
     },
@@ -2989,7 +2989,7 @@
       "tags": "[threshold-crypto, mpc, vm]",
       "created": "2025-12-11",
       "updated": "",
-      "requires": "7014, 6081, 7103, 7104, 7321, 7322, 7323",
+      "requires": "7014, 6000, 7103, 7104, 7321, 7322, 7323",
       "replaces": "",
       "discussions_to": "https://github.com/luxfi/lps/discussions"
     },
@@ -3009,7 +3009,7 @@
       "tags": "[bridge, mpc, vm]",
       "created": "2025-12-11",
       "updated": "",
-      "requires": "7013, 7014, 6015, 6016, 6017, 6018, 6081, 7322",
+      "requires": "7013, 7014, 6015, 6016, 6017, 6018, 6000, 7322",
       "replaces": "81, 301",
       "discussions_to": "https://github.com/luxfi/lps/discussions"
     },
@@ -3029,7 +3029,7 @@
       "tags": "[teleport, bridge, cross-chain]",
       "created": "2025-12-11",
       "updated": "",
-      "requires": "7013, 7014, 6015, 6016, 6081, 7103",
+      "requires": "7013, 7014, 6015, 6016, 6000, 7103",
       "replaces": "",
       "discussions_to": "https://github.com/luxfi/lps/discussions"
     },
@@ -4169,7 +4169,7 @@
       "tags": "[evm, gas]",
       "created": "2025-01-15",
       "updated": "",
-      "requires": "1212",
+      "requires": "1200",
       "replaces": "",
       "discussions_to": "https://github.com/luxfi/lps/discussions"
     },
@@ -4189,7 +4189,7 @@
       "tags": "[precompile, evm]",
       "created": "2025-11-22",
       "updated": "",
-      "requires": "1212",
+      "requires": "1200",
       "replaces": "",
       "discussions_to": "https://github.com/luxfi/lps/discussions"
     },
@@ -4209,7 +4209,7 @@
       "tags": "[consensus, core]",
       "created": "2025-11-22",
       "updated": "",
-      "requires": "1212",
+      "requires": "1200",
       "replaces": "",
       "discussions_to": "https://github.com/luxfi/lps/discussions"
     },

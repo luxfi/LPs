@@ -13,9 +13,9 @@ tags: [privacy, zk, core]
 order: 45
 ---
 
-> **See also**: [LP-46](/docs/lp-8046-z-chain-zkvm-architecture/) (ZKVM Architecture), [LP-302](/docs/lp-0302-lux-z-a-chain-privacy-ai-attestation-layer/), [LP-503](/docs/lp-0503-validity-proof-system/)
+> **See also**: [LP-8000](./lp-8000-z-chain-zkvm-specification.md) (ZKVM Architecture), [LP-302](/docs/lp-0302-lux-z-a-chain-privacy-ai-attestation-layer/), [LP-503](/docs/lp-0503-validity-proof-system/)
 
-> **Note**: This LP specifies the EVM precompile interface for FHE/TEE operations. For the RISC-V ZKVM architecture with GPU/FPGA acceleration, see [LP-46](/docs/lp-8046-z-chain-zkvm-architecture/).
+> **Note**: This LP specifies the EVM precompile interface for FHE/TEE operations. For the RISC-V ZKVM architecture with GPU/FPGA acceleration, see [LP-8000](./lp-8000-z-chain-zkvm-specification.md).
 
 ## Abstract
 

@@ -56,7 +56,7 @@ After completing this path, you will understand:
 
 | Order | LP | Title | Time | Depth |
 |-------|-----|-------|------|-------|
-| 4 | [LP-9100](/docs/lp-9100/) | Order Book Architecture | 30 min | Deep |
+| 4 | [LP-9001](./lp-9001-dex-trading-engine.md) | Order Book Architecture | 30 min | Deep |
 | 5 | [LP-9003](/docs/lp-9003-high-performance-dex-protocol/) | High-Performance DEX (FPGA) | 25 min | Deep |
 
 ### Stage 3: Precompiles
@@ -64,37 +64,37 @@ After completing this path, you will understand:
 | Order | LP | Title | Time | Depth |
 |-------|-----|-------|------|-------|
 | 6 | [LP-9010](/docs/lp-9010-dex-precompile/) | DEX Precompile | 30 min | Deep |
-| 7 | [LP-9011](/docs/lp-9011-oracle-precompile/) | Oracle Precompile | 25 min | Deep |
+| 7 | [LP-9006](./lp-9006-hft-trading-venues-global-network.md) | HFT Trading | 25 min | Deep |
 
 ### Stage 4: Oracles & Price Feeds
 
 | Order | LP | Title | Time | Depth |
 |-------|-----|-------|------|-------|
 | 8 | [LP-9005](/docs/lp-9005-native-oracle-protocol/) | Native Oracle Protocol | 30 min | Deep |
-| 9 | [LP-9050](/docs/lp-9050/) | TWAP & Price Aggregation | 20 min | Medium |
+| 9 | [LP-9005](./lp-9005-native-oracle-protocol.md) | Native Oracle Protocol | 20 min | Medium |
 
 ### Stage 5: Derivatives
 
 | Order | LP | Title | Time | Depth |
 |-------|-----|-------|------|-------|
 | 10 | [LP-9004](/docs/lp-9004-perpetuals-derivatives-protocol/) | Perpetuals & Derivatives | 35 min | Deep |
-| 11 | [LP-9400](/docs/lp-9400/) | Margin Trading | 25 min | Medium |
+| 11 | [LP-9040](./lp-9040-perpetuals-derivatives-protocol.md) | Margin Trading | 25 min | Medium |
 
 ### Stage 6: Operations & Risk
 
 | Order | LP | Title | Time | Depth |
 |-------|-----|-------|------|-------|
-| 12 | [LP-9016](/docs/lp-9016-emergency-procedures/) | Emergency Procedures | 20 min | Medium |
-| 13 | [LP-9017](/docs/lp-9017-risk-management/) | Risk Management | 25 min | Deep |
-| 14 | [LP-9025](/docs/lp-9025-mev-protection/) | MEV Protection | 30 min | Deep |
+| 12 | [LP-9002](./lp-9002-dex-api-rpc-specification.md) | DEX API & RPC | 20 min | Medium |
+| 13 | [LP-9003](./lp-9003-high-performance-dex-protocol.md) | High-Performance DEX | 25 min | Deep |
+| 14 | [LP-10096](./lp-10096-mev-protection-research.md) | MEV Protection | 30 min | Deep |
 
 ### Stage 7: HFT (Advanced)
 
 | Order | LP | Title | Time | Depth |
 |-------|-----|-------|------|-------|
-| 15 | [LP-9500](/docs/lp-9500/) | HFT Venues | 30 min | Deep |
-| 16 | [LP-9014](/docs/lp-9014-quantumswap-hft/) | QuantumSwap HFT | 25 min | Deep |
-| 17 | [LP-9700](/docs/lp-9700/) | CEX Integration (FIX) | 20 min | Medium |
+| 15 | [LP-9006](./lp-9006-hft-trading-venues-global-network.md) | HFT Venues | 30 min | Deep |
+| 16 | [LP-9006](./lp-9006-hft-trading-venues-global-network.md) | QuantumSwap HFT | 25 min | Deep |
+| 17 | [LP-9002](./lp-9002-dex-api-rpc-specification.md) | CEX Integration | 20 min | Medium |
 
 ---
 
@@ -118,7 +118,7 @@ After completing this path, you will understand:
 ## Research Extensions
 
 For trading research:
-- [LP-19xxx](/docs/) — Trading/HFT Research
+- [LP-10000](./lp-10000-learning-paths-index.md) — Trading/HFT Research
 
 ---
 

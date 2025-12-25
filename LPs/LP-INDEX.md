@@ -29,12 +29,12 @@ The Lux Network consists of specialized chains, each optimized for specific func
 
 | Chain | Name | Purpose | Key LPs |
 |-------|------|---------|---------|
-| **P-Chain** | Platform | Validators, staking, registry | [LP-1000](/docs/lp-1000-p-chain-core-platform-specification/), [LP-1010](/docs/lp-1010-p-chain-platform-chain-specification/) |
+| **P-Chain** | Platform | Validators, staking, registry | [LP-1000](/docs/lp-1000-p-chain-core-platform-specification/) |
 | **C-Chain** | Contract | EVM-compatible smart contracts | [LP-2000](/docs/lp-2000-c-chain-evm-specification/), [LP-2012](/docs/lp-2012-c-chain-contract-chain-specification/) |
 | **X-Chain** | Exchange | High-performance trading | [LP-3600](/docs/lp-3000-x-chain-exchange-specification/), [LP-9000](/docs/lp-9000-dex-core-specification/) |
 | **Q-Chain** | Quantum | Post-quantum secure consensus | [LP-4000](/docs/lp-4000-q-chain-quantum-specification/), [LP-4099](/docs/lp-4099-q-chain-quantum-secure-consensus-protocol-family-quasar/) |
-| **A-Chain** | Attestation | TEE attestation & AI compute | [LP-5000](/docs/lp-5000-a-chain-ai-attestation-specification/), [LP-5080](/docs/lp-5080-a-chain-attestation-chain-specification/) |
-| **B-Chain** | Bridge | Cross-chain asset transfers | [LP-6000](/docs/lp-6000-b-chain-bridge-specification/), [LP-6081](/docs/lp-6081-b-chain-bridge-chain-specification/) |
+| **A-Chain** | Attestation | TEE attestation & AI compute | [LP-5000](/docs/lp-5000-a-chain-ai-attestation-specification/) |
+| **B-Chain** | Bridge | Cross-chain asset transfers | [LP-6000](/docs/lp-6000-b-chain-bridge-specification/) |
 | **T-Chain** | Threshold | MPC networks, threshold signing | [LP-7000](/docs/lp-7000-t-chain-threshold-specification/), [LP-7083](/docs/lp-7083-t-chain-threshold-signature-chain-specification/) |
 | **Z-Chain** | Zero-Knowledge | Privacy & encrypted execution | [LP-8000](/docs/lp-8000-z-chain-zkvm-specification/), [LP-8045](/docs/lp-8045-z-chain-encrypted-execution-layer-interface/) |
 
@@ -82,7 +82,7 @@ LPs for P-Chain platform infrastructure.
 | LP | Title | Tags | Status |
 |----|-------|------|--------|
 | [LP-1000](/docs/lp-1000-p-chain-core-platform-specification/) | P-Chain Core Platform Specification | `p-chain`, `core` | Draft |
-| [LP-1010](/docs/lp-1010-p-chain-platform-chain-specification/) | P-Chain Platform Chain Specification | `p-chain`, `platform` | Draft |
+| P-Chain Platform Chain Specification | `p-chain`, `platform` | Draft |
 | [LP-1024](/docs/lp-1024-parallel-validation-and-shared-mempool/) | Parallel Validation and Shared Mempool | `p-chain`, `validation` | Draft |
 | [LP-1033](/docs/lp-1033-p-chain-state-rollup-to-c-chain-evm/) | P-Chain State Rollup to C-Chain EVM | `p-chain`, `rollup` | Draft |
 | [LP-1034](/docs/lp-1034-p-chain-as-superchain-l2-op-stack-rollup-integration/) | P-Chain as Superchain L2 (OP Stack) | `p-chain`, `l2`, `op-stack` | Draft |
@@ -214,7 +214,7 @@ LPs for AI integration, compute verification, and attestation.
 |----|-------|------|--------|
 | [LP-5000](/docs/lp-5000-a-chain-ai-attestation-specification/) | A-Chain AI Attestation Specification | `ai`, `a-chain`, `attestation` | Draft |
 | [LP-5075](/docs/lp-5075-tee-integration-standard/) | TEE Integration Standard | `ai`, `tee`, `attestation` | Draft |
-| [LP-5080](/docs/lp-5080-a-chain-attestation-chain-specification/) | A-Chain Attestation Chain Specification | `ai`, `a-chain` | Draft |
+| A-Chain Attestation Chain Specification | `ai`, `a-chain` | Draft |
 | [LP-5101](/docs/lp-5101-solidity-graphql-extension-for-native-g-chain-integration/) | Solidity GraphQL Extension | `ai`, `graphql` | Draft |
 | [LP-5102](/docs/lp-5102-immutable-training-ledger-for-privacy-preserving-ai/) | Immutable Training Ledger | `ai`, `privacy`, `training` | Draft |
 | [LP-5106](/docs/lp-5106-llm-gateway-integration-with-hanzo-ai/) | LLM Gateway Integration (Hanzo AI) | `ai`, `llm`, `hanzo` | Draft |
@@ -237,7 +237,7 @@ LPs for cross-chain bridging, Warp messaging, and Teleport protocol.
 | LP | Title | Tags | Status |
 |----|-------|------|--------|
 | [LP-6000](/docs/lp-6000-b-chain-bridge-specification/) | B-Chain Bridge Specification | `bridge`, `b-chain` | Draft |
-| [LP-6081](/docs/lp-6081-b-chain-bridge-chain-specification/) | B-Chain Bridge Chain Specification | `bridge`, `b-chain` | Draft |
+| B-Chain Bridge Chain Specification | `bridge`, `b-chain` | Draft |
 | [LP-6331](/docs/lp-6331-b-chain-bridgevm-specification/) | B-Chain BridgeVM Specification | `bridge`, `b-chain`, `vm` | Draft |
 
 ### Bridge Protocols
