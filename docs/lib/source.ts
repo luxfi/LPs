@@ -738,38 +738,19 @@ function isResearchLP(page: LPPage): boolean {
   return RESEARCH_TAGS.some(rt => tags.includes(rt));
 }
 
-// Status priority for sorting (lower = appears first)
-const STATUS_PRIORITY: Record<string, number> = {
-  'Final': 0,
-  'Last Call': 1,
-  'Review': 2,
-  'Draft': 3,
-  'Stagnant': 4,
-  'Withdrawn': 5,
-  'Superseded': 6,
-};
-
-function getStatusPriority(page: LPPage): number {
-  const status = page.data.frontmatter.status || 'Draft';
-  return STATUS_PRIORITY[status] ?? 3;
-}
-
-// Sort LPs: Final before Draft, non-research before research, then by order
-// Priority: 1) Status (Final first), 2) Research tag, 3) Display order
+// Sort LPs by numerical order within each category (LP number)
+// Priority: 1) Research tag (research goes to end), 2) LP number (numerical order)
+// This ensures LPs appear in numerical order regardless of status
 function sortLPsWithResearchLast(lps: LPPage[]): void {
   lps.sort((a, b) => {
-    // First: Sort by status (Final before Draft)
-    const statusDiff = getStatusPriority(a) - getStatusPriority(b);
-    if (statusDiff !== 0) return statusDiff;
-    
-    // Second: Research goes to end within same status
+    // First: Research goes to end within same number
     const aIsResearch = isResearchLP(a);
     const bIsResearch = isResearchLP(b);
     if (aIsResearch !== bIsResearch) {
       return aIsResearch ? 1 : -1;
     }
-    
-    // Third: Sort by display order
+
+    // Second: Sort by numerical order (LP number)
     return getLPOrder(a) - getLPOrder(b);
   });
 }
