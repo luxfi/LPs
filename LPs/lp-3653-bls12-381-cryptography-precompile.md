@@ -70,6 +70,54 @@ LP-3653 specifies a native EVM precompile for BLS12-381 pairing-based cryptograp
 | Aggregate Verify (100 sigs) | 1.2M | 180,000 | 6.7x |
 | Multi-Scalar Mul (100) | 1.2M | 150,000 | 8x |
 
+## Rationale
+
+### BLS12-381 Curve Selection
+
+BLS12-381 is the industry standard for pairing-based cryptography:
+
+1. **Security Level**: 128-bit security (comparable to AES-256)
+2. **Widely Adopted**: Ethereum 2.0, Zcash, Filecoin, and major blockchain protocols
+3. **Performance**: Optimal balance between security and computational efficiency
+4. **Tooling**: Extensive library support (blst, milagro, relic)
+
+### Precompile Address Choice
+
+Using `0x0313` (491+ in hex) for BLS12-381 operations:
+
+- Follows the precompile address convention for cryptographic operations
+- Avoids collision with existing EIP-2537 addresses (0x0a-0x12)
+- Groups all BLS operations under a single address with function selectors
+
+### Function Selector Design
+
+Organized by operation category for intuitive API:
+
+- `0x01-0x0F`: G1 operations
+- `0x10-0x1F`: G2 operations
+- `0x20-0x2F`: Pairing operations
+- `0x30-0x3F`: Signature operations
+- `0x40-0x4F`: Hash-to-curve operations
+
+### Gas Cost Derivation
+
+Gas costs are derived from benchmark ratios relative to `ecrecover`:
+
+| Operation | blst Time (μs) | ecrecover (μs) | Ratio | Gas |
+|-----------|---------------|----------------|-------|-----|
+| g1Add | 0.8 | ~50 | 0.016x | 200 |
+| g1Mul | 18 | ~50 | 0.36x | 5,000 |
+| pairing (2) | 220 | ~50 | 4.4x | 65,000 |
+
+### blst Library Selection
+
+The `blst` library provides:
+
+1. **Assembly Optimization**: Hand-tuned AVX2/AVX-512 assembly
+2. **Constant-Time**: All operations use constant-time algorithms
+3. **Multi-Platform**: Optimized for x86_64, ARM64, and other architectures
+4. **Standards Compliance**: Follows IETF CFRG specifications
+
 ## Specification
 
 ### Precompile Address

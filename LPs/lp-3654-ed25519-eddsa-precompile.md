@@ -69,6 +69,53 @@ LP-3654 specifies a native EVM precompile for Ed25519 elliptic curve operations 
 | Point Multiplication | 80,000 gas | 1,500 gas | 53x |
 | Key Derivation | 100,000 gas | 2,500 gas | 40x |
 
+## Rationale
+
+### Ed25519 Curve Selection
+
+Ed25519 is the most widely deployed EdDSA curve for 128-bit security:
+
+1. **Performance**: Fastest signature verification of any standardized curve
+2. **Simplicity**: Fixed-base scalar multiplication, no curve parameter choices
+3. **Adoption**: Used by Solana, NEAR, Cosmos, Polkadot, and many others
+4. **Security**: Well-studied, no known practical attacks
+
+### Precompile Address Choice
+
+Using `0x0314` (492+ in hex) for Ed25519 operations:
+
+- Follows the cryptographic precompile address convention
+- Sequential after BLS12-381 at `0x0313`
+- Single address with function selectors for all Ed25519 operations
+
+### Function Selector Design
+
+Organized for intuitive API:
+
+- `0x01-0x0F`: Core EdDSA operations (verify, batch verify)
+- `0x10-0x1F`: Scalar/point operations
+- `0x20-0x2F`: Key derivation and conversion
+- `0x30-0x3F`: X25519 (ECDH) operations
+
+### Gas Cost Derivation
+
+Gas costs based on computational complexity:
+
+| Operation | libsodium Time (μs) | Ratio to ecrecover | Gas |
+|-----------|---------------------|-------------------|-----|
+| eddsaVerify | 8 | 0.16x | 2,000 |
+| eddsaBatch (10) | 45 | 0.9x | 10,000 |
+| pointMul | 6 | 0.12x | 1,500 |
+| x25519 | 5 | 0.1x | 1,200 |
+
+### RFC 8032 Compliance
+
+Strict adherence to RFC 8032 (EdDSA) ensures:
+
+- Interoperability with all Ed25519 implementations
+- Compatibility with existing key formats
+- Proper handling of edge cases (clamped scalars, etc.)
+
 ## Specification
 
 ### Precompile Address

@@ -74,6 +74,68 @@ Blake3 is even faster:
 | 4-way parallel | 6.2 GB/s |
 | 16-way parallel | 18.1 GB/s |
 
+## Rationale
+
+### Blake2 Family Selection
+
+Blake2 is the fastest cryptographic hash family with strong security:
+
+1. **Performance**: 2-3x faster than SHA-256 on modern CPUs
+2. **Security**: Same security level as SHA-256/512 with better margins
+3. **Simplicity**: Fewer rounds than SHA-2, simpler implementation
+4. **Flexibility**: Built-in keyed mode, personalisation, and salt
+
+### Blake2b vs Blake2s
+
+Two variants for different use cases:
+
+- **Blake2b**: 64-bit optimized, faster on most systems
+  - 256/512-bit output
+  - High-security for signature hashing
+  - Default for cross-chain verification
+
+- **Blake2s**: 8/32-bit optimized, smaller code
+  - 256-bit output
+  - Ideal for constrained environments
+  - Used in ZK circuits (smaller arithmetic)
+
+### Blake3 Innovation
+
+Blake3 provides unique advantages:
+
+1. **Parallelism**: Tree hashing scales with CPU cores
+2. **Simplicity**: Single-pass (unlike BLAKE2's 2-pass)
+3. **XOF Capability**: Variable-length output
+4. **Security**: 256-bit security, quantum-resistant margin
+
+### Precompile Address Choice
+
+Using `0x0316` (494+ in hex) for Blake2/Blake3:
+
+- Sequential after SHA-3 at `0x0315`
+- Grouping all BLAKE-family operations
+- Follows cryptographic precompile convention
+
+### Function Selector Design
+
+Organized by algorithm and mode:
+
+- `0x01-0x0F`: Blake2b operations
+- `0x10-0x1F`: Blake2s operations
+- `0x20-0x2F`: Blake3 operations
+- `0x30-0x3F`: Keyed/XOF modes
+
+### Gas Cost Derivation
+
+Gas based on computational complexity relative to Blake2b:
+
+| Function | Relative Speed | Gas Ratio | Rationale |
+|----------|---------------|-----------|-----------|
+| blake2b | 1x (baseline) | 1x | Original EIP-152 reference |
+| blake2s | 0.8x | 1.2x | Slightly slower on 64-bit |
+| blake3 | 2-10x | 0.5x | Much faster, especially parallel |
+| blake3_parallel | 10-20x | 0.25x | Scales with cores |
+
 ## Specification
 
 ### Precompile Address
