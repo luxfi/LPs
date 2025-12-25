@@ -1,8 +1,17 @@
-# LP-0118: Warp Signature Aggregation Protocol
+---
+lp: 118
+title: Warp Signature Aggregation Protocol
+description: P2P protocol for requesting and aggregating BLS signatures for Warp cross-chain messages
+author: Lux Network Team (@luxfi)
+discussions-to: https://github.com/luxfi/lps/discussions
+status: Final
+type: Standards Track
+category: Networking
+created: 2024-12-23
+tags: [warp, bls, signatures, p2p, cross-chain]
+---
 
-| LP | Title | Status | Type | Created |
-|----|-------|--------|------|---------|
-| 118 | Warp Signature Aggregation Protocol | Final | Standards Track | 2024-12-23 |
+# LP-0118: Warp Signature Aggregation Protocol
 
 ## Abstract
 

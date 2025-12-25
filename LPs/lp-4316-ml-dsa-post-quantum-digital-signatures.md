@@ -517,11 +517,11 @@ Copyright and related rights waived via [CC0](https://creativecommons.org/public
 ## References
 
 ### Related Lux Proposals
-- [LP-200](lp-200-post-quantum-cryptography-suite-for-lux-network.md) - Parent specification
-- [LP-317](lp-317-slh-dsa-stateless-hash-based-digital-signatures.md) - Alternative PQC signature scheme
-- [LP-318](lp-4318-ml-kem-post-quantum-key-encapsulation.md) - Complementary key exchange
-- [LP-311](lp-311-ml-dsa-signature-verification-precompile.md) - EVM precompile implementation
-- [LP-201](lp-201-hybrid-classical-quantum-cryptography-transitions.md) - Migration strategy
+- [LP-200](./lp-4200-post-quantum-cryptography-suite-for-lux-network.md - Parent specification
+- [LP-317](./lp-4317-slh-dsa-stateless-hash-based-digital-signatures.md - Alternative PQC signature scheme
+- [LP-318](./lp-4318-ml-kem-post-quantum-key-encapsulation.md - Complementary key exchange
+- [LP-311](./lp-4316-ml-dsa-post-quantum-digital-signatures.md - EVM precompile implementation
+- [LP-201](./lp-4201-hybrid-classical-quantum-cryptography-transitions.md - Migration strategy
 
 ### Standards and Specifications
 1. **FIPS 204**: [Module-Lattice-Based Digital Signature Standard](https://csrc.nist.gov/pubs/fips/204/final)

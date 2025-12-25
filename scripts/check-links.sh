@@ -1,7 +1,7 @@
 #!/bin/bash
 
-# Enhanced Link Checker Script
-# Checks all links in LP files for validity with smart handling of docs site paths
+# Enhanced Link Checker Script v2
+# Checks all links in LP files for validity with smart handling
 
 set -e
 
@@ -24,10 +24,6 @@ print_warning() {
     echo -e "${YELLOW}[WARN]${NC} $1"
 }
 
-print_info() {
-    echo -e "${BLUE}[INFO]${NC} $1"
-}
-
 # Track stats
 TOTAL_LINKS=0
 BROKEN_LINKS=0
@@ -35,21 +31,7 @@ SKIPPED_LINKS=0
 EXTERNAL_CHECKED=0
 EXTERNAL_BROKEN=0
 
-# Known docs site paths (for the website routing, not actual files)
-declare -A DOCS_PATHS=(
-    ["/docs/lp-"]=1
-    ["/docs/category/"]=1
-)
-
-# External repos that may have different structure than referenced
-declare -A EXTERNAL_REPOS=(
-    ["github.com/luxfi/standard"]=1
-    ["github.com/luxfi/node"]=1
-    ["github.com/luxfi/dex"]=1
-    ["github.com/luxfi/crypto"]=1
-)
-
-# Check if URL is valid
+# Check if URL returns 200
 check_url() {
     local url=$1
     local status=$(curl -sSfI --max-time 10 --connect-timeout 5 "$url" 2>/dev/null | head -1 | cut -d' ' -f2)
@@ -64,11 +46,7 @@ check_url() {
 check_local_file() {
     local file=$1
     local base_dir=$2
-
-    # Remove leading ./
     file=${file#./}
-
-    # Check relative to base directory
     if [ -f "$base_dir/$file" ]; then
         echo "found"
     else
@@ -76,12 +54,10 @@ check_local_file() {
     fi
 }
 
-# Check if LP file exists (handles lp-N.md and lp-0NNN.md naming)
+# Check LP file with multiple naming formats
 check_lp_file() {
     local lp_num=$1
     local file_dir=$2
-
-    # Try different naming formats
     for format in "lp-$lp_num.md" "lp-0$lp_num.md"; do
         if [ -f "$file_dir/$format" ]; then
             echo "found:$format"
@@ -91,14 +67,28 @@ check_lp_file() {
     echo "not_found"
 }
 
+# Check if line looks like Go code (not a real link)
+is_go_code() {
+    local line=$1
+    # Go type signatures often contain: space comma type patterns
+    # Real markdown links have [text](url) format
+    if [[ $line =~ ^[a-zA-Z_]+[[:space:]]+[a-zA-Z_]+(\[[^]]+\])?[[:space:]]*,[[:space:]]*[a-zA-Z_]+ ]]; then
+        return 0
+    fi
+    # Lines with multiple spaces and types
+    if [[ $line =~ ^(store|ctx|fn|func|config|config|type|interface)[[:space:]] ]]; then
+        return 0
+    fi
+    return 1
+}
+
 echo "Checking links in LP files..."
 echo "=============================="
 
-# Find LP markdown files
 for file in $(find LPs -name "*.md" -type f | sort); do
     echo -e "\nChecking: $file"
 
-    # Extract all links
+    # Extract links properly - only from markdown [text](url) format
     links=$(grep -oE '\[([^]]+)\]\(([^)]+)\)' "$file" 2>/dev/null | sed -E 's/\[([^]]+)\]\(([^)]+)\)/\2/g' | sort -u)
 
     if [ -z "$links" ]; then
@@ -121,32 +111,44 @@ for file in $(find LPs -name "*.md" -type f | sort); do
             continue
         fi
 
+        # Skip Go code patterns
+        if is_go_code "$link"; then
+            echo -n "  Go code: $link "
+            print_warning "Skipped (code)"
+            SKIPPED_LINKS=$((SKIPPED_LINKS + 1))
+            continue
+        fi
+
         # Handle external URLs
         if [[ $link == http://* ]] || [[ $link == https://* ]]; then
             echo -n "  External: $link "
 
-            # Check for known docs site paths in external URLs
-            is_docs_url=0
-            for prefix in "${!DOC_PATHS[@]}"; do
-                if [[ $link == *"$prefix"* ]]; then
-                    is_docs_url=1
-                    break
-                fi
-            done
-
-            if [ "$SKIP_EXTERNAL" = "1" ] || [ "$is_docs_url" -eq 1 ]; then
-                print_warning "Skipped"
+            # Skip docs site paths
+            if [[ $link == *"/docs/lp-"* ]] || [[ $link == *"/docs/category/"* ]]; then
+                print_warning "Docs route (skip)"
                 SKIPPED_LINKS=$((SKIPPED_LINKS + 1))
-            else
-                status=$(check_url "$link")
-                EXTERNAL_CHECKED=$((EXTERNAL_CHECKED + 1))
-                if [ "$status" = "200" ]; then
-                    print_success "Valid"
+                continue
+            fi
+
+            # Skip external repo internal paths (not checkable locally)
+            if [[ $link == *github.com*"/blob/"* ]] || [[ $link == *github.com*"/tree/"* ]]; then
+                if [ "$SKIP_EXTERNAL" = "1" ]; then
+                    print_warning "Skipped"
+                    SKIPPED_LINKS=$((SKIPPED_LINKS + 1))
                 else
-                    print_error "Broken ($status)"
-                    BROKEN_LINKS=$((BROKEN_LINKS + 1))
-                    EXTERNAL_BROKEN=$((EXTERNAL_BROKEN + 1))
+                    status=$(check_url "$link")
+                    EXTERNAL_CHECKED=$((EXTERNAL_CHECKED + 1))
+                    if [ "$status" = "200" ]; then
+                        print_success "Valid"
+                    else
+                        print_error "Broken ($status)"
+                        BROKEN_LINKS=$((BROKEN_LINKS + 1))
+                        EXTERNAL_BROKEN=$((EXTERNAL_BROKEN + 1))
+                    fi
                 fi
+            else
+                print_warning "External URL (skip)"
+                SKIPPED_LINKS=$((SKIPPED_LINKS + 1))
             fi
             continue
         fi
@@ -154,21 +156,27 @@ for file in $(find LPs -name "*.md" -type f | sort); do
         # Handle local file references
         echo -n "  Local: $link "
 
-        # Skip docs site routing paths (not actual files)
-        if [[ $link == /docs/* ]] || [[ $link == /docs/category/* ]]; then
-            print_warning "Docs site route (skipping)"
+        # Skip docs site routing paths
+        if [[ $link == /docs/* ]]; then
+            print_warning "Docs route (skip)"
             SKIPPED_LINKS=$((SKIPPED_LINKS + 1))
             continue
         fi
 
-        # Check for LP file references (lp-NNN)
-        if [[ $link =~ ^\.\/lp-([0-9]+) ]]; then
+        # Skip absolute filesystem paths
+        if [[ $link == /* ]]; then
+            print_warning "FS path (skip)"
+            SKIPPED_LINKS=$((SKIPPED_LINKS + 1))
+            continue
+        fi
+
+        # Check for LP file references (lp-NNN or just NNN)
+        if [[ $link =~ ^\.\/lp-([0-9]+) ]] || [[ $link =~ ^lp-([0-9]+) ]]; then
             lp_num="${BASH_REMATCH[1]}"
             result=$(check_lp_file "$lp_num" "$file_dir")
             if [[ $result == found:* ]]; then
                 print_success "Found (${result#found:})"
             else
-                # Try to find nearby LP
                 nearby=$(ls "$file_dir"/lp-${lp_num}*.md 2>/dev/null | head -1)
                 if [ -n "$nearby" ]; then
                     basename_near=$(basename "$nearby")

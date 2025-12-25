@@ -497,7 +497,7 @@ func (b *BridgeClient) RelayTransfer(
 
 ## References
 
-- **Paper**: [~/work/lux/papers/lux-bridge.tex](~/work/lux/papers/lux-bridge.tex)
+- **Paper**: ~/work/lux/papers/lux-bridge.tex (see local file ~/work/lux/papers/lux-bridge.tex)
 - **Contracts**: https://github.com/luxfi/bridge/tree/main/contracts
 - **Relayer**: https://github.com/luxfi/bridge/tree/main/relayer
 

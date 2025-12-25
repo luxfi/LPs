@@ -489,9 +489,6 @@ threshold/
 
 ## Related Documentation
 
-- [API Access Guide](../docs/API_ACCESS_GUIDE.md)
-- [Network Status](../docs/NETWORK_STATUS.md)
-- [POA Implementation Summary](../docs/POA_IMPLEMENTATION_SUMMARY.md)
 
 ## Copyright
 

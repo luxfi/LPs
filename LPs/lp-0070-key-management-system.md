@@ -4,7 +4,7 @@ title: Key Management System
 description: Defines the pluggable key storage backend architecture with distributed secrets via K-Chain
 author: Lux Network Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
-status: Draft
+status: Final
 type: Standards Track
 category: Core
 created: 2025-01-23

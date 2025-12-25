@@ -4,7 +4,7 @@ title: ML-DSA Post-Quantum Signature Precompile
 description: Native precompile for NIST FIPS 204 ML-DSA post-quantum digital signature verification
 author: Lux Core Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
-status: Draft
+status: Final
 type: Standards Track
 category: Core
 created: 2025-12-14

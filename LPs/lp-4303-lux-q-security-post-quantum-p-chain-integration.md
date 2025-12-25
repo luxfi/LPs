@@ -535,8 +535,8 @@ func BenchmarkBatchVerify(b *testing.B) {
 
 ## References
 
-- **Quantum Consensus Paper**: [~/work/lux/papers/lux-quantum-consensus.tex](~/work/lux/papers/lux-quantum-consensus.tex)
-- **Post-Quantum Cryptography Paper**: [~/work/lux/papers/lux-ethfalcon-post-quantum.tex](~/work/lux/papers/lux-ethfalcon-post-quantum.tex)
+- **Quantum Consensus Paper**: ~/work/lux/papers/lux-quantum-consensus.tex (see local file ~/work/lux/papers/lux-quantum-consensus.tex)
+- **Post-Quantum Cryptography Paper**: ~/work/lux/papers/lux-ethfalcon-post-quantum.tex (see local file ~/work/lux/papers/lux-ethfalcon-post-quantum.tex)
 - **Implementation**: https://github.com/luxfi/node/tree/main/consensus/quantum
 - **NIST PQC**: https://csrc.nist.gov/projects/post-quantum-cryptography
 

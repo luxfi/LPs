@@ -664,8 +664,8 @@ Enabling private transfers across chains:
 
 ## References
 
-- **Z-Chain Paper**: [~/work/lux/papers/lux-zchain.tex](~/work/lux/papers/lux-zchain.tex)
-- **A-Chain Paper**: [~/work/lux/papers/lux-achain-attestation.tex](~/work/lux/papers/lux-achain-attestation.tex)
+- **Z-Chain Paper**: ~/work/lux/papers/lux-zchain.tex (see local file ~/work/lux/papers/lux-zchain.tex)
+- **A-Chain Paper**: ~/work/lux/papers/lux-achain-attestation.tex (see local file ~/work/lux/papers/lux-achain-attestation.tex)
 - **Contracts**: https://github.com/luxfi/zchain/tree/main/contracts
 - **zkEVM**: https://github.com/luxfi/zchain/tree/main/zkevm
 
