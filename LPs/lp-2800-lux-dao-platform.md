@@ -95,12 +95,12 @@ github.com/luxfi/dao/
 
 | Contract | Path | Purpose |
 |----------|------|---------|
-| **ModuleAzoriusV1** | `deployables/modules/` | Primary governance module |
-| **ModuleFractalV1** | `deployables/modules/` | Hierarchical governance |
+| **ModuleAzoriusV1** | `~/work/lux/standard/src/dao/modules/` | Primary governance module |
+| **ModuleFractalV1** | `~/work/lux/standard/src/dao/modules/` | Hierarchical governance |
 | **VotesERC20V1** | `deployables/erc20/` | Voting token |
 | **VotesERC20StakedV1** | `deployables/erc20/` | Staked voting token |
-| **FreezeGuardAzoriusV1** | `deployables/freeze-guard/` | Emergency freeze |
-| **FreezeVotingAzoriusV1** | `deployables/freeze-voting/` | Freeze proposal voting |
+| **FreezeGuardAzoriusV1** | `~/work/lux/standard/src/dao/freeze-guard/` | Emergency freeze |
+| **FreezeVotingAzoriusV1** | `~/work/lux/standard/src/dao/freeze-voting/` | Freeze proposal voting |
 | **StrategyV1** | `deployables/strategies/` | Base voting strategy |
 | **PaymasterV1** | `deployables/account-abstraction/` | Gas sponsorship |
 | **SystemDeployerV1** | `singletons/` | DAO factory |

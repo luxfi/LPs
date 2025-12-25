@@ -57,7 +57,7 @@ Emergency controls are essential for:
 Guards Azorius module execution:
 
 ```solidity
-// Location: contracts/contracts/freeze-guard/FreezeGuardAzoriusV1.sol
+// Location: ~/work/lux/standard/src/dao/freeze-guard/FreezeGuardAzoriusV1.sol
 
 interface IFreezeGuardAzoriusV1 {
     // Freeze state
@@ -93,7 +93,7 @@ interface IFreezeGuardAzoriusV1 {
 Guards multisig execution:
 
 ```solidity
-// Location: contracts/contracts/freeze-guard/FreezeGuardMultisigV1.sol
+// Location: contracts/standard/src/dao/freeze-guard/FreezeGuardMultisigV1.sol
 
 interface IFreezeGuardMultisigV1 {
     function isFrozen() external view returns (bool);
@@ -110,7 +110,7 @@ interface IFreezeGuardMultisigV1 {
 Base contract for freeze voting:
 
 ```solidity
-// Location: contracts/contracts/freeze-voting/FreezeVotingBase.sol
+// Location: contracts/standard/src/dao/freeze-voting/FreezeVotingBase.sol
 
 interface IFreezeVotingBase {
     // Freeze proposal
@@ -140,7 +140,7 @@ interface IFreezeVotingBase {
 Freeze voting for Azorius DAOs:
 
 ```solidity
-// Location: contracts/contracts/freeze-voting/FreezeVotingAzoriusV1.sol
+// Location: ~/work/lux/standard/src/dao/freeze-voting/FreezeVotingAzoriusV1.sol
 
 interface IFreezeVotingAzoriusV1 is IFreezeVotingBase {
     function owner() external view returns (address);
@@ -156,7 +156,7 @@ interface IFreezeVotingAzoriusV1 is IFreezeVotingBase {
 Freeze voting for multisig DAOs:
 
 ```solidity
-// Location: contracts/contracts/freeze-voting/FreezeVotingMultisigV1.sol
+// Location: contracts/standard/src/dao/freeze-voting/FreezeVotingMultisigV1.sol
 
 interface IFreezeVotingMultisigV1 is IFreezeVotingBase {
     function parentGnosisSafe() external view returns (address);
@@ -171,7 +171,7 @@ interface IFreezeVotingMultisigV1 is IFreezeVotingBase {
 Standalone freeze voting:
 
 ```solidity
-// Location: contracts/contracts/freeze-voting/FreezeVotingStandaloneV1.sol
+// Location: contracts/standard/src/dao/freeze-voting/FreezeVotingStandaloneV1.sol
 
 interface IFreezeVotingStandaloneV1 is IFreezeVotingBase {
     function votingToken() external view returns (address);

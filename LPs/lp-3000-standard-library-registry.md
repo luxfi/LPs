@@ -255,68 +255,68 @@ The Lux Bridge uses MPC-signed messages for cross-chain token transfers.
 
 | Contract | Purpose | Source |
 |----------|---------|--------|
-| `Bridge.sol` | Main bridge contract with MPC verification | `~/work/lux/bridge/contracts/contracts/Bridge.sol` |
-| `LuxVault.sol` | ERC4626 vault for Lux chain assets | `~/work/lux/bridge/contracts/contracts/LuxVault.sol` |
-| `ZooVault.sol` | ERC4626 vault for Zoo chain assets | `~/work/lux/bridge/contracts/contracts/ZooVault.sol` |
-| `ETHVault.sol` | Native ETH vault | `~/work/lux/bridge/contracts/contracts/ETHVault.sol` |
-| `ERC20B.sol` | Bridge-enabled ERC20 base | `~/work/lux/bridge/contracts/contracts/ERC20B.sol` |
-| `LERC4626.sol` | ERC4626 tokenized vault | `~/work/lux/bridge/contracts/contracts/LERC4626.sol` |
+| `Bridge.sol` | Main bridge contract with MPC verification | `~/work/lux/bridge/src/contracts/Bridge.sol` |
+| `LuxVault.sol` | ERC4626 vault for Lux chain assets | `~/work/lux/bridge/src/contracts/LuxVault.sol` |
+| `ZooVault.sol` | ERC4626 vault for Zoo chain assets | `~/work/lux/bridge/src/contracts/ZooVault.sol` |
+| `ETHVault.sol` | Native ETH vault | `~/work/lux/bridge/src/contracts/ETHVault.sol` |
+| `ERC20B.sol` | Bridge-enabled ERC20 base | `~/work/lux/bridge/src/contracts/ERC20B.sol` |
+| `LERC4626.sol` | ERC4626 tokenized vault | `~/work/lux/bridge/src/contracts/LERC4626.sol` |
 
 ### Bridge Token Contracts (Lux Chain)
 
 | Token | Contract | Source |
 |-------|----------|--------|
-| LETH | `LETH.sol` | `~/work/lux/bridge/contracts/contracts/lux/LETH.sol` |
-| LUSD | `LUSD.sol` | `~/work/lux/bridge/contracts/contracts/lux/LUSD.sol` |
-| LBTC | `LBTC.sol` | `~/work/lux/bridge/contracts/contracts/lux/LBTC.sol` |
-| LBNB | `LBNB.sol` | `~/work/lux/bridge/contracts/contracts/lux/LBNB.sol` |
-| LPOL | `LPOL.sol` | `~/work/lux/bridge/contracts/contracts/lux/LPOL.sol` |
-| LCELO | `LCELO.sol` | `~/work/lux/bridge/contracts/contracts/lux/LCELO.sol` |
-| LFTM | `LFTM.sol` | `~/work/lux/bridge/contracts/contracts/lux/LFTM.sol` |
-| LXDAI | `LXDAI.sol` | `~/work/lux/bridge/contracts/contracts/lux/LXDAI.sol` |
-| LSOL | `LSOL.sol` | `~/work/lux/bridge/contracts/contracts/lux/LSOL.sol` |
-| LTON | `LTON.sol` | `~/work/lux/bridge/contracts/contracts/lux/LTON.sol` |
-| LAVAX | `LAVAX.sol` | `~/work/lux/bridge/contracts/contracts/lux/LAVAX.sol` |
-| LBLAST | `LBLAST.sol` | `~/work/lux/bridge/contracts/contracts/lux/LBLAST.sol` |
-| LZOO | `LZOO.sol` | `~/work/lux/bridge/contracts/contracts/lux/LZOO.sol` |
-| LADA | `LADA.sol` | `~/work/lux/bridge/contracts/contracts/lux/LADA.sol` |
-| LAI16Z | `LAI16Z.sol` | `~/work/lux/bridge/contracts/contracts/lux/LAI16Z.sol` |
+| LETH | `LETH.sol` | `~/work/lux/bridge/src/contracts/lux/LETH.sol` |
+| LUSD | `LUSD.sol` | `~/work/lux/bridge/src/contracts/lux/LUSD.sol` |
+| LBTC | `LBTC.sol` | `~/work/lux/bridge/src/contracts/lux/LBTC.sol` |
+| LBNB | `LBNB.sol` | `~/work/lux/bridge/src/contracts/lux/LBNB.sol` |
+| LPOL | `LPOL.sol` | `~/work/lux/bridge/src/contracts/lux/LPOL.sol` |
+| LCELO | `LCELO.sol` | `~/work/lux/bridge/src/contracts/lux/LCELO.sol` |
+| LFTM | `LFTM.sol` | `~/work/lux/bridge/src/contracts/lux/LFTM.sol` |
+| LXDAI | `LXDAI.sol` | `~/work/lux/bridge/src/contracts/lux/LXDAI.sol` |
+| LSOL | `LSOL.sol` | `~/work/lux/bridge/src/contracts/lux/LSOL.sol` |
+| LTON | `LTON.sol` | `~/work/lux/bridge/src/contracts/lux/LTON.sol` |
+| LAVAX | `LAVAX.sol` | `~/work/lux/bridge/src/contracts/lux/LAVAX.sol` |
+| LBLAST | `LBLAST.sol` | `~/work/lux/bridge/src/contracts/lux/LBLAST.sol` |
+| LZOO | `LZOO.sol` | `~/work/lux/bridge/src/contracts/lux/LZOO.sol` |
+| LADA | `LADA.sol` | `~/work/lux/bridge/src/contracts/lux/LADA.sol` |
+| LAI16Z | `LAI16Z.sol` | `~/work/lux/bridge/src/contracts/lux/LAI16Z.sol` |
 
 ### Bridge Token Contracts (Zoo Chain)
 
 | Token | Contract | Source |
 |-------|----------|--------|
-| ZETH | `ZETH.sol` | `~/work/lux/bridge/contracts/contracts/zoo/ZETH.sol` |
-| ZUSD | `ZUSD.sol` | `~/work/lux/bridge/contracts/contracts/zoo/ZUSD.sol` |
-| ZBTC | `ZBTC.sol` | `~/work/lux/bridge/contracts/contracts/zoo/ZBTC.sol` |
-| ZLUX | `ZLUX.sol` | `~/work/lux/bridge/contracts/contracts/zoo/ZLUX.sol` |
-| ZBNB | `ZBNB.sol` | `~/work/lux/bridge/contracts/contracts/zoo/ZBNB.sol` |
-| ZPOL | `ZPOL.sol` | `~/work/lux/bridge/contracts/contracts/zoo/ZPOL.sol` |
-| ZCELO | `ZCELO.sol` | `~/work/lux/bridge/contracts/contracts/zoo/ZCELO.sol` |
-| ZFTM | `ZFTM.sol` | `~/work/lux/bridge/contracts/contracts/zoo/ZFTM.sol` |
-| ZXDAI | `ZXDAI.sol` | `~/work/lux/bridge/contracts/contracts/zoo/ZXDAI.sol` |
-| ZSOL | `ZSOL.sol` | `~/work/lux/bridge/contracts/contracts/zoo/ZSOL.sol` |
-| ZTON | `ZTON.sol` | `~/work/lux/bridge/contracts/contracts/zoo/ZTON.sol` |
-| ZAVAX | `ZAVAX.sol` | `~/work/lux/bridge/contracts/contracts/zoo/ZAVAX.sol` |
-| ZBLAST | `ZBLAST.sol` | `~/work/lux/bridge/contracts/contracts/zoo/ZBLAST.sol` |
-| ZADA | `ZADA.sol` | `~/work/lux/bridge/contracts/contracts/zoo/ZADA.sol` |
-| ZAI16Z | `ZAI16Z.sol` | `~/work/lux/bridge/contracts/contracts/zoo/ZAI16Z.sol` |
-| ZBONK | `ZBONK.sol` | `~/work/lux/bridge/contracts/contracts/zoo/ZBONK.sol` |
-| ZWIF | `ZWIF.sol` | `~/work/lux/bridge/contracts/contracts/zoo/ZWIF.sol` |
-| ZPOPCAT | `ZPOPCAT.sol` | `~/work/lux/bridge/contracts/contracts/zoo/ZPOPCAT.sol` |
-| ZPNUT | `ZPNUT.sol` | `~/work/lux/bridge/contracts/contracts/zoo/ZPNUT.sol` |
-| ZMEW | `ZMEW.sol` | `~/work/lux/bridge/contracts/contracts/zoo/ZMEW.sol` |
-| ZBOME | `ZBOME.sol` | `~/work/lux/bridge/contracts/contracts/zoo/ZBOME.sol` |
-| ZGIGA | `ZGIGA.sol` | `~/work/lux/bridge/contracts/contracts/zoo/ZGIGA.sol` |
-| ZFWOG | `ZFWOG.sol` | `~/work/lux/bridge/contracts/contracts/zoo/ZFWOG.sol` |
-| ZMOODENG | `ZMOODENG.sol` | `~/work/lux/bridge/contracts/contracts/zoo/ZMOODENG.sol` |
-| ZPONKE | `ZPONKE.sol` | `~/work/lux/bridge/contracts/contracts/zoo/ZPONKE.sol` |
-| ZNOT | `ZNOT.sol` | `~/work/lux/bridge/contracts/contracts/zoo/ZNOT.sol` |
-| ZDOGS | `ZDOGS.sol` | `~/work/lux/bridge/contracts/contracts/zoo/ZDOGS.sol` |
-| SLOG | `SLOG.sol` | `~/work/lux/bridge/contracts/contracts/zoo/SLOG.sol` |
-| TRUMP | `TRUMP.sol` | `~/work/lux/bridge/contracts/contracts/zoo/TRUMP.sol` |
-| MELANIA | `MELANIA.sol` | `~/work/lux/bridge/contracts/contracts/zoo/MELANIA.sol` |
-| CYRUS | `CYRUS.sol` | `~/work/lux/bridge/contracts/contracts/zoo/CYRUS.sol` |
+| ZETH | `ZETH.sol` | `~/work/lux/bridge/src/contracts/zoo/ZETH.sol` |
+| ZUSD | `ZUSD.sol` | `~/work/lux/bridge/src/contracts/zoo/ZUSD.sol` |
+| ZBTC | `ZBTC.sol` | `~/work/lux/bridge/src/contracts/zoo/ZBTC.sol` |
+| ZLUX | `ZLUX.sol` | `~/work/lux/bridge/src/contracts/zoo/ZLUX.sol` |
+| ZBNB | `ZBNB.sol` | `~/work/lux/bridge/src/contracts/zoo/ZBNB.sol` |
+| ZPOL | `ZPOL.sol` | `~/work/lux/bridge/src/contracts/zoo/ZPOL.sol` |
+| ZCELO | `ZCELO.sol` | `~/work/lux/bridge/src/contracts/zoo/ZCELO.sol` |
+| ZFTM | `ZFTM.sol` | `~/work/lux/bridge/src/contracts/zoo/ZFTM.sol` |
+| ZXDAI | `ZXDAI.sol` | `~/work/lux/bridge/src/contracts/zoo/ZXDAI.sol` |
+| ZSOL | `ZSOL.sol` | `~/work/lux/bridge/src/contracts/zoo/ZSOL.sol` |
+| ZTON | `ZTON.sol` | `~/work/lux/bridge/src/contracts/zoo/ZTON.sol` |
+| ZAVAX | `ZAVAX.sol` | `~/work/lux/bridge/src/contracts/zoo/ZAVAX.sol` |
+| ZBLAST | `ZBLAST.sol` | `~/work/lux/bridge/src/contracts/zoo/ZBLAST.sol` |
+| ZADA | `ZADA.sol` | `~/work/lux/bridge/src/contracts/zoo/ZADA.sol` |
+| ZAI16Z | `ZAI16Z.sol` | `~/work/lux/bridge/src/contracts/zoo/ZAI16Z.sol` |
+| ZBONK | `ZBONK.sol` | `~/work/lux/bridge/src/contracts/zoo/ZBONK.sol` |
+| ZWIF | `ZWIF.sol` | `~/work/lux/bridge/src/contracts/zoo/ZWIF.sol` |
+| ZPOPCAT | `ZPOPCAT.sol` | `~/work/lux/bridge/src/contracts/zoo/ZPOPCAT.sol` |
+| ZPNUT | `ZPNUT.sol` | `~/work/lux/bridge/src/contracts/zoo/ZPNUT.sol` |
+| ZMEW | `ZMEW.sol` | `~/work/lux/bridge/src/contracts/zoo/ZMEW.sol` |
+| ZBOME | `ZBOME.sol` | `~/work/lux/bridge/src/contracts/zoo/ZBOME.sol` |
+| ZGIGA | `ZGIGA.sol` | `~/work/lux/bridge/src/contracts/zoo/ZGIGA.sol` |
+| ZFWOG | `ZFWOG.sol` | `~/work/lux/bridge/src/contracts/zoo/ZFWOG.sol` |
+| ZMOODENG | `ZMOODENG.sol` | `~/work/lux/bridge/src/contracts/zoo/ZMOODENG.sol` |
+| ZPONKE | `ZPONKE.sol` | `~/work/lux/bridge/src/contracts/zoo/ZPONKE.sol` |
+| ZNOT | `ZNOT.sol` | `~/work/lux/bridge/src/contracts/zoo/ZNOT.sol` |
+| ZDOGS | `ZDOGS.sol` | `~/work/lux/bridge/src/contracts/zoo/ZDOGS.sol` |
+| SLOG | `SLOG.sol` | `~/work/lux/bridge/src/contracts/zoo/SLOG.sol` |
+| TRUMP | `TRUMP.sol` | `~/work/lux/bridge/src/contracts/zoo/TRUMP.sol` |
+| MELANIA | `MELANIA.sol` | `~/work/lux/bridge/src/contracts/zoo/MELANIA.sol` |
+| CYRUS | `CYRUS.sol` | `~/work/lux/bridge/src/contracts/zoo/CYRUS.sol` |
 
 ### Bridge Key Addresses
 

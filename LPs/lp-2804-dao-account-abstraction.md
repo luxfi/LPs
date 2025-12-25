@@ -368,7 +368,7 @@ function test_RejectInvalidSignature() public {
 ## Related LPs
 
 - **LP-2520**: Lux DAO Platform
-- **LP-2521**: Azorius Governance Module
+- **LP-2801**: Azorius Governance Module
 - **ERC-4337**: Account Abstraction Standard
 
 ## References
