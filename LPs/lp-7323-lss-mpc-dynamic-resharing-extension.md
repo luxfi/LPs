@@ -538,6 +538,416 @@ for range ticker.C {
 }
 ```
 
+## Full Implementation Stack
+
+### Architecture Overview
+
+```
+┌─────────────────────────────────────────────────────────────────────────┐
+│                    Application Layer (Smart Contracts)                   │
+│  LSS-MPC.sol → IResharable.sol → MultiChainAdapter.sol                  │
+└─────────────────────────────────┬───────────────────────────────────────┘
+                                  │ staticcall
+┌─────────────────────────────────▼───────────────────────────────────────┐
+│                    EVM Precompile Layer (Go)                             │
+│  precompiles/lss/contract.go → Run() → DynamicReshare()                 │
+└─────────────────────────────────┬───────────────────────────────────────┘
+                                  │ FFI
+┌─────────────────────────────────▼───────────────────────────────────────┐
+│                    LSS Protocol Layer (Go)                               │
+│  ┌─────────────┐  ┌─────────────┐  ┌─────────────┐  ┌─────────────────┐ │
+│  │ lss_cmp.go  │  │lss_frost.go │  │ rollback.go │  │sign_blinding.go │ │
+│  └─────────────┘  └─────────────┘  └─────────────┘  └─────────────────┘ │
+└─────────────────────────────────┬───────────────────────────────────────┘
+                                  │ imports
+┌─────────────────────────────────▼───────────────────────────────────────┐
+│                    Base Protocol Layer                                   │
+│  ┌────────────────────────────┐  ┌────────────────────────────────────┐ │
+│  │    CGGMP21 (cmp/)          │  │         FROST (frost/)             │ │
+│  │  keygen/ presign/ sign/    │  │    keygen/ sign/ verify/          │ │
+│  └────────────────────────────┘  └────────────────────────────────────┘ │
+└─────────────────────────────────┬───────────────────────────────────────┘
+                                  │ imports
+┌─────────────────────────────────▼───────────────────────────────────────┐
+│                    Cryptographic Primitives                              │
+│  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐ │
+│  │    JVSS      │  │   Shamir     │  │  Lagrange    │  │   Feldman    │ │
+│  │  jvss/       │  │   shamir/    │  │ interpolate/ │  │    vss/      │ │
+│  └──────────────┘  └──────────────┘  └──────────────┘  └──────────────┘ │
+└─────────────────────────────────────────────────────────────────────────┘
+```
+
+### Layer 1: EVM Precompile (Optional On-Chain Interface)
+
+| File | Purpose | Lines |
+|------|---------|-------|
+| `precompiles/lss/contract.go` | LSS precompile interface | ~180 |
+| `precompiles/lss/config.go` | Precompile configuration | ~60 |
+| `precompiles/lss/module.go` | StatefulPrecompiledContract | ~120 |
+
+**Precompile Address:** `0x0370` (LSS Dynamic Resharing)
+
+### Layer 2: LSS Protocol (Core Implementation)
+
+| File | Purpose | Lines | Key Functions |
+|------|---------|-------|---------------|
+| `lss/lss_cmp.go` | CGGMP21 resharing | 334 | `DynamicReshareCMP()`, `verifyResharingCMP()` |
+| `lss/lss_frost.go` | FROST resharing | 365 | `DynamicReshareFROST()`, `verifyResharingFROST()` |
+| `lss/rollback.go` | State management | 180 | `SaveSnapshot()`, `Rollback()`, `RollbackOnFailure()` |
+| `lss/sign_blinding.go` | Nonce blinding | 220 | `SignWithBlinding()`, `SignCollaborative()` |
+| `lss/coordinator.go` | Resharing orchestration | 280 | `StartResharing()`, `CollectShares()` |
+
+### Layer 3: JVSS (Joint Verifiable Secret Sharing)
+
+| File | Purpose | Lines | Key Functions |
+|------|---------|-------|---------------|
+| `lss/jvss/jvss.go` | Core JVSS protocol | 245 | `GenerateShares()`, `VerifyShare()` |
+| `lss/jvss/commitment.go` | Polynomial commitments | 120 | `Commit()`, `VerifyCommitment()` |
+| `lss/jvss/reconstruct.go` | Secret reconstruction | 95 | `Reconstruct()`, `Interpolate()` |
+
+### Layer 4: Multi-Chain Adapters
+
+| File | Chain | Signature Type |
+|------|-------|----------------|
+| `lss/adapters/ethereum.go` | Ethereum/EVM | ECDSA secp256k1 |
+| `lss/adapters/bitcoin.go` | Bitcoin | Schnorr (Taproot) |
+| `lss/adapters/solana.go` | Solana | Ed25519 |
+| `lss/adapters/xrpl.go` | Ripple | ECDSA secp256k1 |
+| `lss/adapters/cardano.go` | Cardano | Ed25519 |
+| `lss/adapters/sui.go` | Sui | Ed25519 |
+| `lss/adapters/ringtail.go` | Post-Quantum | Ring-LWE |
+| `lss/adapters/mldsa_threshold.go` | Post-Quantum | ML-DSA |
+
+## Secure Implementation Guidelines
+
+### JVSS Security Requirements
+
+**Polynomial Generation (CRITICAL):**
+```go
+// JVSS auxiliary polynomials must use cryptographically secure randomness
+import "crypto/rand"
+
+func generateAuxiliaryPolynomial(degree int, group curve.Curve) (*poly.Polynomial, error) {
+    // Use crypto/rand, NEVER math/rand
+    coefficients := make([]curve.Scalar, degree+1)
+    for i := range coefficients {
+        scalar, err := group.NewScalar().SetRandom(rand.Reader)
+        if err != nil {
+            return nil, fmt.Errorf("secure random generation failed: %w", err)
+        }
+        coefficients[i] = scalar
+    }
+    return poly.NewPolynomial(coefficients), nil
+}
+```
+
+**Commitment Verification (MANDATORY):**
+```go
+// Every JVSS share MUST be verified against commitments
+func verifyJVSSShare(share *Share, commitments []curve.Point, group curve.Curve) error {
+    // Compute expected commitment: C_i = g^{f(i)}
+    expected := group.NewPoint().Identity()
+    xPower := group.NewScalar().SetInt64(1)
+    x := group.NewScalar().SetBytes(share.Index)
+    
+    for _, c := range commitments {
+        term := group.NewPoint().ScalarMult(xPower, c)
+        expected.Add(expected, term)
+        xPower.Mul(xPower, x)
+    }
+    
+    // Verify: g^{share} == expected
+    actual := group.NewPoint().ScalarBaseMult(share.Value)
+    if !actual.Equal(expected) {
+        return ErrInvalidJVSSShare
+    }
+    return nil
+}
+```
+
+### Blinding Security Requirements
+
+**Multiplicative Blinding (Information-Theoretic Security):**
+```go
+// Blinding masks the secret with random polynomial w
+// a·w is uniformly random - provides UNCONDITIONAL security
+type BlindedSecret struct {
+    Value    curve.Scalar  // a·w (blinded secret)
+    Blinding curve.Scalar  // w (random blinding factor)
+}
+
+// CRITICAL: Blinding factor must be non-zero
+func blind(secret curve.Scalar, group curve.Curve) (*BlindedSecret, error) {
+    for {
+        w, err := group.NewScalar().SetRandom(rand.Reader)
+        if err != nil {
+            return nil, err
+        }
+        if !w.IsZero() {  // CRITICAL: w ≠ 0
+            blinded := group.NewScalar().Mul(secret, w)
+            return &BlindedSecret{Value: blinded, Blinding: w}, nil
+        }
+    }
+}
+```
+
+**Inverse Blinding (Remove Mask):**
+```go
+// z = (q·w)^(-1) allows removing blinding without revealing secret
+// Final share: a'_j = (a·w)·q_j·z_j
+func computeInverseBlinding(q, w curve.Scalar, group curve.Curve) (curve.Scalar, error) {
+    // Compute q·w
+    qw := group.NewScalar().Mul(q, w)
+    
+    // CRITICAL: qw must be non-zero for inversion
+    if qw.IsZero() {
+        return nil, ErrZeroProductForInversion
+    }
+    
+    // Compute (q·w)^(-1)
+    z := group.NewScalar().Invert(qw)
+    return z, nil
+}
+```
+
+### Lagrange Interpolation Security
+
+**Interpolation Coefficient Calculation:**
+```go
+// Lagrange coefficients for threshold reconstruction
+// λ_i = Π_{j≠i} (x_j / (x_j - x_i))
+func lagrangeCoefficients(indices []party.ID, targetIndex party.ID, group curve.Curve) []curve.Scalar {
+    n := len(indices)
+    coeffs := make([]curve.Scalar, n)
+    
+    for i, idx := range indices {
+        num := group.NewScalar().SetInt64(1)
+        den := group.NewScalar().SetInt64(1)
+        
+        xi := group.NewScalar().SetBytes(idx.Bytes())
+        
+        for j, jdx := range indices {
+            if i == j {
+                continue
+            }
+            xj := group.NewScalar().SetBytes(jdx.Bytes())
+            
+            // num *= x_j
+            num.Mul(num, xj)
+            
+            // den *= (x_j - x_i)
+            diff := group.NewScalar().Sub(xj, xi)
+            if diff.IsZero() {
+                panic("duplicate party indices - CRITICAL ERROR")
+            }
+            den.Mul(den, diff)
+        }
+        
+        // λ_i = num / den = num · den^(-1)
+        coeffs[i] = group.NewScalar().Mul(num, den.Invert(den))
+    }
+    return coeffs
+}
+```
+
+### Rollback Security
+
+**State Snapshot Integrity:**
+```go
+// Snapshots must be authenticated to prevent tampering
+type AuthenticatedSnapshot struct {
+    Generation int64
+    State      []byte
+    Timestamp  time.Time
+    MAC        []byte  // HMAC-SHA256 of State
+}
+
+func (mgr *RollbackManager) SaveSnapshot(config *Config, key []byte) error {
+    state, err := config.Marshal()
+    if err != nil {
+        return err
+    }
+    
+    // Compute MAC for integrity
+    mac := hmac.New(sha256.New, key)
+    mac.Write(state)
+    
+    snapshot := &AuthenticatedSnapshot{
+        Generation: config.Generation,
+        State:      state,
+        Timestamp:  time.Now(),
+        MAC:        mac.Sum(nil),
+    }
+    
+    return mgr.store(snapshot)
+}
+
+func (mgr *RollbackManager) Rollback(gen int64, key []byte) (*Config, error) {
+    snapshot, err := mgr.load(gen)
+    if err != nil {
+        return nil, err
+    }
+    
+    // Verify MAC before restoration
+    mac := hmac.New(sha256.New, key)
+    mac.Write(snapshot.State)
+    expected := mac.Sum(nil)
+    
+    if !hmac.Equal(snapshot.MAC, expected) {
+        return nil, ErrSnapshotTampered
+    }
+    
+    return UnmarshalConfig(snapshot.State)
+}
+```
+
+### Side-Channel Resistance
+
+**Constant-Time Share Operations:**
+```go
+// All share computations must be constant-time
+func constantTimeShareComputation(shares []curve.Scalar, coefficients []curve.Scalar) curve.Scalar {
+    if len(shares) != len(coefficients) {
+        panic("mismatched lengths")
+    }
+    
+    result := shares[0].Group().NewScalar()
+    
+    for i := range shares {
+        // Constant-time multiply-accumulate
+        term := shares[0].Group().NewScalar().Mul(shares[i], coefficients[i])
+        result.Add(result, term)
+    }
+    
+    return result
+}
+
+// Secure memory clearing after use
+func secureZero(data []curve.Scalar) {
+    for i := range data {
+        data[i].Zero()
+    }
+}
+```
+
+**Network Message Padding:**
+```go
+// Pad messages to fixed length to prevent traffic analysis
+const MaxShareMessageSize = 1024
+
+func padMessage(msg []byte) []byte {
+    if len(msg) > MaxShareMessageSize {
+        panic("message too large")
+    }
+    padded := make([]byte, MaxShareMessageSize)
+    copy(padded, msg)
+    // Random padding
+    rand.Read(padded[len(msg):])
+    return padded
+}
+```
+
+## Integration Across Lux Infrastructure
+
+### Layer Integration Points
+
+| Layer | Component | LSS Integration | Purpose |
+|-------|-----------|-----------------|---------|
+| **EVM** | `precompiles/lss/` | On-chain resharing interface | Smart contract access |
+| **Threshold** | `protocols/lss/` | Core resharing protocol | Validator key rotation |
+| **Node** | `vms/platformvm/` | Validator set management | Dynamic validator sets |
+| **Consensus** | `consensus/quasar/` | Epoch-based key rotation | Finality key updates |
+| **Bridge** | `bridge/guardians/` | Guardian set rotation | Cross-chain security |
+| **Wallet** | `wallet/threshold/` | Multi-sig management | User custody |
+
+### Network Usage Map
+
+| Lux Component | LSS Protocol | Use Case | Frequency |
+|---------------|--------------|----------|-----------|
+| **P-Chain Validators** | LSS + FROST | Validator key rotation | Epoch boundaries |
+| **C-Chain Multisig** | LSS + CGGMP21 | Contract upgrades | On-demand |
+| **Q-Chain Bridge** | LSS + FROST | Guardian rotation | Weekly/Monthly |
+| **T-Chain Threshold** | LSS + CGGMP21 | Key policy changes | On-demand |
+| **Cross-Chain Warp** | LSS + FROST | Relayer key updates | Hourly |
+| **Safe Module** | LSS + CGGMP21 | Institutional custody | Quarterly |
+
+### Quasar Consensus Integration
+
+```go
+// LSS integrates with Quasar for epoch-based key management
+type QuasarLSSIntegration struct {
+    currentEpoch    uint64
+    lssManager      *lss.Manager
+    validatorSet    *validators.Set
+}
+
+// Automatic resharing at epoch boundaries
+func (q *QuasarLSSIntegration) OnEpochTransition(newEpoch uint64, changes *ValidatorChanges) error {
+    if changes.HasChanges() {
+        // Compute new validator set
+        newValidators := q.validatorSet.ApplyChanges(changes)
+        
+        // Trigger LSS resharing
+        newConfigs, err := q.lssManager.DynamicReshareFROST(
+            q.currentConfigs,
+            newValidators.PartyIDs(),
+            q.computeThreshold(newValidators.Size()),
+            q.pool,
+        )
+        if err != nil {
+            return fmt.Errorf("epoch %d resharing failed: %w", newEpoch, err)
+        }
+        
+        q.currentConfigs = newConfigs
+        q.currentEpoch = newEpoch
+    }
+    return nil
+}
+```
+
+### Proactive Security Schedule
+
+| Security Level | Resharing Frequency | Use Case |
+|----------------|---------------------|----------|
+| **Critical** | Weekly | Cross-chain bridges, high-value custody |
+| **High** | Monthly | Validator keys, institutional wallets |
+| **Standard** | Quarterly | DAO treasuries, DeFi protocols |
+| **Low** | Annually | Development keys, test environments |
+
+```go
+// Automated proactive resharing
+func (mgr *ProactiveManager) Start(interval time.Duration) {
+    ticker := time.NewTicker(interval)
+    defer ticker.Stop()
+    
+    for range ticker.C {
+        if err := mgr.performProactiveReshare(); err != nil {
+            log.Error("proactive reshare failed", "error", err)
+            // Alert operators but continue
+        }
+    }
+}
+
+func (mgr *ProactiveManager) performProactiveReshare() error {
+    // Same parties, same threshold - just refresh shares
+    refreshed, err := lss.DynamicReshareCMP(
+        mgr.currentConfigs,
+        mgr.currentParties,
+        mgr.threshold,
+        mgr.pool,
+    )
+    if err != nil {
+        return err
+    }
+    
+    // Old shares now useless (forward security)
+    mgr.currentConfigs = refreshed
+    mgr.generation++
+    
+    return mgr.SaveSnapshot(refreshed)
+}
+```
+
 ## Reference Implementation
 
 **Implementation Status:** ✅ PRODUCTION READY
