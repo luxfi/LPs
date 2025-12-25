@@ -57,7 +57,7 @@ LP-4 proposes integrating quantum-resistant cryptographic primitives into the Lu
 ### ML-DSA Post-Quantum Signatures (FIPS 204)
 
 **Location**: `~/work/lux/crypto/mldsa/`
-**GitHub**: [`github.com/luxfi/node/tree/main/crypto/mldsa`](https://github.com/luxfi/node/tree/main/crypto/mldsa)
+**GitHub**: [`github.com/luxfi/node/tree/main/crypto/mldsa`](https://github.com/luxfi/node)
 
 **Key Files**:
 - [`mldsa.go`](https://github.com/luxfi/node/blob/main/crypto/mldsa/mldsa.go) - ML-DSA-65 signature implementation (7.7 KB)

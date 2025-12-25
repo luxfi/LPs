@@ -18,7 +18,7 @@ order: 14
 >
 > **Source DEX**: [github.com/luxfi/dex](https://github.com/luxfi/dex)
 >
-> **EVM Wrapper**: [github.com/luxfi/standard](https://github.com/luxfi/standard/tree/main/src/liquidity/dex)
+> **EVM Wrapper**: 
 
 ## Abstract
 

@@ -475,7 +475,7 @@ This LP specification is released under CC0.
 - [Compound V3 Documentation](https://docs.compound.finance/)
 - [Compound V3 GitHub](https://github.com/compound-finance/comet)
 - [LP-2000](./lp-1200-c-chain-evm-specification.md)
-- [Compound V3 Audits](https://github.com/compound-finance/comet/tree/main/audits)
+- [Compound V3 Audits]()
 
 ## Copyright
 

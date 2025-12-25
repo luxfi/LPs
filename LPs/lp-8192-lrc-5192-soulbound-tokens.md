@@ -18,7 +18,6 @@ LRC-5192 (mirrors ERC-5192) defines minimal soulbound (non-transferable) NFTs.
 ## Specification
 Adds `locked(uint256 tokenId)` to indicate non-transferability.
 
-
 ## Motivation
 
 This standard ensures compatibility with the broader EVM ecosystem while enabling Lux-specific optimizations.

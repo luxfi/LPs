@@ -1,6 +1,6 @@
 ---
 lp: 6
-title: Security
+title: Network Security Principles
 description: Lux Network's security principles, threat model, and security practices
 author: Lux Core Team
 status: Final

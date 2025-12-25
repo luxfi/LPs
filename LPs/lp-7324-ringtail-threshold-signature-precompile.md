@@ -530,7 +530,7 @@ All tests passing across the full stack:
 | Ringtail Library | `github.com/luxfi/ringtail/` |
 | Lattice Primitives | `github.com/luxfi/lattice/` |
 | Epoch Management | `github.com/luxfi/node/consensus/protocol/quasar/` |
-| Solidity Interface | `github.com/luxfi/standard/src/precompiles/ringtail/` |
+| Solidity Interface | `~/work/lux/standard/contracts/precompiles/ringtail/` |
 
 ## Security Considerations
 

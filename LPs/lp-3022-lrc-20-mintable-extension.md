@@ -59,12 +59,11 @@ See the IERC20Mintable interface in the standard repository:
 ### LRC-20 Mintable Token Contracts
 
 **Location**: `~/work/lux/standard/src/tokens/`
-**GitHub**: [`github.com/luxfi/standard/tree/main/src/tokens`](https://github.com/luxfi/standard/tree/main/src/tokens)
 
 **Core Contracts**:
-- [`ERC20.sol`](https://github.com/luxfi/standard/blob/main/src/tokens/ERC20.sol) - Base LRC-20 implementation
-- [`ERC20Mintable.sol`](https://github.com/luxfi/standard/blob/main/src/tokens/ERC20Mintable.sol) - Mintable extension
-- [`ERC20Burnable.sol`](https://github.com/luxfi/standard/blob/main/src/tokens/ERC20Burnable.sol) - Burnable extension
+- `LRC20.sol` - Base LRC-20 implementation
+- `ERC20Mintable.sol` - Mintable extension
+- `ERC20Burnable.sol` - Burnable extension
 - [`Ownable.sol`](https://github.com/luxfi/standard/blob/main/src/tokens/Ownable.sol) - Access control for minting
 
 **Minting Implementation**:

@@ -764,7 +764,7 @@ Based on ACP-226 by Stephen Buttolph and Michael Kaplan. Thanks to Luigi D'Onori
 - [LP-181](https://github.com/avalanche-foundation/ACPs/tree/main/ACPs/181-p-chain-epoched-views
 - [LP-601)](./lp-1605-dynamic-gas-fee-mechanism-with-ai-compute-pricing.md
 - [LP-204](https://github.com/avalanche-foundation/ACPs/tree/main/ACPs/204-precompile-secp256r1
-- [ACP-176: Dynamic Fees](https://github.com/avalanche-foundation/ACPs/tree/main/ACPs/176-dynamic-fees)
+- [ACP-176: Dynamic Fees](https://github.com/avalanche-foundation/ACPs)
 
 ## Copyright
 

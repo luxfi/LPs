@@ -568,7 +568,6 @@ describe("Safe", () => {
 });
 ```
 
-
 ## Reference Implementation
 
 **Repository**: [https://github.com/luxfi/standard](https://github.com/luxfi/standard)

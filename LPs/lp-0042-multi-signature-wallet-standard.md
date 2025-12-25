@@ -515,8 +515,7 @@ Key features:
 
 ### Multi-Signature Wallet Contracts
 
-**Location**: `~/work/lux/standard/src/wallets/multisig/`
-**GitHub**: [`github.com/luxfi/standard/tree/main/src/wallets/multisig`](https://github.com/luxfi/standard/tree/main/src/wallets/multisig)
+**Location**: `~/work/lux/standard/contracts/wallets/` (to be implemented)
 
 **Core Contracts**:
 - [`LuxMultiSig.sol`](https://github.com/luxfi/standard/blob/main/src/wallets/multisig/LuxMultiSig.sol) - Base multi-sig implementation

@@ -64,13 +64,12 @@ See the IERC20Bridgable interface in the standard repository:
 ### LRC-20 Bridgable Token Contracts
 
 **Location**: `~/work/lux/standard/src/tokens/`
-**GitHub**: [`github.com/luxfi/standard/tree/main/src/tokens`](https://github.com/luxfi/standard/tree/main/src/tokens)
 
 **Core Contracts**:
-- [`ERC20.sol`](https://github.com/luxfi/standard/blob/main/src/tokens/ERC20.sol) - Base implementation
-- [`ERC20Bridgable.sol`](https://github.com/luxfi/standard/blob/main/src/tokens/ERC20Bridgable.sol) - Bridge extension
-- [`ERC20Mintable.sol`](https://github.com/luxfi/standard/blob/main/src/tokens/ERC20Mintable.sol) - Minting capability
-- [`ERC20Burnable.sol`](https://github.com/luxfi/standard/blob/main/src/tokens/ERC20Burnable.sol) - Burning capability
+- `LRC20.sol` - Base implementation
+- `ERC20Bridgable.sol` - Bridge extension
+- `ERC20Mintable.sol` - Minting capability
+- `ERC20Burnable.sol` - Burning capability
 
 **Bridge Integration** (Teleport Protocol):
 - Location: `~/work/lux/standard/src/bridge/`

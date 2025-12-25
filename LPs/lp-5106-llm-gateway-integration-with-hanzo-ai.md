@@ -7,7 +7,7 @@ type: Standards Track
 category: Interface
 status: Final
 created: 2025-01-09
-requires: LP-10, LP-103, HIP-4
+requires: [5101, 5102]
 tags: [ai, dev-tools]
 order: 106
 ---

@@ -1,7 +1,7 @@
 ---
 lp: 7104
-title: FROST - Flexible Round-Optimized Schnorr Threshold Signatures for EdDSA
-description: Formal specification for the FROST protocol implementation in Lux, providing efficient threshold Schnorr/EdDSA signatures with Taproot support
+title: FROST Threshold Signatures
+description: Round-optimized Schnorr threshold signatures for EdDSA with Taproot support
 author: Lux Industries Inc.
 discussions-to: https://github.com/luxfi/lps/discussions
 status: Final

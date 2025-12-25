@@ -10,13 +10,13 @@ type: Standards Track
 category: Core
 created: 2025-12-21
 requires: 9000, 9003, 3020
-implementation: https://github.com/luxfi/standard/tree/main/contracts/liquidity/precompiles/IDEX.sol
+implementation: ~/work/lux/standard/contracts/liquidity/precompiles/IDEX.sol
 order: 10
 ---
 
 > **Documentation**: [dex.lux.network](https://dex.lux.network)
 >
-> **Source**: [github.com/luxfi/standard](https://github.com/luxfi/standard/tree/main/contracts/liquidity/precompiles)
+> **Source**: 
 >
 > **DEX Core**: [github.com/luxfi/dex](https://github.com/luxfi/dex)
 

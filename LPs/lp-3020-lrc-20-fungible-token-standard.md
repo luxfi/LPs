@@ -170,14 +170,13 @@ The AI compute extensions recognize tokens as representations of computational r
 
 This LP is additive. Existing components remain functional; migration can occur incrementally without breaking changes.
 
-
 ### Upgradeable Variants
 
 For proxy-based upgradeable contracts:
 
 | Contract | Description |
 |----------|-------------|
-| [`ERC20Upgradeable.sol`](https://github.com/luxfi/standard/blob/main/lib/openzeppelin-contracts-upgradeable/contracts/token/ERC20/ERC20Upgradeable.sol) | Upgradeable ERC-20 base |
+| [`ERC20Upgradeable.sol`](~/work/lux/standard/lib/openzeppelin-contracts-upgradeable/contracts/token/ERC20/ERC20Upgradeable.sol) | Upgradeable ERC-20 base |
 
 **Usage**: Initialize in `initialize()` instead of constructor. See [OpenZeppelin Upgrades](https://docs.openzeppelin.com/upgrades).
 

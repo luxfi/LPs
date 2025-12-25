@@ -10,13 +10,13 @@ type: Standards Track
 category: Core
 created: 2025-12-21
 requires: 9000, 9010, 3020
-implementation: https://github.com/luxfi/standard/contracts/liquidity/precompiles/IOracle.sol
+implementation: ~/work/lux/standard/contracts/liquidity/precompiles/IOracle.sol
 order: 11
 ---
 
 > **Documentation**: [docs.lux.network/oracle](https://docs.lux.network/oracle)
 >
-> **Source**: [github.com/luxfi/standard](https://github.com/luxfi/standard/tree/main/contracts/liquidity/precompiles)
+> **Source**: 
 
 ## Abstract
 

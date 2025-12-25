@@ -180,13 +180,13 @@ This standard is fully backwards compatible with existing contracts and infrastr
 
 | Contract | Description |
 |----------|-------------|
-| [`lib/openzeppelin-contracts/contracts/token/ERC20/extensions/ERC1363.sol`](https://github.com/luxfi/standard/blob/main/lib/openzeppelin-contracts/contracts/token/ERC20/extensions/ERC1363.sol) | ERC20 with transfer callbacks |
+| [`lib/openzeppelin-contracts/contracts/token/ERC20/extensions/ERC1363.sol`](~/work/lux/standard/lib/openzeppelin-contracts/contracts/token/ERC20/extensions/ERC1363.sol) | ERC20 with transfer callbacks |
 
 ### Interfaces
 
-- [`lib/openzeppelin-contracts/contracts/interfaces/IERC1363.sol`](https://github.com/luxfi/standard/blob/main/lib/openzeppelin-contracts/contracts/interfaces/IERC1363.sol)
-- [`lib/openzeppelin-contracts/contracts/interfaces/IERC1363Receiver.sol`](https://github.com/luxfi/standard/blob/main/lib/openzeppelin-contracts/contracts/interfaces/IERC1363Receiver.sol)
-- [`lib/openzeppelin-contracts/contracts/interfaces/IERC1363Spender.sol`](https://github.com/luxfi/standard/blob/main/lib/openzeppelin-contracts/contracts/interfaces/IERC1363Spender.sol)
+- [`lib/openzeppelin-contracts/contracts/interfaces/IERC1363.sol`](~/work/lux/standard/lib/openzeppelin-contracts/contracts/interfaces/IERC1363.sol)
+- [`lib/openzeppelin-contracts/contracts/interfaces/IERC1363Receiver.sol`](~/work/lux/standard/lib/openzeppelin-contracts/contracts/interfaces/IERC1363Receiver.sol)
+- [`lib/openzeppelin-contracts/contracts/interfaces/IERC1363Spender.sol`](~/work/lux/standard/lib/openzeppelin-contracts/contracts/interfaces/IERC1363Spender.sol)
 
 ### Build and Test
 

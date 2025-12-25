@@ -61,9 +61,9 @@ LP-5 focuses on the design of Lux’s quantum-safe wallet infrastructure, includ
 **GitHub**: [`github.com/luxfi/safe/tree/main`](https://github.com/luxfi/safe/tree/main)
 
 **Quantum-Safe Wallet Components**:
-- [`app/`](https://github.com/luxfi/safe/tree/main/app) - Next.js wallet application (React, TypeScript)
-- [`react/`](https://github.com/luxfi/safe/tree/main/react) - Reusable React components for Safe interface
-- [`contracts/`](https://github.com/luxfi/safe/tree/main/contracts) - Smart contract module (Solidity)
+- [`app/`]() - Next.js wallet application (React, TypeScript)
+- [`react/`]() - Reusable React components for Safe interface
+- [`contracts/`]() - Smart contract module (Solidity)
 
 **Key Features**:
 - M-of-N multisig with post-quantum key support

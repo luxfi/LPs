@@ -18,7 +18,6 @@ LRC-721 Enumerable extension for iterating over all tokens and owner tokens.
 ## Specification
 Implements `totalSupply()`, `tokenByIndex()`, and `tokenOfOwnerByIndex()`.
 
-
 ## Motivation
 
 This standard ensures compatibility with the broader EVM ecosystem while enabling Lux-specific optimizations.
@@ -31,7 +30,6 @@ Mirrors the corresponding Ethereum standard for maximum compatibility.
 
 Fully compatible with existing ERC implementations.
 
-
 ## Reference Implementation
 
 **Repository**: [https://github.com/luxfi/standard](https://github.com/luxfi/standard)
@@ -41,12 +39,11 @@ Fully compatible with existing ERC implementations.
 
 | Contract | Description |
 |----------|-------------|
-| [`lib/openzeppelin-contracts/contracts/token/ERC721/extensions/ERC721Enumerable.sol`](https://github.com/luxfi/standard/blob/main/lib/openzeppelin-contracts/contracts/token/ERC721/extensions/ERC721Enumerable.sol) | OpenZeppelin Enumerable |
+| [`lib/openzeppelin-contracts/contracts/token/ERC721/extensions/ERC721Enumerable.sol`](~/work/lux/standard/lib/openzeppelin-contracts/contracts/token/ERC721/extensions/ERC721Enumerable.sol) | OpenZeppelin Enumerable |
 
 ### Interfaces
 
-- [`lib/openzeppelin-contracts/contracts/token/ERC721/extensions/IERC721Enumerable.sol`](https://github.com/luxfi/standard/blob/main/lib/openzeppelin-contracts/contracts/token/ERC721/extensions/IERC721Enumerable.sol)
-
+- [`lib/openzeppelin-contracts/contracts/token/ERC721/extensions/IERC721Enumerable.sol`](~/work/lux/standard/lib/openzeppelin-contracts/contracts/token/ERC721/extensions/IERC721Enumerable.sol)
 
 ### Upgradeable Variants
 
@@ -54,7 +51,7 @@ For proxy-based upgradeable contracts:
 
 | Contract | Description |
 |----------|-------------|
-| [`ERC721EnumerableUpgradeable.sol`](https://github.com/luxfi/standard/blob/main/lib/openzeppelin-contracts-upgradeable/contracts/token/ERC721/extensions/ERC721EnumerableUpgradeable.sol) | Upgradeable enumerable |
+| [`ERC721EnumerableUpgradeable.sol`](~/work/lux/standard/lib/openzeppelin-contracts-upgradeable/contracts/token/ERC721/extensions/ERC721EnumerableUpgradeable.sol) | Upgradeable enumerable |
 
 **Usage**: Initialize in `initialize()` instead of constructor. See [OpenZeppelin Upgrades](https://docs.openzeppelin.com/upgrades).
 

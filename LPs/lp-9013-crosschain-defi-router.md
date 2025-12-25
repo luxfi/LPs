@@ -10,7 +10,7 @@ type: Standards Track
 category: LRC
 created: 2025-12-21
 requires: 9010, 9011, 9012, 3020
-implementation: https://github.com/luxfi/standard/contracts/liquidity/CrossChainDeFiRouter.sol
+implementation: ~/work/lux/standard/contracts/liquidity/CrossChainDeFiRouter.sol
 order: 13
 ---
 

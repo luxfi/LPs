@@ -18,7 +18,6 @@ LRC-173 (mirrors ERC-173) provides standard contract ownership interface.
 ## Specification
 Implements `owner()`, `transferOwnership(address)`, and `OwnershipTransferred` event.
 
-
 ## Motivation
 
 This standard ensures compatibility with the broader EVM ecosystem while enabling Lux-specific optimizations.
@@ -31,7 +30,6 @@ Mirrors the corresponding Ethereum standard for maximum compatibility.
 
 Fully compatible with existing ERC implementations.
 
-
 ## Reference Implementation
 
 **Repository**: [https://github.com/luxfi/standard](https://github.com/luxfi/standard)
@@ -41,9 +39,8 @@ Fully compatible with existing ERC implementations.
 
 | Contract | Description |
 |----------|-------------|
-| [`lib/openzeppelin-contracts/contracts/access/Ownable.sol`](https://github.com/luxfi/standard/blob/main/lib/openzeppelin-contracts/contracts/access/Ownable.sol) | OpenZeppelin Ownable |
-| [`lib/openzeppelin-contracts/contracts/access/Ownable2Step.sol`](https://github.com/luxfi/standard/blob/main/lib/openzeppelin-contracts/contracts/access/Ownable2Step.sol) | Two-step ownership transfer |
-
+| [`lib/openzeppelin-contracts/contracts/access/Ownable.sol`](~/work/lux/standard/lib/openzeppelin-contracts/contracts/access/Ownable.sol) | OpenZeppelin Ownable |
+| [`lib/openzeppelin-contracts/contracts/access/Ownable2Step.sol`](~/work/lux/standard/lib/openzeppelin-contracts/contracts/access/Ownable2Step.sol) | Two-step ownership transfer |
 
 ### Upgradeable Variants
 
@@ -51,8 +48,8 @@ For proxy-based upgradeable contracts:
 
 | Contract | Description |
 |----------|-------------|
-| [`OwnableUpgradeable.sol`](https://github.com/luxfi/standard/blob/main/lib/openzeppelin-contracts-upgradeable/contracts/access/OwnableUpgradeable.sol) | Upgradeable ownable |
-| [`Ownable2StepUpgradeable.sol`](https://github.com/luxfi/standard/blob/main/lib/openzeppelin-contracts-upgradeable/contracts/access/Ownable2StepUpgradeable.sol) | Upgradeable 2-step |
+| [`OwnableUpgradeable.sol`](~/work/lux/standard/lib/openzeppelin-contracts-upgradeable/contracts/access/OwnableUpgradeable.sol) | Upgradeable ownable |
+| [`Ownable2StepUpgradeable.sol`](~/work/lux/standard/lib/openzeppelin-contracts-upgradeable/contracts/access/Ownable2StepUpgradeable.sol) | Upgradeable 2-step |
 
 **Usage**: Initialize in `initialize()` instead of constructor. See [OpenZeppelin Upgrades](https://docs.openzeppelin.com/upgrades).
 

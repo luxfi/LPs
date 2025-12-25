@@ -464,7 +464,7 @@ forge build
 | Protocol | Auditor | Report |
 |----------|---------|--------|
 | GMX v1 | ABDK | [Report](https://github.com/gmx-io/gmx-contracts/tree/master/audits) |
-| Alchemix v2 | Runtime Verification | [Report](https://github.com/alchemix-finance/v2-contracts/tree/master/audits) |
+| Alchemix v2 | Runtime Verification | [Report]() |
 
 ### Risk Factors
 

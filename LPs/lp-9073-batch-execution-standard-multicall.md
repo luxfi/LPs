@@ -9,7 +9,7 @@ tags: [dex, trading]
 type: Standards Track
 category: LRC
 created: 2025-01-23
-requires: tags:, evm, dev-tools
+requires: [3020]
 order: 73
 ---
 

@@ -957,7 +957,7 @@ func (r *abort2) Finalize() (abort.Report, error) {
 | ZK Proofs | `github.com/luxfi/threshold/pkg/zk/` |
 | Crypto Primitives | `github.com/luxfi/threshold/pkg/` |
 | Native secp256k1 | `github.com/luxfi/crypto/secp256k1/` |
-| Solidity Interface | `github.com/luxfi/standard/src/precompiles/cggmp21/`
+| Solidity Interface | `~/work/lux/standard/contracts/precompiles/cggmp21/`
 
 ## Performance Benchmarks
 
@@ -1079,7 +1079,7 @@ Copyright and related rights waived via [CC0](https://creativecommons.org/public
 
 ### Implementation References
 
-- **Lux Precompile**: https://github.com/luxfi/standard/tree/main/src/precompiles/cggmp21
+- **Lux Precompile**: ~/work/lux/standard/contracts/precompiles/cggmp21
 - **Threshold Library**: https://github.com/luxfi/threshold/tree/main/protocols/cmp
 - **Multi-Party Sig**: https://github.com/luxfi/multi-party-sig/tree/main/protocols/cmp
 

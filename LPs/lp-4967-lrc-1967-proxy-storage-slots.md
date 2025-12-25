@@ -18,7 +18,6 @@ LRC-1967 (mirrors ERC-1967) standardizes proxy storage slots for upgradeable con
 ## Specification
 Defines standard storage slots for implementation, admin, and beacon addresses.
 
-
 ## Motivation
 
 This standard ensures compatibility with the broader EVM ecosystem while enabling Lux-specific optimizations.
@@ -31,7 +30,6 @@ Mirrors the corresponding Ethereum standard for maximum compatibility.
 
 Fully compatible with existing ERC implementations.
 
-
 ## Reference Implementation
 
 **Repository**: [https://github.com/luxfi/standard](https://github.com/luxfi/standard)
@@ -41,8 +39,8 @@ Fully compatible with existing ERC implementations.
 
 | Contract | Description |
 |----------|-------------|
-| [`lib/openzeppelin-contracts/contracts/proxy/ERC1967/ERC1967Proxy.sol`](https://github.com/luxfi/standard/blob/main/lib/openzeppelin-contracts/contracts/proxy/ERC1967/ERC1967Proxy.sol) | OpenZeppelin ERC-1967 Proxy |
-| [`lib/openzeppelin-contracts/contracts/proxy/ERC1967/ERC1967Utils.sol`](https://github.com/luxfi/standard/blob/main/lib/openzeppelin-contracts/contracts/proxy/ERC1967/ERC1967Utils.sol) | Proxy utilities |
+| [`lib/openzeppelin-contracts/contracts/proxy/ERC1967/ERC1967Proxy.sol`](~/work/lux/standard/lib/openzeppelin-contracts/contracts/proxy/ERC1967/ERC1967Proxy.sol) | OpenZeppelin ERC-1967 Proxy |
+| [`lib/openzeppelin-contracts/contracts/proxy/ERC1967/ERC1967Utils.sol`](~/work/lux/standard/lib/openzeppelin-contracts/contracts/proxy/ERC1967/ERC1967Utils.sol) | Proxy utilities |
 
 ### Build and Test
 

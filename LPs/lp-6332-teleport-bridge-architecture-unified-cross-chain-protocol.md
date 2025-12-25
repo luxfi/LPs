@@ -1724,7 +1724,7 @@ cd ~/work/lux/node
 
 ## Test Cases
 
-See the full test suite in [github.com/luxfi/bridge/tests](https://github.com/luxfi/bridge/tree/main/tests).
+See the full test suite in [github.com/luxfi/bridge/tests]().
 
 ## Economic Impact
 

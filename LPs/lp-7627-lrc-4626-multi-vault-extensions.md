@@ -18,7 +18,6 @@ Extensions for multi-asset and multi-strategy vault implementations.
 ## Specification
 Extends LRC-4626 with support for multiple underlying assets and yield strategies.
 
-
 ## Motivation
 
 This standard ensures compatibility with the broader EVM ecosystem while enabling Lux-specific optimizations.

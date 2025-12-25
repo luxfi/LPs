@@ -10,13 +10,13 @@ type: Standards Track
 category: Core
 created: 2025-12-21
 requires: 3020, 9010, 9011
-implementation: https://github.com/luxfi/standard/contracts/liquidity/precompiles/PrecompileRegistry.sol
+implementation: ~/work/lux/standard/contracts/liquidity/precompiles/PrecompileRegistry.sol
 order: 15
 ---
 
 > **Documentation**: [docs.lux.network/precompiles](https://docs.lux.network/precompiles)
 >
-> **Source**: [github.com/luxfi/standard](https://github.com/luxfi/standard/tree/main/contracts/liquidity/precompiles)
+> **Source**: 
 
 ## Abstract
 

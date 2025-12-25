@@ -18,7 +18,6 @@ LRC-165 (mirrors ERC-165) provides standard interface detection for smart contra
 ## Specification
 Implements `supportsInterface(bytes4 interfaceId)` returning true for supported interfaces.
 
-
 ## Motivation
 
 This standard ensures compatibility with the broader EVM ecosystem while enabling Lux-specific optimizations.
@@ -31,7 +30,6 @@ Mirrors the corresponding Ethereum standard for maximum compatibility.
 
 Fully compatible with existing ERC implementations.
 
-
 ## Reference Implementation
 
 **Repository**: [https://github.com/luxfi/standard](https://github.com/luxfi/standard)
@@ -41,12 +39,11 @@ Fully compatible with existing ERC implementations.
 
 | Contract | Description |
 |----------|-------------|
-| [`lib/openzeppelin-contracts/contracts/utils/introspection/ERC165.sol`](https://github.com/luxfi/standard/blob/main/lib/openzeppelin-contracts/contracts/utils/introspection/ERC165.sol) | OpenZeppelin ERC-165 |
+| [`lib/openzeppelin-contracts/contracts/utils/introspection/ERC165.sol`](~/work/lux/standard/lib/openzeppelin-contracts/contracts/utils/introspection/ERC165.sol) | OpenZeppelin ERC-165 |
 
 ### Interfaces
 
-- [`lib/openzeppelin-contracts/contracts/utils/introspection/IERC165.sol`](https://github.com/luxfi/standard/blob/main/lib/openzeppelin-contracts/contracts/utils/introspection/IERC165.sol)
-
+- [`lib/openzeppelin-contracts/contracts/utils/introspection/IERC165.sol`](~/work/lux/standard/lib/openzeppelin-contracts/contracts/utils/introspection/IERC165.sol)
 
 ### Upgradeable Variants
 
@@ -54,7 +51,7 @@ For proxy-based upgradeable contracts:
 
 | Contract | Description |
 |----------|-------------|
-| [`ERC165Upgradeable.sol`](https://github.com/luxfi/standard/blob/main/lib/openzeppelin-contracts-upgradeable/contracts/utils/introspection/ERC165Upgradeable.sol) | Upgradeable ERC-165 |
+| [`ERC165Upgradeable.sol`](~/work/lux/standard/lib/openzeppelin-contracts-upgradeable/contracts/utils/introspection/ERC165Upgradeable.sol) | Upgradeable ERC-165 |
 
 **Usage**: Initialize in `initialize()` instead of constructor. See [OpenZeppelin Upgrades](https://docs.openzeppelin.com/upgrades).
 

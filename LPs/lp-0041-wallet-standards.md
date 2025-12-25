@@ -1,7 +1,7 @@
 ---
 lp: 41
 title: Wallet Standards
-description: Wallet-related standards.
+description: Interfaces and guidance for Lux wallet interoperability across chains and dApps
 author: Lux Network Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
 status: Final
@@ -28,7 +28,7 @@ This LP's normative content is the set of algorithms, data models, and parameter
 ### Wallet Standard Contracts
 
 **Location**: `~/work/lux/standard/src/wallets/`
-**GitHub**: [`github.com/luxfi/standard/tree/main/src/wallets`](https://github.com/luxfi/standard/tree/main/src/wallets)
+(~/work/lux/standard/contracts/wallets)
 
 **Core Wallet Interfaces**:
 - [`ILuxWallet.sol`](https://github.com/luxfi/standard/blob/main/src/wallets/ILuxWallet.sol) - Base wallet interface

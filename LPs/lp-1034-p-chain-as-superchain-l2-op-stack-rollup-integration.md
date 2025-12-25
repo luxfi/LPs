@@ -72,7 +72,7 @@ This upgrade is fully additive and opt-in. Nodes not launched in OP-Stack mode b
 ### P-Chain as OP Stack Rollup Integration
 
 **Location**: `~/work/lux/geth/rollup/optimism/`
-**GitHub**: [`github.com/luxfi/geth/tree/main/rollup/optimism`](https://github.com/luxfi/geth/tree/main/rollup/optimism)
+**GitHub**: [`github.com/luxfi/geth/tree/main/rollup/optimism`]()
 
 **Core Components**:
 - [`plugin.go`](https://github.com/luxfi/geth/blob/main/rollup/optimism/plugin.go) - OP Stack plugin
@@ -82,8 +82,8 @@ This upgrade is fully additive and opt-in. Nodes not launched in OP-Stack mode b
 
 **Lux-specific Components**:
 - Location: `~/work/lux/stack/`
-- [`lux-batcher`](https://github.com/luxfi/stack/tree/main/lux-batcher) - Batch posting service
-- [`lux-proposer`](https://github.com/luxfi/stack/tree/main/lux-proposer) - Output root proposer
+- [`lux-batcher`]() - Batch posting service
+- [`lux-proposer`]() - Output root proposer
 
 **Stake-Weighted Proposer Implementation**:
 ```go

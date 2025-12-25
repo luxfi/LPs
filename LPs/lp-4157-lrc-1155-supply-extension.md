@@ -18,7 +18,6 @@ Extension tracking total supply for each token ID in LRC-1155 contracts.
 ## Specification
 Implements `totalSupply(uint256 id)` and `exists(uint256 id)` functions.
 
-
 ## Motivation
 
 This standard ensures compatibility with the broader EVM ecosystem while enabling Lux-specific optimizations.
@@ -40,8 +39,7 @@ Fully compatible with existing ERC implementations.
 
 | Contract | Description |
 |----------|-------------|
-| [`lib/openzeppelin-contracts/contracts/token/ERC1155/extensions/ERC1155Supply.sol`](https://github.com/luxfi/standard/blob/main/lib/openzeppelin-contracts/contracts/token/ERC1155/extensions/ERC1155Supply.sol) | ERC1155 with totalSupply tracking |
-
+| [`lib/openzeppelin-contracts/contracts/token/ERC1155/extensions/ERC1155Supply.sol`](~/work/lux/standard/lib/openzeppelin-contracts/contracts/token/ERC1155/extensions/ERC1155Supply.sol) | ERC1155 with totalSupply tracking |
 
 ### Upgradeable Variants
 
@@ -49,7 +47,7 @@ For proxy-based upgradeable contracts:
 
 | Contract | Description |
 |----------|-------------|
-| [`ERC1155SupplyUpgradeable.sol`](https://github.com/luxfi/standard/blob/main/lib/openzeppelin-contracts-upgradeable/contracts/token/ERC1155/extensions/ERC1155SupplyUpgradeable.sol) | Upgradeable supply tracking |
+| [`ERC1155SupplyUpgradeable.sol`](~/work/lux/standard/lib/openzeppelin-contracts-upgradeable/contracts/token/ERC1155/extensions/ERC1155SupplyUpgradeable.sol) | Upgradeable supply tracking |
 
 **Usage**: Initialize in `initialize()` instead of constructor. See [OpenZeppelin Upgrades](https://docs.openzeppelin.com/upgrades).
 

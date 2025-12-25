@@ -276,7 +276,6 @@ func init() {
 
 ### Solidity Smart Contracts
 
-**GitHub**: [`github.com/luxfi/standard`](https://github.com/luxfi/standard)
 **Local Path**: `~/work/lux/standard/src/`
 
 **Example Usage**: See [`IMLDSA.sol`](https://github.com/luxfi/evm/blob/main/precompile/contracts/mldsa/IMLDSA.sol) for interface and library examples
