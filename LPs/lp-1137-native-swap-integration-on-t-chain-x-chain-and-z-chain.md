@@ -4,7 +4,7 @@ title: Native Swap Integration on T-Chain, X-Chain, and Z-Chain
 description: Deep-integration blueprint to migrate legacy swaps REST API (swaps.ts) into fully on-chain M/X/Z chain transactions and RPC
 author: Lux Network Team
 discussions-to: https://github.com/luxfi/lps/discussions
-status: Draft
+status: Final
 type: Standards Track
 category: Core
 created: 2025-07-25

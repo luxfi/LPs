@@ -4,7 +4,7 @@ title: P-Chain State Rollup to C-Chain EVM
 description: A standardized framework for rolling up P-Chain state commitments into the C-Chain for on-chain verification and cross-chain applications
 author: Lux Network Team
 discussions-to: https://github.com/luxfi/lps/discussions
-status: Draft
+status: Final
 type: Standards Track
 category: Core
 created: 2025-07-24

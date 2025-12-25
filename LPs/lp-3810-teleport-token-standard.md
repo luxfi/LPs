@@ -4,7 +4,7 @@ title: Teleport Token Standard
 description: Unified token bridging standard for native and remote tokens across Lux Network chains
 author: Lux Network Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
-status: Draft
+status: Final
 type: Standards Track
 category: LRC
 created: 2025-12-14

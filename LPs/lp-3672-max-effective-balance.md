@@ -4,7 +4,7 @@ title: Maximum Effective Balance Increase (EIP-7251)
 description: Increase validator max effective balance from 32 to 2048 ETH
 author: Lux Core Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
-status: Draft
+status: Final
 type: Informational
 category: Core
 created: 2025-01-23

@@ -4,7 +4,7 @@ title: Azorius Governance Module
 description: Modular on-chain governance module for Lux DAOs with proposal lifecycle management
 author: Lux Industries Inc.
 discussions-to: https://github.com/luxfi/lps/discussions
-status: Draft
+status: Final
 type: Standards Track
 category: LRC
 created: 2025-12-17

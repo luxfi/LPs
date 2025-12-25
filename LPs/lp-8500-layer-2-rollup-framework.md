@@ -4,7 +4,7 @@ title: Layer 2 Rollup Framework
 description: Unified framework for optimistic and ZK rollups supporting AI compute and distributed training workloads
 author: Lux Network Team (@luxfi), Hanzo AI (@hanzoai), Zoo Protocol (@zooprotocol)
 discussions-to: https://github.com/luxfi/lps/discussions
-status: Draft
+status: Final
 type: Standards Track
 category: Core
 created: 2025-09-24

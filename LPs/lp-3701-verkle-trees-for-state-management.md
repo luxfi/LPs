@@ -4,7 +4,7 @@ title: Verkle Trees for State Management
 description: Constant-size state proofs using Verkle trees for stateless clients and efficient cross-chain verification
 author: Lux Core Team (@luxfi)
 discussions-to: https://forum.lux.network/t/lp-606-verkle-trees
-status: Draft
+status: Final
 type: Standards Track
 category: Core
 created: 2025-01-09

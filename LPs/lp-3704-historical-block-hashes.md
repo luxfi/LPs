@@ -4,7 +4,7 @@ title: Historical Block Hashes (EIP-2935)
 description: Store historical block hashes in state for stateless execution
 author: Lux Core Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
-status: Draft
+status: Final
 type: Standards Track
 category: Core
 created: 2025-01-23

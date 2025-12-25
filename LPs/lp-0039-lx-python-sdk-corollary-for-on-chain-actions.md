@@ -4,7 +4,7 @@ title: LX Python SDK Corollary for On-Chain Actions
 description: Breakdown of Python client (lx.api.Exchange) methods and mapping to on-chain Dex actions
 author: Lux Network Team
 discussions-to: https://github.com/luxfi/lps/discussions
-status: Draft
+status: Final
 type: Informational
 category: Interface
 created: 2025-07-25

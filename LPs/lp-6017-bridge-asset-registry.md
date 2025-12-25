@@ -5,7 +5,7 @@ tags: [bridge, cross-chain]
 description: Specifies a standard registry for bridged assets.
 author: Lux Network Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
-status: Draft
+status: Final
 type: Standards Track
 category: Bridge
 created: 2025-01-23

@@ -5,7 +5,7 @@ tags: [esg, impact, grants, community, funding]
 description: Framework for ecosystem grants and community development initiatives.
 author: Lux Network Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
-status: Draft
+status: Final
 type: Meta
 created: 2025-12-17
 requires: 2920, 2990

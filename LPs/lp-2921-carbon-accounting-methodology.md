@@ -5,7 +5,7 @@ tags: [esg, sustainability, carbon, emissions, ghg-protocol]
 description: Methodology for measuring and reporting Lux Network's greenhouse gas emissions.
 author: Lux Network Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
-status: Draft
+status: Final
 type: Meta
 created: 2025-12-17
 requires: 2920

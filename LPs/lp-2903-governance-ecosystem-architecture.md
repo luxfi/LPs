@@ -5,7 +5,7 @@ tags: [investment, accountability, ecosystem]
 description: Governance structure and accountability architecture for the Lux-Hanzo-Zoo ecosystem.
 author: Lux Network Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
-status: Draft
+status: Final
 type: Meta
 created: 2025-12-17
 requires: 2900, 2920

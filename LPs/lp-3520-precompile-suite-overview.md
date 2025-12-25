@@ -4,7 +4,7 @@ title: Precompile Suite Overview
 description: Comprehensive overview of all EVM precompiles for Lux Network including access control, fee management, cross-chain, and cryptography
 author: Lux Core Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
-status: Draft
+status: Final
 type: Informational
 created: 2025-11-14
 requires: 7321, 7322, 7324

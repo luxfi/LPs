@@ -4,7 +4,7 @@ title: DAO Account Abstraction
 description: Account abstraction contracts for gasless DAO interactions and smart account integration
 author: Lux Industries Inc.
 discussions-to: https://github.com/luxfi/lps/discussions
-status: Draft
+status: Final
 type: Standards Track
 category: LRC
 created: 2025-12-17

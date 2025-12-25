@@ -4,7 +4,7 @@ title: Hybrid Classical-Quantum Cryptography Transitions
 description: Framework for secure migration from classical to post-quantum cryptography
 author: Lux Industries Inc (@luxfi)
 discussions-to: https://forum.lux.network/t/lp-201-hybrid-cryptography
-status: Draft
+status: Final
 type: Standards Track
 category: Core
 created: 2025-01-24

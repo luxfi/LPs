@@ -5,7 +5,7 @@ tags: [consensus, prism, dag, geometry, frontier, antichain]
 description: DAG geometry primitives for frontiers, cuts, and refractions in partial order consensus.
 author: Lux Network Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
-status: Draft
+status: Final
 type: Standards Track
 category: Core
 created: 2025-12-19

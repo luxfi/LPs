@@ -3,7 +3,7 @@ lp: 10005
 title: Learning Path - Security & Auditor
 description: System-level threat modeling and security analysis for Lux Network
 author: Lux Core Team
-status: Draft
+status: Final
 type: Meta
 created: 2025-12-21
 tags: [learning-path, security, audit, cryptography]
