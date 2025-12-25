@@ -142,7 +142,7 @@ To support unified node infrastructure, the Lux Node monorepo must embed the OP 
 ### C-Chain Rollup Plugin Architecture
 
 **Location**: `~/work/lux/geth/rollup/`
-**GitHub**: [`github.com/luxfi/geth/tree/main/rollup`](https://github.com/luxfi/geth/tree/main/rollup)
+**GitHub**: [`github.com/luxfi/geth/tree/main/rollup`]()
 
 **Core Plugins**:
 - Location: `~/work/lux/geth/rollup/optimism/`

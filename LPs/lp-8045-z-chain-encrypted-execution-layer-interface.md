@@ -142,7 +142,7 @@ Staked validators publish the quote on‑chain; discrepancies are slashable.
 ### Z-Chain Encrypted Execution Layer
 
 **Location**: `~/work/lux/node/vms/zvm/`
-**GitHub**: [`github.com/luxfi/node/tree/main/vms/zvm`](https://github.com/luxfi/node/tree/main/vms/zvm)
+**GitHub**: [`github.com/luxfi/node/tree/main/vms/zvm`]()
 
 **Core Components**:
 - [`precompile/fhe.go`](https://github.com/luxfi/node/blob/main/vms/zvm/precompile/fhe.go) - FHE precompile execution

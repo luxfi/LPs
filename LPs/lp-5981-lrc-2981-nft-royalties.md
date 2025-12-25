@@ -18,7 +18,6 @@ LRC-2981 (mirrors ERC-2981) standardizes NFT royalty information.
 ## Specification
 Implements `royaltyInfo(tokenId, salePrice)` returning receiver and royalty amount.
 
-
 ## Motivation
 
 This standard ensures compatibility with the broader EVM ecosystem while enabling Lux-specific optimizations.
@@ -40,12 +39,11 @@ Fully compatible with existing ERC implementations.
 
 | Contract | Description |
 |----------|-------------|
-| [`lib/openzeppelin-contracts/contracts/token/common/ERC2981.sol`](https://github.com/luxfi/standard/blob/main/lib/openzeppelin-contracts/contracts/token/common/ERC2981.sol) | NFT royalty standard |
+| [`lib/openzeppelin-contracts/contracts/token/common/ERC2981.sol`](~/work/lux/standard/lib/openzeppelin-contracts/contracts/token/common/ERC2981.sol) | NFT royalty standard |
 
 ### Interfaces
 
-- [`lib/openzeppelin-contracts/contracts/interfaces/IERC2981.sol`](https://github.com/luxfi/standard/blob/main/lib/openzeppelin-contracts/contracts/interfaces/IERC2981.sol)
-
+- [`lib/openzeppelin-contracts/contracts/interfaces/IERC2981.sol`](~/work/lux/standard/lib/openzeppelin-contracts/contracts/interfaces/IERC2981.sol)
 
 ### Upgradeable Variants
 
@@ -53,8 +51,8 @@ For proxy-based upgradeable contracts:
 
 | Contract | Description |
 |----------|-------------|
-| [`ERC721RoyaltyUpgradeable.sol`](https://github.com/luxfi/standard/blob/main/lib/openzeppelin-contracts-upgradeable/contracts/token/ERC721/extensions/ERC721RoyaltyUpgradeable.sol) | Upgradeable royalties (721) |
-| [`ERC2981Upgradeable.sol`](https://github.com/luxfi/standard/blob/main/lib/openzeppelin-contracts-upgradeable/contracts/token/common/ERC2981Upgradeable.sol) | Upgradeable ERC-2981 base |
+| [`ERC721RoyaltyUpgradeable.sol`](~/work/lux/standard/lib/openzeppelin-contracts-upgradeable/contracts/token/ERC721/extensions/ERC721RoyaltyUpgradeable.sol) | Upgradeable royalties (721) |
+| [`ERC2981Upgradeable.sol`](~/work/lux/standard/lib/openzeppelin-contracts-upgradeable/contracts/token/common/ERC2981Upgradeable.sol) | Upgradeable ERC-2981 base |
 
 **Usage**: Initialize in `initialize()` instead of constructor. See [OpenZeppelin Upgrades](https://docs.openzeppelin.com/upgrades).
 

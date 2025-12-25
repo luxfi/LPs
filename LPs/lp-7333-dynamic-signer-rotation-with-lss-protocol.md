@@ -38,7 +38,7 @@ The protocol introduces six new transaction types (ReshareInitTx, ReshareCommitT
 **Key Source Files:**
 - [BridgeVM RPC handlers](https://github.com/luxfi/node/blob/main/vms/bridgevm/rpc.go) - `bridge_registerValidator`, `bridge_getSignerSetInfo`, `bridge_replaceSigner`
 - [BridgeVM core logic](https://github.com/luxfi/node/blob/main/vms/bridgevm/vm.go) - `RegisterValidator()`, `RemoveSigner()`, signer set management
-- [Threshold MPC protocol](https://github.com/luxfi/threshold/tree/main/pkg/cggmp21) - CGGMP21 threshold ECDSA implementation
+- [Threshold MPC protocol]() - CGGMP21 threshold ECDSA implementation
 
 ## Conformance
 

@@ -59,10 +59,9 @@ See the IERC721Burnable interface in the standard repository:
 ### LRC-721 Burnable Token Contracts
 
 **Location**: `~/work/lux/standard/src/tokens/`
-**GitHub**: [`github.com/luxfi/standard/tree/main/src/tokens`](https://github.com/luxfi/standard/tree/main/src/tokens)
 
 **Core Contracts**:
-- [`ERC721.sol`](https://github.com/luxfi/standard/blob/main/src/tokens/ERC721.sol) - Base NFT implementation
+- `LRC721.sol` - Base NFT implementation
 - [`ERC721Burnable.sol`](https://github.com/luxfi/standard/blob/main/src/tokens/ERC721Burnable.sol) - Burn extension
 - [`ERC721Enumerable.sol`](https://github.com/luxfi/standard/blob/main/src/tokens/ERC721Enumerable.sol) - Enumeration support
 
@@ -106,14 +105,13 @@ forge coverage --match-contract ERC721Burnable
 | burn (owner) | ~45,000 | Token removal + event |
 | burn (approved) | ~48,000 | Approval check + removal |
 
-
 ### Upgradeable Variants
 
 For proxy-based upgradeable contracts:
 
 | Contract | Description |
 |----------|-------------|
-| [`ERC721BurnableUpgradeable.sol`](https://github.com/luxfi/standard/blob/main/lib/openzeppelin-contracts-upgradeable/contracts/token/ERC721/extensions/ERC721BurnableUpgradeable.sol) | Upgradeable burnable |
+| [`ERC721BurnableUpgradeable.sol`](~/work/lux/standard/lib/openzeppelin-contracts-upgradeable/contracts/token/ERC721/extensions/ERC721BurnableUpgradeable.sol) | Upgradeable burnable |
 
 **Usage**: Initialize in `initialize()` instead of constructor. See [OpenZeppelin Upgrades](https://docs.openzeppelin.com/upgrades).
 

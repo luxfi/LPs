@@ -18,7 +18,6 @@ LRC-20 Votes extension for governance tokens with delegation and vote checkpoint
 ## Specification
 Implements delegation, vote checkpointing, and EIP-712 signatures for governance participation.
 
-
 ## Motivation
 
 This standard ensures compatibility with the broader EVM ecosystem while enabling Lux-specific optimizations.
@@ -40,13 +39,12 @@ Fully compatible with existing ERC implementations.
 
 | Contract | Description |
 |----------|-------------|
-| [`lib/openzeppelin-contracts/contracts/token/ERC20/extensions/ERC20Votes.sol`](https://github.com/luxfi/standard/blob/main/lib/openzeppelin-contracts/contracts/token/ERC20/extensions/ERC20Votes.sol) | ERC20 with voting/delegation |
-| [`lib/openzeppelin-contracts/contracts/governance/utils/IVotes.sol`](https://github.com/luxfi/standard/blob/main/lib/openzeppelin-contracts/contracts/governance/utils/IVotes.sol) | Votes interface |
+| [`lib/openzeppelin-contracts/contracts/token/ERC20/extensions/ERC20Votes.sol`](~/work/lux/standard/lib/openzeppelin-contracts/contracts/token/ERC20/extensions/ERC20Votes.sol) | ERC20 with voting/delegation |
+| [`lib/openzeppelin-contracts/contracts/governance/utils/IVotes.sol`](~/work/lux/standard/lib/openzeppelin-contracts/contracts/governance/utils/IVotes.sol) | Votes interface |
 
 ### Interfaces
 
-- [`lib/openzeppelin-contracts/contracts/governance/utils/IVotes.sol`](https://github.com/luxfi/standard/blob/main/lib/openzeppelin-contracts/contracts/governance/utils/IVotes.sol)
-
+- [`lib/openzeppelin-contracts/contracts/governance/utils/IVotes.sol`](~/work/lux/standard/lib/openzeppelin-contracts/contracts/governance/utils/IVotes.sol)
 
 ### Upgradeable Variants
 
@@ -54,7 +52,7 @@ For proxy-based upgradeable contracts:
 
 | Contract | Description |
 |----------|-------------|
-| [`ERC20VotesUpgradeable.sol`](https://github.com/luxfi/standard/blob/main/lib/openzeppelin-contracts-upgradeable/contracts/token/ERC20/extensions/ERC20VotesUpgradeable.sol) | Upgradeable votes |
+| [`ERC20VotesUpgradeable.sol`](~/work/lux/standard/lib/openzeppelin-contracts-upgradeable/contracts/token/ERC20/extensions/ERC20VotesUpgradeable.sol) | Upgradeable votes |
 
 **Usage**: Initialize in `initialize()` instead of constructor. See [OpenZeppelin Upgrades](https://docs.openzeppelin.com/upgrades).
 

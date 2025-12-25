@@ -18,7 +18,6 @@ LRC-777 (mirrors ERC-777) provides advanced token functionality with hooks.
 ## Specification
 Token standard with send/receive hooks and operator permissions.
 
-
 ## Motivation
 
 This standard ensures compatibility with the broader EVM ecosystem while enabling Lux-specific optimizations.

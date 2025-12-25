@@ -190,7 +190,7 @@ DEX features live behind the DexFx extension; nodes without DexFx see no behavio
 ### X-Chain DEX Extension Architecture
 
 **Location**: `~/work/lux/node/vms/avm/`
-**GitHub**: [`github.com/luxfi/node/tree/main/vms/avm`](https://github.com/luxfi/node/tree/main/vms/avm)
+**GitHub**: [`github.com/luxfi/node/tree/main/vms/avm`](https://github.com/luxfi/node/tree/main/vms/platformvm)
 
 **Core Components**:
 - [`plugins/dex/dex_fx.go`](https://github.com/luxfi/node/blob/main/vms/avm/plugins/dex/dex_fx.go) - DexFx plugin implementation

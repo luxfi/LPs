@@ -18,7 +18,6 @@ LRC-3156 (mirrors ERC-3156) standardizes flash loan interfaces.
 ## Specification
 Defines `flashLoan()` and `FlashBorrower` interface for atomic borrowing.
 
-
 ## Motivation
 
 This standard ensures compatibility with the broader EVM ecosystem while enabling Lux-specific optimizations.
@@ -31,7 +30,6 @@ Mirrors the corresponding Ethereum standard for maximum compatibility.
 
 Fully compatible with existing ERC implementations.
 
-
 ## Reference Implementation
 
 **Repository**: [https://github.com/luxfi/standard](https://github.com/luxfi/standard)
@@ -41,12 +39,12 @@ Fully compatible with existing ERC implementations.
 
 | Contract | Description |
 |----------|-------------|
-| [`lib/openzeppelin-contracts/contracts/token/ERC20/extensions/ERC20FlashMint.sol`](https://github.com/luxfi/standard/blob/main/lib/openzeppelin-contracts/contracts/token/ERC20/extensions/ERC20FlashMint.sol) | Flash mint extension |
+| [`lib/openzeppelin-contracts/contracts/token/ERC20/extensions/ERC20FlashMint.sol`](~/work/lux/standard/lib/openzeppelin-contracts/contracts/token/ERC20/extensions/ERC20FlashMint.sol) | Flash mint extension |
 
 ### Interfaces
 
-- [`lib/openzeppelin-contracts/contracts/interfaces/IERC3156FlashLender.sol`](https://github.com/luxfi/standard/blob/main/lib/openzeppelin-contracts/contracts/interfaces/IERC3156FlashLender.sol)
-- [`lib/openzeppelin-contracts/contracts/interfaces/IERC3156FlashBorrower.sol`](https://github.com/luxfi/standard/blob/main/lib/openzeppelin-contracts/contracts/interfaces/IERC3156FlashBorrower.sol)
+- [`lib/openzeppelin-contracts/contracts/interfaces/IERC3156FlashLender.sol`](~/work/lux/standard/lib/openzeppelin-contracts/contracts/interfaces/IERC3156FlashLender.sol)
+- [`lib/openzeppelin-contracts/contracts/interfaces/IERC3156FlashBorrower.sol`](~/work/lux/standard/lib/openzeppelin-contracts/contracts/interfaces/IERC3156FlashBorrower.sol)
 
 ### Build and Test
 

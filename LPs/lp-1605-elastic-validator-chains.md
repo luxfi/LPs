@@ -290,7 +290,7 @@ func TestLiquidStaking(t *testing.T) {
 
 ## Reference Implementation
 
-See [github.com/luxfi/node/validator](https://github.com/luxfi/node/tree/main/validator) for the complete implementation.
+See [github.com/luxfi/node/validator]() for the complete implementation.
 
 ## Implementation
 

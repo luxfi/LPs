@@ -488,7 +488,7 @@ Only the MPC wallet can mint/burn bridge tokens - not arbitrary users.
 
 1. [Alchemix V2 Documentation](https://alchemix-finance.gitbook.io/v2/)
 2. [Alchemix V2 GitHub](https://github.com/alchemix-finance/v2-foundry)
-3. [Alchemix Audits](https://github.com/alchemix-finance/v2-foundry/tree/master/audits)
+3. [Alchemix Audits]()
 4. Lux Standard Repository: `~/work/lux/standard/contracts/synths/`
 
 ## Copyright

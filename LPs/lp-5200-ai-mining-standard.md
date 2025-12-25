@@ -162,7 +162,7 @@ interface IAIMining {
 ```
 
 **Reference Implementation:**
-- [`lux/precompiles/AIMining.sol`](https://github.com/luxfi/standard/blob/main/src/precompiles/AIMining.sol)
+- [`lux/precompiles/AIMining.sol`](~/work/lux/standard/contracts/precompiles/AIMining.sol)
 
 ### 6. NVTrust Chain-Binding Double-Spend Prevention
 
@@ -362,7 +362,7 @@ cargo test
 | Global Ledger | [`hanzo-mining/src/ledger.rs`](https://github.com/hanzoai/node/blob/main/hanzo-libs/hanzo-mining/src/ledger.rs) |
 | EVM Integration | [`hanzo-mining/src/evm.rs`](https://github.com/hanzoai/node/blob/main/hanzo-libs/hanzo-mining/src/evm.rs) |
 | Bridge Protocol | [`hanzo-mining/src/bridge.rs`](https://github.com/hanzoai/node/blob/main/hanzo-libs/hanzo-mining/src/bridge.rs) |
-| Solidity Precompile | [`lux/precompiles/AIMining.sol`](https://github.com/luxfi/standard/blob/main/src/precompiles/AIMining.sol) |
+| Solidity Precompile | [`lux/precompiles/AIMining.sol`](~/work/lux/standard/contracts/precompiles/AIMining.sol) |
 
 ## Security Considerations
 

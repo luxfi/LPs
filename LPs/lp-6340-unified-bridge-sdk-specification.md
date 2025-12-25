@@ -2195,7 +2195,6 @@ class RetryConfig:
 
         return delay
 
-
 async def retry(
     fn: Callable[[], Awaitable[T]],
     config: Optional[RetryConfig] = None,
@@ -2229,7 +2228,6 @@ async def retry(
                 await asyncio.sleep(delay)
 
     raise last_error
-
 
 # Usage example
 async def deposit_with_retry():
@@ -2460,7 +2458,6 @@ class RateLimiterConfig:
     burst_size: int = 20
     max_waiting: int = 100
 
-
 class RateLimiter:
     """Token bucket rate limiter for async operations."""
 
@@ -2545,7 +2542,6 @@ class RateLimiter:
             "waiting_requests": self._waiting,
             "last_refill_time": self._last_refill,
         }
-
 
 # Usage with bridge client
 class RateLimitedBridgeClient:
@@ -2831,7 +2827,6 @@ from luxfi.bridge.errors import InsufficientBalanceError, BridgeError
 from luxfi.bridge.utils import parse_units, format_units
 from luxfi.bridge.ratelimit import RateLimiter, RateLimiterConfig
 
-
 @pytest.fixture
 async def client():
     """Create connected bridge client."""
@@ -2839,7 +2834,6 @@ async def client():
     await client.connect()
     yield client
     await client.disconnect()
-
 
 @pytest.mark.asyncio
 async def test_fee_estimation(client):
@@ -2857,7 +2851,6 @@ async def test_fee_estimation(client):
 
     print(f"Fee estimate: bridge={fee.bridge_fee}, "
           f"gas={fee.source_gas_fee}, time={fee.estimated_time_seconds}s")
-
 
 @pytest.mark.asyncio
 async def test_insufficient_balance_error(client):
@@ -2878,7 +2871,6 @@ async def test_insufficient_balance_error(client):
     assert error.name == "INSUFFICIENT_BALANCE"
     assert not error.retryable
 
-
 @pytest.mark.asyncio
 async def test_address_validation():
     """Test address validation."""
@@ -2896,7 +2888,6 @@ async def test_address_validation():
     assert exc_info.value.code == 12001
 
     await client.disconnect()
-
 
 @pytest.mark.asyncio
 async def test_rate_limiter():
@@ -2919,7 +2910,6 @@ async def test_rate_limiter():
     await asyncio.sleep(0.2)  # Wait for ~2 tokens
     assert limiter.try_acquire(), "request after refill should succeed"
 
-
 @pytest.mark.asyncio
 async def test_amount_parsing():
     """Test amount parsing utilities."""
@@ -2937,7 +2927,6 @@ async def test_amount_parsing():
     with pytest.raises(BridgeError) as exc_info:
         parse_units("-100", 6)
     assert exc_info.value.code == 12002
-
 
 @pytest.mark.asyncio
 async def test_chain_support():

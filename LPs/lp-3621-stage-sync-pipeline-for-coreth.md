@@ -82,7 +82,7 @@ The staged sync is fully additive. Nodes started without `--staged-sync` flag us
 ### Staged Sync Pipeline Architecture
 
 **Location**: `~/work/lux/node/evm/stages/`
-**GitHub**: [`github.com/luxfi/node/tree/main/evm/stages`](https://github.com/luxfi/node/tree/main/evm/stages)
+**GitHub**: [`github.com/luxfi/node/tree/main/evm/stages`](https://github.com/luxfi/node/tree/main/vms/evm)
 
 **Core Stage Components**:
 - [`driver.go`](https://github.com/luxfi/node/blob/main/evm/stages/driver.go) - Stage loop runner and coordination

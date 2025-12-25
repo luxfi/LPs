@@ -161,14 +161,13 @@ contract BurnableToken is ERC20, IERC20Burnable {
 }
 ```
 
-
 ### Upgradeable Variants
 
 For proxy-based upgradeable contracts:
 
 | Contract | Description |
 |----------|-------------|
-| [`ERC20BurnableUpgradeable.sol`](https://github.com/luxfi/standard/blob/main/lib/openzeppelin-contracts-upgradeable/contracts/token/ERC20/extensions/ERC20BurnableUpgradeable.sol) | Upgradeable burnable |
+| [`ERC20BurnableUpgradeable.sol`](~/work/lux/standard/lib/openzeppelin-contracts-upgradeable/contracts/token/ERC20/extensions/ERC20BurnableUpgradeable.sol) | Upgradeable burnable |
 
 **Usage**: Initialize in `initialize()` instead of constructor. See [OpenZeppelin Upgrades](https://docs.openzeppelin.com/upgrades).
 
@@ -273,8 +272,8 @@ contract BurnableToken is ERC20 {
 
 ### GitHub References
 - **Implementation**: https://github.com/luxfi/standard/blob/main/src/ERC20Burnable.sol
-- **Test Suite**: https://github.com/luxfi/standard/tree/main/test
-- **Examples**: https://github.com/luxfi/standard/tree/main/examples
+- **Test Suite**: ~/work/lux/standard/test
+- **Examples**: ~/work/lux/standard/examples
 
 ### Integration Points
 - **LP-20**: Base LRC-20 standard (required)

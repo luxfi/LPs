@@ -208,14 +208,13 @@ The provenance system ensures:
 
 Additive change with no breaking effects; rollout is optional and incremental.
 
-
 ### Upgradeable Variants
 
 For proxy-based upgradeable contracts:
 
 | Contract | Description |
 |----------|-------------|
-| [`ERC721Upgradeable.sol`](https://github.com/luxfi/standard/blob/main/lib/openzeppelin-contracts-upgradeable/contracts/token/ERC721/ERC721Upgradeable.sol) | Upgradeable ERC-721 base |
+| [`ERC721Upgradeable.sol`](~/work/lux/standard/lib/openzeppelin-contracts-upgradeable/contracts/token/ERC721/ERC721Upgradeable.sol) | Upgradeable ERC-721 base |
 
 **Usage**: Initialize in `initialize()` instead of constructor. See [OpenZeppelin Upgrades](https://docs.openzeppelin.com/upgrades).
 
@@ -359,10 +358,9 @@ describe("LRC721 Private Ownership", () => {
 ### LRC-721 Token Contracts
 
 **Location**: `~/work/lux/standard/src/tokens/`
-**GitHub**: [`github.com/luxfi/standard/tree/main/src/tokens`](https://github.com/luxfi/standard/tree/main/src/tokens)
 
 **Core Contracts**:
-- [`ERC721.sol`](https://github.com/luxfi/standard/blob/main/src/tokens/ERC721.sol) - Base LRC-721 implementation
+- `LRC721.sol` - Base LRC-721 implementation
 - [`ERC721Enumerable.sol`](https://github.com/luxfi/standard/blob/main/src/tokens/ERC721Enumerable.sol) - Enumeration extension
 - [`ERC721URIStorage.sol`](https://github.com/luxfi/standard/blob/main/src/tokens/ERC721URIStorage.sol) - Metadata URI management
 - [`ERC721Burnable.sol`](https://github.com/luxfi/standard/blob/main/src/tokens/ERC721Burnable.sol) - Burnable NFTs

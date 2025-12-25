@@ -18,7 +18,6 @@ LRC-6909 (mirrors ERC-6909) provides a gas-efficient minimal multi-token interfa
 ## Specification
 Simplified multi-token standard with reduced gas costs compared to LRC-1155.
 
-
 ## Motivation
 
 This standard ensures compatibility with the broader EVM ecosystem while enabling Lux-specific optimizations.

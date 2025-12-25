@@ -18,7 +18,6 @@ LRC-1271 (mirrors ERC-1271) standardizes signature validation for smart contract
 ## Specification
 Implements `isValidSignature(hash, signature)` for contract-based accounts.
 
-
 ## Motivation
 
 This standard ensures compatibility with the broader EVM ecosystem while enabling Lux-specific optimizations.
@@ -31,7 +30,6 @@ Mirrors the corresponding Ethereum standard for maximum compatibility.
 
 Fully compatible with existing ERC implementations.
 
-
 ## Reference Implementation
 
 **Repository**: [https://github.com/luxfi/standard](https://github.com/luxfi/standard)
@@ -39,7 +37,7 @@ Fully compatible with existing ERC implementations.
 
 ### Interfaces
 
-- [`lib/openzeppelin-contracts/contracts/interfaces/IERC1271.sol`](https://github.com/luxfi/standard/blob/main/lib/openzeppelin-contracts/contracts/interfaces/IERC1271.sol)
+- [`lib/openzeppelin-contracts/contracts/interfaces/IERC1271.sol`](~/work/lux/standard/lib/openzeppelin-contracts/contracts/interfaces/IERC1271.sol)
 
 ### Build and Test
 

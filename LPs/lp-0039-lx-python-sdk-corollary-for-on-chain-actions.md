@@ -136,7 +136,7 @@ Client actions correspond to DexFx event logs:
 ### Python SDK Integration
 
 **Location**: `~/work/lux/sdk/python/lx/`
-**GitHub**: [`github.com/luxfi/sdk-python/tree/main/lx`](https://github.com/luxfi/sdk-python/tree/main/lx)
+**GitHub**: [`github.com/luxfi/sdk-python/tree/main/lx`]()
 
 **Core Exchange Module**:
 - [`lx/api/exchange.py`](https://github.com/luxfi/sdk-python/blob/main/lx/api/exchange.py) - Exchange class

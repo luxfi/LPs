@@ -10,7 +10,7 @@ type: Standards Track
 category: Core
 created: 2025-12-11
 updated: 2025-12-11
-requires: 9001, 9002, LP-12, LP-13, LP-80
+requires: [9001, 9002, 1200, 1300]
 series: LP-9000 DEX Series
 implementation: https://github.com/luxfi/dex
 order: 5

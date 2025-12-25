@@ -18,7 +18,6 @@ LRC-4626 (mirrors ERC-4626) standardizes tokenized yield-bearing vaults.
 ## Specification
 Defines deposit/withdraw/mint/redeem interface with share accounting for DeFi vaults.
 
-
 ## Motivation
 
 This standard ensures compatibility with the broader EVM ecosystem while enabling Lux-specific optimizations.
@@ -31,7 +30,6 @@ Mirrors the corresponding Ethereum standard for maximum compatibility.
 
 Fully compatible with existing ERC implementations.
 
-
 ## Reference Implementation
 
 **Repository**: [https://github.com/luxfi/standard](https://github.com/luxfi/standard)
@@ -41,12 +39,11 @@ Fully compatible with existing ERC implementations.
 
 | Contract | Description |
 |----------|-------------|
-| [`lib/openzeppelin-contracts/contracts/token/ERC20/extensions/ERC4626.sol`](https://github.com/luxfi/standard/blob/main/lib/openzeppelin-contracts/contracts/token/ERC20/extensions/ERC4626.sol) | OpenZeppelin ERC-4626 |
+| [`lib/openzeppelin-contracts/contracts/token/ERC20/extensions/ERC4626.sol`](~/work/lux/standard/lib/openzeppelin-contracts/contracts/token/ERC20/extensions/ERC4626.sol) | OpenZeppelin ERC-4626 |
 
 ### Interfaces
 
-- [`lib/openzeppelin-contracts/contracts/interfaces/IERC4626.sol`](https://github.com/luxfi/standard/blob/main/lib/openzeppelin-contracts/contracts/interfaces/IERC4626.sol)
-
+- [`lib/openzeppelin-contracts/contracts/interfaces/IERC4626.sol`](~/work/lux/standard/lib/openzeppelin-contracts/contracts/interfaces/IERC4626.sol)
 
 ### Upgradeable Variants
 
@@ -54,7 +51,7 @@ For proxy-based upgradeable contracts:
 
 | Contract | Description |
 |----------|-------------|
-| [`ERC4626Upgradeable.sol`](https://github.com/luxfi/standard/blob/main/lib/openzeppelin-contracts-upgradeable/contracts/token/ERC20/extensions/ERC4626Upgradeable.sol) | Upgradeable vault |
+| [`ERC4626Upgradeable.sol`](~/work/lux/standard/lib/openzeppelin-contracts-upgradeable/contracts/token/ERC20/extensions/ERC4626Upgradeable.sol) | Upgradeable vault |
 
 **Usage**: Initialize in `initialize()` instead of constructor. See [OpenZeppelin Upgrades](https://docs.openzeppelin.com/upgrades).
 

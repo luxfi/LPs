@@ -108,8 +108,8 @@ go test -v ./core/vm ./core/state
 - **Execution**: Custom VM with DAG consensus
 - **Key Files**:
   - [`vm.go`](https://github.com/luxfi/node/blob/main/vms/avm/vm.go) - Asset VM core
-  - [`txs/`](https://github.com/luxfi/node/tree/main/vms/avm/txs) - Asset transaction types
-  - [`utxos/`](https://github.com/luxfi/node/tree/main/vms/avm/utxos) - UTXO management
+  - [`txs/`](https://github.com/luxfi/node/tree/main/vms/platformvm/txs) - Asset transaction types
+  - [`utxos/`](https://github.com/luxfi/node/tree/main/vms/platformvm) - UTXO management
 
 **3. Quantum VM (Q-Chain)** (`vms/quantumvm/`)
 - **Purpose**: Post-quantum cryptography and hybrid consensus
@@ -117,7 +117,7 @@ go test -v ./core/vm ./core/state
 - **Key Files**:
   - [`vm.go`](https://github.com/luxfi/node/blob/main/vms/quantumvm/vm.go) - Quantum VM
   - [`config/config.go`](https://github.com/luxfi/node/blob/main/vms/quantumvm/config/config.go) - Ringtail and ML-DSA config
-  - [`txs/`](https://github.com/luxfi/node/tree/main/vms/quantumvm/txs) - Quantum-safe transactions
+  - [`txs/`]() - Quantum-safe transactions
 
 **4. EVM (C-Chain)** (via `~/work/lux/evm/`)
 - **Purpose**: Smart contracts and DeFi
@@ -127,22 +127,21 @@ go test -v ./core/vm ./core/state
 ### Solidity Contract Standards
 
 **Location**: `~/work/lux/standard/`
-**GitHub**: [`github.com/luxfi/standard`](https://github.com/luxfi/standard)
 
 **Token Standards** (`standard/src/tokens/`):
-- [`ERC20.sol`](https://github.com/luxfi/standard/blob/main/src/tokens/ERC20.sol) - LRC-20 (LP-20)
-- [`ERC721.sol`](https://github.com/luxfi/standard/blob/main/src/tokens/ERC721.sol) - LRC-721 (LP-721)
-- [`ERC1155.sol`](https://github.com/luxfi/standard/blob/main/src/tokens/ERC1155.sol) - LRC-1155 (LP-1155)
+- `LRC20.sol` - LRC-20 (LP-20)
+- `LRC721.sol` - LRC-721 (LP-721)
+- `LRC1155.sol` - LRC-1155 (LP-1155)
 
 **DeFi Standards** (`standard/src/defi/`):
-- [`UniswapV2/`](https://github.com/luxfi/standard/tree/main/src/defi/UniswapV2) - AMM DEX
-- [`UniswapV3/`](https://github.com/luxfi/standard/tree/main/src/defi/UniswapV3) - Concentrated liquidity
+- UniswapV2-style AMM (available in `standard/contracts/liquidity/`)
+- UniswapV3-style concentrated liquidity (available in `standard/contracts/liquidity/`)
 - Lending protocols, staking contracts, etc.
 
 **Precompile Interfaces** (`precompiles/`):
-- [`IMLDSA.sol`](https://github.com/luxfi/standard/blob/main/src/precompiles/IMLDSA.sol) - Post-quantum signatures
-- [`ICGGMP21.sol`](https://github.com/luxfi/standard/blob/main/src/precompiles/ICGGMP21.sol) - Threshold signatures
-- [`IWarpMessenger.sol`](https://github.com/luxfi/standard/blob/main/src/precompiles/IWarpMessenger.sol) - Cross-chain messaging
+- [`IMLDSA.sol`](~/work/lux/standard/contracts/precompiles/IMLDSA.sol) - Post-quantum signatures
+- [`ICGGMP21.sol`](~/work/lux/standard/contracts/precompiles/ICGGMP21.sol) - Threshold signatures
+- [`IWarpMessenger.sol`](~/work/lux/standard/contracts/precompiles/IWarpMessenger.sol) - Cross-chain messaging
 
 **Testing**:
 ```bash

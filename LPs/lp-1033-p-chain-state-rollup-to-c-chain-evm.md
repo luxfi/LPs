@@ -80,7 +80,7 @@ This LP is additive; existing C-Chain and P-Chain operations remain unaffected. 
 ### P-Chain State Anchor Contracts
 
 **Location**: `~/work/lux/standard/src/rollups/`
-**GitHub**: [`github.com/luxfi/standard/tree/main/src/rollups`](https://github.com/luxfi/standard/tree/main/src/rollups)
+(~/work/lux/standard/contracts/rollups)
 
 **Core Contracts**:
 - [`PChainAnchor.sol`](https://github.com/luxfi/standard/blob/main/src/rollups/PChainAnchor.sol) - State root commitment and proof verification

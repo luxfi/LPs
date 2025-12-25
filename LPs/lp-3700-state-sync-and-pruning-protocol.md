@@ -232,7 +232,7 @@ func TestStatePruning(t *testing.T) {
 
 ## Reference Implementation
 
-See [github.com/luxfi/node/sync](https://github.com/luxfi/node/tree/main/sync) for the complete implementation.
+See [github.com/luxfi/node/sync](https://github.com/luxfi/node) for the complete implementation.
 
 ## Implementation
 

@@ -18,7 +18,6 @@ Standard interface for paymasters that sponsor gas fees for users.
 ## Specification
 Defines paymaster interface for ERC-4337 account abstraction infrastructure.
 
-
 ## Motivation
 
 This standard ensures compatibility with the broader EVM ecosystem while enabling Lux-specific optimizations.
@@ -30,7 +29,6 @@ Mirrors the corresponding Ethereum standard for maximum compatibility.
 ## Backwards Compatibility
 
 Fully compatible with existing ERC implementations.
-
 
 ## Reference Implementation
 

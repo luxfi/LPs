@@ -7,7 +7,7 @@ type: Standards Track
 category: Core
 status: Draft
 created: 2025-01-15
-requires: LP-100
+requires: [5101]
 tags: [ai, privacy]
 order: 102
 ---

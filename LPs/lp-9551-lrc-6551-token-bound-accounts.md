@@ -18,7 +18,6 @@ LRC-6551 (mirrors ERC-6551) enables NFTs to own assets as smart contract wallets
 ## Specification
 Every NFT gets a deterministic smart contract account that can hold assets.
 
-
 ## Motivation
 
 This standard ensures compatibility with the broader EVM ecosystem while enabling Lux-specific optimizations.
@@ -44,8 +43,8 @@ Fully compatible with existing ERC implementations.
 
 ### Interfaces
 
-- [`lib/openzeppelin-contracts/contracts/interfaces/IERC6551Registry.sol`](https://github.com/luxfi/standard/blob/main/lib/openzeppelin-contracts/contracts/interfaces/IERC6551Registry.sol)
-- [`lib/openzeppelin-contracts/contracts/interfaces/IERC6551Account.sol`](https://github.com/luxfi/standard/blob/main/lib/openzeppelin-contracts/contracts/interfaces/IERC6551Account.sol)
+- [`lib/openzeppelin-contracts/contracts/interfaces/IERC6551Registry.sol`](~/work/lux/standard/lib/openzeppelin-contracts/contracts/interfaces/IERC6551Registry.sol)
+- [`lib/openzeppelin-contracts/contracts/interfaces/IERC6551Account.sol`](~/work/lux/standard/lib/openzeppelin-contracts/contracts/interfaces/IERC6551Account.sol)
 
 **Note**: ERC-6551 enables NFTs to own assets. Each NFT gets a deterministic smart contract account.
 

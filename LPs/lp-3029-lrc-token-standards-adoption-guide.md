@@ -28,7 +28,6 @@ A standardized token interface is the bedrock of a composable DeFi and NFT ecosy
 
 ## Specification
 
-
 This LP formally adopts and rebrands the core Ethereum token standards as Lux Request for Comment (LRC) interfaces. For full specifications, see the respective LPs:
 
 | LRC Standard | Maps To  | LP Reference    |
@@ -129,7 +128,7 @@ forge verify-contract <address> src/ERC20.sol:ERC20 \
 ### GitHub References
 - **Standard Library**: https://github.com/luxfi/standard
 - **Token Implementations**: https://github.com/luxfi/standard/tree/main/src
-- **Test Suite**: https://github.com/luxfi/standard/tree/main/test
+- **Test Suite**: ~/work/lux/standard/test
 
 ### Integration with Other Standards
 - **LP-20**: LRC-20 fungible token base

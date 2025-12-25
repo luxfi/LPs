@@ -2121,13 +2121,11 @@ from functools import lru_cache
 import httpx
 from pydantic import BaseModel
 
-
 class SecretVersion(BaseModel):
     version: int
     created_at: int
     created_by: str
     comment: Optional[str] = None
-
 
 class Secret(BaseModel):
     key: str
@@ -2136,7 +2134,6 @@ class Secret(BaseModel):
     description: Optional[str] = None
     tags: List[str] = []
     version: int = 1
-
 
 class SecretsClient:
     """Client for Lux Decentralized Secrets Management Platform"""
@@ -2356,7 +2353,6 @@ class SecretsClient:
 
     def __exit__(self, *args):
         self._client.close()
-
 
 # Usage example
 if __name__ == "__main__":

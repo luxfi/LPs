@@ -67,7 +67,7 @@ network.Healthy(ctx)  # Bootstrap all 4 chains
 ### CLI Integration
 
 **Location**: `~/work/lux/cli/cmd/network/`
-**GitHub**: [`github.com/luxfi/cli/tree/main/cmd/network`](https://github.com/luxfi/cli/tree/main/cmd/network)
+**GitHub**: [`github.com/luxfi/cli/tree/main/cmd/network`]()
 
 **Commands**:
 - `lux network start` - Launch local network with specified node version
