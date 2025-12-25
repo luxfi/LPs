@@ -5,10 +5,20 @@ import matter from 'gray-matter';
 const LPS_DIR = path.join(process.cwd(), '../LPs');
 
 // Format LP number without leading zeros for display (LP-0 instead of LP-0000)
+// Handles both numeric (10000) and alphanumeric (M1) LP numbers
 function formatLPNumber(lp: number | string | undefined): string {
   if (lp === undefined || lp === null) return 'LP-0';
-  const num = typeof lp === 'string' ? parseInt(lp, 10) : lp;
-  return `LP-${num}`;
+  // Check if it's already a string (could be alphanumeric like "M1")
+  if (typeof lp === 'string') {
+    // If it's a numeric string with leading zeros, strip them
+    if (/^\d+$/.test(lp)) {
+      return `LP-${parseInt(lp, 10)}`;
+    }
+    // Non-numeric string (like "M1"), use as-is
+    return `LP-${lp}`;
+  }
+  // Numeric value
+  return `LP-${lp}`;
 }
 
 export interface LPMetadata {
