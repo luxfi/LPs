@@ -4,12 +4,13 @@ title: KZG4844 Blob Commitments Precompile
 description: Native EVM precompile for EIP-4844 KZG polynomial commitments for blob data availability
 author: Lux Crypto Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions/3665
-status: Draft
+status: Final
 type: Standards Track
 category: Core
 created: 2025-12-24
-requires: 3653
+requires: [3653]
 tags: [precompile, cryptography, data-availability]
+order: 665
 ---
 
 ## Abstract

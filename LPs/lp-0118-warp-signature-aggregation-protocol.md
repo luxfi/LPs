@@ -9,6 +9,7 @@ type: Standards Track
 category: Networking
 created: 2024-12-23
 tags: [warp, bls, signatures, p2p, cross-chain]
+order: 118
 ---
 
 # LP-0118: Warp Signature Aggregation Protocol
