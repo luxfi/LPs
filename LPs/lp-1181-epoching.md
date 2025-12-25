@@ -463,9 +463,9 @@ Thanks to Lux Protocol Team for integration testing and  quantum coordination de
 ## References
 
 - [ACP-181 Original Specification](https://github.com/avalanche-foundation/ACPs/tree/main/ACPs/181-p-chain-epoched-views)
-- [LP-605](lp-605-elastic-validator-chains.md)
-- [LP-318](lp-318-ml-kem-post-quantum-key-encapsulation.md)
-- [LP-316](lp-316-ml-dsa-post-quantum-digital-signatures.md)
+- [LP-605](lp-1605-elastic-validator-chains.md)
+- [LP-318](lp-4318-ml-kem-post-quantum-key-encapsulation.md)
+- [LP-316](lp-4316-ml-dsa-post-quantum-digital-signatures.md)
 
 ## Copyright
 

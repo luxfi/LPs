@@ -1,5 +1,5 @@
 ---
-lp: 3653
+lp: 3667
 title: Dynamic EVM Gas Limit Updates
 description: Dynamic gas limit adjustments and EIP-1559 fee mechanism for Lux C-Chain
 author: Lux Core Team (@luxfi)

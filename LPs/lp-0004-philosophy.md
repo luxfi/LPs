@@ -17,7 +17,7 @@ tier: core
 
 Lux Network is built on a foundation of open source principles and software sovereignty. This document articulates our philosophy of strategic forking, explains why we maintain complete control over critical dependencies, and establishes the guiding principles for our open source strategy.
 
-For implementation details, metrics, and verification procedures, see [LP-7](./lp-0007-supply-chain-control.md).
+For implementation details, metrics, and verification procedures, see [LP-0006: Security](./lp-0006-security.md) and [LP-0008: Plugin Architecture](./lp-0008-plugin-architecture.md).
 
 ---
 
@@ -183,9 +183,9 @@ The philosophy documented here reduces attack surface, enables rapid response, a
 
 ## Related LPs
 
-- **[LP-5](./lp-0005-supply-chain-control.md)**: Implementation metrics and verification procedures
 - **LP-85: Security Audit Framework**: How we audit dependencies
 - **LP-86: Security Disclosure**: Responsible disclosure for our forks
+- **LP-0006: Security**: Security principles and practices
 
 ---
 

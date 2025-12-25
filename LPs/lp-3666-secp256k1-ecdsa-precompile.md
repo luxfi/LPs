@@ -1,5 +1,5 @@
 ---
-lp: 3652
+lp: 3666
 title: secp256k1 ECDSA Cryptography Precompile
 description: Native EVM precompile for secp256k1 ECDSA operations with optimized libsecp256k1 backend
 author: Lux Core Team (@luxfi)
