@@ -13,7 +13,7 @@ tags: [evm, dev-tools, indexing]
 order: 101
 ---
 
-> **See also**: [LP-1212: C-Chain Contract Chain Specification](/docs/lp-1212-c-chain-contract-chain-specification/), [LP-1226: C-Chain EVM Equivalence](/docs/lp-1226-c-chain-evm-equivalence-and-core-eips-adoption/), [LP-0098: GraphDB & GraphQL Integration](/docs/lp-0098-luxfi-graphdb-and-graphql-engine-integration/)
+> **See also**: [LP-1200: C-Chain EVM Specification](./lp-1200-c-chain-evm-specification.md), [LP-1226: C-Chain EVM Equivalence](/docs/lp-1226-c-chain-evm-equivalence-and-core-eips-adoption/), [LP-0098: GraphDB & GraphQL Integration](/docs/lp-0098-luxfi-graphdb-and-graphql-engine-integration/)
 
 ## Abstract
 

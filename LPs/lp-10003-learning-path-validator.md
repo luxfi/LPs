@@ -49,45 +49,44 @@ After completing this path, you will be able to:
 | Order | LP | Title | Time | Depth |
 |-------|-----|-------|------|-------|
 | 1 | [LP-1000](/docs/lp-1000-p-chain-core-platform-specification/) | P-Chain Core | 30 min | Deep |
-| 2 | [LP-1010](/docs/lp-1010-p-chain-platform-chain-specification/) | Platform Chain Spec | 30 min | Deep |
-| 3 | [LP-1100](/docs/lp-1100/) | Staking & Epochs | 25 min | Deep |
-| 4 | [LP-0181](/docs/lp-0181-epoching/) | Epoching (LP-181) | 20 min | Deep |
+| 3 | [LP-3605](./lp-3605-validator-staking-and-delegation-standard.md) | Staking & Epochs | 25 min | Deep |
+| 4 | [LP-181](https://github.com/avalanche-foundation/ACPs/tree/main/ACPs/181-p-chain-epoched-views) | Epoching (LP-181) | 20 min | Deep |
 
 ### Stage 2: X-Chain & Asset Settlement
 
 | Order | LP | Title | Time | Depth |
 |-------|-----|-------|------|-------|
-| 5 | LP-1300 | X-Chain Core | 25 min | Deep |
-| 6 | LP-1400 | Asset Standards | 20 min | Medium |
+| 5 | [LP-3600](./lp-3600-virtual-machine-and-execution-environment.md) | X-Chain Core | 25 min | Deep |
+| 6 | [LP-3020](./lp-3020-lrc-20-fungible-token-standard.md) | Asset Standards | 20 min | Medium |
 
 ### Stage 3: Q-Chain & Root Security
 
 | Order | LP | Title | Time | Depth |
 |-------|-----|-------|------|-------|
-| 7 | LP-1500 | Q-Chain Core | 25 min | Deep |
-| 8 | LP-1600 | Quantum Checkpoints | 20 min | Medium |
+| 7 | [LP-4000](./lp-4000-q-chain-quantum-specification.md) | Q-Chain Core | 25 min | Deep |
+| 8 | [LP-4303](./lp-4303-lux-q-security-post-quantum-p-chain-integration.md) | Quantum Checkpoints | 20 min | Medium |
 
 ### Stage 4: Cryptographic Primitives
 
 | Order | LP | Title | Time | Depth |
 |-------|-----|-------|------|-------|
-| 9 | [LP-2000](/docs/lp-2000/) | Crypto Overview | 20 min | Medium |
-| 10 | [LP-2100](/docs/lp-2100/) | Signatures | 25 min | Deep |
-| 11 | [LP-2200](/docs/lp-2200/) | PQC Algorithms | 25 min | Medium |
+| 9 | [LP-2000](./lp-200-post-quantum-cryptography-suite-for-lux-network.md) | Crypto Overview | 20 min | Medium |
+| 10 | [LP-3653](./lp-3653-bls12-381-cryptography-precompile.md) | Signatures | 25 min | Deep |
+| 11 | [LP-4316](./lp-4316-ml-dsa-post-quantum-digital-signatures.md) | PQC Algorithms | 25 min | Medium |
 
 ### Stage 5: chains & Scaling
 
 | Order | LP | Title | Time | Depth |
 |-------|-----|-------|------|-------|
 | 12 | [LP-0003](/docs/lp-0003-chain-architecture-and-cross-chain-interoperability/) | recursive network architecture | 30 min | Deep |
-| 13 | [LP-0605](/docs/lp-0605-elastic-validator-chains/) | Elastic Validator chains | 20 min | Medium |
+| 13 | [LP-1605](./lp-1605-elastic-validator-chains.md) | Elastic Validator chains | 20 min | Medium |
 
 ### Stage 6: Upgrades & Operations
 
 | Order | LP | Title | Time | Depth |
 |-------|-----|-------|------|-------|
-| 14 | [LP-0226](/docs/lp-0226-dynamic-minimum-block-times-granite-upgrade/) | Dynamic Block Times | 20 min | Deep |
-| 15 | [LP-0326](/docs/lp-0326-blockchain-network-upgrade-and-state-migration/) | Network Upgrades | 25 min | Deep |
+| 14 | [LP-3652](./lp-3652-dynamic-minimum-block-times.md) | Dynamic Block Times | 20 min | Deep |
+| 15 | [LP-3660](./lp-3660-network-upgrade-and-state-migration.md) | Network Upgrades | 25 min | Deep |
 
 ---
 
@@ -101,8 +100,8 @@ After completing this path, you will be able to:
 
 | To specialize in... | Go to |
 |---------------------|-------|
-| MPC custody ops | [LP-0016: MPC Path](/docs/lp-0016-learning-path-mpc/) |
-| ZK infrastructure | [LP-0017: Privacy Path](/docs/lp-0017-learning-path-privacy/) |
+| MPC custody ops | [LP-10006: MPC Path](./lp-10006-learning-path-mpc.md) |
+| ZK infrastructure | [LP-10007: Privacy Path](./lp-10007-learning-path-privacy.md) |
 
 ---
 

@@ -33,7 +33,7 @@ order: 5
 | Full Oracle (LX) | [`dex/pkg/lx/oracle.go`](https://github.com/luxfi/dex/blob/main/pkg/lx/oracle.go) | ✅ Complete |
 | Alpaca Source | [`dex/pkg/lx/alpaca_source.go`](https://github.com/luxfi/dex/blob/main/pkg/lx/alpaca_source.go) | ✅ Complete |
 
-> **See also**: [LP-11](/docs/lp-9011-x-chain-exchange-chain-specification/), [LP-12](/docs/lp-2012-c-chain-contract-chain-specification/), [LP-36](/docs/lp-3036-x-chain-order-book-dex-api-and-rpc-addendum/), [LP-13](/docs/lp-7013-t-chain-decentralised-mpc-custody-and-swap-signature-layer/), [LP-80](/docs/lp-5080-a-chain-attestation-chain-specification/), [LP-608](/docs/lp-0608-high-performance-dex-protocol/), [LP-INDEX](/docs/)
+> **See also**: [LP-9001](./lp-9001-dex-trading-engine.md), [LP-1200](./lp-1200-c-chain-evm-specification.md), [LP-9002](./lp-9002-dex-api-rpc-specification.md), [LP-7322](./lp-7322-cggmp21-threshold-ecdsa-precompile.md), [LP-5000](./lp-5000-a-chain-ai-attestation-specification.md), [LP-9003](./lp-9003-high-performance-dex-protocol.md), [LP-INDEX](/docs/)
 
 ## Abstract
 
