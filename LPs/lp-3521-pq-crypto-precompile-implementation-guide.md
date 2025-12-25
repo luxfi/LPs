@@ -22,6 +22,34 @@ order: 720
 
 This LP provides the definitive implementation reference for all post-quantum cryptography (PQC) precompiles on Lux Network. It documents precompile addresses, gas costs for all algorithm modes, input/output formats, mode byte encodings, and implementation locations across all repositories (geth, evm, precompiles).
 
+## Motivation
+
+Post-quantum cryptography is essential for Lux Network's long-term security. As quantum computers advance, traditional elliptic curve cryptography (ECC) will become vulnerable. This LP provides:
+
+1. **Migration Path**: Clear specification for developers transitioning from ECC to PQC
+2. **Gas Cost Transparency**: Predictable costs for smart contract budgeting
+3. **Implementation Clarity**: Exact addresses, mode bytes, and I/O formats for integration
+4. **Test Coverage Visibility**: Documented test cases with pass/fail status
+
+## Specification
+
+This specification defines the interface and behavior for PQC precompiles:
+
+1. **Precompile Addresses**: Three dedicated addresses for ML-DSA, SLH-DSA, and unified PQC operations
+2. **Mode Bytes**: Algorithm/variant identification (0x00-0x87 range)
+3. **Gas Costs**: Fixed per-operation costs based on computational complexity
+4. **Input/Output Format**: Binary encoding for efficient EVM processing
+5. **Function Selectors**: Four-byte selectors for the unified precompile
+
+## Backwards Compatibility
+
+PQC precompiles are additive additions that do not affect existing EVM functionality:
+
+- **New Addresses**: `0x0200000000000000000000000000000000000006` (ML-DSA), `0x0200000000000000000000000000000000000007` (SLH-DSA), `0x0200000000000000000000000000000000000010` (Unified) - outside existing range
+- **No Behavioral Changes**: Existing precompiles remain unchanged
+- **Opt-in Migration**: Contracts must explicitly call PQC precompiles
+- **Gas Model**: Separate gas calculation from standard EVM operations
+
 ## Precompile Addresses
 
 | Precompile | Address | Description |
@@ -405,7 +433,7 @@ library PQCryptoLib {
 | BenchmarkPQPrecompile/ML-DSA-Verify | ML-DSA performance | ✅ PASS |
 | BenchmarkPQPrecompile/ML-KEM-Encapsulate | ML-KEM performance | ✅ PASS |
 
-## Gas Cost Rationale
+## Rationale
 
 ### ML-DSA Gas Derivation
 

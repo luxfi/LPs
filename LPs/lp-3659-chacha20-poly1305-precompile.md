@@ -68,6 +68,69 @@ LP-3659 specifies a native EVM precompile for ChaCha20-Poly1305 authenticated en
 | AEAD Encrypt (1KB) | 700,000 gas | 7,000 gas | 100x |
 | AEAD Decrypt (1KB) | 700,000 gas | 7,000 gas | 100x |
 
+## Rationale
+
+### ChaCha20-Poly1305 Selection
+
+This AEAD cipher provides unique advantages:
+
+1. **Constant-Time**: No data-dependent timing channels
+2. **Software Efficiency**: Fast on all platforms, no hardware needed
+3. **Quantum Margin**: 256-bit security, resistant to future attacks
+4. **Standards Track**: RFC 8439, widely deployed in TLS 1.3
+
+### Why Not AES-GCM?
+
+- AES requires hardware acceleration for efficiency
+- Side-channel attacks on AES are more common
+- ChaCha20 is faster on mobile/embedded devices
+- Both provide similar security (128-bit)
+
+### Precompile Address Choice
+
+Using `0x0319` (497+ in hex) for ChaCha20-Poly1305:
+
+- Sequential after Poseidon at `0x0318`
+- Grouping all encryption operations
+- Follows cryptographic precompile convention
+
+### Function Selector Design
+
+Organized by operation:
+
+- `0x01-0x0F`: Core stream cipher (ChaCha20)
+- `0x10-0x1F`: MAC (Poly1305)
+- `0x20-0x2F`: Combined AEAD operations
+- `0x30-0x3F': Extended variants (XChaCha20, HChaCha20)
+
+### Gas Cost Derivation
+
+Gas based on throughput:
+
+| Operation | Time (μs) | Data Rate | Gas |
+|-----------|-----------|-----------|-----|
+| chacha20 | 5 | 1 GB/s | 1,000 + 5/byte |
+| poly1305 | 3 | 1.5 GB/s | 800 + 2/byte |
+| aead_encrypt | 7 | 500 MB/s | 2,000 + 10/byte |
+| aead_decrypt | 8 | 400 MB/s | 2,500 + 12/byte |
+
+### XChaCha20 for Extended Nonce
+
+XChaCha20 provides:
+
+- 24-byte nonce (vs 12-byte for ChaCha20)
+- Prevents nonce reuse in high-volume scenarios
+- Better suited for key derivation
+- Compatible with most protocols
+
+### RFC 8439 Compliance
+
+Strict implementation of RFC 8439 ensures:
+
+- Interoperability with standard libraries
+- Correct security properties
+- Known test vectors for verification
+
 ## Specification
 
 ### Precompile Address

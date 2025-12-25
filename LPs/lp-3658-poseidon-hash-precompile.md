@@ -67,6 +67,67 @@ LP-3658 specifies a native EVM precompile for the Poseidon hash function, a cryp
 | Poseidon | ~300 | 3ms | Low |
 | Rescue | ~400 | 5ms | Medium |
 
+## Rationale
+
+### Poseidon for Zero-Knowledge
+
+Poseidon is purpose-built for ZK circuits:
+
+1. **Arithmetic Design**: Uses field addition/multiplication, not bit operations
+2. **Sponge Construction**: Standard, well-analyzed security
+3. **Low Constraints**: ~300 vs ~25,000 for SHA-256
+4. **Ecosystem Adoption**: Filecoin, Zcash, Hermez, Polygon
+
+### Why Not MiMC or Rescue?
+
+- **Poseidon**: Better security margins, more analysis
+- **Rescue**: Similar constraints, less adoption
+- **Trade-off**: Poseidon has slightly more rounds for better security
+
+### Precompile Address Choice
+
+Using `0x0318` (496+ in hex) for Poseidon:
+
+- Sequential after VRF at `0x0317`
+- Grouping all ZK-friendly operations
+- Follows cryptographic precompile convention
+
+### Function Selector Design
+
+Organized by operation complexity:
+
+- `0x01-0x0F`: Basic hash operations (single input)
+- `0x10-0x1F`: Two-input hash (for commitments)
+- `0x20-0x2F`: Sponge operations (variable input)
+- `0x30-0x3F`: Merkle tree operations
+
+### Gas Cost Derivation
+
+Gas based on Poseidon permutation complexity:
+
+| Operation | Rounds | Constraints | Gas |
+|-----------|--------|-------------|-----|
+| poseidonHash | 8 + 1/2 + 8 | ~300 | 500 |
+| poseidonHash2 | 8 + 1/2 + 8 | ~400 | 800 |
+| poseidonSponge | 8 + rate | ~rate x 50 | 200 + 10/byte |
+| merkleRoot | n x poseidon | ~n x 300 | 500 + 400/level |
+
+### Field Selection (BN254 vs BLS12-381)
+
+Supporting both prime fields:
+
+- **BN254**: Best compatibility with Ethereum ecosystem
+- **BLS12-381**: Matches BLS signature curve, good for ZK-Bridge
+- **Auto-detection**: Input format determines field
+
+### Circomlib Compatibility
+
+Using circomlib parameters ensures:
+
+- Interoperability with existing ZK circuits
+- Verified secure parameters
+- Standard test vectors available
+
 ## Specification
 
 ### Precompile Address

@@ -69,6 +69,61 @@ LP-3655 specifies a native EVM precompile for the complete SHA-3 family of crypt
 | SHAKE256(64) | N/A | 80 gas | New capability |
 | Keccak-f[1600] | 5,000+ gas | 100 gas | 50x |
 
+## Rationale
+
+### SHA-3 Family Selection
+
+SHA-3 (FIPS 202) is the successor to SHA-2 and provides:
+
+1. **Different Construction**: Sponge-based vs. Merkle-Damgård, immune to length-extension
+2. **NIST Standard**: Government-approved for sensitive applications
+3. **Post-Quantum**: Based on different mathematical assumptions than RSA/ECC
+4. **Flexibility**: SHAKE for variable-length output, KMAC for keyed hashing
+
+### Keccak vs SHA-3 Distinction
+
+Maintaining both Keccak-256 (Ethereum's original) and SHA3-256 (FIPS):
+
+- **Keccak-256**: Backwards compatibility with Ethereum history
+- **SHA3-256**: Standards-compliant for new applications
+- **Clear Differentiation**: Prevents confusion between variants
+
+### Precompile Address Choice
+
+Using `0x0315` (493+ in hex) for SHA-3/Keccak:
+
+- Sequential after Ed25519 at `0x0314`
+- Grouping all Keccak-family operations under single address
+- Follows cryptographic precompile convention
+
+### Function Selector Design
+
+Organized by hash category:
+
+- `0x01-0x0F`: SHA-3 fixed-output (224/256/384/512)
+- `0x10-0x1F`: SHAKE extensible-output (128/256)
+- `0x20-0x2F`: Customized variants (cSHAKE, KMAC)
+- `0x30-0x3F`: Raw operations (Keccak-f1600)
+
+### Gas Cost Derivation
+
+Gas based on throughput (rate) of each function:
+
+| Function | Rate (bytes/cycle) | Gas per KB | Rationale |
+|----------|-------------------|------------|-----------|
+| SHA3-256 | 136 | 21 | ~6.5x Keccak-256 opcode |
+| SHA3-512 | 104 | 28 | More rounds, larger output |
+| SHAKE128 | 168 | 17 | Fastest SHAKE variant |
+| SHAKE256 | 136 | 21 | Standard SHAKE |
+
+### SHAKE for ZK Applications
+
+SHAKE128 is optimal for zero-knowledge circuits:
+
+- Linear complexity in ZK proving systems
+- Arbitrary output length matching circuit needs
+- XOF structure avoids fixed-length constraints
+
 ## Specification
 
 ### Precompile Address

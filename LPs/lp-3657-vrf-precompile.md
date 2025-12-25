@@ -68,6 +68,71 @@ LP-3657 specifies a native EVM precompile for Verifiable Random Function (VRF) o
 | VRF Verify (Ed25519) | 600,000 gas | 12,000 gas | 50x |
 | Batch Verify (10) | 5,000,000 gas | 80,000 gas | 62x |
 
+## Rationale
+
+### VRF Selection for Different Use Cases
+
+Three VRF constructions provide flexibility:
+
+1. **ECVRF-SECP256K1-SHA256**: Default for most applications
+   - Compatible with Ethereum's curve
+   - Best gas efficiency
+   - Widely understood security model
+
+2. **ECVRF-ED25519-SHA512**: High-performance alternative
+   - Faster verification than secp256k1
+   - Used by Algorand, NEAR
+   - Better for batch operations
+
+3. **Ringtail VRF**: Threshold/multi-party VRF
+   - Distributed key generation
+   - No single point of failure
+   - Post-quantum ready
+
+### Precompile Address Choice
+
+Using `0x0317` (495+ in hex) for VRF operations:
+
+- Sequential after Blake3 at `0x0316`
+- Grouping all VRF-related operations
+- Follows cryptographic precompile convention
+
+### Function Selector Design
+
+Organized by operation category:
+
+- `0x01-0x0F`: ECVRF prove/verify operations
+- `0x10-0x1F`: Batch verification
+- `0x20-0x2F`: Proof conversion and hashing
+- `0x30-0x3F`: Ringtail threshold operations
+
+### Gas Cost Derivation
+
+Gas costs based on cryptographic complexity:
+
+| Operation | Complexity | Relative to ecrecover | Gas |
+|-----------|------------|----------------------|-----|
+| vrfVerify (secp256k1) | 2x EC mul + hashing | ~5x | 15,000 |
+| vrfVerify (Ed25519) | 1.5x EC mul + hashing | ~4x | 12,000 |
+| vrfBatchVerify (10) | ~8x single | ~40x | 80,000 |
+| vrfProofToHash | Simple hashing | ~0.5x | 3,000 |
+
+### VRF for Consensus
+
+VRF is essential for leader election in modern consensus:
+
+- **Photon**: VRF-based proposer selection
+- **Quasar**: Randomness for committee formation
+- **Fairness**: Unpredictable but verifiable leader election
+
+### IETF ECVRF Standard Compliance
+
+Following IETF ECVRF draft ensures:
+
+- Interoperability with other chains
+- Correct security properties (unpredictability, uniqueness)
+- Standard proof format for verification
+
 ## Specification
 
 ### Precompile Address

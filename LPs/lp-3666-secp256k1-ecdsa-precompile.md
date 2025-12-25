@@ -70,6 +70,70 @@ LP-3652 specifies a native EVM precompile for secp256k1 ECDSA cryptographic oper
 | Point Multiplication | 40,000 gas | 2,000 gas | 20x |
 | Schnorr Verify | 12,000 gas | 2,500 gas | 4.8x |
 
+## Rationale
+
+### secp256k1 Curve Selection
+
+secp256k1 is the most battle-tested curve for blockchain:
+
+1. **Bitcoin Standard**: Used by Bitcoin since 2009
+2. **Ethereum Compatible**: Default for Ethereum accounts
+3. **Performance**: Efficient arithmetic, well-optimized libraries
+4. **Security**: No known practical attacks after 15+ years
+
+### libsecp256k1 Library
+
+Using Bitcoin Core's implementation provides:
+
+1. **Audit Trail**: Extensively reviewed by Bitcoin developers
+2. **Constant-Time**: All operations use constant-time algorithms
+3. **Optimization**: Hand-tuned assembly for multiple platforms
+4. **Reliability**: Zero known security vulnerabilities
+
+### Precompile Address Choice
+
+Using `0x0312` (498+ in hex) for secp256k1:
+
+- Lower than other crypto precompiles for historical reasons
+- Grouping all secp256k1 operations
+- Matches expected address pattern
+
+### Function Selector Design
+
+Organized by operation category:
+
+- `0x01-0x0F`: ECDSA operations (verify, recover)
+- `0x10-0x1F`: Point operations (add, mul, negate)
+- `0x20-0x2F': Schnorr operations (sign, verify, aggregate)
+- `0x30-0x3F': Key operations (derive, validate)
+
+### Gas Cost Derivation
+
+Gas based on computational complexity relative to ecrecover:
+
+| Operation | Complexity | Ratio to ecrecover | Gas |
+|-----------|------------|-------------------|-----|
+| ecdsaVerify | 1x (baseline) | ~1x | 3,000 |
+| ecdsaRecover | 1.2x baseline | ~1x | 500 |
+| batchVerify | n x 0.8x | ~0.8n | 15,000 (10) |
+| ecMul | 3x baseline | ~3x | 2,000 |
+| schnorrVerify | 0.8x ecdsa | ~0.8x | 2,500 |
+
+### Why Not Replace ecrecover?
+
+- **Backwards Compatibility**: Existing contracts rely on ecrecover
+- **Different Interface**: This precompile has richer functionality
+- **Cost Optimization**: ecrecover is sufficient for simple recovery
+
+### BIP-340 Schnorr Support
+
+Adding Schnorr provides:
+
+1. **Signature Aggregation**: Multiple signatures combine to one
+2. **Privacy**: MAST support for complex spending conditions
+3. **Efficiency**: Smaller signatures (64 bytes vs 65+)
+4. **Future-Proofing**: Foundation for Taproot-style applications
+
 ## Specification
 
 ### Precompile Address
