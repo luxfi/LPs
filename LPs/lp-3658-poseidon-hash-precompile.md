@@ -4,7 +4,7 @@ title: Poseidon Hash Precompile (ZK-Friendly)
 description: Native EVM precompile for Poseidon hash function optimized for zero-knowledge proof circuits
 author: Lux Core Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
-status: Draft
+status: Review
 type: Standards Track
 category: Core
 created: 2025-12-24

@@ -4,7 +4,7 @@ title: Ring Signatures (LSAG) Precompile
 description: Native EVM precompile for Linkable Spontaneous Anonymous Group signatures for Q-Chain privacy
 author: Lux Crypto Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions/3664
-status: Draft
+status: Review
 type: Standards Track
 category: Core
 created: 2025-12-24

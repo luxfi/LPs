@@ -4,7 +4,7 @@ title: Ed25519/EdDSA Cryptography Precompile
 description: Native EVM precompile for Ed25519 curve operations and EdDSA signature verification
 author: Lux Core Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
-status: Draft
+status: Review
 type: Standards Track
 category: Core
 created: 2025-12-24

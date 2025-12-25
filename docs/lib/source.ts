@@ -4,6 +4,13 @@ import matter from 'gray-matter';
 
 const LPS_DIR = path.join(process.cwd(), '../LPs');
 
+// Format LP number without leading zeros for display (LP-0 instead of LP-0000)
+function formatLPNumber(lp: number | string | undefined): string {
+  if (lp === undefined || lp === null) return 'LP-0';
+  const num = typeof lp === 'string' ? parseInt(lp, 10) : lp;
+  return `LP-${num}`;
+}
+
 export interface LPMetadata {
   lp?: number | string;
   title?: string;
@@ -1126,7 +1133,7 @@ export const source = {
           description: topic.description,
           children: topic.lps.slice(0, 20).map(lp => ({
             type: 'page' as const,
-            name: `LP-${lp.data.frontmatter.lp}: ${lp.data.title.substring(0, 40)}${lp.data.title.length > 40 ? '...' : ''}`,
+            name: `${formatLPNumber(lp.data.frontmatter.lp)}: ${lp.data.title.substring(0, 40)}${lp.data.title.length > 40 ? '...' : ''}`,
             url: `/docs/${lp.slug.join('/')}`,
           })),
         })),

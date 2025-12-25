@@ -5,7 +5,7 @@ tags: [mpc, threshold-crypto, bridge]
 description: Purpose-built chain providing threshold-signature custody, on-chain swap-signature proofs, slashing and reward logic, and light-client proofs for bridge operations.
 author: Lux Protocol Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
-status: Draft
+status: Review
 type: Standards Track
 category: Core
 created: 2025-01-23

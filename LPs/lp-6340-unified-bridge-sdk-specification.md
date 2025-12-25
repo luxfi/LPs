@@ -4,7 +4,7 @@ title: Unified Bridge SDK Specification
 description: Comprehensive SDK specification for developers integrating with the Teleport bridge protocol across TypeScript, Go, and Python
 author: Lux Partners (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
-status: Draft
+status: Review
 type: Standards Track
 category: Interface
 created: 2025-12-11

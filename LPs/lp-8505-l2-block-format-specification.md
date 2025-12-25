@@ -4,7 +4,7 @@ title: L2 Block Format Specification
 description: Standardized block format for L2 rollups with compression, batch aggregation, and AI metadata
 author: Lux Network Team (@luxfi), Hanzo AI (@hanzoai), Zoo Protocol (@zooprotocol)
 discussions-to: https://github.com/luxfi/lps/discussions
-status: Draft
+status: Review
 type: Standards Track
 category: Core
 created: 2025-09-24

@@ -5,7 +5,7 @@ tags: [defi, dex, hft, quantumswap, trading, performance]
 description: High-frequency trading integration with QuantumSwap achieving 434M orders/sec and 2ns latency
 author: Lux Network Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
-status: Draft
+status: Review
 type: Standards Track
 category: Core
 created: 2025-12-21

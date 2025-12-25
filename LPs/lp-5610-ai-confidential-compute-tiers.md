@@ -4,7 +4,7 @@ title: AI Confidential Compute Tier Specification
 description: Defines hardware trust tiers for AI compute in the Lux Network's permissionless AI infrastructure
 author: Hanzo AI (@hanzoai), Lux Network (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
-status: Draft
+status: Review
 type: Standards Track
 category: Core
 created: 2025-12-14

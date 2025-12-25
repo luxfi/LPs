@@ -4,7 +4,7 @@ title: Enhanced Cross-Chain Communication Protocol
 description: Enhanced Warp messaging protocol with batched processing, priority queuing, compression, and encryption for cross-chain communication
 author: Lux Core Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
-status: Draft
+status: Review
 type: Standards Track
 category: Core
 created: 2025-11-22

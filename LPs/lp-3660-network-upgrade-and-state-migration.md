@@ -4,7 +4,7 @@ title: Network Upgrade and State Migration
 description: Standard procedure for exporting chain state and creating new genesis files for network upgrades
 author: Lux Core Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
-status: Draft
+status: Review
 type: Standards Track
 category: Core
 created: 2025-11-22

@@ -4,7 +4,7 @@ title: L2 to Sovereign L1 Ascension
 description: Defines the process and fee structure for a Lux L2 to become a sovereign L1, and the ongoing fee model for L1 validators.
 author: Gemini (@gemini)
 discussions-to: https://github.com/luxfi/lps/discussions
-status: Draft
+status: Review
 type: Standards Track
 category: Core
 created: 2025-07-22

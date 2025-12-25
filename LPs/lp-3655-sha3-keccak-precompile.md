@@ -4,7 +4,7 @@ title: SHA-3/Keccak Cryptographic Hash Precompile
 description: Native EVM precompile for SHA-3 family hashes and Keccak variants with SHAKE extensible outputs
 author: Lux Core Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
-status: Draft
+status: Review
 type: Standards Track
 category: Core
 created: 2025-12-24

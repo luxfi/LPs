@@ -4,7 +4,7 @@ title: Bridge Security and Emergency Procedures
 description: Security measures and emergency response procedures for the Lux Bridge cross-chain infrastructure
 author: Lux Protocol Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
-status: Draft
+status: Review
 type: Standards Track
 category: Bridge
 created: 2025-12-11

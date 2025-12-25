@@ -4,7 +4,7 @@ title: NFT Marketplace Standard
 description: Canonical NFT marketplace infrastructure for Lux Network using Seaport and Sudoswap protocols.
 author: Lux Network Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
-status: Draft
+status: Review
 type: Standards Track
 category: LRC
 created: 2025-12-14

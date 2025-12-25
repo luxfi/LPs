@@ -5,7 +5,7 @@ tags: [core, quantum, cryptography, q-chain]
 description: Core specification for the Q-Chain (Quantum Chain), Lux Network's post-quantum cryptographic chain
 author: Lux Network Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
-status: Draft
+status: Review
 type: Standards Track
 category: Core
 created: 2025-12-11

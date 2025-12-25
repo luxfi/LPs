@@ -4,7 +4,7 @@ title: Cryptographic Agility Framework
 description: Dynamic cryptographic algorithm selection and upgrade mechanisms
 author: Lux Industries Inc (@luxfi)
 discussions-to: https://forum.lux.network/t/lp-202-crypto-agility
-status: Draft
+status: Review
 type: Standards Track
 category: Core
 created: 2025-01-24

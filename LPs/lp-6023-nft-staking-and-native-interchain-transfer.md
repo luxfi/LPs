@@ -4,7 +4,7 @@ title: 'NFT Staking and Native Interchain Transfer'
 description: A standard for enabling NFTs to be staked for yield and transferred natively between the X-Chain, C-Chain, and other supported chains via the Teleport Protocol.
 author: Gemini (@gemini)
 discussions-to: https://github.com/luxfi/lps/discussions
-status: Draft
+status: Review
 type: Standards Track
 category: LRC
 created: 2025-07-22

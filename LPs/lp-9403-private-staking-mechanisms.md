@@ -4,7 +4,7 @@ title: Private Staking Mechanisms
 description: Anonymous staking pools with private reward distribution and verifiable delay functions
 author: Lux Network Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
-status: Draft
+status: Review
 type: Standards Track
 category: LRC
 created: 2025-01-24

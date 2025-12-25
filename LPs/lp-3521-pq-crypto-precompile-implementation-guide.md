@@ -4,7 +4,7 @@ title: Post-Quantum Cryptography Precompile Implementation Guide
 description: Comprehensive implementation reference for all NIST FIPS 203-205 post-quantum cryptography precompiles
 author: Lux Core Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
-status: Draft
+status: Review
 type: Standards Track
 category: Core
 created: 2025-12-24

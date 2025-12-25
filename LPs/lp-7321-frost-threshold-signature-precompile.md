@@ -4,7 +4,7 @@ title: FROST Threshold Signature Precompile
 description: Native precompile for Schnorr/EdDSA threshold signatures using FROST protocol
 author: Lux Core Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
-status: Draft
+status: Review
 type: Standards Track
 category: Core
 created: 2025-11-22
