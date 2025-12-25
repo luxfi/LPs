@@ -302,7 +302,7 @@ Blake2b compression function for incremental hashing.
 ```
 
 **Output:**
-```
+```sql
 | Offset | Length | Description |
 |--------|--------|-------------|
 | 0 | 64 | Updated state h |

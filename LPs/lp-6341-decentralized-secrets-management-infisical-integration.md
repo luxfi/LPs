@@ -2579,7 +2579,7 @@ The Kubernetes Operator provides native integration for syncing secrets from the
 
 **Deployment Architecture:**
 
-```
+```sql
 +-------------------+         +----------------------+
 |  Lux Secrets      |         |  Kubernetes Cluster  |
 |  Platform (K-Chain)|<--------|  secrets-operator    |
@@ -2621,7 +2621,7 @@ helm install lux-secrets-operator luxfi/secrets-operator \
 
 **Operator RBAC:**
 
-```
+```sql
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
@@ -2847,7 +2847,7 @@ func (r *SecretSyncReconciler) Reconcile(ctx context.Context, req ctrl.Request) 
 
 #### GitHub Actions
 
-```
+```bash
 # .github/workflows/deploy.yml
 name: Deploy with Secrets
 
@@ -2953,7 +2953,7 @@ func main() {
 
 #### GitLab CI Integration
 
-```
+```bash
 # .gitlab-ci.yml
 image: alpine:latest
 

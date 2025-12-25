@@ -208,7 +208,7 @@ min     var      message       Message to verify
 | `"slhs"` | SLH-DSA Verify |
 
 **ML-DSA Verify (via PQCrypto):**
-```
+```sql
 Offset  Length   Field         Description
 ─────────────────────────────────────────────────────────────
 0       4        selector      "mlds" (0x6d6c6473)
@@ -221,7 +221,7 @@ Offset  Length   Field         Description
 ```
 
 **ML-KEM Encapsulate:**
-```
+```sql
 Offset  Length   Field         Description
 ─────────────────────────────────────────────────────────────
 0       4        selector      "encp" (0x656e6370)
@@ -230,7 +230,7 @@ Offset  Length   Field         Description
 ```
 
 **ML-KEM Decapsulate:**
-```
+```sql
 Offset  Length   Field         Description
 ─────────────────────────────────────────────────────────────
 0       4        selector      "decp" (0x64656370)
@@ -241,7 +241,7 @@ Offset  Length   Field         Description
 ```
 
 **SLH-DSA Verify:**
-```
+```sql
 Offset  Length   Field         Description
 ─────────────────────────────────────────────────────────────
 0       4        selector      "slhs" (0x736c6873)

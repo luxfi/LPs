@@ -389,7 +389,7 @@ type TeleportAttestPayload struct {
 
 BridgeVM orchestrates bridge operations using Teleport:
 
-```
+```sql
 ┌─────────────────────────────────────────────────────────────┐
 │                      BridgeVM (B-Chain)                      │
 ├─────────────────────────────────────────────────────────────┤

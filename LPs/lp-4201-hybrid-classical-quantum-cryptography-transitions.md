@@ -70,7 +70,7 @@ P(break_hybrid) = P(break_classical) * P(break_quantum)
 
 #### Phase 0: Preparation (Months -3 to 0)
 
-```
+```sql
 Preparation:
   Infrastructure:
     - Deploy post-quantum libraries

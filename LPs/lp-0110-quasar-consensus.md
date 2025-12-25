@@ -42,7 +42,7 @@ Quasar addresses these through a modular, physics-inspired architecture where ea
 
 Quasar processes blocks through six phases:
 
-```
+```sql
 ┌─────────────────────────────────────────────────────────────────────────┐
 │                        QUASAR CONSENSUS FLOW                            │
 ├─────────────────────────────────────────────────────────────────────────┤

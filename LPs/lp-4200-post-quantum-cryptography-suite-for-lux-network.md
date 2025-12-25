@@ -119,7 +119,7 @@ contract ETHMDLSA {
 
 #### Security Analysis
 
-```
+```sql
 Security Reduction: ML-DSA → Module-SIS + Module-LWE
 Quantum Security: 128/192/256-bit against Grover's algorithm
 Classical Security: 256/384/512-bit against lattice reduction

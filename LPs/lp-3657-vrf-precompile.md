@@ -398,7 +398,7 @@ Generates a threshold VRF proof using Ringtail aggregation.
 
 ### File Inventory
 
-```
+```sql
 evm/precompile/contracts/vrf/
 ├── vrf.go                  (12 KB)  # Main precompile implementation
 ├── vrf_test.go             (10 KB)  # Unit tests

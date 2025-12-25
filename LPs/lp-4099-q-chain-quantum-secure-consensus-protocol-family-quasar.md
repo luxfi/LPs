@@ -181,7 +181,7 @@ func (q *QuasarConsensus) VerifyStateProof(proof *StateProof, checkpoint *Checkp
 
 #### 5. Checkpoint Processing Flow
 
-```
+```sql
 1. Child chain produces blocks and updates its MMR
 2. At checkpoint interval (e.g., every 100 blocks):
    - Generate MMR proof from last checkpoint to current height

@@ -349,7 +349,7 @@ library BLS12381Lib {
 
 ### Architecture Overview
 
-```
+```sql
 ┌─────────────────────────────────────────────────────────────────────────┐
 │                    Solidity Interface                                    │
 │  IBLS12381.sol → BLS12381Lib.sol → BLSVerifier.sol                      │

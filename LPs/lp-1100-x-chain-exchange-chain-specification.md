@@ -385,7 +385,7 @@ func (x *XChain) SettleBatch(batch *SettlementBatch) error {
 ## API Specification
 
 ### REST API Endpoints
-```
+```sql
 /v1/markets:
   GET: List all trading pairs
   

@@ -265,7 +265,7 @@ interface ICrossChainSwap {
 
 ### REST Endpoints
 
-```
+```sql
 # Order Book (X-Chain)
 POST /ext/bc/X/dex/orders
 DELETE /ext/bc/X/dex/orders/{orderId}
@@ -283,7 +283,7 @@ GET /ext/bc/C/dex/quote/{pair}
 
 ### WebSocket Feeds
 
-```
+```sql
 # Real-time feeds
 ws://node/ext/bc/X/dex/ws
 

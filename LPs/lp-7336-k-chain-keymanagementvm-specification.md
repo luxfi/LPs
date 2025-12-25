@@ -996,7 +996,7 @@ type TChainDecryptResponse struct {
 
 #### T-Chain Integration Architecture
 
-```
+```sql
 +------------------+                    +------------------+
 |    K-Chain       |                    |    T-Chain       |
 |  KeyManagementVM |                    |   ThresholdVM    |

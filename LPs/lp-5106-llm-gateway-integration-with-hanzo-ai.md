@@ -34,7 +34,7 @@ Hanzo's LLM Gateway provides these capabilities through a battle-tested, provide
 
 ### Integration Architecture
 
-```
+```sql
 Lux Network Layer
 ├── Smart Contracts
 │   └── AI Oracle Contracts → Hanzo LLM Gateway

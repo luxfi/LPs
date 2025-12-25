@@ -484,7 +484,7 @@ func TestCalc(t *testing.T) {
 
 ### Test Execution Results
 
-```
+```sql
 $ go test -v ./consensus/protocol/focus/
 === RUN   TestTracker
 --- PASS: TestTracker (0.00s)
@@ -521,7 +521,7 @@ ok      github.com/luxfi/consensus/protocol/focus   0.218s
 
 The reference implementation is located at:
 
-```
+```sql
 ~/work/lux/consensus/protocol/focus/
 ├── doc.go          # Package documentation (172 bytes)
 ├── focus.go        # Core implementation (3.8 KB)

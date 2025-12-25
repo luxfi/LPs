@@ -437,7 +437,7 @@ function testKeyRotation() public {
 **Location**: `/Users/z/work/lux/standard/src/lamport/`
 
 **File Structure:**
-```
+```solidity
 src/lamport/
 ├── contracts/
 │   ├── LamportLib.sol      # Core verification library

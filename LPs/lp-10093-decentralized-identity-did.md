@@ -305,7 +305,7 @@ contract KYCRegistry {
 
 ### 1. Architecture Design
 
-```
+```sql
 recommended_architecture:
   core_identity:
     storage: "Z-Chain for privacy"

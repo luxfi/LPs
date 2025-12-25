@@ -596,7 +596,7 @@ type KeyCreateTx struct {
 
 Key creation follows the CGG21 DKG protocol (or equivalent for other algorithms):
 
-```
+```sql
 1. PROPOSE: Governance submits KeyCreateTx with parameters
 2. ACCEPT:  Selected parties acknowledge participation
 3. COMMIT:  Each party commits to DKG round 1 values
