@@ -3,7 +3,7 @@ lp: 10003
 title: Learning Path - Platform Engineer & Validator
 description: Run, extend, and reason about the Lux Network infrastructure
 author: Lux Core Team
-status: Draft
+status: Final
 type: Meta
 created: 2025-12-21
 tags: [learning-path, validator, infrastructure, operator]
