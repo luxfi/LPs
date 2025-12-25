@@ -337,8 +337,8 @@ Complete implementation available at: https://github.com/luxfi/crypto
 ## References
 
 ### Related Lux Proposals
-- [LP-318](lp-318-ml-kem-post-quantum-key-encapsulation.md)
-- [LP-316](lp-316-ml-dsa-post-quantum-digital-signatures.md)
+- [LP-318](lp-4318-ml-kem-post-quantum-key-encapsulation.md)
+- [LP-316](lp-4316-ml-dsa-post-quantum-digital-signatures.md)
 - [LP-317](lp-317-slh-dsa-stateless-hash-based-digital-signatures.md)
 - [LP-311](lp-311-ml-dsa-signature-verification-precompile.md)
 - [LP-312](lp-312-slh-dsa-signature-verification-precompile.md)

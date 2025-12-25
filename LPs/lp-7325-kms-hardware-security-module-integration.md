@@ -521,10 +521,10 @@ func TestProviderSwitch(t *testing.T) {
 ### Documentation
 - [Lux KMS Documentation](https://github.com/luxfi/kms/tree/main/docs)
 - [HSM Provider Comparison](https://github.com/luxfi/kms/blob/main/docs/documentation/platform/kms/hsm-providers-comparison.md)
-- [LP-321](lp-321-ringtail-threshold-signature-precompile.md)
-- [LP-321](lp-321-frost-threshold-signature-precompile.md)
-- [LP-322](lp-322-cggmp21-threshold-ecdsa-precompile.md)
-- [LP-323](lp-323-lss-mpc-dynamic-resharing-extension.md)
+- [LP-321](lp-7324-ringtail-threshold-signature-precompile.md)
+- [LP-321](lp-7321-frost-threshold-signature-precompile.md)
+- [LP-322](lp-7322-cggmp21-threshold-ecdsa-precompile.md)
+- [LP-323](lp-7323-lss-mpc-dynamic-resharing-extension.md)
 
 ### HSM Vendors
 - [Thales Luna Cloud HSM](https://cpl.thalesgroup.com/encryption/hardware-security-modules/cloud-hsms)

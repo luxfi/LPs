@@ -646,11 +646,9 @@ The LGPL-3.0 license permits:
 
 - [LP-40](./lp-0040-wallet-standards.md)
 - [LP-42](./lp-0042-multi-signature-wallet-standard.md)
-- [LP-104](./lp-104.md)
-- [LP-311](./lp-311.md)
-- [LP-320](./lp-320.md)
-- [LP-321](./lp-321.md)
-- [LP-603](./lp-603.md)
+- [LP-3320](./lp-3320-lamport-signatures-for-safe.md) - Lamport OTS for quantum-safe signing
+- [LP-3337](./lp-3337-lrc-4337-account-abstraction.md) - Account abstraction
+- [LP-3500](./lp-3500-ml-dsa-signature-precompile.md) - Post-quantum signatures
 
 ### External Resources
 

@@ -627,8 +627,8 @@ Copyright and related rights waived via [CC0](https://creativecommons.org/public
 
 ### Related Lux Proposals
 - [LP-200](lp-200-post-quantum-cryptography-suite-for-lux-network.md) - Parent specification
-- [LP-316](lp-316-ml-dsa-post-quantum-digital-signatures.md) - Lattice-based alternative
-- [LP-318](lp-318-ml-kem-post-quantum-key-encapsulation.md) - Complementary key exchange
+- [LP-316](lp-4316-ml-dsa-post-quantum-digital-signatures.md) - Lattice-based alternative
+- [LP-318](lp-4318-ml-kem-post-quantum-key-encapsulation.md) - Complementary key exchange
 - [LP-312](lp-312-slh-dsa-signature-verification-precompile.md) - EVM precompile implementation
 - [LP-201](lp-201-hybrid-classical-quantum-cryptography-transitions.md) - Migration strategy
 
