@@ -456,32 +456,115 @@ signature: <valid 10-of-15 signature>
 
 ## Reference Implementation
 
-**Implementation Status**: ✅ COMPLETE
+**Implementation Status**: ✅ COMPLETE (Final)
 
-See: `precompiles/frost/`
+### Full Implementation Stack
 
-**Key Files:**
-- [`contract.go`](precompiles/frost/contract.go) - Core precompile implementation (167 lines)
-- [`module.go`](precompiles/frost/module.go) - Precompile registration
-- [`contract_test.go`](precompiles/frost/contract_test.go) - Comprehensive test suite
-- [`IFROST.sol`](precompiles/frost/IFROST.sol) - Solidity interface and library (238 lines)
-- [`README.md`](precompiles/frost/README.md) - Complete documentation (266 lines)
+#### 1. EVM Precompile Layer (`~/work/lux/precompiles/frost/`)
 
-**Cryptography:**
-- External Package: [`threshold/protocols/frost`](threshold/protocols/frost)
-- Protocol: Two-round Schnorr threshold signature (IETF CFRG FROST)
-- Curves: secp256k1 (Bitcoin), Ed25519 (Solana), curve25519
-- Security: Discrete logarithm assumption
+| File | Lines | Purpose |
+|------|-------|---------|
+| `contract.go` | 167 | Core precompile at `0x020000...000C` |
+| `module.go` | 68 | Precompile registration |
+| `contract_test.go` | 201 | Comprehensive test suite |
+| `IFROST.sol` | 238 | Solidity interface + FROSTLib |
+| `README.md` | 266 | Complete documentation |
 
-**Test Coverage:**
+#### 2. Threshold Protocol Layer (`~/work/lux/threshold/protocols/frost/`)
+
+| Directory/File | Purpose |
+|----------------|---------|
+| `frost.go` | FROST protocol entry point |
+| `keygen/keygen.go` | Key generation initiation |
+| `keygen/round1.go` | Round 1: Polynomial generation, commitments |
+| `keygen/round2.go` | Round 2: Share distribution |
+| `keygen/round3.go` | Round 3: Verification, key derivation |
+| `keygen/config.go` | Key share configuration |
+| `sign/sign.go` | Signing initiation |
+| `sign/round1.go` | Round 1: Hedged nonce generation |
+| `sign/round2.go` | Round 2: Commitment aggregation, challenge |
+| `sign/round3.go` | Round 3: Response aggregation, verification |
+| `sign/types.go` | Signature type with `Verify()` method |
+
+#### 3. Cryptographic Primitives (`~/work/lux/threshold/pkg/`)
+
+| Package | Purpose |
+|---------|---------|
+| `pkg/math/curve/secp256k1.go` | secp256k1 curve operations (dcrd/dcrec) |
+| `pkg/math/polynomial/` | Shamir secret sharing, Lagrange interpolation |
+| `pkg/taproot/` | BIP-340 Taproot key derivation |
+| `pkg/hash/` | BLAKE3-based Fiat-Shamir hashing |
+| `pkg/party/` | Party ID management |
+| `pkg/pool/` | Parallel execution pool |
+
+#### 4. Native C Implementation (`~/work/lux/crypto/secp256k1/libsecp256k1/`)
+
+| Directory | Lines | Purpose |
+|-----------|-------|---------|
+| `src/modules/musig/` | ~2000 | Native MuSig2 (BIP-327) |
+| `src/modules/schnorrsig/` | ~800 | Native BIP-340 Schnorr |
+| `include/secp256k1_musig.h` | 500+ | MuSig2 API header |
+| `include/secp256k1_schnorrsig.h` | 200+ | Schnorr API header |
+
+### Architecture
+
+```
+┌─────────────────────────────────────────────────────────────────┐
+│                     Solidity Contract                            │
+│  FROSTLib.verifyOrRevert(threshold, totalSigners, pubKey, ...)  │
+└──────────────────────────────┬──────────────────────────────────┘
+                               │ staticcall to 0x0200...000C
+                               ▼
+┌─────────────────────────────────────────────────────────────────┐
+│              precompiles/frost/contract.go                       │
+│  Run() → verifySchnorrSignature() → frost.Verify()              │
+└──────────────────────────────┬──────────────────────────────────┘
+                               │
+                               ▼
+┌─────────────────────────────────────────────────────────────────┐
+│              threshold/protocols/frost/sign/types.go             │
+│  Signature.Verify(publicKey, messageHash) → bool                │
+│                                                                  │
+│  Verification: s·G = R + c·P (BIP-340 Schnorr equation)        │
+└─────────────────────────────────────────────────────────────────┘
+```
+
+### Test Coverage
+
+```bash
+# Run precompile tests
+cd ~/work/lux/precompiles/frost && go test -v -cover
+
+# Run protocol tests
+cd ~/work/lux/threshold && go test -v ./protocols/frost/...
+```
+
+| Test Category | Coverage |
+|---------------|----------|
+| Valid signature verification | ✅ |
+| Invalid signature rejection | ✅ |
+| Message tampering detection | ✅ |
+| Threshold parameter validation | ✅ |
+| Gas cost verification | ✅ |
+| BIP-340 test vectors | ✅ |
+| Edge cases (1-of-1, n-of-n) | ✅ |
+
+### Import Paths
+
 ```go
-// Test suite includes:
-- Valid threshold signature verification
-- Invalid signature rejection
-- Message tampering detection
-- Threshold parameter validation
-- Gas cost verification
-- Edge cases (1-of-1, n-of-n)
+import (
+    // Precompile
+    "github.com/luxfi/precompiles/frost"
+
+    // Threshold protocol
+    "github.com/luxfi/threshold/protocols/frost"
+    "github.com/luxfi/threshold/protocols/frost/keygen"
+    "github.com/luxfi/threshold/protocols/frost/sign"
+
+    // Curve operations
+    "github.com/luxfi/threshold/pkg/math/curve"
+    "github.com/luxfi/threshold/pkg/math/polynomial"
+)
 ```
 
 ## Security Considerations
