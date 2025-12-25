@@ -8,7 +8,7 @@ status: Draft
 type: Informational
 category: Core
 created: 2025-12-11
-requires: 7013, 7014, 6015, 6017, 6081, 7103, 7104
+requires: 7013, 7014, 6015, 6017, 6000, 7103, 7104
 tags: [teleport, bridge, cross-chain]
 order: 329
 ---
