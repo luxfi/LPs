@@ -9,6 +9,7 @@ type: Standards Track
 category: Core
 created: 2025-12-24
 requires: 3653
+tags: [precompile, cryptography, data-availability]
 ---
 
 ## Abstract

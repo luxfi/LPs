@@ -9,7 +9,7 @@ type: Standards Track
 category: Core
 created: 2025-12-24
 updated: 2025-12-24
-requires: 4200, 3502
+requires: 4200, 3500
 activation:
   flag: lp3520-pqcrypto-precompiles
   hfName: "Quantum"
@@ -490,7 +490,7 @@ Precompiles reject unknown mode bytes with clear error messages:
 | LP | Title | Relationship |
 |----|-------|--------------|
 | LP-4200 | Post-Quantum Cryptography Suite | Parent specification |
-| LP-3502 | ML-DSA Precompile | Dedicated ML-DSA spec |
+| LP-3500 | ML-DSA Precompile | Dedicated ML-DSA spec |
 | LP-4316 | ML-DSA Digital Signatures | Algorithm specification |
 | LP-4317 | SLH-DSA Digital Signatures | Algorithm specification |
 | LP-4318 | ML-KEM Key Encapsulation | Algorithm specification |

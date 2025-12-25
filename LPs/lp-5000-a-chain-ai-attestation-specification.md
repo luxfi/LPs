@@ -9,7 +9,7 @@ status: Final
 type: Standards Track
 category: Core
 created: 2025-12-11
-requires: 0, 99, 70
+requires: 0000, 99, 70
 order: 0
 ---
 
