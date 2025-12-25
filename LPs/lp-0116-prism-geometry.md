@@ -163,7 +163,7 @@ Space Complexity: O(k)
 
 ### Algorithm: Refraction
 
-```
+```sql
 Algorithm: RefractPath(DAG G, from, to)
 Input: DAG G, source vertex from, target vertex to
 Output: Optimal non-conflicting path P
@@ -249,7 +249,7 @@ var (
 
 Prism integrates with Quasar consensus in the following phases:
 
-```
+```sql
 ┌─────────────────────────────────────────────────────────────────┐
 │                    QUASAR CONSENSUS FLOW                        │
 ├─────────────────────────────────────────────────────────────────┤
@@ -274,8 +274,8 @@ Prism integrates with Quasar consensus in the following phases:
 
 ### DAG Visualization: Cut Operation
 
-```
-                          BEFORE CUT
+```sql
+BEFORE CUT
     ┌───────────────────────────────────────────────────┐
     │                                                   │
     │   P1 ─── P2 ─── P3 ─── P4 ─── P5 ─── P6 ─── P7   │

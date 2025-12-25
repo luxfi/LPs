@@ -1892,7 +1892,7 @@ The following playbook defines step-by-step procedures for security incidents:
 
 When signer compromise is suspected or confirmed, execute this protocol:
 
-```
+```sql
 Step 1: IMMEDIATE (0-5 minutes)
   - Guardian activates global pause via EmergencyPause(PauseGlobal, "", "Signer compromise suspected", guardian)
   - Log: "EMERGENCY: Key rotation initiated - [KeyID]"
@@ -1938,7 +1938,7 @@ Step 7: SERVICE RESTORATION (2-4 hours)
 
 **Communication Protocol for Security Incidents**
 
-```
+```sql
 PHASE 1: INTERNAL NOTIFICATION (0-5 minutes)
   Channel: PagerDuty + Slack #security-incidents
   Audience: Security Team, On-Call Engineers

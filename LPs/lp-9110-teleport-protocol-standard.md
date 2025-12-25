@@ -330,7 +330,7 @@ The MPC Bridge uses CGGMP21 (LP-322) for ECDSA threshold signatures:
 - **Identifiable Aborts**: Malicious parties detected and excluded
 
 **Signature Generation Flow**:
-```
+```solidity
 1. Bridge contract emits deposit event
 2. MPC nodes detect event via blockchain listeners
 3. Nodes verify transaction independently

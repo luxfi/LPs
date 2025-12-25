@@ -471,7 +471,7 @@ go test -v ./... -run VRF
 - TestConfidenceConvergence - Block acceptance convergence
 
 **Benchmark Results** (Apple M1 Max):
-```
+```sql
 BenchmarkPhotoCommitteeSelection-10  5,248 ops/sec (190μs/op)
 BenchmarkVRFGeneration-10            8,932 ops/sec (112μs/op)
 BenchmarkAdaptiveTimeout-10         12,847 ops/sec (78μs/op)

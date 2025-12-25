@@ -436,7 +436,7 @@ Proof Verification Gas: 50,000
 ```
 
 **Liquidity Aggregation**:
-```
+```sql
 Max Hop Depth: 4 pools
 Price Impact Threshold: 5%
 Update Frequency: Every 10 seconds

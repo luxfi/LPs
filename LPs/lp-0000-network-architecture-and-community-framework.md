@@ -305,7 +305,7 @@ Each chain runs a dedicated VM from the node codebase:
 
 Lux uses **Quasar**, a unified consensus protocol achieving sub-second finality through a physics-inspired multi-phase architecture:
 
-```
+```sql
 PHOTON ------> WAVE ------> FOCUS
 (Select)      (Vote)      (Converge)
                               |

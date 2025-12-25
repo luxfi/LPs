@@ -1108,7 +1108,7 @@ This section details the opt-in signer set management for B-Chain bridge operati
 
 #### 4.1 Opt-In Signer Set Rules
 
-```
+```sql
 Signer Set Lifecycle:
 ┌──────────────────────────────────────────────────────────────────────────┐
 │                                                                          │

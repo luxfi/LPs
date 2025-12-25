@@ -321,7 +321,7 @@ library Secp256k1Lib {
 
 ### Architecture Overview
 
-```
+```sql
 ┌─────────────────────────────────────────────────────────────────────────┐
 │                    Solidity Interface                                    │
 │  ISecp256k1.sol → Secp256k1Lib.sol → Secp256k1Verifier.sol              │
