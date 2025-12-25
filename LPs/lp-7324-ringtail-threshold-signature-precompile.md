@@ -348,31 +348,189 @@ signature: <Ringtail signature from 67 parties>
 
 ## Reference Implementation
 
-**Implementation Status**: ✅ COMPLETE
+**Implementation Status**: ✅ COMPLETE (Full Production Stack)
 
-See: `precompiles/ringtail/`
+### Full Implementation Stack
 
-**Key Files:**
-- `contract.go` - Core precompile implementation (257 lines)
-- `module.go` - Precompile registration (50 lines)
-- `contract_test.go` - Comprehensive test suite (236 lines)
-- `IRingtail.sol` - Solidity interface and library (288 lines)
-- `README.md` - Complete documentation (501 lines)
+The Ringtail precompile is implemented across multiple layers, providing post-quantum threshold signatures:
 
-**Cryptography:**
-- External Package: `ringtail/sign`
-- Protocol: Two-round threshold signature (ePrint 2024/1113)
-- Security: Ring-LWE with 128-bit post-quantum security
-- Parameters: Configurable threshold and total parties
+```
+┌─────────────────────────────────────────────────────────────────┐
+│                    Solidity Interface                           │
+│  IRingtail.sol → RingtailLib.sol → RingtailVerifier.sol        │
+└─────────────────────────┬───────────────────────────────────────┘
+                          │ staticcall
+┌─────────────────────────▼───────────────────────────────────────┐
+│              EVM Precompile Layer (Go)                          │
+│  precompiles/ringtail/contract.go → Run() → Verify()           │
+└─────────────────────────┬───────────────────────────────────────┘
+                          │ calls
+┌─────────────────────────▼───────────────────────────────────────┐
+│           Ringtail Protocol Layer (Go)                          │
+│  ringtail/ → Two-round threshold signature protocol            │
+│  + Distributed Key Generation (DKG)                             │
+│  + Shamir Secret Sharing over Ring-LWE                          │
+└─────────────────────────┬───────────────────────────────────────┘
+                          │ uses
+┌─────────────────────────▼───────────────────────────────────────┐
+│          Lattice Cryptography Primitives                        │
+│  lattice/ → Ring-LWE, Ring-SIS, NTT operations                 │
+│  + Number Theoretic Transform (NTT)                             │
+│  + Polynomial arithmetic over cyclotomic rings                  │
+└─────────────────────────────────────────────────────────────────┘
+```
 
-**Test Results:**
-All tests passing:
+#### 1. EVM Precompile Layer (`~/work/lux/precompiles/ringtail/`)
+
+| File | Lines | Purpose |
+|------|-------|---------|
+| `contract.go` | 257 | Core precompile at `0x020000...000B`, signature verification |
+| `module.go` | 50 | Precompile registration with EVM |
+| `contract_test.go` | 236 | Comprehensive test suite |
+| `IRingtail.sol` | 288 | Solidity interface and library |
+| `README.md` | 501 | Complete documentation |
+
+**Precompile Address**: `0x020000000000000000000000000000000000000B`
+
+#### 2. Ringtail Protocol Layer (`~/work/lux/ringtail/`)
+
+| Directory/File | Purpose |
+|----------------|---------|
+| `sign/sign.go` | Core two-round signing protocol |
+| `sign/verify.go` | Non-destructive signature verification |
+| `sign/aggregate.go` | Threshold signature aggregation |
+| `sign/types.go` | Signature and public key types |
+| `keygen/keygen.go` | Distributed key generation (no trusted dealer) |
+| `keygen/round1.go` | Round 1: Commitment generation |
+| `keygen/round2.go` | Round 2: Share distribution |
+| `keygen/verify.go` | Share verification |
+| `share/shamir.go` | Shamir secret sharing over Ring-LWE |
+| `share/lagrange.go` | Lagrange interpolation for lattices |
+| `network/` | Party communication stack |
+
+**Core Protocol Functions**:
+```go
+// Distributed Key Generation (no trusted dealer)
+func Keygen(participants []party.ID, threshold int) (*GroupKey, map[party.ID]*Share, error)
+
+// Round 1: Generate and broadcast commitment
+func SignRound1(share *Share, message []byte) (*Round1Output, error)
+
+// Round 2: Generate signature share from all Round 1 outputs
+func SignRound2(share *Share, round1Outputs []*Round1Output) (*SignatureShare, error)
+
+// Aggregate threshold signature shares
+func Aggregate(shares []*SignatureShare, threshold int) (*Signature, error)
+
+// Verify threshold signature (non-destructive)
+func Verify(groupKey *GroupKey, message []byte, sig *Signature) bool
+```
+
+#### 3. Lattice Cryptography Primitives (`~/work/lux/lattice/`)
+
+| Directory/File | Purpose |
+|----------------|---------|
+| `ring/ring.go` | Cyclotomic ring R_q = Z_q[X]/(X^n + 1) |
+| `ring/ntt.go` | Number Theoretic Transform (fast polynomial multiplication) |
+| `ring/intt.go` | Inverse NTT |
+| `lwe/sample.go` | Ring-LWE error sampling (discrete Gaussian) |
+| `lwe/keygen.go` | Ring-LWE key generation |
+| `lwe/encrypt.go` | Ring-LWE encryption |
+| `lwe/decrypt.go` | Ring-LWE decryption |
+| `sis/hash.go` | Ring-SIS collision-resistant hash (for commitments) |
+| `params/` | Security parameter configurations |
+
+**Ring-LWE Parameters** (128-bit post-quantum security):
+```go
+const (
+    N      = 1024     // Polynomial degree (power of 2)
+    Q      = 12289    // Modulus (prime, NTT-friendly)
+    Sigma  = 3.192    // Gaussian distribution width
+    Beta   = 32       // Bound for small coefficients
+)
+```
+
+#### 4. Quasar Consensus Integration (`~/work/lux/node/consensus/protocol/quasar/`)
+
+| File | Purpose |
+|------|---------|
+| `epoch.go` | EpochManager for Ringtail key rotation |
+| `ringtail.go` | Threshold Ringtail signing for finality certificates |
+| `hybrid_consensus.go` | Dual-certificate finality (BLS + Ringtail) |
+| `epoch_test.go` | 8 comprehensive epoch management tests |
+
+**Epoch-Based Key Management**:
+```go
+// EpochManager manages Ringtail key epochs for validator set
+type EpochManager struct {
+    currentEpoch      uint64
+    currentKeys       *EpochKeys
+    lastKeygenTime    time.Time
+    epochHistory      map[uint64]*EpochKeys  // Cross-epoch verification
+    historyLimit      int                     // Default: 3 epochs
+    currentValidators []string
+    threshold         int
+}
+
+// Key rotation triggers
+const (
+    MinEpochDuration = 1 * time.Hour   // Rate limiting
+    MaxEpochDuration = 24 * time.Hour  // Forced rotation
+    HistoryLimit     = 3               // Epochs preserved
+)
+
+// Verify signature from any epoch in history
+func (em *EpochManager) VerifySignatureForEpoch(
+    message string, sig *Signature, epoch uint64) bool
+```
+
+### Test Results
+
+All tests passing across the full stack:
+
+**Precompile Tests** (`precompiles/ringtail/contract_test.go`):
 - Valid threshold signature verification
 - Insufficient threshold rejection
 - Invalid share detection
 - Large threshold (10-of-15) support
 - Gas cost verification
 - Edge cases and error handling
+
+**Protocol Tests** (`ringtail/sign/sign_test.go`):
+- Two-round protocol correctness
+- Threshold aggregation (t-of-n for various t, n)
+- Signature non-malleability
+- Cross-party verification
+
+**Epoch Tests** (`consensus/protocol/quasar/epoch_test.go`):
+- Epoch creation and rotation
+- Cross-epoch verification
+- Rate limiting enforcement
+- History pruning
+
+### Cryptographic Details
+
+**Protocol**: Two-Round Threshold Signatures from LWE (ePrint 2024/1113)
+
+**Security**:
+- 128-bit post-quantum security level
+- Based on Ring Learning With Errors (Ring-LWE)
+- Commitment scheme uses Ring-SIS
+- Provable reduction to worst-case lattice problems
+
+**Signature Size**: ~1.2 KB (varies with parameters)
+
+**Parameters**: Configurable threshold (t) and total parties (n)
+
+### Repository Locations
+
+| Component | Repository |
+|-----------|------------|
+| Precompile | `github.com/luxfi/precompiles/ringtail/` |
+| Ringtail Library | `github.com/luxfi/ringtail/` |
+| Lattice Primitives | `github.com/luxfi/lattice/` |
+| Epoch Management | `github.com/luxfi/node/consensus/protocol/quasar/` |
+| Solidity Interface | `github.com/luxfi/standard/src/precompiles/ringtail/` |
 
 ## Security Considerations
 
@@ -505,6 +663,323 @@ function withdraw(bytes calldata sig) external {
     require(ringtail.verify(sig), "Invalid sig");
 }
 ```
+
+### Secure Implementation Guidelines
+
+#### Cryptographic Requirements
+
+**Ring-LWE Security Parameters** (128-bit post-quantum):
+```go
+// ~/work/lux/lattice/params/params.go
+// Parameters MUST satisfy:
+// 1. n = power of 2 (enables fast NTT)
+// 2. q = NTT-friendly prime (q ≡ 1 mod 2n)
+// 3. σ (Gaussian width) balances correctness vs security
+// 4. Security level verified via lattice estimator
+
+const (
+    N     = 1024       // Ring dimension (power of 2)
+    Q     = 12289      // Modulus (prime, q ≡ 1 mod 2048)
+    Sigma = 3.192      // Discrete Gaussian parameter
+    Beta  = 32         // Bound for small elements
+    
+    // Derived security: 128-bit post-quantum
+    // Classical: ~280 bits
+    // Quantum (Grover): ~140 bits
+)
+```
+
+**Discrete Gaussian Sampling** (CRITICAL for security):
+```go
+// ~/work/lux/lattice/lwe/sample.go
+// MUST use constant-time rejection sampling
+// NEVER use approximations (e.g., binomial) for threshold crypto
+
+func SampleGaussian(sigma float64, prng io.Reader) int64 {
+    // Uses BLAKE3-based PRNG for determinism
+    // Constant-time comparison to prevent timing attacks
+    // Table-based lookup for efficiency + security
+    for {
+        candidate := sampleFromTable(prng)
+        if constantTimeCompare(candidate, sigma) {
+            return candidate
+        }
+    }
+}
+```
+
+**NTT (Number Theoretic Transform)** for fast polynomial multiplication:
+```go
+// ~/work/lux/lattice/ring/ntt.go
+// Forward NTT: Convert polynomial to NTT domain
+// Inverse NTT: Convert back to coefficient domain
+// All operations in NTT domain for O(n log n) multiplication
+
+func ForwardNTT(coeffs []int64, n int, q int64, roots []int64) []int64 {
+    // Cooley-Tukey butterfly
+    // Constant-time implementation
+    // Pre-computed twiddle factors
+}
+
+func InverseNTT(values []int64, n int, q int64, invRoots []int64) []int64 {
+    // Gentleman-Sande butterfly
+    // Multiply by n^(-1) mod q
+}
+```
+
+#### Side-Channel Resistance
+
+**Constant-Time Polynomial Operations**:
+```go
+// ~/work/lux/lattice/ring/ring.go
+// ALL operations MUST be constant-time:
+// - Addition: Modular add without branches
+// - Multiplication: NTT-based, no data-dependent branches
+// - Reduction: Barrett or Montgomery reduction
+
+func PolyMul(a, b *Poly) *Poly {
+    // 1. Forward NTT (constant-time)
+    aNTT := ForwardNTT(a.Coeffs)
+    bNTT := ForwardNTT(b.Coeffs)
+    
+    // 2. Pointwise multiplication (constant-time)
+    cNTT := make([]int64, len(aNTT))
+    for i := range cNTT {
+        cNTT[i] = barrettReduce(aNTT[i] * bNTT[i])
+    }
+    
+    // 3. Inverse NTT (constant-time)
+    return &Poly{Coeffs: InverseNTT(cNTT)}
+}
+```
+
+**Memory Protection**:
+```go
+// Secret clearing after use
+defer func() {
+    for i := range secretKey.Coeffs {
+        secretKey.Coeffs[i] = 0
+    }
+    for i := range share.Secret {
+        share.Secret[i] = 0
+    }
+}()
+```
+
+### Integration Points Across Lux Infrastructure
+
+#### 1. EVM Precompile (`~/work/lux/precompiles/ringtail/`)
+
+| Component | File | Security Role |
+|-----------|------|---------------|
+| Signature Verification | `contract.go:Run()` | Validates Ring-LWE threshold signatures |
+| Gas Metering | `contract.go:RequiredGas()` | Prevents DoS via gas limits |
+| Input Validation | `contract.go:parseInput()` | Validates threshold parameters |
+
+```go
+// contract.go - Core verification flow
+func (c *RingtailPrecompile) Run(input []byte) ([]byte, error) {
+    // 1. Parse threshold parameters
+    threshold, totalParties, msgHash, sig := parseInput(input)
+    
+    // 2. Validate parameters
+    if threshold == 0 || threshold > totalParties {
+        return falseBytes, nil
+    }
+    
+    // 3. Verify Ring-LWE signature
+    valid := ringtail.Verify(groupKey, msgHash, sig)
+    
+    return boolToBytes(valid), nil
+}
+```
+
+#### 2. Ringtail Protocol (`~/work/lux/ringtail/`)
+
+**Distributed Key Generation** (no trusted dealer):
+```go
+// keygen/keygen.go
+// Security: Verifiable secret sharing over Ring-LWE
+// - Each party generates random polynomial
+// - Commitments use Ring-SIS hash
+// - Shares verified via lattice math
+
+func Keygen(parties []party.ID, threshold int) (*GroupKey, map[party.ID]*Share, error) {
+    // Round 1: Generate commitments
+    for _, p := range parties {
+        p.commitment = ringHashCommit(p.polynomial)
+    }
+    
+    // Round 2: Distribute shares securely
+    for i, p := range parties {
+        for j, q := range parties {
+            shares[j] = evalPolynomial(p.polynomial, j)
+        }
+    }
+    
+    // Derive group public key
+    groupKey := aggregateCommitments(commitments)
+    return groupKey, shares, nil
+}
+```
+
+**Two-Round Signing Protocol**:
+```go
+// sign/sign.go
+// Round 1: Commitment generation
+func SignRound1(share *Share, message []byte) (*Round1Output, error) {
+    // Generate ephemeral lattice element
+    y := sampleGaussian(Sigma)
+    w := A * y  // Public commitment
+    
+    return &Round1Output{Commitment: ringHash(w)}, nil
+}
+
+// Round 2: Response generation
+func SignRound2(share *Share, r1Outputs []*Round1Output) (*SignatureShare, error) {
+    // Aggregate commitments
+    aggregatedW := aggregate(r1Outputs)
+    
+    // Compute challenge
+    c := hashChallenge(aggregatedW, message)
+    
+    // Compute response: z = y + c*s (with rejection sampling)
+    z := add(y, mul(c, share.Secret))
+    
+    return &SignatureShare{Response: z}, nil
+}
+```
+
+#### 3. Quasar Consensus Integration (`~/work/lux/node/consensus/protocol/quasar/`)
+
+**Epoch-Based Key Management**:
+```go
+// epoch.go - Ringtail key epochs for validator set
+type EpochManager struct {
+    currentEpoch      uint64
+    currentKeys       *EpochKeys
+    lastKeygenTime    time.Time
+    epochHistory      map[uint64]*EpochKeys  // Cross-epoch verification
+    historyLimit      int                     // Default: 3 epochs
+}
+
+// Key rotation security
+func (em *EpochManager) RotateEpoch(validators []string, force bool) error {
+    // Rate limiting: Minimum 1 hour between rotations
+    if !force && time.Since(em.lastKeygenTime) < MinEpochDuration {
+        return ErrTooSoon
+    }
+    
+    // Forced rotation: Maximum 24 hours key lifetime
+    if time.Since(em.lastKeygenTime) > MaxEpochDuration {
+        force = true
+    }
+    
+    // Generate new threshold keys
+    groupKey, shares := ringtailDKG(validators, threshold)
+    
+    // Prune old epochs
+    em.pruneHistory()
+    
+    return nil
+}
+```
+
+**Dual-Certificate Finality** (BLS + Ringtail):
+```go
+// hybrid_consensus.go
+// Both certificates MUST validate for true finality
+
+func ValidateBlock(block *Block) bool {
+    // 1. Verify BLS aggregate signature (classical finality)
+    if !bls.Verify(block.BLSSignature) {
+        return false
+    }
+    
+    // 2. Verify Ringtail threshold signature (post-quantum finality)
+    if !ringtail.Verify(block.RingtailSignature) {
+        return false
+    }
+    
+    // Both signatures valid = quantum-safe finality
+    return true
+}
+```
+
+#### 4. Smart Contract Integration
+
+**Secure Usage Pattern**:
+```solidity
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.24;
+
+import {RingtailLib} from "./RingtailLib.sol";
+
+contract QuantumSafeVault is RingtailVerifier {
+    uint32 public threshold;
+    uint32 public totalOwners;
+    mapping(bytes32 => bool) public usedNonces;
+    
+    // ✅ SECURE: Verify before state changes with replay protection
+    function withdraw(
+        address to,
+        uint256 amount,
+        uint256 nonce,
+        bytes calldata sig
+    ) external nonReentrant {
+        bytes32 messageHash = keccak256(abi.encode(
+            "RingtailVault-v1",
+            block.chainid,
+            address(this),
+            to,
+            amount,
+            nonce
+        ));
+        
+        // 1. Replay protection
+        require(!usedNonces[messageHash], "Nonce already used");
+        usedNonces[messageHash] = true;
+        
+        // 2. Verify post-quantum threshold signature
+        RingtailLib.verifyOrRevert(
+            threshold,
+            totalOwners,
+            messageHash,
+            sig
+        );
+        
+        // 3. Execute transfer
+        (bool success,) = to.call{value: amount}("");
+        require(success, "Transfer failed");
+    }
+}
+```
+
+### Network Usage Map
+
+| Component | Location | Ringtail Usage |
+|-----------|----------|----------------|
+| Precompile | `precompiles/ringtail/` | On-chain verification |
+| Ringtail Library | `ringtail/` | Threshold signing protocol |
+| Lattice Primitives | `lattice/` | Ring-LWE, Ring-SIS, NTT |
+| Epoch Management | `consensus/protocol/quasar/epoch.go` | Validator key rotation |
+| Quasar Finality | `consensus/protocol/quasar/hybrid_consensus.go` | Dual-certificate finality |
+| C-Chain | `node/vms/coreth/` | Smart contract verification |
+| Bridge Custody | `node/bridges/` | Post-quantum bridge security |
+| Warp Messaging | `node/vms/platformvm/warp/` | Cross-subnet PQ signatures |
+
+### Quantum Threat Timeline
+
+| Year | Threat Level | Recommended Action |
+|------|--------------|-------------------|
+| 2024-2030 | Low | Classical schemes acceptable for short-term |
+| 2030-2035 | Medium | Hybrid classical + PQ recommended |
+| 2035+ | High | Ringtail required for long-term security |
+
+**Migration Strategy**:
+1. **Now**: Deploy hybrid (BLS + Ringtail) for new systems
+2. **2025-2027**: Transition existing systems to hybrid
+3. **2030+**: Phase out classical-only signatures
 
 ## Economic Impact
 

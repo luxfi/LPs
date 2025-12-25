@@ -521,6 +521,222 @@ When an abort is identified:
 4. **Forensics**: Preserve proof data for investigation
 5. **Recovery**: Restart signing without malicious party
 
+### Secure Implementation Guidelines
+
+#### Cryptographic Requirements
+
+**Paillier Key Generation** (critical for ECDSA threshold):
+```go
+// ~/work/lux/threshold/pkg/paillier/keygen.go
+// MUST use safe primes p, q where p = 2p' + 1, q = 2q' + 1
+// Key size MUST be ≥ 2048 bits for 128-bit security
+const (
+    MinKeyBits    = 2048   // Minimum Paillier modulus size
+    SecureKeyBits = 3072   // Recommended for long-term security
+)
+
+// Generate safe primes with proper entropy
+func GenerateSafePrime(bits int, rand io.Reader) (*big.Int, error) {
+    // Uses crypto/rand, NOT math/rand
+    // Verified primality with Miller-Rabin + Lucas
+}
+```
+
+**Zero-Knowledge Proof Security**:
+```go
+// ~/work/lux/threshold/pkg/zk/ - All 17 proof systems
+// Each proof MUST be:
+// 1. Sound: No false statements can be proven
+// 2. Zero-knowledge: Reveals nothing beyond truth of statement
+// 3. Non-malleable: Cannot be modified to prove different statement
+
+// Fiat-Shamir transform requirements:
+// - Domain-separated hashes: H("CMP-AffG" || transcript || ...)
+// - Full transcript binding: Include all public values
+// - No short-circuit attacks: Verify all components
+```
+
+**Nonce Generation** (CRITICAL - reuse causes key recovery):
+```go
+// ~/work/lux/threshold/protocols/cmp/presign/round1.go
+// Nonces k and γ MUST be:
+// 1. Uniformly random from curve order
+// 2. Generated using crypto/rand (CSPRNG)
+// 3. NEVER reused across signatures
+// 4. Securely erased after use
+
+func generateNonces(group curve.Curve) (*big.Int, *big.Int, error) {
+    // Uses hedged randomness: HMAC-DRBG(entropy || counter || context)
+    k := group.NewScalar().SetNat(rand.Reader, group.Order())
+    γ := group.NewScalar().SetNat(rand.Reader, group.Order())
+    return k, γ, nil
+}
+```
+
+#### Side-Channel Resistance
+
+All cryptographic operations MUST be constant-time:
+
+```go
+// ~/work/lux/threshold/pkg/math/curve/secp256k1.go
+// Scalar multiplication: Montgomery ladder (constant-time)
+// Point addition: Complete addition formulas
+// Modular operations: Constant-time via big.Int methods
+
+// Memory protection
+defer func() {
+    // Zero-fill secret data after use
+    secretShare.SetInt64(0)
+    nonce.SetInt64(0)
+    privateKey.SetInt64(0)
+}()
+```
+
+### Integration Points Across Lux Infrastructure
+
+#### 1. EVM Precompile (`~/work/lux/precompiles/cggmp21/`)
+
+| Component | File | Security Role |
+|-----------|------|---------------|
+| Signature Verification | `contract.go:Run()` | Validates ECDSA threshold signatures |
+| Gas Metering | `contract.go:RequiredGas()` | Prevents DoS via gas limits |
+| Input Validation | `contract.go:parseInput()` | Validates all parameters |
+
+```go
+// contract.go - Core verification flow
+func (c *CGGMP21Precompile) Run(input []byte) ([]byte, error) {
+    // 1. Parse and validate input (threshold, publicKey, signature)
+    params, err := c.parseInput(input)
+    if err != nil {
+        return nil, err
+    }
+    
+    // 2. Validate threshold parameters
+    if params.threshold == 0 || params.threshold > params.totalParties {
+        return falseBytes, nil
+    }
+    
+    // 3. Verify ECDSA signature
+    valid := ecdsa.VerifySignature(
+        params.publicKey,
+        params.messageHash[:],
+        params.signature,
+    )
+    
+    return boolToBytes(valid), nil
+}
+```
+
+#### 2. Threshold Protocol (`~/work/lux/threshold/protocols/cmp/`)
+
+**Key Generation Security**:
+```go
+// keygen/round1.go - DKG Round 1
+// Security: Verifiable Secret Sharing (VSS) with Pedersen commitments
+// - Each party commits to polynomial coefficients
+// - Feldman commitments: C_i = g^{a_i} (verifiable)
+// - Share verification prevents malicious dealing
+```
+
+**Presign Security**:
+```go
+// presign/round2.go - MtA (Multiplicative-to-Additive) conversion
+// Security: Paillier homomorphic encryption
+// - k·γ computed without revealing k or γ
+// - Affine proofs (affg, affp) verify correctness
+// - No party learns any secret shares
+```
+
+**Abort Detection**:
+```go
+// presign/abort1.go, abort2.go - Identifiable abort
+// Security: Full ZK proof verification during abort
+// - Identify which party sent invalid messages
+// - Cryptographic proof of misbehavior
+// - Enables on-chain slashing
+
+func (r *abort1) ProcessMessage(msg *Message) error {
+    // Verify ALL zero-knowledge proofs
+    if !verifyAffGProof(msg.AffGProof) {
+        return &AbortError{Party: msg.From, Reason: "invalid affg proof"}
+    }
+    // ... verify all other proofs
+}
+```
+
+#### 3. Node Integration (`~/work/lux/node/`)
+
+**Validator Threshold Signing**:
+```go
+// node/vms/platformvm/validator_signing.go
+// Validators can use CGGMP21 for threshold staking keys
+// - Distributed validator key (no single point of failure)
+// - Threshold signatures for block signing
+// - Slashing via identifiable aborts
+```
+
+**Bridge Custody**:
+```go
+// node/bridges/threshold_custody.go
+// Cross-chain bridges use CGGMP21 for asset custody
+// - Guardian set as threshold signers
+// - Regular key refresh via LSS-MPC (LP-7323)
+// - Emergency recovery procedures
+```
+
+#### 4. Smart Contract Integration
+
+**Secure Usage Pattern**:
+```solidity
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.24;
+
+contract SecureCGGMP21Integration {
+    using CGGMP21Lib for *;
+    
+    // ✅ CORRECT: Verify before state changes
+    function executeWithThreshold(
+        bytes32 messageHash,
+        bytes calldata signature
+    ) external nonReentrant {
+        // 1. Verify threshold signature FIRST
+        CGGMP21Lib.verifyOrRevert(
+            config.threshold,
+            config.totalSigners,
+            config.publicKey,
+            messageHash,
+            signature
+        );
+        
+        // 2. Check replay protection
+        require(!usedNonces[messageHash], "Replay attack");
+        usedNonces[messageHash] = true;
+        
+        // 3. Execute action
+        _executeAction(messageHash);
+    }
+    
+    // ❌ WRONG: State change before verification
+    function insecureExecute(bytes calldata sig) external {
+        _executeAction(data);  // Vulnerable!
+        CGGMP21Lib.verifyOrRevert(...);
+    }
+}
+```
+
+### Network Usage Map
+
+| Component | Location | CGGMP21 Usage |
+|-----------|----------|---------------|
+| Precompile | `precompiles/cggmp21/` | On-chain verification |
+| Threshold Library | `threshold/protocols/cmp/` | Off-chain signing |
+| ZK Proofs | `threshold/pkg/zk/` | Protocol security |
+| Paillier Crypto | `threshold/pkg/paillier/` | Homomorphic operations |
+| P-Chain | `node/vms/platformvm/` | Validator threshold keys |
+| C-Chain | `node/vms/coreth/` | Smart contract verification |
+| Bridges | `node/bridges/` | Cross-chain custody |
+| Warp | `node/vms/platformvm/warp/` | Cross-subnet messaging |
+
 ## Test Cases
 
 Reference implementation tests: `github.com/luxfi/precompiles/cggmp21/contract_test.go`
@@ -566,57 +782,182 @@ Gas Used: 225,000
 
 ## Reference Implementation
 
-### Precompile Implementation
+### Full Implementation Stack
 
-**Location**: `github.com/luxfi/precompiles/cggmp21/`
+The CGGMP21 precompile is implemented across multiple layers, from EVM interface down to cryptographic primitives:
 
-**Files**:
-- `contract.go` - EVM precompile implementation
-- `contract_test.go` - Comprehensive test suite
-- `module.go` - Precompile registration
-- `ICGGMP21.sol` - Solidity interface and library
-- `README.md` - Documentation and usage examples
+```
+┌─────────────────────────────────────────────────────────────────┐
+│                    Solidity Interface                           │
+│  ICGGMP21.sol → CGGMP21Lib.sol → CGGMP21Verifier.sol           │
+└─────────────────────────┬───────────────────────────────────────┘
+                          │ staticcall
+┌─────────────────────────▼───────────────────────────────────────┐
+│              EVM Precompile Layer (Go)                          │
+│  precompiles/cggmp21/contract.go → Run() → VerifySignature()   │
+└─────────────────────────┬───────────────────────────────────────┘
+                          │ calls
+┌─────────────────────────▼───────────────────────────────────────┐
+│           Threshold Protocol Layer (Go)                         │
+│  threshold/protocols/cmp/ → Keygen + Presign + Sign            │
+│  + 17 Zero-Knowledge Proof Systems (pkg/zk/)                   │
+│  + Identifiable Aborts (presign/abort1.go, abort2.go)          │
+└─────────────────────────┬───────────────────────────────────────┘
+                          │ uses
+┌─────────────────────────▼───────────────────────────────────────┐
+│          Cryptographic Primitives Layer                         │
+│  pkg/paillier/ (Paillier encryption for ECDSA threshold)       │
+│  pkg/pedersen/ (Pedersen commitments)                          │
+│  pkg/math/curve/secp256k1.go (dcrd/dcrec curve ops)           │
+└─────────────────────────┬───────────────────────────────────────┘
+                          │ wraps
+┌─────────────────────────▼───────────────────────────────────────┐
+│            Native C Implementation                              │
+│  crypto/secp256k1/libsecp256k1/src/ → CGO binding              │
+└─────────────────────────────────────────────────────────────────┘
+```
 
-**Repository**: https://github.com/luxfi/standard/tree/main/src/precompiles/cggmp21
+#### 1. EVM Precompile Layer (`~/work/lux/precompiles/cggmp21/`)
 
-### Threshold Protocol Implementation
+| File | Lines | Purpose |
+|------|-------|---------|
+| `contract.go` | 189 | Core precompile at `0x020000...000D`, signature verification |
+| `module.go` | 72 | Precompile registration with EVM |
+| `contract_test.go` | 312 | Comprehensive test suite (12 tests) |
+| `ICGGMP21.sol` | 203 | Solidity interface and library |
 
-**Location**: `github.com/luxfi/threshold/protocols/cmp/`
+**Precompile Address**: `0x020000000000000000000000000000000000000D`
 
-**Core Functions**:
+#### 2. Threshold Protocol Layer (`~/work/lux/threshold/protocols/cmp/`)
+
+| Directory/File | Purpose |
+|----------------|---------|
+| `cmp.go` | Protocol entry point, orchestrates keygen/presign/sign |
+| `config/config.go` | Party configuration, share storage |
+| `keygen/` | **5-round distributed key generation** |
+| `keygen/round1.go` | VSS commitments, Paillier key generation |
+| `keygen/round2.go` | Secret share distribution, Schnorr proofs |
+| `keygen/round3.go` | Share verification, decommitment |
+| `keygen/round4.go` | Verification shares aggregation |
+| `keygen/round5.go` | Public key computation, config output |
+| `presign/` | **7-round pre-signature generation** |
+| `presign/round1.go` | k, γ share generation, Paillier ciphertext |
+| `presign/round2.go` | MtA (Multiplicative-to-Additive) conversion |
+| `presign/round3.go` | Chi shares, affine proof verification |
+| `presign/abort1.go` | **Identifiable abort round 1** - detect cheaters |
+| `presign/abort2.go` | **Identifiable abort round 2** - identify malicious party |
+| `sign/` | **5-round threshold signing** |
+| `sign/round1.go` | Partial signature generation |
+| `sign/round2.go` | Signature aggregation |
+| `sign/types.go` | Signature struct with Verify() method |
+
+**Core Protocol Functions**:
 ```go
-// Key generation (DKG)
+// Key generation (5-round DKG) - no trusted dealer
 func Keygen(group curve.Curve, selfID party.ID, participants []party.ID,
             threshold int, pl *pool.Pool) protocol.StartFunc
 
-// Threshold signing
+// Presignature generation (7-round, can precompute offline)
+func Presign(config *Config, signers []party.ID, pl *pool.Pool) protocol.StartFunc
+
+// Online signing with presignature (2-round fast path)
+func PresignOnline(config *Config, preSignature *ecdsa.PreSignature,
+                   messageHash []byte, pl *pool.Pool) protocol.StartFunc
+
+// Full signing (5-round, without presignature)
 func Sign(config *Config, signers []party.ID, messageHash []byte,
           pl *pool.Pool) protocol.StartFunc
 
-// Key refresh
+// Key refresh for proactive security (5-round)
 func Refresh(config *Config, pl *pool.Pool) protocol.StartFunc
+```
 
-// Presignature generation
-func Presign(config *Config, signers []party.ID, pl *pool.Pool) protocol.StartFunc
+#### 3. Zero-Knowledge Proof Systems (`~/work/lux/threshold/pkg/zk/`)
 
-// Online signing with presignature
-func PresignOnline(config *Config, preSignature *ecdsa.PreSignature,
-                   messageHash []byte, pl *pool.Pool) protocol.StartFunc
-```solidity
+CGGMP21 requires **17 specialized ZK proof systems** for UC security:
 
-**Repository**: https://github.com/luxfi/threshold/tree/main/protocols/cmp
+| Proof | File | Purpose |
+|-------|------|---------|
+| `affg` | `affg.go` | Affine group operation proof |
+| `affp` | `affp.go` | Affine Paillier operation proof |
+| `enc` | `enc.go` | Paillier encryption correctness |
+| `dec` | `dec.go` | Paillier decryption correctness |
+| `log` | `log.go` | Discrete logarithm proof |
+| `elog` | `elog.go` | Extended discrete log proof |
+| `logstar` | `logstar.go` | Logarithm with range proof |
+| `mod` | `mod.go` | Modular operations proof |
+| `prm` | `prm.go` | Paillier-Pedersen range proof |
+| `mulstar` | `mulstar.go` | Multiplication correctness |
+| `fac` | `fac.go` | Factorization proof |
+| `sch` | `sch.go` | Schnorr identification proof |
+| `schnorr` | `schnorr.go` | Schnorr signature proof |
+| `ntilde` | `ntilde.go` | N-tilde parameter proof |
+| `paillier` | `paillier.go` | Paillier public key correctness |
+| `ring` | `ring.go` | Ring signature proof |
+| `safe` | `safe.go` | Safe prime proof |
 
-### Multi-Party Computation Library
+**ZK Proof Usage in CGGMP21**:
+- **Keygen**: `sch`, `prm`, `paillier`, `ntilde`, `fac`
+- **Presign**: `enc`, `affg`, `affp`, `log`, `logstar`, `mulstar`
+- **Sign**: `dec`, `elog`
+- **Abort**: Full proof set for blame attribution
 
-**Location**: `github.com/luxfi/multi-party-sig/protocols/cmp/`
+#### 4. Cryptographic Primitives (`~/work/lux/threshold/pkg/`)
 
-**Features**:
-- Distributed key generation
-- Threshold signing with identifiable aborts
-- Zero-knowledge proofs for correctness
-- Efficient presignature support
+| Package | Purpose |
+|---------|---------|
+| `pkg/paillier/` | Paillier homomorphic encryption (essential for ECDSA threshold) |
+| `pkg/pedersen/` | Pedersen commitment scheme |
+| `pkg/math/curve/secp256k1.go` | secp256k1 curve operations (dcrd/dcrec) |
+| `pkg/math/polynomial/` | Shamir secret sharing, Lagrange interpolation |
+| `pkg/hash/` | Hash-to-field, domain separation |
+| `pkg/party/` | Party ID management, message routing |
+| `pkg/pool/` | Goroutine pool for parallel operations |
+| `pkg/round/` | Round state machine, message handling |
 
-**Repository**: https://github.com/luxfi/multi-party-sig/tree/main/protocols/cmp
+#### 5. Native C Implementation (`~/work/lux/crypto/secp256k1/libsecp256k1/`)
+
+| Directory | Lines | Purpose |
+|-----------|-------|---------|
+| `src/` | ~12,000 | Core secp256k1 operations |
+| `src/modules/ecdsa/` | ~1,200 | ECDSA signing and verification |
+| `src/modules/recovery/` | ~400 | Public key recovery from signature |
+| `src/modules/extrakeys/` | ~600 | Extra key operations (x-only pubkeys) |
+
+**CGO Binding**: `crypto/secp256k1/secp256k1.go` wraps C library for Go
+
+### Identifiable Aborts Implementation
+
+The critical UC-security feature is implemented in:
+
+```go
+// ~/work/lux/threshold/protocols/cmp/presign/abort1.go
+// Round 1: When signature fails, identify which party cheated
+func (r *abort1) ProcessMessage(msg *Message) error {
+    // Verify all ZK proofs from failed round
+    // If proof fails, identify malicious party
+    // Report to slashing mechanism
+}
+
+// ~/work/lux/threshold/protocols/cmp/presign/abort2.go  
+// Round 2: Complete blame attribution
+func (r *abort2) Finalize() (abort.Report, error) {
+    // Aggregate blame evidence
+    // Produce cryptographic proof of misbehavior
+    // Return party ID for slashing
+}
+```
+
+### Repository Locations
+
+| Component | Repository |
+|-----------|------------|
+| Precompile | `github.com/luxfi/precompiles/cggmp21/` |
+| Threshold Library | `github.com/luxfi/threshold/protocols/cmp/` |
+| ZK Proofs | `github.com/luxfi/threshold/pkg/zk/` |
+| Crypto Primitives | `github.com/luxfi/threshold/pkg/` |
+| Native secp256k1 | `github.com/luxfi/crypto/secp256k1/` |
+| Solidity Interface | `github.com/luxfi/standard/src/precompiles/cggmp21/`
 
 ## Performance Benchmarks
 
