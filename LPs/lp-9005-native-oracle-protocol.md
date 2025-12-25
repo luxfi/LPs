@@ -11,7 +11,6 @@ category: Core
 created: 2025-12-11
 updated: 2025-12-11
 requires: 9001, 9002, LP-12, LP-13, LP-80
-supersedes: 0610
 series: LP-9000 DEX Series
 implementation: https://github.com/luxfi/dex
 order: 5

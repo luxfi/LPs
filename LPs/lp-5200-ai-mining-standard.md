@@ -7,7 +7,7 @@ discussions-to: https://github.com/luxfi/lps/discussions
 status: Draft
 type: Standards Track
 category: Core
-created: 2024-11-30
+created: 2025-01-15
 requires: 0004, 0005
 tags: [ai, consensus]
 activation:
