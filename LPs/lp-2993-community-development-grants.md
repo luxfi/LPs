@@ -168,7 +168,7 @@ The following are **not eligible** for grants:
 
 ### Application Flow
 
-```
+```solidity
 1. Idea submission (brief form)
     ↓
 2. Initial screening (1 week)
@@ -284,7 +284,7 @@ The following are **not eligible** for grants:
 
 ### Milestone Approval
 
-```
+```markdown
 Grantee submits milestone deliverable
     ↓
 Grants team reviews (5 business days)

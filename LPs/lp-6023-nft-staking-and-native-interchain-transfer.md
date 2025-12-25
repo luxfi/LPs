@@ -97,7 +97,7 @@ cd standard
 forge test --match "NFT"
 # Cross-chain transfer tests
 forge test --match "Teleport"
-```
+```solidity
 
 ### Example Implementation
 ```solidity

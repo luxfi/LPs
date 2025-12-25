@@ -31,7 +31,7 @@ A dedicated, well-tested threshold cryptography library provides:
 
 ### Package Structure
 
-```
+```solidity
 github.com/luxfi/threshold/
 ├── protocols/
 │   ├── cmp/           # CGGMP21 threshold ECDSA (LP-7014)
@@ -119,9 +119,7 @@ type Round interface {
     // Finalize completes the round and returns next round or result
     Finalize() (Round, interface{}, error)
 }
-```
-
-```go
+go
 package party
 
 // ID uniquely identifies a party in a threshold protocol
@@ -129,9 +127,7 @@ type ID string
 
 // IDSlice is a sortable slice of party IDs
 type IDSlice []ID
-```
-
-```go
+go
 package pool
 
 // Pool manages goroutine workers for parallel operations
@@ -141,7 +137,7 @@ type Pool struct {
 
 // NewPool creates a worker pool (0 = runtime.NumCPU())
 func NewPool(workers int) *Pool
-```
+```go
 
 ### Protocol Entry Points
 
@@ -178,7 +174,7 @@ type Ed25519 struct{}
 
 // BLS12_381 for BLS aggregate signatures
 type BLS12_381 struct{}
-```
+```solidity
 
 ### Usage Example
 
@@ -247,7 +243,7 @@ go test ./protocols/... -bench=. -benchmem
 
 # Quick smoke test
 go test ./protocols/cmp -run Quick -v
-```
+```go
 
 ### Performance Benchmarks (Apple M1 Max)
 
@@ -395,7 +391,7 @@ func TestFROSTTaproot(t *testing.T) {
     sig := runSign(t, configs, parties[:2], message)
     assert.True(t, bip340.Verify(xOnlyPubKey, message, sig))
 }
-```
+```go
 
 ### Integration Tests
 

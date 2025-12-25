@@ -176,7 +176,7 @@ go test -bench=. -benchmem    # Benchmarks
 cd ~/work/lux/graphql
 go test -v ./...              # GraphVM tests
 go test -v -run TestGas       # Gas metering tests
-```
+```bash
 
 **Foundry Test Suite** (Precompiles):
 
@@ -241,7 +241,7 @@ go build ./graphql/cmd/graphql
 
 # Deploy GraphDB+GraphVM to local Lux network
 # See: node/scripts/local_network_graphdb.sh
-```
+```solidity
 
 ### Integration Points
 
@@ -265,7 +265,7 @@ forge verify-contract \
   --chain-id 43114 \
   --watch 0x000000000000000000000000000000000000000B \
   src/graphdb/GraphMutation.sol:GraphMutation
-```
+```solidity
 
 ## Reference Implementation
 
@@ -291,4 +291,4 @@ GraphVM query gas costs and precompile storage writes introduce new gas sinks; t
 
 ## Copyright
 
-Copyright and related rights waived via [CC0](https://creativecommons.org/publicdomain/zero/1.0/).
+Copyright and related rights waived via [CC0](https://creativecommons.org/publicdomain/zero/1.0/).```

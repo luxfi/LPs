@@ -106,9 +106,9 @@ Z-Chain offers **three privacy tiers**:
 1. User submits shielded transaction T
 2. Sequencer executes T off-chain, generates witness w
 3. Prover generates zk-SNARK proof π:
-   ```
+```solidity
    π ← Prove(ValidExec(T, w, state_old, state_new))
-   ```
+```
 4. L1 verifier checks π and updates state commitment
 
 **Privacy Guarantee**: L1 sees only state commitment C = Hash(state_new), not transaction details.
@@ -131,7 +131,7 @@ Z-Chain offers **three privacy tiers**:
 
 **Private NFT Transfer Protocol**:
 
-```
+```solidity
 commitment_old ← Hash(n, A_sender, salt)
 commitment_new ← Hash(n, A_recv, salt')
 
@@ -207,7 +207,7 @@ commitment_new ← Hash(n, A_recv, salt')
 
 **Attestation Protocol**:
 
-```
+```solidity
 // Execute transaction in enclave
 result ← ExecuteInEnclave(T)
 
@@ -238,7 +238,7 @@ return (E, Q)
        StakeAmount     uint64        // LUX staked for slashing
        Signature       []byte        // Provider signature
    }
-   ```
+```go
 
 2. **SubmitReceiptTx**: Submit AI inference receipt
    ```go
@@ -253,7 +253,7 @@ return (E, Q)
        Fee             uint64        // Fee in LUX
        Signature       []byte        // Provider signature
    }
-   ```
+```
 
 3. **ChallengeTx**: Challenge invalid attestation
    ```go
@@ -264,7 +264,7 @@ return (E, Q)
        StakeAmount     uint64        // Stake for frivolous challenge protection
        Signature       []byte        // Challenger signature
    }
-   ```
+```go
 
 4. **SettlementTx**: Resolve challenge
    ```go
@@ -275,7 +275,7 @@ return (E, Q)
        Evidence        []byte        // Resolution proof
        AuditorSig      []byte        // Auditor committee signature
    }
-   ```
+```
 
 #### Receipt Circuit v1 (Groth16)
 
@@ -295,7 +295,7 @@ return (E, Q)
 - `inference_result`: Inference output
 
 **Circuit Constraints**:
-```
+```solidity
 1. Hash(model_weights) == model_hash
 2. Hash(input_data) == dataset_hash  
 3. Hash(inference_result) == output_hash
@@ -324,7 +324,7 @@ return (E, Q)
 - Dynamic difficulty adjustment based on network load
 
 **Economic Model**:
-```
+```solidity
 Mining Reward = Base_Reward × (1 + Complexity_Bonus) × (1 - Challenge_Risk)
 
 Where:
@@ -351,7 +351,7 @@ Where:
 ```
 vk = HKDF(sk_user, "view_key", salt)
 PlaintextData = Decrypt(C, vk)
-```
+```go
 
 Auditors receive vk (not sk_user), enabling read-only access without spending authority.
 
@@ -502,7 +502,7 @@ interface IZChainPrivacy {
   function withdraw(uint256 amount, bytes calldata zkProof,
     address recipient) external returns (bool);
 }
-```
+```solidity
 
 ### Go API
 
@@ -589,7 +589,7 @@ Compared to:
 **Certificate Proof**:
 ```
 π_kyc ← Prove(HasValidCertificate(pk_user, provider_id))
-```
+```solidity
 
 ### OFAC Compliance
 
@@ -680,3 +680,4 @@ Code: Apache 2.0
 *LP-302 Created: October 28, 2025*
 *Status: Active*
 *Contact: research@lux.network*
+```

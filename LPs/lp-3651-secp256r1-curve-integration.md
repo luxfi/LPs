@@ -79,7 +79,7 @@ Matches RIP-7212 for cross-ecosystem compatibility. Libraries developed for Ethe
 ### Function Interface
 
 **Input**: 160 bytes
-```
+```solidity
 [32 bytes] message hash
 [32 bytes] r (signature component)
 [32 bytes] s (signature component)  
@@ -206,7 +206,7 @@ func TestNISTVectors(t *testing.T) {
         })
     }
 }
-```
+```solidity
 
 ### Integration Tests
 
@@ -308,7 +308,7 @@ const signature = await navigator.credentials.get({
 
 // Submit to blockchain (only 3,450 gas for verification!)
 await wallet.executeWithBiometric(target, data, signature.r, signature.s);
-```
+```go
 
 **Benefits**:
 - No private key exposure
@@ -394,7 +394,7 @@ contract CrossChainIdentity {
         ICM.sendCrossChain(destChainId, abi.encode(pubKey, messageHash));
     }
 }
-```
+```solidity
 
 ## Security Considerations
 
@@ -542,7 +542,7 @@ func RunSecp256r1(input []byte) ([]byte, error) {
     
     return []byte{}, nil
 }
-```
+```solidity
 
 ## Future Enhancements
 
@@ -590,7 +590,7 @@ function verifyP256(bytes32 hash, bytes32 r, bytes32 s, bytes32 x, bytes32 y)
         );
     return success && abi.decode(result, (uint256)) == 1;
 }
-```
+```solidity
 
 ### Application Categories Enabled
 
@@ -616,3 +616,4 @@ function verifyP256(bytes32 hash, bytes32 r, bytes32 s, bytes32 x, bytes32 y)
 
 Copyright © 2025 Lux Industries Inc. All rights reserved.  
 Based on ACP-204 - Copyright waived via [CC0](https://creativecommons.org/publicdomain/zero/1.0/).
+```

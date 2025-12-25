@@ -52,7 +52,7 @@ HPKE (RFC 9180) provides:
 
 ### Precompile Address
 
-```
+```solidity
 HPKE_PRECOMPILE = 0x031A
 ```
 
@@ -107,7 +107,7 @@ The precompile supports the following cipher suites:
 
 #### SetupBaseS (Sender Setup - Base Mode)
 
-```
+```solidity
 ┌────────┬─────────┬─────────┬────────┬────────────────┬───────────────┐
 │ 1 byte │ 2 bytes │ 2 bytes │ 2 bytes│ Variable       │ Variable      │
 │ 0x01   │ kem_id  │ kdf_id  │ aead_id│ recipient_pk   │ info          │
@@ -118,7 +118,7 @@ Returns: `encapsulated_key || context_handle`
 
 #### SetupBaseR (Receiver Setup - Base Mode)
 
-```
+```solidity
 ┌────────┬─────────┬─────────┬────────┬────────────────┬───────────────┬──────────────┐
 │ 1 byte │ 2 bytes │ 2 bytes │ 2 bytes│ Variable       │ Variable      │ Variable     │
 │ 0x02   │ kem_id  │ kdf_id  │ aead_id│ enc            │ recipient_sk  │ info         │
@@ -129,7 +129,7 @@ Returns: `context_handle`
 
 #### SetupAuthS (Sender Setup - Auth Mode)
 
-```
+```solidity
 ┌────────┬─────────┬─────────┬────────┬────────────────┬───────────────┬──────────────┐
 │ 1 byte │ 2 bytes │ 2 bytes │ 2 bytes│ Variable       │ Variable      │ Variable     │
 │ 0x05   │ kem_id  │ kdf_id  │ aead_id│ recipient_pk   │ sender_sk     │ info         │
@@ -140,7 +140,7 @@ Returns: `encapsulated_key || context_handle`
 
 #### SetupPSKS (Sender Setup - PSK Mode)
 
-```
+```solidity
 ┌────────┬─────────┬─────────┬────────┬────────────────┬────────────┬────────────────┬──────────────┐
 │ 1 byte │ 2 bytes │ 2 bytes │ 2 bytes│ Variable       │ Variable   │ Variable       │ Variable     │
 │ 0x03   │ kem_id  │ kdf_id  │ aead_id│ recipient_pk   │ psk        │ psk_id         │ info         │
@@ -151,7 +151,7 @@ Returns: `encapsulated_key || context_handle`
 
 #### Seal (Encrypt)
 
-```
+```solidity
 ┌────────┬────────────────┬───────────────┬────────────────┐
 │ 1 byte │ 32 bytes       │ Variable      │ Variable       │
 │ 0x10   │ context_handle │ aad           │ plaintext      │
@@ -162,7 +162,7 @@ Returns: `ciphertext || tag`
 
 #### Open (Decrypt)
 
-```
+```solidity
 ┌────────┬────────────────┬───────────────┬────────────────┐
 │ 1 byte │ 32 bytes       │ Variable      │ Variable       │
 │ 0x11   │ context_handle │ aad           │ ciphertext     │
@@ -173,7 +173,7 @@ Returns: `plaintext`
 
 #### Export (Key Export)
 
-```
+```solidity
 ┌────────┬────────────────┬───────────────┬────────────────┐
 │ 1 byte │ 32 bytes       │ Variable      │ 2 bytes        │
 │ 0x12   │ context_handle │ exporter_ctx  │ length         │
@@ -184,7 +184,7 @@ Returns: `exported_secret`
 
 #### SingleShotSeal (One-Shot Encryption)
 
-```
+```solidity
 ┌────────┬─────────┬─────────┬────────┬────────────────┬───────────────┬──────────────┬────────────────┐
 │ 1 byte │ 2 bytes │ 2 bytes │ 2 bytes│ Variable       │ Variable      │ Variable     │ Variable       │
 │ 0x20   │ kem_id  │ kdf_id  │ aead_id│ recipient_pk   │ info          │ aad          │ plaintext      │
@@ -541,7 +541,7 @@ library HPKE {
         return result;
     }
 }
-```
+```go
 
 ### Go Implementation
 
@@ -899,7 +899,7 @@ This is a new precompile with no backwards compatibility concerns.
 
 ### Test Vector 1: X25519 + ChaCha20-Poly1305
 
-```
+```solidity
 // RFC 9180 Test Vector
 kem_id: 0x0020 (X25519)
 kdf_id: 0x0001 (HKDF-SHA256)
@@ -918,7 +918,7 @@ ciphertext: 0xf938558b5d72f1a23810b4be2ab4f84331acc02fc97babc53a52ae8218a355a9
 
 ### Test Vector 2: P-256 + AES-GCM
 
-```
+```solidity
 kem_id: 0x0010 (P-256)
 kdf_id: 0x0001 (HKDF-SHA256)
 aead_id: 0x0001 (AES-128-GCM)
@@ -942,7 +942,7 @@ function testHPKEEncryptDecrypt() public {
 
     assertEq(decrypted, plaintext);
 }
-```
+```solidity
 
 ## Reference Implementation
 
@@ -988,3 +988,4 @@ HPKE with current KEMs is NOT post-quantum secure. For quantum resistance:
 ## Copyright
 
 Copyright and related rights waived via [CC0](https://creativecommons.org/publicdomain/zero/1.0/).
+```

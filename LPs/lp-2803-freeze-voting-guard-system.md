@@ -31,7 +31,7 @@ Emergency controls are essential for:
 
 ### Architecture
 
-```
+```solidity
 ┌──────────────────────────────────────────────────────────────┐
 │                         Safe Wallet                           │
 ├──────────────────────────────────────────────────────────────┤
@@ -86,7 +86,7 @@ interface IFreezeGuardAzoriusV1 {
 
     function checkAfterExecution(bytes32 txHash, bool success) external view;
 }
-```
+```solidity
 
 #### FreezeGuardMultisigV1
 
@@ -133,7 +133,7 @@ interface IFreezeVotingBase {
     event Frozen();
     event Unfrozen();
 }
-```
+```solidity
 
 #### FreezeVotingAzoriusV1
 
@@ -164,7 +164,7 @@ interface IFreezeVotingMultisigV1 is IFreezeVotingBase {
     // Only Safe owners can vote
     function isOwner(address _address) external view returns (bool);
 }
-```
+```solidity
 
 #### FreezeVotingStandaloneV1
 
@@ -181,7 +181,7 @@ interface IFreezeVotingStandaloneV1 is IFreezeVotingBase {
 
 ### File Structure
 
-```
+```solidity
 contracts/contracts/
 ├── freeze-guard/
 │   ├── FreezeGuardAzoriusV1.sol     # Guards Azorius execution
@@ -195,7 +195,7 @@ contracts/contracts/
 
 ### Freeze Lifecycle
 
-```
+```markdown
 Normal Operation
       │
       ▼
@@ -249,7 +249,7 @@ event FreezeVoteCast(address indexed voter);
 event FreezeProposalCreated(address indexed creator);
 event Frozen();
 event Unfrozen();
-```
+```solidity
 
 ## Usage Example
 
@@ -365,7 +365,7 @@ function test_UnfreezeAfterPeriod() public {
 
     assertFalse(freezeVoting.isFrozen());
 }
-```
+```solidity
 
 ### Guard Tests
 

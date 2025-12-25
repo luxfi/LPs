@@ -69,7 +69,7 @@ Integration with Lux precompiles enables:
 
 The singleton EntryPoint processes UserOperations and manages deposits:
 
-```
+```solidity
 Address: 0x0000000071727De22E5E9d8BAf0edAc6f37da032 (v0.7)
 ```
 
@@ -98,7 +98,7 @@ interface IEntryPoint {
     function depositTo(address account) external payable;
     function withdrawTo(address payable withdrawAddress, uint256 withdrawAmount) external;
 }
-```
+```solidity
 
 #### 2. UserOperation Struct
 
@@ -134,7 +134,7 @@ struct UserOperation {
     bytes paymasterAndData;
     bytes signature;
 }
-```
+```solidity
 
 #### 3. Account Interface
 
@@ -174,7 +174,7 @@ interface IPaymaster {
         uint256 actualUserOpFeePerGas
     ) external;
 }
-```
+```solidity
 
 ### Lux Smart Account Implementation
 
@@ -249,7 +249,7 @@ contract SmartAccountFactory {
         uint256 index
     ) public returns (address proxy);
 }
-```
+```solidity
 
 #### Authorization Modules
 
@@ -286,7 +286,7 @@ contract PasskeyRegistryModule is BaseAuthorizationModule {
         // Uses 0x0000000000000000000000000000000000000100
     }
 }
-```
+```solidity
 
 **SessionKeyManagerModule**: Time-limited session keys
 
@@ -336,7 +336,7 @@ contract VerifyingSingletonPaymaster is BasePaymaster {
         paymasterIdBalances[paymasterId] -= actualGasCost;
     }
 }
-```
+```solidity
 
 ### Version Compatibility
 
@@ -403,7 +403,7 @@ library UserOpMigration {
         v7.signature = v6.signature;
     }
 }
-```
+```solidity
 
 ### Solidity Version Requirements
 
@@ -472,7 +472,7 @@ contract FROSTValidationModule is BaseAuthorizationModule {
         return success ? 0 : SIG_VALIDATION_FAILED;
     }
 }
-```
+```solidity
 
 **Gas cost**: 50,000 base + 5,000 per signer
 
@@ -522,7 +522,7 @@ contract MLDSAValidationModule is BaseAuthorizationModule {
         return success ? 0 : SIG_VALIDATION_FAILED;
     }
 }
-```
+```solidity
 
 **Gas cost**: 100,000 base + 10 per message byte
 
@@ -639,7 +639,7 @@ function testBasicExecution() {
     // Verify execution
     assertTrue(target.called);
 }
-```
+```solidity
 
 ### Test 2: Paymaster Sponsored Transaction
 
@@ -686,7 +686,7 @@ function testFROSTValidation() {
     // Execute
     entryPoint.handleOps(toPackedArray(op), beneficiary);
 }
-```
+```solidity
 
 ### Test 4: Social Recovery
 
@@ -736,7 +736,7 @@ forge test -vvv
 
 # Gas report
 forge test --gas-report
-```
+```solidity
 
 ## Security Considerations
 
@@ -829,3 +829,4 @@ Bundlers profit from:
 ## Copyright
 
 Copyright and related rights waived via [CC0](https://creativecommons.org/publicdomain/zero/1.0/).
+```

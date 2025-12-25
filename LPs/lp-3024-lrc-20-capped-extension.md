@@ -48,7 +48,7 @@ interface ILRC20Capped is ILRC20 {
      */
     function cap() external view returns (uint256);
 }
-```
+```solidity
 
 ### Implementation
 

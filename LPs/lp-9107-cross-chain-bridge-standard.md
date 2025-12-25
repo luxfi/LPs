@@ -37,7 +37,7 @@ The MPC oracle bridge provides:
 
 ### Architecture Overview
 
-```
+```markdown
 Source Chain                    MPC Oracle Network              Destination Chain
 ┌─────────────┐                 ┌─────────────────┐             ┌─────────────────┐
 │             │                 │                 │             │                 │
@@ -86,7 +86,7 @@ contract Bridge is Ownable, AccessControl {
     function setMPCOracle(address MPCO) external onlyAdmin;
     function setPayoutAddress(address addr, uint256 feeR) external onlyAdmin;
 }
-```
+```solidity
 
 **Key Features:**
 
@@ -170,7 +170,7 @@ function setMPCOracle(address MPCO) public onlyAdmin {
     addMPCMapping(MPCO);
     emit NewMPCOracleSet(MPCO);
 }
-```
+```solidity
 
 #### Signature Deduplication
 
@@ -203,7 +203,7 @@ amt = amt.sub(fee);
 // Distribute
 varStruct.token.mint(payoutAddr, fee);      // Fee to payout address
 varStruct.token.mint(toTargetAddr, amt);    // Net amount to recipient
-```
+```solidity
 
 **Fee Configuration:**
 
@@ -239,7 +239,7 @@ For Lux chain-to-chain transfers, the bridge integrates with native Warp messagi
 │  Bridge.sol    Bridge.sol    Bridge.sol    Bridge.sol          │
 │  ERC20B        ERC20B        ERC20B        ERC20B              │
 └─────────────────────────────────────────────────────────────────┘
-```
+```solidity
 
 ### Supported Chains
 
@@ -391,7 +391,7 @@ function testFeeCalculation() public {
     assertEq(token.balanceOf(payoutAddr), expectedFee);
     assertEq(token.balanceOf(recipient), expectedNet);
 }
-```
+```solidity
 
 ### Integration Tests
 
@@ -425,7 +425,7 @@ interface IERC20Bridgable {
     event BridgeBurn(address indexed from, uint256 amount);
     event BridgeMint(address indexed to, uint256 amount);
 }
-```
+```solidity
 
 ### Usage Example
 

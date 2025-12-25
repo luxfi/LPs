@@ -83,7 +83,7 @@ interface IEmergencyGuardian {
     event CircuitBreakerReset(bytes32 indexed breakerId);
     event EmergencyAction(string action, address indexed actor, uint256 timestamp);
 }
-```
+```solidity
 
 ### 2. Circuit Breaker Types
 
@@ -279,7 +279,7 @@ interface IPausable {
     function pause() external;
     function unpause() external;
 }
-```
+```solidity
 
 ### 4. Automated Anomaly Detection
 
@@ -345,7 +345,7 @@ interface IEmergencyMultisig {
     // Fast-track for critical emergencies (higher threshold)
     function fastTrackExecute(EmergencyAction action, bytes calldata params, bytes[] calldata signatures) external;
 }
-```
+```solidity
 
 ### 6. Emergency Response Playbooks
 
@@ -422,7 +422,7 @@ interface IIncidentCommunication {
     function resolveIncident(bytes32 incidentId, string calldata resolution) external;
     function getIncidentHistory() external view returns (Incident[] memory);
 }
-```
+```solidity
 
 ## Performance Requirements
 
@@ -462,3 +462,4 @@ Emergency procedures are additive infrastructure that works alongside existing p
 ## Copyright
 
 Copyright and related rights waived via [CC0](https://creativecommons.org/publicdomain/zero/1.0/).
+```

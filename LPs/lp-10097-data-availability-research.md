@@ -57,7 +57,7 @@ interface DataUsageProfile {
     centralized: "High-frequency data";
   };
 }
-```
+```solidity
 
 ## Research Findings
 
@@ -208,7 +208,7 @@ contract ZChainDataAvailability {
         );
     }
 }
-```
+```solidity
 
 ### 3. Rollup Data Availability
 
@@ -361,7 +361,7 @@ contract HybridStorage {
         return _retrieveData(record);
     }
 }
-```
+```solidity
 
 ### 5. State Rent and Pruning
 
@@ -424,7 +424,7 @@ contract StateRent {
 
 ### 1. DA Architecture for Lux
 
-```
+```solidity
 recommended_architecture:
   primary_da_solution:
     chain: "Z-Chain specialized for DA"

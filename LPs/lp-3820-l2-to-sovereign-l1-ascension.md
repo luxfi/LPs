@@ -94,7 +94,7 @@ go test ./vms/platformvm/txs -run TestAscend
 
 # Test L1 fee dynamics
 go test ./vms/platformvm -run TestL1Fee
-```
+```solidity
 
 ### Governance Integration
 - **LP Parameters**:
@@ -153,3 +153,4 @@ This LP introduces additive capabilities and preserves existing behavior. Rollou
    - Verify reentrancy protection
    - Test gas forwarding
 
+```

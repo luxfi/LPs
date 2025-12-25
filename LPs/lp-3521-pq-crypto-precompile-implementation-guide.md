@@ -69,7 +69,7 @@ PQC precompiles are additive additions that do not affect existing EVM functiona
 | ML-DSA-87 | NIST Level 5 (256-bit) | `0x87` | **150,000** | 2,592 bytes | 4,627 bytes |
 
 **Gas Formula:**
-```
+```solidity
 gas = BASE_COST[mode]
 ```
 
@@ -110,7 +110,7 @@ gas = BASE_COST[mode]
 
 ## Gas Cost Summary Table
 
-```
+```solidity
 ╔════════════════════════════════════════════════════════════════════════════╗
 ║                    POST-QUANTUM CRYPTOGRAPHY GAS COSTS                     ║
 ╠════════════════════════════════════════════════════════════════════════════╣
@@ -147,7 +147,7 @@ const (
     ModeMLDSA65 uint8 = 0x65  // Maps to mldsa.MLDSA65
     ModeMLDSA87 uint8 = 0x87  // Maps to mldsa.MLDSA87
 )
-```
+```solidity
 
 **Important**: The precompile mode bytes (`0x44`, `0x65`, `0x87`) differ from the library's internal mode values (`0`, `1`, `2`). The precompile implementation converts between these formats.
 
@@ -181,7 +181,7 @@ const (
     SLHDSAModeSHAKE_256s uint8 = 0x14
     SLHDSAModeSHAKE_256f uint8 = 0x15
 )
-```
+```solidity
 
 ## Input Formats
 
@@ -195,7 +195,7 @@ Offset  Length   Field         Description
 1+pk    32       messageLen    Message length as big-endian uint256
 1+pk+32 var      signature     Signature (2420/3309/4627 bytes)
 min     var      message       Message to verify
-```
+```solidity
 
 ### PQCrypto Unified Precompile
 
@@ -227,7 +227,7 @@ Offset  Length   Field         Description
 0       4        selector      "encp" (0x656e6370)
 4       1        mode          Mode byte (0x00, 0x01, 0x02)
 5       var      publicKey     Public key (800/1184/1568 bytes)
-```
+```sql
 
 **ML-KEM Decapsulate:**
 ```sql
@@ -251,7 +251,7 @@ Offset  Length   Field         Description
 7+pk    2        messageLen    Message length (big-endian)
 9+pk    var      message       Message bytes
 9+pk+m  var      signature     Remaining bytes are signature
-```
+```solidity
 
 ## Output Formats
 
@@ -290,7 +290,7 @@ github.com/luxfi/crypto/
     ├── slhdsa.go         # SLH-DSA implementation
     ├── slhdsa_test.go    # Tests
     └── params.go         # Algorithm parameters
-```
+```solidity
 
 ### EVM Precompile Implementation
 
@@ -305,7 +305,7 @@ github.com/luxfi/evm/precompile/contracts/
     ├── contract_test.go  # 234 lines of tests
     ├── module.go         # Registration
     └── config.go         # Configuration
-```
+```solidity
 
 ### Geth Integration
 
@@ -313,7 +313,7 @@ github.com/luxfi/evm/precompile/contracts/
 github.com/luxfi/geth/core/vm/
 ├── contracts.go          # Precompile registry
 └── pq_contracts.go       # PQ crypto precompile bindings
-```
+```solidity
 
 ## Solidity Interface
 
@@ -402,7 +402,7 @@ library PQCryptoLib {
     bytes4 constant DECAP_SELECTOR = 0x64656370;   // "decp"
     bytes4 constant SLHDSA_SELECTOR = 0x736c6873;  // "slhs"
 }
-```
+```solidity
 
 ## Test Coverage
 
@@ -534,3 +534,4 @@ Precompiles reject unknown mode bytes with clear error messages:
 ## Copyright
 
 Copyright and related rights waived via [CC0](https://creativecommons.org/publicdomain/zero/1.0/).
+```

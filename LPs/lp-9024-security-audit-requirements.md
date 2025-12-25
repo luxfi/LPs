@@ -113,7 +113,7 @@ interface IAuditRegistry {
     function getProtocolAudits(address protocol) external view returns (AuditReport[] memory);
     function verifyAuditStatus(address protocol) external view returns (bool isAudited, uint256 lastAuditDate);
 }
-```
+```solidity
 
 ### 3. Vulnerability Classification
 
@@ -231,7 +231,7 @@ library VulnerabilityClassification {
 - [ ] Randomness sources secure
 - [ ] Hash functions appropriate
 - [ ] Key management secure
-```
+```solidity
 
 ### 5. Audit Process
 
@@ -366,7 +366,7 @@ contract SecurityScoreCalculator {
         return ScoreFactors(0, 0, 0, 0, 0, 0);
     }
 }
-```
+```solidity
 
 ### 7. Formal Verification Requirements
 

@@ -121,7 +121,7 @@ contract xUSD is SynthToken {
 
     constructor() SynthToken("Lux Synthetic USD", "xUSD", FLASH_FEE) {}
 }
-```
+```solidity
 
 ### AlchemistV2 Interface
 
@@ -192,7 +192,7 @@ interface ITransmuterV2 {
     function syntheticToken() external view returns (address);
     function underlyingToken() external view returns (address);
 }
-```
+```solidity
 
 ### Protocol Parameters
 
@@ -226,7 +226,7 @@ interface ITransmuterV2 {
 │  └─────────────┘     └─────────────┘     └─────────────┘     └───────────┘ │
 │                                                                             │
 └─────────────────────────────────────────────────────────────────────────────┘
-```
+```solidity
 
 ### Collateral Flow
 
@@ -250,7 +250,7 @@ User Collateral Flow:
                          | User Debt  |           | Transmuter    |
                          | Decreases  | --------> | Buffer        |
                          +------------+           +---------------+
-```
+```solidity
 
 ### LP Pair Integration
 
@@ -306,7 +306,7 @@ All synth contracts are implemented in the Lux Standard Library:
 │   └── transmuter/
 ├── libraries/
 └── utils/
-```
+```solidity
 
 ### Gas Costs
 
@@ -367,7 +367,7 @@ function testSelfRepayingLoan() public {
     (int256 debtAfter,) = alchemist.accounts(address(this));
     assertLt(debtAfter, 500e18);  // Debt reduced by harvested yield
 }
-```
+```solidity
 
 ### 3. Transmuter Exchange
 
@@ -469,7 +469,7 @@ contract LRC20B is LRC20, Ownable, AccessControl {
     function bridgeMint(address account, uint256 amount) public onlyAdmin returns (bool);
     function bridgeBurn(address account, uint256 amount) public onlyAdmin returns (bool);
 }
-```
+```markdown
 
 Only the MPC wallet can mint/burn bridge tokens - not arbitrary users.
 
@@ -494,3 +494,4 @@ Only the MPC wallet can mint/burn bridge tokens - not arbitrary users.
 ## Copyright
 
 Copyright and related rights waived via [BSD-3-Clause](https://opensource.org/licenses/BSD-3-Clause).
+```

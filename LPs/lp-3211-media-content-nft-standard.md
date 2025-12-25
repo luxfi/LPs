@@ -130,7 +130,7 @@ interface ILuxMedia {
     function currentAskForToken(uint256 tokenId) external view returns (Ask memory);
     function currentBidForToken(uint256 tokenId) external view returns (Bid memory);
 }
-```
+```solidity
 
 ### Licensing Extension
 
@@ -243,7 +243,7 @@ interface IMediaCollaboration is ILuxMedia {
     
     function distributeRoyalties(uint256 tokenId) external;
 }
-```
+```solidity
 
 ### Content Verification Extension
 
@@ -336,7 +336,7 @@ interface IMediaMetadata {
         string calldata value
     ) external;
 }
-```
+```solidity
 
 ## Rationale
 
@@ -466,7 +466,7 @@ function testCollaboration() public {
     // Distribute royalties
     collab.distributeRoyalties(tokenId);
 }
-```
+```bash
 
 ## Implementation
 
@@ -510,7 +510,7 @@ forge test --match-path test/media-nft/\* --gas-report
 
 # Coverage
 forge coverage --match-path test/media-nft/\*
-```
+```solidity
 
 **Test Cases** (see `/test/media-nft/LuxMedia.t.sol`):
 - `testMintMedia()` - Mint with metadata and bid shares
@@ -697,7 +697,7 @@ contract LuxMedia is ILuxMedia, IMediaLicensing, ERC721 {
         }
     }
 }
-```
+```solidity
 
 ## Security Considerations
 
@@ -714,7 +714,7 @@ Ensure safe transfers:
 ```solidity
 (bool success, ) = recipient.call{value: amount}("");
 require(success, "Transfer failed");
-```
+```solidity
 
 ### License Enforcement
 
@@ -730,8 +730,8 @@ Require all approvals:
 for (uint i = 0; i < collaborators.length; i++) {
     require(collaborators[i].approved, "Not all approved");
 }
-```
+```solidity
 
 ## Copyright
 
-Copyright and related rights waived via [CC0](../LICENSE.md).
+Copyright and related rights waived via [CC0](../LICENSE.md).```

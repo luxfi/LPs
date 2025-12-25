@@ -54,7 +54,7 @@ Ringtail provides unique properties for quantum-safe threshold signatures:
 
 ### Precompile Address
 
-```
+```solidity
 0x020000000000000000000000000000000000000B
 ```
 
@@ -87,7 +87,7 @@ The Ringtail signature contains:
 
 ### Gas Cost
 
-```
+```solidity
 gas = BASE_COST + (totalParties * PER_PARTY_COST)
 
 Where:
@@ -168,7 +168,7 @@ abstract contract RingtailVerifier {
         _;
     }
 }
-```
+```solidity
 
 ### Example Usage
 
@@ -258,7 +258,7 @@ The gas formula accounts for:
 
 Ringtail achieves threshold signatures in 2 rounds:
 
-```
+```markdown
 Round 1: Each party broadcasts commitment
 Round 2: Each party broadcasts response
 Result: Aggregated threshold signature
@@ -288,7 +288,7 @@ function verify(bytes calldata frostSig, bytes calldata ringtailSig) {
     require(verifyFROST(frostSig), "FROST failed");
     require(verifyRingtail(ringtailSig), "Ringtail failed");
 }
-```
+```solidity
 
 **Phase 2**: Migrate keys to Ringtail-only
 
@@ -304,7 +304,7 @@ threshold: 2
 totalParties: 3
 messageHash: keccak256("Test message for threshold signature")
 signature: <Ringtail signature from 2 of 3 parties>
-```
+```solidity
 
 **Expected Output:** `0x...0001` (valid)
 **Expected Gas:** 150,000 + (3 × 10,000) = 180,000 gas
@@ -317,7 +317,7 @@ threshold: 2
 totalParties: 3
 messageHash: <same as above>
 signature: <Ringtail signature from only 1 party>
-```
+```solidity
 
 **Expected Output:** `0x...0000` (invalid - threshold not met)
 
@@ -329,7 +329,7 @@ threshold: 2
 totalParties: 3
 messageHash: <valid hash>
 signature: <Ringtail signature with 1 corrupted share>
-```
+```solidity
 
 **Expected Output:** `0x...0000` (invalid - share verification failed)
 
@@ -341,7 +341,7 @@ threshold: 67
 totalParties: 100
 messageHash: <valid hash>
 signature: <Ringtail signature from 67 parties>
-```
+```solidity
 
 **Expected Output:** `0x...0001` (valid)
 **Expected Gas:** 150,000 + (100 × 10,000) = 1,150,000 gas
@@ -378,7 +378,7 @@ The Ringtail precompile is implemented across multiple layers, providing post-qu
 │  + Number Theoretic Transform (NTT)                             │
 │  + Polynomial arithmetic over cyclotomic rings                  │
 └─────────────────────────────────────────────────────────────────┘
-```
+```solidity
 
 #### 1. EVM Precompile Layer (`~/work/lux/precompiles/ringtail/`)
 
@@ -448,7 +448,7 @@ const (
     Sigma  = 3.192    // Gaussian distribution width
     Beta   = 32       // Bound for small coefficients
 )
-```
+```go
 
 #### 4. Quasar Consensus Integration (`~/work/lux/node/consensus/protocol/quasar/`)
 
@@ -562,7 +562,7 @@ Ringtail's security rests on the hardness of:
 ### Distributed Key Generation
 
 Ringtail supports DKG without trusted dealer:
-```
+```solidity
 1. Each party generates share locally
 2. Broadcast commitments
 3. Verify all commitments
@@ -640,7 +640,7 @@ func (em *EpochManager) VerifySignatureForEpoch(message string, sig *Signature, 
     }
     return ringtailThreshold.Verify(keys.GroupKey, message, sig)
 }
-```
+```solidity
 
 **Implementation Files:**
 - `consensus/protocol/quasar/epoch.go` - EpochManager
@@ -687,7 +687,7 @@ const (
     // Classical: ~280 bits
     // Quantum (Grover): ~140 bits
 )
-```
+```solidity
 
 **Discrete Gaussian Sampling** (CRITICAL for security):
 ```go
@@ -725,7 +725,7 @@ func InverseNTT(values []int64, n int, q int64, invRoots []int64) []int64 {
     // Gentleman-Sande butterfly
     // Multiply by n^(-1) mod q
 }
-```
+```go
 
 #### Side-Channel Resistance
 
@@ -764,7 +764,7 @@ defer func() {
         share.Secret[i] = 0
     }
 }()
-```
+```solidity
 
 ### Integration Points Across Lux Infrastructure
 
@@ -821,7 +821,7 @@ func Keygen(parties []party.ID, threshold int) (*GroupKey, map[party.ID]*Share, 
     groupKey := aggregateCommitments(commitments)
     return groupKey, shares, nil
 }
-```
+```go
 
 **Two-Round Signing Protocol**:
 ```go
@@ -883,7 +883,7 @@ func (em *EpochManager) RotateEpoch(validators []string, force bool) error {
     
     return nil
 }
-```
+```go
 
 **Dual-Certificate Finality** (BLS + Ringtail):
 ```go
@@ -953,7 +953,7 @@ contract QuantumSafeVault is RingtailVerifier {
         require(success, "Transfer failed");
     }
 }
-```
+```solidity
 
 ### Network Usage Map
 

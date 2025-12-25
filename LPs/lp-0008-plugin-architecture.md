@@ -97,7 +97,7 @@ type Plugin interface {
     OnBlockAccepted(blockID ids.ID) error
     OnConsensusStateUpdate() error
 }
-```
+```solidity
 
 **Plugin Capabilities**:
 - Block observation hooks

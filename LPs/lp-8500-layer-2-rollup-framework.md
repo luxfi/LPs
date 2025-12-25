@@ -90,7 +90,7 @@ interface ILuxRollup {
     event StateRootChallenged(uint256 indexed batchNumber, address challenger);
     event StateRootFinalized(uint256 indexed batchNumber, bytes32 stateRoot);
 }
-```
+```solidity
 
 ### AI Compute Rollup Extensions
 
@@ -191,7 +191,7 @@ interface IDistributedTrainingRollup is ILuxRollup {
     event GradientSubmitted(bytes32 indexed jobId, address indexed worker, uint256 round);
     event ModelUpdated(bytes32 indexed jobId, uint256 round, bytes32 newWeightsHash);
 }
-```
+```solidity
 
 ### State Transition Function
 
@@ -248,7 +248,7 @@ interface IMessageBridge {
     function getMessageStatus(bytes32 messageHash) external view returns (uint8);
     function isMessageExecuted(bytes32 messageHash) external view returns (bool);
 }
-```
+```sql
 
 ## Rationale
 
@@ -377,7 +377,7 @@ describe("AI Compute Rollup", () => {
         expect(await rollup.getTaskResult(task.taskId)).to.equal(result.outputHash);
     });
 });
-```
+```sql
 
 ### Distributed Training Tests
 

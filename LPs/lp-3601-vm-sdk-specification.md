@@ -62,7 +62,7 @@ A standardized VM SDK removes ambiguity for VM authors, accelerates development 
 cd ~/work/lux/vmsdk
 # View API documentation
 go doc ./... | head -100
-```
+```solidity
 
 **Example VM**:
 - Location: `~/work/lux/vmsdk/examples/`
@@ -126,3 +126,4 @@ Additive and non‑breaking; existing consumers continue to work. Adoption is op
 ## Security Considerations
 
 Apply appropriate validation, authentication, and resource‑limiting to prevent abuse; follow cryptographic best practices where applicable.
+```

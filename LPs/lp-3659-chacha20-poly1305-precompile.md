@@ -154,7 +154,7 @@ Strict implementation of RFC 8439 ensures:
 
 ### Gas Calculation
 
-```
+```markdown
 ChaCha20:    500 + ceil(data_bytes / 32) * 5
 Poly1305:    500 + ceil(data_bytes / 32) * 3
 AEAD:        1000 + ceil((plaintext + aad) / 32) * 8
@@ -165,7 +165,7 @@ XAEAD:       1200 + ceil((plaintext + aad) / 32) * 8
 ### Data Encoding
 
 **ChaCha20 Stream Cipher:**
-```
+```solidity
 | Offset | Length | Description |
 |--------|--------|-------------|
 | 0 | 32 | Key (256-bit) |
@@ -176,7 +176,7 @@ XAEAD:       1200 + ceil((plaintext + aad) / 32) * 8
 ```
 
 **AEAD Encrypt Input:**
-```
+```solidity
 | Offset | Length | Description |
 |--------|--------|-------------|
 | 0 | 32 | Key |
@@ -188,7 +188,7 @@ XAEAD:       1200 + ceil((plaintext + aad) / 32) * 8
 ```
 
 **AEAD Encrypt Output:**
-```
+```solidity
 | Offset | Length | Description |
 |--------|--------|-------------|
 | 0 | P | Ciphertext |
@@ -196,7 +196,7 @@ XAEAD:       1200 + ceil((plaintext + aad) / 32) * 8
 ```
 
 **AEAD Decrypt Input:**
-```
+```solidity
 | Offset | Length | Description |
 |--------|--------|-------------|
 | 0 | 32 | Key |
@@ -209,7 +209,7 @@ XAEAD:       1200 + ceil((plaintext + aad) / 32) * 8
 ```
 
 **AEAD Decrypt Output:**
-```
+```solidity
 | Offset | Length | Description |
 |--------|--------|-------------|
 | 0 | 1 | Valid flag (0x01 if authentic) |
@@ -223,7 +223,7 @@ XAEAD:       1200 + ceil((plaintext + aad) / 32) * 8
 Applies ChaCha20 stream cipher (encryption = decryption).
 
 **Input:**
-```
+```solidity
 | Offset | Length | Description |
 |--------|--------|-------------|
 | 0 | 32 | Key |
@@ -234,14 +234,14 @@ Applies ChaCha20 stream cipher (encryption = decryption).
 ```
 
 **Output:**
-```
+```solidity
 | Offset | Length | Description |
 |--------|--------|-------------|
 | 0 | N | XOR'd data |
 ```
 
 **Algorithm:**
-```
+```solidity
 for block in 0..ceil(data.len() / 64):
     state = [
         0x61707865, 0x3320646e, 0x79622d32, 0x6b206574,  // "expand 32-byte k"
@@ -270,7 +270,7 @@ for block in 0..ceil(data.len() / 64):
 Computes Poly1305 MAC.
 
 **Input:**
-```
+```solidity
 | Offset | Length | Description |
 |--------|--------|-------------|
 | 0 | 32 | One-time key (r || s) |
@@ -279,7 +279,7 @@ Computes Poly1305 MAC.
 ```
 
 **Output:**
-```
+```solidity
 | Offset | Length | Description |
 |--------|--------|-------------|
 | 0 | 16 | Authentication tag |
@@ -292,7 +292,7 @@ Computes Poly1305 MAC.
 ChaCha20-Poly1305 authenticated encryption per RFC 8439.
 
 **Input:**
-```
+```solidity
 | Offset | Length | Description |
 |--------|--------|-------------|
 | 0 | 32 | Key |
@@ -304,7 +304,7 @@ ChaCha20-Poly1305 authenticated encryption per RFC 8439.
 ```
 
 **Output:**
-```
+```solidity
 | Offset | Length | Description |
 |--------|--------|-------------|
 | 0 | P | Ciphertext |
@@ -312,7 +312,7 @@ ChaCha20-Poly1305 authenticated encryption per RFC 8439.
 ```
 
 **Algorithm:**
-```
+```solidity
 1. poly1305_key = chacha20(key, nonce, 0)[0..32]
 2. ciphertext = chacha20(key, nonce, 1, plaintext)
 3. mac_data = pad16(aad) || pad16(ciphertext) || len(aad) || len(ciphertext)
@@ -325,7 +325,7 @@ ChaCha20-Poly1305 authenticated encryption per RFC 8439.
 ChaCha20-Poly1305 authenticated decryption.
 
 **Input:**
-```
+```solidity
 | Offset | Length | Description |
 |--------|--------|-------------|
 | 0 | 32 | Key |
@@ -337,7 +337,7 @@ ChaCha20-Poly1305 authenticated decryption.
 ```
 
 **Output:**
-```
+```solidity
 | Offset | Length | Description |
 |--------|--------|-------------|
 | 0 | 1 | Valid (0x01) or invalid (0x00) |
@@ -345,7 +345,7 @@ ChaCha20-Poly1305 authenticated decryption.
 ```
 
 **Algorithm:**
-```
+```solidity
 1. poly1305_key = chacha20(key, nonce, 0)[0..32]
 2. mac_data = pad16(aad) || pad16(ciphertext) || len(aad) || len(ciphertext)
 3. expected_tag = poly1305(poly1305_key, mac_data)
@@ -361,7 +361,7 @@ ChaCha20-Poly1305 authenticated decryption.
 XChaCha20 variants with 192-bit (24-byte) nonce for safe random nonce generation.
 
 **Extended Nonce Construction:**
-```
+```solidity
 1. subkey = hchacha20(key, nonce[0..16])
 2. subnonce = [0, 0, 0, 0] || nonce[16..24]
 3. Apply ChaCha20 with subkey and subnonce
@@ -372,7 +372,7 @@ XChaCha20 variants with 192-bit (24-byte) nonce for safe random nonce generation
 HChaCha20 function for XChaCha20 key derivation.
 
 **Input:**
-```
+```solidity
 | Offset | Length | Description |
 |--------|--------|-------------|
 | 0 | 32 | Key |
@@ -380,7 +380,7 @@ HChaCha20 function for XChaCha20 key derivation.
 ```
 
 **Output:**
-```
+```solidity
 | Offset | Length | Description |
 |--------|--------|-------------|
 | 0 | 32 | Derived subkey |
@@ -390,7 +390,7 @@ HChaCha20 function for XChaCha20 key derivation.
 
 ### Architecture Overview
 
-```
+```solidity
 ┌─────────────────────────────────────────────────────────────────────┐
 │                ChaCha20-Poly1305 Precompile (0x0319)                 │
 ├─────────────────────────────────────────────────────────────────────┤
@@ -420,7 +420,7 @@ HChaCha20 function for XChaCha20 key derivation.
 
 ### File Inventory
 
-```
+```solidity
 evm/precompile/contracts/chacha20/
 ├── chacha20.go             (10 KB)  # Main precompile implementation
 ├── chacha20_test.go        (8 KB)   # Unit tests
@@ -554,7 +554,7 @@ interface IChaCha20Poly1305 {
         bytes16 nonce
     ) external view returns (bytes32 subkey);
 }
-```
+```solidity
 
 ### Go Implementation
 
@@ -824,7 +824,7 @@ contract SecureChannel {
         }
     }
 }
-```
+```go
 
 ## Security Considerations
 
@@ -945,7 +945,7 @@ func BenchmarkXAEADDecrypt_4KB(b *testing.B) {
     }
 }
 // BenchmarkXAEADDecrypt_4KB-8    45,678 ops/s    2,248 gas
-```
+```solidity
 
 ## Backwards Compatibility
 
@@ -962,3 +962,4 @@ No backwards compatibility issues. This LP introduces a new precompile at an unu
 ## Copyright
 
 Copyright and related rights waived via [CC0](https://creativecommons.org/publicdomain/zero/1.0/).
+```

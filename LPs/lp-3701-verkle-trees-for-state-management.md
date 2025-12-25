@@ -55,7 +55,7 @@ type VerkleNode interface {
     Delete(key []byte) error
     CreateWitness(keys [][]byte) (*VerkleProof, error)
 }
-```
+```go
 
 ### Proof Format
 
@@ -87,7 +87,7 @@ func (c *IPACommitment) Prove(
     // Recursive halving for constant size
     // O(log n) rounds, O(1) proof size
 }
-```
+```go
 
 #### KZG (Kate-Zaverucha-Goldberg)
 
@@ -136,7 +136,7 @@ func ExecuteBlock(block *Block, state *VerkleStateDB) (*VerkleWitness, error) {
         Proof:        witness.Proof,
     }, nil
 }
-```
+```solidity
 
 ### Light Client Protocol
 
@@ -211,7 +211,7 @@ func TestCrossChainProof(t *testing.T) {
     // Check proof size
     assert.Less(t, proof.Size(), 2048)  // <2KB total
 }
-```
+```sql
 
 ## Reference Implementation
 
@@ -270,7 +270,7 @@ Field: BN254 or Verkle field
 Proof Size Target: <1.5 KB
 Cache Size: 16,384 commitments
 Migration Batch Size: 10,000 keys/transaction
-```
+```solidity
 
 **Shadow Mode** (dual MPT/Verkle):
 ```
@@ -278,7 +278,7 @@ Enabled: True (during transition)
 Validation Interval: Every block
 Dual Root Inclusion: Until block N
 Final Switch: Hard fork at agreed height
-```
+```solidity
 
 ### Source Code References
 
@@ -306,4 +306,4 @@ All implementation files verified to exist:
 
 ## Copyright
 
-Copyright and related rights waived via [CC0](../LICENSE.md).
+Copyright and related rights waived via [CC0](../LICENSE.md).```

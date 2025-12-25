@@ -30,13 +30,13 @@ Cross-chain bridges and L2 solutions need to verify state proofs:
 
 ### Precompile Address
 
-```
+```solidity
 0x0000000000000000000000000000000000000014
 ```
 
 ### Input Format
 
-```
+```solidity
 | Field          | Offset | Size   | Description                    |
 |----------------|--------|--------|--------------------------------|
 | commitment     | 0      | 32     | Tree root commitment           |
@@ -52,7 +52,7 @@ Cross-chain bridges and L2 solutions need to verify state proofs:
 
 ### Output Format
 
-```
+```solidity
 | Field    | Offset | Size | Description                         |
 |----------|--------|------|-------------------------------------|
 | valid    | 0      | 32   | 1 if proof valid, 0 otherwise      |
@@ -69,7 +69,7 @@ const (
     VERKLE_BASE_GAS    = 3000    // Base verification cost
     VERKLE_PER_KEY_GAS = 200     // Per key in multiproof
 )
-```
+```go
 
 ### Implementation
 
@@ -122,7 +122,7 @@ function verifyL2State(
     (bool success, bytes memory result) = VERKLE_PRECOMPILE.staticcall(input);
     return success && abi.decode(result, (uint256)) == 1;
 }
-```
+```solidity
 
 ## Rationale
 
@@ -149,3 +149,4 @@ This standard is fully backwards compatible with existing contracts and infrastr
 ## Copyright
 
 Copyright and related rights waived via [CC0](../LICENSE.md).
+```

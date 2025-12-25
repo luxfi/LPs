@@ -50,7 +50,7 @@ While EIP-4844 includes a point evaluation precompile at `0x0A`, we extend funct
 
 ### Precompile Address
 
-```
+```solidity
 KZG4844_PRECOMPILE = 0x031D
 ```
 
@@ -58,7 +58,7 @@ Note: This extends the EIP-4844 point evaluation precompile (0x0A) with addition
 
 ### Constants
 
-```
+```solidity
 FIELD_ELEMENTS_PER_BLOB = 4096
 BLOB_SIZE = 131072  // 128 KB
 COMMITMENT_SIZE = 48  // G1 point, compressed
@@ -86,7 +86,7 @@ CELLS_PER_BLOB = 128
 
 #### BlobToCommitment
 
-```
+```solidity
 ┌────────┬─────────────────────────────────────┐
 │ 1 byte │ 131072 bytes                        │
 │ 0x01   │ blob                                │
@@ -97,7 +97,7 @@ CELLS_PER_BLOB = 128
 
 #### ComputeProof
 
-```
+```solidity
 ┌────────┬─────────────────────────────────────┬────────────────┐
 │ 1 byte │ 131072 bytes                        │ 32 bytes       │
 │ 0x02   │ blob                                │ point (z)      │
@@ -108,7 +108,7 @@ CELLS_PER_BLOB = 128
 
 #### VerifyProof
 
-```
+```solidity
 ┌────────┬────────────────┬────────────────┬────────────────┬────────────────┐
 │ 1 byte │ 48 bytes       │ 32 bytes       │ 32 bytes       │ 48 bytes       │
 │ 0x03   │ commitment     │ point (z)      │ claim (y)      │ proof          │
@@ -119,7 +119,7 @@ CELLS_PER_BLOB = 128
 
 #### ComputeBlobProof
 
-```
+```solidity
 ┌────────┬─────────────────────────────────────┬────────────────┐
 │ 1 byte │ 131072 bytes                        │ 48 bytes       │
 │ 0x04   │ blob                                │ commitment     │
@@ -130,7 +130,7 @@ CELLS_PER_BLOB = 128
 
 #### VerifyBlobProof
 
-```
+```solidity
 ┌────────┬─────────────────────────────────────┬────────────────┬────────────────┐
 │ 1 byte │ 131072 bytes                        │ 48 bytes       │ 48 bytes       │
 │ 0x05   │ blob                                │ commitment     │ proof          │
@@ -141,7 +141,7 @@ CELLS_PER_BLOB = 128
 
 #### ComputeCellProofs
 
-```
+```solidity
 ┌────────┬─────────────────────────────────────┐
 │ 1 byte │ 131072 bytes                        │
 │ 0x10   │ blob                                │
@@ -152,7 +152,7 @@ CELLS_PER_BLOB = 128
 
 #### VerifyCellProofs (Batch)
 
-```
+```solidity
 ┌────────┬─────────┬──────────────────────────────────────────────────────────────┐
 │ 1 byte │ 2 bytes │ Variable                                                     │
 │ 0x11   │ n_blobs │ [blob, commitment, proofs[128]] * n_blobs                   │
@@ -163,7 +163,7 @@ CELLS_PER_BLOB = 128
 
 #### BatchVerifyProofs
 
-```
+```solidity
 ┌────────┬─────────┬──────────────────────────────────────────────────────────────┐
 │ 1 byte │ 2 bytes │ [commitment, point, claim, proof] * n                        │
 │ 0x20   │ n_proofs│ Each: 48 + 32 + 32 + 48 = 160 bytes                         │
@@ -174,7 +174,7 @@ CELLS_PER_BLOB = 128
 
 #### CalcBlobHash
 
-```
+```solidity
 ┌────────┬────────────────┐
 │ 1 byte │ 48 bytes       │
 │ 0x30   │ commitment     │
@@ -496,7 +496,7 @@ contract BlobDataManager {
         );
     }
 }
-```
+```go
 
 ### Go Implementation
 
@@ -854,7 +854,7 @@ The 0x0A point evaluation precompile remains unchanged for compatibility.
 
 ### Test Vector 1: Blob Commitment
 
-```
+```markdown
 Blob: 0x00000000... (128KB zeros)
 
 Expected Commitment:
@@ -863,7 +863,7 @@ Expected Commitment:
 
 ### Test Vector 2: Point Evaluation
 
-```
+```markdown
 Commitment: 0xc00000...
 Point (z): 0x0000000000000000000000000000000000000000000000000000000000000001
 Claim (y): 0x0000000000000000000000000000000000000000000000000000000000000000
@@ -920,7 +920,7 @@ function testPointEvaluation() public {
     );
     assertTrue(valid);
 }
-```
+```solidity
 
 ## Reference Implementation
 
@@ -963,3 +963,4 @@ Implementation exists in:
 ## Copyright
 
 Copyright and related rights waived via [CC0](https://creativecommons.org/publicdomain/zero/1.0/).
+```

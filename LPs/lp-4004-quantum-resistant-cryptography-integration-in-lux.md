@@ -91,7 +91,7 @@ go test -v ./...
 ```bash
 cd ~/work/lux/evm/precompile/contracts/mldsa
 go test -v ./...
-```
+```solidity
 
 ## Test Cases
 
@@ -126,4 +126,4 @@ go test -v ./...
 
 ## Copyright
 
-Copyright and related rights waived via [CC0](../LICENSE.md).
+Copyright and related rights waived via [CC0](../LICENSE.md).```

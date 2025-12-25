@@ -57,7 +57,7 @@ Guidelines, best practices, and general information:
 
 ### LP Lifecycle
 
-```
+```markdown
 Draft --> Review --> Last Call --> Final
             |            |
         Withdrawn    Stagnant
@@ -91,7 +91,7 @@ Create your LP:
 ```bash
 cd ~/work/lux/lps
 make new  # Interactive wizard
-```
+```markdown
 
 Submit via Pull Request:
 - File: `LPs/lp-draft.md`
@@ -253,7 +253,7 @@ make validate-all  # Validate all
 make check-links   # Check links
 make update-index  # Update index
 make pre-pr        # Pre-PR checks
-```
+```solidity
 
 ---
 
@@ -279,3 +279,4 @@ This LP establishes the governance framework. It does not break any existing pro
 ## Copyright
 
 Copyright and related rights waived via [CC0](https://creativecommons.org/publicdomain/zero/1.0/).
+```

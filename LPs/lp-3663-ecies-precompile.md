@@ -53,7 +53,7 @@ While HPKE (LP-3662) is the modern standard, ECIES provides:
 
 ### Precompile Address
 
-```
+```solidity
 ECIES_PRECOMPILE = 0x031B
 ```
 
@@ -89,7 +89,7 @@ ECIES_PRECOMPILE = 0x031B
 
 #### Encrypt (Default Parameters)
 
-```
+```solidity
 ┌────────┬────────┬────────────────┬───────────────┬────────────────┐
 │ 1 byte │ 1 byte │ Variable       │ Variable      │ Variable       │
 │ 0x01   │ curve  │ recipient_pk   │ s1 (optional) │ plaintext      │
@@ -98,7 +98,7 @@ ECIES_PRECOMPILE = 0x031B
 
 **Output Format:**
 
-```
+```solidity
 ┌─────────────────────────┬─────────────────┬─────────────────┐
 │ Ephemeral Public Key    │ Ciphertext      │ MAC Tag         │
 │ 65 bytes (uncompressed) │ len(plaintext)  │ 32 bytes        │
@@ -107,7 +107,7 @@ ECIES_PRECOMPILE = 0x031B
 
 #### Decrypt
 
-```
+```solidity
 ┌────────┬────────┬────────────────┬───────────────┬────────────────┐
 │ 1 byte │ 1 byte │ 32 bytes       │ Variable      │ Variable       │
 │ 0x02   │ curve  │ recipient_sk   │ s1 (optional) │ ciphertext     │
@@ -115,7 +115,7 @@ ECIES_PRECOMPILE = 0x031B
 ```
 
 **Ciphertext format:**
-```
+```solidity
 ephemeral_pk (65 bytes) || encrypted_data || mac_tag (32 bytes)
 ```
 
@@ -123,7 +123,7 @@ ephemeral_pk (65 bytes) || encrypted_data || mac_tag (32 bytes)
 
 #### EncryptWithParams
 
-```
+```solidity
 ┌────────┬────────┬─────────┬─────────┬────────────────┬───────────┬───────────┬────────────────┐
 │ 1 byte │ 1 byte │ 1 byte  │ 1 byte  │ Variable       │ Variable  │ Variable  │ Variable       │
 │ 0x03   │ curve  │ hash_id │ aes_bits│ recipient_pk   │ s1        │ s2        │ plaintext      │
@@ -143,7 +143,7 @@ ephemeral_pk (65 bytes) || encrypted_data || mac_tag (32 bytes)
 
 #### ECDH (Raw Key Agreement)
 
-```
+```solidity
 ┌────────┬────────┬────────────────┬────────────────┐
 │ 1 byte │ 1 byte │ 32 bytes       │ Variable       │
 │ 0x10   │ curve  │ private_key    │ public_key     │
@@ -170,7 +170,7 @@ ephemeral_pk (65 bytes) || encrypted_data || mac_tag (32 bytes)
 
 #### Gas Formula
 
-```
+```solidity
 encrypt_gas = base_gas + (plaintext_length * per_byte)
 decrypt_gas = base_gas + (ciphertext_length * per_byte)
 ```
@@ -420,7 +420,7 @@ library ECIES {
         return bytes32(secret);
     }
 }
-```
+```solidity
 
 ### Go Implementation
 
@@ -885,7 +885,7 @@ This precompile is designed for maximum compatibility with existing ECIES implem
 
 ### Test Vector 1: secp256k1 Encryption
 
-```
+```markdown
 Private Key: 0xc9afa9d845ba75166b5c215767b1d6934e50c3db36e89b127b8a622b120f6721
 Public Key: 0x0460fed4ba255a9d31c961eb74c6356d68c049b8923b61fa6ce669622e60f29fb67903fe1008b8bc99a41ae9e95628bc64f2f1b20c2d7e9f5177a3c294d4462299
 
@@ -896,7 +896,7 @@ Output format: ephemeral_pk (65 bytes) || iv (16 bytes) || ciphertext || mac (32
 
 ### Test Vector 2: P-256 Encryption
 
-```
+```markdown
 Private Key: 0x0d4a9b1c2e3f4a5b6c7d8e9f0a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6e7f8a9b
 Public Key: 0x04... (P-256 uncompressed)
 
@@ -919,7 +919,7 @@ function testECIESEncryptDecrypt() public {
 
     assertEq(decrypted, plaintext);
 }
-```
+```solidity
 
 ## Reference Implementation
 
@@ -964,3 +964,4 @@ For post-quantum encryption, use HPKE with ML-KEM (LP-3662 + LP-4318).
 ## Copyright
 
 Copyright and related rights waived via [CC0](https://creativecommons.org/publicdomain/zero/1.0/).
+```

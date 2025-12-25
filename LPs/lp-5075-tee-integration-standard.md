@@ -191,7 +191,7 @@ interface ITEEManager {
         bytes calldata attestation
     ) external view returns (bool);
 }
-```
+```solidity
 
 ### Attestation Verification
 
@@ -332,7 +332,7 @@ contract ConfidentialAuction {
         revealed = true;
     }
 }
-```
+```solidity
 
 ### Key Management Service
 
@@ -481,7 +481,7 @@ interface IPrivateComputation {
         bytes32 enclaveId
     ) external returns (bytes32 taskId);
 }
-```
+```solidity
 
 ### TEE Oracle Service
 
@@ -616,7 +616,7 @@ contract ConfidentialLending {
         });
     }
 }
-```
+```solidity
 
 ## Rationale
 
@@ -693,7 +693,7 @@ function testConfidentialComputation() public {
     Task memory task = teeManager.getTask(taskId);
     assertEq(task.status, TaskStatus.COMPLETED);
 }
-```
+```bash
 
 ## Implementation
 
@@ -745,7 +745,7 @@ forge test --match-path test/tee/\* --gas-report
 
 # Coverage
 forge coverage --match-path test/tee/\*
-```
+```solidity
 
 **Test Cases** (see `/test/tee/TEEManager.t.sol`):
 - `testEnclaveRegistration()` - Register SGX/SEV enclaves

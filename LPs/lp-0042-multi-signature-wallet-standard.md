@@ -92,7 +92,7 @@ interface ILuxMultiSig {
     function isOwner(address owner) external view returns (bool);
     function required() external view returns (uint256);
 }
-```
+```solidity
 
 ### Transaction Structure
 
@@ -149,7 +149,7 @@ interface ITimeLockMultiSig is ILuxMultiSig {
     function cancelTransaction(uint256 transactionId) external;
     function getTimeLock(uint256 transactionId) external view returns (TimeLock memory);
 }
-```
+```solidity
 
 #### Quantum-Safe Multi-Sig
 ```solidity
@@ -222,7 +222,7 @@ interface IRoleBasedMultiSig is ILuxMultiSig {
     function getRoleConfig(Role role) external view returns (RoleConfig memory);
     function setRoleConfig(Role role, RoleConfig memory config) external;
 }
-```
+```solidity
 
 ### Cross-Chain Multi-Sig
 
@@ -308,7 +308,7 @@ interface IMultiSigFactory {
     
     function getWallets(address owner) external view returns (address[] memory);
 }
-```
+```solidity
 
 ### Recovery Mechanisms
 
@@ -377,7 +377,7 @@ library MultiSigStorage {
         }
     }
 }
-```
+```solidity
 
 ## Rationale
 
@@ -471,7 +471,7 @@ function testTimeLock() public {
     // Now execution succeeds
     wallet.executeTransaction(txId);
 }
-```
+```solidity
 
 ### Quantum-Safe Test
 ```solidity
@@ -554,7 +554,7 @@ function createDeterministicWallet(
 
     emit WalletCreated(wallet, owners, required, salt);
 }
-```
+```solidity
 
 **Testing**:
 ```bash

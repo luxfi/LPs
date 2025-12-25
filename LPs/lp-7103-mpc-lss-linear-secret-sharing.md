@@ -65,7 +65,7 @@ Given a secret `s` and threshold `t`:
 
 LSS implements fully distributed key generation without any trusted dealer:
 
-```
+```markdown
 Input: Parties P = {p₁, ..., pₙ}, threshold t
 Output: Share sᵢ for each party, public key Y
 
@@ -99,7 +99,7 @@ This DKG protocol ensures:
 
 #### 2. Signing
 
-```
+```markdown
 Input: Message m, signers S ⊆ P with |S| ≥ t
 Output: Schnorr signature (R, z)
 
@@ -126,7 +126,7 @@ Output: Schnorr signature (R, z)
 
 #### 3. Dynamic Resharing (Unique to LSS)
 
-```
+```markdown
 Input: Old parties P_old, new parties P_new, new threshold t_new
 Output: New shares for P_new, same public key Y
 
@@ -162,7 +162,7 @@ type Config struct {
     PartyIDs        []party.ID
     Generation      uint32       // Incremented on reshare
 }
-```
+```solidity
 
 #### Security Parameters
 
@@ -380,7 +380,7 @@ The LSS protocol is fully implemented in the Lux threshold cryptography library:
 
 ### File Inventory
 
-```
+```solidity
 protocols/lss/
 ├── lss.go                 # Entry points: Keygen(), Sign(), Refresh()
 ├── factory.go             # Protocol factory creation
@@ -437,7 +437,7 @@ LSS is integrated into T-Chain (ThresholdVM) via:
 executor := NewProtocolExecutor(pool)
 startFunc := executor.LSSKeygenStartFunc(selfID, participants, threshold)
 handler, err := protocol.NewMultiHandler(startFunc, sessionID)
-```
+```solidity
 
 ### Testing
 

@@ -57,7 +57,7 @@ interface StablecoinArchitecture {
     chains: ["Ethereum", "BSC", "Polygon"];
   };
 }
-```
+```solidity
 
 ## Research Findings
 
@@ -208,7 +208,7 @@ contract AlgorithmicStable {
         emit BondsIssued(bondsToIssue, bondPrice);
     }
 }
-```
+```solidity
 
 ### 3. Multi-Collateral Stability
 
@@ -318,7 +318,7 @@ contract YieldStable {
         _burn(address(this), repayAmount);
     }
 }
-```
+```solidity
 
 ### 5. Privacy-Preserving Stablecoins
 
@@ -386,7 +386,7 @@ contract PrivateStable {
 
 ### 1. Stablecoin Architecture
 
-```
+```solidity
 recommended_architecture:
   primary_mechanism:
     type: "Collateralized with zero interest"

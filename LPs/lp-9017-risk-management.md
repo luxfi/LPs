@@ -97,7 +97,7 @@ interface IRiskManager {
     event RiskLevelChanged(address indexed entity, RiskLevel oldLevel, RiskLevel newLevel);
     event FlashLoanBlocked(address indexed user, uint256 amount, string reason);
 }
-```
+```solidity
 
 ### 2. Flash Loan Protection
 
@@ -229,7 +229,7 @@ library SlippageProtection {
         }
     }
 }
-```
+```solidity
 
 ### 4. Position & Concentration Limits
 
@@ -404,7 +404,7 @@ library RiskScoring {
         return 1000;                  // 10%
     }
 }
-```
+```solidity
 
 ### 6. Sandwich Attack Protection
 
@@ -491,7 +491,7 @@ interface ILiquidityRisk {
     function getMinimumLiquidityThreshold(address pool) external view returns (uint256);
     function isLiquidityHealthy(address pool) external view returns (bool);
 }
-```
+```solidity
 
 ## Risk Thresholds
 
@@ -530,3 +530,4 @@ Risk management integrates with existing DEX and DeFi contracts through standard
 ## Copyright
 
 Copyright and related rights waived via [CC0](https://creativecommons.org/publicdomain/zero/1.0/).
+```

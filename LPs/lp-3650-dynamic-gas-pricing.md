@@ -40,7 +40,7 @@ Static gas limits and pricing mechanisms struggle to handle varying network load
 
 Base fee adjusts exponentially based on block fullness:
 
-```
+```solidity
 newBaseFee = currentBaseFee * (1 + (gasUsed - target) / (target * denominator))
 ```
 
@@ -54,7 +54,7 @@ newBaseFee = currentBaseFee * (1 + (gasUsed - target) / (target * denominator))
 
 Block gas limit adjusts based on sustained demand:
 
-```
+```solidity
 targetGasPerSecond = baseTarget * e^(excessTarget / conversionRate)
 maxGasPerBlock = targetGasPerSecond * ElasticityMultiplier
 ```
@@ -69,7 +69,7 @@ maxGasPerBlock = targetGasPerSecond * ElasticityMultiplier
 
 Under sustained load, prices double approximately every 60 seconds:
 
-```
+```solidity
 time_to_double = ln(2) * conversionRate / demand_rate
 ```
 
@@ -137,7 +137,7 @@ type ChainConfig struct {
     // ... existing fields
     LP176Timestamp *uint64 `json:"lp176Timestamp,omitempty"`
 }
-```
+```go
 
 ## Test Cases
 

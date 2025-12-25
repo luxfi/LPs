@@ -46,7 +46,7 @@ contract PChainAnchor {
         bytes32[] calldata path
     ) external view returns (bool);
 }
-```
+```solidity
 
 ### 2. Off-Chain Relayer
 
@@ -122,7 +122,7 @@ function verifyProof(
 cd ~/work/lux/standard
 forge test --match-contract PChainAnchorTest
 forge coverage --match-contract PChainAnchor
-```
+```solidity
 
 ### Gas Costs
 
@@ -160,4 +160,4 @@ Relayer operators pay L1 gas to submit state anchors. At ~50 gwei and ~100 0
 
 ## Copyright
 
-Copyright and related rights waived via [CC0](https://creativecommons.org/publicdomain/zero/1.0/).
+Copyright and related rights waived via [CC0](https://creativecommons.org/publicdomain/zero/1.0/).```

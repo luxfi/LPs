@@ -57,7 +57,7 @@ interface IPerformanceRequirements {
         uint256 maxPendingOrders;
     }
 }
-```
+```solidity
 
 ### 2. Benchmark Standards
 
@@ -267,7 +267,7 @@ class DeFiLoadTester:
             error_rate=self.errors / total,
             duration_seconds=duration_seconds,
         )
-```
+```solidity
 
 ### 5. Gas Optimization Benchmarks
 
@@ -396,7 +396,7 @@ const performanceAlerts: AlertRule[] = [
     action: 'slack',
   },
 ];
-```
+```solidity
 
 ### 7. Capacity Planning
 
@@ -443,3 +443,4 @@ Benchmarking infrastructure is observational and doesn't modify protocol behavio
 ## Copyright
 
 Copyright and related rights waived via [CC0](https://creativecommons.org/publicdomain/zero/1.0/).
+```

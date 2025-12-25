@@ -46,7 +46,7 @@ Compound V3 (Comet) provides the most gas-efficient lending architecture availab
 
 Compound V3 (Comet) uses a monolithic contract design optimized for gas efficiency:
 
-```
+```solidity
 lib/compound/
 ├── contracts/
 │   ├── Comet.sol                    # Main lending pool contract
@@ -109,7 +109,7 @@ interface IComet {
     // Admin
     function pause(bool supplyPaused, bool transferPaused, bool withdrawPaused, bool absorbPaused, bool buyPaused) external;
 }
-```
+```solidity
 
 #### CometRewards
 
@@ -146,7 +146,7 @@ struct InterestRateConfig {
     uint64 borrowPerSecondInterestRateSlopeHigh;
     uint64 borrowPerSecondInterestRateBase;
 }
-```
+```solidity
 
 #### Default Parameters (Recommended)
 
@@ -205,7 +205,7 @@ contract FlashLoanReceiver {
         comet.supply(comet.baseToken(), amount);
     }
 }
-```
+```solidity
 
 ### Liquidation Mechanism
 
@@ -295,7 +295,7 @@ function testSupplyAndBorrow() public {
     assertGt(comet.borrowBalanceOf(address(this)), 0);
     assertEq(usdc.balanceOf(address(this)), 5000e6);
 }
-```
+```solidity
 
 ### Liquidation Test
 
@@ -332,7 +332,7 @@ function testInterestAccrual() public {
     uint256 finalBalance = comet.balanceOf(supplier);
     assertGt(finalBalance, initialBalance);
 }
-```
+```bash
 
 ## Reference Implementation
 
@@ -388,7 +388,7 @@ CometConfiguration.Configuration memory config = CometConfiguration.Configuratio
     targetReserves: 1000000e6,
     assetConfigs: assetConfigs
 });
-```
+```solidity
 
 ## Security Considerations
 

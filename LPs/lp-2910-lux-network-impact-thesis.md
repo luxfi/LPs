@@ -55,7 +55,7 @@ $130+ trillion in global assets under management increasingly seeks ESG-aligned 
 
 ### How We Create Impact
 
-```
+```solidity
 ┌─────────────────────────────────────────────────────────────────┐
 │                    LUX IMPACT THESIS                            │
 ├─────────────────────────────────────────────────────────────────┤
@@ -134,7 +134,7 @@ $130+ trillion in global assets under management increasingly seeks ESG-aligned 
 
 ### The Flywheel
 
-```
+```solidity
 1. Lux funds projects meeting strict E/S/G gates
            ↓
 2. Hanzo reduces cost + risk through better tech

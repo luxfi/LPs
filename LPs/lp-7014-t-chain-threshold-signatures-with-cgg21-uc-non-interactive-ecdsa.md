@@ -181,7 +181,7 @@ Use authenticated channels, verify transcripts, and schedule periodic key refres
 
 ### File Inventory
 
-```
+```solidity
 protocols/cmp/
 ├── cmp.go                    # Entry points: Keygen(), Sign(), Refresh(), Presign()
 ├── cmp_*_test.go             # Test suites (basic, debug, integration, benchmark, etc.)
@@ -208,7 +208,7 @@ go build -o bin/cgg21-keygen ./cmd/keygen
 
 # Or build all tools
 make build
-```
+```solidity
 
 ### Testing
 
@@ -267,7 +267,7 @@ CMP is integrated into T-Chain (ThresholdVM) via:
 executor := NewProtocolExecutor(pool)
 startFunc := executor.CMPKeygenStartFunc(selfID, participants, threshold)
 handler, err := protocol.NewTwoRoundHandler(startFunc, sessionID)
-```
+```markdown
 
 See LP-7330 for full ThresholdVM specification.
 
@@ -279,3 +279,4 @@ See LP-7330 for full ThresholdVM specification.
 - **LP-7330**: T-Chain ThresholdVM (VM integration)
 - **LP-15**: MPC Bridge Protocol
 - **LP-16**: Teleport Protocol
+```

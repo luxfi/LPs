@@ -78,7 +78,7 @@ interface IMetricsCollector {
         uint256 riskLevel;
     }
 }
-```
+```solidity
 
 ### 2. Core Metrics Standards
 
@@ -282,7 +282,7 @@ interface DashboardConfig {
     ],
   },
 }
-```
+```solidity
 
 ### 5. Log Aggregation
 
@@ -449,7 +449,7 @@ class DeFiAnomalyDetector:
         )
 
         return min(weighted_sum, 1.0)
-```
+```solidity
 
 ### 7. Incident Response Integration
 

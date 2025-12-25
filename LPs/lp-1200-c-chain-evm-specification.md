@@ -57,7 +57,7 @@ var EVMID = constants.EVMID // ids.ID{'e', 'v', 'm'}
 // Create C-Chain VM
 factory := &cvm.Factory{}
 vm, err := factory.New(logger)
-```
+```solidity
 
 ### Directory Structure
 
@@ -74,7 +74,7 @@ geth/                     # EVM implementation (luxfi/geth)
 │   └── types/           # Transaction types
 ├── plugin/evm/          # Plugin interface
 └── rpc/                 # JSON-RPC API
-```
+```go
 
 ### EVM Compatibility
 
@@ -146,7 +146,7 @@ type GasConfig struct {
 
 #### REST Endpoints
 
-```
+```solidity
 POST /ext/bc/C/rpc              # JSON-RPC endpoint
 GET  /ext/bc/C/lux/getUTXOs     # Get atomic UTXOs
 POST /ext/bc/C/lux/issueTx      # Issue atomic tx
@@ -174,7 +174,7 @@ type AtomicTx struct {
     Ins          []*AtomicInput
     Outs         []*AtomicOutput
 }
-```
+```solidity
 
 #### Warp Messaging
 
@@ -203,7 +203,7 @@ interface IWarpMessenger {
     }
   }
 }
-```
+```solidity
 
 ### Performance
 

@@ -23,7 +23,7 @@ order: 603
 - **Teleport protocol** standardizes 7 cross-chain operation types
 - Backward compatible with Warp 1.0 (BLS still supported during transition)
 
-```
+```markdown
 Source Chain → [Create TeleportMessage] → [Sign with Ringtail] → Warp Layer → Destination Chain
                      ↓                           ↓
               (optional encrypt)         (2/3 validator threshold)
@@ -107,7 +107,7 @@ Three cryptographic upgrades:
 
 ### Standard Cross-Chain Transfer
 
-```
+```solidity
 ┌─────────────────────────────────────────────────────────────────────────────┐
 │                         CROSS-CHAIN TRANSFER FLOW                           │
 ├─────────────────────────────────────────────────────────────────────────────┤
@@ -165,7 +165,7 @@ Three cryptographic upgrades:
 
 ### Private Transfer (Encrypted)
 
-```
+```solidity
 ┌─────────────────────────────────────────────────────────────────────────────┐
 │                      PRIVATE (ENCRYPTED) TRANSFER                           │
 ├─────────────────────────────────────────────────────────────────────────────┤
@@ -224,7 +224,7 @@ const (
     // SigTypeHybrid uses BLS+Ringtail hybrid (deprecated)
     SigTypeHybrid
 )
-```
+```go
 
 #### When to Use Each Type
 
@@ -300,7 +300,7 @@ type EncryptedWarpPayload struct {
     // RecipientKeyID identifies which ML-KEM public key was used
     RecipientKeyID []byte `serialize:"true"`
 }
-```
+```solidity
 
 **Constants:**
 
@@ -341,7 +341,7 @@ type TeleportMessage struct {
     Payload       []byte       `serialize:"true"` // Application data
     Encrypted     bool         `serialize:"true"` // Encryption flag
 }
-```
+```go
 
 **Message Types:**
 
@@ -379,7 +379,7 @@ type TeleportAttestPayload struct {
     Data            []byte      `serialize:"true"` // Attestation data
     AttesterID      ids.NodeID  `serialize:"true"` // Who created it
 }
-```
+```sql
 
 ---
 
@@ -420,7 +420,7 @@ BridgeVM orchestrates bridge operations using Teleport:
 
 ThresholdVM provides MPC signing services:
 
-```
+```solidity
 ┌─────────────────────────────────────────────────────────────┐
 │                     ThresholdVM (T-Chain)                    │
 ├─────────────────────────────────────────────────────────────┤
@@ -478,7 +478,7 @@ msg := warp.NewTeleportMessage(
 
 // Convert to Warp message for signing
 warpMsg, _ := msg.ToWarpMessage(networkID)
-```
+```solidity
 
 ### Creating a Private Transfer
 
@@ -511,7 +511,7 @@ if teleportMsg.Encrypted {
     }
     // plaintext contains the original payload
 }
-```
+```bash
 
 ---
 

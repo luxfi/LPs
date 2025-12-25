@@ -250,7 +250,7 @@ function verifyHybrid(
     // Both must pass
     return classical && quantum;
 }
-```
+```sql
 
 ### Threshold Wallet Selection
 
@@ -284,7 +284,7 @@ function receiveMessage(
     );
     // Process message...
 }
-```
+```solidity
 
 ## Related LPs
 
@@ -385,3 +385,4 @@ The precompile suite provides a migration path:
 ## Copyright
 
 Copyright and related rights waived via [CC0](https://creativecommons.org/publicdomain/zero/1.0/).
+```

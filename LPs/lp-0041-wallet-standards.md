@@ -40,7 +40,7 @@ This LP's normative content is the set of algorithms, data models, and parameter
 cd ~/work/lux/standard
 forge test --match-contract WalletTest
 forge coverage --match-contract Wallet
-```
+```solidity
 
 ## Rationale
 
@@ -89,3 +89,4 @@ Consider typical threat models (input validation, replay/DoS resistance, key han
    - Verify performance under load
    - Test resource utilization limits
 
+```

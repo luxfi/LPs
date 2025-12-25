@@ -155,7 +155,7 @@ The `blst` library provides:
 ### Point Encoding (Compressed, ZCash Format)
 
 #### G1 Point (48 bytes)
-```
+```markdown
 Compressed: x-coordinate (48 bytes) with flags in MSB
   - Bit 7: Compression flag (1 = compressed)
   - Bit 6: Infinity flag (1 = point at infinity)
@@ -165,7 +165,7 @@ Uncompressed: x (48 bytes) || y (48 bytes) = 96 bytes
 ```
 
 #### G2 Point (96 bytes compressed)
-```
+```markdown
 Compressed: x-coordinate (96 bytes = 2×48 for Fp2) with flags
   x = c0 + c1*u where u² = -1
 
@@ -173,7 +173,7 @@ Uncompressed: x (96 bytes) || y (96 bytes) = 192 bytes
 ```
 
 #### Scalar (32 bytes)
-```
+```solidity
 256-bit scalar in big-endian, must be < r
 r = 0x73eda753299d7d483339d80809a1d80553bda402fffe5bfeffffffff00000001
 ```
@@ -343,7 +343,7 @@ library BLS12381Lib {
         return success && abi.decode(result, (bool));
     }
 }
-```
+```sql
 
 ## Full Implementation Stack
 
@@ -420,7 +420,7 @@ library BLS12381Lib {
 
 ### Implementation Files
 
-```
+```solidity
 ~/work/lux/
 ├── crypto/bls12381/
 │   ├── blst/                   # Supranational's blst library
@@ -481,7 +481,7 @@ func (p *G1Affine) Validate() error {
 func (p *G1Affine) InG1() bool {
     return C.blst_p1_affine_in_g1((*C.blst_p1_affine)(unsafe.Pointer(p))) != 0
 }
-```
+```solidity
 
 ### G2 Subgroup Check
 
@@ -584,7 +584,7 @@ func VerifyPOP(pk *G2Affine, pop *G1Affine) bool {
     // Check: e(σ_pop, g2) = e(H(pk), pk)
     return PairingCheck([]*G1Affine{pop, hpk}, []*G2Affine{G2Generator(), pk.Neg()})
 }
-```
+```solidity
 
 ### Multi-Scalar Multiplication (MSM) Security
 
@@ -677,7 +677,7 @@ func PairingCheck(g1s []*G1Affine, g2s []*G2Affine) bool {
     // Use optimized multi-pairing with delayed final exp
     return C.blst_pairing_chk_n_mul_n_aggr_pk_in_g2(...) != 0
 }
-```
+```solidity
 
 ## Integration Across Lux Infrastructure
 
@@ -840,7 +840,7 @@ contract BLS12381Test {
         require(valid, "Pairing check failed");
     }
 }
-```
+```solidity
 
 ## Security Considerations
 
@@ -867,3 +867,4 @@ This LP introduces a new precompile and is fully backwards compatible with EIP-2
 ## Copyright
 
 Copyright and related rights waived via [CC0](https://creativecommons.org/publicdomain/zero/1.0/).
+```

@@ -31,7 +31,7 @@ A unified DAO platform provides:
 
 ### Platform Architecture
 
-```
+```solidity
 ┌─────────────────────────────────────────────────────────────────┐
 │                        lux.vote Frontend                         │
 │                    (React + Vite + Chakra UI)                    │
@@ -57,7 +57,7 @@ A unified DAO platform provides:
 
 ### Repository Structure
 
-```
+```solidity
 github.com/luxfi/dao/
 ├── app/                    # React frontend application
 │   ├── src/
@@ -136,7 +136,7 @@ await dao.createProposal({
 
 // Vote
 await dao.vote(proposalId, VoteType.For)
-```
+```solidity
 
 ### Network Configuration
 
@@ -158,7 +158,7 @@ GET  /api/v1/daos/:address/proposals # DAO proposals
 POST /api/v1/daos/:address/proposals # Create proposal
 GET  /api/v1/users/:address/daos     # User's DAOs
 GET  /api/v1/search?q=               # Search DAOs
-```
+```bash
 
 ## Development
 
@@ -196,7 +196,7 @@ make up-docker
 # - PostgreSQL (port 5432)
 # - Redis (port 6379)
 # - IPFS (port 8080/5001)
-```
+```solidity
 
 ### Testing
 
@@ -288,7 +288,7 @@ function test_FreezeExecution() public {
     vm.expectRevert("Governance frozen");
     azorius.execute(proposalId);
 }
-```
+```solidity
 
 ### E2E Tests
 

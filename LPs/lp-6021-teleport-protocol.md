@@ -122,7 +122,7 @@ cd bridge
 docker-compose -f compose.local.yml up -d  # Local bridge testing
 cd test/
 # Run bridge integration tests
-```
+```solidity
 
 ### Cross-Chain Testing
 - **Test Cases**: `bridge/test/`
@@ -152,3 +152,4 @@ The security of the Teleport Protocol rests on several pillars:
 ## Copyright
 
 Copyright and related rights waived via [CC0](https://creativecommons.org/publicdomain/zero/1.0/).
+```

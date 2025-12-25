@@ -47,7 +47,7 @@ The K/DLUX/VLUX stack addresses these by:
 
 ### Token Overview
 
-```
+```solidity
 ┌─────────────────────────────────────────────────────────────────────────────┐
 │                        GOVERNANCE TOKEN STACK                               │
 ├─────────────────────────────────────────────────────────────────────────────┤
@@ -129,7 +129,7 @@ interface IKarma {
     /// @notice Get DID bound to account
     function didOf(address account) external view returns (bytes32);
 }
-```
+```solidity
 
 ---
 
@@ -167,7 +167,7 @@ Staked DLUX earns rebases funded by:
 2. Treasury yield
 3. NFT staking emissions
 
-```
+```markdown
 Daily APY = (1 + rebaseRate)^(rebases_per_day) - 1
 
 Example: 0.4% per 8h epoch = 3 epochs/day
@@ -179,7 +179,7 @@ Annual APY = (1.004)^(3*365) - 1 ≈ 7800%
 
 Unstaked DLUX in wallets (not in staking contracts) suffers demurrage:
 
-```
+```solidity
 balance_after = balance_before × (1 - demurrage_rate)^days
 
 Example: 0.1% daily demurrage
@@ -221,7 +221,7 @@ interface IDLUX {
     /// @notice Get staking tier for account
     function tierOf(address account) external view returns (uint8 tier, uint256 boost);
 }
-```
+```solidity
 
 ---
 
@@ -237,7 +237,7 @@ VLUX = DLUX_staked × f(K) × time_multiplier
 where:
   f(K) = sqrt(K / 100)  // Karma scaling function
   time_multiplier = 1 + (lock_months × 0.1)  // Max 4x at 30 months
-```
+```solidity
 
 #### Example Calculations
 
@@ -258,7 +258,7 @@ Effective Votes = sqrt(VLUX_spent)
 
 Example: 10,000 VLUX → 100 effective votes
          40,000 VLUX → 200 effective votes (not 4x)
-```
+```solidity
 
 #### VLUX Interface
 
@@ -319,7 +319,7 @@ interface INFTStaking {
     /// @notice Get emission rate for collection
     function emissionRate(address collection) external view returns (uint256 dluxPerDay);
 }
-```
+```solidity
 
 ---
 

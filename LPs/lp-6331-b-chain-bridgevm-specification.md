@@ -95,7 +95,7 @@ Implementations claiming conformance to this specification:
 
 ### Architecture Overview
 
-```
+```solidity
 +-------------------------------------------------------------------------+
 |                         Teleport Network (5+ nodes)                      |
 +-------------------------------------------------------------------------+
@@ -176,7 +176,7 @@ const (
     ChainTypeCosmos  ChainType = 2
     ChainTypeSolana  ChainType = 3
 )
-```
+```go
 
 #### Block Structure
 
@@ -315,7 +315,7 @@ const (
     StatusFailed     BridgeStatus = 5
     StatusRefunded   BridgeStatus = 6
 )
-```
+```go
 
 ### Transaction Types
 
@@ -496,7 +496,7 @@ func (tx *WithdrawRequestTx) Verify(state *BridgeState) error {
 
     return nil
 }
-```
+```go
 
 #### 3. WithdrawExecuteTx
 
@@ -618,7 +618,7 @@ type SwapRequestTx struct {
 
     Signature       []byte
 }
-```
+```go
 
 #### 5. SwapExecuteTx
 
@@ -700,7 +700,7 @@ func (tx *ChainRegistrationTx) Verify(state *BridgeState) error {
 
     return nil
 }
-```
+```go
 
 #### 7. AssetRegistrationTx
 
@@ -757,7 +757,7 @@ type RelayerRewardTx struct {
     // Signed by reward distributor
     DistributorSig  []byte
 }
-```
+```solidity
 
 ### Bridge State Machine
 
@@ -816,7 +816,7 @@ The B-Chain manages bridge operations through comprehensive state machines for d
                                                          |      +----------------+        |
                                                          |                                |
                                                          +--------------------------------+
-```
+```solidity
 
 #### Withdrawal State Machine
 
@@ -863,7 +863,7 @@ The B-Chain manages bridge operations through comprehensive state machines for d
                      |      +----------------+        |      |                           |
                      |                                |      |                           |
                      +--------------------------------+      +---------------------------+
-```
+```solidity
 
 #### Consolidated State Diagram
 
@@ -895,7 +895,7 @@ The B-Chain manages bridge operations through comprehensive state machines for d
                     +-----v-----+            +-----+-----+
                     | COMPLETED |            | REFUNDED  |
                     +-----------+            +-----------+
-```
+```solidity
 
 #### Mermaid State Diagrams
 
@@ -930,7 +930,7 @@ stateDiagram-v2
     FAILED --> REFUNDED: Tokens returned to user
     COMPLETED --> [*]
     REFUNDED --> [*]
-```
+```solidity
 
 **Cross-Chain Swap State Machine**:
 
@@ -1020,7 +1020,7 @@ func (sm *BridgeStateMachine) processDeposit(deposit *DepositRecord) {
         }
     }
 }
-```
+```solidity
 
 ### External Chain Watchers
 
@@ -1140,7 +1140,7 @@ func (w *EVMWatcher) parseDepositLog(log types.Log) (*DepositEvent, error) {
         Recipient:     event.Recipient[:],
     }, nil
 }
-```
+```solidity
 
 #### Bitcoin Watcher
 
@@ -1388,7 +1388,7 @@ func (w *CosmosWatcher) VerifyIBCProof(
         proof,
     )
 }
-```
+```go
 
 ### Signature Request Flow to T-Chain
 
@@ -1523,7 +1523,7 @@ func (b *BridgeVM) SendWarpMessage(msg *WarpBridgeMessage) error {
     // Submit to P-Chain for aggregation
     return b.warpClient.SendMessage(warpMsg)
 }
-```
+```solidity
 
 ### Supported Chains Configuration
 
@@ -1650,7 +1650,7 @@ func (c *AssetRegistryClient) ValidateTransfer(
 
     return nil
 }
-```
+```go
 
 ### Fee Model
 
@@ -1807,7 +1807,7 @@ func (fd *FeeDistribution) ClaimRelayerReward(relayer common.Address) (*big.Int,
 
 The total fee for a bridge operation is calculated as:
 
-```
+```markdown
 TotalFee = BaseFee + PercentageFee + ChainFee
 
 Where:
@@ -1828,7 +1828,7 @@ Fee Distribution:
 ```
 
 **Example Calculation** (1000 USDC withdrawal to Ethereum):
-```
+```markdown
 Amount          = 1000 USDC
 BaseFee         = 0.001 LUX = ~$0.05
 PercentageFee   = 1000 * 20 / 10000 = 2 USDC
@@ -1848,7 +1848,7 @@ All bridge messages use a compact binary encoding for on-chain storage and cross
 
 #### Message Header (8 bytes)
 
-```
+```solidity
 +--------+--------+--------+--------+--------+--------+--------+--------+
 |  Ver   |  Type  |          Length (4 bytes)          |    Flags       |
 +--------+--------+--------+--------+--------+--------+--------+--------+
@@ -1875,7 +1875,7 @@ Flags:  Reserved for future use (MUST be 0x0000)
 
 #### DepositObserved Wire Format (Type 0xB1)
 
-```
+```solidity
 +--------+--------+--------+--------+--------+--------+--------+--------+
 |                    Header (8 bytes - see above)                       |
 +--------+--------+--------+--------+--------+--------+--------+--------+
@@ -1907,7 +1907,7 @@ Total minimum size: 8 + 8 + 32 + 8 + 2 + 32 + 32 + 1 + 20 + 20 + 1 + 20 + 65 = 2
 
 #### WithdrawRequest Wire Format (Type 0xB2)
 
-```
+```solidity
 +--------+--------+--------+--------+--------+--------+--------+--------+
 |                    Header (8 bytes)                                   |
 +--------+--------+--------+--------+--------+--------+--------+--------+
@@ -1935,7 +1935,7 @@ Total minimum size: 8 + 8 + 1 + 20 + 32 + 32 + 32 + 8 + 8 + 20 + 65 = 234 bytes
 
 #### MPCSignature Wire Format
 
-```
+```solidity
 +--------+--------+--------+--------+--------+--------+--------+--------+
 |                    R (32 bytes, uint256 BE)                           |
 +--------+--------+--------+--------+--------+--------+--------+--------+
@@ -1986,7 +1986,7 @@ const (
     MinRelayerUptime    = 95           // 95% uptime requirement
     ObservationTimeout  = 30           // Seconds to submit observation
 )
-```
+```solidity
 
 #### Observation Requirements
 
@@ -2021,7 +2021,7 @@ Relayer                          B-Chain                         T-Chain
    |                                |<-- 9. MPC signature ----------|
    |                                |                               |
    |<-- 10. Deposit confirmed ------|                               |
-```
+```go
 
 #### Relayer Rewards and Penalties
 
@@ -2309,7 +2309,7 @@ func (api *BridgeAPI) Fees(
         EstimatedTime: api.estimateTime(sourceChainID, destChainID),
     }, nil
 }
-```
+```go
 
 #### Additional RPC Methods
 
@@ -2485,7 +2485,7 @@ type WithdrawNotification struct {
     DestTxHash      *common.Hash    `json:"destTxHash,omitempty"`
     BlockNumber     uint64          `json:"blockNumber"`
 }
-```
+```go
 
 #### RPC Method Summary
 
@@ -2607,7 +2607,7 @@ func (vm *BridgeVM) GetChallengeBlocks(amount *big.Int, assetID AssetID) uint64 
 
     return DefaultChallengeBlocks
 }
-```
+```go
 
 ## Rationale
 
@@ -2855,7 +2855,7 @@ func TestCrossChainSwap(t *testing.T) {
     require.NoError(t, err)
     require.True(t, balance.Cmp(big.NewInt(1e8)) >= 0)
 }
-```
+```go
 
 ### Stress Tests
 
@@ -2909,7 +2909,7 @@ This section provides concrete test vectors for implementers to validate their i
 
 **Input**: Ethereum USDC deposit to Lux recipient
 
-```
+```markdown
 Source Chain:      Ethereum (ChainID: 1)
 Source Tx Hash:    0x8f2c7e9d3a1b5c4e6f8a0b2d4e6f8a0b2d4e6f8a0b2d4e6f8a0b2d4e6f8a0b2d
 Source Block:      19500000
@@ -2921,13 +2921,13 @@ Recipient:         0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC
 ```
 
 **Expected DepositID** (keccak256 of chainID || txHash || logIndex):
-```
+```markdown
 Input bytes:  0x0000000000000001 || 0x8f2c7e9d3a1b5c4e6f8a0b2d4e6f8a0b2d4e6f8a0b2d4e6f8a0b2d4e6f8a0b2d || 0x0003
 DepositID:    0xa1b2c3d4e5f6789012345678901234567890123456789012345678901234abcd
 ```
 
 **Expected Wire Format** (hex):
-```
+```solidity
 01b1000000f9000000                             # Header: v1, type B1, len 249, flags 0
 0000000000000001                               # SourceChainID: 1
 8f2c7e9d3a1b5c4e6f8a0b2d4e6f8a0b2d4e6f8a0b2d4e6f8a0b2d4e6f8a0b2d  # SourceTxHash
@@ -2946,7 +2946,7 @@ DepositID:    0xa1b2c3d4e5f6789012345678901234567890123456789012345678901234abcd
 
 **Input**: Withdraw wrapped USDC from Lux to Ethereum
 
-```
+```markdown
 Destination Chain: Ethereum (ChainID: 1)
 Recipient:         0x742d35Cc6634C0532925a3b844Bc9e7595f8a1b2
 AssetID:           0xabcdef1234567890abcdef1234567890abcdef1234567890abcdef1234567890
@@ -2958,13 +2958,13 @@ Sender:            0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC
 ```
 
 **Expected WithdrawID** (keccak256 of sender || nonce || destChain || assetID):
-```
+```markdown
 Input bytes:  0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC || 0x000000000000002a || 0x0000000000000001 || [assetID]
 WithdrawID:   0xfedcba0987654321fedcba0987654321fedcba0987654321fedcba0987654321
 ```
 
 **Expected Fee Breakdown**:
-```
+```markdown
 BaseFee:        1000000000000000 wei (0.001 LUX)
 PercentageFee:  500000000 * 20 / 10000 = 1000000 (1 USDC, 0.2%)
 ChainFee:       ~3000000 (estimated Ethereum gas)
@@ -2981,7 +2981,7 @@ Distribution:
 
 **Input**: Sign withdrawal message for Ethereum release
 
-```
+```markdown
 Message to sign (EIP-712 typed data hash):
   Domain:       "LuxBridge", version 1, chainId 1
   WithdrawID:   0xfedcba0987654321fedcba0987654321fedcba0987654321fedcba0987654321
@@ -2993,7 +2993,7 @@ Signing message hash: 0x1234567890abcdef1234567890abcdef1234567890abcdef12345678
 ```
 
 **Expected MPC Signature** (CGG21 ECDSA):
-```
+```solidity
 R: 0x2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d7e8f9a0b1c2d3e4f5a6b7c8d9e0f1a2b3c
 S: 0x1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d7e8f9a0b1c2d3e4f5a6b7c8d9e0f1a2b
 V: 27
@@ -3007,7 +3007,7 @@ TChainProof: [merkle proof bytes]
 
 **Input**: Swap ETH USDC for LUX WBTC
 
-```
+```markdown
 Source Chain:       Ethereum (1)
 Dest Chain:         Lux C-Chain (96369)
 Source Asset:       USDC (0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48)
@@ -3018,13 +3018,13 @@ Max Slippage:       100 (1%)
 ```
 
 **Expected SwapID**:
-```
+```markdown
 SwapID: keccak256(sourceChain || destChain || sourceAsset || destAsset || sender || nonce)
       = 0x5678901234abcdef5678901234abcdef5678901234abcdef5678901234abcdef
 ```
 
 **Expected Fee** (swap = 30 bp):
-```
+```markdown
 BaseFee:        0.001 LUX
 PercentageFee:  50000 * 0.003 = 150 USDC
 ChainFee:       ~5 USDC (both chains)
@@ -3035,7 +3035,7 @@ TotalFee:       ~155 USDC
 
 **Input**: Bitcoin deposit to MPC Taproot vault
 
-```
+```bash
 Bitcoin TxID:       a1b2c3d4e5f6789012345678901234567890123456789012345678901234abcd
 Output Index:       0
 Value:              10000000 satoshis (0.1 BTC)
@@ -3044,13 +3044,13 @@ OP_RETURN data:     0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC (Lux recipient)
 ```
 
 **Expected DepositID**:
-```
+```markdown
 DepositID: keccak256(0 || txid || outputIndex)
          = 0x9876543210fedcba9876543210fedcba9876543210fedcba9876543210fedcba
 ```
 
 **SPV Proof Structure**:
-```
+```markdown
 BlockHeader:    80 bytes (Bitcoin block header)
 MerkleProof:    [hash1, hash2, ...] (path to tx in merkle tree)
 TxIndex:        position in block
@@ -3071,7 +3071,7 @@ Confirmations:  6 required
 
 ### Directory Structure
 
-```
+```solidity
 node/vms/bridgevm/
 |-- vm.go                    # Main VM implementation
 |-- block.go                 # Block structure and processing
@@ -3139,7 +3139,7 @@ curl -X POST -H "Content-Type: application/json" \
 # WebSocket subscription (port 9631)
 wscat -c ws://localhost:9631/ext/bc/B/ws
 > {"jsonrpc":"2.0","method":"bridge_subscribe","params":["deposits",{}],"id":1}
-```
+```solidity
 
 ## Security Considerations
 
@@ -3301,3 +3301,4 @@ Copyright and related rights waived via [CC0](https://creativecommons.org/public
 *LP-331 Created: December 11, 2025*
 *Status: Draft*
 *Contact: engineering@lux.network*
+```

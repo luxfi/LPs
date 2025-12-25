@@ -165,19 +165,19 @@ Adding Schnorr provides:
 ### Input/Output Encoding
 
 #### ECDSA Signature Format
-```
+```markdown
 Standard (65 bytes): r (32) || s (32) || v (1)
 Compact (64 bytes):  r (32) || s (32)  // v derived from recovery
 ```
 
 #### Public Key Format
-```
+```markdown
 Compressed (33 bytes):   prefix (1) || x (32)
 Uncompressed (65 bytes): 0x04 || x (32) || y (32)
 ```
 
 #### Schnorr Signature Format (BIP-340)
-```
+```solidity
 Schnorr (64 bytes): r (32) || s (32)
 ```
 
@@ -315,7 +315,7 @@ library Secp256k1Lib {
         return result;
     }
 }
-```
+```sql
 
 ## Full Implementation Stack
 
@@ -391,7 +391,7 @@ library Secp256k1Lib {
 
 ### Implementation Files
 
-```
+```solidity
 ~/work/lux/
 ├── crypto/secp256k1/
 │   ├── libsecp256k1/           # Bitcoin Core's libsecp256k1
@@ -442,7 +442,7 @@ static SECP256K1_INLINE int secp256k1_memczero(void *s, size_t len, int flag) {
     }
     return 1;
 }
-```
+```solidity
 
 ### Secure Scalar Handling
 
@@ -503,7 +503,7 @@ func IsLowS(sig *Signature) bool {
     halfOrder := new(big.Int).Rsh(secp256k1Order, 1)
     return sig.S.Cmp(halfOrder) <= 0
 }
-```
+```go
 
 ### Nonce Generation (CRITICAL - k reuse = key recovery)
 
@@ -556,7 +556,7 @@ static void secp256k1_ecmult(
     // Constant-time implementation using precomputed table
     secp256k1_ecmult_strauss_wnaf(r, a, &n1, &n2, ng);
 }
-```
+```go
 
 ### Public Key Validation
 
@@ -678,7 +678,7 @@ contract Secp256k1Test {
         // sum should be 3G
     }
 }
-```
+```solidity
 
 ## Security Considerations
 
@@ -705,3 +705,4 @@ This LP introduces a new precompile and is fully backwards compatible. Existing 
 ## Copyright
 
 Copyright and related rights waived via [CC0](https://creativecommons.org/publicdomain/zero/1.0/).
+```

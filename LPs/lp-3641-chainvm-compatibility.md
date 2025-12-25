@@ -52,7 +52,7 @@ type ChainConfig struct {
     // ... existing fields
     LP118Timestamp *uint64 `json:"lp118Timestamp,omitempty"`
 }
-```
+```go
 
 When `LP118Timestamp` is set:
 1. Enables chain-EVM transaction format parsing
@@ -160,7 +160,7 @@ func (b *ChainVMBlock) ToLuxBlock() *LuxBlock {
         // ... map remaining fields
     }
 }
-```
+```go
 
 ## Test Cases
 

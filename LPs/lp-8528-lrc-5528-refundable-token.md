@@ -84,7 +84,7 @@ interface ILRC5528 is ILRC20 {
     function getEscrow(bytes32 escrowId) external view returns (Escrow memory);
     function escrowBalance(address account) external view returns (uint256);
 }
-```
+```solidity
 
 ### Implementation
 
@@ -211,7 +211,7 @@ contract ArbitrationResolver is IDisputeResolver {
         }
     }
 }
-```
+```solidity
 
 ## Use Cases
 
@@ -231,7 +231,7 @@ escrowId = token.escrowTransfer(freelancer, payment, 30 days);
 
 // On work completion, client releases
 token.completeEscrow(escrowId);
-```
+```solidity
 
 ### Subscription Trials
 ```solidity

@@ -46,7 +46,7 @@ Current DeFi landscape challenges:
 
 ### Contract Architecture
 
-```
+```solidity
 ┌─────────────────────────────────────────────────────────────────────────────┐
 │                        CrossChainDeFiRouter                                  │
 ├─────────────────────────────────────────────────────────────────────────────┤
@@ -578,7 +578,7 @@ contract CrossChainDeFiRouter {
         uint256 totalOut
     );
 }
-```
+```solidity
 
 ### Integration Example
 
@@ -690,7 +690,7 @@ function testMultiVenueSwap() public {
     uint256 singleVenueQuote = _getBestSingleQuote(WETH, USDC, amountIn);
     assertGe(result.amountOut, singleVenueQuote * 99 / 100);
 }
-```
+```solidity
 
 ### Cross-Chain Limit Order
 
@@ -724,7 +724,7 @@ function testCrossChainLimitOrder() public {
 
 **Location**: `/Users/z/work/lux/standard/contracts/liquidity/CrossChainDeFiRouter.sol`
 
-```
+```solidity
 contracts/liquidity/
 ├── CrossChainDeFiRouter.sol    # Main router (this LP)
 ├── precompiles/

@@ -41,7 +41,7 @@ type VerkleStateTree struct {
 // Account storage layout in Verkle
 // Key = hash(address || storage_slot)
 // Value = 32-byte state value
-```
+```go
 
 ### Witness Format
 
@@ -75,7 +75,7 @@ type BlockBody struct {
     // NEW: Execution witness for stateless validation
     ExecutionWitness *ExecutionWitness
 }
-```
+```solidity
 
 ### Transition Mechanism
 
@@ -131,3 +131,4 @@ Verkle trees chosen over:
 ## Copyright
 
 Copyright and related rights waived via [CC0](../LICENSE.md).
+```

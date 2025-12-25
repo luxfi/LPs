@@ -59,7 +59,7 @@ FROST (Flexible Round-Optimized Schnorr Threshold) provides unique advantages:
 
 ### Precompile Address
 
-```
+```solidity
 0x020000000000000000000000000000000000000C
 ```
 
@@ -93,7 +93,7 @@ The signature is indistinguishable from a single-party Schnorr signature.
 
 ### Gas Cost
 
-```
+```solidity
 gas = BASE_COST + (totalSigners * PER_SIGNER_COST)
 
 Where:
@@ -212,7 +212,7 @@ abstract contract FROSTVerifier {
         FROSTLib.verifyOrRevert(threshold, totalSigners, publicKey, messageHash, signature);
     }
 }
-```
+```solidity
 
 ### Example Usage
 
@@ -315,7 +315,7 @@ The premium is justified by:
 
 FROST achieves threshold signatures in 2 rounds:
 
-```
+```markdown
 Setup (one-time):
   - Distributed key generation (DKG)
   - Each party holds share of private key
@@ -351,7 +351,7 @@ bytes calldata frostSig = /* threshold signature */;
 bool valid = FROST.verify(3, 5, taprootPubKey, txHash, frostSig);
 
 // This signature is valid on Bitcoin mainnet!
-```
+```solidity
 
 Use cases:
 - **Multi-chain custody**: Same threshold key controls Bitcoin + EVM assets
@@ -389,7 +389,7 @@ function verify(bytes calldata sig) internal view returns (bool) {
 ### Test Vector 1: Valid 3-of-5 Threshold
 
 **Input:**
-```
+```solidity
 threshold: 3
 totalSigners: 5
 publicKey: 0x9f86d081884c7d659a2feaa0c55ad015a3bf4f1b2b0b822cd15d6c15b0f00a08
@@ -403,7 +403,7 @@ signature: 0x<64 bytes of valid Schnorr signature>
 ### Test Vector 2: Invalid Signature
 
 **Input:**
-```
+```solidity
 threshold: 3
 totalSigners: 5
 publicKey: <same as above>
@@ -417,7 +417,7 @@ signature: 0x<64 bytes of INVALID signature>
 ### Test Vector 3: Tampered Message
 
 **Input:**
-```
+```solidity
 threshold: 3
 totalSigners: 5
 publicKey: <valid key>
@@ -430,7 +430,7 @@ signature: <valid signature for different message>
 ### Test Vector 4: Invalid Threshold Parameters
 
 **Input:**
-```
+```solidity
 threshold: 6
 totalSigners: 5
 publicKey: <valid key>
@@ -443,7 +443,7 @@ signature: <valid signature>
 ### Test Vector 5: Large Threshold (10-of-15)
 
 **Input:**
-```
+```solidity
 threshold: 10
 totalSigners: 15
 publicKey: <valid key>
@@ -508,7 +508,7 @@ signature: <valid 10-of-15 signature>
 
 ### Architecture
 
-```
+```solidity
 ┌─────────────────────────────────────────────────────────────────┐
 │                     Solidity Contract                            │
 │  FROSTLib.verifyOrRevert(threshold, totalSigners, pubKey, ...)  │
@@ -537,7 +537,7 @@ cd ~/work/lux/precompiles/frost && go test -v -cover
 
 # Run protocol tests
 cd ~/work/lux/threshold && go test -v ./protocols/frost/...
-```
+```solidity
 
 | Test Category | Coverage |
 |---------------|----------|
@@ -599,7 +599,7 @@ For quantum resistance, use **Ringtail** (LP-320) or LSS-MPC (LP-323).
 
 FROST supports DKG without trusted dealer:
 
-```
+```solidity
 1. Each party i generates random polynomial f_i(x) of degree t-1
 2. Broadcast commitments: C_i,k = f_i(k)·G for k = 0..t-1
 3. Send shares: s_i,j = f_i(j) to party j (secure channel)
@@ -625,7 +625,7 @@ for each signature {
     d, e := generateFreshNonces()
     sig := sign(msg, d, e)
 }
-```
+```markdown
 
 Reusing nonces allows **private key recovery** from two signatures.
 
@@ -659,7 +659,7 @@ bytes32 messageHash = keccak256(abi.encodePacked(
     contractAddress,
     data
 ));
-```
+```solidity
 
 ### Integration Security
 
@@ -762,7 +762,7 @@ import "github.com/luxfi/threshold/protocols/frost"
 // - frost.Verify() - Standard Schnorr verification
 // - frost.Refresh() - Share refreshing
 // - frost.KeygenTaproot() - Bitcoin Taproot keys
-```
+```solidity
 
 **Library Features:**
 - Two-round signing protocol (commitment + response)
@@ -802,7 +802,7 @@ Verify:
   1. Compute challenge: c = H(R || P || m)
   2. Verify equation: s·G = R + c·P
   3. Return true if equation holds, false otherwise
-```
+```markdown
 
 This is identical to BIP-340 verification, ensuring Bitcoin compatibility.
 
@@ -840,3 +840,4 @@ See **LP-323** (LSS-MPC) for dynamic resharing capabilities:
 ## Copyright
 
 Copyright and related rights waived via [CC0](https://creativecommons.org/publicdomain/zero/1.0/).
+```

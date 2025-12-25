@@ -163,7 +163,7 @@ Gas based on computational complexity relative to Blake2b:
 
 ### Gas Calculation
 
-```
+```markdown
 Blake2b: 15 + (input_bytes / 32) * 3
 Blake2s: 12 + (input_bytes / 32) * 3
 Blake3:  10 + (input_bytes / 32) * 2
@@ -177,7 +177,7 @@ Additional costs:
 ### Data Encoding
 
 **Blake2b Hash:**
-```
+```solidity
 | Offset | Length | Description |
 |--------|--------|-------------|
 | 0 | 4 | Data length |
@@ -186,7 +186,7 @@ Additional costs:
 ```
 
 **Blake2b Keyed:**
-```
+```solidity
 | Offset | Length | Description |
 |--------|--------|-------------|
 | 0 | 1 | Key length (1-64) |
@@ -197,7 +197,7 @@ Additional costs:
 ```
 
 **Blake3:**
-```
+```solidity
 | Offset | Length | Description |
 |--------|--------|-------------|
 | 0 | 4 | Data length |
@@ -206,7 +206,7 @@ Additional costs:
 ```
 
 **Blake3 Derive Key:**
-```
+```solidity
 | Offset | Length | Description |
 |--------|--------|-------------|
 | 0 | 4 | Context length |
@@ -223,7 +223,7 @@ Additional costs:
 Computes Blake2b hash with configurable output length.
 
 **Input:**
-```
+```solidity
 | Offset | Length | Description |
 |--------|--------|-------------|
 | 0 | 4 | Data length (N) |
@@ -232,7 +232,7 @@ Computes Blake2b hash with configurable output length.
 ```
 
 **Output:**
-```
+```solidity
 | Offset | Length | Description |
 |--------|--------|-------------|
 | 0 | D | Digest (D = digest length) |
@@ -269,7 +269,7 @@ Computes Blake3 hash with unlimited output length (XOF mode).
 Derives cryptographic keys from context and key material.
 
 **Input:**
-```
+```solidity
 | Offset | Length | Description |
 |--------|--------|-------------|
 | 0 | 4 | Context length |
@@ -280,7 +280,7 @@ Derives cryptographic keys from context and key material.
 ```
 
 **Output:**
-```
+```solidity
 | Offset | Length | Description |
 |--------|--------|-------------|
 | 0 | L | Derived key |
@@ -291,7 +291,7 @@ Derives cryptographic keys from context and key material.
 Blake2b compression function for incremental hashing.
 
 **Input:**
-```
+```solidity
 | Offset | Length | Description |
 |--------|--------|-------------|
 | 0 | 4 | Rounds (big-endian) |
@@ -306,7 +306,7 @@ Blake2b compression function for incremental hashing.
 | Offset | Length | Description |
 |--------|--------|-------------|
 | 0 | 64 | Updated state h |
-```
+```solidity
 
 ## Implementation Stack
 
@@ -339,7 +339,7 @@ Blake2b compression function for incremental hashing.
 │  │ blake3_arm64.s           - Blake3 NEON                          ││
 │  └─────────────────────────────────────────────────────────────────┘│
 └─────────────────────────────────────────────────────────────────────┘
-```
+```solidity
 
 ### File Inventory
 
@@ -366,7 +366,7 @@ node/crypto/blake/
 └── blake_test.go           (6 KB)   # Benchmarks
 
 Total: ~80 KB implementation
-```
+```solidity
 
 ### Solidity Interface
 
@@ -681,7 +681,7 @@ func (p *BlakePrecompile) blake2bF(data []byte, suppliedGas uint64) ([]byte, uin
 
     return result, remainingGas, nil
 }
-```
+```solidity
 
 ### Cross-Chain Compatibility
 
@@ -713,7 +713,7 @@ func (p *BlakePrecompile) blake2bF(data []byte, suppliedGas uint64) ([]byte, uin
 │  └──────────────┘    └──────────────┘    └──────────────┘          │
 │                                                                      │
 └─────────────────────────────────────────────────────────────────────┘
-```
+```go
 
 ### Network Usage Map
 
@@ -864,7 +864,7 @@ func BenchmarkBlake3_1MB(b *testing.B) {
     }
 }
 // BenchmarkBlake3_1MB-8    654,321 ns/op    65,546 gas
-```
+```solidity
 
 ## Backwards Compatibility
 
@@ -882,3 +882,4 @@ This LP extends the existing Blake2b compression function (EIP-152 at 0x09) with
 ## Copyright
 
 Copyright and related rights waived via [CC0](https://creativecommons.org/publicdomain/zero/1.0/).
+```

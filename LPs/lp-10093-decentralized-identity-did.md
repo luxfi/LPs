@@ -55,7 +55,7 @@ interface IdentityArchitecture {
     reputation_tracking: true;
   };
 }
-```
+```solidity
 
 ## Research Findings
 
@@ -147,7 +147,7 @@ interface LuxDIDDocument {
     recovery: string[];         // Social recovery addresses
   };
 }
-```
+```solidity
 
 ### 3. Privacy-Preserving Credentials
 
@@ -249,7 +249,7 @@ interface IdentityBridge {
     calculation: "Weighted average with decay";
   };
 }
-```
+```solidity
 
 ### 5. Decentralized KYC Providers
 
@@ -326,7 +326,7 @@ recommended_architecture:
     calculation: "Multi-chain aggregation"
     privacy: "Optional public/private modes"
     decay: "Time-weighted with activity bonus"
-```
+```solidity
 
 ### 2. Privacy Features
 
@@ -435,13 +435,13 @@ Each network has its own DID registry with cross-chain resolution via Warp messa
    - Controller-based access control
 
 2. **Supported DID Methods**
-   ```
+```solidity
    did:lux:<identifier>
    did:lux:mainnet:<address>
    did:lux:testnet:<address>
    did:hanzo:<username>
    did:hanzo:eth:<address>
-   ```
+```
 
 3. **Verification Method Types**
    - Ed25519VerificationKey2020

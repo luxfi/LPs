@@ -179,7 +179,7 @@ This precompile implements Poseidon with the following parameters:
 ### Data Encoding
 
 **Poseidon Hash Input:**
-```
+```solidity
 | Offset | Length | Description |
 |--------|--------|-------------|
 | 0 | 4 | Number of inputs (n) |
@@ -187,14 +187,14 @@ This precompile implements Poseidon with the following parameters:
 ```
 
 **Poseidon Hash Output:**
-```
+```solidity
 | Offset | Length | Description |
 |--------|--------|-------------|
 | 0 | 32 | Hash output (field element) |
 ```
 
 **Poseidon Sponge Input:**
-```
+```solidity
 | Offset | Length | Description |
 |--------|--------|-------------|
 | 0 | 4 | Number of inputs (n) |
@@ -203,7 +203,7 @@ This precompile implements Poseidon with the following parameters:
 ```
 
 **Merkle Proof Input:**
-```
+```solidity
 | Offset | Length | Description |
 |--------|--------|-------------|
 | 0 | 32 | Leaf value |
@@ -219,7 +219,7 @@ This precompile implements Poseidon with the following parameters:
 Computes Poseidon hash of variable number of field elements.
 
 **Input:**
-```
+```solidity
 | Offset | Length | Description |
 |--------|--------|-------------|
 | 0 | 4 | Count (n), where 1 ≤ n ≤ 16 |
@@ -227,14 +227,14 @@ Computes Poseidon hash of variable number of field elements.
 ```
 
 **Output:**
-```
+```solidity
 | Offset | Length | Description |
 |--------|--------|-------------|
 | 0 | 32 | Hash (single field element) |
 ```
 
 **Algorithm:**
-```
+```solidity
 1. Initialize state S = [0, input_0, input_1, ..., input_{n-1}, 0, ...]
 2. Apply RF/2 full rounds:
    - Add round constants
@@ -253,7 +253,7 @@ Computes Poseidon hash of variable number of field elements.
 Optimized 2-to-1 hash for Merkle trees.
 
 **Input:**
-```
+```solidity
 | Offset | Length | Description |
 |--------|--------|-------------|
 | 0 | 32 | Left child |
@@ -261,7 +261,7 @@ Optimized 2-to-1 hash for Merkle trees.
 ```
 
 **Output:**
-```
+```solidity
 | Offset | Length | Description |
 |--------|--------|-------------|
 | 0 | 32 | Parent hash |
@@ -274,7 +274,7 @@ This is the primary building block for Merkle trees in ZK circuits.
 Applies Poseidon in sponge mode for variable-length output.
 
 **Input:**
-```
+```solidity
 | Offset | Length | Description |
 |--------|--------|-------------|
 | 0 | 4 | Input count (n) |
@@ -283,14 +283,14 @@ Applies Poseidon in sponge mode for variable-length output.
 ```
 
 **Output:**
-```
+```solidity
 | Offset | Length | Description |
 |--------|--------|-------------|
 | 0 | 32*m | Output field elements |
 ```
 
 **Algorithm (Sponge):**
-```
+```solidity
 1. Absorb: For each rate-sized chunk of input:
    - XOR into state rate portion
    - Apply Poseidon permutation
@@ -304,7 +304,7 @@ Applies Poseidon in sponge mode for variable-length output.
 Computes Merkle root of leaves using Poseidon hash.
 
 **Input:**
-```
+```solidity
 | Offset | Length | Description |
 |--------|--------|-------------|
 | 0 | 4 | Leaf count (n, must be power of 2) |
@@ -312,7 +312,7 @@ Computes Merkle root of leaves using Poseidon hash.
 ```
 
 **Output:**
-```
+```solidity
 | Offset | Length | Description |
 |--------|--------|-------------|
 | 0 | 32 | Merkle root |
@@ -323,7 +323,7 @@ Computes Merkle root of leaves using Poseidon hash.
 Verifies a Merkle proof using Poseidon hash.
 
 **Input:**
-```
+```solidity
 | Offset | Length | Description |
 |--------|--------|-------------|
 | 0 | 32 | Leaf value |
@@ -334,7 +334,7 @@ Verifies a Merkle proof using Poseidon hash.
 ```
 
 **Output:**
-```
+```solidity
 | Offset | Length | Description |
 |--------|--------|-------------|
 | 0 | 1 | Valid flag (0x01 if valid) |
@@ -344,7 +344,7 @@ Verifies a Merkle proof using Poseidon hash.
 
 ### Architecture Overview
 
-```
+```solidity
 ┌─────────────────────────────────────────────────────────────────────┐
 │                   Poseidon Precompile (0x0318)                       │
 ├─────────────────────────────────────────────────────────────────────┤
@@ -382,7 +382,7 @@ Verifies a Merkle proof using Poseidon hash.
 
 ### File Inventory
 
-```
+```solidity
 evm/precompile/contracts/poseidon/
 ├── poseidon.go             (15 KB)  # Core implementation
 ├── poseidon_test.go        (12 KB)  # Unit tests
@@ -483,7 +483,7 @@ interface IPoseidon {
     /// @return hash Hash result
     function poseidonBLS12_381(uint256[] calldata inputs) external view returns (uint256 hash);
 }
-```
+```solidity
 
 ### Go Implementation
 
@@ -794,7 +794,7 @@ contract PoseidonMerkleTree {
         return abi.decode(result, (uint256));
     }
 }
-```
+```solidity
 
 ### Network Usage Map
 
@@ -879,7 +879,7 @@ func TestPoseidonMerkleTree(t *testing.T) {
     valid := precompile.PoseidonMerkleProof(big.NewInt(2), proof, 1, root)
     assert.True(t, valid)
 }
-```
+```go
 
 ### Performance Benchmarks
 

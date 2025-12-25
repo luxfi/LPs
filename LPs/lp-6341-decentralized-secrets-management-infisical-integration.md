@@ -97,7 +97,7 @@ This platform addresses these challenges:
 
 ### Architecture Overview
 
-```
+```solidity
 +-------------------------------------------------------------------------+
 |                    Decentralized Secrets Platform                        |
 +-------------------------------------------------------------------------+
@@ -190,7 +190,7 @@ const (
     PlanBusiness   OrgPlan = 0x02  // Business: 100 projects, 10000 secrets
     PlanEnterprise OrgPlan = 0x03  // Enterprise: unlimited
 )
-```
+```go
 
 #### Project
 
@@ -331,7 +331,7 @@ type TimeWindow struct {
     EndHourUTC   int                      // 0-23
     Timezone     string                   // For display purposes
 }
-```
+```go
 
 #### Secret
 
@@ -474,7 +474,7 @@ type SecretVersionRef struct {
     CreatedBy   ids.ShortID
     ValueHash   [32]byte                  // For quick comparison
 }
-```
+```go
 
 #### AccessPolicy
 
@@ -662,7 +662,7 @@ const (
     ResourceMember      ResourceType = 0x05
     ResourceServiceAcct ResourceType = 0x06
 )
-```
+```go
 
 ### Secret Operations
 
@@ -1099,7 +1099,7 @@ func (s *ImportExportService) ImportSecrets(ctx context.Context, req *ImportRequ
 
     return result, nil
 }
-```
+```solidity
 
 #### Rotation Workflows
 
@@ -1227,7 +1227,7 @@ func (p *DatabaseRotationProvider) Rotate(ctx context.Context, secret *Secret, c
 
 The automated rotation protocol defines the state machine and message flow for scheduled secret rotation.
 
-```
+```markdown
 Rotation State Machine:
 
     +----------+     schedule      +------------+
@@ -1251,9 +1251,7 @@ Rotation State Machine:
                                     +----------+
                                     | ROLLBACK |
                                     +----------+
-```
-
-```go
+go
 // RotationProtocol implements the automated rotation state machine
 type RotationProtocol struct {
     scheduler *RotationScheduler
@@ -1387,7 +1385,7 @@ func (p *RotationProtocol) RollbackRotation(ctx context.Context, jobID ids.ID) e
 
     return nil
 }
-```
+```go
 
 **Rotation Protocol Requirements:**
 
@@ -1629,7 +1627,7 @@ func (s *AccessControlService) CreateServiceAccountToken(ctx context.Context, sa
         ExpiresAt: token.ExpiresAt,
     }, nil
 }
-```
+```solidity
 
 ### SDK Integration
 
@@ -2101,7 +2099,7 @@ func Example() {
     // Rollback
     client.Rollback(ctx, "API_KEY", 2, WithComment("Reverting to known good value"))
 }
-```
+```python
 
 #### Python SDK
 
@@ -2560,7 +2558,7 @@ func rollbackCmd() *cobra.Command {
     cmd.MarkFlagRequired("version")
     return cmd
 }
-```
+```sql
 
 ### DevOps Integration
 
@@ -2617,7 +2615,7 @@ helm install lux-secrets-operator luxfi/secrets-operator \
   --create-namespace \
   --set auth.token="lux_sk_..." \
   --set auth.orgId="org_abc123"
-```
+```sql
 
 **Operator RBAC:**
 
@@ -2658,9 +2656,7 @@ subjects:
   - kind: ServiceAccount
     name: lux-secrets-operator
     namespace: lux-system
-```
-
-```
+solidity
 # CRD: SecretSync
 apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
@@ -2753,9 +2749,7 @@ spec:
   managedFields:
     - sourceKey: DB_PASSWORD
       targetKey: database-password
-```
-
-```go
+go
 // Kubernetes Operator Controller
 package controller
 
@@ -2843,7 +2837,7 @@ func (r *SecretSyncReconciler) Reconcile(ctx context.Context, req ctrl.Request) 
     interval, _ := time.ParseDuration(secretSync.Spec.RefreshInterval)
     return ctrl.Result{RequeueAfter: interval}, nil
 }
-```
+```bash
 
 #### GitHub Actions
 
@@ -2878,9 +2872,7 @@ jobs:
           # Secrets are now available as environment variables
           echo "Deploying to $DEPLOY_TARGET"
           ./deploy.sh
-```
-
-```go
+go
 // GitHub Action implementation
 package main
 
@@ -2949,7 +2941,7 @@ func main() {
         action.SetOutput("secrets", encryptForOutput(allSecrets))
     }
 }
-```
+```bash
 
 #### GitLab CI Integration
 
@@ -3012,9 +3004,7 @@ deploy_production:
   when: manual
   only:
     - main
-```
-
-```go
+go
 // GitLab CI Helper - luxfi/secrets-gitlab
 package main
 
@@ -3067,7 +3057,7 @@ func main() {
 
     fmt.Println(strings.Join(lines, "\n"))
 }
-```
+```solidity
 
 #### Terraform Provider
 
@@ -3152,9 +3142,7 @@ output "database_url" {
   value     = data.luxsecrets_secret.database_url.value
   sensitive = true
 }
-```
-
-```go
+go
 // Terraform Provider implementation
 package provider
 
@@ -3272,7 +3260,7 @@ func resourceSecretCreate(ctx context.Context, d *schema.ResourceData, meta inte
 
     return resourceSecretRead(ctx, d, meta)
 }
-```
+```go
 
 ### Security Considerations
 
@@ -3333,7 +3321,7 @@ type E2EEncryption struct {
 //             +-> Environment DEK (AES-256 wrapped)
 //                     |
 //                     +-> Secret Ciphertext (AES-256-GCM encrypted)
-```
+```go
 
 #### Threshold Decryption for High-Value Secrets
 
@@ -3405,7 +3393,7 @@ func (a *AuditService) GenerateComplianceReport(ctx context.Context, req *Compli
 
     return report, nil
 }
-```
+```go
 
 ## Rationale
 
@@ -3643,7 +3631,7 @@ func TestVersionRollback(t *testing.T) {
     updated := service.state.Secrets[secret.SecretID]
     require.Equal(t, uint32(4), updated.Version)
 }
-```
+```go
 
 ### Integration Tests
 
@@ -3748,7 +3736,7 @@ This section provides concrete test vectors for implementers to validate their i
     }
   }
 }
-```
+```solidity
 
 #### Secret Encryption Test Vector
 
@@ -3793,7 +3781,7 @@ This section provides concrete test vectors for implementers to validate their i
     "latest_change_type": "rolled"
   }
 }
-```
+```solidity
 
 #### Environment Inheritance Test Vector
 
@@ -3890,7 +3878,7 @@ This section provides concrete test vectors for implementers to validate their i
     }
   ]
 }
-```
+```solidity
 
 #### Rotation Protocol Test Vector
 
@@ -3968,7 +3956,7 @@ $ lux-secrets get DATABASE_URL
 # Test 7: View audit log
 $ lux-secrets audit --key DATABASE_URL --limit 5
 # Expected: List of 5 audit events for DATABASE_URL
-```
+```sql
 
 #### API Response Test Vectors
 
@@ -4026,7 +4014,7 @@ $ lux-secrets audit --key DATABASE_URL --limit 5
 
 ### Repository Structure
 
-```
+```solidity
 github.com/luxfi/secrets-platform/
 ├── api/
 │   ├── proto/                    # gRPC/Protobuf definitions

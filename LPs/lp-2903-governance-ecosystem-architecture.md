@@ -34,7 +34,7 @@ This architecture establishes:
 
 ### The Four Layers
 
-```
+```solidity
 ┌─────────────────────────────────────────────────────────────────┐
 │                         OWNERSHIP LAYER                         │
 │    DAOs: Steward IP and governance for community benefit        │
@@ -209,7 +209,7 @@ This architecture establishes:
 
 ### Escalation Process
 
-```
+```markdown
 Issue identified
     ↓
 Working group resolution attempt

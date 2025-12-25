@@ -55,7 +55,7 @@ Fast Probabilistic Consensus (FPC) achieves 1ms finality by:
 
 Q-Chain serves as the quantum finality layer for all Lux chains:
 
-```
+```solidity
 +------------------------------------------------------------------+
 |  Q-Chain (Quantum Finality Layer)                                |
 |  Stores quantum-final block tips via Quasar (BLS/Ringtail)       |
@@ -234,7 +234,7 @@ interface ICompressedVerify {
         uint32 validatorBits
     ) external view returns (bool valid);
 }
-```
+```solidity
 
 ### QuasarLib Helper Library
 
@@ -295,7 +295,7 @@ library QuasarLib {
 
 Quasar implements FPC for 1ms block finality:
 
-```
+```markdown
 Round 0 (Proposal):
   Proposer → Block + BLS signature → Broadcast
 
@@ -321,7 +321,7 @@ Validators maintain two key pairs:
 2. **Ringtail Key Pair**: For quantum-safe signatures
 
 **Signature Strategy:**
-```
+```markdown
 Normal Operation:     BLS only (5,000 gas, fast)
 High-Value Blocks:    Hybrid BLS+Ringtail (10,000 gas, quantum-safe)
 Long-Term Finality:   Ringtail only (8,000 gas, stored on Q-Chain)
@@ -341,7 +341,7 @@ type QChainFinalityRecord struct {
     RingtailSig    []byte        // Ringtail threshold signature
     ValidatorBits  uint32        // Participating validator bitfield
 }
-```
+```solidity
 
 **Finality Flow:**
 1. C-Chain block reaches local finality
@@ -448,7 +448,7 @@ function testBLSVerification() public {
     bool valid = QuasarLib.verifyBLS(pubKey, msgHash, sig);
     assertTrue(valid);
 }
-```
+```solidity
 
 **Expected Gas:** 5,000
 
@@ -488,7 +488,7 @@ function testHybridVerification() public {
     assertTrue(success);
     assertEq(result[0], 0x01);
 }
-```
+```solidity
 
 **Expected Gas:** 10,000
 
@@ -514,7 +514,7 @@ function testInvalidSignatureRejected() public {
     bool valid = QuasarLib.verifyBLS(validPubKey, msgHash, invalidSig);
     assertFalse(valid);
 }
-```
+```solidity
 
 ## Reference Implementation
 
@@ -627,3 +627,4 @@ Compressed witnesses rely on validator bitfields. Attacks mitigated by:
 ## Copyright
 
 Copyright and related rights waived via [CC0](https://creativecommons.org/publicdomain/zero/1.0/).
+```

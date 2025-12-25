@@ -89,7 +89,7 @@ type Order struct {
     Commitment  Hash       // Hidden order hash
     ZKProof     []byte     // Validity proof
 }
-```
+```sql
 
 ### GPU-Accelerated Matching
 
@@ -185,7 +185,7 @@ contract CommitRevealDEX {
         delete revealedOrders;
     }
 }
-```
+```solidity
 
 ### Zero-Knowledge Privacy Layer
 
@@ -272,7 +272,7 @@ func (a *LiquidityAggregator) FindBestPath(
 
     return paths[:10], nil  // Top 10 paths
 }
-```
+```solidity
 
 ### Cross-Chain Settlement
 
@@ -354,7 +354,7 @@ func TestMEVProtection(t *testing.T) {
     err = dex.RevealOrder(order, proof)
     assert.NoError(t, err)
 }
-```
+```solidity
 
 ## Reference Implementation
 
@@ -433,7 +433,7 @@ Liquidity Pool Fee: 0.05% - 1% (pool-specific)
 Cross-Chain Fee: 0.2%
 Settlement Timeout: 1 hour
 Proof Verification Gas: 50,000
-```
+```sql
 
 **Liquidity Aggregation**:
 ```sql
@@ -445,7 +445,7 @@ Fallback Strategy: Direct pool only
 ```
 
 **ZK Privacy Parameters**:
-```
+```markdown
 Circuit: Halo2 (~32KB proofs)
 Hash Function: Poseidon (14 rounds)
 Field: BN254
@@ -477,7 +477,7 @@ Benchmarks run on Apple M1 Max (2025-12-11):
 
 ### Order Book Performance
 
-```
+```markdown
 BenchmarkOrderBook-10              1,269,255 orders/sec    787.9 ns/op
 BenchmarkOrderBookParallel-10        684,184 orders/sec   1,462.0 ns/op
 BenchmarkCriticalOrderMatching/100   714,820 orders/sec   1,398.8 ns/op

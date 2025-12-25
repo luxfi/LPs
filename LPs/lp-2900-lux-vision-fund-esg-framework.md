@@ -65,7 +65,7 @@ Community governance and IP stewardship ensure long-tail value doesn't get extra
 
 ### The Flywheel of Good
 
-```
+```solidity
 ┌─────────────────────────────────────────────────────────────────┐
 │                                                                 │
 │  1. Lux funds projects that meet strict E/S/G gates            │

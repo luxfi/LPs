@@ -84,7 +84,7 @@ interface IDataAvailabilityLayer {
     event DataRetrieved(bytes32 indexed commitmentHash, address retriever);
     event DataChallenged(bytes32 indexed commitmentHash, address challenger);
 }
-```
+```solidity
 
 ### Erasure Coding Implementation
 
@@ -153,7 +153,7 @@ interface IKZGCommitments {
     function dataToPolynomial(bytes calldata data) external pure returns (Polynomial memory);
     function polynomialToData(Polynomial calldata poly) external pure returns (bytes memory);
 }
-```
+```solidity
 
 ### Data Availability Sampling (DAS)
 
@@ -255,7 +255,7 @@ interface IStorageNetwork {
     event DataStored(bytes32 indexed dataHash, bytes32 contractId);
     event StorageProofSubmitted(bytes32 indexed contractId, address node);
 }
-```
+```solidity
 
 ### AI Model Storage Optimization
 
@@ -398,7 +398,7 @@ describe("Erasure Coding", () => {
         expect(decoded).to.deep.equal(data);
     });
 });
-```
+```solidity
 
 ### KZG Commitment Tests
 
@@ -472,7 +472,7 @@ describe("Data Availability Sampling", () => {
         expect(await daLayer.calculateConfidence(100, 100)).to.equal(10000); // 100%
     });
 });
-```
+```sql
 
 ### AI Model Storage Tests
 

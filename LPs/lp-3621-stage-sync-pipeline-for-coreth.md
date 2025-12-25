@@ -117,7 +117,7 @@ func (sl *StageLoop) Run(ctx context.Context) error {
         }
     }
 }
-```
+```bash
 
 **Testing**:
 ```bash
@@ -153,7 +153,7 @@ Per-stage latency benchmarks (measured on reference hardware):
 ## Reference Implementation
 
 See prototype code under `node/evm/stages/` in the Lux repo:
-```
+```solidity
 node/evm/stages/
 ├─ driver.go
 ├─ headers.go

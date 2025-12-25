@@ -68,7 +68,7 @@ template<typename Func, typename... Args>
 void launch_kernel(Func kernel, dim3 grid, dim3 block, Args... args);
 
 }
-```
+```solidity
 
 ### Consensus Acceleration
 
@@ -148,7 +148,7 @@ public:
         return x;
     }
 };
-```
+```solidity
 
 ### AI Inference Acceleration
 
@@ -206,7 +206,7 @@ __global__ void generate_verkle_proofs(
         proofs + idx * PROOF_SIZE
     );
 }
-```
+```solidity
 
 ### Go Integration
 
@@ -298,7 +298,7 @@ func TestGPUSignatureVerification(t *testing.T) {
     speedup := float64(cpuTime) / float64(gpuTime)
     assert.Greater(t, speedup, 10.0)  // At least 10x speedup
 }
-```
+```solidity
 
 ## Reference Implementation
 
@@ -367,7 +367,7 @@ CUDA: Requires sm_70 or newer (Volta+)
 MLX: Requires macOS 12+, Apple Silicon
 ROCm: Requires RDNA or CDNA architecture
 fallback: CPU (always available)
-```
+```solidity
 
 **Resource Limits**:
 ```
@@ -376,7 +376,7 @@ Thread Pool Size: 4 * num_gpus
 Queue Depth: 256 tasks
 Timeout: 30 seconds per operation
 Thermal Throttle: 85°C (pause work)
-```
+```solidity
 
 **Configuration File** (`config/gpu.yaml`):
 ```
@@ -391,7 +391,7 @@ gpu:
   fallback_on_error: true
   log_performance: true
   profile_interval: 60s
-```
+```solidity
 
 ### Source Code References
 
@@ -419,4 +419,4 @@ All implementation files verified to exist:
 
 ## Copyright
 
-Copyright and related rights waived via [CC0](../LICENSE.md).
+Copyright and related rights waived via [CC0](../LICENSE.md).```

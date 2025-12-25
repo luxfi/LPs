@@ -63,7 +63,7 @@ This LP transforms Lux Network's environmental performance from a black box into
 ### Network Power Consumption
 
 **Bottom-Up Method** (Primary):
-```
+```solidity
 P_network = Σ(P_validator_i) for all active validators
 ```
 
@@ -76,7 +76,7 @@ Where:
 - Unknown: Use network average
 
 **Top-Down Method** (Verification):
-```
+```solidity
 P_network = N_validators × P_average × (1 + overhead)
 ```
 
@@ -87,7 +87,7 @@ Where:
 
 ### Energy Per Transaction
 
-```
+```solidity
 E_tx = (P_network × T_block) / N_tx_block
 ```
 
@@ -97,7 +97,7 @@ Where:
 - `N_tx_block` = Transactions in block
 
 **Finality-Adjusted**:
-```
+```solidity
 E_tx_final = E_tx × (1 / finality_probability)
 ```
 
@@ -105,7 +105,7 @@ For Lux (deterministic finality): finality_probability = 1.0
 
 ### Carbon Intensity
 
-```
+```solidity
 I_carbon = E_tx × EF_network × (1 - R_network)
 ```
 
@@ -115,7 +115,7 @@ Where:
 - `R_network` = Renewable energy fraction
 
 **Emission Factor Calculation**:
-```
+```solidity
 EF_network = Σ(EF_region_i × E_region_i) / Σ(E_region_i)
 ```
 
@@ -253,7 +253,7 @@ Open-source tools for community verification:
   "green_certified_count": 360,
   "data_quality": "medium"
 }
-```
+```sql
 
 **Rate Limits**: 100 requests/minute (authenticated)
 
@@ -320,3 +320,4 @@ If errors discovered:
 ## Copyright
 
 Copyright and related rights waived via [CC0](https://creativecommons.org/publicdomain/zero/1.0/).
+```

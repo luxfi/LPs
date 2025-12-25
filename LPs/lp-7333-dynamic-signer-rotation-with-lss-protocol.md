@@ -84,7 +84,7 @@ Proof-of-Stake networks experience continuous validator churn as nodes join and 
 
 LSS (Linear Secret Sharing) with dynamic resharing solves these problems:
 
-```
+```markdown
 Generation 0: Parties A, B, C (2-of-3)
      |
      | ReshareKey(newParties=[A, B, D, E], threshold=3)
@@ -128,7 +128,7 @@ Feldman VSS extends Shamir's Secret Sharing with public verification of share co
 
 **Dealer Protocol (for DKG, each party acts as dealer):**
 
-```
+```markdown
 DealerShare(secret s, parties P, threshold t):
     1. Generate random polynomial coefficients:
        a_0 = s  (secret)
@@ -155,7 +155,7 @@ DealerShare(secret s, parties P, threshold t):
 
 Each party verifies their received share against the public commitments:
 
-```
+```markdown
 VerifyShare(share_i, party_index i, commitments {C_j}):
     1. Compute expected point from commitments using polynomial evaluation:
        expected = sum_{j=0}^{t-1} (i^j * C_j)
@@ -190,7 +190,7 @@ The security reduces to the Discrete Logarithm (DL) assumption on group G:
 **Theorem 1 (Share Generation Secrecy):**
 Let A be a probabilistic polynomial-time (PPT) adversary controlling a coalition S of parties where |S| < t. The advantage of A in distinguishing the secret s from a uniformly random element r in Z_q is negligible in the security parameter lambda.
 
-```
+```solidity
 Adv_A^{secrecy}(lambda) = |Pr[A(View_S) = s] - Pr[A(View_S) = r]| <= negl(lambda)
 ```
 
@@ -208,7 +208,7 @@ Adv_A^{secrecy}(lambda) = |Pr[A(View_S) = s] - Pr[A(View_S) = r]| <= negl(lambda
 **Theorem 2 (Share Verification Soundness):**
 Let A be a PPT adversary. The probability that A produces an invalid share s_i' != f(i) that passes Feldman verification is negligible.
 
-```
+```solidity
 Pr[VerifyShare(s_i', i, {C_j}) = true AND s_i' != f(i)] <= negl(lambda)
 ```
 
@@ -268,7 +268,7 @@ Given any t points on a polynomial f(x) of degree < t, we can uniquely recover f
 
 For a set of indices S = {i_1, i_2, ..., i_t}, the Lagrange basis polynomial for index i_k is:
 
-```
+```solidity
 L_{i_k}(x) = product_{j in S, j != i_k} (x - j) / (i_k - j)
 ```
 
@@ -280,7 +280,7 @@ These polynomials satisfy:
 
 Given t shares {(i_1, s_{i_1}), ..., (i_t, s_{i_t})}, reconstruct the secret s = f(0):
 
-```
+```markdown
 LagrangeInterpolate(shares, x_target):
     result = 0
     for each (i, s_i) in shares:
@@ -300,7 +300,7 @@ LagrangeCoefficient(i, shares, x_target):
 
 For secret reconstruction, x_target = 0, yielding the simplified formula:
 
-```
+```solidity
 lambda_i = product_{j in S, j != i} (-j) / (i - j)
          = product_{j in S, j != i} j / (j - i)
 ```
@@ -309,7 +309,7 @@ lambda_i = product_{j in S, j != i} (-j) / (i - j)
 
 Given shares at indices {1, 2} with values {s_1, s_2}:
 
-```
+```solidity
 lambda_1 = (0 - 2) / (1 - 2) = -2 / -1 = 2  (mod q)
 lambda_2 = (0 - 1) / (2 - 1) = -1 / 1  = -1 (mod q) = q - 1
 
@@ -321,7 +321,7 @@ secret = lambda_1 * s_1 + lambda_2 * s_2
 
 During resharing, Lagrange interpolation converts old shares to new indices without reconstructing the secret:
 
-```
+```markdown
 ConvertShare(old_share_at_i, old_index_set S_old, new_index j):
     // Compute the contribution of this old share to the new share at j
     lambda_i_to_j = LagrangeCoefficient(i, S_old, j)
@@ -330,7 +330,7 @@ ConvertShare(old_share_at_i, old_index_set S_old, new_index j):
 
 The new party's share is the sum of converted contributions from t_old old parties:
 
-```
+```solidity
 new_share_j = sum_{i in S_old} ConvertShare(old_share_i, S_old, j)
 ```
 
@@ -360,7 +360,7 @@ func LagrangeCoefficient(selfID party.ID, allIDs []party.ID, targetX *big.Int, q
     denInv := new(big.Int).ModInverse(den, q)
     return new(big.Int).Mul(num, denInv).Mod(result, q)
 }
-```
+```solidity
 
 #### 1.3 Dynamic Resharing Protocol
 
@@ -380,7 +380,7 @@ Where:
   Sigma = {init, commit, share, verify, activate, timeout, error, rollback}
   q_0 = IDLE
   F = {COMPLETE, ROLLBACK}
-```
+```solidity
 
 **State Transition Function delta:**
 
@@ -399,7 +399,7 @@ delta(VERIFY, error)           = ROLLBACK
 delta(ACTIVATE, complete)      = COMPLETE   if public_key_unchanged
 delta(ACTIVATE, error)         = ROLLBACK
 delta(*, rollback)             = ROLLBACK   for any state in {INIT, COMMIT, SHARE, VERIFY, ACTIVATE}
-```
+```solidity
 
 **State Invariants:**
 
@@ -451,7 +451,7 @@ delta(*, rollback)             = ROLLBACK   for any state in {INIT, COMMIT, SHAR
             +----------+     +----------+
             | ROLLBACK |     | COMPLETE |
             +----------+     +----------+
-```
+```solidity
 
 **Transition Guards (Predicate Logic):**
 
@@ -478,7 +478,7 @@ activation_valid(tx) :=
     all_verifications_passed(tx.ReshareID) AND
     verify_threshold_signature(tx.ThresholdSignature) AND
     tx.PublicKeyVerification = original_public_key(tx.KeyID)
-```
+```solidity
 
 **Protocol Steps:**
 
@@ -535,7 +535,7 @@ Reshare(old_configs, new_parties, new_threshold):
         2. Feldman commitments validate their share
 
     Output: new_configs with shares {a'_j}, same public key Y
-```
+```go
 
 **Theorem (Resharing Correctness):**
 Let a be the master secret. After resharing from (t, n) to (t', n'):
@@ -630,7 +630,7 @@ type CommitmentProof struct {
     Challenges [][]byte `serialize:"true" json:"challenges"`
     Responses  [][]byte `serialize:"true" json:"responses"`
 }
-```
+```go
 
 **Validation Rules:**
 1. ReshareID must reference a valid, non-expired ReshareInitTx
@@ -733,7 +733,7 @@ type AggregationProof struct {
     PartialCommitments [][]byte `serialize:"true" json:"partialCommitments"`
     ConsistencyProof   []byte   `serialize:"true" json:"consistencyProof"`
 }
-```
+```go
 
 **Validation Rules:**
 1. VerifierID must be in new party set
@@ -832,7 +832,7 @@ type RollbackEvidence struct {
     // For RollbackTimeout: original expiry
     OriginalExpiry uint64 `serialize:"true" json:"originalExpiry,omitempty"`
 }
-```
+```go
 
 **Validation Rules:**
 1. ReshareID must reference an active (not completed/rolled back) reshare
@@ -997,7 +997,7 @@ func (gm *GenerationManager) Rollback(keyID ids.ID, toGeneration uint32) error {
     gm.activeGeneration[keyID] = toGeneration
     return nil
 }
-```
+```solidity
 
 #### 3.3 Atomic Rollback Protocol
 
@@ -1042,7 +1042,7 @@ The atomic rollback protocol ensures that failed reshares do not leave the syste
                                                  │ New Gen      │
                                                  │ Active       │
                                                  └──────────────┘
-```
+```go
 
 **Automatic Rollback Triggers:**
 
@@ -1131,7 +1131,7 @@ Signer Set Lifecycle:
 │     └─> Epoch increments                                                │
 │                                                                          │
 └──────────────────────────────────────────────────────────────────────────┘
-```
+```go
 
 **Key Properties:**
 - **Opt-in**: Validators explicitly choose to participate via `lux-cli`
@@ -1181,7 +1181,7 @@ $ lux bridge join --node-id=NodeID-xxxxx --stake=100000000
 
 # CLI calls bridge_registerValidator RPC
 # Key shard saved to ~/.lux/keys/bridge-shard.key
-```
+```go
 
 #### 4.3 Slot Replacement (Only Reshare Trigger)
 
@@ -1205,7 +1205,7 @@ type SignerReplacementResult struct {
 
 **Replacement Flow:**
 
-```
+```markdown
 Signer #42 fails health checks
          │
          ▼
@@ -1329,7 +1329,7 @@ func (t *SlotReplacementTrigger) computeThreshold(partyCount int) uint32 {
     // Use configured threshold ratio (default 2/3)
     return uint32(float64(partyCount) * t.vm.config.ThresholdRatio)
 }
-```
+```go
 
 #### 5.3 Manual Trigger Interface
 
@@ -1435,7 +1435,7 @@ func (gm *GenerationManager) ValidateThresholdChange(
 
     return nil
 }
-```
+```go
 
 #### 6.2 Governance-Controlled Threshold Updates
 
@@ -1533,7 +1533,7 @@ func (party *SigningParty) OnShareInvalidation(inv *ShareInvalidation) {
         "keyID", inv.KeyID,
         "generation", inv.InvalidatedGen)
 }
-```
+```solidity
 
 #### 7.2 Secure Share Deletion
 
@@ -1608,7 +1608,7 @@ func (gm *GenerationManager) RunCleanup() {
         }
     }
 }
-```
+```go
 
 ### 8. Network Partition Handling
 
@@ -1761,7 +1761,7 @@ func (ptr *PartitionTolerantReshare) executeReshareRound(
     // Continue with share distribution...
     return ptr.continueReshare(ctx, initTx, commitments)
 }
-```
+```go
 
 ### 9. State Synchronization
 
@@ -1940,7 +1940,7 @@ Systems using static (non-rotatable) threshold keys can migrate to dynamic signe
 #### Migration Phases
 
 **Phase 1: Inventory and Assessment**
-```
+```solidity
 1. Enumerate all static threshold keys in the system
 2. For each key, record:
    - Public key (to be preserved)
@@ -1953,7 +1953,7 @@ Systems using static (non-rotatable) threshold keys can migrate to dynamic signe
 ```
 
 **Phase 2: Generation 0 Bootstrap**
-```
+```solidity
 1. Create Generation 0 state from existing static configuration
 2. Parties retain their existing shares (no reshare required)
 3. Register key with GenerationManager
@@ -1962,7 +1962,7 @@ Systems using static (non-rotatable) threshold keys can migrate to dynamic signe
 ```
 
 **Phase 3: First Reshare (Optional Validation)**
-```
+```solidity
 1. Trigger a reshare to same party set with same threshold
 2. This validates the reshare protocol works correctly
 3. Verify:
@@ -1973,7 +1973,7 @@ Systems using static (non-rotatable) threshold keys can migrate to dynamic signe
 ```
 
 **Phase 4: Production Enable**
-```
+```solidity
 1. Enable automatic validator change triggers
 2. Configure proactive refresh schedule
 3. Monitor first automatic reshare
@@ -2170,7 +2170,7 @@ func runTestReshare(ctx context.Context, vm *VM, keyID ids.ID) error {
 
     return nil
 }
-```
+```go
 
 #### Legacy Key Support
 
@@ -2256,7 +2256,7 @@ lux bridge migration migrate \
 
 # Check migration status
 lux bridge migration status --key-id=<key-id>
-```
+```go
 
 **RPC Endpoint Mapping:**
 | CLI Command | RPC Method |
@@ -2420,7 +2420,7 @@ func TestMaliciousShareDetection(t *testing.T) {
     require.ErrorAs(t, err, &abortErr)
     assert.Equal(t, maliciousParty.ID, abortErr.MaliciousParty)
 }
-```
+```solidity
 
 ### Integration Tests
 
@@ -2449,7 +2449,7 @@ p  = 0xFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFFFFFC2F
 n  = 0xFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEBAAEDCE6AF48A03BBFD25E8CD0364141
 Gx = 0x79BE667EF9DCBBAC55A06295CE870B07029BFCDB2DCE28D959F2815B16F81798
 Gy = 0x483ADA7726A3C4655DA4FBFC0E1108A8FD17B448A68554199C47D08FFB10D4B8
-```
+```solidity
 
 #### Test Vector 1: Basic 2-of-3 Reshare to 2-of-3
 
@@ -2475,7 +2475,7 @@ C_0 = s * G = Y  (public key)
 C_1 = a_1 * G
 C_1.x = 0x7D8E9FABCDEF0123456789ABCDEF0123456789ABCDEF0123456789ABCDEF0123
 C_1.y = 0x1A2B3C4D5E6F7A8B9C0D1E2F3A4B5C6D7E8F9A0B1C2D3E4F5A6B7C8D9E0F1A2B
-```
+```solidity
 
 **Share Verification (Party 1):**
 ```
@@ -2483,7 +2483,7 @@ expected = C_0 + 1*C_1 = s*G + a_1*G = (s + a_1)*G = f(1)*G = share_1*G
 actual = share_1 * G
 
 Verify: expected == actual  => PASS
-```
+```solidity
 
 **Reshare to New Parties {2, 3, 4} with Threshold 2:**
 
@@ -2522,7 +2522,7 @@ Step 4: Verify new shares reconstruct to same public key
   s' = LagrangeInterpolate(new_shares, 0)
   Y' = s' * G
   Verify: Y' == Y  => PASS (public key preserved)
-```
+```solidity
 
 **Expected New Shares (Generation 1):**
 ```
@@ -2533,7 +2533,7 @@ new_share_4 = 0x<computed value after blinding>
 New Feldman Commitments (new polynomial f'(x)):
 C'_0 = s * G = Y  (unchanged)
 C'_1 = a'_1 * G  (new random coefficient)
-```
+```solidity
 
 #### Test Vector 2: Threshold Change 2-of-3 to 3-of-5
 
@@ -2549,7 +2549,7 @@ shares:
   share_1 = 0x234567...
   share_2 = 0x345678...
   share_3 = 0x456789...
-```
+```solidity
 
 **Reshare Parameters:**
 ```
@@ -2560,21 +2560,21 @@ New polynomial degree: t_new - 1 = 2
 New polynomial f'(x) = s + a'_1*x + a'_2*x^2
 
 Note: f'(0) = s (secret unchanged)
-```
+```solidity
 
 **New Feldman Commitments:**
 ```
 C'_0 = s * G      (same as C_0)
 C'_1 = a'_1 * G   (new coefficient)
 C'_2 = a'_2 * G   (new coefficient, didn't exist before)
-```
+```solidity
 
 **Verification Formula for New Party j:**
 ```
 expected_j = C'_0 + j*C'_1 + j^2*C'_2
 actual_j = new_share_j * G
 Verify: expected_j == actual_j for all j in {1,2,3,4,5}
-```
+```solidity
 
 #### Test Vector 3: ReshareInitTx Serialization
 
@@ -2611,7 +2611,7 @@ Serialized (hex):
 00000000658f3d2c                                # ExpiryTime (uint64)
 
 Transaction ID (SHA256): 0xabcdef1234567890...
-```
+```solidity
 
 #### Test Vector 4: Share Verification Failure Detection
 
@@ -2637,7 +2637,7 @@ ReshareVerifyTx from Party 4:
         Party3: ShareValid
     }
 }
-```
+```solidity
 
 #### Test Vector 5: Lagrange Coefficient Computation
 
@@ -2658,7 +2658,7 @@ lambda_5 = (0-1)(0-3) / (5-1)(5-3) = 3 / 8
          = 0x5FFFFFFF...
 
 Verification: lambda_1 + lambda_3 + lambda_5 = 1 (mod n)
-```
+```solidity
 
 ## Reference Implementation
 
@@ -2717,7 +2717,7 @@ github.com/luxfi/node/
       verify.go         # ReshareVerifyTx
       activate.go       # ReshareActivateTx
       rollback.go       # ReshareRollbackTx
-```
+```bash
 
 ### Build and Test
 
@@ -2753,7 +2753,7 @@ This section specifies the binary wire format for reshare protocol messages exch
 
 All reshare protocol messages are wrapped in a common envelope:
 
-```
+```solidity
 +----------------+----------------+----------------+----------------+
 |    Version     |   MsgType      |    Reserved    |   PayloadLen   |
 |    (1 byte)    |   (1 byte)     |   (2 bytes)    |   (4 bytes)    |
@@ -2781,7 +2781,7 @@ All reshare protocol messages are wrapped in a common envelope:
 
 ### ReshareInit Message (0x01)
 
-```
+```solidity
 +----------------+----------------+----------------+----------------+
 |                          KeyID (32 bytes)                         |
 +----------------+----------------+----------------+----------------+
@@ -2810,7 +2810,7 @@ Total size: 32 + 4 + 4 + 4 + 4 + (PartyCount * 20) + 1 + 8 + 8 + 20 + 64
 
 ### ReshareCommit Message (0x02)
 
-```
+```solidity
 +----------------+----------------+----------------+----------------+
 |                        ReshareID (32 bytes)                       |
 +----------------+----------------+----------------+----------------+
@@ -2832,7 +2832,7 @@ Total size: 32 + 4 + 4 + 4 + 4 + (PartyCount * 20) + 1 + 8 + 8 + 20 + 64
 ```
 
 **Commitment Proof Format:**
-```
+```solidity
 +----------------+----------------+----------------+----------------+
 |       ProofCount (4 bytes)      |                                 |
 +----------------+----------------+----------------+----------------+
@@ -2846,7 +2846,7 @@ Total size: 32 + 4 + 4 + 4 + 4 + (PartyCount * 20) + 1 + 8 + 8 + 20 + 64
 
 ### ReshareShare Message (0x03)
 
-```
+```solidity
 +----------------+----------------+----------------+----------------+
 |                        ReshareID (32 bytes)                       |
 +----------------+----------------+----------------+----------------+
@@ -2866,7 +2866,7 @@ Total size: 32 + 4 + 4 + 4 + 4 + (PartyCount * 20) + 1 + 8 + 8 + 20 + 64
 ```
 
 **Encrypted Share Format (per recipient):**
-```
+```solidity
 +----------------+----------------+----------------+----------------+
 |                      RecipientID (20 bytes)                       |
 +----------------+----------------+----------------+----------------+
@@ -2883,7 +2883,7 @@ Total size: 32 + 4 + 4 + 4 + 4 + (PartyCount * 20) + 1 + 8 + 8 + 20 + 64
 
 ### ReshareVerify Message (0x04)
 
-```
+```solidity
 +----------------+----------------+----------------+----------------+
 |                        ReshareID (32 bytes)                       |
 +----------------+----------------+----------------+----------------+
@@ -2904,7 +2904,7 @@ Total size: 32 + 4 + 4 + 4 + 4 + (PartyCount * 20) + 1 + 8 + 8 + 20 + 64
 ```
 
 **ShareVerificationStatus Encoding:**
-```
+```solidity
 0x00 = ShareValid
 0x01 = ShareInvalid
 0x02 = ShareMissing
@@ -2913,7 +2913,7 @@ Total size: 32 + 4 + 4 + 4 + 4 + (PartyCount * 20) + 1 + 8 + 8 + 20 + 64
 
 ### ReshareActivate Message (0x05)
 
-```
+```solidity
 +----------------+----------------+----------------+----------------+
 |                        ReshareID (32 bytes)                       |
 +----------------+----------------+----------------+----------------+
@@ -2931,7 +2931,7 @@ Total size: 32 + 4 + 4 + 4 + 4 + (PartyCount * 20) + 1 + 8 + 8 + 20 + 64
 ```
 
 **ThresholdSignature Format:**
-```
+```solidity
 +----------------+----------------+----------------+----------------+
 |       MessageLen (4 bytes)      |                                 |
 +----------------+----------------+----------------+----------------+
@@ -2947,7 +2947,7 @@ Total size: 32 + 4 + 4 + 4 + 4 + (PartyCount * 20) + 1 + 8 + 8 + 20 + 64
 
 ### ReshareRollback Message (0x06)
 
-```
+```solidity
 +----------------+----------------+----------------+----------------+
 |                        ReshareID (32 bytes)                       |
 +----------------+----------------+----------------+----------------+
@@ -2961,7 +2961,7 @@ Total size: 32 + 4 + 4 + 4 + 4 + (PartyCount * 20) + 1 + 8 + 8 + 20 + 64
 ```
 
 **RollbackReason Encoding:**
-```
+```solidity
 0x00 = RollbackTimeout
 0x01 = RollbackInsufficientParts
 0x02 = RollbackVerificationFail
@@ -2974,7 +2974,7 @@ Total size: 32 + 4 + 4 + 4 + 4 + (PartyCount * 20) + 1 + 8 + 8 + 20 + 64
 Reshare protocol messages are transmitted over the Lux P2P network using the standard message routing infrastructure. Messages are delivered to the ThresholdVM on port 9630 (RPC) via the node's internal routing.
 
 **P2P Message Routing:**
-```
+```solidity
 +------------------+     +------------------+     +------------------+
 |   Sender Node    | --> |   P2P Network    | --> |  Receiver Node   |
 |   (port 9630)    |     |                  |     |   (port 9630)    |
@@ -3006,7 +3006,7 @@ Reshare protocol messages are transmitted over the Lux P2P network using the sta
 
 Encrypted shares use ECIES with the following parameters:
 
-```
+```markdown
 Curve:          secp256k1
 KDF:            HKDF-SHA256
 Cipher:         AES-256-GCM
@@ -3045,7 +3045,7 @@ Decryption:
 
 Regular resharing defeats mobile adversaries:
 
-```
+```markdown
 Without Proactive Resharing:
   Year 0: Adversary compromises share 1
   Year 1: Compromises share 2
@@ -3093,7 +3093,7 @@ func EmergencyReshare(keyID ids.ID, suspectedCompromised []ids.NodeID) error {
 
     return vm.submitTx(initTx)
 }
-```
+```sql
 
 ### Coordinator Security
 
@@ -3171,7 +3171,7 @@ github.com/luxfi/node           # ThresholdVM and transaction types
     v
 github.com/luxfi/ids            # Identifier types
 github.com/luxfi/crypto         # Cryptographic primitives
-```
+```solidity
 
 ## Copyright
 
@@ -3199,3 +3199,4 @@ Copyright and related rights waived via [CC0](../LICENSE.md).
 11. Canetti, R., et al. (2021). **UC Non-Interactive, Proactive, Threshold ECDSA with Identifiable Aborts**. CCS 2021.
 12. Seesahai, V.J. (2025). **LSS MPC ECDSA: A Pragmatic Framework for Dynamic and Resilient Threshold Signatures**. Cornell University.
 13. SEC 2: Recommended Elliptic Curve Domain Parameters, Standards for Efficient Cryptography, Certicom Research, 2010.
+```

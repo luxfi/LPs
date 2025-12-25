@@ -81,7 +81,7 @@ abstract contract DeFiTestBase is Test {
         // Fund accounts
     }
 }
-```
+```solidity
 
 ### 3. Unit Test Requirements
 
@@ -238,7 +238,7 @@ contract DeFiIntegrationTests is DeFiTestBase {
         return ((b - a) * 10000) / a;
     }
 }
-```
+```solidity
 
 ### 5. Fuzz Testing
 
@@ -377,7 +377,7 @@ contract DeFiInvariantTests is DeFiTestBase {
         assertLt(deviation, 1000, "Price deviation > 10%");
     }
 }
-```
+```solidity
 
 ### 7. E2E Test Scenarios
 
@@ -558,7 +558,7 @@ jobs:
         run: |
           pip install mythril
           myth analyze contracts/*.sol --solc-json mythril.config.json
-```
+```solidity
 
 ## Test Data Requirements
 
@@ -606,3 +606,4 @@ Existing test suites can be incrementally migrated:
 ## Copyright
 
 Copyright and related rights waived via [CC0](https://creativecommons.org/publicdomain/zero/1.0/).
+```

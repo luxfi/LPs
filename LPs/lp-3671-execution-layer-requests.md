@@ -45,7 +45,7 @@ type Request struct {
     Type byte
     Data []byte
 }
-```
+```go
 
 ### Block Format
 
@@ -96,7 +96,7 @@ func ProcessRequests(state StateDB, block *Block) ([]*Request, error) {
     
     return requests, nil
 }
-```
+```solidity
 
 ### Request Contracts
 
@@ -122,7 +122,7 @@ contract WithdrawalRequestContract {
         uint64 amount
     ) external;
 }
-```
+```solidity
 
 #### Consolidation Request Contract
 ```solidity
@@ -149,7 +149,7 @@ def process_execution_payload(state, payload):
             process_withdrawal_request(state, request.data)
         elif request.type == CONSOLIDATION_REQUEST_TYPE:
             process_consolidation_request(state, request.data)
-```
+```solidity
 
 ## Rationale
 
@@ -177,3 +177,4 @@ Unified framework chosen for:
 ## Copyright
 
 Copyright and related rights waived via [CC0](../LICENSE.md).
+```

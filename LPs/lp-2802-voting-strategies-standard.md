@@ -44,7 +44,7 @@ interface IBaseStrategy {
         uint256 abstainVotes
     );
 }
-```
+```solidity
 
 ### Available Strategies
 
@@ -85,7 +85,7 @@ interface IVotingWeightERC721V1 {
     function governanceToken() external view returns (address);
     function getVotingWeight(address _voter, uint32 _proposalId) external view returns (uint256);
 }
-```
+```solidity
 
 #### 3. Vote Trackers
 
@@ -131,7 +131,7 @@ interface IProposerAdapterHatsV1 {
     function proposerHatId() external view returns (uint256);
     function isProposer(address _address) external view returns (bool);
 }
-```
+```solidity
 
 ### File Structure
 
@@ -148,7 +148,7 @@ contracts/contracts/strategies/
     ├── ProposerAdapterERC20V1.sol           # Token threshold
     ├── ProposerAdapterERC721V1.sol          # NFT threshold
     └── ProposerAdapterHatsV1.sol            # Role-based (Hats)
-```
+```solidity
 
 ### Voting Token Contracts
 
@@ -179,7 +179,7 @@ enum VoteType {
     For,        // 1
     Abstain     // 2
 }
-```
+```solidity
 
 ### Quorum Calculation
 
@@ -218,7 +218,7 @@ const strategy = await VotingWeightERC20V1__factory.deploy(
 
 // Enable strategy on Azorius
 await azorius.enableStrategy(strategy.address)
-```
+```solidity
 
 ## Rationale
 
@@ -325,7 +325,7 @@ function test_DelegatedVotes() public {
     assertEq(token.getVotes(delegatee), 100 ether);
     assertEq(token.getVotes(delegator), 0);
 }
-```
+```solidity
 
 ## Security Considerations
 
@@ -342,3 +342,4 @@ function test_DelegatedVotes() public {
 ## Copyright
 
 Copyright and related rights waived via [CC0](../LICENSE.md).
+```

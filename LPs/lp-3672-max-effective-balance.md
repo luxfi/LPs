@@ -40,7 +40,7 @@ Key changes:
 ```python
 MAX_EFFECTIVE_BALANCE = Gwei(2048 * 10**9)  # 2048 ETH
 MIN_ACTIVATION_BALANCE = Gwei(32 * 10**9)   # 32 ETH (unchanged)
-```
+```solidity
 
 ## Lux Considerations
 
@@ -62,3 +62,4 @@ Pectra upgrade component - evaluate for Lux adoption.
 ## Copyright
 
 Copyright and related rights waived via [CC0](../LICENSE.md).
+```

@@ -54,7 +54,7 @@ var ThresholdVMID = constants.ThresholdVMID // ids.ID{'t', 'h', 'r', 'e', 's', '
 // Create T-Chain VM
 factory := &tvm.Factory{}
 vm, err := factory.New(logger)
-```
+```solidity
 
 ### Directory Structure
 
@@ -69,7 +69,7 @@ node/vms/thresholdvm/
 ├── factory.go        # VM factory
 ├── vm.go             # Main VM implementation
 └── *_test.go         # Tests
-```
+```solidity
 
 ### Supported Protocols
 
@@ -111,7 +111,7 @@ partialSig, err := session.SignBLS(keyShare, message)
 
 // Sign with Schnorr
 partialSig, err := session.SignSchnorr(keyShare, message)
-```
+```solidity
 
 #### Ringtail - Post-Quantum Threshold
 
@@ -152,7 +152,7 @@ const (
     ProtocolFROST
     ProtocolRingtail
 )
-```
+```solidity
 
 #### Key Ceremonies
 
@@ -204,7 +204,7 @@ valid, err := tvm.VerifyThresholdWarp(signedMsg)
 
 ### Bridge Integration
 
-```
+```solidity
 ┌─────────────┐     ┌─────────────┐     ┌─────────────┐
 │   B-Chain   │────▶│   T-Chain   │────▶│  External   │
 │  (Bridge)   │     │ (Threshold) │     │   Chain     │
@@ -234,7 +234,7 @@ valid, err := tvm.VerifyThresholdWarp(signedMsg)
 
 #### REST Endpoints
 
-```
+```solidity
 POST /ext/bc/T/threshold/dkg/init
 GET  /ext/bc/T/threshold/keys/{keyId}
 POST /ext/bc/T/threshold/sign
@@ -256,7 +256,7 @@ POST /ext/bc/T/threshold/reshare
     "enableRingtail": true
   }
 }
-```
+```go
 
 ### Security Properties
 

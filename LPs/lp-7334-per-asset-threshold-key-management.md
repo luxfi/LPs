@@ -53,7 +53,7 @@ type ManagedKey struct {
     LastRotation uint64      // Last key refresh height
     Metadata     KeyMetadata // Extended attributes
 }
-```
+```markdown
 
 Example configurations demonstrating flexibility:
 
@@ -87,7 +87,7 @@ Keys follow a hierarchical naming scheme that encodes source chain, asset, and o
 
 ```
 {source_chain}-{asset_symbol}[-{variant}]
-```
+```markdown
 
 This naming convention provides:
 - **Uniqueness**: Each key has a globally unique identifier
@@ -153,7 +153,7 @@ arb-weth           # Arbitrum wrapped ETH
 base-usdc          # Base USDC
 eth-bayc-nft       # Bored Ape Yacht Club NFTs
 xrpl-xrp           # Native XRP
-```
+```go
 
 #### 1.5 KeyID Validation
 
@@ -192,7 +192,7 @@ func ValidateKeyID(keyID string) error {
 
 The threshold t for a given party count n follows the Byzantine fault tolerance formula:
 
-```
+```solidity
 t = ceil((2n + 1) / 3)
 ```
 
@@ -251,7 +251,7 @@ var ethUSDCLargeConfig = KeyConfig{
     MaxTxValue:   1_000_000 * 1e6, // $1M
     QuantumBackup: true,           // Ringtail dual-sig enabled
 }
-```
+```solidity
 
 ### 2.5 Complete Asset Configuration Examples
 
@@ -363,7 +363,7 @@ var ethLargeConfig = KeyConfig{
         Tags:        []string{"ethereum", "large", "institutional"},
     },
 }
-```
+```solidity
 
 #### 2.5.3 USDC Configuration
 
@@ -506,7 +506,7 @@ var bscUsdtConfig = KeyConfig{
         },
     },
 }
-```
+```go
 
 #### 2.5.5 Complete Asset Registry
 
@@ -590,7 +590,7 @@ type KeyCreateTx struct {
     Metadata      KeyMetadata  // Extended attributes
     GovernanceSig []byte       // Required governance approval
 }
-```
+```sql
 
 #### 3.2 Distributed Key Generation Protocol
 
@@ -603,9 +603,7 @@ Key creation follows the CGG21 DKG protocol (or equivalent for other algorithms)
 4. SHARE:   Parties exchange encrypted key shares
 5. VERIFY:  All parties verify share consistency
 6. PUBLISH: Aggregate public key committed on-chain
-```
-
-```go
+go
 // DKG state machine
 type DKGState uint8
 
@@ -629,7 +627,7 @@ type DKGSession struct {
     StartHeight uint64
     Timeout     uint64
 }
-```
+```solidity
 
 #### 3.3 Creation RPC Flow
 
@@ -650,7 +648,7 @@ Client                 T-Chain/T-Chain               Signers
    |                        |<--AggPubKey--------------|
    |                        |                          |
    |<--KeyCreated-----------|                          |
-```
+```go
 
 ### 4. Key Metadata Storage
 
@@ -720,7 +718,7 @@ type NonceState struct {
     Used   bool
     Height uint64 // Block when generated
 }
-```
+```go
 
 ### 5. Signer Assignment Strategies
 
@@ -840,7 +838,7 @@ var TierGeoRequirements = map[ValueTier]GeographyConstraint{
     TierVeryLarge: {MinRegions: 5, MaxPerRegion: 2},
     TierCustody: {MinRegions: 6, MaxPerRegion: 2},
 }
-```
+```solidity
 
 **Geographic Diversity Rationale:**
 
@@ -930,7 +928,7 @@ func (c *Coordinator) ExecuteMultiKey(session MultiKeySession) ([][]byte, error)
     }
     return results, nil
 }
-```
+```go
 
 #### 6.2 Key Dependency Graph
 
@@ -961,7 +959,7 @@ func ValidateKeyOperation(keyID string, op Operation, deps []KeyDependency) erro
 
 #### 7.1 State Transitions
 
-```
+```solidity
                     +-------------+
                     |   PROPOSED  |
                     +------+------+
@@ -1027,7 +1025,7 @@ func (vm *VM) ProcessKeyRotate(tx *KeyRotateTx) error {
 
     return vm.state.StartDKG(session)
 }
-```
+```go
 
 #### 7.3 Automatic Refresh Schedule
 
@@ -1165,7 +1163,7 @@ var TierRotationPolicies = map[ValueTier]RotationPolicy{
         RequireGovernance:         true,
     },
 }
-```
+```solidity
 
 ##### 7.4.2 Rotation Triggers
 
@@ -1266,7 +1264,7 @@ func (rm *RotationManager) executeProactiveRefresh(key *ManagedKey) error {
     }
     return rm.submitRotation(tx)
 }
-```
+```solidity
 
 ##### 7.4.4 Rotation Summary by Tier
 
@@ -1346,7 +1344,7 @@ func ComputeKeyHealth(keyID string) KeyHealthMetrics {
 
     return metrics
 }
-```
+```go
 
 #### 8.2 Alert Conditions
 
@@ -1414,7 +1412,7 @@ type KeyHealthSummary struct {
     LastUsed    uint64  `json:"lastUsedBlock"`
     ValueLocked string  `json:"valueLocked"` // Human-readable USD
 }
-```
+```solidity
 
 ### 9. RPC API for Key Management
 
@@ -1500,7 +1498,7 @@ service KeyManager {
         "estimatedCompletion": 12345678
     }
 }
-```
+```solidity
 
 **Sign Request:**
 
@@ -1580,7 +1578,7 @@ service KeyManager {
         }
     }
 }
-```
+```go
 
 ## Security Considerations
 
@@ -1658,7 +1656,7 @@ func VerifyDualSignature(msg []byte, classical, quantum []byte, config QuantumCo
     }
     return nil
 }
-```
+```go
 
 ## Backwards Compatibility
 
@@ -1781,7 +1779,7 @@ func TestMultiKeySigning_OneKeyFails(t *testing.T) {
     require.Error(t, err)
     require.Contains(t, err.Error(), "suspended")
 }
-```
+```go
 
 ### Key Rotation Tests
 
@@ -1854,7 +1852,7 @@ func TestThresholdTiers(t *testing.T) {
         })
     }
 }
-```
+```sql
 
 ## Reference Implementation
 
@@ -1966,8 +1964,9 @@ This LP integrates with several other Lux Proposals:
 3. LP-330's T-Chain processes SignRequest for key "eth-usdc-large"
 4. LP-0014's CGG21 protocol generates threshold signature
 5. If rotation needed, LP-333's resharing is triggered per this LP's policy
-```
+```solidity
 
 ## Copyright
 
 Copyright and related rights waived via [CC0](../LICENSE.md).
+```

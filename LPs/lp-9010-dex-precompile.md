@@ -48,7 +48,7 @@ Traditional EVM-based DEXs face fundamental limitations:
 
 ### Precompile Address
 
-```
+```solidity
 0x0200000000000000000000000000000000000010
 ```
 
@@ -254,7 +254,7 @@ interface IDEX {
     event OrderExpired(bytes32 indexed orderId);
     event OrderModified(bytes32 indexed oldOrderId, bytes32 indexed newOrderId);
 }
-```
+```solidity
 
 ### DEXLib Helper Library
 
@@ -359,7 +359,7 @@ library DEXLib {
 
 ### Performance Specifications
 
-```
+```solidity
 ┌────────────────────────────────────────────────────────────────────┐
 │                   QuantumSwap Performance Tiers                    │
 ├─────────────────────┬──────────────────────────────────────────────┤
@@ -446,7 +446,7 @@ function testLimitOrder() public {
     assertEq(uint(order.status), uint(IDEX.OrderStatus.OPEN));
     assertEq(order.price, price);
 }
-```
+```solidity
 
 ### Order Book Queries
 
@@ -473,7 +473,7 @@ function testOrderBookDepth() public view {
 
 **Location**: `~/work/lux/standard/contracts/liquidity/precompiles/IDEX.sol`
 
-```
+```solidity
 contracts/liquidity/precompiles/
 ├── IDEX.sol           # Interface definition (this LP)
 ├── DEXPrecompile.go   # Go precompile implementation
@@ -484,7 +484,7 @@ contracts/liquidity/precompiles/
 
 **Location**: `/Users/z/work/lux/dex/`
 
-```
+```solidity
 dex/
 ├── matching/          # Order matching engine
 ├── orderbook/         # B+ tree order book

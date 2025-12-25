@@ -54,7 +54,7 @@ var ZKVMID = constants.ZKVMID // ids.ID{'z', 'k', 'v', 'm'}
 // Create Z-Chain VM
 factory := &zvm.Factory{}
 vm, err := factory.New(logger)
-```
+```solidity
 
 ### Directory Structure
 
@@ -73,7 +73,7 @@ node/vms/zkvm/
 ├── factory.go        # VM factory
 ├── vm.go             # Main VM implementation
 └── *_test.go         # Tests
-```
+```solidity
 
 ### Proof Systems
 
@@ -124,7 +124,7 @@ func GetAccelerator() Accelerator {
     }
     return NewGoAccelerator()
 }
-```
+```go
 
 ### Transaction Types
 
@@ -176,7 +176,7 @@ type Circuit struct {
     Public      uint32
     Private     uint32
 }
-```
+```solidity
 
 ### Privacy Features
 
@@ -200,7 +200,7 @@ type EncryptedData struct {
     Tag         [16]byte
     PublicKey   [32]byte
 }
-```
+```go
 
 ### FHE Operations
 
@@ -235,7 +235,7 @@ type FHEOperation struct {
 
 #### REST Endpoints
 
-```
+```solidity
 POST /ext/bc/Z/zk/proof/submit
 POST /ext/bc/Z/zk/proof/verify
 GET  /ext/bc/Z/zk/circuits/{circuitId}
@@ -271,7 +271,7 @@ POST /ext/bc/Z/zk/fhe/compute
     "privacyEnabled": true
   }
 }
-```
+```go
 
 ### Performance
 

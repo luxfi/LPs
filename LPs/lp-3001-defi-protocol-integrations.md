@@ -43,7 +43,7 @@ interface ILiquidityAdapter {
     function swap(SwapParams calldata params) external payable returns (uint256 amountOut);
     function getPoolInfo(address pool) external view returns (PoolInfo memory);
 }
-```
+```solidity
 
 ### ILiquidityEngine
 

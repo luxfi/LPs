@@ -126,7 +126,7 @@ func (fpc *FPCEngine) Consensus(txID TxID) Opinion {
 
     return opinion
 }
-```
+```solidity
 
 ### Phase-Shift Threshold Function
 
@@ -192,7 +192,7 @@ func cryptoRandInt(min, max int) int {
     val := binary.BigEndian.Uint64(b[:])
     return min + int(val%uint64(max-min))
 }
-```
+```sql
 
 ### Query Optimization
 
@@ -261,7 +261,7 @@ func (fpc *FPCEngine) computeConfidence(agreements int, round int) float64 {
 
     return confidence
 }
-```
+```solidity
 
 ### Byzantine Fault Tolerance
 
@@ -333,7 +333,7 @@ func (oc *OpinionCache) Get(node NodeID, txID TxID) (Opinion, bool) {
     }
     return Opinion{}, false
 }
-```
+```solidity
 
 #### 2. Batch Queries
 ```go
@@ -403,7 +403,7 @@ func (hc *HybridConsensus) Consensus(tx Transaction) {
 
     return opinion
 }
-```
+```python
 
 ## Test Cases
 
@@ -439,7 +439,7 @@ def test_byzantine_strategies():
         # Should maintain consensus despite 30% Byzantine
         assert result.agreement_rate > 0.999
         assert result.avg_confidence > 0.99
-```
+```python
 
 ### Test 3: Phase-Shift Effectiveness
 ```python
@@ -509,7 +509,7 @@ go test -v ./... -coverprofile=coverage.out
 #
 # ok  	github.com/luxfi/consensus/core/dag	567ms
 # coverage: 96.4% of statements
-```
+```solidity
 
 **API Endpoints**:
 - `GET /ext/info/dag/vertex/{vertexID}` - Query finalization status
@@ -563,7 +563,7 @@ go test -v ./... -run Vertex
 - TestFlarePerformanceUnderLoad - Performance under 1000 TPS
 
 **Benchmark Results** (Apple M1 Max):
-```
+```markdown
 BenchmarkFlareCausalWalk-10     2,854 ops/sec (350μs/op)
 BenchmarkCertificateDetection-10 8,392 ops/sec (119μs/op)
 BenchmarkVertexFinalization-10   5,621 ops/sec (178μs/op)
@@ -601,7 +601,7 @@ THEOREM Liveness ==
     <>(
 \A n \in HonestNodes :
         Finalized(n))
-```
+```solidity
 
 ## Performance Benchmarks
 
@@ -637,4 +637,4 @@ This makes FPC suitable for global-scale networks.
 
 ## Copyright
 
-Copyright and related rights waived via [CC0](../LICENSE.md).
+Copyright and related rights waived via [CC0](../LICENSE.md).```

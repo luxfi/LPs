@@ -297,7 +297,7 @@ interface IBridgeAggregator {
         uint256 amountRefunded
     );
 }
-```
+```solidity
 
 ### Protocol Adapters
 
@@ -409,7 +409,7 @@ abstract contract AxelarExecutable {
         uint256 amount
     ) internal virtual;
 }
-```
+```solidity
 
 #### LayerZero V2 Receiver
 
@@ -487,7 +487,7 @@ abstract contract WormholeReceiver {
         bytes32 deliveryHash
     ) internal virtual;
 }
-```
+```solidity
 
 ### BridgeLib Helper Library
 
@@ -579,7 +579,7 @@ library BridgeLib {
 
 ### Protocol Comparison
 
-```
+```solidity
 ┌─────────────────────────────────────────────────────────────────────────┐
 │                      Bridge Protocol Comparison                         │
 ├─────────────────┬──────────┬──────────┬───────────┬────────────────────┤
@@ -633,7 +633,7 @@ IAxelarGateway(gateway).callContract(destChain, destAddr, payload);
 
 // After: Aggregator (Axelar route)
 BRIDGE.bridgeVia(request, BridgeProtocol.AXELAR_GMP);
-```
+```solidity
 
 ## Test Cases
 
@@ -692,7 +692,7 @@ function testBridge() public {
     assertGt(result.messageId, bytes32(0));
     assertGt(result.estimatedReceive, 0);
 }
-```
+```solidity
 
 ## Reference Implementation
 
@@ -711,7 +711,7 @@ contracts/liquidity/bridges/
 └── lib/
     ├── BridgeLib.sol
     └── ChainIds.sol
-```
+```sql
 
 ## Security Considerations
 
@@ -748,3 +748,4 @@ By aggregating volume, protocols may offer better rates for high-volume routes.
 ## Copyright
 
 Copyright and related rights waived via [CC0](https://creativecommons.org/publicdomain/zero/1.0/).
+```

@@ -75,7 +75,7 @@ LP-3680 introduces the CLZ (Count Leading Zeros) opcode to the Lux EVM, providin
 
 ### Semantics
 
-```
+```solidity
 CLZ(x) returns the number of leading zero bits in x
 
 For x = 0: CLZ(0) = 256
@@ -118,7 +118,7 @@ func opCLZ(pc *uint64, interpreter *EVMInterpreter, scope *ScopeContext) ([]byte
     x.SetUint64(256 - count)
     return nil, nil
 }
-```
+```solidity
 
 ## Rationale
 
@@ -177,7 +177,7 @@ function polyDegree(uint256[] memory coeffs) internal pure returns (uint256) {
     }
     return 0;
 }
-```
+```solidity
 
 ## Integration with ZK Proofs
 
@@ -203,7 +203,7 @@ function rangeProofBits(uint256 value, uint256 range) internal pure returns (uin
     // Use minimum bits needed
     return rangeBits;
 }
-```
+```solidity
 
 ## Backwards Compatibility
 
@@ -237,7 +237,7 @@ contract CLZTest {
 
 ### Location
 
-```
+```solidity
 /Users/z/work/lux/geth/core/vm/instructions.go  - opCLZ implementation
 /Users/z/work/lux/geth/core/vm/opcodes.go       - CLZ opcode definition
 /Users/z/work/lux/geth/core/vm/gas_table.go     - CLZ gas cost (5)

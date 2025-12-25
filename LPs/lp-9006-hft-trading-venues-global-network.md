@@ -25,7 +25,7 @@ order: 6
 
 > **LP-9000 Series**: [LP-9000 Overview](/docs/lp-9000-dex-overview/) | [LP-9001 Trading Engine](/docs/lp-9001-dex-trading-engine/) | [LP-9003 Performance](/docs/lp-9003-high-performance-dex-protocol/) | [LP-9004 Perpetuals](/docs/lp-9004-perpetuals-derivatives-protocol/) | [LP-9005 Oracle](/docs/lp-9005-native-oracle-protocol/)
 
-```
+```solidity
   ╔═══════════════════════════════════════════════════════════════════════╗
   ║  ██╗     ██╗  ██╗    ██████╗ ███████╗██╗  ██╗    ██╗  ██╗███████╗████████╗  ║
   ║  ██║     ██║  ██║    ██╔══██╗██╔════╝╚██╗██╔╝    ██║  ██║██╔════╝╚══██╔══╝  ║
@@ -105,7 +105,7 @@ Lux DEX operates as its own daemon/network that:
 
 ### Network Separation
 
-```
+```solidity
 ┌─────────────────────────────────────────────────────────────────────────┐
 │                        LUX BLOCKCHAIN NETWORK                           │
 │  ┌─────────┐  ┌─────────┐  ┌─────────┐  ┌─────────┐  ┌─────────┐      │
@@ -190,7 +190,7 @@ Light travels at ~299,792 km/s in vacuum, ~200,000 km/s in fiber optic cable.
 
 Kansas City is the **optimal first venue** for North America:
 
-```
+```solidity
                     ┌─────────────────────────────────────────┐
                     │           NORTH AMERICA                 │
                     │                                         │
@@ -268,7 +268,7 @@ Venues determined by community governance and trading demand:
 
 ### Global Coverage Map
 
-```
+```solidity
                            GLOBAL HFT VENUE NETWORK
     ┌───────────────────────────────────────────────────────────────────┐
     │                                                                    │
@@ -313,7 +313,7 @@ Venues determined by community governance and trading demand:
 
 ### Network Infrastructure
 
-```
+```solidity
 ┌─────────────────────────────────────────────────────────────────┐
 │                     TRADING VENUE NETWORK                        │
 │                                                                  │
@@ -360,7 +360,7 @@ Venues determined by community governance and trading demand:
 
 ### Inter-Venue Backbone
 
-```
+```solidity
                     GLOBAL BACKBONE NETWORK
 
             ┌──────────────── 32ms ────────────────┐
@@ -465,7 +465,7 @@ Each venue MUST have direct cross-connects to:
 
 ### Phase 1: North America (Q1 2025)
 
-```
+```markdown
 Week 1-4:   Kansas City venue buildout
 Week 5-8:   Hardware installation & testing
 Week 9-12:  Beta testing with market makers
@@ -480,7 +480,7 @@ Week 13-16: Public launch NA-1
 
 ### Phase 2: Europe (Q2-Q3 2025)
 
-```
+```markdown
 Month 1-2:  London LD4 buildout
 Month 3-4:  Frankfurt FR2 buildout (parallel)
 Month 5:    EU backbone operational
@@ -495,7 +495,7 @@ Month 6:    Zurich ZH4 expansion
 
 ### Phase 3: Asia-Pacific (Q3-Q4 2025)
 
-```
+```markdown
 Month 1-2:  Tokyo TY3 buildout
 Month 3-4:  Singapore SG1 buildout
 Month 5-6:  APAC backbone operational
