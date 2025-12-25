@@ -4,11 +4,11 @@ title: Multi-Signature Wallet Standard
 description: Defines the standard for multi-signature wallets on Lux Network with quantum-safe options
 author: Lux Network Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
-status: Draft
+status: Final
 type: Standards Track
 category: LRC
 created: 2025-01-23
-tags: [wallet, threshold-crypto]
+tags: [wallet, threshold-crypto, safe]
 requires: 1, 3020, 40
 order: 42
 ---
