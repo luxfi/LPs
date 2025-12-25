@@ -5,7 +5,7 @@ description: Defines an on-chain training ledger and per-user model forks for tr
 author: Lux Network Team
 type: Standards Track
 category: Core
-status: Draft
+status: Final
 created: 2025-01-15
 requires: [5101]
 tags: [ai, privacy]

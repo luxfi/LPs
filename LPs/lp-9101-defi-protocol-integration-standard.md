@@ -4,7 +4,7 @@ title: DeFi Protocol Integration Standard
 description: Standard DeFi protocol integrations for the Lux Standard Library with MIT/GPL licensing
 author: Lux Network Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
-status: Draft
+status: Final
 tags: [c-chain, evm]
 type: Standards Track
 category: LRC

@@ -4,7 +4,7 @@ title: Developer Tools Overview
 description: Index of standards and protocols that support developer workflows and tooling in the Lux ecosystem.
 author: Lux Network Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
-status: Draft
+status: Final
 type: Meta
 created: 2025-01-23
 updated: 2025-07-25

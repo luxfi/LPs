@@ -4,7 +4,7 @@ title: Governance Framework Research
 description: Research on decentralized governance models and implementation strategies for Lux Network
 author: Lux Network Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
-status: Draft
+status: Final
 type: Informational
 created: 2025-01-23
 requires: 0, 1, 0

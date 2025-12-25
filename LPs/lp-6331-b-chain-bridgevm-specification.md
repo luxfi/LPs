@@ -4,7 +4,7 @@ title: B-Chain - BridgeVM Specification
 description: Complete specification for the B-Chain (BridgeVM), the dedicated cross-chain bridge chain for Lux Network with MPC custody and T-Chain threshold signature coordination.
 author: Lux Protocol Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
-status: Draft
+status: Final
 type: Standards Track
 category: Core
 created: 2025-12-11

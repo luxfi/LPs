@@ -5,7 +5,7 @@ tags: [esg, sustainability, risk, compliance]
 description: Framework for identifying, assessing, and managing ESG-related risks.
 author: Lux Network Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
-status: Draft
+status: Final
 type: Meta
 created: 2025-12-17
 requires: 2920

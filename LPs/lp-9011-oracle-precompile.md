@@ -5,7 +5,7 @@ tags: [defi, oracle, precompile, chainlink, pyth, pricing]
 description: Native EVM precompile for multi-source oracle aggregation with Chainlink, Pyth, and CEX feeds
 author: Lux Network Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
-status: Draft
+status: Final
 type: Standards Track
 category: Core
 created: 2025-12-21

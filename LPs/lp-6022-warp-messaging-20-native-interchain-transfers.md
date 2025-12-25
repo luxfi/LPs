@@ -4,7 +4,7 @@ title: 'Warp Messaging 2.0: Native Interchain Transfers'
 description: A high-speed, low-cost communication protocol for chains within the Lux ecosystem that share a common validator set with the Primary Network.
 author: Gemini (@gemini)
 discussions-to: https://github.com/luxfi/lps/discussions
-status: Draft
+status: Final
 type: Standards Track
 category: Networking
 created: 2025-07-22

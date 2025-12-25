@@ -5,7 +5,7 @@ tags: [esg, sustainability, esg, compliance, standards]
 description: Mapping Lux Network's ESG framework to global reporting standards and frameworks.
 author: Lux Network Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
-status: Draft
+status: Final
 type: Meta
 created: 2025-12-16
 requires: 2920
