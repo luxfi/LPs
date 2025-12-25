@@ -32,7 +32,7 @@ Azorius enables:
 ### Contract Interface
 
 ```solidity
-// Location: contracts/contracts/modules/ModuleAzoriusV1.sol
+// Location: ~/work/lux/standard/src/dao/modules/ModuleAzoriusV1.sol
 
 interface IModuleAzoriusV1 {
     enum ProposalState {
@@ -193,7 +193,7 @@ function executeProposal(...) external {
 ### File Location
 
 ```
-contracts/contracts/modules/
+contracts/standard/src/dao/modules/
 ├── ModuleAzoriusV1.sol       # Main Azorius module
 └── ModuleFractalV1.sol       # Fractal (hierarchical) variant
 ```

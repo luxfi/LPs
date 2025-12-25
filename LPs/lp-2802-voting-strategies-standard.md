@@ -265,7 +265,7 @@ Maintains familiar patterns from Compound:
 - Proposer threshold requirements
 - Quorum percentage model
 
-### LP-2521 Azorius Integration
+### LP-2801 Azorius Integration
 
 Fully compatible with LP-2521 Azorius module:
 
