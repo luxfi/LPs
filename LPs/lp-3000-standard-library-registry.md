@@ -7,7 +7,7 @@ discussions-to: https://github.com/luxfi/lps/discussions
 status: Final
 type: Informational
 created: 2025-12-23
-updated: 2025-12-24
+updated: 2025-12-25
 tags: [registry, contracts, standard-library, defi]
 order: 3000
 ---
@@ -29,9 +29,10 @@ The Lux ecosystem requires a single source of truth for:
 
 ## Standard Library Overview
 
-**Repository**: `https://github.com/luxfi/standard`  
-**Solidity Version**: 0.8.28  
+**Repository**: `https://github.com/luxfi/standard`
+**Solidity Version**: 0.8.31
 **Framework**: Foundry
+**Test Coverage**: 751 tests passing (100%)
 
 ### Contract Categories
 
@@ -369,17 +370,42 @@ The Lux Bridge uses MPC-signed messages for cross-chain token transfers.
 
 ## Standard Library Test Coverage
 
-| Test Suite | Tests | Status |
-|------------|-------|--------|
-| AI.t.sol | 15 | ✅ Pass |
-| AIMining.t.sol | 12 | ✅ Pass |
-| AIToken.t.sol | 8 | ✅ Pass |
-| LUX.t.sol | 10 | ✅ Pass |
-| Lamport.t.sol | 6 | ✅ Pass |
-| Perps.t.sol | 45 | ✅ Pass |
-| Synths.t.sol | 35 | ✅ Pass |
+**Total**: 751 tests passing across 35 test suites (100% pass rate)
 
-**Total**: 177 tests passing
+### Protocol Test Suites
+
+| Test Suite | Tests | Status | Description |
+|------------|-------|--------|-------------|
+| AITest | 15 | ✅ Pass | AI token functionality |
+| AIMiningTest | 26 | ✅ Pass | GPU attestation mining |
+| AITokenTest | 41 | ✅ Pass | Multi-chain AI token |
+| AMMV2Test | 30 | ✅ Pass | Uniswap V2 AMM |
+| AMMV3Test | 14 | ✅ Pass | Concentrated liquidity AMM |
+| AdaptersTest | 31 | ✅ Pass | Aave/Compound/Yearn adapters |
+| BridgeTokensTest | 47 | ✅ Pass | L*/Z* bridge tokens |
+| GovernanceTest | 37 | ✅ Pass | DAO, voting, timelock |
+| IdentityTest | 69 | ✅ Pass | W3C DID registry |
+| LSSVMTest | 32 | ✅ Pass | NFT AMM (sudoswap-style) |
+| LUXTest | 10 | ✅ Pass | Core LUX token |
+| LamportFoundryTest | 6 | ✅ Pass | Post-quantum signatures |
+| MarketsTest | 47 | ✅ Pass | Lending/borrowing markets |
+| MarketTest | 26 | ✅ Pass | NFT marketplace |
+| OmnichainTest | 36 | ✅ Pass | Cross-chain messaging |
+| PerpsTest | 17 | ✅ Pass | Perpetual futures core |
+| PerpsPositionTest | 20 | ✅ Pass | Position management |
+| PerpsEdgeCaseTest | 20 | ✅ Pass | Edge case coverage |
+| StakingTest | 43 | ✅ Pass | sLUX staking |
+| SynthsTest | 14 | ✅ Pass | Self-repaying synths |
+| SynthsEdgeCaseTest | 3 | ✅ Pass | Synth edge cases |
+| TreasuryTest | 39 | ✅ Pass | Fee distribution |
+| YieldStrategiesTest | 30 | ✅ Pass | Aave/Yearn strategies |
+| LRC1155Test | 22 | ✅ Pass | Multi-token standard |
+
+### CI/CD Status
+
+- **GitHub Actions**: ✅ Passing
+- **Workflow**: `ci.yml` (Build, Lint, Test)
+- **Last Updated**: 2025-12-25
 
 ---
 
@@ -460,5 +486,5 @@ d8b1c635 lib/v3-core (heads/main)
 
 ---
 
-**Document Maintainer**: Lux Industries  
-**Last Updated**: 2025-12-23
+**Document Maintainer**: Lux Industries
+**Last Updated**: 2025-12-25
