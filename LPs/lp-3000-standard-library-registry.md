@@ -423,13 +423,213 @@ The Lux Bridge uses MPC-signed messages for cross-chain token transfers.
 
 ---
 
-## Related LPs
+## LRC Token Standards Index
+
+LRC (Lux Request for Comments) standards are Lux-native equivalents of ERC standards, optimized for the Lux ecosystem with cross-chain compatibility.
+
+### LP-3000 Series Organization
+
+| Range | Category | Description |
+|-------|----------|-------------|
+| **3000-3019** | Registry & Meta | Standard library registry, DeFi integrations |
+| **3020-3079** | LRC-20 Extensions | Fungible token standard and extensions |
+| **3080-3099** | Reserved | Future LRC-20 extensions |
+| **3155-3199** | Core Standards | LRC-165, LRC-173, LRC-1155, LRC-1271, etc. |
+| **3200-3299** | Storage & NFT Utilities | Namespaced storage, NFT staking, media |
+| **3300-3399** | Account Abstraction | Safe, AA, paymasters |
+| **3500-3599** | Precompiles | Cryptography and VM precompiles |
+| **3600-3699** | VM & Chain | Virtual machine, rollups, gas |
+| **3700-3799** | State & LRC-721 | Verkle, state sync, NFT standard |
+| **3800-3899** | Bridge & Teleport | Cross-chain asset standards |
+| **3900-3999** | Advanced Standards | Multi-token, royalties, proxies |
+
+---
+
+### LRC-20: Fungible Token Standard
+
+| LP | Standard | ERC Equivalent | Description |
+|----|----------|----------------|-------------|
+| **LP-3020** | LRC-20 | ERC-20 | Base fungible token standard |
+| **LP-3021** | LRC-20-Burnable | ERC20Burnable | Token burning capability |
+| **LP-3022** | LRC-20-Mintable | ERC20Mintable | Token minting capability |
+| **LP-3023** | LRC-20-Bridgable | - | Cross-chain bridge support |
+| **LP-3024** | LRC-20-Capped | ERC20Capped | Maximum supply cap |
+| **LP-3025** | LRC-20-Votes | ERC20Votes | Governance voting power |
+| **LP-3026** | LRC-20-Permit | - | Gasless approvals (see LP-3612) |
+| **LP-3027** | LRC-20-FlashMint | ERC20FlashMint | Flash minting capability |
+| **LP-3028** | x402 Payment | HTTP 402 | Payment protocol standard |
+| **LP-3029** | Adoption Guide | - | Token standards migration guide |
+| **LP-3030** | LRC-20-Wrapper | ERC20Wrapper | Token wrapping capability |
+
+### LRC-20 Related Standards
+
+| LP | Standard | ERC Equivalent | Description |
+|----|----------|----------------|-------------|
+| **LP-3009** | LRC-3009 | ERC-3009 | Transfer with authorization |
+| **LP-3612** | LRC-2612 | EIP-2612 | Permit extension (gasless approvals) |
+| **LP-3363** | LRC-1363 | ERC-1363 | Payable token callbacks |
+| **LP-3777** | LRC-777 | ERC-777 | Advanced token with hooks |
+
+---
+
+### LRC-721: Non-Fungible Token Standard
+
+| LP | Standard | ERC Equivalent | Description |
+|----|----------|----------------|-------------|
+| **LP-3721** | LRC-721 | ERC-721 | Base NFT standard |
+| **LP-3722** | LRC-721-Burnable | ERC721Burnable | NFT burning capability |
+| **LP-3723** | LRC-721-Enumerable | ERC721Enumerable | Enumeration support |
+| **LP-3981** | LRC-2981 | ERC-2981 | NFT royalty standard |
+| **LP-3675** | LRC-4675 | ERC-4675 | Multi-fractional NFT |
+| **LP-3551** | LRC-6551 | ERC-6551 | Token-bound accounts |
+
+### NFT Utilities
+
+| LP | Standard | Description |
+|----|----------|-------------|
+| **LP-3210** | NFT Staking | NFT staking mechanics |
+| **LP-3211** | Media Content NFT | Media/content NFT standard |
+
+---
+
+### LRC-1155: Multi-Token Standard
+
+| LP | Standard | ERC Equivalent | Description |
+|----|----------|----------------|-------------|
+| **LP-3155** | LRC-1155 | ERC-1155 | Multi-token standard |
+| **LP-3157** | LRC-1155-Supply | ERC1155Supply | Supply tracking extension |
+| **LP-3909** | LRC-6909 | ERC-6909 | Minimal multi-token |
+| **LP-3525** | LRC-3525 | ERC-3525 | Semi-fungible token |
+
+---
+
+### LRC-4626: Tokenized Vault Standard
+
+| LP | Standard | ERC Equivalent | Description |
+|----|----------|----------------|-------------|
+| **LP-3626** | LRC-4626 | ERC-4626 | Tokenized vault standard |
+| **LP-3627** | LRC-4626-Multi | - | Multi-vault extensions |
+
+---
+
+### Core Infrastructure Standards
+
+| LP | Standard | ERC Equivalent | Description |
+|----|----------|----------------|-------------|
+| **LP-3165** | LRC-165 | ERC-165 | Interface detection |
+| **LP-3173** | LRC-173 | ERC-173 | Contract ownership |
+| **LP-3156** | LRC-3156 | ERC-3156 | Flash loans |
+| **LP-3271** | LRC-1271 | ERC-1271 | Signature validation |
+| **LP-3201** | LRC-7201 | ERC-7201 | Namespaced storage layout |
+| **LP-3967** | LRC-1967 | ERC-1967 | Proxy storage slots |
+| **LP-3169** | LRC-5169 | ERC-5169 | Client script URI |
+| **LP-3572** | LRC-7572 | ERC-7572 | Contract-level metadata |
+| **LP-3528** | LRC-5528 | ERC-5528 | Refundable token |
+
+---
+
+### Account Abstraction Standards
+
+| LP | Standard | ERC Equivalent | Description |
+|----|----------|----------------|-------------|
+| **LP-3337** | LRC-4337 | ERC-4337 | Account abstraction |
+| **LP-3338** | Paymaster | ERC-4337 | Paymaster standard |
+| **LP-3579** | LRC-7579 | ERC-7579 | Modular smart accounts |
+| **LP-3310** | Safe Multisig | - | Safe multisig standard |
+| **LP-3320** | Lamport-Safe | - | Post-quantum Safe signatures |
+
+---
+
+### Soulbound & Identity Standards
+
+| LP | Standard | ERC Equivalent | Description |
+|----|----------|----------------|-------------|
+| **LP-3192** | LRC-5192 | ERC-5192 | Soulbound tokens |
+| **LP-10093** | DID | W3C DID | Decentralized identity |
+
+---
+
+### Bridge & Cross-Chain Standards
+
+| LP | Standard | Description |
+|----|----------|-------------|
+| **LP-3800** | Bridged Asset | Bridge token standard (L*/Z* tokens) |
+| **LP-3810** | Teleport Token | Warp-based cross-chain tokens |
+| **LP-3820** | L2 Ascension | L2 to sovereign L1 migration |
+
+---
+
+### Precompile Standards
+
+| LP | Standard | Address | Description |
+|----|----------|---------|-------------|
+| **LP-3500** | ML-DSA | `0x...0006` | Post-quantum signatures |
+| **LP-3501** | SLH-DSA | `0x...0007` | Stateless hash signatures |
+| **LP-3502** | ML-DSA-2 | - | Extended PQ signatures |
+| **LP-3503** | Quasar | `0x...000A` | Quantum consensus |
+| **LP-3510** | Warp | `0x...0005` | Cross-chain messaging |
+| **LP-3511** | Fee Manager | `0x...0401` | Dynamic fees |
+| **LP-3512** | Warp-2 | - | Enhanced Warp messaging |
+| **LP-3520** | Suite Overview | - | Precompile suite index |
+| **LP-3550** | Verkle Proof | - | Verkle tree proofs |
+| **LP-3651** | secp256r1 | - | P-256 curve support |
+| **LP-3652** | secp256k1 | - | ECDSA precompile |
+| **LP-3653** | BLS12-381 | - | BLS cryptography |
+| **LP-3654** | Ed25519 | - | EdDSA signatures |
+| **LP-3655** | SHA3/Keccak | - | Hash functions |
+| **LP-3656** | BLAKE2/3 | - | BLAKE hash family |
+| **LP-3657** | VRF | - | Verifiable random function |
+| **LP-3658** | Poseidon | - | ZK-friendly hash |
+| **LP-3659** | ChaCha20 | - | Symmetric encryption |
+| **LP-3662** | HPKE | - | Hybrid public key encryption |
+| **LP-3663** | ECIES | - | Elliptic curve encryption |
+| **LP-3664** | Ring Signatures | - | Privacy signatures |
+| **LP-3665** | KZG-4844 | - | Blob commitments |
+
+---
+
+### VM & Execution Standards
+
+| LP | Standard | Description |
+|----|----------|-------------|
+| **LP-3600** | VM Environment | Virtual machine specification |
+| **LP-3601** | VM SDK | VM development kit |
+| **LP-3610** | AIVM | AI virtual machine |
+| **LP-3620** | Rollup Plugin | C-Chain rollup architecture |
+| **LP-3621** | Stage Sync | Sync pipeline for Coreth |
+| **LP-3630** | RNG | Random number generation |
+| **LP-3640** | Upgrade Mapping | C-Chain upgrade mapping |
+| **LP-3641** | ChainVM Compat | ChainVM compatibility |
+| **LP-3650** | Dynamic Gas | Dynamic gas pricing |
+| **LP-3652** | Min Block Times | Dynamic minimum block times |
+| **LP-3653** | Gas Limit | Dynamic EVM gas limits |
+| **LP-3660** | State Migration | Network upgrade migration |
+| **LP-3661** | BadgerDB Verkle | Database optimization |
+| **LP-3670** | EOA Code | EOA account code |
+| **LP-3671** | EL Requests | Execution layer requests |
+| **LP-3672** | Max Balance | Max effective balance |
+| **LP-3673** | Calldata Cost | Calldata cost increase |
+| **LP-3674** | Blob Throughput | Blob throughput increase |
+| **LP-3680** | CLZ Opcode | Count leading zeros |
+
+---
+
+### State Management Standards
+
+| LP | Standard | Description |
+|----|----------|-------------|
+| **LP-3700** | State Sync | State sync and pruning |
+| **LP-3701** | Verkle Trees | Verkle state management |
+| **LP-3702** | Verkle Transition | Verkle state transition |
+| **LP-3703** | Stateless Gas | Statelessness gas costs |
+| **LP-3704** | Block Hashes | Historical block hashes |
+
+---
+
+## Related LPs (Cross-References)
 
 | LP | Title |
 |----|-------|
-| LP-3020 | LRC-20 Fungible Token Standard |
-| LP-3721 | LRC-721 Non-Fungible Token Standard |
-| LP-3626 | LRC-4626 Tokenized Vault |
 | LP-6016 | Teleport Cross-Chain Protocol |
 | LP-6332 | Teleport Bridge Architecture |
 | LP-7325 | KMS Hardware Security Module Integration |
