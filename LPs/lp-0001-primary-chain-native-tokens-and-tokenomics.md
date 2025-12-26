@@ -4,7 +4,7 @@ title: Primary Chain, Native Tokens, and Tokenomics
 tags: [network, core, tokenomics, token]
 description: Defines Lux native currency (LUX), tokenomics, and core chain identifiers for the network.
 author: Lux Network Team (@luxfi)
-status: Final
+status: Implemented
 type: Standards Track
 category: Core
 created: 2025-07-24

@@ -4,7 +4,7 @@ title: Horizon DAG Finality Predicates
 description: DAG order-theory predicates for reachability, LCA, antichain queries, and certificate/skip detection under a DAG model
 author: Lux Network Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
-status: Final
+status: Implemented
 type: Standards Track
 category: Core
 created: 2025-01-29

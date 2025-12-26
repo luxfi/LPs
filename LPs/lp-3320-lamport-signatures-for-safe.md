@@ -4,7 +4,7 @@ title: Lamport Signatures for Safe
 description: Post-quantum one-time signature scheme for Lux Network using hash-based cryptography
 author: Lux Core Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
-status: Final
+status: Implemented
 type: Standards Track
 category: Core
 created: 2025-12-14

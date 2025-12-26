@@ -4,7 +4,7 @@ title: ChainVM Compatibility
 description: Provides compatibility layer for legacy Avalanche chain-EVM chains migrating to Lux Network
 author: Lux Network Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
-status: Final
+status: Implemented
 type: Standards Track
 category: Interface
 created: 2025-01-15

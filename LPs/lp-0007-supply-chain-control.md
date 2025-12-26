@@ -3,7 +3,7 @@ lp: 7
 title: Supply Chain Control
 description: How Lux maintains complete control over its software dependencies through strategic forking and internal management
 author: Lux Core Team
-status: Final
+status: Implemented
 type: Meta
 created: 2025-12-21
 tags: [network, core, security, supply-chain, dependencies, implementation]

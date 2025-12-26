@@ -5,7 +5,7 @@ tags: [defi, dex, trading, amm, orderbook]
 description: Core specification for the Lux DEX trading protocols, including AMM and order book implementations
 author: Lux Network Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
-status: Final
+status: Implemented
 type: Standards Track
 category: LRC
 created: 2025-12-11

@@ -5,7 +5,7 @@ tags: [c-chain, vm, evm, core]
 description: Specifies the Lux execution model, which is designed to be EVM-compatible while allowing future extensibility for new virtual machines.
 author: Lux Network Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
-status: Final
+status: Implemented
 type: Standards Track
 category: Core
 created: 2025-01-25

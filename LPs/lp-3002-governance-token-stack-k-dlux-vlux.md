@@ -4,7 +4,7 @@ title: Governance Token Stack — K, DLUX, VLUX
 description: Soul-bound reputation (K), rebasing governance (DLUX), and vote-locked voting power (VLUX)
 author: Lux Core Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
-status: Final
+status: Implemented
 type: Standards Track
 category: LRC
 created: 2025-12-23

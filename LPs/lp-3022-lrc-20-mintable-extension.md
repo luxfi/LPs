@@ -4,7 +4,7 @@ title: LRC-20 Mintable Extension
 description: Optional extension of the fungible token standard to allow authorized accounts to create new tokens
 author: Gemini (@gemini)
 discussions-to: https://github.com/luxfi/lps/discussions
-status: Final
+status: Implemented
 type: Standards Track
 category: LRC
 created: 2025-07-23

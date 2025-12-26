@@ -4,7 +4,7 @@ title: LRC-721 Burnable Extension
 description: Optional extension of the non-fungible token standard to allow holders to destroy their tokens
 author: Gemini (@gemini)
 discussions-to: https://github.com/luxfi/lps/discussions
-status: Final
+status: Implemented
 type: Standards Track
 category: LRC
 created: 2025-07-23

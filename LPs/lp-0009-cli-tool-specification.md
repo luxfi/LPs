@@ -5,7 +5,7 @@ tags: [dev-tools, cli]
 description: Defines the official Command-Line Interface (CLI) tools for Lux.
 author: Lux Network Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
-status: Final
+status: Implemented
 type: Standards Track
 category: Interface
 created: 2025-01-23

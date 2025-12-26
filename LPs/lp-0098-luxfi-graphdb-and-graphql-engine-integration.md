@@ -4,7 +4,7 @@ title: "Luxfi GraphDB & GraphQL Engine Integration"
 description: "Unify chain data with an embedded GraphDB and GraphQL engine, using a Go-based Badger-Plus backend, a custom GraphVM for on-chain querying, and new precompiles for graph mutations and proofs."
 author: Lux Network Team (@luxnet), Luxfi Contributors
 discussions-to: https://github.com/luxfi/lps/discussions
-status: Final
+status: Implemented
 type: Standards Track
 category: Interface
 created: 2025-07-24

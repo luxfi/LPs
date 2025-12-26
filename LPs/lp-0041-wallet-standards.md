@@ -4,7 +4,7 @@ title: Wallet Standards
 description: Interfaces and guidance for Lux wallet interoperability across chains and dApps
 author: Lux Network Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
-status: Final
+status: Implemented
 type: Standards Track
 category: Interface
 created: 2025-01-23
