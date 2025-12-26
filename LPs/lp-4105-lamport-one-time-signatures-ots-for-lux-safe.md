@@ -9,7 +9,7 @@ type: Standards Track
 category: Core
 created: 2025-01-28
 requires: [4, 5, 3320]
-tags: [pqc, wallet]
+tags: [pqc, wallet, lamport, threshold, mpc, t-chain, ml-kem]
 order: 105
 ---
 
@@ -554,13 +554,258 @@ BenchmarkMerkleProofVerification     100000   9,876 ns/op    2,048 B/op    16 al
 
 **Test Results**: All 15 test cases pass consistently
 
+## Threshold Lamport via T-Chain MPC
+
+### Design Principle
+
+**Key Insight**: Threshold control lives entirely off-chain (T-Chain MPC network jointly controls ONE Lamport key). On-chain verifies a normal Lamport signature - no changes to `LamportBase` required.
+
+This gives you:
+- **Vanilla EVM/Solidity verification** - exactly like `LamportBase.verify_u256()`
+- **Threshold property** - fewer than `t` nodes cannot produce a valid signature
+- **Standard signature format** - `bytes[256] sig + currentpub + nextPKH`
+- **Works on ANY EVM chain** - no precompiles needed (Ethereum, Polygon, Arbitrum, etc.)
+
+### Architecture
+
+```
+┌─────────────────────────────────────────────────────────────────────────┐
+│                         T-CHAIN MPC NETWORK                              │
+│  ┌──────────┐  ┌──────────┐  ┌──────────┐  ┌──────────┐                 │
+│  │  Node 1  │  │  Node 2  │  │  Node 3  │  │  Node N  │   ...           │
+│  │ ┌──────┐ │  │ ┌──────┐ │  │ ┌──────┐ │  │ ┌──────┐ │                 │
+│  │ │Share │ │  │ │Share │ │  │ │Share │ │  │ │Share │ │ ← DKG shares    │
+│  │ │sk[i] │ │  │ │sk[i] │ │  │ │sk[i] │ │  │ │sk[i] │ │   for each      │
+│  │ └──────┘ │  │ └──────┘ │  │ └──────┘ │  │ └──────┘ │   secret bit    │
+│  └────┬─────┘  └────┬─────┘  └────┬─────┘  └────┬─────┘                 │
+│       │             │             │             │                        │
+│       └─────────────┼─────────────┼─────────────┘                        │
+│                     │ t-of-n reconstruct                                 │
+│                     ▼                                                    │
+│         ┌─────────────────────┐                                          │
+│         │ Reconstruct sk[i][b]│  ← Only reveal secrets for message bits  │
+│         │ for each bit of m   │                                          │
+│         └──────────┬──────────┘                                          │
+│                    │                                                     │
+│                    ▼                                                     │
+│         ┌─────────────────────┐                                          │
+│         │ Assemble sig[256]   │  ← Standard Lamport signature            │
+│         │ + currentpub        │                                          │
+│         │ + nextPKH           │                                          │
+│         └──────────┬──────────┘                                          │
+└────────────────────┼────────────────────────────────────────────────────┘
+                     │
+                     ▼  (Submit to any EVM chain)
+┌─────────────────────────────────────────────────────────────────────────┐
+│                    ANY EVM CHAIN (Ethereum, Polygon, etc.)               │
+│  ┌────────────────────────────────────────────────────────────────────┐ │
+│  │                     LamportBase.verify_u256()                       │ │
+│  │  • Verifies keccak256(sig[i]) == pub[i][bit]                       │ │
+│  │  • NO threshold logic on-chain                                      │ │
+│  │  • NO precompiles required                                          │ │
+│  │  • Updates pkh = nextPKH (one-time key rotation)                   │ │
+│  └────────────────────────────────────────────────────────────────────┘ │
+└─────────────────────────────────────────────────────────────────────────┘
+```
+
+### Core Design
+
+#### 1. MPC Network as "Lamport Owner"
+
+The Safe module has exactly ONE Lamport owner key at a time:
+- On-chain stores `pkh = keccak256(abi.encodePacked(currentpub))`
+- Transaction authorized if MPC network produces valid Lamport signature over:
+
+```solidity
+// Domain-separated message binding
+bytes32 m = keccak256(abi.encodePacked(
+    safeTxHash,      // Safe transaction hash
+    nextPKH,         // Commit to next public key
+    address(this),   // Prevent cross-contract replay
+    block.chainid    // Prevent cross-chain replay
+));
+```
+
+#### 2. Threshold Key Generation (DKG) for Lamport Secrets
+
+A Lamport public key consists of 256 pairs of secrets: `(sk[i][0], sk[i][1])`.
+
+T-Chain nodes perform DKG so that for every `sk[i][b]`:
+- No single node knows the full secret
+- Any `t-of-n` nodes can reconstruct it via MPC
+
+Public key material:
+```
+pub[i][b] = H(sk[i][b])  // keccak256(sig[i]) == pub[i][bit]
+pkh = keccak256(abi.encodePacked(pub))
+```
+
+#### 3. Threshold Signing Flow
+
+```go
+// T-Chain MPC signing protocol
+func ThresholdLamportSign(safeTxHash bytes32, nextPKH bytes32) []byte {
+    // Step 1: Every node computes canonical safeTxHash locally
+    // NEVER accept coordinator-provided hash (security critical)
+    localHash := computeSafeTxHash(tx)
+
+    // Step 2: 1-round "same digest" check
+    // Broadcast safeTxHash, only proceed if ≥t nodes match
+    if !consensusOnHash(localHash) {
+        return nil // Abort if disagreement
+    }
+
+    // Step 3: Compute domain-separated message
+    m := keccak256(safeTxHash, nextPKH, moduleAddress, chainId)
+
+    // Step 4: For each bit of m, reconstruct ONLY the needed secret
+    sig := make([][]byte, 256)
+    for i := 0; i < 256; i++ {
+        bit := (m >> (255 - i)) & 1
+        // MPC reconstruct: t-of-n nodes reveal shares for sk[i][bit]
+        sig[i] = mpcReconstruct(i, bit)
+    }
+
+    // Step 5: Return assembled signature
+    return sig // Standard bytes[256] Lamport signature
+}
+```
+
+#### 4. One-Time Key Rotation (Built-in)
+
+After signing, update `pkh = nextPKH`:
+```solidity
+// Your existing pattern handles this
+function _afterVerify(bytes32 nextPKH) internal {
+    pkh = nextPKH;  // Old pkh no longer accepted
+}
+```
+
+Each signature is **one-time safe** because the old `pkh` is invalidated.
+
+### Implementation
+
+#### Solidity Module (Unchanged LamportBase)
+
+```solidity
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.20;
+
+import {LamportBase} from "./LamportBase.sol";
+
+/**
+ * @title ThresholdLamportModule
+ * @notice T-Chain MPC threshold control with vanilla Lamport verification
+ * @dev Threshold lives off-chain; on-chain is standard Lamport
+ */
+contract ThresholdLamportModule is LamportBase {
+    address public safe;
+
+    /**
+     * @notice Execute Safe transaction with threshold Lamport signature
+     * @param safeTxHash The Safe transaction hash
+     * @param sig The Lamport signature (bytes[256]) from T-Chain MPC
+     * @param currentPub Current public key (bytes32[2][256])
+     * @param nextPKH Hash of next public key (for rotation)
+     */
+    function execWithThresholdLamport(
+        bytes32 safeTxHash,
+        bytes[256] calldata sig,
+        bytes32[2][256] calldata currentPub,
+        bytes32 nextPKH
+    ) external returns (bool) {
+        // Verify current public key matches stored hash
+        require(
+            keccak256(abi.encodePacked(currentPub)) == pkh,
+            "Invalid public key"
+        );
+
+        // Domain-separated message (critical for security)
+        uint256 m = uint256(keccak256(abi.encodePacked(
+            safeTxHash,
+            nextPKH,
+            address(this),
+            block.chainid
+        )));
+
+        // Standard Lamport verification (unchanged)
+        require(verify_u256(m, sig, currentPub), "Invalid Lamport signature");
+
+        // Rotate to next key (one-time property)
+        pkh = nextPKH;
+
+        // Execute via Safe
+        return ISafe(safe).execTransactionFromModule(...);
+    }
+}
+```
+
+### ML-KEM/KMS Integration for Share Protection
+
+Use ML-KEM to protect Lamport secret shares:
+
+```go
+// T-Chain node share protection
+type SecureShareStorage struct {
+    // ML-KEM wrapped shares (quantum-safe encryption)
+    encryptedShares map[int]map[int][]byte  // [bitIndex][bitValue] -> encrypted sk
+
+    // KMS wrapping key (hardware-backed)
+    kmsKeyID string
+}
+
+func (s *SecureShareStorage) GetShare(i, b int) []byte {
+    // Decrypt share using ML-KEM + KMS
+    wrapped := s.encryptedShares[i][b]
+    mlkemDecrypted := mlkem.Decapsulate(wrapped, s.kmsKeyID)
+    return mlkemDecrypted
+}
+```
+
+**ML-KEM protects**:
+- Each node's shares at rest (device ↔ KMS wrapping)
+- Share rotation when membership changes
+- Node-to-node transport (PQ-safe channels)
+
+### Security Properties
+
+| Property | Guarantee |
+|----------|-----------|
+| **Threshold** | < t nodes cannot produce signature |
+| **Quantum-Safe** | Lamport uses only hash functions |
+| **One-Time** | Key rotation after each signature |
+| **Replay-Safe** | Domain separation (address + chainId) |
+| **Cross-Contract Safe** | Module address bound in message |
+
+### What You Do NOT Need
+
+- ❌ Threshold verification on-chain
+- ❌ New precompiles on remote chains
+- ❌ 5 separate Lamport signatures (MPC emits ONE signature)
+- ❌ Changes to `LamportBase.verify_u256()`
+
+### Comparison: Threshold Lamport vs Ringtail
+
+| Criterion | Threshold Lamport (MPC) | Ringtail |
+|-----------|------------------------|----------|
+| **On-Chain** | Vanilla Lamport | Lattice precompile |
+| **Remote Chains** | ✅ Works everywhere | ❌ Needs precompile |
+| **Gas Cost** | ~800K (hash-based) | ~200K (precompile) |
+| **Key Reuse** | ❌ One-time | ✅ Reusable |
+| **Threshold** | Off-chain MPC | On-chain threshold |
+| **Best For** | Cross-chain custody | Native Lux chains |
+
+**Recommendation**:
+- Use **Threshold Lamport** for remote chain custody (Ethereum, Polygon, etc.)
+- Use **Ringtail** for native Lux chain operations (C-Chain, subnets)
+
 ## Future Enhancements
 
 1. **Stateless Signatures**: Implement SPHINCS+ for unlimited signing
-2. **Threshold Lamport**: Distribute key shares among signers
-3. **Hardware Integration**: HSM support for key generation
-4. **Batch Verification**: Optimize multiple signature verification
-5. **Quantum Random**: Use quantum RNG for key generation
+2. **Hardware Integration**: HSM support for DKG share generation
+3. **Batch Verification**: Optimize multiple signature verification
+4. **Quantum Random**: Use quantum RNG for key generation
+5. **Proactive Share Refresh**: Periodic resharing without changing public key
 
 ## Conclusion
 
