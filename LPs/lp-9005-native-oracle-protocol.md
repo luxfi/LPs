@@ -138,7 +138,7 @@ type PriceFeedPayload struct {
 
 // AttestationType for TeleportAttest
 const AttestationTypePriceFeed = 0x01
-```solidity
+```
 
 ### 3. Chain-Specific Access Mechanisms
 
@@ -237,7 +237,7 @@ contract LendingPool {
         // ...
     }
 }
-```solidity
+```
 
 **Gas Costs:**
 - `getPrice()`: 2,100 gas (cold) / 100 gas (warm)
@@ -344,7 +344,7 @@ type CChainSource struct {
 type OrderbookSource struct {
     books OrderbookProvider
 }
-```go
+```
 
 ### 5. Aggregation Strategy
 
@@ -420,7 +420,7 @@ type CircuitBreaker struct {
 │     └───────────────────────────────────────────────────────────────────┘    │
 │                                                                               │
 └──────────────────────────────────────────────────────────────────────────────┘
-```solidity
+```
 
 ### 7. Supported Trading Pairs
 
@@ -494,7 +494,7 @@ go run ./cmd/dex-server/main.go \
     --chainlink-rpc https://mainnet.infura.io/v3/... \
     --cchain-rpc http://127.0.0.1:9650/ext/bc/C/rpc \
     --symbols BTC-USD,ETH-USD,LUX-USD
-```solidity
+```
 
 ## Rationale
 

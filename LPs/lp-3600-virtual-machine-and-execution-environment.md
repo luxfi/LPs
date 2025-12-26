@@ -82,7 +82,7 @@ LP-2 specifies the Lux execution model, which is designed to be EVM-compatible w
 cd ~/work/lux/evm
 go test -v ./core/vm ./core/state
 # Comprehensive EVM execution tests
-```solidity
+```
 
 ### VM Registry and Management
 
@@ -182,7 +182,7 @@ RUN_E2E=1 go test -v ./tests/e2e/
 # - EVM smart contract execution
 # - Cross-VM Warp messaging
 # - Q-Chain quantum signatures
-```solidity
+```
 
 **Performance Benchmarks**:
 - Platform VM: ~2,000 validator txs/sec

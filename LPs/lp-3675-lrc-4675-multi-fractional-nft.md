@@ -85,7 +85,7 @@ interface ILRC4675 {
     // Redemption (requires 100% of shares)
     function redeem(uint256 tokenId) external;
 }
-```solidity
+```
 
 ### Metadata Extension
 
@@ -164,7 +164,7 @@ contract MultiNFTFractions is ERC1155, ILRC4675 {
         emit Defractionalize(info.nftId, tokenId, msg.sender);
     }
 }
-```solidity
+```
 
 ### Buyout Extension
 
@@ -192,7 +192,7 @@ fractions.fractionalize(
     "Bored Ape #1234 Shares",
     "BA1234"
 );
-```solidity
+```
 
 ### Real Estate Tokens
 ```solidity
@@ -210,7 +210,7 @@ fractions.fractionalize(
 ```solidity
 // DAO collectively purchases and fractions NFT
 // Each member receives proportional shares
-```solidity
+```
 
 ## Rationale
 

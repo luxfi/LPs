@@ -157,7 +157,7 @@ type ManagedKey struct {
     PartyIDs     []party.ID         // Current signer set
     Generation   uint32             // Incremented on reshare
 }
-```go
+```
 
 ### B-Chain (BridgeVM) - LP-0331
 
@@ -281,7 +281,7 @@ Five core contracts for on-chain bridge operations:
     }
   }
 }
-```bash
+```
 
 ## Quick Start Guide
 
@@ -317,7 +317,7 @@ curl -X POST http://localhost:9630/ext/bc/T/rpc \
       "publicKey": "0x..."
     }
   }'
-```solidity
+```
 
 ### 3. Initiating a Bridge Transfer
 
@@ -357,7 +357,7 @@ curl -X POST http://localhost:9630/ext/bc/T/rpc \
       "deadline": 1000
     }
   }'
-```solidity
+```
 
 ## Repository Map
 
@@ -400,7 +400,7 @@ threshold/
 ├── protocols/frost/        # FROST protocol
 ├── protocols/musig2/       # MuSig2 for Bitcoin
 └── protocols/ringtail/     # Quantum-safe signatures
-```solidity
+```
 
 ## Roadmap
 

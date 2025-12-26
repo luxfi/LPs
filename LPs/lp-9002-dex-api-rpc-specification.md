@@ -83,7 +83,7 @@ type OrderTx struct {
 }
 
 // Validation: Size>0, Price>0 unless OrderType==market.
-```sql
+```
 
 #### 1.2 DexFx extension
 
@@ -236,7 +236,7 @@ func (ob *OrderBook) GetBook(depth uint16) (bids, asks []PriceLevel) {
     }
     return
 }
-```bash
+```
 
 **Testing**:
 ```bash

@@ -90,7 +90,7 @@ interface ISLHDSA {
         bytes calldata signature
     ) external view returns (bool valid);
 }
-```solidity
+```
 
 ## Rationale
 
@@ -228,7 +228,7 @@ All tests passing with comprehensive coverage:
 | Metric | SLH-DSA-128s | ML-DSA-65 | Ratio |
 |--------|--------------|-----------|-------|
 | Public Key | 32 bytes | 1,952 bytes | 61x smaller |
-| Signature | 7,856 bytes | 3,309 bytes | 2.4x larger |
+| Signature | 7,856 bytes | 3,293 bytes | 2.4x larger |
 | Verify Time | ~286μs | ~108μs | 2.6x slower |
 | Base Gas | 15,000 | 100,000 | 6.7x cheaper |
 

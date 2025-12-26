@@ -119,7 +119,7 @@ def calc_next_q(q_current: int, q_desired: int, max_change: int) -> int:
         return q_current + min(q_desired - q_current, max_change)
     else:
         return q_current - min(q_current - q_desired, max_change)
-```latex
+```
 
 The change $|\Delta q| \leq Q$ or the block is invalid.
 
@@ -297,7 +297,7 @@ func TestConvergenceRate(t *testing.T) {
     // Should take ~3,635 blocks
     require.InDelta(t, 3635, blocks, 10)
 }
-```go
+```
 
 ### Integration Tests
 
@@ -377,7 +377,7 @@ func DesiredExcess(desiredDelay uint64) uint64 {
     ln := math.Log(ratio)
     return uint64(float64(UpdateConstant) * ln)
 }
-```go
+```
 
 ### Block Building
 
@@ -438,7 +438,7 @@ func (b *BlockBuilder) BuildBlock(parent *Block, txs []Tx) (*Block, error) {
 ```toml
 [c-chain]
 minimum-block-delay = 500  # milliseconds
-```go
+```
 
 **Result**: Network gradually adjusts to 500ms blocks over ~2 hours
 
@@ -494,7 +494,7 @@ contract BridgeVM {
         }
     }
 }
-```solidity
+```
 
 **Benefit**: Bridge operations coordinated with epoch timing
 
@@ -596,7 +596,7 @@ EPOCH_DURATION_MS = 300000  # 5 minutes
 
 # Ensure epoch duration >> minimum block delay
 assert EPOCH_DURATION_MS > MIN_BLOCK_DELAY * 100
-```go
+```
 
 ### LP-601 (Gas Fees)
 
@@ -674,7 +674,7 @@ func TestCalculateMinimumDelay(t *testing.T) {
     finalDelay := CalculateMinimumBlockDelay(current)
     assert.InDelta(t, 500, finalDelay, 10) // Within 10ms
 }
-```solidity
+```
 
 ## Backwards Compatibility
 
@@ -733,7 +733,7 @@ class AdaptiveBlockTiming:
         else:
             # Maintain current
             return current_delay
-```solidity
+```
 
 ### Cross-Chain Coordination
 

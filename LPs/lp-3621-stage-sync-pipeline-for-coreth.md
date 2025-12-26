@@ -117,7 +117,7 @@ func (sl *StageLoop) Run(ctx context.Context) error {
         }
     }
 }
-```bash
+```
 
 **Testing**:
 ```bash

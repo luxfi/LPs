@@ -315,7 +315,7 @@ library Secp256k1Lib {
         return result;
     }
 }
-```sql
+```
 
 ## Full Implementation Stack
 
@@ -442,7 +442,7 @@ static SECP256K1_INLINE int secp256k1_memczero(void *s, size_t len, int flag) {
     }
     return 1;
 }
-```solidity
+```
 
 ### Secure Scalar Handling
 
@@ -503,7 +503,7 @@ func IsLowS(sig *Signature) bool {
     halfOrder := new(big.Int).Rsh(secp256k1Order, 1)
     return sig.S.Cmp(halfOrder) <= 0
 }
-```go
+```
 
 ### Nonce Generation (CRITICAL - k reuse = key recovery)
 
@@ -556,7 +556,7 @@ static void secp256k1_ecmult(
     // Constant-time implementation using precomputed table
     secp256k1_ecmult_strauss_wnaf(r, a, &n1, &n2, ng);
 }
-```go
+```
 
 ### Public Key Validation
 
@@ -678,7 +678,7 @@ contract Secp256k1Test {
         // sum should be 3G
     }
 }
-```solidity
+```
 
 ## Security Considerations
 

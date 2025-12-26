@@ -54,7 +54,7 @@ var PlatformVMID = constants.PlatformVMID // ids.ID{'p', 'l', 'a', 't', 'f', 'o'
 // Create P-Chain VM
 factory := &pvm.Factory{}
 vm, err := factory.New(logger)
-```solidity
+```
 
 ### Directory Structure
 
@@ -70,7 +70,7 @@ node/vms/platformvm/
 ├── factory.go        # VM factory
 ├── vm.go             # Main VM implementation
 └── *_test.go         # Tests
-```solidity
+```
 
 ### Core Responsibilities
 
@@ -111,7 +111,7 @@ Where:
 - Maximum APY: 11% (at 50% network staked)
 - Minimum APY: 7% (at 80% network staked)
 - Rewards decrease as total stake increases
-```solidity
+```
 
 ### API Endpoints
 
@@ -137,7 +137,7 @@ POST /ext/bc/P/validators/add
 POST /ext/bc/P/delegators/add
 POST /ext/bc/P/chains/register
 POST /ext/bc/P/blockchains/create
-```go
+```
 
 ### recursive network architecture
 
@@ -195,7 +195,7 @@ P-Chain uses Lux consensus (linear chain):
     }
   }
 }
-```go
+```
 
 ## Rationale
 

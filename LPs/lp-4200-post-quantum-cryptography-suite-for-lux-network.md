@@ -57,7 +57,7 @@ type KEMScheme interface {
 // Security proof: Based on Module-LWE problem
 // Reduction: If Module-LWE is hard, ML-KEM is IND-CCA2 secure
 // Reference: Bos et al., "CRYSTALS-Kyber: A CCA-Secure Module-Lattice-Based KEM"
-```solidity
+```
 
 #### EVM Precompiled Contracts
 
@@ -115,7 +115,7 @@ contract ETHMDLSA {
         return success;
     }
 }
-```sql
+```
 
 #### Security Analysis
 
@@ -160,7 +160,7 @@ func (k *SLHDSAKey) Sign(message []byte) []byte {
 
 // Security: Only assumes collision resistance of SHA-256/SHA3
 // No algebraic structure that quantum computers can exploit
-```go
+```
 
 ### 4. Hybrid Cryptography Mode
 
@@ -225,7 +225,7 @@ func (c *ConfidentialAICompute) SecureInference(
     // Aggregate results while preserving privacy
     return c.secretSharing.Reconstruct(results)
 }
-```solidity
+```
 
 #### Private Finance Integration
 
@@ -320,7 +320,7 @@ func TestQuantumSuite(t *testing.T) {
     hybridSig := signHybrid(msg, classicalKey, quantumKey)
     assert.True(t, verifyHybrid(msg, hybridSig, hybridPubKey))
 }
-```solidity
+```
 
 ## Reference Implementation
 

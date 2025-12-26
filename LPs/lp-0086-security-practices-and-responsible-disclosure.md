@@ -77,7 +77,7 @@ report:
     name: "Your name or handle"
     contact: "email or signal"
     wallet: "0x... for bounty payment"
-```solidity
+```
 
 ### Alternative Channels
 
@@ -186,7 +186,7 @@ Impact Factors:
 - Funds at Risk > $1M: 1.2x
 - Funds at Risk < $1M: 1.0x
 - No Funds at Risk: 0.5x
-```solidity
+```
 
 ### Payment
 
@@ -225,7 +225,7 @@ Day 14+:  Disclosure
           ├── Researcher credited
           ├── Public advisory
           └── Bounty payment
-```sql
+```
 
 ### Communication
 
@@ -418,7 +418,7 @@ Current version: 1.0.0 (2025-12-21)
 ├─────────────────────────────────────────────────────────────┤
 │  Safe Harbor: We won't sue good-faith researchers          │
 └─────────────────────────────────────────────────────────────┘
-```solidity
+```
 
 ---
 

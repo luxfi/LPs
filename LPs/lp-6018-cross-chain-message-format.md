@@ -64,7 +64,7 @@ enum MessageType {
     REGISTRY_UPDATE = 0x05,    // Asset registry update
     EMERGENCY = 0x06           // Emergency action
 }
-```solidity
+```
 
 ### Payload Formats
 
@@ -78,7 +78,7 @@ AssetTransferPayload {
     fee: uint256              // Bridge fee
     data: bytes               // Optional callback data
 }
-```solidity
+```
 
 #### Contract Call Payload
 ```solidity
@@ -175,7 +175,7 @@ function validateMessage(
     
     return (true, "");
 }
-```solidity
+```
 
 ### Cross-Chain Identifiers
 
@@ -187,7 +187,7 @@ Examples:
 - Ethereum Mainnet: keccak256("EVM", 1, 0)
 - Lux C-Chain: keccak256("EVM", 43114, 0)
 - Bitcoin: keccak256("Bitcoin", 0, 0)
-```solidity
+```
 
 #### Address Format
 Addresses are encoded based on chain type:
@@ -231,7 +231,7 @@ function teleportAsset(
     // AWM handles message relay
     warpMessenger.sendMessage(destChain, encode(message));
 }
-```solidity
+```
 
 ## Rationale
 
@@ -359,7 +359,7 @@ go test ./vms/platformvm/warp/validator -v
 
 # Integration tests
 go test -tags=integration ./vms/platformvm/warp/...
-```solidity
+```
 
 ### Message Format Testing
 

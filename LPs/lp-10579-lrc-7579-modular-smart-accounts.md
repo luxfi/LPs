@@ -44,7 +44,7 @@ enum ModuleType {
     Fallback,      // 3: Handles unknown function calls
     Hook           // 4: Pre/post execution hooks
 }
-```solidity
+```
 
 ### Account Interface
 
@@ -119,7 +119,7 @@ contract PasskeyValidator is IValidator {
         return 1; // Invalid
     }
 }
-```solidity
+```
 
 ### Executor Module
 
@@ -190,7 +190,7 @@ contract SpendingLimitHook is IHook {
         dailySpent[msg.sender] += spent;
     }
 }
-```solidity
+```
 
 ### Execution Modes
 
@@ -213,7 +213,7 @@ account.installModule(1, multisigValidator, guardianKeys);
 
 // Install hook for spending limits
 account.installModule(4, spendingHook, limits);
-```solidity
+```
 
 ### Enterprise Wallet
 ```solidity

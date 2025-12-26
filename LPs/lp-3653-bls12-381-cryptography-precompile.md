@@ -343,7 +343,7 @@ library BLS12381Lib {
         return success && abi.decode(result, (bool));
     }
 }
-```sql
+```
 
 ## Full Implementation Stack
 
@@ -481,7 +481,7 @@ func (p *G1Affine) Validate() error {
 func (p *G1Affine) InG1() bool {
     return C.blst_p1_affine_in_g1((*C.blst_p1_affine)(unsafe.Pointer(p))) != 0
 }
-```solidity
+```
 
 ### G2 Subgroup Check
 
@@ -584,7 +584,7 @@ func VerifyPOP(pk *G2Affine, pop *G1Affine) bool {
     // Check: e(σ_pop, g2) = e(H(pk), pk)
     return PairingCheck([]*G1Affine{pop, hpk}, []*G2Affine{G2Generator(), pk.Neg()})
 }
-```solidity
+```
 
 ### Multi-Scalar Multiplication (MSM) Security
 
@@ -677,7 +677,7 @@ func PairingCheck(g1s []*G1Affine, g2s []*G2Affine) bool {
     // Use optimized multi-pairing with delayed final exp
     return C.blst_pairing_chk_n_mul_n_aggr_pk_in_g2(...) != 0
 }
-```solidity
+```
 
 ## Integration Across Lux Infrastructure
 
@@ -840,7 +840,7 @@ contract BLS12381Test {
         require(valid, "Pairing check failed");
     }
 }
-```solidity
+```
 
 ## Security Considerations
 

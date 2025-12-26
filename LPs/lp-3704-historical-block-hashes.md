@@ -58,7 +58,7 @@ contract BlockHashHistory {
         return blockHashes[blockNumber % HISTORY_SIZE];
     }
 }
-```solidity
+```
 
 ### System Address
 
@@ -87,7 +87,7 @@ func opBlockhash(pc *uint64, interpreter *EVMInterpreter, scope *ScopeContext) (
     num.SetBytes(hash.Bytes())
     return nil, nil
 }
-```go
+```
 
 ### Block Processing
 

@@ -176,7 +176,7 @@ const (
     ChainTypeCosmos  ChainType = 2
     ChainTypeSolana  ChainType = 3
 )
-```go
+```
 
 #### Block Structure
 
@@ -315,7 +315,7 @@ const (
     StatusFailed     BridgeStatus = 5
     StatusRefunded   BridgeStatus = 6
 )
-```go
+```
 
 ### Transaction Types
 
@@ -496,7 +496,7 @@ func (tx *WithdrawRequestTx) Verify(state *BridgeState) error {
 
     return nil
 }
-```go
+```
 
 #### 3. WithdrawExecuteTx
 
@@ -618,7 +618,7 @@ type SwapRequestTx struct {
 
     Signature       []byte
 }
-```go
+```
 
 #### 5. SwapExecuteTx
 
@@ -700,7 +700,7 @@ func (tx *ChainRegistrationTx) Verify(state *BridgeState) error {
 
     return nil
 }
-```go
+```
 
 #### 7. AssetRegistrationTx
 
@@ -757,7 +757,7 @@ type RelayerRewardTx struct {
     // Signed by reward distributor
     DistributorSig  []byte
 }
-```solidity
+```
 
 ### Bridge State Machine
 
@@ -816,7 +816,7 @@ The B-Chain manages bridge operations through comprehensive state machines for d
                                                          |      +----------------+        |
                                                          |                                |
                                                          +--------------------------------+
-```solidity
+```
 
 #### Withdrawal State Machine
 
@@ -863,7 +863,7 @@ The B-Chain manages bridge operations through comprehensive state machines for d
                      |      +----------------+        |      |                           |
                      |                                |      |                           |
                      +--------------------------------+      +---------------------------+
-```solidity
+```
 
 #### Consolidated State Diagram
 
@@ -895,7 +895,7 @@ The B-Chain manages bridge operations through comprehensive state machines for d
                     +-----v-----+            +-----+-----+
                     | COMPLETED |            | REFUNDED  |
                     +-----------+            +-----------+
-```solidity
+```
 
 #### Mermaid State Diagrams
 
@@ -930,7 +930,7 @@ stateDiagram-v2
     FAILED --> REFUNDED: Tokens returned to user
     COMPLETED --> [*]
     REFUNDED --> [*]
-```solidity
+```
 
 **Cross-Chain Swap State Machine**:
 
@@ -1020,7 +1020,7 @@ func (sm *BridgeStateMachine) processDeposit(deposit *DepositRecord) {
         }
     }
 }
-```solidity
+```
 
 ### External Chain Watchers
 
@@ -1140,7 +1140,7 @@ func (w *EVMWatcher) parseDepositLog(log types.Log) (*DepositEvent, error) {
         Recipient:     event.Recipient[:],
     }, nil
 }
-```solidity
+```
 
 #### Bitcoin Watcher
 
@@ -1388,7 +1388,7 @@ func (w *CosmosWatcher) VerifyIBCProof(
         proof,
     )
 }
-```go
+```
 
 ### Signature Request Flow to T-Chain
 
@@ -1523,7 +1523,7 @@ func (b *BridgeVM) SendWarpMessage(msg *WarpBridgeMessage) error {
     // Submit to P-Chain for aggregation
     return b.warpClient.SendMessage(warpMsg)
 }
-```solidity
+```
 
 ### Supported Chains Configuration
 
@@ -1650,7 +1650,7 @@ func (c *AssetRegistryClient) ValidateTransfer(
 
     return nil
 }
-```go
+```
 
 ### Fee Model
 
@@ -1986,7 +1986,7 @@ const (
     MinRelayerUptime    = 95           // 95% uptime requirement
     ObservationTimeout  = 30           // Seconds to submit observation
 )
-```solidity
+```
 
 #### Observation Requirements
 
@@ -2021,7 +2021,7 @@ Relayer                          B-Chain                         T-Chain
    |                                |<-- 9. MPC signature ----------|
    |                                |                               |
    |<-- 10. Deposit confirmed ------|                               |
-```go
+```
 
 #### Relayer Rewards and Penalties
 
@@ -2309,7 +2309,7 @@ func (api *BridgeAPI) Fees(
         EstimatedTime: api.estimateTime(sourceChainID, destChainID),
     }, nil
 }
-```go
+```
 
 #### Additional RPC Methods
 
@@ -2485,7 +2485,7 @@ type WithdrawNotification struct {
     DestTxHash      *common.Hash    `json:"destTxHash,omitempty"`
     BlockNumber     uint64          `json:"blockNumber"`
 }
-```go
+```
 
 #### RPC Method Summary
 
@@ -2607,7 +2607,7 @@ func (vm *BridgeVM) GetChallengeBlocks(amount *big.Int, assetID AssetID) uint64 
 
     return DefaultChallengeBlocks
 }
-```go
+```
 
 ## Rationale
 
@@ -2855,7 +2855,7 @@ func TestCrossChainSwap(t *testing.T) {
     require.NoError(t, err)
     require.True(t, balance.Cmp(big.NewInt(1e8)) >= 0)
 }
-```go
+```
 
 ### Stress Tests
 
@@ -3139,7 +3139,7 @@ curl -X POST -H "Content-Type: application/json" \
 # WebSocket subscription (port 9631)
 wscat -c ws://localhost:9631/ext/bc/B/ws
 > {"jsonrpc":"2.0","method":"bridge_subscribe","params":["deposits",{}],"id":1}
-```solidity
+```
 
 ## Security Considerations
 

@@ -119,7 +119,7 @@ The Lux ecosystem requires a single source of truth for:
   },
   "treasury": "0x9011E888251AB053B7bD1cdB598Db4f9DEd94714"
 }
-```solidity
+```
 
 ---
 
@@ -682,7 +682,7 @@ c01640b0 lib/uniswap-lib (heads/master)
 ee547b17 lib/v2-core (heads/master)
 d8b1c635 lib/v3-core (heads/main)
 06823871 lib/v3-periphery (heads/main)
-```sql
+```
 
 ---
 

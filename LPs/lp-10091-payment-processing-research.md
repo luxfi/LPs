@@ -62,7 +62,7 @@ interface PaymentArchitecture {
     accepted_collateral: ["LUX", "BTC", "ETH", "Stablecoins"];
   };
 }
-```solidity
+```
 
 ## Research Findings
 
@@ -157,7 +157,7 @@ contract LuxCredit {
         emit CreditLineOpened(msg.sender, creditLimit);
     }
 }
-```solidity
+```
 
 ### 3. Recurring Payments
 
@@ -252,7 +252,7 @@ class LuxMerchantSDK {
     return payment.status === 'completed' && onChainTx.confirmed;
   }
 }
-```solidity
+```
 
 ### 5. Compliance Framework
 

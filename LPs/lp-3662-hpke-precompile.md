@@ -541,7 +541,7 @@ library HPKE {
         return result;
     }
 }
-```go
+```
 
 ### Go Implementation
 
@@ -942,7 +942,7 @@ function testHPKEEncryptDecrypt() public {
 
     assertEq(decrypted, plaintext);
 }
-```solidity
+```
 
 ## Reference Implementation
 

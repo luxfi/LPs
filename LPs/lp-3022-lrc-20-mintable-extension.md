@@ -30,7 +30,7 @@ interface IERC20Mintable {
      */
     function mint(address to, uint256 amount) external;
 }
-```solidity
+```
 
 ## Rationale
 
@@ -52,7 +52,7 @@ Standard tests should cover:
 See the IERC20Mintable interface in the standard repository:
 ```
 /standard/src/interfaces/IERC20Mintable.sol
-```solidity
+```
 
 ## Implementation
 
@@ -85,7 +85,7 @@ function mint(address to, uint256 amount) external onlyMinter {
 cd ~/work/lux/standard
 forge test --match-contract ERC20MintableTest
 forge coverage --match-contract ERC20Mintable
-```solidity
+```
 
 ### Gas Costs
 

@@ -71,7 +71,7 @@ pub struct TrainingOp {
     // Updated priors
     pub prior_update: PriorDelta,
 }
-```sql
+```
 
 ### Immutable Training Ledger
 
@@ -134,7 +134,7 @@ impl UserModel {
         }
     }
 }
-```sql
+```
 
 #### Homomorphic Aggregation
 ```rust
@@ -190,7 +190,7 @@ interface IUserModelLedger {
         uint256[] calldata opIds
     ) external returns (uint256 rewards);
 }
-```solidity
+```
 
 ### Model Evolution and Priors
 
@@ -244,7 +244,7 @@ message UserModelSync {
     string source_chain = 4;
     string target_chain = 5;
 }
-```python
+```
 
 ## Implementation
 

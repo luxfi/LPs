@@ -131,7 +131,7 @@ func BenchmarkCriticalOrderMatching(b *testing.B) {
         })
     }
 }
-```go
+```
 
 ## Order Types
 
@@ -204,7 +204,7 @@ type TWAPOrder struct {
     Interval    time.Duration `json:"interval"`
     SliceSize   int           `json:"slice_size"`
 }
-```solidity
+```
 
 ## Matching Engine
 
@@ -277,7 +277,7 @@ type PriceLevel struct {
     Orders []*Order  // Time-ordered queue
     Total  decimal.Decimal
 }
-```go
+```
 
 ## DAG Consensus Integration
 
@@ -359,7 +359,7 @@ var (
     ErrSelfTrade           = errors.New("self-trade not allowed")
     ErrMaxOrdersExceeded   = errors.New("max orders exceeded")
 )
-```go
+```
 
 ## Test Cases
 

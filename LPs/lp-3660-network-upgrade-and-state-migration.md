@@ -137,7 +137,7 @@ cd /Users/z/work/lux/state/scripts
 go run export-state-to-genesis.go \
   /path/to/chaindata \
   /output/genesis-export.json
-```solidity
+```
 
 **What Gets Exported**:
 - Account balances (all addresses with non-zero balance)
@@ -159,7 +159,7 @@ blockchain.ExportCallback(func(block *types.Block) error {
     // Process each block
     return archiveBlock(block)
 }, 0, lastBlockNumber)
-```solidity
+```
 
 ### Phase 2: Genesis File Creation
 
@@ -224,7 +224,7 @@ contract_count=$(jq '[.alloc | to_entries[] |
 echo "Total Balance: $total_exported"
 echo "Accounts: $account_count"
 echo "Contracts: $contract_count"
-```solidity
+```
 
 ### Phase 3: Network Initialization
 
@@ -251,7 +251,7 @@ geth --datadir /path/to/new/datadir \
   --http.api eth,net,web3 \
   --bootnodes "" \
   console
-```solidity
+```
 
 #### 3.3 Validator Migration
 
@@ -306,7 +306,7 @@ type ChainExporter interface {
 
     Close() error
 }
-```solidity
+```
 
 **ChainImporter** - Imports blockchain data into destination VM:
 ```go
@@ -354,7 +354,7 @@ type ChainMigrator interface {
     // Verify migration success
     VerifyMigration(source ChainExporter, dest ChainImporter, blockNumber uint64) error
 }
-```solidity
+```
 
 #### VM-Specific Implementations
 
@@ -430,7 +430,7 @@ lux network import \
   --db-backend=badgerdb \
   --verify=true \
   --batch-size=1000
-```solidity
+```
 
 **Node Configuration Flags** (used internally by lux-cli):
 - `genesis-import`: Path to source database
@@ -466,7 +466,7 @@ for !isEpochSealed(currentEpoch) {
 
 // Export state at exact epoch boundary
 exportStateAtHeight(currentEpoch.DChainHeight)
-```go
+```
 
 **Benefits**:
 1. **Validator Set Consistency**: All chains reference same P-Chain epoch
@@ -512,7 +512,7 @@ qChainGenesis := generateFreshGenesis(
     timestamp: time.Now(),
 )
 deployNewChain(qChainGenesis)
-```solidity
+```
 
 ## Rationale
 
@@ -607,7 +607,7 @@ geth --datadir /test/datadir \
 > eth.getBalance("0x...")  // Check known addresses
 > eth.getCode("0x...")     // Verify contract code
 > debug.trieHash()         // Compare state root
-```solidity
+```
 
 ### Network upgrade Checklist
 
@@ -680,7 +680,7 @@ make build-patched
 
 # 5. Coordinate validator upgrade
 # 6. Launch new network
-```go
+```
 
 ### Performance Optimization
 
@@ -726,7 +726,7 @@ type IncrementalExport struct {
     NewContracts   []Contract  // Newly deployed contracts
     UpdatedStorage []Storage   // Modified storage
 }
-```go
+```
 
 ### Cross-Chain State Proofs
 
@@ -757,7 +757,7 @@ func (n *Network) CheckNetwork upgradeSchedule() {
         n.ProposeNetwork upgrade()
     }
 }
-```solidity
+```
 
 ## References
 
@@ -792,7 +792,7 @@ This section documents the practical workflow for migrating blocks from chainEVM
 │  Fresh C-Chain      │  Target: New P-Q network
 │   (BadgerDB)        │  Live with P,C,Q,X chains
 └─────────────────────┘
-```solidity
+```
 
 ### Step 1: Export Blocks to JSONL
 
@@ -830,7 +830,7 @@ cd /Users/z/work/lux/genesis
 # Verify export
 wc -l blocks-mainnet-full.jsonl
 # Should output: 1082781 (blocks 0-1082780)
-```bash
+```
 
 #### 1.3 Data Normalization During Export
 
@@ -864,7 +864,7 @@ cd /Users/z/work/lux/genesis
 curl -s -X POST -H 'Content-Type: application/json' \
   -d '{"jsonrpc":"2.0","id":1,"method":"info.getNetworkID","params":{}}' \
   http://127.0.0.1:9650/ext/info
-```bash
+```
 
 ### Step 3: Import Blocks to C-Chain
 
@@ -895,7 +895,7 @@ curl -s -X POST -H 'Content-Type: application/json' \
 CURRENT=$(curl -s ... | xargs printf "%d\n")
 TOTAL=1082780
 echo "Progress: $((CURRENT * 100 / TOTAL))%"
-```solidity
+```
 
 ### Performance Metrics
 
@@ -952,7 +952,7 @@ After import completion:
 curl -s http://127.0.0.1:9650/ext/bc/C/rpc -X POST \
   -H 'Content-Type: application/json' \
   -d '{"method":"eth_syncing","params":[],"id":1,"jsonrpc":"2.0"}'
-```solidity
+```
 
 #### Block Validation Errors
 chainEVM blocks may have different validation rules. Ensure Coreth is configured for chainEVM compatibility.

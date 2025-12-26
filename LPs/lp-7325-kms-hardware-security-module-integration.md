@@ -163,7 +163,7 @@ const (
     AlgorithmRSA_2048
     AlgorithmRSA_4096
 )
-```solidity
+```
 
 #### Configuration
 
@@ -205,7 +205,7 @@ kms:
     backup_provider: thales-luna
     health_check_interval: 30s
     failure_threshold: 3
-```go
+```
 
 ### Integration with Lux Consensus
 
@@ -246,7 +246,7 @@ func (v *QuasarValidator) ThresholdSign(
         threshold,
     )
 }
-```solidity
+```
 
 ### Security Considerations
 
@@ -299,7 +299,7 @@ kms:
     strategy: automatic
     health_check_interval: 30s
     failure_threshold: 3
-```solidity
+```
 
 ### Performance Benchmarks
 
@@ -340,7 +340,7 @@ lux/
 │   ├── metrics/                 # Prometheus metrics
 │   └── docs/                    # Documentation
 │       └── hsm-providers-comparison.mdx  # Provider comparison
-```solidity
+```
 
 ### Installation
 
@@ -384,7 +384,7 @@ luxd kms set-weight google-cloud-kms 10   # 10% traffic
 luxd kms set-weight google-cloud-kms 50   # 50% traffic
 # Monitor for 24 hours
 luxd kms set-weight google-cloud-kms 100  # Full cutover
-```solidity
+```
 
 ## Cost Analysis
 

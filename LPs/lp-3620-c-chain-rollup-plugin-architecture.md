@@ -55,7 +55,7 @@ go build -tags "rollup_optimism" ./cmd/geth
 
 # Run geth with the OP plugin enabled
 ./geth --rollup.optimism --rollup.config ./config/optimism.toml
-```go
+```
 
 ### CLI Integration
 
@@ -84,7 +84,7 @@ type = "optimism"
 genesis = "./optimism/genesis.json"
 sequencer.enabled = true
 relay.rpc = "https://mainnet.optimism.io"
-```solidity
+```
 
 ### Rollup Module API
 
@@ -156,7 +156,7 @@ To support unified node infrastructure, the Lux Node monorepo must embed the OP 
 ```bash
 cd ~/work/lux/geth
 go build -tags "rollup_optimism" -o geth ./cmd/geth
-```solidity
+```
 
 **Plugin Loading Example**:
 ```go
@@ -171,7 +171,7 @@ if flags.Rollup == "optimism" {
 ```bash
 cd ~/work/lux/geth
 go test ./rollup/optimism/... -v
-```solidity
+```
 
 ### RPC Extensions
 
@@ -196,7 +196,7 @@ With EIP‑4844 (proto‑dank sharding), data gas cost falls to ~1.6 gas/byte�
 Sequencers (node operators) collect these L1 fees by charging an L2 base fee designed to cover L1 gas + operator margin. A typical fee model:
 ```
 L2 base fee = (estimated L1 gas per L2 tx × current gas price) + operator service fee
-```markdown
+```
 Operator margins should cover infrastructure, storage, and bandwidth costs. Larger batch sizes (e.g. 100–500 tx) or longer aggregation windows reduce per‑tx gas costs.
 
 ## Open Questions (optional)

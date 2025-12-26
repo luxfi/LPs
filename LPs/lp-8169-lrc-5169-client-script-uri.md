@@ -37,7 +37,7 @@ interface ILRC5169 {
     function scriptURI() external view returns (string[] memory);
     event ScriptUpdate(string[] newScriptURI);
 }
-```solidity
+```
 
 ### Script Format
 

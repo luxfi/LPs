@@ -55,7 +55,7 @@ enum AuditType {
   OPERATIONAL = "operational",
   PENETRATION = "penetration",
 }
-```solidity
+```
 
 #### Audit Process
 ```typescript
@@ -123,7 +123,7 @@ interface SeverityMatrix {
   // Risk rating
   getRiskRating(score: number): Severity;
 }
-```solidity
+```
 
 ### Smart Contract Security Standards
 
@@ -198,7 +198,7 @@ interface CrossChainSecurity {
     };
   };
 }
-```solidity
+```
 
 ### Incident Response
 
@@ -279,7 +279,7 @@ interface ContinuousSecurity {
     rules: BountyRules;
   };
 }
-```solidity
+```
 
 ### Security Tooling
 
@@ -351,7 +351,7 @@ interface AuditReport {
     signoff: Approval[];
   };
 }
-```solidity
+```
 
 ### Disclosure Policy
 
@@ -409,7 +409,7 @@ interface ComplianceRequirements {
     reporting: ReportingRequirement[];
   };
 }
-```solidity
+```
 
 ## Rationale
 
@@ -487,7 +487,7 @@ async function testEmergencyResponse() {
     action: 'LARGE_DRAIN'
   });
 }
-```sql
+```
 
 ## Reference Implementation
 

@@ -55,7 +55,7 @@ interface MEVLandscape {
     prevention: "Currently minimal";
   };
 }
-```solidity
+```
 
 ## Research Findings
 
@@ -200,7 +200,7 @@ contract BlockSpaceAuction {
         _processRefunds(targetBlock, winners);
     }
 }
-```solidity
+```
 
 ### 3. MEV Redistribution
 
@@ -312,7 +312,7 @@ contract MEVResistantAMM {
         return amountOut;
     }
 }
-```solidity
+```
 
 ### 5. Cross-Chain MEV Mitigation
 

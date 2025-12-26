@@ -420,7 +420,7 @@ library ECIES {
         return bytes32(secret);
     }
 }
-```solidity
+```
 
 ### Go Implementation
 
@@ -919,7 +919,7 @@ function testECIESEncryptDecrypt() public {
 
     assertEq(decrypted, plaintext);
 }
-```solidity
+```
 
 ## Reference Implementation
 

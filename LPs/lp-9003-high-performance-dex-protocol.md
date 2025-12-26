@@ -89,7 +89,7 @@ type Order struct {
     Commitment  Hash       // Hidden order hash
     ZKProof     []byte     // Validity proof
 }
-```sql
+```
 
 ### GPU-Accelerated Matching
 
@@ -185,7 +185,7 @@ contract CommitRevealDEX {
         delete revealedOrders;
     }
 }
-```solidity
+```
 
 ### Zero-Knowledge Privacy Layer
 
@@ -272,7 +272,7 @@ func (a *LiquidityAggregator) FindBestPath(
 
     return paths[:10], nil  // Top 10 paths
 }
-```solidity
+```
 
 ### Cross-Chain Settlement
 
@@ -354,7 +354,7 @@ func TestMEVProtection(t *testing.T) {
     err = dex.RevealOrder(order, proof)
     assert.NoError(t, err)
 }
-```solidity
+```
 
 ## Reference Implementation
 
@@ -433,7 +433,7 @@ Liquidity Pool Fee: 0.05% - 1% (pool-specific)
 Cross-Chain Fee: 0.2%
 Settlement Timeout: 1 hour
 Proof Verification Gas: 50,000
-```sql
+```
 
 **Liquidity Aggregation**:
 ```sql

@@ -125,7 +125,7 @@ This is a foundational specification. No prior on‑chain deployments are change
 ```bash
 cd ~/work/lux/node/config
 go test -v ./...
-```solidity
+```
 
 ### LUX Token Implementation
 

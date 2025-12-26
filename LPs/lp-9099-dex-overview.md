@@ -351,7 +351,7 @@ make build
 
 # Run DEX daemon
 ./build/lxd --config=dex.yaml
-```solidity
+```
 
 ### Go SDK
 
@@ -385,7 +385,7 @@ const order = await dex.placeOrder({
   size: 0.1,
   leverage: 10,
 });
-```bash
+```
 
 ## Benchmarks
 

@@ -85,7 +85,7 @@ type LuxDAG struct {
     frontier    set.Set[ids.ID]  // Current frontier vertices
     conflictSet map[ids.ID]set.Set[ids.ID]
 }
-```solidity
+```
 
 ### Consensus Parameters
 ```go
@@ -118,7 +118,7 @@ type Owner struct {
     Addrs     []ids.ShortID
     SignatureType uint8  // 0: ECDSA, 1: Lamport OTS
 }
-```go
+```
 
 ### Transaction Types
 
@@ -145,7 +145,7 @@ type CancelOrderTx struct {
     OrderID     ids.ID
     CancelAll   bool     // Cancel all orders for trader
 }
-```go
+```
 
 #### 3. TradeTx (System-generated)
 ```go
@@ -192,7 +192,7 @@ type Order struct {
     Timestamp   uint64
     SignatureType uint8
 }
-```sql
+```
 
 ### Matching Engine
 ```go
@@ -242,7 +242,7 @@ type LamportSignature struct {
     KeyIndex     uint64
     Timestamp    uint64
 }
-```go
+```
 
 ### Signature Generation
 ```go
@@ -285,7 +285,7 @@ func VerifyLamportSignature(message []byte, sig *LamportSignature,
     
     return true
 }
-```go
+```
 
 ### Key Management Service
 ```go
@@ -333,7 +333,7 @@ func (pm *ParallelMatcher) ProcessOrder(order *Order) {
     shardID := pm.hashFunc(order.ID)
     pm.shards[shardID].inbound <- order
 }
-```solidity
+```
 
 ### Memory Pool Optimization
 ```go
@@ -380,7 +380,7 @@ func (x *XChain) SettleBatch(batch *SettlementBatch) error {
     // Commit to chain
     return x.commitTransaction(settlementTx)
 }
-```solidity
+```
 
 ## API Specification
 
@@ -435,7 +435,7 @@ ws.subscribe({
     channel: "orders",
     address: "X-lux1..."
 });
-```go
+```
 
 ## Cross-Chain Settlement
 
@@ -510,7 +510,7 @@ func BenchmarkOrderMatching(b *testing.B) {
     }
     // Result: 1,200,000 orders/sec on 32-core machine
 }
-```bash
+```
 
 ## Implementation
 
@@ -565,7 +565,7 @@ go test ./vms/exchangevm/orderbook -bench=. -benchmem
 
 # Test with race detection
 go test -race ./vms/exchangevm/...
-```solidity
+```
 
 ### Performance Testing
 
@@ -600,7 +600,7 @@ curl -X POST --data '{
   "method":"exchangevm.getOrderBook",
   "params":{"pair":"LUX-USDC"}
 }' -H 'content-type:application/json;' http://localhost:9650/ext/bc/X
-```solidity
+```
 
 ### File Size Verification
 
@@ -626,7 +626,7 @@ curl -X POST --data '{
 10,000 orders: 8.5ms (1.18M orders/sec)
 100,000 orders: 78ms (1.28M orders/sec)
 1,000,000 orders: 0.83sec (1.20M orders/sec)
-```sql
+```
 
 ## Backwards Compatibility
 

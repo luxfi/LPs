@@ -93,7 +93,7 @@ contract DeFiAggregator {
         address address;
     }
 }
-```solidity
+```
 
 ## Rationale
 
@@ -142,7 +142,7 @@ function getTokenPrice(address token) external view returns (uint256) {
     
     return result.token.priceUSD;
 }
-```sql
+```
 
 ### Query Modifiers
 
@@ -220,7 +220,7 @@ function getTotalUSDValue(address user, string memory token)
     var result = GetCrossChainBalance.execute(user, token);
     return result.total;
 }
-```solidity
+```
 
 ### Gas Optimization
 
@@ -257,7 +257,7 @@ uint256 symbol = result.token.symbol; // Error: string to uint256
 
 // Automatic type coercion where safe
 uint256 amount = result.balance; // OK if balance is numeric
-```solidity
+```
 
 ### Security Features
 
@@ -334,7 +334,7 @@ contract DeFiAggregator {
         IDex(result.best.protocol).swap(tokenIn, tokenOut, amount);
     }
 }
-```solidity
+```
 
 ### NFT Marketplace
 ```solidity
@@ -380,7 +380,7 @@ contract UniversalBridge {
         """
     }
 }
-```solidity
+```
 
 ## Test Cases
 
@@ -435,7 +435,7 @@ contract TestTypeSafety {
         string memory name = GetUser.execute(1).user.name;
     }
 }
-```solidity
+```
 
 ### 3. Cross-Chain Aggregation
 
@@ -495,7 +495,7 @@ contract TestCaching {
         assert(result1.stats.timestamp == result2.stats.timestamp);
     }
 }
-```solidity
+```
 
 ### 5. Gas Metering
 
@@ -545,7 +545,7 @@ contract TestPrecompile {
         assert(result.length > 0);
     }
 }
-```solidity
+```
 
 ### 7. Error Handling
 
@@ -595,7 +595,7 @@ contract TestBatchQueries {
         assert(results.stats.tvl > 0);
     }
 }
-```solidity
+```
 
 ## Backwards Compatibility
 

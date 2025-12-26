@@ -118,7 +118,7 @@ interface ILuxNFTStaking {
     function getUserStakes(uint256 poolId, address user) external view returns (StakeInfo[] memory);
     function getPoolInfo(uint256 poolId) external view returns (PoolInfo memory);
 }
-```solidity
+```
 
 ### Boost System Extension
 
@@ -229,7 +229,7 @@ interface INFTStakingLock is ILuxNFTStaking {
         uint256 tokenId
     ) external view returns (uint256);
 }
-```solidity
+```
 
 ### Multi-Reward Extension
 
@@ -319,7 +319,7 @@ interface INFTStakingDelegation is ILuxNFTStaking {
         address delegator
     ) external view returns (Delegation[] memory);
 }
-```solidity
+```
 
 ## Rationale
 
@@ -478,7 +478,7 @@ function testLockBonus() public {
     // Now unstake should work
     staking.unstake(poolId, tokenIds, new uint256[](0));
 }
-```bash
+```
 
 ## Implementation
 
@@ -522,7 +522,7 @@ forge test --match-path test/nft-staking/\* --gas-report
 
 # Coverage
 forge coverage --match-path test/nft-staking/\*
-```solidity
+```
 
 **Test Cases** (see `/test/nft-staking/LuxNFTStaking.t.sol`):
 - `testCreatePoolAndStake()` - Pool creation and basic staking
@@ -836,7 +836,7 @@ contract LuxNFTStaking is ILuxNFTStaking, INFTStakingBoost, ReentrancyGuard, Own
         emit EmergencyWithdraw(poolId, msg.sender, tokenIds);
     }
 }
-```solidity
+```
 
 ## Security Considerations
 
@@ -858,7 +858,7 @@ Use safe transfer functions:
 ```solidity
 IERC721(collection).safeTransferFrom(from, to, tokenId);
 // Handle onERC721Received callback
-```solidity
+```
 
 ### Reward Calculation Precision
 
@@ -875,7 +875,7 @@ modifier onlyOwner() {
     require(msg.sender == owner, "Not owner");
     _;
 }
-```solidity
+```
 
 ## Copyright
 

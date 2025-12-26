@@ -50,7 +50,7 @@ Hanzo LLM Gateway (HIP-4)
 ├── Model Selection Engine
 ├── Caching Layer
 └── Cost Optimization
-```solidity
+```
 
 ### Smart Contract AI Oracle
 
@@ -150,7 +150,7 @@ func (v *AIValidator) OptimizePerformance() error {
     
     return v.applyOptimizations(response)
 }
-```solidity
+```
 
 ### Developer SDK Integration
 
@@ -278,7 +278,7 @@ class LuxCrossChainAI implements CrossChainAnalytics {
     };
   }
 }
-```solidity
+```
 
 ### Configuration Management
 
@@ -310,7 +310,7 @@ ai:
     max_requests_per_minute: 100
     max_tokens_per_request: 4000
     monthly_budget: 1000  # USD
-```go
+```
 
 ### Performance Optimization
 
@@ -397,7 +397,7 @@ contract SecureAIOracle {
         return verifySignature(proofHash, proof);
     }
 }
-```solidity
+```
 
 ## Rationale
 

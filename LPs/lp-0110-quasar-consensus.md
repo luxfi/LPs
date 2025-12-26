@@ -59,7 +59,7 @@ Quasar processes blocks through six phases:
 │   └─────────┘    └─────────┘    └─────────┘                            │
 │                                                                         │
 └─────────────────────────────────────────────────────────────────────────┘
-```go
+```
 
 ### 2. Component Specifications
 
@@ -124,7 +124,7 @@ func (w *WaveEngine) Poll(sample []NodeID, item Decidable) (preferOK, confOK boo
     confOK = ratio > theta + 0.1  // Higher bar for confidence
     return
 }
-```go
+```
 
 #### 2.3 Focus: Confidence Accumulation (LP-114)
 
@@ -180,7 +180,7 @@ func (p *PrismEngine) Refract(vertices []ids.ID, k int) [][]ids.ID {
     }
     return groups
 }
-```go
+```
 
 #### 2.5 Horizon: Finality Predicates (LP-115)
 
@@ -247,7 +247,7 @@ func (f *FlareEngine) Finalize(cut []ids.ID) []ids.ID {
 
     return finalized
 }
-```go
+```
 
 ### 3. Unified Consensus Loop
 
@@ -324,7 +324,7 @@ func (q *QuasarPQ) FinalizeWithPQ(itemID ids.ID) {
         q.flare.Finalize([]ids.ID{itemID})
     }
 }
-```solidity
+```
 
 ## Rationale
 

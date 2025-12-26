@@ -107,7 +107,7 @@ func (pr *ProposerRotation) NextProposer() ids.NodeID {
         }
     }
 }
-```bash
+```
 
 **Testing**:
 ```bash

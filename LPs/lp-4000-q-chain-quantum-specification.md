@@ -56,7 +56,7 @@ var QVMID = constants.QVMID // ids.ID{'q', 'v', 'm'}
 // Create Q-Chain VM
 factory := &qvm.Factory{}
 vm, err := factory.New(logger)
-```solidity
+```
 
 ### Directory Structure
 
@@ -73,7 +73,7 @@ node/crypto/
 ├── mlkem/            # ML-KEM (FIPS 203)
 ├── mldsa/            # ML-DSA (FIPS 204)
 └── slhdsa/           # SLH-DSA (FIPS 205)
-```solidity
+```
 
 ### Cryptographic Algorithms
 
@@ -110,7 +110,7 @@ signature, err := mldsa.Sign65(sk, message)
 
 // Verify signature
 valid, err := mldsa.Verify65(pk, message, signature)
-```solidity
+```
 
 | Variant | Security Level | Public Key | Signature |
 |---------|----------------|------------|-----------|
@@ -150,7 +150,7 @@ stamp, err := qvm.CreateQuantumStamp(chainID, blockHash, blockHeight)
 
 // Verify a quantum stamp
 valid, err := qvm.VerifyQuantumStamp(stamp)
-```solidity
+```
 
 ### Transaction Types
 
@@ -178,7 +178,7 @@ valid, err := qvm.VerifyQuantumStamp(stamp)
        │                   │                   │
        │         Cross-chain with PQ stamp     │
        │──────────────────────────────────────▶│
-```solidity
+```
 
 ### API Endpoints
 
@@ -199,7 +199,7 @@ GET  /ext/bc/Q/quantum/stamp/{chainId}/{blockHeight}
 POST /ext/bc/Q/quantum/verify
 GET  /ext/bc/Q/quantum/keys
 POST /ext/bc/Q/quantum/rotate
-```solidity
+```
 
 ### Configuration
 
@@ -251,7 +251,7 @@ func TestConfigValidation(t *testing.T)
 func TestQuantumStampExpiration(t *testing.T)
 func TestMLKEMKeyExchange(t *testing.T)
 func TestMLDSASignVerify(t *testing.T)
-```solidity
+```
 
 ## Reference Implementation
 

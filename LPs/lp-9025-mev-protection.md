@@ -89,7 +89,7 @@ interface IFairOrdering {
     event OrderRevealed(bytes32 indexed orderId, bytes orderData);
     event BatchExecuted(uint256 indexed batchId, uint256 ordersExecuted);
 }
-```solidity
+```
 
 ### 3. Commit-Reveal Implementation
 
@@ -316,7 +316,7 @@ contract BatchAuctionDEX {
         }
     }
 }
-```solidity
+```
 
 ### 5. Private Transaction Pool
 
@@ -472,7 +472,7 @@ contract SlippageProtectedSwap {
     function getVolatility(address, address) internal view returns (uint256) { return 0; }
     function _executeSwap(address, address, uint256) internal returns (uint256) { return 0; }
 }
-```solidity
+```
 
 ### 7. MEV-Aware Routing
 
@@ -576,7 +576,7 @@ interface MEVMetrics {
     },
   ];
 }
-```solidity
+```
 
 ## MEV Protection Levels
 

@@ -72,7 +72,7 @@ X-Payment-Request: {
   "resource": "/api/v1/data",
   "validFor": 300  // seconds
 }
-```solidity
+```
 
 ### Payment Authorization Header
 
@@ -163,7 +163,7 @@ contract X402Facilitator {
         );
     }
 }
-```solidity
+```
 
 ### AI Agent Integration
 
@@ -262,7 +262,7 @@ function x402Paywall(config: PaywallConfig) {
     }
   };
 }
-```solidity
+```
 
 ## DID Integration
 
@@ -316,7 +316,7 @@ interface IX402DIDService {
     function getX402Config(string calldata did) external view returns (X402Config memory);
     function supportsX402(string calldata did) external view returns (bool);
 }
-```markdown
+```
 
 See [LP-10093: Decentralized Identity Research](./lp-10093-decentralized-identity-research.md) for full DID specification.
 
@@ -327,14 +327,14 @@ See [LP-10093: Decentralized Identity Research](./lp-10093-decentralized-identit
 AI Agent → 402 Payment Required for dataset
 AI Agent → Signs LRC-3009 auth (1 USDC)
 Server → Verifies, delivers dataset
-```solidity
+```
 
 ### API Monetization
 ```
 Developer → Builds paid API
 Client → Gets 402 on rate limit
 Client → Pays per-request
-```solidity
+```
 
 ### Content Paywalls
 ```
@@ -342,7 +342,7 @@ User → Visits premium article
 Site → Returns 402
 Wallet → Auto-pays $0.10
 Site → Delivers content
-```solidity
+```
 
 ## Rationale
 

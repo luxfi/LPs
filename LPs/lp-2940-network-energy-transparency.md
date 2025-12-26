@@ -253,7 +253,7 @@ Open-source tools for community verification:
   "green_certified_count": 360,
   "data_quality": "medium"
 }
-```sql
+```
 
 **Rate Limits**: 100 requests/minute (authenticated)
 

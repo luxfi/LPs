@@ -40,7 +40,7 @@ MAX_BLOB_GAS_PER_BLOCK = 786432      # 6 blobs
 # EIP-7691 (proposed)
 TARGET_BLOB_GAS_PER_BLOCK = 786432   # 6 blobs (2x)
 MAX_BLOB_GAS_PER_BLOCK = 1572864     # 12 blobs (2x)
-```solidity
+```
 
 ## Lux Considerations
 

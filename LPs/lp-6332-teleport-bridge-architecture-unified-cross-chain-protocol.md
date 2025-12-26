@@ -273,7 +273,7 @@ The Teleport network requires a minimum of 5 nodes running both BridgeVM and Thr
     "signatureAggregation": true
   }
 }
-```bash
+```
 
 #### Network Bootstrap Script
 
@@ -368,7 +368,7 @@ main "$@"
   "bchain-mainnet": "bridgevm",
   "keychain-mainnet": "keymanagementvm"
 }
-```solidity
+```
 
 ### Warp Messaging Integration
 
@@ -405,7 +405,7 @@ Teleport uses Lux Warp Messaging for secure cross-chain communication between T-
 │  - Replay protection via message nonces                                      │
 │                                                                              │
 └─────────────────────────────────────────────────────────────────────────────┘
-```go
+```
 
 #### Warp Message Types
 
@@ -497,7 +497,7 @@ func (h *WarpMessageHandler) HandleMessage(msg *warp.Message) error {
   "allowed-incoming-warp-source-chains": ["B"],
   "outgoing-warp-destinations": ["B", "C"]
 }
-```solidity
+```
 
 **chains/B/config.json**:
 
@@ -603,7 +603,7 @@ func (c *BridgeCoordinator) HandleSignatureResponse(
 
 	return nil
 }
-```solidity
+```
 
 ### Key Generation Ceremony
 
@@ -716,7 +716,7 @@ type DKGRound3 struct {
 	PublicKey       curve.Point      // Y = sum(C_j,0)
 	Verification    []byte           // Final verification proof
 }
-```solidity
+```
 
 ### Bridge Flow: Deposit (External -> Lux)
 
@@ -752,7 +752,7 @@ Complete deposit flow from Ethereum to Lux C-Chain:
      │◄────────────────────────────────────────────────────────────────────────
      │  7. Receive wrapped tokens                                            │
      │                 │                 │                 │                 │
-```solidity
+```
 
 #### Deposit Contract Interface
 
@@ -919,7 +919,7 @@ contract TeleportVault is ITeleportVault, ReentrancyGuard, Pausable {
         );
     }
 }
-```solidity
+```
 
 ### Bridge Flow: Withdraw (Lux -> External)
 
@@ -955,7 +955,7 @@ Complete withdrawal flow from Lux C-Chain to Ethereum:
      │                 │                 │                 │                 │
      │◄────────────────────────────────────────────────────────────────────────
      │  8. Receive native tokens                                             │
-```go
+```
 
 ### Supported Chain Types
 
@@ -1221,7 +1221,7 @@ async function main(): Promise<void> {
   );
   console.log(`Bridge complete: ${destTxHash}`);
 }
-```go
+```
 
 #### Go SDK
 
@@ -1417,7 +1417,7 @@ mkdir -p /opt/teleport/{config,certs,data,logs}
   --threshold 3 \
   --parties 5 \
   --output /opt/teleport/config
-```solidity
+```
 
 **Step 2: Deploy Infrastructure**
 
@@ -1457,7 +1457,7 @@ for i in {1..5}; do
     -d '{"jsonrpc":"2.0","id":1,"method":"threshold_getAddress","params":{"keyId":"bridge-main"}}' \
     | jq .
 done
-```bash
+```
 
 **Step 4: Deploy Bridge Contracts**
 
@@ -1485,7 +1485,7 @@ forge script script/DeployVault.s.sol \
 # Start relayer service
 cd ~/work/lux/bridge/relayer
 ./relayer --config /opt/teleport/config/relayer.json
-```solidity
+```
 
 #### Testnet Deployment
 
@@ -1509,7 +1509,7 @@ For testnet, use reduced requirements:
 bash
 # Deploy testnet with 3 nodes
 ./scripts/deploy-testnet.sh --nodes 3 --threshold 2
-```solidity
+```
 
 #### Monitoring and Operations
 
@@ -1566,7 +1566,7 @@ func (c *FeeConfig) CalculateFee(amount *big.Int) *big.Int {
 
 	return totalFee
 }
-```sql
+```
 
 ## Rationale
 
@@ -1617,7 +1617,7 @@ Phase 1 (Current): Deploy T-Chain + B-Chain with CGG21
 Phase 2 (Q1 2025): Enable LSS for dynamic resharing
 Phase 3 (Q2 2025): Add Ringtail dual signatures
 Phase 4 (Q3 2025): Full quantum-safe transition
-```solidity
+```
 
 ## Reference Implementation
 
@@ -1656,7 +1656,7 @@ pnpm build
 # Run local test network
 cd ~/work/lux/node
 ./scripts/run-teleport-testnet.sh
-```solidity
+```
 
 ### Contract Deployments
 
@@ -1741,7 +1741,7 @@ See the full test suite in [github.com/luxfi/bridge/tests]().
 20% -> Relayer incentives
 20% -> DAO treasury (insurance fund)
 10% -> LUX token burn
-```solidity
+```
 
 ### Economic Security
 

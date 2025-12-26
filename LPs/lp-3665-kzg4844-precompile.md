@@ -496,7 +496,7 @@ contract BlobDataManager {
         );
     }
 }
-```go
+```
 
 ### Go Implementation
 
@@ -920,7 +920,7 @@ function testPointEvaluation() public {
     );
     assertTrue(valid);
 }
-```solidity
+```
 
 ## Reference Implementation
 

@@ -52,7 +52,7 @@ function setFeeConfig(
     uint256 maxBlockGasCost,
     uint256 blockGasCostStep
 ) external;
-```solidity
+```
 
 #### getFeeConfig
 ```solidity
@@ -62,7 +62,7 @@ function getFeeConfig() external view returns (FeeConfig memory);
 #### getLastChangedAt
 ```solidity
 function getLastChangedAt() external view returns (uint256 blockNumber);
-```solidity
+```
 
 ### Access Control
 
@@ -129,7 +129,7 @@ setFeeConfig(
     maxBlockGasCost: 1000 gwei,
     blockGasCostStep: 200 wei
 )
-```solidity
+```
 **Expected:** Success, fee config updated
 **Expected Gas:** ~20,000 (write cost)
 **Expected Event:** FeeConfigChanged emitted
@@ -291,7 +291,7 @@ abstract contract FeeManagerValidator {
 cd ~/work/lux/evm/precompile/contracts/fee-manager
 go test -v ./...
 # Tests: setFeeConfig, getFeeConfig, access control, parameter validation
-```bash
+```
 
 **Integration Tests**:
 ```bash
@@ -305,7 +305,7 @@ go test -v ./...
 cd ~/work/lux/standard
 forge test --match-contract FeeManagerTest
 # Tests: Configuration updates, unauthorized access, rate limiting
-```solidity
+```
 
 ### Gas Costs
 
@@ -341,7 +341,7 @@ curl -X POST --data '{
 // Solidity
 IFeeManager feeManager = IFeeManager(0x0200000000000000000000000000000000000003);
 FeeConfig memory config = feeManager.getFeeConfig();
-```solidity
+```
 
 ## Backwards Compatibility
 

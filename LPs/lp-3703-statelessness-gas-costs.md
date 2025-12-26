@@ -37,7 +37,7 @@ type AccessEvent struct {
     IsWrite      bool
     TreeIndex    uint64       // chunk in tree
 }
-```go
+```
 
 ### Gas Schedule
 
@@ -97,7 +97,7 @@ const (
     // Witness gas per byte
     WITNESS_GAS_PER_BYTE = 16
 )
-```go
+```
 
 ### EIP-2929 Compatibility
 

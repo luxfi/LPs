@@ -96,7 +96,7 @@ interface IL2BlockFormat {
         bytes proof;                  // Merkle proof of changes
     }
 }
-```solidity
+```
 
 ### Transaction Format
 
@@ -221,7 +221,7 @@ interface ICompressionSchemes {
     function rleEncode(bytes calldata data) external pure returns (bytes memory);
     function huffmanEncode(bytes calldata data) external pure returns (bytes memory);
 }
-```solidity
+```
 
 ### AI Compute Metadata
 
@@ -340,7 +340,7 @@ interface IBatchAggregation {
         address[] calldata signers
     ) external view returns (bool);
 }
-```solidity
+```
 
 ### Cross-Rollup Messaging
 
@@ -455,7 +455,7 @@ interface IQuantumResistant {
         address account
     ) external view returns (bool);
 }
-```solidity
+```
 
 ### Encoding Specifications
 
@@ -481,7 +481,7 @@ interface IEncodingSpecs {
     function canonicalEncode(L2Block calldata block) external pure returns (bytes memory);
     function computeBlockHash(L2Block calldata block) external pure returns (bytes32);
 }
-```solidity
+```
 
 ## Rationale
 
@@ -617,7 +617,7 @@ describe("Transaction Compression", () => {
         }
     });
 });
-```solidity
+```
 
 ### AI Metadata Tests
 
@@ -701,7 +701,7 @@ describe("Cross-Rollup Messaging", () => {
         expect(batch.aggregatedProof).to.not.be.null;
     });
 });
-```solidity
+```
 
 ### Quantum Signature Tests
 

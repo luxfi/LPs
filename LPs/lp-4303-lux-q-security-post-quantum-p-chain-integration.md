@@ -194,7 +194,7 @@ func ThresholdSignDilithium(
     message []byte,
     threshold int,
 ) (signature []byte, err error)
-```solidity
+```
 
 ### Validator Configuration
 
@@ -209,7 +209,7 @@ quantum:
   # Hybrid mode
   hybridMode: true
   ecdsaKeyFile: "/path/to/ecdsa.key"
-```go
+```
 
 ## Performance Benchmarks
 
@@ -531,7 +531,7 @@ func BenchmarkBatchVerify(b *testing.B) {
     }
 }
 // Result: ~12ms for 100 signatures (120µs average vs 500µs individual)
-```solidity
+```
 
 ## References
 

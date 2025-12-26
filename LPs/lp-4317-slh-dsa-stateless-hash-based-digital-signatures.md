@@ -115,7 +115,7 @@ pk := sk.PublicKey
 // Serialize keys
 privBytes := sk.Bytes()          // 64 bytes
 pubBytes := pk.Bytes()            // 32 bytes
-```solidity
+```
 
 ### Signing
 
@@ -143,7 +143,7 @@ valid := pk.Verify(message, signature, nil)
 if !valid {
     return errors.New("invalid signature")
 }
-```go
+```
 
 **Verification checks**:
 1. Signature size matches parameter set
@@ -181,7 +181,7 @@ type GovernanceProposal struct {
     PublicKey       []byte  // 32 bytes
     Mode            uint8   // SHA2_128f
 }
-```solidity
+```
 
 **Rationale**: Governance decisions have long-lasting effects and require maximum security assurance.
 
@@ -193,7 +193,7 @@ Subject: Lux Network Root CA
 Public Key Algorithm: SLH-DSA-SHA2-256s
 Signature Algorithm: SLH-DSA-SHA2-256s
 Validity: 10 years
-```solidity
+```
 
 **Use Case**: Root CAs issue long-lived certificates and require conservative security guarantees.
 
@@ -245,7 +245,7 @@ contract GovernanceVault {
         // Process governance proposal
     }
 }
-```go
+```
 
 ## Implementation
 
@@ -318,7 +318,7 @@ func GetSignatureSize(mode Mode) int
 func init() {
     precompile.Register(&SLHDSAPrecompile{})
 }
-```solidity
+```
 
 ## Test Results
 
@@ -340,7 +340,7 @@ func init() {
 ✓ GetPublicKeySize               (0.00s)
 ✓ GetSignatureSize               (0.00s)
 ✓ DeterministicSigning           (0.37s)
-```solidity
+```
 
 ### Performance Benchmarks (Apple M1 Max)
 
@@ -354,13 +354,13 @@ BenchmarkSLHDSA_Verify_SHA2_128s  3,500 ops   286,000 ns/op (286μs)
 BenchmarkSLHDSA_Verify_SHA2_256s  1,686 ops   593,000 ns/op (593μs)
 
 BenchmarkSLHDSA_KeyGen_SHA2_128f    285 ops   35,000,000 ns/op (35ms)
-```solidity
+```
 
 #### SHAKE Variants (Slower)
 ```
 BenchmarkSLHDSA_Sign_SHAKE_128s      1 op   1,020,000,000 ns/op (1.02s)
 BenchmarkSLHDSA_Sign_SHAKE_128f     26 ops    38,000,000 ns/op (38ms)
-```solidity
+```
 
 ## Migration Path
 
@@ -586,7 +586,7 @@ func signGovernanceProposal(proposal []byte) ([]byte, error) {
     // signature is 29,792 bytes for SHA2-256s
     return signature, nil
 }
-```solidity
+```
 
 ## Test Cases
 

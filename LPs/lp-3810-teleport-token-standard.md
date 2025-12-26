@@ -70,7 +70,7 @@ contract ERC20B is ERC20, Ownable, AccessControl {
     function grantAdmin(address to) public onlyAdmin;
     function revokeAdmin(address to) public onlyAdmin;
 }
-```solidity
+```
 
 ### LRC20 Base Standard
 
@@ -88,7 +88,7 @@ contract LRC20 {
     function approve(address spender, uint256 amount) public returns (bool);
     function transferFrom(address from, address to, uint256 amount) public returns (bool);
 }
-```solidity
+```
 
 ### Token Implementations
 
@@ -112,7 +112,7 @@ contract LuxBTC is ERC20B {
 
     constructor() ERC20B(_name, _symbol) {}
 }
-```solidity
+```
 
 ### Bridge Architecture
 
@@ -154,7 +154,7 @@ contract Bridge is Ownable, AccessControl {
     function setMPCOracle(address MPCO) public onlyAdmin;
     function setPayoutAddress(address addr, uint256 feeR) public onlyAdmin;
 }
-```solidity
+```
 
 #### Message Format
 
@@ -169,7 +169,7 @@ message = concat(
     keccak256(chainId),               // bytes32 hex
     vault                             // string
 )
-```markdown
+```
 
 Signature verification:
 
@@ -197,7 +197,7 @@ struct TeleportMessage {
     address recipient;
     bytes data;  // optional
 }
-```solidity
+```
 
 ### Supported Chain Routes
 
@@ -244,7 +244,7 @@ contract TokenFactory {
         return Create2.computeAddress(SALT, keccak256(bytecode));
     }
 }
-```solidity
+```
 
 ## Rationale
 
@@ -344,7 +344,7 @@ function testBridgeBurn() public {
     assertEq(leth.balanceOf(address(this)), 0.5 ether);
     assertEq(leth.totalSupply(), 0.5 ether);
 }
-```solidity
+```
 
 ### Replay Protection Test
 
@@ -368,7 +368,7 @@ function testInvalidSignature() public {
     vm.expectRevert("BadSig");
     bridge.bridgeMintStealth(amount, txHash, alice, badSig, token, chainId, vault);
 }
-```solidity
+```
 
 ## Reference Implementation
 
@@ -408,7 +408,7 @@ forge create src/teleport/Bridge.sol:Bridge \
 forge create src/tokens/LETH.sol:LuxETH \
   --rpc-url https://api.lux.network/ext/bc/C/rpc \
   --broadcast
-```solidity
+```
 
 ### Deployed Addresses
 
@@ -449,7 +449,7 @@ Messages include hashed chain ID:
 
 ```solidity
 varStruct.toChainIdHash = keccak256(abi.encodePacked(chainId));
-```markdown
+```
 
 Prevents cross-chain replay even with identical transaction parameters.
 

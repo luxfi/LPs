@@ -104,7 +104,7 @@ go build -o bin/lux-cli ./cmd/main.go
 # Or using make (if available)
 make build
 make install  # Install to $GOPATH/bin
-```bash
+```
 
 ### Testing
 
@@ -150,7 +150,7 @@ go vet ./...
 
 # Full validation
 go test -race ./...
-```solidity
+```
 
 ### File Size Verification
 

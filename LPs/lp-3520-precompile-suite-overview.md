@@ -171,7 +171,7 @@ These precompiles manage chain economics:
 **ML-DSA** (`0x...0006`):
 - NIST FIPS 204 (Dilithium) signatures
 - Level 3 security (192-bit equivalent)
-- 1952-byte public keys, 3309-byte signatures
+- 1952-byte public keys, 3293-byte signatures
 - ~108us verification time
 - See LP-2311 for full specification
 
@@ -250,7 +250,7 @@ function verifyHybrid(
     // Both must pass
     return classical && quantum;
 }
-```sql
+```
 
 ### Threshold Wallet Selection
 
@@ -284,7 +284,7 @@ function receiveMessage(
     );
     // Process message...
 }
-```solidity
+```
 
 ## Related LPs
 

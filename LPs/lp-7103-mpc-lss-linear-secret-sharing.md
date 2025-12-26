@@ -162,7 +162,7 @@ type Config struct {
     PartyIDs        []party.ID
     Generation      uint32       // Incremented on reshare
 }
-```solidity
+```
 
 #### Security Parameters
 
@@ -437,7 +437,7 @@ LSS is integrated into T-Chain (ThresholdVM) via:
 executor := NewProtocolExecutor(pool)
 startFunc := executor.LSSKeygenStartFunc(selfID, participants, threshold)
 handler, err := protocol.NewMultiHandler(startFunc, sessionID)
-```solidity
+```
 
 ### Testing
 

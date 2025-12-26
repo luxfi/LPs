@@ -79,7 +79,7 @@ func SelectProposer(height uint64, validators []Validator) (ids.NodeID, []byte) 
 
     return bestProposer, bestProof
 }
-```go
+```
 
 **Theorem 1 (Fairness)**: The probability of validator v being selected as proposer is proportional to their stake weight: P(v) = stake(v) / Σstake(i).
 
@@ -180,7 +180,7 @@ func (s *PhotonPlusPlus) RecordPoll(votes []Vote) {
     // Update preference
     s.updatePreference(winner)
 }
-```go
+```
 
 ### Weighted Sampling
 
@@ -239,7 +239,7 @@ type PhotonBlock struct {
     ChitCount   uint32  // Number of chits received
     Confidence  uint32  // Consecutive rounds of success
 }
-```solidity
+```
 
 ### Finalization Rules
 
@@ -307,7 +307,7 @@ const (
     PhotonV1   BlockVersion = 1  // Original
     PhotonPlusV2 BlockVersion = 2  // With VRF
 )
-```python
+```
 
 Migration strategy:
 1. Soft fork to recognize v2 blocks
@@ -348,7 +348,7 @@ def test_adaptive_timeout():
     # Slow network
     timeout.update([2000, 2500, 3000, 2200, 2800])
     assert 7000 < timeout.compute() < 10000  # Should increase
-```python
+```
 
 ### Test 3: Byzantine Resilience
 ```python
@@ -413,7 +413,7 @@ go test -v ./... -coverprofile=coverage.out
 #
 # ok  	github.com/luxfi/consensus/protocol/photon	1,043ms
 # coverage: 97.2% of statements
-```bash
+```
 
 **API Endpoints**:
 - `GET /ext/info/photon/luminance/{nodeID}` - Query node performance metrics
@@ -476,7 +476,7 @@ BenchmarkPhotoCommitteeSelection-10  5,248 ops/sec (190μs/op)
 BenchmarkVRFGeneration-10            8,932 ops/sec (112μs/op)
 BenchmarkAdaptiveTimeout-10         12,847 ops/sec (78μs/op)
 BenchmarkLuminanceUpdate-10         24,561 ops/sec (41μs/op)
-```sql
+```
 
 **GitHub**: https://github.com/luxfi/node/tree/main/consensus/protocol/photon
 

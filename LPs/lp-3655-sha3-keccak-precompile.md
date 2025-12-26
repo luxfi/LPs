@@ -450,7 +450,7 @@ interface ISHA3 {
     /// @return permuted Permuted state
     function keccakF1600(bytes calldata state) external view returns (bytes memory permuted);
 }
-```solidity
+```
 
 ### Go Implementation
 
@@ -765,7 +765,7 @@ Use cSHAKE for domain separation:
 bytes memory a = cshake128(data, "", "Domain A", 32);
 bytes memory b = cshake128(data, "", "Domain B", 32);
 // a != b guaranteed
-```go
+```
 
 ## Test Cases
 
@@ -839,7 +839,7 @@ func BenchmarkSHAKE128_1KB(b *testing.B) {
     }
 }
 // BenchmarkSHAKE128_1KB-8    987,654 ns/op    360 gas (40 + 32*6 + 128)
-```solidity
+```
 
 ## Backwards Compatibility
 

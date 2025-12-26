@@ -91,7 +91,7 @@ Create your LP:
 ```bash
 cd ~/work/lux/lps
 make new  # Interactive wizard
-```markdown
+```
 
 Submit via Pull Request:
 - File: `LPs/lp-draft.md`
@@ -252,7 +252,7 @@ make validate-all  # Validate all
 make check-links   # Check links
 make update-index  # Update index
 make pre-pr        # Pre-PR checks
-```solidity
+```
 
 ---
 

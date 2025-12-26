@@ -306,7 +306,7 @@ Blake2b compression function for incremental hashing.
 | Offset | Length | Description |
 |--------|--------|-------------|
 | 0 | 64 | Updated state h |
-```solidity
+```
 
 ## Implementation Stack
 
@@ -339,7 +339,7 @@ Blake2b compression function for incremental hashing.
 │  │ blake3_arm64.s           - Blake3 NEON                          ││
 │  └─────────────────────────────────────────────────────────────────┘│
 └─────────────────────────────────────────────────────────────────────┘
-```solidity
+```
 
 ### File Inventory
 
@@ -366,7 +366,7 @@ node/crypto/blake/
 └── blake_test.go           (6 KB)   # Benchmarks
 
 Total: ~80 KB implementation
-```solidity
+```
 
 ### Solidity Interface
 
@@ -681,7 +681,7 @@ func (p *BlakePrecompile) blake2bF(data []byte, suppliedGas uint64) ([]byte, uin
 
     return result, remainingGas, nil
 }
-```solidity
+```
 
 ### Cross-Chain Compatibility
 
@@ -713,7 +713,7 @@ func (p *BlakePrecompile) blake2bF(data []byte, suppliedGas uint64) ([]byte, uin
 │  └──────────────┘    └──────────────┘    └──────────────┘          │
 │                                                                      │
 └─────────────────────────────────────────────────────────────────────┘
-```go
+```
 
 ### Network Usage Map
 
@@ -864,7 +864,7 @@ func BenchmarkBlake3_1MB(b *testing.B) {
     }
 }
 // BenchmarkBlake3_1MB-8    654,321 ns/op    65,546 gas
-```solidity
+```
 
 ## Backwards Compatibility
 

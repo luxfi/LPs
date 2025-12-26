@@ -40,7 +40,7 @@ CALLDATA_NONZERO_BYTE_GAS = 16
 # Proposed (EIP-7623)
 CALLDATA_ZERO_BYTE_GAS = 12      # 3x increase
 CALLDATA_NONZERO_BYTE_GAS = 48   # 3x increase
-```solidity
+```
 
 ## Lux Considerations
 

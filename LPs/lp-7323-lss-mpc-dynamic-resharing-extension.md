@@ -148,7 +148,7 @@ func DynamicReshareCMP(
 // - Requires at least t old parties to participate
 // - Output configs maintain same public key
 // - Cryptographic verification of resharing correctness
-```go
+```
 
 **Implementation:** [`threshold/protocols/lss/lss_cmp.go`](https://github.com/luxfi/threshold/blob/main/protocols/lss/lss_cmp.go)
 
@@ -193,7 +193,7 @@ newThreshold := 3
 
 newConfigs, err := lss.DynamicReshareCMP(oldConfigs, newPartyIDs, newThreshold, pool)
 // Result: 7 parties can now sign, still need 3 signatures
-```solidity
+```
 
 #### Contract Signing Group (Remove Parties)
 ```go
@@ -215,7 +215,7 @@ newThreshold := 4
 
 newConfigs, err := lss.DynamicReshareCMP(oldConfigs, newPartyIDs, newThreshold, pool)
 // Result: 6 parties, now need 4 signatures instead of 3
-```solidity
+```
 
 #### Proactive Refresh (No Membership Change)
 ```go
@@ -519,7 +519,7 @@ existingConfigs := /* your current threshold shares */
 lssConfigs, err := lss.DynamicReshareCMP(existingConfigs, sameParties, sameThreshold, pool)
 
 // Now you can dynamically reshare in future
-```solidity
+```
 
 **Phase 2: Perform First Resharing**
 ```go
@@ -536,7 +536,7 @@ for range ticker.C {
     refreshedConfigs, _ := lss.DynamicReshareCMP(currentConfigs, sameParties, sameThreshold, pool)
     currentConfigs = refreshedConfigs
 }
-```solidity
+```
 
 ## Full Implementation Stack
 
@@ -575,7 +575,7 @@ for range ticker.C {
 │  │  jvss/       │  │   shamir/    │  │ interpolate/ │  │    vss/      │ │
 │  └──────────────┘  └──────────────┘  └──────────────┘  └──────────────┘ │
 └─────────────────────────────────────────────────────────────────────────┘
-```go
+```
 
 ### Layer 1: EVM Precompile (Optional On-Chain Interface)
 
@@ -663,7 +663,7 @@ func verifyJVSSShare(share *Share, commitments []curve.Point, group curve.Curve)
     }
     return nil
 }
-```go
+```
 
 ### Blinding Security Requirements
 
@@ -708,7 +708,7 @@ func computeInverseBlinding(q, w curve.Scalar, group curve.Curve) (curve.Scalar,
     z := group.NewScalar().Invert(qw)
     return z, nil
 }
-```go
+```
 
 ### Lagrange Interpolation Security
 
@@ -799,7 +799,7 @@ func (mgr *RollbackManager) Rollback(gen int64, key []byte) (*Config, error) {
     
     return UnmarshalConfig(snapshot.State)
 }
-```go
+```
 
 ### Side-Channel Resistance
 
@@ -845,7 +845,7 @@ func padMessage(msg []byte) []byte {
     rand.Read(padded[len(msg):])
     return padded
 }
-```solidity
+```
 
 ## Integration Across Lux Infrastructure
 
@@ -946,7 +946,7 @@ func (mgr *ProactiveManager) performProactiveReshare() error {
     
     return mgr.SaveSnapshot(refreshed)
 }
-```bash
+```
 
 ## Reference Implementation
 
@@ -1075,7 +1075,7 @@ type SignerAdapter interface {
     Verify(publicKey []byte, message []byte, signature []byte) bool
     ChainID() string
 }
-```solidity
+```
 
 ## Use Cases and Applications
 
@@ -1100,7 +1100,7 @@ newConfigs := lss.DynamicReshareCMP(configs, 6parties, threshold=3, pool)
 // Change policy to 4-of-6 (require more approvals)
 newConfigs := lss.DynamicReshareCMP(configs, 6parties, threshold=4, pool)
 // No withdrawal, no re-staking required
-```solidity
+```
 
 **Year 3 - Remove Departing Employee:**
 ```go
@@ -1131,7 +1131,7 @@ oldGuardians := []party.ID{g1, g2, g3, g4, g5, g6, g7, g8}
 newGuardians := []party.ID{g1, g2, g3, g4, g5, g6, g7, g9}  // g8 out, g9 in
 
 newConfigs := lss.DynamicReshareFROST(configs, newGuardians, threshold=5, pool)
-```solidity
+```
 
 **Emergency Security Increase:**
 ```go
@@ -1164,7 +1164,7 @@ for range ticker.C {
     configs = refreshed
 }
 // Defeats slow key compromise attacks
-```solidity
+```
 
 **Policy Change - Increase Threshold:**
 ```go
@@ -1177,7 +1177,7 @@ highSecConfigs := lss.DynamicReshareCMP(configs, parties, threshold=4, pool)
 // CFO resignation - remove immediately
 newConfigs := lss.DynamicReshareCMP(configs, 4parties, threshold=3, pool)
 // No need to move funds to new wallet
-```solidity
+```
 
 **Benefits:**
 - ✅ Operational efficiency (no wallet migrations)
@@ -1209,7 +1209,7 @@ newConfigs := lss.DynamicReshareFROST(oldConfigs, newCouncil, threshold=67, pool
 // Critical vulnerability detected - increase threshold
 emergencyConfigs := lss.DynamicReshareFROST(configs, council, threshold=80, pool)
 // Now need 80% approval for any treasury action
-```sql
+```
 
 **Benefits:**
 - ✅ Democratic governance (quarterly elections)
@@ -1361,7 +1361,7 @@ for each share {
         abort and identify malicious party
     }
 }
-```go
+```
 
 #### 4. Rollback Attacks
 
@@ -1436,7 +1436,7 @@ defer func() {
     secretShare.Zero()
     randomBlinding.Zero()
 }()
-```solidity
+```
 
 ## Open Questions and Future Work
 

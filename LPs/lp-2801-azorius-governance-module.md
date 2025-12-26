@@ -87,7 +87,7 @@ interface IModuleAzoriusV1 {
     function disableStrategy(address _strategy) external;
     function isStrategyEnabled(address _strategy) external view returns (bool);
 }
-```solidity
+```
 
 ### Proposal Lifecycle
 
@@ -102,7 +102,7 @@ interface IModuleAzoriusV1 {
                │  FAILED  │                     │ EXPIRED  │
                │(no quorum)│                     │(timeout) │
                └──────────┘                     └──────────┘
-```solidity
+```
 
 ### Configuration Parameters
 
@@ -147,7 +147,7 @@ struct Transaction {
     bytes data;           // Calldata
     Enum.Operation op;    // Call or DelegateCall
 }
-```solidity
+```
 
 ### Events
 
@@ -188,7 +188,7 @@ function executeProposal(...) external {
 
     emit ProposalExecuted(_proposalId);
 }
-```solidity
+```
 
 ### File Location
 
@@ -196,7 +196,7 @@ function executeProposal(...) external {
 contracts/standard/src/dao/modules/
 ├── ModuleAzoriusV1.sol       # Main Azorius module
 └── ModuleFractalV1.sol       # Fractal (hierarchical) variant
-```solidity
+```
 
 ## Usage Example
 
@@ -330,7 +330,7 @@ function test_FailWithoutQuorum() public {
 
     assertEq(uint(azorius.proposalState(proposalId)), uint(ProposalState.FAILED));
 }
-```solidity
+```
 
 ### Strategy Tests
 

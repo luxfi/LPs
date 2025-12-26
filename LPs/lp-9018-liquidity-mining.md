@@ -87,7 +87,7 @@ interface ILiquidityMining {
     event RewardPaid(address indexed user, address indexed pool, uint256 reward);
     event BoostApplied(address indexed user, uint256 multiplier);
 }
-```solidity
+```
 
 ### 2. Multi-Token Reward System
 
@@ -272,7 +272,7 @@ contract BoostController {
         userBoosts[user].loyaltyBoost = boost;
     }
 }
-```solidity
+```
 
 ### 4. Vesting & Distribution
 
@@ -428,7 +428,7 @@ abstract contract AntiGaming {
                (history.penaltyAccrued * 100 / history.totalStaked) > 500; // >5% penalties
     }
 }
-```solidity
+```
 
 ### 6. Incentive Programs
 

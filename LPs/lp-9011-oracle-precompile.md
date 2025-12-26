@@ -267,7 +267,7 @@ interface IOracle {
         OracleSource source2
     );
 }
-```solidity
+```
 
 ### OracleLib Helper Library
 
@@ -375,7 +375,7 @@ abstract contract ChainlinkCompatible {
         return ORACLE.description(feedId);
     }
 }
-```solidity
+```
 
 ### PythCompatible Wrapper
 
@@ -496,7 +496,7 @@ AggregatorV3Interface feed = AggregatorV3Interface(feedAddress);
 
 // After: Oracle precompile (Chainlink compatible)
 (, int256 answer,,,) = OracleLib.ORACLE.latestRoundData(feedId);
-```solidity
+```
 
 ### Pyth Migration
 
@@ -532,7 +532,7 @@ function testAggregatedPrice() public view {
     assertGe(agg.price, agg.minPrice);
     assertLe(agg.price, agg.maxPrice);
 }
-```solidity
+```
 
 ### TWAP Calculation
 

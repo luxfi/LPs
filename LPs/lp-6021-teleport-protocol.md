@@ -122,7 +122,7 @@ cd bridge
 docker-compose -f compose.local.yml up -d  # Local bridge testing
 cd test/
 # Run bridge integration tests
-```solidity
+```
 
 ### Cross-Chain Testing
 - **Test Cases**: `bridge/test/`

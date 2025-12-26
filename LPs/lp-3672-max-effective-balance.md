@@ -40,7 +40,7 @@ Key changes:
 ```python
 MAX_EFFECTIVE_BALANCE = Gwei(2048 * 10**9)  # 2048 ETH
 MIN_ACTIVATION_BALANCE = Gwei(32 * 10**9)   # 32 ETH (unchanged)
-```solidity
+```
 
 ## Lux Considerations
 

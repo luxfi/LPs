@@ -57,7 +57,7 @@ interface ILRC20 {
     event Transfer(address indexed from, address indexed to, uint256 value);
     event Approval(address indexed owner, address indexed spender, uint256 value);
 }
-```solidity
+```
 
 ### Confidential Transfer Extension
 
@@ -127,7 +127,7 @@ interface ILRC20AICompute {
     event ComputeReleased(bytes32 indexed allocationId);
     event TrainingRewardsDistributed(bytes32 indexed modelUpdateHash, uint256 totalRewards);
 }
-```solidity
+```
 
 ### zkSNARK Proof Structure
 
@@ -252,7 +252,7 @@ describe("LRC20 Confidential Transfers", () => {
         ).to.be.revertedWith("Nullifier already used");
     });
 });
-```sql
+```
 
 ### AI Compute Tests
 
@@ -319,7 +319,7 @@ cd standard
 forge test                      # Run all LRC-20 tests
 forge test --match "Confidential"  # Test privacy features
 forge test --match "AICompute"     # Test AI extensions
-```solidity
+```
 
 ### Integration with C-Chain
 - **Deployment**: C-Chain EVM compatibility via LP-26

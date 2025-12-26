@@ -149,7 +149,7 @@ rhoHash.WriteAny(D[i], E[i])  // May use affine or projective
 dBytes, _ := D[i].MarshalBinary()  // Canonical bytes
 eBytes, _ := E[i].MarshalBinary()
 rhoHash.WriteAny(dBytes, eBytes)
-```solidity
+```
 
 This ensures all parties compute identical binding values ρ, preventing signature failures.
 
@@ -332,7 +332,7 @@ FROST is integrated into T-Chain (ThresholdVM) via:
 executor := NewProtocolExecutor(pool)
 startFunc := executor.FROSTKeygenStartFunc(selfID, participants, threshold)
 handler, err := protocol.NewMultiHandler(startFunc, sessionID)
-```solidity
+```
 
 ### Testing
 

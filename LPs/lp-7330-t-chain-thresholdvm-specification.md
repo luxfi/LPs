@@ -146,7 +146,7 @@ type ThresholdState struct {
     RewardPool      *big.Int                  // Accumulated signing rewards
     SlashingQueue   []SlashingEvent           // Pending slashing events
 }
-```go
+```
 
 #### 2. Managed Key Structure
 
@@ -230,7 +230,7 @@ var RecommendedThresholds = map[string]ThresholdConfig{
     "enterprise": {Threshold: 7, TotalParties: 10},  // 7-of-10
     "bridge":     {Threshold: 11, TotalParties: 15}, // 11-of-15
 }
-```go
+```
 
 ### Transaction Types
 
@@ -411,7 +411,7 @@ func (tx *SignRequestTx) Execute(state *ThresholdState) (*SignSession, error) {
     state.ActiveSessions[session.SessionID] = session
     return session, nil
 }
-```go
+```
 
 #### 3. SignResponseTx - Submit Signature Share
 
@@ -594,7 +594,7 @@ func (tx *ReshareTx) Execute(state *ThresholdState) (*ReshareSession, error) {
 
     return session, nil
 }
-```go
+```
 
 #### 5. ReshareCompleteTx - Finalize Resharing
 
@@ -713,7 +713,7 @@ func (tx *KeyRotateTx) Execute(state *ThresholdState) error {
 
     return keygenTx.Execute(state, nil)
 }
-```solidity
+```
 
 ### State Machine
 
@@ -744,7 +744,7 @@ func (tx *KeyRotateTx) Execute(state *ThresholdState) error {
                                 +------+------+
                                 | DEPRECATED  |
                                 +-------------+
-```solidity
+```
 
 #### Signing Session States
 
@@ -773,7 +773,7 @@ func (tx *KeyRotateTx) Execute(state *ThresholdState) error {
                          v                           v
                   Callback to consumer        Identifiable abort
                                               (slash misbehaving signer)
-```go
+```
 
 ### LSS Protocol Integration
 
@@ -884,7 +884,7 @@ func (vss *FeldmanVSS) VerifyShare(share *Share, commitments []curve.Point) bool
 
     return sharePoint.Equal(expected)
 }
-```go
+```
 
 ### CGGMP21 Protocol Support
 
@@ -1037,7 +1037,7 @@ func (m *CGGMP21Manager) ExecuteSign(
 
     return sig, nil
 }
-```go
+```
 
 ### FROST Protocol Support
 
@@ -1238,7 +1238,7 @@ func (m *FROSTManager) ExecuteSignTaproot(
         S: sig.S,
     }, nil
 }
-```solidity
+```
 
 ### Dynamic Resharing Mechanism
 
@@ -1386,7 +1386,7 @@ func (r *SignerRegistry) ValidatorSync(validators []Validator) error {
 
     return nil
 }
-```solidity
+```
 
 ### RPC API Endpoints
 
@@ -1457,7 +1457,7 @@ T-Chain exposes JSON-RPC endpoints under `/ext/bc/T`:
     },
     "id": 1
 }
-```solidity
+```
 
 #### threshold_reshare - Trigger Key Resharing
 
@@ -1520,7 +1520,7 @@ T-Chain exposes JSON-RPC endpoints under `/ext/bc/T`:
     },
     "id": 1
 }
-```solidity
+```
 
 #### threshold_getKeyStatus - Query Key State
 
@@ -1604,7 +1604,7 @@ T-Chain exposes JSON-RPC endpoints under `/ext/bc/T`:
     },
     "id": 1
 }
-```solidity
+```
 
 #### threshold_getSession - Get Signing Session Status
 
@@ -1677,7 +1677,7 @@ T-Chain exposes JSON-RPC endpoints under `/ext/bc/T`:
     },
     "id": 1
 }
-```solidity
+```
 
 #### threshold_getSignerInfo - Get Signer Details
 
@@ -1763,7 +1763,7 @@ T-Chain exposes JSON-RPC endpoints under `/ext/bc/T`:
     },
     "id": 1
 }
-```solidity
+```
 
 #### threshold_refresh - Trigger Proactive Share Refresh
 
@@ -1842,7 +1842,7 @@ T-Chain exposes JSON-RPC endpoints under `/ext/bc/T`:
     },
     "id": 1
 }
-```go
+```
 
 #### Additional RPC Method Summary
 
@@ -1980,7 +1980,7 @@ var DefaultThresholdParams = Parameters{
     MinSignerStake:     10000 * units.LUX,
     MaxKeysPerSigner:   50,
 }
-```solidity
+```
 
 ## IANA-Style Protocol Registries
 
@@ -2071,7 +2071,7 @@ This section defines the binary encoding for T-Chain protocol messages. All mult
 +                        Sender ID (20 bytes)                   +
 |                                                               |
 +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-```solidity
+```
 
 | Field | Size | Description |
 |:------|:-----|:------------|
@@ -2117,7 +2117,7 @@ This section defines the binary encoding for T-Chain protocol messages. All mult
 +                  Schnorr Proof (64 bytes)                     +
 |                                                               |
 +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-```solidity
+```
 
 ### Sign Commitment Payload (FROST Round 1)
 
@@ -2133,7 +2133,7 @@ This section defines the binary encoding for T-Chain protocol messages. All mult
 +                  E Commitment (33 bytes compressed)           +
 |                                                               |
 +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-```solidity
+```
 
 ### Sign Share Payload (Round 2)
 
@@ -2149,7 +2149,7 @@ This section defines the binary encoding for T-Chain protocol messages. All mult
 +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+                               +
 |                  Optional ZK Proof (variable)                 |
 +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-```solidity
+```
 
 ### Abort Payload (Identifiable Abort)
 
@@ -2165,7 +2165,7 @@ This section defines the binary encoding for T-Chain protocol messages. All mult
 +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+                               +
 |                  Evidence Data (variable)                     |
 +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-```go
+```
 
 | Abort Reason | Value | Description |
 |:-------------|:------|:------------|
@@ -2232,7 +2232,7 @@ type DKGCommitReveal struct {
     // Proof of knowledge prevents rogue key
     ProofOfKnowledge *SchnorrProof
 }
-```solidity
+```
 
 ### T3: Nonce Reuse in Threshold ECDSA
 
@@ -2242,7 +2242,7 @@ type DKGCommitReveal struct {
 ```
 k = (m1 - m2) / (s1 - s2) mod n
 x = (s1 * k - m1) / r mod n
-```go
+```
 
 **Mitigation**:
 - CGGMP21 MUST use pre-signed nonces computed during keygen
@@ -2307,7 +2307,7 @@ func (r *RateLimiter) Allow(keyID KeyID, block uint64) bool {
     r.RequestsPerBlock[keyID]++
     return true
 }
-```sql
+```
 
 ### T6: Sybil Attack on Signer Selection
 
@@ -2347,7 +2347,7 @@ T-Chain provides threshold signatures to B-Chain (BridgeVM) for cross-chain asse
        ^                                     |
        |          Warp Message               |
        +--------- SignatureResult -----------+
-```go
+```
 
 **Request Flow**:
 1. B-Chain BridgeVM constructs withdrawal message
@@ -2427,7 +2427,7 @@ type AuthorizationResponse struct {
     RateLimit   *RateLimitStatus
     Expiry      uint64     // Authorization expires at block
 }
-```solidity
+```
 
 ### T-Chain to T-Chain Integration
 
@@ -2482,7 +2482,7 @@ type CrossChainMessage struct {
     Payload     []byte
     Signature   []byte   // BLS aggregate from source chain validators
 }
-```solidity
+```
 
 ### Interoperability Requirements
 
@@ -2752,7 +2752,7 @@ func TestCrossChainReshare(t *testing.T) {
         }
     }
 }
-```go
+```
 
 ### Stress Tests
 
@@ -3006,7 +3006,7 @@ E Commitment:   0x025B6C7D8E9FA0B1C2D3E4F50617283940A1B2C3D4E5F60718293A4B5C6D7E
     },
     "id": 1
 }
-```solidity
+```
 
 ## Reference Implementation
 
@@ -3024,7 +3024,7 @@ github.com/luxfi/node/vms/thresholdvm/
 ├── codec.go        # Serialization codec
 ├── factory.go      # VM factory for registration
 └── warp_integration_test.go  # Integration tests
-```solidity
+```
 
 **Threshold Cryptography Library** (real implementations):
 ```
@@ -3052,7 +3052,7 @@ github.com/luxfi/threshold/
 │   ├── paillier/      # Paillier encryption
 │   └── zk/            # Zero-knowledge proofs
 └── cmd/               # CLI tools
-```solidity
+```
 
 **TypeScript SDK**:
 ```
@@ -3063,7 +3063,7 @@ github.com/luxfi/threshold/
 │   └── index.ts       # Package exports
 └── test/
     └── client.test.ts # Test suite
-```go
+```
 
 ### Key Implementation Files
 
@@ -3142,7 +3142,7 @@ func (vm *VM) Initialize(...) error {
 
     // ... rest of initialization
 }
-```solidity
+```
 
 ## Security Considerations
 
@@ -3323,7 +3323,7 @@ func (vm *VM) Initialize(...) error {
                         [=== Phase 4: B-Chain Integration ===]
                                     [=== Phase 5: Security ===]
                                                 [=== Phase 6: Launch ===]
-```solidity
+```
 
 ### Related LP Dependencies
 

@@ -76,7 +76,7 @@ The canonical reference implementations for LRC standards are maintained in the 
       function transferFrom(address, address, uint256) external returns (bool);
       // ... standard ERC20 events
   }
-```bash
+```
 
 ### LRC-721 Implementation
 - **Location**: `standard/src/ERC721.sol`
@@ -123,7 +123,7 @@ forge create src/ERC20.sol:ERC20 \
 # Verify contract
 forge verify-contract <address> src/ERC20.sol:ERC20 \
   --rpc-url http://localhost:9650/ext/bc/C
-```solidity
+```
 
 ### GitHub References
 - **Standard Library**: https://github.com/luxfi/standard

@@ -75,7 +75,7 @@ interface ILRC20FlashMint is ILRC20, ILRC3156FlashLender {
         bytes calldata data
     ) external returns (bool);
 }
-```solidity
+```
 
 ### Implementation
 

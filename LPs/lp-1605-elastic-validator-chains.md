@@ -58,7 +58,7 @@ type Performance struct {
     ResponseTime   time.Duration
     ComputeJobs    uint64  // For AI chains
 }
-```go
+```
 
 ### Elastic chain Configuration
 
@@ -122,7 +122,7 @@ contract LiquidStaking {
         _queueUnstaking(msg.sender, amount);
     }
 }
-```sql
+```
 
 ### Dynamic Validator Selection
 
@@ -196,7 +196,7 @@ func (v *CrosschainValidator) Validatechain(
     // chain-specific validation logic
     return chain.Validate(block, v.BaseValidator)
 }
-```go
+```
 
 ### Reward Distribution
 
@@ -286,7 +286,7 @@ func TestLiquidStaking(t *testing.T) {
     pending := staking.PendingUnstake(user)
     assert.Equal(t, 500, pending)
 }
-```sql
+```
 
 ## Reference Implementation
 
@@ -359,7 +359,7 @@ Base APR: 8%
 Performance Bonus: 2% (for 99.9%+ uptime)
 Liquid Staking Fee: 0.1%
 Commission Range: 0% - 25%
-```solidity
+```
 
 **Reward Distribution**:
 ```
@@ -368,7 +368,7 @@ Delegator Rewards: 25%
 Protocol Reserve: 5%
 Slashing Penalty: 10% of stake (for byzantine behavior)
 Unstaking Delay: 14 days
-```solidity
+```
 
 ### Source Code References
 

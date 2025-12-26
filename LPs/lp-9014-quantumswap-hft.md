@@ -806,7 +806,7 @@ contract QuantumSwap is Ownable, ReentrancyGuard {
 
     event MarketMakingStopped(bytes32 indexed configId);
 }
-```solidity
+```
 
 ### Performance Specifications
 
@@ -836,7 +836,7 @@ contract QuantumSwap is Ownable, ReentrancyGuard {
 │  └── Settlement:            Atomic (no partial fills)                      │
 │                                                                             │
 └─────────────────────────────────────────────────────────────────────────────┘
-```solidity
+```
 
 ## Rationale
 
@@ -895,7 +895,7 @@ function testTWAP() public {
     assertTrue(state.active);
     assertEq(state.slices, 12);
 }
-```solidity
+```
 
 ## Reference Implementation
 
@@ -913,7 +913,7 @@ dex/
 ├── orderbook/         # B+ tree order book
 ├── consensus/         # FPC integration
 └── protocol/          # QZMQ messaging
-```solidity
+```
 
 ## Backwards Compatibility
 

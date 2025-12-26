@@ -108,7 +108,7 @@ Position 18:    BlockGasCost (*big.Int, optional)
     "graniteTimestamp": 253399622400
   }
 }
-```solidity
+```
 
 #### Testnet (Chain ID: 96368)
 ```json

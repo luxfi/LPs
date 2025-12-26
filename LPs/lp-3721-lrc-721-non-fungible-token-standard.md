@@ -64,7 +64,7 @@ interface ILRC721 {
     event Approval(address indexed owner, address indexed approved, uint256 indexed tokenId);
     event ApprovalForAll(address indexed owner, address indexed operator, bool approved);
 }
-```solidity
+```
 
 ### AI Model NFT Extension
 
@@ -155,7 +155,7 @@ interface ILRC721Private {
     event StealthTransfer(uint256 indexed tokenId, bytes32 stealthAddress);
     event OwnershipRevealed(uint256 indexed tokenId, address owner);
 }
-```solidity
+```
 
 ### Provenance Verification Structure
 
@@ -308,7 +308,7 @@ describe("LRC721 AI Model NFTs", () => {
         expect(isValid).to.be.true;
     });
 });
-```solidity
+```
 
 ### Privacy Tests
 
@@ -381,7 +381,7 @@ cd ~/work/lux/standard
 forge test --match-contract ERC721Test
 forge test --match-contract LRC721AIModelTest
 forge test --match-contract LRC721PrivateTest
-```solidity
+```
 
 ### AI Model NFT Implementation
 
@@ -433,7 +433,7 @@ function transferToStealth(
     // Emit event with recovery data
     emit StealthTransfer(tokenId, ephemeralKey);
 }
-```solidity
+```
 
 ### Marketplace Integration
 
@@ -453,7 +453,7 @@ function royaltyInfo(uint256 tokenId, uint256 salePrice)
     receiver = modelMetadata[tokenId].creator;
     royaltyAmount = (salePrice * royaltyBasisPoints) / 10000;
 }
-```solidity
+```
 
 ### Gas Costs
 

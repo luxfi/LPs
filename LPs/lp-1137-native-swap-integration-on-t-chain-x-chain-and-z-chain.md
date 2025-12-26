@@ -91,7 +91,7 @@ type SwapTx struct {
     FeeBps    uint16
     Recipient [32]byte
 }
-```go
+```
 
 Funds lock to SwapFx until SwapSigTx appears; SwapID = txID.
 
@@ -124,7 +124,7 @@ sequenceDiagram
     BTC-->>User: funds arrive
 
     Note right of Z-Chain: if privacy, zSwapDeposit and zSwapRedeem flows.
-```solidity
+```
 
 ### 4 RPC Mapping
 
@@ -140,7 +140,7 @@ sequenceDiagram
 ```
 X-Chain Node (luxd + DexFx)  <-->  dexfx plugin verifies SwapTx, watches proofs
 T-Chain Node (luxd + mpckeyd) <-->  mpckeyd holds key shares, exposes gRPC sign_swap
-```solidity
+```
 
 ### 6 State Diagrams
 
@@ -227,7 +227,7 @@ func (tx *SwapTx) Status() SwapStatus {
 
     return PENDING
 }
-```bash
+```
 
 **Testing**:
 ```bash

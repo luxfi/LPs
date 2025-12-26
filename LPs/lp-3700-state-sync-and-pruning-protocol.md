@@ -47,7 +47,7 @@ const (
     LightSync                        // Headers only
     WarpSync                         // From checkpoint
 )
-```go
+```
 
 ### State Snapshot
 
@@ -84,7 +84,7 @@ func FastSync(target *StateSnapshot) error {
     // 5. Download recent blocks
     return DownloadBlocks(target.BlockHeight, HEAD)
 }
-```go
+```
 
 ### Pruning Modes
 
@@ -139,7 +139,7 @@ func (p *StatePruner) Prune(currentBlock uint64) error {
 
     return nil
 }
-```go
+```
 
 ### Differential Sync
 
@@ -228,7 +228,7 @@ func TestStatePruning(t *testing.T) {
     // Verify old state pruned
     assert.False(t, HasState(500))
 }
-```sql
+```
 
 ## Reference Implementation
 
@@ -291,7 +291,7 @@ Pruning Mode: full
 Retention Blocks: 131,072 (1 year approx)
 Ancient Threshold: 90,000 blocks
 Freezer Batch Size: 2,048 blocks
-```solidity
+```
 
 **Validator Node Configuration**:
 ```
@@ -300,7 +300,7 @@ Pruning Mode: archive
 Retention: infinite
 Ancient Store: enabled
 Enable Snapshots: true
-```solidity
+```
 
 **Light Node Configuration**:
 ```
@@ -309,7 +309,7 @@ Pruning Mode: fast
 Retention Blocks: 128
 Ancient Store: disabled
 Enable Snapshots: false
-```solidity
+```
 
 ### Source Code References
 

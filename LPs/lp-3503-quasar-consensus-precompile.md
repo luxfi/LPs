@@ -234,7 +234,7 @@ interface ICompressedVerify {
         uint32 validatorBits
     ) external view returns (bool valid);
 }
-```solidity
+```
 
 ### QuasarLib Helper Library
 
@@ -341,7 +341,7 @@ type QChainFinalityRecord struct {
     RingtailSig    []byte        // Ringtail threshold signature
     ValidatorBits  uint32        // Participating validator bitfield
 }
-```solidity
+```
 
 **Finality Flow:**
 1. C-Chain block reaches local finality
@@ -448,7 +448,7 @@ function testBLSVerification() public {
     bool valid = QuasarLib.verifyBLS(pubKey, msgHash, sig);
     assertTrue(valid);
 }
-```solidity
+```
 
 **Expected Gas:** 5,000
 
@@ -488,7 +488,7 @@ function testHybridVerification() public {
     assertTrue(success);
     assertEq(result[0], 0x01);
 }
-```solidity
+```
 
 **Expected Gas:** 10,000
 
@@ -514,7 +514,7 @@ function testInvalidSignatureRejected() public {
     bool valid = QuasarLib.verifyBLS(validPubKey, msgHash, invalidSig);
     assertFalse(valid);
 }
-```solidity
+```
 
 ## Reference Implementation
 

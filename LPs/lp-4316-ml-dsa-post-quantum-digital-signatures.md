@@ -91,7 +91,7 @@ pk := sk.PublicKey
 // Serialize keys
 privBytes := sk.Bytes()          // 4,000 bytes
 pubBytes := pk.Bytes()            // 1,952 bytes
-```solidity
+```
 
 ### Signing
 
@@ -118,7 +118,7 @@ valid := pk.Verify(message, signature, nil)
 if !valid {
     return errors.New("invalid signature")
 }
-```go
+```
 
 **Verification checks**:
 1. Signature size = 3,293 bytes (for ML-DSA-65)
@@ -164,7 +164,7 @@ type MLDSATransaction struct {
     PublicKey   []byte  // 1,952 bytes
     Mode        uint8   // 65
 }
-```solidity
+```
 
 ### EVM Precompile
 
@@ -208,7 +208,7 @@ contract SecureVault {
         // Process withdrawal
     }
 }
-```go
+```
 
 ## Implementation
 
@@ -272,7 +272,7 @@ func PublicKeyFromBytes(data []byte, mode Mode) (*PublicKey, error)
 func init() {
     precompile.Register(&MLDSAPrecompile{})
 }
-```solidity
+```
 
 ### Solidity Smart Contracts
 
@@ -304,7 +304,7 @@ contract SecureVault is MLDSAVerifier {
 # Test Solidity contracts using ML-DSA
 cd ~/work/lux/standard
 forge test --match-path test/**/*MLDSA*.t.sol
-```solidity
+```
 
 ## Test Results
 
@@ -322,7 +322,7 @@ forge test --match-path test/**/*MLDSA*.t.sol
 ✓ InvalidKeySize             (0.00s)
 ✓ GetPublicKeySize           (0.00s)
 ✓ GetSignatureSize           (0.00s)
-```solidity
+```
 
 ### Performance Benchmarks (Apple M1 Max)
 
@@ -330,7 +330,7 @@ forge test --match-path test/**/*MLDSA*.t.sol
 BenchmarkMLDSA_Sign_65         2,400 ops    417,000 ns/op
 BenchmarkMLDSA_Verify_65       9,259 ops    108,000 ns/op
 BenchmarkMLDSA_KeyGen_65       8,000 ops    125,000 ns/op
-```solidity
+```
 
 ## Migration Path
 

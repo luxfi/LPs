@@ -554,7 +554,7 @@ interface IChaCha20Poly1305 {
         bytes16 nonce
     ) external view returns (bytes32 subkey);
 }
-```solidity
+```
 
 ### Go Implementation
 
@@ -824,7 +824,7 @@ contract SecureChannel {
         }
     }
 }
-```go
+```
 
 ## Security Considerations
 
@@ -945,7 +945,7 @@ func BenchmarkXAEADDecrypt_4KB(b *testing.B) {
     }
 }
 // BenchmarkXAEADDecrypt_4KB-8    45,678 ops/s    2,248 gas
-```solidity
+```
 
 ## Backwards Compatibility
 

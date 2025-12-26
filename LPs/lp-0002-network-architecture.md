@@ -115,7 +115,7 @@ type WarpMessage struct {
     Nonce          uint64
     Signature      []byte  // Aggregated BLS
 }
-```bash
+```
 
 ---
 

@@ -238,7 +238,7 @@ return (E, Q)
        StakeAmount     uint64        // LUX staked for slashing
        Signature       []byte        // Provider signature
    }
-```go
+```
 
 2. **SubmitReceiptTx**: Submit AI inference receipt
    ```go
@@ -264,7 +264,7 @@ return (E, Q)
        StakeAmount     uint64        // Stake for frivolous challenge protection
        Signature       []byte        // Challenger signature
    }
-```go
+```
 
 4. **SettlementTx**: Resolve challenge
    ```go
@@ -331,7 +331,7 @@ Where:
 - Base_Reward: Fixed LUX per attestation
 - Complexity_Bonus: Higher for complex models (transformers > CNNs)
 - Challenge_Risk: Reduced if attestation is challenged
-```solidity
+```
 
 **Slashing Conditions**:
 1. Invalid attestation (failed challenge)
@@ -351,7 +351,7 @@ Where:
 ```
 vk = HKDF(sk_user, "view_key", salt)
 PlaintextData = Decrypt(C, vk)
-```go
+```
 
 Auditors receive vk (not sk_user), enabling read-only access without spending authority.
 
@@ -502,7 +502,7 @@ interface IZChainPrivacy {
   function withdraw(uint256 amount, bytes calldata zkProof,
     address recipient) external returns (bool);
 }
-```solidity
+```
 
 ### Go API
 
@@ -527,7 +527,7 @@ func (z *ZChainClient) EncryptedCompute(
     operation string,
     inputs []fhe.Ciphertext,
 ) (result fhe.Ciphertext, err error)
-```solidity
+```
 
 ## Performance Benchmarks
 
@@ -589,7 +589,7 @@ Compared to:
 **Certificate Proof**:
 ```
 π_kyc ← Prove(HasValidCertificate(pk_user, provider_id))
-```solidity
+```
 
 ### OFAC Compliance
 
