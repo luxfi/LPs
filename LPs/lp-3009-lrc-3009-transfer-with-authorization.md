@@ -83,7 +83,7 @@ interface ILRC3009 is ILRC20 {
         bytes32 nonce
     ) external view returns (bool);
 }
-```solidity
+```
 
 ### EIP-712 Domain
 
@@ -150,7 +150,7 @@ contract LRC3009Token is LRC20, ILRC3009 {
         // ... same validation and transfer logic
     }
 }
-```solidity
+```
 
 ### Nonce Management
 
@@ -172,7 +172,7 @@ bytes32 nonce = keccak256(abi.encodePacked(
 // User signs authorization off-chain
 // Relayer submits to blockchain
 // User receives tokens without holding ETH
-```solidity
+```
 
 ### x402 Payments
 ```solidity
@@ -198,7 +198,7 @@ function batchTransferWithAuth(
         );
     }
 }
-```solidity
+```
 
 ## Rationale
 

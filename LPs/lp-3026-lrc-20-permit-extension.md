@@ -76,7 +76,7 @@ interface ILRC20Permit is ILRC20 {
      */
     function DOMAIN_SEPARATOR() external view returns (bytes32);
 }
-```solidity
+```
 
 ### EIP-712 Typed Data
 
@@ -152,7 +152,7 @@ abstract contract LRC20Permit is LRC20, EIP712 {
         }
     }
 }
-```solidity
+```
 
 ## Rationale
 

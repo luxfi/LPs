@@ -46,7 +46,7 @@ contract PChainAnchor {
         bytes32[] calldata path
     ) external view returns (bool);
 }
-```solidity
+```
 
 ### 2. Off-Chain Relayer
 
@@ -122,7 +122,7 @@ function verifyProof(
 cd ~/work/lux/standard
 forge test --match-contract PChainAnchorTest
 forge coverage --match-contract PChainAnchor
-```solidity
+```
 
 ### Gas Costs
 

@@ -254,7 +254,7 @@ interface IDEX {
     event OrderExpired(bytes32 indexed orderId);
     event OrderModified(bytes32 indexed oldOrderId, bytes32 indexed newOrderId);
 }
-```solidity
+```
 
 ### DEXLib Helper Library
 
@@ -446,7 +446,7 @@ function testLimitOrder() public {
     assertEq(uint(order.status), uint(IDEX.OrderStatus.OPEN));
     assertEq(order.price, price);
 }
-```solidity
+```
 
 ### Order Book Queries
 

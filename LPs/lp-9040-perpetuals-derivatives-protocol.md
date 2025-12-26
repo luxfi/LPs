@@ -104,7 +104,7 @@ type PerpetualContract struct {
     MaintenanceMargin float64  // Minimum margin requirement
     Status           ContractStatus
 }
-```solidity
+```
 
 ### 2.2 Mark Price Calculation
 
@@ -116,7 +116,7 @@ MarkPrice = IndexPrice × (1 + PremiumIndex)
 PremiumIndex = TWAP(ImpactMidPrice - IndexPrice) / IndexPrice
 
 ImpactMidPrice = (ImpactBidPrice + ImpactAskPrice) / 2
-```solidity
+```
 
 Where:
 - **ImpactBidPrice**: Price to execute $10K sell order
@@ -179,7 +179,7 @@ type MarginAccount struct {
     UnrealizedPnL       *big.Int
     RealizedPnL         *big.Int
 }
-```go
+```
 
 ### 3.3 Margin Requirements
 
@@ -239,7 +239,7 @@ type FundingConfig struct {
     InterestRate    float64       // 0.01% base rate
     PremiumDampener float64       // 1.0 (no dampening)
 }
-```solidity
+```
 
 ### 4.2 Funding Rate Calculation
 
@@ -249,7 +249,7 @@ FundingRate = Premium + InterestRate
 Premium = TWAP(MarkPrice - IndexPrice) / IndexPrice
 
 Clamped: -0.75% ≤ FundingRate ≤ +0.75%
-```go
+```
 
 ### 4.3 Funding Payment
 
@@ -294,7 +294,7 @@ type PriceSample struct {
     Volume    float64    // Optional volume weight
     Timestamp time.Time
 }
-```solidity
+```
 
 ---
 
@@ -308,7 +308,7 @@ Liquidation occurs when:
 MarginLevel = Equity / MarginUsed
 
 If MarginLevel < MaintenanceMargin → Liquidation
-```go
+```
 
 ### 5.2 Liquidation Queue
 
@@ -357,7 +357,7 @@ type InsuranceFund struct {
     CurrentDrawdown float64
     APY           float64
 }
-```go
+```
 
 ### 5.4 Auto-Deleveraging (ADL)
 
@@ -388,7 +388,7 @@ type SocializedLossEngine struct {
     AffectedPositions    map[string]*big.Int
     DistributionRatio    float64
 }
-```go
+```
 
 ---
 
@@ -461,7 +461,7 @@ type RiskLimits struct {
     MinOrderSize        *big.Int
     MaxNotionalExposure *big.Int
 }
-```go
+```
 
 ### 7.2 Circuit Breakers
 
@@ -512,7 +512,7 @@ type VaultManager struct {
     leaderVaults map[string][]string   // leader -> vault IDs
     engine       *TradingEngine
 }
-```go
+```
 
 ### 8.2 Standard Vault
 
@@ -565,7 +565,7 @@ type CopyVault struct {
     State         VaultState
     CreatedAt     time.Time
 }
-```go
+```
 
 ### 8.4 Vault Strategies
 
@@ -625,7 +625,7 @@ type LendingAsset struct {
     LiquidationBonus float64
     ReserveFactor    float64
 }
-```solidity
+```
 
 ### 9.2 Interest Rate Model
 
@@ -638,7 +638,7 @@ Else:
     BorrowRate = BaseRate + Slope1 + ((Utilization - Optimal) / (1 - Optimal)) × Slope2
 
 SupplyRate = BorrowRate × UtilizationRate × (1 - ReserveFactor)
-```solidity
+```
 
 ### 9.3 Collateral Assets
 
@@ -765,7 +765,7 @@ go test -run TestLiquidationEngine ./pkg/lx/
 go test -run TestClearingHouse ./pkg/lx/
 go test -run TestVaultManager ./pkg/lx/
 go test -run TestLendingPool ./pkg/lx/
-```solidity
+```
 
 ### 12.2 Test Coverage
 

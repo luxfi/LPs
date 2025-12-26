@@ -374,7 +374,7 @@ interface IEd25519 {
         bytes32 point2
     ) external view returns (bytes32 result);
 }
-```solidity
+```
 
 ### Go Implementation
 
@@ -612,7 +612,7 @@ func validateScalar(s []byte) error {
     }
     return nil
 }
-```go
+```
 
 **Cofactored vs Cofactorless Verification:**
 ```go
@@ -639,7 +639,7 @@ func verifySubgroup(R *edwards25519.Point) error {
 func constantTimeCompare(a, b []byte) bool {
     return subtle.ConstantTimeCompare(a, b) == 1
 }
-```sql
+```
 
 **No Branching on Secret Data:**
 ```go
@@ -664,7 +664,7 @@ func clampPrivateKey(key []byte) {
     key[31] &= 127  // Clear highest bit
     key[31] |= 64   // Set second highest bit
 }
-```go
+```
 
 ### Small Order Point Rejection
 
@@ -741,7 +741,7 @@ func TestX25519(t *testing.T) {
     assert.Equal(t, expectedShared, shared1)
     assert.Equal(t, shared1, shared2)
 }
-```go
+```
 
 ### Performance Benchmarks
 

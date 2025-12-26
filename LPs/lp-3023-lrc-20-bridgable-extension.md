@@ -35,7 +35,7 @@ interface IERC20Bridgable is IERC20Mintable, IERC20Burnable {
      */
     function bridgeMint(address from, uint256 amount) external;
 }
-```solidity
+```
 
 ## Rationale
 
@@ -57,7 +57,7 @@ Standard tests should cover:
 See the IERC20Bridgable interface in the standard repository:
 ```
 /standard/src/interfaces/IERC20Bridgable.sol
-```solidity
+```
 
 ## Implementation
 
@@ -97,7 +97,7 @@ function bridgeMint(address to, uint256 amount) external onlyBridgeRelayer {
 cd ~/work/lux/standard
 forge test --match-contract ERC20BridgableTest
 forge coverage --match-contract ERC20Bridgable
-```solidity
+```
 
 ### Gas Costs
 

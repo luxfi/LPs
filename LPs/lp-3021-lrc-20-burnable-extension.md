@@ -56,7 +56,7 @@ interface IERC20Burnable {
      */
     function burnFrom(address account, uint256 amount) external;
 }
-```solidity
+```
 
 ### Implementation Notes
 
@@ -86,7 +86,7 @@ This is a backwards-compatible extension. Contracts may implement burnable behav
    burn(100)
    // Result: balance = 900, totalSupply = 9900
    // Events: Transfer(user, 0x0, 100), Burn(user, 100)
-```solidity
+```
 
 2. **Burn Exceeds Balance**
    ```javascript
@@ -97,7 +97,7 @@ This is a backwards-compatible extension. Contracts may implement burnable behav
 3. **Burn Zero Amount**
    ```javascript
    burn(0) // Should succeed with no state changes
-```solidity
+```
 
 ### BurnFrom Function Tests
 1. **Successful BurnFrom**
@@ -112,7 +112,7 @@ This is a backwards-compatible extension. Contracts may implement burnable behav
    ```javascript
    // Allowance = 100
    burnFrom(alice, 200) // Should revert: "ERC20: insufficient allowance"
-```solidity
+```
 
 3. **BurnFrom with Max Allowance**
    ```javascript
@@ -159,7 +159,7 @@ contract BurnableToken is ERC20, IERC20Burnable {
         emit Burn(account, amount);
     }
 }
-```solidity
+```
 
 ### Upgradeable Variants
 
@@ -196,7 +196,7 @@ interface IERC20Burnable {
     function burn(uint256 amount) external;
     function burnFrom(address account, uint256 amount) external;
 }
-```solidity
+```
 
 ### Integration with LRC-20 Base
 - **Base Contract**: `standard/src/ERC20.sol`
@@ -230,7 +230,7 @@ forge create src/ERC20Burnable.sol:BurnableToken \
 # Test burn on-chain
 cast send <contract> "burn(uint256)" 1000000000000000000 \
   --rpc-url http://localhost:9650/ext/bc/C
-```solidity
+```
 
 ### Use Cases
 1. **Deflationary Tokens**: Programmatic supply reduction

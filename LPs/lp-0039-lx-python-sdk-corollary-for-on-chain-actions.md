@@ -46,7 +46,7 @@ from lx.utils.signing import (
 from lx.utils.types import (
     List, Optional, Cloid, BuilderInfo, Meta, SpotMeta
 )
-```solidity
+```
 
 ## Exchange Class Overview
 
@@ -73,7 +73,7 @@ class Exchange(API):
 1. Convert high-level OrderRequest to on-chain wire format:
    ```python
    wire = order_request_to_order_wire(order_req, asset_id)
-```solidity
+```
 2. Build order action payload:
    ```python
    action = order_wires_to_order_action([wire], builder)
@@ -84,7 +84,7 @@ class Exchange(API):
        self.wallet, action, self.vault_address, timestamp,
        self.expires_after, self.base_url == MAINNET_API_URL
    )
-```solidity
+```
 4. Submit via _post_action → JSON‑RPC dex.swap.submit or HTTP REST↔RPC gateway.
 
 ## Modify and Cancel Flows
@@ -110,7 +110,7 @@ Compute slippage-adjusted price via on-chain midprice query:
 px = float(self.info.all_mids()[asset])
 px *= 1±slippage
 round to 6 or 8 decimals
-```solidity
+```
 
 ## Advanced Actions
 
@@ -189,7 +189,7 @@ response = exchange._post_action(action, signature, timestamp)
 cd ~/work/lux/sdk/python
 python -m pytest lx/tests/test_exchange.py -v
 python -m pytest lx/tests/test_signing.py -v
-```solidity
+```
 
 ### Method Mapping Reference
 

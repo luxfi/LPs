@@ -425,7 +425,7 @@ consensus/protocol/photon/
 └── luminance.go            (3 KB)   # VRF luminance tracking
 
 Total: ~91 KB implementation
-```solidity
+```
 
 ### Solidity Interface
 
@@ -724,7 +724,7 @@ func proofToHash(gamma *btcec.PublicKey) [32]byte {
     copy(beta[:], h.Sum(nil))
     return beta
 }
-```go
+```
 
 ### Consensus Integration
 
@@ -897,7 +897,7 @@ func TestVRFDeterminism(t *testing.T) {
     assert.Equal(t, beta1, beta2)
     // Proofs may differ in encoding but verify to same beta
 }
-```go
+```
 
 ### Performance Benchmarks
 

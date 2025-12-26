@@ -39,7 +39,7 @@ Namespaced storage provides:
 // Storage slot = keccak256(namespace) - 1
 // The -1 ensures the slot itself isn't at the namespace hash
 bytes32 constant NAMESPACE = keccak256("example.storage.namespace") - 1;
-```solidity
+```
 
 ### Standard Namespace
 
@@ -90,7 +90,7 @@ contract MyUpgradeableContract {
         return _getMainStorage().value;
     }
 }
-```solidity
+```
 
 ### Diamond Pattern Integration
 
@@ -133,7 +133,7 @@ contract FacetB {
 struct MyStorage {
     // Storage variables
 }
-```solidity
+```
 
 ## Rationale
 

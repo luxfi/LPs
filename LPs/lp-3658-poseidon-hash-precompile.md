@@ -483,7 +483,7 @@ interface IPoseidon {
     /// @return hash Hash result
     function poseidonBLS12_381(uint256[] calldata inputs) external view returns (uint256 hash);
 }
-```solidity
+```
 
 ### Go Implementation
 
@@ -794,7 +794,7 @@ contract PoseidonMerkleTree {
         return abi.decode(result, (uint256));
     }
 }
-```solidity
+```
 
 ### Network Usage Map
 
@@ -879,7 +879,7 @@ func TestPoseidonMerkleTree(t *testing.T) {
     valid := precompile.PoseidonMerkleProof(big.NewInt(2), proof, 1, root)
     assert.True(t, valid)
 }
-```go
+```
 
 ### Performance Benchmarks
 

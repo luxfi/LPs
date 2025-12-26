@@ -424,7 +424,7 @@ contract KeyImageRegistry {
         return usedKeyImages[keccak256(keyImage)];
     }
 }
-```go
+```
 
 ### Go Implementation
 
@@ -960,7 +960,7 @@ function testRingSignature() public {
     assertTrue(valid);
     assertEq(keyImage, extractedKI);
 }
-```sql
+```
 
 ## Reference Implementation
 

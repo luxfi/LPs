@@ -142,7 +142,7 @@ interface IRandomNumberGenerator {
     function updateProviderFee(uint256 newFee) external;
     function withdrawProviderStake() external;
 }
-```solidity
+```
 
 ### VRF Implementation
 
@@ -301,7 +301,7 @@ contract CommitRevealLottery {
         rng.revealRandomValue(currentRound, number, nonce);
     }
 }
-```solidity
+```
 
 ### Threshold Signature RNG
 
@@ -408,7 +408,7 @@ interface ITEERandomness {
         uint256 sessionId
     ) external returns (uint256[] memory randomValues);
 }
-```solidity
+```
 
 ### Hybrid RNG System
 
@@ -568,7 +568,7 @@ contract DecentralizedLottery {
         emit WinnerSelected(winner, randomValues[0]);
     }
 }
-```solidity
+```
 
 ### Security Module
 
@@ -678,7 +678,7 @@ function testVRFRandomness() public {
     
     assertEq(rng.getRandomness(requestId), randomValues);
 }
-```solidity
+```
 
 ### Commit-Reveal Test
 
@@ -742,7 +742,7 @@ forge build
 forge script script/DeployRNG.s.sol:DeployRNG \
   --rpc-url https://api.avax.network/ext/bc/C/rpc \
   --broadcast
-```bash
+```
 
 ### Testing
 
@@ -792,7 +792,7 @@ forge verify-contract \
   --chain-id 43114 \
   --watch 0x<RNG_COORDINATOR_ADDRESS> \
   src/rng/RandomNumberGenerator.sol:RandomNumberGenerator
-```solidity
+```
 
 ## Reference Implementation
 

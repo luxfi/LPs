@@ -211,7 +211,7 @@ interface IBridgeVault {
      */
     function depositNonce() external view returns (uint256);
 }
-```solidity
+```
 
 #### 2.2 Reference Implementation
 
@@ -739,7 +739,7 @@ interface IBridgeRouter {
         bytes32 destinationChainId
     ) external view returns (uint256 fee);
 }
-```solidity
+```
 
 #### 3.2 Reference Implementation
 
@@ -1056,7 +1056,7 @@ interface ITokenRegistry {
     function getRemoteToken(bytes32 assetId, bytes32 chainId) external view returns (bytes32);
     function isRegistered(address localAddress) external view returns (bool);
 }
-```solidity
+```
 
 #### 4.2 Reference Implementation
 
@@ -1350,7 +1350,7 @@ interface IBridgeGovernor {
     function cancel(uint256 proposalId) external;
     function getProposal(uint256 proposalId) external view returns (Proposal memory);
 }
-```solidity
+```
 
 #### 5.2 Reference Implementation
 
@@ -1642,7 +1642,7 @@ contract EmergencyBrake is AccessControl {
         return (globalPause, tokenPaused[token], chainPaused[chainId]);
     }
 }
-```solidity
+```
 
 ### 7. Signature Flow with T-Chain Integration
 
@@ -2024,7 +2024,7 @@ Contracts use transparent proxy pattern for upgradeability:
 
 import "@openzeppelin/contracts/proxy/transparent/TransparentUpgradeableProxy.sol";
 import "@openzeppelin/contracts/proxy/transparent/ProxyAdmin.sol";
-```solidity
+```
 
 ### 11. Multi-Chain Deployment Addresses
 
@@ -2218,7 +2218,7 @@ contract DeployBridge is Script {
         vm.stopBroadcast();
     }
 }
-```solidity
+```
 
 ## Rationale
 
@@ -2570,7 +2570,7 @@ contract BridgeVaultTest is Test {
         );
     }
 }
-```solidity
+```
 
 ### Integration Tests
 
@@ -2720,7 +2720,7 @@ forge script script/Deploy.s.sol --rpc-url http://localhost:9630/ext/bc/C/rpc --
 npx hardhat run scripts/deploy.ts --network lux
 # Or with Foundry
 forge script script/Deploy.s.sol --rpc-url http://api.lux.network/ext/bc/C/rpc --broadcast --verify
-```solidity
+```
 
 ## Security Considerations
 
@@ -2827,7 +2827,7 @@ feeRate = 10 (0.1%)
 // BridgeGovernor
 MIN_DELAY = 1 days
 MAX_DELAY = 30 days
-```solidity
+```
 
 ### Related LPs
 

@@ -78,7 +78,7 @@ func (t *Tracker[ID]) Reset(id ID) {
     defer t.mu.Unlock()
     delete(t.counts, id)
 }
-```go
+```
 
 #### Confidence Accumulator
 
@@ -198,7 +198,7 @@ func (w *WindowedConfidence[ID]) State(id ID) (int, bool) {
     decided := state >= w.threshold
     return state, decided
 }
-```solidity
+```
 
 ### Confidence Calculation
 
@@ -326,7 +326,7 @@ func (q *QuasarConsensus) ProcessRound(blockID BlockID) (finalized bool) {
 
     return false
 }
-```go
+```
 
 ### Skip Detection
 
@@ -480,7 +480,7 @@ func TestCalc(t *testing.T) {
         t.Errorf("expected prev returned for 0 total, got ratio=%f conf=%d", ratio, conf)
     }
 }
-```sql
+```
 
 ### Test Execution Results
 
@@ -538,7 +538,7 @@ The reference implementation is located at:
     ├── TestWindowedConfidenceNoUpdate
     ├── TestCalc
     └── TestSkipLogic
-```solidity
+```
 
 ### Import Path
 

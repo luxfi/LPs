@@ -137,7 +137,7 @@ type ChainConfig struct {
     // ... existing fields
     LP176Timestamp *uint64 `json:"lp176Timestamp,omitempty"`
 }
-```go
+```
 
 ## Test Cases
 

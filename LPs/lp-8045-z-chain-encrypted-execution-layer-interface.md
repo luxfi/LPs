@@ -179,7 +179,7 @@ func FHEAdd(input []byte) ([]byte, error) {
 
     return result, nil
 }
-```solidity
+```
 
 **Testing**:
 ```bash

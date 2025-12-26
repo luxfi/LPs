@@ -208,7 +208,7 @@ go build -o bin/cgg21-keygen ./cmd/keygen
 
 # Or build all tools
 make build
-```solidity
+```
 
 ### Testing
 
@@ -267,7 +267,7 @@ CMP is integrated into T-Chain (ThresholdVM) via:
 executor := NewProtocolExecutor(pool)
 startFunc := executor.CMPKeygenStartFunc(selfID, participants, threshold)
 handler, err := protocol.NewTwoRoundHandler(startFunc, sessionID)
-```markdown
+```
 
 See LP-7330 for full ThresholdVM specification.
 

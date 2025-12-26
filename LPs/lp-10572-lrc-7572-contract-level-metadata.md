@@ -36,7 +36,7 @@ LRC-7572 provides:
 interface ILRC7572 {
     function contractURI() external view returns (string memory);
 }
-```solidity
+```
 
 ### Metadata Schema
 

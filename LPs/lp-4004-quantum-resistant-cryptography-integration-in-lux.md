@@ -72,7 +72,7 @@ LP-4 proposes integrating quantum-resistant cryptographic primitives into the Lu
 ```bash
 cd ~/work/lux/crypto/mldsa
 go test -v ./...
-```solidity
+```
 
 ### EVM ML-DSA Precompile
 
@@ -91,7 +91,7 @@ go test -v ./...
 ```bash
 cd ~/work/lux/evm/precompile/contracts/mldsa
 go test -v ./...
-```solidity
+```
 
 ## Test Cases
 

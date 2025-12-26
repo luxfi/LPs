@@ -165,7 +165,7 @@ interface IAlchemistV2 {
     function burn(uint256 amount, address recipient) external;
     function liquidate(address owner, uint256 shares, uint256 minimumAmountOut) external returns (uint256);
 }
-```solidity
+```
 
 **Lux Adaptations**:
 - Integration with Lux yield sources
@@ -180,7 +180,7 @@ OpenZeppelin 5.x removed several legacy utilities. The standard library provides
 ```
 Location: /Users/z/work/lux/standard/src/safe/contracts/external/SafeMath.sol
 License: LGPL-3.0
-```solidity
+```
 
 **Usage**: Required for contracts targeting Solidity <0.8.0 or requiring explicit overflow checks.
 
@@ -203,7 +203,7 @@ library SafeCast {
     function toInt256(uint256 y) internal pure returns (int256 z);
     function toUint256(int256 y) internal pure returns (uint256 z);
 }
-```solidity
+```
 
 **Additional Utilities**:
 - `EnumerableSet.sol` - Set data structures (`src/gmx2/contracts/libraries/utils/`)
@@ -265,7 +265,7 @@ contract InstitutionalVault {
         IERC20(token).transfer(msg.sender, amount);
     }
 }
-```solidity
+```
 
 **Gas Costs**:
 
@@ -305,7 +305,7 @@ interface ITokenAdapter {
     function wrap(uint256 amount, address recipient) external returns (uint256);
     function unwrap(uint256 amount, address recipient) external returns (uint256);
 }
-```bash
+```
 
 ## Rationale
 
@@ -389,7 +389,7 @@ npx hardhat test
 cd /Users/z/work/lux/standard/src/alcx2
 yarn install
 yarn test
-```solidity
+```
 
 **Key Test Cases**:
 1. Deposit collateral
@@ -445,7 +445,7 @@ yarn compile
 # Full standard library
 cd /Users/z/work/lux/standard
 forge build
-```solidity
+```
 
 ## Security Considerations
 

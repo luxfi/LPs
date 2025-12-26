@@ -69,7 +69,7 @@ const (
     VERKLE_BASE_GAS    = 3000    // Base verification cost
     VERKLE_PER_KEY_GAS = 200     // Per key in multiproof
 )
-```go
+```
 
 ### Implementation
 
@@ -122,7 +122,7 @@ function verifyL2State(
     (bool success, bytes memory result) = VERKLE_PRECOMPILE.staticcall(input);
     return success && abi.decode(result, (uint256)) == 1;
 }
-```solidity
+```
 
 ## Rationale
 

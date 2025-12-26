@@ -212,7 +212,7 @@ abstract contract FROSTVerifier {
         FROSTLib.verifyOrRevert(threshold, totalSigners, publicKey, messageHash, signature);
     }
 }
-```solidity
+```
 
 ### Example Usage
 
@@ -351,7 +351,7 @@ bytes calldata frostSig = /* threshold signature */;
 bool valid = FROST.verify(3, 5, taprootPubKey, txHash, frostSig);
 
 // This signature is valid on Bitcoin mainnet!
-```solidity
+```
 
 Use cases:
 - **Multi-chain custody**: Same threshold key controls Bitcoin + EVM assets
@@ -537,7 +537,7 @@ cd ~/work/lux/precompiles/frost && go test -v -cover
 
 # Run protocol tests
 cd ~/work/lux/threshold && go test -v ./protocols/frost/...
-```solidity
+```
 
 | Test Category | Coverage |
 |---------------|----------|
@@ -625,7 +625,7 @@ for each signature {
     d, e := generateFreshNonces()
     sig := sign(msg, d, e)
 }
-```markdown
+```
 
 Reusing nonces allows **private key recovery** from two signatures.
 
@@ -659,7 +659,7 @@ bytes32 messageHash = keccak256(abi.encodePacked(
     contractAddress,
     data
 ));
-```solidity
+```
 
 ### Integration Security
 
@@ -762,7 +762,7 @@ import "github.com/luxfi/threshold/protocols/frost"
 // - frost.Verify() - Standard Schnorr verification
 // - frost.Refresh() - Share refreshing
 // - frost.KeygenTaproot() - Bitcoin Taproot keys
-```solidity
+```
 
 **Library Features:**
 - Two-round signing protocol (commitment + response)
@@ -802,7 +802,7 @@ Verify:
   1. Compute challenge: c = H(R || P || m)
   2. Verify equation: s·G = R + c·P
   3. Return true if equation holds, false otherwise
-```markdown
+```
 
 This is identical to BIP-340 verification, ensuring Bitcoin compatibility.
 

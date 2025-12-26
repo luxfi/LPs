@@ -62,7 +62,7 @@ A standardized VM SDK removes ambiguity for VM authors, accelerates development 
 cd ~/work/lux/vmsdk
 # View API documentation
 go doc ./... | head -100
-```solidity
+```
 
 **Example VM**:
 - Location: `~/work/lux/vmsdk/examples/`

@@ -217,7 +217,7 @@ make validate FILE=LPs/lp-N.md
 
 # Run all pre-PR checks
 make pre-pr
-```solidity
+```
 
 ### Required Sections
 
@@ -281,7 +281,7 @@ Lux implements a heterogeneous multi-chain architecture where each chain runs a 
 | - TEE attestation   | | - Validity   | | - Perpetuals     |
 | - Confidential AI   | | - Private exec| | - HFT support    |
 +---------------------+ +--------------+ +------------------+
-```sql
+```
 
 ### Virtual Machine Implementation
 
@@ -483,7 +483,7 @@ cd docs && pnpm dev
 
 # Create new LP
 make new
-```solidity
+```
 
 ## Security Considerations
 

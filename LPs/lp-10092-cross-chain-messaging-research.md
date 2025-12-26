@@ -62,7 +62,7 @@ interface CrossChainArchitecture {
     external: ["Ethereum", "BSC", "Lux", "Polygon"];
   };
 }
-```solidity
+```
 
 ## Research Findings
 
@@ -150,7 +150,7 @@ interface SecurityModels {
     implementation: "Z-Chain with Plonky2";
   };
 }
-```solidity
+```
 
 ### 3. Teleporter Protocol Design
 
@@ -261,7 +261,7 @@ contract StateSynchronizer {
         );
     }
 }
-```solidity
+```
 
 ### 5. Message Ordering and Delivery
 

@@ -175,7 +175,7 @@ interface IERC2981 {
     function royaltyInfo(uint256 tokenId, uint256 salePrice)
         external view returns (address receiver, uint256 royaltyAmount);
 }
-```solidity
+```
 
 ### Seaport Integration
 
@@ -234,7 +234,7 @@ IERC721(nft).setApprovalForAll(conduitAddress, true);
 
 // All Seaport orders use same approval
 // No per-order approvals needed
-```solidity
+```
 
 ### Sudoswap Adaptations
 
@@ -252,25 +252,25 @@ IERC721(nft).setApprovalForAll(conduitAddress, true);
 ```
 newPrice = currentPrice + delta (buy)
 newPrice = currentPrice - delta (sell)
-```solidity
+```
 
 **Exponential Curve**:
 ```
 newPrice = currentPrice * (1 + delta/1e18) (buy)
 newPrice = currentPrice / (1 + delta/1e18) (sell)
-```solidity
+```
 
 **XYK Curve** (Constant Product):
 ```
 x * y = k
 newPrice derived from reserves
-```solidity
+```
 
 **GDA Curve** (Gradual Dutch Auction):
 ```
 Price decays over time until purchase
 Resets on each sale
-```solidity
+```
 
 #### Property Checking
 
@@ -323,7 +323,7 @@ interface ICrossChainNFT {
         bytes calldata warpProof
     ) external;
 }
-```solidity
+```
 
 #### Supported Chains
 
@@ -344,7 +344,7 @@ The Zoo NFT marketplace uses these same primitives:
 │   ├── ZooSeaport.sol        # Seaport wrapper with Zoo fees
 │   ├── ZooSudoPool.sol       # Sudoswap pool factory
 │   └── ZooRoyaltyEngine.sol  # Zoo-specific royalty handling
-```solidity
+```
 
 **Zoo-Specific Features**:
 - ZOO token fee discounts
@@ -486,7 +486,7 @@ describe("Sudoswap NFT AMM", () => {
         ).to.be.revertedWith("PropertyCheckFailed");
     });
 });
-```bash
+```
 
 ## Reference Implementation
 
@@ -560,7 +560,7 @@ contract NFTMarketplace {
         );
     }
 }
-```solidity
+```
 
 ## Security Considerations
 

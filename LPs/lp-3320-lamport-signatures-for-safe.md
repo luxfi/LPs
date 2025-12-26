@@ -104,7 +104,7 @@ library LamportLib {
         }
     }
 }
-```solidity
+```
 
 **Gas Cost**: Approximately 19.6M gas per verification (256 keccak256 operations plus storage reads).
 
@@ -150,7 +150,7 @@ abstract contract LamportBase {
         _;
     }
 }
-```solidity
+```
 
 **Key Rotation**: The `nextPKH` parameter enforces automatic key rotation on each use. The signed message includes `nextPKH` to prevent tampering.
 
@@ -193,7 +193,7 @@ function sign_hash(hmsg: string, pri: RandPair[]): Sig {
     );
     return sig;
 }
-```solidity
+```
 
 #### Verification (Off-chain)
 
@@ -255,7 +255,7 @@ class KeyTracker {
         // Save to disk...
     }
 }
-```solidity
+```
 
 ### Merkle Tree Key Aggregation
 
@@ -267,7 +267,7 @@ For multiple signatures without re-deploying contracts, use Merkle tree aggregat
               H(0,1)         H(2,3)
              /     \        /     \
           PKH_0   PKH_1  PKH_2   PKH_3
-```solidity
+```
 
 **Benefits:**
 - Store single root hash on-chain
@@ -338,7 +338,7 @@ From actual benchmarks (`gas_data.json`):
 | Scheme | Gas Cost | Signature Size | Quantum Safe |
 |--------|----------|----------------|--------------|
 | **Lamport OTS** | ~20M | ~8 KB | Unconditional |
-| ML-DSA-65 | ~100K | 3,309 bytes | Lattice-based |
+| ML-DSA-65 | ~100K | 3,293 bytes | Lattice-based |
 | Ringtail | ~200K | ~4 KB | Lattice-based |
 
 Lamport is expensive but provides the strongest quantum guarantees.
@@ -371,7 +371,7 @@ const sig = sign_hash(msgHash, pri);
 const valid = verify_signed_hash(msgHash, sig, pub);
 
 assert(valid === true);
-```solidity
+```
 
 ### Test 2: Invalid Signature Detection
 
@@ -398,7 +398,7 @@ const sig = sign_hash(msgHash1, pri);
 const valid = verify_signed_hash(msgHash2, sig, pub);
 
 assert(valid === false);
-```solidity
+```
 
 ### Test 4: PKH Validation
 
@@ -430,7 +430,7 @@ function testKeyRotation() public {
     // Verify rotation
     assert(contract.getPKH() == nextPKH);
 }
-```solidity
+```
 
 ## Reference Implementation
 
@@ -467,7 +467,7 @@ src/lamport/
 ```bash
 cd /Users/z/work/lux/standard/src/lamport
 bash test.sh
-```solidity
+```
 
 ## Security Considerations
 

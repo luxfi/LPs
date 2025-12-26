@@ -93,7 +93,7 @@ if err != nil {
 // Serialize keys
 pubBytes := pub.Bytes()     // 1,184 bytes
 privBytes := priv.Bytes()   // 2,400 bytes
-```solidity
+```
 
 ### Encapsulation
 
@@ -125,7 +125,7 @@ if err != nil {
 
 // Verify shared secrets match
 assert.Equal(sharedSecret, recoveredSecret)
-```go
+```
 
 **Decapsulation properties**:
 1. Ciphertext size validation (1,088 bytes for ML-KEM-768)
@@ -186,7 +186,7 @@ type EncryptedWarpMessage struct {
     EncryptedPayload  []byte  // AES-GCM encrypted data
     Nonce             []byte  // GCM nonce
 }
-```go
+```
 
 **Workflow**:
 1. Sender encapsulates using recipient's ML-KEM public key → shared secret
@@ -263,7 +263,7 @@ func (h *HybridKeyExchange) DeriveSharedSecret(
 
     return finalSecret[:], nil
 }
-```solidity
+```
 
 **Security**: Secure if EITHER classical OR post-quantum is unbroken
 
@@ -335,7 +335,7 @@ contract SecureVault {
         // Store ciphertext + encrypted data on-chain
     }
 }
-```go
+```
 
 ## Implementation
 
@@ -400,7 +400,7 @@ func (mode Mode) SharedSecretSize() int  // Always 32
 func init() {
     precompile.Register(&MLKEMPrecompile{})
 }
-```solidity
+```
 
 ## Test Results
 
@@ -417,7 +417,7 @@ func init() {
 ✓ SharedSecretSize               (0.00s)
 ✓ InvalidMode                    (0.00s)
 ✓ NilRandomSource                (0.00s)
-```solidity
+```
 
 ### Performance Benchmarks (Apple M1 Max)
 
@@ -432,7 +432,7 @@ BenchmarkMLKEM_Encapsulate_1024   16,667 ops    60,000 ns/op (60μs)
 BenchmarkMLKEM_Decapsulate_1024   15,385 ops    65,000 ns/op (65μs)
 
 BenchmarkMLKEM_KeyGen_768         8,000 ops     125,000 ns/op (125μs)
-```sql
+```
 
 ## Migration Path
 
@@ -504,7 +504,7 @@ BenchmarkMLKEM_KeyGen_768         8,000 ops     125,000 ns/op (125μs)
 ```go
 // Secure if EITHER is unbroken
 hybridSecret = KDF(ecdh_secret || mlkem_secret)
-```go
+```
 
 **Benefits**:
 - Protects against unknown lattice attacks
@@ -662,7 +662,7 @@ func establishHybridChannel(
 
     return finalSecret[:], ciphertext, nil
 }
-```solidity
+```
 
 ## Test Cases
 

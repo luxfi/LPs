@@ -103,7 +103,7 @@ interface ILuxMulticall {
             uint256 blockTimestamp
         );
 }
-```solidity
+```
 
 ### Advanced Multicall Features
 
@@ -205,7 +205,7 @@ interface IMulticallPermit is ILuxMulticall {
         Call[] calldata calls
     ) external payable returns (Result[] memory results);
 }
-```solidity
+```
 
 ### Time-Sensitive Operations
 
@@ -292,7 +292,7 @@ interface IMulticallCrossChain is ILuxMulticall {
         bytes32 messageId
     ) external;
 }
-```solidity
+```
 
 ## Rationale
 
@@ -455,7 +455,7 @@ function testConditionalMulticall() public {
     
     advanced.multicallConditional(calls);
 }
-```bash
+```
 
 ## Implementation
 
@@ -499,7 +499,7 @@ forge test --match-path test/multicall/\* --gas-report
 
 # Coverage
 forge coverage --match-path test/multicall/\*
-```solidity
+```
 
 **Test Cases** (see `/test/multicall/LuxMulticall.t.sol`):
 - `testBasicMulticall()` - Multi-operation batching
@@ -532,7 +532,7 @@ forge test test/integration/SwapAndStake.t.sol -vvv
 ```bash
 # Test approval + action in one call
 forge test test/integration/PermitMulticall.t.sol -vvv
-```solidity
+```
 
 ### Contract Verification
 
@@ -695,7 +695,7 @@ contract LuxMulticall is ILuxMulticall, ILuxMulticallAdvanced {
         // Accept ETH for multicall operations
     }
 }
-```solidity
+```
 
 ## Security Considerations
 
@@ -716,7 +716,7 @@ modifier nonReentrant() {
 Prevent out-of-gas attacks:
 ```solidity
 require(gasleft() > calls.length * 50000, "Insufficient gas");
-```solidity
+```
 
 ### Value Handling
 
@@ -735,7 +735,7 @@ Validate target addresses:
 ```solidity
 require(calls[i].target != address(0), "Invalid target");
 require(calls[i].target.code.length > 0, "Target not contract");
-```solidity
+```
 
 ## Copyright
 

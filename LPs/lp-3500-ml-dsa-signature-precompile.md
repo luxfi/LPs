@@ -45,7 +45,7 @@ ML-DSA (formerly Dilithium) was selected by NIST in 2024 as the primary post-qua
 1. **Security**: Based on the hardness of Module-LWE and Module-SIS lattice problems, believed quantum-resistant
 2. **Performance**: Faster verification than other PQ signatures (108μs vs 15ms for SLH-DSA)
 3. **Standardization**: Official NIST standard with security proofs
-4. **Key Sizes**: Balanced size/performance tradeoff (1952 byte pubkey, 3309 byte signature)
+4. **Key Sizes**: Balanced size/performance tradeoff (1952 byte pubkey, 3293 byte signature)
 
 ### Use Cases
 
@@ -71,7 +71,7 @@ The precompile accepts a packed binary input with the following structure:
 |--------|--------|-------|-------------|
 | 0      | 1952   | `publicKey` | ML-DSA-65 public key |
 | 1952   | 32     | `messageLength` | Message length as big-endian uint256 |
-| 1984   | 3309   | `signature` | ML-DSA-65 signature |
+| 1984   | 3293   | `signature` | ML-DSA-65 signature |
 | 5293   | variable | `message` | Message to verify (length from field above) |
 
 **Total minimum size**: 5293 bytes (without message)
@@ -109,7 +109,7 @@ interface IMLDSA {
      * @dev Verifies an ML-DSA-65 signature
      * @param publicKey The 1952-byte ML-DSA-65 public key
      * @param message The message that was signed
-     * @param signature The 3309-byte ML-DSA-65 signature  
+     * @param signature The 3293-byte ML-DSA-65 signature  
      * @return valid True if signature is valid
      */
     function verify(
@@ -118,7 +118,7 @@ interface IMLDSA {
         bytes calldata signature
     ) external view returns (bool valid);
 }
-```solidity
+```
 
 ### Example Usage
 
@@ -205,13 +205,13 @@ function verifySignature(bytes calldata data, bytes calldata sig) {
     if (sig.length == 65) {
         // ECDSA signature
         return verifyECDSA(data, sig);
-    } else if (sig.length == 3309) {
+    } else if (sig.length == 3293) {
         // ML-DSA signature
         return verifyMLDSA(data, sig);
     }
     revert("Unknown signature type");
 }
-```solidity
+```
 
 **Phase 2**: Migrate all keys to ML-DSA over time
 
@@ -225,8 +225,8 @@ function verifySignature(bytes calldata data, bytes calldata sig) {
 ```
 publicKey: 0x<1952 bytes of ML-DSA public key>
 message: "Hello, quantum-safe world!"
-signature: 0x<3309 bytes of ML-DSA signature>
-```solidity
+signature: 0x<3293 bytes of ML-DSA signature>
+```
 
 **Expected Output:** `0x0000...0001` (valid)
 **Expected Gas:** ~100,270 gas (27 byte message)
@@ -237,8 +237,8 @@ signature: 0x<3309 bytes of ML-DSA signature>
 ```
 publicKey: 0x<1952 bytes of ML-DSA public key>
 message: "Hello, quantum-safe world!"
-signature: 0x<3309 bytes of WRONG signature>
-```solidity
+signature: 0x<3293 bytes of WRONG signature>
+```
 
 **Expected Output:** `0x0000...0000` (invalid)
 **Expected Gas:** ~100,270 gas (verification still runs)
@@ -249,8 +249,8 @@ signature: 0x<3309 bytes of WRONG signature>
 ```
 publicKey: 0x<1952 bytes of ML-DSA public key>
 message: "Tampered message"
-signature: 0x<3309 bytes signature for DIFFERENT message>
-```solidity
+signature: 0x<3293 bytes signature for DIFFERENT message>
+```
 
 **Expected Output:** `0x0000...0000` (invalid)
 
@@ -266,8 +266,8 @@ signature: 0x<3309 bytes signature for DIFFERENT message>
 ```
 publicKey: 0x<1952 bytes>
 message: 0x<10KB of data>
-signature: 0x<3309 bytes>
-```solidity
+signature: 0x<3293 bytes>
+```
 
 **Expected Gas:** ~202,400 gas
 

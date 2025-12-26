@@ -90,7 +90,7 @@ func (s *Selector) computeTheta(phase uint64) float64 {
     // Map to [θ_min, θ_max] with sigmoid cooling
     return s.thetaMin + (s.thetaMax-s.thetaMin)*normalized
 }
-```go
+```
 
 ### Wave Engine
 
@@ -227,7 +227,7 @@ func (q *QuasarEngine) runWavePhase(item Decidable, phase uint64) {
     // Send to Focus
     q.focus.RecordPoll(item.ID(), result)
 }
-```python
+```
 
 ## Rationale
 
@@ -280,7 +280,7 @@ def test_byzantine_30_percent():
 
         # Should pass with honest majority
         assert result.prefer_ok == True
-```python
+```
 
 ### Test 3: Metastability Prevention
 ```python

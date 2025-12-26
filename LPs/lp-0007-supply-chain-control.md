@@ -148,7 +148,7 @@ luxfi/trace       // Distributed tracing
 luxfi/utils       // Common utilities
 luxfi/vm          // VM interfaces
 luxfi/warp        // Cross-chain messaging
-```solidity
+```
 
 ---
 
@@ -250,7 +250,7 @@ ls -lh luxd  # Should be ~41MB
 ```bash
 go mod graph | wc -l  # Should be ~23,653 edges
 go list -m all | wc -l  # Should be ~620 unique
-```solidity
+```
 
 ### Dependency Audit
 ```bash

@@ -120,7 +120,7 @@ func opCLZ(pc *uint64, interpreter *EVMInterpreter, scope *ScopeContext) ([]byte
     x.SetUint64(256 - count)
     return nil, nil
 }
-```solidity
+```
 
 ## Rationale
 
@@ -179,7 +179,7 @@ function polyDegree(uint256[] memory coeffs) internal pure returns (uint256) {
     }
     return 0;
 }
-```solidity
+```
 
 ## Integration with ZK Proofs
 
@@ -205,7 +205,7 @@ function rangeProofBits(uint256 value, uint256 range) internal pure returns (uin
     // Use minimum bits needed
     return rangeBits;
 }
-```solidity
+```
 
 ## Backwards Compatibility
 

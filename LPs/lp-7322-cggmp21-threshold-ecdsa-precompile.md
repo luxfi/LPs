@@ -148,7 +148,7 @@ interface ICGGMP21 {
         bytes calldata signature
     ) external view returns (bool valid);
 }
-```solidity
+```
 
 ### CGGMP21Lib Library
 
@@ -242,7 +242,7 @@ abstract contract CGGMP21Verifier {
         emit CGGMP21SignatureVerified(threshold, totalSigners, publicKey, messageHash);
     }
 }
-```solidity
+```
 
 ## Usage Examples
 
@@ -349,7 +349,7 @@ contract DAOTreasury is CGGMP21Verifier {
         require(success, "Proposal execution failed");
     }
 }
-```solidity
+```
 
 ### Cross-Chain Bridge
 
@@ -395,7 +395,7 @@ contract ThresholdBridge is CGGMP21Verifier {
         // Process cross-chain message
     }
 }
-```solidity
+```
 
 ## Technical Specification
 
@@ -540,7 +540,7 @@ func GenerateSafePrime(bits int, rand io.Reader) (*big.Int, error) {
     // Uses crypto/rand, NOT math/rand
     // Verified primality with Miller-Rabin + Lucas
 }
-```solidity
+```
 
 **Zero-Knowledge Proof Security**:
 ```go
@@ -571,7 +571,7 @@ func generateNonces(group curve.Curve) (*big.Int, *big.Int, error) {
     γ := group.NewScalar().SetNat(rand.Reader, group.Order())
     return k, γ, nil
 }
-```solidity
+```
 
 #### Side-Channel Resistance
 
@@ -625,7 +625,7 @@ func (c *CGGMP21Precompile) Run(input []byte) ([]byte, error) {
     
     return boolToBytes(valid), nil
 }
-```solidity
+```
 
 #### 2. Threshold Protocol (`~/work/lux/threshold/protocols/cmp/`)
 
@@ -645,7 +645,7 @@ func (c *CGGMP21Precompile) Run(input []byte) ([]byte, error) {
 // - k·γ computed without revealing k or γ
 // - Affine proofs (affg, affp) verify correctness
 // - No party learns any secret shares
-```solidity
+```
 
 **Abort Detection**:
 ```go
@@ -673,7 +673,7 @@ func (r *abort1) ProcessMessage(msg *Message) error {
 // - Distributed validator key (no single point of failure)
 // - Threshold signatures for block signing
 // - Slashing via identifiable aborts
-```solidity
+```
 
 **Bridge Custody**:
 ```go
@@ -722,7 +722,7 @@ contract SecureCGGMP21Integration {
         CGGMP21Lib.verifyOrRevert(...);
     }
 }
-```solidity
+```
 
 ### Network Usage Map
 
@@ -752,14 +752,14 @@ Input:
 
 Expected Output: 0x0000...0001 (valid)
 Gas Used: 125,000
-```solidity
+```
 
 ### Test 2: Invalid Signature
 ```
 Input: (same as Test 1 but corrupted signature)
 Expected Output: 0x0000...0000 (invalid)
 Gas Used: 125,000
-```solidity
+```
 
 ### Test 3: Threshold Violation
 ```
@@ -768,7 +768,7 @@ Input:
   totalParties: 5
 
 Expected: Revert with "Invalid threshold"
-```solidity
+```
 
 ### Test 4: Large Threshold (10-of-15)
 ```
@@ -778,7 +778,7 @@ Input:
 
 Expected Output: 0x0000...0001 (valid)
 Gas Used: 225,000
-```solidity
+```
 
 ## Reference Implementation
 
@@ -815,7 +815,7 @@ The CGGMP21 precompile is implemented across multiple layers, from EVM interface
 │            Native C Implementation                              │
 │  crypto/secp256k1/libsecp256k1/src/ → CGO binding              │
 └─────────────────────────────────────────────────────────────────┘
-```solidity
+```
 
 #### 1. EVM Precompile Layer (`~/work/lux/precompiles/cggmp21/`)
 
@@ -946,7 +946,7 @@ func (r *abort2) Finalize() (abort.Report, error) {
     // Produce cryptographic proof of misbehavior
     // Return party ID for slashing
 }
-```solidity
+```
 
 ### Repository Locations
 
@@ -1037,7 +1037,7 @@ Future LPs may define hybrid schemes combining CGGMP21 with post-quantum signatu
 
 ```
 HybridSignature = CGGMP21_Signature || PQ_Signature
-```markdown
+```
 
 This provides:
 - Backward compatibility with ECDSA verifiers

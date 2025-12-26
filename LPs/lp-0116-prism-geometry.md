@@ -82,7 +82,7 @@ type Frontier struct {
     Height   uint64
     Vertices []types.NodeID
 }
-```markdown
+```
 
 The Frontier is a maximal antichain: the set of vertices with no descendants in the current DAG view. It represents the "leading edge" for voting and scheduling.
 
@@ -124,7 +124,7 @@ type Luminance struct {
     TotalPeers  int
     Lx          float64 // Illuminance in lux (lx)
 }
-```solidity
+```
 
 ### Algorithm: Frontier Computation
 
@@ -141,7 +141,7 @@ Output: Frontier F (maximal antichain)
 
 Time Complexity: O(V)
 Space Complexity: O(F) where F = |frontier|
-```sql
+```
 
 ### Algorithm: Cut Selection
 
@@ -159,7 +159,7 @@ Output: Random sample S of size min(k, |P|)
 
 Time Complexity: O(k)
 Space Complexity: O(k)
-```sql
+```
 
 ### Algorithm: Refraction
 
@@ -200,7 +200,7 @@ func (c *UniformCut) Luminance() Luminance {
         Lx:          lx,
     }
 }
-```go
+```
 
 | Network Size | Luminance (lx) | Description |
 |--------------|----------------|-------------|
@@ -243,7 +243,7 @@ var (
     ErrInvalidBeta  = errors.New("invalid Beta value")
     ErrNoSampler    = errors.New("no sampler provided")
 )
-```sql
+```
 
 ### Integration with Quasar (LP-110)
 
@@ -296,7 +296,7 @@ BEFORE CUT
     │   Selected sample (3 peers for voting)            │
     │                                                   │
     └───────────────────────────────────────────────────┘
-```solidity
+```
 
 ### DAG Visualization: Refraction
 
@@ -327,7 +327,7 @@ BEFORE CUT
     │       │          │     │       │          │
     │      v6          │     │      v6          │
     └──────────────────┘     └──────────────────┘
-```solidity
+```
 
 ## Rationale
 
@@ -436,7 +436,7 @@ func TestPrismWithQuasar(t *testing.T) {
 **Package Import**:
 ```go
 import "github.com/luxfi/consensus/protocol/prism"
-```solidity
+```
 
 **Basic Usage**:
 ```go

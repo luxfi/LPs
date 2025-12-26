@@ -30,7 +30,7 @@ interface IERC721Burnable is IERC721 {
      */
     function burn(uint256 tokenId) external;
 }
-```solidity
+```
 
 ## Rationale
 
@@ -52,7 +52,7 @@ Standard tests should cover:
 See the IERC721Burnable interface in the standard repository:
 ```
 /standard/src/interfaces/IERC721Burnable.sol
-```solidity
+```
 
 ## Implementation
 
@@ -96,7 +96,7 @@ function _burn(uint256 tokenId) internal {
 cd ~/work/lux/standard
 forge test --match-contract ERC721BurnableTest
 forge coverage --match-contract ERC721Burnable
-```solidity
+```
 
 ### Gas Costs
 

@@ -129,7 +129,7 @@ interface IKarma {
     /// @notice Get DID bound to account
     function didOf(address account) external view returns (bytes32);
 }
-```solidity
+```
 
 ---
 
@@ -221,7 +221,7 @@ interface IDLUX {
     /// @notice Get staking tier for account
     function tierOf(address account) external view returns (uint8 tier, uint256 boost);
 }
-```solidity
+```
 
 ---
 
@@ -237,7 +237,7 @@ VLUX = DLUX_staked × f(K) × time_multiplier
 where:
   f(K) = sqrt(K / 100)  // Karma scaling function
   time_multiplier = 1 + (lock_months × 0.1)  // Max 4x at 30 months
-```solidity
+```
 
 #### Example Calculations
 
@@ -258,7 +258,7 @@ Effective Votes = sqrt(VLUX_spent)
 
 Example: 10,000 VLUX → 100 effective votes
          40,000 VLUX → 200 effective votes (not 4x)
-```solidity
+```
 
 #### VLUX Interface
 
@@ -319,7 +319,7 @@ interface INFTStaking {
     /// @notice Get emission rate for collection
     function emissionRate(address collection) external view returns (uint256 dluxPerDay);
 }
-```solidity
+```
 
 ---
 

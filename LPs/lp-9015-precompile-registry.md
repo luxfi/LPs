@@ -215,7 +215,7 @@ library PrecompileRegistry {
         return "Unknown";
     }
 }
-```solidity
+```
 
 ### PrecompileChecker Contract
 
@@ -418,7 +418,7 @@ contract MyContract {
         // Use DEX...
     }
 }
-```solidity
+```
 
 ## Test Cases
 
@@ -445,7 +445,7 @@ function testPrecompileCategories() public {
         "Cryptography"
     );
 }
-```solidity
+```
 
 ### Availability Check
 
@@ -483,7 +483,7 @@ require(
     PrecompileRegistry.isPrecompile(addr),
     "Not a precompile"
 );
-```solidity
+```
 
 ### Upgrade Safety
 

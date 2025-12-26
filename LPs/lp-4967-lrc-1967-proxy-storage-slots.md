@@ -55,7 +55,7 @@ forge test -vvv
 
 # Gas report
 forge test --gas-report
-```solidity
+```
 
 ## Security Considerations
 

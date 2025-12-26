@@ -141,7 +141,7 @@ var KnownScenarios = []SignerCompromiseScenario{
         ResponseTime:    1 * time.Hour,
     },
 }
-```solidity
+```
 
 **Signer Compromise Response Matrix:**
 
@@ -291,7 +291,7 @@ var OracleAttacks = []OracleAttackVector{
         Mitigation:  "TWAP oracles, price deviation circuit breakers",
     },
 }
-```solidity
+```
 
 #### 1.5 Network-Level Attacks
 
@@ -523,7 +523,7 @@ func (rl *RateLimiter) checkAssetLimit(asset AssetID, amount *big.Int) error {
 
     return nil
 }
-```go
+```
 
 #### 2.2 Withdrawal Delays (Time-locks)
 
@@ -934,7 +934,7 @@ func (cb *CircuitBreaker) tripBreaker(name string, action BreakerAction, reason 
         "action", action,
         "reason", reason)
 }
-```solidity
+```
 
 #### 2.4 Insurance Fund
 
@@ -1255,7 +1255,7 @@ func (pm *PauseManager) IsOperationAllowed(
 
     return true
 }
-```go
+```
 
 #### 3.2 Emergency Key Rotation
 
@@ -1596,7 +1596,7 @@ func (frm *FundRecoveryManager) ExecuteRecovery(recoveryID RecoveryID) error {
     procedure.Status = RecoveryCompleted
     return nil
 }
-```go
+```
 
 #### 3.4 Communication Protocols
 
@@ -1934,7 +1934,7 @@ Step 7: SERVICE RESTORATION (2-4 hours)
     c. Third: small withdrawals
     d. Finally: all operations
   - Monitor closely for 24 hours post-restoration
-```sql
+```
 
 **Communication Protocol for Security Incidents**
 
@@ -2062,7 +2062,7 @@ var DefaultMetricThresholds = []MetricThreshold{
     {"vault_balance_change_1h", 0.10, 0.25, 0},  // 10%/25% change
     {"pending_withdrawal_count", 100, 500, 10 * time.Minute},
 }
-```go
+```
 
 #### 4.2 Off-Chain Monitoring
 
@@ -2328,7 +2328,7 @@ func (ad *AnomalyDetector) Detect(metric string, value float64) (*AnomalyResult,
 
     return nil, nil
 }
-```solidity
+```
 
 ### 5. Governance for Emergency Actions
 
@@ -2630,7 +2630,7 @@ contract BridgeEmergencyGovernor {
         // Handle other proposal types...
     }
 }
-```solidity
+```
 
 ### 6. Post-Incident Procedures
 
@@ -2983,7 +2983,7 @@ func (rv *RecoveryVerifier) runAutomatedCheck(name string) (bool, string) {
         return false, "Manual verification required"
     }
 }
-```go
+```
 
 ### 7. Integration with Related LPs
 
@@ -3102,7 +3102,7 @@ func (bi *BChainSecurityIntegration) ChallengeWithdrawal(
     // Submit challenge via LP-331
     return bi.bchain.ChallengeWithdrawal(withdrawID, reason)
 }
-```go
+```
 
 #### 7.3 Dynamic Signer Rotation Integration (LP-333)
 
@@ -3190,7 +3190,7 @@ func (ci *ContractSecurityIntegration) UpdateMPCSignerAllChains(
 
     return nil
 }
-```solidity
+```
 
 ## Rationale
 
@@ -3338,7 +3338,7 @@ func TestFullIncidentResponse(t *testing.T) {
     err := system.pauseMgr.Unpause(PauseGlobal, "", admin)
     require.NoError(t, err)
 }
-```solidity
+```
 
 ## Reference Implementation
 
@@ -3375,7 +3375,7 @@ const (
     LuxMainnetRPC = "http://localhost:9630/ext/bc/C/rpc"
     LuxTestnetRPC = "http://localhost:9630/ext/bc/C/rpc"
 )
-```solidity
+```
 
 ### Repository Structure
 
@@ -3406,7 +3406,7 @@ github.com/luxfi/bridge/security/
 └── postmortem/
     ├── template.go          # Post-mortem templates
     └── process.go           # Post-mortem process
-```bash
+```
 
 ### Build and Test
 

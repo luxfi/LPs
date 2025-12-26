@@ -104,7 +104,7 @@ func GenerateVerkleProof(keys [][]byte) {
     // Step 3: Fetch only needed proofs (single value log read each)
     proofs := db.GetValues(structure.RequiredProofs())
 }
-```go
+```
 
 #### State Root Computation
 ```go
@@ -155,7 +155,7 @@ opts.ValueLogMaxEntries = 1000000   // 1M entries per file
 // Compression
 opts.Compression = options.Snappy   // Fast compression
 opts.BlockSize = 4096               // 4KB blocks
-```go
+```
 
 ### Performance Characteristics
 
@@ -382,7 +382,7 @@ func VerifyVerkleProof(key []byte, proof []byte) bool {
     // Verify proof cryptographically
     return verkle.Verify(key, proof, storedProof)
 }
-```go
+```
 
 ### Example 2: Bulk State Updates
 ```go

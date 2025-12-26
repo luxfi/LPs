@@ -137,7 +137,7 @@ type Pool struct {
 
 // NewPool creates a worker pool (0 = runtime.NumCPU())
 func NewPool(workers int) *Pool
-```go
+```
 
 ### Protocol Entry Points
 
@@ -174,7 +174,7 @@ type Ed25519 struct{}
 
 // BLS12_381 for BLS aggregate signatures
 type BLS12_381 struct{}
-```solidity
+```
 
 ### Usage Example
 
@@ -243,7 +243,7 @@ go test ./protocols/... -bench=. -benchmem
 
 # Quick smoke test
 go test ./protocols/cmp -run Quick -v
-```go
+```
 
 ### Performance Benchmarks (Apple M1 Max)
 
@@ -391,7 +391,7 @@ func TestFROSTTaproot(t *testing.T) {
     sig := runSign(t, configs, parties[:2], message)
     assert.True(t, bip340.Verify(xOnlyPubKey, message, sig))
 }
-```go
+```
 
 ### Integration Tests
 

@@ -123,7 +123,7 @@ func TestEncryptedMessage(t *testing.T) {
     decrypted := encrypted.Decrypt(receiverKey)
     require.Equal(t, payload, decrypted.Payload())
 }
-```solidity
+```
 
 ## Backwards Compatibility
 Maintains compatibility with existing Warp messages while adding optional enhanced features.

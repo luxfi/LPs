@@ -57,7 +57,7 @@ type GasSchedule struct {
     BridgeMessage   Gas  // 50000
     StateProof      Gas  // 10000
 }
-```go
+```
 
 ### Dynamic Base Fee (EIP-1559)
 
@@ -104,7 +104,7 @@ func CalculateComputeCost(
 
     return uint64(basePrice * duration.Seconds() * multiplier * tokenFactor)
 }
-```solidity
+```
 
 ### Fee Distribution
 

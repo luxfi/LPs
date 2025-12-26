@@ -49,7 +49,7 @@ type VertexID [32]byte
 
 // VID represents a generic vertex identifier for protocol interfaces
 type VID interface{ comparable }
-```solidity
+```
 
 #### 1.2 BlockView Interface
 
@@ -72,7 +72,7 @@ type Store[V VID] interface {
     Get(V) (BlockView[V], bool)   // Retrieve a vertex by ID
     Children(V) []V               // Get children of a vertex
 }
-```solidity
+```
 
 #### 1.4 Meta and View Interfaces
 
@@ -133,7 +133,7 @@ func IsReachable[V VID](store Store[V], from, to V) bool {
 
     return false
 }
-```go
+```
 
 **Complexity**: O(V + E) where V is vertices and E is edges in the reachable subgraph.
 
@@ -238,7 +238,7 @@ func LCA[V VID](store Store[V], a, b V) V {
 
     return lca
 }
-```go
+```
 
 **Complexity**: O(V + E) for both phases.
 
@@ -307,7 +307,7 @@ func ValidateCertificate[V VID](store Store[V], cert Certificate[V], isValid fun
     }
     return validCount >= cert.Threshold
 }
-```go
+```
 
 #### 5.2 Certificate Detection
 
@@ -349,7 +349,7 @@ func HasSkip(v View, proposer Meta, p Params) bool {
     }
     return false
 }
-```solidity
+```
 
 ### 6. Event Horizon
 
@@ -425,7 +425,7 @@ func Horizon[V VID](store Store[V], checkpoints []EventHorizon[V]) EventHorizon[
         Signature:  latest.Signature,
     }
 }
-```solidity
+```
 
 #### 6.3 BeyondHorizon Predicate
 
@@ -472,7 +472,7 @@ func ComputeHorizonOrder[V VID](store Store[V], horizon EventHorizon[V]) []V {
 
     return beyondHorizon
 }
-```go
+```
 
 ### 7. Skip List for Efficient Traversal
 
@@ -592,7 +592,7 @@ func (h *HorizonEngine) LCA(a, b VertexID) VertexID {
 func (h *HorizonEngine) Antichain(vertices []VertexID) []VertexID {
     return Antichain(h.dag, vertices)
 }
-```go
+```
 
 ## Integration with Flare Finalization
 
@@ -670,7 +670,7 @@ func (s *SnowmanHorizonAdapter) IsAccepted(blockID ids.ID) bool {
     vertexID := toVertexID(blockID)
     return s.horizon.Certificate(vertexID)
 }
-```go
+```
 
 ## Test Cases
 
@@ -724,7 +724,7 @@ func TestLCA(t *testing.T) {
     lca = LCA(g, "B", "D")
     assert.Equal(t, "B", lca)
 }
-```go
+```
 
 ### Test 3: Antichain Detection
 
@@ -791,7 +791,7 @@ func TestValidateCertificate(t *testing.T) {
     cert.Threshold = 3
     assert.False(t, ValidateCertificate(g, cert, isValid))
 }
-```solidity
+```
 
 ### Test 5: Event Horizon Computation
 
@@ -845,7 +845,7 @@ func TestBuildSkipList(t *testing.T) {
     // B should have skip pointer to A
     assert.Equal(t, "A", sl.Levels["B"][0])
 }
-```go
+```
 
 ### Test 7: Path Finding
 
@@ -936,7 +936,7 @@ go test -v ./... -coverprofile=coverage.out
 #
 # ok      github.com/luxfi/consensus/protocol/horizon    0.134s
 # coverage: 97.2% of statements
-```solidity
+```
 
 **API Endpoints**:
 - `GET /ext/info/horizon/reachable?from={id}&to={id}` - Check reachability

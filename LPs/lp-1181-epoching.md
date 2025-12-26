@@ -104,7 +104,7 @@ func GetDChainEpoch(parent Block) Epoch {
         StartTime:    parent.Epoch().StartTime,
     }
 }
-```go
+```
 
 ## Lux-Specific Enhancements
 
@@ -365,7 +365,7 @@ type EpochKeys struct {
     Shares          map[string]*ringtailThreshold.KeyShare
     Signers         map[string]*ringtailThreshold.Signer
 }
-```solidity
+```
 
 ### Rate Limiting
 
@@ -401,7 +401,7 @@ func (em *EpochManager) VerifySignatureForEpoch(message string, sig *Signature, 
     }
     return ringtailThreshold.Verify(keys.GroupKey, message, sig)
 }
-```sql
+```
 
 ### Integration with Quasar Consensus
 
