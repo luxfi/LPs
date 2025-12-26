@@ -4,7 +4,8 @@ title: Warp Cross-Chain Messaging Protocol
 description: Authenticated cross-chain messaging using BLS aggregation and Verkle proofs for sub-second finality
 author: Lux Core Team (@luxfi)
 discussions-to: https://forum.lux.network/t/lp-602-warp-messaging
-status: Implemented
+status: Superseded
+superseded_by: 118
 type: Standards Track
 category: Networking
 created: 2025-01-09

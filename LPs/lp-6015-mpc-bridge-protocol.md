@@ -5,7 +5,8 @@ tags: [mpc, bridge, cross-chain]
 description: Defines the overall Lux Bridge protocol using Multi-Party Computation/Threshold Signatures.
 author: Lux Network Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
-status: Review
+status: Superseded
+superseded_by: 6021
 type: Standards Track
 category: Bridge
 created: 2025-01-23

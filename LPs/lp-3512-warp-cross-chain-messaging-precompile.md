@@ -4,7 +4,8 @@ title: Warp Cross-Chain Messaging Precompile
 description: Native precompile for cross-chain communication with BLS signature aggregation and validator quorum verification
 author: Lux Core Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
-status: Implemented
+status: Superseded
+superseded_by: 118
 type: Standards Track
 category: Core
 created: 2025-12-14

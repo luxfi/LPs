@@ -4,7 +4,8 @@ title: Warp 1.5 - Quantum-Safe Cross-Chain Messaging
 description: Post-quantum secure cross-chain messaging with Ringtail signatures, ML-KEM encryption, and Teleport protocol integration
 author: Lux Core Team (@luxfi)
 discussions-to: https://forum.lux.network/t/lp-603-warp-1-5
-status: Review
+status: Superseded
+superseded_by: 118
 type: Standards Track
 category: Networking
 created: 2025-12-11

@@ -145,7 +145,6 @@ status: Draft|Review|Last Call|Final
 type: Standards Track|Meta|Informational
 category: Core|Networking|Interface|LRC|Bridge
 created: <YYYY-MM-DD>
-requires: <LP numbers>  # optional
 ---
 ```
 
