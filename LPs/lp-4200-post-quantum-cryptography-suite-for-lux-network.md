@@ -80,8 +80,8 @@ uint256 constant GAS_ML_KEM_DECAP = 600_000;
 | Parameter Set | Security Level | Public Key | Private Key | Signature | Signing Ops/sec | Verification Ops/sec |
 |--------------|----------------|------------|-------------|-----------|-----------------|--------------------|
 | ML-DSA-44    | NIST Level 2 (128-bit) | 1,312 B | 2,560 B | 2,420 B | 40,000 | 45,000 |
-| ML-DSA-65    | NIST Level 3 (192-bit) | 1,952 B | 4,032 B | 3,293 B | 35,000 | 40,000 |
-| ML-DSA-87    | NIST Level 5 (256-bit) | 2,592 B | 4,896 B | 4,595 B | 30,000 | 35,000 |
+| ML-DSA-65    | NIST Level 3 (192-bit) | 1,952 B | 4,032 B | 3,309 B | 35,000 | 40,000 |
+| ML-DSA-87    | NIST Level 5 (256-bit) | 2,592 B | 4,896 B | 4,627 B | 30,000 | 35,000 |
 
 #### EVM Optimization (ETH-ML-DSA)
 

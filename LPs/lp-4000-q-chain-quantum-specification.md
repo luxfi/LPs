@@ -115,8 +115,8 @@ valid, err := mldsa.Verify65(pk, message, signature)
 | Variant | Security Level | Public Key | Signature |
 |---------|----------------|------------|-----------|
 | ML-DSA-44 | 128-bit | 1,312 bytes | 2,420 bytes |
-| ML-DSA-65 | 192-bit | 1,952 bytes | 3,293 bytes |
-| ML-DSA-87 | 256-bit | 2,592 bytes | 4,595 bytes |
+| ML-DSA-65 | 192-bit | 1,952 bytes | 3,309 bytes |
+| ML-DSA-87 | 256-bit | 2,592 bytes | 4,627 bytes |
 
 #### SLH-DSA (FIPS 205) - Hash-Based Signatures
 

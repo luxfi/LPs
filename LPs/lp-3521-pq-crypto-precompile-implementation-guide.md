@@ -65,8 +65,8 @@ PQC precompiles are additive additions that do not affect existing EVM functiona
 | Mode | Security Level | Mode Byte | Gas Cost | Public Key | Signature |
 |------|---------------|-----------|----------|------------|-----------|
 | ML-DSA-44 | NIST Level 2 (128-bit) | `0x44` | **75,000** | 1,312 bytes | 2,420 bytes |
-| ML-DSA-65 | NIST Level 3 (192-bit) | `0x65` | **100,000** | 1,952 bytes | 3,293 bytes |
-| ML-DSA-87 | NIST Level 5 (256-bit) | `0x87` | **150,000** | 2,592 bytes | 4,595 bytes |
+| ML-DSA-65 | NIST Level 3 (192-bit) | `0x65` | **100,000** | 1,952 bytes | 3,309 bytes |
+| ML-DSA-87 | NIST Level 5 (256-bit) | `0x87` | **150,000** | 2,592 bytes | 4,627 bytes |
 
 **Gas Formula:**
 ```solidity
@@ -193,7 +193,7 @@ Offset  Length   Field         Description
 0       1        mode          Mode byte (0x44, 0x65, 0x87)
 1       var      publicKey     Public key (1312/1952/2592 bytes)
 1+pk    32       messageLen    Message length as big-endian uint256
-1+pk+32 var      signature     Signature (2420/3293/4595 bytes)
+1+pk+32 var      signature     Signature (2420/3309/4627 bytes)
 min     var      message       Message to verify
 ```
 

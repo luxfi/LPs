@@ -77,8 +77,8 @@ Mining wallets MUST use ML-DSA (Module-Lattice Digital Signature Algorithm) per 
 | Security Level | Algorithm   | Public Key Size | Signature Size |
 |---------------|-------------|-----------------|----------------|
 | Level 2       | ML-DSA-44   | 1,312 bytes     | 2,420 bytes    |
-| Level 3       | ML-DSA-65   | 1,952 bytes     | 3,293 bytes    |
-| Level 5       | ML-DSA-87   | 2,592 bytes     | 4,595 bytes    |
+| Level 3       | ML-DSA-65   | 1,952 bytes     | 3,309 bytes    |
+| Level 5       | ML-DSA-87   | 2,592 bytes     | 4,627 bytes    |
 
 **Address Derivation:**
 ```solidity
