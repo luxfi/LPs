@@ -597,6 +597,23 @@ By integrating Lamport OTS into Lux Safe, we create the first production-ready q
    - Verify cross-chain compatibility
    - Test upgrade transitions
 
+## References
+
+### Related Lux Proposals
+- [LP-4200: Post-Quantum Cryptography Suite for Lux Network](./lp-4200-post-quantum-cryptography-suite-for-lux-network.md) - Complete PQC ecosystem
+- [LP-7324: Ringtail Threshold Signature Precompile](./lp-7324-ringtail-threshold-signature-precompile.md) - Post-quantum threshold signatures
+- [LP-7000: T-Chain Threshold Specification](./lp-7000-t-chain-threshold-specification.md) - MPC custody integration
+- [LP-3310: Safe Multisig Standard](./lp-3310-safe-multisig-standard.md) - Lux Safe base specification
+- [LP-4201: Hybrid Classical-Quantum Cryptography Transitions](./lp-4201-hybrid-classical-quantum-cryptography-transitions.md) - Migration strategy
+
+### Implementation
+- **Solidity Contracts**: [`github.com/luxfi/standard/contracts/crypto/lamport/`](https://github.com/luxfi/standard/tree/main/contracts/crypto/lamport)
+- **Node Integration**: [`github.com/luxfi/node/tree/main/vms/safe/lamport/`](https://github.com/luxfi/node/tree/main/vms/safe/lamport)
+
+### Academic References
+- Lamport, L. "Constructing Digital Signatures from a One-Way Function" (1979)
+- NIST Post-Quantum Cryptography Standardization
+
 ## Copyright
 
 Copyright and related rights waived via [CC0](../LICENSE.md).

@@ -1080,10 +1080,13 @@ func verifyRingtail(threshold, totalParties uint32, msgHash []byte, sig []byte) 
 - **Ringtail Protocol**: [`github.com/luxfi/ringtail`](https://github.com/luxfi/ringtail) (v0.1.2)
 - **Lattice Primitives**: [`github.com/luxfi/lattice`](https://github.com/luxfi/lattice) (v6.1.2)
 - **Solidity Interface**: [`github.com/luxfi/standard/contracts/crypto/precompiles/IRingtailThreshold.sol`](https://github.com/luxfi/standard/blob/main/contracts/crypto/precompiles/IRingtailThreshold.sol)
+- **LP-4200**: [Post-Quantum Cryptography Suite for Lux Network](./lp-4200-post-quantum-cryptography-suite-for-lux-network.md) - Complete PQC ecosystem
+- **LP-4105**: [Lamport One-Time Signatures for Lux Safe](./lp-4105-lamport-one-time-signatures-ots-for-lux-safe.md) - Hash-based OTS for remote chains
 - **LP-110**: Quasar Consensus with Dual-Certificate Finality
 - **LP-311**: ML-DSA Precompile (non-threshold PQ signature)
 - **LP-7321**: FROST Precompile (classical threshold for comparison)
 - **LP-7322**: CGGMP21 Precompile (classical ECDSA threshold)
+- **LP-7000**: [T-Chain Threshold Specification](./lp-7000-t-chain-threshold-specification.md) - MPC custody chain
 
 ## Copyright
 
