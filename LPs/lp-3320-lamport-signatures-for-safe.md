@@ -338,7 +338,7 @@ From actual benchmarks (`gas_data.json`):
 | Scheme | Gas Cost | Signature Size | Quantum Safe |
 |--------|----------|----------------|--------------|
 | **Lamport OTS** | ~20M | ~8 KB | Unconditional |
-| ML-DSA-65 | ~100K | 3,293 bytes | Lattice-based |
+| ML-DSA-65 | ~100K | 3,309 bytes | Lattice-based |
 | Ringtail | ~200K | ~4 KB | Lattice-based |
 
 Lamport is expensive but provides the strongest quantum guarantees.

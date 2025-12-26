@@ -69,8 +69,8 @@ Three parameter sets providing different security/performance trade-offs:
 | Mode | Security | Public Key | Private Key | Signature | Sign Time | Verify Time |
 |------|----------|------------|-------------|-----------|-----------|-------------|
 | **ML-DSA-44** | 128-bit (NIST-2) | 1,312 bytes | 2,528 bytes | 2,420 bytes | ~150μs | ~80μs |
-| **ML-DSA-65** | 192-bit (NIST-3) | 1,952 bytes | 4,000 bytes | 3,293 bytes | ~417μs | ~108μs |
-| **ML-DSA-87** | 256-bit (NIST-5) | 2,592 bytes | 4,864 bytes | 4,595 bytes | ~600μs | ~150μs |
+| **ML-DSA-65** | 192-bit (NIST-3) | 1,952 bytes | 4,000 bytes | 3,309 bytes | ~417μs | ~108μs |
+| **ML-DSA-87** | 256-bit (NIST-5) | 2,592 bytes | 4,864 bytes | 4,627 bytes | ~600μs | ~150μs |
 
 **Lux Default**: ML-DSA-65 (192-bit security, balanced performance)
 
@@ -102,7 +102,7 @@ signature, err := sk.Sign(rand.Reader, message, nil)
 if err != nil {
     return err
 }
-// signature is 3,293 bytes for ML-DSA-65
+// signature is 3,309 bytes for ML-DSA-65
 ```
 
 **Properties**:
@@ -121,7 +121,7 @@ if !valid {
 ```
 
 **Verification checks**:
-1. Signature size = 3,293 bytes (for ML-DSA-65)
+1. Signature size = 3,309 bytes (for ML-DSA-65)
 2. Polynomial bounds verification
 3. Challenge reconstruction and comparison
 
@@ -133,7 +133,7 @@ if !valid {
 ```go
 type ValidatorSignature struct {
     BLS     []byte  // 96 bytes - current
-    MLDSA   []byte  // 3,293 bytes - quantum-safe
+    MLDSA   []byte  // 3,309 bytes - quantum-safe
     Mode    uint8   // ML-DSA mode (44/65/87)
 }
 ```
@@ -160,7 +160,7 @@ type MLDSATransaction struct {
     To          common.Address
     Value       *big.Int
     Data        []byte
-    Signature   []byte  // 3,293 bytes (ML-DSA-65)
+    Signature   []byte  // 3,309 bytes (ML-DSA-65)
     PublicKey   []byte  // 1,952 bytes
     Mode        uint8   // 65
 }
@@ -176,7 +176,7 @@ interface IMLDSA {
     /// @notice Verify ML-DSA signature
     /// @param publicKey 1,952 bytes for ML-DSA-65
     /// @param message Arbitrary length message
-    /// @param signature 3,293 bytes for ML-DSA-65
+    /// @param signature 3,309 bytes for ML-DSA-65
     /// @return valid True if signature is valid
     function verify(
         bytes calldata publicKey,
@@ -405,7 +405,7 @@ BenchmarkMLDSA_KeyGen_65       8,000 ops    125,000 ns/op
 
 **vs SLH-DSA (LP-312)**:
 - ML-DSA is 10-100x faster (417μs vs 40ms sign time)
-- Smaller signatures (3,293 bytes vs 17,088-49,856 bytes)
+- Smaller signatures (3,309 bytes vs 17,088-49,856 bytes)
 - Trade-off: Lattice security assumptions vs hash-based conservative security
 
 **vs Classical Multivariate**:
@@ -428,7 +428,7 @@ BenchmarkMLDSA_KeyGen_65       8,000 ops    125,000 ns/op
 **Performance Balance**:
 - 417μs sign time acceptable for transaction throughput
 - 108μs verify time suitable for consensus
-- 3,293 byte signatures fit in typical network packets
+- 3,309 byte signatures fit in typical network packets
 
 ## Reference Implementation
 
@@ -459,7 +459,7 @@ func main() {
     }
 
     fmt.Printf("Signature size: %d bytes\n", len(signature))
-    // Output: Signature size: 3293 bytes
+    // Output: Signature size: 3309 bytes
 
     // Verify signature
     valid := validatorKey.PublicKey.Verify(blockHash, signature, nil)
@@ -538,8 +538,8 @@ Copyright and related rights waived via [CC0](https://creativecommons.org/public
 | **ECDSA (secp256k1)** | 33 bytes | 32 bytes | 65 bytes | 128-bit (classical) |
 | **BLS12-381** | 96 bytes | 32 bytes | 96 bytes | 128-bit (classical) |
 | **ML-DSA-44** | 1,312 bytes | 2,528 bytes | 2,420 bytes | 128-bit (quantum) |
-| **ML-DSA-65** | 1,952 bytes | 4,000 bytes | 3,293 bytes | 192-bit (quantum) |
-| **ML-DSA-87** | 2,592 bytes | 4,864 bytes | 4,595 bytes | 256-bit (quantum) |
+| **ML-DSA-65** | 1,952 bytes | 4,000 bytes | 3,309 bytes | 192-bit (quantum) |
+| **ML-DSA-87** | 2,592 bytes | 4,864 bytes | 4,627 bytes | 256-bit (quantum) |
 
 **Size Trade-off**: 60x larger keys, 50x larger signatures for quantum resistance
 

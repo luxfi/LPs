@@ -648,7 +648,7 @@ Copyright and related rights waived via [CC0](https://creativecommons.org/public
 |--------|---------------|-----------|---------------------|
 | **ECDSA (secp256k1)** | 65 bytes | ~88μs | Elliptic curve discrete log (broken by quantum) |
 | **BLS12-381** | 96 bytes | ~1,200μs | Pairing-based (broken by quantum) |
-| **ML-DSA-65** | 3,293 bytes | ~417μs | Module-lattice (quantum-resistant) |
+| **ML-DSA-65** | 3,309 bytes | ~417μs | Module-lattice (quantum-resistant) |
 | **SLH-DSA-SHA2-128s** | 7,856 bytes | ~309ms | Hash function (quantum-resistant) |
 | **SLH-DSA-SHA2-128f** | 17,088 bytes | ~10ms | Hash function (quantum-resistant) |
 | **SLH-DSA-SHA2-256s** | 29,792 bytes | ~603ms | Hash function (quantum-resistant) |
