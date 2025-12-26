@@ -3,7 +3,7 @@ lp: 9023
 title: Integration Testing Requirements
 description: Comprehensive integration testing standards and CI/CD pipelines for production DeFi
 author: Lux Core Team
-status: Review
+status: Superseded
 tags: [dex, trading]
 type: Standards Track
 category: Core

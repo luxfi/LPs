@@ -5,7 +5,7 @@ tags: [defi, bridge, cross-chain, axelar, layerzero, wormhole, warp]
 description: Unified bridge aggregator supporting Axelar GMP, LayerZero V2, Wormhole CCTP, and Lux Warp
 author: Lux Network Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
-status: Review
+status: Superseded
 type: Standards Track
 category: Core
 created: 2025-12-21
