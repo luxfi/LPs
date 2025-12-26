@@ -3,11 +3,11 @@ lp: 99
 title: LP Numbering Scheme and Chain Organization
 description: Canonical governance anchor defining LP numbering, status semantics, and normative classification
 author: Lux Core Team
-status: Final
+status: Living
 tags: [core, meta, governance]
 type: Meta
 created: 2025-01-15
-updated: 2025-12-21
+updated: 2025-12-25
 order: 99
 ---
 
@@ -49,39 +49,74 @@ This LP is the **canonical governance anchor** for all Lux Proposals. It defines
 
 | Range | Purpose | Status Allowed |
 |-------|---------|----------------|
-| **0–99** | Constitutional / Meta | Final only |
-| **100–999** | Core Protocols | Draft, Final |
-| **1000–1999** | Chain Specifications | Draft, Final |
-| **2000–2999** | DAO, Governance & ESG | Draft, Final, Research |
-| **3000–3999** | Solidity, Tokens & Web3 | Draft, Final |
-| **4000–4999** | Cryptography / PQC | Draft, Final |
-| **5000–5999** | AI / Attestation | Draft, Final |
-| **6000–6999** | Bridges & Interop | Draft, Final |
-| **7000–7999** | Threshold / MPC | Draft, Final |
-| **8000–8999** | ZK / Privacy | Draft, Final |
-| **9000–9999** | DeFi / Markets | Draft, Final |
-| **10000–19999** | Learning Paths | Research only |
-| **50000–59999** | Research Indexes | Research only |
+| **0–99** | Constitutional / Meta | Final, Implemented, Living |
+| **100–999** | Core Protocols | Draft, Review, Last Call, Final, Implemented |
+| **1000–1999** | Chain Specifications | Draft, Review, Last Call, Final, Implemented |
+| **2000–2999** | DAO, Governance & ESG | Draft, Review, Last Call, Final, Implemented, Research |
+| **3000–3999** | Solidity, Tokens & Web3 | Draft, Review, Last Call, Final, Implemented |
+| **4000–4999** | Cryptography / PQC | Draft, Review, Last Call, Final, Implemented |
+| **5000–5999** | AI / Attestation | Draft, Review, Last Call, Final, Implemented |
+| **6000–6999** | Bridges & Interop | Draft, Review, Last Call, Final, Implemented |
+| **7000–7999** | Threshold / MPC | Draft, Review, Last Call, Final, Implemented |
+| **8000–8999** | ZK / Privacy | Draft, Review, Last Call, Final, Implemented |
+| **9000–9999** | DeFi / Markets | Draft, Review, Last Call, Final, Implemented |
+| **10000–19999** | Learning Paths | Draft, Review, Final, Living |
+| **50000–59999** | Research Indexes | Research |
 
 **Rule**: LPs outside their designated range are INVALID.
 
 ---
 
-### Status Semantics (Strict)
+### Status Semantics (EIP-Aligned)
+
+The Lux LP process follows the [EIP standard flow](https://eips.ethereum.org/EIPS/eip-1) for familiarity with the EVM community.
 
 Each LP MUST declare exactly one status:
 
-| Status | Meaning | Binding? |
-|--------|---------|----------|
-| **Draft** | Actively evolving | No |
-| **Final** | Normative standard | Yes |
-| **Superseded** | Replaced, read-only | No |
-| **Research** | Informational only | Never |
+| Status | Meaning | Binding? | Next Status |
+|--------|---------|----------|-------------|
+| **Idea** | Pre-proposal discussion | No | Draft |
+| **Draft** | Actively evolving | No | Review, Withdrawn |
+| **Review** | Ready for peer review (pre-implementation) | No | Last Call, Draft, Withdrawn |
+| **Last Call** | Final review window (14 days) | No | Final, Implemented, Review |
+| **Final** | Normative standard (spec complete) | Yes | Implemented, Living |
+| **Implemented** | Deployed to mainnet | Yes | Living |
+| **Living** | Continually updated (process docs, curricula) | Yes | N/A |
+| **Stagnant** | Inactive 6+ months | No | Draft, Withdrawn |
+| **Withdrawn** | Author withdrew proposal | No | N/A |
+| **Superseded** | Replaced by another LP | No | N/A |
+| **Research** | Informational only | Never | Draft |
+
+#### Status Progression
+
+```
+Idea → Draft → Review → Last Call → Final → Implemented
+         ↓        ↓         ↓         ↓         ↓
+     Withdrawn  Draft    Review    Living    Living
+         ↑
+      Stagnant (after 6 months inactivity)
+```
+
+#### Special Statuses
+
+**Implemented**: The most common final state for technical LPs. Indicates the spec is deployed on mainnet with working code. Use this for all deployed features.
+
+**Living Documents**: Designated for continuously updated content:
+- Process documents (LP-0099, governance)
+- Learning paths (curricula that evolve)
+- Research indexes (maintained references)
+- Must track changes via git history
+
+**Research**: Informational content. Can transition to Draft when ready to become a normative standard.
+
+**Review vs Draft**:
+- **Draft**: Actively being written, not ready for feedback
+- **Review**: Ready for peer review BEFORE implementation
 
 **Hard Rules**:
-- Learning Paths (10000+) can NEVER be Final
-- Research Indexes (50000+) can NEVER be Final
-- Only ranges 0–9999 can reach Final status
+- Research Indexes (50000+) are Research only (can transition to 0-9999 to become normative)
+- Only ranges 0–9999 can reach Final/Implemented status
+- Learning Paths (10000+) can be Draft, Review, Final, or Living
 
 ---
 
@@ -98,7 +133,7 @@ Each LP MUST declare exactly one status:
 | 50–89 | Wallet, key management, security |
 | 90–99 | Meta (this document), indexes |
 
-**Status**: Final only. These are foundational.
+**Status**: Final or Living. These are foundational. Living status for continuously updated documents (e.g., LP-0099).
 
 ---
 
@@ -289,14 +324,16 @@ Each LP MUST declare exactly one status:
 
 #### 10000–19999: Learning Paths
 
-**Purpose**: Educational guides (NON-NORMATIVE).
+**Purpose**: Educational guides and technical tutorials.
 
-| Sub-range | Mirrors |
+| Sub-range | Purpose |
 |-----------|---------|
 | 10000–10099 | Indexes, paths |
 | 10100–19999 | Topic-specific guides |
 
-**Status**: Research only. NEVER Final.
+**Status**: Draft, Review, Final, or Living.
+- **Final**: Complete, accurate tutorials that teach normative standards
+- **Living**: Continuously updated curricula (recommended for active learning paths)
 
 ---
 
@@ -308,27 +345,29 @@ Each LP MUST declare exactly one status:
 |-------|---------|
 | 50000–59999 | Research papers |
 
-**Status**: Research only. NEVER Final.
+**Status**: Research only.
+- Informational content, never normative
+- Can transition to Draft → Final when ready to become normative
 
 ---
 
 ## Decision Rules
 
-| If your spec is about... | Range | Can be Final? |
-|--------------------------|-------|---------------|
-| Network identity, LP process | 0–99 | Yes (must be) |
-| Consensus, validators, epochs | 100–999 | Yes |
-| P/X/C chain core identity | 1000–1999 | Yes |
-| Tokens, DAO, ESG | 2000–2999 | Yes |
-| VM, precompiles, execution | 3000–3999 | Yes |
-| Post-quantum cryptography | 4000–4999 | Yes |
-| AI, attestation, TEE | 5000–5999 | Yes |
-| Bridges, cross-chain | 6000–6999 | Yes |
-| MPC, threshold signing | 7000–7999 | Yes |
-| ZK, privacy, FHE | 8000–8999 | Yes |
-| DeFi, trading, markets | 9000–9999 | Yes |
-| Learning guides | 10000–19999 | **No** |
-| Research, indexes | 50000+ | **No** |
+| If your spec is about... | Range | Can be Implemented? | Can be Living? |
+|--------------------------|-------|---------------------|----------------|
+| Network identity, LP process | 0–99 | Yes | Yes |
+| Consensus, validators, epochs | 100–999 | Yes | No |
+| P/X/C chain core identity | 1000–1999 | Yes | No |
+| Tokens, DAO, ESG | 2000–2999 | Yes | No |
+| VM, precompiles, execution | 3000–3999 | Yes | No |
+| Post-quantum cryptography | 4000–4999 | Yes | No |
+| AI, attestation, TEE | 5000–5999 | Yes | No |
+| Bridges, cross-chain | 6000–6999 | Yes | No |
+| MPC, threshold signing | 7000–7999 | Yes | No |
+| ZK, privacy, FHE | 8000–8999 | Yes | No |
+| DeFi, trading, markets | 9000–9999 | Yes | No |
+| Learning guides | 10000–19999 | No | Yes |
+| Research, indexes | 50000+ | **No** | **No** |
 
 ---
 
@@ -338,26 +377,45 @@ Each LP MUST declare exactly one status:
 # LP-lint rules (machine-enforceable)
 rules:
   range_check:
-    - "LP 0-99 MUST have status: Final"
-    - "LP 10000+ MUST have status: Draft"
-    - "LP 50000+ MUST have status: Draft"
+    - "LP 0-99 MUST have status: Final or Living"
+    - "LP 50000+ MUST have status: Research"
     - "LP outside defined range is INVALID"
-  
+
   status_check:
-    - "status MUST be one of: Draft, Final, Superseded, Research"
+    - "status MUST be one of: Idea, Draft, Review, Last Call, Final, Implemented, Living, Stagnant, Withdrawn, Superseded, Research"
     - "Research LPs cannot reference normative behavior"
-  
+    - "Living LPs must be in range 0-99 or 10000-19999"
+    - "Implemented status indicates deployed to mainnet"
+
+  progression_check:
+    - "Draft can move to: Review, Withdrawn, Stagnant"
+    - "Review can move to: Last Call, Draft, Withdrawn"
+    - "Last Call can move to: Final, Implemented, Review"
+    - "Final can move to: Implemented, Living"
+    - "Implemented can move to: Living"
+    - "Stagnant can move to: Draft, Withdrawn"
+
   content_check:
     - "Final LPs MUST have reference implementation OR test vectors"
+    - "Last Call LPs MUST specify review-period-end date"
     - "Superseded LPs MUST reference replacement LP"
     - "No duplicate LP numbers allowed"
-```solidity
+```
 
 ---
 
 ## Migration History
 
-### v5.1 (Current)
+### v6.0 (Current - 2025-12-25)
+- **EIP-Aligned Status Semantics**: Full alignment with Ethereum EIP-1 process
+- Added statuses: Review, Last Call, **Implemented**, Living, Stagnant, Withdrawn
+- LP-0099 itself changed from Final → Living (continually updated)
+- Learning Paths (10000+) can now be Draft, Review, Final, or Living
+- Research stays in Research status (transitions to normative range when ready)
+- Added status progression rules matching EIP-1 flow
+- **Implemented** is the common final state for deployed specs (vs Final for spec-complete)
+
+### v5.1
 - DAO (71xxx) → 2800-2849
 - ESG (72xxx) → 2900-2999
 - Removed 70000-79999 range
@@ -391,4 +449,3 @@ Indirect impact: Clear LP organization prevents:
 ## Copyright
 
 Copyright and related rights waived via [CC0](https://creativecommons.org/publicdomain/zero/1.0/).
-```
