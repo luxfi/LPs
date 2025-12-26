@@ -4,7 +4,7 @@ title: Ringtail Threshold Signature Precompile
 description: Native precompile for lattice-based (LWE) post-quantum threshold signatures
 author: Lux Core Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
-status: Review
+status: Final
 type: Standards Track
 category: Core
 created: 2025-11-13
@@ -524,13 +524,13 @@ All tests passing across the full stack:
 
 ### Repository Locations
 
-| Component | Repository |
-|-----------|------------|
-| Precompile | `github.com/luxfi/precompiles/ringtail/` |
-| Ringtail Library | `github.com/luxfi/ringtail/` |
-| Lattice Primitives | `github.com/luxfi/lattice/` |
-| Epoch Management | `github.com/luxfi/node/consensus/protocol/quasar/` |
-| Solidity Interface | `~/work/lux/standard/contracts/precompiles/ringtail/` |
+| Component | Repository | Version |
+|-----------|------------|---------|
+| Precompile | [`github.com/luxfi/precompiles/ringtail/`](https://github.com/luxfi/precompiles/tree/main/ringtail) | v0.1.7 |
+| Ringtail Library | [`github.com/luxfi/ringtail/`](https://github.com/luxfi/ringtail) | v0.1.2 |
+| Lattice Primitives | [`github.com/luxfi/lattice/`](https://github.com/luxfi/lattice) | v6.1.2 |
+| Epoch Management | [`github.com/luxfi/node/consensus/protocol/quasar/`](https://github.com/luxfi/node/tree/main/consensus/protocol/quasar) | - |
+| Solidity Interface | [`github.com/luxfi/standard/contracts/crypto/precompiles/IRingtailThreshold.sol`](https://github.com/luxfi/standard/tree/main/contracts/crypto/precompiles) | v1.1.0 |
 
 ## Security Considerations
 
@@ -1074,13 +1074,16 @@ func verifyRingtail(threshold, totalParties uint32, msgHash []byte, sig []byte) 
 
 ## References
 
-- **Ringtail Paper**: "Two-Round Threshold Signatures from LWE" (ePrint 2024/1113)
+- **Ringtail Paper**: "Two-Round Threshold Signatures from LWE" ([ePrint 2024/1113](https://eprint.iacr.org/2024/1113))
 - **Ring-LWE**: Lyubashevsky et al., "On Ideal Lattices and Learning with Errors Over Rings"
-- **Implementation**: `github.com/luxfi/ringtail` and `precompiles/ringtail/`
-- **LP-99**: Quasar Consensus with Dual-Certificate Finality
+- **Precompile Implementation**: [`github.com/luxfi/precompiles/ringtail`](https://github.com/luxfi/precompiles/tree/main/ringtail) (v0.1.7)
+- **Ringtail Protocol**: [`github.com/luxfi/ringtail`](https://github.com/luxfi/ringtail) (v0.1.2)
+- **Lattice Primitives**: [`github.com/luxfi/lattice`](https://github.com/luxfi/lattice) (v6.1.2)
+- **Solidity Interface**: [`github.com/luxfi/standard/contracts/crypto/precompiles/IRingtailThreshold.sol`](https://github.com/luxfi/standard/blob/main/contracts/crypto/precompiles/IRingtailThreshold.sol)
+- **LP-110**: Quasar Consensus with Dual-Certificate Finality
 - **LP-311**: ML-DSA Precompile (non-threshold PQ signature)
-- **LP-321**: FROST Precompile (classical threshold for comparison)
-- **LP-322**: CGGMP21 Precompile (classical ECDSA threshold)
+- **LP-7321**: FROST Precompile (classical threshold for comparison)
+- **LP-7322**: CGGMP21 Precompile (classical ECDSA threshold)
 
 ## Copyright
 
