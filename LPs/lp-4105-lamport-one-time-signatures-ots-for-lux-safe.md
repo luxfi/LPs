@@ -640,36 +640,88 @@ pub[i][b] = H(sk[i][b])  // keccak256(sig[i]) == pub[i][bit]
 pkh = keccak256(abi.encodePacked(pub))
 ```
 
-#### 3. Threshold Signing Flow
+#### 3. Threshold Signing Flow (Production Protocol)
+
+**CRITICAL SECURITY RULES**:
+
+1. **Canonical Digest Rule** (mandatory): Every MPC node MUST locally compute `safeTxHash` from full transaction fields. **NEVER** accept a coordinator-provided hash.
+
+2. **1-Round Digest Agreement** (kills equivocation): Before revealing ANY Lamport material, nodes broadcast `H(m)` to each other. Proceed ONLY if ≥t nodes report the same value. This prevents the 2022 "different messages to different signers" attack.
+
+3. **Reconstruct Only Needed Halves**: For each bit position, the network reconstructs ONLY `sk[i][bit(m,i)]` - never both halves.
 
 ```go
-// T-Chain MPC signing protocol
-func ThresholdLamportSign(safeTxHash bytes32, nextPKH bytes32) []byte {
-    // Step 1: Every node computes canonical safeTxHash locally
-    // NEVER accept coordinator-provided hash (security critical)
-    localHash := computeSafeTxHash(tx)
+// T-Chain MPC signing protocol (production implementation)
+func ThresholdLamportSign(tx *SafeTransaction, nextPKH bytes32) ([]byte, error) {
+    // ═══════════════════════════════════════════════════════════════════
+    // STEP 1: Canonical Digest (SECURITY CRITICAL)
+    // ═══════════════════════════════════════════════════════════════════
+    // Every node computes safeTxHash LOCALLY from full tx fields
+    // NEVER accept coordinator-provided hash - this prevents equivocation
+    safeTxHash := computeSafeTxHash(
+        tx.To, tx.Value, tx.Data, tx.Operation,
+        tx.SafeTxGas, tx.BaseGas, tx.GasPrice,
+        tx.GasToken, tx.RefundReceiver, tx.Nonce,
+    )
 
-    // Step 2: 1-round "same digest" check
-    // Broadcast safeTxHash, only proceed if ≥t nodes match
-    if !consensusOnHash(localHash) {
-        return nil // Abort if disagreement
+    // ═══════════════════════════════════════════════════════════════════
+    // STEP 2: 1-Round Digest Agreement (kills equivocation attack)
+    // ═══════════════════════════════════════════════════════════════════
+    // Broadcast H(safeTxHash) to all nodes BEFORE revealing any Lamport material
+    // This prevents "different messages to different signers" attack
+    commitment := keccak256(safeTxHash)
+
+    allCommitments := broadcastAndCollect(commitment)
+    matchCount := countMatching(allCommitments, commitment)
+
+    if matchCount < threshold {
+        return nil, errors.New("digest disagreement - possible equivocation attack")
     }
 
-    // Step 3: Compute domain-separated message
-    m := keccak256(safeTxHash, nextPKH, moduleAddress, chainId)
+    // ═══════════════════════════════════════════════════════════════════
+    // STEP 3: Domain-Separated Message
+    // ═══════════════════════════════════════════════════════════════════
+    m := keccak256(abi.encodePacked(
+        safeTxHash,
+        nextPKH,
+        moduleAddress,
+        chainId,
+    ))
 
-    // Step 4: For each bit of m, reconstruct ONLY the needed secret
+    // ═══════════════════════════════════════════════════════════════════
+    // STEP 4: MPC Reconstruct Only Needed Halves
+    // ═══════════════════════════════════════════════════════════════════
+    // For each bit of m, reconstruct ONLY sk[i][bit] - never both halves
     sig := make([][]byte, 256)
     for i := 0; i < 256; i++ {
         bit := (m >> (255 - i)) & 1
-        // MPC reconstruct: t-of-n nodes reveal shares for sk[i][bit]
-        sig[i] = mpcReconstruct(i, bit)
+
+        // t-of-n nodes contribute shares for sk[i][bit]
+        shares := collectShares(i, bit)
+        if len(shares) < threshold {
+            return nil, errors.New("insufficient shares")
+        }
+
+        // Lagrange interpolation to reconstruct secret
+        sig[i] = shamirReconstruct(shares)
     }
 
-    // Step 5: Return assembled signature
-    return sig // Standard bytes[256] Lamport signature
+    // ═══════════════════════════════════════════════════════════════════
+    // STEP 5: Assemble Standard Lamport Signature
+    // ═══════════════════════════════════════════════════════════════════
+    return sig, nil // bytes[256] - exactly what LamportBase.verify_u256 expects
 }
 ```
+
+**Attack Mitigations**:
+
+| Attack Vector | Mitigation |
+|---------------|------------|
+| Coordinator sends different txs to different signers | Canonical digest + 1-round agreement |
+| Replay across contracts | `address(this)` in domain |
+| Replay across chains | `block.chainid` in domain |
+| Key reuse leak | `pkh = nextPKH` rotation |
+| Single node compromise | t-of-n threshold (no single node has full secret) |
 
 #### 4. One-Time Key Rotation (Built-in)
 
@@ -685,60 +737,190 @@ Each signature is **one-time safe** because the old `pkh` is invalidated.
 
 ### Implementation
 
-#### Solidity Module (Unchanged LamportBase)
+#### Solidity Module (Production-Ready)
+
+**IMPORTANT FIXES** (vs naive implementation):
+
+1. **Use `abi.encodePacked`** for signature hashing, not `abi.encode`
+2. **Don't accept arbitrary `prepacked`** from coordinator - compute `safeTxHash` on-chain
+3. **Guard `init()`** - prevent random callers from setting initial pkh
 
 ```solidity
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-import {LamportBase} from "./LamportBase.sol";
+import {ISafe} from "@safe-global/safe-contracts/contracts/interfaces/ISafe.sol";
+import {Enum} from "@safe-global/safe-contracts/contracts/common/Enum.sol";
 
 /**
  * @title ThresholdLamportModule
  * @notice T-Chain MPC threshold control with vanilla Lamport verification
  * @dev Threshold lives off-chain; on-chain is standard Lamport
+ *
+ * SECURITY: This module verifies ONE Lamport signature produced by
+ * the T-Chain MPC network. The threshold property (t-of-n) is enforced
+ * off-chain; on-chain sees a normal Lamport signature.
  */
-contract ThresholdLamportModule is LamportBase {
-    address public safe;
+contract ThresholdLamportModule {
+    // ═══════════════════════════════════════════════════════════════════
+    // State
+    // ═══════════════════════════════════════════════════════════════════
+
+    ISafe public immutable safe;
+    bytes32 public pkh;           // keccak256(abi.encodePacked(currentpub))
+    bool public initialized;
+
+    // ═══════════════════════════════════════════════════════════════════
+    // Events
+    // ═══════════════════════════════════════════════════════════════════
+
+    event LamportKeyRotated(bytes32 indexed oldPkh, bytes32 indexed newPkh);
+    event LamportExecuted(bytes32 indexed safeTxHash, bytes32 indexed nextPkh);
+
+    // ═══════════════════════════════════════════════════════════════════
+    // Constructor
+    // ═══════════════════════════════════════════════════════════════════
+
+    constructor(address _safe) {
+        safe = ISafe(_safe);
+    }
+
+    /**
+     * @notice Initialize with first Lamport public key hash
+     * @dev GUARDED: Only Safe can call (prevents random init)
+     * @param initialPkh Hash of initial Lamport public key from DKG
+     */
+    function init(bytes32 initialPkh) external {
+        require(msg.sender == address(safe), "Only Safe can init");
+        require(!initialized, "Already initialized");
+        pkh = initialPkh;
+        initialized = true;
+    }
+
+    // ═══════════════════════════════════════════════════════════════════
+    // Core Verification (unchanged from LamportBase)
+    // ═══════════════════════════════════════════════════════════════════
+
+    /**
+     * @notice Verify Lamport signature
+     * @dev FIX: Use abi.encodePacked, NOT abi.encode
+     */
+    function verify_u256(
+        uint256 bits,
+        bytes[256] calldata sig,
+        bytes32[2][256] calldata pub
+    ) public pure returns (bool) {
+        unchecked {
+            for (uint256 i; i < 256; i++) {
+                // FIX: keccak256(abi.encodePacked(sig[i])) for raw bytes
+                // NOT keccak256(abi.encode(sig[i])) which adds length prefix
+                if (
+                    pub[i][((bits & (1 << (255 - i))) > 0) ? 1 : 0] !=
+                    keccak256(sig[i])  // sig[i] is already bytes, hash directly
+                ) return false;
+            }
+            return true;
+        }
+    }
+
+    // ═══════════════════════════════════════════════════════════════════
+    // Safe Module Execution
+    // ═══════════════════════════════════════════════════════════════════
 
     /**
      * @notice Execute Safe transaction with threshold Lamport signature
-     * @param safeTxHash The Safe transaction hash
-     * @param sig The Lamport signature (bytes[256]) from T-Chain MPC
+     * @dev FIX: Compute safeTxHash ON-CHAIN, don't accept from coordinator
+     *
+     * @param to Destination address
+     * @param value ETH value
+     * @param data Call data
+     * @param operation Call or DelegateCall
+     * @param safeTxGas Gas for Safe execution
+     * @param baseGas Base gas
+     * @param gasPrice Gas price for refund
+     * @param gasToken Token for gas payment (address(0) = ETH)
+     * @param refundReceiver Refund recipient
+     * @param sig Lamport signature (bytes[256]) from T-Chain MPC
      * @param currentPub Current public key (bytes32[2][256])
      * @param nextPKH Hash of next public key (for rotation)
      */
     function execWithThresholdLamport(
-        bytes32 safeTxHash,
+        address to,
+        uint256 value,
+        bytes calldata data,
+        Enum.Operation operation,
+        uint256 safeTxGas,
+        uint256 baseGas,
+        uint256 gasPrice,
+        address gasToken,
+        address payable refundReceiver,
         bytes[256] calldata sig,
         bytes32[2][256] calldata currentPub,
         bytes32 nextPKH
-    ) external returns (bool) {
-        // Verify current public key matches stored hash
+    ) external returns (bool success) {
+        require(initialized, "Not initialized");
+
+        // ═══════════════════════════════════════════════════════════════
+        // STEP 1: Verify current public key matches stored hash
+        // ═══════════════════════════════════════════════════════════════
         require(
             keccak256(abi.encodePacked(currentPub)) == pkh,
             "Invalid public key"
         );
 
-        // Domain-separated message (critical for security)
+        // ═══════════════════════════════════════════════════════════════
+        // STEP 2: Compute safeTxHash ON-CHAIN (SECURITY CRITICAL)
+        // FIX: Don't accept prepacked hash from coordinator!
+        // ═══════════════════════════════════════════════════════════════
+        bytes32 safeTxHash = safe.getTransactionHash(
+            to, value, data, operation,
+            safeTxGas, baseGas, gasPrice,
+            gasToken, refundReceiver,
+            safe.nonce()
+        );
+
+        // ═══════════════════════════════════════════════════════════════
+        // STEP 3: Domain-separated message (prevents replay)
+        // ═══════════════════════════════════════════════════════════════
         uint256 m = uint256(keccak256(abi.encodePacked(
             safeTxHash,
             nextPKH,
-            address(this),
-            block.chainid
+            address(this),   // Prevent cross-contract replay
+            block.chainid    // Prevent cross-chain replay
         )));
 
-        // Standard Lamport verification (unchanged)
+        // ═══════════════════════════════════════════════════════════════
+        // STEP 4: Verify Lamport signature
+        // ═══════════════════════════════════════════════════════════════
         require(verify_u256(m, sig, currentPub), "Invalid Lamport signature");
 
-        // Rotate to next key (one-time property)
+        // ═══════════════════════════════════════════════════════════════
+        // STEP 5: Rotate to next key (one-time property)
+        // ═══════════════════════════════════════════════════════════════
+        bytes32 oldPkh = pkh;
         pkh = nextPKH;
+        emit LamportKeyRotated(oldPkh, nextPKH);
+        emit LamportExecuted(safeTxHash, nextPKH);
 
-        // Execute via Safe
-        return ISafe(safe).execTransactionFromModule(...);
+        // ═══════════════════════════════════════════════════════════════
+        // STEP 6: Execute via Safe
+        // ═══════════════════════════════════════════════════════════════
+        success = safe.execTransactionFromModule(
+            to, value, data, operation
+        );
     }
 }
 ```
+
+#### Key Security Properties
+
+| Property | Implementation |
+|----------|---------------|
+| **No coordinator trust** | `safeTxHash` computed on-chain from full tx fields |
+| **Domain separation** | `address(this) + block.chainid` in message |
+| **One-time keys** | `pkh = nextPKH` after each signature |
+| **Init guard** | Only Safe can call `init()` |
+| **Correct hashing** | `keccak256(sig[i])` not `keccak256(abi.encode(sig[i]))` |
 
 ### ML-KEM/KMS Integration for Share Protection
 
@@ -801,11 +983,43 @@ func (s *SecureShareStorage) GetShare(i, b int) []byte {
 
 ## Future Enhancements
 
-1. **Stateless Signatures**: Implement SPHINCS+ for unlimited signing
-2. **Hardware Integration**: HSM support for DKG share generation
-3. **Batch Verification**: Optimize multiple signature verification
-4. **Quantum Random**: Use quantum RNG for key generation
-5. **Proactive Share Refresh**: Periodic resharing without changing public key
+### Production Path
+
+1. **Hash-Ladder / Winternitz OTS**: Reduce calldata from ~16KB to ~2KB per signature
+   - Same threshold MPC architecture
+   - Same Safe module interface
+   - Just swap per-signer primitive from raw Lamport to Winternitz
+   - Tradeoff: slightly more compute for much less calldata
+
+2. **Merkle OTS Leaves**: Instead of single key rotation, use Merkle tree of keys
+   - `pkh = merkleRoot` (not single key hash)
+   - `nextPKH = encode(leafIndex + 1)`
+   - Enables batching multiple signatures before rotation
+
+3. **Proactive Share Refresh**: Periodic resharing without changing public key
+   - Prevents long-term key compromise
+   - Transparent to on-chain verifier
+
+### Research Path
+
+4. **Stateless Signatures**: SPHINCS+ for unlimited signing (larger signatures)
+5. **Hardware Integration**: HSM support for DKG share generation
+6. **Batch Verification**: Optimize multiple signature verification in single tx
+7. **Quantum Random**: Use quantum RNG for key generation entropy
+
+### Simplest Production Path
+
+```
+Current: Threshold Lamport (MPC controls rotating key)
+   ↓
+Phase 1: Add Winternitz (cut calldata 8x)
+   ↓
+Phase 2: Add Merkle OTS (batch keys)
+   ↓
+Phase 3: Full SPHINCS+ (if needed)
+```
+
+Keep the **same Safe module + canonical digest + threshold-offchain architecture** throughout.
 
 ## Conclusion
 
