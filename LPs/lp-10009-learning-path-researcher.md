@@ -11,7 +11,7 @@ order: 29
 tier: core
 ---
 
-# LP-0019: Learning Path - Researcher
+# LP-10009: Learning Path - Researcher
 
 ## Abstract
 

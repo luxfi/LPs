@@ -11,7 +11,7 @@ order: 20
 tier: core
 ---
 
-# LP-0010: Learning Paths Index
+# LP-10000: Learning Paths Index
 
 ## Abstract
 
@@ -30,15 +30,15 @@ The Lux LP system contains 200+ proposals. Without guided paths, newcomers get l
 
 | LP | Path | Audience |
 |----|------|----------|
-| [LP-0011](/docs/lp-0011-learning-path-core/) | Core Protocol | Everyone (start here) |
-| [LP-0012](/docs/lp-0012-learning-path-developer/) | Smart Contract Developer | Solidity devs, Web3 teams |
-| [LP-0013](/docs/lp-0013-learning-path-validator/) | Platform Engineer / Validator | Infra engineers, node operators |
-| [LP-0014](/docs/lp-0014-learning-path-trading/) | Trading / Market Infrastructure | Quants, exchanges, prop desks |
-| [LP-0015](/docs/lp-0015-learning-path-security/) | Security / Auditor | Auditors, red teams |
-| [LP-0016](/docs/lp-0016-learning-path-mpc/) | MPC / Threshold / Custody | Security engineers, custodians |
-| [LP-0017](/docs/lp-0017-learning-path-privacy/) | Privacy / ZK / FHE | Cryptographers, privacy teams |
-| [LP-0018](/docs/lp-0018-learning-path-investor/) | Investor / Institutional | Funds, allocators, boards |
-| [LP-0019](/docs/lp-0019-learning-path-researcher/) | Researcher | Academics, frontier teams |
+| [LP-10001](/docs/lp-10001-learning-path-core/) | Core Protocol | Everyone (start here) |
+| [LP-10002](/docs/lp-10002-learning-path-developer/) | Smart Contract Developer | Solidity devs, Web3 teams |
+| [LP-10003](/docs/lp-10003-learning-path-validator/) | Platform Engineer / Validator | Infra engineers, node operators |
+| [LP-10004](/docs/lp-10004-learning-path-trading/) | Trading / Market Infrastructure | Quants, exchanges, prop desks |
+| [LP-10005](/docs/lp-10005-learning-path-security/) | Security / Auditor | Auditors, red teams |
+| [LP-10006](/docs/lp-10006-learning-path-mpc/) | MPC / Threshold / Custody | Security engineers, custodians |
+| [LP-10007](/docs/lp-10007-learning-path-privacy/) | Privacy / ZK / FHE | Cryptographers, privacy teams |
+| [LP-10008](/docs/lp-10008-learning-path-investor/) | Investor / Institutional | Funds, allocators, boards |
+| [LP-10009](/docs/lp-10009-learning-path-researcher/) | Researcher | Academics, frontier teams |
 
 ---
 

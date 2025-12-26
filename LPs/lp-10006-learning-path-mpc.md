@@ -11,7 +11,7 @@ order: 26
 tier: core
 ---
 
-# LP-0016: Learning Path - MPC & Threshold Custody
+# LP-10006: Learning Path - MPC & Threshold Custody
 
 ## Abstract
 

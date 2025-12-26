@@ -65,7 +65,7 @@ LP-4 proposes integrating quantum-resistant cryptographic primitives into the Lu
 
 **Algorithm**: ML-DSA-65 (Dilithium, NIST Level 3)
 - Public Key Size: 1,952 bytes
-- Signature Size: 3,309 bytes
+- Signature Size: 3,293 bytes (per NIST FIPS 204)
 - Quantum Security: ~192 bits
 
 **Testing**:

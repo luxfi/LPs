@@ -11,7 +11,7 @@ order: 28
 tier: core
 ---
 
-# LP-0018: Learning Path - Investor & Institutional
+# LP-10008: Learning Path - Investor & Institutional
 
 ## Abstract
 
