@@ -15,7 +15,7 @@ requires: 0000, 99
 
 ## Abstract
 
-LP-2000 specifies the C-Chain (Contract Chain), Lux Network's EVM-compatible smart contract blockchain. The C-Chain runs a full Ethereum Virtual Machine, enabling deployment of Solidity and Vyper smart contracts with full tooling compatibility.
+LP-1200 specifies the C-Chain (Contract Chain), Lux Network's EVM-compatible smart contract blockchain. The C-Chain runs a full Ethereum Virtual Machine, enabling deployment of Solidity and Vyper smart contracts with full tooling compatibility.
 
 ## Motivation
 
@@ -35,7 +35,7 @@ An EVM-compatible chain provides:
 | Chain ID | `C` |
 | VM ID | `evm` |
 | VM Name | `evm` |
-| EVM Chain ID | 43114 (Mainnet), 43113 (Testnet) |
+| EVM Chain ID | 96369 (Mainnet), 96368 (Testnet) |
 | Block Time | ~2 seconds |
 | Consensus | Quasar |
 
@@ -225,7 +225,7 @@ Design decisions for C-Chain:
 
 ## Backwards Compatibility
 
-LP-2000 supersedes LP-0012. Both old and new numbers resolve to this document.
+LP-1200 supersedes LP-12. Both old and new numbers resolve to this document.
 
 ## Test Cases
 

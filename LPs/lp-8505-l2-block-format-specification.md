@@ -403,10 +403,10 @@ interface ICrossRollupMessaging {
 ```solidity
 interface IQuantumResistant {
     enum PostQuantumAlgorithm {
-        SPHINCS_SHAKE256,    // Hash-based signatures
-        DILITHIUM3,          // Lattice-based (NIST selected)
-        FALCON512,           // Lattice-based
-        Rainbow,             // Multivariate
+        SPHINCS_SHAKE256,    // Hash-based signatures (NIST SLH-DSA)
+        DILITHIUM3,          // Lattice-based (NIST ML-DSA-65)
+        FALCON512,           // Lattice-based (NIST alternate)
+        // Rainbow REMOVED - cryptanalytically broken March 2022 (Ward Beullens attack)
         McEliece             // Code-based
     }
 

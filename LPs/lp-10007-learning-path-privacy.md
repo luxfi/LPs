@@ -11,7 +11,7 @@ order: 27
 tier: core
 ---
 
-# LP-0017: Learning Path - Privacy & Zero-Knowledge
+# LP-10007: Learning Path - Privacy & Zero-Knowledge
 
 ## Abstract
 

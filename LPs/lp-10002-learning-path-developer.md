@@ -11,7 +11,7 @@ order: 22
 tier: core
 ---
 
-# LP-0012: Learning Path - Smart Contract Developer
+# LP-10002: Learning Path - Smart Contract Developer
 
 ## Abstract
 

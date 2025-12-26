@@ -11,7 +11,7 @@ order: 23
 tier: core
 ---
 
-# LP-0013: Learning Path - Platform Engineer & Validator
+# LP-10003: Learning Path - Platform Engineer & Validator
 
 ## Abstract
 

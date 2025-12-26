@@ -11,7 +11,7 @@ order: 24
 tier: core
 ---
 
-# LP-0014: Learning Path - Trading & Market Infrastructure
+# LP-10004: Learning Path - Trading & Market Infrastructure
 
 ## Abstract
 

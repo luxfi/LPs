@@ -11,7 +11,7 @@ order: 25
 tier: core
 ---
 
-# LP-0015: Learning Path - Security & Auditor
+# LP-10005: Learning Path - Security & Auditor
 
 ## Abstract
 

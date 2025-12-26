@@ -11,7 +11,7 @@ order: 21
 tier: core
 ---
 
-# LP-0011: Learning Path - Core Protocol
+# LP-10001: Learning Path - Core Protocol
 
 ## Abstract
 
