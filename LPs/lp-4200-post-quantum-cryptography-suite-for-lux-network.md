@@ -9,13 +9,13 @@ type: Standards Track
 category: Core
 created: 2025-01-24
 requires:
-tags: [pqc, core, ml-dsa, slh-dsa, ml-kem]
+tags: [pqc, core, ml-dsa, slh-dsa, ml-kem, ringtail, lamport, t-chain]
 order: 200
 ---
 
 ## Abstract
 
-This proposal establishes the complete post-quantum cryptography suite for the Lux Network, integrating NIST FIPS 203-205 standardized algorithms (ML-KEM, ML-DSA, SLH-DSA) to provide quantum-resistant security for all blockchain operations. The suite enables confidential AI compute and private finance applications through lattice-based cryptographic primitives that resist attacks from both classical and quantum computers.
+This proposal establishes the complete post-quantum cryptography suite for the Lux Network, integrating NIST FIPS 203-205 standardized algorithms (ML-KEM, ML-DSA, SLH-DSA) alongside Lux-native schemes (Ringtail threshold signatures, Lamport OTS) to provide quantum-resistant security for all blockchain operations. The suite enables confidential AI compute and private finance applications through lattice-based and hash-based cryptographic primitives that resist attacks from both classical and quantum computers. Ringtail provides post-quantum threshold signatures for T-Chain MPC custody, while Lamport OTS enables quantum resistance on any remote EVM chain.
 
 ## Motivation
 
@@ -334,16 +334,109 @@ Complete implementation available at: https://github.com/luxfi/crypto
 4. **Migration Risks**: Hybrid mode prevents single point of failure during transition
 5. **Quantum Timeline**: Monitor NIST and NSA guidance on quantum threat evolution
 
+### 6. Lux-Native Post-Quantum Schemes
+
+#### Ringtail: Post-Quantum Threshold Signatures (LP-7324)
+
+Ringtail is Lux's own post-quantum threshold signature scheme, providing distributed signing with quantum resistance:
+
+```go
+// Ringtail: Ring-LWE based threshold signatures
+type RingtailScheme struct {
+    threshold   uint16      // Minimum signers required (t of n)
+    totalNodes  uint16      // Total participants
+    modulusQ    *big.Int    // Lattice modulus
+    dimension   uint16      // Ring dimension (n=1024)
+}
+
+// Two-round threshold protocol
+func (r *RingtailScheme) ThresholdSign(
+    message []byte,
+    partialSigs []PartialSignature,
+) (*RingtailSignature, error) {
+    // Round 1: Commitment phase (each signer commits)
+    // Round 2: Response phase (aggregate into final signature)
+    return aggregateRingtailSignatures(partialSigs, message)
+}
+```
+
+**Precompile Address**: `0x020000000000000000000000000000000000000B`
+
+**Integration with Quasar Consensus**:
+- Dual-certificate finality: BLS (classical) + Ringtail (quantum-safe)
+- T-Chain threshold MPC custody uses Ringtail for quantum resistance
+- Sub-second finality with post-quantum security guarantees
+
+#### Lamport OTS: Hash-Based One-Time Signatures (LP-4105)
+
+Lamport One-Time Signatures provide quantum resistance for remote chains secured by T-Chain MPC:
+
+```solidity
+// Lamport OTS for any EVM chain - no lattice math required
+contract LamportBase {
+    // 256-bit security using only hash functions
+    function verify_u256(
+        uint256 bits,
+        bytes[256] calldata sig,
+        bytes32[2][256] calldata pub
+    ) public pure returns (bool) {
+        for (uint256 i; i < 256; i++) {
+            if (pub[i][((bits & (1 << (255 - i))) > 0) ? 1 : 0] !=
+                keccak256(sig[i])) return false;
+        }
+        return true;
+    }
+}
+```
+
+**Use Cases**:
+- Remote chain custody (any EVM chain without PQC precompiles)
+- T-Chain MPC wallet integration (threshold custody + PQC)
+- Lux Safe multisig with quantum-resistant recovery
+- Bridge security with post-quantum attestations
+
+**Migration Path**:
+1. `ECDSA_ONLY`: Classical signatures (current state)
+2. `DUAL_SIGNATURES`: ECDSA + Lamport OTS (hybrid security)
+3. `LAMPORT_PREFERRED`: Lamport primary, ECDSA fallback
+4. `LAMPORT_ONLY`: Full quantum resistance
+
+### 7. Complete PQC Ecosystem
+
+The Lux PQC ecosystem provides defense-in-depth with multiple complementary schemes:
+
+| Scheme | Type | Use Case | Chain |
+|--------|------|----------|-------|
+| ML-KEM | Key Exchange | Confidential compute, encrypted channels | Q-Chain |
+| ML-DSA | Signatures | Validator attestations, consensus | Q-Chain |
+| SLH-DSA | Signatures | Long-term archives (50+ years) | Q-Chain |
+| Ringtail | Threshold Sigs | Distributed signing, T-Chain custody | T-Chain |
+| Lamport OTS | One-Time Sigs | Remote chains, Safe wallets | Any EVM |
+
+**T-Chain Integration**:
+- T-Chain (Threshold Chain) provides MPC custody secured by Ringtail
+- Remote chains use Lamport OTS with T-Chain as the trusted signer set
+- Quasar consensus achieves finality with BLS + Ringtail dual certificates
+
 ## References
 
 ### Related Lux Proposals
-- [LP-318](./lp-4318-ml-kem-post-quantum-key-encapsulation.md
-- [LP-316](./lp-4316-ml-dsa-post-quantum-digital-signatures.md
-- [LP-317](./lp-4317-slh-dsa-stateless-hash-based-digital-signatures.md
-- [LP-311](./lp-4316-ml-dsa-post-quantum-digital-signatures.md
-- [LP-312](./lp-4317-slh-dsa-stateless-hash-based-digital-signatures.md
-- [LP-201](./lp-4201-hybrid-classical-quantum-cryptography-transitions.md
-- [LP-202](../lp-4201-hybrid-classical-quantum-cryptography-transitions.md
+
+#### NIST-Standardized Algorithms
+- [LP-4316: ML-DSA Post-Quantum Digital Signatures](./lp-4316-ml-dsa-post-quantum-digital-signatures.md)
+- [LP-4317: SLH-DSA Stateless Hash-Based Digital Signatures](./lp-4317-slh-dsa-stateless-hash-based-digital-signatures.md)
+- [LP-4318: ML-KEM Post-Quantum Key Encapsulation](./lp-4318-ml-kem-post-quantum-key-encapsulation.md)
+
+#### Lux-Native Schemes
+- [LP-7324: Ringtail Threshold Signature Precompile](./lp-7324-ringtail-threshold-signature-precompile.md) - Post-quantum threshold signatures
+- [LP-4105: Lamport One-Time Signatures for Lux Safe](./lp-4105-lamport-one-time-signatures-ots-for-lux-safe.md) - Hash-based OTS for remote chains
+
+#### Hybrid & Transition
+- [LP-4201: Hybrid Classical-Quantum Cryptography Transitions](./lp-4201-hybrid-classical-quantum-cryptography-transitions.md)
+
+#### Integration
+- [LP-7000: T-Chain Threshold Specification](./lp-7000-t-chain-threshold-specification.md) - MPC custody chain
+- [LP-4099: Q-Chain Quantum-Secure Consensus](./lp-4099-q-chain-quantum-secure-consensus-protocol-family-quasar.md)
 
 ### NIST Standards
 1. [FIPS 203: Module-Lattice-Based Key-Encapsulation Mechanism](https://doi.org/10.6028/NIST.FIPS.203)
@@ -359,4 +452,4 @@ Complete implementation available at: https://github.com/luxfi/crypto
 
 ## Copyright
 
-Copyright and related rights waived via [CC0](../LICENSE.md).```
+Copyright and related rights waived via [CC0](../LICENSE.md).
