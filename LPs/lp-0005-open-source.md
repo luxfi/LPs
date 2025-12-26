@@ -3,7 +3,7 @@ lp: 5
 title: Open Source
 description: Lux Network's open source strategy, forking philosophy, and contribution guidelines
 author: Lux Core Team
-status: Final
+status: Implemented
 type: Meta
 created: 2025-12-21
 tags: [network, core, open-source, forking, contributions]

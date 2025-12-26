@@ -3,7 +3,7 @@ lp: 86
 title: Security Practices and Responsible Disclosure
 description: How to report vulnerabilities, bug bounty program, and security response procedures
 author: Lux Security Team
-status: Final
+status: Implemented
 type: Meta
 created: 2025-12-21
 tags: [security, disclosure, bug-bounty, cve]

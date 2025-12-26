@@ -4,7 +4,7 @@ title: Warp Signature Aggregation Protocol
 description: P2P protocol for requesting and aggregating BLS signatures for Warp cross-chain messages
 author: Lux Network Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
-status: Final
+status: Implemented
 type: Standards Track
 category: Networking
 created: 2024-12-23

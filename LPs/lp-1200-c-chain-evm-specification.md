@@ -6,7 +6,7 @@ tags: [core, evm, smart-contracts, c-chain]
 description: Core specification for the C-Chain (Contract Chain), Lux Network's EVM-compatible smart contract chain
 author: Lux Network Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
-status: Final
+status: Implemented
 type: Standards Track
 category: Core
 created: 2025-12-11

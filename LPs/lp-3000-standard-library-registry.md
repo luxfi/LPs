@@ -4,7 +4,7 @@ title: Lux Standard Library Registry
 description: Comprehensive registry of all contracts, forks, library dependencies, and deployed addresses in the Lux Standard Library
 author: Lux Industries (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
-status: Final
+status: Implemented
 type: Informational
 created: 2025-12-23
 updated: 2025-12-25

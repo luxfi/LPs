@@ -4,7 +4,7 @@ title: LRC-1155 Supply Extension
 description: LRC-1155 Supply Extension for Lux Network
 author: Lux Network Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
-status: Final
+status: Implemented
 type: Standards Track
 category: LRC
 created: 2025-01-23

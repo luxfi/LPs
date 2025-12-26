@@ -4,7 +4,7 @@ title: Synths - Self-Repaying Synthetic Assets Standard
 description: Self-repaying synthetic asset protocol enabling users to mint x* tokens against yield-bearing collateral
 author: Lux Network Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
-status: Final
+status: Implemented
 type: Standards Track
 category: LRC
 created: 2025-12-14

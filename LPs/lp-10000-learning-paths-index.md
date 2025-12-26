@@ -3,7 +3,7 @@ lp: 10000
 title: Learning Paths Index
 description: Canonical learning paths for developers, validators, traders, investors, and researchers
 author: Lux Core Team
-status: Final
+status: Living
 type: Meta
 created: 2025-12-21
 tags: [learning-path, index]

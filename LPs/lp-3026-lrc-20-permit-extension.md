@@ -4,7 +4,7 @@ title: LRC-20 Permit Extension
 description: Gasless approval extension for LRC-20 tokens via EIP-2612 signatures
 author: Lux Industries (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
-status: Final
+status: Implemented
 type: Standards Track
 category: LRC
 created: 2025-12-25

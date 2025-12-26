@@ -5,7 +5,7 @@ tags: [network, architecture, meta, governance, standards]
 description: Foundational document establishing Lux Network's mission, the LP standards process, multi-chain architecture, and research domains.
 author: Lux Network Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
-status: Final
+status: Implemented
 type: Meta
 created: 2025-01-23
 updated: 2025-12-19

@@ -4,7 +4,7 @@ title: C-Chain Upgrade Mapping
 description: Comprehensive mapping of C-Chain network upgrades to LPs and Ethereum equivalents
 author: Lux Core Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
-status: Final
+status: Implemented
 tags: [c-chain, evm]
 type: Informational
 created: 2025-12-17

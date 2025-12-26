@@ -4,7 +4,7 @@ title: DeFi Protocol Integrations Registry
 description: Registry of external DeFi protocols integrated via adapter contracts in the Lux ecosystem
 author: Lux Core Contributors (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
-status: Final
+status: Implemented
 type: Informational
 created: 2025-12-23
 updated: 2025-12-24

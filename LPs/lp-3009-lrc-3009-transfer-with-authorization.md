@@ -4,7 +4,7 @@ title: LRC-3009 Transfer With Authorization
 description: Gasless token transfers via cryptographic signatures (meta-transactions)
 author: Lux Core Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
-status: Final
+status: Implemented
 type: Standards Track
 category: LRC
 created: 2025-01-23

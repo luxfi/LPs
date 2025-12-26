@@ -4,7 +4,7 @@ title: Wave FPC Threshold Voting Protocol
 description: Fast Probabilistic Consensus with phase-dependent threshold selection for Byzantine fault-tolerant voting
 author: Lux Network Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
-status: Final
+status: Implemented
 type: Standards Track
 category: Core
 created: 2025-01-29

@@ -4,7 +4,7 @@ title: LRC-20 FlashMint Extension
 description: Flash minting extension for LRC-20 tokens enabling uncollateralized borrowing within a single transaction
 author: Lux Industries (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
-status: Final
+status: Implemented
 type: Standards Track
 category: LRC
 created: 2025-12-25

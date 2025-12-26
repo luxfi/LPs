@@ -4,7 +4,7 @@ title: Security Audit Framework
 description: Defines the security audit standards and requirements for Lux Network protocols
 author: Lux Network Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
-status: Final
+status: Implemented
 type: Standards Track
 category: Core
 created: 2025-01-23
