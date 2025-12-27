@@ -9,7 +9,7 @@ type: Standards Track
 category: LRC
 created: 2025-12-25
 updated: 2025-12-26
-requires: 3003, 3810, 6022
+requires: 3001, 3003, 3810, 6022
 tags: [c-chain, evm, defi, teleport, bridge, yield]
 order: 3004
 ---
@@ -466,6 +466,7 @@ interface IYieldStrategy {
 
 | LP | Title | Relationship |
 |----|-------|--------------|
+| LP-3001 | Teleport Bridge MPC | Base bridge protocol |
 | LP-3003 | Liquid Protocol | Lending layer |
 | LP-3810 | Teleport Token Standard | Token interface |
 | LP-6022 | Warp Messaging 2.0 | Cross-chain |
