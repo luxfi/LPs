@@ -4,22 +4,94 @@ title: Poseidon Hash Precompile (ZK-Friendly)
 description: Native EVM precompile for Poseidon hash function optimized for zero-knowledge proof circuits
 author: Lux Core Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
-status: Review
+status: Draft
 type: Standards Track
 category: Core
 created: 2025-12-24
 requires: 4
 activation:
   flag: lp3658-poseidon
-  hfName: "Quantum"
-  activationHeight: "0"
-tags: [evm, precompile, cryptography, hash, poseidon, zk]
+  hfName: "TBD"
+  activationHeight: "TBD"
+tags: [evm, precompile, cryptography, hash, poseidon, zk, research]
 order: 3658
 ---
+
+> **⚠️ DRAFT STATUS**: This LP requires further community discussion on parameter selection
+> and fixed vs. generic instantiation trade-offs. See "Open Questions" section below.
 
 ## Abstract
 
 LP-3658 specifies a native EVM precompile for the Poseidon hash function, a cryptographic hash designed specifically for zero-knowledge proof systems. Poseidon is optimized for arithmetic circuits over prime fields, providing efficient ZK-SNARK and ZK-STARK implementations. This precompile enables native ZK verification and Merkle tree operations on the Lux Z-Chain.
+
+## Open Questions (Requires Community Input)
+
+> **This section documents critical design decisions that must be resolved before implementation.**
+
+### 1. Fixed vs. Generic Instantiation
+
+**The Core Problem**: EIP-5988 (Ethereum's stagnant Poseidon proposal) allows arbitrary parameter sets, which leads to:
+- Parameter fragmentation across rollups/projects
+- Security footguns (users choosing weak parameters)
+- DoS surfaces (expensive parameter combinations)
+- Consensus complexity (many code paths to audit)
+
+**Recommended Approach**: Implement **fixed, opinionated instantiations** that match Lux ZK circuit stack:
+
+```
+Option A: Fixed Functions Only (Recommended)
+├── poseidon2(x, y) -> Fr           # 2-input, most common
+├── poseidon3(x, y, z) -> Fr        # 3-input for commitments
+└── poseidonN(inputs[]) -> Fr       # N-input with hard cap (N ≤ 16)
+
+Option B: Fixed + EIP-5988 Generic (Maximum Compatibility)
+├── Fixed functions (as above)
+└── poseidonGeneric(p, rounds, ...) # EIP-5988 compatible interface
+```
+
+**Question for Community**: Should Lux support only fixed instantiations, or also include EIP-5988 generic interface for ecosystem compatibility?
+
+### 2. Field Selection
+
+Current spec supports multiple fields with "auto-detection". This may cause:
+- Consensus issues if detection logic has edge cases
+- User confusion about which field their contract uses
+
+**Recommended Approach**: Default to BN254 (matches Groth16/Ethereum), require explicit selector for other fields:
+
+| Selector | Field | Use Case |
+|----------|-------|----------|
+| `0x30` | BN254 (default) | Groth16, Ethereum compatibility |
+| `0x31` | BLS12-381 | PLONK, consensus proofs |
+
+### 3. Address Selection
+
+**Option A**: Use `0x0318` (current spec) - sequential with other Lux precompiles
+**Option B**: Use `0x0A` (EIP-5988 suggestion) - maximum Ethereum compatibility even if EIP-5988 never ships
+
+### 4. Input Size Limits
+
+Must hard-cap input sizes to prevent DoS:
+- Maximum N for poseidonN: **16 elements** (matches circomlib)
+- Maximum sponge input: **1024 bytes**
+- Maximum Merkle tree depth: **32 levels**
+
+### 5. EIP-5988 Status
+
+[EIP-5988](https://eips.ethereum.org/EIPS/eip-5988) proposes a generic Poseidon precompile for Ethereum but is **stagnant** due to parameter fragmentation concerns. Lux can:
+1. Wait for Ethereum (likely never)
+2. Ship Lux-native with fixed params (recommended)
+3. Ship EIP-5988 compatible (risk of adopting a dead standard)
+
+## Design Principles
+
+Based on the open questions above, this LP adopts the following principles:
+
+1. **Fixed Over Generic**: Prefer fixed parameter sets that match Lux ZK circuits
+2. **BN254 Primary**: Default to BN254 field for Groth16 compatibility
+3. **Hard Caps**: Strict input size limits for gas predictability
+4. **Circomlib Compatible**: Use circomlib parameters for verified security
+5. **Explicit Field Selection**: No auto-detection; require explicit field selector
 
 ## Motivation
 
@@ -913,12 +985,75 @@ func BenchmarkPoseidonMerkleRoot_1024(b *testing.B) {
 
 No backwards compatibility issues. This LP introduces a new precompile at an unused address.
 
+## Security Considerations
+
+### Parameter Fragmentation Risk
+
+The biggest risk with Poseidon precompiles is **parameter fragmentation**:
+- Different projects use different round counts, MDS matrices, and S-boxes
+- A "generic" precompile that accepts arbitrary parameters enables:
+  - Weak parameter choices (insufficient rounds)
+  - Non-standard parameters with less cryptanalysis
+  - Interoperability issues between projects
+
+**Mitigation**: This LP recommends fixed, opinionated instantiations matching circomlib parameters, which have undergone extensive cryptanalysis.
+
+### DoS via Expensive Parameters
+
+A generic precompile could allow attackers to choose parameters that maximize computation while minimizing gas payment.
+
+**Mitigation**: 
+- Hard-cap input sizes (N ≤ 16 elements)
+- Fixed round counts (not user-specified)
+- Gas formula tied to actual computation cost
+
+### Field Element Validation
+
+Invalid field elements (≥ field modulus) must be rejected to prevent undefined behavior.
+
+**Mitigation**: All inputs validated against field modulus before processing; revert on invalid input.
+
+### Domain Separation
+
+Without proper domain separation, hash collisions between different use cases are possible.
+
+**Mitigation**: 
+- First state element reserved for domain tag
+- Recommend explicit domain separation in application layer
+- Sponge mode includes rate in capacity
+
+### Circomlib Compatibility Verification
+
+Using circomlib parameters requires exact match of:
+- Round constants (pre-computed from seed)
+- MDS matrix coefficients
+- S-box exponent (x^5)
+
+**Mitigation**: Test vectors from circomlib included in implementation tests.
+
+### What This Unlocks (Non-SNARK Modes)
+
+With cheap Poseidon on Lux EVM:
+
+1. **On-Chain Merkle Trees**: Maintain claim/note trees directly in EVM using Poseidon nodes; verify membership without SNARK for public operations
+
+2. **Cheaper Proving (Hybrid)**: Move some hashing out of circuit; circuit focuses on ownership + conservation + nullifier logic; smaller circuits → faster provers
+
+3. **Public Fast-Path**: For non-private flows (LP deposits, MM flows):
+   - Plain Merkle proof + signature ownership
+   - On-chain nullifier checks
+   - No Groth16 required
+   - Keep ZK path for privacy/stealth claims
+
 ## References
 
+- [EIP-5988: Poseidon Hash Function Precompile](https://eips.ethereum.org/EIPS/eip-5988) (Stagnant - parameter fragmentation concerns)
 - [Poseidon Paper](https://eprint.iacr.org/2019/458)
+- [Poseidon2 Paper](https://eprint.iacr.org/2023/323) (Optimized variant)
 - [Circomlib Poseidon](https://github.com/iden3/circomlib)
 - [Filecoin Poseidon](https://spec.filecoin.io/algorithms/crypto/poseidon/)
 - [Dusk Poseidon252](https://github.com/dusk-network/poseidon252)
+- [LP-1227: Standard Ethereum Precompiles](./lp-1227-standard-ethereum-precompiles.md)
 - [LP-3653: BLS12-381 Precompile](./lp-3653-bls12-381-cryptography-precompile.md)
 - [LP-3655: SHA-3/Keccak Precompile](./lp-3655-sha3-keccak-precompile.md)
 
