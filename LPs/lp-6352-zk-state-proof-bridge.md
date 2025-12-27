@@ -1,21 +1,21 @@
 ---
 lp: 6352
 title: Zero-Knowledge State Proof Bridge
-description: Succinct ZK proofs for cross-chain state verification, enabling fast and gas-efficient trustless bridging.
-author: Claude (@anthropic)
+description: Succinct ZK proofs for cross-chain state verification using Z-Chain zkVM, enabling fast and gas-efficient trustless bridging with optional FHE privacy.
+author: Lux Network Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
 status: Draft
 type: Standards Track
 category: Core
 created: 2025-12-27
-tags: [teleport, bridge, zk-proof, snark, trustless]
+tags: [teleport, bridge, zk-proof, snark, trustless, z-chain, quasar, fhe]
 requires: [3001, 6350, 6351]
 order: 352
 ---
 
 ## Abstract
 
-This LP specifies a zero-knowledge proof system for bridge verification that compresses light client proofs into constant-size ZK proofs. Instead of verifying full block headers and receipt proofs on-chain (~500k gas), users submit succinct ZK proofs (~200k gas) that prove the same facts. This enables faster finality, lower gas costs, and better scalability for trustless cross-chain transfers.
+This LP specifies a zero-knowledge proof system for bridge verification that compresses light client proofs into constant-size ZK proofs. Instead of verifying full Quasar dual-certificates and receipt proofs on-chain (~500k gas), users submit succinct ZK proofs (~200k gas) that prove the same facts. Proofs are generated on **Z-Chain** (Lux's zkVM chain) and verified on Ethereum or other destinations.
 
 ## Motivation
 
@@ -27,64 +27,210 @@ While light client verification (LP-6350) and receipt proofs (LP-6351) provide t
 | Finality delay | Must wait for finality | Can prove in parallel |
 | Verification complexity | Complex on-chain logic | Single pairing check |
 | Proof size | ~10-50 KB | ~256 bytes |
+| Ringtail on ETH | Not practical (~2M gas) | Wrapped in circuit |
+
+**Key Insight**: Verifying Ringtail PQ signatures directly on Ethereum is prohibitively expensive. ZK proofs solve this by verifying Quasar dual-cert (BLS + Ringtail) inside the circuit, then outputting a constant-size Groth16/Plonk proof verifiable on any EVM.
 
 ZK proofs provide:
 
 * **Constant Verification Cost**: O(1) regardless of what's being proven
 * **Proof Aggregation**: Batch multiple claims into one proof
-* **Privacy Potential**: Foundation for private bridging
-* **Faster UX**: Generate proofs while waiting for finality
+* **PQ-Safe Bridging**: Ringtail verified in circuit, not on-chain
+* **Privacy Foundation**: Same circuits enable private bridging (LP-6353)
+* **Z-Chain Acceleration**: Hardware-optimized ZK proof generation
 
 ## Specification
 
-### 1. Proof System Selection
+### 1. Z-Chain: Lux's zkVM Chain
 
-We use Groth16 for production and Plonk for flexibility:
+Z-Chain is Lux's dedicated zero-knowledge virtual machine chain optimized for:
+- **ZK Proof Generation**: GPU/FPGA-accelerated circuit proving
+- **Recursive Proofs**: Aggregate multiple proofs efficiently
+- **zkEVM Execution**: Run Solidity contracts privately via zkFHE
 
-| System | Proof Size | Verification Gas | Setup |
-|--------|-----------|-----------------|-------|
-| Groth16 | 128 bytes | ~200k | Trusted per-circuit |
-| Plonk | 384 bytes | ~300k | Universal |
-| STARK | ~50 KB | ~500k | Transparent |
+```
+┌────────────────────────────────────────────────────────────────────┐
+│  Z-Chain (Chain ID: 800Z)                                          │
+│  ──────────────────────────────────────────────────────────────── │
+│                                                                    │
+│  ┌──────────────┐    ┌──────────────┐    ┌──────────────┐         │
+│  │  zkVM Core   │    │  FHE Runtime │    │  Proof Store │         │
+│  │  - Groth16   │    │  - TFHE      │    │  - IPFS/DA   │         │
+│  │  - Plonk     │    │  - Concrete  │    │  - Celestia  │         │
+│  │  - Halo2     │    │  - OpenFHE   │    │              │         │
+│  └──────────────┘    └──────────────┘    └──────────────┘         │
+│                                                                    │
+│  Prover Network: GPU clusters for parallel proof generation        │
+└────────────────────────────────────────────────────────────────────┘
+                              │
+                              ▼ Groth16 proof (~200 bytes)
+┌────────────────────────────────────────────────────────────────────┐
+│  Ethereum / Base / Arbitrum / Any EVM                              │
+│  ──────────────────────────────────────────────────────────────── │
+│  ZKBridgeVerifier.sol: Single pairing check (~200k gas)            │
+└────────────────────────────────────────────────────────────────────┘
+```
 
-### 2. Circuit Design
+### 2. Proof System Selection
 
-The ZK circuit proves:
+| System | Proof Size | Verification Gas | Setup | Z-Chain Support |
+|--------|-----------|-----------------|-------|-----------------|
+| Groth16 | 128 bytes | ~200k | Trusted per-circuit | ✓ Primary |
+| Plonk | 384 bytes | ~300k | Universal | ✓ Supported |
+| Halo2 | 400 bytes | ~280k | None (IPA) | ✓ Supported |
+| STARK | ~50 KB | ~500k | Transparent | Planned |
 
-1. **Block Finality**: The source block is finalized on the source chain
-2. **Receipt Inclusion**: A burn event exists in the receipts trie
-3. **Event Validity**: The burn event matches the claim parameters
+### 3. Circuit Design (Quasar-Aware)
+
+The ZK circuit proves the complete two-layer verification:
+
+**Layer 1: Quasar Finality** (for Lux source)
+- Verify BLS aggregate signature
+- Verify Ringtail PQ threshold signature
+- Confirm dual-certificate over block hash
+
+**Layer 2: Event Inclusion**
+- MPT receipt proof verification
+- BridgeBurned event extraction and validation
 
 ```
 Public Inputs:
 - sourceChainId: uint256
-- destinationChainId: uint256
+- destinationChainId: uint256  
 - token: address
 - amount: uint256
 - recipient: address
 - nonce: uint256
+- quasarAnchorRoot: bytes32  // Commitment to validator set
 
 Private Inputs (witness):
 - blockHeader: BlockHeader
 - receiptProof: bytes[]
 - receipt: TransactionReceipt
-- syncCommitteeSignature: bytes (for Ethereum)
-- validatorSignatures: bytes (for Lux)
+
+// For Ethereum source:
+- syncCommitteeSignature: bytes
+- syncCommitteeBits: bytes32
+
+// For Lux source (Quasar dual-cert):
+- blsSignature: bytes          // BLS aggregate signature
+- ringtailSignature: bytes     // Ringtail PQ threshold signature  
+- validatorBits: bytes32       // Which validators signed
+- validatorSet: Validator[]    // Current validator set with dual keys
 
 Circuit Constraints:
-1. Verify block header against light client state
-2. Verify receipt proof against receiptsRoot
-3. Extract and validate BridgeBurned event
-4. Hash public inputs to single field element
+1. IF sourceChainId == LUX:
+   a. Verify BLS signature over blockHeader
+   b. Verify Ringtail signature over blockHeader
+   c. Check 2/3+ stake signed BOTH
+2. ELSE (Ethereum):
+   a. Verify sync committee BLS signature
+   b. Check 2/3 of 512 validators signed
+3. Verify receipt MPT proof against header.receiptsRoot
+4. Extract BridgeBurned event, validate fields match public inputs
+5. Hash public inputs for efficient verification
 ```
 
-### 3. Verifier Contract
+### 4. Circom Circuit (Quasar + Ringtail)
+
+```circom
+pragma circom 2.1.0;
+
+include "bls12_381.circom";
+include "ringtail.circom";  // LWE-based threshold sig
+include "mpt.circom";
+include "poseidon.circom";
+
+template QuasarBridgeProof(maxProofDepth, maxValidators) {
+    // Public inputs
+    signal input sourceChainId;
+    signal input destChainId;
+    signal input token;
+    signal input amount;
+    signal input recipient;
+    signal input nonce;
+    signal input validatorSetRoot;  // Merkle root of validator set
+    
+    // Private inputs - Block
+    signal input blockHash;
+    signal input receiptsRoot;
+    
+    // Private inputs - Quasar dual-cert (for Lux source)
+    signal input blsSigR[2];
+    signal input blsSigS;
+    signal input ringtailSig[RINGTAIL_SIG_SIZE];
+    signal input validatorBits;
+    signal input validators[maxValidators][VALIDATOR_SIZE];  // BLS + Ringtail pubkeys
+    
+    // Private inputs - Receipt proof
+    signal input receiptProof[maxProofDepth];
+    signal input receipt;
+    
+    // 1. Verify validator set matches commitment
+    component valSetHasher = ValidatorSetHasher(maxValidators);
+    valSetHasher.validators <== validators;
+    valSetHasher.root === validatorSetRoot;
+    
+    // 2. Verify BLS aggregate signature
+    component blsVerifier = BLS12_381_AggregateVerify(maxValidators);
+    blsVerifier.message <== blockHash;
+    blsVerifier.signature <== [blsSigR, blsSigS];
+    blsVerifier.pubkeys <== extractBLSKeys(validators);
+    blsVerifier.bits <== validatorBits;
+    blsVerifier.valid === 1;
+    
+    // 3. Verify Ringtail PQ threshold signature
+    component ringtailVerifier = RingtailThresholdVerify(maxValidators);
+    ringtailVerifier.message <== blockHash;
+    ringtailVerifier.signature <== ringtailSig;
+    ringtailVerifier.pubkeys <== extractRingtailKeys(validators);
+    ringtailVerifier.bits <== validatorBits;
+    ringtailVerifier.valid === 1;
+    
+    // 4. Check 2/3+ stake threshold for BOTH signatures
+    component stakeCheck = StakeThreshold(maxValidators);
+    stakeCheck.bits <== validatorBits;
+    stakeCheck.stakes <== extractStakes(validators);
+    stakeCheck.threshold === 2/3;
+    
+    // 5. Verify receipt MPT proof
+    component mptVerifier = MPTVerifier(maxProofDepth);
+    mptVerifier.root <== receiptsRoot;
+    mptVerifier.proof <== receiptProof;
+    mptVerifier.value <== receipt;
+    mptVerifier.valid === 1;
+    
+    // 6. Extract and verify burn event
+    component eventExtractor = BurnEventExtractor();
+    eventExtractor.receipt <== receipt;
+    eventExtractor.token === token;
+    eventExtractor.amount === amount;
+    eventExtractor.recipient === recipient;
+    eventExtractor.toChainId === destChainId;
+    eventExtractor.nonce === nonce;
+    
+    // 7. Output public input hash
+    component hasher = Poseidon(7);
+    hasher.inputs[0] <== sourceChainId;
+    hasher.inputs[1] <== destChainId;
+    hasher.inputs[2] <== token;
+    hasher.inputs[3] <== amount;
+    hasher.inputs[4] <== recipient;
+    hasher.inputs[5] <== nonce;
+    hasher.inputs[6] <== validatorSetRoot;
+    
+    signal output publicInputHash;
+    publicInputHash <== hasher.out;
+}
+
+component main = QuasarBridgeProof(32, 100);
+```
+
+### 5. Verifier Contract
 
 ```solidity
 interface IZKBridgeVerifier {
     /// @notice Verify a Groth16 proof
-    /// @param proof The proof (a, b, c points)
-    /// @param publicInputs The public inputs
     function verifyProof(
         uint256[8] calldata proof,
         uint256[] calldata publicInputs
@@ -94,8 +240,8 @@ interface IZKBridgeVerifier {
 contract ZKBridge {
     IZKBridgeVerifier public verifier;
     
-    /// @notice The verification key hash (for upgrades)
-    bytes32 public vkHash;
+    /// @notice Current Quasar validator set root (updated by light client)
+    bytes32 public quasarValidatorSetRoot;
     
     mapping(bytes32 => bool) public claimed;
     
@@ -107,24 +253,25 @@ contract ZKBridge {
         uint256 amount
     );
     
-    /// @notice Claim with ZK proof
+    /// @notice Claim with ZK proof (verifies Quasar inside circuit)
     function claimWithZKProof(
         uint256[8] calldata proof,
         ClaimData calldata claim
     ) external returns (bytes32 claimId) {
-        // 1. Compute public inputs hash
-        uint256[] memory publicInputs = new uint256[](6);
+        // 1. Build public inputs
+        uint256[] memory publicInputs = new uint256[](7);
         publicInputs[0] = claim.sourceChainId;
         publicInputs[1] = block.chainid;
         publicInputs[2] = uint256(uint160(claim.token));
         publicInputs[3] = claim.amount;
         publicInputs[4] = uint256(uint160(claim.recipient));
         publicInputs[5] = claim.nonce;
+        publicInputs[6] = uint256(quasarValidatorSetRoot);
         
-        // 2. Verify ZK proof
+        // 2. Verify ZK proof (BLS + Ringtail verified inside circuit!)
         require(verifier.verifyProof(proof, publicInputs), "Invalid proof");
         
-        // 3. Compute claim ID and check replay
+        // 3. Replay protection
         claimId = keccak256(abi.encode(claim));
         require(!claimed[claimId], "Already claimed");
         claimed[claimId] = true;
@@ -143,196 +290,105 @@ contract ZKBridge {
 }
 ```
 
-### 4. Groth16 Verifier
-
-```solidity
-library Pairing {
-    struct G1Point {
-        uint256 X;
-        uint256 Y;
-    }
-    
-    struct G2Point {
-        uint256[2] X;
-        uint256[2] Y;
-    }
-    
-    /// @notice Perform pairing check
-    function pairing(
-        G1Point[] memory p1,
-        G2Point[] memory p2
-    ) internal view returns (bool) {
-        // Uses EIP-197 precompile at 0x08
-        uint256 inputSize = p1.length * 6;
-        uint256[] memory input = new uint256[](inputSize);
-        
-        for (uint256 i = 0; i < p1.length; i++) {
-            input[i*6 + 0] = p1[i].X;
-            input[i*6 + 1] = p1[i].Y;
-            input[i*6 + 2] = p2[i].X[0];
-            input[i*6 + 3] = p2[i].X[1];
-            input[i*6 + 4] = p2[i].Y[0];
-            input[i*6 + 5] = p2[i].Y[1];
-        }
-        
-        uint256[1] memory out;
-        bool success;
-        assembly {
-            success := staticcall(
-                sub(gas(), 2000),
-                8,  // Pairing precompile
-                add(input, 0x20),
-                mul(inputSize, 0x20),
-                out,
-                0x20
-            )
-        }
-        require(success, "Pairing failed");
-        return out[0] == 1;
-    }
-}
-
-contract Groth16Verifier is IZKBridgeVerifier {
-    using Pairing for *;
-    
-    // Verification key (generated during trusted setup)
-    Pairing.G1Point public alfa1;
-    Pairing.G2Point public beta2;
-    Pairing.G2Point public gamma2;
-    Pairing.G2Point public delta2;
-    Pairing.G1Point[] public IC;
-    
-    function verifyProof(
-        uint256[8] calldata proof,
-        uint256[] calldata input
-    ) external view override returns (bool) {
-        // Parse proof points
-        Pairing.G1Point memory A = Pairing.G1Point(proof[0], proof[1]);
-        Pairing.G2Point memory B = Pairing.G2Point(
-            [proof[2], proof[3]],
-            [proof[4], proof[5]]
-        );
-        Pairing.G1Point memory C = Pairing.G1Point(proof[6], proof[7]);
-        
-        // Compute linear combination of public inputs
-        Pairing.G1Point memory vk_x = IC[0];
-        for (uint256 i = 0; i < input.length; i++) {
-            vk_x = Pairing.addition(
-                vk_x,
-                Pairing.scalar_mul(IC[i + 1], input[i])
-            );
-        }
-        
-        // Verify pairing equation
-        return Pairing.pairing(
-            [Pairing.negate(A), alfa1, vk_x, C],
-            [B, beta2, gamma2, delta2]
-        );
-    }
-}
-```
-
-### 5. Proof Generation (Off-Chain)
+### 6. Z-Chain Proof Generation
 
 ```typescript
-import { groth16 } from 'snarkjs';
+import { ZChainProver } from '@lux/zchain-sdk';
 
-interface BridgeProofInput {
-    // Public
-    sourceChainId: bigint;
-    destinationChainId: bigint;
-    token: string;
-    amount: bigint;
-    recipient: string;
-    nonce: bigint;
+interface QuasarBridgeWitness {
+    // Block data
+    blockHash: string;
+    receiptsRoot: string;
     
-    // Private (witness)
-    blockHeader: BlockHeader;
+    // Quasar dual-cert
+    blsSignature: { r: [bigint, bigint], s: bigint };
+    ringtailSignature: bigint[];
+    validatorBits: bigint;
+    validators: QuasarValidator[];
+    
+    // Receipt proof
     receiptProof: string[];
     receipt: TransactionReceipt;
-    lightClientState: LightClientState;
-    signatures: string;
 }
 
-async function generateBridgeProof(
-    input: BridgeProofInput
-): Promise<{ proof: Proof; publicInputs: bigint[] }> {
-    const { proof, publicSignals } = await groth16.fullProve(
-        input,
-        'circuits/bridge.wasm',
-        'circuits/bridge_final.zkey'
-    );
+async function generateBridgeProofOnZChain(
+    claim: ClaimData,
+    witness: QuasarBridgeWitness
+): Promise<{ proof: bigint[]; publicInputs: bigint[] }> {
+    // Connect to Z-Chain prover network
+    const prover = new ZChainProver({
+        endpoint: 'https://zchain.lux.network/prover',
+        circuit: 'quasar-bridge-v1'
+    });
     
-    // Format for Solidity
+    // Submit proving job (runs on GPU cluster)
+    const job = await prover.prove({
+        publicInputs: {
+            sourceChainId: claim.sourceChainId,
+            destChainId: claim.destChainId,
+            token: claim.token,
+            amount: claim.amount,
+            recipient: claim.recipient,
+            nonce: claim.nonce,
+            validatorSetRoot: computeValidatorSetRoot(witness.validators)
+        },
+        witness
+    });
+    
+    // Wait for proof (typically 10-30 seconds on Z-Chain)
+    const result = await job.waitForCompletion();
+    
     return {
-        proof: [
-            proof.pi_a[0], proof.pi_a[1],
-            proof.pi_b[0][1], proof.pi_b[0][0],
-            proof.pi_b[1][1], proof.pi_b[1][0],
-            proof.pi_c[0], proof.pi_c[1]
-        ],
-        publicInputs: publicSignals.map(BigInt)
+        proof: result.proof,  // 8 field elements for Groth16
+        publicInputs: result.publicInputs
     };
 }
 ```
 
-### 6. Circuit Implementation (Circom)
+### 7. zkFHE: Fully Private Bridge Execution
 
-```circom
-pragma circom 2.1.0;
+Z-Chain supports **Fully Homomorphic Encryption** for private smart contract execution:
 
-include "poseidon.circom";
-include "mpt.circom";
-include "ecdsa.circom";
-
-template BridgeProof(maxProofDepth) {
-    // Public inputs
-    signal input sourceChainId;
-    signal input destChainId;
-    signal input token;
-    signal input amount;
-    signal input recipient;
-    signal input nonce;
+```solidity
+// Compile standard Solidity → runs privately on Z-Chain FHE runtime
+contract PrivateBridgeClaim {
+    // All values are FHE-encrypted on Z-Chain
+    mapping(address => euint256) private balances;  // Encrypted balances
     
-    // Private inputs
-    signal input blockHeaderHash;
-    signal input receiptsRoot;
-    signal input receiptProof[maxProofDepth];
-    signal input receipt;
-    signal input burnEventLog;
-    
-    // 1. Verify receipt inclusion
-    component mptVerifier = MPTVerifier(maxProofDepth);
-    mptVerifier.root <== receiptsRoot;
-    mptVerifier.proof <== receiptProof;
-    mptVerifier.value <== receipt;
-    
-    // 2. Extract and verify burn event
-    component eventExtractor = BurnEventExtractor();
-    eventExtractor.receipt <== receipt;
-    eventExtractor.token === token;
-    eventExtractor.amount === amount;
-    eventExtractor.recipient === recipient;
-    eventExtractor.toChainId === destChainId;
-    eventExtractor.nonce === nonce;
-    
-    // 3. Compute public input hash (for efficient verification)
-    component hasher = Poseidon(6);
-    hasher.inputs[0] <== sourceChainId;
-    hasher.inputs[1] <== destChainId;
-    hasher.inputs[2] <== token;
-    hasher.inputs[3] <== amount;
-    hasher.inputs[4] <== recipient;
-    hasher.inputs[5] <== nonce;
-    
-    signal output publicInputHash;
-    publicInputHash <== hasher.out;
+    /// @notice Claim with encrypted amount (ZK proves validity)
+    function privateClaim(
+        bytes calldata zkProof,
+        ebytes calldata encryptedClaim  // FHE-encrypted claim data
+    ) external {
+        // 1. Verify ZK proof of valid source burn
+        require(zkVerifier.verify(zkProof), "Invalid proof");
+        
+        // 2. Decrypt claim inside FHE (only Z-Chain can decrypt)
+        ClaimData memory claim = fheDecrypt(encryptedClaim);
+        
+        // 3. Update encrypted balance
+        balances[claim.recipient] = balances[claim.recipient] + claim.amount;
+        
+        // 4. Emit encrypted event (only recipient can decrypt)
+        emit PrivateClaim(fheEncryptFor(claim.recipient, claim));
+    }
 }
-
-component main = BridgeProof(32);
 ```
 
-### 7. Proof Aggregation
+**zkFHE Flow**:
+```
+User                    Z-Chain FHE Runtime              Ethereum
+  │                            │                            │
+  │─── Encrypted claim ───────▶│                            │
+  │                            │─── Execute privately ──────│
+  │                            │    (all values encrypted)  │
+  │                            │                            │
+  │                            │─── ZK proof of execution ─▶│
+  │◀── Encrypted result ───────│                            │
+  │                            │                            │
+```
+
+### 8. Proof Aggregation
 
 Batch multiple claims into a single proof:
 
@@ -353,58 +409,60 @@ function claimBatchWithZKProof(
 
 ## Rationale
 
-ZK proofs provide the optimal end-game for bridge verification:
+ZK proofs solve the key challenge of Quasar → Ethereum bridging:
 
-1. **Constant Gas Cost**: ~200k gas regardless of proof complexity
-2. **Composability**: Can prove arbitrary statements about source chain state
-3. **Privacy Foundation**: Same circuits can add privacy features (LP-6353)
-4. **Future-Proof**: Works with any consensus mechanism
+1. **Ringtail Verification**: Ringtail PQ signatures are expensive to verify on Ethereum (~2M gas). ZK wrapping reduces this to ~200k gas.
 
-The trusted setup requirement for Groth16 is mitigated by:
-- Large multi-party ceremonies (100+ participants)
-- Universal setup alternatives (Plonk, Halo2)
-- Transparent alternatives for maximum security (STARKs)
+2. **Z-Chain Acceleration**: Dedicated proving infrastructure with GPU/FPGA acceleration for fast proof generation.
+
+3. **FHE Option**: Same Z-Chain infrastructure enables fully private DeFi via zkFHE.
+
+4. **Constant Gas Cost**: ~200k gas regardless of proof complexity.
+
+5. **PQ-Safe**: Full post-quantum security from Lux, verified inside ZK circuit.
 
 ## Backwards Compatibility
 
-This extends the bridge with an additional proof type. All existing methods remain functional:
+This extends the bridge with an additional proof type:
 
 ```solidity
 enum ProofType {
-    MPC_ORACLE,      // LP-3001
-    LIGHT_CLIENT,    // LP-6350 + LP-6351
-    ZK_PROOF,        // LP-6352 (this LP)
-    ZK_PRIVATE       // LP-6353 (future)
+    MPC_ORACLE,      // LP-3001: Fast, trusted
+    LIGHT_CLIENT,    // LP-6350 + LP-6351: Trustless, ~500k gas
+    ZK_PROOF,        // LP-6352: Trustless, ~200k gas (this LP)
+    ZK_PRIVATE       // LP-6353: Private bridging
 }
 ```
 
 ## Test Cases
 
-1. Generate and verify valid Groth16 proof
-2. Reject proof with invalid public inputs
-3. Reject proof with tampered witness
-4. Verify gas consumption < 250k
-5. Test proof aggregation for batch claims
-6. Verify circuit constraints match Solidity checks
+1. Generate valid Groth16 proof on Z-Chain
+2. Verify Quasar dual-cert (BLS + Ringtail) inside circuit
+3. Reject proof with only BLS signature (missing Ringtail)
+4. Reject proof with invalid validator set root
+5. Verify gas consumption < 250k on Ethereum
+6. Test proof aggregation for batch claims
+7. Verify zkFHE encrypted claim flow
 
 ## Reference Implementation
 
-- Circuits: `/bridge/circuits/bridge.circom`
+- Z-Chain Prover: `/zchain/prover/`
+- Circuits: `/bridge/circuits/quasar-bridge.circom`
+- Ringtail Circuit: `/bridge/circuits/ringtail.circom`
 - Verifier: `/bridge/contracts/contracts/zk/Groth16Verifier.sol`
-- Prover: `/bridge/prover/src/bridge_prover.ts`
-- Trusted Setup: `/bridge/setup/powers_of_tau/`
+- FHE Runtime: `/zchain/fhe/`
 
 ## Security Considerations
 
-1. **Trusted Setup**: Groth16 requires trusted setup ceremony. Ensure sufficient participants and verify final parameters.
+1. **Trusted Setup**: Groth16 requires trusted setup. Z-Chain provides public ceremony participation.
 
-2. **Circuit Soundness**: Audit circuits for constraint completeness. Missing constraints can allow invalid proofs.
+2. **Circuit Soundness**: Both BLS and Ringtail verification must be complete in circuit. Missing constraints allow forged proofs.
 
-3. **Proof Malleability**: Groth16 proofs can be malleable. Use claim ID for replay protection, not proof bytes.
+3. **Validator Set Sync**: On-chain `quasarValidatorSetRoot` must track P-Chain validator changes.
 
-4. **Frontend Security**: Proof generation in browser requires secure delivery of WASM and zkey files.
+4. **FHE Key Management**: zkFHE keys must be managed securely. Threshold FHE recommended for decentralization.
 
-5. **Upgrade Path**: Verification key must be upgradeable for circuit fixes. Use timelock for governance.
+5. **Proof Malleability**: Use claim ID for replay protection, not proof bytes.
 
 ## Copyright
 
