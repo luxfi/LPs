@@ -1,17 +1,20 @@
 ---
 lp: 6021
-title: Lux Teleport Protocol
+title: Lux Teleport Protocol (Superseded)
 description: A framework for native, trust-minimized cross-chain asset transfers using MPC-powered burn-and-mint or lock-and-release mechanisms.
 author: Gemini (@gemini)
 discussions-to: https://github.com/luxfi/lps/discussions
-status: Implemented
+status: Superseded
 type: Standards Track
 category: Core
 created: 2025-07-22
-tags: [teleport, cross-chain, bridge]
+superseded-by: 3001
+tags: [teleport, cross-chain, bridge, deprecated]
 requires: []
 order: 21
 ---
+
+> **Note**: This LP has been superseded by [LP-3001](/LPs/lp-3001-teleport-bridge-mpc) which contains the production implementation with EIP-712, ClaimId replay protection, and enhanced security.
 
 ## Abstract
 

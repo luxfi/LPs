@@ -9,7 +9,7 @@ type: Standards Track
 category: Core
 created: 2025-12-27
 tags: [teleport, bridge, privacy, bulletproofs, stealth-address]
-requires: [6021, 6352]
+requires: [3001, 6352]
 order: 353
 ---
 
@@ -19,7 +19,7 @@ This LP specifies a privacy-preserving bridge extension using Bulletproofs for c
 
 ## Motivation
 
-Current bridge implementations (LP-6021, LP-6350-6352) expose full transfer details on-chain:
+Current bridge implementations (LP-3001, LP-6350-6352) expose full transfer details on-chain:
 
 | Data Exposed | Public Bridges | Private Bridge (this LP) |
 |--------------|---------------|-------------------------|
@@ -461,7 +461,7 @@ Private bridging is a new optional mode. Extends proof types:
 
 ```solidity
 enum ProofType {
-    MPC_ORACLE,      // LP-6021
+    MPC_ORACLE,      // LP-3001
     LIGHT_CLIENT,    // LP-6350 + LP-6351
     ZK_PROOF,        // LP-6352
     ZK_PRIVATE       // LP-6353 (this LP)

@@ -9,7 +9,7 @@ type: Standards Track
 category: Core
 created: 2025-12-27
 tags: [teleport, bridge, merkle-proof, trustless, mpt]
-requires: [6021, 6350]
+requires: [3001, 6350]
 order: 351
 ---
 
@@ -280,11 +280,11 @@ Receipt proofs provide the missing link between light client verification and tr
 
 ## Backwards Compatibility
 
-This extends LP-6021 and LP-6350 without breaking changes. The bridge contract supports multiple proof types:
+This extends LP-3001 and LP-6350 without breaking changes. The bridge contract supports multiple proof types:
 
 ```solidity
 enum ProofType {
-    MPC_ORACLE,      // LP-6021: Oracle signature
+    MPC_ORACLE,      // LP-3001: Oracle signature
     LIGHT_CLIENT,    // LP-6350: Light client + receipt proof
     ZK_PROOF         // LP-6352: ZK state proof (future)
 }

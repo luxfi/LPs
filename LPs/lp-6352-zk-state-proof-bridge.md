@@ -9,7 +9,7 @@ type: Standards Track
 category: Core
 created: 2025-12-27
 tags: [teleport, bridge, zk-proof, snark, trustless]
-requires: [6021, 6350, 6351]
+requires: [3001, 6350, 6351]
 order: 352
 ---
 
@@ -371,7 +371,7 @@ This extends the bridge with an additional proof type. All existing methods rema
 
 ```solidity
 enum ProofType {
-    MPC_ORACLE,      // LP-6021
+    MPC_ORACLE,      // LP-3001
     LIGHT_CLIENT,    // LP-6350 + LP-6351
     ZK_PROOF,        // LP-6352 (this LP)
     ZK_PRIVATE       // LP-6353 (future)

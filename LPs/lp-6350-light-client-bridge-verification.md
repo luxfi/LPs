@@ -9,7 +9,7 @@ type: Standards Track
 category: Core
 created: 2025-12-27
 tags: [teleport, bridge, light-client, trustless]
-requires: [6021]
+requires: [3001]
 order: 350
 ---
 
@@ -19,7 +19,7 @@ This LP specifies a trustless bridge verification mechanism using on-chain light
 
 ## Motivation
 
-The current Teleport Protocol (LP-6021) relies on MPC oracles with 2-of-3 threshold signatures. While this provides strong security through economic incentives, it still requires trusting that a majority of MPC nodes are honest. For maximum security and true decentralization, we can eliminate oracle trust entirely by verifying source chain consensus directly on the destination chain.
+The current Teleport Protocol (LP-3001) relies on MPC oracles with 2-of-3 threshold signatures. While this provides strong security through economic incentives, it still requires trusting that a majority of MPC nodes are honest. For maximum security and true decentralization, we can eliminate oracle trust entirely by verifying source chain consensus directly on the destination chain.
 
 Light client verification provides:
 
@@ -184,7 +184,7 @@ The trade-off is increased gas costs and finality latency compared to MPC oracle
 
 ## Backwards Compatibility
 
-This LP extends LP-6021 (Teleport Protocol) with an additional verification path. The existing MPC oracle path remains available for users who prefer faster finality. Smart contracts support both verification methods:
+This LP extends LP-3001 (Teleport Protocol) with an additional verification path. The existing MPC oracle path remains available for users who prefer faster finality. Smart contracts support both verification methods:
 
 ```solidity
 function claim(ClaimData calldata claim, bytes calldata proof, ProofType proofType) external {
