@@ -49,6 +49,36 @@ Without a central index, developers must navigate dozens of individual LPs to un
 
 ### Standard Ethereum Precompiles
 
+For complete documentation of standard Ethereum precompiles (0x01-0x11), see **[LP-1227: Standard Ethereum Precompiles](./lp-1227-standard-ethereum-precompiles.md)**.
+
+#### Core Precompiles (Active from Genesis)
+
+| Address | Name | Purpose | Gas (EIP-1108) | Status |
+|---------|------|---------|----------------|--------|
+| `0x01` | ECRECOVER | secp256k1 signature recovery | 3,000 | ✅ Active |
+| `0x02` | SHA256 | SHA-256 hash | 60 + 12/word | ✅ Active |
+| `0x03` | RIPEMD160 | RIPEMD-160 hash | 600 + 120/word | ✅ Active |
+| `0x04` | IDENTITY | Data copy | 15 + 3/word | ✅ Active |
+| `0x05` | MODEXP | Modular exponentiation | EIP-2565 | ✅ Active |
+| `0x06` | BN256_ADD | BN254 elliptic curve addition | 150 | ✅ Active |
+| `0x07` | BN256_MUL | BN254 scalar multiplication | 6,000 | ✅ Active |
+| `0x08` | BN256_PAIRING | BN254 pairing check (Groth16) | 45,000 + 34,000/pair | ✅ Active |
+| `0x09` | BLAKE2F | BLAKE2 compression | 1/round | ✅ Active |
+
+#### Prague Precompiles (BLS12-381)
+
+| Address | Name | Purpose | Gas | Status |
+|---------|------|---------|-----|--------|
+| `0x0b` | BLS12381_G1ADD | BLS G1 addition | 375 | 🔜 Ready |
+| `0x0c` | BLS12381_G1MSM | BLS G1 multi-scalar mult | 12,000 | 🔜 Ready |
+| `0x0d` | BLS12381_G2ADD | BLS G2 addition | 600 | 🔜 Ready |
+| `0x0e` | BLS12381_G2MSM | BLS G2 multi-scalar mult | 22,500 | 🔜 Ready |
+| `0x0f` | BLS12381_PAIRING | BLS pairing check | 37,700 + 32,600/pair | 🔜 Ready |
+| `0x10` | BLS12381_MAP_G1 | Map to G1 | 5,500 | 🔜 Ready |
+| `0x11` | BLS12381_MAP_G2 | Map to G2 | 23,800 | 🔜 Ready |
+
+#### Extended Precompiles
+
 | Address | Name | Purpose | LP Reference | Status |
 |---------|------|---------|--------------|--------|
 | `0x0000000000000000000000000000000000000100` | secp256r1 | P-256 ECDSA verification (RIP-7212) | LP-2204 | Final |
