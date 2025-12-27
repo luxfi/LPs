@@ -1,45 +1,79 @@
 ---
 lp: 6353
-title: Privacy Bridge with Range Proofs
-description: Private cross-chain transfers using Bulletproofs for amount hiding and stealth addresses for recipient privacy.
-author: Claude (@anthropic)
+title: Privacy Bridge with FHE-EVM Execution
+description: Private cross-chain transfers using Bulletproofs, stealth addresses, and Z-Chain FHE-EVM for fully private DeFi execution.
+author: Lux Network Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
 status: Draft
 type: Standards Track
 category: Core
 created: 2025-12-27
-tags: [teleport, bridge, privacy, bulletproofs, stealth-address]
+tags: [teleport, bridge, privacy, bulletproofs, stealth-address, fhe, z-chain, zkfhe]
 requires: [3001, 6352]
 order: 353
 ---
 
 ## Abstract
 
-This LP specifies a privacy-preserving bridge extension using Bulletproofs for confidential transfers and stealth addresses for recipient privacy. Users can bridge assets without revealing amounts on-chain, while still proving they burned valid amounts on the source chain. This provides financial privacy for cross-chain operations while maintaining full auditability through zero-knowledge proofs.
+This LP specifies a privacy-preserving bridge using Bulletproofs for confidential transfers, stealth addresses for recipient privacy, and **Z-Chain FHE-EVM** for fully private smart contract execution. Users can bridge assets, execute DeFi operations, and withdraw—all without revealing amounts, addresses, or transaction logic on-chain.
+
+The key innovation is **FHE-EVM**: compile standard Solidity to run on Z-Chain's Fully Homomorphic Encryption runtime, where all values remain encrypted throughout execution. Only ZK proofs of correct execution are published.
 
 ## Motivation
 
-Current bridge implementations (LP-3001, LP-6350-6352) expose full transfer details on-chain:
+Current bridge implementations expose full transfer details:
 
-| Data Exposed | Public Bridges | Private Bridge (this LP) |
-|--------------|---------------|-------------------------|
-| Amount | ✗ Visible | ✓ Hidden (range proof) |
-| Sender | ✗ Visible | ✓ Hidden (stealth send) |
-| Recipient | ✗ Visible | ✓ Hidden (stealth address) |
-| Token type | ✗ Visible | Configurable |
+| Data Exposed | Public | Bulletproofs | FHE-EVM |
+|--------------|--------|--------------|---------|
+| Amount | ✗ Visible | ✓ Hidden | ✓ Encrypted |
+| Sender | ✗ Visible | ✓ Stealth | ✓ Encrypted |
+| Recipient | ✗ Visible | ✓ Stealth | ✓ Encrypted |
+| Token type | ✗ Visible | Configurable | ✓ Encrypted |
+| DeFi logic | ✗ Visible | ✗ Visible | ✓ Encrypted |
 
-Privacy is essential for:
+**FHE-EVM** enables:
 
-* **Financial Privacy**: Users shouldn't expose their net worth publicly
-* **Business Confidentiality**: Companies need private treasury operations
-* **Regulatory Compliance**: Some jurisdictions require transaction privacy
-* **MEV Protection**: Hidden amounts prevent front-running
+* **Fully Private DeFi**: Swap, lend, stake—all values encrypted
+* **Compile-to-Private**: Standard Solidity → private execution
+* **Encrypted State**: Contract storage is encrypted on Z-Chain
+* **ZK Proofs Only**: Destination chains see only validity proofs
 
 ## Specification
 
-### 1. Cryptographic Primitives
+### 1. Privacy Architecture
 
-#### 1.1 Pedersen Commitments
+```
+┌─────────────────────────────────────────────────────────────────────────────┐
+│  LAYER 1: Confidential Transfers (Bulletproofs + Stealth)                   │
+│  ─────────────────────────────────────────────────────────────────────────  │
+│  • Pedersen commitments: Hide amounts                                       │
+│  • Bulletproofs: Prove range without revealing value                        │
+│  • Stealth addresses: One-time recipient addresses (EIP-5564)               │
+└─────────────────────────────────────────────────────────────────────────────┘
+                                    │
+                                    ▼
+┌─────────────────────────────────────────────────────────────────────────────┐
+│  LAYER 2: FHE-EVM Private Execution (Z-Chain)                               │
+│  ─────────────────────────────────────────────────────────────────────────  │
+│  • Compile Solidity → FHE bytecode                                          │
+│  • All variables: euint256, ebool, eaddress (encrypted types)               │
+│  • Execute on encrypted values (TFHE/Concrete operations)                   │
+│  • Output: ZK proof of correct execution                                    │
+└─────────────────────────────────────────────────────────────────────────────┘
+                                    │
+                                    ▼
+┌─────────────────────────────────────────────────────────────────────────────┐
+│  LAYER 3: Private Bridge Claims (ZK + FHE)                                  │
+│  ─────────────────────────────────────────────────────────────────────────  │
+│  • ZK proof: Valid burn on source chain (LP-6352)                           │
+│  • FHE claim: Encrypted mint on destination                                 │
+│  • Private withdrawal: Reveal only to recipient                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+```
+
+### 2. Cryptographic Primitives
+
+#### 2.1 Pedersen Commitments
 
 Hide amounts using additive homomorphic commitments:
 
@@ -47,17 +81,12 @@ Hide amounts using additive homomorphic commitments:
 Commitment = amount * G + blinding * H
 ```
 
-Where:
-- `G`, `H` are generator points on secp256k1
-- `amount` is the hidden value
-- `blinding` is a random scalar
-
 Properties:
 - **Hiding**: Cannot extract amount without blinding factor
 - **Binding**: Cannot open to different amount
 - **Homomorphic**: `C(a) + C(b) = C(a+b)`
 
-#### 1.2 Bulletproofs
+#### 2.2 Bulletproofs
 
 Prove amount is in valid range [0, 2^64) without revealing it:
 
@@ -70,9 +99,7 @@ Properties:
 - Verification: ~50k gas
 - No trusted setup required
 
-#### 1.3 Stealth Addresses
-
-Generate one-time addresses for recipient privacy:
+#### 2.3 Stealth Addresses (EIP-5564)
 
 ```
 // Sender generates ephemeral keypair
@@ -85,95 +112,194 @@ sharedSecret = ECDH(r, recipientPublicKey)
 stealthAddress = recipientPublicKey + hash(sharedSecret) * G
 ```
 
-Recipient scans for payments by checking each `R`:
-```
-expectedAddress = recipientPublicKey + hash(ECDH(recipientPrivateKey, R)) * G
-```
+### 3. FHE-EVM: Compile Solidity to Private
 
-### 2. Private Burn
+Z-Chain's FHE-EVM allows standard Solidity to execute on encrypted data:
 
 ```solidity
-interface IPrivateBridge {
-    struct PrivateBurnData {
-        bytes32 commitment;      // Pedersen commitment to amount
-        bytes rangeProof;        // Bulletproof that amount in [0, 2^64)
-        bytes32 tokenCommitment; // Optional: hide token type too
-        bytes32 stealthPubKey;   // Recipient's stealth meta-address
-        bytes32 ephemeralPubKey; // R for stealth derivation
-        bytes32 nullifier;       // Prevents double-spend
+// BEFORE: Standard public Solidity
+contract PublicDEX {
+    mapping(address => uint256) public balances;
+    
+    function swap(uint256 amountIn, address tokenOut) public {
+        require(balances[msg.sender] >= amountIn);
+        uint256 amountOut = calculateOutput(amountIn);
+        balances[msg.sender] -= amountIn;
+        balances[msg.sender] += amountOut;
+    }
+}
+
+// AFTER: FHE-EVM private execution (same logic, encrypted types)
+contract PrivateDEX {
+    mapping(eaddress => euint256) private balances;  // Encrypted!
+    
+    function swap(euint256 amountIn, eaddress tokenOut) public {
+        // All operations happen on encrypted values
+        ebool sufficient = balances[msg.sender].gte(amountIn);
+        require(sufficient.decrypt());  // Only reveals true/false
+        
+        euint256 amountOut = calculateOutput(amountIn);  // Private calculation
+        balances[msg.sender] = balances[msg.sender].sub(amountIn);
+        balances[msg.sender] = balances[msg.sender].add(amountOut);
+        
+        // Emit encrypted event (only recipient can decrypt)
+        emit PrivateSwap(amountIn.encryptFor(msg.sender));
+    }
+}
+```
+
+#### FHE Type System
+
+```solidity
+// Z-Chain FHE types (from @lux/fhe-evm)
+euint8    // Encrypted uint8
+euint16   // Encrypted uint16
+euint32   // Encrypted uint32
+euint64   // Encrypted uint64
+euint256  // Encrypted uint256
+ebool     // Encrypted bool
+eaddress  // Encrypted address
+ebytes32  // Encrypted bytes32
+
+// Homomorphic operations
+euint256.add(euint256)    // Encrypted addition
+euint256.sub(euint256)    // Encrypted subtraction
+euint256.mul(euint256)    // Encrypted multiplication
+euint256.lt(euint256)     // Encrypted comparison → ebool
+euint256.select(ebool, euint256)  // Encrypted conditional
+
+// Decrypt (returns to public domain)
+euint256.decrypt() → uint256     // Requires decryption key
+euint256.encryptFor(address)     // Re-encrypt for specific recipient
+```
+
+### 4. Private Bridge Flow
+
+```solidity
+contract FHEPrivateBridge {
+    IZKVerifier public zkVerifier;
+    IFHERuntime public fheRuntime;
+    
+    // Encrypted balances per stealth address
+    mapping(eaddress => euint256) private balances;
+    
+    // Nullifier set for replay protection
+    mapping(bytes32 => bool) public nullifiers;
+    
+    /// @notice Private claim: ZK proof + FHE execution
+    function privateClaim(
+        bytes calldata zkProof,           // LP-6352 Quasar proof
+        bytes calldata encryptedClaim,    // FHE-encrypted claim data
+        bytes32 stealthAddress,           // One-time address
+        bytes32 ephemeralPubKey           // For stealth derivation
+    ) external {
+        // 1. Verify ZK proof of valid source burn
+        require(zkVerifier.verify(zkProof), "Invalid burn proof");
+        
+        // 2. Extract nullifier from proof public inputs
+        bytes32 nullifier = extractNullifier(zkProof);
+        require(!nullifiers[nullifier], "Already claimed");
+        nullifiers[nullifier] = true;
+        
+        // 3. Decrypt claim inside FHE runtime (Z-Chain only)
+        euint256 amount = fheRuntime.decrypt(encryptedClaim);
+        
+        // 4. Update encrypted balance at stealth address
+        eaddress recipient = fheRuntime.toEAddress(stealthAddress);
+        balances[recipient] = balances[recipient].add(amount);
+        
+        // 5. Emit announcement for recipient scanning
+        emit PrivateClaim(ephemeralPubKey, stealthAddress);
     }
     
-    event PrivateBridgeBurned(
-        bytes32 indexed nullifier,
+    /// @notice Private transfer (entirely in FHE domain)
+    function privateTransfer(
+        euint256 amount,
+        bytes32 commitment,       // Pedersen commitment
+        bytes calldata rangeProof,// Bulletproof
+        eaddress recipient
+    ) external {
+        // Verify range proof (public verification)
+        require(Bulletproofs.verify(commitment, rangeProof), "Invalid range");
+        
+        // All of this executes on encrypted values
+        balances[msg.sender] = balances[msg.sender].sub(amount);
+        balances[recipient] = balances[recipient].add(amount);
+    }
+    
+    /// @notice Exit to public (reveal and withdraw)
+    function reveal(
         bytes32 commitment,
-        bytes32 ephemeralPubKey,
-        uint256 toChainId
-    );
-    
-    /// @notice Burn tokens privately
-    /// @param token The token to burn
-    /// @param data Private burn parameters
-    function privateBurn(
-        address token,
-        PrivateBurnData calldata data
-    ) external returns (bytes32 nullifier);
+        uint256 amount,
+        uint256 blindingFactor,
+        address recipient
+    ) external {
+        // Verify commitment opening
+        require(verifyCommitment(commitment, amount, blindingFactor));
+        
+        // Convert from encrypted to public
+        // (proves you know the amount without revealing it earlier)
+        IERC20(token).transfer(recipient, amount);
+    }
 }
 ```
 
-### 3. Range Proof Verification
+### 5. Private DeFi Composability
+
+With FHE-EVM, entire DeFi protocols run privately:
 
 ```solidity
-library Bulletproofs {
-    struct RangeProof {
-        // Proof components (compressed)
-        uint256 A;       // First commitment
-        uint256 S;       // Second commitment
-        uint256 T1;      // Polynomial commitment
-        uint256 T2;      // Polynomial commitment
-        uint256 taux;    // Blinding factor for t
-        uint256 mu;      // Blinding factor
-        uint256 t;       // Polynomial evaluation
-        uint256[] L;     // Left vector commitments
-        uint256[] R;     // Right vector commitments
-        uint256 a;       // Final scalar
-        uint256 b;       // Final scalar
-    }
+// Private AMM on Z-Chain
+contract PrivateAMM {
+    euint256 private reserve0;
+    euint256 private reserve1;
     
-    /// @notice Verify a Bulletproof range proof
-    /// @param commitment The Pedersen commitment
-    /// @param proof The range proof
-    /// @return valid Whether the proof is valid
-    function verify(
-        uint256 commitment,
-        RangeProof calldata proof
-    ) internal view returns (bool) {
-        // 1. Reconstruct challenges using Fiat-Shamir
-        uint256 y = hashToScalar(commitment, proof.A, proof.S);
-        uint256 z = hashToScalar(y);
-        uint256 x = hashToScalar(z, proof.T1, proof.T2);
+    function privateSwap(
+        euint256 amountIn,
+        ebool zeroForOne
+    ) external returns (euint256 amountOut) {
+        // Constant product formula on encrypted values
+        euint256 reserveIn = zeroForOne.select(reserve0, reserve1);
+        euint256 reserveOut = zeroForOne.select(reserve1, reserve0);
         
-        // 2. Verify polynomial commitment
-        // t * G + taux * H == z^2 * V + delta * G + x * T1 + x^2 * T2
+        // amountOut = reserveOut * amountIn / (reserveIn + amountIn)
+        euint256 numerator = reserveOut.mul(amountIn);
+        euint256 denominator = reserveIn.add(amountIn);
+        amountOut = numerator.div(denominator);
         
-        // 3. Verify inner product proof
-        // Uses logarithmic verification with L, R vectors
-        
-        // 4. Final pairing check
-        return verifyInnerProduct(proof, x, y, z);
+        // Update reserves (all encrypted)
+        reserve0 = zeroForOne.select(
+            reserve0.add(amountIn),
+            reserve0.sub(amountOut)
+        );
+        reserve1 = zeroForOne.select(
+            reserve1.sub(amountOut),
+            reserve1.add(amountIn)
+        );
     }
+}
+
+// Private lending on Z-Chain
+contract PrivateLending {
+    mapping(eaddress => euint256) private collateral;
+    mapping(eaddress => euint256) private debt;
     
-    /// @notice Batch verify multiple range proofs (more efficient)
-    function batchVerify(
-        uint256[] calldata commitments,
-        RangeProof[] calldata proofs
-    ) internal view returns (bool) {
-        // Aggregate proofs for single verification
-        // ~40% gas savings over individual verification
+    function privateBorrow(
+        euint256 collateralAmount,
+        euint256 borrowAmount
+    ) external {
+        // Check collateral ratio (encrypted comparison)
+        euint256 maxBorrow = collateralAmount.mul(75).div(100);
+        ebool valid = borrowAmount.lte(maxBorrow);
+        require(valid.decrypt(), "Undercollateralized");
+        
+        collateral[msg.sender] = collateral[msg.sender].add(collateralAmount);
+        debt[msg.sender] = debt[msg.sender].add(borrowAmount);
     }
 }
 ```
 
-### 4. Stealth Address Registry
+### 6. Stealth Address Registry
 
 ```solidity
 contract StealthAddressRegistry {
@@ -185,10 +311,10 @@ contract StealthAddressRegistry {
     
     mapping(address => MetaAddress) public metaAddresses;
     
-    event MetaAddressRegistered(
-        address indexed owner,
-        bytes32 spendingPubKey,
-        bytes32 viewingPubKey
+    event Announcement(
+        bytes32 indexed ephemeralPubKey,
+        bytes32 indexed stealthAddress,
+        bytes32 viewTag  // First 4 bytes of shared secret for fast scanning
     );
     
     /// @notice Register stealth meta-address
@@ -197,157 +323,15 @@ contract StealthAddressRegistry {
         bytes32 viewingPubKey
     ) external {
         metaAddresses[msg.sender] = MetaAddress(spendingPubKey, viewingPubKey);
-        emit MetaAddressRegistered(msg.sender, spendingPubKey, viewingPubKey);
     }
     
-    /// @notice Compute stealth address for recipient
-    function computeStealthAddress(
-        address recipient,
-        bytes32 ephemeralPrivKey
-    ) external view returns (address stealthAddress, bytes32 ephemeralPubKey) {
-        MetaAddress memory meta = metaAddresses[recipient];
-        require(meta.spendingPubKey != bytes32(0), "Not registered");
-        
-        // Compute shared secret
-        bytes32 sharedSecret = ecMul(meta.viewingPubKey, ephemeralPrivKey);
-        
-        // Derive stealth address
-        bytes32 stealthPubKey = ecAdd(
-            meta.spendingPubKey,
-            ecMul(G, keccak256(abi.encode(sharedSecret)))
-        );
-        
-        stealthAddress = pubKeyToAddress(stealthPubKey);
-        ephemeralPubKey = ecMul(G, ephemeralPrivKey);
-    }
-}
-```
-
-### 5. Private Claim
-
-```solidity
-contract PrivateBridge {
-    using Bulletproofs for *;
-    
-    mapping(bytes32 => bool) public nullifiers;
-    mapping(bytes32 => bool) public claimed;
-    
-    struct PrivateClaimData {
-        bytes32 commitment;       // Amount commitment
-        bytes32 nullifier;        // From source chain
-        address stealthAddress;   // Derived stealth address
-        bytes32 ephemeralPubKey;  // For stealth derivation
-        bytes rangeProof;         // Bulletproof
-        bytes zkProof;            // ZK proof of source burn (LP-6352)
-    }
-    
-    event PrivateBridgeClaimed(
-        bytes32 indexed nullifier,
-        address indexed stealthAddress,
-        bytes32 commitment
-    );
-    
-    /// @notice Claim privately with range proof
-    function privateClaim(
-        PrivateClaimData calldata data
+    /// @notice Announce payment to stealth address
+    function announce(
+        bytes32 ephemeralPubKey,
+        bytes32 stealthAddress,
+        bytes32 viewTag
     ) external {
-        // 1. Verify not already claimed
-        require(!claimed[data.nullifier], "Already claimed");
-        claimed[data.nullifier] = true;
-        
-        // 2. Verify range proof (amount in valid range)
-        require(
-            Bulletproofs.verify(
-                uint256(data.commitment),
-                abi.decode(data.rangeProof, (Bulletproofs.RangeProof))
-            ),
-            "Invalid range proof"
-        );
-        
-        // 3. Verify ZK proof of source chain burn
-        require(
-            zkVerifier.verifyPrivateBurn(data.zkProof, data.commitment, data.nullifier),
-            "Invalid burn proof"
-        );
-        
-        // 4. Mint to stealth address with commitment
-        // Amount is hidden - mint "commitment tokens"
-        IPrivateToken(privateToken).mintCommitment(
-            data.stealthAddress,
-            data.commitment
-        );
-        
-        emit PrivateBridgeClaimed(
-            data.nullifier,
-            data.stealthAddress,
-            data.commitment
-        );
-    }
-}
-```
-
-### 6. Private Token (Commitment-Based)
-
-```solidity
-contract PrivateToken is ERC20 {
-    // Commitment-based balances
-    mapping(address => bytes32[]) public commitments;
-    mapping(bytes32 => bool) public spentCommitments;
-    
-    event CommitmentMinted(address indexed to, bytes32 commitment);
-    event CommitmentSpent(bytes32 indexed commitment, bytes32 newCommitment);
-    
-    /// @notice Mint a commitment (only bridge can call)
-    function mintCommitment(
-        address to,
-        bytes32 commitment
-    ) external onlyBridge {
-        commitments[to].push(commitment);
-        emit CommitmentMinted(to, commitment);
-    }
-    
-    /// @notice Spend commitment privately
-    /// @param oldCommitment Commitment to spend
-    /// @param newCommitment Change commitment (back to sender)
-    /// @param recipientCommitment Commitment to recipient
-    /// @param rangeProofs Bulletproofs for both new commitments
-    /// @param balanceProof Proof that oldCommitment = newCommitment + recipientCommitment
-    function transfer(
-        bytes32 oldCommitment,
-        bytes32 newCommitment,
-        bytes32 recipientCommitment,
-        bytes calldata rangeProofs,
-        bytes calldata balanceProof
-    ) external {
-        require(!spentCommitments[oldCommitment], "Already spent");
-        
-        // Verify range proofs
-        require(verifyRangeProofs(rangeProofs, newCommitment, recipientCommitment));
-        
-        // Verify balance: old = new + recipient (homomorphic property)
-        require(verifyBalanceProof(balanceProof, oldCommitment, newCommitment, recipientCommitment));
-        
-        spentCommitments[oldCommitment] = true;
-        commitments[msg.sender].push(newCommitment);
-        
-        emit CommitmentSpent(oldCommitment, newCommitment);
-    }
-    
-    /// @notice Exit to public tokens
-    function reveal(
-        bytes32 commitment,
-        uint256 amount,
-        uint256 blindingFactor,
-        address recipient
-    ) external {
-        require(!spentCommitments[commitment], "Already spent");
-        
-        // Verify commitment opens to claimed amount
-        bytes32 computed = pedersenCommit(amount, blindingFactor);
-        require(computed == commitment, "Invalid opening");
-        
-        spentCommitments[commitment] = true;
-        _mint(recipient, amount);
+        emit Announcement(ephemeralPubKey, stealthAddress, viewTag);
     }
 }
 ```
@@ -355,162 +339,162 @@ contract PrivateToken is ERC20 {
 ### 7. Client SDK
 
 ```typescript
-import { Bulletproofs, StealthAddress, PedersenCommitment } from '@lux/privacy';
+import { FHEBridge, StealthAddress, Bulletproofs } from '@lux/privacy-sdk';
 
-interface PrivateBridgeParams {
-    token: string;
-    amount: bigint;
-    recipientMetaAddress: MetaAddress;
-    sourceChainId: number;
-    destChainId: number;
-}
-
-async function privateBridge(params: PrivateBridgeParams) {
-    // 1. Generate blinding factor
-    const blinding = randomScalar();
+async function privateBridge(
+    token: string,
+    amount: bigint,
+    recipientMetaAddress: MetaAddress
+) {
+    // 1. Generate stealth address for recipient
+    const { stealthAddress, ephemeralPubKey, viewTag } = 
+        StealthAddress.derive(recipientMetaAddress);
     
-    // 2. Create Pedersen commitment
-    const commitment = PedersenCommitment.commit(params.amount, blinding);
+    // 2. Create Pedersen commitment + Bulletproof
+    const { commitment, blinding, rangeProof } = 
+        Bulletproofs.commit(amount);
     
-    // 3. Generate range proof
-    const rangeProof = await Bulletproofs.prove(params.amount, blinding);
-    
-    // 4. Generate stealth address for recipient
-    const ephemeralKey = randomScalar();
-    const { stealthAddress, ephemeralPubKey } = StealthAddress.derive(
-        params.recipientMetaAddress,
-        ephemeralKey
-    );
-    
-    // 5. Generate nullifier (prevents double-spend)
-    const nullifier = keccak256(
-        abi.encode(commitment, params.sourceChainId, params.destChainId)
-    );
-    
-    // 6. Burn on source chain
-    const burnTx = await privateBridge.privateBurn(params.token, {
-        commitment,
-        rangeProof,
-        stealthPubKey: params.recipientMetaAddress.viewingPubKey,
-        ephemeralPubKey,
-        nullifier
+    // 3. Encrypt claim data for FHE execution
+    const encryptedClaim = await FHEBridge.encrypt({
+        amount,
+        blinding,
+        recipient: stealthAddress
     });
     
-    // 7. Generate ZK proof of burn (LP-6352)
-    const zkProof = await generateBurnProof(burnTx, commitment);
-    
-    // 8. Claim on destination chain
-    await destBridge.privateClaim({
+    // 4. Generate ZK proof of source burn (LP-6352)
+    const zkProof = await generateQuasarBridgeProof({
         commitment,
-        nullifier,
-        stealthAddress,
-        ephemeralPubKey,
-        rangeProof,
-        zkProof
+        sourceChain: 'ethereum',
+        destChain: 'lux'
     });
     
-    // 9. Return receipt for recipient to claim
-    return {
-        commitment,
-        blinding,  // Recipient needs this to spend
+    // 5. Submit to private bridge on Z-Chain
+    const tx = await fheBridge.privateClaim(
+        zkProof,
+        encryptedClaim,
         stealthAddress,
         ephemeralPubKey
-    };
+    );
+    
+    // 6. Return receipt for recipient scanning
+    return { stealthAddress, ephemeralPubKey, viewTag, commitment };
 }
 
 // Recipient scans for payments
-async function scanPayments(privateKey: bigint) {
-    const viewingKey = deriveViewingKey(privateKey);
-    const announcements = await bridge.getAnnouncements();
+async function scanPayments(viewingKey: bigint) {
+    const announcements = await registry.getAnnouncements();
     
     return announcements.filter(ann => {
+        // Fast check using viewTag (first 4 bytes)
         const sharedSecret = ecdh(viewingKey, ann.ephemeralPubKey);
-        const expectedAddress = deriveStealthAddress(
-            deriveSpendingPubKey(privateKey),
-            sharedSecret
-        );
+        const expectedViewTag = keccak256(sharedSecret).slice(0, 4);
+        if (expectedViewTag !== ann.viewTag) return false;
+        
+        // Full stealth address derivation
+        const expectedAddress = deriveStealthAddress(sharedSecret);
         return expectedAddress === ann.stealthAddress;
     });
 }
 ```
 
+### 8. zkFHE: Proof of Private Execution
+
+Z-Chain generates ZK proofs that FHE execution was correct:
+
+```
+┌─────────────────────────────────────────────────────────────────┐
+│  Z-Chain FHE Execution                                          │
+│  ───────────────────────────────────────────────────────────── │
+│                                                                 │
+│  Input: Encrypted state + encrypted transaction                 │
+│  Execution: FHE operations on ciphertexts                       │
+│  Output: Encrypted new state + ZK proof of correct execution    │
+│                                                                 │
+│  ZK Proof proves:                                               │
+│  1. FHE operations followed EVM semantics                       │
+│  2. State transition is valid                                   │
+│  3. No decryption occurred (except authorized reveals)          │
+│                                                                 │
+└─────────────────────────────────────────────────────────────────┘
+                              │
+                              ▼ ZK proof (~256 bytes)
+┌─────────────────────────────────────────────────────────────────┐
+│  Ethereum / Lux C-Chain                                         │
+│  ───────────────────────────────────────────────────────────── │
+│  Verify ZK proof (~200k gas)                                    │
+│  Accept state root update                                       │
+│  No visibility into actual values or logic                      │
+└─────────────────────────────────────────────────────────────────┘
+```
+
 ## Rationale
 
-Bulletproofs were chosen over other range proof systems:
+This LP combines three privacy technologies:
 
-| System | Proof Size | Verification | Setup |
-|--------|-----------|--------------|-------|
-| Bulletproofs | 700 bytes | ~50k gas | None |
-| Σ-protocols | 10 KB | ~200k gas | None |
-| Groth16 | 128 bytes | ~200k gas | Trusted |
-| STARK | 50 KB | ~500k gas | None |
+| Technology | Provides | Trade-off |
+|------------|----------|-----------|
+| Bulletproofs | Amount privacy | ~50k gas, ~700 byte proofs |
+| Stealth Addresses | Recipient privacy | Scanning required |
+| FHE-EVM | Full logic privacy | Higher computation cost |
 
-Bulletproofs provide the best balance of:
-- No trusted setup (unlike Groth16)
-- Small proof size (unlike STARKs)
-- Reasonable verification cost
-
-Stealth addresses (EIP-5564 compatible) enable:
-- Recipient privacy without interaction
-- Scanning with view keys (delegatable)
-- Standard address format for compatibility
+**Why FHE-EVM?**
+- Standard Solidity → private execution (no new language)
+- Entire DeFi protocols run privately
+- Only ZK proofs published (not encrypted data)
+- Composable with existing contracts
 
 ## Backwards Compatibility
 
-Private bridging is a new optional mode. Extends proof types:
+Private bridging is an additional proof type:
 
 ```solidity
 enum ProofType {
-    MPC_ORACLE,      // LP-3001
-    LIGHT_CLIENT,    // LP-6350 + LP-6351
-    ZK_PROOF,        // LP-6352
-    ZK_PRIVATE       // LP-6353 (this LP)
+    MPC_ORACLE,      // LP-3001: Fast
+    LIGHT_CLIENT,    // LP-6350: Trustless
+    ZK_PROOF,        // LP-6352: Efficient
+    ZK_PRIVATE       // LP-6353: Private (this LP)
 }
 ```
 
-Users choose privacy level per transfer.
-
 ## Test Cases
 
-1. Generate and verify valid Bulletproof range proof
-2. Reject range proof for out-of-range value
-3. Generate and verify stealth address derivation
-4. Scan and detect incoming private payments
-5. Verify commitment balance conservation (homomorphic)
-6. Reject double-spend via nullifier
-7. Private transfer with change output
-8. Reveal private balance to public tokens
+1. Generate Bulletproof range proof
+2. Derive and verify stealth addresses
+3. Encrypt claim data for FHE execution
+4. Execute private swap on FHE-EVM
+5. Verify zkFHE execution proof
+6. Scan and detect incoming private payments
+7. Private transfer with change commitment
+8. Reveal and exit to public tokens
 
 ## Reference Implementation
 
 - Bulletproofs: `/bridge/contracts/contracts/privacy/Bulletproofs.sol`
-- Stealth Addresses: `/bridge/contracts/contracts/privacy/StealthAddressRegistry.sol`
-- Private Bridge: `/bridge/contracts/contracts/privacy/PrivateBridge.sol`
-- Private Token: `/bridge/contracts/contracts/privacy/PrivateToken.sol`
+- Stealth Registry: `/bridge/contracts/contracts/privacy/StealthAddressRegistry.sol`
+- FHE Bridge: `/zchain/contracts/FHEPrivateBridge.sol`
+- FHE-EVM Compiler: `/zchain/fhe-compiler/`
 - Client SDK: `/bridge/sdk/src/privacy/`
 
 ## Security Considerations
 
-1. **Blinding Factor Security**: Random blinding factors must use secure randomness. Reusing blinding factors leaks amounts.
+1. **FHE Key Management**: Threshold FHE keys across Z-Chain validators. No single party can decrypt.
 
-2. **View Key Separation**: Separate viewing and spending keys allow delegated scanning without spending authority.
+2. **Blinding Factor Security**: Random blinding factors must use secure randomness.
 
-3. **Nullifier Uniqueness**: Nullifiers must be deterministically derived from commitment + chain info to prevent cross-chain replay.
+3. **View Key Separation**: Viewing keys for scanning, spending keys for transfers. Separate trust levels.
 
-4. **Commitment Soundness**: Pedersen commitments are information-theoretically hiding but computationally binding. Discrete log assumption must hold.
+4. **Nullifier Uniqueness**: Deterministic derivation prevents cross-chain replay.
 
-5. **Range Proof Completeness**: Range proofs must cover the full token range. Overflow attacks possible if range too small.
+5. **FHE Performance**: FHE operations are ~1000x slower than plaintext. Z-Chain uses GPU/FPGA acceleration.
 
-6. **Stealth Address Scanning**: View key holders can see incoming payments. Minimize view key exposure.
-
-7. **Timing Analysis**: Private transfers may still be correlated via timing. Consider batching and delays for maximum privacy.
+6. **Decryption Oracles**: Minimize decrypt() calls. Each reveal leaks information.
 
 ## References
 
 - [Bulletproofs Paper](https://eprint.iacr.org/2017/1066)
 - [EIP-5564: Stealth Addresses](https://eips.ethereum.org/EIPS/eip-5564)
-- [Pedersen Commitments](https://link.springer.com/chapter/10.1007/3-540-46766-1_9)
-- [Monero RingCT](https://eprint.iacr.org/2015/1098)
+- [TFHE Library](https://github.com/zama-ai/tfhe-rs)
+- [Concrete ML](https://docs.zama.ai/concrete-ml)
 
 ## Copyright
 

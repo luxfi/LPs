@@ -2,13 +2,13 @@
 lp: 6351
 title: Receipt and Storage Proofs for Trustless Bridge Claims
 description: Merkle Patricia Trie proofs for verifying burn events without oracles, enabling fully trustless bridge claims.
-author: Claude (@anthropic)
+author: Lux Network Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
 status: Draft
 type: Standards Track
 category: Core
 created: 2025-12-27
-tags: [teleport, bridge, merkle-proof, trustless, mpt]
+tags: [teleport, bridge, merkle-proof, trustless, mpt, quasar]
 requires: [3001, 6350]
 order: 351
 ---
@@ -25,10 +25,35 @@ Light client verification (LP-6350) establishes that a block is finalized, but d
 2. The transaction succeeded (receipt status)
 3. Specific events were emitted (burn event logs)
 
-This enables a fully trustless claim flow:
-1. Light client confirms block finality
-2. Receipt proof confirms burn event inclusion
-3. Bridge mints without any oracle involvement
+## Two-Layer Proof Structure
+
+Trustless bridge claims require TWO independent proofs:
+
+```
+┌─────────────────────────────────────────────────────────────────┐
+│  LAYER 1: Finalized Header Proof                                │
+│  ─────────────────────────────────────────────────────────────  │
+│  Ethereum → Lux:                                                │
+│    • Sync committee BLS signature (2/3 of 512 validators)       │
+│                                                                 │
+│  Lux → Ethereum:                                                │
+│    • Quasar dual-certificate (BLS + Ringtail PQ)                │
+│    • Anchor options: BlockCert / QuantumBundle / EpochCheckpoint│
+└────────────────────────────┬────────────────────────────────────┘
+                             │
+                             ▼ header.receiptsRoot
+┌─────────────────────────────────────────────────────────────────┐
+│  LAYER 2: Event Inclusion Proof                                 │
+│  ─────────────────────────────────────────────────────────────  │
+│    • MPT proof: receipt ∈ receiptsRoot                          │
+│    • Log extraction: BridgeBurned event from receipt.logs       │
+│    • Claim validation: event fields match claim parameters      │
+└─────────────────────────────────────────────────────────────────┘
+```
+
+This separation is important because:
+- **Layer 1** changes based on consensus mechanism (Quasar for Lux, Casper for Ethereum)
+- **Layer 2** is chain-agnostic (all EVM chains use identical MPT structure)
 
 ## Specification
 
@@ -72,7 +97,22 @@ struct Log {
 }
 ```
 
-### 3. Proof Verification
+### 3. Complete Proof Bundle
+
+A full trustless claim requires both layers:
+
+```solidity
+struct TrustlessClaimProof {
+    // Layer 1: Finalized header proof
+    bytes32 blockHash;
+    bytes headerProof;        // Quasar cert or sync committee sig
+    
+    // Layer 2: Event inclusion proof  
+    ReceiptProof receiptProof;
+}
+```
+
+### 4. Proof Verification
 
 ```solidity
 interface IReceiptProofVerifier {
@@ -98,7 +138,7 @@ interface IReceiptProofVerifier {
 }
 ```
 
-### 4. MPT Proof Verification Algorithm
+### 5. MPT Proof Verification Algorithm
 
 ```solidity
 library MerklePatriciaProof {
@@ -146,12 +186,15 @@ library MerklePatriciaProof {
 }
 ```
 
-### 5. Bridge Claim with Receipt Proof
+### 6. Bridge Claim with Receipt Proof
 
 ```solidity
 contract ReceiptProofBridge {
-    ILightClient public lightClient;
+    ILuxLightClient public luxLightClient;
+    IEthereumLightClient public ethLightClient;
     IReceiptProofVerifier public verifier;
+    
+    mapping(bytes32 => bool) public claimed;
     
     event BridgeClaimed(
         bytes32 indexed claimId,
@@ -160,59 +203,70 @@ contract ReceiptProofBridge {
         uint256 amount
     );
     
-    /// @notice Claim bridged assets with receipt proof
+    /// @notice Claim bridged assets with full two-layer proof
     function claimWithReceiptProof(
-        bytes32 sourceBlockHash,
-        ReceiptProof calldata receiptProof,
+        TrustlessClaimProof calldata proof,
         ClaimData calldata claim
     ) external returns (bytes32 claimId) {
-        // 1. Verify block is finalized via light client
-        require(lightClient.isFinalized(sourceBlockHash), "Block not finalized");
+        // LAYER 1: Verify block finality
+        if (claim.sourceChainId == LUX_CHAIN_ID) {
+            // Lux → ETH: Verify Quasar dual-certificate
+            require(
+                luxLightClient.isFinalized(proof.blockHash),
+                "Lux block not finalized"
+            );
+        } else {
+            // ETH → Lux: Verify sync committee signature
+            require(
+                ethLightClient.isFinalized(proof.blockHash),
+                "Ethereum block not finalized"
+            );
+        }
         
-        // 2. Get receipts root from verified header
-        bytes32 receiptsRoot = lightClient.getReceiptsRoot(sourceBlockHash);
+        // Get receipts root from verified header
+        bytes32 receiptsRoot = _getReceiptsRoot(proof.blockHash, claim.sourceChainId);
         
-        // 3. Verify receipt proof
+        // LAYER 2: Verify receipt inclusion
         require(
             verifier.verifyReceiptProof(
                 receiptsRoot,
-                receiptProof.proof,
-                receiptProof.txIndex,
-                receiptProof.rlpEncodedReceipt
+                proof.receiptProof.proof,
+                proof.receiptProof.txIndex,
+                proof.receiptProof.rlpEncodedReceipt
             ),
             "Invalid receipt proof"
         );
         
-        // 4. Decode receipt and extract burn event
-        TransactionReceipt memory receipt = decodeReceipt(receiptProof.rlpEncodedReceipt);
+        // Decode receipt and extract burn event
+        TransactionReceipt memory receipt = decodeReceipt(proof.receiptProof.rlpEncodedReceipt);
         require(receipt.status == 1, "Source tx failed");
         
         BurnEvent memory burn = verifier.extractBurnEvent(receipt, claim.sourceBridge);
         
-        // 5. Validate claim matches burn event
+        // Validate claim matches burn event
         require(burn.token == claim.token, "Token mismatch");
         require(burn.amount == claim.amount, "Amount mismatch");
         require(burn.toChainId == block.chainid, "Chain mismatch");
         require(burn.recipient == claim.recipient, "Recipient mismatch");
         
-        // 6. Compute claim ID and check replay
+        // Compute claim ID and check replay
         claimId = keccak256(abi.encode(
-            sourceBlockHash,
-            receiptProof.txIndex,
+            proof.blockHash,
+            proof.receiptProof.txIndex,
             claim
         ));
         require(!claimed[claimId], "Already claimed");
         claimed[claimId] = true;
         
-        // 7. Mint tokens
+        // Mint tokens
         IERC20B(claim.token).bridgeMint(claim.recipient, claim.amount);
         
-        emit BridgeClaimed(claimId, sourceBlockHash, claim.recipient, claim.amount);
+        emit BridgeClaimed(claimId, proof.blockHash, claim.recipient, claim.amount);
     }
 }
 ```
 
-### 6. Storage Proofs (Alternative)
+### 7. Storage Proofs (Alternative)
 
 For verifying contract state directly:
 
@@ -239,32 +293,40 @@ Storage proofs are useful for:
 - Checking balance changes
 - Confirming contract state transitions
 
-### 7. Proof Generation (Off-Chain)
+### 8. Proof Generation (Off-Chain)
 
 ```typescript
-// Generate receipt proof using eth_getProof
-async function generateReceiptProof(
-    provider: Provider,
-    txHash: string
-): Promise<ReceiptProof> {
-    const receipt = await provider.getTransactionReceipt(txHash);
-    const block = await provider.getBlock(receipt.blockNumber);
+// Generate full two-layer proof
+async function generateTrustlessProof(
+    sourceProvider: Provider,
+    txHash: string,
+    sourceChainId: number
+): Promise<TrustlessClaimProof> {
+    const receipt = await sourceProvider.getTransactionReceipt(txHash);
+    const block = await sourceProvider.getBlock(receipt.blockNumber);
     
-    // Get proof from node
-    const proof = await provider.send('eth_getProof', [
-        receipt.to,
-        [],
-        block.number
-    ]);
+    // Layer 1: Get finality proof
+    let headerProof: bytes;
+    if (sourceChainId === LUX_CHAIN_ID) {
+        // Get Quasar certificate
+        headerProof = await getQuasarCert(block.hash);
+    } else {
+        // Get sync committee signature
+        headerProof = await getSyncCommitteeProof(block.hash);
+    }
     
-    // Build receipt trie and generate proof
+    // Layer 2: Build receipt proof
     const receiptTrie = await buildReceiptTrie(block);
     const mptProof = receiptTrie.prove(receipt.transactionIndex);
     
     return {
-        proof: mptProof,
-        rlpEncodedReceipt: encodeReceipt(receipt),
-        txIndex: receipt.transactionIndex
+        blockHash: block.hash,
+        headerProof,
+        receiptProof: {
+            proof: mptProof,
+            rlpEncodedReceipt: encodeReceipt(receipt),
+            txIndex: receipt.transactionIndex
+        }
     };
 }
 ```
@@ -277,6 +339,7 @@ Receipt proofs provide the missing link between light client verification and tr
 2. **Efficient Verification**: MPT proofs are O(log n) in block size
 3. **Standard Format**: Uses existing Ethereum/EVM proof formats
 4. **Cross-Platform**: Works with any EVM-compatible chain
+5. **Composable**: Layer 1 (finality) and Layer 2 (inclusion) are independent
 
 ## Backwards Compatibility
 
@@ -285,8 +348,9 @@ This extends LP-3001 and LP-6350 without breaking changes. The bridge contract s
 ```solidity
 enum ProofType {
     MPC_ORACLE,      // LP-3001: Oracle signature
-    LIGHT_CLIENT,    // LP-6350: Light client + receipt proof
-    ZK_PROOF         // LP-6352: ZK state proof (future)
+    LIGHT_CLIENT,    // LP-6350 + LP-6351: Two-layer proof
+    ZK_PROOF,        // LP-6352: ZK compressed proof
+    ZK_PRIVATE       // LP-6353: Private bridging
 }
 ```
 
@@ -294,10 +358,11 @@ enum ProofType {
 
 1. Generate and verify valid receipt proof
 2. Reject proof with tampered receipt data
-3. Reject proof against non-finalized block
-4. Extract BridgeBurned event from receipt logs
-5. Reject claim with mismatched event data
-6. Verify storage proofs for balance checks
+3. Reject proof against non-finalized block (Layer 1 failure)
+4. Reject proof with invalid MPT path (Layer 2 failure)
+5. Extract BridgeBurned event from receipt logs
+6. Reject claim with mismatched event data
+7. Verify storage proofs for balance checks
 
 ## Reference Implementation
 
@@ -312,6 +377,7 @@ enum ProofType {
 2. **Proof Length**: Limit proof array length to prevent DoS
 3. **Gas Limits**: MPT verification can be gas-intensive for deep tries
 4. **Event Spoofing**: Verify event comes from expected bridge contract address
+5. **Finality Depth**: Ensure Layer 1 proof uses sufficient finality (Quasar anchors for Lux)
 
 ## Copyright
 
