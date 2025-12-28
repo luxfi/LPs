@@ -180,15 +180,23 @@ An LP (Lux Proposal) is a design document describing a feature, standard, or pro
 |----------|-------------|----------|
 | **Consensus** | Agreement, finality, validators | 100-199 |
 | **Network** | P2P, messaging, topology | 200-499 |
-| **P-Chain** | Platform coordination | 1000-1199 |
-| **C-Chain** | EVM execution, precompiles | 2000-2499 |
-| **X-Chain** | Asset exchange | 3000-3999 |
+| **Cryptography** | Curves, hashes, primitives | 500-999 |
+| **P-Chain** | Platform coordination | 1000-1999 |
+| **C-Chain** | EVM execution, wallets, identity | 2000-2999 |
+| **LRC Standards** | Token standards (LRC-20, LRC-721, etc.) | 3000-3999 |
 | **Q-Chain** | Post-quantum operations | 4000-4999 |
 | **A-Chain** | AI and attestation | 5000-5999 |
-| **B-Chain** | Bridging | 6000-6999 |
-| **T-Chain** | Threshold cryptography | 7000-7999 |
-| **Z-Chain** | Zero-knowledge proofs | 8000-8999 |
+| **B-Chain** | Bridging, Teleport | 6000-6999 |
+| **T-Chain** | Threshold cryptography, MPC | 7000-7999 |
+| **Z-Chain** | Zero-knowledge proofs, privacy | 8000-8999 |
 | **DEX** | Trading infrastructure | 9000-9999 |
+
+### Meta & Educational Categories
+
+| Category | Description | LP Range |
+|----------|-------------|----------|
+| **Learning Paths** | Educational resources, tutorials | 10000-10099 |
+| **Research** | Experimental proposals, papers | 10100-10999 |
 
 ### LP Lifecycle
 
@@ -373,7 +381,7 @@ LPs are organized by research domain — distinct knowledge areas that may span 
 |------|-------------|---------|
 | **Markets & DeFi** | AMMs, lending, derivatives | LP-2500+ |
 | **DEX & Trading** | Order books, matching, HFT | LP-9000+ |
-| **Assets & Tokens** | LRC-20, LRC-721, LRC-1155 | LP-20, LP-721, LP-1155 |
+| **Assets & Tokens** | LRC-20, LRC-721, LRC-1155 | LP-3020, LP-3721, LP-3675 |
 | **Wallets & Identity** | Multisig, AA, DIDs | LP-2600+ |
 | **Governance & Impact** | DAOs, voting, ESG, sustainability | LP-750 to LP-930 |
 | **Privacy** | FHE, TEE, confidential compute | LP-8300+ |

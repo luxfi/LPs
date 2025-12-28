@@ -1,5 +1,5 @@
 ---
-lp: 10090
+lp: 10100
 title: Research Papers Index
 description: Index of research papers, experimental proposals, and forward-looking explorations for the Lux ecosystem.
 author: Lux Network Team (@luxfi)
@@ -28,7 +28,7 @@ Research is critical for the long-term success and innovation of the Lux Network
 
 ### 1. Payment and Financial Systems
 
-#### [LP-91: Payment Processing Research](/docs/lp-91-payment-processing-research/)
+#### [LP-10101: Payment Processing Research](/docs/lp-10101/)
 - **Status**: Draft
 - **Focus**: Efficient payment processing mechanisms
 - **Key Research Areas**:
@@ -40,7 +40,7 @@ Research is critical for the long-term success and innovation of the Lux Network
 
 ### 2. Cross-Chain Communication
 
-#### [LP-92: Cross-Chain Messaging Research](/docs/lp-92-cross-chain-messaging-research/)
+#### [LP-10102: Cross-Chain Messaging Research](/docs/lp-10102/)
 - **Status**: Draft
 - **Focus**: Advanced cross-chain communication protocols
 - **Key Research Areas**:
@@ -50,21 +50,17 @@ Research is critical for the long-term success and innovation of the Lux Network
   - Light client protocols
   - Trust-minimized relaying
 
-### 3. Identity and Privacy
+### 3. Identity Standards
 
-#### [LP-93: Decentralized Identity Research](/docs/lp-93-decentralized-identity-research/)
-- **Status**: Draft
+#### [LP-3093: W3C Decentralized Identity (DID)](/docs/lp-3093/)
+- **Status**: Draft → **Standards Track**
 - **Focus**: Self-sovereign identity solutions
-- **Key Research Areas**:
-  - DID (Decentralized Identifier) implementation
-  - Verifiable credentials
-  - Zero-knowledge identity proofs
-  - Privacy-preserving attestations
-  - Cross-chain identity portability
+- **Key Areas**: DID implementation, verifiable credentials, cross-chain identity
+- **Note**: Promoted from research to LRC standard
 
 ### 4. Governance Systems
 
-#### [LP-94: Governance Framework Research](/docs/lp-94-governance-framework-research/)
+#### [LP-10103: Governance Framework Research](/docs/lp-10103/)
 - **Status**: Draft
 - **Focus**: Advanced governance mechanisms
 - **Key Research Areas**:
@@ -76,7 +72,7 @@ Research is critical for the long-term success and innovation of the Lux Network
 
 ### 5. Stablecoin Design
 
-#### [LP-95: Stablecoin Mechanisms Research](/docs/lp-95-stablecoin-mechanisms-research/)
+#### [LP-10104: Stablecoin Mechanisms Research](/docs/lp-10104/)
 - **Status**: Draft
 - **Focus**: Stablecoin design and stability mechanisms
 - **Key Research Areas**:
@@ -85,6 +81,28 @@ Research is critical for the long-term success and innovation of the Lux Network
   - Cross-chain collateral
   - Decentralized oracle integration
   - Emergency response systems
+
+### 6. MEV Protection
+
+#### [LP-10105: MEV Protection Research](/docs/lp-10105/)
+- **Status**: Draft
+- **Focus**: Mitigating maximal extractable value attacks
+- **Key Research Areas**:
+  - Order flow protection
+  - Fair sequencing services
+  - Commit-reveal schemes
+  - Private transaction pools
+
+### 7. Data Availability
+
+#### [LP-10106: Data Availability Research](/docs/lp-10106/)
+- **Status**: Draft
+- **Focus**: Ensuring data availability for L2/rollups
+- **Key Research Areas**:
+  - Data availability sampling
+  - Erasure coding
+  - Data availability committees
+  - Integration with L1 chains
 
 ## Research Process
 
