@@ -122,7 +122,7 @@ DAO governance modules are policy, not protocol.
 
 | Current | New | Title |
 |---------|-----|-------|
-| 3720 | 71020 | Lux DAO Platform (lux.vote) |
+| 3720 | 71020 | Lux Vote Interface |
 | 3721 | 71021 | Azorius Governance Module |
 | 3722 | 71022 | Voting Strategies Standard |
 | 3723 | 71023 | Freeze Voting & Guard System |

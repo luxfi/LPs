@@ -16,7 +16,7 @@ LP_DIR = Path("/Users/z/work/lux/lps/LPs")
 # Renumbering map
 RENUMBER_MAP = {
     # DAO Governance (71xxx → 28xx)
-    71020: 2800,  # Lux DAO Platform
+    71020: 2800,  # Lux Vote Interface
     71021: 2801,  # Azorius Governance Module
     71022: 2802,  # Voting Strategies
     71023: 2803,  # Freeze Voting & Guard

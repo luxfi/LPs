@@ -337,7 +337,7 @@ function test_DelegatedVotes() public {
 ## Related LPs
 
 - **LP-2521**: Azorius Governance Module
-- **LP-2520**: Lux DAO Platform
+- **LP-2520**: Lux Vote Interface
 
 ## Copyright
 

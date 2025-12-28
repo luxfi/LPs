@@ -1,6 +1,6 @@
 ---
 lp: 2800
-title: Lux DAO Platform (lux.vote)
+title: Lux Vote Interface
 description: Decentralized governance platform for creating and managing DAOs on Lux Network
 author: Lux Industries Inc.
 discussions-to: https://github.com/luxfi/lps/discussions
@@ -15,7 +15,7 @@ order: 2800
 
 ## Abstract
 
-This LP specifies the Lux DAO Platform, a comprehensive decentralized governance solution deployed at lux.vote. The platform enables creation, management, and participation in DAOs on Lux Network, featuring modular governance modules (Azorius, Fractal), multiple voting strategies, freeze protection, account abstraction, and cross-chain governance capabilities.
+This LP specifies the Lux Vote Interface, a comprehensive decentralized governance solution deployed at lux.vote. The platform enables creation, management, and participation in DAOs on Lux Network, featuring modular governance modules (Azorius, Fractal), multiple voting strategies, freeze protection, account abstraction, and cross-chain governance capabilities.
 
 ## Motivation
 
