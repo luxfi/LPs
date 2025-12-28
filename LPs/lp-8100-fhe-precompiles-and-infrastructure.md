@@ -654,6 +654,14 @@ User Tx → EVM → Emit FHE Event → Return Handle
 - Higher throughput
 - Requires result polling or callbacks
 
+## Rationale
+
+FHE precompiles were designed with these principles:
+1. Pure Go implementation avoids patent encumbrance and CGO complexity
+2. Precompile addresses in 0x80-0x83 range avoid conflicts with Ethereum
+3. Network key management enables confidential smart contracts
+4. TFHE was chosen for boolean operations efficiency over BGV/CKKS
+
 ## Security Considerations
 
 ### Key Management

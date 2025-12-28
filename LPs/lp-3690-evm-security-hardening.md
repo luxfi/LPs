@@ -182,6 +182,17 @@ func TestTransactionGasCap(t *testing.T) {
 }
 ```
 
+## Rationale
+
+EVM security hardening follows Ethereum's lead on resource limits because:
+1. Prevents computational exhaustion attacks
+2. Ensures nodes can operate on commodity hardware
+3. Maintains network stability under adversarial conditions
+
+## Backwards Compatibility
+
+All limits are set above current legitimate usage. No breaking changes to existing contracts.
+
 ## Security Considerations
 
 1. **Backwards Compatibility**: All limits are set above current legitimate usage

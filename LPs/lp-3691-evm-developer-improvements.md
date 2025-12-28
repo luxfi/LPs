@@ -234,6 +234,14 @@ func TestHistoryExpiry(t *testing.T) {
 }
 ```
 
+## Rationale
+
+Developer experience improvements were chosen based on:
+1. Common pain points from Ethereum developers
+2. Features proven useful in Ethereum Pectra upgrade
+3. Reduced sync times for new node operators
+4. Better debugging and monitoring capabilities
+
 ## Security Considerations
 
 1. **History Expiry**: Does not affect consensus - only historical queries

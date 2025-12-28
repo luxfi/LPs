@@ -471,6 +471,26 @@ interface IYieldStrategy {
 | LP-3810 | Teleport Token Standard | Token interface |
 | LP-6022 | Warp Messaging 2.0 | Cross-chain |
 
+## Rationale
+
+The cross-chain teleport design uses a hub-and-spoke model because:
+1. Reduces complexity compared to fully meshed connections
+2. Lux Network acts as the liquidity hub
+3. MPC signatures provide decentralized security
+4. Warp Messaging provides native interoperability
+
+## Backwards Compatibility
+
+This LP extends LP-3001 (Teleport Bridge MPC) and is backwards compatible with existing bridge deployments.
+
+## Security Considerations
+
+Key security measures:
+- MPC threshold signatures prevent single points of failure
+- Rate limiting protects against flash loan attacks
+- Timelocks on large withdrawals
+- Oracle manipulation resistance through multi-source price feeds
+
 ## Copyright
 
 Copyright and related rights waived via [CC0](../LICENSE.md).
