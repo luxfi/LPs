@@ -18,6 +18,18 @@ tier: core
 
 This LP defines the canonical numbering scheme for Lux Proposals (LPs). Numbers follow **dependency order** — lower numbers are foundations that higher numbers build upon. This creates a natural learning path and enforces architectural discipline.
 
+## Motivation
+
+A consistent, dependency-ordered numbering scheme is essential for the Lux ecosystem:
+
+1. **Architectural Clarity**: Lower numbers represent foundational components that higher numbers depend on, making dependency relationships explicit
+2. **Learning Path**: Developers can follow numbers sequentially to understand the stack from primitives to applications
+3. **Collision Prevention**: Reserved ranges prevent number conflicts as the ecosystem grows
+4. **Chain Organization**: Each chain family (P, C, Z, T, B, A) has dedicated ranges reflecting their role in the architecture
+5. **Review Efficiency**: Reviewers can quickly identify an LP's domain and dependencies from its number
+
+Without a canonical taxonomy, LP numbers become arbitrary, making it difficult to understand relationships between proposals, locate relevant specifications, or ensure consistent organization across hundreds of documents.
+
 ## Canonical Taxonomy
 
 ### 0xxx: Meta / Governance / Process

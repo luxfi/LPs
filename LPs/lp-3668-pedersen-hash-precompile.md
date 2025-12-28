@@ -349,7 +349,7 @@ Test vectors will be generated from:
 - [Pedersen Commitments (Wikipedia)](https://en.wikipedia.org/wiki/Commitment_scheme#Pedersen_commitment)
 - [Baby-Jubjub Elliptic Curve (EIP-2494)](https://eips.ethereum.org/EIPS/eip-2494)
 - [circomlib Baby-Jubjub](https://github.com/iden3/circomlib/blob/master/circuits/babyjub.circom)
-- [Zcash Sapling Jubjub](https://github.com/zcash/librustzcash/tree/main/components/jubjub)
+- [Zcash Jubjub Curve](https://github.com/zkcrypto/jubjub)
 - [Bulletproofs Paper](https://eprint.iacr.org/2017/1066)
 - [LP-3658: Poseidon Hash Precompile](./lp-3658-poseidon-hash-precompile.md)
 - [LP-1227: Standard Ethereum Precompiles](./lp-1227-standard-ethereum-precompiles.md)
