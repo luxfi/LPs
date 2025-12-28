@@ -23,12 +23,11 @@ LP_DIR = Path("/Users/z/work/lux/lps/LPs")
 RANGES = {
     (0, 99): {
         "name": "Constitutional/Meta",
-        "allowed_status": ["Final"],
-        "required_status": "Final",
+        "allowed_status": ["Final", "Living"],
     },
     (100, 999): {
         "name": "Core Protocols",
-        "allowed_status": ["Draft", "Review", "Implemented", "Final", "Superseded"],
+        "allowed_status": ["Draft", "Review", "Implemented", "Final", "Living", "Superseded"],
     },
     (1000, 1999): {
         "name": "Chain Specifications",
@@ -78,7 +77,7 @@ RANGES = {
     },
 }
 
-VALID_STATUSES = ["Draft", "Review", "Implemented", "Final", "Superseded", "Research"]
+VALID_STATUSES = ["Draft", "Review", "Implemented", "Final", "Living", "Superseded", "Research"]
 VALID_TYPES = ["Standards Track", "Meta", "Informational"]
 VALID_CATEGORIES = ["Core", "Networking", "Interface", "LRC", "Bridge"]
 
