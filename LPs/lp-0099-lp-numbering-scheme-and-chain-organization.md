@@ -3,7 +3,7 @@ lp: 99
 title: LP Numbering Scheme and Chain Organization
 description: Canonical governance anchor defining LP numbering, status semantics, and normative classification
 author: Lux Core Team
-status: Final
+status: Living
 tags: [core, meta, governance]
 type: Meta
 created: 2025-01-15
@@ -377,7 +377,7 @@ Idea → Draft → Review → Last Call → Final → Implemented
 # LP-lint rules (machine-enforceable)
 rules:
   range_check:
-    - "LP 0-99 MUST have status: Final or Living"
+    - "LP 0-99 MUST have status: Living or Living"
     - "LP 50000+ MUST have status: Research"
     - "LP outside defined range is INVALID"
 

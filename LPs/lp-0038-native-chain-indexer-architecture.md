@@ -5,7 +5,7 @@ tags: [indexer, explorer, dag, consensus, api]
 description: Multi-chain indexer for Lux Network's native DAG and linear chains
 author: Lux Industries Inc.
 discussions-to: https://github.com/luxfi/lps/discussions
-status: Final
+status: Living
 type: Standards Track
 category: Core
 created: 2025-12-25
