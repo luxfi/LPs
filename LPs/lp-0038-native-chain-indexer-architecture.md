@@ -5,7 +5,7 @@ tags: [indexer, explorer, dag, consensus, api]
 description: Multi-chain indexer for Lux Network's native DAG and linear chains
 author: Lux Industries Inc.
 discussions-to: https://github.com/luxfi/lps/discussions
-status: Living
+status: Final
 type: Standards Track
 category: Core
 created: 2025-12-25
@@ -488,6 +488,18 @@ spec:
 2. **API Rate Limiting**: Implement per-IP rate limits on REST endpoints
 3. **WebSocket Limits**: Maximum 1000 concurrent connections per chain
 4. **RPC Authentication**: Support for authenticated RPC endpoints
+
+## Rationale
+
+The multi-chain indexer architecture was chosen over chain-specific indexers because:
+1. Shared infrastructure reduces operational overhead
+2. Unified API design provides consistent developer experience
+3. Common data models enable cross-chain analytics
+4. Modular fetcher design allows chain-specific optimizations while sharing core logic
+
+## Backwards Compatibility
+
+This LP documents new infrastructure and does not affect existing chain operations. The REST API follows Blockscout conventions for EVM-familiar developers.
 
 ## Related LPs
 
