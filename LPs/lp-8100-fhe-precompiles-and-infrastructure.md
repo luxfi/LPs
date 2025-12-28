@@ -5,10 +5,12 @@
 | LP | 8100 |
 | Title | Fully Homomorphic Encryption Precompiles and Infrastructure |
 | Author | Lux Network |
-| Status | Draft |
+| Status | Implemented |
 | Type | Standards Track |
 | Category | Core |
 | Created | 2025-12-27 |
+| Updated | 2025-12-27 |
+| Requires | LP-333 (T-Chain), LP-5302 (Z-Chain) |
 
 ## Abstract
 
@@ -39,8 +41,9 @@ Lux provides three complementary FHE libraries:
 | Library | Language | License | Schemes | Use Case |
 |---------|----------|---------|---------|----------|
 | `luxfi/fhe` | C++ | BSD-3-Clause | TFHE, FHEW, CKKS, BGV, BFV | High-performance, multi-scheme |
-| `luxfi/tfhe` | Go | BSD-3-Clause | TFHE (Boolean) | Pure Go fhEVM, no CGO |
+| `luxfi/tfhe` | Go | Lux Research | TFHE (Threshold) | Pure Go fhEVM, no CGO |
 | `luxfi/lattice` | Go | Apache-2.0 | CKKS, BGV | Primitives, multiparty |
+| `luxfhe/*` | TS/Sol/Rust | BSD-3-Clause | TFHE | Full SDK stack (v1/v2) |
 
 ### luxfi/fhe (OpenFHE C++ Fork)
 
@@ -241,6 +244,106 @@ values := []complex128{3.14159, 2.71828, 1.41421}
 plaintext := encoder.EncodeNew(values, params.MaxLevel(), params.DefaultScale())
 ciphertext := encryptor.EncryptNew(plaintext)
 ```
+
+### LuxFHE SDK Stack (github.com/luxfhe)
+
+The `luxfhe` organization provides a complete FHE application stack:
+
+**SDK Packages:**
+
+| Package | Mode | Description |
+|---------|------|-------------|
+| `@luxfhe/v1-sdk` | Standard | Single-key TFHE - simpler, faster for trusted setups |
+| `@luxfhe/v2-sdk` | Threshold | Network-based TFHE - decentralized decryption via T-Chain |
+| `@luxfhe/contracts` | Solidity | FHE-enabled smart contracts (FHE.sol, token/, finance/) |
+
+**Architecture:**
+
+```
+┌─────────────────────────────────────────────────────────────────────────┐
+│                         JavaScript Applications                         │
+├────────────────────────────┬────────────────────────────────────────────┤
+│   @luxfhe/v1-sdk           │         @luxfhe/v2-sdk                     │
+│   (Standard TFHE)          │         (Threshold TFHE)                   │
+│   - Single encryption key  │         - Distributed key shares (t-of-n) │
+│   - Key holder decrypts    │         - T-Chain consensus decryption    │
+│   - Lower latency          │         - No single point of trust        │
+│   - Trusted environments   │         - Public DeFi, trustless apps     │
+├────────────────────────────┴────────────────────────────────────────────┤
+│                          @luxfhe/contracts                              │
+│                    Solidity FHE Smart Contracts                         │
+│    FHE.sol · FheOS.sol · token/* · finance/* · governance/*            │
+├─────────────────────────────────────────────────────────────────────────┤
+│                         Core Components                                  │
+│  ┌────────────────┐  ┌────────────────┐  ┌────────────────┐            │
+│  │   concrete/    │  │    fhevm/      │  │     kms/       │            │
+│  │ TFHE Compiler  │  │ Full Stack VM  │  │ Key Management │            │
+│  │   (Python)     │  │   (Solidity)   │  │    (Rust)      │            │
+│  └────────────────┘  └────────────────┘  └────────────────┘            │
+├─────────────────────────────────────────────────────────────────────────┤
+│                    Backend Services                                      │
+│  ┌───────────────────────────────────┐  ┌───────────────────────────┐  │
+│  │   Go FHE Server                   │  │   WASM Bindings           │  │
+│  │   luxfi/tfhe/cmd/fhe-server       │  │   luxfhe/wasm/tfhe        │  │
+│  │   /encrypt /decrypt /evaluate     │  │   Browser-native FHE      │  │
+│  └───────────────────────────────────┘  └───────────────────────────┘  │
+├─────────────────────────────────────────────────────────────────────────┤
+│                    Cryptographic Foundations                             │
+│     github.com/luxfi/tfhe (Pure Go)  ·  github.com/luxfi/lattice       │
+└─────────────────────────────────────────────────────────────────────────┘
+```
+
+**v2-sdk Quick Start (Threshold TFHE):**
+
+```typescript
+import { createFheClient } from '@luxfhe/v2-sdk'
+
+const client = await createFheClient({
+  provider: window.ethereum,
+  networkUrl: 'https://fhe.lux.network'  // T-Chain gateway
+})
+
+// Encrypt a value (uses network public key)
+const encrypted = await client.encrypt_uint32(42)
+
+// Submit to smart contract
+const tx = await contract.deposit(encrypted)
+
+// Decryption requires T-Chain consensus (67-of-100)
+const result = await client.decrypt(encryptedResult)
+```
+
+**Confidential Token Contract:**
+
+```solidity
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.24;
+
+import "@luxfhe/contracts/FHE.sol";
+
+contract ConfidentialToken {
+    mapping(address => euint32) private _balances;
+    
+    function transfer(address to, euint32 amount) external {
+        // Operations on encrypted values
+        _balances[msg.sender] = FHE.sub(_balances[msg.sender], amount);
+        _balances[to] = FHE.add(_balances[to], amount);
+    }
+    
+    function balanceOf(address owner) external view returns (euint32) {
+        return _balances[owner];
+    }
+}
+```
+
+**Core Components:**
+
+| Component | Location | Purpose |
+|-----------|----------|---------|
+| `core/threshold/` | Rust | Threshold TFHE library for T-Chain validators |
+| `core/kms/` | Rust | Key Management System with threshold key ceremonies |
+| `core/fhevm/` | TypeScript/Solidity | Full-stack FHEVM framework |
+| `core/concrete/` | Python | TFHE compiler (Python to FHE circuits) |
 
 ### EVM Precompiles
 
@@ -577,37 +680,53 @@ Decrypt operations require:
 
 ### Completed ✅
 
-- [x] **luxfi/tfhe Pure Go Library**
+- [x] **luxfi/tfhe Pure Go Library** (`github.com/luxfi/tfhe`)
   - Boolean gates with blind rotation
-  - Integer types FheUint4-256
+  - Integer types FheUint4-256 (including FheUint160 for addresses)
   - Arithmetic: Add, Sub, Neg, ScalarAdd
   - Comparisons: Eq, Lt, Le, Gt, Ge, Min, Max
   - Bitwise: And, Or, Xor, Not, Shl, Shr
-  - Public key encryption
-  - Deterministic RNG
-  - Binary serialization
-  - OpenFHE CGO backend (optional)
+  - Public key encryption (users encrypt without secret key)
+  - Deterministic RNG for blockchain consensus
+  - Binary serialization for keys and ciphertexts
+  - **18x faster** bootstrap key generation vs OpenFHE CGO
 
-- [x] **luxfi/fhe OpenFHE Fork**
+- [x] **luxfi/fhe OpenFHE Fork** (`github.com/luxfi/fhe`)
   - Full TFHE/FHEW/CKKS/BGV/BFV support
   - fhEVM radix integer operations
-  - CGO bindings for Go
+  - CGO bindings for Go integration
+
+- [x] **LuxFHE SDK Stack** (`github.com/luxfhe/*`)
+  - @luxfhe/v1-sdk: Standard single-key TFHE
+  - @luxfhe/v2-sdk: Threshold TFHE with T-Chain integration
+  - @luxfhe/contracts: Solidity FHE library (FHE.sol, token/, finance/)
+  - core/threshold/: Rust threshold TFHE library
+  - core/kms/: Rust Key Management System
+  - core/fhevm/: Full-stack FHEVM framework
+  - 25+ example applications (voting, auctions, poker, tokens)
 
 - [x] **FHE.sol Solidity Library**
   - Encrypted types: ebool, euint8-256, eaddress
   - All arithmetic, comparison, and bitwise operations
   - Async decryption via FHEDecrypt precompile
+  - ICofhe interface for threshold operations
 
 - [x] **FHE Precompiles** (`evm/precompile/contracts/fhe/`)
   - FHE Core (0x80): All FHE operations
   - ACL (0x81): Access control for encrypted values
   - FHEDecrypt (0x82): Threshold decryption gateway
 
+- [x] **T-Chain Threshold Decryption**
+  - 67-of-100 validator threshold
+  - Epoch-based key ceremonies
+  - CKKS multiparty protocol
+  - Warp messaging integration
+
 ### In Progress 🔄
 
-- [ ] **Mul/Div Operations in luxfi/tfhe** (expensive)
-- [ ] **Production Key Ceremony**
-- [ ] **GPU Acceleration**
+- [ ] **Mul/Div Operations in luxfi/tfhe** (expensive, ~10-20s per operation)
+- [ ] **GPU Acceleration** (CUDA/Metal backends)
+- [ ] **Production Mainnet Deployment**
 
 ### Implementation Roadmap
 
