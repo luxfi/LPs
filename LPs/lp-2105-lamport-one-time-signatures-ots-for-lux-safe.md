@@ -408,7 +408,7 @@ This proposal is additive. Existing Safes and ECDSA signatures continue to work 
    - `GET /admin/lamport/key-status` - Query remaining keys
    - `POST /admin/lamport/rotate-keys` - Initiate key rotation
 
-**Repository**: `github.com/luxfi/node/vms/safe/lamport/` *(Planned - implementation pending)*
+**Repository**: [`github.com/luxfi/crypto/lamport/`](https://github.com/luxfi/crypto/tree/main/lamport)
 
 ## Testing
 
@@ -1067,7 +1067,7 @@ By integrating Lamport OTS into Lux Safe, we create the first production-ready q
 
 ### Implementation
 - **Solidity Contracts**: [`github.com/luxfi/standard/contracts/crypto/lamport/`](https://github.com/luxfi/standard/tree/main/contracts/crypto/lamport)
-- **Node Integration**: `github.com/luxfi/node/vms/safe/lamport/` *(Planned)*
+- **Node Integration**: [`github.com/luxfi/crypto/lamport/`](https://github.com/luxfi/crypto/tree/main/lamport)
 
 ### Academic References
 - Lamport, L. "Constructing Digital Signatures from a One-Way Function" (1979)

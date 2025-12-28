@@ -507,7 +507,7 @@ BenchmarkMigrationTransaction-10      3,891 ops/sec (257μs/op)
 - Legacy support: Hybrid mode indefinitely
 - Cleanup timeline: 2-year window published at Phase 3
 
-**GitHub**: `github.com/luxfi/node/consensus/protocol/quasar/` *(Planned - Quasar implementation pending)*
+**GitHub**: [`github.com/luxfi/consensus/protocol/quasar/`](https://github.com/luxfi/consensus/tree/main/protocol/quasar)
 
 ## Test Cases
 
