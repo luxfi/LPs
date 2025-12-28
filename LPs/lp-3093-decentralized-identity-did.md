@@ -1,5 +1,5 @@
 ---
-lp: 10093
+lp: 3093
 title: W3C Decentralized Identity (DID) Standard
 description: W3C DID Core specification implementation with premium registry, x402 integration, and multi-network support
 author: Lux Network Team (@luxfi)
