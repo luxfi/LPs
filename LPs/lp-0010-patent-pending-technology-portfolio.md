@@ -14,7 +14,24 @@
 
 ## Abstract
 
-This LP documents Lux Network's comprehensive portfolio of patent-pending technologies across five core segments: **DEX** (decentralized exchange), **Consensus** (blockchain consensus protocols), **Threshold** (threshold cryptography), **MPC** (multi-party computation), and **TFHE** (fully homomorphic encryption). These innovations collectively enable "the fastest, most secure, and private quantum-safe network of blockchains."
+This LP documents Lux Network's comprehensive portfolio of **120+ patent-pending technologies** across twelve core segments:
+
+| Segment | Innovations | Competitive Moat |
+|---------|-------------|------------------|
+| **DEX** | 10 | vs Hyperliquid, NASDAQ, Uniswap |
+| **Consensus** | 12 | vs Ava-Labs, Ethereum |
+| **Threshold** | 9 | vs Fireblocks, Utila |
+| **MPC** | 9 | vs BitGo, Copper |
+| **TFHE** | 8 | vs Zama, Inpher |
+| **AI Mining** | 6 | vs NVIDIA, render networks |
+| **Post-Quantum Crypto** | 15 | vs ALL (first-mover) |
+| **Bridge/Teleport** | 10 | vs LayerZero, Wormhole |
+| **Wallet/KMS/HSM** | 13 | vs Ledger, Fireblocks |
+| **EVM Precompiles** | 14 | vs Ethereum, L2s |
+| **Hanzo AI** | 15 | vs OpenAI, Anthropic infra |
+| **Enterprise Custody** | 8 | vs institutional providers |
+
+These innovations collectively enable "the fastest, most secure, and private quantum-safe network of blockchains."
 
 All technologies are protected under the **Lux Research License with Patent Reservation Version 1.0**, which permits research and non-commercial use while reserving all patent rights and commercial licensing to Lux Industries Inc.
 
@@ -689,49 +706,478 @@ Luminance = Uptime × 0.4 + (1 - LatencyRatio) × 0.3 + CorrectnessRate × 0.3
 
 ---
 
-## Part VI: Prosecution Strategy
+## Part VI: AI Mining & Confidential Compute (vs NVIDIA/Render)
 
-### Priority Matrix
+**Repository**: `~/work/lux/node`, `~/work/lux/precompiles`
+**Competitive Moat Against**: NVIDIA, Render Network, Akash
+
+### AI1. AI Mining Precompile with ML-DSA & NVTrust (0x0300)
+
+**Innovation**: Quantum-safe ML-DSA signature verification integrated as native EVM precompile with NVTrust GPU attestation and privacy-tiered reward multipliers.
+
+**Files**: `precompiles/ai/ai_mining.go`
+
+**Privacy Levels**:
+- Level 1 (Public): 0.25x multiplier
+- Level 2 (Private): 0.50x multiplier
+- Level 3 (Confidential): 1.00x multiplier
+- Level 4 (Sovereign): 1.50x multiplier
+
+**Claims**:
+1. System for quantum-safe GPU compute verification on blockchain
+2. Privacy-tiered reward calculation for confidential computing attestations
+3. Native EVM precompile for FIPS 204 ML-DSA signature verification
+
+---
+
+### AI2. TEE Integration (Intel SGX, AMD SEV, NVIDIA H100)
+
+**Innovation**: Multi-provider TEE abstraction with attestation reports and cryptographic verification.
+
+**Files**: `hanzo/agent/extensions/tee/tee.py`
+
+**Claims**:
+1. Unified abstraction over heterogeneous TEE providers
+2. Remote attestation verification with code hash validation
+3. Enclave state management for confidential AI inference
+
+---
+
+### AI3. NVTrust GPU Attestation Chain Verification
+
+**Innovation**: On-chain verification of NVIDIA confidential computing attestations with work proof deduplication.
+
+**Files**: `precompiles/ai/ai_mining.go`
+
+**Claims**:
+1. NVIDIA H100 GPU attestation verification on blockchain
+2. Work proof deduplication via BLAKE3 spent set tracking
+3. TEE quote validation for decentralized AI compute
+
+---
+
+## Part VII: Post-Quantum Cryptography Suite
+
+**Repository**: `~/work/lux/crypto`, `~/work/lux/lattice`
+**Competitive Moat Against**: ALL competitors (first-mover advantage)
+
+### PQ1. ML-DSA (FIPS 204) - Digital Signatures
+
+**Innovation**: Native NIST post-quantum signature verification with automatic security level detection.
+
+**Files**: `crypto/mldsa/mldsa.go`
+
+**Variants**: MLDSA44 (Level 2), MLDSA65 (Level 3), MLDSA87 (Level 5)
+
+**Claims**:
+1. Automatic security level detection from public key size
+2. CGO-optimized with pure Go fallback
+3. Native blockchain precompile integration
+
+---
+
+### PQ2. ML-KEM (FIPS 203) - Key Encapsulation
+
+**Innovation**: Post-quantum key encapsulation for encrypted cross-chain messaging.
+
+**Files**: `crypto/kem/mlkem.go`
+
+**Variants**: ML-KEM-512, ML-KEM-768, ML-KEM-1024
+
+**Claims**:
+1. Hybrid KEM factory with fallback implementations
+2. Cross-chain bridge encryption with quantum resistance
+3. Non-blocking KEM for missing liboqs installations
+
+---
+
+### PQ3. SLH-DSA (FIPS 205) - Stateless Hash-Based Signatures
+
+**Innovation**: 12 variants supporting speed/size tradeoffs without lattice assumptions.
+
+**Files**: `crypto/slhdsa/slhdsa.go`
+
+**Claims**:
+1. Stateless construction (no nonce management)
+2. SHA2/SHAKE dual-mode support
+3. Time-speed-signature-size tradeoff selector
+
+---
+
+### PQ4. Ringtail Lattice Threshold Signatures
+
+**Innovation**: 2-round post-quantum threshold protocol with lattice assumptions.
+
+**Files**: `ringtail/threshold/threshold.go`
+
+**Performance**: 0.6s online phase, 2.5s total
+
+**Claims**:
+1. First production post-quantum threshold signatures
+2. Hybrid BLS+Ringtail for dual-layer security
+3. Module-LWE hardness assumptions
+
+---
+
+### PQ5. Lamport One-Time Signatures for Safe
+
+**Innovation**: Quantum-safe OTS with automatic key destruction.
+
+**Files**: `crypto/lamport/lamport.go`
+
+**Claims**:
+1. Multi-hash-function OTS (SHA256, SHA512, SHA3)
+2. Automatic key destruction after signing
+3. Safe multisig integration for post-quantum
+
+---
+
+## Part VIII: Bridge & Cross-Chain (vs LayerZero/Wormhole)
+
+**Repository**: `~/work/lux/bridge`, `~/work/lux/teleport`
+**Competitive Moat Against**: LayerZero, Wormhole, Stargate, Across
+
+### B1. ClaimID-Based Replay Protection
+
+**Innovation**: ECDSA malleability-immune replay protection using content-based claim IDs.
+
+**Files**: `teleport/contracts/Bridge.sol`
+
+**Claims**:
+1. Content-based claim ID generation (not signature-based)
+2. Immunity to ECDSA signature malleability attacks
+3. Deterministic cross-chain message verification
+
+---
+
+### B2. Destination-Committed Burn Events
+
+**Innovation**: Oracle parameter spoofing prevention via destination binding in events.
+
+**Files**: `teleport/contracts/Bridge.sol`
+
+**Claims**:
+1. Destination chain/address committed in burn event
+2. Prevention of oracle parameter manipulation
+3. Cryptographic binding of cross-chain intent
+
+---
+
+### B3. Light Client Bridge Framework
+
+**Innovation**: Heterogeneous chain verification using Ethereum beacon + Lux consensus.
+
+**Files**: `teleport/LLM.md`
+
+**Claims**:
+1. Trustless cross-chain verification without oracles
+2. Light client state proof validation
+3. Multi-consensus bridge architecture
+
+---
+
+### B4. Warp TeleportAttest with Threshold Signatures
+
+**Innovation**: Cross-chain messaging with 67/100 validator threshold and optional quantum attachment.
+
+**Files**: `node/vms/platformvm/warp/contract.go`
+
+**Claims**:
+1. BLS signature aggregation for message authentication
+2. Optional post-quantum Ringtail attachment
+3. Validator set rotation via height-indexed snapshots
+
+---
+
+## Part IX: Wallet/KMS/HSM Enterprise Custody
+
+**Repository**: `~/work/lux/wallet`, `~/work/lux/safe`
+**Competitive Moat Against**: Ledger, Fireblocks, BitGo
+
+### W1. Multi-Curve HD Wallet Framework
+
+**Innovation**: Unified BIP32/BIP39 with encrypted keys supporting 28+ blockchains.
+
+**Files**: `wallet/packages/core/src/secret/`
+
+**Claims**:
+1. Multi-curve support (secp256k1, nistp256, ed25519) with unified API
+2. Batch key derivation with parent fingerprint tracking
+3. SLIP-0010 ED25519 compliance with retry logic
+
+---
+
+### W2. Air-Gap QR Protocol (UR Standard)
+
+**Innovation**: Animated QR code fragmentation for hardware wallet communication.
+
+**Files**: `wallet/packages/qr-wallet-sdk/`
+
+**Claims**:
+1. Air-gap transaction protocol via QR codes
+2. Animated QR fragmentation/reassembly
+3. UR encoding with CBOR serialization
+
+---
+
+### W3. Social Recovery Module with Guardian Threshold
+
+**Innovation**: Lost key recovery via trusted guardian consensus.
+
+**Files**: `safe/docs/content/docs/modules.mdx`
+
+**Claims**:
+1. Guardian-based account recovery
+2. Programmable recovery delay for intervention
+3. Custody chain of authority hierarchy
+
+---
+
+### W4. Allowance Module with Delegated Spending
+
+**Innovation**: Employee/vendor spending limits without owner signatures.
+
+**Files**: `safe/docs/content/docs/modules.mdx`
+
+**Claims**:
+1. Time-based periodic reset logic
+2. Per-delegate, per-token allowances
+3. Nonce-based replay protection
+
+---
+
+### W5. EIP-7702 EOA Delegation Detection
+
+**Innovation**: Bytecode-level detection of delegated account execution.
+
+**Files**: `safe/contracts/contracts/common/EIP7702.sol`
+
+**Claims**:
+1. Runtime execution context identification
+2. 0xef0100 magic byte detection
+3. Forward-compatible account abstraction
+
+---
+
+## Part X: EVM Precompiles & Infrastructure
+
+**Repository**: `~/work/lux/evm`, `~/work/lux/coreth`, `~/work/lux/precompiles`
+**Competitive Moat Against**: Ethereum, all L2s
+
+### EVM1. Singleton DEX Pool Manager (0x0400)
+
+**Innovation**: All liquidity pools in single precompile with flash accounting.
+
+**Files**: `precompiles/dex/pool_manager.go`
+
+**Performance**: 443K swaps/sec, 2.26μs latency
+
+**Claims**:
+1. Singleton AMM architecture with global liquidity
+2. Flash accounting for netted token settlement
+3. Native blockchain token without wrapping
+
+---
+
+### EVM2. Hooks System for Modular Pool Logic
+
+**Innovation**: 12 hook points encoded in contract address bitmap.
+
+**Files**: `precompiles/dex/hooks.go`
+
+**Claims**:
+1. Address-encoded hook capabilities (first 16 bits)
+2. Dynamic fee adjustment via hooks
+3. MEV protection via commit-reveal hooks
+
+---
+
+### EVM3. FHE Precompile with Z-Chain Coprocessor
+
+**Innovation**: Encrypted computation delegation to off-chain FHE coprocessor.
+
+**Files**: `precompiles/fhe/contract.go`
+
+**Claims**:
+1. Ciphertext handle pointers to Z-Chain values
+2. 23+ encrypted operations (add, sub, mul, compare, etc.)
+3. Type-safe encrypted computation
+
+---
+
+### EVM4. Ring Signature Precompile (LSAG)
+
+**Innovation**: Privacy-preserving signatures with key image linkability.
+
+**Files**: `precompiles/ring/contract.go`
+
+**Claims**:
+1. Linkable ring signatures for anonymous transactions
+2. Key image computation for double-spend prevention
+3. Batch verification with 20% gas discount
+
+---
+
+### EVM5. Dynamic Fee Configuration (Triple Damping)
+
+**Innovation**: Block gas cost + base fee + min floor for stable pricing.
+
+**Files**: `evm/commontype/fee_config.go`, `coreth/plugin/evm/header/gas_limit.go`
+
+**Claims**:
+1. Triple damping mechanism (block rate, utilization, min price)
+2. Validator incentive alignment via BlockGasCost
+3. Fortuna upgrade dynamic capacity model
+
+---
+
+## Part XI: Hanzo AI Infrastructure
+
+**Repository**: `~/work/hanzo`
+**Competitive Moat Against**: OpenAI, Anthropic, Cohere (infrastructure layer)
+
+### H1. Intelligent Multi-Provider LLM Router
+
+**Innovation**: Dynamic routing across 40+ LLM providers with cost optimization.
+
+**Files**: `hanzo/llm/llm/router.py`
+
+**Claims**:
+1. Real-time cost tracking per deployment
+2. Multi-level routing (cost, latency, availability)
+3. Provider-agnostic response normalization
+
+---
+
+### H2. Prompt Caching with Cross-Deployment Reuse
+
+**Innovation**: SHA256-based deterministic cache keys for prompt reuse.
+
+**Files**: `hanzo/llm/router_utils/prompt_caching_cache.py`
+
+**Claims**:
+1. Cross-provider prompt cache coordination
+2. Tool schema caching for multi-turn conversations
+3. Canonical object serialization for stable keys
+
+---
+
+### H3. MCP Unified Search Engine (5-Strategy Parallel)
+
+**Innovation**: AST + Vector + Text + Path + Symbol search with priority ranking.
+
+**Files**: `hanzo/mcp/src/search/search-engine.ts`
+
+**Claims**:
+1. Priority-based strategy orchestration
+2. Parallel multi-modal code search
+3. 93% reduction in MCP tool surface
+
+---
+
+### H4. Active Inference Planner
+
+**Innovation**: Expected Free Energy minimization for AI tool selection.
+
+**Files**: `hanzo/HIPs/hip-0007-active-inference-integration.md`
+
+**Claims**:
+1. Principled planning via Active Inference
+2. RSSM world models for reasoning
+3. Explainable decision traces
+
+---
+
+### H5. Decentralized AI Compute Swarm (BitTorrent-style)
+
+**Innovation**: Task decomposition into verifiable pieces with consensus verification.
+
+**Files**: `hanzo/HIPs/hip-0023-decentralized-ai-compute-swarm.md`
+
+**Claims**:
+1. BitTorrent model for AI compute distribution
+2. Multiple verification strategies (hash, vote, BFT, TEE)
+3. RarestFirst scheduling for fault tolerance
+
+---
+
+### H6. Hanzo Market Maker (HMM) - DEX for AI Compute
+
+**Innovation**: AMM for trading GPU time and inference as liquid assets.
+
+**Files**: `hanzo/HIPs/hip-0008-hmm-hanzo-market-maker.md`
+
+**Claims**:
+1. Constant product AMM for heterogeneous compute
+2. Quality-adjusted pricing via performance oracle
+3. Fractional GPU ownership
+
+---
+
+## Part XII: Prosecution Strategy
+
+### Priority Matrix (Top 40 - Critical & High)
 
 | Innovation | Segment | Priority | Competitive Value |
 |------------|---------|----------|-------------------|
+| PQ4. Ringtail Threshold | Post-Quantum | 🔴 Critical | First-mover (no competitor) |
+| AI1. NVTrust GPU Attestation | AI Mining | 🔴 Critical | vs NVIDIA/Render |
+| H5. Decentralized Compute Swarm | Hanzo AI | 🔴 Critical | vs centralized AI |
+| EVM1. Singleton DEX Manager | EVM | 🔴 Critical | vs Uniswap/all DEX |
 | D2. Multi-Backend Matching | DEX | 🔴 Critical | vs Hyperliquid/NASDAQ |
 | D3. FPGA Pipeline | DEX | 🔴 Critical | vs HFT venues |
 | C1. FPC Threshold Selection | Consensus | 🔴 Critical | vs Ava-Labs |
-| C2. Grouped Threshold Sigs | Consensus | 🔴 Critical | Quantum scaling |
+| C2. Grouped Threshold Sigs | Consensus | 🔴 Critical | 10K+ validators |
 | T1. LSS Dynamic Resharing | Threshold | 🔴 Critical | vs Fireblocks |
-| T3. Ringtail Threshold | Threshold | 🔴 Critical | Post-quantum |
 | M1. Unified Framework | MPC | 🔴 Critical | vs BitGo/Utila |
-| M2. Key Rotation | MPC | 🔴 Critical | Enterprise adoption |
 | F1. Pure Go TFHE | TFHE | 🔴 Critical | vs Zama |
-| F2. Deterministic FHE RNG | TFHE | 🔴 Critical | Blockchain FHE |
-| F3. Batch Bootstrapping | TFHE | 🔴 Critical | Performance |
+| B3. Light Client Bridge | Bridge | 🔴 Critical | vs LayerZero |
+| H1. Multi-Provider LLM Router | Hanzo AI | 🔴 Critical | $500M+ value |
+| W3. Social Recovery Module | Wallet | 🔴 Critical | Enterprise custody |
+| PQ1. ML-DSA (FIPS 204) | Post-Quantum | 🟡 High | NIST standard |
+| PQ2. ML-KEM (FIPS 203) | Post-Quantum | 🟡 High | NIST standard |
+| PQ3. SLH-DSA (FIPS 205) | Post-Quantum | 🟡 High | NIST standard |
+| AI2. TEE Multi-Provider | AI Mining | 🟡 High | Intel/AMD/NVIDIA |
+| EVM2. Hooks System | EVM | 🟡 High | Modular DEX |
+| EVM3. FHE Precompile | EVM | 🟡 High | Z-Chain integration |
+| EVM4. Ring Signature | EVM | 🟡 High | Privacy |
+| B1. ClaimID Replay Protection | Bridge | 🟡 High | Security |
+| B4. Warp TeleportAttest | Bridge | 🟡 High | Cross-chain |
+| W1. Multi-Curve HD Wallet | Wallet | 🟡 High | 28+ chains |
+| W2. Air-Gap QR Protocol | Wallet | 🟡 High | Hardware security |
+| H2. Prompt Caching | Hanzo AI | 🟡 High | Cost optimization |
+| H3. MCP Unified Search | Hanzo AI | 🟡 High | Code intelligence |
+| H4. Active Inference | Hanzo AI | 🟡 High | AI reasoning |
+| H6. HMM Compute DEX | Hanzo AI | 🟡 High | GPU trading |
 | C5. Hybrid BLS+Ringtail | Consensus | 🟡 High | Quantum transition |
-| T5. Identifiable Abort | Threshold | 🟡 High | Security feature |
-| D4. Multi-Source Oracle | DEX | 🟡 High | DeFi security |
-| M4. Byzantine Coordination | MPC | 🟡 High | Decentralization |
-| F5. FHE Gas Metering | TFHE | 🟡 High | fhEVM differentiator |
+| T5. Identifiable Abort | Threshold | 🟡 High | Security |
+| M2. Key Rotation | MPC | 🟡 High | Enterprise |
+| F2. Deterministic FHE RNG | TFHE | 🟡 High | Blockchain FHE |
+| F3. Batch Bootstrapping | TFHE | 🟡 High | Performance |
 
 ### Recommended Filing Order
 
-**Phase 1 (Immediate)**: Core differentiators
-- D2, D3: DEX hardware acceleration
-- C1, C2: Consensus innovations
-- T1, T3: Threshold crypto
-- M1, M2: MPC framework
-- F1, F2, F3: TFHE blockchain integration
+**Phase 1 (Immediate - 30 days)**: Core differentiators
+- PQ4: Ringtail threshold (FIRST - no competitor exists)
+- AI1, AI2, AI3: AI mining + TEE
+- EVM1, EVM2: DEX precompiles
+- D2, D3: Hardware acceleration
 
-**Phase 2 (Q1 2025)**: Post-quantum features
-- All quantum-resistant innovations
-- Hybrid signature schemes
-- Key rotation protocols
-- F4, F5: FHE optimizations
+**Phase 2 (Q1 2025)**: Post-quantum & AI
+- PQ1, PQ2, PQ3, PQ5: Full NIST PQ suite
+- H1-H6: Hanzo AI infrastructure
+- C1, C2, C5: Consensus innovations
 
-**Phase 3 (Q2 2025)**: Infrastructure
-- Multi-chain adapters
-- Oracle systems
-- Coordination protocols
-- F6: Privacy features (PIR)
+**Phase 3 (Q2 2025)**: Enterprise & Infrastructure
+- W1-W5: Wallet/custody
+- B1-B4: Bridge/cross-chain
+- T1-T9: Threshold crypto
+- M1-M9: MPC framework
+
+**Phase 4 (Q3 2025)**: Privacy & Advanced
+- EVM3, EVM4: FHE + ring signatures
+- F1-F6: TFHE innovations
+- Additional EVM precompiles
 
 ---
 

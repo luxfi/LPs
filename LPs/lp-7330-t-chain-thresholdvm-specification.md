@@ -2796,7 +2796,7 @@ func TestLargeSignerSet(t *testing.T) {
         parties[i] = party.ID(fmt.Sprintf("signer-%d", i))
     }
 
-    // 67-of-100 threshold
+    // 69-of-100 threshold
     key, err := tchain.GenerateKey("large-key", CGGMP21_ECDSA, SECP256K1, 67, parties)
     require.NoError(t, err)
 
