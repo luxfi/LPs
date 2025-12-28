@@ -1,13 +1,14 @@
-# LP-8101: Lux FHE Patent Strategy
+---
+lp: 8101
+title: Fully Homomorphic Encryption Patent Strategy
+description: Patent strategy for Lux's FHE stack including patentable innovations and prosecution strategy
+author: Lux Industries Inc (@luxfi)
+status: Draft
+type: Meta
+created: 2025-12-27
+---
 
-| Field | Value |
-|-------|-------|
-| LP # | 8101 |
-| Title | Fully Homomorphic Encryption Patent Strategy |
-| Author(s) | Lux Industries Inc |
-| Status | Draft |
-| Created | 2025-12-27 |
-| Category | Intellectual Property |
+# LP-8101: Lux FHE Patent Strategy
 
 ## Abstract
 
