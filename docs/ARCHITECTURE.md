@@ -203,7 +203,7 @@ All chains communicate via the Teleport Protocol and Warp Messaging:
 
 ### Phase 2: Z-Chain
 - zkEVM implementation
-- FHE integration (Zama.ai style)
+- FHE integration via OpenFHE/Lattice (BSD-licensed)
 - Privacy-preserving bridges
 
 ### Phase 3: A-Chain

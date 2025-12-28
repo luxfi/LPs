@@ -25,7 +25,7 @@ Below is a complete interface specification for Z‑Chain’s encrypted executio
 - JSON‑RPC extensions the node must expose to wallets, dApps and dev‑ops tools
 - Generic TEE design for NVIDIA Blackwell “TEE‑I/O” GPUs, including attestation and run‑time APIs
 
-All choices are aligned with Zama’s fhEVM library and Lux-/Lux-class consensus parameters, while taking advantage of NVIDIA Confidential Computing.
+All choices are aligned with Lux's permissively-licensed FHE/Lattice libraries and Lux-/Lux-class consensus parameters, while taking advantage of NVIDIA Confidential Computing.
 
 ## Motivation
 
