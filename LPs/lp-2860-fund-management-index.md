@@ -66,7 +66,7 @@ Institutional investors, fund managers, and DAOs need clear standards for:
 
 - [LP-11000: DAO/Governance Index](/docs/lp-11000-dao-governance-index/)
 - [LP-12000: ESG/Impact Index](/docs/lp-12000-esg-impact-index/)
-- [LP-2520: Lux DAO Platform](/docs/lp-2520-lux-dao-platform/)
+- [LP-2520: Lux Vote Interface](/docs/lp-2520-lux-vote-interface/)
 
 ## Security Considerations
 

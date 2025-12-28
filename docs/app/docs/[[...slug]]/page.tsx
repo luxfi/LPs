@@ -391,14 +391,82 @@ export async function generateMetadata({ params }: { params: Promise<{ slug?: st
     return {
       title: 'All Proposals',
       description: 'Browse all Lux Proposals (LPs) - standards and improvements for the Lux Network',
+      openGraph: {
+        title: 'All Lux Proposals (LPs)',
+        description: 'Browse all Lux Proposals - standards and improvements for the Lux Network blockchain ecosystem',
+        type: 'website',
+        siteName: 'Lux Proposals',
+        images: [
+          {
+            url: '/og.png',
+            width: 1200,
+            height: 630,
+            alt: 'Lux Proposals - Quantum-Safe Blockchain Standards',
+          },
+        ],
+      },
+      twitter: {
+        card: 'summary_large_image',
+        title: 'All Lux Proposals (LPs)',
+        description: 'Browse all Lux Proposals - standards and improvements for the Lux Network',
+        images: ['/og.png'],
+      },
     };
   }
 
   const page = source.getPage(slug);
   if (!page) return {};
 
+  const { frontmatter } = page.data;
+  const lpNumber = frontmatter.lp || '0';
+  const title = page.data.title || 'Lux Proposal';
+  const description = page.data.description || frontmatter.description || `Lux Proposal ${lpNumber}`;
+  const status = frontmatter.status || 'Draft';
+  const category = frontmatter.category || 'Core';
+  const type = frontmatter.type || 'Standards Track';
+
+  // Build dynamic OG image URL with LP-specific parameters
+  const ogImageParams = new URLSearchParams({
+    lp: String(lpNumber),
+    title: title,
+    description: description.substring(0, 200),
+    status: status,
+    category: category,
+    type: type,
+  });
+
+  const ogImageUrl = `/api/og?${ogImageParams.toString()}`;
+
   return {
-    title: `LP-${page.data.frontmatter.lp}: ${page.data.title}`,
-    description: page.data.description || `Lux Proposal ${page.data.frontmatter.lp}`,
+    title: `LP-${lpNumber}: ${title}`,
+    description: description,
+    openGraph: {
+      title: `LP-${lpNumber}: ${title}`,
+      description: description,
+      type: 'article',
+      siteName: 'Lux Proposals',
+      images: [
+        {
+          url: ogImageUrl,
+          width: 1200,
+          height: 630,
+          alt: `LP-${lpNumber}: ${title}`,
+        },
+      ],
+      authors: frontmatter.author ? [frontmatter.author] : undefined,
+      publishedTime: frontmatter.created,
+      modifiedTime: frontmatter.updated,
+      tags: frontmatter.tags,
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: `LP-${lpNumber}: ${title}`,
+      description: description,
+      images: [ogImageUrl],
+    },
+    other: {
+      'article:section': category,
+      'article:tag': frontmatter.tags?.join(', '),
+    },
   };
 }

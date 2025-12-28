@@ -465,7 +465,7 @@ LPs for fund management, DAO governance, and ESG frameworks.
 
 | LP | Title | Tags | Status |
 |----|-------|------|--------|
-| [LP-2520](/docs/lp-2520-lux-dao-platform/) | Lux DAO Platform | `dao`, `governance` | Draft |
+| [LP-2520](/docs/lp-2520-lux-vote-interface/) | Lux Vote Interface | `dao`, `governance` | Draft |
 | [LP-2521](/docs/lp-2521-azorius-governance-module/) | Azorius Governance Module | `dao`, `azorius` | Draft |
 | [LP-2522](/docs/lp-2522-voting-strategies-standard/) | Voting Strategies Standard | `dao`, `voting` | Draft |
 | [LP-2523](/docs/lp-2523-freeze-voting-guard-system/) | Freeze Voting Guard System | `dao`, `security` | Draft |

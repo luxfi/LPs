@@ -524,7 +524,7 @@ describe('Azorius', () => {
 
 ## Related LPs
 
-- **LP-2520**: Lux DAO Platform
+- **LP-2520**: Lux Vote Interface
 - **LP-2801**: Azorius Governance Module
 - **LP-2522**: Voting Strategies Standard
 - **LP-2523**: Freeze Voting & Guard System

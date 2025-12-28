@@ -365,7 +365,7 @@ function test_OnlyEnabledStrategies() public {
 ## Related LPs
 
 - **LP-2504**: Safe Multisig Standard
-- **LP-2520**: Lux DAO Platform
+- **LP-2520**: Lux Vote Interface
 - **LP-2522**: Voting Strategies Standard
 - **LP-2523**: Freeze Voting & Guard System
 

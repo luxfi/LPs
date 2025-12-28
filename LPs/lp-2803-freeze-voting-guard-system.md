@@ -402,7 +402,7 @@ function test_AllowTransactionWhenNotFrozen() public {
 
 - **LP-2504**: Safe Multisig Standard
 - **LP-2521**: Azorius Governance Module
-- **LP-2520**: Lux DAO Platform
+- **LP-2520**: Lux Vote Interface
 
 ## Copyright
 

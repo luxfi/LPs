@@ -78,7 +78,7 @@ These LPs from other series relate to governance:
 
 | LP | Title | Relation |
 |----|-------|----------|
-| LP-2520 | Lux DAO Platform | C-Chain implementation |
+| LP-2520 | Lux Vote Interface | C-Chain implementation |
 | LP-2521 | Azorius Governance Module | Multi-sig governance |
 | LP-2522 | Voting Strategies Standard | Voting implementations |
 | LP-2523 | Freeze Voting Guard | Security mechanism |
