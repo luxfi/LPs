@@ -83,6 +83,24 @@ For complete documentation of standard Ethereum precompiles (0x01-0x11), see **[
 |---------|------|---------|--------------|--------|
 | `0x0000000000000000000000000000000000000100` | secp256r1 | P-256 ECDSA verification (RIP-7212) | LP-2204 | Final |
 
+#### FHE Precompiles (Fully Homomorphic Encryption)
+
+For FHE operations enabling computation on encrypted data, see **[LP-8100: FHE Precompiles and Infrastructure](./lp-8100-fhe-precompiles-and-infrastructure.md)**.
+
+| Address | Name | Purpose | Gas (euint32) | Status |
+|---------|------|---------|---------------|--------|
+| `0x80` | FHE_CORE | FHE arithmetic/comparison/bitwise | 60,000-200,000 | 📋 Draft |
+| `0x81` | FHE_VERIFY | Encrypted input verification | 50,000 | 📋 Draft |
+| `0x82` | FHE_DECRYPT | Threshold decryption | 200,000 | 📋 Draft |
+| `0x83` | FHE_REENCRYPT | Re-encrypt for user sealing | 100,000 | 📋 Draft |
+
+#### ZK-Friendly Hash Precompiles (Proposed)
+
+| Address | Name | Purpose | LP Reference | Status |
+|---------|------|---------|--------------|--------|
+| `0x0A` | Poseidon | ZK-friendly hash (~300 R1CS) | LP-3658 | 📋 Draft |
+| `0x0A+1` | Pedersen | Homomorphic commitment | LP-3668 | 📋 Draft |
+
 ## Gas Cost Comparison
 
 ### Signature Verification Precompiles

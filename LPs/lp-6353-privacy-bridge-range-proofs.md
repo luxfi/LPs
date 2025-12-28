@@ -493,8 +493,8 @@ enum ProofType {
 
 - [Bulletproofs Paper](https://eprint.iacr.org/2017/1066)
 - [EIP-5564: Stealth Addresses](https://eips.ethereum.org/EIPS/eip-5564)
-- [TFHE Library](https://github.com/zama-ai/tfhe-rs)
-- [Concrete ML](https://docs.zama.ai/concrete-ml)
+- [Lux FHE Library](https://github.com/luxfi/fhe) - OpenFHE-based C++ implementation
+- [Lux Lattice Library](https://github.com/luxfi/lattice) - Pure Go HE with multiparty support
 
 ## Copyright
 

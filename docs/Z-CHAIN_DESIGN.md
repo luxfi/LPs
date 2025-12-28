@@ -38,7 +38,7 @@ The Z-Chain is the privacy and cryptographic proof layer of the Lux Network, pro
   - Confidential token transfers
   - Private DeFi primitives
 
-### 2. FHE Integration (Zama.ai Style)
+### 2. FHE Integration (OpenFHE/Lattice)
 ```solidity
 // Example: Private voting contract using FHE
 contract PrivateVoting {
