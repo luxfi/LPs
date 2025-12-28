@@ -12,7 +12,7 @@
 
 ## Abstract
 
-This LP specifies the integration of Fully Homomorphic Encryption (FHE) capabilities into Lux EVM chains, enabling computation on encrypted data without decryption. The implementation uses permissively-licensed open-source libraries (OpenFHE and Lattice) to provide a vendor-neutral, commercially-friendly FHE stack.
+This LP specifies the integration of Fully Homomorphic Encryption (FHE) capabilities into Lux EVM chains, enabling computation on encrypted data without decryption. The implementation uses permissively-licensed open-source libraries to provide a vendor-neutral, commercially-friendly FHE stack.
 
 ## Motivation
 
@@ -24,55 +24,206 @@ FHE enables powerful privacy-preserving applications:
 4. **Medical Data**: Process health records while maintaining HIPAA compliance
 5. **Private AI**: Run inference on encrypted data
 
-Current FHE blockchain implementations suffer from:
-- **Restrictive Licensing**: BSD-3-Clause-Clear with commercial restrictions
-- **Vendor Lock-in**: Proprietary coprocessors and key management
-- **Single-Scheme Support**: Only TFHE, limiting use cases
-
 Lux's approach provides:
-- **Permissive Licensing**: BSD-2-Clause (OpenFHE) and Apache-2.0 (Lattice)
+- **Permissive Licensing**: BSD-3-Clause and Apache-2.0
 - **Multi-Scheme Support**: TFHE, FHEW, CKKS, BGV, BFV
-- **Pure Go Option**: Lattice library for microservices without CGO
+- **Pure Go Option**: No CGO dependencies for microservices
 - **Threshold Integration**: Native multiparty FHE via T-Chain
 
 ## Specification
 
-### FHE Libraries
+### FHE Libraries Overview
 
-#### OpenFHE (C++)
+Lux provides three complementary FHE libraries:
 
-The `luxfi/fhe` repository provides OpenFHE-based FHE capabilities:
+| Library | Language | License | Schemes | Use Case |
+|---------|----------|---------|---------|----------|
+| `luxfi/fhe` | C++ | BSD-3-Clause | TFHE, FHEW, CKKS, BGV, BFV | High-performance, multi-scheme |
+| `luxfi/tfhe` | Go | BSD-3-Clause | TFHE (Boolean) | Pure Go fhEVM, no CGO |
+| `luxfi/lattice` | Go | Apache-2.0 | CKKS, BGV | Primitives, multiparty |
 
-| Scheme | Use Case | Security Level |
-|--------|----------|----------------|
-| TFHE/CGGI | Boolean circuits, ~10ms bootstrap | 128-bit |
-| FHEW | Binary operations, functional bootstrap | 128-bit |
-| CKKS | Approximate real number arithmetic | 128-bit |
-| BGV | Exact integer arithmetic | 128-bit |
-| BFV | Scale-invariant integer arithmetic | 128-bit |
+### luxfi/fhe (OpenFHE C++ Fork)
+
+The `luxfi/fhe` repository is a fork of OpenFHE providing comprehensive FHE capabilities:
+
+**Supported Schemes:**
+
+| Scheme | Use Case | Performance | Notes |
+|--------|----------|-------------|-------|
+| TFHE/CGGI | Boolean circuits, fhEVM | 50ms/gate | Programmable bootstrapping |
+| FHEW | Binary operations | 50ms/gate | Lightweight alternative |
+| CKKS | Approximate arithmetic, ML | 0.7-16ms mul | Real number operations |
+| BGV | Exact integer arithmetic | Similar to CKKS | Modular arithmetic |
+| BFV | Scale-invariant integers | Similar to CKKS | Fixed-point operations |
+
+**Architecture:**
+
+```
+luxfi/fhe/
+├── src/
+│   ├── binfhe/          # TFHE/FHEW boolean FHE
+│   │   ├── lib/
+│   │   │   ├── fhevm/   # fhEVM radix integer operations
+│   │   │   ├── radix/   # Multi-bit integer support
+│   │   │   └── batch/   # Batched operations
+│   │   └── include/     # C++ headers
+│   ├── pke/             # CKKS/BGV/BFV
+│   └── core/            # Lattice primitives
+├── go/                  # CGO bindings for Go
+├── contracts/           # Solidity interfaces
+└── benchmark/           # Performance tests
+```
+
+**Performance Benchmarks** (M1 Max, 128-bit security):
+
+*TFHE/BinFHE (Boolean Gates):*
+| Operation | LMKCDEY | GINX |
+|-----------|---------|------|
+| AND | 50.4ms | 50.6ms |
+| OR | 50.5ms | 49.9ms |
+| XOR | 51.2ms | 49.5ms |
+| NAND | 49.6ms | 51.5ms |
+| Key Gen | 2.0s | 2.2s |
+
+*CKKS (Approximate Arithmetic):*
+| Operation | Time |
+|-----------|------|
+| Add/Ciphertext | 0.50ms |
+| Mul/Ciphertext | 15.99ms |
+| MulRelin | 15.40ms |
+| Rescale | 0.13ms |
+| Rotate | 14.71ms |
+
+### luxfi/tfhe (Pure Go TFHE)
+
+The `luxfi/tfhe` repository provides a standalone pure Go TFHE implementation built on `luxfi/lattice`:
+
+**Key Features:**
+
+- **Pure Go**: No CGO, compiles to WASM, runs in browsers
+- **Patent-Safe**: Uses classic boolean circuit approach
+- **Full Integer Support**: FheUint4 through FheUint256
+- **Public Key Encryption**: Users encrypt without secret key
+- **Deterministic RNG**: Blockchain-compatible random generation
+- **Serialization**: Full key and ciphertext serialization
+
+**Architecture:**
+
+```
+luxfi/tfhe/
+├── tfhe.go              # Parameters, KeyGenerator, SecretKey, PublicKey
+├── encryptor.go         # Boolean bit encryption
+├── decryptor.go         # Boolean bit decryption  
+├── evaluator.go         # Boolean gates (AND, OR, XOR, NOT, NAND, NOR, MUX)
+├── integers.go          # FheUintType, RadixCiphertext
+├── bitwise_integers.go  # BitCiphertext, BitwiseEncryptor, BitwiseEvaluator
+├── integer_ops.go       # Add, Sub, Eq, Lt, Le, Gt, Ge, Min, Max
+├── random.go            # FheRNG, FheRNGPublic (deterministic)
+├── serialization.go     # Binary serialization for keys/ciphertexts
+├── shortint.go          # Small integer optimizations
+└── cgo/                 # Optional OpenFHE CGO backend
+    ├── openfhe.go       # Go bindings (build with -tags openfhe)
+    ├── tfhe_bridge.cpp  # C++ bridge implementation
+    └── tfhe_bridge.h    # C header
+```
+
+**Supported Integer Types:**
+
+| Type | Bits | Use Case |
+|------|------|----------|
+| FheBool | 1 | Boolean conditions |
+| FheUint4 | 4 | Small values |
+| FheUint8 | 8 | Bytes |
+| FheUint16 | 16 | Short integers |
+| FheUint32 | 32 | Standard integers |
+| FheUint64 | 64 | Long integers |
+| FheUint128 | 128 | Large values |
+| FheUint160 | 160 | Ethereum addresses |
+| FheUint256 | 256 | EVM words |
+
+**Supported Operations:**
+
+| Category | Operations |
+|----------|------------|
+| Boolean Gates | AND, OR, XOR, NOT, NAND, NOR, XNOR, MUX |
+| Arithmetic | Add, Sub, Neg, ScalarAdd |
+| Comparison | Eq, Lt, Le, Gt, Ge, Min, Max |
+| Bitwise | And, Or, Xor, Not |
+| Shifts | Shl, Shr |
+| Selection | Select (if-then-else) |
+| Conversion | CastTo |
 
 **Performance Benchmarks** (M1 Max):
 
-| Operation | TFHE | CKKS |
-|-----------|------|------|
-| Add | 0.1ms | 0.2ms |
-| Multiply | 1.5ms | 5ms |
-| Bootstrap | 12ms | 200ms |
-| Comparison | 15ms | 50ms |
+| Operation | Time |
+|-----------|------|
+| Boolean Gate (AND/OR) | ~50ms |
+| Boolean Gate (XOR) | ~150ms |
+| 4-bit Integer Add | ~2s |
+| 8-bit Integer Add | ~4s |
+| 8-bit Integer Eq | ~3.2s |
+| 8-bit Integer Lt | ~6.5s |
 
-#### Lattice (Go)
+**Quick Start:**
 
-The `luxfi/lattice` repository provides pure Go homomorphic encryption:
+```go
+package main
+
+import (
+    "fmt"
+    "github.com/luxfi/tfhe"
+)
+
+func main() {
+    // Setup
+    params, _ := tfhe.NewParametersFromLiteral(tfhe.PN10QP27)
+    kg := tfhe.NewKeyGenerator(params)
+    sk, pk := kg.GenKeyPair()
+    bsk := kg.GenBootstrapKey(sk)
+
+    // Encrypt with public key (user side)
+    pubEnc := tfhe.NewBitwisePublicEncryptor(params, pk)
+    ctA := pubEnc.EncryptUint64(5, tfhe.FheUint8)
+    ctB := pubEnc.EncryptUint64(3, tfhe.FheUint8)
+
+    // Compute on encrypted data (server side)
+    eval := tfhe.NewBitwiseEvaluator(params, bsk, sk)
+    ctSum, _ := eval.Add(ctA, ctB)
+
+    // Decrypt result
+    dec := tfhe.NewBitwiseDecryptor(params, sk)
+    result := dec.DecryptUint64(ctSum)
+    fmt.Println("5 + 3 =", result) // 8
+}
+```
+
+### luxfi/lattice (Go Lattice Primitives)
+
+The `luxfi/lattice` repository provides pure Go lattice cryptography primitives:
+
+**Key Features:**
 
 - **No CGO**: Compiles to WASM, runs in browsers
 - **Multiparty**: Built-in threshold key generation and decryption
 - **CKKS/BGV**: Both exact and approximate arithmetic
 - **Ring Operations**: Optimized NTT, RNS arithmetic
 
+**Performance Benchmarks** (M1 Max, 128-bit security):
+
+| Operation | luxfi/lattice (Go) |
+|-----------|-------------------|
+| Add/Ciphertext | **0.15ms** |
+| Mul/Ciphertext | **0.71ms** |
+| MulRelin | 20.78ms |
+| Rescale | 2.19ms |
+| Rotate | 18.63ms |
+
+**Usage:**
+
 ```go
 import (
-    "github.com/luxfi/lattice/schemes/ckks"
-    "github.com/luxfi/lattice/multiparty"
+    "github.com/luxfi/lattice/v6/schemes/ckks"
+    "github.com/luxfi/lattice/v6/multiparty"
 )
 
 // Create context with 128-bit security
@@ -159,7 +310,7 @@ OP_ENCRYPT  = 0x41  // Trivial encrypt (plaintext -> ciphertext)
 ### Solidity Library
 
 ```solidity
-// SPDX-License-Identifier: BSD-2-Clause
+// SPDX-License-Identifier: BSD-3-Clause
 pragma solidity ^0.8.20;
 
 /// @title Encrypted Types
@@ -232,41 +383,123 @@ library FHE {
 }
 ```
 
-### T-Chain Integration
+### fhEVM Integration
 
-The T-Chain (Threshold Chain) provides:
-
-1. **Distributed Key Generation**: Generate network FHE keys across validators
-2. **Threshold Decryption**: Require t-of-n validators to decrypt
-3. **Key Rotation**: Periodic resharing without revealing secret
-4. **Access Control**: On-chain ACLs for decrypt permissions
+The precompiles can use either backend:
 
 ```go
-// T-Chain key ceremony
-import "github.com/luxfi/lattice/multiparty"
+// Option 1: Pure Go (luxfi/tfhe) - Default, no CGO
+import "github.com/luxfi/tfhe"
 
-// Setup
-params := ckks.NewParametersFromLiteral(ckks.PN14QP438)
-crs := multiparty.NewCRS(params.Parameters)
-
-// Each validator generates key share
-type ValidatorNode struct {
-    id     int
-    share  *multiparty.SecretShare
-    pubKey *rlwe.PublicKey
+type FHEPrecompile struct {
+    params      tfhe.Parameters
+    bsk         *tfhe.BootstrapKey
+    bitwiseEval *tfhe.BitwiseEvaluator
 }
 
-func (v *ValidatorNode) KeyGenRound1() *multiparty.Share1 {
-    return multiparty.GenShare1(crs, v.id, v.share)
+func (p *FHEPrecompile) Add(input []byte) ([]byte, error) {
+    ct1 := new(tfhe.BitCiphertext)
+    ct1.UnmarshalBinary(input[:len(input)/2])
+    ct2 := new(tfhe.BitCiphertext)
+    ct2.UnmarshalBinary(input[len(input)/2:])
+    
+    result, err := p.bitwiseEval.Add(ct1, ct2)
+    if err != nil {
+        return nil, err
+    }
+    return result.MarshalBinary()
 }
 
-func (v *ValidatorNode) KeyGenRound2(shares1 []*multiparty.Share1) *multiparty.Share2 {
-    return multiparty.GenShare2(crs, v.id, v.share, shares1)
+// Option 2: CGO (luxfi/fhe) - Build with -tags openfhe
+// Faster but requires C++ dependencies
+```
+
+### T-Chain Integration
+
+The T-Chain (Threshold Chain) provides native threshold FHE with 67-of-100 validator consensus (LP-333).
+
+#### Architecture
+
+```
+┌─────────────────────────────────────────────────────────────────┐
+│                        C-Chain (EVM)                            │
+│  ┌─────────────────────────────────────────────────────────┐   │
+│  │                  Smart Contracts                         │   │
+│  │   ┌─────────────┐  ┌─────────────┐  ┌─────────────────┐ │   │
+│  │   │ FHERC20.sol │  │ Auction.sol │  │ PrivateVote.sol │ │   │
+│  │   └──────┬──────┘  └──────┬──────┘  └────────┬────────┘ │   │
+│  └──────────┼────────────────┼──────────────────┼──────────┘   │
+│             │                │                  │               │
+│  ┌──────────▼────────────────▼──────────────────▼──────────┐   │
+│  │                    FHE Precompiles                       │   │
+│  │  ┌─────────────┐  ┌─────────────┐  ┌─────────────────┐  │   │
+│  │  │ FHE (0x80)  │  │ ACL (0x81)  │  │ FHEDecrypt(0x82)│  │   │
+│  │  │ luxfi/tfhe  │  │ Access Ctrl │  │ Async Decrypt   │  │   │
+│  │  └──────┬──────┘  └─────────────┘  └────────┬────────┘  │   │
+│  └─────────┼───────────────────────────────────┼───────────┘   │
+└────────────┼───────────────────────────────────┼───────────────┘
+             │ Warp Message                      │ Warp Message
+             ▼                                   ▼
+┌────────────────────────┐         ┌─────────────────────────────┐
+│      Z-Chain (zkVM)    │         │     T-Chain (Threshold)     │
+│  ┌──────────────────┐  │         │  ┌───────────────────────┐  │
+│  │   FHE Processor  │  │         │  │ Threshold Decryptor   │  │
+│  │   - CKKS Ops     │  │         │  │ - 67-of-100 shares    │  │
+│  │   - Coprocessor  │  │         │  │ - CKKS Multiparty     │  │
+│  │   - luxfi/lattice│  │         │  │ - EncToShareProtocol  │  │
+│  └──────────────────┘  │         │  └───────────────────────┘  │
+└────────────────────────┘         └─────────────────────────────┘
+```
+
+#### Threshold Parameters
+
+| Parameter | Value | Description |
+|-----------|-------|-------------|
+| t (threshold) | 67 | Minimum validators for decryption |
+| n (total) | 100 | Total validator set size |
+| Scheme | CKKS | Approximate FHE for real numbers |
+| Security | 128-bit | Post-quantum resistant |
+| Key Ceremony | Epoch-based | ~24 hour rotation |
+
+#### Decryption Flow
+
+1. **Request**: Contract calls `FHE.decrypt(handle)` via FHEDecrypt precompile
+2. **Warp**: Request emitted as Warp message to T-Chain
+3. **Collection**: T-Chain collects 67 decryption shares from validators
+4. **Combine**: Shares combined via `EncToShareProtocol` from luxfi/lattice
+5. **Fulfill**: Result returned to C-Chain via `fulfillDecryption` callback
+
+```go
+// T-Chain threshold decryption (luxfi/lattice)
+import (
+    "github.com/luxfi/lattice/v6/schemes/ckks"
+    "github.com/luxfi/lattice/v6/multiparty/mpckks"
+)
+
+// Each validator generates partial decryption share
+func (v *Validator) GenerateDecryptionShare(ct *rlwe.Ciphertext) *mpckks.AdditiveShare {
+    share := mpckks.NewAdditiveShare(v.params, v.params.MaxSlots())
+    v.e2sProtocol.GenShare(v.secretKeyShare, ct, &share)
+    return &share
 }
 
-// Combine for collective public key
-func CombinePublicKey(shares2 []*multiparty.Share2) *rlwe.PublicKey {
-    return multiparty.GenCollectivePublicKey(shares2)
+// Combiner aggregates 67+ shares
+func CombineShares(shares []*mpckks.AdditiveShare, params ckks.Parameters) []complex128 {
+    encoder := ckks.NewEncoder(params)
+    pt := ckks.NewPlaintext(params, params.MaxLevel())
+    
+    // Sum all additive shares
+    for _, share := range shares {
+        for j := range pt.Value.Coeffs {
+            for k := range pt.Value.Coeffs[j] {
+                pt.Value.Coeffs[j][k] += share.Value.Coeffs[j][k]
+            }
+        }
+    }
+    
+    values := make([]complex128, params.MaxSlots())
+    encoder.Decode(pt, values)
+    return values
 }
 ```
 
@@ -295,7 +528,7 @@ Storage options:
 #### Synchronous (Simple)
 
 ```
-User Tx → EVM → FHE Precompile → OpenFHE → Result → Continue EVM
+User Tx → EVM → FHE Precompile → luxfi/tfhe → Result → Continue EVM
 ```
 
 - Blocks until complete
@@ -309,7 +542,7 @@ User Tx → EVM → Emit FHE Event → Return Handle
                       ↓
               Coprocessor Queue
                       ↓
-                OpenFHE Execute
+                luxfi/tfhe Execute
                       ↓
               Callback Tx with Result
 ```
@@ -340,31 +573,60 @@ Decrypt operations require:
 - No early-exit on comparison operations
 - Uniform gas costs regardless of plaintext values
 
-## Implementation Roadmap
+## Implementation Status
 
-### Phase 1: Core Integration (Q1 2025)
-- [ ] FHE precompile with synchronous execution
-- [ ] OpenFHE Go bindings
-- [ ] Handle storage in state trie
-- [ ] Basic Solidity library
+### Completed ✅
 
-### Phase 2: Threshold Decryption (Q2 2025)
-- [ ] Lattice multiparty integration
-- [ ] T-Chain key ceremony protocol
-- [ ] Validator key share management
-- [ ] Decrypt authorization flow
+- [x] **luxfi/tfhe Pure Go Library**
+  - Boolean gates with blind rotation
+  - Integer types FheUint4-256
+  - Arithmetic: Add, Sub, Neg, ScalarAdd
+  - Comparisons: Eq, Lt, Le, Gt, Ge, Min, Max
+  - Bitwise: And, Or, Xor, Not, Shl, Shr
+  - Public key encryption
+  - Deterministic RNG
+  - Binary serialization
+  - OpenFHE CGO backend (optional)
 
-### Phase 3: Async Coprocessor (Q3 2025)
-- [ ] Event-based FHE execution
-- [ ] Result callback mechanism
-- [ ] Parallel operation batching
-- [ ] Ciphertext garbage collection
+- [x] **luxfi/fhe OpenFHE Fork**
+  - Full TFHE/FHEW/CKKS/BGV/BFV support
+  - fhEVM radix integer operations
+  - CGO bindings for Go
 
-### Phase 4: Production Hardening (Q4 2025)
-- [ ] Comprehensive gas metering
-- [ ] Key rotation protocol
-- [ ] GPU acceleration (optional)
-- [ ] Security audit
+- [x] **FHE.sol Solidity Library**
+  - Encrypted types: ebool, euint8-256, eaddress
+  - All arithmetic, comparison, and bitwise operations
+  - Async decryption via FHEDecrypt precompile
+
+- [x] **FHE Precompiles** (`evm/precompile/contracts/fhe/`)
+  - FHE Core (0x80): All FHE operations
+  - ACL (0x81): Access control for encrypted values
+  - FHEDecrypt (0x82): Threshold decryption gateway
+
+### In Progress 🔄
+
+- [ ] **Mul/Div Operations in luxfi/tfhe** (expensive)
+- [ ] **Production Key Ceremony**
+- [ ] **GPU Acceleration**
+
+### Implementation Roadmap
+
+| Phase | Timeline | Focus |
+|-------|----------|-------|
+| 1 | Q1 2025 | Core precompiles + Pure Go FHE |
+| 2 | Q2 2025 | T-Chain threshold + CGO acceleration |
+| 3 | Q3 2025 | Async coprocessor + batching |
+| 4 | Q4 2025 | Production hardening + audit |
+
+### Performance Targets
+
+| Backend | Add (ms) | Mul (ms) | Compare (ms) | Bootstrap (ms) |
+|---------|----------|----------|--------------|----------------|
+| luxfi/tfhe (Pure Go) | 2000 | TBD | 3000 | 50 |
+| luxfi/fhe (CGO) | 0.2 | 5 | 50 | 200 |
+| luxfi/fhe + GPU | 0.05 | 1 | 10 | 50 |
+
+*Benchmarks on M1 Max, 128-bit security*
 
 ## Backwards Compatibility
 
@@ -372,7 +634,27 @@ FHE precompiles are additive and do not affect existing EVM behavior. Chains wit
 
 ## Test Cases
 
-See `luxfi/fhe/contracts/test` for comprehensive test coverage including:
+### luxfi/tfhe Test Results
+
+```
+=== RUN   TestBitwiseEncryptDecrypt      --- PASS
+=== RUN   TestBitwiseAdd                 --- PASS (6.50s)
+=== RUN   TestBitwiseScalarAdd           --- PASS (2.74s)
+=== RUN   TestBitwiseEq                  --- PASS (3.21s)
+=== RUN   TestBitwiseLt                  --- PASS (6.53s)
+=== RUN   TestBitwiseSub                 --- PASS (8.94s)
+=== RUN   TestBitwiseBitOps              --- PASS (1.15s)
+=== RUN   TestBitwiseShift               --- PASS (0.13s)
+=== RUN   TestBitwiseCastTo              --- PASS (0.13s)
+=== RUN   TestPublicKeyEncryption        --- PASS
+=== RUN   TestPublicKeyWithOperations    --- PASS (1.71s)
+=== RUN   TestPublicKeySerialization     --- PASS
+=== RUN   TestFheRNG                     --- PASS (6 subtests)
+=== RUN   TestFheRNGPublic               --- PASS (2 subtests)
+PASS - ok  github.com/luxfi/tfhe  35.876s
+```
+
+See `luxfi/fhe/contracts/test` and `luxfi/tfhe/*_test.go` for comprehensive test coverage including:
 - Arithmetic operations on all encrypted types
 - Comparison operators
 - Conditional selection
@@ -382,7 +664,8 @@ See `luxfi/fhe/contracts/test` for comprehensive test coverage including:
 ## References
 
 - [OpenFHE Documentation](https://openfhe-development.readthedocs.io/)
-- [Lux FHE Library](https://github.com/luxfi/fhe)
+- [Lux FHE Library (C++)](https://github.com/luxfi/fhe)
+- [Lux TFHE Library (Go)](https://github.com/luxfi/tfhe)
 - [Lux Lattice Library](https://github.com/luxfi/lattice)
 - [TFHE Original Paper](https://eprint.iacr.org/2018/421)
 - [CKKS Paper](https://eprint.iacr.org/2016/421)
