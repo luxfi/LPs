@@ -28,43 +28,43 @@ RANGES = {
     },
     (100, 999): {
         "name": "Core Protocols",
-        "allowed_status": ["Draft", "Final", "Superseded"],
+        "allowed_status": ["Draft", "Review", "Implemented", "Final", "Superseded"],
     },
     (1000, 1999): {
         "name": "Chain Specifications",
-        "allowed_status": ["Draft", "Final", "Superseded"],
+        "allowed_status": ["Draft", "Review", "Implemented", "Final", "Superseded"],
     },
     (2000, 2999): {
         "name": "DAO, Governance & ESG",
-        "allowed_status": ["Draft", "Final", "Superseded", "Research"],
+        "allowed_status": ["Draft", "Review", "Implemented", "Final", "Superseded", "Research"],
     },
     (3000, 3999): {
         "name": "Solidity, Tokens & Web3",
-        "allowed_status": ["Draft", "Final", "Superseded"],
+        "allowed_status": ["Draft", "Review", "Implemented", "Final", "Superseded"],
     },
     (4000, 4999): {
         "name": "Cryptography/PQC",
-        "allowed_status": ["Draft", "Final", "Superseded"],
+        "allowed_status": ["Draft", "Review", "Implemented", "Final", "Superseded"],
     },
     (5000, 5999): {
         "name": "AI/Attestation",
-        "allowed_status": ["Draft", "Final", "Superseded"],
+        "allowed_status": ["Draft", "Review", "Implemented", "Final", "Superseded"],
     },
     (6000, 6999): {
         "name": "Bridges/Interop",
-        "allowed_status": ["Draft", "Final", "Superseded"],
+        "allowed_status": ["Draft", "Review", "Implemented", "Final", "Superseded"],
     },
     (7000, 7999): {
         "name": "Threshold/MPC",
-        "allowed_status": ["Draft", "Final", "Superseded"],
+        "allowed_status": ["Draft", "Review", "Implemented", "Final", "Superseded"],
     },
     (8000, 8999): {
         "name": "ZK/Privacy",
-        "allowed_status": ["Draft", "Final", "Superseded"],
+        "allowed_status": ["Draft", "Review", "Implemented", "Final", "Superseded"],
     },
     (9000, 9999): {
         "name": "DeFi/Markets",
-        "allowed_status": ["Draft", "Final", "Superseded"],
+        "allowed_status": ["Draft", "Review", "Implemented", "Final", "Superseded"],
     },
     (10000, 19999): {
         "name": "Learning Paths",
@@ -78,7 +78,7 @@ RANGES = {
     },
 }
 
-VALID_STATUSES = ["Draft", "Final", "Superseded", "Research"]
+VALID_STATUSES = ["Draft", "Review", "Implemented", "Final", "Superseded", "Research"]
 VALID_TYPES = ["Standards Track", "Meta", "Informational"]
 VALID_CATEGORIES = ["Core", "Networking", "Interface", "LRC", "Bridge"]
 
