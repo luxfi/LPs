@@ -41,7 +41,7 @@ if [ ! -f "$LP_FILE" ]; then
 fi
 
 # Valid status values
-VALID_STATUSES=("Draft" "Review" "Last Call" "Implemented" "Final" "Withdrawn" "Deferred" "Superseded" "Stagnant")
+VALID_STATUSES=("Draft" "Review" "Last Call" "Implemented" "Final" "Living" "Withdrawn" "Deferred" "Superseded" "Stagnant")
 
 echo "Validating LP: $LP_FILE"
 echo "================================"
