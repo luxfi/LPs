@@ -217,10 +217,10 @@ For an LP to become a standard, it must:
 - **Requirement**: Higher approval threshold (75%)
 - **Example**: Adding new LP categories
 
-### Subnet-Specific LPs
-- **Scope**: Changes affecting only specific subnets
-- **Voting**: Subnet validators and stakeholders
-- **Integration**: Must not break cross-subnet compatibility
+### Chain-Specific LPs
+- **Scope**: Changes affecting only specific chains
+- **Voting**: Chain validators and stakeholders
+- **Integration**: Must not break cross-chain compatibility
 
 ## Incentive Alignment
 

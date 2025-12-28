@@ -14,7 +14,7 @@
 
 ## Abstract
 
-This LP documents Lux Network's comprehensive portfolio of **120+ patent-pending technologies** across twelve core segments:
+This LP documents Lux Network's comprehensive portfolio of **100+ patent-pending technologies** across eleven core blockchain segments:
 
 | Segment | Innovations | Competitive Moat |
 |---------|-------------|------------------|
@@ -28,8 +28,9 @@ This LP documents Lux Network's comprehensive portfolio of **120+ patent-pending
 | **Bridge/Teleport** | 10 | vs LayerZero, Wormhole |
 | **Wallet/KMS/HSM** | 13 | vs Ledger, Fireblocks |
 | **EVM Precompiles** | 14 | vs Ethereum, L2s |
-| **Hanzo AI** | 15 | vs OpenAI, Anthropic infra |
 | **Enterprise Custody** | 8 | vs institutional providers |
+
+**Note**: Hanzo AI infrastructure patents (25+ innovations) are documented separately in the [Hanzo Patent Portfolio](https://github.com/hanzoai/patents).
 
 These innovations collectively enable "the fastest, most secure, and private quantum-safe network of blockchains."
 
@@ -1031,98 +1032,14 @@ Luminance = Uptime × 0.4 + (1 - LatencyRatio) × 0.3 + CorrectnessRate × 0.3
 
 ---
 
-## Part XI: Hanzo AI Infrastructure
+## Part XI: Prosecution Strategy
 
-**Repository**: `~/work/hanzo`
-**Competitive Moat Against**: OpenAI, Anthropic, Cohere (infrastructure layer)
-
-### H1. Intelligent Multi-Provider LLM Router
-
-**Innovation**: Dynamic routing across 40+ LLM providers with cost optimization.
-
-**Files**: `hanzo/llm/llm/router.py`
-
-**Claims**:
-1. Real-time cost tracking per deployment
-2. Multi-level routing (cost, latency, availability)
-3. Provider-agnostic response normalization
-
----
-
-### H2. Prompt Caching with Cross-Deployment Reuse
-
-**Innovation**: SHA256-based deterministic cache keys for prompt reuse.
-
-**Files**: `hanzo/llm/router_utils/prompt_caching_cache.py`
-
-**Claims**:
-1. Cross-provider prompt cache coordination
-2. Tool schema caching for multi-turn conversations
-3. Canonical object serialization for stable keys
-
----
-
-### H3. MCP Unified Search Engine (5-Strategy Parallel)
-
-**Innovation**: AST + Vector + Text + Path + Symbol search with priority ranking.
-
-**Files**: `hanzo/mcp/src/search/search-engine.ts`
-
-**Claims**:
-1. Priority-based strategy orchestration
-2. Parallel multi-modal code search
-3. 93% reduction in MCP tool surface
-
----
-
-### H4. Active Inference Planner
-
-**Innovation**: Expected Free Energy minimization for AI tool selection.
-
-**Files**: `hanzo/HIPs/hip-0007-active-inference-integration.md`
-
-**Claims**:
-1. Principled planning via Active Inference
-2. RSSM world models for reasoning
-3. Explainable decision traces
-
----
-
-### H5. Decentralized AI Compute Swarm (BitTorrent-style)
-
-**Innovation**: Task decomposition into verifiable pieces with consensus verification.
-
-**Files**: `hanzo/HIPs/hip-0023-decentralized-ai-compute-swarm.md`
-
-**Claims**:
-1. BitTorrent model for AI compute distribution
-2. Multiple verification strategies (hash, vote, BFT, TEE)
-3. RarestFirst scheduling for fault tolerance
-
----
-
-### H6. Hanzo Market Maker (HMM) - DEX for AI Compute
-
-**Innovation**: AMM for trading GPU time and inference as liquid assets.
-
-**Files**: `hanzo/HIPs/hip-0008-hmm-hanzo-market-maker.md`
-
-**Claims**:
-1. Constant product AMM for heterogeneous compute
-2. Quality-adjusted pricing via performance oracle
-3. Fractional GPU ownership
-
----
-
-## Part XII: Prosecution Strategy
-
-### Priority Matrix (Top 40 - Critical & High)
+### Priority Matrix (Top 30 - Critical & High)
 
 | Innovation | Segment | Priority | Competitive Value |
 |------------|---------|----------|-------------------|
 | PQ4. Ringtail Threshold | Post-Quantum | 🔴 Critical | First-mover (no competitor) |
 | AI1. NVTrust GPU Attestation | AI Mining | 🔴 Critical | vs NVIDIA/Render |
-| H5. Decentralized Compute Swarm | Hanzo AI | 🔴 Critical | vs centralized AI |
 | EVM1. Singleton DEX Manager | EVM | 🔴 Critical | vs Uniswap/all DEX |
 | D2. Multi-Backend Matching | DEX | 🔴 Critical | vs Hyperliquid/NASDAQ |
 | D3. FPGA Pipeline | DEX | 🔴 Critical | vs HFT venues |
@@ -1132,7 +1049,6 @@ Luminance = Uptime × 0.4 + (1 - LatencyRatio) × 0.3 + CorrectnessRate × 0.3
 | M1. Unified Framework | MPC | 🔴 Critical | vs BitGo/Utila |
 | F1. Pure Go TFHE | TFHE | 🔴 Critical | vs Zama |
 | B3. Light Client Bridge | Bridge | 🔴 Critical | vs LayerZero |
-| H1. Multi-Provider LLM Router | Hanzo AI | 🔴 Critical | $500M+ value |
 | W3. Social Recovery Module | Wallet | 🔴 Critical | Enterprise custody |
 | PQ1. ML-DSA (FIPS 204) | Post-Quantum | 🟡 High | NIST standard |
 | PQ2. ML-KEM (FIPS 203) | Post-Quantum | 🟡 High | NIST standard |
@@ -1145,15 +1061,13 @@ Luminance = Uptime × 0.4 + (1 - LatencyRatio) × 0.3 + CorrectnessRate × 0.3
 | B4. Warp TeleportAttest | Bridge | 🟡 High | Cross-chain |
 | W1. Multi-Curve HD Wallet | Wallet | 🟡 High | 28+ chains |
 | W2. Air-Gap QR Protocol | Wallet | 🟡 High | Hardware security |
-| H2. Prompt Caching | Hanzo AI | 🟡 High | Cost optimization |
-| H3. MCP Unified Search | Hanzo AI | 🟡 High | Code intelligence |
-| H4. Active Inference | Hanzo AI | 🟡 High | AI reasoning |
-| H6. HMM Compute DEX | Hanzo AI | 🟡 High | GPU trading |
 | C5. Hybrid BLS+Ringtail | Consensus | 🟡 High | Quantum transition |
 | T5. Identifiable Abort | Threshold | 🟡 High | Security |
 | M2. Key Rotation | MPC | 🟡 High | Enterprise |
 | F2. Deterministic FHE RNG | TFHE | 🟡 High | Blockchain FHE |
 | F3. Batch Bootstrapping | TFHE | 🟡 High | Performance |
+
+**Note**: See [Hanzo Patent Portfolio](https://github.com/hanzoai/patents) for AI infrastructure priorities (H1-H6).
 
 ### Recommended Filing Order
 
@@ -1163,9 +1077,8 @@ Luminance = Uptime × 0.4 + (1 - LatencyRatio) × 0.3 + CorrectnessRate × 0.3
 - EVM1, EVM2: DEX precompiles
 - D2, D3: Hardware acceleration
 
-**Phase 2 (Q1 2025)**: Post-quantum & AI
+**Phase 2 (Q1 2025)**: Post-quantum & Consensus
 - PQ1, PQ2, PQ3, PQ5: Full NIST PQ suite
-- H1-H6: Hanzo AI infrastructure
 - C1, C2, C5: Consensus innovations
 
 **Phase 3 (Q2 2025)**: Enterprise & Infrastructure
@@ -1179,9 +1092,11 @@ Luminance = Uptime × 0.4 + (1 - LatencyRatio) × 0.3 + CorrectnessRate × 0.3
 - F1-F6: TFHE innovations
 - Additional EVM precompiles
 
+**Note**: Hanzo AI infrastructure (H1-H6) follows separate filing timeline - see [Hanzo Patent Portfolio](https://github.com/hanzoai/patents).
+
 ---
 
-## Part VII: License Text Summary
+## Part XII: License Text Summary
 
 All five repositories now include the **Lux Research License with Patent Reservation Version 1.0**:
 
@@ -1199,21 +1114,35 @@ This License grants RESEARCH USE only.
 ALL PATENT RIGHTS ARE EXPRESSLY RESERVED.
 Commercial use requires separate license from oss@lux.network.
 
-LUX NETWORK PRIMARY NETWORK EXCEPTION:
-Automatic license granted for operating nodes on Lux Network
-primary network (mainnet/testnet) subject to network terms.
+OPEN AI PROTOCOL EXCEPTION:
+Automatic license granted for:
+(a) Operating nodes on Lux Network primary network (mainnet/testnet)
+(b) Any network built on the Open AI Protocol - the primary consensus
+    layer powering decentralized AI across Hanzo, Lux, Zoo, and all
+    other Open AI chains
+(c) Networks adopting PoAI (Proof of AI) consensus automatically qualify
+
+This enables the open ecosystem of decentralized AI networks while
+protecting against closed/proprietary commercial exploitation.
 ```
 
 ---
 
-## Related LPs
+## Related Documents
 
+### Lux LPs
 - **LP-8101**: FHE Patent Strategy (related IP for Z-Chain)
 - **LP-105**: Lamport One-Time Signatures for Safe
 - **LP-110**: Quasar Consensus Protocol
 - **LP-200**: Post-Quantum Cryptography Suite
 - **LP-7340**: Threshold Cryptography Library
 - **LP-3001**: Teleport Bridge MPC
+
+### External
+- **[Hanzo Patent Portfolio](https://github.com/hanzoai/patents)**: AI infrastructure patents (52 innovations)
+  - LLM Router, MCP, Agent Frameworks, Compute Swarm, Jin Architecture, HMM
+  - **Zen-Agentic Dataset**: 10.5B tokens (PRIVATE, Network Use License when released)
+- **[Zoo Labs Innovations](https://github.com/zoolabs/zips)**: Public goods (78 innovations, CC0)
 
 ---
 

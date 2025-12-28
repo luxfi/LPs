@@ -477,8 +477,8 @@ While we adopt specifications from Avalanche ACPs, all implementations in Lux us
   - `geth/plugin/evm/upgrade/lp176/` (plugin params)
 - **Package**: `github.com/luxfi/geth/plugin/evm/upgrade/lp176`
 
-**LP-118: Subnet-EVM Compatibility**
-- **Spec**: `~/work/lux/lps/LP-118-subnetevm-compat.md`
+**LP-118: EVM Compatibility**
+- **Spec**: `~/work/lux/lps/LP-118-evm-compat.md`
 - **Implementation**:
   - `geth/plugin/evm/upgrade/lp118/` (plugin params)
 - **Package**: `github.com/luxfi/geth/plugin/evm/upgrade/lp118`
@@ -625,7 +625,7 @@ Batch file: `/tmp/lp-batch-ah` - 10 core LPs enhanced with complete implementati
 
 **Verification**: Repository links confirmed in place
 
-#### 6. LP-118: Subnet-EVM Compatibility
+#### 6. LP-118: EVM Compatibility
 **Status**: ✅ VERIFIED
 
 **Current State**:

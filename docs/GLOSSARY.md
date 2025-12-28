@@ -23,7 +23,7 @@ Standards that define application-layer protocols, typically categorized as LRCs
 A cryptographic proof or statement about data or identity, primarily used on the B-Chain for compliance and verification.
 
 **AWM (Avalanche Warp Messaging)**  
-Cross-subnet messaging protocol that Lux adapted as Teleporter for cross-chain communication.
+Cross-chain messaging protocol that Lux adapted as Teleporter for cross-chain communication.
 
 ## B
 
@@ -167,7 +167,7 @@ A value that prevents double-spending in privacy protocols, used in Z-Chain.
 ## P
 
 **P-Chain (Platform Chain)**  
-The metadata blockchain in Lux that coordinates validators and manages subnets.
+The metadata blockchain in Lux that coordinates validators and manages L1 chains.
 
 **Phase**  
 One of seven major development stages in the Lux roadmap.
@@ -217,7 +217,7 @@ Type of LP that defines technical standards requiring implementation.
 **State Rent**  
 Economic mechanism where storage on the blockchain requires ongoing payment.
 
-**Subnet**  
+**L1 Chain**  
 An independent blockchain network within the Lux ecosystem.
 
 ## T

@@ -12,9 +12,9 @@ Tip: Keep each repo README current with purpose, quickstart, and links to API/AD
 | `coreth` | coreth | Go | Golang execution layer implementation of the Ethereum protocol. |
 | `crypto` | Lux Crypto Package | Go | [![Go Reference](https://pkg.go.dev/badge/github.com/luxfi/crypto.svg)](https://pkg.go.dev/github.com/luxfi/crypto) [![Go Report Card](https://goreportcard.com/badge/github.com/luxfi/crypto)](https://goreportcard.com/... |
 | `database` | database | Go |  |
-| `evm` | Subnet EVM | Go | [![Releases](https://img.shields.io/github/v/tag/luxfi/evm.svg?sort=semver)](https://github.com/luxfi/evm/releases) [![CI](https://github.com/luxfi/evm/actions/workflows/ci.yml/badge.svg)](https://github.com/luxfi/evm... |
+| `evm` | Lux EVM | Go | [![Releases](https://img.shields.io/github/v/tag/luxfi/evm.svg?sort=semver)](https://github.com/luxfi/evm/releases) [![CI](https://github.com/luxfi/evm/actions/workflows/ci.yml/badge.svg)](https://github.com/luxfi/evm... |
 | `standard` | Lux Standard | TypeScript/JS | The official standard smart contracts library for the Lux Network ecosystem. |
-| `state` | Lux State Database Documentation | Go | This directory contains blockchain state data for various networks. The primary database is SubnetEVM format stored in PebbleDB, which can be migrated to Coreth format for use with the Lux node. |
+| `state` | Lux State Database Documentation | Go | This directory contains blockchain state data for various networks. The primary database is EVM format stored in PebbleDB, which can be migrated to Coreth format for use with the Lux node. |
 | `threshold` | Threshold Signatures - Universal Multi-Chain Implementation | Go | [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0) [![Go Version](https://img.shields.io/badge/Go-1.24.5-blue.svg)](https://go.dev) [![Status](https://... |
 
 ## Interoperability
@@ -29,7 +29,7 @@ Tip: Keep each repo README current with purpose, quickstart, and links to API/AD
 
 | Repo | Title | Language | Summary |
 |:-----|:------|:---------|:--------|
-| `plugins-core` | plugins-core | Mixed | `plugins-core` is plugin repository that ships with the [Lux Plugin Manager](https://github.com/luxfi/lpm). A plugin repository consists of a set of virtual machine and subnet definitions that the `LPM` consumes to al... |
+| `plugins-core` | plugins-core | Mixed | `plugins-core` is plugin repository that ships with the [Lux Plugin Manager](https://github.com/luxfi/lpm). A plugin repository consists of a set of virtual machine and chain definitions that the `LPM` consumes to al... |
 | `vmsdk` | vmsdk | Go | <h1>vmsdk</h1> <p align="center"> Framework for Building Hyper-Scalable Blockchains on Lux </p> <p align="center"> <a href="https://goreportcard.com/report/github.com/luxfi/vmsdk"><img src="https://goreportcard.com/ba... |
 
 ## Dev Tools & Infra
@@ -38,7 +38,7 @@ Tip: Keep each repo README current with purpose, quickstart, and links to API/AD
 |:-----|:------|:---------|:--------|
 | `explore` | explore | TypeScript/JS | <h1 align="center">Lux Explore frontend</h1> |
 | `explorer` | explorer | TypeScript/JS | <h1 align="center">Blockscout</h1> <p align="center">Blockchain Explorer for inspecting and analyzing EVM Chains.</p> <div align="center"> |
-| `faucet` | LUX Subnet Faucet | TypeScript/JS | Right now there are thousands of networks and chains in the blockchain space, each with its capabilities and use-cases. And each network requires native coins to do any transaction on them, which can have a monetary v... |
+| `faucet` | LUX Faucet | TypeScript/JS | Right now there are thousands of networks and chains in the blockchain space, each with its capabilities and use-cases. And each network requires native coins to do any transaction on them, which can have a monetary v... |
 | `genesis` | LUX Genesis | Go | Migration and validation tools for LUX mainnet. |
 | `genesis-new` | Genesis - Lux Blockchain Configuration Tool | Go | [![CI](https://github.com/luxfi/genesis/actions/workflows/ci.yml/badge.svg)](https://github.com/luxfi/genesis/actions/workflows/ci.yml) [![Go Report Card](https://goreportcard.com/badge/github.com/luxfi/genesis)](http... |
 | `sdk` | Lux SDK | Go | The official Go SDK for building and managing Lux-compatible networks and blockchains. This SDK provides a unified interface integrating the full Lux ecosystem - netrunner for network orchestration, the CLI for user-f... |
@@ -75,7 +75,7 @@ Tip: Keep each repo README current with purpose, quickstart, and links to API/AD
 | `bank` | bank | TypeScript/JS | The Lux BaaS Platform is the first full-stack, open-source Banking as a Service (BaaS) platform, designed to revolutionize the financial services industry. Our platform enables seamless integrations and interoperabili... |
 | `bft` | BFT consensus for Avalanche | Go | The scientific literature is full of different consensus protocols, and each has its own strengths and weaknesses. |
 | `chat` | Lux | TypeScript/JS | An AI-powered search engine with a generative UI. |
-| `cli` | Lux CLI | Go | Lux CLI is a command line tool that gives developers access to everything Lux. This release specializes in helping developers develop and test subnets. |
+| `cli` | Lux CLI | Go | Lux CLI is a command line tool that gives developers access to everything Lux. This release specializes in helping developers develop and test chains. |
 | `community` | Lux Network Community | Mixed | Welcome to the Lux Network Community! This is the central hub for all community-driven initiatives, Special Interest Groups (SIGs), Working Groups (WGs), and governance activities within the Lux ecosystem. |
 | `czmq` | czmq - LuxFi Fork [![Go Reference](https://pkg.go.dev/badge/github.com/luxfi/czmq/v4.svg)](https://pkg.go.dev/github.com/luxfi/czmq/v4) | Go | This is the LuxFi fork of the original [zeromq/czmq](https://github.com/zeromq/goczmq) Go bindings, maintained for use in the Lux Network ecosystem. |
 | `dilithium-c-temp` | Dilithium | Mixed | [![Build Status](https://travis-ci.org/pq-crystals/dilithium.svg?branch=master)](https://travis-ci.org/pq-crystals/dilithium) [![Coverage Status](https://coveralls.io/repos/github/pq-crystals/dilithium/badge.svg?branc... |

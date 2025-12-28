@@ -158,7 +158,7 @@ Chains are **products that deploy subjects**. They aggregate research domains in
 
 | Chain | Slug | Purpose | LP Range | Deploys |
 |-------|------|---------|----------|---------|
-| **P-Chain** | `p-chain` | Platform coordination | 1000-1199 | Validators, staking, subnets |
+| **P-Chain** | `p-chain` | Platform coordination | 1000-1199 | Validators, staking, L1s |
 | **C-Chain** | `c-chain` | EVM execution | 2000-2499 | Smart contracts, precompiles |
 | **X-Chain** | `x-chain` | Asset exchange | 3000-3999 | UTXO, atomic swaps |
 | **T-Chain** | `t-chain` | Threshold execution | 7000-7999 | Threshold + MPC |
@@ -292,7 +292,7 @@ ai, attestation, llm, training-ledger, gpu, inference, model
 
 ### Chain Tags
 ```
-p-chain, platform, staking, delegation, subnet
+p-chain, platform, staking, delegation, l1
 c-chain, evm, precompile, solidity, gas, coreth
 x-chain, utxo, atomic-swap
 t-chain

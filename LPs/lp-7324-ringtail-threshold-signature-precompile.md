@@ -966,7 +966,7 @@ contract QuantumSafeVault is RingtailVerifier {
 | Quasar Finality | `consensus/protocol/quasar/hybrid_consensus.go` | Dual-certificate finality |
 | C-Chain | `node/vms/coreth/` | Smart contract verification |
 | Bridge Custody | `node/bridges/` | Post-quantum bridge security |
-| Warp Messaging | `node/vms/platformvm/warp/` | Cross-subnet PQ signatures |
+| Warp Messaging | `node/vms/platformvm/warp/` | Cross-chain PQ signatures |
 
 ### Quantum Threat Timeline
 

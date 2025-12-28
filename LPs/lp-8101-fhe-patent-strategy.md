@@ -250,33 +250,33 @@ BatchResult EvalFuncMultiOutputBatch(
 
 ### Category C: Blockchain Infrastructure (Medium Priority)
 
-#### C1. Subnet-Specific FHE Parameters
+#### C1. Consensus-Specific FHE Parameters
 
 **Problem**: Different blockchain applications have different security/performance tradeoffs. Single parameter set is suboptimal.
 
-**Innovation**: Per-subnet configurable FHE parameters:
+**Innovation**: Per-chain configurable FHE parameters:
 
 ```
-Subnet A (High-frequency DeFi):
+Chain A (High-frequency DeFi):
   - Security: 128-bit
   - Message bits: 4 per limb
   - Bootstrap: ~8ms (faster, lower precision)
 
-Subnet B (Confidential Voting):
+Chain B (Confidential Voting):
   - Security: 256-bit
   - Message bits: 2 per limb
   - Bootstrap: ~20ms (slower, higher security)
 
-Subnet C (Privacy-Preserving ML):
+Chain C (Privacy-Preserving ML):
   - Security: 128-bit
   - CKKS mode for approximate arithmetic
   - No bootstrapping (leveled)
 ```
 
 **Independent Claims**:
-1. Blockchain subnet architecture with per-subnet FHE parameter selection based on application requirements
-2. Cross-subnet encrypted data migration with automatic parameter conversion
-3. Dynamic FHE security level adjustment based on subnet policy configuration
+1. Blockchain chain architecture with per-chain FHE parameter selection based on application requirements
+2. Cross-chain encrypted data migration with automatic parameter conversion
+3. Dynamic FHE security level adjustment based on chain policy configuration
 
 **Files**: `fhe/src/binfhe/include/fhevm/fhevm.h`
 
@@ -546,7 +546,7 @@ func (cmb Combiner) GenAdditiveShare(activesPoints []ShamirPublicPoint,
 | B3. Batch DAG Execution | 🟡 High | Medium | GPU optimization essential |
 | C2. Gas Metering | 🟡 High | Medium | fhEVM differentiator |
 | A3. Keyshare Rotation | 🟢 Medium | Medium | Operational feature |
-| C1. Subnet Parameters | 🟢 Medium | Low | Configuration feature |
+| C1. Chain Parameters | 🟢 Medium | Low | Configuration feature |
 | C3. Encrypted PIR | 🟢 Medium | Medium | Privacy feature |
 | E1. Pure Go TFHE | 🟢 Medium | Low | Implementation choice |
 
@@ -568,7 +568,7 @@ func (cmb Combiner) GenAdditiveShare(activesPoints []ShamirPublicPoint,
 9. C2: Gas Metering
 10. A3: Keyshare Rotation
 11. C3: Encrypted PIR
-12. C1: Subnet Parameters
+12. C1: Chain Parameters
 13. F1: Pure Go TFHE
 
 ### Filing Jurisdictions
@@ -625,7 +625,7 @@ Potential cross-licensing partners:
 | B1. Batch Bootstrapping | ✅ Complete | ✅ Complete | Not started |
 | B2. Lazy Carry | ✅ Complete | ✅ Complete | Not started |
 | B3. Batch DAG | ✅ Complete | ✅ Complete | Not started |
-| C1. Subnet Parameters | Partial | ✅ Complete | Not started |
+| C1. Chain Parameters | Partial | ✅ Complete | Not started |
 | C2. Gas Metering | Partial | ✅ Complete | Not started |
 | C3. Encrypted PIR | Planned | ✅ Complete | Not started |
 | D1. Backend Abstraction GPU | ✅ Complete | ✅ Complete | Not started |

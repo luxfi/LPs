@@ -46,7 +46,7 @@ The Lux Network now consists of eight specialized chains:
 ├─────────────────────┼─────────────────────┼─────────────────────────────┤
 │ • CGG21 + Ringtail  │ • Quasar Consensus  │ • GraphQL API Layer         │
 │ • Decentralized     │ • Validator Mgmt    │ • Real-time Indexing        │
-│ • Native Swaps      │ • Staking/Subnets   │ • Cross-chain Queries       │
+│ • Native Swaps      │ • Staking/L1s       │ • Cross-chain Queries       │
 │ • Quantum Extended  │ • Dual-Certificate  │ • Analytics Dashboard       │
 ├─────────────────────┼─────────────────────┼─────────────────────────────┤
 │     X-Chain         │                     │         Z-Chain             │
@@ -102,7 +102,7 @@ The Q-Chain serves as the platform management chain with quantum-safe consensus 
 
 **Platform Management:**
 - **Validator Management**: Registration, staking, rewards with quantum-secure signatures
-- **Subnet Creation**: Deploy custom blockchain instances
+- **Chain Creation**: Deploy custom blockchain instances (L1 or L2)
 - **Staking Operations**: LUX token staking with dual-certificate validation
 - **Network Governance**: Protocol upgrades and parameters
 - **Cross-Chain Coordination**: Validator set management

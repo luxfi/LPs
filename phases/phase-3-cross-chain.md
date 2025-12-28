@@ -14,7 +14,7 @@ Phase 3 establishes Lux Network as a premier interoperability hub by implementin
 
 ### Primary Goals
 1. Implement Teleporter (AWM) messaging standard
-2. Enable cross-subnet communication
+2. Enable cross-chain communication
 3. Create universal bridge standards
 4. Standardize cross-chain NFTs
 5. Unify wallet experiences
@@ -38,12 +38,12 @@ Phase 3 establishes Lux Network as a premier interoperability hub by implementin
   - Validation rules
   - Fee mechanism
   
-### LP-16: Cross-Subnet Communication Protocol
+### LP-16: Cross-Chain Communication Protocol
 - **Type**: Standards Track (Core)
 - **Status**: Proposed
-- **Description**: Protocol for communication between Lux subnets
+- **Description**: Protocol for communication between Lux chains
 - **Features**:
-  - Subnet registry
+  - Chain registry
   - Message routing
   - State verification
   - Failure handling
