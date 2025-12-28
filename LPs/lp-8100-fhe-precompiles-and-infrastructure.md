@@ -1,16 +1,16 @@
-# LP-8100: FHE Precompiles and Infrastructure
+---
+lp: 8100
+title: Fully Homomorphic Encryption Precompiles and Infrastructure
+description: Integration of FHE capabilities into Lux EVM chains for computation on encrypted data
+author: Lux Network (@luxfi)
+status: Implemented
+type: Standards Track
+category: Core
+created: 2025-12-27
+requires: 333, 5302
+---
 
-| Field | Value |
-|-------|-------|
-| LP | 8100 |
-| Title | Fully Homomorphic Encryption Precompiles and Infrastructure |
-| Author | Lux Network |
-| Status | Implemented |
-| Type | Standards Track |
-| Category | Core |
-| Created | 2025-12-27 |
-| Updated | 2025-12-27 |
-| Requires | LP-333 (T-Chain), LP-5302 (Z-Chain) |
+# LP-8100: FHE Precompiles and Infrastructure
 
 ## Abstract
 

@@ -1,15 +1,15 @@
-# LP-0011: Chain Types - L1/L2/L3 Specification
-
-| Field | Value |
-|-------|-------|
-| LP | 0011 |
-| Title | Chain Types - L1/L2/L3 Specification |
-| Author | Lux Network |
-| Status | Final |
-| Type | Standards Track (Core) |
-| Created | 2025-12-27 |
-
 ---
+lp: 11
+title: Chain Types - L1/L2/L3 Specification
+description: Defines L1 sovereign chains, L2 primary-validated chains, and L3 application chains
+author: Lux Network (@luxfi)
+status: Final
+type: Standards Track
+category: Core
+created: 2025-12-27
+---
+
+# LP-0011: Chain Types - L1/L2/L3 Specification
 
 ## Abstract
 
@@ -241,7 +241,7 @@ lux warp send --from hanzo --to zoo --payload "0x..."
 lux warp send --from zoo --to zoo-gaming --payload "0x..."
 ```
 
-### Security Considerations
+## Security Considerations
 
 #### L1 Security
 - Requires sufficient validator diversity
