@@ -4,7 +4,7 @@ title: FROST Threshold Signatures
 description: Round-optimized Schnorr threshold signatures for EdDSA with Taproot support
 author: Lux Industries Inc.
 discussions-to: https://github.com/luxfi/lps/discussions
-status: Implemented
+status: Final
 type: Standards Track
 category: Core
 created: 2025-08-14
