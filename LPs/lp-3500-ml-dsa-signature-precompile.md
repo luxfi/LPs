@@ -4,7 +4,7 @@ title: ML-DSA Signature Precompile
 description: Native precompile for NIST FIPS 204 ML-DSA (Dilithium) post-quantum signature verification
 author: Lux Core Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
-status: Implemented
+status: Final
 type: Standards Track
 category: Core
 created: 2025-11-13

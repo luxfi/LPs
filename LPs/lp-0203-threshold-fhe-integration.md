@@ -3,7 +3,7 @@ lp: 203
 title: Threshold FHE - Distributed Key Management
 description: Threshold decryption for FHE with MPC integration and KMS support
 author: Lux Network (@luxfi)
-status: Review
+status: Final
 type: Standards Track
 category: Core
 created: 2025-12-28
