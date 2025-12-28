@@ -359,6 +359,18 @@ spec:
               fieldPath: metadata.name
 ```
 
+## Rationale
+
+The MPC node cluster design was chosen because:
+1. Threshold signatures eliminate single points of failure
+2. CGGMP21 provides identifiable abort for malicious parties
+3. gRPC provides efficient binary protocol for node communication
+4. Share refresh enables secure key rotation without key regeneration
+
+## Backwards Compatibility
+
+This LP defines new infrastructure and does not affect existing systems.
+
 ## Security Considerations
 
 ### Key Security

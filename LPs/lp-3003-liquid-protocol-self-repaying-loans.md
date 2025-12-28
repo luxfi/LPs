@@ -311,6 +311,14 @@ function testLiquidation() public {
 }
 ```
 
+## Rationale
+
+Self-repaying loans were chosen over traditional overcollateralized lending because:
+1. **Better UX**: Users don't actively manage loan health
+2. **Reduced liquidation risk**: 90% LTV with E-Mode for correlated assets
+3. **Yield utilization**: Collateral yield automatically services debt
+4. **Simple mental model**: "Deposit asset, borrow liquid version"
+
 ## Security Considerations
 
 ### Smart Contract Risks

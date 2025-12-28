@@ -233,6 +233,17 @@ Based on Baby-Jubjub scalar multiplication cost:
 | pedersenCommit | 1,500 | Same as hash |
 | pedersenAdd | 500 | EC point addition |
 
+## Rationale
+
+Pedersen hash was chosen for ZK applications because:
+1. Algebraic structure enables efficient in-circuit verification
+2. Widely used in ZK protocols (Zcash, Tornado Cash, etc.)
+3. Baby-Jubjub curve provides BN254 compatibility for Groth16
+
+## Backwards Compatibility
+
+This LP introduces new precompile addresses and does not affect existing functionality.
+
 ## Security Considerations
 
 ### 1. No Mainstream Standard Exists
