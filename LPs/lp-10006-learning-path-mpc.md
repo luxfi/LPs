@@ -56,15 +56,15 @@ After completing this path, you will understand:
 
 | Order | LP | Title | Time | Depth |
 |-------|-----|-------|------|-------|
-| 4 | [LP-7000](/docs/lp-7000-t-chain-threshold-specification/) | T-Chain Core | 30 min | Deep |
-| 5 | [LP-7100](/docs/lp-7100/) | Signing Networks | 25 min | Deep |
+| 4 | [LP-5000](/docs/lp-7000-t-chain-threshold-specification/) | T-Chain Core | 30 min | Deep |
+| 5 | [LP-5100](/docs/lp-7100/) | Signing Networks | 25 min | Deep |
 | 6 | [LP-0330](/docs/lp-0330-t-chain-thresholdvm-specification/) | ThresholdVM Spec | 30 min | Deep |
 
 ### Stage 3: DKG & Resharing
 
 | Order | LP | Title | Time | Depth |
 |-------|-----|-------|------|-------|
-| 7 | [LP-7200](/docs/lp-7200/) | DKG Protocols | 25 min | Deep |
+| 7 | [LP-5200](/docs/lp-7200/) | DKG Protocols | 25 min | Deep |
 | 8 | [LP-0103](/docs/lp-0103-mpc-lss---multi-party-computation-linear-secret-sharing-with-dynamic-resharing/) | LSS Dynamic Resharing | 30 min | Deep |
 | 9 | [LP-0333](/docs/lp-0333-dynamic-signer-rotation-with-lss-protocol/) | Signer Rotation | 25 min | Deep |
 
@@ -73,15 +73,15 @@ After completing this path, you will understand:
 | Order | LP | Title | Time | Depth |
 |-------|-----|-------|------|-------|
 | 10 | [LP-0334](/docs/lp-0334-per-asset-threshold-key-management/) | Per-Asset Key Management | 25 min | Deep |
-| 11 | [LP-7400](/docs/lp-7400/) | K-Chain / KMS | 25 min | Deep |
+| 11 | [LP-5400](/docs/lp-7400/) | K-Chain / KMS | 25 min | Deep |
 | 12 | [LP-0325](/docs/lp-0325-kms-hardware-security-module-integration/) | HSM Integration | 25 min | Deep |
 
 ### Stage 5: Custody & Bridges
 
 | Order | LP | Title | Time | Depth |
 |-------|-----|-------|------|-------|
-| 13 | [LP-7300](/docs/lp-7300/) | Decentralized Custody | 25 min | Deep |
-| 14 | [LP-7500](/docs/lp-7500/) | MPC-Based Bridges | 25 min | Deep |
+| 13 | [LP-5300](/docs/lp-7300/) | Decentralized Custody | 25 min | Deep |
+| 14 | [LP-5500](/docs/lp-7500/) | MPC-Based Bridges | 25 min | Deep |
 | 15 | [LP-0319](/docs/lp-0319-t-chain-decentralised-mpc-custody/) | MPC Custody v2 | 25 min | Deep |
 
 ### Stage 6: Post-Quantum MPC
@@ -89,8 +89,8 @@ After completing this path, you will understand:
 | Order | LP | Title | Time | Depth |
 |-------|-----|-------|------|-------|
 | 16 | [LP-0324](/docs/lp-0324-ringtail-threshold-signature-precompile/) | Ringtail (PQ Threshold) | 30 min | Deep |
-| 17 | [LP-7321](/docs/lp-7321-frost-threshold-signature-precompile/) | FROST Precompile | 20 min | Medium |
-| 18 | [LP-7322](/docs/lp-7322-cggmp21-threshold-ecdsa-precompile/) | CGGMP21 Precompile | 20 min | Medium |
+| 17 | [LP-5321](/docs/lp-7321-frost-threshold-signature-precompile/) | FROST Precompile | 20 min | Medium |
+| 18 | [LP-5322](/docs/lp-7322-cggmp21-threshold-ecdsa-precompile/) | CGGMP21 Precompile | 20 min | Medium |
 
 ---
 

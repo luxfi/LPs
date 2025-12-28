@@ -936,7 +936,7 @@ No backwards compatibility issues. This LP introduces a new precompile at an unu
 - [IETF VRF Draft](https://datatracker.ietf.org/doc/draft-irtf-cfrg-vrf/)
 - [Chainlink VRF v2](https://docs.chain.link/vrf)
 - [LP-111: Photon Consensus Selection](./lp-111.md)
-- [LP-7324: Ringtail Threshold Signature](./lp-7324-ringtail-threshold-signature-precompile.md)
+- [LP-5324: Ringtail Threshold Signature](./lp-7324-ringtail-threshold-signature-precompile.md)
 - [LP-3654: Ed25519 Precompile](./lp-3654-ed25519-eddsa-precompile.md)
 
 ## Copyright
