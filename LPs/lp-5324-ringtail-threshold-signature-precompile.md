@@ -529,7 +529,7 @@ All tests passing across the full stack:
 | Precompile | [`github.com/luxfi/precompiles/ringtail/`](https://github.com/luxfi/precompiles/tree/main/ringtail) | v0.1.7 |
 | Ringtail Library | [`github.com/luxfi/ringtail/`](https://github.com/luxfi/ringtail) | v0.1.2 |
 | Lattice Primitives | [`github.com/luxfi/lattice/`](https://github.com/luxfi/lattice) | v6.1.2 |
-| Epoch Management | `github.com/luxfi/node/consensus/protocol/quasar/` *(Planned)* | - |
+| Epoch Management | [`github.com/luxfi/consensus/protocol/quasar/`](https://github.com/luxfi/consensus/tree/main/protocol/quasar) | v1.0.0 |
 | Solidity Interface | [`github.com/luxfi/standard/contracts/crypto/precompiles/IRingtailThreshold.sol`](https://github.com/luxfi/standard/tree/main/contracts/crypto/precompiles) | v1.1.0 |
 
 ## Security Considerations
