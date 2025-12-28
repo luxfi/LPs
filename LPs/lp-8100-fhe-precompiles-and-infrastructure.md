@@ -253,9 +253,10 @@ The `luxfhe` organization provides a complete FHE application stack:
 
 | Package | Mode | Description |
 |---------|------|-------------|
-| `@luxfhe/v1-sdk` | Standard | Single-key TFHE - simpler, faster for trusted setups |
-| `@luxfhe/v2-sdk` | Threshold | Network-based TFHE - decentralized decryption via T-Chain |
+| `@luxfhe/sdk` | Standard | Single-key TFHE - simpler, faster for trusted setups |
+| `@luxfhe/sdk-threshold` | Threshold | Network-based TFHE - decentralized decryption via T-Chain |
 | `@luxfhe/contracts` | Solidity | FHE-enabled smart contracts (FHE.sol, token/, finance/) |
+| `@luxfhe/wasm` | Browser | WASM bindings for browser-native FHE (planned) |
 
 **Architecture:**
 
@@ -263,7 +264,7 @@ The `luxfhe` organization provides a complete FHE application stack:
 ┌─────────────────────────────────────────────────────────────────────────┐
 │                         JavaScript Applications                         │
 ├────────────────────────────┬────────────────────────────────────────────┤
-│   @luxfhe/v1-sdk           │         @luxfhe/v2-sdk                     │
+│   @luxfhe/sdk              │         @luxfhe/sdk-threshold             │
 │   (Standard TFHE)          │         (Threshold TFHE)                   │
 │   - Single encryption key  │         - Distributed key shares (t-of-n) │
 │   - Key holder decrypts    │         - T-Chain consensus decryption    │
@@ -272,19 +273,19 @@ The `luxfhe` organization provides a complete FHE application stack:
 ├────────────────────────────┴────────────────────────────────────────────┤
 │                          @luxfhe/contracts                              │
 │                    Solidity FHE Smart Contracts                         │
-│    FHE.sol · FheOS.sol · token/* · finance/* · governance/*            │
+│    FHE.sol · Gateway.sol · token/* · finance/* · governance/*          │
 ├─────────────────────────────────────────────────────────────────────────┤
 │                         Core Components                                  │
 │  ┌────────────────┐  ┌────────────────┐  ┌────────────────┐            │
-│  │   concrete/    │  │    fhevm/      │  │     kms/       │            │
-│  │ TFHE Compiler  │  │ Full Stack VM  │  │ Key Management │            │
-│  │   (Python)     │  │   (Solidity)   │  │    (Rust)      │            │
+│  │   threshold/   │  │    fhevm/      │  │     kms/       │            │
+│  │ Threshold TFHE │  │ Full Stack VM  │  │ Key Management │            │
+│  │    (Rust)      │  │   (Solidity)   │  │    (Rust)      │            │
 │  └────────────────┘  └────────────────┘  └────────────────┘            │
 ├─────────────────────────────────────────────────────────────────────────┤
 │                    Backend Services                                      │
 │  ┌───────────────────────────────────┐  ┌───────────────────────────┐  │
 │  │   Go FHE Server                   │  │   WASM Bindings           │  │
-│  │   luxfi/tfhe/cmd/fhe-server       │  │   luxfhe/wasm/tfhe        │  │
+│  │   luxfi/tfhe/cmd/fhe-server       │  │   @luxfhe/wasm (planned)  │  │
 │  │   /encrypt /decrypt /evaluate     │  │   Browser-native FHE      │  │
 │  └───────────────────────────────────┘  └───────────────────────────┘  │
 ├─────────────────────────────────────────────────────────────────────────┤
@@ -293,10 +294,10 @@ The `luxfhe` organization provides a complete FHE application stack:
 └─────────────────────────────────────────────────────────────────────────┘
 ```
 
-**v2-sdk Quick Start (Threshold TFHE):**
+**SDK Quick Start (Threshold TFHE):**
 
 ```typescript
-import { createFheClient } from '@luxfhe/v2-sdk'
+import { createFheClient } from '@luxfhe/sdk-threshold'
 
 const client = await createFheClient({
   provider: window.ethereum,
@@ -951,9 +952,21 @@ Decrypt operations require:
 
 ### In Progress 🔄
 
-- [ ] **Mul/Div Operations in luxfi/tfhe** (expensive, ~10-20s per operation)
+- [ ] **Mul/Div/Rem Operations in luxfi/tfhe** (expensive, ~10-20s per 8-bit operation)
+- [ ] **@luxfhe/wasm Package** - Browser-native FHE via WASM bindings
 - [ ] **GPU Acceleration** (CUDA/Metal backends)
 - [ ] **Production Mainnet Deployment**
+
+### Package Namespace Migration
+
+The FHE SDK packages are migrating from `@luxfi/*` to `@luxfhe/*`:
+
+| Old Package | New Package | Status |
+|-------------|-------------|--------|
+| `@luxfi/fhe-sdk` | `@luxfhe/sdk` | ✅ Migrated |
+| `@luxfi/fhe-contracts` | `@luxfhe/contracts` | ✅ Migrated |
+| `@luxfi/fhe-threshold` | `@luxfhe/sdk-threshold` | ✅ Migrated |
+| N/A | `@luxfhe/wasm` | 🔄 Planned |
 
 ### Implementation Roadmap
 
