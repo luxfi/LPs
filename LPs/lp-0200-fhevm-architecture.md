@@ -3,7 +3,7 @@ lp: 200
 title: fhEVM - Fully Homomorphic Encryption Virtual Machine
 description: Native FHE operations in the Lux EVM with GPU acceleration
 author: Lux Network (@luxfi)
-status: Draft
+status: Review
 type: Standards Track
 category: Core
 created: 2025-12-28
