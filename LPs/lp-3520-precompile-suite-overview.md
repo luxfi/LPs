@@ -85,7 +85,7 @@ For complete documentation of standard Ethereum precompiles (0x01-0x11), see **[
 
 #### FHE Precompiles (Fully Homomorphic Encryption)
 
-For FHE operations enabling computation on encrypted data, see **[LP-8100: FHE Precompiles and Infrastructure](./lp-8100-fhe-precompiles-and-infrastructure.md)**.
+For FHE operations enabling computation on encrypted data, see **[LP-8100: FHE Precompiles and Infrastructure](./lp-4100-fhe-precompiles-and-infrastructure.md)**.
 
 | Address | Name | Purpose | Gas (euint32) | Status |
 |---------|------|---------|---------------|--------|

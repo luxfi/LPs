@@ -415,7 +415,7 @@ The Post-Quantum Module enables quantum-resistant signatures for Lux Safe, suppo
 | ML-DSA-65 | Lattice | ✅ Yes | ~500K | Single-signer wallets |
 | SLH-DSA-128s | Hash-based | ✅ Yes | ~800K | Long-term archives |
 | **Ringtail** | Lattice Threshold | ✅ Yes | ~200K | **Multisig/MPC** |
-| Lamport OTS | Hash-based | ❌ One-time | ~800K | Remote chains (LP-4105) |
+| Lamport OTS | Hash-based | ❌ One-time | ~800K | Remote chains (LP-2105) |
 
 #### Ringtail Threshold Integration
 
@@ -561,7 +561,7 @@ contract TChainCustodySafe is RingtailSafeModule {
 - **Institutional Wallets**: Enterprise custody with quantum resistance
 - **Protocol Upgrades**: Time-locked upgrades with PQ attestations
 
-**Reference**: See [LP-7324](./lp-7324-ringtail-threshold-signature-precompile.md) (Ringtail), [LP-4105](./lp-4105-lamport-one-time-signatures-ots-for-lux-safe.md) (Lamport OTS), [LP-7000](./lp-7000-t-chain-threshold-specification.md) (T-Chain).
+**Reference**: See [LP-5324](./lp-7324-ringtail-threshold-signature-precompile.md) (Ringtail), [LP-2105](./lp-4105-lamport-one-time-signatures-ots-for-lux-safe.md) (Lamport OTS), [LP-5000](./lp-7000-t-chain-threshold-specification.md) (T-Chain).
 
 ## Formal Verification
 
@@ -781,10 +781,10 @@ The LGPL-3.0 license permits:
 - [LP-3320](./lp-3320-lamport-signatures-for-safe.md) - Lamport OTS for quantum-safe signing
 - [LP-3337](./lp-3337-lrc-4337-account-abstraction.md) - Account abstraction
 - [LP-3500](./lp-3500-ml-dsa-signature-precompile.md) - Post-quantum signatures
-- [LP-4105](./lp-4105-lamport-one-time-signatures-ots-for-lux-safe.md) - Lamport OTS implementation
-- [LP-4200](./lp-4200-post-quantum-cryptography-suite-for-lux-network.md) - Complete PQC ecosystem
-- [LP-7000](./lp-7000-t-chain-threshold-specification.md) - T-Chain MPC custody
-- [LP-7324](./lp-7324-ringtail-threshold-signature-precompile.md) - Ringtail threshold signatures
+- [LP-2105](./lp-4105-lamport-one-time-signatures-ots-for-lux-safe.md) - Lamport OTS implementation
+- [LP-2200](./lp-4200-post-quantum-cryptography-suite-for-lux-network.md) - Complete PQC ecosystem
+- [LP-5000](./lp-7000-t-chain-threshold-specification.md) - T-Chain MPC custody
+- [LP-5324](./lp-7324-ringtail-threshold-signature-precompile.md) - Ringtail threshold signatures
 
 ### External Resources
 
