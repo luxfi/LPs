@@ -98,7 +98,7 @@ Where:
 **Examples:**
 - 3-of-5 threshold: 150,000 + (5 × 10,000) = 200,000 gas
 - 10-of-15 threshold: 150,000 + (15 × 10,000) = 300,000 gas
-- 67-of-100 threshold: 150,000 + (100 × 10,000) = 1,150,000 gas
+- 69-of-100 threshold: 150,000 + (100 × 10,000) = 1,150,000 gas
 
 ### Solidity Interface
 
@@ -333,7 +333,7 @@ signature: <Ringtail signature with 1 corrupted share>
 
 **Expected Output:** `0x...0000` (invalid - share verification failed)
 
-### Test Vector 4: Large Threshold (67-of-100)
+### Test Vector 4: Large Threshold (69-of-100)
 
 **Input:**
 ```
@@ -1070,7 +1070,7 @@ func verifyRingtail(threshold, totalParties uint32, msgHash []byte, sig []byte) 
 **Security Recommendations:**
 - Byzantine threshold: `threshold` > `totalParties * 2/3`
 - Liveness threshold: `totalParties - threshold` < `totalParties/3`
-- Optimal: 67-of-100 (67% threshold, 33% offline tolerance)
+- Optimal: 69-of-100 (67% threshold, 33% offline tolerance)
 
 ## References
 

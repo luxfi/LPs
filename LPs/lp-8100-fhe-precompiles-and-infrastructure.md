@@ -309,7 +309,7 @@ const encrypted = await client.encrypt_uint32(42)
 // Submit to smart contract
 const tx = await contract.deposit(encrypted)
 
-// Decryption requires T-Chain consensus (67-of-100)
+// Decryption requires T-Chain consensus (69-of-100)
 const result = await client.decrypt(encryptedResult)
 ```
 
@@ -519,7 +519,7 @@ func (p *FHEPrecompile) Add(input []byte) ([]byte, error) {
 
 ### T-Chain Integration
 
-The T-Chain (Threshold Chain) provides native threshold FHE with 67-of-100 validator consensus (LP-333).
+The T-Chain (Threshold Chain) provides native threshold FHE with 69-of-100 validator consensus (LP-333).
 
 #### Architecture
 
@@ -547,7 +547,7 @@ The T-Chain (Threshold Chain) provides native threshold FHE with 67-of-100 valid
 │      Z-Chain (zkVM)    │         │     T-Chain (Threshold)     │
 │  ┌──────────────────┐  │         │  ┌───────────────────────┐  │
 │  │   FHE Processor  │  │         │  │ Threshold Decryptor   │  │
-│  │   - CKKS Ops     │  │         │  │ - 67-of-100 shares    │  │
+│  │   - CKKS Ops     │  │         │  │ - 69-of-100 shares    │  │
 │  │   - Coprocessor  │  │         │  │ - CKKS Multiparty     │  │
 │  │   - luxfi/lattice│  │         │  │ - EncToShareProtocol  │  │
 │  └──────────────────┘  │         │  └───────────────────────┘  │
@@ -717,7 +717,7 @@ Decrypt operations require:
   - FHEDecrypt (0x82): Threshold decryption gateway
 
 - [x] **T-Chain Threshold Decryption**
-  - 67-of-100 validator threshold
+  - 69-of-100 validator threshold
   - Epoch-based key ceremonies
   - CKKS multiparty protocol
   - Warp messaging integration

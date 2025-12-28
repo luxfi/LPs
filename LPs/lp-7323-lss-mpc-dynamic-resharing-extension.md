@@ -1190,7 +1190,7 @@ newConfigs := lss.DynamicReshareCMP(configs, 4parties, threshold=3, pool)
 **Scenario:** DeFi protocol treasury ($500M TVL)
 
 **Governance Structure:**
-- 67-of-100 council members (Byzantine threshold)
+- 69-of-100 council members (Byzantine threshold)
 - FROST threshold signatures
 - Quarterly council elections
 
