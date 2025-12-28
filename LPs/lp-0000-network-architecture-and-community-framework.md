@@ -176,20 +176,57 @@ An LP (Lux Proposal) is a design document describing a feature, standard, or pro
 
 ### Standards Track Categories
 
+LP numbers follow **dependency order** — lower numbers are foundations that higher numbers build upon.
+
+#### 0xxx: Meta / Governance / Index
+Core process documents, taxonomy, governance rules. Start here.
+
+#### 1xxx: Foundations (Cross-Chain Primitives)
+Cryptographic primitives, formal security models, execution invariants, economic/game-theoretic primitives. Things every chain depends on but no single chain owns.
+
+**Contents**: Hash/sig/commitment basics, MPC math (not custody ops), ZK arithmetization theory, PQ definitions (not deployment).
+
 | Category | Description | LP Range |
 |----------|-------------|----------|
-| **Consensus** | Agreement, finality, validators | 100-199 |
-| **Network** | P2P, messaging, topology | 200-499 |
-| **Cryptography** | Curves, hashes, primitives | 500-999 |
-| **P-Chain** | Platform coordination | 1000-1999 |
-| **C-Chain** | EVM execution, wallets, identity | 2000-2999 |
-| **LRC Standards** | Token standards (LRC-20, LRC-721, etc.) | 3000-3999 |
-| **Q-Chain** | Post-quantum operations | 4000-4999 |
-| **A-Chain** | AI and attestation | 5000-5999 |
-| **B-Chain** | Bridging, Teleport | 6000-6999 |
-| **T-Chain** | Threshold cryptography, MPC | 7000-7999 |
-| **Z-Chain** | Zero-knowledge proofs, privacy | 8000-8999 |
-| **DEX** | Trading infrastructure | 9000-9999 |
+| **Meta/Process** | Taxonomy, governance, review rules | 0000-0099 |
+| **Consensus** | Agreement, finality, validators | 0100-0199 |
+| **Network** | P2P, messaging, topology | 0200-0499 |
+| **Foundations** | Cryptographic primitives, proofs, math | 1000-1999 |
+
+#### Chain Standards (Dependency Order)
+
+| Chain | Description | LP Range | Depends On |
+|-------|-------------|----------|------------|
+| **Q-Chain** | Post-quantum keys, signatures, addresses, hybrid modes, migration | 2000-2999 | 1xxx |
+| **C-Chain** | EVM execution, LRC standards, accounts, gas, Web3, wallets | 3000-3999 | 1xxx, 2xxx |
+| **Z-Chain** | ZK proofs, FHE, privacy protocols, zkVM, verifier costs | 4000-4999 | 1xxx, 2xxx, 3xxx |
+| **T-Chain** | Threshold signing, DKG ceremonies, custody, recovery, rotation | 5000-5999 | 1xxx, 2xxx, 4xxx |
+| **B-Chain** | Cross-chain messaging, finality proofs, relayers, fraud proofs | 6000-6999 | 2xxx, 4xxx, 5xxx |
+| **A-Chain** | AI agents, policy engines, verifiable AI, automated governance | 7000-7999 | All above |
+| **Governance** | DAO, voting, ESG, ops, monitoring, upgrades, kill switches | 8000-8999 | All above |
+| **DEX/Markets** | AMMs, orderbooks, MEV mitigation, oracles, liquidation | 9000-9999 | 3xxx, 6xxx |
+
+#### Learning Order
+
+```
+1xxx Foundations
+    ↓
+2xxx Q-Chain (PQ Identity)
+    ↓
+3xxx C-Chain (EVM / LRC)
+    ↓
+4xxx Z-Chain (Privacy)
+    ↓
+5xxx T-Chain (Threshold)
+    ↓
+6xxx B-Chain (Bridges)
+    ↓
+7xxx A-Chain (AI)
+    ↓
+8xxx Governance
+    ↓
+9xxx Markets
+```
 
 ### Meta & Educational Categories
 
@@ -197,6 +234,17 @@ An LP (Lux Proposal) is a design document describing a feature, standard, or pro
 |----------|-------------|----------|
 | **Learning Paths** | Educational resources, tutorials | 10000-10099 |
 | **Research** | Experimental proposals, papers | 10100-10999 |
+
+### Dependency Rules
+
+**Rule 1 — Ownership**: A doc lives in the lowest layer that owns the invariant it defines.
+
+**Rule 2 — Declared Dependencies**: Every LP must declare its chain dependencies:
+```yaml
+requires:
+  - chain: Q
+  - chain: Z
+```
 
 ### LP Lifecycle
 
