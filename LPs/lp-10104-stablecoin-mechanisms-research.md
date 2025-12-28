@@ -1,5 +1,5 @@
 ---
-lp: 10095
+lp: 10104
 title: Stablecoin Mechanisms Research
 description: Research on stablecoin designs and stability mechanisms for Lux Network
 author: Lux Network Team (@luxfi)

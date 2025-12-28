@@ -1,5 +1,5 @@
 ---
-lp: 10096
+lp: 10105
 title: MEV Protection Research
 description: Research on Maximum Extractable Value (MEV) mitigation strategies for Lux Network
 author: Lux Network Team (@luxfi)
