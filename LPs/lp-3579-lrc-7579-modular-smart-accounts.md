@@ -1,5 +1,5 @@
 ---
-lp: 10579
+lp: 3579
 title: LRC-7579 Modular Smart Accounts
 description: Standard interface for modular smart account plugins
 author: Lux Core Team (@luxfi)

@@ -1,5 +1,5 @@
 ---
-lp: 10572
+lp: 3572
 title: LRC-7572 Contract-level Metadata
 description: Standard for contract-level metadata separate from token metadata
 author: Lux Core Team (@luxfi)
