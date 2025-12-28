@@ -421,21 +421,11 @@ export async function generateMetadata({ params }: { params: Promise<{ slug?: st
   const lpNumber = frontmatter.lp || '0';
   const title = page.data.title || 'Lux Proposal';
   const description = page.data.description || frontmatter.description || `Lux Proposal ${lpNumber}`;
-  const status = frontmatter.status || 'Draft';
   const category = frontmatter.category || 'Core';
-  const type = frontmatter.type || 'Standards Track';
 
-  // Build dynamic OG image URL with LP-specific parameters
-  const ogImageParams = new URLSearchParams({
-    lp: String(lpNumber),
-    title: title,
-    description: description.substring(0, 200),
-    status: status,
-    category: category,
-    type: type,
-  });
-
-  const ogImageUrl = `/api/og?${ogImageParams.toString()}`;
+  // Static OG images generated at build time by scripts/generate-og.mjs (idempotent)
+  const lpSlug = `lp-${String(lpNumber).padStart(4, '0')}`;
+  const ogImagePath = `/og/${lpSlug}.png`;
 
   return {
     title: `LP-${lpNumber}: ${title}`,
@@ -447,7 +437,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug?: st
       siteName: 'Lux Proposals',
       images: [
         {
-          url: ogImageUrl,
+          url: ogImagePath,
           width: 1200,
           height: 630,
           alt: `LP-${lpNumber}: ${title}`,
@@ -462,7 +452,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug?: st
       card: 'summary_large_image',
       title: `LP-${lpNumber}: ${title}`,
       description: description,
-      images: [ogImageUrl],
+      images: [ogImagePath],
     },
     other: {
       'article:section': category,

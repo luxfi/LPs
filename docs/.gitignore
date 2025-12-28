@@ -17,6 +17,9 @@
 # Production
 /build
 
+# Generated OG images (built at prebuild via scripts/generate-og.mjs)
+/public/og/
+
 # Misc
 .DS_Store
 *.pem
