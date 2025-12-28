@@ -36,7 +36,7 @@ Phase 2 focuses on standardizing the execution environment and establishing comp
   - Native multi-sig support
   - Batch transaction processing
   - Gas optimization features
-  - Cross-subnet calls
+  - Cross-chain calls
 
 ### LP-10: Native Asset Bridge Protocol
 - **Type**: Standards Track (Core)

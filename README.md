@@ -109,7 +109,7 @@ Lux Network operates an **8-chain architecture** with specialized chains for dif
 
 | Chain | Series | Focus | Status |
 |:------|:-------|:------|:-------:|
-| **P-Chain** | 1xxx | Platform, Staking, Subnets | ✅ |
+| **P-Chain** | 1xxx | Platform, Staking, L1s | ✅ |
 | **C-Chain** | 2xxx | EVM Contracts, Token Standards | ✅ |
 | **X-Chain** | 3xxx | Exchange, Asset Transfers | ✅ |
 | **Q-Chain** | 4xxx | Quantum-Safe Operations | ✅ |
@@ -123,7 +123,7 @@ Lux Network operates an **8-chain architecture** with specialized chains for dif
 
 ### 🔷 P-Chain — Platform (1xxx Series)
 
-> *Validator management, staking, subnet creation*
+> *Validator management, staking, chain creation*
 
 | LP | Title | Status |
 |:---|:------|:------:|
@@ -133,7 +133,7 @@ Lux Network operates an **8-chain architecture** with specialized chains for dif
 | [1033](./LPs/lp-1033-p-chain-state-rollup-to-c-chain-evm.md) | State Rollup to C-Chain EVM | 📝 |
 | [1034](./LPs/lp-1034-p-chain-as-superchain-l2-op-stack-rollup-integration.md) | Superchain L2 (OP Stack) | 📝 |
 | [1181](./LPs/lp-1181-epoching.md) | Epoching & Validator Rotation | ✅ |
-| [1605](./LPs/lp-1605-elastic-validator-subnets.md) | Elastic Validator Subnets | 📝 |
+| [1605](./LPs/lp-1605-elastic-validator-l1s.md) | Elastic Validator L1s | 📝 |
 
 ### 🟢 C-Chain — Contract/EVM (2xxx Series)
 
@@ -146,7 +146,7 @@ Lux Network operates an **8-chain architecture** with specialized chains for dif
 | [2012](./LPs/lp-2012-c-chain-contract-chain-specification.md) | Contract Chain Specification | ✅ |
 | [2025](./LPs/lp-2025-l2-to-sovereign-l1-ascension-and-fee-model.md) | L2 to Sovereign L1 Ascension | 📝 |
 | [2026](./LPs/lp-2026-c-chain-evm-equivalence-and-core-eips-adoption.md) | EVM Equivalence & Core EIPs | ✅ |
-| [2118](./LPs/lp-2118-subnetevm-compat.md) | Subnet-EVM Compatibility | ✅ |
+| [2118](./LPs/lp-2118-evm-compat.md) | EVM Compatibility | ✅ |
 | [2176](./LPs/lp-2176-dynamic-gas-pricing.md) | Dynamic Gas Pricing | ✅ |
 | [2204](./LPs/lp-2204-secp256r1-curve-integration.md) | secp256r1 Curve Integration | ✅ |
 | [2226](./LPs/lp-2226-dynamic-minimum-block-times-granite-upgrade.md) | Dynamic Block Times (Granite) | ✅ |
@@ -381,7 +381,7 @@ Lux Network operates an **8-chain architecture** with specialized chains for dif
 | [0000](./LPs/lp-0000-network-architecture-and-community-framework.md) | **Network Architecture** | ✅ |
 | [0001](./LPs/lp-0001-primary-chain-native-tokens-and-tokenomics.md) | Tokenomics | ✅ |
 | [0002](./LPs/lp-0002-virtual-machine-and-execution-environment.md) | VM & Execution | ✅ |
-| [0003](./LPs/lp-0003-subnet-architecture-and-cross-chain-interoperability.md) | Subnet Architecture | ✅ |
+| [0003](./LPs/lp-0003-chain-architecture-and-cross-chain-interoperability.md) | Chain Architecture | ✅ |
 | [0099](./LPs/lp-0099-lp-numbering-scheme-and-chain-organization.md) | LP Numbering Scheme | ✅ |
 
 #### 🛠️ Developer Tools

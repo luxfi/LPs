@@ -225,7 +225,7 @@ export default function HomePage() {
   // Group categories by type for balanced sections
   const foundationalCategories = allCategories.filter(c => ['Core Architecture', 'Consensus', 'Cryptography', 'Token Standards', 'DeFi', 'Governance'].includes(c.name));
   const advancedCategories = allCategories.filter(c => ['Network Upgrades', 'Research', 'Sustainability & ESG', 'Impact & Public Goods'].includes(c.name));
-  const chainCategories = allCategories.filter(c => ['Platform Chain (P-Chain)', 'EVM & Smart Contracts', 'Virtual Machines & Subnets', 'Interoperability', 'Bridge Protocols', 'Threshold Cryptography (T-Chain)'].includes(c.name));
+  const chainCategories = allCategories.filter(c => ['Platform Chain (P-Chain)', 'EVM & Smart Contracts', 'Virtual Machines & L1s', 'Interoperability', 'Bridge Protocols', 'Threshold Cryptography (T-Chain)'].includes(c.name));
   const extendedCategories = allCategories.filter(c => ['Protocol Extensions', 'Advanced Protocols', 'Extended Specifications'].includes(c.name));
 
   return (

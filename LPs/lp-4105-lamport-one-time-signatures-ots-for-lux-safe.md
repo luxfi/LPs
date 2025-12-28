@@ -979,7 +979,7 @@ func (s *SecureShareStorage) GetShare(i, b int) []byte {
 
 **Recommendation**:
 - Use **Threshold Lamport** for remote chain custody (Ethereum, Polygon, etc.)
-- Use **Ringtail** for native Lux chain operations (C-Chain, subnets)
+- Use **Ringtail** for native Lux chain operations (C-Chain, L1s)
 
 ## Future Enhancements
 

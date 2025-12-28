@@ -325,13 +325,13 @@ const LP_TOPICS: CategoryMeta[] = [
     slug: 'p-chain',
     name: 'P-Chain',
     shortDesc: 'Platform coordination',
-    description: 'Platform chain for validator management, staking, delegation, subnet creation, and network coordination.',
+    description: 'Platform chain for validator management, staking, delegation, chain creation, and network coordination.',
     range: [1000, 1199],
-    tags: ['p-chain', 'platform', 'staking', 'delegation', 'subnet', 'validator-management'],
+    tags: ['p-chain', 'platform', 'staking', 'delegation', 'l1', 'validator-management'],
     icon: 'platform',
     color: 'violet',
-    learnMore: 'P-Chain is the metadata blockchain coordinating validators and subnets across the Lux network.',
-    keyTopics: ['Validator management', 'Staking', 'Delegation', 'Subnet creation'],
+    learnMore: 'P-Chain is the metadata blockchain coordinating validators and L1 chains across the Lux network.',
+    keyTopics: ['Validator management', 'Staking', 'Delegation', 'Chain creation'],
   },
 
   // ============================================================

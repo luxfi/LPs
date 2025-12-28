@@ -152,7 +152,7 @@ import "@lux/contracts/token/LRC20/extensions/LRC20Bridgeable.sol";
 ### From Avalanche
 
 ```javascript
-// Avalanche subnet assets
+// Avalanche chain assets
 // Can use Teleporter for native bridging to Lux
 import "@lux/contracts/bridge/TeleporterCompatible.sol";
 ```
@@ -177,7 +177,7 @@ These standards are compatible but Lux adds features:
 ### Conceptual Compatibility 🔄
 
 Similar purpose, different implementation:
-- Ethereum L2s ↔ Lux Subnets
+- Ethereum L2s ↔ Lux Chains
 - Various bridges ↔ LP-17 unified bridge
 - Multiple DEXs ↔ LP-13 standard interface
 
@@ -201,7 +201,7 @@ No equivalent on other chains:
 
 ### Porting from Avalanche
 
-1. **Subnet Projects**: Easy migration path
+1. **Chain Projects**: Easy migration path
 2. **AWM Users**: Direct Teleporter support
 3. **Native Assets**: Use bridge standards
 4. **Validators**: Similar architecture

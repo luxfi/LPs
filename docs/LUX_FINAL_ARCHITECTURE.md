@@ -12,7 +12,7 @@
 │    (Platform)      │    (Exchange)        │     (Contract)          │
 ├─────────────────────┼─────────────────────┼─────────────────────────┤
 │ • Validators       │ • UTXO Assets        │ • EVM Smart Contracts   │
-│ • Subnets          │ • Fast Transfers     │ • DeFi Applications     │
+│ • L1 Chains        │ • Fast Transfers     │ • DeFi Applications     │
 │ • Staking          │ • Native Assets      │ • NFTs & Tokens         │
 └─────────────────────┴─────────────────────┴─────────────────────────┘
                                 │
@@ -32,7 +32,7 @@
 ## Chain Responsibilities
 
 ### Primary Network (Existing)
-- **P-Chain**: Validator management, subnet creation, staking
+- **P-Chain**: Validator management, chain creation, staking
 - **X-Chain**: High-speed asset transfers, settlement layer
 - **C-Chain**: EVM compatibility, smart contracts, DeFi
 
@@ -72,7 +72,7 @@ type MChain struct {
 - **zkBridge**: Privacy-preserving cross-chain transfers
 - **FHE Support**: Fully homomorphic encryption for private computation
 - **AI Attestations**: TEE/SGX attestations for AI model integrity
-- **Proof Services**: Generate proofs for T-Chain and subnets
+- **Proof Services**: Generate proofs for T-Chain and L1 chains
 
 **Key Features**:
 ```rust
@@ -106,9 +106,9 @@ User Intent → T-Chain (MPC Lock) → X-Chain (Mint/Burn) → Destination
 Private Transfer → Z-Chain (Generate Proof) → T-Chain (Verify & Execute)
 ```
 
-### AI Subnet ↔ Z-Chain Attestation
+### AI Chain ↔ Z-Chain Attestation
 ```
-AI Model → TEE Execution → Z-Chain (Attestation) → Subnet Verification
+AI Model → TEE Execution → Z-Chain (Attestation) → Chain Verification
 ```
 
 ## Use Cases
@@ -147,7 +147,7 @@ async function privateBridgeAssets() {
 
 ### 3. AI Model Attestation (Z-Chain)
 ```typescript
-// AI subnet requests model attestation
+// AI chain requests model attestation
 async function attestAIModel() {
     const attestation = await zChain.attestModel({
         modelHash: "0x...",
@@ -155,7 +155,7 @@ async function attestAIModel() {
         performance: benchmarkResults
     });
     
-    // Subnet can verify model integrity
+    // Chain can verify model integrity
     return attestation;
 }
 ```
@@ -195,7 +195,7 @@ async function attestAIModel() {
 1. **Simplicity**: Only 2 additional chains with clear purposes
 2. **Modularity**: Each chain optimized for specific functions
 3. **Scalability**: Parallel processing of money and privacy operations
-4. **Flexibility**: Can add AI/specialized subnets as needed
+4. **Flexibility**: Can add AI/specialized chains as needed
 5. **Security**: Separation of concerns with shared validator set
 
 ## Implementation Priority
@@ -211,7 +211,7 @@ async function attestAIModel() {
    - TEE attestation framework
 
 3. **Phase 3**: Advanced Features
-   - AI subnet support
+   - AI chain support
    - Advanced FHE applications
    - Cross-chain privacy pools
 

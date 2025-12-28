@@ -735,7 +735,7 @@ contract SecureCGGMP21Integration {
 | P-Chain | `node/vms/platformvm/` | Validator threshold keys |
 | C-Chain | `node/vms/coreth/` | Smart contract verification |
 | Bridges | `node/bridges/` | Cross-chain custody |
-| Warp | `node/vms/platformvm/warp/` | Cross-subnet messaging |
+| Warp | `node/vms/platformvm/warp/` | Cross-chain messaging |
 
 ## Test Cases
 

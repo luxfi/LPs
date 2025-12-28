@@ -66,8 +66,8 @@ The Lux Network implements a clear 5-chain architecture with distinct separation
 
 ### Cross-Chain Asset Transfer
 ```
-External Chain → T-Chain (MPC Lock) → X-Chain (Mint) → C-Chain/Subnets
-External Chain ← T-Chain (MPC Release) ← X-Chain (Burn) ← C-Chain/Subnets
+External Chain → T-Chain (MPC Lock) → X-Chain (Mint) → C-Chain/L1s
+External Chain ← T-Chain (MPC Release) ← X-Chain (Burn) ← C-Chain/L1s
 ```
 
 ### Private Transaction

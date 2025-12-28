@@ -71,7 +71,7 @@ The Lux Network standards framework aims to establish a comprehensive set of pro
 
 ### Key LPs
 - **LP-15**: Teleport (AWM) Message Format (Core)
-- **LP-16**: Cross-Subnet Communication Protocol (Core)
+- **LP-16**: Cross-Chain Communication Protocol (Core)
 - **LP-17**: Universal Bridge Standards (Interface)
 - **LP-18**: Cross-Chain Asset Registry (Interface)
 - **LP-19**: Wallet Integration Standards (Interface)
