@@ -374,6 +374,14 @@ contract ERC20B is ERC20, ERC20Burnable, AccessControl, Pausable {
 | Lux ETH | LETH | Lux |
 | Lux BTC | LBTC | Lux |
 
+## Rationale
+
+The MPC threshold signature approach was chosen over alternatives:
+1. **vs Multi-sig**: MPC prevents key exposure; multi-sig reveals individual public keys
+2. **vs Trusted validators**: MPC eliminates single points of failure
+3. **vs ZK bridges**: MPC is simpler and has proven production reliability
+4. **EIP-712**: Provides structured, typed signing to prevent signature malleability
+
 ## Security Considerations
 
 ### EIP-712 Domain
