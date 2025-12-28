@@ -277,6 +277,22 @@ go test -v ./core/vm/... -run "TestBn256"
 go test -v ./core/vm/... -run "TestBls12381"
 ```
 
+## Motivation
+
+Standard Ethereum precompiles are essential for EVM compatibility and enable critical cryptographic operations that would be prohibitively expensive in pure Solidity:
+
+1. **Groth16 verification** requires BN254 curve pairings
+2. **BLS signatures** require BLS12-381 curve operations
+3. **Ethereum compatibility** requires identical gas costs
+
+## Rationale
+
+Lux EVM chains inherit all standard Ethereum precompiles to ensure full compatibility with existing smart contracts and tooling. Gas costs match Ethereum mainnet post-EIP-1108 for predictable behavior.
+
+## Backwards Compatibility
+
+All precompiles are active from genesis with identical behavior to Ethereum mainnet. No breaking changes to existing contracts.
+
 ## References
 
 - [EIP-1108: Reduce alt_bn128 precompile gas costs](https://eips.ethereum.org/EIPS/eip-1108)

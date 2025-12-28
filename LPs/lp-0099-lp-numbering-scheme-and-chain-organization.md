@@ -3,7 +3,7 @@ lp: 99
 title: LP Numbering Scheme and Chain Organization
 description: Canonical governance anchor defining LP numbering, status semantics, and normative classification
 author: Lux Core Team
-status: Living
+status: Final
 tags: [core, meta, governance]
 type: Meta
 created: 2025-01-15
