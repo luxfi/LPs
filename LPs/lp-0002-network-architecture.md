@@ -40,22 +40,29 @@ Lux organizes chains into a recursive structure:
 ┌─────────────────────────────────────────────────────────────────────┐
 │                         LUX NETWORK                                 │
 ├─────────────────────────────────────────────────────────────────────┤
-│  PRIMARY CHAINS (Core Infrastructure)                               │
-│    P-Chain: Platform - Validator coordination, staking, chain mgmt  │
-│    X-Chain: Exchange - High-throughput asset transfers (DAG)        │
-│    C-Chain: Contract - EVM smart contracts                          │
+│  PRIMARY NETWORK (Required — every validator)                       │
+│    P-Chain: Platform — Validator coordination, staking, chain mgmt  │
+│    Q-Chain: Quantum  — Post-quantum consensus finality (BLS+PQ)     │
 ├─────────────────────────────────────────────────────────────────────┤
-│  SPECIALIZED CHAINS (Purpose-Built)                                 │
-│    A-Chain: Attestation - AI verification, proof-of-inference       │
-│    B-Chain: Bridge - Cross-network asset movement                   │
-│    T-Chain: Threshold - MPC/TSS key management                      │
-│    Q-Chain: Quantum - Post-quantum cryptography operations          │
-│    Z-Chain: Zero-Knowledge - ZKP verification and privacy           │
+│  OPTIONAL L1 CHAINS (Validator opt-in via --track-chains)           │
+│    C-Chain: Contract    — General-purpose EVM                       │
+│    X-Chain: Exchange    — High-throughput asset transfers (DAG)      │
+│    D-Chain: DEX         — Native CLOB + AMM orderbook               │
+│    Z-Chain: ZK          — Zero-knowledge proof verification         │
+│    T-Chain: Threshold   — MPC/TSS/FHE key management                │
+│    B-Chain: Bridge      — Cross-network asset movement              │
+│    A-Chain: Attestation — AI verification, proof-of-inference       │
 ├─────────────────────────────────────────────────────────────────────┤
-│  APPLICATION CHAINS (User-Deployed)                                 │
-│    Custom chains with own validators, consensus, and VMs            │
+│  L2 CHAINS (Sovereign chain networks — own validators)              │
+│    Require P+Q only. Q optional for non-quantum L1s.                │
+│    Example: Liquidity (EVM + DEX + FHE)                             │
+├─────────────────────────────────────────────────────────────────────┤
+│  L1 CHAINS (Independent networks — own consensus)                   │
+│    Q optional for quantum safety on native consensus.               │
 └─────────────────────────────────────────────────────────────────────┘
 ```
+
+See [LPS-006](../LPS-006-primary-network-consensus.md) for the full P+Q consensus specification.
 
 ### Chain Registration
 
