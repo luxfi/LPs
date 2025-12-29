@@ -1,5 +1,5 @@
 ---
-lp: 006
+lp: 101
 title: Primary Network Consensus — P+Q Architecture
 tags: [consensus, primary-network, quantum, p-chain, q-chain, l1, l2]
 description: Only P-Chain and Q-Chain are required for the primary network. All other chains are optional L1s.
