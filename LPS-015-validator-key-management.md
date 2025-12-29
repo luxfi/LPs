@@ -48,9 +48,11 @@ Each validator maintains 3 independent key pairs:
 **Post-Quantum Path** (LPS-012):
 | Key | Classical | Post-Quantum | Timeline |
 |-----|-----------|--------------|----------|
-| TLS | ECDSA P-256 | Ringtail lattice signatures | Phase 1 (2026) |
-| BLS | BLS12-381 | Ringtail lattice signatures | Phase 1 (2026) |
-| Staking | secp256k1 | Ringtail lattice signatures | Phase 1 (2026) |
+| TLS | ECDSA P-256 | ML-DSA-65 + Ringtail hybrid | Phase 1 (2026) |
+| BLS | BLS12-381 | Ringtail lattice (threshold-friendly) | Phase 1 (2026) |
+| Staking | secp256k1 | Ringtail lattice | Phase 1 (2026) |
+
+ML-DSA-65 on TLS adds ~7 KB to the initial handshake (one-time per connection) but provides NIST FIPS 204 compliance — important for regulated institutional clients. Ringtail on consensus voting keeps per-block overhead minimal with threshold-aggregatable signatures.
 
 Hybrid mode: classical + PQ signatures on every message. Secure if either algorithm holds.
 
