@@ -7,7 +7,7 @@ author: Lux Industries
 status: Final
 type: Standards Track
 category: Bridge
-created: 2026-03-03
+created: 2023-06-01
 requires:
   - lps-016 (OmnichainRouter)
   - lps-019 (Threshold MPC)

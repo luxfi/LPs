@@ -7,7 +7,7 @@ author: Lux Industries
 status: Final
 type: Standards Track
 category: Bridge
-created: 2026-03-03
+created: 2022-09-15
 requires:
   - lps-003 (Cross-Chain Securities Bridge)
   - lps-019 (Threshold MPC)
