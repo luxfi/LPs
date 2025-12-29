@@ -1,0 +1,165 @@
+---
+lp: 1034
+title: P-Chain as Superchain L2 – OP Stack Rollup Integration
+description: Blueprint for integrating the P-Chain as an OP Stack rollup into the Ethereum Superchain while preserving Lux Consensus
+author: Zach Kelling (@zeekay) and Lux Team (@luxfi)
+discussions-to: https://github.com/luxfi/lps/discussions
+status: Draft
+type: Standards Track
+category: Core
+created: 2025-07-24
+tags: [l2, scaling]
+requires: 3, 3
+order: 34
+---
+
+## Abstract
+
+This LP presents a feasibility blueprint showing how Lux P-Chain can operate as an OP Stack rollup on Ethereum mainnet—joining the Superchain—without discarding Lux Consensus or our eight-chain architecture. P-Chain’s stake-weighted proposer set replaces a centralized sequencer key, and finalized P-Blocks are batched to Ethereum via the OptimismPortal and L2OutputOracle.
+
+## Motivation
+
+By merging P-Chain with OP Stack, Lux achieves:
+- **Decentralized Sequencing**: P-Chain’s Lux consensus++ consensus (≥ ⅔ stake) orders blocks instead of a single sequencer.
+- **Native Settlement**: Batches of P-Chain transactions commit on L1 via Optimism contracts.
+- **Seamless Integration**: All Lux chains (C/X/M/Z) remain L3 Superchain appchains.
+- **Shared Security**: Lux validators secure both base-chain and rollup state with the same stake.
+
+## Specification
+
+### 1. Big-Picture Topology
+
+```
+Ethereum L1
+│   ▲              ▲
+│   │ (ETH deposits│L2 outputs, fraud/zk proofs)
+│   │              │
+│ ┌─┴──────────────┴────────────────┐
+│ │  P-Chain  (Lux  ↔  OP-Stack L2) │
+│ │  ─ Lux Consensus (≥⅔ stake)     │
+│ │  ─ op-geth state engine         │
+│ │  ─ lux-batcher & lux-proposer   │
+│ └─┬───────────────────────────────┘
+│   │ Warp / IBC / SDK
+│   ▼
+┌───┴───────────┬───────────┬────────────┐
+│ C-Chain (EVM) │ X-Chain   │ T-Chain    │ Z-Chain    │
+│               │ (AMM)     │ (MPC)      │ (zk/FHE)   │
+└───────────────┴───────────┴────────────┴────────────┘
+```
+
+### 2. P-Chain Component Changes
+
+| Component       | Current                     | After Upgrade                                                  |
+|-----------------|-----------------------------|----------------------------------------------------------------|
+| Execution       | PlatformVM (UTXO + staking) | op-geth (EVM + OP Stack modifications)                         |
+| Ordering        | Lux consensus++ proposer rotation | Unchanged (stake-weighted proposer; exposed via op-node API)   |
+| L2 Contracts    | none                        | Deploy OptimismPortal, L2OutputOracle, StandardBridge on L1    |
+| Batcher         | n/a                         | `lux-batcher` service batches P-Blocks and posts to portal    |
+| Proposer        | n/a                         | `lux-proposer` submits output roots to L2OutputOracle every N blocks |
+| Fraud/Validity  | Lux slashing only           | Start with OP fault-proof; later replace with ZK proofs       |
+
+## Rationale
+
+This design preserves Lux Consensus ordering and finality, anchors P-Chain state natively on Ethereum, and reuses proven OP Stack contracts for settlement. It aligns with Superchain standards while retaining decentralization and low-latency UX.
+
+## Backwards Compatibility
+
+This upgrade is fully additive and opt-in. Nodes not launched in OP-Stack mode behave as before, and existing Lux applications are unaffected unless they explicitly enable rollup features.
+
+## Implementation
+
+### P-Chain as OP Stack Rollup Integration
+
+**Location**: `~/work/lux/geth/rollup/optimism/`
+**GitHub**: [`github.com/luxfi/geth/tree/main/rollup/optimism`]()
+
+**Core Components**:
+- [`plugin.go`](https://github.com/luxfi/geth/blob/main/rollup/optimism/plugin.go) - OP Stack plugin
+- [`consensus/sequencer.go`](https://github.com/luxfi/geth/blob/main/rollup/optimism/consensus/sequencer.go) - Stake-weighted sequencer
+- [`contracts/OptimismPortal.sol`](https://github.com/luxfi/geth/blob/main/rollup/optimism/contracts/OptimismPortal.sol) - L1 settlement
+- [`contracts/L2OutputOracle.sol`](https://github.com/luxfi/geth/blob/main/rollup/optimism/contracts/L2OutputOracle.sol) - Output validation
+
+**Lux-specific Components**:
+- Location: `~/work/lux/stack/`
+- [`lux-batcher`]() - Batch posting service
+- [`lux-proposer`]() - Output root proposer
+
+**Stake-Weighted Proposer Implementation**:
+```go
+// From consensus/sequencer.go
+type ProposerRotation struct {
+    validators ValidatorSet
+    currentIdx uint32
+    stake      map[ids.NodeID]uint64
+}
+
+func (pr *ProposerRotation) NextProposer() ids.NodeID {
+    // Select next proposer weighted by stake
+    totalStake := pr.TotalStake()
+    selected := rand.Int64() % totalStake
+    cumulative := int64(0)
+
+    for nodeID, nodeStake := range pr.stake {
+        cumulative += int64(nodeStake)
+        if selected < cumulative {
+            return nodeID
+        }
+    }
+}
+```
+
+**Testing**:
+```bash
+cd ~/work/lux/geth
+go test ./rollup/optimism/... -v
+go test ./contracts/... -v
+
+cd ~/work/lux/stack
+go test ./lux-batcher/... -v
+go test ./lux-proposer/... -v
+```
+
+### RPC Extensions
+
+**P-Chain Rollup RPC methods**:
+- `rollup_getCurrentSequencer` - Get active sequencer
+- `rollup_getProposerCommitment` - Get proposed output root
+- `rollup_estimateL1Cost` - Estimate L1 settlement cost
+
+## Test Cases
+
+1. Commit and verify a known P-Chain state root and inclusion proofs.
+2. Submit and validate batches under different block sizes and time intervals.
+3. Simulate fault-proof challenges via OP Stack test harness.
+4. Ensure C-Chain and other Lux chains operate normally when rollup mode is disabled.
+5. Verify stake-weighted proposer selection is correct.
+6. Test validator set updates trigger new DKG for MPC signers.
+
+## Reference Implementation
+
+Proof-of-concept modules:
+- `/work/lux/geth/rollup/optimism` (OP plugin)
+- `/work/lux/evm` with `op-geth` feature under Lux consensus++ harness
+- `lux-batcher` and `lux-proposer` binaries in `/work/lux/stack`
+
+## Security Considerations
+
+- Relayer authority must be permissioned (e.g. multisig) to guard against malicious commits.
+- Batch submissions only after P-Chain finality (≥ ⅔ stake) to prevent reorg attacks.
+- Strict gas limits on proof verification to mitigate DoS.
+- Isolate rollup state from base-chain state to avoid cross-chain contamination.
+
+## Economic Impact (optional)
+
+At 50 gwei and 100 000 gas per batch, L1 cost ≈ 0.0025 ETH (~ $4.50). Batching 200 L2 txs yields ~$0.0225 per tx. EIP‑4844 proto‑dank cuts this by ≈ 10×.
+
+## Open Questions (optional)
+
+1. Optimal batch window (size vs latency)?
+2. Dynamic fee‑market or fixed sequencer margin?
+3. L1 proof challenge window vs ZK proof replacement?
+
+## Copyright
+
+Copyright and related rights waived via [CC0](https://creativecommons.org/publicdomain/zero/1.0/).
