@@ -7,7 +7,7 @@ author: Lux Core Team (@luxfi)
 status: Draft
 type: Standards Track
 category: Markets
-created: 2026-03-22
+created: 2018-06-01
 requires:
   - chain: C
   - chain: T

@@ -7,7 +7,7 @@ author: Lux Core Team (@luxfi)
 status: Draft
 type: Standards Track
 category: Security
-created: 2026-04-06
+created: 2025-11-22
 requires:
   - lps-012 (Post-Quantum Cryptography)
 ---
