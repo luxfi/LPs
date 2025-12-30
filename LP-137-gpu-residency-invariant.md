@@ -1219,6 +1219,10 @@ Status of each invariant the LP commits to. "Enforced" = mechanically
 asserted in CI on every build. "Satisfied" = code path proven correct
 once but not blocked by CI. "Pending" = not yet landed.
 
+> The test oracle is non-authoritative: blst may appear only in test
+> targets and never in production link graphs. Items 6 and 7 below are
+> the mechanical enforcement of this rule.
+
 | # | Invariant | Status |
 |---|---|---|
 | 1 | All 9 LP-134 chains GPU-native (state + canonical transition on device) | ✓ enforced (per-VM determinism harness, `LP-137-COVERAGE.md`) |
