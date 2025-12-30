@@ -17,7 +17,7 @@ backend is asserted against).
 | Q-Chain | QuantumVM    | luxcpp/lattice + cevm/quasar | v0.43+ | (in cevm) | — | (in cevm 13 BLS+Ringtail) | CPU+Metal+CUDA+WGSL |
 | Z-Chain | ZKVM         | cevm/quasar Groth16 | v0.44.0 | (in cevm) | — | (in cevm 13) | CPU+Metal+CUDA, WGSL partial |
 | A-Chain | AIVM         | luxcpp/aivm       | v0.58.2 | **98.71%** | **94.71%** | 45/45 | CPU+Metal+CUDA+WGSL |
-| B-Chain | BridgeVM     | luxcpp/bridgevm   | v0.59.1 | 98.17% | 90.53% | 42/42 | CPU+Metal+CUDA+WGSL |
+| B-Chain | BridgeVM     | luxcpp/bridgevm   | v0.60 | 98.17% | 90.53% | 42/42 | CPU+Metal+CUDA+WGSL |
 | M-Chain | MPCVM        | luxcpp/mpcvm      | v0.61.0 | 97.90% | 90.32% | 41/41 | CPU+Metal+CUDA+WGSL |
 | F-Chain | FHEVM        | luxcpp/fhe + luxfi/fhevm | (existing) | n/a (gtest contract) | n/a | 2,174 gtest cases | CPU+CUDA+Metal+MLX+WGSL |
 

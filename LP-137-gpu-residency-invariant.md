@@ -42,7 +42,7 @@ Full roll-up with reproduction commands and per-VM analysis lives in
 | C-Chain | EVM (cevm) | v0.46.1 | 95.78% (TOTAL) / 96.51% (mm) | 58.46% (TOTAL) | 59/59 |
 | X-Chain | XVM | v0.55+1 | 97.48% | 92.46% | 44/44 + 7 det + 6 Metal |
 | A-Chain | AIVM | v0.58.2 | 98.71% | 94.71% (oracle) | 45/45 |
-| B-Chain | BridgeVM | v0.59.1 | 98.17% | 90.53% | 42/42 |
+| B-Chain | BridgeVM | v0.60 | 98.17% | 90.53% | 42/42 |
 | M-Chain | MPCVM | v0.61.0 | 97.90% (oracle) | 90.32% (oracle) | 41/41 |
 
 Aggregate: line ≥96% across the five new VMs (avg **97.96%**, excludes cevm — see note); CPU reference
@@ -1215,11 +1215,13 @@ on every chain that ships a Phase-2 GPU engine (cevm 6/6, platformvm
 > on Metal (CUDA build, WGSL full Fp tower); 2 746+ vectors byte-equal
 > blst. Production binaries clear of blst symbols (CI-asserted). blst
 > pinned to test-only oracle at
-> `luxcpp/crypto/bls/test/cmake/blst.cmake`. Phase-2 substrate
-> geometric mean lift (0.30× → 1.33×) holds; three workloads beat CPU
-> end-to-end (F NTT 23.6×, B-Chain BLS 9.5×, C-Chain BLS 9.2×). Full
-> numbers, Phase-1↔Phase-2↔Phase-3 deltas, and BLS pairing-stack vector
-> totals in `LP-137-BENCHMARKS.md`.**
+> `luxcpp/crypto/bls/test/cmake/blst.cmake`. Substrate-wide geometric
+> mean lift **0.17× (Phase-1) → 0.97× (Phase-3 with v0.47.1 pubkey
+> cache)** — 5.7× lift, has not yet crossed parity. Three workloads
+> beat CPU end-to-end: F NTT 23.6×, B-Chain BLS 9.5×, C-Chain BLS
+> 16.51× via pubkey cache. Full numbers, Phase-1↔Phase-2↔Phase-3
+> deltas, and BLS pairing-stack vector totals in
+> `LP-137-BENCHMARKS.md`.**
 
 ## 46. LP-137 audit checklist — enforced
 
