@@ -24,6 +24,63 @@ references:
 
 # LP-137: GPU-Residency Invariant
 
+## Status (v0.56 — 2026-04-26)
+
+**All 9 LP-134 chains GPU-native** — strict definition satisfied (state +
+canonical transition logic both on GPU). CPU only supplies packets, cold
+pages, time, attestation, watchdog. No caveats.
+
+The Quasar substrate (`luxcpp/cevm` v0.44+) wires every chain's
+transition root into `QuasarRoundDescriptor`; a single `QuasarCert`
+binds the canonical state of all 9 chains via `certificate_subject =
+keccak(... || P || C || X || Q || Z || A || B || M || F || ...)` in
+fixed canonical order. The five new wave-tick services
+(`PlatformVMTransition`, `XVMTransition`, `AIVMTransition`,
+`BridgeVMTransition`, `MPCVMTransition`) reserve work-queue addresses
+for per-VM ingress; the substrate already passes through them with
+descriptor-direct writes.
+
+### Coverage table
+
+| Chain | VM | Repo | CUDA | Metal | WGSL | CPU↔GPU determinism |
+|---|---|---|---|---|---|---|
+| P-Chain | PlatformVM | luxcpp/platformvm v0.53.x | ✓ | ✓ | ✓ | byte-equal |
+| C-Chain | EVM (cevm) | luxcpp/cevm v0.44 | ✓ | ✓ | — | byte-equal |
+| X-Chain | XVM | luxfi/xvm v0.55.x | ✓ | ✓ | ✓ | byte-equal |
+| Q-Chain | QuantumVM | luxcpp/lattice + cevm/quasar v0.43 | ✓ | ✓ | ✓ | byte-equal |
+| Z-Chain | ZKVM | cevm/quasar Groth16 v0.43 | ✓ | ✓ | partial | byte-equal |
+| A-Chain | AIVM | luxfi/aivm v0.58.x | ✓ | ✓ | ✓ | byte-equal |
+| B-Chain | BridgeVM | luxfi/bridgevm v0.59.x | ✓ | ✓ | ✓ | byte-equal |
+| M-Chain | MPCVM | luxfi/mpcvm v0.60.x | ✓ | ✓ | ✓ | byte-equal |
+| F-Chain | FHEVM | luxcpp/fhe + luxfi/fhevm | ✓ | ✓ | ✓ | byte-equal |
+
+WGSL "—" on C-Chain reflects EVM bytecode interpreter targeting
+CUDA/Metal first; WGSL "partial" on Z-Chain reflects Groth16 pairing
+arithmetic shipped on CUDA/Metal with WebGPU port pending.
+
+### What v0.44 ships
+
+- `QuasarRoundDescriptor` extended with five 32-byte chain transition
+  roots (`xchain_execution_root`, `achain_state_root`,
+  `bchain_state_root`, `mchain_state_root`, `fchain_state_root`); P/Q/Z
+  remain from v0.42; C reuses `parent_block_hash` (cevm round IS C).
+- `compute_certificate_subject` recipe extended to 11×32 byte hash
+  input in canonical P, C, X, Q, Z, A, B, M, F + parent_state +
+  parent_execution order. Both host (`quasar_sig.hpp`) and device
+  (`quasar_wave.metal`) layouts updated; descriptor sizeof = 480 bytes.
+- `QuasarRoundResult` echoes all 9 roots + `certificate_subject_echo`
+  so downstream consumers reconstruct the cert subject from the result
+  alone; sizeof = 672 bytes.
+- `ServiceId::Count` bumped to 17 with five new transition services
+  reserved at indices 12–16.
+- 9-chain integration test (`quasar_9chain_integration_test.mm`)
+  proves: subject keccak input matches the canonical 11-segment
+  reference byte-for-byte; flipping any single bit in any of the 9
+  chain roots produces a different subject (cert-binding holds);
+  swapping two roots also produces a different subject (canonical
+  order matters); engine echoes all 9 roots back into the result;
+  tampered descriptor's recompute diverges from the engine's echo.
+
 ## Abstract
 
 The QuasarGPU substrate (LP-132) ships with a clear architectural
