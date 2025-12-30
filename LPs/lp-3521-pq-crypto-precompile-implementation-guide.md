@@ -221,12 +221,21 @@ Offset  Length   Field         Description
 ```
 
 **ML-KEM Encapsulate:**
+
+> **CONSENSUS SAFETY**: The 32-byte `seed` field is MANDATORY. It replaces
+> `crypto/rand` to ensure all validators produce identical ciphertext for the
+> same calldata. Without this, validators diverge on state and the chain splits.
+> The seed is expanded via iterated SHA-256 (same pattern as HPKE precompile
+> `deterministicReader`). Callers MUST provide a unique seed per encapsulation
+> (e.g. `keccak256(abi.encodePacked(msg.sender, nonce))`).
+
 ```sql
 Offset  Length   Field         Description
 ─────────────────────────────────────────────────────────────
 0       4        selector      "encp" (0x656e6370)
 4       1        mode          Mode byte (0x00, 0x01, 0x02)
-5       var      publicKey     Public key (800/1184/1568 bytes)
+5       32       seed          Deterministic randomness seed
+37      var      publicKey     Public key (800/1184/1568 bytes)
 ```
 
 **ML-KEM Decapsulate:**
@@ -425,13 +434,15 @@ library PQCryptoLib {
 
 | Test Name | Description | Status |
 |-----------|-------------|--------|
-| TestPQCryptoPrecompile | Basic setup | ✅ PASS |
-| TestMLDSAVerify | ML-DSA-44 verification | ✅ PASS |
-| TestMLKEMEncapsulateDecapsulate | Full KEM round-trip | ✅ PASS |
-| TestSLHDSAVerify | SLH-DSA-SHA2-128s verification | ✅ PASS |
-| TestGasCalculation | All 15 per-mode gas costs | ✅ PASS |
-| BenchmarkPQPrecompile/ML-DSA-Verify | ML-DSA performance | ✅ PASS |
-| BenchmarkPQPrecompile/ML-KEM-Encapsulate | ML-KEM performance | ✅ PASS |
+| TestPQCryptoPrecompile | Basic setup | PASS |
+| TestMLDSAVerify | ML-DSA-44 verification | PASS |
+| TestMLKEMEncapsulateDecapsulate | Full KEM round-trip (with seed) | PASS |
+| TestMLKEMEncapsulateDeterministic | Same seed+pubkey = identical output (consensus safety) | PASS |
+| TestMLKEMEncapsulateRejectsMissingSeed | Old-format calldata without seed rejected | PASS |
+| TestSLHDSAVerify | SLH-DSA-SHA2-128s verification | PASS |
+| TestGasCalculation | All 15 per-mode gas costs | PASS |
+| BenchmarkPQPrecompile/ML-DSA-Verify | ML-DSA performance | PASS |
+| BenchmarkPQPrecompile/ML-KEM-Encapsulate | ML-KEM performance (with seed) | PASS |
 
 ## Rationale
 
@@ -496,6 +507,7 @@ Hash-based signatures have wide variance between "small" and "fast" variants:
 2. **Input validation**: All input lengths validated before processing
 3. **No secret leakage**: No branching on secret values
 4. **Audited library**: Uses Cloudflare CIRCL (audited implementation)
+5. **Deterministic randomness (consensus safety)**: ML-KEM encapsulate, all keygen, and all signing operations require a caller-provided 32-byte seed. Pseudorandom bytes are derived via iterated SHA-256 (`deterministicReader`), ensuring every validator produces identical output for identical calldata. This is the same pattern used in the HPKE precompile (LP-3662). Using `crypto/rand` in any EVM precompile is a consensus-safety violation that causes chain splits.
 
 ### Mode Byte Validation
 
