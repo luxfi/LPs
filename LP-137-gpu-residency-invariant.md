@@ -30,6 +30,32 @@ references:
 canonical transition logic both on GPU). CPU only supplies packets, cold
 pages, time, attestation, watchdog. No caveats.
 
+### Coverage status (2026-04-26 roll-up)
+
+LLVM source-based coverage on all five new VMs + cevm/quasar substrate.
+Full roll-up with reproduction commands and per-VM analysis lives in
+[`LP-137-COVERAGE.md`](LP-137-COVERAGE.md).
+
+| Chain | VM | Tag | Line % | Branch % (oracle) | Tests |
+|---|---|---|---:|---:|---:|
+| P-Chain | PlatformVM | v0.55 | 98.10% | 99.25% (oracle) | 53/53 |
+| C-Chain | EVM (cevm) | v0.44 | 96.51% | (host-side) | 59/59 |
+| X-Chain | XVM | v0.55 | 95.15% | 90.08% | 43+/43+ |
+| A-Chain | AIVM | v0.58.2 | 95.58% | 94.71% (oracle) | 45/45 |
+| B-Chain | BridgeVM | v0.59.1 | 98.17% | 90.53% | 42/42 |
+| M-Chain | MPCVM | v0.61.0 | 97.90% (oracle) | 90.32% (oracle) | 41/41 |
+
+Aggregate: line ≥95% across the five new VMs (avg 96.98%); CPU reference
+oracle — the security-critical byte-equivalence target — clears 90%
+branch on every VM where it is the dominant translation unit. Branch
+coverage gaps below 90% on whole-VM totals are itemized in each VM's
+`COVERAGE.md` as physically-unreachable defenses (hash-table
+linear-probe fallthrough behind arena-cap invariants, GPU driver
+allocation-failure paths, switch-default arms over enum types). Bugs
+caught and fixed during this push (rotl64 UB at n=0, keccak_f1600
+clang -O3 miscompile, WGSL pointer/reserved-keyword issues, MPCVM
+WGSL struct stride drift) are listed in the roll-up.
+
 The Quasar substrate (`luxcpp/cevm` v0.44+) wires every chain's
 transition root into `QuasarRoundDescriptor`; a single `QuasarCert`
 binds the canonical state of all 9 chains via `certificate_subject =
