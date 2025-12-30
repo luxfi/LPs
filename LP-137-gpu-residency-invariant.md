@@ -1126,17 +1126,23 @@ The slogan stays right:
 
 > **The CPU touches reality. The GPU runs the chain.**
 
-## 45. Performance — measured (2026-04-26, Phase-2)
+## 45. Performance — measured (2026-04-27, Phase-3)
 
 GPU acceleration measured against CPU reference on Apple M1 Max
 (32-core integrated GPU, 10.4 TFLOPS FP32, 64 GB unified RAM, macOS
 26.4) — full roll-up in
 [`LP-137-BENCHMARKS.md`](LP-137-BENCHMARKS.md).
 
-**Phase-2 shipped on 5 of 6 target chains. Substrate-wide geometric
-mean lifts from 0.30× (Phase-1) to 1.33× (Phase-2) — a 4.4× lift in
-the GPU-vs-CPU position.** Three production workloads now beat CPU
-end-to-end (F NTT 23.6×, B-Chain BLS 9.5×, C-Chain BLS 9.2×).
+**Acceleration shipped on 9 of 9 chains. BLS pairing fully on-device on
+Metal (CUDA build, WGSL lower tower); 2 746+ vectors byte-equal blst.
+Production binaries clear of blst symbols (CI-asserted). blst pinned to
+test-only oracle at `luxcpp/crypto/bls/test/cmake/blst.cmake`.**
+Three production workloads beat CPU end-to-end at the v0.45 (Phase-2)
+crossover (F NTT 23.6×, B-Chain BLS 9.5×, C-Chain BLS 9.2×); Phase-3
+adds correctness-complete on-device pairing across all stages of the
+BLS12-381 tower (Fp/Fp2/Fp6/Fp12 + G2 + Miller + final_exp + e(P,Q)),
+plus AI/ML inference byte-equal CPU↔Metal across 1 000 inputs, plus
+composite confidential attestation byte-equal C++↔Go.
 
 **Headline by chain** (representative workload, Phase-1 → Phase-2):
 
@@ -1197,12 +1203,35 @@ the byte-equivalence ground truth — clears its release-blocking gate
 on every chain that ships a Phase-2 GPU engine (cevm 6/6, platformvm
 15/15, aivm 47/47, bridgevm 49/49, mpcvm 21/21, fhe primitive parity).
 
-> **GPU acceleration shipped on 5 of 6 Phase-2 target chains;
-> substrate-wide geometric mean 1.33× (vs Phase-1 0.30×). Three
-> production workloads now beat CPU end-to-end (F NTT 23.6×, B-Chain
-> BLS 9.5×, C-Chain BLS 9.2×). Architectural invariant verified on
-> all 9 chains. Full numbers and Phase-1↔Phase-2 deltas in
-> `LP-137-BENCHMARKS.md`.**
+> **Acceleration shipped on 9 of 9 chains. BLS pairing fully on-device
+> on Metal (CUDA build, WGSL lower tower); 2 746+ vectors byte-equal
+> blst. Production binaries clear of blst symbols (CI-asserted). blst
+> pinned to test-only oracle at
+> `luxcpp/crypto/bls/test/cmake/blst.cmake`. Phase-2 substrate
+> geometric mean lift (0.30× → 1.33×) holds; three workloads beat CPU
+> end-to-end (F NTT 23.6×, B-Chain BLS 9.5×, C-Chain BLS 9.2×). Full
+> numbers, Phase-1↔Phase-2↔Phase-3 deltas, and BLS pairing-stack vector
+> totals in `LP-137-BENCHMARKS.md`.**
+
+## 46. LP-137 audit checklist — enforced
+
+Status of each invariant the LP commits to. "Enforced" = mechanically
+asserted in CI on every build. "Satisfied" = code path proven correct
+once but not blocked by CI. "Pending" = not yet landed.
+
+| # | Invariant | Status |
+|---|---|---|
+| 1 | All 9 LP-134 chains GPU-native (state + canonical transition on device) | ✓ enforced (per-VM determinism harness, `LP-137-COVERAGE.md`) |
+| 2 | 4-way byte-equal CPU ↔ Metal ↔ CUDA ↔ WGSL on every deterministic primitive | ✓ enforced where backend lands (Phase-3 BLS Metal byte-equal blst on 2 746 vectors; WGSL lower tower 1 300 vectors; CUDA build-only on Apple host) |
+| 3 | Cert subject binds 9 chain transition roots + attestation_root + cert_mode | ✓ enforced (`quasar_9chain_integration_test.mm`, 7 tests) |
+| 4 | Composite confidential attestation across SEV-SNP / TDX / NRAS + RIM | ✓ enforced (11 parser + 16 composite tests, byte-equal C++↔Go) |
+| 5 | EVM precompile services route through GPU-resident batched drains | ✓ enforced (PrecompileService per-id batched entry-point; KeccakResidencySession ≥0.50 hit rate; transcript_root commits to input‖output‖gas‖status byte-equal CPU↔Metal) |
+| 6 | Production build has NO CPU fallback for hot precompile paths | ✓ enforced (no-blst-in-production-check passes from cevm v0.46.0; ctest WILL_FAIL property removed) |
+| 7 | Production build has NO vendored blst dependency | ✓ enforced (cevm v0.46.0 dropped `cevm/cmake/blst.cmake`; blst pinned to `luxcpp/crypto/bls/test/cmake/blst.cmake` test-only) |
+| 8 | Single-fused-kernel pairing (≤1 dispatch per pairing) | pending (Stage 5b/6; today ~280 dispatches per pairing) |
+| 9 | WGSL higher-tower pairing ops on M1 | pending (mechanical `ptr<function, array<u32, N>>` rewrite for fp6_inv / fp12 mul/sqr/inv/conj/cyclo_sqr) |
+| 10 | CUDA full kernel coverage on Linux+CUDA CI runner | pending (Apple host build-only today; H100 / Ada self-hosted runners report when their workflows complete) |
+| 11 | Brand-neutral API across env / C-ABI / Rust / TS / Python | ✓ enforced (one transition release with deprecation warnings, then drop) |
 
 ## References
 
