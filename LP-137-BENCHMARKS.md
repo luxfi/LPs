@@ -292,8 +292,11 @@ latency dominates; expected to land on discrete CUDA hosts).
   `verify_ringtail_batch` collapse N pairings into one Miller-fold
   + one final-exponentiation. Same-message (consensus hot path) hits
   9.24× at n=1024 against a flat 1.15 ms host-blst baseline. Pairing
-  itself is host blst in v0.45 (the on-GPU Fp12 stack lands v0.45.1);
-  the batching alone is what produces the published number.
+  itself is host blst (canonical c-abi body); the batching alone is
+  what produces the published number. Stage 5b measurement (cevm
+  9ff799fd, 2026-04-27) confirmed Metal single-pairing at N=1 lands
+  at ~475 ms vs 510 µs host blst — structurally bounded by serial
+  Fp12 chain on SIMD GPU; the SoTA single-pairing path is Linux+CUDA.
 - **cevm v0.45 V2 EVM kernel** — `evm_kernel_v2.metal` ships as a
   32-threads/tx threadgroup dispatcher with a lane-0-leader fallback
   to V1 on status=255. Build flag `LUX_EVM_KERNEL_V2=ON`. The SIMD
@@ -301,8 +304,11 @@ latency dominates; expected to land on discrete CUDA hosts).
 - **bridgevm v0.60 batched BLS pairing** — `bls::pre_verify_inbox`
   shards Miller loops across 10 M1 Max worker threads and merges into
   one final-exponentiation. 8.58×–10.35× across 1k/5k/10k message
-  workloads, mean 9.5×. Pairing math is host blst (the brief's stretch
-  target of 30× requires the on-GPU pairing landing in v0.61).
+  workloads, mean 9.5×. Pairing math stays on host blst via canonical
+  c-abi; per Stage 5b measurement (cevm 9ff799fd) Metal single-pairing
+  is structurally slower than host blst on M1 Max for this workload
+  shape. Stretch target ≥30× requires either Linux+CUDA, batched-N
+  parallel kernel saturation, or Karabina compressed cyclo.
 - **platformvm v0.57 single encoder + buffer pool + workgroup-parallel
   EpochTransition** — one persistent buffer pool per engine (eliminates
   14 `MTLBuffer` allocations per round), one command encoder per round
@@ -335,10 +341,18 @@ latency dominates; expected to land on discrete CUDA hosts).
 - **cevm V2 EVM kernel ships but does not yet replace V1 in the
   standard build.** The 32-threads/tx threadgroup is dispatched; the
   SIMD fan-out across opcodes lands in v0.45.x.
-- **Pairing math remains host-CPU** in cevm v0.45 and bridgevm v0.60.
-  Both reach the brief's primary target (≥9× batched) without the
-  on-GPU Fp12 stack; the stretch target (≥30×) requires that GPU
-  pairing port (cevm v0.45.1 / bridgevm v0.61).
+- **Pairing math remains host-CPU** in cevm v0.45 and bridgevm v0.60
+  (canonical c-abi body, no exposed blst symbols in production link
+  graph). Both reach the brief's primary target (≥9× batched). Stage
+  5b measurement (2026-04-27, cevm 9ff799fd) shows Metal single-
+  pairing at N=1 is structurally bounded on M1 Max (~475 ms vs 510 µs
+  host blst, 930× slower) because the serial Fp12 chain mismatches
+  the SIMD GPU shape; per-dispatch GPU compute is ~770 µs for a
+  single-thread Fp12 op. The ≥30× stretch target requires either
+  Linux+CUDA (`bls_driver_cuda.cpp` stub) where the toolchain doesn't
+  fight, batched-N parallel kernel saturation (1 warp per pairing on
+  M1 Max ≥32-way), or algorithmic changes (Karabina compressed cyclo
+  squarings).
 - **aivm v0.59 architectural change is correct but not measurable on
   M1 integrated GPU.** The locate+writeback split, the size-sweep
   determinism harness extension, and the dGPU-ready dispatch shape
