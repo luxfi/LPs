@@ -504,7 +504,7 @@ library BridgeLib {
     bytes32 constant OPTIMISM = keccak256("optimism");
     bytes32 constant POLYGON = keccak256("polygon");
     bytes32 constant BSC = keccak256("bsc");
-    bytes32 constant AVALANCHE = keccak256("avalanche");
+    bytes32 constant AVALANCHE = keccak256("avalanche"); // External chain bridge target
     bytes32 constant BASE = keccak256("base");
     bytes32 constant SOLANA = keccak256("solana");
 

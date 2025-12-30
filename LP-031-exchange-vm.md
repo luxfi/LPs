@@ -87,7 +87,7 @@ The DAG structure enables parallelism:
 | Resource | Location |
 |---|---|
 | XVM implementation | `github.com/luxfi/node/vms/xvm/` |
-| DAG consensus | `github.com/luxfi/node/snow/consensus/snowstorm/` |
+| DAG consensus (Nebula mode, LP-134) | `github.com/luxfi/node/consensus/nebula/` |
 | FPC protocol | LP-028 |
 
 ## Copyright

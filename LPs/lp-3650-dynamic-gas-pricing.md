@@ -19,11 +19,11 @@ order: 960
 **Type**: Standards Track
 **Category**: Core
 **Created**: 2025-01-15
-**Based on**: Avalanche ACP-176
+**Based on**: ACP-176 (historical prior art)
 
 ## Abstract
 
-This Lux Proposal (LP) adapts Avalanche's ACP-176 dynamic fee mechanism for the Lux Network. It introduces adaptive gas pricing and limits that respond to network congestion, improving user experience and network stability.
+This Lux Proposal (LP) adapts ACP-176's dynamic fee mechanism (historical prior art) for the Lux Network. It introduces adaptive gas pricing and limits that respond to network congestion, improving user experience and network stability.
 
 ## Motivation
 
@@ -97,7 +97,7 @@ time_to_double = ln(2) * conversionRate / demand_rate
 LP-176 maintains exact parameter compatibility with ACP-176 to ensure:
 - Cross-chain tooling works identically
 - Gas estimation libraries function correctly
-- Existing Avalanche documentation remains applicable
+- Existing upstream ACP-176 documentation remains applicable
 
 ## Implementation
 
@@ -260,7 +260,7 @@ Lux LP-176 maintains compatibility with ACP-176 while adapting to Lux-specific r
 
 ## References
 
-- [Avalanche ACP-176](https://github.com/avalanche-foundation/ACPs/blob/main/ACPs/176-dynamic-evm-gas-limit-and-price-discovery-updates/README.md)
+- [ACP-176 (historical prior art)](https://github.com/avalanche-foundation/ACPs/blob/main/ACPs/176-dynamic-evm-gas-limit-and-price-discovery-updates/README.md)
 - [EIP-1559: Fee Market Change](https://eips.ethereum.org/EIPS/eip-1559)
 - [Lux EVM Implementation](https://github.com/luxfi/node/tree/main/vms/evm/lp176)
 

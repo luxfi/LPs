@@ -39,7 +39,7 @@ The following 12 synthetic assets are approved for Lux Mainnet launch:
 | **xSOL** | Lux Synthetic SOL | LSOL | Solana synthetic |
 | **xTON** | Lux Synthetic TON | LTON | TON synthetic |
 | **xADA** | Lux Synthetic ADA | LADA | Cardano synthetic |
-| **xAVAX** | Lux Synthetic AVAX | LAVAX | Avalanche synthetic |
+| **xAVAX** | Lux Synthetic AVAX | LAVAX | Synthetic of external Avalanche AVAX |
 | **xBNB** | Lux Synthetic BNB | LBNB | BNB Chain synthetic |
 | **xPOL** | Lux Synthetic POL | LPOL | Polygon synthetic |
 
@@ -266,7 +266,7 @@ For each synth, corresponding LP pairs enable arbitrage when synths depeg:
 | LSOL/xSOL | LSOL/LUSD | SOL synth arbitrage |
 | LTON/xTON | LTON/LUSD | TON synth arbitrage |
 | LADA/xADA | LADA/LUSD | ADA synth arbitrage |
-| LAVAX/xAVAX | LAVAX/LUSD | AVAX synth arbitrage |
+| LAVAX/xAVAX | LAVAX/LUSD | AVAX synth arbitrage (external asset) |
 | LBNB/xBNB | LBNB/LUSD | BNB synth arbitrage |
 | LPOL/xPOL | LPOL/LUSD | POL synth arbitrage |
 | LZOO/xZOO | LZOO/LUSD | ZOO synth arbitrage |

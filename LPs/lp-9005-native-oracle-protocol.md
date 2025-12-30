@@ -431,7 +431,7 @@ Initial supported symbols (extendable via governance):
 | BTC-USD | BTC | USD | 100ms | 5 |
 | ETH-USD | ETH | USD | 100ms | 5 |
 | SOL-USD | SOL | USD | 100ms | 4 |
-| AVAX-USD | AVAX | USD | 100ms | 4 |
+| AVAX-USD (external asset) | AVAX | USD | 100ms | 4 |
 | LUX-USD | LUX | USD | 100ms | 3 |
 | BTC-ETH | BTC | ETH | 500ms | 3 |
 | ETH-LUX | ETH | LUX | 500ms | 2 |

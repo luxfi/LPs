@@ -32,7 +32,7 @@ The joint release explicitly classifies the following activities as **administra
 
 | Activity | Classification | How Lux Implements It |
 |----------|---------------|----------------------|
-| Protocol validation | Administrative | Proof-of-stake consensus (Snowman/Quasar) |
+| Protocol validation | Administrative | Proof-of-stake consensus (Quasar; Nova linear-chain mode + Nebula DAG mode, LP-020/LP-134) |
 | Solo staking | Administrative | P-Chain direct validator staking |
 | Delegated staking | Administrative | P-Chain permissionless delegation |
 | Liquid staking | Administrative | sLUX liquid staking receipt tokens |

@@ -97,7 +97,7 @@ interface ILuxAIOracle {
 package validator
 
 import (
-    "github.com/luxfi/lux-node/snow/engine"
+    "github.com/luxfi/node/consensus/engine"
     "github.com/hanzoai/llm-gateway/client"
 )
 

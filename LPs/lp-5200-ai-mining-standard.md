@@ -432,7 +432,7 @@ R(epoch) = 79.4 × 2^(-epoch) AI per block
 | Arbitrum | 42161 | External (Teleport) | Camelot | AI/ETH |
 | Optimism | 10 | External (Teleport) | Velodrome | AI/ETH |
 | Polygon | 137 | External (Teleport) | QuickSwap | AI/MATIC |
-| Avalanche | 43114 | External (Teleport) | Trader Joe | AI/AVAX |
+| Avalanche (external chain) | 43114 | External (Teleport) | Trader Joe | AI/AVAX |
 
 **Global Supply at Launch:** 10B AI (10 chains × 1B each)
 

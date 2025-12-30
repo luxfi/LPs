@@ -424,7 +424,7 @@ forge build
 
 # Deploy bridged asset to C-Chain
 forge script script/DeployBridgedAsset.s.sol:DeployBridgedAsset \
-  --rpc-url https://api.avax.network/ext/bc/C/rpc \
+  --rpc-url https://api.lux.network/ext/bc/C/rpc \
   --broadcast
 
 # Example: Bridged Bitcoin
@@ -436,7 +436,7 @@ forge create src/tokens/LuxBridgedAsset.sol:LuxBridgedAsset \
     0x<BRIDGE_ADDRESS> \
     0x<ORIGIN_BTC_ADDRESS> \
     0 \
-  --rpc-url https://api.avax.network/ext/bc/C/rpc
+  --rpc-url https://api.lux.network/ext/bc/C/rpc
 ```
 
 ### Testing

@@ -118,7 +118,7 @@ T-Chain is a specialized chain providing MPC key management. See [LP-330](/docs/
 
 **Chain Parameters:**
 - **Chain ID**: `T` (Threshold)
-- **Consensus**: Lux Snowball++ with 2s finality
+- **Consensus**: Lux Quasar (Photon committee + Wave voting + Focus, LP-020) with 2s finality
 - **Block Time**: 500ms
 - **Staking Token**: LUX (minimum 5,000 LUX per signer)
 - **Threshold**: Configurable t-of-n (default: 2/3 + 1)
@@ -136,7 +136,7 @@ B-Chain orchestrates bridge operations. See [LP-331](/docs/lp-6331-b-chain-bridg
 
 **Chain Parameters:**
 - **Chain ID**: `B` (Bridge)
-- **Consensus**: Lux Snowball++ with 2s finality
+- **Consensus**: Lux Quasar (Photon committee + Wave voting + Focus, LP-020) with 2s finality
 - **Block Time**: 500ms
 - **Staking Token**: LUX (minimum 10,000 LUX per validator)
 

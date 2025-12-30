@@ -122,7 +122,7 @@ go test -v ./core/vm ./core/state
 **4. EVM (C-Chain)** (via `~/work/lux/evm/`)
 - **Purpose**: Smart contracts and DeFi
 - **Execution**: Full EVM compatibility
-- **Integration**: `plugin/evm/vm.go` implements `snowman.ChainVM` interface
+- **Integration**: `plugin/evm/vm.go` implements `chain.ChainVM` interface (`github.com/luxfi/consensus/engine/chain/block`, the linear-chain Nova-mode VM contract)
 
 ### Solidity Contract Standards
 

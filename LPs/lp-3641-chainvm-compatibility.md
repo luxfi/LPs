@@ -1,7 +1,7 @@
 ---
 lp: 3641
 title: ChainVM Compatibility
-description: Provides compatibility layer for legacy Avalanche chain-EVM chains migrating to Lux Network
+description: Provides compatibility layer for legacy chain-EVM chains (historical Avalanche origin) migrating to Lux Network
 author: Lux Network Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
 status: Final
@@ -21,11 +21,11 @@ order: 955
 
 ## Abstract
 
-LP-118 provides a compatibility layer for legacy Avalanche chain-EVM chains migrating to the Lux Network. It ensures seamless transition while maintaining deterministic behavior and state consistency.
+LP-118 provides a compatibility layer for legacy chain-EVM chains (historical Avalanche origin) migrating to the Lux Network. It ensures seamless transition while maintaining deterministic behavior and state consistency.
 
 ## Motivation
 
-Many existing blockchain applications are built on Avalanche's chain-EVM. LP-118 enables these chains to migrate to Lux without requiring application-level changes, preserving:
+Many existing blockchain applications were built on the upstream chain-EVM (originally Avalanche, historical prior art). LP-118 enables these chains to migrate to Lux without requiring application-level changes, preserving:
 
 1. **Existing State**: All account balances and contract storage
 2. **Transaction Format**: Compatible with existing wallets and tools
@@ -280,7 +280,7 @@ LP-118 is designed for forward compatibility only. chain-EVM chains can migrate 
 
 ## References
 
-- [Avalanche chain-EVM](https://github.com/ava-labs/chain-evm)
+- [Upstream chain-EVM (ava-labs, historical prior art)](https://github.com/ava-labs/chain-evm)
 - [Lux EVM Implementation](https://github.com/luxfi/evm)
 - [Precompile Documentation](https://docs.lux.network/precompiles)
 

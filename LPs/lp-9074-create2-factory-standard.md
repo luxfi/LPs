@@ -491,7 +491,7 @@ forge build
 
 # Deploy to C-Chain
 forge script script/DeployCREATE2.s.sol:DeployCREATE2 \
-  --rpc-url https://api.avax.network/ext/bc/C/rpc \
+  --rpc-url https://api.lux.network/ext/bc/C/rpc \
   --broadcast
 ```
 

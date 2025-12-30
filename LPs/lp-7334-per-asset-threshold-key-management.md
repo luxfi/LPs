@@ -112,7 +112,7 @@ This naming convention provides:
 | XRP Ledger | `xrpl` | N/A | XRPL mainnet |
 | Solana | `sol` | N/A | Solana mainnet |
 | BNB Chain | `bsc` | 56 | BNB Smart Chain |
-| Avalanche | `avax` | 43114 | Avalanche C-Chain |
+| Avalanche (external chain) | `avax` | 43114 | Avalanche C-Chain (external network) |
 
 #### 1.2 Asset Symbol Rules
 

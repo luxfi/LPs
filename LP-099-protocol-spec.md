@@ -27,7 +27,7 @@ The protocol specification consists of the following sections, each referencing 
 
 | Section | LPS | Status |
 |---------|-----|--------|
-| Consensus: Snow family | Node documentation | Final |
+| Consensus: Quasar family (Photon/Wave/Nova/Nebula) | LP-020, LP-134 | Final |
 | Consensus: Block-STM parallel execution | LP-010 | Final |
 | Networking: P2P protocol, Warp messaging | LP-6022 | Final |
 | Execution: EVM, cevm GPU acceleration | LP-009, LP-098 | Final |

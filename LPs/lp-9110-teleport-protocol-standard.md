@@ -85,7 +85,7 @@ The Lux Network requires robust cross-chain interoperability to:
 | | zkSync Era      | |              +---------+---------+
 | | Blast           | |                        |
 | | Fantom (250)    | |              ICS-20 Token Transfer
-| | Avalanche       | |              ICS-27 Interchain Accounts
+| | Avalanche (ext) | |              ICS-27 Interchain Accounts
 | +-----------------+ |
 | +---------------+   |
 | | Non-EVM       |   |
@@ -276,7 +276,7 @@ The MPC Bridge enables cross-chain asset transfers across EVM and non-EVM chains
 | **Ethereum** | 1 | EVM | Active |
 | **BSC** | 56 | EVM | Active |
 | **Polygon** | 137 | EVM | Active |
-| **Avalanche** | 43114 | EVM | Active |
+| **Avalanche** (external chain) | 43114 | EVM | Active |
 | **Fantom** | 250 | EVM | Active |
 | **Arbitrum** | 42161 | L2 | Active |
 | **Optimism** | 10 | L2 | Active |
