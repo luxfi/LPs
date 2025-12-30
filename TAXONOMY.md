@@ -1,21 +1,25 @@
 # Lux Canonical Taxonomy
 
 Authoritative naming reference. All LPs, papers, code, and docs must
-conform. Last updated 2025-12-15 (Quasar 3.0 launch).
+conform. Last updated 2026-04-26 (explicit VM naming).
 
 ## Chains
 
-| Chain | VM | URI | Role |
-|---|---|---|---|
-| **P-Chain** | **PVM** | `lux:pvm`  | Platform — staking, validators, epochs, slashing |
-| **C-Chain** | **EVM** (cevm) | `lux:evm`  | Contracts — general smart contracts |
-| **X-Chain** | **XVM** | `lux:xvm`  | UTXO — assets, swaps, native txs |
-| **Q-Chain** | **QVM** | `lux:qvm`  | Quasar threshold-key (Ringtail DKG ceremony) |
-| **Z-Chain** | **ZVM** | `lux:zvm`  | Zero-knowledge (Groth16 rollups + ZKP registry) |
-| **A-Chain** | **AIVM** | `lux:aivm` | Attestation + AI provenance (TEE quotes, audit, identity, model registry) |
-| **B-Chain** | **BVM** | `lux:bvm`  | Bridge — cross-ecosystem messaging |
-| **M-Chain** | **MVM** | `lux:mvm`  | MPC ceremonies (CGGMP21, FROST, Ringtail-general) |
-| **F-Chain** | **FVM** | `lux:fvm`  | FHE compute (TFHE, encrypted EVM, confidential ERC-20) |
+VM names are **explicit**: PlatformVM, BridgeVM, MPCVM, FHEVM, DEXVM
+(not the short forms PVM/BVM/MVM/FVM/DVM). Explicit > implicit.
+
+| Chain | VM (canonical) | Short form (deprecated) | URI | Role |
+|---|---|---|---|---|
+| **P-Chain** | **PlatformVM** | PVM | `lux:platformvm` | Platform — staking, validators, epochs, slashing |
+| **C-Chain** | **EVM** (cevm) | — | `lux:evm` | Contracts — general smart contracts |
+| **X-Chain** | **XVM** | — | `lux:xvm` | UTXO — assets, swaps, native txs |
+| **Q-Chain** | **QuantumVM** | QVM | `lux:quantumvm` | Quasar threshold-key (Ringtail DKG ceremony) |
+| **Z-Chain** | **ZKVM** | ZVM | `lux:zkvm` | Zero-knowledge (Groth16 rollups + ZKP registry) |
+| **A-Chain** | **AIVM** | — | `lux:aivm` | Attestation + AI provenance (TEE quotes, audit, identity, model registry) |
+| **B-Chain** | **BridgeVM** | BVM | `lux:bridgevm` | Bridge — cross-ecosystem messaging |
+| **M-Chain** | **MPCVM** | MVM | `lux:mpcvm` | MPC ceremonies (CGGMP21, FROST, Ringtail-general) |
+| **F-Chain** | **FHEVM** | FVM | `lux:fhevm` | FHE compute (TFHE, encrypted EVM, confidential ERC-20) |
+| **D-Chain** | **DEXVM** | DVM | `lux:dexvm` | DEX — orderbook, AMM, lending, settlement (white-label template) |
 
 ## Consensus family (LP-020 §Quasar 3.0)
 
@@ -71,7 +75,7 @@ e.g., "Snowman (= Lux Nova mode)".
 ## Threshold-VM substrate
 
 `~/work/lux/chains/thresholdvm` is a **library**, not a chain.
-M-Chain (MVM) and F-Chain (FVM) both depend on it but stay
+M-Chain (MPCVM) and F-Chain (FHEVM) both depend on it but stay
 operationally distinct (orthogonal validators, ceremony cadence,
 gas economics). **No T-Chain.** LP-7013 is Expired (deprecated
 2025-12-25).
