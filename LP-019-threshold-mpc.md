@@ -8,20 +8,38 @@ status: Final
 type: Standards Track
 category: Cryptography
 created: 2021-08-01
+updated: 2025-12-15
 requires:
   - lps-012 (Post-Quantum Cryptography)
   - lps-015 (Validator Key Management)
 references:
-  - lp-5013 (T-Chain MPC Custody)
+  - lp-134 (Lux Chain Topology — M-Chain + F-Chain split)
   - lp-5333 (DKG Resharing)
   - lp-3001 (Teleport Bridge MPC)
+deprecates:
+  - lp-5013 (T-Chain MPC Custody) — superseded by M-Chain (MPC) +
+    F-Chain (FHE keygen) split per LP-134, effective 2025-12-25
 ---
 
 # LP-019: Threshold MPC for Bridge Signing
 
+> **Deprecation note (2025-12-15):** LP-5013 *T-Chain Decentralised
+> MPC Custody and Swap Signature Layer* is superseded by the
+> **M-Chain + F-Chain** split defined in LP-134, effective with the
+> Quasar 3.0 launch on 2025-12-25. M-Chain hosts the MPC ceremonies
+> (CGGMP21, FROST, Ringtail-general) described in this LP. F-Chain
+> hosts FHE compute and TFHE key-share ceremonies (LP-013). The
+> shared substrate library lives at `lux/chains/thresholdvm` and is
+> used by both M-Chain and F-Chain.
+
 ## Abstract
 
 Defines the threshold MPC signing infrastructure for the Teleport bridge. Three protocols are used: FROST (Schnorr/EdDSA, 2-round, for Ed25519 chains), CGGMP21 (ECDSA, identifiable aborts, for secp256k1 chains), and LSS (Linear Shamir's Secret Sharing, wraps both, enables dynamic resharing). The MPC group produces a single aggregate signature per signing request. On-chain verification uses Lux EVM precompiles: FROST at 0x000C, CGGMP21 at 0x000D, and Ringtail (post-quantum) at 0x000B. LSS enables dynamic resharing (e.g. 3-of-5 to 5-of-7) in 0.14ms per party without reconstructing the secret key.
+
+The MPC ceremonies in this LP are hosted on **M-Chain (MPC, see
+LP-134)**. TFHE bootstrap-key generation is hosted on **F-Chain (FHE
+keygen, see LP-134)** and consumes M-Chain ceremony output via the
+shared `thresholdvm` substrate.
 
 ## Motivation
 
@@ -388,6 +406,36 @@ The resharing happens off-chain during the timelock window. By day 7, the new gr
 
 8. **Gas cost comparison**: Threshold MPC verification is more expensive than plain ecrecover (50K-75K vs 3K gas) but cheaper than N-of-M multisig verification (3K * M gas for M individual signatures). For a 5-of-7 group, threshold MPC saves 5x in gas.
 
+## Operational Authority (Quasar 3.0)
+
+LP-019 specifies the **protocols** (FROST, CGGMP21, LSS, Ringtail-general). The
+**operational chain** that hosts these ceremonies is **M-Chain (MPC, see
+LP-134)** (`lux:mpc`), established by LP-134 (Lux Chain Topology) at
+the Quasar 3.0 activation on 2025-12-25. Prior to that activation,
+ceremonies ran on the legacy T-Chain custody layer (LP-5013, now
+deprecated by this LP and LP-134). TFHE bootstrap-key ceremonies that
+feed the encrypted-EVM (LP-013) run on **F-Chain (FHE keygen, see
+LP-134)** under the same protocol semantics. The protocol semantics in
+this LP are unchanged across the cutover.
+
+| Concern | Authority |
+|---|---|
+| Protocol semantics (DKG, sign, reshare) | LP-019 (this LP), LP-076 |
+| Operational chain hosting ceremonies | M-Chain (LP-134 §M-Chain) |
+| Cert-lane wire shape on Quasar | LP-020 §Ringtail / §Cert lanes; LP-134 §QuasarCertLane registry |
+| Ceremony round → cert ingress | LP-133 §3 (MPC + KMS as Quasar cert lanes) |
+| Shared library substrate | `~/work/lux/chains/thresholdvm` (consumed by both M-Chain and F-Chain) |
+
+The cert lanes on M-Chain are:
+
+| Cert lane | Protocol | Wire shape |
+|---|---|---|
+| `MChainCGGMP21` (5) | CGGMP21 ECDSA threshold | partial-share artifact |
+| `MChainFROST` (6) | FROST Schnorr/EdDSA threshold | partial-share artifact |
+| `MChainRingtailGen` (7) | Ringtail-general (PQ threshold) | partial-share artifact |
+
+(Lane numbers per LP-134 §QuasarCertLane registry.)
+
 ## Reference
 
 | Resource | Location |
@@ -400,13 +448,16 @@ The resharing happens off-chain during the timelock window. By day 7, the new gr
 | CGGMP21 precompile | `github.com/luxfi/evm/precompile/contracts/cggmp21.go` |
 | LP-016 OmnichainRouter | `LP-016-omnichain-router.md` |
 | LP-012 Post-Quantum Crypto | `LP-012-pq-crypto-gpu.md` |
-| T-Chain MPC Custody | `lp-5013-t-chain-decentralised-mpc-custody-and-swap-signature-layer.md` |
+| M-Chain (MPC, see LP-134) — ceremony host | LP-134 §M-Chain |
+| F-Chain (FHE keygen, see LP-134) — bootstrap-key ceremonies | LP-134 §F-Chain |
+| Shared substrate library (M-Chain + F-Chain) | `~/work/lux/chains/thresholdvm` |
+| LP-5013 T-Chain MPC Custody (deprecated, superseded 2025-12-25) | historical |
 | DKG Resharing | `lp-5333-dkg-resharing.md` |
 | FROST paper | Komlo & Goldberg, "FROST: Flexible Round-Optimized Schnorr Threshold Signatures" (2020) |
 | CGGMP21 paper | Canetti et al., "UC Non-Interactive, Proactive, Threshold ECDSA with Identifiable Aborts" (2021) |
 
 ## Copyright
 
-Copyright (C) 2024-2026, Lux Partners Limited. All rights reserved.
+Copyright (C) 2021-2025, Lux Partners Limited. All rights reserved.
 
 Licensed under the MIT License.

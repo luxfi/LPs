@@ -1,18 +1,101 @@
 ---
 lp: 7013
 title: T-Chain – Decentralised MPC Custody & Swap-Signature Layer
-tags: [mpc, threshold-crypto, bridge]
-description: Purpose-built chain providing threshold-signature custody, on-chain swap-signature proofs, slashing and reward logic, and light-client proofs for bridge operations.
+tags: [mpc, threshold-crypto, bridge, expired, deprecated, historical]
+description: Historical specification of T-Chain — the original ceremony chain that hosted both MPC and FHE. Split into M-Chain and F-Chain at Quasar 3.0 activation (2025-12-25).
 author: Lux Protocol Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
-status: Final
+status: Expired
 type: Standards Track
 category: Core
 created: 2025-01-23
-updated: 2025-07-25
+updated: 2025-12-15
+deprecated-by: lp-134
+deprecated-on: 2025-12-25
 requires: 1, 2, 3, 5, 6
 order: 13
 ---
+
+> **STATUS: EXPIRED** — This LP is preserved as the historical record of
+> T-Chain's design. The chain was split into **M-Chain** (MPC ceremonies,
+> LP-019, LP-076) and **F-Chain** (FHE compute, LP-013) at the Quasar 3.0
+> activation on **2025-12-25**. Canonical authority for the post-split
+> chain set lives in **LP-134** (Lux Chain Topology). New work MUST NOT
+> target T-Chain — see the migration mapping in `## Historical Note`
+> below.
+
+## Historical Note
+
+T-Chain (chain ID `T`, VM ID `thresholdvm`) ran from **2025-01-23**
+(LP-7013 acceptance) through **2025-12-25** (Quasar 3.0 activation,
+LP-134 §M/F split). It was the original "ceremony chain" — a single
+sovereign chain that hosted *both* threshold-MPC ceremonies (CGGMP21,
+FROST, Ringtail-general) and FHE compute (TFHE evaluation, blind-rotate,
+programmable bootstrap, key-share ceremonies).
+
+### Why the split
+
+T-Chain coupled two ceremony classes whose scaling axes are orthogonal:
+
+| Class | Bottleneck | Round shape | Optimization target |
+|---|---|---|---|
+| MPC threshold ceremonies | sign-throughput-bound (latency × n participants) | Nebula DAG of partial signatures → frontier → committed cert | minimize round-trip count and aggregation cost |
+| FHE compute | bootstrap-cost-bound (gate evaluation × ciphertext depth) | Nebula computation graph over ciphertext arenas | maximize per-round encrypted-gate throughput |
+
+Running both on one chain forced every node to provision for both
+worst cases simultaneously. The validator set, gas schedule, block-time
+target, and committee sizing all pulled in opposite directions —
+optimizing for MPC sign-latency under-provisioned for FHE bootstraps,
+and vice versa.
+
+### What replaced T-Chain
+
+LP-134 (Quasar 3.0 chain topology) split T-Chain along the natural
+seam:
+
+| T-Chain responsibility | Successor chain | Authoritative LPs |
+|---|---|---|
+| CGGMP21 threshold ECDSA ceremonies | **M-Chain** (`lux:mpc`) | LP-019, LP-076 |
+| FROST threshold Schnorr/EdDSA ceremonies | **M-Chain** | LP-019, LP-076 |
+| Ringtail-general threshold ceremonies | **M-Chain** | LP-073, LP-076 |
+| `SwapSigTx` / `DualSigTx` flow | **M-Chain** | LP-019 + LP-134 |
+| TFHE evaluation, blind-rotate, bootstrap | **F-Chain** (`lux:fhe`) | LP-013, LP-066 |
+| TFHE key-share ceremonies | **M-Chain** ceremony emits → **F-Chain** key arena | LP-013, LP-076 |
+| Bridge custody (cross-chain MPC) | **B-Chain** (routing) + **M-Chain** (signing) | LP-134, LP-016 |
+| Light-client proof format (MProof) | M-Chain `mchain_ceremony_root` in `QuasarRoundDescriptor` | LP-020 §3.0, LP-134 |
+
+ThresholdVM — the shared library substrate (CGGMP21 / FROST / Ringtail
+DKG state machines, LSS resharing, partial-signature aggregation) — is
+extracted into `~/work/lux/chains/thresholdvm` and is consumed by both
+M-Chain and F-Chain runtimes. ThresholdVM is **not a chain**; it is a
+shared library. The chains are M and F; ThresholdVM is the code they
+both call.
+
+### Cross-chain replay during the cutover
+
+The QuasarGPU `cert_lane` dispatcher accepted the legacy `TChain*` enum
+values during a one-epoch grace window after activation height
+(2025-12-25), routing them to the corresponding `MChain*` / `FChain*`
+verifier. After the grace window, `TChain*` cert lanes are rejected.
+See LP-134 §"Deprecation notice — T-Chain" for the cert-lane mapping
+table.
+
+### Why this LP is preserved
+
+This document remains the authoritative history of:
+- the original `SwapSigTx` / `DualSigTx` / `KeyGenTx` / `SlashTx`
+  transaction shapes (now hosted on M-Chain unchanged);
+- the asset-quorum sizing decisions (BTC ≈ 15, ETH ≈ 15, XRPL ≈ 10);
+- the staged quantum-resistance phases (0/1/2/3) that informed
+  LP-020's three-lane cert pipeline;
+- the economic parameters (`rewardPerSig`, `slashPct`, `graceBlocks`,
+  `bondUnbondPeriod`) that M-Chain inherited at genesis.
+
+Implementations targeting Quasar 3.0 MUST consult LP-134 for chain
+topology, LP-019 / LP-076 for MPC semantics, and LP-013 / LP-066 for
+FHE compute. This LP is referenced for archival continuity only.
+
+
 
 > **See also**: [LP-0](/docs/lp-0-network-architecture-and-community-framework/), [LP-10](/docs/lp-10-p-chain-platfort-chain-specification-deprecated/), [LP-11](/docs/lp-11-x-chain-exchange-chain-specification/), [LP-12](/docs/lp-12-c-chain-contract-chain-specification/), [LP-14](/docs/lp-14-t-chain-threshold-signatures-with-cgg21-uc-non-interactive-ecdsa/), [LP-INDEX](/docs/)
 

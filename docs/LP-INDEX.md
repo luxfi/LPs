@@ -73,6 +73,32 @@ LPs for consensus mechanisms including the Quasar protocol family.
 
 ---
 
+## Quasar 3.0 — GPU Execution Stack
+
+> **Tags**: `quasar`, `gpu`, `cevm`, `block-stm`, `mvcc`, `cert-lanes`, `chain-topology`
+> **Launched**: 2025-12-25 (Quasar 3.0 production release)
+
+The Quasar 3.0 stack defines the GPU-native execution adapter, the
+ordered MVCC fabric (QuasarSTM), the cert-lane consensus pipeline, and
+the canonical chain topology. All shipped December 2025.
+
+| LP | Title | Tags | Status |
+|----|-------|------|--------|
+| [LP-009](/docs/lp-009-gpu-native-evm/) | GPU-Native EVM Execution | `evm`, `gpu`, `metal`, `cuda`, `cevm` | Final |
+| [LP-010](/docs/lp-010-block-stm-parallel/) | Block-STM 3.0 — QuasarSTM | `parallel`, `block-stm`, `mvcc`, `lanes` | Final |
+| [LP-020](/docs/lp-020-quasar-consensus/) | Quasar Consensus 3.0 — Cert Lanes + P/Q/Z Chain Pipeline | `consensus`, `bls`, `ringtail`, `ml-dsa`, `cert-lanes` | Final |
+| [LP-132](/docs/lp-132-quasar-gpu-execution-adapter/) | QuasarGPU Execution Adapter | `gpu`, `quasar`, `wave-tick`, `cert-lanes` | Final |
+| [LP-133](/docs/lp-133-quasar-native-app-stack/) | Quasar-Native App Stack — Gateway Pinning, Base Appchains, MPC/KMS Cert Lanes | `gateway`, `base`, `appchain`, `mpc`, `kms` | Final |
+| [LP-134](/docs/lp-134-lux-chain-topology/) | Lux Chain Topology — P / C / X / Q / Z / A / B / M / F | `lux`, `chains`, `taxonomy`, `m-chain`, `f-chain` | Final |
+| [LP-135](/docs/lp-135-quasarstm-4-research/) | QuasarSTM 4.0 Research — ConflictSpec, NEMO Lanes, Deferred Objects, Predictive Scheduling, CSMV Commit Server, Disaggregated MVCC | `research`, `quasar-stm`, `multi-gpu`, `rdma` | Draft |
+
+> **Note on chain taxonomy**: LP-134 splits the legacy T-Chain custody
+> layer (LP-5013, deprecated 2025-12-25) into **M-Chain** (MPC ceremonies)
+> and **F-Chain** (FHE compute / TFHE keygen). Threshold MPC protocols
+> live in LP-019; FHE compute lives in LP-013.
+
+---
+
 ## Platform Chains (1xxx)
 
 > **Tags**: `p-chain`, `platform`, `validators`, `staking`
