@@ -44,7 +44,7 @@ A unified attestation layer provides:
 
 ```go
 import (
-    avm "github.com/luxfi/node/vms/aivm"
+    xvm "github.com/luxfi/node/vms/aivm"
     "github.com/luxfi/node/utils/constants"
 )
 
@@ -52,7 +52,7 @@ import (
 var AIVMID = constants.AIVMID // ids.ID{'a', 'i', 'v', 'm'}
 
 // Create A-Chain VM
-factory := &avm.Factory{}
+factory := &xvm.Factory{}
 vm, err := factory.New(logger)
 ```
 

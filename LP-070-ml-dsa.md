@@ -46,7 +46,8 @@ Gas:    80,000 (ML-DSA-44), 120,000 (ML-DSA-65), 180,000 (ML-DSA-87)
 
 | Application | Description |
 |-------------|-------------|
-| Validator signing | Post-quantum block/vote signatures (Phase 2, LP-012) |
+| Quasar consensus | Triple-hybrid PQ proof path: BLS + Ringtail + ML-DSA-65 (LP-020, LP-102) |
+| Validator signing | Post-quantum block/vote signatures (LP-012) |
 | DID authentication | ML-DSA keys in DID documents (LP-060) |
 | Bridge attestation | PQ-safe bridge message signatures |
 | Certificate signing | Long-lived credentials requiring PQ safety |

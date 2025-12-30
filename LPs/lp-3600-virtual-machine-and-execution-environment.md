@@ -103,11 +103,11 @@ go test -v ./core/vm ./core/state
   - [`txs/`](https://github.com/luxfi/node/tree/main/vms/platformvm/txs) - Transaction types
   - [`state/`](https://github.com/luxfi/node/tree/main/vms/platformvm/state) - Validator/staker state
 
-**2. AVM (X-Chain)** (`vms/avm/`)
+**2. XVM (X-Chain)** (`vms/xvm/`)
 - **Purpose**: Asset exchange and UTXO-based transfers
 - **Execution**: Custom VM with DAG consensus
 - **Key Files**:
-  - [`vm.go`](https://github.com/luxfi/node/blob/main/vms/avm/vm.go) - Asset VM core
+  - [`vm.go`](https://github.com/luxfi/node/blob/main/vms/xvm/vm.go) - Asset VM core
   - [`txs/`](https://github.com/luxfi/node/tree/main/vms/platformvm/txs) - Asset transaction types
   - [`utxos/`](https://github.com/luxfi/node/tree/main/vms/platformvm) - UTXO management
 
@@ -156,7 +156,7 @@ forge test --match-contract ERC721Test
 
 **Static Fee Configuration**:
 - P-Chain: `~/work/lux/node/vms/platformvm/txs/fee/calculator.go`
-- X-Chain: `~/work/lux/node/vms/avm/txs/fee.go`
+- X-Chain: `~/work/lux/node/vms/xvm/txs/fee.go`
 
 **Dynamic Gas (C-Chain)**:
 - **LP-176 Implementation**: `~/work/lux/node/vms/evm/lp176/`
@@ -178,7 +178,7 @@ RUN_E2E=1 go test -v ./tests/e2e/
 
 # Tests verify:
 # - Platform VM validator operations
-# - AVM asset transfers
+# - XVM asset transfers
 # - EVM smart contract execution
 # - Cross-VM Warp messaging
 # - Q-Chain quantum signatures
@@ -186,7 +186,7 @@ RUN_E2E=1 go test -v ./tests/e2e/
 
 **Performance Benchmarks**:
 - Platform VM: ~2,000 validator txs/sec
-- AVM: ~10,000 transfers/sec
+- XVM: ~10,000 transfers/sec
 - EVM: ~1,500 contract calls/sec (single-threaded)
 - Q-Chain: ~500 quantum-verified txs/sec
 

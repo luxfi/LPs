@@ -1,8 +1,8 @@
 ---
 lp: 078
 title: EVM Precompile Registry
-tags: [evm, precompile, crypto, curves, zk, fhe, dex, bridge, ai]
-description: Complete registry of all 33 EVM precompile packages with addresses, gas costs, and specifications
+tags: [evm, precompile, crypto, curves, zk, fhe, dex, bridge, ai, vrf]
+description: Complete registry of all 37 EVM precompile packages with addresses, gas costs, and specifications
 author: Lux Core Team
 status: Final
 type: Standards Track
@@ -15,7 +15,7 @@ updated: 2026-04-13
 
 ## Abstract
 
-Complete registry of all custom EVM precompile addresses for the Lux Network and all ecosystem chains. Standard Ethereum precompiles (0x01-0x0A) are preserved. All 33 precompile packages are enabled on every EVM by default. Genesis determines activation timestamps.
+Complete registry of all custom EVM precompile addresses for the Lux Network and all ecosystem chains. Standard Ethereum precompiles (0x01-0x0A) are preserved. All 37 precompile packages are enabled on every EVM by default. Genesis determines activation timestamps.
 
 Three packages were removed for exposing secret key material in public calldata:
 `aes` (0x9210), `chacha20` (0x9211), `ecies` (0x9201). See individual LP deprecation notes.
@@ -84,6 +84,12 @@ AES-256-GCM (0x9210) and ChaCha20-Poly1305 (0x9211) precompiles have been remove
 Both accepted secret encryption keys in calldata, which is public on-chain.
 Use the FHE precompile (0x0700) for encrypted computation.
 
+### Verifiable Random Function (1 package)
+
+| Address | Package | Description | LP |
+|---------|---------|-------------|-----|
+| 0x3213 | `vrf` | ECVRF-EDWARDS25519-SHA512-ELL2 verify + proof-to-hash (RFC 9381) | 131 |
+
 ### Asymmetric Encryption / Privacy (2 packages)
 
 | Address | Package | Description | LP |
@@ -95,11 +101,13 @@ ECIES (0x9201) has been removed: decrypt required secret keys in calldata,
 and encrypt used non-deterministic randomness (consensus split risk).
 HPKE seal covers the same public-key encryption use case.
 
-### AI (1 package)
+### AI (3 packages)
 
 | Address | Package | Description | LP |
 |---------|---------|-------------|-----|
 | 0x0300 | `ai` | AI mining / on-chain inference | 009 |
+| 0x0300..01 | `attestation` | TEE attestation (NVTrust GPU, SGX, SEV-SNP, TDX) | -- |
+| 0x0300..10 | `compute` | AI compute marketplace (register, submit, claim, verify) | -- |
 
 ### Consensus — Quasar (1 package, 5 addresses)
 
@@ -151,6 +159,12 @@ HPKE seal covers the same public-key encryption use case.
 |---------|---------|-------------|-----|
 | 0x0500..08 | `pasta` | Pallas + Vesta curve ops (Halo2/Nova) | -- |
 
+### StableSwap AMM (1 package)
+
+| Address | Package | Description | LP |
+|---------|---------|-------------|-----|
+| 0x0400..60 | `stableswap` | Curve StableSwap invariant (GetDy, AddLiquidity, RemoveLiquidity, GetD) | -- |
+
 ### DEX — LX Suite (1 package, 13 addresses)
 
 | Address | Package | Description | LP |
@@ -184,17 +198,10 @@ HPKE seal covers the same public-key encryption use case.
 |---------|---------|-------------|-----|
 | 0xB002 | `kzg4844` | EIP-4844 KZG blob commitments | -- |
 
-### Attestation (1 package — library only, no module registration)
+### Attestation (see AI section above)
 
-| Address | Package | Description | LP |
-|---------|---------|-------------|-----|
-| 0x0301 | `attestation` | NVTrust GPU attestation | -- |
-| 0x0302 | `attestation` | TPM attestation | -- |
-| 0x0303 | `attestation` | Compute attestation | -- |
-| 0x0304 | `attestation` | Attestation creation | -- |
-| 0x0305 | `attestation` | Device status | -- |
-
-Note: attestation has no init()/module registration. It is a library package, not a registered precompile. EVM mains should NOT blank-import it.
+Attestation is registered at 0x0300..01 as part of the AI range. See the AI section for the full entry.
+Selector dispatch routes to 5 operations: VerifyNVTrust, VerifyTPM, VerifyCompute, CreateAttestation, GetDeviceStatus.
 
 ### Registry (1 package)
 
@@ -219,7 +226,10 @@ Note: attestation has no init()/module registration. It is a library package, no
 | 0x0100 | secp256r1 (EIP-7212) |
 | 0x0200-0x022F | Post-quantum + X-Wing |
 | 0x0300 | AI mining |
+| 0x0300..01 | AI attestation (TEE) |
+| 0x0300..10 | AI compute marketplace |
 | 0x0300..20-24 | Quasar consensus helpers |
+| 0x0400..50-60 | StableSwap AMM |
 | 0x0440-0x0443 | Bridge |
 | 0x0500..01-09 | Hashing (blake3, poseidon, pedersen, babyjubjub, pasta) |
 | 0x0500..10-13 | Graph (query, subscribe, cache, index) |
@@ -229,6 +239,7 @@ Note: attestation has no init()/module registration. It is a library package, no
 | 0x0900-0x090F | ZK proofs |
 | 0x0A00-0x0A0F | Substrate curves |
 | 0x3211 | Ed25519 |
+| 0x3213 | VRF (ECVRF, RFC 9381) |
 | 0x6010 | Teleport |
 | 0x9010-0x9080 | DEX (LX Suite) |
 | 0x9200-0x9204 | Privacy (HPKE seal, ring verify, x25519, curve25519) |
@@ -241,4 +252,4 @@ All precompiles are compiled into the EVM binary. Activation is controlled per-c
 ## Implementation
 
 Source: `github.com/luxfi/precompile`
-33 packages (each with `contract.go` + `module.go`). 3 removed for key exposure: aes, chacha20, ecies.
+37 packages (each with `contract.go` + `module.go`). 3 removed for key exposure: aes, chacha20, ecies.
