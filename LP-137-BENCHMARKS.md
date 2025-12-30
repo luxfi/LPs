@@ -4,8 +4,8 @@
 execution end-to-end. Per-VM transition kernels run on-device byte-equal
 the CPU oracle on every measured workload. BLS12-381 pairing runs fully
 on Metal byte-equal blst across 2 746 vectors, with CUDA + WGSL parity
-ports landed (WGSL covers the lower tower, 1 300 vectors byte-equal CPU
-oracle). EVM precompiles route through GPU-resident services (Keccak
+ports landed (WGSL covers the full Fp tower, 1 900 vectors byte-equal CPU
+oracle (lower + upper, including fp6_inv + fp12 mul/sqr/inv/conj/cyclo_sqr)). EVM precompiles route through GPU-resident services (Keccak
 residency cache ≥0.50 hit rate; ecrecover Stage A inv on-device).
 AI/ML inference has 3 deterministic execution modes byte-equal CPU↔Metal
 across 1 000 inputs. Composite confidential attestation hashes byte-equal
@@ -17,7 +17,7 @@ at `luxcpp/crypto/bls/test/cmake/`.
 
 | Subsystem | Phase-2 baseline | Phase-3 result | Vectors / metric |
 |---|---|---|---|
-| BLS Fp/Fp2/Fp6/Fp12 tower | host blst | Metal byte-equal blst + WGSL byte-equal CPU oracle (lower tower) | 1 900 Metal + 1 300 WGSL |
+| BLS Fp/Fp2/Fp6/Fp12 tower | host blst | Metal byte-equal blst + WGSL byte-equal CPU oracle (full tower) | 1 900 Metal + 1 900 WGSL |
 | BLS G2 + Miller loop | host blst | Metal byte-equal blst | 350 G2 + 100 Miller = 450 vectors |
 | BLS final_exp + e(P,Q) full pairing | host blst | Metal byte-equal blst (8 categories) | 396 vectors |
 | BLS subgroup + cofactor | none | host-side predicate vs blst on every backend | 46 vectors |
@@ -115,7 +115,7 @@ stays at:
 - `bls/test/bls_*_oracle.cpp` — generates byte-truth vectors once, then
   the production library never sees blst again.
 - `bls/test/bls_*_test.{cpp,mm}` — verifies kernel output byte-equal
-  blst across 2 746 vectors (Metal) + 1 300 (WGSL lower tower).
+  blst across 2 746 vectors (Metal) + 1 900 (WGSL full Fp tower).
 
 ## Honest gaps
 
@@ -127,12 +127,16 @@ stays at:
   single fused kernel (or async pipeline of N parallel pairings) is
   Stage 5b/6 work. Architecture proven byte-equal blst; performance
   collapse pending.
-- **WGSL higher tower.** `fp6_inv`, `fp12 mul/sqr/inv/conj/cyclo_sqr`
-  exceed AGXMetalG13X function-call stack budget when `array<u32,144>`
-  is passed by value through the karatsuba/inversion call tree. Fix is
-  mechanical (`ptr<function, array<u32, N>>` instead of by-value); same
-  arithmetic, smaller stack frames. Not landed in Stage 4 to keep the
-  byte-equality proof clean.
+- **WGSL higher tower.** Landed. `fp6_inv`, `fp12 mul/sqr/inv/conj/cyclo_sqr`
+  now run on AGXMetalG13X via wgpu-native, byte-equal CPU oracle on every
+  vector. Approach: push all multi-limb scratches (24/72/144 x u32) to
+  `var<private>` storage and decompose the upper-tower call tree into
+  single-Fp2-frame leaves so the per-thread function-call stack budget
+  holds. Same arithmetic as Metal; new vector count for the full WGSL Fp
+  tower is 1 900 across 19 ops (Fp + Fp2 + Fp6 + Fp12 add/sub/mul/sqr +
+  fp6_inv + fp12 inv/conj/cyclo_sqr). See
+  `luxcpp/crypto/bls/gpu/wgsl/{bls_fp_ops,bls_fp2,bls_fp6,bls_fp12,bls_fp_tower_kernels}.wgsl`
+  and `bls_fp_tower_wgsl_test.cpp`.
 - **CUDA full kernel coverage.** Kernel translation of Stages 1-3 +
   host driver compile cleanly in stub mode on Apple
   (`bls_cuda_stub.a`); full kernel dispatch is gated `LUX_BLS_HAVE_CUDA`
@@ -150,7 +154,7 @@ stays at:
 LP-137 invariant fully shipped. Acceleration shipped on **9 of 9
 chains**. Cross-language byte-equality proven across CPU / Metal / WGSL
 on every deterministic primitive that has landed (2 746 BLS pairing
-vectors on Metal byte-equal blst; 1 300 WGSL lower-tower vectors
+vectors on Metal byte-equal blst; 1 900 WGSL full-Fp-tower vectors
 byte-equal CPU oracle; 1 000 AI/ML inputs byte-equal CPU↔Metal; 27
 attestation cases byte-equal C++↔Go). blst pinned to test oracle only.
 Production binaries clear of blst symbols (CI-asserted).

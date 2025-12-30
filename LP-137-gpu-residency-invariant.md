@@ -1134,7 +1134,7 @@ GPU acceleration measured against CPU reference on Apple M1 Max
 [`LP-137-BENCHMARKS.md`](LP-137-BENCHMARKS.md).
 
 **Acceleration shipped on 9 of 9 chains. BLS pairing fully on-device on
-Metal (CUDA build, WGSL lower tower); 2 746+ vectors byte-equal blst.
+Metal (CUDA build, WGSL full Fp tower); 2 746+ vectors byte-equal blst.
 Production binaries clear of blst symbols (CI-asserted). blst pinned to
 test-only oracle at `luxcpp/crypto/bls/test/cmake/blst.cmake`.**
 Three production workloads beat CPU end-to-end at the v0.45 (Phase-2)
@@ -1212,7 +1212,7 @@ on every chain that ships a Phase-2 GPU engine (cevm 6/6, platformvm
 15/15, aivm 47/47, bridgevm 49/49, mpcvm 21/21, fhe primitive parity).
 
 > **Acceleration shipped on 9 of 9 chains. BLS pairing fully on-device
-> on Metal (CUDA build, WGSL lower tower); 2 746+ vectors byte-equal
+> on Metal (CUDA build, WGSL full Fp tower); 2 746+ vectors byte-equal
 > blst. Production binaries clear of blst symbols (CI-asserted). blst
 > pinned to test-only oracle at
 > `luxcpp/crypto/bls/test/cmake/blst.cmake`. Phase-2 substrate
@@ -1234,14 +1234,14 @@ once but not blocked by CI. "Pending" = not yet landed.
 | # | Invariant | Status |
 |---|---|---|
 | 1 | All 9 LP-134 chains GPU-native (state + canonical transition on device) | ✓ enforced (per-VM determinism harness, `LP-137-COVERAGE.md`) |
-| 2 | 4-way byte-equal CPU ↔ Metal ↔ CUDA ↔ WGSL on every deterministic primitive | ✓ enforced where backend lands (Phase-3 BLS Metal byte-equal blst on 2 746 vectors; WGSL lower tower 1 300 vectors; CUDA build-only on Apple host) |
+| 2 | 4-way byte-equal CPU ↔ Metal ↔ CUDA ↔ WGSL on every deterministic primitive | ✓ enforced where backend lands (Phase-3 BLS Metal byte-equal blst on 2 746 vectors; WGSL full Fp tower 1 900 vectors including fp6_inv + fp12 mul/sqr/inv/conj/cyclo_sqr; CUDA build-only on Apple host) |
 | 3 | Cert subject binds 9 chain transition roots + attestation_root + cert_mode | ✓ enforced (`quasar_9chain_integration_test.mm`, 7 tests) |
 | 4 | Composite confidential attestation across SEV-SNP / TDX / NRAS + RIM | ✓ enforced (11 parser + 16 composite tests, byte-equal C++↔Go) |
 | 5 | EVM precompile services route through GPU-resident batched drains | ✓ enforced (PrecompileService per-id batched entry-point; KeccakResidencySession ≥0.50 hit rate; transcript_root commits to input‖output‖gas‖status byte-equal CPU↔Metal) |
 | 6 | Production build has NO direct blst symbols in hot precompile paths | ✓ enforced (no-blst-in-production-check passes from cevm v0.46.0; ctest WILL_FAIL property removed). Note: this is **symbol-routing** invariant — production link graph carries zero blst symbols, with all calls going through canonical `cevm::crypto::bls::*` c-abi. The c-abi body still computes pairing on host CPU; per Stage 5b (2026-04-27) Metal single-pairing on M1 Max is ~930× slower than host blst, so on-device pairing is **not** in production. SoTA on-device path is Linux+CUDA or batched-N kernel saturation. |
 | 7 | Production build has NO vendored blst dependency | ✓ enforced (cevm v0.46.0 dropped `cevm/cmake/blst.cmake`; blst pinned to `luxcpp/crypto/bls/test/cmake/blst.cmake` test-only) |
 | 8 | Single-fused-kernel pairing (≤1 dispatch per pairing) | pending (Stage 5b/6; today ~280 dispatches per pairing) |
-| 9 | WGSL higher-tower pairing ops on M1 | pending (mechanical `ptr<function, array<u32, N>>` rewrite for fp6_inv / fp12 mul/sqr/inv/conj/cyclo_sqr) |
+| 9 | WGSL higher-tower pairing ops on M1 | ✓ enforced (full Fp tower runs on WGSL byte-equal CPU oracle on M1; 1 900 vectors across 19 ops including fp6_inv + fp12 mul/sqr/inv/conj/cyclo_sqr; achieved by pushing all multi-limb scratches to `var<private>` storage and decomposing the upper-tower call tree into single-Fp2-frame leaves so AGXMetalG13X's per-thread function-call stack budget holds) |
 | 10 | CUDA full kernel coverage on Linux+CUDA CI runner | pending (Apple host build-only today; H100 / Ada self-hosted runners report when their workflows complete) |
 | 11 | Brand-neutral API across env / C-ABI / Rust / TS / Python | ✓ enforced (one transition release with deprecation warnings, then drop) |
 
