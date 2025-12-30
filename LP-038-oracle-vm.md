@@ -1,7 +1,7 @@
 ---
 lp: 038
 title: Oracle VM
-tags: [oracle, k-chain, price-feed, aggregation, vm]
+tags: [oracle, o-chain, price-feed, aggregation, vm]
 description: Oracle aggregation VM for decentralized price feeds and external data
 author: Lux Industries
 status: Final
@@ -19,7 +19,7 @@ references:
 
 ## Abstract
 
-The Oracle VM runs the K-chain (Knowledge chain), a dedicated chain for decentralized oracle data aggregation. Registered data providers submit price feeds and external data as K-chain transactions. The VM aggregates reports using a median-of-medians algorithm, producing canonical price points that are disseminated to all Lux chains via Warp messages. The K-chain replaces external oracle dependencies (Chainlink, Pyth) with a native, validator-secured data layer.
+The Oracle VM runs the O-chain (Oracle chain), a dedicated chain for decentralized oracle data aggregation. Registered data providers submit price feeds and external data as O-chain transactions. The VM aggregates reports using a median-of-medians algorithm, producing canonical price points that are disseminated to all Lux chains via Warp messages. The O-chain replaces external oracle dependencies (Chainlink, Pyth) with a native, validator-secured data layer.
 
 ## Specification
 
@@ -48,7 +48,7 @@ Data providers stake LUX and register the feeds they serve:
 
 ### Report Submission
 
-Providers submit reports as K-chain transactions:
+Providers submit reports as O-chain transactions:
 
 ```
 Report {
@@ -79,7 +79,7 @@ PriceUpdate {
     price       uint256
     timestamp   uint64
     roundID     uint64
-    signatures  []byte      // K-chain validator aggregate BLS signature
+    signatures  []byte      // O-chain validator aggregate BLS signature
 }
 ```
 
@@ -96,15 +96,15 @@ Providers are slashed for:
 ## Security Considerations
 
 1. **Collusion resistance**: median aggregation requires >50% of staked providers to collude for price manipulation.
-2. **Flash loan immunity**: K-chain prices are off-chain observations, not on-chain spot prices. Flash loans cannot manipulate them.
-3. **Latency**: K-chain block time is 1 second. Warp propagation adds <500ms. Total oracle latency: <1.5 seconds.
+2. **Flash loan immunity**: O-chain prices are off-chain observations, not on-chain spot prices. Flash loans cannot manipulate them.
+3. **Latency**: O-chain block time is 1 second. Warp propagation adds <500ms. Total oracle latency: <1.5 seconds.
 
 ## Reference
 
 | Resource | Location |
 |---|---|
-| Oracle VM | `github.com/luxfi/node/vms/oraclevm/` |
-| Aggregation engine | `github.com/luxfi/node/vms/oraclevm/aggregator/` |
+| Oracle VM | `github.com/luxfi/chains/oraclevm/` |
+| Aggregation engine | `github.com/luxfi/chains/oraclevm/aggregator/` |
 | Warp dissemination | LP-021 |
 
 ## Copyright
