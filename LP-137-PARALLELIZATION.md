@@ -168,19 +168,19 @@ structural reason for staying CPU-only (3 of 11).
 | 11 | mlkem (FIPS 203) | yes (Go body via cloudflare/circl) | Metal kernel skeleton ships (`mlkem_batch.metal` + `mlkem_batch_driver.mm` + `mlkem_metal_test`, v0.65); same shape as mldsa, dGPU-deferred for full FIPS-203 decap | 100 dispatch-shape vectors (deferred-code emit + ss-zeroed byte-equal) | **A** (skeleton M1; dGPU-only for full decap) |
 | 12 | slhdsa (FIPS 205) | NOTIMPL | n/a | n/a | **D** |
 | 13 | lamport | NOTIMPL | n/a | n/a | **D** |
-| 14 | ipa | NOTIMPL | n/a (intra-proof round-by-round; cross-proof batch is template-fit when body lands) | n/a | **D** |
+| 14 | ipa | Go body (luxfi/crypto/ipa); C++ scaffold w/ validate_batch_inputs (LP-137 Agent D); GPU stencil w/ ipa_metal_available probe — byte-equal verify body blocked on Banderwagon backend | cross-proof batched verify shape locked in: Go `CheckMultiProofBatch` + 10 KAT vectors + tamper-detect; C++ + Metal NOTIMPL after validation pass | 10 Go batched-KAT proofs + 24 C++ scaffold KATs | **B** (Go A; C++/GPU pending Banderwagon) |
 | 15 | kzg | bootstrap-blocked (cpp body needs blst+intx) | n/a (cevm exposes `bls12_381_kzg_verify_proof` via blst test oracle) | n/a | **E** |
 | 16 | modexp | bootstrap-blocked (cpp body needs intx+evmmax+evmc) | n/a | n/a | **E** |
 | 17 | evm256 (mulmod/addmod) | bootstrap-blocked (cpp body needs intx+evmmax) | n/a | n/a | **E** |
 | 18 | ntt | gpukit CPU oracle (600 PASS); fhe/MLX Metal | Metal NTT in `fhe/src/core/lib/math/hal/mlx/`; gpukit-ntt-test (CPU oracle here) | 600 CPU + FHE Metal/MLX 23.6× at N=4096 B=128 | **A** (FHE backend) |
-| 19 | poly_mul | NOTIMPL | n/a | n/a | **D** |
-| 20 | pedersen | NOTIMPL | n/a | n/a | **D** |
+| 19 | poly_mul | yes (Go luxfi/crypto/poly_mul + C++ luxcpp/crypto/poly_mul/cpp; FFT-friendly Q=998244353; schoolbook + NTT byte-equal) (LP-137 Agent D) | Metal `poly_mul_batch.metal` + `poly_mul_batch_driver.mm` + `poly_mul_metal_test`; one thread per (batch_idx, output_coef); BATCH=100 N=64 byte-equal CPU↔Metal. Crossover N_threshold (M1 Max, median of 11): N=64 batch≈2048; N=128 batch≈1024; N=256 batch≈256; N=512 batch≈128; N=1024 batch≈64 | 13 Go KATs + 10354 C++ KATs + 6400 Metal byte-equal coefficients | **A** |
+| 20 | pedersen | Go body (luxfi/crypto/pedersen) + DeterministicGenerators + CommitBatch (LP-137 Agent D); C++ scaffold w/ validate_commit_inputs; GPU stencil — byte-equal commit body blocked on BN254 G1 backend (Agent E intx+evmmax bootstrap) | cross-proof batched commit shape locked in: Go `CommitBatch` + 11 reproducible KAT vectors against gnark-crypto BN254; C++ + Metal NOTIMPL after validation | 11 Go KATs + 33 C++ scaffold KATs | **B** (Go A; C++/GPU pending Agent E BN254) |
 | 21 | poseidon | NOTIMPL | n/a | n/a | **D** |
 | 22 | ringtail | NOTIMPL umbrella; cevm path lives in `cevm/lib/consensus/quasar/gpu/` | Metal `crypto/ringtail/gpu/metal/{ringtail.metal, ringtail_ops.metal, ringtail_sign.metal, ringtail_verify.metal}`; CUDA + WGSL ports; cevm `verify_ringtail_batch` GPU-batched at the NTT/polynomial layer | (cevm-side; intra-proof Fiat-Shamir is canonical-sequential per protocol) | **C** intra-proof; cross-proof batch is template-fit |
 | 23 | bls (Fp tower / G2 / Miller / final_exp) | yes | Metal Stage 1-3 byte-equal blst across Fp / G2 / Miller / final_exp; WGSL full Fp tower; CUDA stub | 2 746 Metal + 1 900 WGSL byte-equal | **A** |
 | 24 | frost | NOTIMPL umbrella; mpcvm_frost.metal exists (single-thread canonical, 3-round keygen / 2-round sign) | n/a as crypto primitive; mpcvm path is single-thread canonical | n/a | **C** intra-ceremony round-by-round; cross-ceremony batch is template-fit |
 | 25 | cggmp21 | NOTIMPL umbrella; mpcvm_cggmp21.metal exists (single-thread canonical) | n/a as crypto primitive; mpcvm path is single-thread canonical | n/a | **C** same as FROST |
-| 26 | verkle | NOTIMPL | n/a | n/a | **D** |
+| 26 | verkle | Go body (luxfi/crypto/verkle re-export + Verify + VerifyBatch) (LP-137 Agent D); C++ scaffold w/ validate_batch_inputs; GPU stencil — byte-equal verify body blocked on IPA + Banderwagon | cross-proof batched verify shape locked in: Go `VerifyBatch` + 10 single-leaf KAT proofs (preStateRoot + postStateRoot + statediff serialization roundtrip); C++ + Metal NOTIMPL after validation | 10 Go batched-KAT proofs + 22 C++ scaffold KATs | **B** (Go A; C++/GPU pending IPA backend) |
 | 27 | sr25519 | NOTIMPL | n/a | n/a | **D** |
 | 28 | aead | NOTIMPL | n/a | n/a | **D** |
 | 29 | (BLS umbrella shim — covered by #23) | — | — | — | — |
@@ -191,10 +191,10 @@ structural reason for staying CPU-only (3 of 11).
 
 | Class | Count | Primitives |
 |---|---:|---|
-| **A** GPU-native today | **9** | sha256, keccak, ripemd160, blake2b, secp256k1, bls, ed25519 (v0.65 RFC 8032 byte-equal), mldsa (v0.65 skeleton, dGPU-deferred), mlkem (v0.65 skeleton, dGPU-deferred) (+ ntt via FHE backend) |
-| **B** GPU-feasible body shipped, kernel pending | **0** | (every working CPU body has a shipped Metal kernel after the v0.64+v0.65 pass) |
+| **A** GPU-native today | **10** | sha256, keccak, ripemd160, blake2b, secp256k1, bls, ed25519 (v0.65 RFC 8032 byte-equal), mldsa (v0.65 skeleton, dGPU-deferred), mlkem (v0.65 skeleton, dGPU-deferred), poly_mul (LP-137 Agent D, BATCH=100 N=64 Metal byte-equal) (+ ntt via FHE backend) |
+| **B** GPU-feasible body shipped, kernel pending | **3** | ipa (Agent D Go A; C++/GPU pending Banderwagon), pedersen (Agent D Go A; C++/GPU pending BN254 G1), verkle (Agent D Go A; C++/GPU pending IPA) |
 | **C** Structurally CPU-only / round-by-round | **4** | attestation parsers, frost (intra-ceremony), cggmp21 (intra-ceremony), ringtail (intra-proof Fiat-Shamir) |
-| **D** NOTIMPL — no CPU body authored | **10** | blake3, sr25519, slhdsa, lamport, ipa, poly_mul, pedersen, poseidon, verkle, aead |
+| **D** NOTIMPL — no CPU body authored | **6** | blake3, sr25519, slhdsa, lamport, poseidon, aead |
 | **E** Bootstrap-blocked (cpp body needs intx/blst/evmmax) | **5** | bn254, secp256r1, kzg, modexp, evm256 |
 
 **Of working primitives** (denominator = 6 with shipped CPU body
