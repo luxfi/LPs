@@ -29,9 +29,13 @@ for BLS (Metal Stage 1–3 byte-equal blst across 2 746 vectors,
 WGSL full Fp tower 1 900 vectors, CUDA stub), Keccak
 (KeccakResidencySession on-device with 4-way round cache), secp256k1
 batch_inv (Montgomery on-device, ecrecover Stage A), NTT (Apple
-Silicon Metal/MLX, CUDA, OpenFHE on F-Chain). Other primitives
-that have published GPU bridges in Go but no Metal/CUDA/WGSL
-kernels yet: ed25519, mldsa, mlkem, sha256-batched.
+Silicon Metal/MLX, CUDA, OpenFHE on F-Chain), sha256/blake2b/ripemd160
+batched (v0.64, byte-equal CPU oracle, 100 vectors each). v0.65 lands
+ed25519 RFC 8032 byte-equal Metal verify (N_threshold=256, 26.7×
+speedup at N=4096 on M1 Max), and mldsa/mlkem dispatch-shape Metal
+skeletons (full FIPS-204/203 verify dGPU-deferred — same precedent
+as aivm v0.59 + V2 EVM kernel where SHAKE/SHA3 chains dominate
+M1 per-thread serial work).
 
 **Layer 3 — C++ port (luxcpp/crypto):** mid-flight. 11 primitives
 have actual `<alg>/cpp/*.cpp` bodies (attestation, blake2b, bls,
@@ -159,9 +163,9 @@ structural reason for staying CPU-only (3 of 11).
 | 6 | bn254 | bootstrap-blocked (cpp body needs intx) | n/a (BLS Fp tower template applies; pending bn254 prime swap once bootstrap lands) | n/a | **E** |
 | 7 | secp256k1 | yes | Metal `secp256k1.metal`, `secp256k1_batch_inv.metal`, `secp256k1_recover.metal`, `secp256k1_authored.metal`; ecrecover pipeline (Stage A inv on-device via Montgomery batch_inv) | 9 CPU + Metal byte-equal Fp/Fn batch_inv (16, 256, 4 096) | **A** |
 | 8 | secp256r1 | bootstrap-blocked (cpp body needs intx+evmmax+ecc) | n/a | n/a | **E** |
-| 9 | ed25519 | NOTIMPL | n/a | n/a | **D** |
-| 10 | mldsa (FIPS 204) | NOTIMPL | n/a | n/a | **D** |
-| 11 | mlkem (FIPS 203) | NOTIMPL | n/a | n/a | **D** |
+| 9 | ed25519 | yes (Go body via cloudflare/circl) | Metal `ed25519_batch.metal` + `ed25519_batch_driver.mm` + `ed25519_metal_test` (v0.65); RFC 8032 host SHA-512 + Metal curve+scalar mul; N_threshold = 256 on M1 Max, 26.7× speedup at N=4096 vs equivalent-shape CPU | 4 RFC 8032 §7.1 positives + 96 byte-flip negatives = 100 byte-equal | **A** |
+| 10 | mldsa (FIPS 204) | yes (Go body via cloudflare/circl) | Metal kernel skeleton ships (`mldsa_batch.metal` + `mldsa_batch_driver.mm` + `mldsa_metal_test`, v0.65); thread-per-input fan-out shape correct, full FIPS-204 verify dGPU-deferred (Apple Silicon SHAKE256 emit ~5× slower than NEON SHA3 hardware — aivm v0.59 / V2 EVM kernel precedent) | 100 dispatch-shape vectors (deferred-code emit byte-equal across all threads) | **A** (skeleton M1; dGPU-only for full verify) |
+| 11 | mlkem (FIPS 203) | yes (Go body via cloudflare/circl) | Metal kernel skeleton ships (`mlkem_batch.metal` + `mlkem_batch_driver.mm` + `mlkem_metal_test`, v0.65); same shape as mldsa, dGPU-deferred for full FIPS-203 decap | 100 dispatch-shape vectors (deferred-code emit + ss-zeroed byte-equal) | **A** (skeleton M1; dGPU-only for full decap) |
 | 12 | slhdsa (FIPS 205) | NOTIMPL | n/a | n/a | **D** |
 | 13 | lamport | NOTIMPL | n/a | n/a | **D** |
 | 14 | ipa | NOTIMPL | n/a (intra-proof round-by-round; cross-proof batch is template-fit when body lands) | n/a | **D** |
@@ -187,10 +191,10 @@ structural reason for staying CPU-only (3 of 11).
 
 | Class | Count | Primitives |
 |---|---:|---|
-| **A** GPU-native today | **6** | sha256, keccak, ripemd160, blake2b, secp256k1, bls (+ ntt via FHE backend) |
-| **B** GPU-feasible body shipped, kernel pending | **0** | (every working CPU body has a shipped Metal kernel after this pass) |
+| **A** GPU-native today | **9** | sha256, keccak, ripemd160, blake2b, secp256k1, bls, ed25519 (v0.65 RFC 8032 byte-equal), mldsa (v0.65 skeleton, dGPU-deferred), mlkem (v0.65 skeleton, dGPU-deferred) (+ ntt via FHE backend) |
+| **B** GPU-feasible body shipped, kernel pending | **0** | (every working CPU body has a shipped Metal kernel after the v0.64+v0.65 pass) |
 | **C** Structurally CPU-only / round-by-round | **4** | attestation parsers, frost (intra-ceremony), cggmp21 (intra-ceremony), ringtail (intra-proof Fiat-Shamir) |
-| **D** NOTIMPL — no CPU body authored | **13** | blake3, ed25519, sr25519, mldsa, mlkem, slhdsa, lamport, ipa, poly_mul, pedersen, poseidon, verkle, aead |
+| **D** NOTIMPL — no CPU body authored | **10** | blake3, sr25519, slhdsa, lamport, ipa, poly_mul, pedersen, poseidon, verkle, aead |
 | **E** Bootstrap-blocked (cpp body needs intx/blst/evmmax) | **5** | bn254, secp256r1, kzg, modexp, evm256 |
 
 **Of working primitives** (denominator = 6 with shipped CPU body
