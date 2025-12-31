@@ -579,6 +579,3 @@ func TestWarpPriceAttestation(t *testing.T) {
 
 5. **Warp Message Integrity**: TeleportAttest messages are cryptographically verified at destination. Invalid attestations are rejected at consensus level.
 
-## Copyright
-
-Copyright and related rights waived via [CC0](../LICENSE.md).

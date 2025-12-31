@@ -379,7 +379,4 @@ go test ./integration/dex/... -v
 | LP-9400 | Lending/Borrowing | Sub-specification |
 | LP-9500 | Yield Protocols | Sub-specification |
 
-## Copyright
-
-Copyright and related rights waived via [CC0](https://creativecommons.org/publicdomain/zero/1.0/).
 ```

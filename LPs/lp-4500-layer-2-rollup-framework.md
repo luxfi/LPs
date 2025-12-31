@@ -565,6 +565,3 @@ Key components:
 - Integrates with Warp cross-chain messaging
 - Leverages existing consensus engines (BFT, Chain, DAG)
 
-## Copyright
-
-Copyright and related rights waived via [CC0](https://creativecommons.org/publicdomain/zero/1.0/).

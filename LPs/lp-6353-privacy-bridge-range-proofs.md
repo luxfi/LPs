@@ -496,6 +496,3 @@ enum ProofType {
 - [Lux FHE Library](https://github.com/luxfi/fhe) - OpenFHE-based C++ implementation
 - [Lux Lattice Library](https://github.com/luxfi/lattice) - Pure Go HE with multiparty support
 
-## Copyright
-
-Copyright and related rights waived via [CC0](https://creativecommons.org/publicdomain/zero/1.0/).

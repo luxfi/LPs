@@ -612,8 +612,5 @@ function verifyP256(bytes32 hash, bytes32 r, bytes32 s, bytes32 x, bytes32 y)
 - [LP-316](./lp-4316-ml-dsa-post-quantum-digital-signatures.md
 - [LP-181](https://github.com/avalanche-foundation/ACPs/tree/main/ACPs/181-p-chain-epoched-views
 
-## Copyright
-
 Copyright © 2025 Lux Industries Inc. All rights reserved.  
-Based on ACP-204 - Copyright waived via [CC0](https://creativecommons.org/publicdomain/zero/1.0/).
-```
+Based on ACP-204. Licensed under BSD-3-Clause-Network (see LICENSE).

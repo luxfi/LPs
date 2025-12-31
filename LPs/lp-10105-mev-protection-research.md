@@ -460,9 +460,6 @@ MEV protection is crucial for Lux Network's success as a fair and efficient DeFi
 - [Threshold Encryption](https://eprint.iacr.org/2017/1132)
 - [MEV Wiki](https://mev.wiki/)
 
-## Copyright
-
-Copyright and related rights waived via [CC0](../LICENSE.md).
 ## Specification
 
 Normative sections define the processes, data formats, and constants required for interoperability.

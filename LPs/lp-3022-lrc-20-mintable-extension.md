@@ -102,6 +102,3 @@ forge coverage --match-contract ERC20Mintable
 - Use AccessControl or Ownable patterns for role management.
 - Emit events for all mint operations for auditability.
 
-## Copyright
-
-Copyright and related rights waived via [CC0](https://creativecommons.org/publicdomain/zero/1.0/).```

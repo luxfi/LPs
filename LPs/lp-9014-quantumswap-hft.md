@@ -958,7 +958,4 @@ Sub-nanosecond matching enables:
 - **LP-9010**: DEX Precompile
 - **LP-3000**: X-Chain Exchange Specification
 
-## Copyright
-
-Copyright and related rights waived via [CC0](https://creativecommons.org/publicdomain/zero/1.0/).
 ```

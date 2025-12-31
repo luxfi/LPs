@@ -766,7 +766,5 @@ Based on ACP-226 by Stephen Buttolph and Michael Kaplan. Thanks to Luigi D'Onori
 - [LP-204](https://github.com/avalanche-foundation/ACPs/tree/main/ACPs/204-precompile-secp256r1
 - [ACP-176: Dynamic Fees](https://github.com/avalanche-foundation/ACPs)
 
-## Copyright
-
 Copyright © 2025 Lux Industries Inc. All rights reserved.  
-Based on ACP-226 - Copyright waived via [CC0](https://creativecommons.org/publicdomain/zero/1.0/).
+Based on ACP-226. Licensed under BSD-3-Clause-Network (see LICENSE).

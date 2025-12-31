@@ -239,6 +239,3 @@ As a Meta LP, formal test cases are not applicable. Framework validation is demo
 |---------|------|---------|
 | 1.0 | 2025-12-17 | Initial draft |
 
-## Copyright
-
-Copyright and related rights waived via [CC0](https://creativecommons.org/publicdomain/zero/1.0/).

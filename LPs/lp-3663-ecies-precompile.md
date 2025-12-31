@@ -961,7 +961,4 @@ Implementation exists in:
 
 For post-quantum encryption, use HPKE with ML-KEM (LP-3662 + LP-4318).
 
-## Copyright
-
-Copyright and related rights waived via [CC0](https://creativecommons.org/publicdomain/zero/1.0/).
 ```

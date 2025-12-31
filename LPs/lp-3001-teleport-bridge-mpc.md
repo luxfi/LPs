@@ -500,6 +500,3 @@ This LP defines the core Teleport Bridge protocol. Future LPs may extend functio
 | LP-3004 | Teleport + Yield | Remote yield integration |
 | LP-6022 | Warp Messaging | Alternative cross-chain messaging |
 
-## Copyright
-
-Copyright and related rights waived via [CC0](../LICENSE.md).

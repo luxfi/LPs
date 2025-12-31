@@ -456,9 +456,6 @@ Lux's multi-chain architecture enables innovative governance approaches that bal
 - [Snapshot](https://snapshot.org/)
 - [Quadratic Voting](https://www.radicalxchange.org/concepts/quadratic-voting/)
 
-## Copyright
-
-Copyright and related rights waived via [CC0](../LICENSE.md).
 ## Specification
 
 Normative algorithms, types, and constants described herein MUST be followed for interoperability.

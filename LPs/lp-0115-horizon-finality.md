@@ -992,7 +992,4 @@ Query timing could leak DAG structure:
 [4] Bernstein, P.A., Hadzilacos, V., Goodman, N. "Concurrency Control and Recovery in Database Systems". 1987.
 [5] Lamport, L. "Time, Clocks, and the Ordering of Events in a Distributed System". Communications of the ACM, 1978.
 
-## Copyright
-
-Copyright and related rights waived via [CC0](../LICENSE.md).
 ```

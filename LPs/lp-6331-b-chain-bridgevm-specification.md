@@ -3292,9 +3292,6 @@ The insurance fund (10% of fees) covers:
 
 3. **Privacy Features**: Integration with Z-Chain for private cross-chain transfers - implementation timeline?
 
-## Copyright
-
-Copyright and related rights waived via [CC0](https://creativecommons.org/publicdomain/zero/1.0/).
 
 ---
 

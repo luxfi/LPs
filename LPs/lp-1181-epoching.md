@@ -467,7 +467,5 @@ Thanks to Lux Protocol Team for integration testing and  quantum coordination de
 - [LP-318](./lp-4318-ml-kem-post-quantum-key-encapsulation.md
 - [LP-316](./lp-4316-ml-dsa-post-quantum-digital-signatures.md
 
-## Copyright
-
 Copyright © 2025 Lux Industries Inc. All rights reserved.  
-Based on ACP-181 - Copyright waived via [CC0](https://creativecommons.org/publicdomain/zero/1.0/).
+Based on ACP-181. Licensed under BSD-3-Clause-Network (see LICENSE).

@@ -669,6 +669,3 @@ Key components:
 6. Goldwasser, S., et al. (2019). "Secure Multi-Party Computation: From Theory to Practice." ACM Computing Surveys.
 7. Kairouz, P., et al. (2021). "Advances and Open Problems in Federated Learning." Foundations and Trends in Machine Learning.
 
-## Copyright
-
-Copyright and related rights waived via [CC0](../LICENSE.md).```

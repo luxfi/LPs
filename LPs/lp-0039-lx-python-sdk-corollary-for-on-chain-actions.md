@@ -216,7 +216,3 @@ Python client methods are additive; existing JSON-RPC and WS endpoints remain un
 - Manage key material via secure LocalAccount handlers.
 - Use HTTPS for all connections to avoid man-in-the-middle attacks.
 - Implement rate limiting on client side to prevent accidental spam.
-
-## Copyright
-
-CC0```

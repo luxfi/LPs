@@ -124,6 +124,3 @@ go test -v ./...
    - Verify cross-chain compatibility
    - Test upgrade transitions
 
-## Copyright
-
-Copyright and related rights waived via [CC0](../LICENSE.md).```

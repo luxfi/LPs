@@ -397,6 +397,3 @@ go test ./vms/platformvm/warp -run TestCrossChainRouting -v
 - **LP-301**: Bridge Protocol (main spec)
 - **LP-300-310**: Various cross-chain specifications
 
-## Copyright
-
-Copyright and related rights waived via [CC0](../LICENSE.md).

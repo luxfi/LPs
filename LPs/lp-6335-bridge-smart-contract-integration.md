@@ -2843,7 +2843,4 @@ MAX_DELAY = 30 days
 - **[LP-0333](/docs/lp-7333-dynamic-signer-rotation-with-lss-protocol/)**: Dynamic Signer Rotation (LSS protocol)
 - **[LP-0334](/docs/lp-7334-per-asset-threshold-key-management/)**: Per-Asset Threshold Keys
 
-## Copyright
-
-Copyright and related rights waived via [CC0](../LICENSE.md).
 ```

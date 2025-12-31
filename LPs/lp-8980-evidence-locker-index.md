@@ -304,6 +304,3 @@ All evidence access is logged:
 |---------|------|---------|
 | 1.0 | 2025-12-16 | Initial draft |
 
-## Copyright
-
-Copyright and related rights waived via [CC0](https://creativecommons.org/publicdomain/zero/1.0/).

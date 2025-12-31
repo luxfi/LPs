@@ -504,6 +504,3 @@ BenchmarkCriticalOrderMatching/10000 521,370 orders/sec   1,918.0 ns/op
 | CME | 100-200 µs | Futures |
 | Binance | 1-5 ms | CEX |
 
-## Copyright
-
-Copyright and related rights waived via [CC0](../LICENSE.md).

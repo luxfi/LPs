@@ -3348,7 +3348,4 @@ func (vm *VM) Initialize(...) error {
 8. BIP-341. **Taproot: SegWit version 1 spending rules**. Bitcoin Improvement Proposal.
 9. IETF CFRG. **FROST: Flexible Round-Optimized Schnorr Threshold Signatures**. draft-irtf-cfrg-frost.
 
-## Copyright
-
-Copyright and related rights waived via [CC0](../LICENSE.md).
 ```

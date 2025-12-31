@@ -669,8 +669,6 @@ Enabling private transfers across chains:
 - **Contracts**: https://github.com/luxfi/zchain/tree/main/contracts
 - **zkEVM**: https://github.com/luxfi/zchain/tree/main/zkevm
 
-## Copyright
-
 © 2025 Lux Partners
 Papers: CC BY 4.0
 Code: Apache 2.0

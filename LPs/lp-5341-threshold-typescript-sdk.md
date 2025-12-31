@@ -582,7 +582,4 @@ describe('Error handling', () => {
 4. **Access Control**: Implement authorization before signing requests
 5. **Rate Limiting**: Implement client-side rate limiting
 
-## Copyright
-
-Copyright and related rights waived via [CC0](../LICENSE.md).
 ```

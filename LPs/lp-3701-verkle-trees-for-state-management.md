@@ -304,6 +304,3 @@ All implementation files verified to exist:
 | State Update | <1ms | 0.7ms |
 | Migration Time | <24h | 18h |
 
-## Copyright
-
-Copyright and related rights waived via [CC0](../LICENSE.md).```

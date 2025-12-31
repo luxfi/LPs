@@ -424,6 +424,3 @@ This is a new system with no backwards compatibility concerns. The DEX integrate
 - [LP-9004](/docs/lp-9004-perpetuals-derivatives-protocol/): Perpetuals & Derivatives
 - [LP-9005](/docs/lp-9005-native-oracle-protocol/): Oracle Protocol
 
-## Copyright
-
-Copyright and related rights waived via [CC0](../LICENSE.md).

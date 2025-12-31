@@ -369,7 +369,4 @@ The x402 protocol is designed to be backwards compatible with existing HTTP infr
 - [LP-3009: LRC-3009](./lp-3009-lrc-3009-transfer-authorization.md)
 - [ERC-3009](https://eips.ethereum.org/EIPS/eip-3009)
 
-## Copyright
-
-Copyright and related rights waived via [CC0](../LICENSE.md).
 ```

@@ -3883,7 +3883,4 @@ ML-KEM operations are computationally efficient:
 15. OASIS. (2015). **PKCS #11 Cryptographic Token Interface Standard v2.40**. http://docs.oasis-open.org/pkcs11/pkcs11-base/v2.40/pkcs11-base-v2.40.html
 16. Jones, M. & Hildebrand, J. (2015). **RFC 7516: JSON Web Encryption (JWE)**. https://www.rfc-editor.org/rfc/rfc7516
 
-## Copyright
-
-Copyright and related rights waived via [CC0](../LICENSE.md).
 ```

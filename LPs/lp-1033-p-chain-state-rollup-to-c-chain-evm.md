@@ -158,6 +158,3 @@ Relayer operators pay L1 gas to submit state anchors. At ~50 gwei and ~100 0
 2. How to integrate Z-Chain state proofs for privacy-preserving applications?  
 3. What finality window on P-Chain ensures safety vs. liveness trade-offs?  
 
-## Copyright
-
-Copyright and related rights waived via [CC0](https://creativecommons.org/publicdomain/zero/1.0/).```

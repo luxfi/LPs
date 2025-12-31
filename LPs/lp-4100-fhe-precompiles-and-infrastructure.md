@@ -1065,6 +1065,3 @@ See `luxfi/fhe/contracts/test` and `luxfi/tfhe/*_test.go` for comprehensive test
 - [BGV Paper](https://eprint.iacr.org/2011/277)
 - [Threshold FHE](https://eprint.iacr.org/2020/304)
 
-## Copyright
-
-Copyright and related rights waived via [CC0](https://creativecommons.org/publicdomain/zero/1.0/).

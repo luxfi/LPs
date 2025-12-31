@@ -96,5 +96,3 @@ Comprehensive test suite in `vms/evm/lp176/lp176_test.go` covering:
 - Original ACP-176 (migrated to LP-176)
 - Lux fee mechanism research
 
-## Copyright
-Copyright (c) 2025 Lux Industries, Inc. All rights reserved.

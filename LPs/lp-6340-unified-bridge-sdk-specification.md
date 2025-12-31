@@ -3064,6 +3064,3 @@ The SDK implementations MUST address the following security requirements:
 
 See Section 10 of the Specification for detailed security implementation guidelines.
 
-## Copyright
-
-Copyright and related rights waived via [CC0](../LICENSE.md).

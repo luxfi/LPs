@@ -430,6 +430,3 @@ func TestCrossProtocolCompatibility(t *testing.T) {
 3. Shamir, A. (1979). **How to Share a Secret**. Communications of the ACM.
 4. Doerner, J., et al. (2019). **Threshold ECDSA from ECDSA Assumptions**. IEEE S&P 2019.
 
-## Copyright
-
-Copyright and related rights waived via [CC0](../LICENSE.md).

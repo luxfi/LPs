@@ -116,9 +116,6 @@ go doc ./... | head -100
    - Verify performance under load
    - Test resource utilization limits
 
-## Copyright
-
-Copyright and related rights waived via [CC0](../LICENSE.md).
 ## Backwards Compatibility
 
 Additive and non‑breaking; existing consumers continue to work. Adoption is opt‑in.

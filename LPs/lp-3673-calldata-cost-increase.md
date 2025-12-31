@@ -59,7 +59,4 @@ Evaluate post-blob adoption on Lux.
 
 - [EIP-7623: Increase Calldata Cost](https://eips.ethereum.org/EIPS/eip-7623)
 
-## Copyright
-
-Copyright and related rights waived via [CC0](../LICENSE.md).
 ```

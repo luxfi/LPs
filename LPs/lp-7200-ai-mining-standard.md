@@ -474,7 +474,4 @@ New chains added via governance vote. Each chain deploys independent AI token co
 - **HIP-006**: Hanzo AI Mining Protocol
 - **ZIP-005**: Zoo AI Mining Integration
 
-## Copyright
-
-Copyright and related rights waived via [CC0](https://creativecommons.org/publicdomain/zero/1.0/).
 ```

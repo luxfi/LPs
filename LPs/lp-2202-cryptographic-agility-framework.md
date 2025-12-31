@@ -462,6 +462,3 @@ func TestCryptoAgility(t *testing.T) {
 4. [BSI: Cryptographic Agility in Practice](https://www.bsi.bund.de/EN/Publications/)
 5. [IETF: Algorithm Agility in DNSSEC](https://datatracker.ietf.org/doc/html/rfc6975)
 
-## Copyright
-
-Copyright and related rights waived via [CC0](../LICENSE.md).```

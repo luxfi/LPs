@@ -1042,6 +1042,3 @@ New features (authentication, batch limits) are opt-in and don't break existing 
 - [luxfi/lattice](https://github.com/luxfi/lattice) - Lattice cryptography library
 - [luxfi/node](https://github.com/luxfi/node) - Node implementation
 
-## Copyright
-
-Copyright and related rights waived via [CC0](https://creativecommons.org/publicdomain/zero/1.0/).

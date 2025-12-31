@@ -55,9 +55,6 @@ By standardizing the CLI, all users from developers to validators have a clear r
    - Verify performance under load
    - Test resource utilization limits
 
-## Copyright
-
-Copyright and related rights waived via [CC0](../LICENSE.md).
 ## Backwards Compatibility
 
 Additive proposal; does not break existing modules. Adoption can be phased in.

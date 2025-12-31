@@ -206,8 +206,6 @@ Lux Industries Inc. is pursuing patent protection for 150+ innovations including
 
 ---
 
-## Copyright
-
 Copyright 2020-2025 Lux Industries Inc. All rights reserved.
 
 Enterprise components are proprietary. Components under Ecosystem License permit use on Lux Primary Network and descending chains. Contact licensing@lux.network for all other uses.

@@ -510,7 +510,4 @@ Default 1% fee structure:
 | LP-9072 | Bridged Asset Standard | General bridged asset interface |
 | LP-3528 | LRC-20 Bridgable Token Extension | Bridgeable token extensions |
 
-## Copyright
-
-Copyright and related rights waived via [CC0](../LICENSE.md).
 ```

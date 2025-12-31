@@ -208,9 +208,6 @@ The DeFi ecosystem on Lux is rapidly expanding with various protocols for lendin
 ### Development
 - [LP-50: Developer Tools Overview](/docs/lp-50-developer-tools-overview/)
 
-## Copyright
-
-Copyright and related rights waived via [CC0](../LICENSE.md).
 ## Specification
 
 The algorithms, message flows, and parameters defined in this LP are normative and MUST be followed for interoperability.

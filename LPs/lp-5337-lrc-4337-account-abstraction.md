@@ -826,7 +826,4 @@ Bundlers profit from:
 - **LP-2204**: secp256r1 Curve Integration
 - **Implementation**: `standard/contracts/account/`
 
-## Copyright
-
-Copyright and related rights waived via [CC0](https://creativecommons.org/publicdomain/zero/1.0/).
 ```

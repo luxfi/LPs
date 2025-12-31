@@ -632,7 +632,4 @@ contract NFTMarketplace {
 9. [LP-6022](./lp-6022-warp-messaging-20-native-interchain-transfers.md)
 10. [LP-3155](./lp-3155-lrc-1155-multi-token-standard.md)
 
-## Copyright
-
-Copyright and related rights waived via [CC0](../LICENSE.md).
 ```

@@ -139,9 +139,6 @@ The complete implementation is available at `github.com/luxfi/threshold` with co
    - Verify multi-chain coordination
    - Test emergency recovery
 
-## Copyright
-
-Copyright and related rights waived via [CC0](../LICENSE.md).
 ## Specification
 
 Normative details are defined by the CGG21 protocol phases (DKG, signing, refresh) and their parameter choices. Implementations MUST follow the described rounds, validations, and message formats.

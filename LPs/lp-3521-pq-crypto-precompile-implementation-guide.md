@@ -531,7 +531,4 @@ Precompiles reject unknown mode bytes with clear error messages:
 - **Cloudflare CIRCL**: https://github.com/cloudflare/circl
 - **Lux Crypto Library**: https://github.com/luxfi/crypto
 
-## Copyright
-
-Copyright and related rights waived via [CC0](https://creativecommons.org/publicdomain/zero/1.0/).
 ```

@@ -520,6 +520,3 @@ Key components:
 - Tool and methodology updates
 - Community feedback integration
 
-## Copyright
-
-Copyright and related rights waived via [CC0](../LICENSE.md).```

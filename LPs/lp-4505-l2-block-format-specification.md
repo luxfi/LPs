@@ -927,6 +927,3 @@ Key components:
 - Compression/decompression: < 50ms per block
 - Merkle proof generation: < 20ms per 100 state deltas
 
-## Copyright
-
-Copyright and related rights waived via [CC0](https://creativecommons.org/publicdomain/zero/1.0/).

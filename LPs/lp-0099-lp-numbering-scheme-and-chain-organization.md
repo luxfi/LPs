@@ -164,6 +164,3 @@ CI can validate:
 - [LP-0000: Network Architecture](./lp-0000-network-architecture-and-community-framework.md) — Full architecture
 - [LP-10000: Learning Paths Index](./lp-10000-learning-paths-index.md) — Educational entry points
 
-## Copyright
-
-Copyright and related rights waived via [CC0](../LICENSE.md).

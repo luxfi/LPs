@@ -184,8 +184,6 @@ No security-sensitive implementation details are disclosed in this document.
 
 ---
 
-## Copyright
-
 All technologies described herein are (c) 2020-2025 Lux Industries Inc.
 All rights reserved.
 

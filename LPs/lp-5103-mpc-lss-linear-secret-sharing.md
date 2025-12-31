@@ -488,6 +488,3 @@ LSS provides unique dynamic resharing capabilities essential for long-lived thre
 9. Benhamouda, F., et al. (2021). **Can a Blockchain Keep a Secret?** TCC 2021.
 10. Komlo, C., & Goldberg, I. (2020). **FROST: Flexible Round-Optimized Schnorr Threshold Signatures**. SAC 2020.
 
-## Copyright
-
-Copyright and related rights waived via [CC0](../LICENSE.md).

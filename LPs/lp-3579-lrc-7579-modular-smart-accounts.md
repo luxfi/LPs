@@ -250,6 +250,3 @@ This standard is fully backwards compatible with existing contracts and infrastr
 - [ERC-7579: Minimal Modular Smart Accounts](https://eips.ethereum.org/EIPS/eip-7579)
 - [LP-3337: LRC-4337 Account Abstraction](./lp-3337-lrc-4337-account-abstraction.md)
 
-## Copyright
-
-Copyright and related rights waived via [CC0](../LICENSE.md).

@@ -160,6 +160,3 @@ At 50 gwei and 100 000 gas per batch, L1 cost ≈ 0.0025 ETH (~ $4.5
 2. Dynamic fee‑market or fixed sequencer margin?
 3. L1 proof challenge window vs ZK proof replacement?
 
-## Copyright
-
-Copyright and related rights waived via [CC0](https://creativecommons.org/publicdomain/zero/1.0/).

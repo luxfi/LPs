@@ -224,7 +224,4 @@ This standard is fully backwards compatible with existing ERC-20 tokens. The aut
 - [x402 Payment Protocol](https://x402.org)
 - [LP-3026: LRC-2612 Permit](./lp-3026-lrc-2612-permit-extension.md)
 
-## Copyright
-
-Copyright and related rights waived via [CC0](../LICENSE.md).
 ```

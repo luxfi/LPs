@@ -621,7 +621,4 @@ Migration path for existing protocols:
 3. **Timing attacks** - Randomized execution
 4. **Front-running within batch** - Shuffled ordering
 
-## Copyright
-
-Copyright and related rights waived via [CC0](https://creativecommons.org/publicdomain/zero/1.0/).
 ```

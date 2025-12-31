@@ -960,7 +960,4 @@ Implementation exists in:
 2. **Reconstruction**: Must fetch from network during availability window
 3. **Light Client**: Can verify availability without full blob
 
-## Copyright
-
-Copyright and related rights waived via [CC0](https://creativecommons.org/publicdomain/zero/1.0/).
 ```

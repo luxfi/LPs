@@ -238,9 +238,6 @@ Research is critical for the long-term success and innovation of the Lux Network
 - [LP-50: Developer Tools Overview](/docs/lp-50-developer-tools-overview/)
 - [LP-60: DeFi Protocols Overview](/docs/lp-60-defi-protocols-overview/)
 
-## Copyright
-
-Copyright and related rights waived via [CC0](../LICENSE.md).
 ## Specification
 
 Normative sections define message flows, data types, and constants; implementations MUST follow them for interoperability.

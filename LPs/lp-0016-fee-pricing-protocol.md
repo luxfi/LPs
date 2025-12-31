@@ -657,6 +657,3 @@ function calculateOrderbookFee(
 - Version numbers prevent replay/rollback
 - Timestamp validation prevents stale updates
 
-## Copyright
-
-Copyright and related rights waived via [CC0](https://creativecommons.org/publicdomain/zero/1.0/).

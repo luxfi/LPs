@@ -262,6 +262,3 @@ All new features are additive:
 - [EIP-4444: History Expiry](https://eips.ethereum.org/EIPS/eip-4444)
 - [EIP-4938: Snap Protocol](https://eips.ethereum.org/EIPS/eip-4938)
 
-## Copyright
-
-Copyright and related rights waived via [CC0](https://creativecommons.org/publicdomain/zero/1.0/).

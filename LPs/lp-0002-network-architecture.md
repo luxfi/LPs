@@ -209,6 +209,3 @@ cd ~/work/lux/node/vms/platformvm/warp && go test -v ./...
 
 ---
 
-## Copyright
-
-Copyright and related rights waived via [CC0](../LICENSE.md).

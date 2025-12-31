@@ -137,6 +137,3 @@ Gas costs reflect:
 - [EIP-4762: Statelessness Gas Cost Changes](https://eips.ethereum.org/EIPS/eip-4762)
 - [EIP-2929: Gas Cost Increases](https://eips.ethereum.org/EIPS/eip-2929)
 
-## Copyright
-
-Copyright and related rights waived via [CC0](../LICENSE.md).

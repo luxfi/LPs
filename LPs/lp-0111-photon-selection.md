@@ -528,6 +528,3 @@ BenchmarkLuminanceUpdate-10         24,561 ops/sec (41μs/op)
 
 [5] "Distributed Platform: Scalable and Secure Blockchain Infrastructure". 2020.
 
-## Copyright
-
-Copyright and related rights waived via [CC0](../LICENSE.md).```

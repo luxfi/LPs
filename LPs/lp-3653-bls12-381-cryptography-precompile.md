@@ -864,7 +864,4 @@ This LP introduces a new precompile and is fully backwards compatible with EIP-2
 - [BLS Signature Standard](https://datatracker.ietf.org/doc/html/draft-irtf-cfrg-bls-signature) - CFRG standard
 - LP-110: Quasar Consensus Protocol
 
-## Copyright
-
-Copyright and related rights waived via [CC0](https://creativecommons.org/publicdomain/zero/1.0/).
 ```

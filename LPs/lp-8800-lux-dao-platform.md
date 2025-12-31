@@ -325,6 +325,3 @@ test('DAO creation flow', async ({ page }) => {
 3. Safe (Gnosis Safe): https://docs.safe.global/
 4. Hats Protocol: https://docs.hatsprotocol.xyz/
 
-## Copyright
-
-Copyright and related rights waived via [CC0](../LICENSE.md).

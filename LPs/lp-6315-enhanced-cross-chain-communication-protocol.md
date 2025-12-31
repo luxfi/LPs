@@ -151,5 +151,3 @@ Maintains compatibility with existing Warp messages while adding optional enhanc
 - IBC Protocol (Cosmos)
 - LayerZero architecture
 
-## Copyright
-Copyright (c) 2025 Lux Industries, Inc. All rights reserved.```

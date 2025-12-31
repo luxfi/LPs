@@ -824,6 +824,3 @@ Key features:
 - Slashing for misbehavior
 - Insurance funds for critical applications
 
-## Copyright
-
-Copyright and related rights waived via [CC0](../LICENSE.md).```

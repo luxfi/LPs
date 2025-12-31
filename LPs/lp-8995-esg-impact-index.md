@@ -123,6 +123,3 @@ ESG systems must ensure:
 - Transparent methodology disclosure
 - Audit trails for all metrics
 
-## Copyright
-
-Copyright and related rights waived via [CC0](../LICENSE.md).

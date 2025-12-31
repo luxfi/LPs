@@ -63,6 +63,3 @@ Widely used by OpenSea and other marketplaces.
 
 - [ERC-7572: Contract-level Metadata](https://eips.ethereum.org/EIPS/eip-7572)
 
-## Copyright
-
-Copyright and related rights waived via [CC0](../LICENSE.md).

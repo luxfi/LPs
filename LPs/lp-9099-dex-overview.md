@@ -439,6 +439,3 @@ go run ./cmd/fix-benchmark/
 
 ---
 
-## Copyright
-
-Copyright and related rights waived via [CC0](../LICENSE.md).

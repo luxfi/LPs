@@ -939,6 +939,3 @@ No backwards compatibility issues. This LP introduces a new precompile at an unu
 - [LP-5324: Ringtail Threshold Signature](./lp-7324-ringtail-threshold-signature-precompile.md)
 - [LP-3654: Ed25519 Precompile](./lp-3654-ed25519-eddsa-precompile.md)
 
-## Copyright
-
-Copyright and related rights waived via [CC0](https://creativecommons.org/publicdomain/zero/1.0/).

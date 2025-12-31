@@ -354,9 +354,6 @@ Test vectors will be generated from:
 - [LP-3658: Poseidon Hash Precompile](./lp-3658-poseidon-hash-precompile.md)
 - [LP-1227: Standard Ethereum Precompiles](./lp-1227-standard-ethereum-precompiles.md)
 
-## Copyright
-
-Copyright and related rights waived via [CC0](https://creativecommons.org/publicdomain/zero/1.0/).
 
 ---
 

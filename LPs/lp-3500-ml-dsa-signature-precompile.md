@@ -419,6 +419,3 @@ Higher gas costs for PQ operations generate more fee revenue for validators, cre
 - **LP-4**: Quantum-Resistant Cryptography Integration
 - **Implementation**: `precompiles/mldsa/`
 
-## Copyright
-
-Copyright and related rights waived via [CC0](https://creativecommons.org/publicdomain/zero/1.0/).

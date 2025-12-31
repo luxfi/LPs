@@ -394,6 +394,3 @@ All implementation files verified to exist:
 | Liquid Staking | Instant | No delays |
 | Cross-chain Overhead | <5% | Minimal impact |
 
-## Copyright
-
-Copyright and related rights waived via [CC0](../LICENSE.md).```

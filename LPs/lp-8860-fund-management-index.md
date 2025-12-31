@@ -76,6 +76,3 @@ Fund management LPs must address:
 - Audit requirements
 - Custody standards
 
-## Copyright
-
-Copyright and related rights waived via [CC0](../LICENSE.md).

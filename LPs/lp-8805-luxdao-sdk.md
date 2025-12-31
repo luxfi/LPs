@@ -529,7 +529,4 @@ describe('Azorius', () => {
 - **LP-2522**: Voting Strategies Standard
 - **LP-2523**: Freeze Voting & Guard System
 
-## Copyright
-
-Copyright and related rights waived via [CC0](../LICENSE.md).
 ```

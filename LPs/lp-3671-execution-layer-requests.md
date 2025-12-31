@@ -174,7 +174,4 @@ Unified framework chosen for:
 
 - [EIP-7685: General Purpose Execution Layer Requests](https://eips.ethereum.org/EIPS/eip-7685)
 
-## Copyright
-
-Copyright and related rights waived via [CC0](../LICENSE.md).
 ```

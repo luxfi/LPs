@@ -157,7 +157,4 @@ This standard is fully backwards compatible with existing contracts and infrastr
 - [ERC-7201: Namespaced Storage Layout](https://eips.ethereum.org/EIPS/eip-7201)
 - [LP-3967: LRC-1967 Proxy Storage Slots](./lp-3967-lrc-1967-proxy-storage-slots.md)
 
-## Copyright
-
-Copyright and related rights waived via [CC0](../LICENSE.md).
 ```

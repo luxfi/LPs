@@ -157,7 +157,7 @@ created: <YYYY-MM-DD>
 6. **Test Cases** (required for Standards Track)
 7. **Reference Implementation** (optional but recommended)
 8. **Security Considerations**
-9. **Copyright** (must be CC0)
+9. **License** (BSD-3-Clause-Network, see LICENSE)
 
 ---
 
@@ -275,7 +275,4 @@ This LP establishes the governance framework. It does not break any existing pro
 - Private disclosure protects users during fix development
 - Editor review prevents malicious proposals
 
-## Copyright
-
-Copyright and related rights waived via [CC0](https://creativecommons.org/publicdomain/zero/1.0/).
 ```

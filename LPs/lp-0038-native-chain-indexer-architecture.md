@@ -517,6 +517,3 @@ This LP documents new infrastructure and does not affect existing chain operatio
 - [LUX Explorer](https://github.com/luxfi/explore) - Frontend
 - [Blockscout](https://github.com/blockscout/blockscout) - C-Chain indexer
 
-## Copyright
-
-Copyright and related rights waived via [CC0](https://creativecommons.org/publicdomain/zero/1.0/).

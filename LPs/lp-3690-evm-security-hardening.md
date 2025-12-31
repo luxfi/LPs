@@ -207,6 +207,3 @@ All limits are set above current legitimate usage. No breaking changes to existi
 - [EIP-7825: Memory Expansion Limit](https://eips.ethereum.org/EIPS/eip-7825)
 - [EIP-6780: SELFDESTRUCT Deprecation](https://eips.ethereum.org/EIPS/eip-6780)
 
-## Copyright
-
-Copyright and related rights waived via [CC0](https://creativecommons.org/publicdomain/zero/1.0/).

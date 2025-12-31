@@ -574,6 +574,3 @@ function pausePrivateSwaps() external onlyGovernance {
 5. Penumbra. "Private Decentralized Exchange." 2022.
 6. Anoma. "Intent-Centric Privacy Architecture." 2023.
 
-## Copyright
-
-Copyright and related rights waived via [CC0](../LICENSE.md).```

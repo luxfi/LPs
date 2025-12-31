@@ -506,7 +506,4 @@ curl -X POST --data '{
    - Verify multi-chain coordination
    - Test emergency recovery
 
-## Copyright
-
-Copyright and related rights waived via [CC0](../LICENSE.md).
 ```

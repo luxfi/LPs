@@ -601,7 +601,4 @@ A native precompile could reduce costs dramatically:
 - **NIST SP 800-208**: Recommendation for Stateful Hash-Based Signature Schemes
 - **Implementation**: `/Users/z/work/lux/standard/src/lamport/`
 
-## Copyright
-
-Copyright and related rights waived via [CC0](https://creativecommons.org/publicdomain/zero/1.0/).
 ```

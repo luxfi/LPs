@@ -695,9 +695,6 @@ func establishHybridChannel(
    - Verify cross-chain compatibility
    - Test upgrade transitions
 
-## Copyright
-
-Copyright and related rights waived via [CC0](https://creativecommons.org/publicdomain/zero/1.0/).
 
 ## References
 

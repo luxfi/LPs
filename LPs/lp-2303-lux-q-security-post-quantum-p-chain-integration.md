@@ -540,8 +540,6 @@ func BenchmarkBatchVerify(b *testing.B) {
 - **Implementation**: https://github.com/luxfi/node/tree/main/consensus/quantum
 - **NIST PQC**: https://csrc.nist.gov/projects/post-quantum-cryptography
 
-## Copyright
-
 © 2025 Lux Partners
 Papers: CC BY 4.0
 Code: Apache 2.0

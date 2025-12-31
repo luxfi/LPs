@@ -213,6 +213,3 @@ Understanding upgrade boundaries is critical for:
 - Archive node operation
 - Block validation during import
 
-## Copyright
-
-Copyright and related rights waived via [CC0](https://creativecommons.org/publicdomain/zero/1.0/).

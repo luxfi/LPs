@@ -221,6 +221,3 @@ RUN_E2E=1 go test -v ./tests/e2e/
    - Verify performance under load
    - Test resource utilization limits
 
-## Copyright
-
-Copyright and related rights waived via [CC0](../LICENSE.md).```

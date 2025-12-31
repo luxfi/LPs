@@ -996,9 +996,6 @@ The dual-certificate mechanism ensures that Q-Chain remains secure against both 
    - Verify cross-chain compatibility
    - Test upgrade transitions
 
-## Copyright
-
-Copyright and related rights waived via [CC0](../LICENSE.md).
 ## Specification
 
 Normative definitions (APIs, data types, and constants) in this LP MUST be implemented as described to ensure compatibility.

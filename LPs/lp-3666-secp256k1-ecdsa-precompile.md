@@ -702,7 +702,4 @@ This LP introduces a new precompile and is fully backwards compatible. Existing 
 - LP-7321: FROST Threshold Signature Precompile
 - LP-7322: CGGMP21 Threshold ECDSA Precompile
 
-## Copyright
-
-Copyright and related rights waived via [CC0](https://creativecommons.org/publicdomain/zero/1.0/).
 ```

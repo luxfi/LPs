@@ -236,7 +236,4 @@ This standard is fully backwards compatible with existing contracts and infrastr
 - [LP-3721: LRC-721](./lp-3721-lrc-721-non-fungible-token-standard.md)
 - [LP-3155: LRC-1155](./lp-3155-lrc-1155-multi-token-standard.md)
 
-## Copyright
-
-Copyright and related rights waived via [CC0](../LICENSE.md).
 ```

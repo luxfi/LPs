@@ -55,9 +55,6 @@ This standard encourages a rich ecosystem of node add-ons (think monitoring dash
    - Verify performance under load
    - Test resource utilization limits
 
-## Copyright
-
-Copyright and related rights waived via [CC0](../LICENSE.md).
 ## Backwards Compatibility
 
 This LP is additive; existing behavior remains unchanged. Migration can be performed progressively.
@@ -148,6 +145,3 @@ scrape_interval = "15s"
 
 Standardizing this area improves developer experience and interoperability across wallets, tooling, and chains within Lux.
 
-## Copyright
-
-Copyright and related rights waived via [CC0](../LICENSE.md).

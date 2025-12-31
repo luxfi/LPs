@@ -339,7 +339,4 @@ function test_DelegatedVotes() public {
 - **LP-2521**: Azorius Governance Module
 - **LP-2520**: Lux Vote Interface
 
-## Copyright
-
-Copyright and related rights waived via [CC0](../LICENSE.md).
 ```

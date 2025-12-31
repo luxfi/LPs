@@ -502,7 +502,4 @@ Critical operations should verify precompile availability before use.
 - **LP-322**: CGGMP21 Threshold ECDSA
 - **LP-320**: Ringtail Threshold Signatures
 
-## Copyright
-
-Copyright and related rights waived via [CC0](https://creativecommons.org/publicdomain/zero/1.0/).
 ```

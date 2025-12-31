@@ -218,7 +218,4 @@ The binary format is backwards compatible. The package location change requires 
 - [LP-3510: Warp Messaging Precompile](./lp-3510-warp-messaging-precompile.md)
 - [BLS12-381 Curve](https://hackmd.io/@benjaminion/bls12-381)
 
-## Copyright
-
-Copyright and related rights waived via [CC0](https://creativecommons.org/publicdomain/zero/1.0/).
 ```

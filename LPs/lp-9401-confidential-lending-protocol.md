@@ -667,6 +667,3 @@ This LP introduces a new lending protocol that operates independently from exist
 5. Goldreich, O. "Secure Multi-Party Computation." 2002.
 6. Gentry, C. "Fully Homomorphic Encryption." 2009.
 
-## Copyright
-
-Copyright and related rights waived via [CC0](../LICENSE.md).```

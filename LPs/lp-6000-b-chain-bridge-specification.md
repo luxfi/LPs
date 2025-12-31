@@ -343,6 +343,3 @@ func TestQuantumPhaseTransition(t *testing.T)
 | LP-6400 | External Chain Support | Sub-specification |
 | LP-7000 | T-Chain | Provides threshold infrastructure |
 
-## Copyright
-
-Copyright and related rights waived via [CC0](https://creativecommons.org/publicdomain/zero/1.0/).

@@ -843,6 +843,3 @@ Key components:
 - Phase 3: Economic security and slashing mechanisms
 - Phase 4: Production hardening and audits
 
-## Copyright
-
-Copyright and related rights waived via [CC0](https://creativecommons.org/publicdomain/zero/1.0/).

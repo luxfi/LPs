@@ -502,6 +502,3 @@ Liquidity mining contracts are standalone and integrate with existing AMM pools 
 3. **Gaming prevention** - Penalties for mercenary LPs
 4. **Governance control** - DAO controls emissions
 
-## Copyright
-
-Copyright and related rights waived via [CC0](https://creativecommons.org/publicdomain/zero/1.0/).

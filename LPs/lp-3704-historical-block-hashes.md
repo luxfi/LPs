@@ -128,6 +128,3 @@ func ProcessBlockHashUpdate(state StateDB, header *Header) {
 
 - [EIP-2935: Save Historical Block Hashes in State](https://eips.ethereum.org/EIPS/eip-2935)
 
-## Copyright
-
-Copyright and related rights waived via [CC0](../LICENSE.md).

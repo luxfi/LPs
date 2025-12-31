@@ -342,6 +342,3 @@ func TestGoAccelerator_Benchmark(t *testing.T)
 | LP-8400 | FHE Operations | Sub-specification |
 | LP-8500 | ZK Rollups | Sub-specification |
 
-## Copyright
-
-Copyright and related rights waived via [CC0](https://creativecommons.org/publicdomain/zero/1.0/).
