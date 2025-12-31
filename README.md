@@ -7,7 +7,7 @@
 _Lux Network is an 8-chain blockchain ecosystem designed for quantum-safe operations, AI integration, and high-performance DeFi._
 
 [![Documentation](https://img.shields.io/badge/docs-latest-brightgreen?style=for-the-badge)](https://docs.lux.network)
-[![License](https://img.shields.io/badge/license-CC0_1.0-blue?style=for-the-badge)](https://creativecommons.org/publicdomain/zero/1.0/)
+[![License](https://img.shields.io/badge/license-BSD_3--Clause-blue?style=for-the-badge)](./LICENSE.md)
 [![Network Status](https://img.shields.io/badge/network-mainnet-success?style=for-the-badge)](https://explorer.lux.network)
 
 </div>
@@ -492,9 +492,17 @@ make watch        # Watch for changes and auto-validate
 
 ---
 
-## 📄 License
+## 📄 License & Patents
 
-[CC0 1.0 Universal](https://creativecommons.org/publicdomain/zero/1.0/) - Public Domain Dedication
+**Specifications**: [BSD 3-Clause License](./LICENSE.md)
+
+**Technology Innovation**: We are seeking patent protection for the core technologies described in these LPs. See [LP-0010: Technology Portfolio](./LPs/lp-0010-patent-pending-technology-portfolio.md) for the complete portfolio of 100+ innovations.
+
+**Why We Can't Share More**: US patent law (since the America Invents Act of 2013) and UK law provide no grace period for prior public disclosure, preventing us from fully open-sourcing certain innovations until patent applications are filed. We believe these laws harm independent inventors but must operate within them.
+
+**Commercial Use**: Contact oss@lux.network for commercial licensing inquiries.
+
+**Open AI Protocol Exception**: Automatic license granted for operating nodes on Lux Network and any network built on the Open AI Protocol (PoAI consensus).
 
 <div align="center">
 
