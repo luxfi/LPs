@@ -1,17 +1,19 @@
 ---
-lip: 50
-title: Enterprise GPU Acceleration Licensing
+lp: 50
+title: Enterprise Licensing
 author: Lux Industries Inc
 status: Active
 type: Informational
 created: 2025-12-29
+tags: [licensing, enterprise, commercial]
+tier: core
 ---
 
-# LP-0050: Enterprise GPU Acceleration Licensing
+# LP-0050: Enterprise Licensing
 
 ## Abstract
 
-This LP describes the licensing model for Lux Network's GPU-accelerated cryptographic libraries. Consumer-grade Apple Silicon (Metal/MLX) acceleration is open source. Enterprise-grade NVIDIA CUDA acceleration requires a commercial license.
+This LP describes enterprise licensing options for Lux Network's advanced technologies including GPU acceleration, FHE libraries, threshold cryptography, and post-quantum implementations. Consumer-grade components are open source while enterprise-grade deployments require commercial licensing.
 
 ## Motivation
 
