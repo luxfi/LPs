@@ -5,6 +5,7 @@ author: Lux Industries Inc
 status: Active
 type: Informational
 created: 2025-12-29
+updated: 2025-12-30
 tags: [licensing, enterprise, commercial]
 tier: core
 ---
@@ -13,84 +14,200 @@ tier: core
 
 ## Abstract
 
-This LP describes enterprise licensing options for Lux Network's advanced technologies including GPU acceleration, FHE libraries, threshold cryptography, and post-quantum implementations. Consumer-grade components are open source while enterprise-grade deployments require commercial licensing.
+This LP describes enterprise licensing options for Lux Network's advanced technologies. While core blockchain infrastructure is open source, enterprise-grade deployments of advanced cryptography, private networks, AI/ML compute, and high-performance systems require commercial licensing.
 
-## Motivation
+## Enterprise Licensing Categories
 
-Lux Network provides high-performance Fully Homomorphic Encryption (FHE) and cryptographic operations. To sustain ongoing R&D while serving both individual developers and enterprise customers, we employ a dual-licensing model:
+### 1. Private & Custom Networks
 
-- **Open Source (BSD-3-Clause)**: Apple Silicon / Metal / MLX support
-- **Enterprise License**: NVIDIA CUDA / Multi-GPU / Datacenter support
+Deploy Lux technology for private, permissioned, or consortium networks.
 
-## Specification
+| Offering | Description | License Required |
+|----------|-------------|------------------|
+| **Private L1 Network** | Standalone Lux network with custom validators | Enterprise |
+| **Permissioned Subnet** | Private subnet on Lux Primary Network | Ecosystem (free) |
+| **Consortium Chain** | Multi-organization private network | Enterprise |
+| **Air-Gapped Deployment** | Fully isolated network infrastructure | Enterprise |
+| **White-Label Network** | Rebranded Lux technology | OEM |
 
-### Open Source Components
+**Permitted Free (Ecosystem License)**:
+- L1/L2/L3 chains descending from Lux Primary Network
+- Public testnets and devnets
+- Research and academic networks
 
-The following are available under BSD-3-Clause:
+**Requires Commercial License**:
+- Networks NOT connected to Lux Primary Network
+- Forks of Lux technology
+- Competing blockchain deployments
 
-| Component | Repository | GPU Support |
-|-----------|------------|-------------|
-| FHE Core Library | `luxcpp/fhe` | Metal/MLX |
-| Go FHE Bindings | `lux/fhe` | Metal/MLX via CGO |
-| Lattice Crypto | `luxfi/lattice` | CPU |
+### 2. Multi-Party Computation (MPC) & Threshold Crypto
 
-### Enterprise Components
+Enterprise-grade distributed key management and signing services.
 
-The following require a commercial license:
-
-| Component | Description | Contact |
+| Component | Description | License |
 |-----------|-------------|---------|
-| CUDA FHE Backend | H100/H200/A100 support | licensing@lux.network |
-| Multi-GPU Pipeline | 8x GPU, NVLink, NVSwitch | licensing@lux.network |
-| HGX Integration | DGX/HGX datacenter systems | licensing@lux.network |
-| Threshold FHE Server | Enterprise MPC deployment | licensing@lux.network |
+| **Threshold Signing Service** | Hosted t-of-n signature infrastructure | Enterprise |
+| **DKG Ceremonies** | Distributed key generation as a service | Enterprise |
+| **Key Rotation Service** | Non-disruptive key refresh | Enterprise |
+| **Custody SDK** | White-label institutional custody | OEM |
+| **TSS Libraries** | Core threshold signature libraries | Ecosystem |
 
-### Innovation Status
+**Use Cases**:
+- Institutional custody solutions
+- DAO treasury management
+- Cross-chain bridge operations
+- Exchange hot wallet security
+- Corporate key management
 
-Lux Industries Inc. is seeking patent protection in the UK and USA for the following optimizations:
+### 3. Cryptographic Libraries
 
-1. Four-step NTT for Apple Metal threadgroup memory
-2. Fused external product GPU kernel
-3. Twiddle factor hotset caching
-4. Speculative bootstrapping key prefetch
-5. GPU-native scheme switching
-6. Batched threshold FHE protocol
-7. EVM-compatible encrypted integers (euint256)
-8. Lazy carry propagation for encrypted arithmetic
-9. Verifiable FHE computation witnesses
-10. Multi-GPU NTT distribution via NVLink
+Advanced cryptographic implementations with hardware acceleration.
 
-### Licensing Tiers
+| Library | Open Source | Enterprise |
+|---------|-------------|------------|
+| **Post-Quantum (ML-KEM, ML-DSA)** | ✅ Pure Go | CUDA acceleration |
+| **FHE/TFHE** | ✅ Metal/MLX | CUDA/Multi-GPU |
+| **Lattice Operations** | ✅ CPU | GPU acceleration |
+| **BLS Signatures** | ✅ Basic | Threshold BLS |
+| **Ring Signatures** | ✅ Basic | GPU-accelerated |
+| **Zero-Knowledge** | ✅ Groth16/PLONK | Hardware provers |
 
-#### Community (Free)
-- Apple Silicon acceleration (M1/M2/M3/M4)
-- Single-GPU Metal compute
-- BSD-3-Clause license
-- Community support via GitHub
+### 4. High-Performance Compute & GPU Acceleration
 
-#### Enterprise
-- NVIDIA datacenter GPU support
-- Multi-GPU scaling (up to 8x H200)
-- Priority support and SLAs
+#### Open Source (BSD-3-Clause)
+- Apple Silicon (M1/M2/M3/M4) via Metal/MLX
+- Single-GPU acceleration
+- Standard CPU implementations
+
+#### Enterprise License Required
+| Component | Description |
+|-----------|-------------|
+| **CUDA Backend** | NVIDIA H100/H200/A100 support |
+| **Multi-GPU** | Up to 8x GPU via NVLink/NVSwitch |
+| **DGX/HGX** | Datacenter-scale deployments |
+| **FPGA Accelerators** | Custom hardware integration |
+| **TPU Support** | Google TPU integration |
+
+### 5. AI/ML Infrastructure
+
+Enterprise AI compute and inference infrastructure.
+
+| Service | Description | License |
+|---------|-------------|---------|
+| **Verifiable Inference** | Proof-of-inference for AI models | Enterprise |
+| **Confidential AI** | TEE-protected model execution | Enterprise |
+| **Training Coordination** | Distributed training orchestration | Enterprise |
+| **Model Registry** | On-chain model provenance | Ecosystem |
+| **AI Mining Pools** | GPU compute marketplace | Enterprise |
+
+**TEE Support**:
+- Intel SGX enclaves
+- AMD SEV confidential VMs
+- ARM CCA realms
+- NVIDIA H100 Confidential Compute
+
+### 6. Exchange & Trading Infrastructure
+
+High-frequency trading and exchange deployments.
+
+| Component | Description | License |
+|-----------|-------------|---------|
+| **Order Book Engine** | Sub-millisecond matching | Enterprise |
+| **FPGA Matching** | Hardware-accelerated orderbook | Enterprise |
+| **Market Making SDK** | Automated market making tools | Enterprise |
+| **Liquidation Engine** | MEV-resistant liquidations | Enterprise |
+| **DEX Precompiles** | Native EVM DEX operations | Ecosystem |
+
+### 7. Bridge & Cross-Chain
+
+Cross-network infrastructure and integration.
+
+| Service | Description | License |
+|---------|-------------|---------|
+| **Bridge Operator Node** | Run bridge validator infrastructure | Enterprise |
+| **Light Client SDK** | Custom network light clients | Enterprise |
+| **Relayer Service** | Hosted message relaying | Enterprise |
+| **Warp Integration** | Custom chain Warp messaging | Ecosystem |
+
+---
+
+## Licensing Tiers
+
+### Community (Free)
+
+**Ecosystem License v1.2** - No cost for:
+- Research and academic use
+- Lux Primary Network (mainnet/testnet)
+- L1/L2/L3 chains descending from Lux Primary
+- Open source contributions
+
+### Enterprise
+
+Annual licensing for commercial deployments outside Lux ecosystem:
+- Full source code access
+- Priority support (24/7 SLA available)
 - Custom integration assistance
-- Contact: licensing@lux.network
+- Security advisories and patches
+- Dedicated account management
 
-#### OEM
-- White-label licensing
-- Custom builds and optimizations
+### OEM
+
+White-label and embedded licensing:
+- Rebranding rights
+- Custom builds and modifications
 - Dedicated engineering support
-- Contact: licensing@lux.network
+- Volume pricing
+- Co-marketing opportunities
+
+---
+
+## Innovation Portfolio
+
+Lux Industries Inc. is pursuing patent protection for 150+ innovations including:
+
+**FHE/Privacy (40+ innovations)**:
+- GPU-optimized TFHE bootstrapping
+- Batched threshold FHE protocols
+- EVM-compatible encrypted integers
+- Verifiable FHE computation witnesses
+
+**Post-Quantum (15 innovations)**:
+- Lattice-based threshold signatures
+- Hybrid classical/PQC modes
+- Hardware-accelerated ML-DSA/ML-KEM
+
+**Consensus (12 innovations)**:
+- Quasar multi-consensus family
+- Sub-second finality protocols
+- Performance-weighted validator selection
+
+**See**: [LP-0010: Technology Portfolio](/docs/lp-0010) for complete listing.
+
+---
 
 ## Contact
 
-For enterprise licensing inquiries:
+| Inquiry | Contact |
+|---------|---------|
+| **General Licensing** | licensing@lux.network |
+| **Enterprise Sales** | enterprise@lux.network |
+| **Partnership** | partners@lux.network |
+| **Technical Questions** | GitHub Issues |
 
-- **Email**: licensing@lux.network
-- **Website**: https://lux.network/enterprise
-- **GitHub**: https://github.com/luxfi
+**Website**: https://lux.network/enterprise
+
+---
+
+## Related LPs
+
+- [LP-0010: Technology Portfolio](/docs/lp-0010) - Innovation catalog
+- [LP-0011: Fee Pricing Protocol](/docs/lp-0011) - Network economics
+- [LP-0012: Ecosystem Licensing](/docs/lp-0012) - Two-tier model
+
+---
 
 ## Copyright
 
-Copyright 2025 Lux Industries Inc. All rights reserved.
+Copyright 2020-2025 Lux Industries Inc. All rights reserved.
 
-Enterprise components are proprietary. Open source components are licensed under BSD-3-Clause.
+Enterprise components are proprietary. Components under Ecosystem License permit use on Lux Primary Network and descending chains. Contact licensing@lux.network for all other uses.

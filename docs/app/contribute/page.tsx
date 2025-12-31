@@ -320,7 +320,7 @@ created: <YYYY-MM-DD>
                   <li>• Rationale</li>
                   <li>• Backwards Compatibility</li>
                   <li>• Security Considerations</li>
-                  <li>• Copyright (CC0)</li>
+                  <li>• Copyright (BSD 3-Clause)</li>
                 </ul>
               </div>
               <div className="p-4 rounded-lg border border-border bg-background">
