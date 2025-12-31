@@ -103,7 +103,7 @@ Recommended: Use `effectiveTipPerUnit` with a minimum tip floor to avoid "big tx
 
 | Component | Destination | Rationale |
 |-----------|-------------|-----------|
-| Base fee | Burn (70%) + Treasury (30%) | Monetary policy + protocol funding |
+| Base fee | Burn (50%) + Treasury (50%) | Monetary policy + protocol funding (DAO configurable) |
 | Priority fee | Validators/Sequencers | Direct incentive to prioritize |
 
 **Governance can adjust the burn/treasury split**, but priority fees ALWAYS go to validators.
@@ -404,10 +404,10 @@ Step 5: Calculate total fee
   priorityFee = 1,600 × 2 = 3,200 µLUX
   totalFee    = 1,600 + 3,200 = 4,800 µLUX
 
-Distribution:
-  Burned:    1,600 × 70% = 1,120 µLUX
-  Treasury:  1,600 × 30% = 480 µLUX
-  Validator: 3,200 µLUX
+Distribution (default 50/50 split, DAO configurable):
+  Burned:    1,600 × 50% = 800 µLUX
+  Treasury:  1,600 × 50% = 800 µLUX
+  Validator: 3,200 µLUX (priority fees always to validators)
 ```
 
 #### Example 2: C-Chain Contract Call (High Congestion)

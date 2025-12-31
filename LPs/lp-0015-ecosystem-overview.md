@@ -399,16 +399,19 @@ where:
 - **Anti-Spam**: Congestion multipliers prevent spam attacks
 - **Predictable**: Users know max fees upfront (EIP-1559 style)
 
-### Fee Distribution
+### Fee Distribution (DAO Configurable)
 
+**Base Fee** (default split):
 | Recipient | Share | Purpose |
 |-----------|-------|---------|
-| **LPs** | 40% | Liquidity provider rewards |
-| **Stakers** | 30% | Validator/delegator rewards |
-| **Treasury** | 20% | Protocol development |
-| **Buyback** | 10% | Token burns |
+| **Burn** | 50% | Deflationary pressure |
+| **Treasury** | 50% | Protocol development |
 
-**Related LPs**: LP-9019 (Fee Distribution), LP-9020 (Fee Pricing Protocol)
+**Priority Fee**: 100% to validators/sequencers
+
+All fee parameters are **governance-controlled** via C-Chain DAO with 24-hour timelock.
+
+**Related LPs**: LP-0016 (Fee Pricing Protocol), LP-9019 (Fee Distribution)
 
 ---
 
