@@ -376,7 +376,4 @@ function test_RejectInvalidSignature() public {
 1. ERC-4337: https://eips.ethereum.org/EIPS/eip-4337
 2. Alchemy Light Account: https://docs.alchemy.com/docs/light-account
 
-## Copyright
-
-Copyright and related rights waived via [CC0](../LICENSE.md).
 ```

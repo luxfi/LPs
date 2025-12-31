@@ -732,6 +732,3 @@ for (uint i = 0; i < collaborators.length; i++) {
 }
 ```
 
-## Copyright
-
-Copyright and related rights waived via [CC0](../LICENSE.md).```

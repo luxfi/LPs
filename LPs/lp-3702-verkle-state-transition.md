@@ -128,7 +128,4 @@ Verkle trees chosen over:
 - [EIP-6800: Ethereum State Verkle Transition](https://eips.ethereum.org/EIPS/eip-6800)
 - [LP-3701: Verkle Trees for State Management](./lp-3701-verkle-trees-for-state-management.md)
 
-## Copyright
-
-Copyright and related rights waived via [CC0](../LICENSE.md).
 ```

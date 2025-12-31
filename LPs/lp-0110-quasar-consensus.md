@@ -408,6 +408,3 @@ See component-specific LPs for detailed test cases:
 [3] Popov, S., et al. "FPC-BI: Fast Probabilistic Consensus". 2021.
 [4] Team Rocket. "Snowflake to Avalanche". 2018.
 
-## Copyright
-
-Copyright and related rights waived via [CC0](../LICENSE.md).

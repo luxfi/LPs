@@ -167,7 +167,4 @@ go test -v ./...
 - `platform.getTotalStake()` - Total staked LUX
 - `platform.getCurrentSupply()` - Total LUX supply
 
-## Copyright
-
-Copyright and related rights waived via [CC0](../LICENSE.md).
 ```

@@ -607,6 +607,3 @@ Focus inherits safety from Wave's FPC voting:
 - Maximum tracked items per validator configurable
 - Memory-bounded map implementations available
 
-## Copyright
-
-Copyright and related rights waived via [CC0](https://creativecommons.org/publicdomain/zero/1.0/).

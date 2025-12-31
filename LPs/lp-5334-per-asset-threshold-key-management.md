@@ -1966,7 +1966,4 @@ This LP integrates with several other Lux Proposals:
 5. If rotation needed, LP-333's resharing is triggered per this LP's policy
 ```
 
-## Copyright
-
-Copyright and related rights waived via [CC0](../LICENSE.md).
 ```

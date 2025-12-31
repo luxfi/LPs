@@ -512,9 +512,6 @@ Data availability is a critical challenge for blockchain scalability. Lux's mult
 - [Polygon Avail](https://polygon.technology/avail)
 - [EigenDA](https://www.eigenlayer.xyz/eigenDA)
 
-## Copyright
-
-Copyright and related rights waived via [CC0](../LICENSE.md).
 ## Specification
 
 Algorithms, data structures, and parameters in this LP are normative and MUST be followed.

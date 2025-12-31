@@ -335,6 +335,3 @@ All implementation files verified to exist:
 | Pruning Rate | >1GB/min | Background operation |
 | Ancient Write | >100MB/s | Batch operations |
 
-## Copyright
-
-Copyright and related rights waived via [CC0](../LICENSE.md).```

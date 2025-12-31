@@ -180,6 +180,3 @@ Faster sync lowers hardware requirements and validator operational costs, broade
 2. Safe concurrency models for trie updates?  
 3. Stage-loop scheduling: sequential vs concurrent?  
 
-## Copyright
-
-Copyright and related rights waived via [CC0](https://creativecommons.org/publicdomain/zero/1.0/).

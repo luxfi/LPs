@@ -264,6 +264,4 @@ Lux LP-176 maintains compatibility with ACP-176 while adapting to Lux-specific r
 - [EIP-1559: Fee Market Change](https://eips.ethereum.org/EIPS/eip-1559)
 - [Lux EVM Implementation](https://github.com/luxfi/node/tree/main/vms/evm/lp176)
 
-## Copyright
-
 Copyright (C) 2025 Lux Partners Limited. All rights reserved.

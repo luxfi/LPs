@@ -421,6 +421,3 @@ This LP defines new infrastructure and does not affect existing systems.
 - [CGGMP21 Paper](https://eprint.iacr.org/2021/060)
 - [FROST Paper](https://eprint.iacr.org/2020/852)
 
-## Copyright
-
-Copyright and related rights waived via [CC0](https://creativecommons.org/publicdomain/zero/1.0/).

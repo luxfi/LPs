@@ -1001,7 +1001,4 @@ Implementation exists in:
 
 The Lattice-LSAG scheme (ID `0x10`) provides post-quantum security using Module-LWE hardness. It should be used when quantum resistance is required.
 
-## Copyright
-
-Copyright and related rights waived via [CC0](https://creativecommons.org/publicdomain/zero/1.0/).
 ```

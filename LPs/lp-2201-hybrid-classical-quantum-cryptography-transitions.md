@@ -548,6 +548,3 @@ func TestHybridMigration(t *testing.T) {
 3. [ETSI TS 103 744: Quantum-Safe Hybrid Key Exchanges](https://www.etsi.org/deliver/etsi_ts/103700_103799/103744/)
 4. [Bindel et al., "Transitioning to a Quantum-Resistant Public Key Infrastructure"](https://doi.org/10.1007/978-3-319-59879-6_22)
 
-## Copyright
-
-Copyright and related rights waived via [CC0](../LICENSE.md).```

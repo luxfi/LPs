@@ -879,7 +879,4 @@ This LP extends the existing Blake2b compression function (EIP-152 at 0x09) with
 - [github.com/zeebo/blake3](https://github.com/zeebo/blake3)
 - [LP-3655: SHA-3/Keccak Precompile](./lp-3655-sha3-keccak-precompile.md)
 
-## Copyright
-
-Copyright and related rights waived via [CC0](https://creativecommons.org/publicdomain/zero/1.0/).
 ```

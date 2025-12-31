@@ -697,6 +697,3 @@ See individual LPs for detailed implementations:
 - GPU memory cleared after use
 - Threshold keys distributed across parties
 
-## Copyright
-
-Copyright and related rights waived via [CC0](https://creativecommons.org/publicdomain/zero/1.0/).

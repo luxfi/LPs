@@ -635,6 +635,3 @@ This makes FPC suitable for global-scale networks.
 
 [5] Baudet, M., et al. "State Machine Replication in the Libra Blockchain". 2019.
 
-## Copyright
-
-Copyright and related rights waived via [CC0](../LICENSE.md).```

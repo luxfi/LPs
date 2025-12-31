@@ -140,9 +140,6 @@ struct ConfidentialProof {
 }
 ```
 
-## Copyright
-
-Copyright and related rights waived via [CC0](../LICENSE.md).
 ## Rationale
 
 The design prioritizes clarity, interoperability, and operational simplicity, selecting mechanisms that reduce ambiguity and ease integration across Lux tooling and chains.

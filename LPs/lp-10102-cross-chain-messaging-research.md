@@ -374,9 +374,6 @@ Cross-chain messaging is fundamental to Lux's multi-chain vision. The combinatio
 - [Axelar Network](https://github.com/axelarnetwork/axelar-core)
 - [Chainlink CCIP](https://chain.link/cross-chain)
 
-## Copyright
-
-Copyright and related rights waived via [CC0](../LICENSE.md).
 ## Specification
 
 Normative content includes the processes, data formats, and constants described here; implementations MUST conform for compatibility.

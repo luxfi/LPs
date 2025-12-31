@@ -260,6 +260,3 @@ See `plugins-core/dex` for DexFx code and `stack/dex-indexer` for indexing servi
 - Implement market circuit breakers for extreme price moves.
 - Enforce minimum order sizes to prevent dust attacks.
 
-## Copyright
-
-Copyright and related rights waived via [CC0](https://creativecommons.org/publicdomain/zero/1.0/).

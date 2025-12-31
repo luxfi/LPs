@@ -119,6 +119,18 @@ Plus all underlying technology:
 | `luxcpp/lattice` | PQC | C++ lattice crypto |
 | `luxcpp/crypto` | Crypto | C++ crypto primitives |
 
+**Enterprise Hardware Backends** — Contact: `licensing@lux.network`
+
+| Backend | Performance | Availability |
+|---------|-------------|--------------|
+| Apple Metal/MLX | ~130x vs CPU | **Open Source (BSD-3-Clause)** |
+| NVIDIA H100/H200 CUDA | ~60x vs Metal | Enterprise License |
+| Multi-GPU (8x H100 HGX) | 600K PBS/sec | Enterprise License |
+| FPGA (Alveo U280) | 200K PBS/sec @ 75W | Enterprise License |
+| Custom ASIC IP | 1M+ PBS/sec @ 50W | Enterprise License |
+
+See PAT-FHE-031 for hardware acceleration roadmap.
+
 #### Specialized Chain VMs
 | Repository | Chain | Description |
 |------------|-------|-------------|
@@ -247,7 +259,5 @@ All affected repositories MUST include:
 
 - [LP-0010: Technology Portfolio](./lp-0010-technology-portfolio.md) - Innovation catalog
 - [LP-0005: Open Source](./lp-0005-open-source.md) - Open source philosophy
-
-## Copyright
 
 Copyright (c) 2020-2025 Lux Industries Inc. All rights reserved.

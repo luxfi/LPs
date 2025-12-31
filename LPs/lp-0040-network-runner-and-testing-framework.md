@@ -105,9 +105,6 @@ network.Healthy(ctx)  # Bootstrap all 4 chains
    - Verify performance under load
    - Test resource utilization limits
 
-## Copyright
-
-Copyright and related rights waived via [CC0](../LICENSE.md).
 ## Backwards Compatibility
 
 Additive specification; no breaking changes to existing interfaces. Adoption is optional per component.

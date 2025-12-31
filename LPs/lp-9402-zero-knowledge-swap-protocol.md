@@ -765,6 +765,3 @@ Withdrawal: 100,000 gas (including mixer)
 5. Tornado Cash. "Privacy Solution for Ethereum." 2019.
 6. Zcash. "Zcash Protocol Specification." 2022.
 
-## Copyright
-
-Copyright and related rights waived via [CC0](../LICENSE.md).

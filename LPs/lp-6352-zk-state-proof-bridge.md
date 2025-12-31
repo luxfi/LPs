@@ -464,6 +464,3 @@ enum ProofType {
 
 5. **Proof Malleability**: Use claim ID for replay protection, not proof bytes.
 
-## Copyright
-
-Copyright and related rights waived via [CC0](https://creativecommons.org/publicdomain/zero/1.0/).

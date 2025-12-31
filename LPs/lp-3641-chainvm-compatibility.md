@@ -284,6 +284,4 @@ LP-118 is designed for forward compatibility only. chain-EVM chains can migrate 
 - [Lux EVM Implementation](https://github.com/luxfi/evm)
 - [Precompile Documentation](https://docs.lux.network/precompiles)
 
-## Copyright
-
 Copyright (C) 2025 Lux Partners Limited. All rights reserved.

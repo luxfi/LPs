@@ -123,6 +123,3 @@ For cutting-edge DeFi research:
 
 None — this is a meta/organizational proposal.
 
-## Copyright
-
-Copyright and related rights waived via [CC0](https://creativecommons.org/publicdomain/zero/1.0/).

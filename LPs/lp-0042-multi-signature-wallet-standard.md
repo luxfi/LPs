@@ -603,6 +603,3 @@ forge test --match-contract MultiSigLoadTest -vv
 - Proper error handling with revert messages
 - Chain reorganization handling via finality windows
 
-## Copyright
-
-Copyright and related rights waived via [CC0](../LICENSE.md).

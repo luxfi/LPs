@@ -557,7 +557,4 @@ make new
 - [5] Ethereum EIP Process: eips.ethereum.org
 - [6] NIST Post-Quantum Standards: FIPS 203, 204, 205
 
-## Copyright
-
-Copyright and related rights waived via [CC0](../LICENSE.md).
 ```

@@ -379,6 +379,3 @@ enum ProofType {
 4. **Event Spoofing**: Verify event comes from expected bridge contract address
 5. **Finality Depth**: Ensure Layer 1 proof uses sufficient finality (Quasar anchors for Lux)
 
-## Copyright
-
-Copyright and related rights waived via [CC0](https://creativecommons.org/publicdomain/zero/1.0/).

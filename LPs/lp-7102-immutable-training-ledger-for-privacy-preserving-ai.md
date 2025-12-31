@@ -360,6 +360,3 @@ This LP introduces additive interfaces and on-chain records. Existing applicatio
 2. [HIP-1: Hanzo Multimodal Models](https://github.com/hanzoai/hips/blob/main/HIPs/hip-1.md)
 3. [Federated Learning](https://arxiv.org/abs/1602.05629)
 
-## Copyright
-
-Copyright and related rights waived via [CC0](https://creativecommons.org/publicdomain/zero/1.0/).

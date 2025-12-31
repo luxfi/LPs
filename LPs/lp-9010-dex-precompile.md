@@ -544,6 +544,3 @@ dex/
 2. **Options/Futures**: Extend for derivatives trading?
 3. **Privacy Orders**: Dark pool integration?
 
-## Copyright
-
-Copyright and related rights waived via [CC0](https://creativecommons.org/publicdomain/zero/1.0/).

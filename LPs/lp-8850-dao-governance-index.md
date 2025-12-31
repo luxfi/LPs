@@ -99,6 +99,3 @@ Governance systems must address:
 - Quorum manipulation
 - Proposal spam
 
-## Copyright
-
-Copyright and related rights waived via [CC0](../LICENSE.md).

@@ -59,7 +59,4 @@ Pectra upgrade component - evaluate for Lux adoption.
 
 - [EIP-7251: Increase Max Effective Balance](https://eips.ethereum.org/EIPS/eip-7251)
 
-## Copyright
-
-Copyright and related rights waived via [CC0](../LICENSE.md).
 ```

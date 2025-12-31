@@ -511,6 +511,3 @@ DAG geometry operations must be bounded:
 
 **Invariant**: All operations must complete in O(V) time or better.
 
-## Copyright
-
-Copyright and related rights waived via [CC0](../LICENSE.md).

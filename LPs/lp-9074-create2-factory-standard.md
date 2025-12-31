@@ -573,6 +573,3 @@ Key features:
 - Rate limiting for deployment operations
 - Whitelist/blacklist mechanisms
 
-## Copyright
-
-Copyright and related rights waived via [CC0](../LICENSE.md).```

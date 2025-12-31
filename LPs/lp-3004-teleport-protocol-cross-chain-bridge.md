@@ -491,6 +491,3 @@ Key security measures:
 - Timelocks on large withdrawals
 - Oracle manipulation resistance through multi-source price feeds
 
-## Copyright
-
-Copyright and related rights waived via [CC0](../LICENSE.md).

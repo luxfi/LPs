@@ -1057,6 +1057,3 @@ With cheap Poseidon on Lux EVM:
 - [LP-3653: BLS12-381 Precompile](./lp-3653-bls12-381-cryptography-precompile.md)
 - [LP-3655: SHA-3/Keccak Precompile](./lp-3655-sha3-keccak-precompile.md)
 
-## Copyright
-
-Copyright and related rights waived via [CC0](https://creativecommons.org/publicdomain/zero/1.0/).

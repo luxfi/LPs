@@ -614,6 +614,3 @@ For 1M price queries/day:
 - **LP-9013**: CrossChainDeFiRouter (oracle consumer)
 - **LP-2517**: Precompile Suite Overview
 
-## Copyright
-
-Copyright and related rights waived via [CC0](https://creativecommons.org/publicdomain/zero/1.0/).

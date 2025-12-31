@@ -289,6 +289,3 @@ GraphVM query gas costs and precompile storage writes introduce new gas sinks; t
 - What guardrails (whitelists, ACLs) are needed for schema evolution or custom GraphQL extensions?
 - How to best surface proof root updates to light clients (block metadata vs. separate registry)?
 
-## Copyright
-
-Copyright and related rights waived via [CC0](https://creativecommons.org/publicdomain/zero/1.0/).```

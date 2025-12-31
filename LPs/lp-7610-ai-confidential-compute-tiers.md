@@ -765,7 +765,4 @@ Higher CC tiers command premium fees:
 - **LP-5601**: Dynamic Gas Fee with AI Compute Pricing
 - **LP-5607**: GPU Acceleration Framework
 
-## Copyright
-
-Copyright and related rights waived via [CC0](https://creativecommons.org/publicdomain/zero/1.0/).
 ```

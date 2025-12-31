@@ -226,6 +226,3 @@ All implementation files verified to exist:
 3. **GPU Resource DoS**: Compute operations require staking to prevent abuse
 4. **Priority Fee Caps**: Maximum priority fees prevent auction manipulation
 
-## Copyright
-
-Copyright and related rights waived via [CC0](../LICENSE.md).

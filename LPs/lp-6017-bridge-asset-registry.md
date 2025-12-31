@@ -335,6 +335,3 @@ forge coverage --match="Registry"
 - **LP-721**: Non-Fungible Token Standard (LRC-721)
 - **LP-301**: Bridge Protocol (main spec)
 
-## Copyright
-
-Copyright and related rights waived via [CC0](../LICENSE.md).

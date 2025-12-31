@@ -311,6 +311,3 @@ function claim(ClaimData calldata claim, bytes calldata proof, ProofType proofTy
 
 4. **Header Submission Liveness**: Requires at least one honest header submitter. Can be incentivized through fees.
 
-## Copyright
-
-Copyright and related rights waived via [CC0](https://creativecommons.org/publicdomain/zero/1.0/).

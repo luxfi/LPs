@@ -793,6 +793,3 @@ The LGPL-3.0 license permits:
 - [Safe Deployments](https://github.com/safe-global/safe-deployments)
 - [Safe SDK](https://github.com/safe-global/safe-core-sdk)
 
-## Copyright
-
-Copyright and related rights waived via [CC0](../LICENSE.md).

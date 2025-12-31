@@ -472,9 +472,6 @@ Lux's multi-chain architecture and zero-interest credit system provide unique ad
 - [Frax Finance](https://frax.finance/)
 - [Alchemix alUSD](https://alchemix.fi/)
 
-## Copyright
-
-Copyright and related rights waived via [CC0](../LICENSE.md).
 ## Specification
 
 The LP’s algorithms, data definitions, and parameters are normative; implementations MUST follow them.

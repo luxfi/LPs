@@ -189,6 +189,3 @@ The philosophy documented here reduces attack surface, enables rapid response, a
 
 ---
 
-## Copyright
-
-Copyright and related rights waived via [CC0](https://creativecommons.org/publicdomain/zero/1.0/).

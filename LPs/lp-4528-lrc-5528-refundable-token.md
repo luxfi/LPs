@@ -265,6 +265,3 @@ This standard is fully backwards compatible with existing contracts and infrastr
 - [ERC-5528: Refundable Fungible Token](https://eips.ethereum.org/EIPS/eip-5528)
 - [LP-3020: LRC-20](./lp-3020-lrc-20-fungible-token-standard.md)
 
-## Copyright
-
-Copyright and related rights waived via [CC0](../LICENSE.md).

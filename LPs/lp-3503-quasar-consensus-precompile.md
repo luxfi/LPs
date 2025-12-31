@@ -624,7 +624,4 @@ Compressed witnesses rely on validator bitfields. Attacks mitigated by:
 - **LP-700**: Quasar Consensus Protocol Specification
 - **Implementation**: `/Users/z/work/lux/precompiles/quasar/`
 
-## Copyright
-
-Copyright and related rights waived via [CC0](https://creativecommons.org/publicdomain/zero/1.0/).
 ```

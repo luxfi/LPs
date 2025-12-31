@@ -737,6 +737,3 @@ require(calls[i].target != address(0), "Invalid target");
 require(calls[i].target.code.length > 0, "Target not contract");
 ```
 
-## Copyright
-
-Copyright and related rights waived via [CC0](../LICENSE.md).```

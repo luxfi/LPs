@@ -39,9 +39,6 @@ This LP defines how unique, non-fungible tokens are created and managed, with sp
 
 A common NFT interface ensures wallets, marketplaces, and tools interoperate seamlessly, enabling portability of digital assets across Lux dApps and infrastructure.
 
-## Copyright
-
-Copyright and related rights waived via [CC0](../LICENSE.md).
 ## Specification
 
 ### Core NFT Interface

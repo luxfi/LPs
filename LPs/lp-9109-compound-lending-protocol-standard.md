@@ -468,7 +468,7 @@ For Lux Network, consider:
 
 The Compound V3 (Comet) implementation uses BUSL-1.1 which converts to GPL v2.0+ on 2025-12-31.
 
-This LP specification is released under CC0.
+This LP specification is licensed under BSD-3-Clause-Network (see LICENSE).
 
 ## References
 
@@ -477,6 +477,3 @@ This LP specification is released under CC0.
 - [LP-2000](./lp-1200-c-chain-evm-specification.md)
 - [Compound V3 Audits]()
 
-## Copyright
-
-Copyright and related rights waived via [CC0](../LICENSE.md).

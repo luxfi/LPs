@@ -272,6 +272,3 @@ cd standard && forge test
 | LP-2400 | DeFi Protocols | Sub-specification |
 | LP-2600 | Rollups/L2 | Sub-specification |
 
-## Copyright
-
-Copyright and related rights waived via [CC0](https://creativecommons.org/publicdomain/zero/1.0/).

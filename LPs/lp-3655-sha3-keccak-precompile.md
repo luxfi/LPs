@@ -853,7 +853,4 @@ No backwards compatibility issues. This LP introduces a new precompile at an unu
 - [golang.org/x/crypto/sha3](https://pkg.go.dev/golang.org/x/crypto/sha3)
 - [LP-3658: Poseidon Hash Precompile](./lp-3658-poseidon-hash-precompile.md)
 
-## Copyright
-
-Copyright and related rights waived via [CC0](https://creativecommons.org/publicdomain/zero/1.0/).
 ```

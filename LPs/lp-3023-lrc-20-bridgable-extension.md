@@ -115,6 +115,3 @@ forge coverage --match-contract ERC20Bridgable
 - Implement rate limiting to prevent bridge floods.
 - Verify message signatures from the Teleport Protocol.
 
-## Copyright
-
-Copyright and related rights waived via [CC0](https://creativecommons.org/publicdomain/zero/1.0/).```

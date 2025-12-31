@@ -248,6 +248,3 @@ func TestUTXOStateTransitions(t *testing.T)
 | LP-1200 | Staking Mechanics | Sub-specification |
 | LP-1300 | chain Management | Sub-specification |
 
-## Copyright
-
-Copyright and related rights waived via [CC0](https://creativecommons.org/publicdomain/zero/1.0/).

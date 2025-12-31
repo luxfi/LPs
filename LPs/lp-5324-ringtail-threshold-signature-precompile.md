@@ -1088,6 +1088,3 @@ func verifyRingtail(threshold, totalParties uint32, msgHash []byte, sig []byte) 
 - **LP-7322**: CGGMP21 Precompile (classical ECDSA threshold)
 - **LP-5000**: [T-Chain Threshold Specification](./lp-7000-t-chain-threshold-specification.md) - MPC custody chain
 
-## Copyright
-
-Copyright and related rights waived via [CC0](https://creativecommons.org/publicdomain/zero/1.0/).

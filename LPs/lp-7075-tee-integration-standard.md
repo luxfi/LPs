@@ -811,6 +811,3 @@ Key features:
 - Secure multi-party computation
 - Zero-knowledge proof integration
 
-## Copyright
-
-Copyright and related rights waived via [CC0](../LICENSE.md).

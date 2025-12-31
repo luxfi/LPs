@@ -287,6 +287,3 @@ This LP itself is a security measure. By documenting the supply chain:
 3. Security researchers have clear scope
 4. CVE response procedures are defined
 
-## Copyright
-
-Copyright and related rights waived via [CC0](https://creativecommons.org/publicdomain/zero/1.0/).

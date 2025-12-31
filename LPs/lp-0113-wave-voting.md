@@ -336,6 +336,3 @@ Wave FPC is a new consensus component that integrates with the existing Quasar p
 [2] Müller, S., et al. "Fast Probabilistic Consensus with Weighted Votes". 2020.
 [3] LP-110: Quasar Unified Consensus Protocol
 
-## Copyright
-
-Copyright and related rights waived via [CC0](../LICENSE.md).

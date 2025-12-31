@@ -494,7 +494,4 @@ This LP introduces new key management capabilities without breaking existing fun
 4. **Share Distribution**: Shares must be transmitted over encrypted channels
 5. **Validator Trust**: K-Chain assumes honest majority among validators
 
-## Copyright
-
-Copyright and related rights waived via [CC0](https://creativecommons.org/publicdomain/zero/1.0/).
 ```

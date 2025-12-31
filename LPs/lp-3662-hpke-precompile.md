@@ -985,7 +985,4 @@ HPKE with current KEMs is NOT post-quantum secure. For quantum resistance:
 - Use with ML-KEM hybrid (LP-4318)
 - Transition path defined in LP-4201
 
-## Copyright
-
-Copyright and related rights waived via [CC0](https://creativecommons.org/publicdomain/zero/1.0/).
 ```

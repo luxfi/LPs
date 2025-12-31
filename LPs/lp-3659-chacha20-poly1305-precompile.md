@@ -959,7 +959,4 @@ No backwards compatibility issues. This LP introduces a new precompile at an unu
 - [WireGuard Cryptography](https://www.wireguard.com/protocol/)
 - [LP-3654: Ed25519 Precompile](./lp-3654-ed25519-eddsa-precompile.md) (for X25519)
 
-## Copyright
-
-Copyright and related rights waived via [CC0](https://creativecommons.org/publicdomain/zero/1.0/).
 ```

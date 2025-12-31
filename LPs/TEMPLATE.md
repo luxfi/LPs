@@ -80,6 +80,3 @@ Discuss the economic implications of the proposed change, such as effects on tok
 
 List any unresolved issues, trade-offs, or questions that require further discussion before the LP can advance.
 
-## Copyright
-
-Copyright and related rights waived via [CC0](https://creativecommons.org/publicdomain/zero/1.0/).

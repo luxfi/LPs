@@ -371,6 +371,3 @@ Migration path for existing s* holders:
 2. LP-3004: Teleport Protocol Specification
 3. Aave E-Mode Documentation: https://docs.aave.com/developers/whats-new/efficiency-mode-emode
 
-## Copyright
-
-Copyright and related rights waived via [BSD-3-Clause](https://opensource.org/licenses/BSD-3-Clause).

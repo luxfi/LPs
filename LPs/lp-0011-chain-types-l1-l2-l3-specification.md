@@ -279,6 +279,3 @@ This LP introduces new chain type classifications. Existing chains are classifie
 - Node: `github.com/luxfi/node/vms/platformvm/blocks`
 - Genesis: `github.com/luxfi/genesis/pkg/genesis`
 
-## Copyright
-
-Copyright and related rights waived via [CC0](https://creativecommons.org/publicdomain/zero/1.0/).

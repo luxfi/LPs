@@ -253,9 +253,6 @@ Tools available via:
 - Developer Discord: [discord.gg/lux](https://discord.gg/lux)
 - GitHub Discussions: [github.com/luxfi/lps/discussions](https://github.com/luxfi/lps/discussions)
 
-## Copyright
-
-Copyright and related rights waived via [CC0](../LICENSE.md).
 ## Specification
 
 Normative definitions for data structures, processes, and parameters in this LP MUST be followed for compatibility across Lux components.

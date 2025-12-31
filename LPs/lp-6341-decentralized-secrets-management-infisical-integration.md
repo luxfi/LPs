@@ -4087,6 +4087,3 @@ See Section "Security Considerations" within the Specification for detailed impl
 5. NIST FIPS 203 - ML-KEM Standard
 6. SOC 2 Type II Compliance - https://www.aicpa.org/soc2
 
-## Copyright
-
-Copyright and related rights waived via [CC0](../LICENSE.md).

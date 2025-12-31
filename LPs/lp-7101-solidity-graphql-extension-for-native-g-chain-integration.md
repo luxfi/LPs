@@ -621,7 +621,4 @@ This extension is opt-in via `pragma experimental GraphQL`. Contracts without th
 
 By embedding GraphQL directly into Solidity, we dramatically simplify cross-chain dApp development on Lux. Developers can write complex queries with the same ease as calling a local function, while the compiler handles all the complexity of cross-chain communication, type safety, and gas optimization.
 
-## Copyright
-
-Copyright and related rights waived via [CC0](../LICENSE.md).
 ```

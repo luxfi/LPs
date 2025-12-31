@@ -450,6 +450,3 @@ The Lux PQC ecosystem provides defense-in-depth with multiple complementary sche
 7. [ZKNOX ETHDILITHIUM - EVM Optimizations](https://github.com/ZKNOX/ETHDILITHIUM)
 8. [Cloudflare CIRCL - Pure Go Implementation](https://github.com/cloudflare/circl)
 
-## Copyright
-
-Copyright and related rights waived via [CC0](../LICENSE.md).

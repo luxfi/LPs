@@ -68,6 +68,3 @@ Key considerations:
 
 - [ERC-5169: Client Script URI](https://eips.ethereum.org/EIPS/eip-5169)
 
-## Copyright
-
-Copyright and related rights waived via [CC0](../LICENSE.md).

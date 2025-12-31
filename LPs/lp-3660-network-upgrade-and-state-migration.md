@@ -1021,6 +1021,4 @@ The network upgrade process migrates C-Chain state from Chain ID 96369, which re
    - Verify reentrancy protection
    - Test gas forwarding
 
-## Copyright
-
 Copyright © 2025 Lux Industries Inc. All rights reserved.

@@ -489,9 +489,6 @@ Decentralized identity on Lux leverages Z-Chain's unique privacy features to cre
 - [BBS+ Signatures](https://github.com/hyperledger/anoncreds-spec)
 - [Sovrin Network](https://sovrin.org/)
 
-## Copyright
-
-Copyright and related rights waived via [CC0](../LICENSE.md).
 ## Specification
 
 Normative sections define APIs, data models, and parameters. Implementations MUST follow these for consistent behavior.

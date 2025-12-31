@@ -737,6 +737,3 @@ function emergencyPause() external onlyOwner {
 }
 ```
 
-## Copyright
-
-Copyright and related rights waived via [CC0](../LICENSE.md).

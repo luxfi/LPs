@@ -206,6 +206,3 @@ Operator margins should cover infrastructure, storage, and bandwidth costs. Larg
 3. How should L1 gas refunds (e.g. EIP‑3529 burn refunds) be allocated back to L2 users or operators?
 4. Which data availability layer (Ethereum L1 vs. Celestia vs. others) optimizes cost and throughput for Lux rollups?
 
-## Copyright
-
-Copyright and related rights waived via [CC0](https://creativecommons.org/publicdomain/zero/1.0/).```

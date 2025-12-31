@@ -430,7 +430,4 @@ The precompile suite provides a migration path:
 2. **Transition**: Use hybrid signatures (classical + PQ)
 3. **Future**: Use pure post-quantum (ML-DSA, SLH-DSA, Ringtail)
 
-## Copyright
-
-Copyright and related rights waived via [CC0](https://creativecommons.org/publicdomain/zero/1.0/).
 ```

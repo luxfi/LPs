@@ -417,6 +417,3 @@ All implementation files verified to exist:
 | AI Inference (1K tokens) | 500ms | 5ms | 100x |
 | Order Matching (10K) | 100ms | 1ms | 100x |
 
-## Copyright
-
-Copyright and related rights waived via [CC0](../LICENSE.md).```

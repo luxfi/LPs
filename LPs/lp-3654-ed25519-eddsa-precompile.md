@@ -805,6 +805,3 @@ X25519 shared secrets may equal identity if peer provides small-order point. Imp
 - [LP-5324: Ringtail Threshold EdDSA](./lp-7324-ringtail-threshold-signature-precompile.md)
 - [LP-3652: secp256k1 ECDSA Precompile](./lp-3652-secp256k1-ecdsa-precompile.md)
 
-## Copyright
-
-Copyright and related rights waived via [CC0](https://creativecommons.org/publicdomain/zero/1.0/).

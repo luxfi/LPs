@@ -3561,6 +3561,3 @@ Researchers acting in good faith are protected:
 2. **Oracle Dependency**: Anomaly detection relies on accurate external data
 3. **Governance Delay**: Recovery voting takes 7+ days for full approval
 
-## Copyright
-
-Copyright and related rights waived via [CC0](../LICENSE.md).

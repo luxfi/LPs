@@ -333,6 +333,3 @@ func TestFROSTSigning(t *testing.T)
 | LP-7400 | DKG Ceremonies | Sub-specification |
 | LP-6000 | B-Chain | Uses T-Chain for bridge custody |
 
-## Copyright
-
-Copyright and related rights waived via [CC0](https://creativecommons.org/publicdomain/zero/1.0/).

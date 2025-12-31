@@ -1756,7 +1756,4 @@ See the full test suite in [github.com/luxfi/bridge/tests]().
 3. **Cross-L2 Optimization**: Direct L2-to-L2 paths or always via mainnet?
 4. **IBC Integration**: Full Cosmos interoperability scope?
 
-## Copyright
-
-Copyright and related rights waived via [CC0](../LICENSE.md).
 ```

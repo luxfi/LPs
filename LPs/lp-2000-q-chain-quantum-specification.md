@@ -280,7 +280,4 @@ func TestMLDSASignVerify(t *testing.T)
 | LP-4400 | Quantum Stamping | Sub-specification |
 | LP-4500 | Key Management | Sub-specification |
 
-## Copyright
-
-Copyright and related rights waived via [CC0](https://creativecommons.org/publicdomain/zero/1.0/).
 ```

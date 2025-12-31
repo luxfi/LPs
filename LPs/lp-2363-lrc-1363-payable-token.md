@@ -212,7 +212,4 @@ forge test --gas-report
 
 - [ERC-1363: Payable Token](https://eips.ethereum.org/EIPS/eip-1363)
 
-## Copyright
-
-Copyright and related rights waived via [CC0](../LICENSE.md).
 ```

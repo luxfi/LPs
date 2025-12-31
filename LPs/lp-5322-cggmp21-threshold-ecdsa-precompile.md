@@ -1053,9 +1053,6 @@ Integration with Lux Warp messaging for cross-chain threshold signatures:
 3. Destination chain verifies via this precompile
 4. Identifiable aborts enable cross-chain slashing
 
-## Copyright
-
-Copyright and related rights waived via [CC0](https://creativecommons.org/publicdomain/zero/1.0/).
 
 ## References
 

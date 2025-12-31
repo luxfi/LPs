@@ -168,6 +168,3 @@ This policy places a high degree of trust in the security processes of the Ether
    - Verify reentrancy protection
    - Test gas forwarding
 
-## Copyright
-
-Copyright and related rights waived via [CC0](https://creativecommons.org/publicdomain/zero/1.0/).

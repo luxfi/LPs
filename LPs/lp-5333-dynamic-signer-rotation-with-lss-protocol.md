@@ -3173,9 +3173,6 @@ github.com/luxfi/ids            # Identifier types
 github.com/luxfi/crypto         # Cryptographic primitives
 ```
 
-## Copyright
-
-Copyright and related rights waived via [CC0](../LICENSE.md).
 
 ## References
 

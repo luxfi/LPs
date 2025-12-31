@@ -508,6 +508,3 @@ Fee distribution mechanisms integrate with existing protocol contracts through s
 3. **Spending limits** - Daily caps on treasury spending
 4. **Audit trail** - All distributions logged on-chain
 
-## Copyright
-
-Copyright and related rights waived via [CC0](https://creativecommons.org/publicdomain/zero/1.0/).

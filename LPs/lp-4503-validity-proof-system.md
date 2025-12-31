@@ -575,6 +575,3 @@ Key components:
 7. Kate, A., et al. (2010). "Constant-Size Commitments to Polynomials and Their Applications"
 8. StarkWare (2018). "Stark 101: The Theory"
 
-## Copyright
-
-Copyright and related rights waived via [CC0](https://creativecommons.org/publicdomain/zero/1.0/).

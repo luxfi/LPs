@@ -146,7 +146,4 @@ This standard is fully backwards compatible with existing contracts and infrastr
 - [EIP-7545: Verkle Proof Verification Precompile](https://github.com/ethereum/EIPs/issues/7545)
 - [LP-3701: Verkle Trees](./lp-3701-verkle-trees-for-state-management.md)
 
-## Copyright
-
-Copyright and related rights waived via [CC0](../LICENSE.md).
 ```

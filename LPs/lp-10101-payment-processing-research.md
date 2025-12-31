@@ -367,9 +367,6 @@ Lux's payment processing infrastructure combines traditional finance convenience
 - [Circle APIs](https://developers.circle.com/)
 - [MakerDAO Credit System](https://makerdao.com/)
 
-## Copyright
-
-Copyright and related rights waived via [CC0](../LICENSE.md).
 ## Specification
 
 This LP’s normative elements are the detailed algorithms, structures, and parameters provided. Implementers MUST adhere to them.

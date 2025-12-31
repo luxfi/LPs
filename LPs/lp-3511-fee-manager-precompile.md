@@ -365,6 +365,3 @@ For chains upgrading from fixed fee to dynamic fee model:
 - **Precompile Framework**: `evm/precompile/contracts/fee-manager/`
 - **Gas Meter Integration**: `node/vms/evm/gasprice/`
 
-## Copyright
-
-Copyright and related rights waived via [CC0](https://creativecommons.org/publicdomain/zero/1.0/).```

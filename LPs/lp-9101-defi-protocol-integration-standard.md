@@ -528,7 +528,4 @@ For DeFi protocols using threshold signatures:
 |---------|------|---------|
 | 1.0.0 | 2025-12-14 | Initial specification |
 
-## Copyright
-
-Copyright and related rights waived via [CC0](https://creativecommons.org/publicdomain/zero/1.0/).
 ```

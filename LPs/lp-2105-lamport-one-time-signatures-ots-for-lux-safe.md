@@ -1073,6 +1073,3 @@ By integrating Lamport OTS into Lux Safe, we create the first production-ready q
 - Lamport, L. "Constructing Digital Signatures from a One-Way Function" (1979)
 - NIST Post-Quantum Cryptography Standardization
 
-## Copyright
-
-Copyright and related rights waived via [CC0](../LICENSE.md).

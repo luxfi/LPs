@@ -385,6 +385,3 @@ This entire LP is about security considerations. Key meta-considerations include
 - Cross-team communication
 - External stakeholder management
 
-## Copyright
-
-Copyright and related rights waived via [CC0](../LICENSE.md).```

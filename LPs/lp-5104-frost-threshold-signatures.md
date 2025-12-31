@@ -436,6 +436,3 @@ FROST provides optimal-round threshold signatures for Schnorr and EdDSA, with na
    - Verify multi-chain coordination
    - Test emergency recovery
 
-## Copyright
-
-Copyright and related rights waived via [CC0](../LICENSE.md).

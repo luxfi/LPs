@@ -60,7 +60,4 @@ Evaluate after blob adoption on Lux.
 - [EIP-7691: Blob Throughput Increase](https://eips.ethereum.org/EIPS/eip-7691)
 - [LP-8500: Layer 2 Rollup Framework](./lp-4500-layer-2-rollup-framework.md)
 
-## Copyright
-
-Copyright and related rights waived via [CC0](../LICENSE.md).
 ```

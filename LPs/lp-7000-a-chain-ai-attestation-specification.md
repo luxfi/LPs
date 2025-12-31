@@ -419,7 +419,4 @@ func TestNVTrustIntegration(t *testing.T)
 | LP-5400 | Reward Distribution | Sub-specification |
 | LP-5500 | Model Registry | Sub-specification |
 
-## Copyright
-
-Copyright and related rights waived via [CC0](https://creativecommons.org/publicdomain/zero/1.0/).
 ```

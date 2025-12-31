@@ -693,7 +693,4 @@ X-Chain represents a breakthrough in decentralized exchange technology, combinin
    - Verify exchange rate accuracy
    - Test slippage protection
 
-## Copyright
-
-Copyright and related rights waived via [CC0](../LICENSE.md).
 ```
