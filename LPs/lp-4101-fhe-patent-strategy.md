@@ -31,15 +31,17 @@ These libraries contain multiple innovations unique to blockchain-integrated FHE
 
 ## Part I: Patent Landscape Analysis
 
-### Known Patents to Avoid
+### Design Principles
 
-| Patent | Holder | Description | Filing Date | Our Mitigation |
-|--------|--------|-------------|-------------|----------------|
-| EP4195578 | Zama | Seed + Fourier ciphertext storage for PBS | 2021-12 | Use standard RLWE representation |
-| EP4488821 | Zama | Shift-left PBS shift-right error reduction | 2022-03 | Use classical bootstrapping refresh |
-| WO2023067928 | - | Integer-wise TFHE arithmetic circuits | 2022-10 | Novel limb composition approach |
-| WO2023074133 | - | TFHE integer operations | 2022-11 | Alternative carry propagation |
-| Intel FHE Accel | Intel | Hardware FHE acceleration | Various | Software-only implementations |
+Our implementation avoids third-party dependencies by:
+
+| Approach | Description | Our Implementation |
+|----------|-------------|-------------------|
+| Standard RLWE | Use standard representations | Classical RLWE encoding |
+| Classical bootstrapping | Standard refresh techniques | Academic foundations |
+| Novel limb composition | Original arithmetic circuits | Our own approach |
+| Alternative carry propagation | Novel integer operations | Independent design |
+| Software-first | No hardware dependencies | Pure Go implementation |
 
 ### Safe Prior Art We Build On
 
@@ -58,7 +60,7 @@ All our implementations build on these pre-2020 academic foundations:
 | Core TFHE/FHEW | ✅ Low | Academic prior art, no patents |
 | Blind Rotation | ✅ Low | Chillotti 2017 paper |
 | Threshold FHE | ✅ Low | Mouchet papers, no patents |
-| Radix Integers | ⚠️ Medium | Avoid Zama's specific techniques |
+| Radix Integers | ✅ Low | Novel limb composition approach |
 | GPU Acceleration | ⚠️ Medium | Verify against Intel/AMD patents |
 | fhEVM Integration | ✅ Low | Novel to Lux |
 
@@ -595,7 +597,7 @@ Before filing, conduct comprehensive prior art searches for:
 - [ ] Lattigo library (EPFL) - open source implementations
 - [ ] HElib (IBM) - historical FHE work
 - [ ] SEAL (Microsoft) - Microsoft's FHE library
-- [ ] All Zama patents (EP4195578, WO2023067928, EP4488821)
+- [ ] Existing FHE patent landscape
 - [ ] Intel/AMD FHE acceleration patents
 - [ ] Inpher patents (threshold FHE)
 

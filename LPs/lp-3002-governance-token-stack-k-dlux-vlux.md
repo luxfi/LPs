@@ -8,7 +8,7 @@ status: Implemented
 type: Standards Track
 category: LRC
 created: 2025-12-23
-updated: 2025-12-24
+updated: 2025-12-30
 requires: 3020, 3000
 tags: [governance, dao, tokenomics, staking, voting]
 order: 3002
@@ -108,13 +108,43 @@ K is a non-transferable, soul-bound reputation token that represents human legit
 | Governance penalty | -50 to -500 K |
 | Failed malicious proposal | -100 K |
 | Slashing event | -25% of K |
-| Inactivity (>1 year) | -10% decay |
+
+#### Activity-Driven Karma Decay
+
+K decays annually based on on-chain activity (LP-3002-1 amendment):
+
+| Activity Level | Decay Rate | After 10 Years | After 100 Years |
+|----------------|------------|----------------|-----------------|
+| **Active** (≥1 tx/month) | 1% per year | 90.4% retained | 36.6% retained |
+| **Inactive** (0 tx/month) | 10% per year | 34.9% retained | ~0% retained |
+
+**Formulas:**
+```
+Active decay:   K_new = K × 0.99^years
+Inactive decay: K_new = K × 0.90^years
+```
+
+**Rationale**: Activity-driven decay incentivizes engagement while remaining permissionless. Active contributors retain most of their reputation.
+
+#### MIN_VERIFIED_KARMA Floor
+
+To ensure governance can continue for 1000+ years, verified DID holders have a Karma floor:
+
+| Constant | Value | Purpose |
+|----------|-------|---------|
+| `MIN_VERIFIED_KARMA` | 50 K | Minimum for verified users |
+
+**Why 50 K?**
+- Even after 1000 years of inactivity, verified humans retain voting power
+- Prevents governance deadlock from total decay
+- 50 K gives sqrt(50/100) = 0.707x Karma factor — meaningful but not dominant
+- Floor only applies to verified DID holders (not bots/contracts)
 
 #### K Contract Interface
 
 ```solidity
 interface IKarma {
-    /// @notice Get K balance for account
+    /// @notice Get K balance for account (applies MIN_VERIFIED_KARMA floor)
     function karmaOf(address account) external view returns (uint256);
 
     /// @notice Check if account is human-verified
@@ -128,6 +158,23 @@ interface IKarma {
 
     /// @notice Get DID bound to account
     function didOf(address account) external view returns (bytes32);
+
+    /// @notice Get comprehensive activity status for account
+    /// @dev Returns all relevant decay and floor information
+    function getActivityStatus(address account) external view returns (
+        uint256 karma,           // Current karma (with floor applied)
+        bool verified,           // Whether account is DID-verified
+        bool activeThisMonth,    // Has tx this month
+        bool activeLastMonth,    // Was active last month (determines decay rate)
+        uint256 currentDecayRate,// Current decay rate (100 = 1%, 1000 = 10%)
+        bool hasKarmaFloor       // Whether MIN_VERIFIED_KARMA floor applies
+    );
+
+    /// @notice Activity-driven decay constants
+    uint256 constant ACTIVITY_PERIOD = 30 days;
+    uint256 constant ACTIVE_DECAY_RATE = 100;     // 1% per year (basis points)
+    uint256 constant INACTIVE_DECAY_RATE = 1000;  // 10% per year (basis points)
+    uint256 constant MIN_VERIFIED_KARMA = 50e18;  // Floor for verified DIDs
 }
 ```
 
@@ -375,10 +422,12 @@ Implementation repository: [`luxfi/standard`](https://github.com/luxfi/standard)
 
 ### Implementation Notes
 
-**Karma.sol** (10.3 KB):
+**Karma.sol** (12.1 KB):
 - Soul-bound reputation with DID linking
 - ATTESTOR_ROLE and SLASHER_ROLE access control
-- Inactivity decay after 365 days (10% per year)
+- Activity-driven decay: 1% if active (≥1 tx/month), 10% if inactive
+- MIN_VERIFIED_KARMA = 50 K floor for verified DID holders
+- getActivityStatus() helper for full decay/floor info
 - Max 1000 K per account soft cap
 
 **DLUX.sol** (19.7 KB):
@@ -452,6 +501,29 @@ Implementation repository: [`luxfi/standard`](https://github.com/luxfi/standard)
 - Governance can pause emissions
 - Multi-sig emergency actions for critical vulnerabilities
 - Timelock on all parameter changes
+
+### 1000+ Year Sustainability
+
+The governance system is designed to remain operational for millennia:
+
+| Concern | Mitigation |
+|---------|------------|
+| **Total Karma decay** | MIN_VERIFIED_KARMA (50 K) floor for verified DIDs |
+| **Numeric overflow** | uint256 for all balances (2^256 capacity) |
+| **proposalId overflow** | uint64 supports 584B years at 1 proposal/sec |
+| **Zero participation** | Adaptive quorum (planned) adjusts for low engagement |
+| **All holders inactive** | Verified DIDs retain minimum voting power |
+
+**Long-term projections (starting with 1000 K):**
+
+| Years | Active (1%) | Inactive (10%) | Verified Floor |
+|-------|-------------|----------------|----------------|
+| 10 | 904 K | 349 K | 50 K |
+| 50 | 605 K | 5 K | 50 K |
+| 100 | 366 K | ~0 K | 50 K |
+| 1000 | ~0 K | ~0 K | 50 K ✓ |
+
+**Result**: Even after 1000 years, verified humans retain 50 K minimum, ensuring governance can always proceed.
 
 ---
 
