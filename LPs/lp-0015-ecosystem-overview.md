@@ -8,7 +8,7 @@ status: Living
 type: Informational
 created: 2025-12-30
 tags: [core, ecosystem, overview]
-order: 3
+order: 15
 tier: core
 ---
 
@@ -405,9 +405,11 @@ where:
 | Recipient | Share | Purpose |
 |-----------|-------|---------|
 | **Burn** | 50% | Deflationary pressure |
-| **Treasury** | 50% | Protocol development |
+| **DAO Treasury** | 50% | Distributed via governance gauges |
 
 **Priority Fee**: 100% to validators/sequencers
+
+**Treasury Distribution**: The DAO's 50% share is distributed according to **governance gauges** — stakeholders vote on allocation weights between protocols, validators, liquidity providers, grants, and other ecosystem participants. This creates a programmable incentive layer where the community directs protocol revenue.
 
 All fee parameters are **governance-controlled** via C-Chain DAO with 24-hour timelock.
 

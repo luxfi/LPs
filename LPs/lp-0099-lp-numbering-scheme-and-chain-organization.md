@@ -8,7 +8,7 @@ status: Living
 type: Meta
 created: 2025-12-28
 tags: [meta, governance, taxonomy]
-order: 1
+order: 99
 tier: core
 ---
 
