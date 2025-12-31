@@ -1,18 +1,19 @@
 ---
-lp: 9020
+lp: 11
 title: Fee Pricing Protocol
 description: Multi-resource fee model with per-byte pricing, congestion multipliers, and action-based fees
 author: Lux Core Team
 status: Draft
-tags: [dex, fees, governance]
+tags: [core, fees, governance]
 type: Standards Track
 category: Core
 created: 2025-12-30
-requires: [9019]
-order: 20
+requires: [1]
+order: 11
+tier: core
 ---
 
-# LP-9020: Fee Pricing Protocol
+# LP-0011: Fee Pricing Protocol
 
 ## Abstract
 
