@@ -7,7 +7,7 @@ status: Final
 type: Meta
 created: 2025-12-30
 tags: [meta, licensing, legal]
-order: 2
+order: 12
 tier: core
 ---
 

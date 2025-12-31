@@ -9,7 +9,7 @@ type: Standards Track
 category: Core
 created: 2025-12-30
 requires: [1]
-order: 11
+order: 16
 tier: core
 ---
 
@@ -103,8 +103,17 @@ Recommended: Use `effectiveTipPerUnit` with a minimum tip floor to avoid "big tx
 
 | Component | Destination | Rationale |
 |-----------|-------------|-----------|
-| Base fee | Burn (50%) + Treasury (50%) | Monetary policy + protocol funding (DAO configurable) |
+| Base fee | Burn (50%) + DAO Treasury (50%) | Monetary policy + governance-directed funding |
 | Priority fee | Validators/Sequencers | Direct incentive to prioritize |
+
+**Governance Gauge Distribution**: The DAO's 50% treasury share is distributed according to **governance gauges** — token holders vote on allocation weights between:
+- **Protocols**: DEX, lending, NFT marketplaces
+- **Validators**: Staking rewards supplement
+- **Liquidity Providers**: AMM incentives
+- **Grants**: Builder funding, ecosystem development
+- **Other**: Community-approved initiatives
+
+This creates a programmable incentive layer where the community directs protocol revenue.
 
 **Governance can adjust the burn/treasury split**, but priority fees ALWAYS go to validators.
 
@@ -405,9 +414,9 @@ Step 5: Calculate total fee
   totalFee    = 1,600 + 3,200 = 4,800 µLUX
 
 Distribution (default 50/50 split, DAO configurable):
-  Burned:    1,600 × 50% = 800 µLUX
-  Treasury:  1,600 × 50% = 800 µLUX
-  Validator: 3,200 µLUX (priority fees always to validators)
+  Burned:       1,600 × 50% = 800 µLUX (permanently removed from supply)
+  DAO Treasury: 1,600 × 50% = 800 µLUX (distributed via governance gauges)
+  Validator:    3,200 µLUX (priority fees always to validators)
 ```
 
 #### Example 2: C-Chain Contract Call (High Congestion)

@@ -8,7 +8,7 @@ type: Meta
 created: 2025-12-27
 updated: 2025-12-30
 tags: [meta, ip, licensing]
-order: 3
+order: 10
 tier: core
 ---
 
