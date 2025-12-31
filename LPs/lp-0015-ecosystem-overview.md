@@ -14,9 +14,13 @@ tier: core
 
 # LP-0015: Lux Network Ecosystem Overview
 
-## Executive Summary
+## Abstract
 
-Lux is a **multi-chain, multi-consensus blockchain network** designed for the next generation of Web3 applications. Unlike single-chain platforms that force all applications to compete for the same resources, Lux provides **purpose-built chains** that are optimized for specific workloads while maintaining seamless interoperability.
+Lux is a **multi-chain, multi-consensus blockchain network** designed for the next generation of Web3 applications. Unlike single-chain platforms that force all applications to compete for the same resources, Lux provides **purpose-built chains** that are optimized for specific workloads while maintaining seamless interoperability. This LP provides a comprehensive overview of the Lux ecosystem, its architecture, chains, and unique capabilities.
+
+## Motivation
+
+Current blockchain platforms face fundamental challenges: quantum computing threatens existing cryptography, privacy is bolted on as an afterthought, single chains cannot scale, bridges are security liabilities, and key management remains centralized. Lux addresses these challenges with a purpose-built multi-chain architecture featuring native post-quantum cryptography, FHE-based privacy, protocol-native cross-chain messaging, and decentralized threshold signatures.
 
 **Why Lux?**
 
