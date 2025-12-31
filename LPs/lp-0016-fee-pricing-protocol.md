@@ -1,5 +1,5 @@
 ---
-lp: 11
+lp: 16
 title: Fee Pricing Protocol
 description: Multi-resource fee model with per-byte pricing, congestion multipliers, and action-based fees
 author: Lux Core Team
@@ -13,7 +13,7 @@ order: 11
 tier: core
 ---
 
-# LP-0011: Fee Pricing Protocol
+# LP-0016: Fee Pricing Protocol
 
 ## Abstract
 
