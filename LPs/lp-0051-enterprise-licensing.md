@@ -1,5 +1,5 @@
 ---
-lp: 50
+lp: 51
 title: Enterprise Licensing
 author: Lux Industries Inc
 status: Active
@@ -10,7 +10,7 @@ tags: [licensing, enterprise, commercial]
 tier: core
 ---
 
-# LP-0050: Enterprise Licensing
+# LP-0051: Enterprise Licensing
 
 ## Abstract
 

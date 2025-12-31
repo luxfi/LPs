@@ -1,5 +1,5 @@
 ---
-lp: 3
+lp: 15
 title: Lux Network Ecosystem Overview
 description: The fastest, most secure, and private quantum-safe network of blockchains
 author: Lux Core Team (@luxfi)
@@ -12,7 +12,7 @@ order: 3
 tier: core
 ---
 
-# LP-0003: Lux Network Ecosystem Overview
+# LP-0015: Lux Network Ecosystem Overview
 
 ## Executive Summary
 
