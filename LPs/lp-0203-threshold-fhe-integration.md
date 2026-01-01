@@ -161,7 +161,7 @@ interface IThresholdDecryption {
     }
     
     // Request decryption
-    function requestDecryption(
+    function decrypt(
         bytes calldata ciphertext,
         bytes4 callback,
         uint256 deadline

@@ -637,7 +637,7 @@ library Gateway {
     /// @param maxTimestamp Maximum timestamp for decryption validity
     /// @param passSignaturesToCaller Whether to include T-Chain signatures
     /// @return requestId Unique identifier for tracking the request
-    function requestDecryption(
+    function decrypt(
         uint256[] memory cts,
         address callback,
         bytes4 callbackSelector,
@@ -686,7 +686,7 @@ contract ConfidentialAuction {
         uint256[] memory cts = new uint256[](1);
         cts[0] = euint64.unwrap(highestBid);
         
-        uint256 requestId = Gateway.requestDecryption(
+        uint256 requestId = Gateway.decrypt(
             cts,
             address(this),
             this.onWinnerRevealed.selector,

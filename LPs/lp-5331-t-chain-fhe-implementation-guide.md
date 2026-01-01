@@ -333,7 +333,7 @@ Create an access permit for a ciphertext.
 
 ---
 
-#### tfhe_requestDecrypt
+#### tfhe_decrypt
 
 Request threshold decryption of a ciphertext.
 
@@ -341,7 +341,7 @@ Request threshold decryption of a ciphertext.
 ```json
 {
   "jsonrpc": "2.0",
-  "method": "tfhe_requestDecrypt",
+  "method": "tfhe_decrypt",
   "params": {
     "ciphertextHandle": "0x1234...5678",
     "permitID": "0xfedc...ba98",
@@ -436,7 +436,7 @@ Get results for multiple decryption requests.
 
 ---
 
-#### tfhe_requestDecryptBatch
+#### tfhe_decryptBatch
 
 Request decryption of multiple ciphertexts atomically.
 
@@ -444,7 +444,7 @@ Request decryption of multiple ciphertexts atomically.
 ```json
 {
   "jsonrpc": "2.0",
-  "method": "tfhe_requestDecryptBatch",
+  "method": "tfhe_decryptBatch",
   "params": {
     "requests": [
       {
@@ -780,7 +780,7 @@ contract PrivateVoting {
         cts[0] = Gateway.toUint256(yesVotes);
         cts[1] = Gateway.toUint256(noVotes);
         
-        Gateway.requestDecryption(
+        FHE.decrypt(
             cts,
             this.receiveResults.selector,
             0,  // No additional params
@@ -835,7 +835,7 @@ func main() {
     var decryptResult struct {
         RequestID string `json:"requestID"`
     }
-    client.Call(&decryptResult, "tfhe_requestDecrypt", map[string]interface{}{
+    client.Call(&decryptResult, "tfhe_decrypt", map[string]interface{}{
         "ciphertextHandle": hex.EncodeToString(handle[:]),
         "permitID": permitID,
         "callback": callbackAddress,
@@ -892,7 +892,7 @@ async function example() {
   });
   
   // Request decryption
-  const requestId = await client.requestDecrypt({
+  const requestId = await client.decrypt({
     handle,
     permitId: permit.id,
     callback: {

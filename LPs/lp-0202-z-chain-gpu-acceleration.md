@@ -179,7 +179,7 @@ interface IZChainThreshold {
     ) external returns (bytes32 sessionId);
     
     // Threshold decryption request
-    function requestDecryption(
+    function decrypt(
         bytes calldata ciphertext,
         bytes4 callback
     ) external returns (uint256 requestId);
