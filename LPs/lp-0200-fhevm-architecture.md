@@ -133,7 +133,7 @@ library FHE {
 ```solidity
 library Gateway {
     // Request decryption from threshold network
-    function requestDecryption(
+    function decrypt(
         uint256[] calldata ciphertexts,
         bytes4 callbackSelector,
         uint256 callbackMsgValue,

@@ -65,7 +65,7 @@ Threshold & decryption helpers
 | Addr   | Name                         | ABI                                     | Gas     | Comment                                                                |
 |:-------|:-----------------------------|:----------------------------------------|:--------|:-----------------------------------------------------------------------|
 | 0xF010 | FHE.decryptSync (LEGACY)     | decrypt(bytes A) returns (uint256)      | 200 000 | Will be deprecated once all apps migrate to async oracle               |
-| 0xF011 | FHE.requestDecrypt           | reqDecrypt(bytes A,address callback)    | 15 000  | Emits DecryptRequested(id); oracle fulfils off‑chain                   |
+| 0xF011 | FHE.decrypt           | decrypt(bytes A,address callback)    | 15 000  | Emits Decrypted(id); oracle fulfils off‑chain                   |
 | 0xF012 | FHE.asEuint                  | asEuint(uint256 p) returns(bytes)      | 4 000   | Deterministic encryption of literal (for constants)                   |
 | 0xF013 | FHE.noise                    | noiseBudget(bytes A) returns(uint16)    | 700     | Allows contracts to react before overflow                             |
 
