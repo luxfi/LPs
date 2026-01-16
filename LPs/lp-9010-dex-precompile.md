@@ -1,8 +1,8 @@
 ---
 lp: 9010
-title: DEX Precompile - Native HFT Order Book
-tags: [defi, dex, precompile, hft, orderbook, trading]
-description: Native EVM precompile for high-frequency trading with 434M orders/sec throughput
+title: DEX Precompile - Native PoolManager (Uniswap v4 Style)
+tags: [defi, dex, precompile, poolmanager, uniswap-v4, amm]
+description: Native EVM precompile implementing Uniswap v4-style singleton PoolManager with flash accounting
 author: Lux Network Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
 status: Review
@@ -10,7 +10,10 @@ type: Standards Track
 category: Core
 created: 2025-12-21
 requires: 9000, 9003, 3020
-implementation: ~/work/lux/standard/contracts/liquidity/precompiles/IDEX.sol
+implementation: |
+  - Go: ~/work/lux/precompile/dex/lxpool.go
+  - Solidity: ~/work/lux/precompile/solidity/dex/ILXPool.sol
+  - Docs: ~/work/lux/precompile/docs/dex/LX.md
 order: 10
 ---
 
@@ -22,7 +25,7 @@ order: 10
 
 ## Abstract
 
-LP-9010 specifies the DEX Precompile at address `0x0200000000000000000000000000000000000010`, providing native EVM access to the Lux QuantumSwap high-frequency trading (HFT) infrastructure. This precompile enables smart contracts to interact with a full on-chain Central Limit Order Book (CLOB) achieving 434M orders/sec (GPU), 1M ops/sec (Go), 2ns latency, and 1ms finality.
+LP-9010 specifies the DEX Precompile at address `0x0000000000000000000000000000000000009010`, providing native EVM access to the Lux QuantumSwap high-frequency trading (HFT) infrastructure. This precompile enables smart contracts to interact with a full on-chain Central Limit Order Book (CLOB) achieving 434M orders/sec (GPU), 1M ops/sec (Go), 2ns latency, and 1ms finality.
 
 ## Motivation
 
@@ -49,7 +52,7 @@ Traditional EVM-based DEXs face fundamental limitations:
 ### Precompile Address
 
 ```solidity
-0x0200000000000000000000000000000000000010
+0x0000000000000000000000000000000000009010
 ```
 
 ### Interface Definition
@@ -61,7 +64,7 @@ pragma solidity ^0.8.24;
 
 /// @title IDEX - Native HFT DEX Precompile Interface
 /// @notice Provides direct access to QuantumSwap order book
-/// @dev Precompile at 0x0200000000000000000000000000000000000010
+/// @dev Precompile at 0x0000000000000000000000000000000000009010
 interface IDEX {
     /*//////////////////////////////////////////////////////////////
                               ORDER TYPES
@@ -262,7 +265,7 @@ interface IDEX {
 /// @title DEXLib - Helper library for DEX precompile
 /// @notice Simplifies DEX interactions
 library DEXLib {
-    IDEX internal constant DEX = IDEX(0x0200000000000000000000000000000000000010);
+    IDEX internal constant DEX = IDEX(0x0000000000000000000000000000000000009010);
 
     /// @notice Place a market buy order
     function marketBuy(bytes32 marketId, uint256 amount) internal returns (bytes32) {

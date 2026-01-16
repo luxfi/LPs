@@ -45,7 +45,7 @@ A unified attestation layer provides:
 ```go
 import (
     avm "github.com/luxfi/node/vms/aivm"
-    "github.com/luxfi/node/utils/constants"
+    "github.com/luxfi/utils/constants"
 )
 
 // VM ID constant

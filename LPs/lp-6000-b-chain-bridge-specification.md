@@ -45,7 +45,7 @@ A dedicated bridge chain provides:
 ```go
 import (
     bvm "github.com/luxfi/node/vms/bridgevm"
-    "github.com/luxfi/node/utils/constants"
+    "github.com/luxfi/utils/constants"
 )
 
 // VM ID constant

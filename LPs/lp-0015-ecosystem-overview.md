@@ -477,8 +477,12 @@ Lux has developed **150+ innovations** across key areas:
 ### Quick Start
 
 ```bash
-# Install Lux CLI
-curl -sSL https://get.lux.network | sh
+# Install Lux CLI from GitHub releases
+OS="$(uname -s | tr '[:upper:]' '[:lower:]')"
+ARCH="$(uname -m)"
+curl -L "https://github.com/luxfi/cli/releases/latest/download/cli_${OS}_${ARCH}.tar.gz" -o /tmp/lux.tar.gz
+tar -xzf /tmp/lux.tar.gz -C /tmp
+sudo mv /tmp/lux /usr/local/bin/lux
 
 # Start a local network
 lux network start local

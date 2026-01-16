@@ -48,7 +48,7 @@ An EVM-compatible chain provides:
 ```go
 import (
     cvm "github.com/luxfi/node/vms/cchainvm"
-    "github.com/luxfi/node/utils/constants"
+    "github.com/luxfi/utils/constants"
 )
 
 // VM ID constant

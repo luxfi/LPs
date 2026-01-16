@@ -45,7 +45,7 @@ A dedicated ZK chain provides:
 ```go
 import (
     zvm "github.com/luxfi/node/vms/zkvm"
-    "github.com/luxfi/node/utils/constants"
+    "github.com/luxfi/utils/constants"
 )
 
 // VM ID constant

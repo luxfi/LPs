@@ -1141,7 +1141,7 @@ export const source = {
           type: 'folder' as const,
           name: topic.name,
           description: topic.description,
-          children: topic.lps.slice(0, 20).map(lp => ({
+          children: topic.lps.map(lp => ({
             type: 'page' as const,
             name: `${formatLPNumber(lp.data.frontmatter.lp)}: ${lp.data.title.substring(0, 40)}${lp.data.title.length > 40 ? '...' : ''}`,
             url: `/docs/${lp.slug.join('/')}`,

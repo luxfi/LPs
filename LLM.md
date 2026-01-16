@@ -851,3 +851,217 @@ https://github.com/luxfi/LPs/discussions
 - 11 category discussions
 - 195 open LP discussions (duplicates closed)
 - Each LP has dedicated discussion thread
+
+## Z-Chain Universal ZK Platform - January 2026
+
+### Overview
+
+The Z-Chain is Lux Network's Universal ZK Platform, providing cryptographic proof verification across all proof systems (STARKs, SNARKs, Groth16, PLONK, Nova). It implements a Two-Lane Architecture separating production proofs from research experiments.
+
+**Design Document**: `docs/Z-CHAIN_DESIGN.md`
+
+### Architecture: Two-Lane System
+
+```
+┌─────────────────────────────────────────────────────────────────────┐
+│                       Z-CHAIN ARCHITECTURE                          │
+├─────────────────────────────────────────────────────────────────────┤
+│  ┌───────────────────────┐     ┌───────────────────────────────┐   │
+│  │   PRODUCTION LANE     │     │       RESEARCH LANE           │   │
+│  │   (IDs 1-99)          │     │       (IDs 100+)              │   │
+│  │                       │     │                               │   │
+│  │  • STARK (ID=1)       │     │  • Nova-Scotia (ID=100)       │   │
+│  │  • Groth16 (ID=2)     │     │  • HyperPlonk (ID=101)        │   │
+│  │  • PLONK (ID=3)       │     │  • Jolt (ID=102)              │   │
+│  │  • Nova (ID=4)        │     │  • Experimental proofs...     │   │
+│  │  • Reserved (5-99)    │     │                               │   │
+│  │                       │     │  Versioned, may break         │   │
+│  │  Immutable ABI        │     │  No receipt guarantees        │   │
+│  │  Full receipt support │     │                               │   │
+│  └───────────────────────┘     └───────────────────────────────┘   │
+│                                                                     │
+│  ┌─────────────────────────────────────────────────────────────┐   │
+│  │                    RECEIPT REGISTRY                          │   │
+│  │  Merkle Accumulator (Poseidon2, depth 32)                   │   │
+│  │  Stores verified receipts with inclusion proofs             │   │
+│  └─────────────────────────────────────────────────────────────┘   │
+└─────────────────────────────────────────────────────────────────────┘
+```
+
+### ZK ISA Precompile Map
+
+| Address Range | Component | Status |
+|---------------|-----------|--------|
+| `0x0500` | Reserved | - |
+| `0x0501` | Poseidon2 Hash (PQ-safe) | LP-3658 |
+| `0x0502` | Pedersen Hash (NOT PQ-safe) | LP-3658 |
+| `0x0503` | Blake3 | Planned |
+| `0x0510-0x051E` | STARK Helper Ops | LP-0510 |
+| `0x051F` | STARK Verify (Production) | LP-0510 |
+| `0x0520-0x052F` | SNARK Operations | Planned |
+| `0x0530` | Receipt Registry | LP-0530 |
+| `0x0531` | Submit Proof | LP-0530 |
+| `0x0532` | Get Receipt | LP-0530 |
+| `0x0533` | Get Inclusion Proof | LP-0530 |
+| `0x0540-0x054F` | FHE Operations | Planned |
+| `0x0580-0x05FF` | Research Lane | LP-9015 |
+
+### Core LPs
+
+#### LP-3658: Poseidon2 Precompile
+**File**: `LPs/lp-3658-poseidon2-precompile.md`
+**Address**: `0x0501`
+**Status**: Draft
+
+**Key Features**:
+- ZK-friendly algebraic hash over BN254 scalar field
+- Post-quantum safe (no discrete log dependency)
+- Fixed arity functions: hash2, hash3, hash4, hash8, hash12, hash16
+- Domain separation with prefixes: MERKLE_NODE=0x01, MERKLE_LEAF=0x02, COMMITMENT=0x03, NULLIFIER=0x04, RECEIPT=0x05
+
+**Gas Schedule**:
+| Function | Gas Cost | Constraints |
+|----------|----------|-------------|
+| hash2 | 800 | ~300 |
+| hash3 | 950 | ~400 |
+| hash4 | 1,100 | ~500 |
+| hash8 | 1,700 | ~900 |
+| hash12 | 2,300 | ~1,300 |
+| hash16 | 2,900 | ~1,700 |
+
+**Performance** (Apple M1 Max):
+- Poseidon2: ~500 ns/hash (2M hashes/sec)
+- Pedersen: ~1,000,000 ns/hash (1K hashes/sec)
+- Poseidon2 is ~2000x faster and PQ-safe
+
+#### LP-0510: STARK Verification Precompiles
+**File**: `LPs/lp-0510-stark-verifier-precompile.md`
+**Address Range**: `0x0510-0x051F`
+**Status**: Draft
+
+**Receipt Hash Definition**:
+```
+receiptHash = Poseidon2(
+    DST_RECEIPT,
+    programId,
+    claimHash,
+    proofSystemId,
+    version,
+    verifiedAt
+)
+```
+
+**Gas Formula**:
+```
+gas = 500,000 + 10 * proof_bytes + 1,000 * num_public_inputs
+```
+
+#### LP-0530: Receipt Registry
+**File**: `LPs/lp-0530-receipt-registry.md`
+**Address Range**: `0x0530-0x053F`
+**Status**: Draft
+
+**Core Functions**:
+- `registerProgram(verifierAddress, metadata)` → programId
+- `submitProof(programId, proof, publicInputs, claimHash)` → receiptId
+- `getReceipt(receiptId)` → Receipt
+- `getLatestRoot()` → bytes32
+- `getInclusionProof(receiptId)` → MerkleProof
+
+**Merkle Tree Specification**:
+- Hash: Poseidon2
+- Depth: 32 (4 billion leaves)
+- Leaf: `Poseidon2(DST_MERKLE_LEAF, receiptHash)`
+- Node: `Poseidon2(DST_MERKLE_NODE, leftChild, rightChild)`
+
+#### LP-9015: Precompile Registry
+**File**: `LPs/lp-9015-precompile-registry.md`
+**Status**: Updated with ZK ISA
+
+**New Constants Added**:
+```solidity
+address internal constant POSEIDON2 = address(0x0501);
+address internal constant PEDERSEN = address(0x0502);
+address internal constant STARK_VERIFY = address(0x051F);
+address internal constant RECEIPT_REGISTRY = address(0x0530);
+address internal constant RESEARCH_BASE = address(0x0580);
+```
+
+### Z-Chain RPC Surface
+
+New RPC endpoints for ZK operations:
+
+| Endpoint | Description |
+|----------|-------------|
+| `zkp_registerProgram` | Register new verifier program |
+| `zkp_submitProof` | Submit proof for verification |
+| `zkp_getReceipt` | Query receipt by ID |
+| `zkp_getLatestRoot` | Current Merkle root |
+| `zkp_getInclusionProof` | Merkle inclusion proof |
+
+### Post-Quantum Safety
+
+| Hash | PQ-Safe | Reason |
+|------|---------|--------|
+| Poseidon2 | ✅ Yes | Algebraic, no DLP |
+| Pedersen | ❌ No | Discrete log based |
+| Blake3 | ✅ Yes | Symmetric primitive |
+
+**Recommendation**: Use Poseidon2 for all new ZK applications. Pedersen retained only for legacy compatibility.
+
+### Privacy Stack Composition
+
+```
+Layer 4: Applications      (Private DEX, Confidential Voting)
+Layer 3: Privacy Circuits  (Aztec Noir, Circom, Cairo)
+Layer 2: Receipt Registry  (Merkle accumulator, cross-chain export)
+Layer 1: Cryptographic ISA (Poseidon2, STARK verify, FHE ops)
+Layer 0: Z-Chain Consensus (Snowman++, dedicated validators)
+```
+
+### Integration with Other Chains
+
+| Chain | Purpose | Z-Chain Integration |
+|-------|---------|---------------------|
+| C-Chain | EVM contracts | Call precompiles via staticcall |
+| T-Chain | TEE/Privacy | Encrypted receipt storage |
+| K-Chain | Key management | FROST/BLS key ceremonies |
+| A-Chain | AI attestation | Model verification receipts |
+| P-Chain | Staking | Validator set for Z-chain |
+
+### Implementation Status
+
+| Component | Status | Location |
+|-----------|--------|----------|
+| Poseidon2 precompile | ✅ Implemented | `precompile/contracts/poseidon2/` |
+| Pedersen precompile | ✅ Implemented | `precompile/contracts/pedersen/` |
+| STARK verifier | 📋 Planned | - |
+| Receipt Registry | 📋 Planned | - |
+| Z-chain RPC | 📋 Planned | - |
+
+### Benchmarks
+
+**Poseidon2 vs Pedersen** (Go implementation, M1 Max):
+
+```
+BenchmarkPoseidon2_2-12     2000000     500 ns/op
+BenchmarkPedersen_2-12           1000   1000000 ns/op
+
+Poseidon2: ~2,000,000 hashes/sec
+Pedersen:  ~1,000 hashes/sec
+Ratio:     ~2000x faster
+```
+
+### Security Considerations
+
+1. **Production Lane Immutability**: Proof system IDs 1-99 have frozen ABIs
+2. **Research Lane Isolation**: IDs 100+ may have breaking changes, no receipt guarantees
+3. **Domain Separation**: All hashes use domain separation tags to prevent cross-context collisions
+4. **Quantum Transition**: Use Poseidon2 exclusively for new applications
+5. **Receipt Finality**: Receipts are final once included in Merkle tree and root is checkpointed
+
+### Related Documents
+
+- **Architecture**: `docs/Z-CHAIN_DESIGN.md`
+- **Precompile Registry**: `LPs/lp-9015-precompile-registry.md`
+- **Post-Quantum Crypto**: LP-311 (ML-DSA), LP-312 (SLH-DSA), LP-313 (ML-KEM)

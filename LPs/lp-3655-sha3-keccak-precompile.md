@@ -332,7 +332,7 @@ Applies Keccak-f[1600] permutation to 1600-bit state.
 ├─────────────────────────────────────────────────────────────────────┤
 │  Layer 2: SHA-3 Family Implementation                                │
 │  ┌─────────────────────────────────────────────────────────────────┐│
-│  │ golang.org/x/crypto/sha3 - FIPS 202 SHA-3 and SHAKE             ││
+│  │ crypto/sha3 - FIPS 202 SHA-3 and SHAKE             ││
 │  │ sha3.go                  - Keccak variants                       ││
 │  │ cshake.go                - Customizable SHAKE                    ││
 │  │ kmac.go                  - Keyed MAC                             ││
@@ -850,7 +850,7 @@ No backwards compatibility issues. This LP introduces a new precompile at an unu
 - [FIPS 202: SHA-3 Standard](https://csrc.nist.gov/publications/detail/fips/202/final)
 - [SP 800-185: SHA-3 Derived Functions](https://csrc.nist.gov/publications/detail/sp/800-185/final)
 - [The Keccak Reference](https://keccak.team/keccak.html)
-- [golang.org/x/crypto/sha3](https://pkg.go.dev/golang.org/x/crypto/sha3)
+- [crypto/sha3](https://pkg.go.dev/crypto/sha3)
 - [LP-3658: Poseidon Hash Precompile](./lp-3658-poseidon-hash-precompile.md)
 
 ```

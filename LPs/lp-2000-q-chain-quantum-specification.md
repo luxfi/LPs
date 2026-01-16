@@ -47,7 +47,7 @@ With quantum computing advancement, traditional cryptographic algorithms face th
 ```go
 import (
     qvm "github.com/luxfi/node/vms/quantumvm"
-    "github.com/luxfi/node/utils/constants"
+    "github.com/luxfi/utils/constants"
 )
 
 // VM ID constant
