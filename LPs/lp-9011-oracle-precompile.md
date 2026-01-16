@@ -10,7 +10,11 @@ type: Standards Track
 category: Core
 created: 2025-12-21
 requires: 9000, 9010, 3020
-implementation: ~/work/lux/standard/contracts/liquidity/precompiles/IOracle.sol
+implementation: |
+  - Go: ~/work/lux/precompile/dex/lxoracle.go
+  - Solidity: ~/work/lux/precompile/solidity/dex/ILXOracle.sol
+  - Feed: ~/work/lux/precompile/solidity/dex/ILXFeed.sol
+  - Docs: ~/work/lux/precompile/docs/dex/LX.md
 order: 11
 ---
 
@@ -20,7 +24,7 @@ order: 11
 
 ## Abstract
 
-LP-9011 specifies the Oracle Precompile at address `0x0200000000000000000000000000000000000011`, providing unified access to multiple price oracle sources including native TWAP, Chainlink, Pyth Network, and major CEX feeds (Binance, Kraken). The precompile aggregates prices with configurable staleness thresholds and confidence intervals for reliable DeFi price discovery.
+LP-9011 specifies the Oracle Precompile at address `0x0000000000000000000000000000000000009011`, providing unified access to multiple price oracle sources including native TWAP, Chainlink, Pyth Network, and major CEX feeds (Binance, Kraken). The precompile aggregates prices with configurable staleness thresholds and confidence intervals for reliable DeFi price discovery.
 
 ## Motivation
 
@@ -47,7 +51,7 @@ Current DeFi applications face challenges with oracle integration:
 ### Precompile Address
 
 ```solidity
-0x0200000000000000000000000000000000000011
+0x0000000000000000000000000000000000009011
 ```
 
 ### Interface Definition
@@ -59,7 +63,7 @@ pragma solidity ^0.8.24;
 
 /// @title IOracle - Multi-Source Oracle Precompile Interface
 /// @notice Aggregates prices from Chainlink, Pyth, CEXs, and native TWAP
-/// @dev Precompile at 0x0200000000000000000000000000000000000011
+/// @dev Precompile at 0x0000000000000000000000000000000000009011
 interface IOracle {
     /*//////////////////////////////////////////////////////////////
                                 TYPES
@@ -275,7 +279,7 @@ interface IOracle {
 /// @title OracleLib - Helper library for Oracle precompile
 /// @notice Simplifies oracle price queries
 library OracleLib {
-    IOracle internal constant ORACLE = IOracle(0x0200000000000000000000000000000000000011);
+    IOracle internal constant ORACLE = IOracle(0x0000000000000000000000000000000000009011);
 
     /// @notice Get price or revert if stale
     function getPriceOrRevert(
@@ -337,7 +341,7 @@ library OracleLib {
 /// @title ChainlinkCompatible - Drop-in Chainlink AggregatorV3 replacement
 /// @notice Allows existing Chainlink integrations to use Oracle precompile
 abstract contract ChainlinkCompatible {
-    IOracle internal constant ORACLE = IOracle(0x0200000000000000000000000000000000000011);
+    IOracle internal constant ORACLE = IOracle(0x0000000000000000000000000000000000009011);
 
     address public immutable baseToken;
     address public immutable quoteToken;
@@ -383,7 +387,7 @@ abstract contract ChainlinkCompatible {
 /// @title PythCompatible - Drop-in Pyth Network replacement
 /// @notice Allows existing Pyth integrations to use Oracle precompile
 abstract contract PythCompatible {
-    IOracle internal constant ORACLE = IOracle(0x0200000000000000000000000000000000000011);
+    IOracle internal constant ORACLE = IOracle(0x0000000000000000000000000000000000009011);
 
     function getPriceUnsafe(bytes32 id) external view returns (IOracle.Price memory) {
         return ORACLE.getPriceFromSource(

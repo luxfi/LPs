@@ -45,7 +45,7 @@ A dedicated platform chain provides:
 ```go
 import (
     pvm "github.com/luxfi/node/vms/platformvm"
-    "github.com/luxfi/node/utils/constants"
+    "github.com/luxfi/utils/constants"
 )
 
 // VM ID constant

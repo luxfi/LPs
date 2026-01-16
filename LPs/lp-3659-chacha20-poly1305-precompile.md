@@ -403,7 +403,7 @@ HChaCha20 function for XChaCha20 key derivation.
 ├─────────────────────────────────────────────────────────────────────┤
 │  Layer 2: AEAD Construction                                          │
 │  ┌─────────────────────────────────────────────────────────────────┐│
-│  │ golang.org/x/crypto/chacha20poly1305 - RFC 8439 AEAD            ││
+│  │ crypto/chacha20poly1305 - RFC 8439 AEAD            ││
 │  │ xchacha20.go             - XChaCha20 extended nonce             ││
 │  │ hchacha20.go             - HChaCha20 key derivation             ││
 │  └─────────────────────────────────────────────────────────────────┘│
@@ -566,7 +566,7 @@ import (
     "encoding/binary"
 
     "golang.org/x/crypto/chacha20"
-    "golang.org/x/crypto/chacha20poly1305"
+    "crypto/chacha20poly1305"
     "github.com/luxfi/evm/precompile/contract"
 )
 
@@ -955,7 +955,7 @@ No backwards compatibility issues. This LP introduces a new precompile at an unu
 
 - [RFC 8439: ChaCha20 and Poly1305](https://datatracker.ietf.org/doc/html/rfc8439)
 - [XChaCha20 Draft](https://datatracker.ietf.org/doc/draft-irtf-cfrg-xchacha/)
-- [golang.org/x/crypto/chacha20poly1305](https://pkg.go.dev/golang.org/x/crypto/chacha20poly1305)
+- [crypto/chacha20poly1305](https://pkg.go.dev/crypto/chacha20poly1305)
 - [WireGuard Cryptography](https://www.wireguard.com/protocol/)
 - [LP-3654: Ed25519 Precompile](./lp-3654-ed25519-eddsa-precompile.md) (for X25519)
 

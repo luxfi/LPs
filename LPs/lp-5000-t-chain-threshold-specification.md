@@ -45,7 +45,7 @@ A dedicated threshold signature chain provides:
 ```go
 import (
     tvm "github.com/luxfi/node/vms/thresholdvm"
-    "github.com/luxfi/node/utils/constants"
+    "github.com/luxfi/utils/constants"
 )
 
 // VM ID constant

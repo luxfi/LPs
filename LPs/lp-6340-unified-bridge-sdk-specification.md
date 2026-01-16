@@ -891,7 +891,7 @@ import (
 
     "github.com/luxfi/sdk/bridge"
     "github.com/luxfi/node/vms/platformvm"
-    "github.com/luxfi/node/api/keystore"
+    "github.com/luxfi/node/keystore"
 )
 
 func integrateLuxNode() error {

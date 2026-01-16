@@ -1,505 +1,358 @@
 ---
 lp: 9015
-title: Precompile Registry - DeFi Precompile Address Map
-tags: [precompile, registry, defi, core, infrastructure]
-description: Central registry of all Lux DeFi and cryptographic precompile addresses
+title: Precompile Registry - LP-Aligned Trailing Address Scheme
+tags: [precompile, registry, core, infrastructure]
+description: Central registry of all Lux precompile addresses using trailing LP numbers
 author: Lux Network Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
-status: Review
+status: Final
 type: Standards Track
 category: Core
 created: 2025-12-21
-requires: 3020, 9010, 9011
-implementation: ~/work/lux/standard/contracts/liquidity/precompiles/PrecompileRegistry.sol
+updated: 2026-01-05
+requires: 0099
+implementation: |
+  - Go: ~/work/lux/precompile/dex/module.go
+  - Solidity: ~/work/lux/standard/contracts/precompile/LX.sol
+  - TypeScript: ~/work/lux/exchange/packages/dex/src/precompile/addresses.ts
 order: 15
 ---
 
-> **Documentation**: [docs.lux.network/precompiles](https://docs.lux.network/precompiles)
->
-> **Source**: 
-
 ## Abstract
 
-LP-9015 specifies the PrecompileRegistry, a central registry and helper library for all Lux EVM precompiles. The registry maps addresses in the `0x0200...00XX` range to named precompiles covering core network functions, post-quantum cryptography, threshold signatures, and DeFi primitives.
+LP-9015 specifies the canonical precompile address scheme for the Lux ecosystem using a simple trailing LP number format: `0x0000000000000000000000000000000000LPNUM`. This creates a direct 1:1 mapping between LP documentation numbers and precompile addresses.
 
 ## Motivation
 
-### Precompile Discovery
+### Direct LP Alignment
 
-Applications need to:
-1. **Discover** available precompiles
-2. **Verify** precompile availability
-3. **Categorize** precompiles by function
-4. **Track** address changes across upgrades
+The trailing LP format is maximally simple:
+- **LP-9010** (LXPool) → `0x0000000000000000000000000000000000009010`
+- **LP-9011** (LXOracle) → `0x0000000000000000000000000000000000009011`
+- **LP-6010** (Teleport) → `0x0000000000000000000000000000000000006010`
 
-### Registry Benefits
+No calculations needed. The LP number IS the address suffix.
 
-1. **Single Source of Truth**: One location for all addresses
-2. **Type Safety**: Named constants prevent address errors
-3. **Upgradability**: Central location for address updates
-4. **Discovery**: Runtime precompile availability checks
+### LX Naming Convention
+
+**LX** is the umbrella name for the Lux DEX stack (AMM + CLOB + vaults + feeds + routing).
+Individual precompiles use the **LX prefix** for developer-facing clarity:
+
+| Human Name | Technical Name | Purpose |
+|------------|---------------|---------|
+| LX | (umbrella) | The whole on-chain trading system |
+| LXPool | LP-9010 | v4 PoolManager-compatible AMM core |
+| LXOracle | LP-9011 | Multi-source price aggregation |
+| LXRouter | LP-9012 | Optimized swap routing |
+| LXHooks | LP-9013 | Hook contract registry |
+| LXFlash | LP-9014 | Flash loan facility |
+| LXBook | LP-9020 | Permissionless orderbooks + matching + advanced orders |
+| LXVault | LP-9030 | Balances, margin, collateral, liquidations |
+| LXFeed | LP-9040 | Price feed aggregator |
+
+### Benefits
+
+1. **Zero Ambiguity**: LP number directly visible in address
+2. **Easy Discovery**: Looking at address immediately tells you the LP
+3. **Multi-Chain Consistent**: Same address on all EVM chains (C-Chain, Zoo, Hanzo, SPC)
+4. **Maximum Simplicity**: No encoding scheme to learn or compute
 
 ## Specification
 
-### Address Range
+### Address Format
 
-All Lux precompiles use the address range:
-```solidity
-0x0200000000000000000000000000000000000001  to
-0x0200000000000000000000000000000000000FFF
+```
+Address = 0x0000000000000000000000000000000000LPNUM
+
+Where:
+  LPNUM = The LP number (4 digits, hex-encoded)
+
+Examples:
+  LP-9010 → 0x0000000000000000000000000000000000009010
+  LP-9011 → 0x0000000000000000000000000000000000009011
+  LP-6010 → 0x0000000000000000000000000000000000006010
 ```
 
-### Registry Contract
+### Canonical Address Registry
+
+#### LX Precompiles (LP-9xxx - AMM + CLOB)
+
+| Address | LP | Name | Description |
+|---------|-----|------|-------------|
+| `0x0000000000000000000000000000000000009010` | LP-9010 | LXPool | v4 PoolManager-compatible AMM core |
+| `0x0000000000000000000000000000000000009011` | LP-9011 | LXOracle | Multi-source price aggregation |
+| `0x0000000000000000000000000000000000009012` | LP-9012 | LXRouter | Optimized swap routing |
+| `0x0000000000000000000000000000000000009013` | LP-9013 | LXHooks | Hook contract registry |
+| `0x0000000000000000000000000000000000009014` | LP-9014 | LXFlash | Flash loan facility |
+| `0x0000000000000000000000000000000000009020` | LP-9020 | LXBook | Permissionless orderbooks + matching + advanced orders |
+| `0x0000000000000000000000000000000000009030` | LP-9030 | LXVault | Balances, margin, collateral, liquidations |
+| `0x0000000000000000000000000000000000009040` | LP-9040 | LXFeed | Price feed aggregator |
+
+#### Bridge Precompiles (LP-6xxx)
+
+| Address | LP | Name | Description |
+|---------|-----|------|-------------|
+| `0x0000000000000000000000000000000000006010` | LP-6010 | Teleport | Cross-chain asset teleportation |
+
+### Solidity Registry
 
 ```solidity
 // SPDX-License-Identifier: BSD-3-Clause
-// Copyright (c) 2025 Lux Industries Inc.
 pragma solidity ^0.8.24;
 
-/// @title PrecompileRegistry
-/// @notice Central registry of all Lux DeFi precompile addresses
-/// @dev All precompiles are in the 0x0200...00XX address range
-library PrecompileRegistry {
-    /*//////////////////////////////////////////////////////////////
-                         CORE PRECOMPILES
-    //////////////////////////////////////////////////////////////*/
+/// @title LX
+/// @notice LP-aligned LX precompile address constants
+/// @dev Address format: 0x0000000000000000000000000000000000LPNUM
+library LX {
+    // Core AMM (LP-9010 series - Uniswap v4 style)
+    address internal constant LX_POOL   = 0x0000000000000000000000000000000000009010; // LP-9010 LXPool
+    address internal constant LX_ORACLE = 0x0000000000000000000000000000000000009011; // LP-9011 LXOracle
+    address internal constant LX_ROUTER = 0x0000000000000000000000000000000000009012; // LP-9012 LXRouter
+    address internal constant LX_HOOKS  = 0x0000000000000000000000000000000000009013; // LP-9013 LXHooks
+    address internal constant LX_FLASH  = 0x0000000000000000000000000000000000009014; // LP-9014 LXFlash
 
-    /// @notice Deployer allow list management
-    address internal constant DEPLOYER_ALLOW_LIST = 0x0200000000000000000000000000000000000001;
+    // Trading & DeFi Extensions
+    address internal constant LX_BOOK   = 0x0000000000000000000000000000000000009020; // LP-9020 LXBook
+    address internal constant LX_VAULT  = 0x0000000000000000000000000000000000009030; // LP-9030 LXVault
+    address internal constant LX_FEED   = 0x0000000000000000000000000000000000009040; // LP-9040 LXFeed
 
-    /// @notice Transaction allow list management
-    address internal constant TX_ALLOW_LIST = 0x0200000000000000000000000000000000000002;
+    // Bridge Precompiles (LP-6xxx)
+    address internal constant TELEPORT  = 0x0000000000000000000000000000000000006010; // LP-6010
 
-    /// @notice Fee manager for dynamic gas pricing
-    address internal constant FEE_MANAGER = 0x0200000000000000000000000000000000000003;
-
-    /// @notice Native token minting
-    address internal constant NATIVE_MINTER = 0x0200000000000000000000000000000000000004;
-
-    /// @notice Cross-chain Warp messaging
-    address internal constant WARP = 0x0200000000000000000000000000000000000005;
-
-    /// @notice Reward manager for validators
-    address internal constant REWARD_MANAGER = 0x0200000000000000000000000000000000000006;
-
-    /*//////////////////////////////////////////////////////////////
-                      CRYPTOGRAPHY PRECOMPILES
-    //////////////////////////////////////////////////////////////*/
-
-    /// @notice ML-DSA (FIPS 204) post-quantum signatures
-    address internal constant ML_DSA = 0x0200000000000000000000000000000000000007;
-
-    /// @notice SLH-DSA (FIPS 205) hash-based signatures
-    address internal constant SLH_DSA = 0x0200000000000000000000000000000000000008;
-
-    /// @notice General post-quantum crypto operations
-    address internal constant PQ_CRYPTO = 0x0200000000000000000000000000000000000009;
-
-    /// @notice Quasar quantum consensus operations
-    address internal constant QUASAR = 0x020000000000000000000000000000000000000a;
-
-    /// @notice Ringtail lattice threshold signatures
-    address internal constant RINGTAIL = 0x020000000000000000000000000000000000000B;
-
-    /// @notice FROST Schnorr threshold signatures
-    address internal constant FROST = 0x020000000000000000000000000000000000000c;
-
-    /// @notice CGGMP21 ECDSA threshold signatures
-    address internal constant CGGMP21 = 0x020000000000000000000000000000000000000D;
-
-    /// @notice Bridge verification (reserved)
-    address internal constant BRIDGE = 0x020000000000000000000000000000000000000E;
-
-    /*//////////////////////////////////////////////////////////////
-                          DEFI PRECOMPILES
-    //////////////////////////////////////////////////////////////*/
-
-    /// @notice Native HFT DEX (QuantumSwap/LX)
-    /// @dev 434M orders/sec, 2ns latency, 1ms finality
-    address internal constant DEX = 0x0200000000000000000000000000000000000010;
-
-    /// @notice Multi-source oracle aggregator
-    /// @dev Chainlink, Pyth, Binance, Kraken, Native TWAP
-    address internal constant ORACLE = 0x0200000000000000000000000000000000000011;
-
-    /// @notice Lending protocol interface
-    address internal constant LENDING = 0x0200000000000000000000000000000000000012;
-
-    /// @notice Staking operations
-    address internal constant STAKING = 0x0200000000000000000000000000000000000013;
-
-    /// @notice Yield aggregator
-    address internal constant YIELD = 0x0200000000000000000000000000000000000014;
-
-    /// @notice Derivatives/Perpetuals
-    address internal constant PERPS = 0x0200000000000000000000000000000000000015;
-
-    /*//////////////////////////////////////////////////////////////
-                       ATTESTATION PRECOMPILES
-    //////////////////////////////////////////////////////////////*/
-
-    /// @notice GPU/TEE attestation (AI tokens)
-    address internal constant ATTESTATION = 0x0200000000000000000000000000000000000300;
-
-    /*//////////////////////////////////////////////////////////////
-                         HELPER FUNCTIONS
-    //////////////////////////////////////////////////////////////*/
-
-    /// @notice Check if address is a known precompile
-    function isPrecompile(address addr) internal pure returns (bool) {
-        uint256 addrInt = uint256(uint160(addr));
-
-        // Check 0x0200...00XX range (Core + Crypto + DeFi)
-        if (addrInt >= uint256(uint160(0x0200000000000000000000000000000000000001)) &&
-            addrInt <= uint256(uint160(0x0200000000000000000000000000000000000015))) {
-            return true;
-        }
-
-        // Check attestation range
-        if (addrInt == uint256(uint160(0x0200000000000000000000000000000000000300))) {
-            return true;
-        }
-
-        return false;
+    /// @notice Generate precompile address from LP number
+    function fromLP(uint16 lpNumber) internal pure returns (address) {
+        return address(uint160(lpNumber));
     }
 
-    /// @notice Get precompile name
-    function getPrecompileName(address addr) internal pure returns (string memory) {
-        if (addr == DEPLOYER_ALLOW_LIST) return "DeployerAllowList";
-        if (addr == TX_ALLOW_LIST) return "TxAllowList";
-        if (addr == FEE_MANAGER) return "FeeManager";
-        if (addr == NATIVE_MINTER) return "NativeMinter";
-        if (addr == WARP) return "Warp";
-        if (addr == REWARD_MANAGER) return "RewardManager";
-        if (addr == ML_DSA) return "ML-DSA";
-        if (addr == SLH_DSA) return "SLH-DSA";
-        if (addr == PQ_CRYPTO) return "PQCrypto";
-        if (addr == QUASAR) return "Quasar";
-        if (addr == RINGTAIL) return "Ringtail";
-        if (addr == FROST) return "FROST";
-        if (addr == CGGMP21) return "CGGMP21";
-        if (addr == BRIDGE) return "Bridge";
-        if (addr == DEX) return "DEX";
-        if (addr == ORACLE) return "Oracle";
-        if (addr == LENDING) return "Lending";
-        if (addr == STAKING) return "Staking";
-        if (addr == YIELD) return "Yield";
-        if (addr == PERPS) return "Perps";
-        if (addr == ATTESTATION) return "Attestation";
-        return "Unknown";
+    /// @notice Extract LP number from precompile address
+    function toLP(address precompile) internal pure returns (uint16) {
+        return uint16(uint160(precompile));
     }
 
-    /// @notice Get precompile category
-    function getPrecompileCategory(address addr) internal pure returns (string memory) {
-        uint256 addrInt = uint256(uint160(addr));
+    /// @notice Check if address is an LX precompile (LP-9xxx)
+    function isLXPrecompile(address addr) internal pure returns (bool) {
+        uint16 lp = uint16(uint160(addr));
+        return lp >= 9000 && lp < 10000;
+    }
 
-        if (addrInt >= uint256(uint160(0x0200000000000000000000000000000000000001)) &&
-            addrInt <= uint256(uint160(0x0200000000000000000000000000000000000006))) {
-            return "Core";
-        }
-
-        if (addrInt >= uint256(uint160(0x0200000000000000000000000000000000000007)) &&
-            addrInt <= uint256(uint160(0x020000000000000000000000000000000000000E))) {
-            return "Cryptography";
-        }
-
-        if (addrInt >= uint256(uint160(0x0200000000000000000000000000000000000010)) &&
-            addrInt <= uint256(uint160(0x0200000000000000000000000000000000000015))) {
-            return "DeFi";
-        }
-
-        if (addrInt == uint256(uint160(0x0200000000000000000000000000000000000300))) {
-            return "Attestation";
-        }
-
-        return "Unknown";
+    /// @notice Check if address is a Bridge precompile (LP-6xxx)
+    function isBridgePrecompile(address addr) internal pure returns (bool) {
+        uint16 lp = uint16(uint160(addr));
+        return lp >= 6000 && lp < 7000;
     }
 }
 ```
 
-### PrecompileChecker Contract
+### Go Registry
 
-```solidity
-/// @title PrecompileChecker
-/// @notice Utility contract for checking precompile availability
-contract PrecompileChecker {
-    using PrecompileRegistry for address;
+```go
+package lxdex
 
-    /// @notice Check if all DeFi precompiles are available
-    function checkDeFiPrecompiles() external view returns (
-        bool dexAvailable,
-        bool oracleAvailable,
-        bool lendingAvailable,
-        bool stakingAvailable
-    ) {
-        dexAvailable = _isContractLive(PrecompileRegistry.DEX);
-        oracleAvailable = _isContractLive(PrecompileRegistry.ORACLE);
-        lendingAvailable = _isContractLive(PrecompileRegistry.LENDING);
-        stakingAvailable = _isContractLive(PrecompileRegistry.STAKING);
-    }
+import (
+    "fmt"
+    "github.com/luxfi/geth/common"
+)
 
-    /// @notice Check if all crypto precompiles are available
-    function checkCryptoPrecompiles() external view returns (
-        bool mldsaAvailable,
-        bool frostAvailable,
-        bool cggmp21Available,
-        bool ringtailAvailable
-    ) {
-        mldsaAvailable = _isContractLive(PrecompileRegistry.ML_DSA);
-        frostAvailable = _isContractLive(PrecompileRegistry.FROST);
-        cggmp21Available = _isContractLive(PrecompileRegistry.CGGMP21);
-        ringtailAvailable = _isContractLive(PrecompileRegistry.RINGTAIL);
-    }
+// LX Precompile addresses - trailing LP number format
+// Address = 0x0000000000000000000000000000000000LPNUM
+const (
+    // Core AMM (LP-9010 series - Uniswap v4 style)
+    LXPool   = "0x0000000000000000000000000000000000009010" // LP-9010 LXPool
+    LXOracle = "0x0000000000000000000000000000000000009011" // LP-9011 LXOracle
+    LXRouter = "0x0000000000000000000000000000000000009012" // LP-9012 LXRouter
+    LXHooks  = "0x0000000000000000000000000000000000009013" // LP-9013 LXHooks
+    LXFlash  = "0x0000000000000000000000000000000000009014" // LP-9014 LXFlash
 
-    /// @notice Get all precompile statuses
-    function getAllPrecompileStatuses() external view returns (
-        address[] memory addresses,
-        string[] memory names,
-        bool[] memory available
-    ) {
-        addresses = new address[](21);
-        names = new string[](21);
-        available = new bool[](21);
+    // Trading & DeFi Extensions
+    LXBook  = "0x0000000000000000000000000000000000009020" // LP-9020 LXBook
+    LXVault = "0x0000000000000000000000000000000000009030" // LP-9030 LXVault
+    LXFeed  = "0x0000000000000000000000000000000000009040" // LP-9040 LXFeed
 
-        addresses[0] = PrecompileRegistry.DEPLOYER_ALLOW_LIST;
-        addresses[1] = PrecompileRegistry.TX_ALLOW_LIST;
-        addresses[2] = PrecompileRegistry.FEE_MANAGER;
-        addresses[3] = PrecompileRegistry.NATIVE_MINTER;
-        addresses[4] = PrecompileRegistry.WARP;
-        addresses[5] = PrecompileRegistry.REWARD_MANAGER;
-        addresses[6] = PrecompileRegistry.ML_DSA;
-        addresses[7] = PrecompileRegistry.SLH_DSA;
-        addresses[8] = PrecompileRegistry.PQ_CRYPTO;
-        addresses[9] = PrecompileRegistry.QUASAR;
-        addresses[10] = PrecompileRegistry.RINGTAIL;
-        addresses[11] = PrecompileRegistry.FROST;
-        addresses[12] = PrecompileRegistry.CGGMP21;
-        addresses[13] = PrecompileRegistry.BRIDGE;
-        addresses[14] = PrecompileRegistry.DEX;
-        addresses[15] = PrecompileRegistry.ORACLE;
-        addresses[16] = PrecompileRegistry.LENDING;
-        addresses[17] = PrecompileRegistry.STAKING;
-        addresses[18] = PrecompileRegistry.YIELD;
-        addresses[19] = PrecompileRegistry.PERPS;
-        addresses[20] = PrecompileRegistry.ATTESTATION;
+    // Bridge Precompiles (LP-6xxx)
+    Teleport = "0x0000000000000000000000000000000000006010" // LP-6010
+)
 
-        for (uint256 i = 0; i < addresses.length; i++) {
-            names[i] = addresses[i].getPrecompileName();
-            available[i] = _isContractLive(addresses[i]);
-        }
-    }
+// PrecompileAddress generates address from LP number
+// Example: PrecompileAddress(9010) → 0x0000...009010
+func PrecompileAddress(lpNumber uint16) common.Address {
+    addr := fmt.Sprintf("0x%040x", lpNumber)
+    return common.HexToAddress(addr)
+}
 
-    /// @notice Check if precompile is live
-    function _isContractLive(address addr) internal view returns (bool) {
-        uint256 size;
-        assembly {
-            size := extcodesize(addr)
-        }
-        // Precompiles don't have code but can still be called
-        // We check by attempting a static call
-        (bool success,) = addr.staticcall("");
-        return success || size > 0;
-    }
+// ToLP extracts LP number from precompile address
+func ToLP(addr common.Address) uint16 {
+    bytes := addr.Bytes()
+    return uint16(bytes[18])<<8 | uint16(bytes[19])
+}
+
+// IsLXPrecompile checks if address is in LP-9xxx range
+func IsLXPrecompile(addr common.Address) bool {
+    lp := ToLP(addr)
+    return lp >= 9000 && lp < 10000
+}
+
+// IsBridgePrecompile checks if address is in LP-6xxx range
+func IsBridgePrecompile(addr common.Address) bool {
+    lp := ToLP(addr)
+    return lp >= 6000 && lp < 7000
 }
 ```
 
-### Complete Precompile Address Map
+### TypeScript Registry
 
-```solidity
-┌─────────────────────────────────────────────────────────────────────────────────────┐
-│                           Lux Precompile Address Map                                │
-├─────────────────────────────────────────────────────────────────────────────────────┤
-│                                                                                     │
-│  CORE PRECOMPILES (0x0200...0001 - 0x0200...0006)                                  │
-│  ┌─────────────────┬────────────────────────────────────────────────────────────┐  │
-│  │ Address         │ Name / Function                                            │  │
-│  ├─────────────────┼────────────────────────────────────────────────────────────┤  │
-│  │ 0x02...0001     │ DeployerAllowList - Contract deployment permissions        │  │
-│  │ 0x02...0002     │ TxAllowList - Transaction sending permissions              │  │
-│  │ 0x02...0003     │ FeeManager - Dynamic gas pricing (LP-176)                  │  │
-│  │ 0x02...0004     │ NativeMinter - Native LUX token minting                    │  │
-│  │ 0x02...0005     │ Warp - Cross-chain messaging (LP-2515)                     │  │
-│  │ 0x02...0006     │ RewardManager - Validator reward distribution              │  │
-│  └─────────────────┴────────────────────────────────────────────────────────────┘  │
-│                                                                                     │
-│  CRYPTOGRAPHY PRECOMPILES (0x0200...0007 - 0x0200...000E)                          │
-│  ┌─────────────────┬────────────────────────────────────────────────────────────┐  │
-│  │ Address         │ Name / Function                                            │  │
-│  ├─────────────────┼────────────────────────────────────────────────────────────┤  │
-│  │ 0x02...0007     │ ML-DSA - FIPS 204 post-quantum signatures (LP-2514)        │  │
-│  │ 0x02...0008     │ SLH-DSA - FIPS 205 hash-based signatures (LP-2312)         │  │
-│  │ 0x02...0009     │ PQCrypto - General post-quantum operations                 │  │
-│  │ 0x02...000a     │ Quasar - Quantum consensus operations (LP-2516)            │  │
-│  │ 0x02...000B     │ Ringtail - Lattice threshold signatures (LP-320)           │  │
-│  │ 0x02...000c     │ FROST - Schnorr threshold signatures (LP-321)              │  │
-│  │ 0x02...000D     │ CGGMP21 - ECDSA threshold signatures (LP-322)              │  │
-│  │ 0x02...000E     │ Bridge - Bridge verification (reserved)                    │  │
-│  └─────────────────┴────────────────────────────────────────────────────────────┘  │
-│                                                                                     │
-│  DEFI PRECOMPILES (0x0200...0010 - 0x0200...0015)                                  │
-│  ┌─────────────────┬────────────────────────────────────────────────────────────┐  │
-│  │ Address         │ Name / Function                                            │  │
-│  ├─────────────────┼────────────────────────────────────────────────────────────┤  │
-│  │ 0x02...0010     │ DEX - Native HFT order book (LP-9010) 434M ops/sec         │  │
-│  │ 0x02...0011     │ Oracle - Multi-source price feeds (LP-9011)                │  │
-│  │ 0x02...0012     │ Lending - Protocol interface (reserved)                    │  │
-│  │ 0x02...0013     │ Staking - Staking operations (reserved)                    │  │
-│  │ 0x02...0014     │ Yield - Yield aggregation (reserved)                       │  │
-│  │ 0x02...0015     │ Perps - Perpetuals/Derivatives (reserved)                  │  │
-│  └─────────────────┴────────────────────────────────────────────────────────────┘  │
-│                                                                                     │
-│  ATTESTATION PRECOMPILES (0x0200...0300)                                           │
-│  ┌─────────────────┬────────────────────────────────────────────────────────────┐  │
-│  │ Address         │ Name / Function                                            │  │
-│  ├─────────────────┼────────────────────────────────────────────────────────────┤  │
-│  │ 0x02...0300     │ Attestation - GPU/TEE attestation for AI tokens            │  │
-│  └─────────────────┴────────────────────────────────────────────────────────────┘  │
-│                                                                                     │
-└─────────────────────────────────────────────────────────────────────────────────────┘
+```typescript
+import type { Address } from 'viem'
+
+/**
+ * LX Precompile addresses (LP-9xxx - Uniswap v4 style)
+ * Address format: 0x0000000000000000000000000000000000LPNUM
+ */
+export const LX = {
+  // Core AMM (LP-9010 series)
+  LX_POOL:   '0x0000000000000000000000000000000000009010' as Address, // LP-9010 LXPool
+  LX_ORACLE: '0x0000000000000000000000000000000000009011' as Address, // LP-9011 LXOracle
+  LX_ROUTER: '0x0000000000000000000000000000000000009012' as Address, // LP-9012 LXRouter
+  LX_HOOKS:  '0x0000000000000000000000000000000000009013' as Address, // LP-9013 LXHooks
+  LX_FLASH:  '0x0000000000000000000000000000000000009014' as Address, // LP-9014 LXFlash
+
+  // Trading & DeFi Extensions
+  LX_BOOK:  '0x0000000000000000000000000000000000009020' as Address, // LP-9020 LXBook
+  LX_VAULT: '0x0000000000000000000000000000000000009030' as Address, // LP-9030 LXVault
+  LX_FEED:  '0x0000000000000000000000000000000000009040' as Address, // LP-9040 LXFeed
+
+  // Bridges (LP-6xxx)
+  TELEPORT: '0x0000000000000000000000000000000000006010' as Address, // LP-6010
+} as const
+
+/**
+ * Generate precompile address from LP number
+ */
+export function fromLP(lpNumber: number): Address {
+  return `0x${lpNumber.toString(16).padStart(40, '0')}` as Address
+}
+
+/**
+ * Extract LP number from precompile address
+ */
+export function toLP(address: Address): number {
+  return parseInt(address.slice(-4), 16)
+}
+
+/**
+ * Check if address is an LX precompile (LP-9xxx)
+ */
+export function isLXPrecompile(address: Address): boolean {
+  const lp = toLP(address)
+  return lp >= 9000 && lp < 10000
+}
 ```
-
-### Gas Costs
-
-| Precompile | Typical Operation | Gas Cost |
-|------------|------------------|----------|
-| DeployerAllowList | Check permission | 2,600 |
-| TxAllowList | Check permission | 2,600 |
-| FeeManager | Get fee config | 2,600 |
-| NativeMinter | Mint tokens | 10,000 |
-| Warp | Send message | 50,000 |
-| ML-DSA | Verify signature | 100,000 |
-| FROST | Verify threshold | 75,000 |
-| CGGMP21 | Verify threshold | 125,000 |
-| Ringtail | Verify threshold | 200,000 |
-| DEX | Place order | 30,000 |
-| Oracle | Get price | 5,000 |
 
 ## Rationale
 
-### Address Range Selection
+### Why Trailing LP Numbers?
 
-The `0x0200...` prefix was chosen to:
-1. Avoid collision with standard Ethereum precompiles (`0x01` - `0x09`)
-2. Allow for 4096+ precompiles in the range
-3. Enable category-based grouping
+The trailing LP scheme was chosen for:
 
-### Category Grouping
+1. **Maximum Simplicity**: No formula to remember - LP number IS the address
+2. **Human Readable**: `0x...9010` is obviously LP-9010
+3. **Universal**: Same address works on all EVM chains
+4. **Debuggable**: Easy to identify precompile calls in traces
 
-Precompiles are grouped by function:
-- **0x01-0x06**: Core network management
-- **0x07-0x0E**: Cryptographic operations
-- **0x10-0x1F**: DeFi primitives
-- **0x0300+**: Specialized functions
+### Previous Schemes Deprecated
 
-### Availability Checking
+The old `0x0200...00XX` scheme was deprecated because:
+- Wasted 38 zero bytes with no benefit
+- Required complex encoding/decoding
+- No relationship to LP documentation
+- Limited extensibility
 
-The `_isContractLive` function uses:
-1. `extcodesize`: Check for contract code
-2. `staticcall`: Verify precompile responds
+The intermediate `BASE + PCII` scheme was also rejected:
+- Required knowing the formula
+- Different addresses per chain
+- Added unnecessary complexity
 
-This handles both deployed contracts and native precompiles.
+## Multi-Chain Deployment
 
-## Backwards Compatibility
+All precompiles use identical addresses across all Lux EVM chains:
 
-### Existing Precompiles
-
-All existing precompiles maintain their addresses. New precompiles are added at unused addresses.
-
-### Library Integration
-
-Applications can import the library:
-
-```solidity
-import {PrecompileRegistry} from "./PrecompileRegistry.sol";
-
-contract MyContract {
-    function useDEX() external {
-        IDEX dex = IDEX(PrecompileRegistry.DEX);
-        // Use DEX...
-    }
-}
-```
+| Chain | Chain ID | LXPool Address |
+|-------|----------|----------------|
+| Lux Mainnet | 96369 | `0x...9010` |
+| Lux Testnet | 96368 | `0x...9010` |
+| Zoo Mainnet | 200200 | `0x...9010` |
+| Zoo Testnet | 200201 | `0x...9010` |
+| Hanzo Mainnet | 36963 | `0x...9010` |
+| Hanzo Testnet | 36962 | `0x...9010` |
+| SPC Mainnet | 36911 | `0x...9010` |
+| LuxDev (Anvil) | 1337 | `0x...9010` |
 
 ## Test Cases
 
-### Precompile Discovery
-
 ```solidity
-function testPrecompileDiscovery() public {
-    assertTrue(PrecompileRegistry.isPrecompile(PrecompileRegistry.DEX));
-    assertTrue(PrecompileRegistry.isPrecompile(PrecompileRegistry.ORACLE));
-    assertFalse(PrecompileRegistry.isPrecompile(address(0x123)));
-}
-```
-
-### Category Classification
-
-```solidity
-function testPrecompileCategories() public {
+function testAddressFromLP() public {
     assertEq(
-        PrecompileRegistry.getPrecompileCategory(PrecompileRegistry.DEX),
-        "DeFi"
+        LXDEX.fromLP(9010),
+        address(0x0000000000000000000000000000000000009010)
     );
     assertEq(
-        PrecompileRegistry.getPrecompileCategory(PrecompileRegistry.FROST),
-        "Cryptography"
+        LXDEX.fromLP(6010),
+        address(0x0000000000000000000000000000000000006010)
     );
 }
-```
 
-### Availability Check
-
-```solidity
-function testDeFiAvailability() public {
-    (bool dex, bool oracle, bool lending, bool staking) =
-        checker.checkDeFiPrecompiles();
-
-    assertTrue(dex, "DEX not available");
-    assertTrue(oracle, "Oracle not available");
-    // Lending and staking may be reserved
+function testLPFromAddress() public {
+    assertEq(
+        LXDEX.toLP(address(0x0000000000000000000000000000000000009010)),
+        9010
+    );
 }
-```
 
-## Reference Implementation
-
-**Location**: `/Users/z/work/lux/standard/contracts/liquidity/precompiles/PrecompileRegistry.sol`
-
-```solidity
-contracts/liquidity/precompiles/
-├── PrecompileRegistry.sol   # Registry library (this LP)
-├── IDEX.sol                 # LP-9010
-├── IOracle.sol              # LP-9011
-└── README.md                # Documentation
+function testIsLXDEXPrecompile() public {
+    assertTrue(LXDEX.isLXDEXPrecompile(
+        address(0x0000000000000000000000000000000000009010)
+    ));
+    assertFalse(LXDEX.isLXDEXPrecompile(
+        address(0x0000000000000000000000000000000000006010)
+    ));
+}
 ```
 
 ## Security Considerations
 
-### Address Verification
+### Address Validation
 
-Applications should verify precompile addresses:
+Applications should validate precompile addresses:
 
 ```solidity
-require(
-    PrecompileRegistry.isPrecompile(addr),
-    "Not a precompile"
-);
+function validateLXDEXPrecompile(address addr) internal pure {
+    require(
+        LXDEX.isLXDEXPrecompile(addr),
+        "Not an LXDEX precompile"
+    );
+}
 ```
 
-### Upgrade Safety
+### Reserved Ranges
 
-Precompile addresses are immutable. New features require new addresses.
+| LP Range | Purpose |
+|----------|---------|
+| 6000-6999 | Bridge precompiles |
+| 9000-9099 | Core LXDEX (LXPool, LXOracle, LXRouter, LXHooks, LXFlash) |
+| 9100-9199 | Reserved |
+| 9200-9299 | Reserved |
 
-### Availability Checks
+## Implementation Status
 
-Critical operations should verify precompile availability before use.
+All repositories have been updated to use the LP-aligned format with LXDEX naming:
+
+- ✅ `~/work/lux/precompile/registry/registry.go` - Canonical Go registry
+- ✅ `~/work/lux/precompile/dex/module.go` - LXDEX precompile implementation
+- ✅ `~/work/lux/dex/pkg/gateway/lux/provider.go` - LXDEX gateway
+- ✅ `~/work/lux/exchange/packages/dex/src/precompile/addresses.ts` - TypeScript registry
 
 ## Related LPs
 
-- **LP-2517**: Precompile Suite Overview
-- **LP-9010**: DEX Precompile
-- **LP-9011**: Oracle Precompile
-- **LP-321**: FROST Threshold Signatures
-- **LP-322**: CGGMP21 Threshold ECDSA
-- **LP-320**: Ringtail Threshold Signatures
-
-```
+- **LP-0099**: LP Numbering Scheme and Chain Organization
+- **LP-9010**: LXPool - v4 PoolManager-Compatible AMM Core
+- **LP-9011**: LXOracle - Multi-Source Price Aggregation
+- **LP-6010**: Teleport Bridge Precompile

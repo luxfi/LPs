@@ -168,7 +168,7 @@ K-Chain uses the `github.com/luxfi/crypto/mlkem` package which wraps FIPS 203 co
 import (
     "github.com/luxfi/crypto/mlkem"
     "github.com/luxfi/ids"
-    "golang.org/x/crypto/curve25519"
+    "crypto/curve25519"
 )
 
 // EncapsulationKey represents an ML-KEM key pair stored on K-Chain
@@ -368,7 +368,7 @@ import (
 
     "github.com/luxfi/crypto/mlkem"
     "github.com/luxfi/ids"
-    "golang.org/x/crypto/curve25519"
+    "crypto/curve25519"
 )
 
 // KeyGenTx generates a new ML-KEM encapsulation key pair
@@ -474,7 +474,7 @@ import (
 
     "github.com/luxfi/crypto/mlkem"
     "github.com/luxfi/ids"
-    "golang.org/x/crypto/curve25519"
+    "crypto/curve25519"
     "golang.org/x/crypto/hkdf"
     "crypto/sha256"
     "io"
@@ -591,7 +591,7 @@ import (
 
     "github.com/luxfi/crypto/mlkem"
     "github.com/luxfi/ids"
-    "golang.org/x/crypto/curve25519"
+    "crypto/curve25519"
     "golang.org/x/crypto/hkdf"
 )
 
@@ -1749,7 +1749,7 @@ import (
 
     "github.com/luxfi/crypto/mlkem"
     "github.com/luxfi/ids"
-    "golang.org/x/crypto/chacha20poly1305"
+    "crypto/chacha20poly1305"
     "golang.org/x/crypto/hkdf"
 )
 
