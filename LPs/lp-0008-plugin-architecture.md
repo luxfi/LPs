@@ -221,6 +221,18 @@ vms:
   - evm
 ```
 
+## Rationale
+
+The plugin architecture uses gRPC-based process isolation rather than in-process dynamic linking for several reasons:
+
+1. **Fault Isolation**: A crashing VM plugin cannot take down the entire node
+2. **Language Agnosticism**: VMs can be implemented in any language, not just Go
+3. **Independent Upgrades**: Plugins can be updated without restarting the node binary
+4. **Security Boundaries**: Process-level sandboxing limits plugin capabilities
+5. **Simplicity**: Binary distribution is simpler than shared library management across platforms
+
+The LPM tool follows the pattern established by package managers (apt, brew, npm) with repository-based distribution, version pinning, and checksum verification. This provides a familiar workflow for developers while maintaining the security guarantees needed for blockchain infrastructure.
+
 ## Test Cases
 
 ### Unit Tests
