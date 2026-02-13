@@ -516,6 +516,10 @@ type BlobRef struct {
 - Enables erasure coding
 - Supports partial retrieval
 
+## Backwards Compatibility
+
+This LP defines a new API for interacting with the LuxDA Bus. As a new component, it does not break any existing APIs or protocols on the Lux Network. The API is versioned to allow for future upgrades without affecting existing applications.
+
 ## Security Considerations
 
 ### Commitment Binding

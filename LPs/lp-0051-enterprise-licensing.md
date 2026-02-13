@@ -1,8 +1,9 @@
 ---
 lp: 51
 title: Enterprise Licensing
+description: Defines enterprise licensing for Lux Network's advanced technologies.
 author: Lux Industries Inc
-status: Active
+status: Living
 type: Informational
 created: 2025-12-29
 updated: 2025-12-30
@@ -15,6 +16,10 @@ tier: core
 ## Abstract
 
 This LP describes enterprise licensing options for Lux Network's advanced technologies. While core blockchain infrastructure is open source, enterprise-grade deployments of advanced cryptography, private networks, AI/ML compute, and high-performance systems require commercial licensing.
+
+## Motivation
+
+To ensure the long-term sustainability and continued innovation of the Lux Network, this LP clarifies the boundary between the open-source, free-to-use components and the advanced, enterprise-grade technologies that require a commercial license. By creating a clear framework for commercial licensing, Lux Industries Inc. can fund ongoing research, development, and support for the entire ecosystem, while providing legal clarity for enterprises building on or with Lux technology.
 
 ## Enterprise Licensing Categories
 

@@ -225,7 +225,23 @@ func ProposeMLSMigration(
 | Commit size | 1 KB | 4 KB | 4x |
 | TreeKEM update | 2 ms | 15 ms | 7.5x |
 
+## Rationale
+
+Group communication is a fundamental part of the LuxDA Bus, and its security is paramount. The IETF's Messaging Layer Security (MLS) protocol provides a strong foundation for scalable, end-to-end encrypted group messaging. However, the standard MLS cipher suites rely on classical cryptography (elliptic curves), which will be vulnerable to attacks from future quantum computers.
+
+To address this long-term threat and protect against "harvest now, decrypt later" attacks, this LP defines a post-quantum profile for MLS. By specifying hybrid cipher suites that combine classical and post-quantum algorithms, we ensure that group communications remain secure even if one of the cryptographic primitives is broken. This provides a robust and future-proof security model for group chats on the Lux network.
+
+## Backwards Compatibility
+
+This LP is designed to be backwards compatible with the existing MLS protocol and allows for a smooth migration from classical to post-quantum secure groups.
+
+-   **Cipher Suite Negotiation**: New groups can be created with the post-quantum cipher suites from the outset.
+-   **Migration of Existing Groups**: Existing groups using classical cipher suites can be upgraded to a post-quantum suite via a `ReInit` proposal. This allows all group members to agree on the new cryptographic parameters and re-establish a secure session without recreating the group.
+-   **Interoperability**: The PQ capabilities extension allows clients to signal their support for post-quantum suites, ensuring that clients with different capabilities can still participate in groups, albeit with the security level of the least capable client.
+
+This approach ensures a non-disruptive upgrade path for the entire network.
 ## Security Considerations
+
 
 1. **Hybrid approach**: Both classical and PQ must be broken
 2. **Forward secrecy**: TreeKEM ratcheting provides FS per epoch

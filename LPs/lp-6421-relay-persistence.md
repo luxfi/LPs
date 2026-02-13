@@ -445,6 +445,10 @@ func (rs *RelayStore) CleanupIndexes() {
 - Enables fair resource allocation
 - Allows priority namespaces
 
+## Backwards Compatibility
+
+This LP defines a new, optional persistence layer for the LuxRelay protocol. Nodes that do not implement this specification can still participate in the gossip network, but they will not be able to serve historical messages to syncing peers. The sync protocol is designed to be backwards compatible, allowing new nodes to sync from older nodes that may not have the full history.
+
 ## Security Considerations
 
 ### Storage Exhaustion

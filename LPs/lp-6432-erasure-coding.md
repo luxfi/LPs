@@ -478,6 +478,10 @@ func NewOptimizedEncoder(data, parity int) reedsolomon.Encoder {
 - Reduces overhead for small messages
 - Optimizes encoding/decoding time
 
+## Backwards Compatibility
+
+This LP defines the erasure coding scheme used within the LuxDA Bus. It is an internal component of the DA layer and does not expose any new interfaces to applications. As such, it has no impact on existing protocols and introduces no breaking changes.
+
 ## Security Considerations
 
 ### Commitment Binding

@@ -356,6 +356,10 @@ DAS (sampling) provides:
 2. Better scaling (sublinear verification)
 3. Light client verification
 
+## Backwards Compatibility
+
+This LP is a definitional document and introduces no breaking changes to the Lux Network. It establishes the terminology and semantic guarantees that all other LuxDA Bus LPs must adhere to. Implementations of the LuxDA Bus will be new components and will not affect existing protocols until they are explicitly integrated.
+
 ## Security Considerations
 
 ### Ordering Attacks

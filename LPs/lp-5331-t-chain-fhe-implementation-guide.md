@@ -19,6 +19,10 @@ order: 5331
 
 This LP provides comprehensive implementation documentation for the T-Chain Fully Homomorphic Encryption (FHE) module. It covers the production implementation details, RPC API specification, security hardening measures, and integration patterns for developers building on Lux Network's threshold FHE infrastructure.
 
+## Motivation
+
+While prior LPs (LP-0203, LP-5330) define the high-level architecture for threshold FHE on the T-Chain, developers require a comprehensive, practical guide to securely and efficiently implement applications using this powerful technology. This LP serves as the canonical implementation guide, providing detailed specifications for the RPC API, security best practices, and ready-to-use integration patterns. By consolidating this information, we lower the barrier to entry for developers, reduce the risk of implementation errors, and accelerate the adoption of privacy-preserving applications on the Lux Network.
+
 ## Implementation Overview
 
 The T-Chain FHE module provides threshold decryption capabilities where no single party holds the complete secret key. The implementation uses:

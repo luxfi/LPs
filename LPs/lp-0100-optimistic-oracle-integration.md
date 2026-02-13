@@ -1,13 +1,17 @@
-# LP-0100: Optimistic Oracle Integration
+---
+lp: 100
+title: Optimistic Oracle Integration
+description: "Introduces UMA's Optimistic Oracle (OO) system to the Lux blockchain, providing dispute-backed price assertions."
+author: Lux Core Team
+status: Draft
+type: Standards Track
+category: Interface
+created: 2025-12-31
+requires:
+  - 101
+---
 
-| Field | Value |
-|-------|-------|
-| LP | 0100 |
-| Title | Optimistic Oracle Integration |
-| Author | Lux Core Team |
-| Status | Draft |
-| Created | 2025-12-31 |
-| Category | Oracle Infrastructure |
+# LP-0100: Optimistic Oracle Integration
 
 ## Abstract
 
@@ -17,9 +21,9 @@ This proposal introduces UMA's Optimistic Oracle (OO) system to the Lux blockcha
 
 Current oracle systems on Lux (Chainlink, Pyth, DEX TWAP) provide real-time price feeds but lack a mechanism for:
 
-1. **Human-readable data assertions** - Questions like "Did Team X win the championship?"
-2. **Economic dispute resolution** - Bond-backed assertions with escalation to token voting
-3. **Prediction market resolution** - Binary/multi-outcome market settlement
+1.  **Human-readable data assertions** - Questions like "Did Team X win the championship?"
+2.  **Economic dispute resolution** - Bond-backed assertions with escalation to token voting
+3.  **Prediction market resolution** - Binary/multi-outcome market settlement
 
 UMA's Optimistic Oracle fills these gaps with a battle-tested dispute mechanism used by Polymarket and other major protocols.
 
@@ -88,7 +92,7 @@ type Assertion {
 }
 ```
 
-## Parameters
+## Rationale
 
 | Parameter | Value | Rationale |
 |-----------|-------|-----------|
@@ -97,12 +101,23 @@ type Assertion {
 | Min Bond | Configurable per market | Flexibility for different use cases |
 | DVM Voting Period | 48 hours | Allow global participation |
 
+## Backwards Compatibility
+
+This LP is fully backwards compatible. It introduces a new, optional oracle system and does not alter any existing oracle integrations or core protocol behavior. Existing applications that do not integrate with the Optimistic Oracle will be unaffected.
+
+## Test Cases
+
+- **Assertion and Settlement**: A test case where an assertion is made and settles correctly after the liveness period without a dispute.
+- **Dispute and Voting**: A test case where an assertion is disputed, voting occurs, and the dispute is resolved correctly based on the vote outcome.
+- **Slashing**: A test case to verify that incorrect voters are slashed as expected.
+- **GraphQL Interface**: A test case to query assertions and their statuses via the G-Chain GraphQL interface.
+
 ## Security Considerations
 
-1. **Economic Security**: Bond requirements deter spam; slashing punishes incorrect votes
-2. **Time-locked Resolution**: 2-hour liveness prevents same-block manipulation
-3. **DVM Fallback**: Human judgment for ambiguous cases
-4. **Circuit Breakers**: Integration with existing Oracle.sol protections
+1.  **Economic Security**: Bond requirements deter spam; slashing punishes incorrect votes
+2.  **Time-locked Resolution**: 2-hour liveness prevents same-block manipulation
+3.  **DVM Fallback**: Human judgment for ambiguous cases
+4.  **Circuit Breakers**: Integration with existing Oracle.sol protections
 
 ## Implementation
 

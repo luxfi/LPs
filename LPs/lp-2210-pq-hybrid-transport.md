@@ -199,7 +199,27 @@ const (
 func NegotiateVersion(local, remote []TransportVersion) TransportVersion
 ```
 
+## Rationale
+
+While TLS 1.3 is the industry standard for secure communication, a custom transport protocol based on the Noise framework was chosen for several reasons:
+1.  **Cryptographic Agility**: The Noise protocol is highly flexible, allowing for easy integration of custom cryptographic primitives like the X-Wing hybrid KEM, which is not yet supported in standard TLS libraries.
+2.  **Simplicity and Auditability**: The Noise protocol has a much smaller and more auditable specification compared to TLS, reducing the attack surface.
+3.  **Performance**: For high-throughput, low-latency blockchain applications, a lightweight protocol without the overhead of the full TLS stack is beneficial.
+4.  **Post-Quantum Preparedness**: This custom protocol allows for a clear and controlled migration path from classical to hybrid to post-quantum-only security, which is critical for the long-term security of the Lux network.
+
+## Backwards Compatibility
+
+This LP is designed to be backwards compatible through a version negotiation mechanism.
+
+-   **Version Negotiation**: During the handshake, peers negotiate the highest commonly supported transport version.
+-   **Migration Path**:
+    -   Nodes running `TransportClassical` (v1) can connect to nodes running `TransportHybrid` (v2), but the connection will be classical.
+    -   Nodes running `TransportHybrid` (v2) can connect to `TransportPQOnly` (v3) nodes, but the connection will be hybrid.
+    -   This allows for a gradual, non-disruptive network upgrade.
+
+No breaking changes are introduced for existing applications, as the transport layer is an internal component of the node.
 ## Security Considerations
+
 
 1. **Forward secrecy**: Ephemeral keys ensure past sessions remain secure
 2. **Hybrid security**: X-Wing combines classical and PQ security

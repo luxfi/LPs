@@ -4,7 +4,7 @@ title: Dead Precompile - Treasury Burn Router
 description: Precompile that routes burns to dead addresses (0x0, 0xdead) to DAO treasury with 50% actual burn and 50% protocol-owned liquidity
 author: Lux Network Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
-status: Accepted
+status: Final
 type: Standards Track
 category: Core
 created: 2026-01-03

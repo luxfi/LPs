@@ -28,6 +28,10 @@ LP-0510 specifies native EVM precompiles for **STARK proof verification** in the
 
 ## Motivation
 
+To support advanced cryptographic applications like ZK-rollups and universal computation, the Lux EVM requires a native, high-performance, and post-quantum safe mechanism for verifying STARK proofs. This LP provides the specification for such a mechanism, enabling a new class of applications on the Lux network.
+
+## Rationale
+
 ### Why STARKs?
 
 | Property | STARK | Groth16 | PLONK |

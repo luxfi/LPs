@@ -29,6 +29,10 @@ LP-3658 specifies a native EVM precompile for the **Poseidon2** hash function at
 
 ## Motivation
 
+The rise of Zero-Knowledge (ZK) applications requires a hash function that is both efficient inside ZK circuits and cheap to execute on-chain. Standard hash functions like SHA-256 are inefficient in ZK circuits, while ZK-friendly hashes like Pedersen are not post-quantum safe. Poseidon2 offers the best of both worlds: it is highly efficient in ZK circuits, post-quantum safe, and fast in native execution. This LP proposes a precompile for Poseidon2 to make it a first-class primitive in the Lux EVM, enabling a new generation of ZK-powered applications.
+
+## Rationale
+
 ### Why Poseidon2?
 
 | Property | Poseidon2 | Pedersen | SHA-256 |

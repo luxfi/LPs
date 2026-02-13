@@ -28,7 +28,7 @@ Current blockchain platforms face fundamental challenges: quantum computing thre
 |-----------|--------------|
 | Quantum computing threatens cryptography | Native post-quantum cryptography (NIST FIPS 203/204/205) |
 | Privacy is an afterthought | Native FHE (encrypted computation) and ZK proofs |
-| Single chains don't scale | 11 purpose-built chains with horizontal scaling |
+| Single chains don't scale | 14 purpose-built chains with horizontal scaling |
 | Bridges get hacked | Protocol-native cross-chain messaging (Warp) |
 | Centralized key management | Decentralized threshold signatures (MPC/TSS) |
 | Slow finality | Sub-second finality via Snow consensus family |
@@ -66,11 +66,17 @@ Current blockchain platforms face fundamental challenges: quantum computing thre
 │  │  │  PQC    │ │FHE + ZK │ │MPC/TSS  │ │Cross-Net│ │Mining   │           │ │
 │  │  └─────────┘ └─────────┘ └─────────┘ └─────────┘ └─────────┘           │ │
 │  │                                                                          │ │
-│  │  ┌─────────┐ ┌─────────┐ ┌─────────┐ ┌─────────┐                       │ │
-│  │  │K-Chain  │ │G-Chain  │ │D-Chain  │ │I-Chain  │                       │ │
-│  │  │KMS/HSM  │ │GraphQL  │ │  DEX    │ │Identity │                       │ │
-│  │  │+Secrets │ │Indexing │ │Advanced │ │(proposed)                       │ │
-│  │  └─────────┘ └─────────┘ └─────────┘ └─────────┘                       │ │
+│  │  ┌─────────┐ ┌─────────┐ ┌─────────┐ ┌─────────┐ ┌─────────┐          │ │
+│  │  │K-Chain  │ │G-Chain  │ │D-Chain  │ │O-Chain  │ │R-Chain  │          │ │
+│  │  │KMS/HSM  │ │GraphQL  │ │  DEX    │ │ Oracle  │ │ Relay   │          │ │
+│  │  │+Secrets │ │Indexing │ │Advanced │ │ Feeds   │ │Messaging│          │ │
+│  │  └─────────┘ └─────────┘ └─────────┘ └─────────┘ └─────────┘          │ │
+│  │                                                                        │ │
+│  │  ┌─────────┐                                                          │ │
+│  │  │I-Chain  │                                                          │ │
+│  │  │Identity │                                                          │ │
+│  │  │  DID    │                                                          │ │
+│  │  └─────────┘                                                          │ │
 │  └─────────────────────────────────────────────────────────────────────────┘ │
 │                                                                              │
 │  ┌─────────────────────────────────────────────────────────────────────────┐ │
@@ -83,7 +89,7 @@ Current blockchain platforms face fundamental challenges: quantum computing thre
 
 ---
 
-## The Chains (11 Active + 1 Proposed)
+## The Chains (13 Active + 1 Proposed)
 
 ### Core Infrastructure Chains
 
@@ -287,7 +293,45 @@ These chains provide advanced cryptographic and specialized capabilities.
 - Perpetual contracts
 - Options and structured products
 
-#### I-Chain (Identity Chain) — *Proposed*
+#### O-Chain (Oracle Chain)
+**Purpose**: Decentralized oracle services and external data feeds
+
+| Feature | Specification |
+|---------|---------------|
+| Aggregation | Median, TWAP, weighted |
+| Proofs | ZK aggregation proofs |
+| Operators | Multi-operator quorums |
+| Attestation | Threshold-signed outputs |
+
+**Key Capabilities**:
+- Decentralized price feeds with deviation bounds
+- Multi-source data aggregation
+- ZK proof of correct aggregation
+- Operator reputation and slashing
+- Dispute resolution via A-Chain attestations
+
+**Why It Matters**: Trustless external data for DeFi, prediction markets, and cross-chain applications.
+
+#### R-Chain (Relay Chain)
+**Purpose**: Cross-domain message bus and inter-chain communication
+
+| Feature | Specification |
+|---------|---------------|
+| Protocol | Channel-based messaging |
+| Ordering | Ordered or unordered delivery |
+| Proofs | Merkle proofs from source chain |
+| Timeout | Configurable relay timeout |
+
+**Key Capabilities**:
+- General-purpose cross-chain messaging
+- Channel handshake and lifecycle
+- Message sequencing and ordering guarantees
+- Light client verification of messages
+- Replay protection and timeout handling
+
+**Why It Matters**: The unified message bus for all cross-chain communication, complementing Warp for native Lux-to-Lux and extending to external chains.
+
+#### I-Chain (Identity Chain)
 **Purpose**: Decentralized identity and credentials
 
 | Feature | Specification |
@@ -297,13 +341,11 @@ These chains provide advanced cryptographic and specialized capabilities.
 | Recovery | Social recovery |
 | Compliance | KYC/AML compatible |
 
-**Key Capabilities** (planned):
+**Key Capabilities**:
 - Self-sovereign identity
 - Privacy-preserving KYC
 - Credential issuance and verification
 - Cross-chain identity
-
-*Note: I-Chain is under consideration. Identity features may be integrated into existing chains.*
 
 ---
 
@@ -358,6 +400,75 @@ Cross-network asset transfer with cryptographic proofs:
 - Threshold-signed attestations
 - Replay protection
 - Configurable security levels
+
+### Data Availability (DA) as Consensus Component
+
+DA is integrated at the consensus level, not as a separate service:
+
+```
+Block Header Structure:
+┌──────────────────────────────────────────────┐
+│  parent_hash  │  state_root  │  DA_root     │
+├──────────────────────────────────────────────┤
+│  Validators vote only if DA sampling passes  │
+└──────────────────────────────────────────────┘
+```
+
+**Key Properties**:
+- Block headers commit to `DA_root` (erasure-coded data commitment)
+- Validators perform sampling before voting
+- Consensus requires DA availability proof
+- Supports LuxDA, Celestia, EigenDA, Avail integrations
+
+---
+
+## Unified Settlement Architecture
+
+The Lux ecosystem follows a **composable, orthogonal** design with one canonical way for each operation:
+
+### X-Chain: The Settlement Root
+
+X-Chain serves as the **single canonical settlement layer**:
+
+```
+┌─────────────────────────────────────────────────────────────────┐
+│                         X-Chain (Settlement Root)                │
+│                     UTXO-based atomic settlement                 │
+└───────────▲─────────────▲─────────────▲─────────────▲───────────┘
+            │             │             │             │
+      ┌─────┴─────┐ ┌─────┴─────┐ ┌─────┴─────┐ ┌─────┴─────┐
+      │  C-Chain  │ │  D-Chain  │ │  Z-Chain  │ │  T-Chain  │
+      │   (EVM)   │ │   (DEX)   │ │ (Privacy) │ │(Threshold)│
+      │  Receipts │ │  Receipts │ │  Receipts │ │   Certs   │
+      └───────────┘ └───────────┘ └───────────┘ └───────────┘
+```
+
+**Settlement Flow**:
+| Chain | Produces | Settles To |
+|-------|----------|------------|
+| C-Chain | State receipts | X-Chain |
+| D-Chain | Trade/position receipts | X-Chain |
+| Z-Chain | ZK proofs, encrypted state | X-Chain |
+| O-Chain | Attested price feeds | Consumed by others |
+| R-Chain | Cross-chain message receipts | X-Chain |
+| T-Chain | Threshold certificates | Consumed by X-Chain |
+| K-Chain | Key lifecycle receipts | X-Chain |
+| A-Chain | Attestation records | X-Chain |
+
+### Canonical Interfaces
+
+**One way to do each operation**:
+
+| Operation | Canonical Interface |
+|-----------|---------------------|
+| Settlement | X-Chain UTXO receipts |
+| Cross-chain messaging | R-Chain channels + Warp |
+| External truth | O-Chain attested feeds |
+| Identity/authZ | I-Chain DIDs + credentials |
+| Quorums/committees | T-Chain threshold certs |
+| Private execution | Z-Chain encrypted state |
+| Key management | K-Chain policied lifecycle |
+| Data availability | DA layer with sampling |
 
 ---
 
@@ -577,10 +688,11 @@ Lux is not just another blockchain—it's a **network of purpose-built blockchai
 
 1. **Quantum-Safe**: Native post-quantum cryptography ensures long-term security
 2. **Privacy-First**: FHE and ZK enable computation on encrypted data
-3. **Horizontally Scalable**: 11 specialized chains, each optimized for its workload
-4. **Trustless Interoperability**: Protocol-native cross-chain messaging
+3. **Horizontally Scalable**: 14 specialized chains, each optimized for its workload
+4. **Trustless Interoperability**: Protocol-native cross-chain messaging via R-Chain + Warp
 5. **Institutional Grade**: Threshold signatures, compliance-ready identity
 6. **Developer Friendly**: Full EVM compatibility, familiar tooling
+7. **Unified Settlement**: Single canonical settlement root (X-Chain) with composable architecture
 
 **Build the future. Build on Lux.**
 
@@ -588,17 +700,33 @@ Lux is not just another blockchain—it's a **network of purpose-built blockchai
 
 ## Related LPs
 
+### Core Architecture
 - **LP-0002**: Recursive Network Architecture
 - **LP-0010**: Technology Portfolio
 - **LP-0012**: Ecosystem Licensing
 - **LP-0099**: LP Numbering Scheme
-- **LP-1000**: P-Chain Specification
-- **LP-1100**: X-Chain Specification
-- **LP-1200**: C-Chain Specification
-- **LP-2000**: Q-Chain Specification
-- **LP-4000**: Z-Chain Specification
-- **LP-5000**: T-Chain Specification
+
+### Chain Specifications
+- **LP-1000**: P-Chain Specification (Platform/Staking)
+- **LP-1100**: X-Chain Specification (Settlement/UTXO)
+- **LP-1200**: C-Chain Specification (EVM/Contracts)
+- **LP-2000**: Q-Chain Specification (Post-Quantum)
+- **LP-3000**: O-Chain Specification (Oracle Feeds)
+- **LP-4000**: Z-Chain Specification (Privacy/FHE)
+- **LP-5000**: T-Chain Specification (Threshold/MPC)
+- **LP-6000**: B-Chain Specification (Bridge)
+- **LP-6100**: R-Chain Specification (Relay/Messaging)
+- **LP-7000**: A-Chain Specification (AI/Attestation)
+- **LP-8000**: K-Chain Specification (Key Management)
+- **LP-8100**: G-Chain Specification (Graph/Indexing)
+- **LP-9000**: D-Chain Specification (DEX/Derivatives)
+- **LP-9100**: I-Chain Specification (Identity/DID)
+
+### fheCRDT Architecture
+- **LP-6500**: fheCRDT Architecture (Encrypted CRDTs)
+- **LP-6501**: DocReceipts (Document Update Receipts)
+- **LP-6502**: DAReceipts (Availability Certificates)
 
 ---
 
-*Last updated: 2025-12-30*
+*Last updated: 2026-01-17*
