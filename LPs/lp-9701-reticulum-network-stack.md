@@ -1,14 +1,15 @@
-# LP-9701: Reticulum Network Stack (RNS) Transport Support
+---
+lp: 9701
+title: "Reticulum Network Stack (RNS) Transport Support"
+description: Integration of Reticulum Network Stack for resilient mesh networking transport
+author: Lux Core Team (@luxfi)
+status: Implemented
+type: Standards Track
+category: Networking
+created: 2026-02-04
+---
 
-| Field | Value |
-|-------|-------|
-| LP | 9701 |
-| Title | Reticulum Network Stack (RNS) Transport Support |
-| Author | Lux Core Team |
-| Status | Implemented |
-| Type | Standards Track |
-| Category | Networking |
-| Created | 2026-02-04 |
+# LP-9701: Reticulum Network Stack (RNS) Transport Support
 
 ## Abstract
 
