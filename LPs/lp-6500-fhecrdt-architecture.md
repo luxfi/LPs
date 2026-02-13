@@ -1,8 +1,17 @@
-# LP-6500: fheCRDT Architecture - Privacy-Preserving App-Chains
+---
+lp: 6500
+title: "fheCRDT Architecture - Privacy-Preserving App-Chains"
+description: Privacy-preserving app-chains combining FHE, CRDTs, and data availability for encrypted collaborative applications
+author: Lux Core Team (@luxfi)
+discussions-to: https://github.com/luxfi/lps/discussions
+status: Draft
+type: Standards Track
+category: Core
+created: 2026-01-17
+requires: 200, 203, 530
+---
 
-| LP | Title | Status | Type | Created |
-|-----|-------|--------|------|---------|
-| 6500 | fheCRDT Architecture | Draft | Standards Track | 2026-01-17 |
+# LP-6500: fheCRDT Architecture - Privacy-Preserving App-Chains
 
 ## Abstract
 

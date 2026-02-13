@@ -1,8 +1,17 @@
-# LP-6502: fheCRDT DAReceipts - Data Availability Certificates
+---
+lp: 6502
+title: "fheCRDT DAReceipts - Data Availability Certificates"
+description: Data availability certificate structure for fheCRDT erasure-coded encrypted blob storage
+author: Lux Core Team (@luxfi)
+discussions-to: https://github.com/luxfi/lps/discussions
+status: Draft
+type: Standards Track
+category: Core
+created: 2026-01-17
+requires: 6500
+---
 
-| LP | Title | Status | Type | Created |
-|-----|-------|--------|------|---------|
-| 6502 | fheCRDT DAReceipts | Draft | Standards Track | 2026-01-17 |
+# LP-6502: fheCRDT DAReceipts - Data Availability Certificates
 
 ## Abstract
 

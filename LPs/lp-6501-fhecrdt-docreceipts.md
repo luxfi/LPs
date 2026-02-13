@@ -1,8 +1,17 @@
-# LP-6501: fheCRDT DocReceipts - Document Update Receipts
+---
+lp: 6501
+title: "fheCRDT DocReceipts - Document Update Receipts"
+description: Document update receipt structure for fheCRDT privacy-preserving app-chains
+author: Lux Core Team (@luxfi)
+discussions-to: https://github.com/luxfi/lps/discussions
+status: Draft
+type: Standards Track
+category: Core
+created: 2026-01-17
+requires: 6500
+---
 
-| LP | Title | Status | Type | Created |
-|-----|-------|--------|------|---------|
-| 6501 | fheCRDT DocReceipts | Draft | Standards Track | 2026-01-17 |
+# LP-6501: fheCRDT DocReceipts - Document Update Receipts
 
 ## Abstract
 
