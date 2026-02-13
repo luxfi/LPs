@@ -483,6 +483,10 @@ func (s *StoreNode) ApplyRetention() error {
 - Enable trustless verification
 - Support light clients
 
+## Backwards Compatibility
+
+LuxStore is a new infrastructure component and does not affect existing DA layer or consensus protocols. Store nodes operate independently and can be deployed incrementally alongside existing DA operators.
+
 ## Security Considerations
 
 ### Query DOS
