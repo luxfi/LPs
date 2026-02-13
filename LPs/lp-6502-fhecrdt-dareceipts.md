@@ -369,6 +369,10 @@ type CommitteeRotation struct {
 | 7 | `ErrBlobNotFound` | Requested blob not available |
 | 8 | `ErrReceiptExpired` | Certificate has expired |
 
+## Backwards Compatibility
+
+This specification introduces new functionality and does not modify existing protocols. It is fully backwards compatible with existing implementations.
+
 ## Security Considerations
 
 1. **Committee Honesty**: Assumes honest threshold of committee members

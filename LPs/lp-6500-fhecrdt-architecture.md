@@ -212,6 +212,10 @@ fheCRDT supports multiple encryption domains for fine-grained access control:
 - No block gas limits on data operations
 - Horizontal scaling through sharding
 
+## Backwards Compatibility
+
+This specification introduces new functionality and does not modify existing protocols. It is fully backwards compatible with existing implementations.
+
 ## Security Considerations
 
 1. **Key Management**: Users must securely store encryption keys

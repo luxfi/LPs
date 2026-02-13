@@ -425,6 +425,10 @@ func (lane *OrchLane) Finalize(trigger *RevealTrigger) (*FinalResult, error) {
 - Committee evolution
 - Security boundaries
 
+## Backwards Compatibility
+
+This specification introduces new functionality and does not modify existing protocols. It is fully backwards compatible with existing implementations.
+
 ## Security Considerations
 
 ### State Integrity

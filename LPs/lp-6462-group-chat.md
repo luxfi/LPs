@@ -546,6 +546,10 @@ func (g *GroupState) BuildAAD(header *MsgHeader) []byte {
 - All state changes via commits
 - Auditable security evolution
 
+## Backwards Compatibility
+
+This specification introduces new functionality and does not modify existing protocols. It is fully backwards compatible with existing implementations.
+
 ## Security Considerations
 
 ### Forward Secrecy

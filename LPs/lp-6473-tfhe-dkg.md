@@ -470,6 +470,10 @@ const (
 - No re-encryption needed
 - Forward secrecy via rotation
 
+## Backwards Compatibility
+
+This specification introduces new functionality and does not modify existing protocols. It is fully backwards compatible with existing implementations.
+
 ## Security Considerations
 
 ### Adversary Threshold

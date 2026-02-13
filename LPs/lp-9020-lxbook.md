@@ -230,6 +230,10 @@ export const LX_POOL = '0x...9010'
 export const POOL_MANAGER = LX_POOL  // v4 compat alias
 ```
 
+## Backwards Compatibility
+
+This specification introduces new functionality and does not modify existing protocols. It is fully backwards compatible with existing implementations.
+
 ## Security Considerations
 
 ### Anti-Replay

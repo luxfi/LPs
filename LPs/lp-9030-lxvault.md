@@ -618,6 +618,10 @@ Funding rates anchor perpetual prices to spot:
 - Settled hourly to minimize tracking error
 - Capped to prevent excessive payments
 
+## Backwards Compatibility
+
+This specification introduces new functionality and does not modify existing protocols. It is fully backwards compatible with existing implementations.
+
 ## Security Considerations
 
 ### Access Control

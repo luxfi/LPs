@@ -425,6 +425,10 @@ func DeriveKeysFromTranscript(transcript *DKGTranscript) (*TFHEKeyEntry, error) 
 - Verifiable by all
 - Integrated with staking/slashing
 
+## Backwards Compatibility
+
+This specification introduces new functionality and does not modify existing protocols. It is fully backwards compatible with existing implementations.
+
 ## Security Considerations
 
 ### Key Availability
