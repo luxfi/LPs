@@ -241,7 +241,23 @@ phase_3:  # Full PQ
   deprecated: bls12-381
 ```
 
+## Rationale
+
+Data Availability (DA) certificates are the cornerstone of the LuxDA Bus's security model. They provide a cryptographic guarantee that data has been made available to the network. The current DA certificates rely on BLS signatures, which are efficient to aggregate but are not secure against future quantum computers.
+
+To ensure the long-term integrity and security of the LuxDA Bus, it is essential to transition to post-quantum secure signature schemes for DA certificates. This LP specifies a hybrid approach that combines the efficiency of BLS signatures with the quantum resistance of ML-DSA. This allows for a gradual and secure migration to full post-quantum security, protecting the network from the threat of "harvest now, decrypt later" attacks on the DA layer.
+
+## Backwards Compatibility
+
+This LP is designed with a phased migration strategy to ensure backwards compatibility and a smooth transition across the network.
+
+-   **Phase 1 (Classical)**: Existing nodes continue to use the current BLS-based DA certificates.
+-   **Phase 2 (Hybrid)**: Upgraded nodes will produce and verify hybrid certificates containing both BLS and ML-DSA signatures. These nodes can still verify classical certificates from non-upgraded nodes. A lower threshold for PQ signatures can be used during the transition to accommodate partial network upgrades.
+-   **Phase 3 (Full PQ)**: Once the network has fully upgraded, the BLS signatures will be deprecated, and only ML-DSA signatures will be required.
+
+This phased rollout ensures that the network remains operational and secure throughout the entire migration process, with no breaking changes for applications relying on the DA layer.
 ## Security Considerations
+
 
 1. **Threshold security**: Both BLS and PQ thresholds must be met in hybrid mode
 2. **Committee binding**: Public keys bound to registered stake

@@ -322,6 +322,10 @@ Changing encryption mode mid-stream would:
 
 Instead, create a new namespace with different encryption.
 
+## Backwards Compatibility
+
+This LP specifies a new, self-contained namespace model for the LuxDA Bus. It does not alter any existing protocols on the Lux Network. All components of this model, including namespace IDs and policies, are new constructs and do not conflict with existing systems.
+
 ## Security Considerations
 
 ### Namespace Squatting

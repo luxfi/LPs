@@ -1,13 +1,17 @@
-# LP-0102: Oracle Dispute Resolution for Perpetuals
+---
+lp: 102
+title: Oracle Dispute Resolution for Perpetuals
+description: "Introduces UMA-based price dispute resolution for Lux's GMX-style perpetuals."
+author: Lux Core Team
+status: Draft
+type: Standards Track
+category: Interface
+created: 2025-12-31
+requires:
+  - 100
+---
 
-| Field | Value |
-|-------|-------|
-| LP | 0102 |
-| Title | Oracle Dispute Resolution for Perpetuals |
-| Author | Lux Core Team |
-| Status | Draft |
-| Created | 2025-12-31 |
-| Category | Oracle Security |
+# LP-0102: Oracle Dispute Resolution for Perpetuals
 
 ## Abstract
 
@@ -17,10 +21,10 @@ This proposal introduces UMA-based price dispute resolution for Lux's GMX-style 
 
 GMX-style perpetuals rely on keeper-updated FastPriceFeed for low-latency execution. While this provides excellent UX, it creates potential attack vectors:
 
-1. **Keeper Collusion** - Malicious keepers reporting incorrect prices
-2. **Price Manipulation** - Coordinated attacks during low liquidity
-3. **Liquidation Hunting** - Artificial price spikes to liquidate positions
-4. **MEV Extraction** - Front-running price updates
+1.  **Keeper Collusion** - Malicious keepers reporting incorrect prices
+2.  **Price Manipulation** - Coordinated attacks during low liquidity
+3.  **Liquidation Hunting** - Artificial price spikes to liquidate positions
+4.  **MEV Extraction** - Front-running price updates
 
 UMA's dispute mechanism provides an economic backstop without sacrificing latency for normal operations.
 
@@ -71,15 +75,6 @@ contract PerpsDisputeAdapter is IOptimisticRequester {
 }
 ```
 
-### Dispute Parameters
-
-| Parameter | Value | Notes |
-|-----------|-------|-------|
-| Default Bond | 1,000 LUSD | Configurable per token |
-| Liveness | 2 hours | Time to dispute |
-| Circuit Breaker Threshold | 500 bps (5%) | Price deviation to pause |
-| Circuit Breaker Duration | 1 hour | Auto-reset after |
-
 ### Configurable Bonds
 
 Per-token bond configuration:
@@ -98,10 +93,10 @@ mapping(address => TokenBondConfig) public tokenBondConfigs;
 
 When a dispute resolves in favor of the disputer (price was incorrect):
 
-1. **Trading Pause** - New positions blocked for affected token
-2. **Liquidation Pause** - Liquidations frozen during investigation
-3. **Position Review** - Affected positions flagged for manual review
-4. **Auto-Reset** - Circuit breaker lifts after configured duration
+1.  **Trading Pause** - New positions blocked for affected token
+2.  **Liquidation Pause** - Liquidations frozen during investigation
+3.  **Position Review** - Affected positions flagged for manual review
+4.  **Auto-Reset** - Circuit breaker lifts after configured duration
 
 ### UMA Integration
 
@@ -117,12 +112,32 @@ FastPriceFeed Address: 0x...
 
 DVM voters verify the claimed price against external sources (Chainlink, exchange APIs, etc.).
 
+## Rationale
+
+| Parameter | Value | Notes |
+|-----------|-------|-------|
+| Default Bond | 1,000 LUSD | Configurable per token |
+| Liveness | 2 hours | Time to dispute |
+| Circuit Breaker Threshold | 500 bps (5%) | Price deviation to pause |
+| Circuit Breaker Duration | 1 hour | Auto-reset after |
+
+## Backwards Compatibility
+
+This LP is backwards compatible. It introduces an optional dispute mechanism that does not alter the core functionality of the perpetuals protocol for users who do not engage with it.
+
+## Test Cases
+
+- **Successful Dispute**: A user successfully disputes a price, triggers the circuit breaker, and receives the bond.
+- **Failed Dispute**: A user's dispute is successfully challenged, and the user loses their bond.
+- **Circuit Breaker**: Test that the circuit breaker correctly pauses and resumes trading and liquidations.
+- **Gas and Performance**: Benchmark the gas costs for dispute and settlement operations.
+
 ## Security Considerations
 
-1. **Bond Requirements** - Deters frivolous disputes
-2. **Liveness Period** - Gives time for legitimate challenges
-3. **DVM Backstop** - Human judgment for ambiguous cases
-4. **Circuit Breaker** - Limits damage from confirmed manipulation
+1.  **Bond Requirements** - Deters frivolous disputes
+2.  **Liveness Period** - Gives time for legitimate challenges
+3.  **DVM Backstop** - Human judgment for ambiguous cases
+4.  **Circuit Breaker** - Limits damage from confirmed manipulation
 
 ### Attack Mitigation
 

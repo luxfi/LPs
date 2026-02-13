@@ -526,6 +526,16 @@ For s=75: P(accept unavailable) ≤ 2^(-75) ≈ 2.6 × 10^(-23)
 - Reasonable bandwidth (~11 KiB)
 - Balances security and efficiency
 
+## Backwards Compatibility
+
+This LP is designed as a backwards-compatible upgrade to the certificate-based DA specified in LP-6431.
+
+-   **Phased Rollout**: The transition from certificate-based DA to DAS is designed to be gradual, with a phase where both systems operate in parallel.
+-   **Dual-Mode Verification**: During the transition, clients can verify availability using either certificates or data availability sampling.
+-   **API Consistency**: The Blob API (LP-6430) abstracts the underlying DA mechanism, so applications do not need to be rewritten to support DAS.
+
+This ensures a seamless upgrade path for the network and its applications.
+
 ## Security Considerations
 
 ### Trusted Setup

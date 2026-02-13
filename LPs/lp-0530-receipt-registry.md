@@ -31,6 +31,10 @@ LP-0530 specifies the **Z-Chain Receipt Registry**, a core precompile that makes
 
 ## Motivation
 
+To create a truly interoperable and universal ZK ecosystem, Lux needs a canonical on-chain mechanism for registering, verifying, and tracking zero-knowledge proofs. This LP proposes a universal "Receipt Registry" that serves as a single source of truth for all verified computation, enabling seamless cross-chain and cross-application communication of ZK-proven facts.
+
+## Rationale
+
 ### The Receipt as Universal Object
 
 A receipt encapsulates:

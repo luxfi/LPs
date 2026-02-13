@@ -1,13 +1,18 @@
-# LP-0101: Prediction Markets Framework
+---
+lp: 101
+title: Prediction Markets Framework
+description: "Introduces the Conditional Tokens Framework (CTF) to Lux, enabling prediction markets with UMA oracle resolution."
+author: Lux Core Team
+status: Draft
+type: Standards Track
+category: LRC
+created: 2025-12-31
+requires:
+  - 100
+  - 102
+---
 
-| Field | Value |
-|-------|-------|
-| LP | 0101 |
-| Title | Prediction Markets Framework |
-| Author | Lux Core Team |
-| Status | Draft |
-| Created | 2025-12-31 |
-| Category | DeFi Infrastructure |
+# LP-0101: Prediction Markets Framework
 
 ## Abstract
 
@@ -116,7 +121,7 @@ Invariant: Only ONE question can resolve to YES
 Conversion: 1 NO(A) + 1 NO(B) ≡ 1 USDC + 1 YES(C)
 ```
 
-## Parameters
+## Rationale
 
 | Parameter | Value | Notes |
 |-----------|-------|-------|
@@ -125,6 +130,18 @@ Conversion: 1 NO(A) + 1 NO(B) ≡ 1 USDC + 1 YES(C)
 | Bond Currency | LUSD | Stablecoin |
 | Min Bond | 100 LUSD | Configurable |
 | Max Bond | 100,000 LUSD | Configurable |
+
+## Backwards Compatibility
+
+This proposal is fully backwards compatible. It introduces a new set of contracts for prediction markets that do not interfere with any existing protocols.
+
+## Test Cases
+
+- **Market Creation**: Verify a new prediction market can be created with specified outcomes.
+- **Position Splitting/Merging**: Test that users can correctly split collateral into outcome tokens and merge them back.
+- **Trading**: Simulate trading of outcome tokens on a DEX.
+- **Resolution and Redemption**: Test the full lifecycle from market resolution by the oracle to the redemption of winning tokens.
+- **Multi-Outcome Market**: Test the creation and resolution of a market with more than two outcomes.
 
 ## Security Considerations
 

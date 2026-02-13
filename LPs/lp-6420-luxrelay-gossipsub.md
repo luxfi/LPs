@@ -448,6 +448,10 @@ func (sm *SubscriptionManager) Unsubscribe(nsId [20]byte) error {
 - Consensus is guaranteed, slower
 - Separation allows optimization of each layer
 
+## Backwards Compatibility
+
+This LP defines the gossip protocol for the LuxDA Bus, a new component of the Lux ecosystem. It operates on a separate port and uses a distinct protocol identifier from the existing Lux p2p network. Therefore, it has no impact on the existing networking stack and introduces no breaking changes.
+
 ## Security Considerations
 
 ### Sybil Attacks

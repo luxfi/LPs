@@ -484,6 +484,10 @@ func MigrateData(oldCommittee, newCommittee *Committee, blobs []BlobCommitment) 
 - Enables slashing for dishonest operators
 - Provides recourse for unavailability
 
+## Backwards Compatibility
+
+This LP defines the V1 availability certificate for the LuxDA Bus. As a new component, it does not break any existing protocols. Future versions of the certificate format will be versioned, and nodes will be expected to support multiple versions during upgrade periods to ensure a smooth transition.
+
 ## Security Considerations
 
 ### Committee Collusion

@@ -393,6 +393,10 @@ def decompress_lane(compressed):
 - Compatible with light clients
 - Standard, well-understood construction
 
+## Backwards Compatibility
+
+This LP defines the V1 block structure for the LuxDA Bus. As this is a new component of the Lux ecosystem, it does not introduce any breaking changes to existing chains or protocols. Future upgrades to the block structure will be managed through a versioning system in the block header, ensuring that nodes can gracefully handle transitions.
+
 ## Security Considerations
 
 ### Fork Choice

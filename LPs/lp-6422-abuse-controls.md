@@ -605,6 +605,10 @@ alerts:
 - Gradually limits bad actors
 - Avoids false positives on new users
 
+## Backwards Compatibility
+
+This LP specifies new, optional abuse control mechanisms for the LuxRelay protocol. Nodes that do not implement these controls can still participate in the network, but they will be more vulnerable to spam and DOS attacks. The mechanisms are designed to be progressively enabled, allowing for a smooth rollout across the network.
+
 ## Security Considerations
 
 ### Rate Limit Bypass

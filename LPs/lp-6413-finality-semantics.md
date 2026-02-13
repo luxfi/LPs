@@ -387,6 +387,10 @@ Different applications have different latency/safety trade-offs:
 - No "confirmations" counting needed
 - Simpler client logic
 
+## Backwards Compatibility
+
+This LP defines the finality semantics for the LuxDA Bus, which is a new component of the Lux ecosystem. It does not alter the finality model of any existing Lux chains (e.g., P-Chain, C-Chain). The mechanisms described here are self-contained within the LuxDA Bus protocol.
+
 ## Security Considerations
 
 ### Long-Range Attacks

@@ -361,6 +361,12 @@ These limits accommodate PQ signatures while remaining practical.
 - Supports both SHA3 and KZG commitments
 - KZG commitment enables DAS (future LP-6433)
 
+## Backwards Compatibility
+
+This LP defines version 1 (`0x01`) of the LuxDA Bus message header. It is the foundational format and does not break any existing systems as the LuxDA Bus is a new component.
+
+Future versions of the header format will use a different version number, and nodes will be expected to support multiple versions during upgrade periods to ensure a smooth transition.
+
 ## Security Considerations
 
 ### Malleability

@@ -197,7 +197,23 @@ type KeyRotationPolicy struct {
 func (p *KeyRotationPolicy) NeedsRotation(bundle *PQXDHKeyBundle) bool
 ```
 
+## Rationale
+
+The security of direct messaging on the LuxDA Bus relies on strong, forward-secret, and deniable encryption. While the X3DH protocol (used by Signal) provides these properties against classical adversaries, it is vulnerable to future quantum computers that can break the underlying elliptic curve cryptography.
+
+PQXDH is a natural extension of X3DH that incorporates post-quantum cryptography (ML-KEM) to provide "hybrid" security. This means that a session is secure if *either* the classical *or* the post-quantum cryptography is unbroken. This approach provides a robust defense against future quantum threats while retaining the security guarantees of the well-analyzed classical X3DH protocol.
+
+## Backwards Compatibility
+
+This LP is fully backwards compatible. It defines a new handshake protocol for establishing secure sessions.
+
+-   **New Sessions**: New direct message sessions will use the PQXDH handshake.
+-   **Existing Sessions**: Existing sessions established with other protocols are unaffected.
+-   **Double Ratchet Integration**: The session keys derived from PQXDH are designed to be seamlessly integrated with the existing Double Ratchet algorithm for ongoing message encryption, ensuring that the core messaging protocol does not need to change.
+
+There are no breaking changes to the user experience or the core messaging functionality.
 ## Security Considerations
+
 
 1. **Forward secrecy**: Ephemeral keys and one-time prekeys ensure forward secrecy
 2. **Post-compromise security**: Double Ratchet provides healing after compromise
