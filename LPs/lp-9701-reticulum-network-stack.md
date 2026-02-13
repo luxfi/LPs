@@ -241,6 +241,10 @@ type RNSConfig struct {
 6. **Quantum Resistance**: Hybrid PQ mode protects against harvest-now-decrypt-later attacks
 7. **Algorithm Agility**: Modular design allows future algorithm upgrades
 
+## Rationale
+
+Reticulum was chosen for its medium-agnostic design, enabling validators to operate over any transport (LoRa, packet radio, serial, TCP) without protocol changes. The hybrid post-quantum cryptography ensures long-term security against quantum adversaries while maintaining backward compatibility with classical-only peers.
+
 ## Backwards Compatibility
 
 Fully backwards compatible. RNS is opt-in via configuration. Nodes without RNS enabled continue using TCP/IP exclusively.

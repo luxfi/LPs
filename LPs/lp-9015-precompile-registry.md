@@ -317,6 +317,10 @@ function testIsLXDEXPrecompile() public {
 }
 ```
 
+## Backwards Compatibility
+
+The precompile registry is additive and does not modify existing precompile addresses or behavior. Existing precompiles continue to function at their assigned addresses.
+
 ## Security Considerations
 
 ### Address Validation
