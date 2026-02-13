@@ -199,6 +199,62 @@ The repository contains both standard LPs (in `LPs/` directory) and recent resea
 - DeFi protocols (LP-60 through LP-74)
 - Research papers (LP-90 through LP-98)
 
+### Unified Multi-Chain Architecture (2026-01-17)
+
+The Lux Network operates 14 purpose-built chains with unified settlement through X-Chain:
+
+**Core Chains (BSD-3-Clause)**:
+- **P-Chain**: Platform/Staking - Validator management
+- **X-Chain**: Settlement Root - UTXO-based atomic settlement
+- **C-Chain**: Contracts - Full EVM compatibility
+
+**Specialized Chains (Ecosystem License)**:
+| Chain | VM | Purpose |
+|-------|-----|---------|
+| Q-Chain | PQVM | Post-quantum cryptography |
+| Z-Chain | PrivateZKVM | Privacy/FHE + ZK proofs |
+| T-Chain | ThresholdVM | MPC/TSS threshold signatures |
+| B-Chain | BridgeVM | Cross-network bridging |
+| A-Chain | AttestationVM | AI/attestation records |
+| K-Chain | KMSVM | Key management lifecycle |
+| G-Chain | GraphVM | GraphQL indexing |
+| D-Chain | DEXVM | DEX/derivatives trading |
+| O-Chain | OracleVM | Oracle feeds + attestations |
+| R-Chain | RelayVM | Cross-chain message bus |
+| I-Chain | IdentityVM | DIDs + credentials |
+
+**Canonical Interfaces**:
+- Settlement: X-Chain UTXO receipts
+- Cross-chain messaging: R-Chain channels + Warp
+- External truth: O-Chain attested feeds
+- Identity/authZ: I-Chain DIDs
+- Quorums: T-Chain threshold certs
+- Privacy: Z-Chain encrypted state
+- Keys: K-Chain policied lifecycle
+- DA: Consensus-integrated sampling
+
+**DA as Consensus Component**:
+- Block headers commit to `DA_root`
+- Validators vote only if DA sampling passes
+- Supports LuxDA, Celestia, EigenDA, Avail
+
+### fheCRDT Architecture (2026-01-17)
+Privacy-preserving, offline-first app-chains combining blockchain consensus with local-first data replication:
+- **LP-6500**: fheCRDT Architecture - Core specification for encrypted CRDTs
+- **LP-6501**: DocReceipts - On-chain document update receipts
+- **LP-6502**: DAReceipts - Data availability certificates
+
+**Supporting documentation:**
+- `docs/fhecrdt-lp-announcement.md` - Web copy for lps.lux.network
+- `docs/fhecrdt-governance-brief.md` - Governance design brief for capital partners
+
+**Key concepts:**
+- CRDT-based state model (LWW Register, OR-Set, RGA List, etc.)
+- SQLite local materialization for SQL queries
+- End-to-end encryption with FHE/TEE support
+- DA layer integration for ciphertext availability
+- DocReceipt/DAReceipt transaction primitives
+
 ## Key Technical Specifications
 
 ### Quasar Consensus (LP-700)
