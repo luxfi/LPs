@@ -33,7 +33,9 @@ fheCRDT addresses all of these by enabling:
 - CRDT-based conflict resolution without central coordination
 - Blockchain finality only for ordering, not data storage
 
-## Architecture Components
+## Specification
+
+### Architecture Components
 
 ### 1. Public Chain Ordering & Finality
 
@@ -211,6 +213,10 @@ fheCRDT supports multiple encryption domains for fine-grained access control:
 - Chain transactions are minimal (receipts only)
 - No block gas limits on data operations
 - Horizontal scaling through sharding
+
+## Rationale
+
+fheCRDT combines CRDTs with FHE/TEE because no single technology addresses all requirements: CRDTs provide conflict-free offline operation, blockchain provides global ordering and finality, the DA layer provides scalable storage, and FHE/TEE provides privacy. This layered approach allows each component to operate at its optimal scale while maintaining end-to-end encryption guarantees.
 
 ## Backwards Compatibility
 
