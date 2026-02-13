@@ -15,6 +15,10 @@ tags: [luxda-bus, data-availability, messaging]
 
 This LP defines how LuxDA Bus components are packaged into a single Lux node binary with configurable modules.
 
+## Motivation
+
+This specification formalizes the component design, ensuring consistent implementation across the LuxDA ecosystem.
+
 ## Specification
 
 ### 1. Module Architecture
@@ -110,7 +114,14 @@ type Runtime struct {
 
 *LP-6490 v1.0.0 - 2026-01-02*
 
+## Rationale
+
+The design follows established patterns in the LuxDA architecture, prioritizing simplicity, security, and interoperability.
+
 ## Backwards Compatibility
 
 This specification introduces new functionality and does not modify existing protocols. It is fully backwards compatible with existing implementations.
 
+## Security Considerations
+
+Implementations must validate all inputs, enforce access controls, and follow the security guidelines established in the LuxDA Bus specification.

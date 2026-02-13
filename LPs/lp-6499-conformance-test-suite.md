@@ -15,6 +15,10 @@ tags: [luxda-bus, data-availability, messaging]
 
 This LP defines the conformance test suite for LuxDA Bus implementations, including wire format test vectors and simulation harnesses.
 
+## Motivation
+
+This specification formalizes the component design, ensuring consistent implementation across the LuxDA ecosystem.
+
 ## Specification
 
 ### 1. Test Categories
@@ -124,7 +128,14 @@ Version: LP-6499 v1.0.0
 
 *LP-6499 v1.0.0 - 2026-01-02*
 
+## Rationale
+
+The design follows established patterns in the LuxDA architecture, prioritizing simplicity, security, and interoperability.
+
 ## Backwards Compatibility
 
 This specification introduces new functionality and does not modify existing protocols. It is fully backwards compatible with existing implementations.
 
+## Security Considerations
+
+Implementations must validate all inputs, enforce access controls, and follow the security guidelines established in the LuxDA Bus specification.

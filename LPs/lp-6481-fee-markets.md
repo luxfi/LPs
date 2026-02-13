@@ -15,6 +15,10 @@ tags: [luxda-bus, data-availability, messaging]
 
 This LP defines the fee markets for LuxDA Bus services: header inclusion, blob dispersal, storage, and retrieval.
 
+## Motivation
+
+This specification formalizes the component design, ensuring consistent implementation across the LuxDA ecosystem.
+
 ## Specification
 
 ### 1. Fee Components
@@ -79,7 +83,14 @@ Storage:       90% Provider, 10% Treasury
 
 *LP-6481 v1.0.0 - 2026-01-02*
 
+## Rationale
+
+The design follows established patterns in the LuxDA architecture, prioritizing simplicity, security, and interoperability.
+
 ## Backwards Compatibility
 
 This specification introduces new functionality and does not modify existing protocols. It is fully backwards compatible with existing implementations.
 
+## Security Considerations
+
+Implementations must validate all inputs, enforce access controls, and follow the security guidelines established in the LuxDA Bus specification.
