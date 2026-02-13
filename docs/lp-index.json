@@ -1,6 +1,6 @@
 {
   "generated": true,
-  "lp_count": 347,
+  "lp_count": 348,
   "sort_order": [
     "tier_rank",
     "order",
@@ -5814,6 +5814,26 @@
       "discussions_to": "https://github.com/luxfi/lps/discussions"
     },
     {
+      "lp": 536,
+      "slug": "lp-0536-seal-finality-quantum-horizon",
+      "file": "LPs/lp-0536-seal-finality-quantum-horizon.md",
+      "title": "Seal Finality via Quantum Event Horizon",
+      "description": "Post-quantum finality guarantees for data integrity seals through dual-certificate consensus",
+      "author": "Lux Network Team (@luxfi)",
+      "status": "Draft",
+      "type": "Standards Track",
+      "category": "Core",
+      "tier": "",
+      "order": 5360,
+      "tier_rank": 99,
+      "tags": "",
+      "created": "2026-02-13",
+      "updated": "",
+      "requires": "[530, 535, 3658]",
+      "replaces": "",
+      "discussions_to": "https://github.com/luxfi/lps/discussions"
+    },
+    {
       "lp": 9101,
       "slug": "lp-9101-defi-protocol-integration-standard",
       "file": "LPs/lp-9101-defi-protocol-integration-standard.md",
@@ -7244,6 +7264,7 @@
     "3690": "lp-3690-evm-security-hardening",
     "3691": "lp-3691-evm-developer-improvements",
     "5331": "lp-5331-t-chain-fhe-implementation-guide",
+    "536": "lp-0536-seal-finality-quantum-horizon",
     "9101": "lp-9101-defi-protocol-integration-standard",
     "9109": "lp-9109-compound-lending-protocol-standard",
     "9400": "lp-9400-automated-market-maker-protocol-with-privacy",
