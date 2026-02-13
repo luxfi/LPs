@@ -494,6 +494,10 @@ func (i *Indexer) AnnounceContent(provider Identity, cids []*CID) error {
 - Incentivize good behavior
 - Market-based quality assurance
 
+## Backwards Compatibility
+
+This specification introduces new functionality and does not modify existing protocols. It is fully backwards compatible with existing implementations.
+
 ## Security Considerations
 
 ### Collusion

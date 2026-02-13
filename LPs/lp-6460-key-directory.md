@@ -455,6 +455,10 @@ func (kd *KeyDirectory) GetFreshKeyPackages(identity *Identity) ([]*KeyPackage, 
 - Verifiable history
 - No central point of failure
 
+## Backwards Compatibility
+
+This specification introduces new functionality and does not modify existing protocols. It is fully backwards compatible with existing implementations.
+
 ## Security Considerations
 
 ### Key Compromise

@@ -521,6 +521,10 @@ func (s *ContentStore) ExportToIPFS(cid *CID) (string, error) {
 - Supports directory structures
 - Allows partial downloads
 
+## Backwards Compatibility
+
+This specification introduces new functionality and does not modify existing protocols. It is fully backwards compatible with existing implementations.
+
 ## Security Considerations
 
 ### Content Integrity

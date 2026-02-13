@@ -262,6 +262,10 @@ func ValidateSidecar(sidecar *TFHESidecar, header *MsgHeader, keyRegistry *KeyRe
 - Optimize ciphertext size
 - Enable type-safe computation
 
+## Backwards Compatibility
+
+This specification introduces new functionality and does not modify existing protocols. It is fully backwards compatible with existing implementations.
+
 ## Security Considerations
 
 ### Malleability

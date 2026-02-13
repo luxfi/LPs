@@ -123,3 +123,8 @@ Version: LP-6499 v1.0.0
 ---
 
 *LP-6499 v1.0.0 - 2026-01-02*
+
+## Backwards Compatibility
+
+This specification introduces new functionality and does not modify existing protocols. It is fully backwards compatible with existing implementations.
+
