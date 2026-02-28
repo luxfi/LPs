@@ -7,8 +7,8 @@ author: Lux Core Team (@luxfi)
 status: Final
 type: Standards Track
 category: Markets
-created: 2024-03-10
-updated: 2026-02-15
+created: 2023-05-15
+updated: 2025-11-01
 requires:
   - LPS-005 (Regulated ATS Stack)
   - LPS-007 (CLOB Matching Engine)

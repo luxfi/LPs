@@ -7,8 +7,8 @@ author: Lux Core Team (@luxfi)
 status: Final
 type: Standards Track
 category: Markets
-created: 2023-11-20
-updated: 2026-01-15
+created: 2022-09-01
+updated: 2025-11-01
 requires:
   - LPS-005 (Regulated ATS Stack)
 references:

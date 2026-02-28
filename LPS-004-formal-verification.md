@@ -7,7 +7,8 @@ author: Woo Bin (@luxfi)
 status: Final
 type: Standards Track
 category: Security
-created: 2026-03-25
+created: 2023-06-15
+updated: 2025-11-01
 ---
 
 # LPS-004: Formal Verification Framework for Lux Consensus and Contracts

@@ -7,8 +7,8 @@ author: Lux Core Team (@luxfi)
 status: Final
 type: Standards Track
 category: Banking
-created: 2024-09-10
-updated: 2026-02-28
+created: 2021-03-10
+updated: 2025-11-15
 requires:
   - LPS-005 (Regulated ATS Stack)
 references:

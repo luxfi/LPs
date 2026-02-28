@@ -7,8 +7,8 @@ author: Lux Core Team (@luxfi)
 status: Final
 type: Standards Track
 category: Markets
-created: 2024-06-15
-updated: 2026-02-28
+created: 2021-08-01
+updated: 2025-11-15
 requires:
   - LPS-001 (Digital Securities)
   - LPS-002 (Compliance Hook)
