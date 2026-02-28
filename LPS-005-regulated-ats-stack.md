@@ -1,8 +1,8 @@
 ---
 lps: 005
-title: Regulated ATS Stack Architecture
-tags: [ats, bd, ta, bank, forex, futures, clob, compliance]
-description: Unified architecture for globally regulated alternative trading system
+title: MTL Platform Architecture
+tags: [mtl, digital-securities, bank, forex, futures, compliance, white-label]
+description: Modular financial platform architecture for MTL-licensed digital securities operations
 author: Lux Core Team (@luxfi)
 status: Final
 type: Standards Track
@@ -17,41 +17,40 @@ references:
   - lp-9010 (DEX PoolManager)
 ---
 
-# LPS-005: Regulated ATS Stack Architecture
+# LPS-005: MTL Platform Architecture
 
 ## Abstract
 
-This specification defines the architecture of the Lux Regulated ATS Stack — a modular, globally compliant financial infrastructure that combines an Alternative Trading System (ATS), Broker-Dealer (BD), Transfer Agent (TA), banking services, foreign exchange, and futures clearing into a single deployable platform.
+This specification defines the architecture of the Lux Financial Platform — a modular, globally compliant digital securities infrastructure. The platform provides banking, foreign exchange, matching, and compliance as independent Go services that compose into a unified stack. White-label operators deploy the same images with their own regulatory licenses (ATS, BD, TA, etc.) and brand configuration.
 
-Each module maps to exactly one regulatory license type and runs as an independent Go service. The modules compose via well-defined HTTP/gRPC interfaces, share no database state, and can be deployed independently or as a unified stack.
+Lux Group Securities operates from Luxembourg as a digital securities platform. White-label licensees operate under their own regulatory registrations in their respective jurisdictions.
 
 ## Architecture
 
 ### Module Map
 
-| Module | Binary | Port | Regulatory Shape | License |
-|--------|--------|------|-----------------|---------|
-| `dex` | `lxd` | :8085 | ATS | SEC Reg ATS |
-| `broker` | `brokerd` | :8080 | BD/RIA | FINRA |
-| `captable` | `captabled` | :8075 | TA | SEC |
-| `bank` | `bankd` | :8070 | Bank/MSB | IOM MTL |
-| `forex` | `forexd` | :8086 | BaaS/MTL | IOM MTL |
-| `futures` | `futuresd` | :8090 | FCM | NFA |
-| `exchange` | (SPA) | :3000 | DEX | On-chain |
+| Module | Binary | Port | Function | License Holder |
+|--------|--------|------|----------|---------------|
+| `bank` | `bankd` | :8070 | Accounts, payments, compliance, KYC | MTL (Lux Group) |
+| `forex` | `forexd` | :8086 | FX execution, payment rails | MTL (Lux Group) |
+| `dex` | `lxd` | :8085 | Order matching, market data | MTL (Lux Group) |
+| `broker` | `brokerd` | :8080 | Multi-provider order routing | WL operator |
+| `futures` | `futuresd` | :8090 | Futures/commodities | WL operator |
+| `captable` | `captabled` | :8075 | Cap table, corporate actions | WL operator |
+| `exchange` | (SPA) | :3000 | DEX frontend | On-chain |
 
 ### Service Topology
 
 ```
 ┌─────────────────────────────────────────────────────┐
 │                    FRONTENDS                         │
-│   exchange (DEX SPA)    bank dash    admin (Base)    │
+│   exchange (DEX)      bank dash       admin (Base)   │
 ├─────────────────────────────────────────────────────┤
-│                  PLATFORM LAYER                      │
-│         bank (Hanzo Base) — accounts, KYC,           │
-│         payments, compliance, audit                  │
+│               PLATFORM LAYER (MTL)                   │
+│      bank — accounts, KYC, payments, compliance      │
 ├──────────┬──────────┬──────────┬──────────┬─────────┤
 │  broker  │  forex   │ futures  │ captable │  dex    │
-│  BD/RIA  │  BaaS    │  FCM     │  TA      │  ATS   │
+│  equities│  FX/BaaS │  commod  │  registry│  match  │
 ├──────────┴──────────┴──────────┴──────────┴─────────┤
 │              PAYMENT RAILS                           │
 │  SEPA · FPS · ACH · SWIFT · Interac · Wire          │
@@ -61,6 +60,24 @@ Each module maps to exactly one regulatory license type and runs as an independe
 │  LMAX · Circle                                       │
 └─────────────────────────────────────────────────────┘
 ```
+
+### White-Label Model
+
+The platform is designed for white-label deployment. Each WL operator:
+
+- Deploys the **same Docker images** (no code forks)
+- Provides their own **brand config** via runtime `/config.json`
+- Holds their own **regulatory licenses** (ATS, BD, TA as needed)
+- Uses their own **provider credentials** (Alpaca keys, CurrencyCloud keys, etc.)
+- Runs on their own **infrastructure** (separate K8s cluster)
+
+Example: A WL operator with SEC ATS + FINRA BD + SEC TA registrations deploys:
+- `ghcr.io/luxfi/broker:main` with their Alpaca/IBKR credentials
+- `ghcr.io/luxfi/bank:dev` with their CurrencyCloud keys
+- `ghcr.io/luxfi/dex:main` for order matching
+- `ghcr.io/luxfi/captable:main` for transfer agent functions
+
+No Lux branding appears in the WL deployment. All customer-facing strings come from brand config.
 
 ### Provider Interfaces
 
@@ -116,9 +133,9 @@ White-label deployments consume the same images with different runtime configura
 ## History
 
 - 2020: Initial broker prototype (Alpaca integration)
-- 2021: Bank module (NestJS), CurrencyCloud integration
+- 2021: Bank module, CurrencyCloud integration
 - 2022: IBKR integration, compliance framework
-- 2023: DEX/CLOB matching engine (Go + C++)
+- 2023: Matching engine (Go + C++)
 - 2024: Cap table, futures module, FPGA PoC
 - 2025: Options trading, multi-leg strategies, Apex provider
-- 2026-02: Bank migration to Hanzo Base, OpenPayd, payment rails
+- 2026-02: Bank v2, OpenPayd, payment rails, WL separation
