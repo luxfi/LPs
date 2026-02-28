@@ -428,3 +428,16 @@ Compliance checks in `lock()` add ~8,000-15,000 gas (via SecurityToken._update).
 Copyright (c) 2026 Lux Partners Limited. All rights reserved.
 
 Licensed under the MIT License.
+
+## References
+
+### Lux Research Papers
+- **lux-bridge** — Cross-chain bridge architecture
+- **lux-warp-messaging** — Warp 1.5 messaging protocol
+- **lux-interchain-transfers** — Native cross-chain asset transfers
+- **lux-state-sync** — State synchronization across chains
+- **lux-fraud-proofs** — Fraud proof system for bridge security
+- **lux-zchain** — ZK proofs for cross-chain verification
+
+### Hanzo Research Papers
+- **hanzo-aci** — AI Chain Infrastructure for cross-chain compute

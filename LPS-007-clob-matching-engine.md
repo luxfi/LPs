@@ -83,3 +83,18 @@ Aggregated from multiple sources:
 - Alpaca, IBKR (equities)
 - CurrencyCloud (FX)
 - On-chain DEX oracles (LP-9040)
+
+## References
+
+### Lux Research Papers
+- **lux-lightspeed-dex** — Core matching engine design and benchmarks
+- **lux-perpetuals-derivatives** — Perpetual futures matching
+- **lux-evm-precompiles** — LP-9020 on-chain CLOB precompile
+- **lux-oracle-infrastructure** — Price feed integration
+- **lux-data-availability** — Market data availability layer
+- **lux-defi-hft-formal-verification** — Formal verification of HFT protocols
+
+### External Standards
+- FIX 4.4: Financial Information eXchange Protocol
+- CME SPAN: Standard Portfolio Analysis of Risk
+- ITCH 5.0: NASDAQ market data protocol

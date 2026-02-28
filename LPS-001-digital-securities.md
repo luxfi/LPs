@@ -546,3 +546,35 @@ For L2/subnet deployments (e.g., Liquidity L2), deploy the same contracts on the
 Copyright (c) 2026 Lux Partners Limited. All rights reserved.
 
 Licensed under the MIT License.
+
+## References
+
+### Lux Research Papers
+- **lux-consensus** — Snow family consensus, Quasar protocol (luxfi/papers)
+- **lux-evm-precompiles** — Native EVM precompile architecture (LP-9010 through LP-9040)
+- **lux-lightspeed-dex** — Sub-microsecond CLOB matching engine design
+- **lux-mchain-mpc** — M-Chain threshold MPC custody (CGGMP21 + FROST)
+- **lux-perpetuals-derivatives** — Perpetual futures and derivatives protocol
+- **lux-privacy-pool** — Poseidon2-based privacy pools
+- **lux-zchain** — Z-Chain universal ZK proof system
+- **lux-ethfalcon-post-quantum** — Post-quantum signature scheme
+- **lux-tokenomics** — LUX token economics and distribution
+
+### Hanzo Research Papers
+- **hanzo-aci** — AI Chain Infrastructure for decentralized compute
+- **hanzo-agent-sdk** — Agent framework and orchestration
+- **hanzo-jin-architecture** — Unified multimodal AI framework
+- **hanzo-mcp-server** — Model Context Protocol infrastructure
+- **hanzo-platform** — Hanzo cloud platform architecture
+
+### Zoo Research Papers
+- **zoo-dao-governance** — Decentralized governance for open research
+- **zoo-poai-consensus** — Proof of AI consensus mechanism
+- **zoo-network-architecture** — Zoo Network topology and design
+- **zoo-tokenomics** — ZOO token economics
+
+### External Standards
+- ERC-1404: Simple Restricted Token Standard
+- ERC-3643: T-REX (Token for Regulated EXchanges)
+- ERC-1400: Security Token Standard
+- FIPS 203/204/205: NIST Post-Quantum Cryptography Standards

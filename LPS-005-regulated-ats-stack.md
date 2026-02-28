@@ -139,3 +139,23 @@ White-label deployments consume the same images with different runtime configura
 - 2024: Cap table, futures module, FPGA PoC
 - 2025: Options trading, multi-leg strategies, Apex provider
 - 2026-02: Bank v2, OpenPayd, payment rails, WL separation
+
+## References
+
+### Lux Research Papers
+- **lux-lightspeed-dex** — CLOB matching engine (Go/C++/FPGA)
+- **lux-perpetuals-derivatives** — Perpetual futures protocol
+- **lux-mchain-mpc** — MPC custody for institutional keys
+- **lux-economics** — Economic model and fee structure
+- **lux-validator-economics** — Validator incentives and staking
+- **lux-oracle-infrastructure** — Price feed aggregation
+- **lux-credit-lending** — Lending protocol design
+
+### Hanzo Research Papers
+- **hanzo-platform** — Base framework for banking services
+- **hanzo-api-gateway** — API gateway architecture
+- **hanzo-identity-nft** — Identity NFT for KYC attestation
+
+### Zoo Research Papers
+- **zoo-dao-governance** — DAO governance framework
+- **zoo-tokenomics** — Token economics model

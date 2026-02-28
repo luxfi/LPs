@@ -72,3 +72,21 @@ All Go types in `broker/pkg/types/types.go` have 1:1 TypeScript equivalents in `
 - `FuturesContract`, `FXPair`, `Bond`
 - `MarginRequirement`, `AccountMargin`
 - `Instrument` (union type across all asset classes)
+
+## References
+
+### Lux Research Papers
+- **lux-lightspeed-dex** — Multi-asset order matching
+- **lux-perpetuals-derivatives** — Perpetual futures and options pricing
+- **lux-credit-lending** — Margin lending protocol
+- **lux-liquid-staking** — Liquid staking for collateral
+- **lux-restaking** — Restaking for capital efficiency
+
+### Hanzo Research Papers
+- **hanzo-analytics-ml** — ML-based risk analytics
+- **hanzo-ml-framework** — Candle ML framework for pricing models
+
+### External Standards
+- Black-Scholes-Merton: Options pricing model
+- SPAN: CME Standard Portfolio Analysis of Risk
+- Reg T: Federal Reserve Board margin requirements

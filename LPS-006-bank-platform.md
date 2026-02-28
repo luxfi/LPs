@@ -78,3 +78,21 @@ Volume discounts: >$100k/mo (5bp off), >$500k/mo (10bp off), >$1M/mo (15bp off).
 | `SMTP_USER` | No | SMTP username |
 | `SMTP_PASS` | No | SMTP password (from KMS) |
 | `SMTP_FROM` | No | Sender email address |
+
+## References
+
+### Lux Research Papers
+- **lux-economics** — Fee structure and economic model
+- **lux-mchain-mpc** — MPC custody for payment signing
+- **lux-id-iam** — Identity and access management
+
+### Hanzo Research Papers
+- **hanzo-platform** — Base framework (Go + goja)
+- **hanzo-api-gateway** — API gateway and routing
+- **hanzo-webhooks** — Webhook infrastructure
+- **hanzo-checkout** — Payment processing patterns
+
+### External Standards
+- ISO 4217: Currency codes
+- ISO 20022: Financial messaging (SEPA, SWIFT)
+- PSD2: EU Payment Services Directive

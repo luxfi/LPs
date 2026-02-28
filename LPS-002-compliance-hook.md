@@ -284,3 +284,18 @@ On the native DEX precompile (LP-9010), compliance checks execute as precompile-
 Copyright (c) 2026 Lux Partners Limited. All rights reserved.
 
 Licensed under the MIT License.
+
+## References
+
+### Lux Research Papers
+- **lux-consensus** — Consensus-level compliance enforcement
+- **lux-evm-precompiles** — Precompile hooks for transfer restrictions
+- **lux-achain-attestation** — A-Chain attestation layer for identity + compliance
+- **lux-id-did-specification** — Decentralized identity for KYC-verified addresses
+- **lux-id-iam** — Identity and access management
+- **lux-privacy-pool** — Privacy-preserving compliance proofs
+
+### External Standards
+- ERC-3643 T-REX: Token for Regulated EXchanges (ConsenSys/Tokeny)
+- FATF Travel Rule: Virtual Asset Transfer Requirements
+- BSA/AML: Bank Secrecy Act compliance framework
