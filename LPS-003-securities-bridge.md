@@ -7,7 +7,7 @@ author: Lux Core Team (@luxfi)
 status: Draft
 type: Standards Track
 category: Markets
-created: 2022-02-10
+created: 2022-07-01
 updated: 2025-12-25
 requires:
   - lps-001 (Digital Securities Standard)
