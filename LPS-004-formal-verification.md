@@ -8,7 +8,7 @@ status: Final
 type: Standards Track
 category: Security
 created: 2023-06-15
-updated: 2025-11-01
+updated: 2025-12-25
 ---
 
 # LPS-004: Formal Verification Framework for Lux Consensus and Contracts

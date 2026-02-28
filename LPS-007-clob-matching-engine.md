@@ -8,7 +8,7 @@ status: Final
 type: Standards Track
 category: Markets
 created: 2022-09-01
-updated: 2025-11-01
+updated: 2025-12-25
 requires:
   - LPS-005 (Regulated ATS Stack)
 references:

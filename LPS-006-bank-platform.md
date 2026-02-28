@@ -8,7 +8,7 @@ status: Final
 type: Standards Track
 category: Banking
 created: 2021-03-10
-updated: 2025-11-15
+updated: 2025-12-25
 requires:
   - LPS-005 (Regulated ATS Stack)
 references:

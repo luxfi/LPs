@@ -8,7 +8,7 @@ status: Final
 type: Standards Track
 category: Markets
 created: 2023-05-15
-updated: 2025-11-01
+updated: 2025-12-25
 requires:
   - LPS-005 (Regulated ATS Stack)
   - LPS-007 (CLOB Matching Engine)

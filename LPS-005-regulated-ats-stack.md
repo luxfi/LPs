@@ -8,7 +8,7 @@ status: Final
 type: Standards Track
 category: Markets
 created: 2021-08-01
-updated: 2025-11-15
+updated: 2025-12-25
 requires:
   - LPS-001 (Digital Securities)
   - LPS-002 (Compliance Hook)

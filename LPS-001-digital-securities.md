@@ -8,7 +8,7 @@ status: Draft
 type: Standards Track
 category: Markets
 created: 2020-11-15
-updated: 2025-11-01
+updated: 2025-12-25
 requires:
   - chain: C
   - chain: T

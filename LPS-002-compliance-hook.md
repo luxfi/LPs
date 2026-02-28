@@ -8,7 +8,7 @@ status: Draft
 type: Standards Track
 category: Markets
 created: 2021-04-20
-updated: 2025-11-01
+updated: 2025-12-25
 requires:
   - lps-001 (Digital Securities Standard)
   - lp-9010 (DEX Precompile)
