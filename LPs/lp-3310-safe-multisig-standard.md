@@ -1,10 +1,10 @@
 ---
 lp: 3310
 title: Safe Multisig Standard
-tags: [wallet, multisig, security, custody, pqc, ringtail, t-chain]
+tags: [wallet, multisig, security, custody]
 description: Safe (formerly Gnosis Safe) multisig wallet integration for institutional-grade custody on Lux Network.
 author: Lux Network Team (@luxfi)
-status: Implemented
+status: Final
 type: Standards Track
 category: LRC
 created: 2025-12-14
@@ -82,7 +82,7 @@ contract Safe is
         bytes memory signatures
     ) external payable returns (bool success);
 }
-```
+```solidity
 
 #### SafeL2.sol
 
@@ -115,7 +115,7 @@ contract SafeProxy {
         }
     }
 }
-```
+```solidity
 
 #### SafeProxyFactory.sol
 
@@ -179,7 +179,7 @@ bytes32 private constant DOMAIN_SEPARATOR_TYPEHASH =
 bytes32 private constant SAFE_TX_TYPEHASH = keccak256(
     "SafeTx(address to,uint256 value,bytes data,uint8 operation,uint256 safeTxGas,uint256 baseGas,uint256 gasPrice,address gasToken,address refundReceiver,uint256 nonce)"
 );
-```
+```solidity
 
 #### EIP-1271 Contract Signatures
 
@@ -406,162 +406,29 @@ interface ICrossChainSafeModule {
 
 **Reference**: See LP-603 (Warp Messaging Protocol).
 
-### Post-Quantum Signature Module
+### Post-Quantum Signature Module (Future)
 
-The Post-Quantum Module enables quantum-resistant signatures for Lux Safe, supporting three complementary schemes:
-
-| Algorithm | Type | Reusable | Gas Cost | Best For |
-|-----------|------|----------|----------|----------|
-| ML-DSA-65 | Lattice | ✅ Yes | ~500K | Single-signer wallets |
-| SLH-DSA-128s | Hash-based | ✅ Yes | ~800K | Long-term archives |
-| **Ringtail** | Lattice Threshold | ✅ Yes | ~200K | **Multisig/MPC** |
-| Lamport OTS | Hash-based | ❌ One-time | ~800K | Remote chains (LP-2105) |
-
-#### Ringtail Threshold Integration
-
-Ringtail is the recommended PQ algorithm for Safe multisig because it natively supports threshold signing:
+Reserved module interface for post-quantum signature integration:
 
 ```solidity
-// SPDX-License-Identifier: MIT
-pragma solidity ^0.8.20;
+interface IPostQuantumModule {
+    enum PQAlgorithm { ML_DSA_65, SLH_DSA_128S, RINGTAIL }
 
-import {IRingtailThreshold} from "@luxfi/precompiles/IRingtailThreshold.sol";
+    function registerPQKey(
+        address owner,
+        bytes calldata pqPublicKey,
+        PQAlgorithm algorithm
+    ) external;
 
-/**
- * @title RingtailSafeModule
- * @notice Quantum-safe threshold signatures for Lux Safe
- * @dev Uses Ringtail precompile at 0x020000000000000000000000000000000000000B
- */
-contract RingtailSafeModule {
-    address constant RINGTAIL_PRECOMPILE = 0x020000000000000000000000000000000000000B;
-
-    // Ringtail group key for this Safe (Ring-LWE public key)
-    bytes public ringtailGroupKey;
-
-    // Threshold configuration (t-of-n)
-    uint16 public threshold;
-    uint16 public totalSigners;
-
-    // Migration phase: CLASSICAL_ONLY → HYBRID → RINGTAIL_ONLY
-    enum MigrationPhase { CLASSICAL_ONLY, HYBRID, RINGTAIL_PREFERRED, RINGTAIL_ONLY }
-    MigrationPhase public phase;
-
-    /**
-     * @notice Register Ringtail group key for threshold signing
-     * @param groupKey The Ring-LWE group public key from DKG ceremony
-     * @param t Threshold (minimum signers required)
-     * @param n Total signers in the group
-     */
-    function registerRingtailGroup(
-        bytes calldata groupKey,
-        uint16 t,
-        uint16 n
-    ) external onlyOwner {
-        require(t > 0 && t <= n, "Invalid threshold");
-        require(n >= 2, "Need at least 2 signers");
-        ringtailGroupKey = groupKey;
-        threshold = t;
-        totalSigners = n;
-    }
-
-    /**
-     * @notice Verify Ringtail threshold signature via precompile
-     * @param messageHash Hash of the Safe transaction
-     * @param signature Aggregated Ringtail threshold signature
-     * @return valid True if t-of-n signers produced valid signature
-     */
-    function verifyRingtailSignature(
+    function verifyPQSignature(
         bytes32 messageHash,
-        bytes calldata signature
-    ) public view returns (bool valid) {
-        // Call Ringtail precompile for verification
-        (bool success, bytes memory result) = RINGTAIL_PRECOMPILE.staticcall(
-            abi.encode(
-                uint8(1),           // VERIFY opcode
-                ringtailGroupKey,   // Group public key
-                messageHash,        // Message
-                signature,          // Threshold signature
-                threshold           // Required signers
-            )
-        );
-        return success && abi.decode(result, (bool));
-    }
-
-    /**
-     * @notice Execute Safe transaction with Ringtail signature
-     * @dev Wraps Safe.execTransaction with PQ verification
-     */
-    function execTransactionWithRingtail(
-        address to,
-        uint256 value,
-        bytes calldata data,
-        bytes calldata ringtailSig,
-        bytes calldata classicalSigs  // For hybrid mode
-    ) external returns (bool) {
-        bytes32 txHash = safe.getTransactionHash(to, value, data, ...);
-
-        if (phase == MigrationPhase.RINGTAIL_ONLY) {
-            // Quantum-only: Ringtail signature required
-            require(verifyRingtailSignature(txHash, ringtailSig), "Invalid Ringtail sig");
-        } else if (phase == MigrationPhase.HYBRID) {
-            // Hybrid: Both classical AND Ringtail required
-            require(verifyRingtailSignature(txHash, ringtailSig), "Invalid Ringtail sig");
-            // Classical sigs verified by Safe.execTransaction
-        }
-        // CLASSICAL_ONLY or RINGTAIL_PREFERRED: classical sigs verified by Safe
-
-        return safe.execTransaction(to, value, data, ..., classicalSigs);
-    }
+        bytes calldata pqSignature,
+        address owner
+    ) external view returns (bool);
 }
 ```
 
-#### Migration Phases
-
-```
-Phase 0: CLASSICAL_ONLY   - ECDSA multisig (current state)
-Phase 1: HYBRID           - ECDSA + Ringtail both required
-Phase 2: RINGTAIL_PREFERRED - Ringtail primary, ECDSA fallback
-Phase 3: RINGTAIL_ONLY    - Full quantum resistance
-```
-
-#### T-Chain MPC Integration
-
-For institutional custody, Safe can delegate to T-Chain MPC signer sets:
-
-```solidity
-contract TChainCustodySafe is RingtailSafeModule {
-    // T-Chain signer set ID (registered on T-Chain)
-    bytes32 public tChainSignerSet;
-
-    /**
-     * @notice Link Safe to T-Chain MPC custody
-     * @param signerSetId The T-Chain threshold signer group
-     * @param attestation Proof of signer set registration
-     */
-    function linkTChainCustody(
-        bytes32 signerSetId,
-        bytes calldata attestation
-    ) external onlyOwner {
-        // Verify T-Chain attestation (Warp message from T-Chain)
-        require(verifyTChainAttestation(signerSetId, attestation));
-        tChainSignerSet = signerSetId;
-
-        // Import Ringtail group key from T-Chain
-        ringtailGroupKey = getTChainGroupKey(signerSetId);
-    }
-
-    // Transactions now require T-Chain MPC threshold signatures
-    // using Ringtail for quantum safety
-}
-```
-
-**Use Cases**:
-- **DAO Treasuries**: Quantum-safe governance with threshold control
-- **Bridge Vaults**: External asset custody with T-Chain MPC
-- **Institutional Wallets**: Enterprise custody with quantum resistance
-- **Protocol Upgrades**: Time-locked upgrades with PQ attestations
-
-**Reference**: See [LP-5324](./lp-7324-ringtail-threshold-signature-precompile.md) (Ringtail), [LP-2105](./lp-4105-lamport-one-time-signatures-ots-for-lux-safe.md) (Lamport OTS), [LP-5000](./lp-7000-t-chain-threshold-specification.md) (T-Chain).
+**Reference**: See LP-311 (ML-DSA), LP-312 (SLH-DSA), LP-320 (Ringtail Threshold).
 
 ## Formal Verification
 
@@ -776,15 +643,11 @@ The LGPL-3.0 license permits:
 
 ### Related LPs
 
-- [LP-40](./lp-0040-wallet-standards.md) - Wallet standards
-- [LP-42](./lp-0042-multi-signature-wallet-standard.md) - Multisig standard
+- [LP-40](./lp-0040-wallet-standards.md)
+- [LP-42](./lp-0042-multi-signature-wallet-standard.md)
 - [LP-3320](./lp-3320-lamport-signatures-for-safe.md) - Lamport OTS for quantum-safe signing
 - [LP-3337](./lp-3337-lrc-4337-account-abstraction.md) - Account abstraction
 - [LP-3500](./lp-3500-ml-dsa-signature-precompile.md) - Post-quantum signatures
-- [LP-2105](./lp-4105-lamport-one-time-signatures-ots-for-lux-safe.md) - Lamport OTS implementation
-- [LP-2200](./lp-4200-post-quantum-cryptography-suite-for-lux-network.md) - Complete PQC ecosystem
-- [LP-5000](./lp-7000-t-chain-threshold-specification.md) - T-Chain MPC custody
-- [LP-5324](./lp-7324-ringtail-threshold-signature-precompile.md) - Ringtail threshold signatures
 
 ### External Resources
 
@@ -793,3 +656,6 @@ The LGPL-3.0 license permits:
 - [Safe Deployments](https://github.com/safe-global/safe-deployments)
 - [Safe SDK](https://github.com/safe-global/safe-core-sdk)
 
+## Copyright
+
+Copyright and related rights waived via [CC0](../LICENSE.md).

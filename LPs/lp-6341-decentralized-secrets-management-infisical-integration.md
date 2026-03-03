@@ -4,7 +4,7 @@ title: Decentralized Secrets Management Platform
 description: Application-layer secrets management platform built on K-Chain providing Infisical-like functionality for projects, environments, version control, and DevOps integration
 author: Lux Protocol Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
-status: Review
+status: Draft
 type: Standards Track
 category: Interface
 created: 2025-12-11
@@ -97,7 +97,7 @@ This platform addresses these challenges:
 
 ### Architecture Overview
 
-```solidity
+```
 +-------------------------------------------------------------------------+
 |                    Decentralized Secrets Platform                        |
 +-------------------------------------------------------------------------+
@@ -1227,7 +1227,7 @@ func (p *DatabaseRotationProvider) Rotate(ctx context.Context, secret *Secret, c
 
 The automated rotation protocol defines the state machine and message flow for scheduled secret rotation.
 
-```markdown
+```
 Rotation State Machine:
 
     +----------+     schedule      +------------+
@@ -1251,7 +1251,9 @@ Rotation State Machine:
                                     +----------+
                                     | ROLLBACK |
                                     +----------+
-go
+```
+
+```go
 // RotationProtocol implements the automated rotation state machine
 type RotationProtocol struct {
     scheduler *RotationScheduler
@@ -2656,7 +2658,9 @@ subjects:
   - kind: ServiceAccount
     name: lux-secrets-operator
     namespace: lux-system
-solidity
+```
+
+```
 # CRD: SecretSync
 apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
@@ -2749,7 +2753,9 @@ spec:
   managedFields:
     - sourceKey: DB_PASSWORD
       targetKey: database-password
-go
+```
+
+```go
 // Kubernetes Operator Controller
 package controller
 
@@ -2872,7 +2878,9 @@ jobs:
           # Secrets are now available as environment variables
           echo "Deploying to $DEPLOY_TARGET"
           ./deploy.sh
-go
+```
+
+```go
 // GitHub Action implementation
 package main
 
@@ -3004,7 +3012,9 @@ deploy_production:
   when: manual
   only:
     - main
-go
+```
+
+```go
 // GitLab CI Helper - luxfi/secrets-gitlab
 package main
 
@@ -3142,7 +3152,9 @@ output "database_url" {
   value     = data.luxsecrets_secret.database_url.value
   sensitive = true
 }
-go
+```
+
+```go
 // Terraform Provider implementation
 package provider
 
@@ -4014,7 +4026,7 @@ $ lux-secrets audit --key DATABASE_URL --limit 5
 
 ### Repository Structure
 
-```solidity
+```
 github.com/luxfi/secrets-platform/
 ├── api/
 │   ├── proto/                    # gRPC/Protobuf definitions
@@ -4087,3 +4099,6 @@ See Section "Security Considerations" within the Specification for detailed impl
 5. NIST FIPS 203 - ML-KEM Standard
 6. SOC 2 Type II Compliance - https://www.aicpa.org/soc2
 
+## Copyright
+
+Copyright and related rights waived via [CC0](../LICENSE.md).

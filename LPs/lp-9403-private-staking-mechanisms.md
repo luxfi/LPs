@@ -4,7 +4,7 @@ title: Private Staking Mechanisms
 description: Anonymous staking pools with private reward distribution and verifiable delay functions
 author: Lux Network Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
-status: Review
+status: Draft
 type: Standards Track
 category: LRC
 created: 2025-01-24
@@ -817,3 +817,6 @@ DKG share submission: 50,000 gas
 5. Gennaro, R., et al. "Secure Distributed Key Generation." 1999.
 6. Keep Network. "Random Beacon and Threshold Signatures." 2020.
 
+## Copyright
+
+Copyright and related rights waived via [CC0](../LICENSE.md).

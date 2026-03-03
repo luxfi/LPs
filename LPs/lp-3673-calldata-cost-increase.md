@@ -4,7 +4,7 @@ title: Calldata Cost Increase (EIP-7623)
 description: Increase calldata gas cost to incentivize blob usage
 author: Lux Core Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
-status: Review
+status: Draft
 type: Informational
 category: Core
 created: 2025-01-23
@@ -59,4 +59,6 @@ Evaluate post-blob adoption on Lux.
 
 - [EIP-7623: Increase Calldata Cost](https://eips.ethereum.org/EIPS/eip-7623)
 
-```
+## Copyright
+
+Copyright and related rights waived via [CC0](../LICENSE.md).

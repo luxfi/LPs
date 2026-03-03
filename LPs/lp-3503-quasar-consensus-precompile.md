@@ -4,7 +4,7 @@ title: Quasar Consensus Precompile
 description: Native precompile suite for hybrid BLS/Ringtail consensus operations enabling quantum-safe finality
 author: Lux Core Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
-status: Review
+status: Final
 type: Standards Track
 category: Core
 created: 2025-12-14
@@ -55,7 +55,7 @@ Fast Probabilistic Consensus (FPC) achieves 1ms finality by:
 
 Q-Chain serves as the quantum finality layer for all Lux chains:
 
-```solidity
+```
 +------------------------------------------------------------------+
 |  Q-Chain (Quantum Finality Layer)                                |
 |  Stores quantum-final block tips via Quasar (BLS/Ringtail)       |
@@ -295,7 +295,7 @@ library QuasarLib {
 
 Quasar implements FPC for 1ms block finality:
 
-```markdown
+```
 Round 0 (Proposal):
   Proposer → Block + BLS signature → Broadcast
 
@@ -321,7 +321,7 @@ Validators maintain two key pairs:
 2. **Ringtail Key Pair**: For quantum-safe signatures
 
 **Signature Strategy:**
-```markdown
+```
 Normal Operation:     BLS only (5,000 gas, fast)
 High-Value Blocks:    Hybrid BLS+Ringtail (10,000 gas, quantum-safe)
 Long-Term Finality:   Ringtail only (8,000 gas, stored on Q-Chain)
@@ -624,4 +624,6 @@ Compressed witnesses rely on validator bitfields. Attacks mitigated by:
 - **LP-700**: Quasar Consensus Protocol Specification
 - **Implementation**: `/Users/z/work/lux/precompiles/quasar/`
 
-```
+## Copyright
+
+Copyright and related rights waived via [CC0](https://creativecommons.org/publicdomain/zero/1.0/).

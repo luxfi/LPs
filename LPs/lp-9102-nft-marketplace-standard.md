@@ -4,7 +4,7 @@ title: NFT Marketplace Standard
 description: Canonical NFT marketplace infrastructure for Lux Network using Seaport and Sudoswap protocols.
 author: Lux Network Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
-status: Review
+status: Draft
 type: Standards Track
 category: LRC
 created: 2025-12-14
@@ -65,7 +65,7 @@ Seaport is the order-book marketplace protocol from OpenSea supporting:
 - **Conduits**: Approval management for efficient transfers
 
 **Core Contracts**:
-```solidity
+```
 lib/seaport/contracts/
 ├── Seaport.sol                    # Main marketplace contract
 ├── conduit/
@@ -95,7 +95,7 @@ lib/seaport/contracts/
 
 **License**: AGPL-3.0
 **Location**: `src/sudo2/`
-**Version**: 2.0
+**Version**: 1.1
 
 Sudoswap provides automated market making for NFTs with bonding curves:
 
@@ -107,7 +107,7 @@ Sudoswap provides automated market making for NFTs with bonding curves:
 - **ERC-1155 Support**: Multi-token AMM pools
 
 **Core Contracts**:
-```solidity
+```
 src/sudo2/src/
 ├── LSSVMPair.sol                 # Base pair contract
 ├── LSSVMPairFactory.sol          # Pair deployment factory
@@ -632,4 +632,6 @@ contract NFTMarketplace {
 9. [LP-6022](./lp-6022-warp-messaging-20-native-interchain-transfers.md)
 10. [LP-3155](./lp-3155-lrc-1155-multi-token-standard.md)
 
-```
+## Copyright
+
+Copyright and related rights waived via [CC0](../LICENSE.md).

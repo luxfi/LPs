@@ -61,4 +61,6 @@ forge test --gas-report
 
 Implementations should follow established security best practices for the corresponding ERC.
 
-```
+## Copyright
+
+Copyright and related rights waived via [CC0](../LICENSE.md).

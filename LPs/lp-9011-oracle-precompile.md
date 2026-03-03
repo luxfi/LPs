@@ -5,16 +5,12 @@ tags: [defi, oracle, precompile, chainlink, pyth, pricing]
 description: Native EVM precompile for multi-source oracle aggregation with Chainlink, Pyth, and CEX feeds
 author: Lux Network Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
-status: Review
+status: Draft
 type: Standards Track
 category: Core
 created: 2025-12-21
 requires: 9000, 9010, 3020
-implementation: |
-  - Go: ~/work/lux/precompile/dex/lxoracle.go
-  - Solidity: ~/work/lux/precompile/solidity/dex/ILXOracle.sol
-  - Feed: ~/work/lux/precompile/solidity/dex/ILXFeed.sol
-  - Docs: ~/work/lux/precompile/docs/dex/LX.md
+implementation: ~/work/lux/standard/contracts/liquidity/precompiles/IOracle.sol
 order: 11
 ---
 
@@ -24,7 +20,7 @@ order: 11
 
 ## Abstract
 
-LP-9011 specifies the Oracle Precompile at address `0x0000000000000000000000000000000000009011`, providing unified access to multiple price oracle sources including native TWAP, Chainlink, Pyth Network, and major CEX feeds (Binance, Kraken). The precompile aggregates prices with configurable staleness thresholds and confidence intervals for reliable DeFi price discovery.
+LP-9011 specifies the Oracle Precompile at address `0x0200000000000000000000000000000000000011`, providing unified access to multiple price oracle sources including native TWAP, Chainlink, Pyth Network, and major CEX feeds (Binance, Kraken). The precompile aggregates prices with configurable staleness thresholds and confidence intervals for reliable DeFi price discovery.
 
 ## Motivation
 
@@ -50,8 +46,8 @@ Current DeFi applications face challenges with oracle integration:
 
 ### Precompile Address
 
-```solidity
-0x0000000000000000000000000000000000009011
+```
+0x0200000000000000000000000000000000000011
 ```
 
 ### Interface Definition
@@ -63,7 +59,7 @@ pragma solidity ^0.8.24;
 
 /// @title IOracle - Multi-Source Oracle Precompile Interface
 /// @notice Aggregates prices from Chainlink, Pyth, CEXs, and native TWAP
-/// @dev Precompile at 0x0000000000000000000000000000000000009011
+/// @dev Precompile at 0x0200000000000000000000000000000000000011
 interface IOracle {
     /*//////////////////////////////////////////////////////////////
                                 TYPES
@@ -279,7 +275,7 @@ interface IOracle {
 /// @title OracleLib - Helper library for Oracle precompile
 /// @notice Simplifies oracle price queries
 library OracleLib {
-    IOracle internal constant ORACLE = IOracle(0x0000000000000000000000000000000000009011);
+    IOracle internal constant ORACLE = IOracle(0x0200000000000000000000000000000000000011);
 
     /// @notice Get price or revert if stale
     function getPriceOrRevert(
@@ -341,7 +337,7 @@ library OracleLib {
 /// @title ChainlinkCompatible - Drop-in Chainlink AggregatorV3 replacement
 /// @notice Allows existing Chainlink integrations to use Oracle precompile
 abstract contract ChainlinkCompatible {
-    IOracle internal constant ORACLE = IOracle(0x0000000000000000000000000000000000009011);
+    IOracle internal constant ORACLE = IOracle(0x0200000000000000000000000000000000000011);
 
     address public immutable baseToken;
     address public immutable quoteToken;
@@ -387,7 +383,7 @@ abstract contract ChainlinkCompatible {
 /// @title PythCompatible - Drop-in Pyth Network replacement
 /// @notice Allows existing Pyth integrations to use Oracle precompile
 abstract contract PythCompatible {
-    IOracle internal constant ORACLE = IOracle(0x0000000000000000000000000000000000009011);
+    IOracle internal constant ORACLE = IOracle(0x0200000000000000000000000000000000000011);
 
     function getPriceUnsafe(bytes32 id) external view returns (IOracle.Price memory) {
         return ORACLE.getPriceFromSource(
@@ -445,7 +441,7 @@ abstract contract PythCompatible {
 
 ### Oracle Source Configuration
 
-```solidity
+```
 ┌─────────────────────────────────────────────────────────────────┐
 │                     Oracle Source Priority                      │
 ├─────────────────────┬───────────────────────────────────────────┤
@@ -560,7 +556,7 @@ function testNativeTWAP() public view {
 
 **Location**: `/Users/z/work/lux/standard/contracts/liquidity/precompiles/IOracle.sol`
 
-```solidity
+```
 contracts/liquidity/precompiles/
 ├── IOracle.sol           # Interface definition (this LP)
 ├── OraclePrecompile.go   # Go precompile implementation
@@ -618,3 +614,6 @@ For 1M price queries/day:
 - **LP-9013**: CrossChainDeFiRouter (oracle consumer)
 - **LP-2517**: Precompile Suite Overview
 
+## Copyright
+
+Copyright and related rights waived via [CC0](https://creativecommons.org/publicdomain/zero/1.0/).

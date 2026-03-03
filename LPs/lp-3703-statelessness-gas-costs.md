@@ -4,7 +4,7 @@ title: Statelessness Gas Costs (EIP-4762)
 description: Gas cost adjustments for Verkle tree and stateless client access patterns
 author: Lux Core Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
-status: Review
+status: Draft
 type: Standards Track
 category: Core
 created: 2025-01-23
@@ -137,3 +137,6 @@ Gas costs reflect:
 - [EIP-4762: Statelessness Gas Cost Changes](https://eips.ethereum.org/EIPS/eip-4762)
 - [EIP-2929: Gas Cost Increases](https://eips.ethereum.org/EIPS/eip-2929)
 
+## Copyright
+
+Copyright and related rights waived via [CC0](../LICENSE.md).

@@ -5,7 +5,7 @@ tags: [network, architecture, meta, governance, standards]
 description: Foundational document establishing Lux Network's mission, the LP standards process, multi-chain architecture, and research domains.
 author: Lux Network Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
-status: Implemented
+status: Final
 type: Meta
 created: 2025-01-23
 updated: 2025-12-19
@@ -176,79 +176,23 @@ An LP (Lux Proposal) is a design document describing a feature, standard, or pro
 
 ### Standards Track Categories
 
-LP numbers follow **dependency order** — lower numbers are foundations that higher numbers build upon.
-
-#### 0xxx: Meta / Governance / Index
-Core process documents, taxonomy, governance rules. Start here.
-
-#### 1xxx: Foundations (Cross-Chain Primitives)
-Cryptographic primitives, formal security models, execution invariants, economic/game-theoretic primitives. Things every chain depends on but no single chain owns.
-
-**Contents**: Hash/sig/commitment basics, MPC math (not custody ops), ZK arithmetization theory, PQ definitions (not deployment).
-
 | Category | Description | LP Range |
 |----------|-------------|----------|
-| **Meta/Process** | Taxonomy, governance, review rules | 0000-0099 |
-| **Consensus** | Agreement, finality, validators | 0100-0199 |
-| **Network** | P2P, messaging, topology | 0200-0499 |
-| **Foundations** | Cryptographic primitives, proofs, math | 1000-1999 |
-
-#### Chain Standards (Dependency Order)
-
-| Chain | Description | LP Range | Depends On |
-|-------|-------------|----------|------------|
-| **Q-Chain** | Post-quantum keys, signatures, addresses, hybrid modes, migration | 2000-2999 | 1xxx |
-| **C-Chain** | EVM execution, LRC standards, accounts, gas, Web3, wallets | 3000-3999 | 1xxx, 2xxx |
-| **Z-Chain** | ZK proofs, FHE, privacy protocols, zkVM, verifier costs | 4000-4999 | 1xxx, 2xxx, 3xxx |
-| **T-Chain** | Threshold signing, DKG ceremonies, custody, recovery, rotation | 5000-5999 | 1xxx, 2xxx, 4xxx |
-| **B-Chain** | Cross-chain messaging, finality proofs, relayers, fraud proofs | 6000-6999 | 2xxx, 4xxx, 5xxx |
-| **A-Chain** | AI agents, policy engines, verifiable AI, automated governance | 7000-7999 | All above |
-| **Governance** | DAO, voting, ESG, ops, monitoring, upgrades, kill switches | 8000-8999 | All above |
-| **DEX/Markets** | AMMs, orderbooks, MEV mitigation, oracles, liquidation | 9000-9999 | 3xxx, 6xxx |
-
-#### Learning Order
-
-```
-1xxx Foundations
-    ↓
-2xxx Q-Chain (PQ Identity)
-    ↓
-3xxx C-Chain (EVM / LRC)
-    ↓
-4xxx Z-Chain (Privacy)
-    ↓
-5xxx T-Chain (Threshold)
-    ↓
-6xxx B-Chain (Bridges)
-    ↓
-7xxx A-Chain (AI)
-    ↓
-8xxx Governance
-    ↓
-9xxx Markets
-```
-
-### Meta & Educational Categories
-
-| Category | Description | LP Range |
-|----------|-------------|----------|
-| **Learning Paths** | Educational resources, tutorials | 10000-10099 |
-| **Research** | Experimental proposals, papers | 10100-10999 |
-
-### Dependency Rules
-
-**Rule 1 — Ownership**: A doc lives in the lowest layer that owns the invariant it defines.
-
-**Rule 2 — Declared Dependencies**: Every LP must declare its chain dependencies:
-```yaml
-requires:
-  - chain: Q
-  - chain: Z
-```
+| **Consensus** | Agreement, finality, validators | 100-199 |
+| **Network** | P2P, messaging, topology | 200-499 |
+| **P-Chain** | Platform coordination | 1000-1199 |
+| **C-Chain** | EVM execution, precompiles | 2000-2499 |
+| **X-Chain** | Asset exchange | 3000-3999 |
+| **Q-Chain** | Post-quantum operations | 4000-4999 |
+| **A-Chain** | AI and attestation | 5000-5999 |
+| **B-Chain** | Bridging | 6000-6999 |
+| **T-Chain** | Threshold cryptography | 7000-7999 |
+| **Z-Chain** | Zero-knowledge proofs | 8000-8999 |
+| **DEX** | Trading infrastructure | 9000-9999 |
 
 ### LP Lifecycle
 
-```markdown
+```
  Draft ----> Review ----> Last Call ----> Final
    |           |             |
    v           v             v
@@ -429,7 +373,7 @@ LPs are organized by research domain — distinct knowledge areas that may span 
 |------|-------------|---------|
 | **Markets & DeFi** | AMMs, lending, derivatives | LP-2500+ |
 | **DEX & Trading** | Order books, matching, HFT | LP-9000+ |
-| **Assets & Tokens** | LRC-20, LRC-721, LRC-1155 | LP-3020, LP-3721, LP-3675 |
+| **Assets & Tokens** | LRC-20, LRC-721, LRC-1155 | LP-20, LP-721, LP-1155 |
 | **Wallets & Identity** | Multisig, AA, DIDs | LP-2600+ |
 | **Governance & Impact** | DAOs, voting, ESG, sustainability | LP-750 to LP-930 |
 | **Privacy** | FHE, TEE, confidential compute | LP-8300+ |
@@ -458,7 +402,7 @@ Lux maintains a comprehensive impact framework documented across dedicated LPs:
 
 The LP system defines standards from low-level primitives to application protocols:
 
-```solidity
+```
 +=================================================================+
 |                    STANDARDS HIERARCHY                          |
 +=================================================================+
@@ -496,7 +440,7 @@ The LP system defines standards from low-level primitives to application protoco
 ### Repository Structure
 
 **LPs Repository**: `github.com/luxfi/lps`
-```solidity
+```
 lps/
 ├── LPs/                 # All LP specifications
 │   ├── TEMPLATE.md     # Template for new LPs
@@ -507,7 +451,7 @@ lps/
 ```
 
 **Node Implementation**: `github.com/luxfi/node`
-```solidity
+```
 node/
 ├── vms/                # Virtual machine implementations
 │   ├── platformvm/    # P-Chain
@@ -557,4 +501,6 @@ make new
 - [5] Ethereum EIP Process: eips.ethereum.org
 - [6] NIST Post-Quantum Standards: FIPS 203, 204, 205
 
-```
+## Copyright
+
+Copyright and related rights waived via [CC0](../LICENSE.md).

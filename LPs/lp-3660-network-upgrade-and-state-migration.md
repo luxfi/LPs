@@ -4,7 +4,7 @@ title: Network Upgrade and State Migration
 description: Standard procedure for exporting chain state and creating new genesis files for network upgrades
 author: Lux Core Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
-status: Review
+status: Draft
 type: Standards Track
 category: Core
 created: 2025-11-22
@@ -23,7 +23,7 @@ This LP specifies the standard procedure for blockchain network upgrade—the pr
 
 Blockchain networks occasionally require fundamental changes that cannot be accomplished through standard upgrades:
 
-1. **Architecture Migration**: Moving from one consensus mechanism to another (e.g., Avalanche Consensus → Lux Consensus)
+1. **Architecture Migration**: Moving from one consensus mechanism to another (e.g., legacy Snow* family → Lux Quasar consensus, see LP-020)
 2. **EVM State Migration**: Preserving all smart contract state during network re-launch
 3. **State Cleanup**: Removing obsolete data and optimizing storage
 4. **Protocol Breaking Changes**: Implementing incompatible improvements
@@ -43,7 +43,7 @@ Lux Network mainnet network upgrade applies to **re-launching the original 3 cha
 | **Z-Chain** | Zero-Knowledge Proofs | ❌ New deployment | N/A (future) |
 | **T-Chain** | TBD | ❌ New deployment | N/A (future) |
 
-**Network upgrade applies to**: P, C, X chains only (original Avalanche-based chains)
+**Network upgrade applies to**: P, C, X chains only (original Avalanche-based chains; historical context for the upstream fork)
 
 **State preservation in mainnet network upgrade**:
 
@@ -97,7 +97,7 @@ The migration to Chain ID 96369 was necessary due to conflicts with Ethereum Imp
 
 ### Network upgrade Process Overview
 
-```solidity
+```
 ┌─────────────────┐
 │  Running Chain  │
 │   (Old State)   │
@@ -137,7 +137,7 @@ cd /Users/z/work/lux/state/scripts
 go run export-state-to-genesis.go \
   /path/to/chaindata \
   /output/genesis-export.json
-```
+```solidity
 
 **What Gets Exported**:
 - Account balances (all addresses with non-zero balance)
@@ -366,7 +366,7 @@ type ChainMigrator interface {
 - Uses Platform VM importer/exporter for validator state
 
 **X-Chain (Exchange)**:
-- Uses AVM importer/exporter for UTXO set and asset state
+- Uses XVM importer/exporter for UTXO set and asset state
 
 ### Programmatic Usage
 
@@ -607,7 +607,7 @@ geth --datadir /test/datadir \
 > eth.getBalance("0x...")  // Check known addresses
 > eth.getCode("0x...")     // Verify contract code
 > debug.trieHash()         // Compare state root
-```
+```solidity
 
 ### Network upgrade Checklist
 
@@ -761,7 +761,7 @@ func (n *Network) CheckNetwork upgradeSchedule() {
 
 ## References
 
-1. [LP-181](https://github.com/avalanche-foundation/ACPs/tree/main/ACPs/181-p-chain-epoched-views
+1. [LP-181](./lp-1181-epoching.md) (based on ACP-181, historical prior art at https://github.com/avalanche-foundation/ACPs/tree/main/ACPs/181-p-chain-epoched-views
 2. [Lux State Package](https://github.com/luxfi/state) - Historical Chain ID 7777 data archive
 3. [EIP-155: Simple replay attack protection](https://eips.ethereum.org/EIPS/eip-155) - Chain ID uniqueness specification
 4. [Geth Genesis Format](https://geth.ethereum.org/docs/fundamentals/private-network)
@@ -982,7 +982,7 @@ luxd --http-port=9650 ...
 
 ## Acknowledgements
 
-Based on Ethereum's genesis format and Avalanche's chain migration patterns. Special thanks to the Lux Core Team for:
+Based on Ethereum's genesis format and the upstream chain migration patterns (originally Avalanche, historical prior art). Special thanks to the Lux Core Team for:
 - Implementing mainnet network upgrade (P, C, X chains) with C-Chain EVM state migration
 - Managing the 2024 Chain ID migration (7777 → 96369) to resolve EIP conflicts
 - Preserving all historical Chain ID 7777 data in the [luxfi/state](https://github.com/luxfi/state) repository
@@ -1020,5 +1020,7 @@ The network upgrade process migrates C-Chain state from Chain ID 96369, which re
    - Test delegate calls
    - Verify reentrancy protection
    - Test gas forwarding
+
+## Copyright
 
 Copyright © 2025 Lux Industries Inc. All rights reserved.

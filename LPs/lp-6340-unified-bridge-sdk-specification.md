@@ -4,7 +4,7 @@ title: Unified Bridge SDK Specification
 description: Comprehensive SDK specification for developers integrating with the Teleport bridge protocol across TypeScript, Go, and Python
 author: Lux Partners (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
-status: Review
+status: Draft
 type: Standards Track
 category: Interface
 created: 2025-12-11
@@ -55,7 +55,7 @@ The Teleport bridge architecture (LP-0332) and smart contract integration (LP-03
 
 ### 1. SDK Architecture Overview
 
-```solidity
+```
 ┌─────────────────────────────────────────────────────────────────────────────┐
 │                          Application Layer                                   │
 │                   (DeFi Protocols, Wallets, Exchanges)                       │
@@ -891,7 +891,7 @@ import (
 
     "github.com/luxfi/sdk/bridge"
     "github.com/luxfi/node/vms/platformvm"
-    "github.com/luxfi/node/keystore"
+    "github.com/luxfi/node/api/keystore"
 )
 
 func integrateLuxNode() error {
@@ -2023,7 +2023,7 @@ Implementations MUST support configurable retry strategies with exponential back
 
 The delay before retry attempt `n` (1-indexed) MUST be calculated as:
 
-```solidity
+```
 delay_n = min(initial_delay * (multiplier ^ (n - 1)) + jitter, max_delay)
 ```
 
@@ -3064,3 +3064,6 @@ The SDK implementations MUST address the following security requirements:
 
 See Section 10 of the Specification for detailed security implementation guidelines.
 
+## Copyright
+
+Copyright and related rights waived via [CC0](../LICENSE.md).

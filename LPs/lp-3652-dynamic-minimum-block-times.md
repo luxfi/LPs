@@ -4,7 +4,7 @@ title: Dynamic Minimum Block Times
 description: Dynamic minimum block delay system enabling sub-second blocks and adaptive performance tuning
 author: Lux Protocol Team (@luxfi), Stephen Buttolph, Michael Kaplan
 discussions-to: https://github.com/luxfi/lps/discussions
-status: Review
+status: Final
 type: Standards Track
 category: Core
 created: 2025-11-22
@@ -21,7 +21,7 @@ order: 970
 | **Author(s)** | Lux Protocol Team (Based on ACP-226 by Stephen Buttolph, Michael Kaplan) |
 | **Status** | Adopted (Granite Upgrade) |
 | **Track** | Standards |
-| **Based On** | [ACP-226](https://github.com/avalanche-foundation/ACPs/tree/main/ACPs/226-dynamic-minimum-block-times) |
+| **Based On** | [ACP-226](https://github.com/avalanche-foundation/ACPs/tree/main/ACPs/226-dynamic-minimum-block-times) (historical prior art) |
 
 ## Abstract
 
@@ -119,7 +119,7 @@ def calc_next_q(q_current: int, q_desired: int, max_change: int) -> int:
         return q_current + min(q_desired - q_current, max_change)
     else:
         return q_current - min(q_current - q_desired, max_change)
-```
+```latex
 
 The change $|\Delta q| \leq Q$ or the block is invalid.
 
@@ -633,8 +633,8 @@ func configureChain() {
 ## Implementation Status
 
 **Upstream Sources**:
-- [AvalancheGo #4289](https://github.com/ava-labs/avalanchego/pull/4289) - Math implementation
-- [AvalancheGo #4300](https://github.com/ava-labs/avalanchego/pull/4300) - Initial delay excess
+- [avalanchego #4289 (historical prior art)](https://github.com/ava-labs/avalanchego/pull/4289) - Math implementation
+- [avalanchego #4300 (historical prior art)](https://github.com/ava-labs/avalanchego/pull/4300) - Initial delay excess
 
 **Lux Node**:
 - Implementation in `vms/evm/acp226/`
@@ -646,7 +646,7 @@ func configureChain() {
 
 ### Key Files
 
-```solidity
+```
 vms/evm/acp226/
 ├── acp226.go       # Core math and delay calculation
 └── acp226_test.go  # Unit tests
@@ -760,11 +760,13 @@ Based on ACP-226 by Stephen Buttolph and Michael Kaplan. Thanks to Luigi D'Onori
 
 ## References
 
-- [ACP-226 Original Specification](https://github.com/avalanche-foundation/ACPs/tree/main/ACPs/226-dynamic-minimum-block-times)
-- [LP-181](https://github.com/avalanche-foundation/ACPs/tree/main/ACPs/181-p-chain-epoched-views
+- [ACP-226 Original Specification](https://github.com/avalanche-foundation/ACPs/tree/main/ACPs/226-dynamic-minimum-block-times) (historical prior art)
+- [LP-181](./lp-1181-epoching.md) (based on ACP-181, historical prior art at https://github.com/avalanche-foundation/ACPs/tree/main/ACPs/181-p-chain-epoched-views
 - [LP-601)](./lp-1605-dynamic-gas-fee-mechanism-with-ai-compute-pricing.md
-- [LP-204](https://github.com/avalanche-foundation/ACPs/tree/main/ACPs/204-precompile-secp256r1
-- [ACP-176: Dynamic Fees](https://github.com/avalanche-foundation/ACPs)
+- [LP-204](./lp-3651-secp256r1-curve-integration.md) (based on ACP-204, historical prior art at https://github.com/avalanche-foundation/ACPs/tree/main/ACPs/204-precompile-secp256r1
+- [ACP-176: Dynamic Fees](https://github.com/avalanche-foundation/ACPs) (historical prior art)
+
+## Copyright
 
 Copyright © 2025 Lux Industries Inc. All rights reserved.  
-Based on ACP-226. Licensed under BSD-3-Clause-Network (see LICENSE).
+Based on ACP-226 - Copyright waived via [CC0](https://creativecommons.org/publicdomain/zero/1.0/).

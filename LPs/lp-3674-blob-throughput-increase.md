@@ -4,7 +4,7 @@ title: Blob Throughput Increase (EIP-7691)
 description: Increase target and max blobs per block for higher DA throughput
 author: Lux Core Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
-status: Review
+status: Draft
 type: Informational
 category: Core
 created: 2025-01-23
@@ -58,6 +58,8 @@ Evaluate after blob adoption on Lux.
 ## References
 
 - [EIP-7691: Blob Throughput Increase](https://eips.ethereum.org/EIPS/eip-7691)
-- [LP-8500: Layer 2 Rollup Framework](./lp-4500-layer-2-rollup-framework.md)
+- [LP-8500: Layer 2 Rollup Framework](./lp-8500-layer-2-rollup-framework.md)
 
-```
+## Copyright
+
+Copyright and related rights waived via [CC0](../LICENSE.md).

@@ -4,7 +4,7 @@ title: Compound Lending Protocol Standard
 description: Compound V3 (Comet) lending protocol integration for Lux Network providing overcollateralized loans, flash loans, and configurable interest rate models
 author: Lux Network Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
-status: Review
+status: Draft
 type: Standards Track
 category: LRC
 created: 2025-12-14
@@ -46,7 +46,7 @@ Compound V3 (Comet) provides the most gas-efficient lending architecture availab
 
 Compound V3 (Comet) uses a monolithic contract design optimized for gas efficiency:
 
-```solidity
+```
 lib/compound/
 ├── contracts/
 │   ├── Comet.sol                    # Main lending pool contract
@@ -246,7 +246,7 @@ interface IPriceFeed {
         uint80 answeredInRound
     );
 }
-```
+```solidity
 
 Custom price feed adapters available:
 - `ScalingPriceFeed`: Decimal conversion
@@ -468,7 +468,7 @@ For Lux Network, consider:
 
 The Compound V3 (Comet) implementation uses BUSL-1.1 which converts to GPL v2.0+ on 2025-12-31.
 
-This LP specification is licensed under BSD-3-Clause-Network (see LICENSE).
+This LP specification is released under CC0.
 
 ## References
 
@@ -477,3 +477,6 @@ This LP specification is licensed under BSD-3-Clause-Network (see LICENSE).
 - [LP-2000](./lp-1200-c-chain-evm-specification.md)
 - [Compound V3 Audits]()
 
+## Copyright
+
+Copyright and related rights waived via [CC0](../LICENSE.md).

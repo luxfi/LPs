@@ -4,7 +4,7 @@ title: C-Chain Rollup Plugin Architecture
 description: A plugin-based architecture for integrating Optimism and other rollup stacks into the Lux C-Chain (geth) client
 author: Lux Network Team
 discussions-to: https://github.com/luxfi/lps/discussions
-status: Review
+status: Draft
 type: Standards Track
 category: Core
 created: 2025-07-23
@@ -30,7 +30,7 @@ The Lux C-Chain guarantees EVM equivalence with Ethereum (LP-26). To extend this
 ### Repository Layout
 
 Component directories under the C-Chain client:
-```solidity
+```
 cmd/geth/                # geth CLI entrypoint
 core/                     # Ethereum base-chain implementation
 consensus/                # Base-chain consensus (PoW/PoS)
@@ -118,7 +118,7 @@ The plugin architecture is fully additive. Without the `rollup_*` build tag or `
 ## Reference Implementation
 
 Proof-of-concept module for Optimism integration lives in the `geth` repository under `rollup/optimism/`:
-```solidity
+```
 geth/rollup/optimism/
 ├─ evm/
 ├─ consensus/
@@ -206,3 +206,6 @@ Operator margins should cover infrastructure, storage, and bandwidth costs. Larg
 3. How should L1 gas refunds (e.g. EIP‑3529 burn refunds) be allocated back to L2 users or operators?
 4. Which data availability layer (Ethereum L1 vs. Celestia vs. others) optimizes cost and throughput for Lux rollups?
 
+## Copyright
+
+Copyright and related rights waived via [CC0](https://creativecommons.org/publicdomain/zero/1.0/).

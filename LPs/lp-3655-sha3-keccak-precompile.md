@@ -4,7 +4,7 @@ title: SHA-3/Keccak Cryptographic Hash Precompile
 description: Native EVM precompile for SHA-3 family hashes and Keccak variants with SHAKE extensible outputs
 author: Lux Core Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
-status: Review
+status: Final
 type: Standards Track
 category: Core
 created: 2025-12-24
@@ -155,7 +155,7 @@ SHAKE128 is optimal for zero-knowledge circuits:
 
 ### Gas Calculation
 
-```markdown
+```
 Base cost + (input_bytes / 32) * 6 + (output_bytes / 8)
 
 Where base costs are:
@@ -170,7 +170,7 @@ Where base costs are:
 ### Data Encoding
 
 **Standard Hash Input:**
-```solidity
+```
 | Offset | Length | Description |
 |--------|--------|-------------|
 | 0 | 4 | Data length |
@@ -178,7 +178,7 @@ Where base costs are:
 ```
 
 **SHAKE/XOF Input:**
-```solidity
+```
 | Offset | Length | Description |
 |--------|--------|-------------|
 | 0 | 4 | Data length |
@@ -187,7 +187,7 @@ Where base costs are:
 ```
 
 **cSHAKE Input:**
-```solidity
+```
 | Offset | Length | Description |
 |--------|--------|-------------|
 | 0 | 4 | Data length |
@@ -206,7 +206,7 @@ Where base costs are:
 Computes SHA3-256 hash per FIPS 202.
 
 **Input:**
-```solidity
+```
 | Offset | Length | Description |
 |--------|--------|-------------|
 | 0 | 4 | Data length (N) |
@@ -214,7 +214,7 @@ Computes SHA3-256 hash per FIPS 202.
 ```
 
 **Output:**
-```solidity
+```
 | Offset | Length | Description |
 |--------|--------|-------------|
 | 0 | 32 | SHA3-256 digest |
@@ -237,7 +237,7 @@ Computes Keccak-256 (Ethereum's hash function).
 Extensible-output functions for variable-length digests.
 
 **Input:**
-```solidity
+```
 | Offset | Length | Description |
 |--------|--------|-------------|
 | 0 | 4 | Data length (N) |
@@ -246,7 +246,7 @@ Extensible-output functions for variable-length digests.
 ```
 
 **Output:**
-```solidity
+```
 | Offset | Length | Description |
 |--------|--------|-------------|
 | 0 | L | SHAKE output |
@@ -273,7 +273,7 @@ SHAKE with domain separation.
 Keccak Message Authentication Code.
 
 **Input:**
-```solidity
+```
 | Offset | Length | Description |
 |--------|--------|-------------|
 | 0 | 4 | Key length (K) |
@@ -286,7 +286,7 @@ Keccak Message Authentication Code.
 ```
 
 **Output:**
-```solidity
+```
 | Offset | Length | Description |
 |--------|--------|-------------|
 | 0 | L | MAC output |
@@ -297,14 +297,14 @@ Keccak Message Authentication Code.
 Applies Keccak-f[1600] permutation to 1600-bit state.
 
 **Input:**
-```solidity
+```
 | Offset | Length | Description |
 |--------|--------|-------------|
 | 0 | 200 | 25 × 64-bit lanes (little-endian) |
 ```
 
 **Output:**
-```solidity
+```
 | Offset | Length | Description |
 |--------|--------|-------------|
 | 0 | 200 | Permuted state |
@@ -319,7 +319,7 @@ Applies Keccak-f[1600] permutation to 1600-bit state.
 
 ### Architecture Overview
 
-```solidity
+```
 ┌─────────────────────────────────────────────────────────────────────┐
 │                  SHA-3/Keccak Precompile (0x0315)                    │
 ├─────────────────────────────────────────────────────────────────────┤
@@ -332,7 +332,7 @@ Applies Keccak-f[1600] permutation to 1600-bit state.
 ├─────────────────────────────────────────────────────────────────────┤
 │  Layer 2: SHA-3 Family Implementation                                │
 │  ┌─────────────────────────────────────────────────────────────────┐│
-│  │ crypto/sha3 - FIPS 202 SHA-3 and SHAKE             ││
+│  │ golang.org/x/crypto/sha3 - FIPS 202 SHA-3 and SHAKE             ││
 │  │ sha3.go                  - Keccak variants                       ││
 │  │ cshake.go                - Customizable SHAKE                    ││
 │  │ kmac.go                  - Keyed MAC                             ││
@@ -350,7 +350,7 @@ Applies Keccak-f[1600] permutation to 1600-bit state.
 
 ### File Inventory
 
-```solidity
+```
 evm/precompile/contracts/sha3/
 ├── sha3.go                 (10 KB)  # Main precompile implementation
 ├── sha3_test.go            (8 KB)   # Unit tests
@@ -693,7 +693,7 @@ func keccakF1600(state *[25]uint64) {
 
 ### Cross-Chain Compatibility
 
-```solidity
+```
 ┌─────────────────────────────────────────────────────────────────────┐
 │                     SHA-3 Cross-Chain Usage                          │
 ├─────────────────────────────────────────────────────────────────────┤
@@ -850,7 +850,9 @@ No backwards compatibility issues. This LP introduces a new precompile at an unu
 - [FIPS 202: SHA-3 Standard](https://csrc.nist.gov/publications/detail/fips/202/final)
 - [SP 800-185: SHA-3 Derived Functions](https://csrc.nist.gov/publications/detail/sp/800-185/final)
 - [The Keccak Reference](https://keccak.team/keccak.html)
-- [crypto/sha3](https://pkg.go.dev/crypto/sha3)
+- [golang.org/x/crypto/sha3](https://pkg.go.dev/golang.org/x/crypto/sha3)
 - [LP-3658: Poseidon Hash Precompile](./lp-3658-poseidon-hash-precompile.md)
 
-```
+## Copyright
+
+Copyright and related rights waived via [CC0](https://creativecommons.org/publicdomain/zero/1.0/).

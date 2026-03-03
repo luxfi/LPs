@@ -3,7 +3,7 @@ lp: 10001
 title: Learning Path - Core Protocol
 description: Essential foundation for understanding Lux Network - required for all roles
 author: Lux Core Team
-status: Living
+status: Draft
 type: Meta
 created: 2025-12-21
 tags: [learning-path, core, beginner]
@@ -11,7 +11,7 @@ order: 21
 tier: core
 ---
 
-# LP-10001: Learning Path - Core Protocol
+# LP-0011: Learning Path - Core Protocol
 
 ## Abstract
 
@@ -101,3 +101,6 @@ You should be able to answer:
 
 None — this is a meta/organizational proposal.
 
+## Copyright
+
+Copyright and related rights waived via [CC0](https://creativecommons.org/publicdomain/zero/1.0/).

@@ -4,7 +4,7 @@ title: Zero-Knowledge Swap Protocol
 description: Pure zero-knowledge swap implementation with stealth addresses and ring signatures
 author: Lux Network Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
-status: Review
+status: Draft
 type: Standards Track
 category: LRC
 created: 2025-01-24
@@ -615,7 +615,7 @@ function testZKSwap() public {
 
     assertTrue(success);
 }
-```
+```solidity
 
 ## Backwards Compatibility
 
@@ -746,7 +746,7 @@ This LP introduces a new ZK swap protocol compatible with existing infrastructur
 - Privacy guarantee: k-anonymity where k = ring size (16)
 
 **Gas Costs**:
-```markdown
+```
 Ring signature verification: 75,000 gas
 Bulletproof verification: 50,000 gas (aggregated)
 Stealth address validation: 20,000 gas
@@ -765,3 +765,6 @@ Withdrawal: 100,000 gas (including mixer)
 5. Tornado Cash. "Privacy Solution for Ethereum." 2019.
 6. Zcash. "Zcash Protocol Specification." 2022.
 
+## Copyright
+
+Copyright and related rights waived via [CC0](../LICENSE.md).

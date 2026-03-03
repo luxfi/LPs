@@ -4,7 +4,7 @@ title: LRC-20 Wrapper Extension
 description: Token wrapper extension for converting between LRC-20 tokens
 author: Lux Industries (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
-status: Implemented
+status: Final
 type: Standards Track
 category: LRC
 created: 2025-12-25
@@ -268,4 +268,3 @@ Existing LRC-20 implementations can be wrapped by:
 
 **Document Maintainer**: Lux Industries
 **Last Updated**: 2025-12-25
-```

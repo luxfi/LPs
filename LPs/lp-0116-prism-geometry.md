@@ -5,7 +5,7 @@ tags: [consensus, prism, dag, geometry, frontier, antichain]
 description: DAG geometry primitives for frontiers, cuts, and refractions in partial order consensus.
 author: Lux Network Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
-status: Implemented
+status: Draft
 type: Standards Track
 category: Core
 created: 2025-12-19
@@ -48,7 +48,7 @@ Without standardized DAG geometry, each consensus protocol would implement its o
 
 ### DAG Structure
 
-```solidity
+```
                     ┌─────────────────────────────────────┐
                     │           GENESIS (g)               │
                     └─────────────────────────────────────┘
@@ -511,3 +511,6 @@ DAG geometry operations must be bounded:
 
 **Invariant**: All operations must complete in O(V) time or better.
 
+## Copyright
+
+Copyright and related rights waived via [CC0](../LICENSE.md).

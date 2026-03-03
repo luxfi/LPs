@@ -4,7 +4,7 @@ title: Flare DAG Finalization Protocol
 description: DAG finalization via cascading accept protocol with causal ordering
 author: Lux Network Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
-status: Implemented
+status: Final
 type: Standards Track
 category: Core
 created: 2025-01-29
@@ -563,7 +563,7 @@ go test -v ./... -run Vertex
 - TestFlarePerformanceUnderLoad - Performance under 1000 TPS
 
 **Benchmark Results** (Apple M1 Max):
-```markdown
+```
 BenchmarkFlareCausalWalk-10     2,854 ops/sec (350μs/op)
 BenchmarkCertificateDetection-10 8,392 ops/sec (119μs/op)
 BenchmarkVertexFinalization-10   5,621 ops/sec (178μs/op)
@@ -635,3 +635,6 @@ This makes FPC suitable for global-scale networks.
 
 [5] Baudet, M., et al. "State Machine Replication in the Libra Blockchain". 2019.
 
+## Copyright
+
+Copyright and related rights waived via [CC0](../LICENSE.md).

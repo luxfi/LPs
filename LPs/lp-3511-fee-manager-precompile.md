@@ -4,7 +4,7 @@ title: Fee Manager Precompile
 description: Native precompile for dynamic fee configuration and EIP-1559 management
 author: Lux Core Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
-status: Review
+status: Draft
 type: Standards Track
 category: Core
 created: 2025-11-14
@@ -34,7 +34,7 @@ The Fee Manager precompile enables chains to implement custom fee economics with
 ## Specification
 
 ### Precompile Address
-```solidity
+```
 0x0200000000000000000000000000000000000003
 ```
 
@@ -62,7 +62,7 @@ function getFeeConfig() external view returns (FeeConfig memory);
 #### getLastChangedAt
 ```solidity
 function getLastChangedAt() external view returns (uint256 blockNumber);
-```
+```solidity
 
 ### Access Control
 
@@ -365,3 +365,6 @@ For chains upgrading from fixed fee to dynamic fee model:
 - **Precompile Framework**: `evm/precompile/contracts/fee-manager/`
 - **Gas Meter Integration**: `node/vms/evm/gasprice/`
 
+## Copyright
+
+Copyright and related rights waived via [CC0](https://creativecommons.org/publicdomain/zero/1.0/).

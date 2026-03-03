@@ -4,7 +4,7 @@ title: BadgerDB Verkle Optimization
 description: Synergistic optimization combining BadgerDB key-value separation with Verkle trees for state management
 author: Lux Core Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
-status: Review
+status: Final
 type: Standards Track
 category: Core
 created: 2025-01-22
@@ -40,7 +40,7 @@ Traditional blockchain databases suffer from severe write amplification when sto
 
 ### 1. Complementary Size Characteristics
 
-```markdown
+```
 Traditional Database Stack:
 ┌─────────────────────────────────────┐
 │         LSM Tree (Everything)        │ ← Large, frequent compactions
@@ -69,7 +69,7 @@ BadgerDB with Verkle trees:
 - Write amplification approaches 1x for proofs
 
 **Calculation**:
-```markdown
+```
 Traditional: 32B key + 512B proof = 544B per entry × 7 levels = 3.8KB written
 BadgerDB: 32B key × 7 levels + 512B proof × 1 = 224B + 512B = 736B written
 Reduction: ~80% less write amplification
@@ -325,7 +325,7 @@ See Benchmarks section for performance results comparing against LevelDB + MPT b
 ## Benchmarks
 
 ### Write Performance (1M Verkle entries)
-```markdown
+```
 Traditional LevelDB:  145 seconds
 Traditional RocksDB:  132 seconds
 BadgerDB (standard):   78 seconds
@@ -333,7 +333,7 @@ BadgerDB (optimized):  42 seconds  ← 71% faster than RocksDB
 ```
 
 ### Read Performance (1M random key lookups)
-```markdown
+```
 Traditional LevelDB:  89 seconds
 Traditional RocksDB:  76 seconds
 BadgerDB (standard):   31 seconds
@@ -341,7 +341,7 @@ BadgerDB (optimized):  12 seconds  ← 84% faster than RocksDB
 ```
 
 ### Storage Efficiency (10M entries)
-```markdown
+```
 Traditional LevelDB:  18.2 GB
 Traditional RocksDB:  16.8 GB
 BadgerDB (standard):   12.1 GB

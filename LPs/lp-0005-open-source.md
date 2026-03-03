@@ -3,7 +3,7 @@ lp: 5
 title: Open Source
 description: Lux Network's open source strategy, forking philosophy, and contribution guidelines
 author: Lux Core Team
-status: Implemented
+status: Final
 type: Meta
 created: 2025-12-21
 tags: [network, core, open-source, forking, contributions]
@@ -28,10 +28,10 @@ Open source is not merely a licensing choice—it is a commitment to transparenc
 
 Every critical component of Lux infrastructure exists in the `luxfi/` namespace under our direct control:
 
-| Upstream | Lux Fork | Purpose |
+| Upstream (historical fork source) | Lux Fork | Purpose |
 |----------|----------|---------|
 | go-ethereum | luxfi/geth | EVM execution |
-| avalanchego | luxfi/node | Consensus engine |
+| ava-labs/avalanchego | luxfi/node | Consensus engine (now Quasar family per LP-020) |
 | Various | luxfi/* | All dependencies |
 
 ### Forking Principles
@@ -73,3 +73,6 @@ Open source transparency must be balanced with responsible disclosure. Security 
 2. Coordinated fix development
 3. Public disclosure after patches are deployed
 
+## Copyright
+
+Copyright and related rights waived via [CC0](https://creativecommons.org/publicdomain/zero/1.0/).

@@ -23,7 +23,7 @@ order: 99
 
 # LP-9000: Lux DEX - Over 9000 Series
 
-```solidity
+```
 ╔═══════════════════════════════════════════════════════════════════════════════╗
 ║                                                                               ║
 ║     ██╗     ██╗   ██╗██╗  ██╗    ██████╗ ███████╗██╗  ██╗                     ║
@@ -52,7 +52,7 @@ Traditional DEXs suffer from high latency, MEV exploitation, and limited order t
 
 The Lux exchange ecosystem consists of two complementary systems:
 
-```solidity
+```
 ┌──────────────────────────────────────────────────────────────────────────────┐
 │                      LUX EXCHANGE ARCHITECTURE                                │
 ├──────────────────────────────────────────────────────────────────────────────┤
@@ -90,7 +90,7 @@ The Lux exchange ecosystem consists of two complementary systems:
 
 ## Key Distinction: Sidecar vs Chain
 
-```solidity
+```
 ┌──────────────────────────────────────────────────────────────────────────────┐
 │                    DEX SIDECAR vs BLOCKCHAIN CHAINS                          │
 ├──────────────────────────────────────────────────────────────────────────────┤
@@ -100,7 +100,7 @@ The Lux exchange ecosystem consists of two complementary systems:
 │   lxd daemon                        │   luxd daemon                      │
 │   github.com/luxfi/dex                   │   github.com/luxfi/node            │
 │   Trading engine, orderbooks             │   C-Chain, P-Chain, B-Chain, etc.  │
-│   DAG consensus for orders               │   Snowman/DAG for blocks           │
+│   DAG consensus for orders               │   Nova/Nebula (Quasar, LP-134)     │
 │   Warp messages → blockchain             │   Native chain transactions        │
 │                                          │                                    │
 │   LP-9000 Series                         │   LP-0011 (X-Chain UTXO)           │
@@ -128,7 +128,7 @@ Benchmarks run on Apple M1 Max (2025-12-11):
 
 ### Order Book Performance
 
-```markdown
+```
 BenchmarkOrderBook-10              1,269,255 orders/sec    787.9 ns/op
 BenchmarkOrderBookParallel-10        684,184 orders/sec   1,462.0 ns/op
 BenchmarkCriticalOrderMatching/100   714,820 orders/sec   1,398.8 ns/op
@@ -158,7 +158,7 @@ BenchmarkCriticalOrderMatching/10000 521,370 orders/sec   1,918.0 ns/op
 
 ## Architecture
 
-```solidity
+```
 ┌─────────────────────────────────────────────────────────────────────────────┐
 │                      LUX DEX SIDECAR ARCHITECTURE                            │
 ├─────────────────────────────────────────────────────────────────────────────┤
@@ -231,7 +231,7 @@ BenchmarkCriticalOrderMatching/10000 521,370 orders/sec   1,918.0 ns/op
 
 ### Directory Structure
 
-```solidity
+```
 dex/
 ├── cmd/                          # CLI commands (30+)
 │   ├── bench-all/                # Multi-backend benchmark
@@ -439,3 +439,6 @@ go run ./cmd/fix-benchmark/
 
 ---
 
+## Copyright
+
+Copyright and related rights waived via [CC0](../LICENSE.md).

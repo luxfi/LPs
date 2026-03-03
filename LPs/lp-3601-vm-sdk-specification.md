@@ -5,7 +5,7 @@ tags: [vm, dev-tools, sdk]
 description: Defines the Virtual Machine SDK for Lux.
 author: Lux Network Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
-status: Review
+status: Final
 type: Standards Track
 category: Core
 created: 2025-01-23
@@ -76,7 +76,7 @@ go doc ./... | head -100
 
 **Registered VMs**:
 - `platformvm/` - Platform VM (P-Chain)
-- `avm/` - Asset VM (X-Chain, UTXO-based)
+- `xvm/` - Asset VM (X-Chain, UTXO-based)
 - `evm/` - EVM Compatible VM (C-Chain)
 - `quantumvm/` - Quantum VM (Q-Chain)
 
@@ -116,6 +116,9 @@ go doc ./... | head -100
    - Verify performance under load
    - Test resource utilization limits
 
+## Copyright
+
+Copyright and related rights waived via [CC0](../LICENSE.md).
 ## Backwards Compatibility
 
 Additive and non‑breaking; existing consumers continue to work. Adoption is opt‑in.
@@ -123,4 +126,3 @@ Additive and non‑breaking; existing consumers continue to work. Adoption is op
 ## Security Considerations
 
 Apply appropriate validation, authentication, and resource‑limiting to prevent abuse; follow cryptographic best practices where applicable.
-```

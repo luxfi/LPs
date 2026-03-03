@@ -4,7 +4,7 @@ title: Wave FPC Threshold Voting Protocol
 description: Fast Probabilistic Consensus with phase-dependent threshold selection for Byzantine fault-tolerant voting
 author: Lux Network Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
-status: Implemented
+status: Draft
 type: Standards Track
 category: Core
 created: 2025-01-29
@@ -180,7 +180,7 @@ Let X_i be the indicator that round i achieves supermajority. For honest majorit
 
 ### State Machine
 
-```solidity
+```
 ┌─────────────────────────────────────────────────────────────┐
 │                     WAVE STATE MACHINE                      │
 ├─────────────────────────────────────────────────────────────┤
@@ -315,7 +315,7 @@ def test_no_oscillation():
 - `wave_test.go` - Unit tests
 - `state_test.go` - State machine tests
 - `fpc_integration_test.go` - Integration with Quasar
-- `snowball_compat_test.go` - Snowball compatibility
+- `legacy_committee_compat_test.go` - Legacy committee-selection compatibility (historical Snowball)
 
 **Repository**: https://github.com/luxfi/consensus/tree/main/protocol/wave
 
@@ -336,3 +336,6 @@ Wave FPC is a new consensus component that integrates with the existing Quasar p
 [2] Müller, S., et al. "Fast Probabilistic Consensus with Weighted Votes". 2020.
 [3] LP-110: Quasar Unified Consensus Protocol
 
+## Copyright
+
+Copyright and related rights waived via [CC0](../LICENSE.md).

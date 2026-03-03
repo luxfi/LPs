@@ -4,7 +4,7 @@ title: Verifiable Random Function (VRF) Precompile
 description: Native EVM precompile for cryptographic VRF operations supporting randomness for consensus and applications
 author: Lux Core Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
-status: Review
+status: Final
 type: Standards Track
 category: Core
 created: 2025-12-24
@@ -190,7 +190,7 @@ Threshold VRF using Ringtail signature aggregation for distributed randomness.
 ### Data Encoding
 
 **VRF Proof (ECVRF-SECP256K1):**
-```solidity
+```
 | Offset | Length | Description |
 |--------|--------|-------------|
 | 0 | 33 | Gamma (compressed point) |
@@ -200,7 +200,7 @@ Total: 81 bytes
 ```
 
 **VRF Proof (ECVRF-ED25519):**
-```solidity
+```
 | Offset | Length | Description |
 |--------|--------|-------------|
 | 0 | 32 | Gamma (compressed point) |
@@ -210,7 +210,7 @@ Total: 80 bytes
 ```
 
 **VRF Output (Hash):**
-```solidity
+```
 | Offset | Length | Description |
 |--------|--------|-------------|
 | 0 | 32 | beta (VRF output hash) |
@@ -223,7 +223,7 @@ Total: 80 bytes
 Generates a VRF proof for given input alpha using secret key.
 
 **Input:**
-```solidity
+```
 | Offset | Length | Description |
 |--------|--------|-------------|
 | 0 | 32 | Secret key (sk) |
@@ -232,7 +232,7 @@ Generates a VRF proof for given input alpha using secret key.
 ```
 
 **Output:**
-```solidity
+```
 | Offset | Length | Description |
 |--------|--------|-------------|
 | 0 | 81 | Proof (pi) |
@@ -240,7 +240,7 @@ Generates a VRF proof for given input alpha using secret key.
 ```
 
 **Algorithm (ECVRF-SECP256K1-SHA256-TAI):**
-```solidity
+```
 1. Derive public key: Y = x * G
 2. Hash to curve: H = ECVRF_hash_to_curve(suite, Y, alpha)
 3. Compute Gamma: Gamma = x * H
@@ -258,7 +258,7 @@ Generates a VRF proof for given input alpha using secret key.
 Verifies a VRF proof and returns the output hash.
 
 **Input:**
-```solidity
+```
 | Offset | Length | Description |
 |--------|--------|-------------|
 | 0 | 33 | Public key (pk, compressed) |
@@ -268,7 +268,7 @@ Verifies a VRF proof and returns the output hash.
 ```
 
 **Output:**
-```solidity
+```
 | Offset | Length | Description |
 |--------|--------|-------------|
 | 0 | 1 | Valid flag (0x01 = valid) |
@@ -276,7 +276,7 @@ Verifies a VRF proof and returns the output hash.
 ```
 
 **Algorithm:**
-```solidity
+```
 1. Parse proof: (Gamma, c, s) = decode_proof(pi)
 2. Validate Gamma is on curve
 3. Parse public key: Y = decode_point(pk)
@@ -294,21 +294,21 @@ Verifies a VRF proof and returns the output hash.
 Extracts the VRF output hash from a proof without verification.
 
 **Input:**
-```solidity
+```
 | Offset | Length | Description |
 |--------|--------|-------------|
 | 0 | 81 | Proof (pi) |
 ```
 
 **Output:**
-```solidity
+```
 | Offset | Length | Description |
 |--------|--------|-------------|
 | 0 | 32 | Hash (beta) |
 ```
 
 **Algorithm:**
-```solidity
+```
 1. Parse Gamma from proof
 2. Compute: cofactor_Gamma = cofactor * Gamma
 3. Return: beta = SHA256(suite_string || 0x03 || point_to_string(cofactor_Gamma))
@@ -319,7 +319,7 @@ Extracts the VRF output hash from a proof without verification.
 Batch verifies multiple VRF proofs for efficiency.
 
 **Input:**
-```solidity
+```
 | Offset | Length | Description |
 |--------|--------|-------------|
 | 0 | 4 | Count (n) |
@@ -327,7 +327,7 @@ Batch verifies multiple VRF proofs for efficiency.
 ```
 
 **Output:**
-```solidity
+```
 | Offset | Length | Description |
 |--------|--------|-------------|
 | 0 | 1 | All valid flag |
@@ -339,7 +339,7 @@ Batch verifies multiple VRF proofs for efficiency.
 Generates a threshold VRF proof using Ringtail aggregation.
 
 **Input:**
-```solidity
+```
 | Offset | Length | Description |
 |--------|--------|-------------|
 | 0 | 4 | Number of signers (t) |
@@ -349,7 +349,7 @@ Generates a threshold VRF proof using Ringtail aggregation.
 ```
 
 **Output:**
-```solidity
+```
 | Offset | Length | Description |
 |--------|--------|-------------|
 | 0 | variable | Aggregated proof |
@@ -360,7 +360,7 @@ Generates a threshold VRF proof using Ringtail aggregation.
 
 ### Architecture Overview
 
-```solidity
+```
 ┌─────────────────────────────────────────────────────────────────────┐
 │                       VRF Precompile (0x0317)                        │
 ├─────────────────────────────────────────────────────────────────────┤
@@ -824,7 +824,7 @@ The try-and-increment method has timing variations but:
 ### Nonce Generation
 
 VRF nonces MUST be deterministically derived:
-```solidity
+```
 k = HMAC-DRBG(sk, H) per RFC 6979
 ```
 Never use random nonces (would break uniqueness).
@@ -936,6 +936,9 @@ No backwards compatibility issues. This LP introduces a new precompile at an unu
 - [IETF VRF Draft](https://datatracker.ietf.org/doc/draft-irtf-cfrg-vrf/)
 - [Chainlink VRF v2](https://docs.chain.link/vrf)
 - [LP-111: Photon Consensus Selection](./lp-111.md)
-- [LP-5324: Ringtail Threshold Signature](./lp-7324-ringtail-threshold-signature-precompile.md)
+- [LP-7324: Ringtail Threshold Signature](./lp-7324-ringtail-threshold-signature-precompile.md)
 - [LP-3654: Ed25519 Precompile](./lp-3654-ed25519-eddsa-precompile.md)
 
+## Copyright
+
+Copyright and related rights waived via [CC0](https://creativecommons.org/publicdomain/zero/1.0/).

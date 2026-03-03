@@ -4,7 +4,7 @@ title: secp256k1 ECDSA Cryptography Precompile
 description: Native EVM precompile for secp256k1 ECDSA operations with optimized libsecp256k1 backend
 author: Lux Core Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
-status: Implemented
+status: Final
 type: Standards Track
 category: Core
 created: 2025-12-24
@@ -165,19 +165,19 @@ Adding Schnorr provides:
 ### Input/Output Encoding
 
 #### ECDSA Signature Format
-```markdown
+```
 Standard (65 bytes): r (32) || s (32) || v (1)
 Compact (64 bytes):  r (32) || s (32)  // v derived from recovery
 ```
 
 #### Public Key Format
-```markdown
+```
 Compressed (33 bytes):   prefix (1) || x (32)
 Uncompressed (65 bytes): 0x04 || x (32) || y (32)
 ```
 
 #### Schnorr Signature Format (BIP-340)
-```solidity
+```
 Schnorr (64 bytes): r (32) || s (32)
 ```
 
@@ -391,7 +391,7 @@ library Secp256k1Lib {
 
 ### Implementation Files
 
-```solidity
+```
 ~/work/lux/
 ├── crypto/secp256k1/
 │   ├── libsecp256k1/           # Bitcoin Core's libsecp256k1
@@ -702,4 +702,6 @@ This LP introduces a new precompile and is fully backwards compatible. Existing 
 - LP-7321: FROST Threshold Signature Precompile
 - LP-7322: CGGMP21 Threshold ECDSA Precompile
 
-```
+## Copyright
+
+Copyright and related rights waived via [CC0](https://creativecommons.org/publicdomain/zero/1.0/).

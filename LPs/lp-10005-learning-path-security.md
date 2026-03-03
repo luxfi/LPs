@@ -3,7 +3,7 @@ lp: 10005
 title: Learning Path - Security & Auditor
 description: System-level threat modeling and security analysis for Lux Network
 author: Lux Core Team
-status: Living
+status: Draft
 type: Meta
 created: 2025-12-21
 tags: [learning-path, security, audit, cryptography]
@@ -11,7 +11,7 @@ order: 25
 tier: core
 ---
 
-# LP-10005: Learning Path - Security & Auditor
+# LP-0015: Learning Path - Security & Auditor
 
 ## Abstract
 
@@ -74,9 +74,9 @@ After completing this path, you will understand:
 
 | Order | LP | Title | Time | Depth |
 |-------|-----|-------|------|-------|
-| 12 | [LP-4000](/docs/lp-8000/) | Z-Chain ZKVM | 30 min | Deep |
-| 13 | [LP-4100](/docs/lp-8100/) | Validity Proofs | 25 min | Deep |
-| 14 | [LP-4200](/docs/lp-8200/) | Fraud Proofs | 20 min | Medium |
+| 12 | [LP-8000](/docs/lp-8000/) | Z-Chain ZKVM | 30 min | Deep |
+| 13 | [LP-8100](/docs/lp-8100/) | Validity Proofs | 25 min | Deep |
+| 14 | [LP-8200](/docs/lp-8200/) | Fraud Proofs | 20 min | Medium |
 
 ### Stage 5: Bridge Security (B-Chain)
 
@@ -118,3 +118,6 @@ After completing this path, you will understand:
 
 None — this is a meta/organizational proposal.
 
+## Copyright
+
+Copyright and related rights waived via [CC0](https://creativecommons.org/publicdomain/zero/1.0/).

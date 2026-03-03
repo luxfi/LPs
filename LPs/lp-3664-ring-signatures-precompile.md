@@ -4,13 +4,12 @@ title: Ring Signatures (LSAG) Precompile
 description: Native EVM precompile for Linkable Spontaneous Anonymous Group signatures for Q-Chain privacy
 author: Lux Crypto Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions/3664
-status: Review
+status: Draft
 type: Standards Track
 category: Core
 created: 2025-12-24
-requires: [3652]
+requires: 3652
 tags: [precompile, cryptography, privacy]
-order: 664
 ---
 
 ## Abstract
@@ -51,7 +50,7 @@ For Q-Chain (Lux's privacy-focused chain), ring signatures are essential:
 
 ### Precompile Address
 
-```solidity
+```
 RING_SIGNATURE_PRECOMPILE = 0x031C
 ```
 
@@ -78,7 +77,7 @@ RING_SIGNATURE_PRECOMPILE = 0x031C
 
 The key image is a deterministic value derived from the signer's private key:
 
-```solidity
+```
 KeyImage = x * HashToPoint(P)
 ```
 
@@ -95,7 +94,7 @@ Key images enable:
 
 #### Sign
 
-```solidity
+```
 ┌────────┬─────────┬────────┬─────────────────────────────────────────┬───────────────┬────────────────┐
 │ 1 byte │ 1 byte  │ 1 byte │ Variable                                │ 32 bytes      │ Variable       │
 │ 0x01   │ scheme  │ n_ring │ ring_pubkeys[n_ring * pubkey_size]     │ signer_sk     │ message        │
@@ -103,7 +102,7 @@ Key images enable:
 ```
 
 **Ring Pubkeys Format:**
-```solidity
+```
 pubkey[0] || pubkey[1] || ... || pubkey[n-1]
 ```
 
@@ -113,7 +112,7 @@ Each pubkey is:
 - Variable for lattice
 
 **Output:**
-```solidity
+```
 ┌───────────────┬────────────────────────────────────────┬────────────────┐
 │ Key Image     │ c[n] (challenges)                      │ s[n] (responses)│
 │ 33 bytes      │ n * 32 bytes                           │ n * 32 bytes    │
@@ -122,7 +121,7 @@ Each pubkey is:
 
 #### Verify
 
-```solidity
+```
 ┌────────┬─────────┬────────┬─────────────────────────────────────────┬───────────────┬────────────────┐
 │ 1 byte │ 1 byte  │ 1 byte │ Variable                                │ Variable      │ Variable       │
 │ 0x02   │ scheme  │ n_ring │ ring_pubkeys[n_ring * pubkey_size]     │ signature     │ message        │
@@ -133,7 +132,7 @@ Each pubkey is:
 
 #### ComputeKeyImage
 
-```solidity
+```
 ┌────────┬─────────┬────────────────┐
 │ 1 byte │ 1 byte  │ 32 bytes       │
 │ 0x04   │ scheme  │ private_key    │
@@ -144,7 +143,7 @@ Each pubkey is:
 
 #### BatchVerify
 
-```solidity
+```
 ┌────────┬─────────┬─────────┬───────────────────────────────────────────────┐
 │ 1 byte │ 1 byte  │ 2 bytes │ Variable                                      │
 │ 0x10   │ scheme  │ n_sigs  │ [ring_size, ring[], signature, message]...   │
@@ -182,7 +181,7 @@ Each pubkey is:
 
 #### Gas Formula
 
-```solidity
+```
 sign_gas = base_gas + (ring_size * per_member) + (message_length * per_byte)
 verify_gas = base_gas + (ring_size * per_member) + (message_length * per_byte)
 batch_verify_gas = base_gas + sum(per_sig_gas) * 0.8  // 20% batch discount
@@ -913,7 +912,7 @@ The signature format is compatible with:
 
 ### Test Vector 1: 4-Member Ring
 
-```markdown
+```
 Ring Public Keys (compressed):
 P[0] = 0x02...a1 (33 bytes)
 P[1] = 0x03...b2 (33 bytes)  <- signer
@@ -1001,4 +1000,6 @@ Implementation exists in:
 
 The Lattice-LSAG scheme (ID `0x10`) provides post-quantum security using Module-LWE hardness. It should be used when quantum resistance is required.
 
-```
+## Copyright
+
+Copyright and related rights waived via [CC0](https://creativecommons.org/publicdomain/zero/1.0/).

@@ -4,7 +4,7 @@ title: C-Chain Upgrade Mapping
 description: Comprehensive mapping of C-Chain network upgrades to LPs and Ethereum equivalents
 author: Lux Core Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
-status: Implemented
+status: Final
 tags: [c-chain, evm]
 type: Informational
 created: 2025-12-17
@@ -66,7 +66,7 @@ The C-Chain header format has evolved with each upgrade phase. The header field 
 | Durango+ | 19 | Full chainEVM header |
 
 #### Field Order (Coreth Format)
-```markdown
+```
 Position 0-14:  Core Ethereum fields (ParentHash through Nonce)
 Position 15:    ExtDataHash (common.Hash, REQUIRED)
 Position 16:    BaseFee (*big.Int, optional)
@@ -75,7 +75,7 @@ Position 18:    BlockGasCost (*big.Int, optional)
 ```
 
 #### Field Order (Geth Format)
-```markdown
+```
 Position 0-14:  Core Ethereum fields (ParentHash through Nonce)
 Position 15:    BaseFee (*big.Int, optional)
 Position 16:    ExtDataHash (*common.Hash, optional)
@@ -213,3 +213,6 @@ Understanding upgrade boundaries is critical for:
 - Archive node operation
 - Block validation during import
 
+## Copyright
+
+Copyright and related rights waived via [CC0](https://creativecommons.org/publicdomain/zero/1.0/).

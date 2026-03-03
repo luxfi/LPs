@@ -5,7 +5,7 @@ tags: [defi, dex, hft, quantumswap, trading, performance]
 description: High-frequency trading integration with QuantumSwap achieving 434M orders/sec and 2ns latency
 author: Lux Network Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
-status: Research
+status: Draft
 type: Standards Track
 category: Core
 created: 2025-12-21
@@ -49,7 +49,7 @@ Modern DeFi demands institutional-grade performance:
 
 ### Architecture
 
-```solidity
+```
 ┌─────────────────────────────────────────────────────────────────────────────┐
 │                         QuantumSwap Architecture                            │
 ├─────────────────────────────────────────────────────────────────────────────┤
@@ -958,4 +958,6 @@ Sub-nanosecond matching enables:
 - **LP-9010**: DEX Precompile
 - **LP-3000**: X-Chain Exchange Specification
 
-```
+## Copyright
+
+Copyright and related rights waived via [CC0](https://creativecommons.org/publicdomain/zero/1.0/).

@@ -4,7 +4,7 @@ title: Perpetuals & Derivatives Protocol
 description: Perpetual futures, margin trading, liquidation engine, and vault strategies - OVER 9000x FASTER
 author: Lux Network Team (@luxfi)
 discussions-to: https://forum.lux.network/t/lp-9004-perpetuals
-status: Review
+status: Final
 type: Standards Track
 category: LRC
 created: 2025-12-11
@@ -130,7 +130,7 @@ Where:
 | BTC-PERP | BTC-USD | 0.001 BTC | 100x | LP-0610 Oracle |
 | ETH-PERP | ETH-USD | 0.01 ETH | 100x | LP-0610 Oracle |
 | SOL-PERP | SOL-USD | 1 SOL | 50x | LP-0610 Oracle |
-| AVAX-PERP | AVAX-USD | 1 AVAX | 50x | LP-0610 Oracle |
+| AVAX-PERP (external asset) | AVAX-USD | 1 AVAX | 50x | LP-0610 Oracle |
 | LUX-PERP | LUX-USD | 10 LUX | 20x | LP-0610 Oracle |
 
 ---
@@ -188,7 +188,7 @@ type MarginAccount struct {
 | BTC | 1% | 0.5% | 100x |
 | ETH | 1% | 0.5% | 100x |
 | SOL | 2% | 1% | 50x |
-| AVAX | 2% | 1% | 50x |
+| AVAX (external asset) | 2% | 1% | 50x |
 | LUX | 5% | 2.5% | 20x |
 
 ### 3.4 Position Management
@@ -273,7 +273,7 @@ type FundingRate struct {
 - If FundingRate > 0: Longs pay Shorts
 - If FundingRate < 0: Shorts pay Longs
 
-```markdown
+```
 FundingPayment = PositionValue × FundingRate
 PositionValue = Size × MarkPrice
 ```
@@ -425,7 +425,7 @@ type ClearingHouse struct {
 
 ### 6.3 Position Opening Flow
 
-```solidity
+```
 1. User submits order (OpenPosition)
 2. RiskEngine validates margin requirements
 3. Order matched against orderbook
@@ -638,7 +638,7 @@ Else:
     BorrowRate = BaseRate + Slope1 + ((Utilization - Optimal) / (1 - Optimal)) × Slope2
 
 SupplyRate = BorrowRate × UtilizationRate × (1 - ReserveFactor)
-```
+```solidity
 
 ### 9.3 Collateral Assets
 

@@ -4,7 +4,7 @@ title: Epoching and Validator Rotation
 description: P-Chain epoched views for optimized validator set retrieval and ICM performance based on ACP-181
 author: Lux Protocol Team (@luxfi), Cam Schultz
 discussions-to: https://github.com/luxfi/lps/discussions
-status: Implemented
+status: Final
 type: Standards Track
 category: Core
 created: 2025-11-22
@@ -21,7 +21,7 @@ order: 181
 | **Author(s)** | Lux Protocol Team (Based on ACP-181 by Cam Schultz) |
 | **Status** | Adopted (Granite Upgrade) |
 | **Track** | Standards |
-| **Based On** | [ACP-181](https://github.com/avalanche-foundation/ACPs/tree/main/ACPs/181-p-chain-epoched-views) |
+| **Based On** | [ACP-181](https://github.com/avalanche-foundation/ACPs/tree/main/ACPs/181-p-chain-epoched-views) (historical prior art) |
 
 ## Abstract
 
@@ -38,7 +38,7 @@ The Lux Network's multi-chain architecture (including the 6-chain network upgrad
 
 ## Motivation
 
-The Lux Network extends Avalanche's validator registry to support its enhanced multi-chain architecture. Validators across A, B, C, D, Y, and Z chains need efficient access to validator sets. Current implementations require expensive P-Chain traversal during block execution, charging high fixed gas costs to account for worst-case scenarios.
+The Lux Network extends the upstream validator registry pattern (originally specified in ACP-181, historical prior art) to support its enhanced multi-chain architecture. Validators across A, B, C, D, Y, and Z chains need efficient access to validator sets. Current implementations require expensive P-Chain traversal during block execution, charging high fixed gas costs to account for worst-case scenarios.
 
 Epoching enables:
 - **Pre-fetching Validator Sets**: Asynchronous retrieval at epoch boundaries
@@ -279,8 +279,8 @@ When  quantum state checkpoints align with epoch boundaries:
 
 ## Implementation Status
 
-**Upstream Source**: [AvalancheGo PR #3746](https://github.com/ava-labs/avalanchego/pull/3746)  
-**Lux Node**: Cherry-picked from upstream commit `7b75fa536`  
+**Upstream Source** (historical prior art): [avalanchego PR #3746](https://github.com/ava-labs/avalanchego/pull/3746)  
+**Lux Node** (canonical): `github.com/luxfi/node`, cherry-picked from upstream commit `7b75fa536`  
 **Activation**: Granite network upgrade
 
 ### Key Files
@@ -456,16 +456,18 @@ func (q *Quasar) AddValidator(validatorID string, share *ringtailThreshold.KeySh
 
 ## Acknowledgements
 
-Based on ACP-181 by Cam Schultz and contributors from Avalanche Labs. Adapted for Lux Network's multi-chain architecture with quantum-safe considerations.
+Based on ACP-181 (historical prior art) by Cam Schultz and contributors from Avalanche Labs. Adapted for Lux Network's multi-chain architecture with quantum-safe considerations.
 
 Thanks to Lux Protocol Team for integration testing and  quantum coordination design.
 
 ## References
 
-- [ACP-181 Original Specification](https://github.com/avalanche-foundation/ACPs/tree/main/ACPs/181-p-chain-epoched-views)
+- [ACP-181 Original Specification](https://github.com/avalanche-foundation/ACPs/tree/main/ACPs/181-p-chain-epoched-views) (historical prior art)
 - [LP-605](./lp-1605-elastic-validator-chains.md
 - [LP-318](./lp-4318-ml-kem-post-quantum-key-encapsulation.md
 - [LP-316](./lp-4316-ml-dsa-post-quantum-digital-signatures.md
 
+## Copyright
+
 Copyright © 2025 Lux Industries Inc. All rights reserved.  
-Based on ACP-181. Licensed under BSD-3-Clause-Network (see LICENSE).
+Based on ACP-181 - Copyright waived via [CC0](https://creativecommons.org/publicdomain/zero/1.0/).

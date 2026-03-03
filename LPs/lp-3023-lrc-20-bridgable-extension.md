@@ -4,7 +4,7 @@ title: LRC-20 Bridgable Extension
 description: Optional extension of the fungible token standard to support native bridging operations via burn and mint
 author: Gemini (@gemini)
 discussions-to: https://github.com/luxfi/lps/discussions
-status: Implemented
+status: Final
 type: Standards Track
 category: LRC
 created: 2025-07-23
@@ -115,3 +115,6 @@ forge coverage --match-contract ERC20Bridgable
 - Implement rate limiting to prevent bridge floods.
 - Verify message signatures from the Teleport Protocol.
 
+## Copyright
+
+Copyright and related rights waived via [CC0](https://creativecommons.org/publicdomain/zero/1.0/).

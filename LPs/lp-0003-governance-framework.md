@@ -3,7 +3,7 @@ lp: 3
 title: LP Governance Framework
 description: How Lux Proposals work - submission, review, and activation process
 author: Lux Core Team
-status: Implemented
+status: Final
 type: Meta
 created: 2025-12-21
 tags: [network, governance, meta, process, standards]
@@ -57,7 +57,7 @@ Guidelines, best practices, and general information:
 
 ### LP Lifecycle
 
-```markdown
+```
 Draft --> Review --> Last Call --> Final
             |            |
         Withdrawn    Stagnant
@@ -145,6 +145,7 @@ status: Draft|Review|Last Call|Final
 type: Standards Track|Meta|Informational
 category: Core|Networking|Interface|LRC|Bridge
 created: <YYYY-MM-DD>
+requires: <LP numbers>  # optional
 ---
 ```
 
@@ -157,7 +158,7 @@ created: <YYYY-MM-DD>
 6. **Test Cases** (required for Standards Track)
 7. **Reference Implementation** (optional but recommended)
 8. **Security Considerations**
-9. **License** (BSD-3-Clause-Network, see LICENSE)
+9. **Copyright** (must be CC0)
 
 ---
 
@@ -275,4 +276,6 @@ This LP establishes the governance framework. It does not break any existing pro
 - Private disclosure protects users during fix development
 - Editor review prevents malicious proposals
 
-```
+## Copyright
+
+Copyright and related rights waived via [CC0](https://creativecommons.org/publicdomain/zero/1.0/).

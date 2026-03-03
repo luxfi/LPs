@@ -4,12 +4,11 @@ title: Warp Signature Aggregation Protocol
 description: P2P protocol for requesting and aggregating BLS signatures for Warp cross-chain messages
 author: Lux Network Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
-status: Implemented
+status: Final
 type: Standards Track
 category: Networking
 created: 2024-12-23
 tags: [warp, bls, signatures, p2p, cross-chain]
-order: 118
 ---
 
 # LP-0118: Warp Signature Aggregation Protocol
@@ -66,7 +65,7 @@ type SignatureRequest struct {
 
 Binary format:
 
-```solidity
+```
 +------------------+
 | Signature Bytes  |
 | (96 bytes)       |
@@ -218,4 +217,6 @@ The binary format is backwards compatible. The package location change requires 
 - [LP-3510: Warp Messaging Precompile](./lp-3510-warp-messaging-precompile.md)
 - [BLS12-381 Curve](https://hackmd.io/@benjaminion/bls12-381)
 
-```
+## Copyright
+
+Copyright and related rights waived via [CC0](https://creativecommons.org/publicdomain/zero/1.0/).

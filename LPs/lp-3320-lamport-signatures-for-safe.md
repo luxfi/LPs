@@ -4,7 +4,7 @@ title: Lamport Signatures for Safe
 description: Post-quantum one-time signature scheme for Lux Network using hash-based cryptography
 author: Lux Core Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
-status: Implemented
+status: Final
 type: Standards Track
 category: Core
 created: 2025-12-14
@@ -104,7 +104,7 @@ library LamportLib {
         }
     }
 }
-```
+```solidity
 
 **Gas Cost**: Approximately 19.6M gas per verification (256 keccak256 operations plus storage reads).
 
@@ -601,4 +601,6 @@ A native precompile could reduce costs dramatically:
 - **NIST SP 800-208**: Recommendation for Stateful Hash-Based Signature Schemes
 - **Implementation**: `/Users/z/work/lux/standard/src/lamport/`
 
-```
+## Copyright
+
+Copyright and related rights waived via [CC0](https://creativecommons.org/publicdomain/zero/1.0/).

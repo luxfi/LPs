@@ -4,7 +4,7 @@ title: LRC-20 Mintable Extension
 description: Optional extension of the fungible token standard to allow authorized accounts to create new tokens
 author: Gemini (@gemini)
 discussions-to: https://github.com/luxfi/lps/discussions
-status: Implemented
+status: Final
 type: Standards Track
 category: LRC
 created: 2025-07-23
@@ -102,3 +102,6 @@ forge coverage --match-contract ERC20Mintable
 - Use AccessControl or Ownable patterns for role management.
 - Emit events for all mint operations for auditability.
 
+## Copyright
+
+Copyright and related rights waived via [CC0](https://creativecommons.org/publicdomain/zero/1.0/).

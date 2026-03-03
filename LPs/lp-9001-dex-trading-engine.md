@@ -5,7 +5,7 @@ tags: [defi, trading, lp-9000-series]
 description: High-performance orderbook trading engine - the core of Lux DEX sidecar network
 author: Lux Network Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
-status: Review
+status: Final
 type: Standards Track
 category: LRC
 created: 2025-01-23
@@ -42,7 +42,7 @@ This LP specifies the DEX Trading Engine - the core component of the Lux DEX sid
 
 ## Architecture: DEX Sidecar Network
 
-```solidity
+```
 ┌──────────────────────────────────────────────────────────────────────┐
 │                         DEX SIDECAR NETWORK                          │
 │                     (Standalone from Lux Node)                       │
@@ -92,7 +92,7 @@ Benchmarks run on Apple M1 Max, 2025-12-11:
 
 ### Order Book Operations
 
-```markdown
+```
 BenchmarkOrderBook-10              1081490 orders/sec    787.9 ns/op
 BenchmarkOrderBookParallel-10       684184 orders/sec   1462.0 ns/op
 BenchmarkCriticalOrderMatching/100   714820 orders/sec   1398.8 ns/op
@@ -321,7 +321,7 @@ func (dag *DAG) ProcessVertex(v *Vertex) error {
 
 ## Configuration
 
-```solidity
+```
 # dex.yaml
 trading_engine:
   backend: "go"  # go, cgo, mlx, fpga
@@ -424,3 +424,6 @@ This is a new system with no backwards compatibility concerns. The DEX integrate
 - [LP-9004](/docs/lp-9004-perpetuals-derivatives-protocol/): Perpetuals & Derivatives
 - [LP-9005](/docs/lp-9005-native-oracle-protocol/): Oracle Protocol
 
+## Copyright
+
+Copyright and related rights waived via [CC0](../LICENSE.md).

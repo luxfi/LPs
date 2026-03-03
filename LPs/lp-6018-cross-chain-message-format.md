@@ -5,7 +5,7 @@ tags: [cross-chain, warp, bridge]
 description: Standardizes the message format for cross-chain communications.
 author: Lux Network Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
-status: Review
+status: Draft
 type: Standards Track
 category: Bridge
 created: 2025-01-23
@@ -33,7 +33,7 @@ Without standardization, each bridge implementation would create incompatible fo
 ### Message Structure
 
 #### Base Message Format
-```markdown
+```
 CrossChainMessage {
     header: MessageHeader
     payload: MessagePayload
@@ -42,7 +42,7 @@ CrossChainMessage {
 ```
 
 #### Message Header
-```markdown
+```
 MessageHeader {
     version: uint8              // Protocol version (currently 1)
     messageType: uint8          // Message type identifier
@@ -92,7 +92,7 @@ ContractCallPayload {
 ```
 
 #### Batch Transfer Payload
-```markdown
+```
 BatchTransferPayload {
     transfers: AssetTransfer[] // Array of transfers
     atomicExecution: bool      // All or nothing execution
@@ -102,7 +102,7 @@ BatchTransferPayload {
 ### Message Proof
 
 #### Proof Structure
-```markdown
+```
 MessageProof {
     proofType: uint8          // Proof type identifier
     signatures: Signature[]    // Array of signatures
@@ -111,7 +111,7 @@ MessageProof {
 ```
 
 #### Signature Format
-```markdown
+```
 Signature {
     signer: bytes20           // Signer identifier
     v: uint8                  // Recovery parameter
@@ -130,7 +130,7 @@ Messages use a compact binary encoding:
 3. **Arrays**: Count-prefixed with uint16
 
 #### Encoding Example
-```solidity
+```
 // Header (88 bytes)
 [version(1)] [type(1)] [sourceChain(32)] [destChain(32)] 
 [nonce(8)] [timestamp(8)] [expiry(8)]
@@ -397,3 +397,6 @@ go test ./vms/platformvm/warp -run TestCrossChainRouting -v
 - **LP-301**: Bridge Protocol (main spec)
 - **LP-300-310**: Various cross-chain specifications
 
+## Copyright
+
+Copyright and related rights waived via [CC0](../LICENSE.md).

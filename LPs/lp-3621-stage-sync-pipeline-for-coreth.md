@@ -4,7 +4,7 @@ title: Stage Sync Pipeline for Coreth
 description: Study and prototype a staged sync architecture, inspired by Erigon, to accelerate and optimize the C-Chain initial sync in Lux's geth fork
 author: Zach Kelling (@zeekay) and Lux Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
-status: Review
+status: Draft
 type: Standards Track
 category: Core
 created: 2025-07-24
@@ -153,7 +153,7 @@ Per-stage latency benchmarks (measured on reference hardware):
 ## Reference Implementation
 
 See prototype code under `node/evm/stages/` in the Lux repo:
-```solidity
+```
 node/evm/stages/
 ├─ driver.go
 ├─ headers.go
@@ -180,3 +180,6 @@ Faster sync lowers hardware requirements and validator operational costs, broade
 2. Safe concurrency models for trie updates?  
 3. Stage-loop scheduling: sequential vs concurrent?  
 
+## Copyright
+
+Copyright and related rights waived via [CC0](https://creativecommons.org/publicdomain/zero/1.0/).

@@ -4,7 +4,7 @@ title: Elastic Validator Chains
 description: Dynamic validator sets with liquid staking and performance-based rewards
 author: Lux Core Team (@luxfi)
 discussions-to: https://forum.lux.network/t/lp-605-elastic-validators
-status: Review
+status: Draft
 type: Standards Track
 category: Core
 created: 2025-01-09
@@ -394,3 +394,6 @@ All implementation files verified to exist:
 | Liquid Staking | Instant | No delays |
 | Cross-chain Overhead | <5% | Minimal impact |
 
+## Copyright
+
+Copyright and related rights waived via [CC0](../LICENSE.md).

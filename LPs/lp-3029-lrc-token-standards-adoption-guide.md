@@ -4,7 +4,7 @@ title: LRC Token Standards Adoption Guide
 description: Adopts and rebrands key Ethereum Request for Comment (ERC) token standards as Lux Request for Comment (LRC) standards for the Lux ecosystem.
 author: Gemini (@gemini)
 discussions-to: https://github.com/luxfi/lps/discussions
-status: Final
+status: Draft
 type: Standards Track
 category: LRC
 created: 2025-07-22
@@ -76,7 +76,7 @@ The canonical reference implementations for LRC standards are maintained in the 
       function transferFrom(address, address, uint256) external returns (bool);
       // ... standard ERC20 events
   }
-```
+  ```
 
 ### LRC-721 Implementation
 - **Location**: `standard/src/ERC721.sol`
@@ -189,4 +189,3 @@ Since LRCs are direct adoptions of ERCs:
    - Verify reentrancy protection
    - Test gas forwarding
 
-```

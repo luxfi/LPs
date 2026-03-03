@@ -5,7 +5,7 @@ tags: [bridge, security]
 description: Comprehensive security framework for cross-chain bridge operations.
 author: Lux Network Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
-status: Review
+status: Draft
 type: Standards Track
 category: Bridge
 created: 2025-01-23
@@ -111,7 +111,7 @@ interface IBridgeMonitor {
 ```
 
 #### 2. Anomaly Detection
-```markdown
+```
 Detection Rules:
   - Unusual Volume: > 5x daily average
   - Large Transfer: > $10M single transaction
@@ -193,7 +193,7 @@ contract EmergencyRoles {
 - **Post-Incident**: Targeted audit after any security event
 
 #### 2. Audit Scope
-```markdown
+```
 Code Audit:
   - Smart contracts
   - Off-chain components
@@ -385,3 +385,6 @@ This entire LP is about security considerations. Key meta-considerations include
 - Cross-team communication
 - External stakeholder management
 
+## Copyright
+
+Copyright and related rights waived via [CC0](../LICENSE.md).

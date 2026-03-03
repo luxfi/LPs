@@ -4,7 +4,7 @@ title: NFT Staking Standard
 description: Standard for staking NFTs to earn rewards on Lux Network
 author: Lux Network Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
-status: Final
+status: Draft
 type: Standards Track
 category: LRC
 created: 2025-01-23
@@ -500,7 +500,7 @@ forge build
 
 # Deploy to C-Chain
 forge script script/DeployNFTStaking.s.sol:DeployNFTStaking \
-  --rpc-url https://api.avax.network/ext/bc/C/rpc \
+  --rpc-url https://api.lux.network/ext/bc/C/rpc \
   --broadcast
 ```
 
@@ -877,3 +877,6 @@ modifier onlyOwner() {
 }
 ```
 
+## Copyright
+
+Copyright and related rights waived via [CC0](../LICENSE.md).

@@ -4,7 +4,7 @@ title: Bridge Security and Emergency Procedures
 description: Security measures and emergency response procedures for the Lux Bridge cross-chain infrastructure
 author: Lux Protocol Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
-status: Review
+status: Draft
 type: Standards Track
 category: Bridge
 created: 2025-12-11
@@ -3561,3 +3561,6 @@ Researchers acting in good faith are protected:
 2. **Oracle Dependency**: Anomaly detection relies on accurate external data
 3. **Governance Delay**: Recovery voting takes 7+ days for full approval
 
+## Copyright
+
+Copyright and related rights waived via [CC0](../LICENSE.md).

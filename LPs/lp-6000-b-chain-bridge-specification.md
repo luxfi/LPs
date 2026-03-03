@@ -5,7 +5,7 @@ tags: [core, bridge, cross-chain, mpc, b-chain]
 description: Core specification for the B-Chain (Bridge Chain), Lux Network's dedicated cross-chain bridge infrastructure
 author: Lux Network Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
-status: Review
+status: Final
 type: Standards Track
 category: Core
 created: 2025-12-11
@@ -45,7 +45,7 @@ A dedicated bridge chain provides:
 ```go
 import (
     bvm "github.com/luxfi/node/vms/bridgevm"
-    "github.com/luxfi/utils/constants"
+    "github.com/luxfi/node/utils/constants"
 )
 
 // VM ID constant
@@ -177,7 +177,7 @@ func (b *Bridge) Sign(request BridgeRequest) (*DualSignature, error) {
 
 #### Inbound (External → Lux)
 
-```solidity
+```
 User → Lock on External Chain
      → Event emission
      → B-Chain MPC validation
@@ -188,7 +188,7 @@ User → Lock on External Chain
 
 #### Outbound (Lux → External)
 
-```markdown
+```
 User → Burn wrapped asset on Lux chain
      → B-Chain receives burn proof
      → MPC signature generation
@@ -257,7 +257,7 @@ func (b *Bridge) SendWarpMessage(dest ids.ID, payload []byte) error {
 
 #### REST Endpoints
 
-```solidity
+```
 POST /ext/bc/B/bridge/initiate
 GET  /ext/bc/B/bridge/status/{txId}
 GET  /ext/bc/B/bridge/assets
@@ -343,3 +343,6 @@ func TestQuantumPhaseTransition(t *testing.T)
 | LP-6400 | External Chain Support | Sub-specification |
 | LP-7000 | T-Chain | Provides threshold infrastructure |
 
+## Copyright
+
+Copyright and related rights waived via [CC0](https://creativecommons.org/publicdomain/zero/1.0/).

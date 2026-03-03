@@ -3,7 +3,7 @@ lp: 4
 title: Philosophy
 description: Lux Network's core principles, values, and foundational beliefs
 author: Lux Core Team
-status: Implemented
+status: Final
 type: Meta
 created: 2025-12-21
 tags: [network, core, philosophy, principles, values]
@@ -189,3 +189,6 @@ The philosophy documented here reduces attack surface, enables rapid response, a
 
 ---
 
+## Copyright
+
+Copyright and related rights waived via [CC0](https://creativecommons.org/publicdomain/zero/1.0/).

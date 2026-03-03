@@ -4,7 +4,7 @@ title: CLZ (Count Leading Zeros) Opcode
 description: Native EVM opcode for efficient bit-counting operations supporting PQ signatures and ZK proofs
 author: Lux Core Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
-status: Review
+status: Draft
 type: Standards Track
 category: Core
 created: 2025-12-24
@@ -67,17 +67,15 @@ LP-3680 introduces the CLZ (Count Leading Zeros) opcode to the Lux EVM, providin
 
 | Property | Value |
 |----------|-------|
-| Opcode | `0x1E` |
+| Opcode | `0x1F` |
 | Mnemonic | `CLZ` |
 | Stack Input | 1 (256-bit value) |
 | Stack Output | 1 (count of leading zeros) |
 | Gas Cost | 5 |
 
-**Implementation Status**: ✅ Implemented in [`geth/core/vm/opcodes.go`](https://github.com/luxfi/geth)
-
 ### Semantics
 
-```solidity
+```
 CLZ(x) returns the number of leading zero bits in x
 
 For x = 0: CLZ(0) = 256
@@ -144,7 +142,7 @@ The CLZ (Count Leading Zeros) operation was selected as a dedicated opcode for s
 
 ### Opcode Number Selection
 
-The opcode `0x1E` was chosen to align with Ethereum's EIP-7939, ensuring compatibility with the broader EVM ecosystem. This positioning places CLZ near other arithmetic operations (ADD=0x01, MUL=0x02) in the opcode space.
+The opcode `0x1F` was chosen to align with Ethereum's EIP-7939, ensuring compatibility with the broader EVM ecosystem. This positioning places CLZ near other arithmetic operations (ADD=0x01, MUL=0x02) in the opcode space.
 
 ### Gas Cost Determination
 
@@ -239,7 +237,7 @@ contract CLZTest {
 
 ### Location
 
-```solidity
+```
 /Users/z/work/lux/geth/core/vm/instructions.go  - opCLZ implementation
 /Users/z/work/lux/geth/core/vm/opcodes.go       - CLZ opcode definition
 /Users/z/work/lux/geth/core/vm/gas_table.go     - CLZ gas cost (5)
@@ -268,3 +266,6 @@ contract CLZTest {
 - LP-3501: SLH-DSA Signature Precompile
 - LP-7324: Ringtail Threshold Signature Precompile
 
+## Copyright
+
+Copyright and related rights waived via [CC0](https://creativecommons.org/publicdomain/zero/1.0/).

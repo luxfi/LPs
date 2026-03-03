@@ -3,7 +3,7 @@ lp: 10002
 title: Learning Path - Smart Contract Developer
 description: Build dApps, DeFi protocols, and Web3 applications on Lux
 author: Lux Core Team
-status: Living
+status: Draft
 type: Meta
 created: 2025-12-21
 tags: [learning-path, developer, web3, defi, solidity]
@@ -11,7 +11,7 @@ order: 22
 tier: core
 ---
 
-# LP-10002: Learning Path - Smart Contract Developer
+# LP-0012: Learning Path - Smart Contract Developer
 
 ## Abstract
 
@@ -123,3 +123,6 @@ For cutting-edge DeFi research:
 
 None — this is a meta/organizational proposal.
 
+## Copyright
+
+Copyright and related rights waived via [CC0](https://creativecommons.org/publicdomain/zero/1.0/).

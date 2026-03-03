@@ -4,7 +4,7 @@ title: Focus Confidence Accumulation Protocol
 description: Confidence accumulation by counting consecutive successes to signal local finality
 author: Lux Network Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
-status: Implemented
+status: Final
 type: Standards Track
 category: Core
 created: 2025-01-29
@@ -238,7 +238,7 @@ func Calc(yes, total, prev int) (float64, int) {
 
 ### State Machine
 
-```solidity
+```
                     ┌─────────────────────────────────────────────────┐
                     │                                                 │
                     ▼                                                 │
@@ -607,3 +607,6 @@ Focus inherits safety from Wave's FPC voting:
 - Maximum tracked items per validator configurable
 - Memory-bounded map implementations available
 
+## Copyright
+
+Copyright and related rights waived via [CC0](https://creativecommons.org/publicdomain/zero/1.0/).

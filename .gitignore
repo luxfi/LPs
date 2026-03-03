@@ -1,52 +1,14 @@
-# OS generated files
-.DS_Store
-.DS_Store?
-._*
-.Spotlight-V100
-.Trashes
-ehthumbs.db
-Thumbs.db
-
-# Editor directories and files
-.idea
-.vscode
-*.swp
-*.swo
-*~
-
-# Temporary files
-*.tmp
-*.temp
-*.log
-
-# Build outputs
-dist/
-build/
-
-# Dependencies
 node_modules/
-
-# Environment variables
-.env
-.env.local
-
-# Backup files
-*.bak
-*.backup
-
-# Archives
-*.zip
-*.tar.gz
-*.rar
-
-.claude
-
-
-
-AGENTS.md
-CLAUDE.md
-GEMINI.md
-GROK.md
-QWEN.md
-.playwright-mcp/*
-docs/screenshots/*
+.playwright-mcp/
+.DS_Store
+*.crx
+.next/
+out/
+.wrangler/
+docs/.source/
+docs/next-env.d.ts
+docs/playwright-report/
+docs/public/
+docs/screenshots/
+docs/test-results/
+docs/tsconfig.tsbuildinfo

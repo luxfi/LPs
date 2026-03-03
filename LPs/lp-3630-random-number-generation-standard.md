@@ -4,7 +4,7 @@ title: Random Number Generation Standard
 description: Defines standard interfaces for secure random number generation on Lux Network
 author: Lux Network Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
-status: Review
+status: Draft
 type: Standards Track
 category: Core
 created: 2025-01-23
@@ -740,7 +740,7 @@ forge build
 
 # Deploy RNG to C-Chain
 forge script script/DeployRNG.s.sol:DeployRNG \
-  --rpc-url https://api.avax.network/ext/bc/C/rpc \
+  --rpc-url https://api.lux.network/ext/bc/C/rpc \
   --broadcast
 ```
 
@@ -824,3 +824,6 @@ Key features:
 - Slashing for misbehavior
 - Insurance funds for critical applications
 
+## Copyright
+
+Copyright and related rights waived via [CC0](../LICENSE.md).

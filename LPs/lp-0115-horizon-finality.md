@@ -4,7 +4,7 @@ title: Horizon DAG Finality Predicates
 description: DAG order-theory predicates for reachability, LCA, antichain queries, and certificate/skip detection under a DAG model
 author: Lux Network Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
-status: Implemented
+status: Final
 type: Standards Track
 category: Core
 created: 2025-01-29
@@ -658,15 +658,15 @@ The 2f+1 threshold enables both positive (certificate) and negative (skip) final
 
 ## Backwards Compatibility
 
-Horizon integrates with existing Snowman consensus through adapters:
+Horizon integrates with legacy linear-chain consensus (historical Snowman, now Nova mode per LP-134) through adapters:
 
 ```go
-// SnowmanHorizonAdapter adapts Horizon predicates for Snowman blocks
-type SnowmanHorizonAdapter struct {
+// LegacyChainHorizonAdapter adapts Horizon predicates for legacy linear-chain blocks
+type LegacyChainHorizonAdapter struct {
     horizon *HorizonEngine
 }
 
-func (s *SnowmanHorizonAdapter) IsAccepted(blockID ids.ID) bool {
+func (s *LegacyChainHorizonAdapter) IsAccepted(blockID ids.ID) bool {
     vertexID := toVertexID(blockID)
     return s.horizon.Certificate(vertexID)
 }
@@ -988,8 +988,10 @@ Query timing could leak DAG structure:
 
 [1] Quasar Unified Consensus Protocol (LP-110). 2025.
 [2] Flare DAG Finalization Protocol (LP-112). 2025.
-[3] Team Rocket. "Snowflake to Avalanche: A Novel Metastable Consensus Protocol Family". 2018.
+[3] Team Rocket. "Snowflake to Avalanche: A Novel Metastable Consensus Protocol Family". 2018. (Historical prior art; Lux's Quasar consensus family supersedes the Snow* family — see LP-020, LP-134.)
 [4] Bernstein, P.A., Hadzilacos, V., Goodman, N. "Concurrency Control and Recovery in Database Systems". 1987.
 [5] Lamport, L. "Time, Clocks, and the Ordering of Events in a Distributed System". Communications of the ACM, 1978.
 
-```
+## Copyright
+
+Copyright and related rights waived via [CC0](../LICENSE.md).

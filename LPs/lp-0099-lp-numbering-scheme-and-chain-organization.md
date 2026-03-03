@@ -1,166 +1,393 @@
 ---
 lp: 99
 title: LP Numbering Scheme and Chain Organization
-description: Canonical LP number taxonomy aligned with chain dependency order
-author: Lux Core Team (@luxfi)
-discussions-to: https://github.com/luxfi/lps/discussions
-status: Living
+description: Canonical governance anchor defining LP numbering, status semantics, and normative classification
+author: Lux Core Team
+status: Final
+tags: [core, meta, governance]
 type: Meta
-created: 2025-12-28
-tags: [meta, governance, taxonomy]
+created: 2025-01-15
+updated: 2025-12-21
 order: 99
-tier: core
 ---
 
-# LP-0099: LP Numbering Scheme and Chain Organization
+# LP-0099: LP Numbering Scheme (Canonical)
 
 ## Abstract
 
-This LP defines the canonical numbering scheme for Lux Proposals (LPs). Numbers follow **dependency order** — lower numbers are foundations that higher numbers build upon. This creates a natural learning path and enforces architectural discipline.
+This LP is the **canonical governance anchor** for all Lux Proposals. It defines:
+1. Reserved number ranges (hard rules)
+2. Status semantics (enforceable)
+3. Normative vs non-normative classification
+4. Decision rules for LP placement
+
+**Anything outside its designated range is invalid and MUST be renumbered.**
 
 ## Motivation
 
-A consistent, dependency-ordered numbering scheme is essential for the Lux ecosystem:
+### Problems Solved
 
-1. **Architectural Clarity**: Lower numbers represent foundational components that higher numbers depend on, making dependency relationships explicit
-2. **Learning Path**: Developers can follow numbers sequentially to understand the stack from primitives to applications
-3. **Collision Prevention**: Reserved ranges prevent number conflicts as the ecosystem grows
-4. **Chain Organization**: Each chain family (P, C, Z, T, B, A) has dedicated ranges reflecting their role in the architecture
-5. **Review Efficiency**: Reviewers can quickly identify an LP's domain and dependencies from its number
+| Problem | Solution |
+|---------|----------|
+| Numbering drift | Reserved ranges with hard boundaries |
+| Category bleed | Domain-first, not chain-first organization |
+| Lifecycle confusion | Strict status semantics |
+| Mixed normative/research | Explicit classification |
 
-Without a canonical taxonomy, LP numbers become arbitrary, making it difficult to understand relationships between proposals, locate relevant specifications, or ensure consistent organization across hundreds of documents.
+### Design Principles
 
-## Canonical Taxonomy
+1. **Domain-first**: Group by semantic domain, not chain identity
+2. **Normative separation**: Standards vs research vs guides
+3. **Machine-navigable**: Predictable ranges for tooling
+4. **Protocol-enforceable**: Clear rules, no ambiguity
 
-### 0xxx: Meta / Governance / Process
-Core process documents, taxonomy, governance rules. **Start here.**
+---
 
-| Range | Category | Contents |
-|-------|----------|----------|
-| 0000-0099 | Meta | Taxonomy, process, review rules, this document |
-| 0100-0199 | Consensus | Quasar protocol (Photon, Wave, Focus, Prism, Horizon, Flare) |
-| 0200-0499 | Network | P2P, messaging, topology, Warp |
-| 0500-0999 | Reserved | Future cross-cutting standards |
+## Specification
 
-### 1xxx: Foundations + P-Chain
+### 🔒 Reserved Ranges (Hard Rules)
 
-| Range | Category | Contents |
-|-------|----------|----------|
-| 1000-1499 | P-Chain | Platform coordination, validators, staking, L1/L2/L3 |
-| 1500-1999 | Foundations | Cryptographic primitives, formal models, math, proofs |
+| Range | Purpose | Status Allowed |
+|-------|---------|----------------|
+| **0–99** | Constitutional / Meta | Final only |
+| **100–999** | Core Protocols | Draft, Final |
+| **1000–1999** | Chain Specifications | Draft, Final |
+| **2000–2999** | DAO, Governance & ESG | Draft, Final, Research |
+| **3000–3999** | Solidity, Tokens & Web3 | Draft, Final |
+| **4000–4999** | Cryptography / PQC | Draft, Final |
+| **5000–5999** | AI / Attestation | Draft, Final |
+| **6000–6999** | Bridges & Interop | Draft, Final |
+| **7000–7999** | Threshold / MPC | Draft, Final |
+| **8000–8999** | ZK / Privacy | Draft, Final |
+| **9000–9999** | DeFi / Markets | Draft, Final |
+| **10000–19999** | Learning Paths | Research only |
+| **50000–59999** | Research Indexes | Research only |
 
-**Foundations** are things every chain depends on but no single chain owns:
-- Hash/signature/commitment basics
-- MPC math (not custody operations)
-- ZK arithmetization theory
-- PQ definitions (not deployment)
+**Rule**: LPs outside their designated range are INVALID.
 
-### Chain Standards (Dependency Order)
+---
 
-```
-2xxx Q-Chain (PQ Identity)
-    ↓
-3xxx C-Chain (EVM / LRC)
-    ↓
-4xxx Z-Chain (Privacy)
-    ↓
-5xxx T-Chain (Threshold)
-    ↓
-6xxx B-Chain (Bridges)
-    ↓
-7xxx A-Chain (AI)
-    ↓
-8xxx Governance
-    ↓
-9xxx Markets
-```
+### Status Semantics (Strict)
 
-| Range | Chain | Description | Depends On |
-|-------|-------|-------------|------------|
-| 2000-2999 | **Q-Chain** | Post-quantum keys, signatures, addresses, hybrid modes, migration | 1xxx |
-| 3000-3999 | **C-Chain** | EVM execution, LRC standards, accounts, gas, Web3, wallets | 1xxx, 2xxx |
-| 4000-4999 | **Z-Chain** | ZK proofs, FHE, privacy protocols, zkVM, verifier costs | 1xxx, 2xxx, 3xxx |
-| 5000-5999 | **T-Chain** | Threshold signing, DKG, custody, recovery, rotation | 1xxx, 2xxx, 4xxx |
-| 6000-6999 | **B-Chain** | Cross-chain messaging, finality proofs, relayers | 2xxx, 4xxx, 5xxx |
-| 7000-7999 | **A-Chain** | AI agents, policy engines, verifiable AI | All above |
-| 8000-8999 | **Governance** | DAO, voting, ESG, ops, monitoring, upgrades, kill switches | All above |
-| 9000-9999 | **DEX/Markets** | AMMs, orderbooks, MEV mitigation, oracles, liquidation | 3xxx, 6xxx |
+Each LP MUST declare exactly one status:
 
-### 10xxx: Learning & Research (Meta)
+| Status | Meaning | Binding? |
+|--------|---------|----------|
+| **Draft** | Actively evolving | No |
+| **Final** | Normative standard | Yes |
+| **Superseded** | Replaced, read-only | No |
+| **Research** | Informational only | Never |
 
-| Range | Category | Contents |
-|-------|----------|----------|
-| 10000-10099 | Learning Paths | Educational resources, tutorials, onboarding |
-| 10100-10999 | Research | Experimental proposals, papers, explorations |
+**Hard Rules**:
+- Learning Paths (10000+) can NEVER be Final
+- Research Indexes (50000+) can NEVER be Final
+- Only ranges 0–9999 can reach Final status
 
-These are **views**, not canonical homes. Research graduates to a chain series when implemented.
+---
 
-## Dependency Rules
+### Range Details
 
-### Rule 1: Ownership
-A doc lives in the **lowest layer** that owns the invariant it defines.
+#### 0–99: Constitutional / Meta
 
-If ZK is used by bridges → ZK spec stays in 4xxx, bridge profile references it.
+**Purpose**: What Lux IS — network identity, LP process, governance.
 
-### Rule 2: Declared Dependencies
-Every LP MUST declare its chain dependencies in frontmatter:
+| Sub-range | Purpose |
+|-----------|---------|
+| 0–9 | Core architecture, tokenomics |
+| 10–49 | Developer tools, SDKs |
+| 50–89 | Wallet, key management, security |
+| 90–99 | Meta (this document), indexes |
+
+**Status**: Final only. These are foundational.
+
+---
+
+#### 100–999: Core Protocols
+
+**Purpose**: HOW Lux operates — consensus, validators, epochs.
+
+| Sub-range | Purpose |
+|-----------|---------|
+| 100–199 | Consensus protocols (Quasar, Photon, Flare) |
+| 200–299 | Validator coordination |
+| 300–399 | Epoch management |
+| 400–599 | (Reserved) |
+| 600–799 | Protocol extensions |
+| 800–999 | (Reserved) |
+
+**Rule**: Core protocol changes require reference implementation.
+
+---
+
+#### 1000–1999: Chain Specifications
+
+**Purpose**: Chain-specific core specs (P, X, C identity).
+
+| Sub-range | Purpose |
+|-----------|---------|
+| 1000–1099 | P-Chain (Platform) |
+| 1100–1199 | X-Chain (Exchange) |
+| 1200–1299 | C-Chain (Contract) |
+| 1300–1399 | (Reserved for future chains) |
+| 1400–1999 | Chain extensions |
+
+**Rule**: One chain = one sub-range. No mixing.
+
+---
+
+#### 2000–2999: DAO, Governance & ESG
+
+**Purpose**: On-chain governance, DAOs, treasury, and sustainability (non-normative).
+
+| Sub-range | Purpose |
+|-----------|---------|
+| 2000–2099 | DAO platforms |
+| 2100–2199 | Voting systems |
+| 2200–2299 | Treasury management |
+| 2300–2799 | (Reserved) |
+| 2800–2849 | DAO governance (Azorius, voting) |
+| 2850–2899 | Fund management indexes |
+| 2900–2989 | ESG framework (carbon, green compute) |
+| 2990–2999 | ESG impact & measurement |
+
+**Rule**: Governance and ESG are domain specs. Token standards go in 3xxx.
+
+---
+
+#### 3000–3999: Solidity, Tokens & Web3
+
+**Purpose**: Token standards (LRC-20/721/1155), Solidity contracts, Web3 interfaces.
+
+| Sub-range | Purpose |
+|-----------|---------|
+| 3000–3019 | Token index, standards overview |
+| 3020–3069 | LRC-20 (fungible tokens) |
+| 3070–3099 | Token extensions (staking, media) |
+| 3100–3154 | Account abstraction, multisig |
+| 3155–3199 | LRC-1155 (multi-token) |
+| 3200–3399 | Contract patterns, security |
+| 3400–3499 | Precompiles (curves, crypto) |
+| 3500–3599 | Signature precompiles |
+| 3600–3699 | Messaging precompiles |
+| 3700–3720 | Teleport, bridged assets |
+| 3721–3799 | LRC-721 (NFTs) |
+| 3800–3999 | Web3 extensions |
+
+**Rule**: All Solidity/token/Web3 standards go in 3xxx.
+
+---
+
+#### 4000–4999: Cryptography / PQC (Q-Chain)
+
+**Purpose**: Post-quantum cryptography, Q-Chain specs.
+
+| Sub-range | Purpose |
+|-----------|---------|
+| 4000–4099 | Q-Chain core |
+| 4100–4199 | ML-KEM (key encapsulation) |
+| 4200–4299 | ML-DSA (signatures) |
+| 4300–4399 | SLH-DSA (hash-based) |
+| 4400–4499 | Hybrid schemes |
+| 4500–4999 | PQC extensions |
+
+**Rule**: Post-quantum only. Classical crypto in 3xxx precompiles.
+
+---
+
+#### 5000–5999: AI / Attestation (A-Chain)
+
+**Purpose**: AI compute, TEE, attestation.
+
+| Sub-range | Purpose |
+|-----------|---------|
+| 5000–5099 | A-Chain core |
+| 5100–5199 | AI integration (LLM gateway) |
+| 5200–5299 | AI mining |
+| 5300–5399 | TEE |
+| 5400–5499 | Confidential compute |
+| 5500–5599 | GPU acceleration |
+| 5600–5699 | Training ledger |
+| 5700–5999 | (Reserved) |
+
+---
+
+#### 6000–6999: Bridges & Interop (B-Chain)
+
+**Purpose**: Cross-chain messaging, bridges.
+
+| Sub-range | Purpose |
+|-----------|---------|
+| 6000–6099 | B-Chain core |
+| 6100–6199 | Teleport protocol |
+| 6200–6299 | Warp messaging |
+| 6300–6399 | Asset registry |
+| 6400–6499 | Security framework |
+| 6500–6699 | Bridge SDK |
+| 6700–6999 | (Reserved) |
+
+---
+
+#### 7000–7999: Threshold / MPC (T-Chain)
+
+**Purpose**: Threshold signatures, MPC, custody.
+
+| Sub-range | Purpose |
+|-----------|---------|
+| 7000–7099 | T-Chain core |
+| 7100–7199 | Signing networks (FROST, CGGMP) |
+| 7200–7299 | DKG & resharing |
+| 7300–7399 | Custody, vaults |
+| 7400–7499 | KMS integration |
+| 7500–7599 | MPC bridges |
+| 7600–7699 | MPC swaps |
+| 7700–7999 | (Reserved) |
+
+**Rule**: MPC as network/service = 7xxx. MPC math only = 4xxx.
+
+---
+
+#### 8000–8999: ZK / Privacy (Z-Chain)
+
+**Purpose**: Zero-knowledge, encrypted execution.
+
+| Sub-range | Purpose |
+|-----------|---------|
+| 8000–8099 | Z-Chain core |
+| 8100–8199 | Validity proofs (SNARKs, STARKs) |
+| 8200–8299 | Fraud proofs |
+| 8300–8399 | (Reserved) |
+| 8400–8499 | Encrypted execution (FHE) |
+| 8500–8599 | L2/Rollups |
+| 8600–8699 | FHE accelerators |
+| 8700–8999 | (Reserved) |
+
+**Hard Rule**: ZK/FHE never leak into other ranges except by reference.
+
+---
+
+#### 9000–9999: DeFi / Markets
+
+**Purpose**: DEX, AMM, lending, trading infrastructure.
+
+| Sub-range | Purpose |
+|-----------|---------|
+| 9000–9049 | DEX core |
+| 9050–9099 | Oracles |
+| 9100–9199 | DeFi protocols (AMM, lending) |
+| 9200–9299 | Operations, risk |
+| 9300–9399 | DeFi precompiles |
+| 9400–9499 | Perpetuals, derivatives |
+| 9500–9599 | HFT venues |
+| 9600–9699 | Market making |
+| 9700–9799 | CEX integration |
+| 9800–9899 | MEV |
+| 9900–9999 | (Reserved) |
+
+**Rule**: Latency, throughput, market microstructure = 9xxx.
+
+---
+
+#### 10000–19999: Learning Paths
+
+**Purpose**: Educational guides (NON-NORMATIVE).
+
+| Sub-range | Mirrors |
+|-----------|---------|
+| 10000–10099 | Indexes, paths |
+| 10100–19999 | Topic-specific guides |
+
+**Status**: Research only. NEVER Final.
+
+---
+
+#### 50000+: Research Indexes
+
+**Purpose**: Non-binding references and research papers.
+
+| Range | Purpose |
+|-------|---------|
+| 50000–59999 | Research papers |
+
+**Status**: Research only. NEVER Final.
+
+---
+
+## Decision Rules
+
+| If your spec is about... | Range | Can be Final? |
+|--------------------------|-------|---------------|
+| Network identity, LP process | 0–99 | Yes (must be) |
+| Consensus, validators, epochs | 100–999 | Yes |
+| P/X/C chain core identity | 1000–1999 | Yes |
+| Tokens, DAO, ESG | 2000–2999 | Yes |
+| VM, precompiles, execution | 3000–3999 | Yes |
+| Post-quantum cryptography | 4000–4999 | Yes |
+| AI, attestation, TEE | 5000–5999 | Yes |
+| Bridges, cross-chain | 6000–6999 | Yes |
+| MPC, threshold signing | 7000–7999 | Yes |
+| ZK, privacy, FHE | 8000–8999 | Yes |
+| DeFi, trading, markets | 9000–9999 | Yes |
+| Learning guides | 10000–19999 | **No** |
+| Research, indexes | 50000+ | **No** |
+
+---
+
+## Validation Rules (LP-lint)
 
 ```yaml
-requires:
-  - chain: Q
-  - chain: Z
+# LP-lint rules (machine-enforceable)
+rules:
+  range_check:
+    - "LP 0-99 MUST have status: Final"
+    - "LP 10000+ MUST have status: Draft"
+    - "LP 50000+ MUST have status: Draft"
+    - "LP outside defined range is INVALID"
+  
+  status_check:
+    - "status MUST be one of: Draft, Final, Superseded, Research"
+    - "Research LPs cannot reference normative behavior"
+  
+  content_check:
+    - "Final LPs MUST have reference implementation OR test vectors"
+    - "Superseded LPs MUST reference replacement LP"
+    - "No duplicate LP numbers allowed"
 ```
 
-No silent assumptions. CI will enforce this.
+---
 
-### Rule 3: No Upward References
-Lower-numbered LPs MUST NOT reference higher-numbered LPs as requirements.
+## Migration History
 
-- ✅ LP-4xxx (Z-Chain) can require LP-2xxx (Q-Chain)
-- ❌ LP-2xxx (Q-Chain) cannot require LP-4xxx (Z-Chain)
+### v5.1 (Current)
+- DAO (71xxx) → 2800-2849
+- ESG (72xxx) → 2900-2999
+- Removed 70000-79999 range
 
-## Migration Status
+### v5.0
+- Applied canonical renumbering
+- ESG, DeFi, tokens moved to proper ranges
+- See `docs/LP-RENUMBERING-DIFF.md`
 
-**All migrations completed 2025-12-28.**
+---
 
-| Migration | Files | Status |
-|-----------|-------|--------|
-| DAO/ESG (2xxx → 8xxx) | 27 | ✅ Complete |
-| Q-Chain (4xxx → 2xxx) | 18 | ✅ Complete |
-| Z-Chain (8xxx → 4xxx) | 13 | ✅ Complete |
-| T-Chain (7xxx → 5xxx) | 20 | ✅ Complete |
-| A-Chain (5xxx → 7xxx) | 11 | ✅ Complete |
+## Backwards Compatibility
 
-**Total: 89 files migrated**
+- Legacy LP numbers remain valid references
+- Superseded LPs redirect to new numbers
+- Old URLs 301-redirect to canonical locations
 
-## Why This Order?
+---
 
-### Pedagogical
-You learn in dependency order:
-1. **Foundations** — What primitives exist?
-2. **Q-Chain** — How do we sign things safely?
-3. **C-Chain** — How do we execute contracts?
-4. **Z-Chain** — How do we add privacy?
-5. **T-Chain** — How do we distribute trust?
-6. **B-Chain** — How do we cross chains?
-7. **A-Chain** — How do we add intelligence?
-8. **Governance** — How do we govern and operate safely?
-9. **Markets** — How do we trade?
+## Security Considerations
 
-### Architectural
-Lower layers cannot break higher layers:
-- PQ migration (2xxx) doesn't break AI (7xxx)
-- Privacy changes (4xxx) don't break bridges (6xxx)
-- Threshold updates (5xxx) don't break markets (9xxx)
+This is a meta/organizational proposal. No direct security impact.
 
-### Enforceable
-CI can validate:
-- 7xxx docs must declare Q/Z/T dependencies
-- 6xxx docs must declare Q or T dependencies
-- No circular dependencies
+Indirect impact: Clear LP organization prevents:
+- Normative confusion (implementing research as spec)
+- Scope creep (mixing domains)
+- Governance attacks (hiding changes in wrong categories)
 
-## Related LPs
+---
 
-- [LP-0000: Network Architecture](./lp-0000-network-architecture-and-community-framework.md) — Full architecture
-- [LP-10000: Learning Paths Index](./lp-10000-learning-paths-index.md) — Educational entry points
+## Copyright
 
+Copyright and related rights waived via [CC0](https://creativecommons.org/publicdomain/zero/1.0/).

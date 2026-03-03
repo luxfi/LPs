@@ -4,7 +4,7 @@ title: Key Management System
 description: Defines the pluggable key storage backend architecture with distributed secrets via K-Chain
 author: Lux Network Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
-status: Implemented
+status: Final
 type: Standards Track
 category: Core
 created: 2025-01-23
@@ -494,4 +494,6 @@ This LP introduces new key management capabilities without breaking existing fun
 4. **Share Distribution**: Shares must be transmitted over encrypted channels
 5. **Validator Trust**: K-Chain assumes honest majority among validators
 
-```
+## Copyright
+
+Copyright and related rights waived via [CC0](https://creativecommons.org/publicdomain/zero/1.0/).

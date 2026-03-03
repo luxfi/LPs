@@ -5,7 +5,7 @@ tags: [defi, dex, trading, amm, orderbook]
 description: Core specification for the Lux DEX trading protocols, including AMM and order book implementations
 author: Lux Network Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
-status: Implemented
+status: Final
 type: Standards Track
 category: LRC
 created: 2025-12-11
@@ -38,7 +38,7 @@ A comprehensive DEX specification provides:
 
 ### DEX Architecture
 
-```solidity
+```
 ┌─────────────────────────────────────────────────────────────────┐
 │                     Lux DEX Architecture                        │
 ├──────────────────────┬──────────────────────────────────────────┤
@@ -379,4 +379,6 @@ go test ./integration/dex/... -v
 | LP-9400 | Lending/Borrowing | Sub-specification |
 | LP-9500 | Yield Protocols | Sub-specification |
 
-```
+## Copyright
+
+Copyright and related rights waived via [CC0](https://creativecommons.org/publicdomain/zero/1.0/).

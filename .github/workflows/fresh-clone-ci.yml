@@ -1,0 +1,144 @@
+name: Fresh-Clone CI
+
+# Additive workflow: fresh-clones the repo into a clean Ubuntu container
+# and validates the LP frontmatter on every LP-*.md file. The schema is
+# the one defined by LP-001 / LP-002: lp (int), title, tags (list),
+# description, author, status, type, category, created.
+
+on:
+  push:
+    branches: [main, dev]
+    tags: ['v*']
+  workflow_dispatch:
+
+jobs:
+  fresh-clone-validate:
+    name: Fresh clone LP frontmatter validation
+    runs-on: ubuntu-latest
+    container:
+      image: ubuntu:24.04
+    steps:
+      - name: Install build deps
+        run: |
+          apt-get update
+          apt-get install -y --no-install-recommends \
+            ca-certificates curl git python3 python3-yaml \
+            > /dev/null
+
+      - name: Fresh clone
+        run: |
+          git clone --depth 1 \
+            "https://github.com/${GITHUB_REPOSITORY}.git" repo
+          cd repo
+          git fetch --depth 1 origin "${GITHUB_SHA}"
+          git checkout "${GITHUB_SHA}"
+
+      - name: Validate LP frontmatter
+        working-directory: repo
+        run: |
+          python3 - <<'PY'
+          import os, re, sys, yaml
+          from pathlib import Path
+
+          # Schema per LP-001 / LP-002.
+          REQUIRED = {
+              'lp':          int,
+              'title':       str,
+              'tags':        list,
+              'description': str,
+              'author':      str,
+              'status':      str,
+              'type':        str,
+              'category':    str,
+              'created':     (str,),  # YAML loads ISO dates; allow either
+          }
+          ALLOWED_STATUS = {
+              'Draft', 'Review', 'Last Call', 'Final', 'Stagnant',
+              'Withdrawn', 'Living', 'Active', 'Superseded',
+              'Informational',
+          }
+          ALLOWED_TYPE = {
+              'Standards Track', 'Meta', 'Informational', 'Process',
+          }
+
+          fail = []
+          # Match LP-NNN.md or LP-NNN-*.md at any depth.
+          for path in sorted(Path('.').rglob('*.md')):
+              name = path.name
+              if not re.match(r'(?i)^lp-\d+', name):
+                  continue
+              text = path.read_text()
+              m = re.match(r'^---\n(.*?)\n---\n', text, re.DOTALL)
+              if not m:
+                  fail.append(f'{path}: missing YAML frontmatter')
+                  continue
+              try:
+                  fm = yaml.safe_load(m.group(1))
+              except yaml.YAMLError as e:
+                  fail.append(f'{path}: YAML parse error: {e}')
+                  continue
+              if not isinstance(fm, dict):
+                  fail.append(f'{path}: frontmatter is not a mapping')
+                  continue
+              for k, t in REQUIRED.items():
+                  if k not in fm:
+                      fail.append(f'{path}: missing required field "{k}"')
+                      continue
+                  v = fm[k]
+                  if isinstance(t, tuple):
+                      if not isinstance(v, t) and \
+                         type(v).__name__ not in ('date', 'datetime'):
+                          fail.append(
+                              f'{path}: field "{k}" has wrong type '
+                              f'(got {type(v).__name__})')
+                  elif not isinstance(v, t):
+                      fail.append(
+                          f'{path}: field "{k}" has wrong type '
+                          f'(got {type(v).__name__}, want {t.__name__})')
+              if fm.get('status') not in ALLOWED_STATUS:
+                  fail.append(
+                      f'{path}: status="{fm.get("status")}" '
+                      f'not in {sorted(ALLOWED_STATUS)}')
+              if fm.get('type') not in ALLOWED_TYPE:
+                  fail.append(
+                      f'{path}: type="{fm.get("type")}" '
+                      f'not in {sorted(ALLOWED_TYPE)}')
+
+          if fail:
+              for f in fail:
+                  print(f'::error file={f.split(":")[0]}::{f}')
+              sys.exit(1)
+          print(f'OK: validated {sum(1 for _ in Path(".").rglob("LP-*.md"))} LPs')
+          PY
+
+      - name: Tag artifact set
+        id: tag
+        working-directory: repo
+        run: |
+          freeze_tag="$(git tag --sort=-v:refname | head -n1)"
+          echo "tag=${freeze_tag:-untagged}" >> "$GITHUB_OUTPUT"
+          echo "sha=${GITHUB_SHA}" >> "$GITHUB_OUTPUT"
+
+      - name: Manifest of validated LPs
+        working-directory: repo
+        run: |
+          mkdir -p ../manifest
+          {
+            echo "# Fresh-clone CI manifest"
+            echo
+            echo "- commit: ${GITHUB_SHA}"
+            echo "- tag: $(git tag --sort=-v:refname | head -n1 || echo none)"
+            echo
+            echo "## LPs"
+            ls LP-*.md 2>/dev/null | sort
+            ls LPs/lp-*.md 2>/dev/null | sort
+          } > ../manifest/manifest.txt
+          cat ../manifest/manifest.txt
+
+      - name: Upload manifest
+        uses: actions/upload-artifact@v4
+        with:
+          name: fresh-clone-lp-manifest-${{ steps.tag.outputs.sha }}-${{ steps.tag.outputs.tag }}
+          path: manifest/
+          if-no-files-found: error
+          retention-days: 90

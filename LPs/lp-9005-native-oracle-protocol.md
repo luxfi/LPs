@@ -5,7 +5,7 @@ tags: [oracle, dex, price-feed, t-chain, warp, a-chain, c-chain, x-chain, lp-900
 description: Native oracle protocol for Lux network with sub-600ms price feeds via T-Chain signers and Warp TeleportAttest - OVER 9000x FASTER
 author: Lux Network Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
-status: Review
+status: Final
 type: Standards Track
 category: Core
 created: 2025-12-11
@@ -33,7 +33,7 @@ order: 5
 | Full Oracle (LX) | [`dex/pkg/lx/oracle.go`](https://github.com/luxfi/dex/blob/main/pkg/lx/oracle.go) | ✅ Complete |
 | Alpaca Source | [`dex/pkg/lx/alpaca_source.go`](https://github.com/luxfi/dex/blob/main/pkg/lx/alpaca_source.go) | ✅ Complete |
 
-> **See also**: [LP-9001](./lp-9001-dex-trading-engine.md), [LP-1200](./lp-1200-c-chain-evm-specification.md), [LP-9002](./lp-9002-dex-api-rpc-specification.md), [LP-5322](./lp-7322-cggmp21-threshold-ecdsa-precompile.md), [LP-5000](./lp-5000-a-chain-ai-attestation-specification.md), [LP-9003](./lp-9003-high-performance-dex-protocol.md), [LP-INDEX](/docs/)
+> **See also**: [LP-9001](./lp-9001-dex-trading-engine.md), [LP-1200](./lp-1200-c-chain-evm-specification.md), [LP-9002](./lp-9002-dex-api-rpc-specification.md), [LP-7322](./lp-7322-cggmp21-threshold-ecdsa-precompile.md), [LP-5000](./lp-5000-a-chain-ai-attestation-specification.md), [LP-9003](./lp-9003-high-performance-dex-protocol.md), [LP-INDEX](/docs/)
 
 ## Abstract
 
@@ -59,7 +59,7 @@ The existing T-Chain infrastructure (LP-13, LP-14) provides the natural committe
 
 ### 1. Architecture Overview
 
-```solidity
+```
 ┌─────────────────────────────────────────────────────────────────────────────────┐
 │                       LUX NETWORK-WIDE ORACLE ARCHITECTURE                       │
 ├─────────────────────────────────────────────────────────────────────────────────┤
@@ -431,7 +431,7 @@ Initial supported symbols (extendable via governance):
 | BTC-USD | BTC | USD | 100ms | 5 |
 | ETH-USD | ETH | USD | 100ms | 5 |
 | SOL-USD | SOL | USD | 100ms | 4 |
-| AVAX-USD | AVAX | USD | 100ms | 4 |
+| AVAX-USD (external asset) | AVAX | USD | 100ms | 4 |
 | LUX-USD | LUX | USD | 100ms | 3 |
 | BTC-ETH | BTC | ETH | 500ms | 3 |
 | ETH-LUX | ETH | LUX | 500ms | 2 |
@@ -494,7 +494,7 @@ go run ./cmd/dex-server/main.go \
     --chainlink-rpc https://mainnet.infura.io/v3/... \
     --cchain-rpc http://127.0.0.1:9650/ext/bc/C/rpc \
     --symbols BTC-USD,ETH-USD,LUX-USD
-```
+```solidity
 
 ## Rationale
 
@@ -579,3 +579,6 @@ func TestWarpPriceAttestation(t *testing.T) {
 
 5. **Warp Message Integrity**: TeleportAttest messages are cryptographically verified at destination. Invalid attestations are rejected at consensus level.
 
+## Copyright
+
+Copyright and related rights waived via [CC0](../LICENSE.md).

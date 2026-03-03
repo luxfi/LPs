@@ -4,7 +4,7 @@ title: Media Content NFT Standard
 description: Standard for media and content NFTs with licensing, royalties, and metadata on Lux Network
 author: Lux Network Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
-status: Final
+status: Draft
 type: Standards Track
 category: LRC
 created: 2025-01-23
@@ -488,7 +488,7 @@ forge build
 
 # Deploy to C-Chain
 forge script script/DeployMedia.s.sol:DeployMedia \
-  --rpc-url https://api.avax.network/ext/bc/C/rpc \
+  --rpc-url https://api.lux.network/ext/bc/C/rpc \
   --broadcast
 ```
 
@@ -732,3 +732,6 @@ for (uint i = 0; i < collaborators.length; i++) {
 }
 ```
 
+## Copyright
+
+Copyright and related rights waived via [CC0](../LICENSE.md).

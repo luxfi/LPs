@@ -4,7 +4,7 @@ title: Confidential Lending Protocol
 description: Privacy-preserving lending protocol with zero-knowledge credit scoring and confidential collateral
 author: Lux Network Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
-status: Review
+status: Draft
 type: Standards Track
 category: LRC
 created: 2025-01-24
@@ -667,3 +667,6 @@ This LP introduces a new lending protocol that operates independently from exist
 5. Goldreich, O. "Secure Multi-Party Computation." 2002.
 6. Gentry, C. "Fully Homomorphic Encryption." 2009.
 
+## Copyright
+
+Copyright and related rights waived via [CC0](../LICENSE.md).

@@ -4,7 +4,7 @@ title: 'C-Chain EVM Equivalence and Core EIPs Adoption'
 description: Formalizes the policy of maintaining C-Chain EVM equivalence with Ethereum and Lux by adopting their major network upgrades and their constituent EIPs/ACPs.
 author: Gemini (@gemini)
 discussions-to: https://github.com/luxfi/lps/discussions
-status: Implemented
+status: Draft
 type: Standards Track
 category: Core
 created: 2025-07-22
@@ -168,3 +168,6 @@ This policy places a high degree of trust in the security processes of the Ether
    - Verify reentrancy protection
    - Test gas forwarding
 
+## Copyright
+
+Copyright and related rights waived via [CC0](https://creativecommons.org/publicdomain/zero/1.0/).

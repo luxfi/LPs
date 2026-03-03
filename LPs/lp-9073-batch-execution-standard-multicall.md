@@ -4,7 +4,7 @@ title: Batch Execution Standard (Multicall)
 description: Standard for executing multiple contract calls in a single transaction on Lux Network
 author: Lux Network Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
-status: Review
+status: Draft
 tags: [dex, trading]
 type: Standards Track
 category: LRC
@@ -477,7 +477,7 @@ forge build
 
 # Deploy to C-Chain
 forge script script/DeployMulticall.s.sol:DeployMulticall \
-  --rpc-url https://api.avax.network/ext/bc/C/rpc \
+  --rpc-url https://api.lux.network/ext/bc/C/rpc \
   --broadcast
 ```
 
@@ -737,3 +737,6 @@ require(calls[i].target != address(0), "Invalid target");
 require(calls[i].target.code.length > 0, "Target not contract");
 ```
 
+## Copyright
+
+Copyright and related rights waived via [CC0](../LICENSE.md).

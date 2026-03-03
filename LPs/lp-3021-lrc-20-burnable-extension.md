@@ -4,7 +4,7 @@ title: LRC-20 Burnable Extension
 description: Optional extension of the fungible token standard to allow token holders to irreversibly destroy tokens
 author: Gemini (@gemini)
 discussions-to: https://github.com/luxfi/lps/discussions
-status: Implemented
+status: Final
 type: Standards Track
 category: LRC
 created: 2025-07-23
@@ -67,7 +67,7 @@ interface IERC20Burnable {
 3. **Error Handling**: Use descriptive revert messages:
    ```solidity
    require(balanceOf[msg.sender] >= amount, "ERC20: burn amount exceeds balance");
-```
+   ```
 
 ## Rationale
 
@@ -86,18 +86,18 @@ This is a backwards-compatible extension. Contracts may implement burnable behav
    burn(100)
    // Result: balance = 900, totalSupply = 9900
    // Events: Transfer(user, 0x0, 100), Burn(user, 100)
-```
+   ```
 
 2. **Burn Exceeds Balance**
    ```javascript
    // Balance = 100
    burn(200) // Should revert: "ERC20: burn amount exceeds balance"
-```
+   ```
 
 3. **Burn Zero Amount**
    ```javascript
    burn(0) // Should succeed with no state changes
-```
+   ```
 
 ### BurnFrom Function Tests
 1. **Successful BurnFrom**
@@ -106,26 +106,26 @@ This is a backwards-compatible extension. Contracts may implement burnable behav
    // Alice balance = 1000
    burnFrom(alice, 200) // Called by Bob
    // Result: Alice balance = 800, Bob's allowance = 300
-```
+   ```
 
 2. **BurnFrom Exceeds Allowance**
    ```javascript
    // Allowance = 100
    burnFrom(alice, 200) // Should revert: "ERC20: insufficient allowance"
-```
+   ```
 
 3. **BurnFrom with Max Allowance**
    ```javascript
    // Allowance = type(uint256).max
    burnFrom(alice, 100)
    // Allowance should remain at max (no decrement)
-```
+   ```
 
 ## Reference Implementation
 
 ### Interface
 See the IERC20Burnable interface in the standard repository:
-```solidity
+```
 /standard/src/interfaces/IERC20Burnable.sol
 ```
 
@@ -196,7 +196,7 @@ interface IERC20Burnable {
     function burn(uint256 amount) external;
     function burnFrom(address account, uint256 amount) external;
 }
-```
+```solidity
 
 ### Integration with LRC-20 Base
 - **Base Contract**: `standard/src/ERC20.sol`
@@ -285,3 +285,6 @@ contract BurnableToken is ERC20 {
 - Same interface and behavior
 - Drop-in replacement for Ethereum contracts
 
+## Copyright
+
+Copyright and related rights waived via [CC0](https://creativecommons.org/publicdomain/zero/1.0/).

@@ -3,7 +3,7 @@ lp: 9025
 title: MEV Protection & Fair Ordering
 description: Comprehensive MEV protection mechanisms, fair ordering protocols, and transaction privacy for DeFi
 author: Lux Core Team
-status: Review
+status: Draft
 tags: [dex, trading]
 type: Standards Track
 category: Core
@@ -621,4 +621,6 @@ Migration path for existing protocols:
 3. **Timing attacks** - Randomized execution
 4. **Front-running within batch** - Shuffled ordering
 
-```
+## Copyright
+
+Copyright and related rights waived via [CC0](https://creativecommons.org/publicdomain/zero/1.0/).

@@ -45,7 +45,7 @@ ML-DSA (formerly Dilithium) was selected by NIST in 2024 as the primary post-qua
 1. **Security**: Based on the hardness of Module-LWE and Module-SIS lattice problems, believed quantum-resistant
 2. **Performance**: Faster verification than other PQ signatures (108μs vs 15ms for SLH-DSA)
 3. **Standardization**: Official NIST standard with security proofs
-4. **Key Sizes**: Balanced size/performance tradeoff (1952 byte pubkey, 3293 byte signature)
+4. **Key Sizes**: Balanced size/performance tradeoff (1952 byte pubkey, 3309 byte signature)
 
 ### Use Cases
 
@@ -59,7 +59,7 @@ ML-DSA (formerly Dilithium) was selected by NIST in 2024 as the primary post-qua
 
 ### Precompile Address
 
-```solidity
+```
 0x0200000000000000000000000000000000000006
 ```
 
@@ -71,7 +71,7 @@ The precompile accepts a packed binary input with the following structure:
 |--------|--------|-------|-------------|
 | 0      | 1952   | `publicKey` | ML-DSA-65 public key |
 | 1952   | 32     | `messageLength` | Message length as big-endian uint256 |
-| 1984   | 3293   | `signature` | ML-DSA-65 signature |
+| 1984   | 3309   | `signature` | ML-DSA-65 signature |
 | 5293   | variable | `message` | Message to verify (length from field above) |
 
 **Total minimum size**: 5293 bytes (without message)
@@ -84,7 +84,7 @@ The precompile returns a 32-byte word:
 
 ### Gas Cost
 
-```solidity
+```
 gas = BASE_COST + (messageLength * PER_BYTE_COST)
 
 Where:
@@ -109,7 +109,7 @@ interface IMLDSA {
      * @dev Verifies an ML-DSA-65 signature
      * @param publicKey The 1952-byte ML-DSA-65 public key
      * @param message The message that was signed
-     * @param signature The 3293-byte ML-DSA-65 signature  
+     * @param signature The 3309-byte ML-DSA-65 signature  
      * @return valid True if signature is valid
      */
     function verify(
@@ -205,7 +205,7 @@ function verifySignature(bytes calldata data, bytes calldata sig) {
     if (sig.length == 65) {
         // ECDSA signature
         return verifyECDSA(data, sig);
-    } else if (sig.length == 3293) {
+    } else if (sig.length == 3309) {
         // ML-DSA signature
         return verifyMLDSA(data, sig);
     }
@@ -225,7 +225,7 @@ function verifySignature(bytes calldata data, bytes calldata sig) {
 ```
 publicKey: 0x<1952 bytes of ML-DSA public key>
 message: "Hello, quantum-safe world!"
-signature: 0x<3293 bytes of ML-DSA signature>
+signature: 0x<3309 bytes of ML-DSA signature>
 ```
 
 **Expected Output:** `0x0000...0001` (valid)
@@ -237,7 +237,7 @@ signature: 0x<3293 bytes of ML-DSA signature>
 ```
 publicKey: 0x<1952 bytes of ML-DSA public key>
 message: "Hello, quantum-safe world!"
-signature: 0x<3293 bytes of WRONG signature>
+signature: 0x<3309 bytes of WRONG signature>
 ```
 
 **Expected Output:** `0x0000...0000` (invalid)
@@ -249,7 +249,7 @@ signature: 0x<3293 bytes of WRONG signature>
 ```
 publicKey: 0x<1952 bytes of ML-DSA public key>
 message: "Tampered message"
-signature: 0x<3293 bytes signature for DIFFERENT message>
+signature: 0x<3309 bytes signature for DIFFERENT message>
 ```
 
 **Expected Output:** `0x0000...0000` (invalid)
@@ -266,7 +266,7 @@ signature: 0x<3293 bytes signature for DIFFERENT message>
 ```
 publicKey: 0x<1952 bytes>
 message: 0x<10KB of data>
-signature: 0x<3293 bytes>
+signature: 0x<3309 bytes>
 ```
 
 **Expected Gas:** ~202,400 gas
@@ -419,3 +419,6 @@ Higher gas costs for PQ operations generate more fee revenue for validators, cre
 - **LP-4**: Quantum-Resistant Cryptography Integration
 - **Implementation**: `precompiles/mldsa/`
 
+## Copyright
+
+Copyright and related rights waived via [CC0](https://creativecommons.org/publicdomain/zero/1.0/).

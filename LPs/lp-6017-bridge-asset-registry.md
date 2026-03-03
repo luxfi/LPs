@@ -5,7 +5,7 @@ tags: [bridge, cross-chain]
 description: Specifies a standard registry for bridged assets.
 author: Lux Network Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
-status: Review
+status: Draft
 type: Standards Track
 category: Bridge
 created: 2025-01-23
@@ -87,7 +87,7 @@ function proposeAsset(
     AssetType assetType,
     bytes memory metadata
 ) external returns (bytes32 proposalId);
-```
+```solidity
 
 #### 2. Validation Phase
 - Automated checks:
@@ -335,3 +335,6 @@ forge coverage --match="Registry"
 - **LP-721**: Non-Fungible Token Standard (LRC-721)
 - **LP-301**: Bridge Protocol (main spec)
 
+## Copyright
+
+Copyright and related rights waived via [CC0](../LICENSE.md).

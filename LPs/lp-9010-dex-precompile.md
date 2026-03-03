@@ -1,19 +1,16 @@
 ---
 lp: 9010
-title: DEX Precompile - Native PoolManager (Uniswap v4 Style)
-tags: [defi, dex, precompile, poolmanager, uniswap-v4, amm]
-description: Native EVM precompile implementing Uniswap v4-style singleton PoolManager with flash accounting
+title: DEX Precompile - Native HFT Order Book
+tags: [defi, dex, precompile, hft, orderbook, trading]
+description: Native EVM precompile for high-frequency trading with 434M orders/sec throughput
 author: Lux Network Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
-status: Review
+status: Draft
 type: Standards Track
 category: Core
 created: 2025-12-21
 requires: 9000, 9003, 3020
-implementation: |
-  - Go: ~/work/lux/precompile/dex/lxpool.go
-  - Solidity: ~/work/lux/precompile/solidity/dex/ILXPool.sol
-  - Docs: ~/work/lux/precompile/docs/dex/LX.md
+implementation: ~/work/lux/standard/contracts/liquidity/precompiles/IDEX.sol
 order: 10
 ---
 
@@ -25,7 +22,7 @@ order: 10
 
 ## Abstract
 
-LP-9010 specifies the DEX Precompile at address `0x0000000000000000000000000000000000009010`, providing native EVM access to the Lux QuantumSwap high-frequency trading (HFT) infrastructure. This precompile enables smart contracts to interact with a full on-chain Central Limit Order Book (CLOB) achieving 434M orders/sec (GPU), 1M ops/sec (Go), 2ns latency, and 1ms finality.
+LP-9010 specifies the DEX Precompile at address `0x0200000000000000000000000000000000000010`, providing native EVM access to the Lux QuantumSwap high-frequency trading (HFT) infrastructure. This precompile enables smart contracts to interact with a full on-chain Central Limit Order Book (CLOB) achieving 434M orders/sec (GPU), 1M ops/sec (Go), 2ns latency, and 1ms finality.
 
 ## Motivation
 
@@ -51,8 +48,8 @@ Traditional EVM-based DEXs face fundamental limitations:
 
 ### Precompile Address
 
-```solidity
-0x0000000000000000000000000000000000009010
+```
+0x0200000000000000000000000000000000000010
 ```
 
 ### Interface Definition
@@ -64,7 +61,7 @@ pragma solidity ^0.8.24;
 
 /// @title IDEX - Native HFT DEX Precompile Interface
 /// @notice Provides direct access to QuantumSwap order book
-/// @dev Precompile at 0x0000000000000000000000000000000000009010
+/// @dev Precompile at 0x0200000000000000000000000000000000000010
 interface IDEX {
     /*//////////////////////////////////////////////////////////////
                               ORDER TYPES
@@ -265,7 +262,7 @@ interface IDEX {
 /// @title DEXLib - Helper library for DEX precompile
 /// @notice Simplifies DEX interactions
 library DEXLib {
-    IDEX internal constant DEX = IDEX(0x0000000000000000000000000000000000009010);
+    IDEX internal constant DEX = IDEX(0x0200000000000000000000000000000000000010);
 
     /// @notice Place a market buy order
     function marketBuy(bytes32 marketId, uint256 amount) internal returns (bytes32) {
@@ -362,7 +359,7 @@ library DEXLib {
 
 ### Performance Specifications
 
-```solidity
+```
 ┌────────────────────────────────────────────────────────────────────┐
 │                   QuantumSwap Performance Tiers                    │
 ├─────────────────────┬──────────────────────────────────────────────┤
@@ -476,7 +473,7 @@ function testOrderBookDepth() public view {
 
 **Location**: `~/work/lux/standard/contracts/liquidity/precompiles/IDEX.sol`
 
-```solidity
+```
 contracts/liquidity/precompiles/
 ├── IDEX.sol           # Interface definition (this LP)
 ├── DEXPrecompile.go   # Go precompile implementation
@@ -487,7 +484,7 @@ contracts/liquidity/precompiles/
 
 **Location**: `/Users/z/work/lux/dex/`
 
-```solidity
+```
 dex/
 ├── matching/          # Order matching engine
 ├── orderbook/         # B+ tree order book
@@ -547,3 +544,6 @@ dex/
 2. **Options/Futures**: Extend for derivatives trading?
 3. **Privacy Orders**: Dark pool integration?
 
+## Copyright
+
+Copyright and related rights waived via [CC0](https://creativecommons.org/publicdomain/zero/1.0/).

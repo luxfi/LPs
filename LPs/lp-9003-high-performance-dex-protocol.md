@@ -4,7 +4,7 @@ title: High-Performance DEX Protocol
 description: Multi-backend acceleration (Go, C++, GPU, FPGA) with 597ns latency and 1M+ orders/sec
 author: Lux Core Team (@luxfi)
 discussions-to: https://forum.lux.network/t/lp-9003-dex-protocol
-status: Review
+status: Final
 type: Standards Track
 category: LRC
 created: 2025-01-09
@@ -445,7 +445,7 @@ Fallback Strategy: Direct pool only
 ```
 
 **ZK Privacy Parameters**:
-```markdown
+```
 Circuit: Halo2 (~32KB proofs)
 Hash Function: Poseidon (14 rounds)
 Field: BN254
@@ -477,7 +477,7 @@ Benchmarks run on Apple M1 Max (2025-12-11):
 
 ### Order Book Performance
 
-```markdown
+```
 BenchmarkOrderBook-10              1,269,255 orders/sec    787.9 ns/op
 BenchmarkOrderBookParallel-10        684,184 orders/sec   1,462.0 ns/op
 BenchmarkCriticalOrderMatching/100   714,820 orders/sec   1,398.8 ns/op
@@ -504,3 +504,6 @@ BenchmarkCriticalOrderMatching/10000 521,370 orders/sec   1,918.0 ns/op
 | CME | 100-200 µs | Futures |
 | Binance | 1-5 ms | CEX |
 
+## Copyright
+
+Copyright and related rights waived via [CC0](../LICENSE.md).

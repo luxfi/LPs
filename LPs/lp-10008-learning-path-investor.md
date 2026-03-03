@@ -3,7 +3,7 @@ lp: 10008
 title: Learning Path - Investor & Institutional
 description: Understanding value accrual and capital deployment in Lux Network
 author: Lux Core Team
-status: Living
+status: Draft
 type: Meta
 created: 2025-12-21
 tags: [learning-path, investor, institutional, esg]
@@ -11,7 +11,7 @@ order: 28
 tier: core
 ---
 
-# LP-10008: Learning Path - Investor & Institutional
+# LP-0018: Learning Path - Investor & Institutional
 
 ## Abstract
 
@@ -112,3 +112,6 @@ After completing this path, you will understand:
 
 None — this is a meta/organizational proposal.
 
+## Copyright
+
+Copyright and related rights waived via [CC0](https://creativecommons.org/publicdomain/zero/1.0/).

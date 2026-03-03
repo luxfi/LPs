@@ -3,11 +3,11 @@ lp: 86
 title: Security Practices and Responsible Disclosure
 description: How to report vulnerabilities, bug bounty program, and security response procedures
 author: Lux Security Team
-status: Implemented
+status: Final
 type: Meta
 created: 2025-12-21
 tags: [security, disclosure, bug-bounty, cve]
-order: 86
+order: 410
 tier: core
 ---
 
@@ -35,7 +35,7 @@ Clear security reporting procedures:
 
 **PGP Key**: Available at https://lux.network/.well-known/security.txt
 
-```solidity
+```
 -----BEGIN PGP PUBLIC KEY BLOCK-----
 [Key available at security.txt]
 -----END PGP PUBLIC KEY BLOCK-----
@@ -432,4 +432,6 @@ This document itself should be:
 
 ---
 
-```
+## Copyright
+
+Copyright and related rights waived via [CC0](https://creativecommons.org/publicdomain/zero/1.0/).

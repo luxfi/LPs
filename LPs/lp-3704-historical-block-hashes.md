@@ -4,7 +4,7 @@ title: Historical Block Hashes (EIP-2935)
 description: Store historical block hashes in state for stateless execution
 author: Lux Core Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
-status: Review
+status: Draft
 type: Standards Track
 category: Core
 created: 2025-01-23
@@ -128,3 +128,6 @@ func ProcessBlockHashUpdate(state StateDB, header *Header) {
 
 - [EIP-2935: Save Historical Block Hashes in State](https://eips.ethereum.org/EIPS/eip-2935)
 
+## Copyright
+
+Copyright and related rights waived via [CC0](../LICENSE.md).

@@ -3,7 +3,7 @@ lp: 10003
 title: Learning Path - Platform Engineer & Validator
 description: Run, extend, and reason about the Lux Network infrastructure
 author: Lux Core Team
-status: Living
+status: Draft
 type: Meta
 created: 2025-12-21
 tags: [learning-path, validator, infrastructure, operator]
@@ -11,7 +11,7 @@ order: 23
 tier: core
 ---
 
-# LP-10003: Learning Path - Platform Engineer & Validator
+# LP-0013: Learning Path - Platform Engineer & Validator
 
 ## Abstract
 
@@ -50,7 +50,7 @@ After completing this path, you will be able to:
 |-------|-----|-------|------|-------|
 | 1 | [LP-1000](/docs/lp-1000-p-chain-core-platform-specification/) | P-Chain Core | 30 min | Deep |
 | 3 | [LP-3605](./lp-3605-validator-staking-and-delegation-standard.md) | Staking & Epochs | 25 min | Deep |
-| 4 | [LP-181](https://github.com/avalanche-foundation/ACPs/tree/main/ACPs/181-p-chain-epoched-views) | Epoching (LP-181) | 20 min | Deep |
+| 4 | [LP-181](./lp-1181-epoching.md) (based on ACP-181, historical prior art) | Epoching (LP-181) | 20 min | Deep |
 
 ### Stage 2: X-Chain & Asset Settlement
 
@@ -109,3 +109,6 @@ After completing this path, you will be able to:
 
 None — this is a meta/organizational proposal.
 
+## Copyright
+
+Copyright and related rights waived via [CC0](https://creativecommons.org/publicdomain/zero/1.0/).

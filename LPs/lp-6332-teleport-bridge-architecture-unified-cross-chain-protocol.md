@@ -4,7 +4,7 @@ title: Teleport Bridge Architecture - Unified Cross-Chain Protocol
 description: Comprehensive specification for Lux Network's decentralized cross-chain bridge using T-Chain (ThresholdVM) for MPC key management and B-Chain (BridgeVM) for bridge coordination
 author: Lux Partners (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
-status: Review
+status: Draft
 type: Standards Track
 category: Core
 created: 2025-12-11
@@ -73,7 +73,7 @@ The Teleport Bridge Architecture addresses these challenges by:
 
 The Teleport system operates across two specialized chains within Lux Network:
 
-```solidity
+```
                      ┌──────────────────────────────────────────────────────┐
                      │                  Lux Primary Network                 │
                      │                                                       │
@@ -118,7 +118,7 @@ T-Chain is a specialized chain providing MPC key management. See [LP-330](/docs/
 
 **Chain Parameters:**
 - **Chain ID**: `T` (Threshold)
-- **Consensus**: Lux Snowball++ with 2s finality
+- **Consensus**: Lux Quasar (Photon committee + Wave voting + Focus, LP-020) with 2s finality
 - **Block Time**: 500ms
 - **Staking Token**: LUX (minimum 5,000 LUX per signer)
 - **Threshold**: Configurable t-of-n (default: 2/3 + 1)
@@ -136,7 +136,7 @@ B-Chain orchestrates bridge operations. See [LP-331](/docs/lp-6331-b-chain-bridg
 
 **Chain Parameters:**
 - **Chain ID**: `B` (Bridge)
-- **Consensus**: Lux Snowball++ with 2s finality
+- **Consensus**: Lux Quasar (Photon committee + Wave voting + Focus, LP-020) with 2s finality
 - **Block Time**: 500ms
 - **Staking Token**: LUX (minimum 10,000 LUX per validator)
 
@@ -176,7 +176,7 @@ The Teleport network requires a minimum of 5 nodes running both BridgeVM and Thr
 
 #### Network Topology
 
-```solidity
+```
 ┌──────────────────────────────────────────────────────────────────────────────┐
 │                    Teleport Network (5-Node Minimum)                          │
 ├──────────────────────────────────────────────────────────────────────────────┤
@@ -752,7 +752,7 @@ Complete deposit flow from Ethereum to Lux C-Chain:
      │◄────────────────────────────────────────────────────────────────────────
      │  7. Receive wrapped tokens                                            │
      │                 │                 │                 │                 │
-```
+```solidity
 
 #### Deposit Contract Interface
 
@@ -1506,7 +1506,9 @@ For testnet, use reduced requirements:
     "protocol": "lss"
   }
 }
-bash
+```
+
+```bash
 # Deploy testnet with 3 nodes
 ./scripts/deploy-testnet.sh --nodes 3 --threshold 2
 ```
@@ -1656,7 +1658,7 @@ pnpm build
 # Run local test network
 cd ~/work/lux/node
 ./scripts/run-teleport-testnet.sh
-```
+```solidity
 
 ### Contract Deployments
 
@@ -1756,4 +1758,6 @@ See the full test suite in [github.com/luxfi/bridge/tests]().
 3. **Cross-L2 Optimization**: Direct L2-to-L2 paths or always via mainnet?
 4. **IBC Integration**: Full Cosmos interoperability scope?
 
-```
+## Copyright
+
+Copyright and related rights waived via [CC0](../LICENSE.md).

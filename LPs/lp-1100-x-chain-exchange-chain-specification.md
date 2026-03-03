@@ -5,7 +5,7 @@ tags: [core, defi]
 description: High-performance order book DEX with Lamport OTS quantum safety
 author: Lux Network Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
-status: Implemented
+status: Final
 type: Standards Track
 category: Core
 created: 2025-01-23
@@ -52,7 +52,7 @@ An order‑book chain specialized for trading delivers predictable latency and d
 
 ## High-Level Architecture
 
-```solidity
+```
 ┌─────────────────────────────────────────────────────────────────┐
 │                        X-Chain Architecture                       │
 ├─────────────────────┬─────────────────────┬────────────────────┤
@@ -693,4 +693,6 @@ X-Chain represents a breakthrough in decentralized exchange technology, combinin
    - Verify exchange rate accuracy
    - Test slippage protection
 
-```
+## Copyright
+
+Copyright and related rights waived via [CC0](../LICENSE.md).

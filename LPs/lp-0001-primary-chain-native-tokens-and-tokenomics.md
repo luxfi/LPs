@@ -4,7 +4,7 @@ title: Primary Chain, Native Tokens, and Tokenomics
 tags: [network, core, tokenomics, token]
 description: Defines Lux native currency (LUX), tokenomics, and core chain identifiers for the network.
 author: Lux Network Team (@luxfi)
-status: Implemented
+status: Final
 type: Standards Track
 category: Core
 created: 2025-07-24
@@ -159,7 +159,7 @@ go test -v ./...
 
 **Balance Queries**:
 - P-Chain: `platform.getBalance(address)`
-- X-Chain: `avm.getBalance(address, assetID)`
+- X-Chain: `xvm.getBalance(address, assetID)`
 - C-Chain: `eth_getBalance(address)`
 
 **Staking Queries**:
@@ -167,4 +167,6 @@ go test -v ./...
 - `platform.getTotalStake()` - Total staked LUX
 - `platform.getCurrentSupply()` - Total LUX supply
 
-```
+## Copyright
+
+Copyright and related rights waived via [CC0](../LICENSE.md).

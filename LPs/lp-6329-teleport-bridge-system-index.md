@@ -4,7 +4,7 @@ title: Teleport Bridge System Index
 description: Master index and navigation guide for the Lux Network's Teleport cross-chain bridge system, unifying threshold cryptography, bridge operations, key management, and smart contract integration.
 author: Lux Protocol Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
-status: Review
+status: Draft
 type: Informational
 category: Core
 created: 2025-12-11
@@ -23,7 +23,7 @@ The Teleport Bridge System spans multiple LPs covering threshold cryptography, b
 
 ## System Overview
 
-```solidity
+```
 +-------------------------------------------------------------------------+
 |                         Lux Network Chain Architecture                   |
 +-------------------------------------------------------------------------+
@@ -197,7 +197,7 @@ LSS-based rotation without key reconstruction:
 - **Triggers**: Validator changes, proactive refresh, emergency rotation
 - **Rollback**: Safe reversion to previous generation on failure
 
-```markdown
+```
 Generation 0: Parties A, B, C (2-of-3)
      |
      | ReshareTx(newParties=[A, B, D, E], threshold=3)
@@ -489,4 +489,6 @@ threshold/
 
 ## Related Documentation
 
-```
+## Copyright
+
+Copyright and related rights waived via [CC0](../LICENSE.md).

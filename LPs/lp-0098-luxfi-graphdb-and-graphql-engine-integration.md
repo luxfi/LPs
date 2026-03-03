@@ -4,7 +4,7 @@ title: "Luxfi GraphDB & GraphQL Engine Integration"
 description: "Unify chain data with an embedded GraphDB and GraphQL engine, using a Go-based Badger-Plus backend, a custom GraphVM for on-chain querying, and new precompiles for graph mutations and proofs."
 author: Lux Network Team (@luxnet), Luxfi Contributors
 discussions-to: https://github.com/luxfi/lps/discussions
-status: Implemented
+status: Final
 type: Standards Track
 category: Interface
 created: 2025-07-24
@@ -115,7 +115,7 @@ query CrossChainPortfolio($address: Address!) {
     jobs, earnings, reputation
   }
 }
-```
+```solidity
 
 ## Backwards Compatibility
 
@@ -248,7 +248,7 @@ go build ./graphql/cmd/graphql
 **Node Integration** (`~/work/lux/node/`):
 - **C-Chain Hooks**: Precompile registration in `vms/evm/config.go`
 - **P-Chain Hooks**: Block event listeners in `vms/platformvm/block_executor.go`
-- **X-Chain Hooks**: UTXO event listeners in `vms/avm/block_executor.go`
+- **X-Chain Hooks**: UTXO event listeners in `vms/xvm/block_executor.go`
 
 **Configuration**:
 ```bash
@@ -289,3 +289,6 @@ GraphVM query gas costs and precompile storage writes introduce new gas sinks; t
 - What guardrails (whitelists, ACLs) are needed for schema evolution or custom GraphQL extensions?
 - How to best surface proof root updates to light clients (block metadata vs. separate registry)?
 
+## Copyright
+
+Copyright and related rights waived via [CC0](https://creativecommons.org/publicdomain/zero/1.0/).

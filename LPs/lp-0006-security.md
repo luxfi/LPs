@@ -3,7 +3,7 @@ lp: 6
 title: Network Security Principles
 description: Lux Network's security principles, threat model, and security practices
 author: Lux Core Team
-status: Implemented
+status: Final
 type: Meta
 created: 2025-12-21
 tags: [network, core, security, cryptography, threat-model]
@@ -96,3 +96,6 @@ This LP establishes policy and does not affect existing implementations.
 
 This document itself defines security considerations for the network. Regular review and updates are required as the threat landscape evolves.
 
+## Copyright
+
+Copyright and related rights waived via [CC0](https://creativecommons.org/publicdomain/zero/1.0/).

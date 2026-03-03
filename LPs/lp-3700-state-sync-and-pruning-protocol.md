@@ -4,7 +4,7 @@ title: State Sync and Pruning Protocol
 description: Efficient state synchronization and pruning mechanisms for scalable node operation
 author: Lux Core Team (@luxfi)
 discussions-to: https://forum.lux.network/t/lp-604-state-sync
-status: Review
+status: Draft
 type: Standards Track
 category: Core
 created: 2025-01-09
@@ -335,3 +335,6 @@ All implementation files verified to exist:
 | Pruning Rate | >1GB/min | Background operation |
 | Ancient Write | >100MB/s | Batch operations |
 
+## Copyright
+
+Copyright and related rights waived via [CC0](../LICENSE.md).

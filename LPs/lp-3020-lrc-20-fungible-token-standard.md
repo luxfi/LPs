@@ -4,7 +4,7 @@ title: LRC-20 Fungible Token Standard
 description: This LP retains the Lux Request for Comment 20 standard.
 author: Lux Network Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
-status: Implemented
+status: Final
 type: Standards Track
 category: LRC
 created: 2025-01-23
@@ -140,6 +140,9 @@ struct ConfidentialProof {
 }
 ```
 
+## Copyright
+
+Copyright and related rights waived via [CC0](../LICENSE.md).
 ## Rationale
 
 The design prioritizes clarity, interoperability, and operational simplicity, selecting mechanisms that reduce ambiguity and ease integration across Lux tooling and chains.
@@ -331,4 +334,3 @@ forge test --match "AICompute"     # Test AI extensions
 4. Li, T., et al. (2020). "Federated Learning: Challenges, Methods, and Future Directions." IEEE Signal Processing Magazine.
 5. Dwork, C., & Roth, A. (2014). "The Algorithmic Foundations of Differential Privacy." Foundations and Trends in Theoretical Computer Science.
 6. Boneh, D., et al. (2020). "Bulletproofs: Short Proofs for Confidential Transactions and More." IEEE Symposium on Security and Privacy.
-```

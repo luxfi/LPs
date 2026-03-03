@@ -5,7 +5,7 @@ tags: [core, consensus, staking, validators, p-chain]
 description: Core specification for the P-Chain (Platform Chain), the metadata and coordination chain of Lux Network
 author: Lux Network Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
-status: Review
+status: Final
 type: Standards Track
 category: Core
 created: 2025-12-11
@@ -45,7 +45,7 @@ A dedicated platform chain provides:
 ```go
 import (
     pvm "github.com/luxfi/node/vms/platformvm"
-    "github.com/luxfi/utils/constants"
+    "github.com/luxfi/node/utils/constants"
 )
 
 // VM ID constant
@@ -163,7 +163,7 @@ P-Chain uses a UTXO model for:
 - Managing locked outputs
 - Handling rewards distribution
 
-```solidity
+```
 UTXO States:
 1. Available → Staked (via AddValidator)
 2. Staked → Locked (during validation)
@@ -248,3 +248,6 @@ func TestUTXOStateTransitions(t *testing.T)
 | LP-1200 | Staking Mechanics | Sub-specification |
 | LP-1300 | chain Management | Sub-specification |
 
+## Copyright
+
+Copyright and related rights waived via [CC0](https://creativecommons.org/publicdomain/zero/1.0/).

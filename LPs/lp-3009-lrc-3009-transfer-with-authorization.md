@@ -4,7 +4,7 @@ title: LRC-3009 Transfer With Authorization
 description: Gasless token transfers via cryptographic signatures (meta-transactions)
 author: Lux Core Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
-status: Implemented
+status: Final
 type: Standards Track
 category: LRC
 created: 2025-01-23
@@ -224,4 +224,6 @@ This standard is fully backwards compatible with existing ERC-20 tokens. The aut
 - [x402 Payment Protocol](https://x402.org)
 - [LP-3026: LRC-2612 Permit](./lp-3026-lrc-2612-permit-extension.md)
 
-```
+## Copyright
+
+Copyright and related rights waived via [CC0](../LICENSE.md).

@@ -4,7 +4,7 @@ title: Bridge Smart Contract Integration
 description: Specification for bridge smart contract integration with T-Chain MPC threshold signatures and B-Chain bridge coordination
 author: Lux Partners (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
-status: Review
+status: Draft
 type: Standards Track
 category: Bridge
 created: 2025-12-11
@@ -47,7 +47,7 @@ Cross-chain bridges are high-value targets with billions lost to exploits. The L
 
 ### 1. Contract Architecture Overview
 
-```solidity
+```
 +------------------+     +------------------+     +------------------+
 |   BridgeRouter   |---->|   BridgeVault    |---->|  TokenRegistry   |
 |   (Entry Point)  |     |  (Asset Custody) |     | (Asset Mapping)  |
@@ -2218,7 +2218,7 @@ contract DeployBridge is Script {
         vm.stopBroadcast();
     }
 }
-```
+```solidity
 
 ## Rationale
 
@@ -2720,7 +2720,7 @@ forge script script/Deploy.s.sol --rpc-url http://localhost:9630/ext/bc/C/rpc --
 npx hardhat run scripts/deploy.ts --network lux
 # Or with Foundry
 forge script script/Deploy.s.sol --rpc-url http://api.lux.network/ext/bc/C/rpc --broadcast --verify
-```
+```solidity
 
 ## Security Considerations
 
@@ -2843,4 +2843,6 @@ MAX_DELAY = 30 days
 - **[LP-0333](/docs/lp-7333-dynamic-signer-rotation-with-lss-protocol/)**: Dynamic Signer Rotation (LSS protocol)
 - **[LP-0334](/docs/lp-7334-per-asset-threshold-key-management/)**: Per-Asset Threshold Keys
 
-```
+## Copyright
+
+Copyright and related rights waived via [CC0](../LICENSE.md).

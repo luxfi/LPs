@@ -5,7 +5,7 @@ tags: [c-chain, vm, evm, core]
 description: Specifies the Lux execution model, which is designed to be EVM-compatible while allowing future extensibility for new virtual machines.
 author: Lux Network Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
-status: Implemented
+status: Final
 type: Standards Track
 category: Core
 created: 2025-01-25
@@ -103,11 +103,11 @@ go test -v ./core/vm ./core/state
   - [`txs/`](https://github.com/luxfi/node/tree/main/vms/platformvm/txs) - Transaction types
   - [`state/`](https://github.com/luxfi/node/tree/main/vms/platformvm/state) - Validator/staker state
 
-**2. AVM (X-Chain)** (`vms/avm/`)
+**2. XVM (X-Chain)** (`vms/xvm/`)
 - **Purpose**: Asset exchange and UTXO-based transfers
 - **Execution**: Custom VM with DAG consensus
 - **Key Files**:
-  - [`vm.go`](https://github.com/luxfi/node/blob/main/vms/avm/vm.go) - Asset VM core
+  - [`vm.go`](https://github.com/luxfi/node/blob/main/vms/xvm/vm.go) - Asset VM core
   - [`txs/`](https://github.com/luxfi/node/tree/main/vms/platformvm/txs) - Asset transaction types
   - [`utxos/`](https://github.com/luxfi/node/tree/main/vms/platformvm) - UTXO management
 
@@ -122,7 +122,7 @@ go test -v ./core/vm ./core/state
 **4. EVM (C-Chain)** (via `~/work/lux/evm/`)
 - **Purpose**: Smart contracts and DeFi
 - **Execution**: Full EVM compatibility
-- **Integration**: `plugin/evm/vm.go` implements `snowman.ChainVM` interface
+- **Integration**: `plugin/evm/vm.go` implements `chain.ChainVM` interface (`github.com/luxfi/consensus/engine/chain/block`, the linear-chain Nova-mode VM contract)
 
 ### Solidity Contract Standards
 
@@ -156,7 +156,7 @@ forge test --match-contract ERC721Test
 
 **Static Fee Configuration**:
 - P-Chain: `~/work/lux/node/vms/platformvm/txs/fee/calculator.go`
-- X-Chain: `~/work/lux/node/vms/avm/txs/fee.go`
+- X-Chain: `~/work/lux/node/vms/xvm/txs/fee.go`
 
 **Dynamic Gas (C-Chain)**:
 - **LP-176 Implementation**: `~/work/lux/node/vms/evm/lp176/`
@@ -178,7 +178,7 @@ RUN_E2E=1 go test -v ./tests/e2e/
 
 # Tests verify:
 # - Platform VM validator operations
-# - AVM asset transfers
+# - XVM asset transfers
 # - EVM smart contract execution
 # - Cross-VM Warp messaging
 # - Q-Chain quantum signatures
@@ -186,7 +186,7 @@ RUN_E2E=1 go test -v ./tests/e2e/
 
 **Performance Benchmarks**:
 - Platform VM: ~2,000 validator txs/sec
-- AVM: ~10,000 transfers/sec
+- XVM: ~10,000 transfers/sec
 - EVM: ~1,500 contract calls/sec (single-threaded)
 - Q-Chain: ~500 quantum-verified txs/sec
 
@@ -221,3 +221,6 @@ RUN_E2E=1 go test -v ./tests/e2e/
    - Verify performance under load
    - Test resource utilization limits
 
+## Copyright
+
+Copyright and related rights waived via [CC0](../LICENSE.md).

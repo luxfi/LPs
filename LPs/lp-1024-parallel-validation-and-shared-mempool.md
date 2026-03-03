@@ -141,4 +141,3 @@ Additive: existing chains and clients continue to operate. Adoption can occur in
    - Verify atomic operations
    - Validate state synchronization
 
-```

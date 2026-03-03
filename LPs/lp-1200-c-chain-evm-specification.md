@@ -6,7 +6,7 @@ tags: [core, evm, smart-contracts, c-chain]
 description: Core specification for the C-Chain (Contract Chain), Lux Network's EVM-compatible smart contract chain
 author: Lux Network Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
-status: Implemented
+status: Final
 type: Standards Track
 category: Core
 created: 2025-12-11
@@ -15,7 +15,7 @@ requires: 0000, 99
 
 ## Abstract
 
-LP-1200 specifies the C-Chain (Contract Chain), Lux Network's EVM-compatible smart contract blockchain. The C-Chain runs a full Ethereum Virtual Machine, enabling deployment of Solidity and Vyper smart contracts with full tooling compatibility.
+LP-2000 specifies the C-Chain (Contract Chain), Lux Network's EVM-compatible smart contract blockchain. The C-Chain runs a full Ethereum Virtual Machine, enabling deployment of Solidity and Vyper smart contracts with full tooling compatibility.
 
 ## Motivation
 
@@ -35,7 +35,7 @@ An EVM-compatible chain provides:
 | Chain ID | `C` |
 | VM ID | `evm` |
 | VM Name | `evm` |
-| EVM Chain ID | 96369 (Mainnet), 96368 (Testnet) |
+| EVM Chain ID | 43114 (Mainnet), 43113 (Testnet) |
 | Block Time | ~2 seconds |
 | Consensus | Quasar |
 
@@ -48,7 +48,7 @@ An EVM-compatible chain provides:
 ```go
 import (
     cvm "github.com/luxfi/node/vms/cchainvm"
-    "github.com/luxfi/utils/constants"
+    "github.com/luxfi/node/utils/constants"
 )
 
 // VM ID constant
@@ -146,7 +146,7 @@ type GasConfig struct {
 
 #### REST Endpoints
 
-```solidity
+```
 POST /ext/bc/C/rpc              # JSON-RPC endpoint
 GET  /ext/bc/C/lux/getUTXOs     # Get atomic UTXOs
 POST /ext/bc/C/lux/issueTx      # Issue atomic tx
@@ -225,7 +225,7 @@ Design decisions for C-Chain:
 
 ## Backwards Compatibility
 
-LP-1200 supersedes LP-12. Both old and new numbers resolve to this document.
+LP-2000 supersedes LP-0012. Both old and new numbers resolve to this document.
 
 ## Test Cases
 
@@ -272,3 +272,6 @@ cd standard && forge test
 | LP-2400 | DeFi Protocols | Sub-specification |
 | LP-2600 | Rollups/L2 | Sub-specification |
 
+## Copyright
+
+Copyright and related rights waived via [CC0](https://creativecommons.org/publicdomain/zero/1.0/).

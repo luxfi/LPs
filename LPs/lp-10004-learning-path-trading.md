@@ -3,7 +3,7 @@ lp: 10004
 title: Learning Path - Trading & Market Infrastructure
 description: Build HFT-grade trading systems, DEXs, and market infrastructure on Lux
 author: Lux Core Team
-status: Living
+status: Draft
 type: Meta
 created: 2025-12-21
 tags: [learning-path, trading, dex, hft, markets]
@@ -11,7 +11,7 @@ order: 24
 tier: core
 ---
 
-# LP-10004: Learning Path - Trading & Market Infrastructure
+# LP-0014: Learning Path - Trading & Market Infrastructure
 
 ## Abstract
 
@@ -126,3 +126,6 @@ For trading research:
 
 None — this is a meta/organizational proposal.
 
+## Copyright
+
+Copyright and related rights waived via [CC0](https://creativecommons.org/publicdomain/zero/1.0/).

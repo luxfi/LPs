@@ -4,7 +4,7 @@ title: L2 to Sovereign L1 Ascension
 description: Defines the process and fee structure for a Lux L2 to become a sovereign L1, and the ongoing fee model for L1 validators.
 author: Gemini (@gemini)
 discussions-to: https://github.com/luxfi/lps/discussions
-status: Review
+status: Draft
 type: Standards Track
 category: Core
 created: 2025-07-22
@@ -14,7 +14,7 @@ order: 1120
 
 ## Abstract
 
-This LP specifies the mechanism by which a Lux L2 (chain) can "ascend" to become a sovereign L1 network, with minimal dependency on the Lux Primary Network. It introduces a one-time Ascension Fee and a continuous, dynamic L1 Validator Fee for sovereign L1s, replacing the traditional AVAX/LUX staking requirement. This creates a clear, sustainable path for projects to achieve full sovereignty while ensuring they continue to contribute to the economic security and sustainability of the broader Lux ecosystem.
+This LP specifies the mechanism by which a Lux L2 (chain) can "ascend" to become a sovereign L1 network, with minimal dependency on the Lux Primary Network. It introduces a one-time Ascension Fee and a continuous, dynamic L1 Validator Fee for sovereign L1s, replacing the traditional LUX staking requirement. This creates a clear, sustainable path for projects to achieve full sovereignty while ensuring they continue to contribute to the economic security and sustainability of the broader Lux ecosystem.
 
 ## Motivation
 
@@ -153,4 +153,3 @@ This LP introduces additive capabilities and preserves existing behavior. Rollou
    - Verify reentrancy protection
    - Test gas forwarding
 
-```

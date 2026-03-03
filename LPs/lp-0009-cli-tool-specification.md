@@ -5,7 +5,7 @@ tags: [dev-tools, cli]
 description: Defines the official Command-Line Interface (CLI) tools for Lux.
 author: Lux Network Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
-status: Implemented
+status: Final
 type: Standards Track
 category: Interface
 created: 2025-01-23
@@ -55,6 +55,9 @@ By standardizing the CLI, all users from developers to validators have a clear r
    - Verify performance under load
    - Test resource utilization limits
 
+## Copyright
+
+Copyright and related rights waived via [CC0](../LICENSE.md).
 ## Backwards Compatibility
 
 Additive proposal; does not break existing modules. Adoption can be phased in.
@@ -161,4 +164,3 @@ go test -race ./...
 - **LP-7**: VM SDK Specification (CLI manages VM creation)
 - **LP-8**: Standard Library (CLI uses standard library functions)
 - **LP-10 through LP-18**: Various chain and bridge implementations (CLI provides interfaces)
-```

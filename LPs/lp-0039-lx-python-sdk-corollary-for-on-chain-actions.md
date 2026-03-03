@@ -4,7 +4,7 @@ title: LX Python SDK Corollary for On-Chain Actions
 description: Breakdown of Python client (lx.api.Exchange) methods and mapping to on-chain Dex actions
 author: Lux Network Team
 discussions-to: https://github.com/luxfi/lps/discussions
-status: Implemented
+status: Draft
 type: Informational
 category: Interface
 created: 2025-07-25
@@ -73,18 +73,18 @@ class Exchange(API):
 1. Convert high-level OrderRequest to on-chain wire format:
    ```python
    wire = order_request_to_order_wire(order_req, asset_id)
-```
+   ```
 2. Build order action payload:
    ```python
    action = order_wires_to_order_action([wire], builder)
-```
+   ```
 3. Sign payload with ECDSA via sign_l1_action:
    ```python
    signature = sign_l1_action(
        self.wallet, action, self.vault_address, timestamp,
        self.expires_after, self.base_url == MAINNET_API_URL
    )
-```
+   ```
 4. Submit via _post_action → JSON‑RPC dex.swap.submit or HTTP REST↔RPC gateway.
 
 ## Modify and Cancel Flows
@@ -216,3 +216,7 @@ Python client methods are additive; existing JSON-RPC and WS endpoints remain un
 - Manage key material via secure LocalAccount handlers.
 - Use HTTPS for all connections to avoid man-in-the-middle attacks.
 - Implement rate limiting on client side to prevent accidental spam.
+
+## Copyright
+
+CC0

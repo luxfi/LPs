@@ -3,7 +3,7 @@ lp: 10009
 title: Learning Path - Researcher
 description: Academic research, experimental protocols, and frontier exploration
 author: Lux Core Team
-status: Living
+status: Final
 type: Meta
 created: 2025-12-21
 tags: [learning-path, research, academic, experimental]
@@ -11,7 +11,7 @@ order: 29
 tier: core
 ---
 
-# LP-10009: Learning Path - Researcher
+# LP-0019: Learning Path - Researcher
 
 ## Abstract
 
@@ -165,3 +165,6 @@ To add a research LP:
 
 None — this is a meta/organizational proposal.
 
+## Copyright
+
+Copyright and related rights waived via [CC0](https://creativecommons.org/publicdomain/zero/1.0/).

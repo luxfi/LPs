@@ -5,7 +5,7 @@ tags: [dev-tools, testing]
 description: Specifies the Lux Network Runner and testing frameworks.
 author: Lux Network Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
-status: Implemented
+status: Final
 type: Standards Track
 category: Interface
 created: 2025-01-23
@@ -105,6 +105,9 @@ network.Healthy(ctx)  # Bootstrap all 4 chains
    - Verify performance under load
    - Test resource utilization limits
 
+## Copyright
+
+Copyright and related rights waived via [CC0](../LICENSE.md).
 ## Backwards Compatibility
 
 Additive specification; no breaking changes to existing interfaces. Adoption is optional per component.

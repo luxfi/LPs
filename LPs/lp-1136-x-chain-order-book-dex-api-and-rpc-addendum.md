@@ -4,7 +4,7 @@ title: X-Chain Order-Book DEX API & RPC Addendum
 description: Detailed specification of transaction types, wire formats, RPC endpoints, indexer schema, and CLI enhancements for the X-Chain Order-Book DEX extension (LP-006)
 author: Zach Kelling (@zeekay) and Lux Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
-status: Review
+status: Final
 type: Standards Track
 category: Interface
 created: 2025-07-24
@@ -55,7 +55,7 @@ To build a native, LX-style DEX on X-Chain, we must extend the core UTXO/Fx tran
 | 0x5d  | BatchLiquidationTx    | Liquidate N traders in one transaction         | 200+40×N                |
 | 0x5e  | FundingSettleTx       | System-generated funding payment transfers     | 180+40×numTraders       |
 
-#### 1.1 OrderTx serialization (AVAX codec v1)
+#### 1.1 OrderTx serialization (LUX codec v1)
 
 ```go
 type OrderTx struct {
@@ -133,7 +133,7 @@ Priority = (gasFeeCap μLux × weightFee) + makerBonus – cancelWeight. Fast‑
 
 ### 7 CLI Enhancements
 
-```solidity
+```
 lux-cli dex markets
 lux-cli dex place --mkt BTC-USD --side buy --price 63421.5 --size 0.8 --post-only
 lux-cli dex cancel --order 0xabc123
@@ -179,14 +179,14 @@ DEX features live behind the DexFx extension; nodes without DexFx see no behavio
 
 ### X-Chain DEX Extension Architecture
 
-**Location**: `~/work/lux/node/vms/avm/`
-**GitHub**: [`github.com/luxfi/node/tree/main/vms/avm`](https://github.com/luxfi/node/tree/main/vms/platformvm)
+**Location**: `~/work/lux/node/vms/xvm/`
+**GitHub**: [`github.com/luxfi/node/tree/main/vms/xvm`](https://github.com/luxfi/node/tree/main/vms/platformvm)
 
 **Core Components**:
-- [`plugins/dex/dex_fx.go`](https://github.com/luxfi/node/blob/main/vms/avm/plugins/dex/dex_fx.go) - DexFx plugin implementation
-- [`plugins/dex/transactions.go`](https://github.com/luxfi/node/blob/main/vms/avm/plugins/dex/transactions.go) - OrderTx, CancelTx codec
-- [`plugins/dex/orderbook.go`](https://github.com/luxfi/node/blob/main/vms/avm/plugins/dex/orderbook.go) - In-memory order book
-- [`plugins/dex/rpc.go`](https://github.com/luxfi/node/blob/main/vms/avm/plugins/dex/rpc.go) - RPC methods
+- [`plugins/dex/dex_fx.go`](https://github.com/luxfi/node/blob/main/vms/xvm/plugins/dex/dex_fx.go) - DexFx plugin implementation
+- [`plugins/dex/transactions.go`](https://github.com/luxfi/node/blob/main/vms/xvm/plugins/dex/transactions.go) - OrderTx, CancelTx codec
+- [`plugins/dex/orderbook.go`](https://github.com/luxfi/node/blob/main/vms/xvm/plugins/dex/orderbook.go) - In-memory order book
+- [`plugins/dex/rpc.go`](https://github.com/luxfi/node/blob/main/vms/xvm/plugins/dex/rpc.go) - RPC methods
 
 **DEX Indexer Service**:
 - Location: `~/work/lux/stack/dex-indexer/`
@@ -231,7 +231,7 @@ func (ob *OrderBook) GetBook(depth uint16) (bids, asks []PriceLevel) {
 **Testing**:
 ```bash
 cd ~/work/lux/node
-go test ./vms/avm/plugins/dex/... -v -bench=BenchmarkOrderBook
+go test ./vms/xvm/plugins/dex/... -v -bench=BenchmarkOrderBook
 
 cd ~/work/lux/stack
 go test ./dex-indexer/... -v
@@ -260,3 +260,6 @@ See `plugins-core/dex` for DexFx code and `stack/dex-indexer` for indexing servi
 - Implement market circuit breakers for extreme price moves.
 - Enforce minimum order sizes to prevent dust attacks.
 
+## Copyright
+
+Copyright and related rights waived via [CC0](https://creativecommons.org/publicdomain/zero/1.0/).

@@ -4,7 +4,7 @@ title: Precompile Suite Overview
 description: Comprehensive overview of all EVM precompiles for Lux Network including access control, fee management, cross-chain, and cryptography
 author: Lux Core Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
-status: Review
+status: Draft
 type: Informational
 created: 2025-11-14
 requires: 7321, 7322, 7324
@@ -49,57 +49,9 @@ Without a central index, developers must navigate dozens of individual LPs to un
 
 ### Standard Ethereum Precompiles
 
-For complete documentation of standard Ethereum precompiles (0x01-0x11), see **[LP-1227: Standard Ethereum Precompiles](./lp-1227-standard-ethereum-precompiles.md)**.
-
-#### Core Precompiles (Active from Genesis)
-
-| Address | Name | Purpose | Gas (EIP-1108) | Status |
-|---------|------|---------|----------------|--------|
-| `0x01` | ECRECOVER | secp256k1 signature recovery | 3,000 | ✅ Active |
-| `0x02` | SHA256 | SHA-256 hash | 60 + 12/word | ✅ Active |
-| `0x03` | RIPEMD160 | RIPEMD-160 hash | 600 + 120/word | ✅ Active |
-| `0x04` | IDENTITY | Data copy | 15 + 3/word | ✅ Active |
-| `0x05` | MODEXP | Modular exponentiation | EIP-2565 | ✅ Active |
-| `0x06` | BN256_ADD | BN254 elliptic curve addition | 150 | ✅ Active |
-| `0x07` | BN256_MUL | BN254 scalar multiplication | 6,000 | ✅ Active |
-| `0x08` | BN256_PAIRING | BN254 pairing check (Groth16) | 45,000 + 34,000/pair | ✅ Active |
-| `0x09` | BLAKE2F | BLAKE2 compression | 1/round | ✅ Active |
-
-#### Prague Precompiles (BLS12-381)
-
-| Address | Name | Purpose | Gas | Status |
-|---------|------|---------|-----|--------|
-| `0x0b` | BLS12381_G1ADD | BLS G1 addition | 375 | 🔜 Ready |
-| `0x0c` | BLS12381_G1MSM | BLS G1 multi-scalar mult | 12,000 | 🔜 Ready |
-| `0x0d` | BLS12381_G2ADD | BLS G2 addition | 600 | 🔜 Ready |
-| `0x0e` | BLS12381_G2MSM | BLS G2 multi-scalar mult | 22,500 | 🔜 Ready |
-| `0x0f` | BLS12381_PAIRING | BLS pairing check | 37,700 + 32,600/pair | 🔜 Ready |
-| `0x10` | BLS12381_MAP_G1 | Map to G1 | 5,500 | 🔜 Ready |
-| `0x11` | BLS12381_MAP_G2 | Map to G2 | 23,800 | 🔜 Ready |
-
-#### Extended Precompiles
-
 | Address | Name | Purpose | LP Reference | Status |
 |---------|------|---------|--------------|--------|
 | `0x0000000000000000000000000000000000000100` | secp256r1 | P-256 ECDSA verification (RIP-7212) | LP-2204 | Final |
-
-#### FHE Precompiles (Fully Homomorphic Encryption)
-
-For FHE operations enabling computation on encrypted data, see **[LP-8100: FHE Precompiles and Infrastructure](./lp-4100-fhe-precompiles-and-infrastructure.md)**.
-
-| Address | Name | Purpose | Gas (euint32) | Status |
-|---------|------|---------|---------------|--------|
-| `0x80` | FHE_CORE | FHE arithmetic/comparison/bitwise | 60,000-200,000 | 📋 Draft |
-| `0x81` | FHE_VERIFY | Encrypted input verification | 50,000 | 📋 Draft |
-| `0x82` | FHE_DECRYPT | Threshold decryption | 200,000 | 📋 Draft |
-| `0x83` | FHE_REENCRYPT | Re-encrypt for user sealing | 100,000 | 📋 Draft |
-
-#### ZK-Friendly Hash Precompiles (Proposed)
-
-| Address | Name | Purpose | LP Reference | Status |
-|---------|------|---------|--------------|--------|
-| `0x0A` | Poseidon | ZK-friendly hash (~300 R1CS) | LP-3658 | 📋 Draft |
-| `0x0A+1` | Pedersen | Homomorphic commitment | LP-3668 | 📋 Draft |
 
 ## Gas Cost Comparison
 
@@ -219,7 +171,7 @@ These precompiles manage chain economics:
 **ML-DSA** (`0x...0006`):
 - NIST FIPS 204 (Dilithium) signatures
 - Level 3 security (192-bit equivalent)
-- 1952-byte public keys, 3293-byte signatures
+- 1952-byte public keys, 3309-byte signatures
 - ~108us verification time
 - See LP-2311 for full specification
 
@@ -430,4 +382,6 @@ The precompile suite provides a migration path:
 2. **Transition**: Use hybrid signatures (classical + PQ)
 3. **Future**: Use pure post-quantum (ML-DSA, SLH-DSA, Ringtail)
 
-```
+## Copyright
+
+Copyright and related rights waived via [CC0](https://creativecommons.org/publicdomain/zero/1.0/).

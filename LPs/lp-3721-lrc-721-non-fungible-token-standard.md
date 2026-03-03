@@ -4,7 +4,7 @@ title: LRC-721 Non-Fungible Token Standard
 description: This special-numbered LP corresponds to the NFT standard on Lux, equivalent to Ethereum's ERC-721.
 author: Lux Network Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
-status: Implemented
+status: Final
 type: Standards Track
 category: LRC
 created: 2025-01-23
@@ -39,6 +39,9 @@ This LP defines how unique, non-fungible tokens are created and managed, with sp
 
 A common NFT interface ensures wallets, marketplaces, and tools interoperate seamlessly, enabling portability of digital assets across Lux dApps and infrastructure.
 
+## Copyright
+
+Copyright and related rights waived via [CC0](../LICENSE.md).
 ## Specification
 
 ### Core NFT Interface
@@ -484,4 +487,3 @@ Key components:
 5. Tramèr, F., et al. (2016). "Stealing Machine Learning Models via Prediction APIs." USENIX Security.
 6. Adi, Y., et al. (2018). "Turning Your Weakness Into a Strength: Watermarking Deep Neural Networks by Backdooring." USENIX Security.
 7. Chen, X., et al. (2021). "Dataset Security for Machine Learning: Data Poisoning, Backdoor Attacks, and Defenses." IEEE TPAMI.
-```

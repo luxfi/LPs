@@ -42,7 +42,7 @@ SLH-DSA (formerly SPHINCS+) provides unique security properties compared to ML-D
 
 ### Precompile Address
 
-```solidity
+```
 0x0200000000000000000000000000000000000007
 ```
 
@@ -65,7 +65,7 @@ SLH-DSA (formerly SPHINCS+) provides unique security properties compared to ML-D
 
 ### Gas Cost
 
-```solidity
+```
 gas = BASE_COST + (messageLength * PER_BYTE_COST)
 
 Where:
@@ -90,7 +90,7 @@ interface ISLHDSA {
         bytes calldata signature
     ) external view returns (bool valid);
 }
-```
+```solidity
 
 ## Rationale
 
@@ -165,7 +165,7 @@ Mitigation: Use SLH-DSA selectively for high-value operations only.
 ## Test Cases
 
 ### Test Vector 1: Valid SLH-DSA-192s Signature
-```solidity
+```
 publicKey: 0x<48 bytes of SLH-DSA public key>
 message: "Quantum-resistant hash-based signature"
 signature: 0x<16224 bytes of SLH-DSA signature>
@@ -174,7 +174,7 @@ Expected Gas: ~502,100 gas
 ```
 
 ### Test Vector 2: Invalid Signature
-```solidity
+```
 publicKey: 0x<48 bytes>
 message: "Test message"
 signature: 0x<16224 bytes of WRONG signature>
@@ -182,7 +182,7 @@ Expected: 0x...0000 (invalid)
 ```
 
 ### Test Vector 3: Large Message
-```solidity
+```
 publicKey: 0x<48 bytes>
 message: 0x<10KB data>
 signature: 0x<16224 bytes>
@@ -228,7 +228,7 @@ All tests passing with comprehensive coverage:
 | Metric | SLH-DSA-128s | ML-DSA-65 | Ratio |
 |--------|--------------|-----------|-------|
 | Public Key | 32 bytes | 1,952 bytes | 61x smaller |
-| Signature | 7,856 bytes | 3,293 bytes | 2.4x larger |
+| Signature | 7,856 bytes | 3,309 bytes | 2.4x larger |
 | Verify Time | ~286μs | ~108μs | 2.6x slower |
 | Base Gas | 15,000 | 100,000 | 6.7x cheaper |
 
@@ -287,3 +287,6 @@ Unlike ML-DSA, SPHINCS+ is **stateless hash-based**:
 - **LP-311**: ML-DSA Precompile (complementary PQ signature)
 - **LP-320**: Ringtail Threshold (PQ threshold variant)
 
+## Copyright
+
+Copyright and related rights waived via [CC0](https://creativecommons.org/publicdomain/zero/1.0/).

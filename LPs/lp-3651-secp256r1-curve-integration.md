@@ -21,7 +21,7 @@ order: 965
 | **Author(s)** | Lux Protocol Team (Based on ACP-204 by Santiago Cammi, Arran Schlosberg) |
 | **Status** | Adopted (Granite Upgrade) |
 | **Track** | Standards |
-| **Based On** | [ACP-204](https://github.com/avalanche-foundation/ACPs/tree/main/ACPs/204-precompile-secp256r1), [RIP-7212](https://github.com/ethereum/RIPs/blob/master/RIPS/rip-7212.md), [EIP-7212](https://eips.ethereum.org/EIPS/eip-7212) |
+| **Based On** | [ACP-204](https://github.com/avalanche-foundation/ACPs/tree/main/ACPs/204-precompile-secp256r1) (historical prior art), [RIP-7212](https://github.com/ethereum/RIPs/blob/master/RIPS/rip-7212.md), [EIP-7212](https://eips.ethereum.org/EIPS/eip-7212) |
 
 ## Abstract
 
@@ -79,7 +79,7 @@ Matches RIP-7212 for cross-ecosystem compatibility. Libraries developed for Ethe
 ### Function Interface
 
 **Input**: 160 bytes
-```solidity
+```
 [32 bytes] message hash
 [32 bytes] r (signature component)
 [32 bytes] s (signature component)  
@@ -603,14 +603,16 @@ function verifyP256(bytes32 hash, bytes32 r, bytes32 s, bytes32 x, bytes32 y)
 
 ## References
 
-- [ACP-204 Original Specification](https://github.com/avalanche-foundation/ACPs/tree/main/ACPs/204-precompile-secp256r1)
+- [ACP-204 Original Specification](https://github.com/avalanche-foundation/ACPs/tree/main/ACPs/204-precompile-secp256r1) (historical prior art)
 - [RIP-7212: secp256r1 Precompile](https://github.com/ethereum/RIPs/blob/master/RIPS/rip-7212.md)
 - [EIP-7212: secp256r1 Curve Support](https://eips.ethereum.org/EIPS/eip-7212)
 - [NIST FIPS 186-3: Digital Signature Standard](https://csrc.nist.gov/publications/detail/fips/186/3/archive/2009-06-25)
 - [WebAuthn Specification](https://www.w3.org/TR/webauthn/)
 - [LP-318](./lp-4318-ml-kem-post-quantum-key-encapsulation.md
 - [LP-316](./lp-4316-ml-dsa-post-quantum-digital-signatures.md
-- [LP-181](https://github.com/avalanche-foundation/ACPs/tree/main/ACPs/181-p-chain-epoched-views
+- [LP-181](./lp-1181-epoching.md) (based on ACP-181, historical prior art at https://github.com/avalanche-foundation/ACPs/tree/main/ACPs/181-p-chain-epoched-views
+
+## Copyright
 
 Copyright © 2025 Lux Industries Inc. All rights reserved.  
-Based on ACP-204. Licensed under BSD-3-Clause-Network (see LICENSE).
+Based on ACP-204 - Copyright waived via [CC0](https://creativecommons.org/publicdomain/zero/1.0/).

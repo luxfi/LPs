@@ -4,7 +4,7 @@ title: DeFi Protocols Overview
 description: Index of decentralized finance protocols, standards, and building blocks in the Lux ecosystem.
 author: Lux Network Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
-status: Review
+status: Draft
 type: Meta
 created: 2025-01-23
 updated: 2025-07-25
@@ -208,6 +208,9 @@ The DeFi ecosystem on Lux is rapidly expanding with various protocols for lendin
 ### Development
 - [LP-50: Developer Tools Overview](/docs/lp-50-developer-tools-overview/)
 
+## Copyright
+
+Copyright and related rights waived via [CC0](../LICENSE.md).
 ## Specification
 
 The algorithms, message flows, and parameters defined in this LP are normative and MUST be followed for interoperability.

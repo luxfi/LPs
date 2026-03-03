@@ -3,7 +3,7 @@ lp: 7
 title: Supply Chain Control
 description: How Lux maintains complete control over its software dependencies through strategic forking and internal management
 author: Lux Core Team
-status: Implemented
+status: Final
 type: Meta
 created: 2025-12-21
 tags: [network, core, security, supply-chain, dependencies, implementation]
@@ -32,7 +32,7 @@ LP-4 establishes *why* we fork dependencies. This document specifies *how* we im
 
 ### Dependency Hierarchy
 
-```solidity
+```
 +---------------------------------------------------------------+
 |                    LUX NODE BINARY (41 MB)                    |
 +---------------------------------------------------------------+
@@ -40,7 +40,7 @@ LP-4 establishes *why* we fork dependencies. This document specifies *how* we im
 |    - luxfi/node        Core validator                         |
 |    - luxfi/geth        Streamlined EVM                        |
 |    - luxfi/coreth      C-Chain integration                    |
-|    - luxfi/consensus   BFT engine (no snow deps)              |
+|    - luxfi/consensus   Quasar BFT engine (no upstream deps)   |
 |    - luxfi/crypto      PQ-ready cryptography                  |
 |    - luxfi/threshold   TSS/MPC protocols                      |
 |    - luxfi/database    Pluggable backends                     |
@@ -63,7 +63,7 @@ LP-4 establishes *why* we fork dependencies. This document specifies *how* we im
 
 ### Size Comparison
 
-| Metric | Lux | Avalanchego | Delta |
+| Metric | Lux | Avalanchego (historical comparison) | Delta |
 |--------|-----|-------------|-------|
 | **Binary Size** | 41 MB | 88 MB | **-53%** |
 | **Compiled Modules** | 147 | ~300 | **-51%** |
@@ -128,7 +128,7 @@ Smart Contracts: 5,714 .sol files (DeFi, governance, bridges)
 ```go
 luxfi/ai          // AI inference & mining
 luxfi/cache       // High-performance caching
-luxfi/consensus   // Custom BFT (no snow deps)
+luxfi/consensus   // Quasar BFT family (no upstream deps)
 luxfi/constants   // Network constants
 luxfi/coreth      // C-Chain with precompiles
 luxfi/crypto      // PQ-ready cryptography
@@ -156,7 +156,7 @@ luxfi/warp        // Cross-chain messaging
 
 ### Precompiles (Native L1 Contracts)
 
-| Category | Lux Precompiles | Avalanche |
+| Category | Lux Precompiles | Avalanche (historical comparison) |
 |----------|-----------------|-----------|
 | **DeFi** | Pool Manager, Lending, Synthetics, Transmuter, Alchemist, Liquidation, Interest Rates | ✗ None |
 | **AI** | AI Mining, Inference | ✗ None |
@@ -169,7 +169,7 @@ luxfi/warp        // Cross-chain messaging
 
 ### Cryptographic Capabilities
 
-| Algorithm | Lux | Avalanche | Notes |
+| Algorithm | Lux | Avalanche (historical comparison) | Notes |
 |-----------|-----|-----------|-------|
 | BLS12-381 | ✓ | ✓ | Aggregate signatures |
 | BN256 | ✓ | ✓ | Pairing-based |
@@ -186,7 +186,7 @@ luxfi/warp        // Cross-chain messaging
 
 ## Database Backend
 
-| Aspect | BadgerDB (Lux) | Pebble (Avalanche) |
+| Aspect | BadgerDB (Lux) | Pebble (Avalanche, historical reference) |
 |--------|----------------|---------------------|
 | Design | SSD-optimized LSM | Generic LSM |
 | Write Amplification | Low | High |
@@ -222,7 +222,7 @@ luxfi/warp        // Cross-chain messaging
 ### Immediate Response Capability
 
 When a CVE is disclosed:
-- **Avalanche**: Wait for upstream fix, hope it merges
+- **Avalanche (historical reference)**: Wait for upstream fix, hope it merges
 - **Lux**: Patch immediately, deploy within hours
 
 ### Zero Trust Dependencies
@@ -287,3 +287,6 @@ This LP itself is a security measure. By documenting the supply chain:
 3. Security researchers have clear scope
 4. CVE response procedures are defined
 
+## Copyright
+
+Copyright and related rights waived via [CC0](https://creativecommons.org/publicdomain/zero/1.0/).

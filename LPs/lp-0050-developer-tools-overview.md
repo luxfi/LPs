@@ -4,7 +4,7 @@ title: Developer Tools Overview
 description: Index of standards and protocols that support developer workflows and tooling in the Lux ecosystem.
 author: Lux Network Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
-status: Implemented
+status: Draft
 type: Meta
 created: 2025-01-23
 updated: 2025-07-25
@@ -253,6 +253,9 @@ Tools available via:
 - Developer Discord: [discord.gg/lux](https://discord.gg/lux)
 - GitHub Discussions: [github.com/luxfi/lps/discussions](https://github.com/luxfi/lps/discussions)
 
+## Copyright
+
+Copyright and related rights waived via [CC0](../LICENSE.md).
 ## Specification
 
 Normative definitions for data structures, processes, and parameters in this LP MUST be followed for compatibility across Lux components.

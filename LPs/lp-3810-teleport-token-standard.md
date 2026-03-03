@@ -4,7 +4,7 @@ title: Teleport Token Standard
 description: Unified token bridging standard for native and remote tokens across Lux Network chains
 author: Lux Network Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
-status: Final
+status: Draft
 type: Standards Track
 category: LRC
 created: 2025-12-14
@@ -70,7 +70,7 @@ contract ERC20B is ERC20, Ownable, AccessControl {
     function grantAdmin(address to) public onlyAdmin;
     function revokeAdmin(address to) public onlyAdmin;
 }
-```
+```solidity
 
 ### LRC20 Base Standard
 
@@ -112,7 +112,7 @@ contract LuxBTC is ERC20B {
 
     constructor() ERC20B(_name, _symbol) {}
 }
-```
+```solidity
 
 ### Bridge Architecture
 
@@ -244,7 +244,7 @@ contract TokenFactory {
         return Create2.computeAddress(SALT, keccak256(bytecode));
     }
 }
-```
+```solidity
 
 ## Rationale
 
@@ -368,7 +368,7 @@ function testInvalidSignature() public {
     vm.expectRevert("BadSig");
     bridge.bridgeMintStealth(amount, txHash, alice, badSig, token, chainId, vault);
 }
-```
+```solidity
 
 ## Reference Implementation
 
@@ -510,4 +510,6 @@ Default 1% fee structure:
 | LP-9072 | Bridged Asset Standard | General bridged asset interface |
 | LP-3528 | LRC-20 Bridgable Token Extension | Bridgeable token extensions |
 
-```
+## Copyright
+
+Copyright and related rights waived via [CC0](../LICENSE.md).

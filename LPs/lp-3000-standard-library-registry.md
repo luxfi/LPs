@@ -4,7 +4,7 @@ title: Lux Standard Library Registry
 description: Comprehensive registry of all contracts, forks, library dependencies, and deployed addresses in the Lux Standard Library
 author: Lux Industries (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
-status: Implemented
+status: Final
 type: Informational
 created: 2025-12-23
 updated: 2025-12-25
@@ -141,7 +141,7 @@ The Lux ecosystem requires a single source of truth for:
 | **Liquid SOL** | LSOL | 18 | `0x26B40f650156C7EbF9e087Dd0dca181Fe87625B7` |
 | **Liquid TON** | LTON | 18 | `0x3141b94b89691009b950c96e97Bff48e0C543E3C` |
 | **Liquid BLAST** | LBLAST | 18 | `0x94f49D0F4C62bbE4238F4AaA9200287bea9F2976` |
-| **Liquid AVAX** | LAVAX | 18 | `0x0e4bD0DD67c15dECfBBBdbbE07FC9d51D737693D` |
+| **Liquid AVAX** (bridged from external Avalanche network) | LAVAX | 18 | `0x0e4bD0DD67c15dECfBBBdbbE07FC9d51D737693D` |
 | **Liquid ZOO** | LZOO | 18 | `0x5E5290f350352768bD2bfC59c2DA15DD04A7cB88` |
 
 ### Uniswap V2 (AMM)
@@ -204,7 +204,7 @@ Same addresses as mainnet (CREATE2 deterministic deployment):
 | **Zoo SOL** | ZSOL | 18 | `0x26B40f650156C7EbF9e087Dd0dca181Fe87625B7` |
 | **Zoo TON** | ZTON | 18 | `0x3141b94b89691009b950c96e97Bff48e0C543E3C` |
 | **Zoo ADA** | ZADA | 18 | `0x8b34152832b8ab4a3274915675754AA61eC113F0` |
-| **Zoo AVAX** | ZAVAX | 18 | `0x0EE4602429bFCEf8aEB1012F448b23532f9855Bd` |
+| **Zoo AVAX** (bridged from external Avalanche network) | ZAVAX | 18 | `0x0EE4602429bFCEf8aEB1012F448b23532f9855Bd` |
 | **Zoo BLAST** | ZBLAST | 18 | `0x7a56c769C50F2e73CFB70b401409Ad1F1a5000cd` |
 
 ### Meme Tokens (Zoo Ecosystem)
@@ -688,4 +688,3 @@ d8b1c635 lib/v3-core (heads/main)
 
 **Document Maintainer**: Lux Industries
 **Last Updated**: 2025-12-25
-```

@@ -4,7 +4,7 @@ title: Verkle Proof Verification Precompile
 description: Precompiled contract for efficient Verkle proof verification
 author: Lux Core Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
-status: Review
+status: Draft
 type: Standards Track
 category: Core
 created: 2025-01-23
@@ -30,13 +30,13 @@ Cross-chain bridges and L2 solutions need to verify state proofs:
 
 ### Precompile Address
 
-```solidity
+```
 0x0000000000000000000000000000000000000014
 ```
 
 ### Input Format
 
-```solidity
+```
 | Field          | Offset | Size   | Description                    |
 |----------------|--------|--------|--------------------------------|
 | commitment     | 0      | 32     | Tree root commitment           |
@@ -52,7 +52,7 @@ Cross-chain bridges and L2 solutions need to verify state proofs:
 
 ### Output Format
 
-```solidity
+```
 | Field    | Offset | Size | Description                         |
 |----------|--------|------|-------------------------------------|
 | valid    | 0      | 32   | 1 if proof valid, 0 otherwise      |
@@ -146,4 +146,6 @@ This standard is fully backwards compatible with existing contracts and infrastr
 - [EIP-7545: Verkle Proof Verification Precompile](https://github.com/ethereum/EIPs/issues/7545)
 - [LP-3701: Verkle Trees](./lp-3701-verkle-trees-for-state-management.md)
 
-```
+## Copyright
+
+Copyright and related rights waived via [CC0](../LICENSE.md).

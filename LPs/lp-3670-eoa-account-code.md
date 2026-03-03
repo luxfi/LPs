@@ -4,7 +4,7 @@ title: EOA Account Code (EIP-7702)
 description: Set code for EOAs enabling smart account features without migration
 author: Lux Core Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
-status: Review
+status: Draft
 type: Standards Track
 category: Core
 created: 2025-01-23
@@ -182,3 +182,6 @@ EIP-7702 chosen over EIP-3074:
 - [EIP-7702: Set EOA Account Code](https://eips.ethereum.org/EIPS/eip-7702)
 - [LP-3337: LRC-4337 Account Abstraction](./lp-3337-lrc-4337-account-abstraction.md)
 
+## Copyright
+
+Copyright and related rights waived via [CC0](../LICENSE.md).

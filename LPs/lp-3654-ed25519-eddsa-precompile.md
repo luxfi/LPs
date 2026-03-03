@@ -4,7 +4,7 @@ title: Ed25519/EdDSA Cryptography Precompile
 description: Native EVM precompile for Ed25519 curve operations and EdDSA signature verification
 author: Lux Core Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
-status: Review
+status: Final
 type: Standards Track
 category: Core
 created: 2025-12-24
@@ -146,19 +146,19 @@ Strict adherence to RFC 8032 (EdDSA) ensures:
 ### Data Encoding
 
 **Ed25519 Public Key:**
-```solidity
+```
 bytes32 pubkey  // 32-byte compressed Edwards point
 ```
 
 **EdDSA Signature:**
-```solidity
+```
 bytes64 signature = R || s
   R: bytes32  // 32-byte Edwards point (R = k*B)
   s: bytes32  // 32-byte scalar
 ```
 
 **X25519 Keys:**
-```solidity
+```
 bytes32 privkey  // 32-byte scalar (clamped)
 bytes32 pubkey   // 32-byte Montgomery u-coordinate
 ```
@@ -170,7 +170,7 @@ bytes32 pubkey   // 32-byte Montgomery u-coordinate
 Verifies an EdDSA signature according to RFC 8032.
 
 **Input:**
-```solidity
+```
 | Offset | Length | Description |
 |--------|--------|-------------|
 | 0 | 32 | Message hash (SHA-512 of message) |
@@ -179,7 +179,7 @@ Verifies an EdDSA signature according to RFC 8032.
 ```
 
 **Output:**
-```solidity
+```
 | Offset | Length | Description |
 |--------|--------|-------------|
 | 0 | 32 | 0x01 if valid, 0x00 if invalid |
@@ -197,7 +197,7 @@ Verifies an EdDSA signature according to RFC 8032.
 Batch verification with randomized linear combination for efficiency.
 
 **Input:**
-```solidity
+```
 | Offset | Length | Description |
 |--------|--------|-------------|
 | 0 | 4 | Count (n) |
@@ -207,14 +207,14 @@ Batch verification with randomized linear combination for efficiency.
 ```
 
 **Output:**
-```solidity
+```
 | Offset | Length | Description |
 |--------|--------|-------------|
 | 0 | 32 | 0x01 if all valid, 0x00 if any invalid |
 ```
 
 **Batch Algorithm:**
-```markdown
+```
 For random challenges z_i:
   Check: sum(z_i * s_i) * B == sum(z_i * R_i) + sum(z_i * h_i * A_i)
 ```
@@ -224,7 +224,7 @@ For random challenges z_i:
 Performs X25519 Diffie-Hellman key exchange.
 
 **Input:**
-```solidity
+```
 | Offset | Length | Description |
 |--------|--------|-------------|
 | 0 | 32 | Private key (clamped) |
@@ -232,7 +232,7 @@ Performs X25519 Diffie-Hellman key exchange.
 ```
 
 **Output:**
-```solidity
+```
 | Offset | Length | Description |
 |--------|--------|-------------|
 | 0 | 32 | Shared secret |
@@ -242,7 +242,7 @@ Performs X25519 Diffie-Hellman key exchange.
 
 ### Architecture Overview
 
-```solidity
+```
 ┌─────────────────────────────────────────────────────────────────────┐
 │                      Ed25519 Precompile (0x0314)                     │
 ├─────────────────────────────────────────────────────────────────────┤
@@ -278,7 +278,7 @@ Performs X25519 Diffie-Hellman key exchange.
 
 ### File Inventory
 
-```solidity
+```
 evm/precompile/contracts/ed25519/
 ├── ed25519.go              (12 KB)  # Main precompile implementation
 ├── ed25519_test.go         (8 KB)   # Unit tests
@@ -558,7 +558,7 @@ func batchVerify(messages, signatures [][]byte, pubkeys [][]byte) bool {
 
 ### Cross-Chain Integration
 
-```solidity
+```
 ┌─────────────────────────────────────────────────────────────────────┐
 │                     Ed25519 Cross-Chain Usage                        │
 ├─────────────────────────────────────────────────────────────────────┤
@@ -802,6 +802,9 @@ X25519 shared secrets may equal identity if peer provides small-order point. Imp
 - [RFC 8032: Edwards-Curve Digital Signature Algorithm (EdDSA)](https://datatracker.ietf.org/doc/html/rfc8032)
 - [RFC 7748: Elliptic Curves for Security](https://datatracker.ietf.org/doc/html/rfc7748)
 - [filippo.io/edwards25519](https://pkg.go.dev/filippo.io/edwards25519)
-- [LP-5324: Ringtail Threshold EdDSA](./lp-7324-ringtail-threshold-signature-precompile.md)
+- [LP-7324: Ringtail Threshold EdDSA](./lp-7324-ringtail-threshold-signature-precompile.md)
 - [LP-3652: secp256k1 ECDSA Precompile](./lp-3652-secp256k1-ecdsa-precompile.md)
 
+## Copyright
+
+Copyright and related rights waived via [CC0](https://creativecommons.org/publicdomain/zero/1.0/).

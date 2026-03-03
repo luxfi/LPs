@@ -4,7 +4,7 @@ title: Execution Layer Requests (EIP-7685)
 description: General purpose mechanism for EL to CL communication
 author: Lux Core Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
-status: Review
+status: Draft
 type: Standards Track
 category: Core
 created: 2025-01-23
@@ -174,4 +174,6 @@ Unified framework chosen for:
 
 - [EIP-7685: General Purpose Execution Layer Requests](https://eips.ethereum.org/EIPS/eip-7685)
 
-```
+## Copyright
+
+Copyright and related rights waived via [CC0](../LICENSE.md).
