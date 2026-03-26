@@ -17,9 +17,13 @@ references:
   - lp-3020 (LRC-20 Fungible Token)
   - lp-6022 (Warp Messaging)
   - lp-5013 (T-Chain MPC Custody)
+  - lp-3103 (US Regulatory Classification)
+  - lp-3104 (GENIUS Act Stablecoin Compliance)
 ---
 
 # LP-3100: Digital Securities Standard
+
+> **Regulatory Context (2026-03-25)**: The SEC/CFTC joint interpretive release of March 17, 2026 classifies native blockchain tokens (including LUX) as **digital commodities** not subject to securities law. This standard applies exclusively to **security tokens** — tokens that represent ownership in regulated financial instruments. For commodity token classification analysis, see LP-3103. For stablecoin compliance under the GENIUS Act, see LP-3104. The commodity/securities boundary is load-bearing: security tokens on Lux MUST use this standard; commodity tokens MUST NOT.
 
 ## Abstract
 
