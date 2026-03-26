@@ -14,9 +14,12 @@ requires:
   - lp-3020 (LRC-20 Fungible Token)
 references:
   - Uniswap V4 Hooks: https://docs.uniswap.org/contracts/v4/concepts/hooks
+  - lp-3103 (US Regulatory Classification)
 ---
 
 # LP-3101: DEX Compliance Hook
+
+> **Regulatory Context (2026-03-25)**: Under the March 17, 2026 SEC/CFTC joint release, commodity token spot trading on permissionless DEXs is CFTC-regulated and does NOT require ATS registration. ComplianceHook is required ONLY for pools containing security tokens. Pools trading commodity tokens (LUX, utility tokens) operate permissionlessly. See LP-3103 for the full regulatory classification analysis.
 
 ## Abstract
 

@@ -18,9 +18,13 @@ references:
   - lp-6332 (Teleport Bridge Architecture)
   - lp-3800 (Bridged Asset Standard)
   - lp-3810 (Teleport Token Standard)
+  - lp-3103 (US Regulatory Classification)
+  - lp-3104 (GENIUS Act Stablecoin Compliance)
 ---
 
 # LP-3102: Cross-Chain Securities Bridge
+
+> **Regulatory Context (2026-03-25)**: Bridge operations must maintain a three-tier compliance model: (1) commodity token bridging is permissionless, (2) security token bridging enforces compliance on both chains per this LP, (3) GENIUS Act stablecoin bridging carries attestation status cross-chain per LP-3104. See LP-3103 for the full classification framework.
 
 ## Abstract
 
