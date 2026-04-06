@@ -48,9 +48,9 @@ Each validator maintains 3 independent key pairs:
 **Post-Quantum Path** (LPS-012):
 | Key | Classical | Post-Quantum | Timeline |
 |-----|-----------|--------------|----------|
-| TLS | ECDSA P-256 | ML-DSA-65 (FIPS 204) hybrid | Phase 1 (2026) |
-| BLS | BLS12-381 | Ringtail lattice signatures | Phase 2 (2027) |
-| Staking | secp256k1 | ML-DSA-65 | Phase 1 (2026) |
+| TLS | ECDSA P-256 | Ringtail lattice signatures | Phase 1 (2026) |
+| BLS | BLS12-381 | Ringtail lattice signatures | Phase 1 (2026) |
+| Staking | secp256k1 | Ringtail lattice signatures | Phase 1 (2026) |
 
 Hybrid mode: classical + PQ signatures on every message. Secure if either algorithm holds.
 
