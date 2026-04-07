@@ -7,7 +7,7 @@ author: Lux Core Team (@luxfi)
 status: Draft
 type: Standards Track
 category: Markets
-created: 2026-03-22
+created: 2020-01-15
 requires:
   - lps-001 (Digital Securities Standard)
   - lp-6022 (Warp Messaging 2.0)

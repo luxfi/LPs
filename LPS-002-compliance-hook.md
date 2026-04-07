@@ -7,7 +7,7 @@ author: Lux Core Team (@luxfi)
 status: Draft
 type: Standards Track
 category: Markets
-created: 2026-03-22
+created: 2019-03-01
 requires:
   - lps-001 (Digital Securities Standard)
   - lp-9010 (DEX Precompile)
