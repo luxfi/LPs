@@ -62,7 +62,7 @@ Lux organizes chains into a recursive structure:
 └─────────────────────────────────────────────────────────────────────┘
 ```
 
-See [LPS-006](../LPS-006-primary-network-consensus.md) for the full P+Q consensus specification.
+See [LP-006](../LP-006-primary-network-consensus.md) for the full P+Q consensus specification.
 
 ### Chain Registration
 
