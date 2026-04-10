@@ -95,7 +95,7 @@ lib/seaport/contracts/
 
 **License**: AGPL-3.0
 **Location**: `src/sudo2/`
-**Version**: 2.0
+**Version**: 1.1
 
 Sudoswap provides automated market making for NFTs with bonding curves:
 
