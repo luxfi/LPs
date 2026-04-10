@@ -4,7 +4,7 @@ title: Encrypted Streaming Replication — SQLite + ZapDB
 tags: [encryption, replication, sqlite, zapdb, age, pq, s3]
 description: E2E post-quantum encrypted streaming replication for SQLite (WAL-based) and ZapDB (incremental backup) to S3-compatible storage using age (ML-KEM-768 + X25519)
 author: Lux Core Team (@luxfi)
-status: Living
+status: Final
 type: Standards Track
 category: Core
 created: 2026-04-09
@@ -197,23 +197,75 @@ age-keygen --pq > /run/secrets/replicate-identity.txt
 
 Keys rotate on a 90-day cycle. During rotation, both old and new keys are valid recipients. The Replicate sidecar encrypts to both keys for a 24-hour overlap window, then drops the old key.
 
+### NIST Standards Adopted
+
+| Standard | Algorithm | Deployed Use Cases |
+|----------|-----------|-------------------|
+| FIPS 203 (ML-KEM-768) | Module-Lattice KEM | age backup encryption, TLS X25519MLKEM768, on-chain precompile |
+| FIPS 204 (ML-DSA-65) | Module-Lattice DSA | JWT signing, validator identity, on-chain precompile, SafeMLDSASigner |
+| FIPS 205 (SLH-DSA) | Stateless Hash DSA | On-chain precompile (stateless fallback) |
+
+### Sovereign L1 Architecture
+
+Lux-based chains run as sovereign L1s with their own validators and Quasar consensus. The consensus layer itself is PQ-hardened, not just the application layer.
+
 ### Complete PQ Scorecard
 
-All cryptographic layers are PQ-safe except EVM chain signing (immutable protocol constraint).
+All 13 cryptographic layers are deployed on devnet, testnet, and mainnet.
 
-| Layer | Algorithm | PQ Status | Status |
-|-------|-----------|-----------|--------|
-| Disk encryption | AES-256 (sqlcipher) | Safe (128-bit PQ via Grover's bound) | Deployed |
-| HKDF derivation | HKDF-SHA-256 | Safe (128-bit PQ) | Deployed |
-| Field encryption | AES-256-GCM | Safe (128-bit PQ) | Deployed |
-| S3 backup | age ML-KEM-768+X25519 (`age1pq`) | Safe (NIST FIPS 203) | Deployed |
-| TLS | X25519MLKEM768 (first curve) | Safe (hybrid PQ) | Deployed |
-| JWT signing | ML-DSA-65 (FIPS 204) | Safe (Module-LWE+SIS) | Deployed |
-| JWKS validation | ML-DSA-65 | Safe | Deployed |
-| MPC transport | Hybrid KEM (X25519+ML-KEM-768) | Safe | Deployed |
-| MPC key shares | PQ KEM encryption | Safe | Deployed |
-| Master keys | Cloud HSM (FIPS 140-2 Level 3) | Hardware isolation | Deployed |
-| Chain signing | secp256k1 ECDSA | **Not PQ-safe** | EVM constraint |
+| # | Layer | Algorithm | PQ Status | NIST/FIPS | Status |
+|---|-------|-----------|-----------|-----------|--------|
+| 1 | Disk encryption | AES-256 sqlcipher, per-principal CEK via HKDF-SHA-256 | Safe (128-bit PQ via Grover bound) | SP 800-57 | Deployed |
+| 2 | Field encryption | AES-256-GCM per sensitive field | Safe (128-bit PQ) | SP 800-38D | Deployed |
+| 3 | S3 backup | age ML-KEM-768+X25519 (`age1pq` recipients) | Safe (FIPS 203) | FIPS 203 | Deployed |
+| 4 | TLS | X25519MLKEM768 first curve (ingress + MPC inter-node) | Safe (hybrid PQ) | FIPS 203 | Deployed |
+| 5 | JWT signing | ML-DSA-65 signing + validation via JWKS | Safe (Module-LWE+SIS) | FIPS 204 | Deployed |
+| 6 | Consensus (Quasar) | BLS + Ringtail + ML-DSA -- three hardness assumptions | Safe (triple hybrid) | FIPS 204 | Deployed |
+| 7 | EVM tx (Smart Account) | SafeMLDSASigner via ML-DSA precompile (ERC-1271 + ERC-4337) | Safe (FIPS 204) | FIPS 204 | Deployed |
+| 8 | EVM tx (EOA) | secp256k1 ECDSA (wallet compat, PQ finality via Quasar) | Not PQ-safe (mitigated) | -- | EVM constraint |
+| 9 | MPC transport | PQ TLS (X25519MLKEM768) | Safe (hybrid PQ) | FIPS 203 | Deployed |
+| 10 | MPC custody | PQ KEM encrypted key shares + Cloud HSM (FIPS 140-2 L3) | Safe (hardware isolation) | FIPS 203, FIPS 140-2 | Deployed |
+| 11 | Threshold signing | CGGMP21 (ECDSA), FROST (EdDSA), BLS, Ringtail (PQ lattice) | Safe (Ringtail PQ) | -- | Deployed |
+| 12 | On-chain precompiles | ML-DSA, ML-KEM, SLH-DSA, Ringtail, PQCrypto unified | Safe (all three FIPS) | FIPS 203/204/205 | Deployed |
+| 13 | Smart contracts | SafeMLDSASigner, SafeRingtailSigner, QuantumSafe base | Safe (precompile-backed) | FIPS 204 | Deployed |
+
+**EOA mitigation**: EOA transactions use secp256k1 ECDSA for wallet compatibility. PQ finality is achieved because Quasar consensus validators sign blocks with BLS + Ringtail + ML-DSA. A quantum adversary who forges an EOA signature still cannot finalize a block without compromising all three consensus assumptions.
+
+### Quasar Consensus
+
+Quasar is a triple-hybrid consensus protocol using three independent hardness assumptions:
+
+| Component | Assumption | PQ Safety |
+|-----------|------------|-----------|
+| BLS (BN254) | Discrete log on elliptic curves | Classical only |
+| Ringtail | Module-LWE (lattice) | PQ-safe |
+| ML-DSA-65 | Module-LWE + Module-SIS | PQ-safe (FIPS 204) |
+
+Block finality requires valid signatures from all three schemes. An adversary must break discrete log AND Module-LWE AND Module-SIS simultaneously.
+
+### Smart Account PQ Signing
+
+Smart Accounts (ERC-4337 compliant) bypass the secp256k1 constraint via signature verification precompiles:
+
+- **SafeMLDSASigner**: Validates ML-DSA-65 signatures via precompile at `0x0130`/`0x0131`. Implements ERC-1271.
+- **SafeRingtailSigner**: Validates Ringtail lattice signatures via precompile at `0x0150`/`0x0151`.
+- **QuantumSafe**: Base contract for Smart Accounts. Routes verification to the appropriate PQ precompile.
+
+### On-Chain Precompiles
+
+All activated at genesis on all networks.
+
+| Address | Primitive | Gas (verify) | Gas (sign/encap) |
+|---------|-----------|-------------|-----------------|
+| 0x0120 | ML-KEM Encapsulate | -- | 15,000 |
+| 0x0121 | ML-KEM Decapsulate | -- | 20,000 |
+| 0x0130 | ML-DSA Sign | -- | 25,000 |
+| 0x0131 | ML-DSA Verify | 10,000 | -- |
+| 0x0140 | SLH-DSA Sign | -- | 50,000 |
+| 0x0141 | SLH-DSA Verify | 15,000 | -- |
+| 0x0150 | Ringtail Sign | -- | 30,000 |
+| 0x0151 | Ringtail Verify | 12,000 | -- |
+| 0x0160 | PQCrypto Unified | varies | varies |
 
 ### Cloud HSM for Master Keys
 
@@ -225,17 +277,36 @@ Master encryption keys are stored in Cloud HSM (GCP Cloud KMS, FIPS 140-2 Level 
 
 Three keyrings per ecosystem: `lux-devnet`, `lux-testnet`, `lux-mainnet`. Mainnet keys use HSM protection level (FIPS 140-2 L3); devnet/testnet use SOFTWARE protection for cost efficiency.
 
+### Threshold Signing
+
+Four threshold protocols deployed, covering all curve families:
+
+| Protocol | Curve | Use Case |
+|----------|-------|----------|
+| CGGMP21 | secp256k1 (ECDSA) | EVM transaction signing |
+| FROST | Ed25519 (EdDSA) | SOL/TON signing |
+| BLS | BN254 | Consensus aggregation |
+| Ringtail | Module-LWE (lattice) | PQ-safe threshold signing |
+
 ### ML-DSA-65 JWT Signing
 
-Hanzo IAM issues JWT tokens signed with ML-DSA-65 (FIPS 204), replacing ECDSA. The JWKS endpoint exposes the ML-DSA-65 public key. All services validate JWTs using the PQ-safe ML-DSA-65 signature. EUF-CMA security under Module-LWE and Module-SIS hardness assumptions ensures that a quantum adversary cannot forge valid tokens.
+Hanzo IAM issues JWT tokens signed with ML-DSA-65 (FIPS 204). The JWKS endpoint exposes the ML-DSA-65 public key. All services validate JWTs using PQ-safe ML-DSA-65 signatures. EUF-CMA security under Module-LWE and Module-SIS hardness assumptions prevents a quantum adversary from forging valid tokens.
 
 ### TLS Post-Quantum
 
-All TLS 1.3 connections use X25519MLKEM768 as the first curve in the supported groups list. This provides PQ protection for all data in transit, including S3 uploads and inter-service communication.
+All TLS 1.3 connections use X25519MLKEM768 as the first curve in the supported groups list. This covers ingress termination, MPC inter-node communication, S3 upload transport, and inter-service HTTP/gRPC.
 
 ### Harvest-Now-Decrypt-Later: Closed
 
-The combination of ML-KEM-768 hybrid encryption (S3 backups), X25519MLKEM768 TLS (transit), ML-DSA-65 JWT signing (auth), PQ KEM for MPC transport and key shares, and Cloud HSM for master keys closes the harvest-now-decrypt-later attack vector. An adversary who captures encrypted data today cannot decrypt it with a future quantum computer.
+The full PQ stack -- ML-KEM-768 hybrid encryption (S3 backups), X25519MLKEM768 TLS (transit), ML-DSA-65 JWT signing (auth), PQ KEM for MPC transport and key shares, Cloud HSM for master keys, and Quasar triple-hybrid consensus -- closes the harvest-now-decrypt-later attack vector. An adversary who captures encrypted data today cannot decrypt it with a future quantum computer.
+
+### Regulatory Compliance
+
+| Regulation | Requirement | How Satisfied |
+|------------|-------------|---------------|
+| NIST SP 800-57 | Key management lifecycle | HKDF-derived per-principal keys, 90-day rotation, Cloud HSM master |
+| NIST SP 800-131A | Cryptographic algorithm transition | All three FIPS PQ standards (203/204/205) deployed |
+| FIPS 140-2 Level 3 | Hardware key isolation | Cloud HSM (GCP, Cavium) for master key material |
 
 ### emptyDir Replaces PVC
 
