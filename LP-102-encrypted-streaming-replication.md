@@ -197,6 +197,46 @@ age-keygen --pq > /run/secrets/replicate-identity.txt
 
 Keys rotate on a 90-day cycle. During rotation, both old and new keys are valid recipients. The Replicate sidecar encrypts to both keys for a 24-hour overlap window, then drops the old key.
 
+### Complete PQ Scorecard
+
+All cryptographic layers are PQ-safe except EVM chain signing (immutable protocol constraint).
+
+| Layer | Algorithm | PQ Status | Status |
+|-------|-----------|-----------|--------|
+| Disk encryption | AES-256 (sqlcipher) | Safe (128-bit PQ via Grover's bound) | Deployed |
+| HKDF derivation | HKDF-SHA-256 | Safe (128-bit PQ) | Deployed |
+| Field encryption | AES-256-GCM | Safe (128-bit PQ) | Deployed |
+| S3 backup | age ML-KEM-768+X25519 (`age1pq`) | Safe (NIST FIPS 203) | Deployed |
+| TLS | X25519MLKEM768 (first curve) | Safe (hybrid PQ) | Deployed |
+| JWT signing | ML-DSA-65 (FIPS 204) | Safe (Module-LWE+SIS) | Deployed |
+| JWKS validation | ML-DSA-65 | Safe | Deployed |
+| MPC transport | Hybrid KEM (X25519+ML-KEM-768) | Safe | Deployed |
+| MPC key shares | PQ KEM encryption | Safe | Deployed |
+| Master keys | Cloud HSM (FIPS 140-2 Level 3) | Hardware isolation | Deployed |
+| Chain signing | secp256k1 ECDSA | **Not PQ-safe** | EVM constraint |
+
+### Cloud HSM for Master Keys
+
+Master encryption keys are stored in Cloud HSM (GCP Cloud KMS, FIPS 140-2 Level 3 certified Cavium HSMs). The master key never leaves the HSM boundary:
+
+- **Wrap**: Application sends plaintext DEK to HSM API; HSM encrypts internally; returns wrapped DEK
+- **Unwrap**: Application sends wrapped DEK to HSM API; HSM decrypts internally; returns plaintext DEK
+- **Sign**: Application sends message hash to HSM API; HSM signs with ML-DSA-65 internally; returns signature
+
+Three keyrings per ecosystem: `lux-devnet`, `lux-testnet`, `lux-mainnet`. Mainnet keys use HSM protection level (FIPS 140-2 L3); devnet/testnet use SOFTWARE protection for cost efficiency.
+
+### ML-DSA-65 JWT Signing
+
+Hanzo IAM issues JWT tokens signed with ML-DSA-65 (FIPS 204), replacing ECDSA. The JWKS endpoint exposes the ML-DSA-65 public key. All services validate JWTs using the PQ-safe ML-DSA-65 signature. EUF-CMA security under Module-LWE and Module-SIS hardness assumptions ensures that a quantum adversary cannot forge valid tokens.
+
+### TLS Post-Quantum
+
+All TLS 1.3 connections use X25519MLKEM768 as the first curve in the supported groups list. This provides PQ protection for all data in transit, including S3 uploads and inter-service communication.
+
+### Harvest-Now-Decrypt-Later: Closed
+
+The combination of ML-KEM-768 hybrid encryption (S3 backups), X25519MLKEM768 TLS (transit), ML-DSA-65 JWT signing (auth), PQ KEM for MPC transport and key shares, and Cloud HSM for master keys closes the harvest-now-decrypt-later attack vector. An adversary who captures encrypted data today cannot decrypt it with a future quantum computer.
+
 ### emptyDir Replaces PVC
 
 With continuous replication, local storage uses `emptyDir` (backed by the node's ephemeral disk or tmpfs). Benefits:
