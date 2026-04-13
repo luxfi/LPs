@@ -54,48 +54,83 @@ preserving open economic participation and horizontal service scaling.
 
 ## Tier 1: Validator seats
 
-### Seat NFT
+### Seat as X-Chain native NFT
 
-A capped-supply ERC-721 on C-Chain:
+No ERC-721 contract. The seat is a native X-Chain asset defined at genesis:
 
-```solidity
-contract ValidatorSeats {
-    uint256 public constant MAX_SEATS = 100;          // configurable via governance
-    mapping(uint256 => address) public seatOwner;     // tokenID → owner
-    mapping(uint256 => bytes) public seatPubKey;      // tokenID → ML-DSA-65 pubkey
-    mapping(uint256 => uint256) public seatUnlockTime;// tokenID → earliest transfer time
-    uint256 public unbondingPeriod = 21 days;
-}
+```
+Genesis asset: SEAT
+  Name:          LuxValidatorSeat
+  Symbol:        LVS
+  Denomination:  0 (indivisible, NFT-like)
+  FixedCap:      true
+  InitialSupply: N (default 100)
+  Mint:          disabled after genesis (fixed supply)
+  OutputType:    NFTTransferOutput (each unit has a unique token ID)
 ```
 
-Seat NFTs are:
+Each of the N seats is a distinct UTXO holding 1 × SEAT with a unique
+token ID (0 to N-1). Transfers are standard X-Chain `BaseTx` consuming and
+producing `NFTTransferOutput`s. No EVM, no contract.
 
-- **Transferable** but subject to an unbonding period after the holder
-  stops validating (default 21 days; same as Ethereum withdrawal queue).
-- **Issued** by governance (P-Chain governance tx), auction (P-Chain
-  auction mechanism), or genesis (initial 100 seats).
-- **Slashable** — misbehavior slashes the seat's self-bond AND can trigger
-  seat revocation (governance vote).
+Seats are:
+
+- **Transferable** on X-Chain like any native asset, subject to the stake
+  lock (NFT is locked while its holder is an active validator + unbonding
+  period of 21 days).
+- **Issued** at genesis (initial 100 seats) to vetted operators. Governance
+  can expand N via supermajority vote (P-Chain governance tx mints
+  additional SEAT NFTs).
+- **Slashable** — misbehavior slashes the self-bond LUX; seats can also
+  be forfeited by governance vote (NFT burned and reissued).
 
 ### Registration
 
-To activate a seat, the holder submits a P-Chain registration:
+Validators register on P-Chain by atomically importing their SEAT from
+X-Chain and posting a self-bond:
 
 ```go
-SeatRegistration {
-    SeatTokenID      uint256          // ERC-721 token on C-Chain
-    NodeID           ids.NodeID
-    SelfBond         uint64           // minimum 10,000 LUX
-    CommissionBps    uint16           // 0-10000 (e.g., 500 = 5% commission)
-    MLDSAPubKey      []byte
-    VRFKey           []byte
-    Endpoints        []Endpoint
-    SeatOwnerSig     []byte           // proves C-Chain NFT ownership
+AddPermissionedValidatorTx {
+    NodeID        ids.NodeID
+    SeatImport    *atomic.Input       // X-Chain UTXO containing 1 × SEAT
+    SelfBond      []*avax.TransferableInput  // ≥ min_bond × LUX
+    CommissionBps uint16
+    MLDSAPubKey   []byte
+    BLSPubKey     []byte                // both keys for PQ upgrade path
+    VRFKey        []byte
+    Endpoints     []Endpoint
+    Duration      uint64                // seconds; max 1 year per registration
 }
 ```
 
-Only NFT holders can register. Seats without self-bond cannot sign blocks
-(the seat is inactive until bond is posted).
+P-Chain verifies:
+
+1. The imported UTXO contains exactly 1 × SEAT with a token ID not currently
+   bound to an active validator.
+2. Self-bond is at least `min_bond` LUX.
+3. Public keys are well-formed.
+4. The signer controls both the imported UTXO and the self-bond inputs.
+
+On success, the SEAT + self-bond are locked in a stake output on P-Chain
+until the registration expires. At expiry (or via `StopValidatorTx`), the
+SEAT is exported back to X-Chain and the LUX self-bond (minus any slashing)
+is returned.
+
+### Delegation
+
+Delegators send LUX only — no SEAT required:
+
+```go
+AddDelegatorTx {
+    NodeID      ids.NodeID             // which validator to back
+    LuxStake    []*avax.TransferableInput // ≥ 10 LUX minimum
+    Duration    uint64
+}
+```
+
+The delegated stake is locked for the delegation duration + unbonding
+period. Delegators share the validator's block and signing rewards minus
+the validator's published commission rate.
 
 ### Revocation
 
