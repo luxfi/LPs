@@ -93,7 +93,7 @@ X-Chain and posting a self-bond:
 AddPermissionedValidatorTx {
     NodeID        ids.NodeID
     SeatImport    *atomic.Input       // X-Chain UTXO containing 1 × SEAT
-    SelfBond      []*avax.TransferableInput  // ≥ min_bond × LUX
+    SelfBond      []*lux.TransferableInput  // ≥ min_bond × LUX
     CommissionBps uint16
     MLDSAPubKey   []byte
     BLSPubKey     []byte                // both keys for PQ upgrade path
@@ -123,7 +123,7 @@ Delegators send LUX only — no SEAT required:
 ```go
 AddDelegatorTx {
     NodeID      ids.NodeID             // which validator to back
-    LuxStake    []*avax.TransferableInput // ≥ 10 LUX minimum
+    LuxStake    []*lux.TransferableInput // ≥ 10 LUX minimum
     Duration    uint64
 }
 ```
