@@ -2,7 +2,7 @@
 lp: 078
 title: EVM Precompile Registry
 tags: [evm, precompile, crypto, curves, zk, fhe, dex, bridge, ai]
-description: Complete registry of all 36 EVM precompile packages with addresses, gas costs, and specifications
+description: Complete registry of all 33 EVM precompile packages with addresses, gas costs, and specifications
 author: Lux Core Team
 status: Final
 type: Standards Track
@@ -15,9 +15,12 @@ updated: 2026-04-13
 
 ## Abstract
 
-Complete registry of all custom EVM precompile addresses for the Lux Network and all ecosystem chains (Liquidity, Zoo, Hanzo, Pars). Standard Ethereum precompiles (0x01-0x0A) are preserved. All 36 precompile packages are enabled on every EVM by default. Genesis determines activation timestamps.
+Complete registry of all custom EVM precompile addresses for the Lux Network and all ecosystem chains. Standard Ethereum precompiles (0x01-0x0A) are preserved. All 33 precompile packages are enabled on every EVM by default. Genesis determines activation timestamps.
 
-## Precompile Packages (36 total)
+Three packages were removed for exposing secret key material in public calldata:
+`aes` (0x9210), `chacha20` (0x9211), `ecies` (0x9201). See individual LP deprecation notes.
+
+## Precompile Packages
 
 ### Ethereum Standard (preserved, not custom)
 
@@ -75,20 +78,22 @@ Complete registry of all custom EVM precompile addresses for the Lux Network and
 |---------|---------|-------------|-----|
 | 0x9203 | `x25519` | X25519 Diffie-Hellman key exchange | -- |
 
-### Symmetric Encryption (2 packages)
+### Symmetric Encryption (REMOVED)
+
+AES-256-GCM (0x9210) and ChaCha20-Poly1305 (0x9211) precompiles have been removed.
+Both accepted secret encryption keys in calldata, which is public on-chain.
+Use the FHE precompile (0x0700) for encrypted computation.
+
+### Asymmetric Encryption / Privacy (2 packages)
 
 | Address | Package | Description | LP |
 |---------|---------|-------------|-----|
-| 0x9210 | `aes` | AES-256-GCM authenticated encryption | -- |
-| 0x9211 | `chacha20` | ChaCha20-Poly1305 AEAD | -- |
+| 0x9200 | `hpke` | HPKE seal only (RFC 9180, public-key encrypt) | -- |
+| 0x9202 | `ring` | Ring signature verify only (LSAG) | -- |
 
-### Asymmetric Encryption / Privacy (3 packages)
-
-| Address | Package | Description | LP |
-|---------|---------|-------------|-----|
-| 0x9200 | `hpke` | Hybrid Public Key Encryption (RFC 9180) | -- |
-| 0x9201 | `ecies` | ECIES encrypt/decrypt (secp256k1) | -- |
-| 0x9202 | `ring` | Ring signatures (linkable, Curve25519) | -- |
+ECIES (0x9201) has been removed: decrypt required secret keys in calldata,
+and encrypt used non-deterministic randomness (consensus split risk).
+HPKE seal covers the same public-key encryption use case.
 
 ### AI (1 package)
 
@@ -164,11 +169,14 @@ Complete registry of all custom EVM precompile addresses for the Lux Network and
 | 0x9080 | `dex` | LXTransmuter — debt→collateral | 032 |
 | 0x6010 | `dex` | Teleport — cross-chain | 016 |
 
-### Graph (1 package)
+### Graph (1 package, 4 addresses)
 
 | Address | Package | Description | LP |
 |---------|---------|-------------|-----|
-| 0x0500 | `graph` | On-chain GraphQL query interface | -- |
+| 0x0500..10 | `graph` | On-chain GraphQL query | -- |
+| 0x0500..11 | `graph` | GraphQL subscribe | -- |
+| 0x0500..12 | `graph` | GraphQL cache | -- |
+| 0x0500..13 | `graph` | GraphQL index | -- |
 
 ### Blob (1 package)
 
@@ -176,11 +184,17 @@ Complete registry of all custom EVM precompile addresses for the Lux Network and
 |---------|---------|-------------|-----|
 | 0xB002 | `kzg4844` | EIP-4844 KZG blob commitments | -- |
 
-### Attestation (1 package)
+### Attestation (1 package — library only, no module registration)
 
 | Address | Package | Description | LP |
 |---------|---------|-------------|-----|
-| TBD | `attestation` | Remote attestation (TEE/SGX/TDX) | -- |
+| 0x0301 | `attestation` | NVTrust GPU attestation | -- |
+| 0x0302 | `attestation` | TPM attestation | -- |
+| 0x0303 | `attestation` | Compute attestation | -- |
+| 0x0304 | `attestation` | Attestation creation | -- |
+| 0x0305 | `attestation` | Device status | -- |
+
+Note: attestation has no init()/module registration. It is a library package, not a registered precompile. EVM mains should NOT blank-import it.
 
 ### Registry (1 package)
 
@@ -188,13 +202,13 @@ Complete registry of all custom EVM precompile addresses for the Lux Network and
 |---------|---------|-------------|-----|
 | 0x000B-0x000D | `registry` | Precompile discovery + BLS12-381 curve ops | -- |
 
-### Deprecated Umbrellas (3 packages — kept for backwards compat, not needed)
+### Deprecated Umbrellas (3 packages — do NOT import)
 
 | Package | Wraps | Status |
 |---------|-------|--------|
-| `pqcrypto` | mldsa + mlkem + slhdsa | Redundant — use explicit imports |
-| `quantum` | mldsa + mlkem + slhdsa + ringtail | Redundant |
-| `threshold` | cggmp21 + frost + ringtail | Redundant |
+| `pqcrypto` | mldsa + mlkem + slhdsa | Redundant — use explicit imports. Has own module registration (will be removed). |
+| `quantum` | mldsa + mlkem + slhdsa + ringtail | Library only, no init — dead blank import |
+| `threshold` | cggmp21 + frost + ringtail | Library only, no init — dead blank import |
 
 ## Address Range Summary
 
@@ -207,7 +221,8 @@ Complete registry of all custom EVM precompile addresses for the Lux Network and
 | 0x0300 | AI mining |
 | 0x0300..20-24 | Quasar consensus helpers |
 | 0x0440-0x0443 | Bridge |
-| 0x0500-0x050F | Hashing + Graph |
+| 0x0500..01-09 | Hashing (blake3, poseidon, pedersen, babyjubjub, pasta) |
+| 0x0500..10-13 | Graph (query, subscribe, cache, index) |
 | 0x0600-0x060F | SLH-DSA + PQ |
 | 0x0700 | FHE |
 | 0x0800-0x080F | Threshold signatures |
@@ -216,7 +231,7 @@ Complete registry of all custom EVM precompile addresses for the Lux Network and
 | 0x3211 | Ed25519 |
 | 0x6010 | Teleport |
 | 0x9010-0x9080 | DEX (LX Suite) |
-| 0x9200-0x9211 | Privacy + encryption |
+| 0x9200-0x9204 | Privacy (HPKE seal, ring verify, x25519, curve25519) |
 | 0xB002 | KZG/blob |
 
 ## Activation
@@ -226,4 +241,4 @@ All precompiles are compiled into the EVM binary. Activation is controlled per-c
 ## Implementation
 
 Source: `github.com/luxfi/precompile`
-36 packages, each with `config.go`, `contract.go`, `module.go`.
+33 packages (each with `contract.go` + `module.go`). 3 removed for key exposure: aes, chacha20, ecies.
