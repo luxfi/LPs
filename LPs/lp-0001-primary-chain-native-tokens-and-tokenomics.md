@@ -159,7 +159,7 @@ go test -v ./...
 
 **Balance Queries**:
 - P-Chain: `platform.getBalance(address)`
-- X-Chain: `avm.getBalance(address, assetID)`
+- X-Chain: `xvm.getBalance(address, assetID)`
 - C-Chain: `eth_getBalance(address)`
 
 **Staking Queries**:

@@ -179,14 +179,14 @@ DEX features live behind the DexFx extension; nodes without DexFx see no behavio
 
 ### X-Chain DEX Extension Architecture
 
-**Location**: `~/work/lux/node/vms/avm/`
-**GitHub**: [`github.com/luxfi/node/tree/main/vms/avm`](https://github.com/luxfi/node/tree/main/vms/platformvm)
+**Location**: `~/work/lux/node/vms/xvm/`
+**GitHub**: [`github.com/luxfi/node/tree/main/vms/xvm`](https://github.com/luxfi/node/tree/main/vms/platformvm)
 
 **Core Components**:
-- [`plugins/dex/dex_fx.go`](https://github.com/luxfi/node/blob/main/vms/avm/plugins/dex/dex_fx.go) - DexFx plugin implementation
-- [`plugins/dex/transactions.go`](https://github.com/luxfi/node/blob/main/vms/avm/plugins/dex/transactions.go) - OrderTx, CancelTx codec
-- [`plugins/dex/orderbook.go`](https://github.com/luxfi/node/blob/main/vms/avm/plugins/dex/orderbook.go) - In-memory order book
-- [`plugins/dex/rpc.go`](https://github.com/luxfi/node/blob/main/vms/avm/plugins/dex/rpc.go) - RPC methods
+- [`plugins/dex/dex_fx.go`](https://github.com/luxfi/node/blob/main/vms/xvm/plugins/dex/dex_fx.go) - DexFx plugin implementation
+- [`plugins/dex/transactions.go`](https://github.com/luxfi/node/blob/main/vms/xvm/plugins/dex/transactions.go) - OrderTx, CancelTx codec
+- [`plugins/dex/orderbook.go`](https://github.com/luxfi/node/blob/main/vms/xvm/plugins/dex/orderbook.go) - In-memory order book
+- [`plugins/dex/rpc.go`](https://github.com/luxfi/node/blob/main/vms/xvm/plugins/dex/rpc.go) - RPC methods
 
 **DEX Indexer Service**:
 - Location: `~/work/lux/stack/dex-indexer/`
@@ -231,7 +231,7 @@ func (ob *OrderBook) GetBook(depth uint16) (bids, asks []PriceLevel) {
 **Testing**:
 ```bash
 cd ~/work/lux/node
-go test ./vms/avm/plugins/dex/... -v -bench=BenchmarkOrderBook
+go test ./vms/xvm/plugins/dex/... -v -bench=BenchmarkOrderBook
 
 cd ~/work/lux/stack
 go test ./dex-indexer/... -v

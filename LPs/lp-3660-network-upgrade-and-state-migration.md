@@ -366,7 +366,7 @@ type ChainMigrator interface {
 - Uses Platform VM importer/exporter for validator state
 
 **X-Chain (Exchange)**:
-- Uses AVM importer/exporter for UTXO set and asset state
+- Uses XVM importer/exporter for UTXO set and asset state
 
 ### Programmatic Usage
 

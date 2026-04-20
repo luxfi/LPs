@@ -1,7 +1,7 @@
 ---
 lp: 031
 title: Exchange VM
-tags: [exchange, x-chain, dag, avm, assets, utxo]
+tags: [exchange, x-chain, dag, xvm, assets, utxo]
 description: X-chain DAG-based asset exchange VM for high-throughput UTXO operations
 author: Lux Industries
 status: Final
@@ -11,14 +11,14 @@ created: 2019-06-01
 requires:
   - lps-028 (Fast Probabilistic Consensus)
 references:
-  - lp-5200 (AVM Specification)
+  - lp-5200 (XVM Specification)
 ---
 
 # LP-031: Exchange VM
 
 ## Abstract
 
-The Exchange VM (AVM) runs the X-chain, Lux's asset creation and exchange chain. Unlike the linear P-chain and C-chain, the X-chain uses a DAG (Directed Acyclic Graph) structure where transactions are vertices that reference parent vertices. Conflicting transactions are resolved via FPC (LP-028). The DAG structure enables higher throughput by allowing non-conflicting transactions to be processed in parallel without block ordering.
+The Exchange VM (XVM) runs the X-chain, Lux's asset creation and exchange chain. Unlike the linear P-chain and C-chain, the X-chain uses a DAG (Directed Acyclic Graph) structure where transactions are vertices that reference parent vertices. Conflicting transactions are resolved via FPC (LP-028). The DAG structure enables higher throughput by allowing non-conflicting transactions to be processed in parallel without block ordering.
 
 ## Specification
 
@@ -86,7 +86,7 @@ The DAG structure enables parallelism:
 
 | Resource | Location |
 |---|---|
-| AVM implementation | `github.com/luxfi/node/vms/avm/` |
+| XVM implementation | `github.com/luxfi/node/vms/xvm/` |
 | DAG consensus | `github.com/luxfi/node/snow/consensus/snowstorm/` |
 | FPC protocol | LP-028 |
 

@@ -46,7 +46,7 @@ Three independent layers protect data. Compromise of one does not compromise the
 | Layer | Scope | Algorithm | Key Source |
 |-------|-------|-----------|------------|
 | 1. Disk encryption | SQLite at rest on local disk | sqlcipher (AES-256-CBC, 256K PBKDF2 iterations) | Per-DB passphrase from KMS |
-| 2. S3 encryption | Data at rest in object storage | age v1.3.0+ (ML-KEM-768 + X25519 hybrid) | Per-service age keypair |
+| 2. S3 encryption | Data at rest in object storage | luxfi/age v1.4.0 HybridRecipient (ML-KEM-768 + X25519) | Per-service age keypair |
 | 3. Transport encryption | Data in flight to S3 | TLS 1.3 (ECDHE + AES-256-GCM) | S3 endpoint certificate |
 
 ### Per-Principal Key Derivation
@@ -174,7 +174,7 @@ s3://{bucket}/{env}/{service}/{instance_id}/zapdb/
 
 ### Post-Quantum Encryption
 
-All age encryption uses ML-KEM-768 + X25519 hybrid mode, available natively in age v1.3.0+.
+All age encryption uses ML-KEM-768 + X25519 hybrid mode via `luxfi/age` v1.4.0 `HybridRecipient`.
 
 **Key properties**:
 
@@ -343,4 +343,14 @@ Reference implementations:
 
 - `luxfi/replicate` — SQLite WAL replication sidecar (Go)
 - `luxfi/zapdb-replicator` — ZapDB frame replication sidecar (Go)
-- `luxfi/age` — age encryption with ML-KEM-768 hybrid support (Go)
+- `luxfi/age` v1.4.0 — age encryption with ML-KEM-768 hybrid support via `HybridRecipient` (Go)
+
+### ZapDB Storage Stack
+
+The ZapDB replication pipeline composes three encryption layers:
+
+```
+zapdb (AES-256 at rest) → age (ML-KEM-768 + X25519 HybridRecipient) → S3 (TLS 1.3)
+```
+
+Each layer is independently keyed. ZapDB encrypts local data with AES-256 using a per-instance CEK from KMS. The replicator sidecar wraps each ZAP frame with age `HybridRecipient` encryption before upload. S3 transport uses TLS 1.3 with X25519MLKEM768 key exchange. Compromise of any single layer does not expose plaintext.

@@ -196,7 +196,7 @@ MPC signers burn stake on misbehavior; relayer gas paid by fees built into SwapT
 
 ### On-Chain Swap Architecture
 
-**Location**: `~/work/lux/node/vms/avm/` and `~/work/lux/node/vms/`
+**Location**: `~/work/lux/node/vms/xvm/` and `~/work/lux/node/vms/`
 
 **T-Chain Signing**: See [LP-7319: T-Chain MPC Custody](/docs/lp-7319-t-chain-decentralised-mpc-custody/) for MPC signing coordination.
 
@@ -232,12 +232,12 @@ func (tx *SwapTx) Status() SwapStatus {
 **Testing**:
 ```bash
 cd ~/work/lux/node
-go test ./vms/avm/plugins/swap/... -v
+go test ./vms/xvm/plugins/swap/... -v
 go test ./vms/mvm/... -v
 
 # Load test with concurrent swaps
 cd ~/work/lux/node
-go test -run TestSwapLoadTest -timeout=5m ./vms/avm/plugins/swap/...
+go test -run TestSwapLoadTest -timeout=5m ./vms/xvm/plugins/swap/...
 ```
 
 ### Swap RPC Endpoints

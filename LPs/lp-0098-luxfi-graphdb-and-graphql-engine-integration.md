@@ -248,7 +248,7 @@ go build ./graphql/cmd/graphql
 **Node Integration** (`~/work/lux/node/`):
 - **C-Chain Hooks**: Precompile registration in `vms/evm/config.go`
 - **P-Chain Hooks**: Block event listeners in `vms/platformvm/block_executor.go`
-- **X-Chain Hooks**: UTXO event listeners in `vms/avm/block_executor.go`
+- **X-Chain Hooks**: UTXO event listeners in `vms/xvm/block_executor.go`
 
 **Configuration**:
 ```bash

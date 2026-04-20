@@ -76,7 +76,7 @@ go doc ./... | head -100
 
 **Registered VMs**:
 - `platformvm/` - Platform VM (P-Chain)
-- `avm/` - Asset VM (X-Chain, UTXO-based)
+- `xvm/` - Asset VM (X-Chain, UTXO-based)
 - `evm/` - EVM Compatible VM (C-Chain)
 - `quantumvm/` - Quantum VM (Q-Chain)
 
