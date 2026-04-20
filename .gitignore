@@ -5,3 +5,10 @@ node_modules/
 .next/
 out/
 .wrangler/
+docs/.source/
+docs/next-env.d.ts
+docs/playwright-report/
+docs/public/
+docs/screenshots/
+docs/test-results/
+docs/tsconfig.tsbuildinfo
