@@ -48,17 +48,17 @@ Two new chains are added:
 
 ## The Nine Chains
 
-| Chain | Role | Maps to luxfi/consensus mode | GPU service path | LP |
-|---|---|---|---|---|
-| **P** | Platform — staking, validators, epoch, slashing | Nova (linear) | precompile (read-only roots in `pchain_validator_root`) | LP-1100, LP-015 |
-| **C** | Contract / EVM — general smart contracts | Nova (linear) | `drain_exec` (EVM fiber VM, LP-009) | LP-009, LP-014 |
-| **X** | UTXO — assets, swaps, native txs | Nova (linear) | precompile | classic Lux UTXO |
-| **Q** | Quasar — Ringtail 2-round threshold ceremony for consensus | Nova or Nebula | `drain_cert_lane` (Ringtail verifier) | LP-073, LP-076 |
-| **Z** | Zero-knowledge — Groth16 rollups (incl. ML-DSA-65 → 192-byte proof) | Nova | `drain_cert_lane` (Groth16 verifier) | LP-063 |
-| **A** | Attestation — unified attestation chain (TEE, audit, identity) | Nova or Nebula | `drain_attest` (NEW service) | this LP + LP-065 |
-| **B** | Bridge — native cross-ecosystem messaging | Nova (mostly) / Nebula (high-fanout) | `drain_bridge` (NEW service) | this LP + LP-016, LP-017 |
-| **M** | MPC — CGGMP21, FROST, Ringtail-general ceremonies | Nebula (DAG of partials) | `drain_cert_lane` (M-Chain verifier) | LP-019, LP-076 |
-| **F** | FHE — TFHE compute, key-share ceremonies, encrypted EVM | Nebula (computation graph) | `drain_fhe` (NEW service) | LP-013, LP-066 |
+| Chain | VM | Role | Mode | GPU service path | LP |
+|---|---|---|---|---|---|
+| **P-Chain** | **PVM** | Platform — staking, validators, epoch, slashing | Nova (linear) | precompile (read-only roots in `pchain_validator_root`) | LP-1100, LP-015 |
+| **C-Chain** | **EVM** (cevm) | Contract — general smart contracts | Nova (linear) | `drain_exec` (EVM fiber VM, LP-009) | LP-009, LP-014 |
+| **X-Chain** | **XVM** | UTXO — assets, swaps, native txs | Nova (linear) | precompile | LP-014 |
+| **Q-Chain** | **QVM** | Quasar — Ringtail 2-round threshold ceremony for consensus | Nova or Nebula | `drain_cert_lane` (Ringtail verifier) | LP-073, LP-076 |
+| **Z-Chain** | **ZVM** | Zero-knowledge — Groth16 rollups (incl. ML-DSA-65 → 192-byte proof) | Nova | `drain_cert_lane` (Groth16 verifier) | LP-063 |
+| **A-Chain** | **AIVM** (AI / Attestation VM) | Attestation — unified attestation chain (TEE, audit, identity, AI provenance) | Nova or Nebula | `drain_attest` | LP-065, Hanzo AI Chain |
+| **B-Chain** | **BVM** | Bridge — native cross-ecosystem messaging | Nova (mostly) / Nebula (high-fanout) | `drain_bridge` | LP-016, LP-017 |
+| **M-Chain** | **MVM** (ThresholdVM-MPC) | MPC — CGGMP21, FROST, Ringtail-general ceremonies | Nebula (DAG of partials) | `drain_cert_lane` (M-Chain verifier) | LP-019, LP-076 |
+| **F-Chain** | **FVM** (ThresholdVM-FHE) | FHE — TFHE compute, key-share ceremonies, encrypted EVM | Nebula (computation graph) | `drain_fhe` | LP-013, LP-066 |
 
 ## Why nine?
 
@@ -307,19 +307,56 @@ The QuasarGPU `cert_lane` dispatcher recognizes the legacy `TChain*`
 enum values during the grace period and routes them to the
 corresponding `MChain*` / `FChain*` verifier.
 
-## VM identifiers
+## VM identifiers (canonical)
 
-```
-P  = lux:platform
-C  = lux:contract
-X  = lux:utxo
-Q  = lux:quasar
-Z  = lux:zk
-A  = lux:attestation
-B  = lux:bridge
-M  = lux:mpc
-F  = lux:fhe
-```
+| Chain | VM name | URI | Description |
+|---|---|---|---|
+| P-Chain | **PVM** | `lux:pvm`       | Platform VM (validator/stake state) |
+| C-Chain | **EVM** | `lux:evm`       | Contract VM (cevm — fork of evmone, GPU fiber VM per LP-009) |
+| X-Chain | **XVM** | `lux:xvm`       | UTXO VM (assets, swaps, native txs) |
+| Q-Chain | **QVM** | `lux:qvm`       | Quasar threshold-key VM (Ringtail DKG ceremony) |
+| Z-Chain | **ZVM** | `lux:zvm`       | Zero-knowledge VM (Groth16 rollups + ZKP registry) |
+| A-Chain | **AIVM** | `lux:aivm`     | AI / Attestation VM (TEE quotes, audit, identity, AI provenance, model registry) |
+| B-Chain | **BVM** | `lux:bvm`       | Bridge VM (cross-ecosystem messaging) |
+| M-Chain | **MVM** | `lux:mvm`       | MPC VM (CGGMP21, FROST, Ringtail-general ceremonies) |
+| F-Chain | **FVM** | `lux:fvm`       | FHE VM (TFHE compute, encrypted EVM, confidential ERC-20) |
+
+**Naming notes (canonical, post-2025-12-15)**:
+
+- `EVM` is the standard Ethereum Virtual Machine name; C-Chain hosts an
+  EVM, no rename needed. Lux's GPU-native fork is `cevm` (LP-009), but
+  the public VM identifier stays `EVM`.
+
+- `XVM` (X-Chain VM) is the Lux UTXO VM. **Lux X-Chain runs XVM.**
+  Upstream Avalanche called the same role "AVM" — that name is
+  *deprecated and unused* in Lux taxonomy. Any reference to "AVM" in
+  pre-2025 Lux docs that meant the X-Chain UTXO VM has been renamed
+  to **XVM**. Cross-references to upstream Avalanche literature that
+  cite "AVM" should be qualified as "(upstream Avalanche AVM = Lux
+  XVM)".
+
+- `AIVM` (A-Chain VM) is the Lux Attestation VM. The "AI" prefix is
+  intentional — A-Chain hosts AI provenance, model registries, agent
+  identity, and TEE attestations. It also explicitly **disambiguates
+  from upstream Avalanche's AVM** (the UTXO VM, which Lux now calls
+  XVM). The Hanzo "AI Chain" brand surface is the same underlying
+  AIVM with AI-native UX (see LP-130 / Hanzo AI Chain whitepaper).
+
+- Threshold-VM family (M-Chain MVM, F-Chain FVM) shares the
+  `~/work/lux/chains/thresholdvm` Go library substrate (LP-019,
+  LP-076) but stays operationally distinct — orthogonal validators,
+  ceremony cadence, gas economics. **No shared T-Chain.**
+
+**Forbidden names** (must NOT appear in any current Lux LP, paper, or
+code identifier):
+
+- `AVM` (was upstream's X-Chain VM; Lux uses **XVM** instead)
+- `Snowball`, `Snowflake`, `Snowman`, `Avalanche` (consensus family)
+  — replaced by Quasar / Photon / Wave / Focus / Nova / Nebula per
+  LP-020 §2
+
+These appear only in **historical** sections (e.g., "Origin", "Forked
+from") with explicit "(upstream X = Lux Y)" qualifiers.
 
 ## Implementation plan
 
