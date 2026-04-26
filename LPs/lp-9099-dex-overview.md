@@ -100,7 +100,7 @@ The Lux exchange ecosystem consists of two complementary systems:
 │   lxd daemon                        │   luxd daemon                      │
 │   github.com/luxfi/dex                   │   github.com/luxfi/node            │
 │   Trading engine, orderbooks             │   C-Chain, P-Chain, B-Chain, etc.  │
-│   DAG consensus for orders               │   Snowman/DAG for blocks           │
+│   DAG consensus for orders               │   Nova/Nebula (Quasar, LP-134)     │
 │   Warp messages → blockchain             │   Native chain transactions        │
 │                                          │                                    │
 │   LP-9000 Series                         │   LP-0011 (X-Chain UTXO)           │

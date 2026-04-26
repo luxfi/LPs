@@ -130,7 +130,7 @@ Where:
 | BTC-PERP | BTC-USD | 0.001 BTC | 100x | LP-0610 Oracle |
 | ETH-PERP | ETH-USD | 0.01 ETH | 100x | LP-0610 Oracle |
 | SOL-PERP | SOL-USD | 1 SOL | 50x | LP-0610 Oracle |
-| AVAX-PERP | AVAX-USD | 1 AVAX | 50x | LP-0610 Oracle |
+| AVAX-PERP (external asset) | AVAX-USD | 1 AVAX | 50x | LP-0610 Oracle |
 | LUX-PERP | LUX-USD | 10 LUX | 20x | LP-0610 Oracle |
 
 ---
@@ -188,7 +188,7 @@ type MarginAccount struct {
 | BTC | 1% | 0.5% | 100x |
 | ETH | 1% | 0.5% | 100x |
 | SOL | 2% | 1% | 50x |
-| AVAX | 2% | 1% | 50x |
+| AVAX (external asset) | 2% | 1% | 50x |
 | LUX | 5% | 2.5% | 20x |
 
 ### 3.4 Position Management

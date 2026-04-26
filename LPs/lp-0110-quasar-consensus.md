@@ -8,7 +8,7 @@ status: Final
 type: Standards Track
 category: Core
 created: 2025-01-29
-tags: [consensus, quasar, finality, bft, snowman, photon, wave, focus, prism, horizon, flare]
+tags: [consensus, quasar, finality, bft, nova, photon, wave, focus, prism, horizon, flare]
 order: 10
 ---
 
@@ -355,15 +355,15 @@ Achieved through:
 
 ## Backwards Compatibility
 
-Quasar maintains compatibility with existing Snowman consensus through interface adapters:
+Quasar maintains compatibility with legacy linear-chain consensus (historical Snowman, now Nova mode per LP-134) through interface adapters:
 
 ```go
-type SnowmanAdapter struct {
+type LegacyChainAdapter struct {
     quasar *QuasarEngine
 }
 
-func (s *SnowmanAdapter) RecordPoll(votes ids.Bag) {
-    // Convert Snowman votes to Quasar polling
+func (s *LegacyChainAdapter) RecordPoll(votes ids.Bag) {
+    // Convert legacy linear-chain votes (historical Snowman) to Quasar polling
     s.quasar.wave.ProcessVotes(votes)
 }
 ```
@@ -406,7 +406,7 @@ See component-specific LPs for detailed test cases:
 [1] Quasar Consensus Protocol Specification. 2024.
 [2] Micali, S., et al. "Verifiable Random Functions". FOCS 1999.
 [3] Popov, S., et al. "FPC-BI: Fast Probabilistic Consensus". 2021.
-[4] Team Rocket. "Snowflake to Avalanche". 2018.
+[4] Team Rocket. "Snowflake to Avalanche: A Novel Metastable Consensus Protocol Family". 2018. (Historical prior art; Lux's Quasar consensus family supersedes the Snow* family — see LP-020, LP-134.)
 
 ## Copyright
 

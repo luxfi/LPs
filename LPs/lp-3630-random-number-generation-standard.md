@@ -740,7 +740,7 @@ forge build
 
 # Deploy RNG to C-Chain
 forge script script/DeployRNG.s.sol:DeployRNG \
-  --rpc-url https://api.avax.network/ext/bc/C/rpc \
+  --rpc-url https://api.lux.network/ext/bc/C/rpc \
   --broadcast
 ```
 

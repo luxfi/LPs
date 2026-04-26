@@ -136,7 +136,7 @@ Valid ← Verify(pk, message, σ)
 
 ### Integration with Consensus
 
-**Snowman Consensus** (linear chain):
+**Nova Consensus** (linear-chain mode, LP-134; historical: Snowman):
 ```
 Block Header:
   - prevHash: Hash(previous block)
@@ -146,7 +146,7 @@ Block Header:
   - merkleRoot: Transaction Merkle root
 ```
 
-**Avalanche Consensus** (DAG):
+**Nebula Consensus** (DAG mode, LP-134; historical: Avalanche DAG):
 ```
 Vertex:
   - parents: {Hash(parent1), Hash(parent2), ...}

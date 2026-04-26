@@ -28,10 +28,10 @@ Open source is not merely a licensing choice—it is a commitment to transparenc
 
 Every critical component of Lux infrastructure exists in the `luxfi/` namespace under our direct control:
 
-| Upstream | Lux Fork | Purpose |
+| Upstream (historical fork source) | Lux Fork | Purpose |
 |----------|----------|---------|
 | go-ethereum | luxfi/geth | EVM execution |
-| avalanchego | luxfi/node | Consensus engine |
+| ava-labs/avalanchego | luxfi/node | Consensus engine (now Quasar family per LP-020) |
 | Various | luxfi/* | All dependencies |
 
 ### Forking Principles

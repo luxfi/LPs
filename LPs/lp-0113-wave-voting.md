@@ -315,7 +315,7 @@ def test_no_oscillation():
 - `wave_test.go` - Unit tests
 - `state_test.go` - State machine tests
 - `fpc_integration_test.go` - Integration with Quasar
-- `snowball_compat_test.go` - Snowball compatibility
+- `legacy_committee_compat_test.go` - Legacy committee-selection compatibility (historical Snowball)
 
 **Repository**: https://github.com/luxfi/consensus/tree/main/protocol/wave
 

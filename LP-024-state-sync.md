@@ -84,7 +84,7 @@ Non-archive nodes prune state older than `STATE_RETENTION` blocks (default 65536
 
 | Resource | Location |
 |---|---|
-| State sync implementation | `github.com/luxfi/node/snow/engine/statesync/` |
+| State sync implementation | `github.com/luxfi/node/consensus/engine/chain/statesync/` |
 | Merkle trie | `github.com/luxfi/evm/trie/` |
 | ZAP state sync messages | LP-022 |
 

@@ -3122,7 +3122,7 @@ Key features of executor.go:
 package tvm
 
 type VM struct {
-    ctx    *snow.Context
+    ctx    *consensus.Context
     state  *ThresholdState
     config *Config
 

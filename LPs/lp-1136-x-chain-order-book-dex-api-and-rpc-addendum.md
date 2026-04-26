@@ -55,7 +55,7 @@ To build a native, LX-style DEX on X-Chain, we must extend the core UTXO/Fx tran
 | 0x5d  | BatchLiquidationTx    | Liquidate N traders in one transaction         | 200+40×N                |
 | 0x5e  | FundingSettleTx       | System-generated funding payment transfers     | 180+40×numTraders       |
 
-#### 1.1 OrderTx serialization (AVAX codec v1)
+#### 1.1 OrderTx serialization (LUX codec v1)
 
 ```go
 type OrderTx struct {

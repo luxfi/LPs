@@ -50,7 +50,7 @@ After completing this path, you will be able to:
 |-------|-----|-------|------|-------|
 | 1 | [LP-1000](/docs/lp-1000-p-chain-core-platform-specification/) | P-Chain Core | 30 min | Deep |
 | 3 | [LP-3605](./lp-3605-validator-staking-and-delegation-standard.md) | Staking & Epochs | 25 min | Deep |
-| 4 | [LP-181](https://github.com/avalanche-foundation/ACPs/tree/main/ACPs/181-p-chain-epoched-views) | Epoching (LP-181) | 20 min | Deep |
+| 4 | [LP-181](./lp-1181-epoching.md) (based on ACP-181, historical prior art) | Epoching (LP-181) | 20 min | Deep |
 
 ### Stage 2: X-Chain & Asset Settlement
 

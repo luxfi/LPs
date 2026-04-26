@@ -163,7 +163,7 @@ function supportsTeleport() external view returns (bool);
 
 ### Integration Tests
 1. **Simple Transfer**
-   - Transfer AVAX from C-Chain to P-Chain
+   - Transfer LUX from C-Chain to P-Chain
    - Verify balance changes
 
 2. **Token Transfer**

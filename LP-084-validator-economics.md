@@ -77,7 +77,7 @@ Delegators increase a validator's stake weight, increasing its reward share. The
 |----------|----------|
 | RewardCalculator | `github.com/luxfi/node/vms/platformvm/reward/calculator.go` |
 | SlashingManager | `github.com/luxfi/standard/contracts/staking/SlashingManager.sol` |
-| Uptime tracking | `github.com/luxfi/node/snow/uptime/` |
+| Uptime tracking | `github.com/luxfi/node/uptime/` |
 
 ## Copyright
 

@@ -86,9 +86,9 @@ coin = H(aggSig(round - 1) || validatorID || round) mod 2
 
 | Resource | Location |
 |---|---|
-| FPC implementation | `github.com/luxfi/node/snow/consensus/fpc/` |
+| FPC implementation | `github.com/luxfi/node/consensus/fpc/` |
 | Quasar integration | LP-020 |
-| Random beacon | `github.com/luxfi/node/snow/consensus/beacon/` |
+| Random beacon | `github.com/luxfi/node/utils/beacon/` |
 
 ## Copyright
 

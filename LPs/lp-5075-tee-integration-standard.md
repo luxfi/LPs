@@ -723,7 +723,7 @@ forge build
 
 # Deploy to C-Chain
 forge script script/DeployTEE.s.sol:DeployTEE \
-  --rpc-url https://api.avax.network/ext/bc/C/rpc \
+  --rpc-url https://api.lux.network/ext/bc/C/rpc \
   --broadcast
 ```
 
