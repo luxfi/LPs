@@ -127,6 +127,57 @@ stays at:
   single fused kernel (or async pipeline of N parallel pairings) is
   Stage 5b/6 work. Architecture proven byte-equal blst; performance
   collapse pending.
+- **v0.49 host fused service shipped.** The host-side BLS batch
+  verifier in `luxcpp/crypto/bls/cpp/bls_fused.{cpp,hpp}` lands the
+  fused pipeline:
+
+  ```
+  parse -> subgroup check -> aggregate sig (G2 add) ->
+  single fused Miller-loop pass over N pairs (blst_miller_loop_n) ->
+  canonical Fp12 tree-reduce (round-by-round pairwise, deterministic) ->
+  final_exp ONCE -> verdict
+  ```
+
+  Critical-path Fp12 ops per pairing batch on the host CPU path drop
+  from N+2 (linear `blst_pairing_chk_n_aggr_pk_in_g1` accumulator) to
+  4 — constant-bounded (2 Miller dispatches + ceil(log2(K=2)) Fp12 mul
+  + 1 final_exp), independent of N.
+
+  Wall-clock at n=1024 same-msg, M1 Max Release, median of 10:
+
+  | Path                                   | µs/batch | vs linear |
+  |----------------------------------------|---------:|----------:|
+  | `aggregate_verify_batch_msg` (linear)  |   458 145 |     1.00x |
+  | `fused_aggregate_verify_batch` (cold)  |   131 308 |     **3.49x** |
+  | `aggregate_verify_batch_msg_aff`       |   376 923 |     1.22x |
+  | `fused_aggregate_verify_batch_aff`     |   **2 581** |   **148.35x** |
+
+  The cold-path 131 ms residual is the parse cost (1024 serial
+  `blst_p1_uncompress` + `blst_p1_affine_in_g1`); the fused kernel
+  cannot save serial decompress work on its own — that reduction is
+  the orthogonal `quasar/gpu/pubkey_cache.hpp` layer (v0.46.2,
+  75.7 ms with cache).
+
+  The warm-affine path at 2.6 ms IS the fused kernel itself. This is
+  the entry bridgevm `pre_verify_inbox` and the warm
+  pubkey-cache hot path call into. Well under the 80 ms target the
+  Stage 3 dispatch projection set.
+
+  The same `tree_reduce<T, Combine>` template composes K-way grouped
+  outputs across BLS pairings, Groth16 batched verify, MLDSAGroth16,
+  Ringtail share comp, MPCVM transcript roots, and receipt root
+  composition — one canonical reduction shape across consumers.
+
+  C-ABI: `bls12_381_fused_aggregate_verify_batch` +
+  `bls12_381_fused_aggregate_verify_batch_aff`. The legacy
+  `bls12_381_aggregate_verify_batch` stays for the per-tuple bitmap
+  fallback.
+
+  Tests: 9 fused-test cases pass byte-equal blst (positive +
+  tampered-sig + tampered-msg + bad-pk + tree-reduce kernel
+  invariants); 2 746 Stage 1-3 BLS Metal vectors continue to pass; 13
+  `quasar-bls-verifier-test` cases continue to pass; 23 IRTF
+  `bls-signature-test` cases continue to pass.
 - **WGSL higher tower.** Landed. `fp6_inv`, `fp12 mul/sqr/inv/conj/cyclo_sqr`
   now run on AGXMetalG13X via wgpu-native, byte-equal CPU oracle on every
   vector. Approach: push all multi-limb scratches (24/72/144 x u32) to
