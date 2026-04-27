@@ -2,7 +2,26 @@
 
 **As of 2026-04-27.** Read-only audit cross-cutting every chain VM
 transition kernel and every crypto primitive in the LP-137 9-chain
-stack against the canonical four-kernel template:
+stack against the canonical four-kernel template.
+
+## Claim wording — audit integrity
+
+> **All production hot-path crypto used by chain-local execution is
+> GPU-native; remaining NOTIMPL primitives are non-production gaps
+> tracked separately.**
+
+This is the precise public claim. The unqualified "all crypto is GPU-
+native" is **not** the audit-supported claim — 17 of 29 luxcpp/crypto
+primitives are NOTIMPL (no working CPU body authored), 5 are blocked
+on intx/blst/evmmax bootstrap. None of the NOTIMPL or bootstrap-
+blocked primitives are on a chain-local hot path today; they are
+non-production surface tracked for future work. The 8 working
+primitives (BLS, Keccak, sha256, ripemd160, blake2b, secp256k1,
+attestation, NTT) cover every chain-local hot path that ships in cevm
+v0.47.2 + Phase 5b/5c production link graph (zero blst symbols, CI-
+asserted on 7 production binaries).
+
+The four-kernel template:
 
 ```
 expand_inputs   →   parallel_eval   →   reduce_or_batch_verify   →   commit_root
