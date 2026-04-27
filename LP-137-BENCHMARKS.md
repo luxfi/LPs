@@ -333,11 +333,17 @@ latency dominates; expected to land on discrete CUDA hosts).
   divergence in v0.55.2 BENCHMARKS.md is therefore unresolved as of
   this roll-up. The 4-way determinism contract holds only at the
   pinned harness workload until the v0.55.3 fix lands.
-- **cevm full-round Metal substrate is still slower than CPU at the
-  workloads we test** (1.49 ms CPU vs 359.50 ms Metal at fast.1024).
-  The v0.45 batched pairings live at the verifier layer; they have
-  not yet been wired through the QuasarGPUEngine wave-tick scheduler.
-  That integration is the v0.45.1 deliverable.
+- **cevm full-round Metal substrate is structurally CPU-only in
+  production (cevm v0.46.1, 2026-04-27).** Sweep on M1 Max measured
+  Metal 0.003×–0.011× CPU at every N within the substrate's 4096-tx
+  ingress envelope; the wave-tick scheduler floor (~554 ms / 256
+  epochs) dominates regardless of N. Threshold-gated dispatch
+  (`kQuasarSubstrateMetalThreshold = 8192`) sends every production-
+  sized substrate-only round to CPU; gated path matches direct CPU
+  byte-equal within ~3% noise. Metal kernel still drives EVM
+  bytecode interpretation + vote / state-page ingestion (`requires_metal`
+  hot paths). The v0.45 batched verifier pairings live at the
+  verifier layer above the scheduler and ship at 9.24× same-msg.
 - **cevm V2 EVM kernel ships but does not yet replace V1 in the
   standard build.** The 32-threads/tx threadgroup is dispatched; the
   SIMD fan-out across opcodes lands in v0.45.x.
