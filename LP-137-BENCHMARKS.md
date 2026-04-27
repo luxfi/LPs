@@ -232,7 +232,7 @@ is computed against the same Phase-1 baseline.
 |---|---|---|---:|---:|---:|
 | P | PlatformVM | luxcpp/platformvm | 0.004× (v0.56 Metal/CPU) | 0.025× (v0.57 Metal/CPU) | **6.5×** |
 | C | EVM (cevm) v1 EVM kernel | luxcpp/cevm | 0.47× (v0.44.1) | 0.47× (v0.45 V1 fallback) + V2 ships | **1.0× (V2 dispatched)** |
-| C | cevm BLS aggregate same-msg, n=1024 | luxcpp/cevm | 1 142.91 µs/sig (host blst, flat) | 129.84 µs/sig (batched same-msg) | **9.24×** |
+| C | cevm BLS aggregate same-msg, n=1024 | luxcpp/cevm | 1 142.91 µs/sig (host blst, flat) — or 1 199.97 µs/sig (v0.44 unbatched) | 129.84 µs/sig (v0.45 batched same-msg) — **73.91 µs/sig (v0.47.1 with pubkey cache)** | **9.24× (v0.45 vs v0.44 unbatched) → 16.51× (v0.47.1 vs v0.44 unbatched) / 15.46× (v0.47.1 vs flat host-blst)** |
 | C | cevm BLS aggregate batched (general msg), n=1024 | luxcpp/cevm | 1.20 s | 0.464 s | **2.58×** |
 | X | XVM | luxcpp/xvm | 0.02× (v0.55.2 large) | _not committed by deadline_ | — |
 | A | AIVM FullRound | luxcpp/aivm | 0.06× (v0.58.3) | 0.06× (v0.59 architecturally split; M1 dispatch-bound) | **1.0× (dGPU ready)** |
@@ -252,10 +252,15 @@ on real (non-synthetic) workloads (P: 0.025, C [BLS same-msg 1024]: 9.24,
 A: 0.06, B: 9.5, M [xlarge]: 0.156, M [FROST sign]: 0.142, F [N=4096
 B=128]: 23.63, F [N=8192 B=128]: 6.22):
 
-**Phase-1 geomean: 0.30× → Phase-2 geomean: 1.06× — a 3.5× lift in the
-substrate-wide GPU-vs-CPU position.** The synthetic-VK Groth16 row is
-excluded from geomean because the speedup reflects O(N) → O(1) keccak
-`compute_vk_root` amortization on a fail-fast path, not pairing speedup.
+**Phase-1 geomean: 0.17× → Phase-2 geomean: 0.90× (with v0.45 BLS at
+9.24×) → 0.97× (with v0.47.1 BLS at 16.51× via pubkey cache) — a
+5.7× lift; substrate-wide geomean has not yet crossed parity.** The
+synthetic-VK Groth16 row is excluded because its speedup reflects
+O(N) → O(1) keccak `compute_vk_root` amortization on a fail-fast
+path, not pairing speedup. Three workloads beat CPU end-to-end
+(F NTT 23.6×, B-Chain BLS 9.5×, C-Chain BLS 16.51×); two lag the
+substrate (PlatformVM 0.025×, AIVM 0.06× on M1 — both architectural-
+ly correct, dGPU-pending).
 
 The crossover that Phase-1 missed (only F-Chain beat CPU end-to-end) now
 holds at three production workloads — F-Chain NTT (23.6×), B-Chain BLS
@@ -404,12 +409,13 @@ BridgeVM batched real pairing 9.5×; MPCVM xlarge 18.6× vs Phase-1
 Metal; AIVM architecture in place). F-Chain's 23.6× holds. X-Chain's
 Phase-2 fix did not land in this push.
 
-Substrate-wide geometric mean lifts from **0.30× (Phase-1) to 1.33×
-(Phase-2)**, with three measured production workloads now beating CPU
-end-to-end (F NTT 23.6×, B-Chain BLS 9.5×, C-Chain BLS 9.2×) and every
-participating Phase-2 chain showing ≥2.5× wall-clock improvement vs
-its Phase-1 baseline except A-Chain (where the architectural change is
-correct but M1 dispatch-bound).
+Substrate-wide geometric mean lifts from **0.17× (Phase-1) to 0.90×
+(Phase-2 / v0.45) → 0.97× (v0.47.1 with pubkey cache)** — a 5.7× lift,
+not yet crossing parity. Three measured production workloads now beat
+CPU end-to-end (F NTT 23.6×, B-Chain BLS 9.5×, C-Chain BLS 16.51× via
+pubkey cache); every participating Phase-2 chain shows ≥2.5×
+wall-clock improvement vs its Phase-1 baseline except A-Chain
+(architectural change correct, M1 dispatch-bound; dGPU-pending).
 
 The CPU touches reality. The GPU now runs the chain — and on three
 chains today, the GPU is **8–24× faster** than CPU at the workloads
