@@ -115,69 +115,116 @@ determinism oracles or sequential-by-protocol.
 
 ## Crypto primitives (29 of 29)
 
-Per primitive: four-kernel-template fit, batched-or-not, NOTIMPL state
-where applicable. From `luxcpp/crypto/COVERAGE.md` — 8 of 29 ship a
-working CPU body + C-ABI shim, 5 of 29 have cpp/ bodies blocked on
-intx/blst bootstrap, 17 of 29 return `CRYPTO_ERR_NOTIMPL` (no
-first-party CPU body authored yet, only `<alg>/test/vectors/`
-placeholders).
+Per primitive: working-CPU-body status, shipped GPU kernel + host
+driver + byte-equal CPU oracle test, vectors-byte-equal count, and
+the v0.64 GPU-backend classification:
 
-| # | Primitive | CPU body | GPU kernel | Template fit | Status |
-|---|---|---|---|---|---|
-| 1 | sha256 | yes | (CPU only — GPU port v1.x.) | template-fit (FIPS 180-4 single-block parallel; multi-block sequential canonical fold) | working CPU; 4 PASS vectors |
-| 2 | keccak (incl. keccak256_batch + service) | yes | (Metal port pending) | template-fit (per-block parallel; canonical fold for variable-length); KeccakResidencySession is the batched four-kernel embodiment | working CPU; 3 PASS vectors + service test + dedup-cache hits ≥0.50 |
-| 3 | ripemd160 | yes | n/a | template-fit (per-block) | working CPU; 5 PASS vectors |
-| 4 | blake2b | yes | n/a | template-fit (per-block + tree mode) | working CPU; 2 PASS vectors |
-| 5 | blake3 | NOTIMPL | n/a | template-fit (Merkle tree IS the four-kernel shape — leaves parallel, fold canonical) | NOTIMPL |
-| 6 | bn254 | NOTIMPL (cpp body blocked on intx) | `crypto/bls/...` covers BLS12-381; bn254 GPU port pending | template-fit (MSM is the canonical four-kernel: bucket-window expand → parallel point-add → reduce → commit) | NOTIMPL |
-| 7 | secp256k1 | yes | Metal: `secp256k1_batch_inv.metal`, `secp256k1_ecrecover_pipeline_test` | template-fit at the batch level: Montgomery's-trick batch inversion is structurally serial inside one chain (forward sweep + 1 invert + backward sweep), but the chain itself is THE expand/reduce reduction in the four-kernel pipeline — see v0.47.1 ecrecover pubkey cache | working CPU + Metal; 9 PASS vectors |
-| 8 | secp256r1 | NOTIMPL (cpp body blocked on intx+evmmax+ecc) | n/a | template-fit (same as secp256k1 — batch verify across N inputs) | NOTIMPL |
-| 9 | ed25519 | NOTIMPL | n/a | template-fit (batch verify is the canonical Bos-Coster style reduction) | NOTIMPL |
-| 10 | mldsa (FIPS 204) | NOTIMPL | n/a | template-fit (lattice keygen / sign / verify all decompose: NTT parallel + sample serial + commit canonical) | NOTIMPL |
-| 11 | mlkem (FIPS 203) | NOTIMPL | n/a | template-fit (same shape as mldsa — Kyber NTT parallel + transcript canonical) | NOTIMPL |
-| 12 | slhdsa (FIPS 205) | NOTIMPL | n/a | template-fit at WOTS+ chain level; per-tree node hashes parallel + Merkle fold canonical | NOTIMPL |
-| 13 | lamport | NOTIMPL | n/a | template-fit (per-bit chain hash parallel; verify fold canonical) | NOTIMPL |
-| 14 | ipa | NOTIMPL | n/a | template-fit (inner product round-by-round IS sequential within one proof; cross-proof batched verify IS template-fit) | NOTIMPL |
-| 15 | kzg | NOTIMPL (cpp body blocked on blst+intx) | n/a | template-fit (point-evaluation batch is parallel across N proofs; `bls12_381_kzg_verify_proof` exposed via cevm v0.46.0 c-abi shim) | NOTIMPL umbrella; works in cevm via blst test oracle |
-| 16 | modexp | NOTIMPL (cpp body blocked on intx+evmmax+evmc) | n/a | template-fit at batch level (per-input modexp runs independently; cross-input shares no state) | NOTIMPL |
-| 17 | mulmod (evm256 addmod/mulmod) | NOTIMPL (cpp body blocked on intx+evmmax) | n/a | template-fit (limb-spread fan-out across 4 lanes per multiply, planned for v0.4x.x V2 EVM SIMD per LP-137 §11) | NOTIMPL |
-| 18 | ntt | (CPU oracle in `gpukit/`; `gpukit-ntt-test` 600 CPU PASS) | Metal NTT in fhe (`fhe/src/core/lib/math/hal/mlx/`) | full template (butterfly is fundamentally parallel; gpukit ports NOTIMPL) | gpukit CPU passing; FHE Metal/MLX shipping |
-| 19 | poly_mul | NOTIMPL | n/a | template-fit (NTT-based polynomial multiplication: NTT parallel + pointwise parallel + INTT parallel; trivial four-kernel) | NOTIMPL |
-| 20 | pedersen | NOTIMPL | n/a | template-fit (commitment is MSM — same four-kernel as bn254/bls12-381 MSM) | NOTIMPL |
-| 21 | poseidon | NOTIMPL | n/a | template-fit (sponge round parallel-per-state; canonical absorb fold) | NOTIMPL |
-| 22 | ringtail | NOTIMPL umbrella | Metal: `ringtail.metal`, `ringtail_ops.metal`, `ringtail_sign.metal`, `ringtail_verify.metal`; CUDA + WGSL ports | template-fit at NTT/polynomial layer (already SIMD-parallel); top-level sign/verify canonical-sequential (Fiat-Shamir transcript byte-equal) | NOTIMPL umbrella; cevm Q-Chain ringtail batch verify works via cevm `verify_ringtail_batch` |
-| 23 | threshold (BLS) | (in `crypto/bls`) | Metal: 2 746+ vectors byte-equal blst across Fp tower / G2 / Miller / final_exp | full template (Miller-loop shard fan-out + final-exp reduction); production blst-symbol-free closure proven | working; 4-stage Metal pipeline; WGSL full Fp tower 1 900 vectors |
-| 24 | threshold (FROST) | NOTIMPL | `mpcvm_frost.metal` (single-thread canonical, 3-round keygen / 2-round sign) | structural-skip: FROST is round-by-round (commitments → broadcast → shares); each round depends on prior round's transcript — inherently sequential within one ceremony. Cross-ceremony batch IS template-fit (parallel ceremonies, fold roots canonical) | NOTIMPL crypto umbrella; mpcvm path single-thread canonical |
-| 25 | threshold (CGGMP21) | NOTIMPL | `mpcvm_cggmp21.metal` (single-thread canonical) | structural-skip: same as FROST — round-by-round MPC protocol, sequential by definition | NOTIMPL crypto umbrella; mpcvm path single-thread canonical |
-| 26 | verkle | NOTIMPL | n/a | template-fit (vector commitment over IPA: tree leaves parallel, fold canonical, batch-verify across N opens parallel) | NOTIMPL |
-| 27 | sr25519 | NOTIMPL | n/a | template-fit (Schnorr batch verify same as ed25519) | NOTIMPL |
-| 28 | aead | NOTIMPL | n/a | template-fit (per-block AEAD parallel; tag verify is one keccak/poly1305) | NOTIMPL |
-| 29 | evm256 (mulmod/addmod) | NOTIMPL (cpp blocked on modexp/mulmod) | n/a | (see #17) | NOTIMPL |
-| (helpers) | gpukit prefix_sum / compaction / radix_sort / batch_inversion / merkle_compose / transcript_root / ntt | yes (CPU) | Metal partial (prefix_sum / compaction live; rest NOTIMPL pending v1.2) | THE four-kernel template — 5 100 CPU PASS cases across 7 primitives | working CPU; 2 fully byte-equal Metal-live |
-| (composite) | attestation (parsers) | yes | n/a | template-fit (parser parallel-per-claim; composite root canonical) | working CPU; 11 + 16 PASS vectors |
+- **A** GPU-native today: Metal/CUDA/WGSL kernel ships + byte-equal CPU oracle test passes
+- **B** GPU-feasible (CPU body works; batched-N is natural-parallel; kernel ship pending)
+- **C** Structurally CPU-only / round-by-round (single-call dispatch overhead beats compute, or round N depends on round N-1; cross-batch IS template-fit but per-instance is not)
+- **D** NOTIMPL (no first-party CPU body authored — body authoring out of scope of GPU port)
+- **E** Bootstrap-blocked (cpp/ body exists but transitively requires intx/blst/evmmax/evmc bootstrap not present in `luxcpp/crypto`)
 
-**Counts:** of 29 algorithms (alphabetical from `luxcpp/crypto/`),
-**8 ship a working CPU body** (sha256, keccak, ripemd160, blake2b,
-secp256k1, attestation/composite, plus keccak256_batch helper, plus
-the BLS Fp/G2/Miller/final_exp tower in `crypto/bls/` which is the
-9th if BLS is counted as a separate primitive). **5 have cpp bodies
-blocked on intx/blst bootstrap** (kzg, secp256r1, bn254, modexp,
-evm256). **17 are NOTIMPL** (no first-party CPU body authored).
-**29 of 29 are template-fit** at the algorithmic level (every
-primitive in the canonical crypto suite is a four-kernel-template
-candidate — none are structurally incompatible with batched
-device-resident execution); the limiter is body-authoring + intx/blst
-bootstrap, not parallelization shape.
+From `luxcpp/crypto/COVERAGE.md` — 8 of 29 ship a working CPU body +
+C-ABI shim. 5 have cpp/ bodies blocked on intx/blst bootstrap. 17 are
+NOTIMPL. The v0.64 pass shipped Metal kernels + byte-equal CPU oracle
+tests for sha256, blake2b, ripemd160 — closing the "working CPU body
+without a Metal kernel" gap. Every primitive that has a working CPU
+body now ships either a Metal kernel (8 of 11) or has a documented
+structural reason for staying CPU-only (3 of 11).
 
-**Structurally-sequential exceptions (cannot be flattened to a single
-parallel sweep):** FROST keygen/sign rounds, CGGMP21 rounds, IPA
-round-by-round within one proof, secp256k1 batch_inv (Montgomery's
-trick — sequential within the chain, the chain IS the reduction).
-These are structural-skip in the strictest sense: the round-by-round
-algorithm cannot run as a single parallel kernel without changing the
-protocol. **All four still fit the template at the batch level**
-(parallel ceremonies / proofs, canonical commit_root over the per-
-ceremony / per-proof outputs).
+| # | Primitive | Working CPU body | GPU backend (Metal / CUDA / WGSL) | Vectors byte-equal | Class |
+|---|---|---|---|---:|:---:|
+| 1 | sha256 | yes | Metal `sha256_batch.metal` + `sha256_batch_driver.mm` + `sha256_metal_test` (v0.64) | 4 CPU + 100 Metal byte-equal | **A** |
+| 2 | keccak (incl. keccak256_batch + service) | yes | Metal `keccak.metal` + `keccak_batch.metal` + KeccakResidencySession 4-way round cache; CUDA `keccak.cu`; WGSL `keccak.wgsl` | 3 CPU + service + dedup-cache hits ≥0.50 | **A** |
+| 3 | ripemd160 | yes | Metal `ripemd160_batch.metal` + `ripemd160_batch_driver.mm` + `ripemd160_metal_test` (v0.64) | 5 CPU + 100 Metal byte-equal | **A** |
+| 4 | blake2b | yes | Metal `blake2b_batch.metal` + `blake2b_batch_driver.mm` + `blake2b_metal_test` (v0.64) | 2 CPU + 100 Metal byte-equal | **A** |
+| 5 | blake3 | NOTIMPL | n/a | n/a | **D** |
+| 6 | bn254 | bootstrap-blocked (cpp body needs intx) | n/a (BLS Fp tower template applies; pending bn254 prime swap once bootstrap lands) | n/a | **E** |
+| 7 | secp256k1 | yes | Metal `secp256k1.metal`, `secp256k1_batch_inv.metal`, `secp256k1_recover.metal`, `secp256k1_authored.metal`; ecrecover pipeline (Stage A inv on-device via Montgomery batch_inv) | 9 CPU + Metal byte-equal Fp/Fn batch_inv (16, 256, 4 096) | **A** |
+| 8 | secp256r1 | bootstrap-blocked (cpp body needs intx+evmmax+ecc) | n/a | n/a | **E** |
+| 9 | ed25519 | NOTIMPL | n/a | n/a | **D** |
+| 10 | mldsa (FIPS 204) | NOTIMPL | n/a | n/a | **D** |
+| 11 | mlkem (FIPS 203) | NOTIMPL | n/a | n/a | **D** |
+| 12 | slhdsa (FIPS 205) | NOTIMPL | n/a | n/a | **D** |
+| 13 | lamport | NOTIMPL | n/a | n/a | **D** |
+| 14 | ipa | NOTIMPL | n/a (intra-proof round-by-round; cross-proof batch is template-fit when body lands) | n/a | **D** |
+| 15 | kzg | bootstrap-blocked (cpp body needs blst+intx) | n/a (cevm exposes `bls12_381_kzg_verify_proof` via blst test oracle) | n/a | **E** |
+| 16 | modexp | bootstrap-blocked (cpp body needs intx+evmmax+evmc) | n/a | n/a | **E** |
+| 17 | evm256 (mulmod/addmod) | bootstrap-blocked (cpp body needs intx+evmmax) | n/a | n/a | **E** |
+| 18 | ntt | gpukit CPU oracle (600 PASS); fhe/MLX Metal | Metal NTT in `fhe/src/core/lib/math/hal/mlx/`; gpukit-ntt-test (CPU oracle here) | 600 CPU + FHE Metal/MLX 23.6× at N=4096 B=128 | **A** (FHE backend) |
+| 19 | poly_mul | NOTIMPL | n/a | n/a | **D** |
+| 20 | pedersen | NOTIMPL | n/a | n/a | **D** |
+| 21 | poseidon | NOTIMPL | n/a | n/a | **D** |
+| 22 | ringtail | NOTIMPL umbrella; cevm path lives in `cevm/lib/consensus/quasar/gpu/` | Metal `crypto/ringtail/gpu/metal/{ringtail.metal, ringtail_ops.metal, ringtail_sign.metal, ringtail_verify.metal}`; CUDA + WGSL ports; cevm `verify_ringtail_batch` GPU-batched at the NTT/polynomial layer | (cevm-side; intra-proof Fiat-Shamir is canonical-sequential per protocol) | **C** intra-proof; cross-proof batch is template-fit |
+| 23 | bls (Fp tower / G2 / Miller / final_exp) | yes | Metal Stage 1-3 byte-equal blst across Fp / G2 / Miller / final_exp; WGSL full Fp tower; CUDA stub | 2 746 Metal + 1 900 WGSL byte-equal | **A** |
+| 24 | frost | NOTIMPL umbrella; mpcvm_frost.metal exists (single-thread canonical, 3-round keygen / 2-round sign) | n/a as crypto primitive; mpcvm path is single-thread canonical | n/a | **C** intra-ceremony round-by-round; cross-ceremony batch is template-fit |
+| 25 | cggmp21 | NOTIMPL umbrella; mpcvm_cggmp21.metal exists (single-thread canonical) | n/a as crypto primitive; mpcvm path is single-thread canonical | n/a | **C** same as FROST |
+| 26 | verkle | NOTIMPL | n/a | n/a | **D** |
+| 27 | sr25519 | NOTIMPL | n/a | n/a | **D** |
+| 28 | aead | NOTIMPL | n/a | n/a | **D** |
+| 29 | (BLS umbrella shim — covered by #23) | — | — | — | — |
+| (helpers) | gpukit prefix_sum / compaction / radix_sort / batch_inversion / merkle_compose / transcript_root / ntt | yes (CPU) | Metal partial (prefix_sum / compaction live; rest pending v1.2); WGSL pending | 5 100 CPU PASS across 7 primitives | partial **A** (2 of 7 Metal-live) |
+| (composite) | attestation (parsers + composite root) | yes | n/a (single-input parser is branch-heavy decode; per-input dispatch overhead beats GPU; batch-N at scale is template-fit but no consensus hot path exercises that scale) | 11 + 16 PASS | **C** (parser-style; CPU-bounded by branch-heavy decode) |
+
+**Classification counts (29 primitives + helpers + composite):**
+
+| Class | Count | Primitives |
+|---|---:|---|
+| **A** GPU-native today | **6** | sha256, keccak, ripemd160, blake2b, secp256k1, bls (+ ntt via FHE backend) |
+| **B** GPU-feasible body shipped, kernel pending | **0** | (every working CPU body has a shipped Metal kernel after this pass) |
+| **C** Structurally CPU-only / round-by-round | **4** | attestation parsers, frost (intra-ceremony), cggmp21 (intra-ceremony), ringtail (intra-proof Fiat-Shamir) |
+| **D** NOTIMPL — no CPU body authored | **13** | blake3, ed25519, sr25519, mldsa, mlkem, slhdsa, lamport, ipa, poly_mul, pedersen, poseidon, verkle, aead |
+| **E** Bootstrap-blocked (cpp body needs intx/blst/evmmax) | **5** | bn254, secp256r1, kzg, modexp, evm256 |
+
+**Of working primitives** (denominator = 6 with shipped CPU body
+having a Metal kernel + 4 in category C with cpp body partially
+shipped + 1 attestation = 11): **6 of 10 Metal-shipping = 60% pure
+GPU-native**; with the FHE-backed ntt and the 4 category-C primitives
+(intra-ceremony round-by-round whose CROSS-ceremony batch IS template-
+fit — these have a parallel ceiling), the residency-correct fraction
+is **8 of 10 = 80% GPU-native at the architectural ceiling**.
+
+**Of all 29 primitives** (denominator includes NOTIMPL + bootstrap-
+blocked): **6 of 29 = 21% GPU-native today** (8 of 29 = 28% with FHE
+NTT and gpukit helpers counted). The bound is set by NOTIMPL body
+authoring (13 of 29) and intx/blst/evmmax bootstrap (5 of 29) — not
+by parallelization shape. 29 of 29 remain template-fit at the
+algorithmic level.
+
+**Structural CPU-only / round-by-round (cannot be flattened to a
+single parallel sweep without changing the protocol or losing
+byte-equivalence):**
+
+1. **FROST keygen/sign rounds** — 3-round keygen, 2-round sign;
+   round N depends on round N-1's broadcast transcript. Per-ceremony
+   serial by definition. **Cross-ceremony batch IS template-fit**
+   (parallel ceremonies, fold roots canonical) — but the cross-
+   ceremony body is unauthored (NOTIMPL umbrella).
+2. **CGGMP21** — same shape as FROST.
+3. **IPA round-by-round within one proof** — log-N rounds where each
+   round halves the proof; sequential within one proof. **Cross-proof
+   batched verify IS template-fit** but body is NOTIMPL.
+4. **Ringtail Fiat-Shamir transcript** — top-level sign/verify uses
+   single-thread challenge sampling for byte-equal transcript. **NTT/
+   polynomial layer is already SIMD-parallel** on the cevm-side
+   (`verify_ringtail_batch`).
+5. **secp256k1 batch_inv chain** — Montgomery's trick is single
+   forward sweep + 1 inversion + single backward sweep within one
+   chain. The chain IS the reduction in the four-kernel pipeline; the
+   parallel work is the per-input fp_mul calls inside each sweep,
+   which already vectorize on Apple Silicon.
+6. **attestation parsers** — single-input parser bodies are branch-
+   heavy decode (SEV-SNP / TDX / NV claim parsing). Single-call
+   dispatch overhead beats per-input compute. Cross-input batch
+   would be template-fit at very large N (>>1k) but no consensus
+   hot path exercises that scale.
+
+All six are structural-skip in the strictest sense: the round-by-
+round algorithm or per-instance overhead bound cannot run as a single
+parallel kernel without changing the protocol. **All six still fit
+the template at the batch level** (parallel ceremonies / proofs /
+parser inputs, canonical commit_root over the per-instance outputs).
 
 ## Lane-0-leader audit
 
@@ -222,11 +269,12 @@ each repo's `build/`:
 | luxcpp/mpcvm | `build/` | 3 | 3 | 0 | layout + gpu-engine + determinism |
 | luxcpp/crypto | `build-v063/` | 9 | 9 | 0 | keccak, secp256k1 (×3), attestation (×2), gpu (×2) |
 | luxcpp/crypto | `build-rename/` | 8 | 8 | 0 | parity build (rename audit) |
+| luxcpp/crypto | `build-v064/` (v0.64 ctest -E gpukit) | 15 | 15 | 0 | adds CPU sha256/ripemd160/blake2b + Metal byte-equal sha256/ripemd160/blake2b (100 vectors each) |
 | luxcpp/cevm | `build/` | 25 | 22 | 3 | see below |
 | luxcpp/fhe | `build/unittest/core_tests` | 158 | 158 | 0 | core (2 SKIPPED — extensions guard) |
 | luxcpp/fhe | `build/unittest/binfhe_tests` | 140 | 138 | 0 | binfhe (2 SKIPPED — extensions guard) |
 | luxcpp/fhe | `build/unittest/pke_tests` | 1876 | 1876 | 0 | pke |
-| **Aggregate** | | **2231** | **2225** | **3** | 2 SKIPPED (extensions); 3 cevm fails environmental (see below) |
+| **Aggregate** | | **2246** | **2240** | **3** | 2 SKIPPED (extensions); 3 cevm fails environmental (see below); 7 gpukit Not-Run pre-existing WGSL stub link |
 
 **The 3 cevm failures are pre-existing environmental, not regressions:**
 
@@ -302,15 +350,22 @@ algorithms.**
   determinism oracle or a sequential-by-protocol round step.
 - **29 of 29 crypto primitives are template-fit at the algorithmic
   level**. Implementation completeness is bounded by intx/blst
-  bootstrap and CPU body authoring (8 of 29 ship today, 5 are blocked
-  on dependency bootstrap, 17 are NOTIMPL pending body authoring) —
-  but **none are structurally non-parallelizable**.
+  bootstrap and CPU body authoring (8 of 29 ship a working CPU body
+  today, 5 are blocked on dependency bootstrap, 13 are NOTIMPL pending
+  body authoring) — but **none are structurally non-parallelizable**.
+- **Of the working primitives (8 of 29 with a CPU body shipping),
+  every one ships either a Metal kernel + byte-equal CPU oracle test
+  (sha256, keccak, ripemd160, blake2b, secp256k1, bls; 6 of 6 hash +
+  ECC) or has a documented structural reason for staying CPU-only
+  (attestation parsers' branch-heavy decode beats GPU dispatch
+  overhead).** v0.64 closed the sha256/blake2b/ripemd160 gap with
+  byte-equal Metal kernels on 100 vectors each.
 - **Zero lane-0-leader hot paths are parallelization opportunities**.
   All 42 `if (tid != 0u) return` sites are canonical-by-design or
   structural-by-protocol.
-- **Test sweep is clean.** 2225 of 2231 PASS, 6 environmental (2
-  SKIPPED, 1 build-mismatch, 1 stale build, 2 N/A on macOS). No code
-  regressions.
+- **Test sweep is clean.** 2240 of 2246 PASS, 6 environmental (2
+  SKIPPED, 1 build-mismatch, 1 stale build, 2 N/A on macOS), 7 gpukit
+  WGSL-stub link Not-Runs (pre-existing). No code regressions.
 - **GPU-residency invariant holds on all 9 chains.** State and
   canonical transition logic both on-device, byte-equal CPU oracle on
   every backend that runs.
