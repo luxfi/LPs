@@ -305,8 +305,16 @@ latency dominates; expected to land on discrete CUDA hosts).
   Fp12 chain on SIMD GPU; the SoTA single-pairing path is Linux+CUDA.
 - **cevm v0.45 V2 EVM kernel** — `evm_kernel_v2.metal` ships as a
   32-threads/tx threadgroup dispatcher with a lane-0-leader fallback
-  to V1 on status=255. Build flag `LUX_EVM_KERNEL_V2=ON`. The SIMD
-  fan-out across opcodes lands in v0.45.x.
+  to V1 on status=255. Build flag `LUX_EVM_KERNEL_V2=ON`. SIMD fan-out
+  across opcodes landed v0.47.2 (commit 580f2cbb): buffer-prep across
+  32 lanes, byte-equal V1 on every tx (status / gas_used / refund /
+  output / log topics + data). Measured **0.33× of V1** on M1 (4.5 ms
+  V1 → 13.7 ms V2; host memset bandwidth ~50 GB/s + 2× dispatch
+  overhead exceed the saved CPU work on Apple unified memory). dGPU-
+  only architectural correctness — same precedent as aivm v0.59. Two
+  latent v0.45 host bugs fixed in passing: status=255 enum-mapping
+  never triggered V1 retry; V2 future deadlocked V1 enqueue on
+  `exec_mutex_`.
 - **bridgevm v0.60 batched BLS pairing** — `bls::pre_verify_inbox`
   shards Miller loops across 10 M1 Max worker threads and merges into
   one final-exponentiation. 8.58×–10.35× across 1k/5k/10k message
@@ -350,9 +358,14 @@ latency dominates; expected to land on discrete CUDA hosts).
   bytecode interpretation + vote / state-page ingestion (`requires_metal`
   hot paths). The v0.45 batched verifier pairings live at the
   verifier layer above the scheduler and ship at 9.24× same-msg.
-- **cevm V2 EVM kernel ships but does not yet replace V1 in the
-  standard build.** The 32-threads/tx threadgroup is dispatched; the
-  SIMD fan-out across opcodes lands in v0.45.x.
+- **cevm V2 EVM kernel SIMD fan-out landed v0.47.2 — slower on M1.**
+  Buffer-prep fan-out across 32 lanes is byte-equal V1 but measures
+  0.33× of V1 (4.5 ms → 13.7 ms) on Apple unified memory. The 32-
+  threads/tx threadgroup dispatch + skip_host_memset plumbing is
+  durable substrate for dGPU; on M1 it is correctly disabled by
+  default. Same shape as aivm v0.59: architecturally correct,
+  measurable speedup awaits ICICLE-class hardware where PCIe-bound
+  host→device transfer cost makes the fan-out genuinely faster.
 - **Pairing math remains host-CPU** in cevm v0.45 and bridgevm v0.60
   (canonical c-abi body, no exposed blst symbols in production link
   graph). Both reach the brief's primary target (≥9× batched). Stage
