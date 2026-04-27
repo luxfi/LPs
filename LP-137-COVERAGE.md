@@ -152,6 +152,10 @@ canonical 11-segment recipe `H(... || P || C || X || Q || Z || A || B
   on Apple) in each repo.
 - Quasar 9-chain binding test:
   `luxcpp/cevm/test/unittests/quasar_9chain_integration_test.mm`.
+- Parallelization audit (Phase 3):
+  [`LP-137-PARALLELIZATION.md`](LP-137-PARALLELIZATION.md) — four-
+  kernel template fit per VM and per crypto primitive, lane-0-leader
+  classification, full test sweep results.
 
 ## Status
 
