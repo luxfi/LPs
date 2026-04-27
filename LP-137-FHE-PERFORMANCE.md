@@ -1,32 +1,49 @@
 # LP-137 FHE Performance — Cross-Cutting Analysis
 
-**Date:** 2026-04-27 (revised after #121 retry).
+**Date:** 2026-04-27 (revised after Montgomery port + BatchNTT fix).
 **Hardware:** Apple M1 Max, 64 GB unified, macOS 26.4.
-**Companion doc:** `/Users/z/work/lux/fhe/policy/PERFORMANCE.md` (full
-benchmark data + per-finding detail).
+**Companion doc:** `/Users/z/work/lux/fhe/bench/results/` (per-N JSON).
 
-## Executive finding (revised)
+## Executive finding (revised after Montgomery port)
 
-**FHE policy evaluation remains the single largest "GPU-native" gap in
-the LP-137 9-chain substrate.** What changed since the original analysis:
+**The two architectural blockers identified in #121 are now resolved.**
+What changed in this iteration:
 
-1. The Go bridge `luxfi/lattice/v7/gpu` is now linked, the GPU-enabled C
-   library is installed, and `gpu.GPUAvailable() == true` on this M1 Max
-   host. G1 is closed.
-2. The drop-in `Ring.NTT` dispatch (G2 in PERFORMANCE.md) is **blocked
-   by a Montgomery-vs-standard form domain mismatch**, not by engineering
-   effort. The Go ring stores its NTT roots in Montgomery form; the C
-   library computes its own standard-form Barrett-precomputed twiddles.
-   A naive dispatch silently corrupts every operation that runs in the
-   NTT domain between forward and inverse. Round-trip identity passes
-   (the C library is internally consistent), but `MulCoeffsMontgomery`
-   in the middle of bootstrap would produce wrong output.
-3. The standalone GPU NTT path (`gpu.NTTContext.NTT([poly])`) is now
-   benchable end-to-end on this host. Single-poly Metal NTT is **12×
-   slower** than Go pure-Go at every N from 1024 to 16384. Only the
-   batched path could win, and that path **SIGSEGVs** at every tested
-   batch size. The 14× claim from `luxcpp/crypto/CROSSOVER.md` cannot be
-   reproduced here until the BatchNTT bug is fixed in `luxcpp/lattice`.
+1. **Montgomery NTT port shipped.** The Metal kernel at
+   `/Users/z/work/luxcpp/lattice/src/metal/metal_ntt.mm` now implements
+   Lattigo-style Montgomery butterflies (port of
+   `luxfi/lattice/v7/ring/ntt.go::butterfly` to MSL using
+   `metal::mulhi`). A new C ABI
+   `lattice_ntt_create_montgomery(N, Q, MRedConstant, NInv, RootsForward, RootsBackward)`
+   accepts the Go-side Montgomery roots directly; output is byte-equal
+   to `ring.NTTStandard` for any SubRing. Verified across **3072
+   forward + 3072 inverse vectors** spanning N ∈ {1024, 2048, 4096}, plus
+   round-trip at N=8192. **Domain mismatch closed -- Ring.NTT dispatch
+   is now safe.**
+2. **BatchNTT SIGSEGV root-cause was a C ABI signature mismatch**, not a
+   threadgroup-memory or alignment issue. The Go cgo bridge declared
+   `int lattice_ntt_batch_forward(LatticeNTTContext*, uint64_t* data, uint32_t batch)`;
+   the C side defined it as
+   `int lattice_ntt_batch_forward(LatticeNTTContext*, uint64_t** polys, uint32_t count)`.
+   Go passed a pointer to a flat `batch * N` buffer; C cast it to an
+   array-of-pointers and dereferenced the first 8 bytes as a pointer to
+   garbage memory. Fixed by aligning the C signature to the Go declaration
+   (contiguous flat buffer). Verified at every previously-segfaulting
+   config including `N=4096 B=128` (the published 14× datapoint).
+3. **A second Metal kernel bug surfaced and was fixed.** The staged
+   forward dispatch wrote stage parameters into a single shared
+   `params_buf` then enqueued multiple compute encoders against it.
+   Metal does not snapshot shared-storage buffer contents at encoder
+   creation time; it reads them when the GPU executes the command. The
+   net effect was every stage saw the *last* stage's parameters,
+   corrupting all transitional stages. Fix: use `setBytes:length:atIndex:`
+   to inline params per-dispatch, snapshotting at encode time.
+4. **Single-poly Metal NTT remains slower than Go on M1 Max** -- but
+   the new measurements differ from #121's. After the Montgomery port,
+   Metal vs Go single-poly ratios are 0.010× (N=1024), 0.020× (N=2048),
+   0.088× (N=4096), 0.075× (N=8192), 0.118× (N=16384). The crossover
+   appears only in the **batched path**: Metal becomes faster than Go
+   per-NTT at N=4096 B=64 (3.18×) and reaches **4.57× at N=4096 B=128**.
 
 Per `LP-137-PARALLELIZATION.md` and `luxcpp/crypto/CROSSOVER.md`:
 
@@ -36,15 +53,22 @@ Per `LP-137-PARALLELIZATION.md` and `luxcpp/crypto/CROSSOVER.md`:
   inversion). Crossover: N≥168.
 - Keccak: shipping `KeccakResidencySession` with 4-way set-associative
   round cache. Crossover: N≥6 144.
-- NTT (Apple Silicon Metal/MLX): published 14.02× at N=4096 fused, B=128
-  (CROSSOVER.md row 4) — **unreproducible on this host as of 2026-04-27
-  due to BatchNTT SIGSEGV**.
-- **FHE bootstrap (programmable PBS): NOT shipping on Metal/CUDA.**
-  Pure-Go implementation in `luxfi/lattice/v7/core/rgsw/blindrot` +
-  `luxfi/lattice/v7/ring`. The `luxfi/lattice/v7/gpu` package now links
-  but operates in a **different arithmetic domain** from `ring`, so it
-  cannot be inserted into the bootstrap chain without either a C API
-  change or per-call domain conversion that erases the speedup.
+- NTT (Apple Silicon Metal/MLX): #88 published 14.02× at N=4096 fused
+  B=128 against the MLX path in `luxcpp/fhe/src/core/lib/math/hal/mlx/`.
+  After porting the parallel kernel in `luxcpp/lattice/src/metal/metal_ntt.mm`
+  to Lattigo-bit-exact Montgomery form and fixing the BatchNTT ABI bug,
+  the **luxlattice path measures 4.57× at N=4096 B=128** on this M1 Max.
+  The discrepancy is a kernel design difference: the MLX path uses
+  Apple's MLX library which transparently routes through the AMX matrix
+  coprocessor for large multiply-heavy ops; the direct Metal compute
+  path used here exercises only the GPU's SIMD ALU. The 4.57× is honest
+  for the Lattigo-byte-equal contract.
+- **FHE bootstrap (programmable PBS): partial.** The drop-in `Ring.NTT`
+  dispatch is now byte-equal-safe but disabled by default
+  (`gpu.SetNTTThreshold(0)`). Single-poly dispatch is strictly slower
+  than Go on M1; the speedup requires batched dispatch which the
+  current bootstrap chain does not exercise. G3 (batch-bootstrap
+  Metal kernel) is still the dominant remaining work.
 
 ## Substrate-wide FHE position
 
@@ -112,23 +136,25 @@ For a 4096-tx ingress block with FHE policy on hot path:
 ## Recommended posture for LP-137 Phase-4 (revised)
 
 1. **G1 done.** Linker + library install closed 2026-04-27.
-2. **Replace G2 with G2'**: fix `gpu.BatchNTT` SIGSEGV in
-   `luxcpp/lattice/src/metal/metal_ntt.mm`. Without batch mode the
-   Metal NTT is strictly slower than CPU on this backend. **Effort: ~1
-   week, requires Objective-C++ debugging cycles.** Risk: none until
-   diagnosed.
-3. **G2 (drop-in `Ring.NTT` dispatch) is dead** as a separate work item.
-   The domain mismatch makes any safe wiring reduce to one of:
-   - C API change in `luxcpp/lattice` to accept Montgomery roots, or
-   - per-NTT `IMForm`/`MForm` conversion that costs 2N modular muls
-     each direction (defeats speedup at all measured N), or
-   - end-to-end blindrot rewrite on Metal in standard form (= G3).
-   Track G3 instead.
-4. **G3 (batch-bootstrap Metal kernel) is the only meaningful path.**
-   This is the single largest FHE-on-M1 win and the prerequisite for
-   any meaningful FHE-in-hot-path posture. Effort: ~6 weeks, requires
-   Metal kernel author cycles + the gadget chain rewritten in standard
-   form. Depends on G2' being fixed first so the inner NTT is competitive.
+2. **G2' done (BatchNTT SIGSEGV fix).** Root cause was a C ABI signature
+   mismatch (Go declared flat-buffer, C declared array-of-pointers).
+   Fixed in `luxcpp/lattice/src/lattice.cpp::lattice_ntt_batch_forward`.
+   Now exercises the same code path as `lattice_ntt_forward(batch=N)`.
+3. **G2 done (Montgomery Ring.NTT dispatch).** Metal kernel ported to
+   Lattigo-bit-exact Montgomery butterflies; new C ABI
+   `lattice_ntt_create_montgomery` accepts Go-side Montgomery roots
+   directly. Output byte-equal to `ring.NTTStandard` across 3072 random
+   vectors. Dispatch is opt-in: callers register a SubRing via
+   `gpu.RegisterSubRing(s)` and set a per-process threshold via
+   `gpu.SetNTTThreshold(n)`. Default threshold is 0 (disabled) because
+   single-poly Metal is still 8-100× slower than Go on M1 Max.
+4. **G3 (batch-bootstrap Metal kernel) remains the dominant remaining
+   work.** With the byte-equal Montgomery dispatch in place, the only
+   path to FHE policy speedup on M1 is to refactor the bootstrap chain
+   to issue batched NTT dispatches (B≥64 to cross over) instead of
+   serial per-poly NTTs. This is a Lattigo-side rewrite, not a kernel
+   port, since the byte-equal kernel is now available. Effort: ~4 weeks
+   in `luxfi/lattice/v7/core/rgsw/blindrot` + a batched evaluator.
 5. **Defer hot-path FHE on chain.** The threshold-decrypt MPC committee
    pattern (LP-073, LP-019) already structures FHE evaluation off-chain.
    Recommendation: keep FHE policy eval out of any block-time-bounded
@@ -137,8 +163,8 @@ For a 4096-tx ingress block with FHE policy on hot path:
 6. **Schedule Linux+H100 self-hosted runner allocation.** The dGPU
    crossover for FHE is the largest expected speedup (~1 800× over M1
    CPU per cuFHE literature) and **cannot be measured on Apple hardware**.
-   Without H100 access, all CUDA numbers in PERFORMANCE.md remain
-   literature-cited estimates.
+   The Montgomery kernel is portable to CUDA via PTX (`metal::mulhi`
+   maps to PTX `mul.hi.u64`); the Go-side dispatcher is platform-neutral.
 
 ## Honest gaps (revised 2026-04-27)
 
