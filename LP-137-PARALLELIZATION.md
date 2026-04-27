@@ -6,20 +6,47 @@ stack against the canonical four-kernel template.
 
 ## Claim wording — audit integrity
 
-> **All production hot-path crypto used by chain-local execution is
-> GPU-native; remaining NOTIMPL primitives are non-production gaps
-> tracked separately.**
+> **All Lux crypto is implemented end-to-end in Go (luxfi/crypto, 142
+> source files); GPU-native acceleration via Metal/CUDA/WGSL kernels
+> ships for the production hot path today; the C++ port at
+> luxcpp/crypto is mid-flight to give native C++ binaries direct
+> Metal/CUDA dispatch without Go FFI.**
 
-This is the precise public claim. The unqualified "all crypto is GPU-
-native" is **not** the audit-supported claim — 17 of 29 luxcpp/crypto
-primitives are NOTIMPL (no working CPU body authored), 5 are blocked
-on intx/blst/evmmax bootstrap. None of the NOTIMPL or bootstrap-
-blocked primitives are on a chain-local hot path today; they are
-non-production surface tracked for future work. The 8 working
-primitives (BLS, Keccak, sha256, ripemd160, blake2b, secp256k1,
-attestation, NTT) cover every chain-local hot path that ships in cevm
-v0.47.2 + Phase 5b/5c production link graph (zero blst symbols, CI-
-asserted on 7 production binaries).
+This is the precise public claim. Three layers, three states:
+
+**Layer 1 — Go reference implementation (luxfi/crypto):** complete
+across every primitive (BLS, ed25519, secp256k1, secp256r1, mldsa,
+mlkem, slhdsa, ringtail, FROST, CGGMP21, IPA, NTT, poseidon,
+keccak, sha256, ripemd160, blake2b, blake3, kzg, lamport, bn254,
+bn256, hpke, ecies, kdf, …). 8 primitives ship explicit `gpu.go`
+GPU bridges (BLS, keccak, mlkem, secp256k1, mldsa, sha256, ed25519
++ master `gpu/gpu.go`); 4 ship `batch.go` for batched-N hot paths
+(mlkem, secp256k1, mldsa, bls). Ringtail + FROST + CGGMP21 live in
+their own repos (luxfi/ringtail, luxfi/threshold).
+
+**Layer 2 — GPU kernels (Metal/CUDA/WGSL):** ships full pipeline
+for BLS (Metal Stage 1–3 byte-equal blst across 2 746 vectors,
+WGSL full Fp tower 1 900 vectors, CUDA stub), Keccak
+(KeccakResidencySession on-device with 4-way round cache), secp256k1
+batch_inv (Montgomery on-device, ecrecover Stage A), NTT (Apple
+Silicon Metal/MLX, CUDA, OpenFHE on F-Chain). Other primitives
+that have published GPU bridges in Go but no Metal/CUDA/WGSL
+kernels yet: ed25519, mldsa, mlkem, sha256-batched.
+
+**Layer 3 — C++ port (luxcpp/crypto):** mid-flight. 11 primitives
+have actual `<alg>/cpp/*.cpp` bodies (attestation, blake2b, bls,
+bn254, keccak, kzg, modexp, ripemd160, secp256k1, secp256r1,
+sha256). 19 have placeholder `cpp/` dirs awaiting port. The C++
+port is not on the Go path's critical path — Go production runs
+through luxfi/crypto today; luxcpp/crypto is the eventual native-
+C++ replacement that lets cevm and other C++ binaries dispatch
+into Metal/CUDA without Go FFI.
+
+The "GPU is the gap" framing is correct: the gap is Metal/CUDA/WGSL
+kernels for primitives where batched-N workloads exist (sha256,
+ed25519, mldsa, mlkem, ripemd160, blake2b, blake3, poseidon, IPA,
+ringtail share-comp). It is **not** a "missing CPU bodies" gap —
+those exist in luxfi/crypto Go.
 
 The four-kernel template:
 
