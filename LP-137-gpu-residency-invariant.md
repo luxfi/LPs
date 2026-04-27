@@ -38,14 +38,14 @@ Full roll-up with reproduction commands and per-VM analysis lives in
 
 | Chain | VM | Tag | Line % | Branch % (oracle) | Tests |
 |---|---|---|---:|---:|---:|
-| P-Chain | PlatformVM | v0.55 | 98.10% | 99.25% (oracle) | 53/53 |
-| C-Chain | EVM (cevm) | v0.44 | 96.51% | (host-side) | 59/59 |
-| X-Chain | XVM | v0.55 | 95.15% | 90.08% | 43+/43+ |
-| A-Chain | AIVM | v0.58.2 | 95.58% | 94.71% (oracle) | 45/45 |
+| P-Chain | PlatformVM | v0.57 | 97.52% (TOTAL) / 99.25% (oracle) | 90.07% (oracle) | 53/53 |
+| C-Chain | EVM (cevm) | v0.46.1 | 95.78% (TOTAL) / 96.51% (mm) | 58.46% (TOTAL) | 59/59 |
+| X-Chain | XVM | v0.55+1 | 97.48% | 92.46% | 44/44 + 7 det + 6 Metal |
+| A-Chain | AIVM | v0.58.2 | 98.71% | 94.71% (oracle) | 45/45 |
 | B-Chain | BridgeVM | v0.59.1 | 98.17% | 90.53% | 42/42 |
 | M-Chain | MPCVM | v0.61.0 | 97.90% (oracle) | 90.32% (oracle) | 41/41 |
 
-Aggregate: line ≥95% across the five new VMs (avg 96.98%); CPU reference
+Aggregate: line ≥96% across the five new VMs (avg **97.96%**, excludes cevm — see note); CPU reference
 oracle — the security-critical byte-equivalence target — clears 90%
 branch on every VM where it is the dominant translation unit. Branch
 coverage gaps below 90% on whole-VM totals are itemized in each VM's

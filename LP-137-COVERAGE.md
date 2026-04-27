@@ -11,8 +11,8 @@ backend is asserted against).
 
 | Chain | VM | Repo | Tag | Line % (oracle) | Branch % | Tests | Backends |
 |---|---|---|---|---:|---:|---:|---|
-| P-Chain | PlatformVM | luxcpp/platformvm | v0.55 | 98.10% | 90.32%* | 53/53 | CPU+Metal+CUDA+WGSL |
-| C-Chain | EVM (cevm)   | luxcpp/cevm       | v0.44.0 | 96.51% | 90.10%* | 59/59 | CPU+Metal+CUDA |
+| P-Chain | PlatformVM | luxcpp/platformvm | v0.57 | 97.52% (TOTAL) / 99.25% (oracle) | 80.52% (TOTAL) / 90.07% (oracle)* | 53/53 | CPU+Metal+CUDA+WGSL |
+| C-Chain | EVM (cevm)   | luxcpp/cevm       | v0.46.1 | 95.78% (TOTAL) / 96.51% (mm) | 58.46% (TOTAL) / — | 59/59 | CPU+Metal+CUDA |
 | X-Chain | XVM          | luxcpp/xvm        | v0.55+1 | **97.48%** | **92.46%** | 44/44 layout + 7 det + 6 Metal | CPU+Metal+CUDA+WGSL |
 | Q-Chain | QuantumVM    | luxcpp/lattice + cevm/quasar | v0.43+ | (in cevm) | — | (in cevm 13 BLS+Ringtail) | CPU+Metal+CUDA+WGSL |
 | Z-Chain | ZKVM         | cevm/quasar Groth16 | v0.44.0 | (in cevm) | — | (in cevm 13) | CPU+Metal+CUDA, WGSL partial |
@@ -45,7 +45,7 @@ PHILOSOPHY.md asks for.
 
 | Aggregate metric | Value |
 |---|---|
-| Average line coverage (5 new VMs, oracle TOTAL) | **97.95%** — exceeds ≥96% target |
+| Average line coverage (5 new VMs, oracle TOTAL — aivm 98.71 + xvm 97.48 + bridgevm 98.17 + platformvm 97.52 + mpcvm 97.90) | **97.96%** — exceeds ≥96% target. **Excludes cevm** (95.78% TOTAL / 96.51% on the dominant `quasar_gpu_engine.mm`); see `cevm/COVERAGE.md` for the per-file breakdown — the gate is met on the dominant translation unit but TOTAL is pulled to 95.78% by the `quasar_gpu_layout.hpp` inline-accessor placement (0% measurable on that header because callers inline it from a different TU). |
 | Median branch coverage (CPU reference oracle)   | **92.46%** — exceeds ≥90% target |
 | Total tests passing (5 new VMs)                 | **221+** (53+44+45+42+41+ + 7 det + 6 Metal smoke on XVM) |
 | C-Chain (cevm) tests                            | **59** (on top of 5-new total) |

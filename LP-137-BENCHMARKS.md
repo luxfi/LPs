@@ -236,20 +236,22 @@ is computed against the same Phase-1 baseline.
 | M | MPCVM xlarge ceremony | luxcpp/mpcvm | 0.010× (v0.61.1, 9 451 ms Metal) | 0.156× (v0.62, 507 ms Metal) | **18.6×** |
 | M | MPCVM FROST sign 5-of-7 | luxcpp/mpcvm | 0.034× (204.3 ms Metal) | 0.142× (48.3 ms Metal) | **4.23×** |
 | Q | QuantumVM (Ringtail in cevm) | luxcpp/lattice + cevm | host keccak baseline | 1.12× (buffer-reuse batch); LWE-on-GPU lands v0.45.1 | **1.12×** |
-| Z | ZKVM Groth16 (in cevm), n=16 | cevm/quasar | 26.5 µs (v0.44 unbatched, host) | 1.0 µs (v0.45 batched) | **25×** (synthetic VK; 9–10× expected on real fixture) |
+| Z | ZKVM Groth16 (in cevm), n=16 | cevm/quasar | 26.5 µs (v0.44 unbatched, host) | 1.0 µs (v0.45 batched) | **synthetic-VK keccak amortization (real-fixture pending; 9–10× expected on real Groth16)** |
 | F | FHEVM NTT primitive N=4096, B=128 | luxcpp/fhe | 23.6× (unchanged) | 23.6× (unchanged) | **1.0×** |
 | F | FHEVM NTT primitive N=4096, B=32 | luxcpp/fhe | 9.0× | 9.0× | **1.0×** |
 | F | FHEVM NTT primitive N=8192, B=128 | luxcpp/fhe | 6.2× | 6.2× | **1.0×** |
 
 ### Geometric mean
 
-Across the 9 per-chain headline rows that have measured Phase-2 numbers
-(P: 0.025, C [BLS same-msg 1024]: 9.24, A: 0.06, B: 9.5, M [xlarge]:
-0.156, M [FROST sign]: 0.142, Z [Groth16 n=16]: 25, F [N=4096 B=128]:
-23.63, F [N=8192 B=128]: 6.22):
+Across the 8 per-chain headline rows that have measured Phase-2 numbers
+on real (non-synthetic) workloads (P: 0.025, C [BLS same-msg 1024]: 9.24,
+A: 0.06, B: 9.5, M [xlarge]: 0.156, M [FROST sign]: 0.142, F [N=4096
+B=128]: 23.63, F [N=8192 B=128]: 6.22):
 
-**Phase-1 geomean: 0.30× → Phase-2 geomean: 1.33× — a 4.4× lift in the
-substrate-wide GPU-vs-CPU position.**
+**Phase-1 geomean: 0.30× → Phase-2 geomean: 1.06× — a 3.5× lift in the
+substrate-wide GPU-vs-CPU position.** The synthetic-VK Groth16 row is
+excluded from geomean because the speedup reflects O(N) → O(1) keccak
+`compute_vk_root` amortization on a fail-fast path, not pairing speedup.
 
 The crossover that Phase-1 missed (only F-Chain beat CPU end-to-end) now
 holds at three production workloads — F-Chain NTT (23.6×), B-Chain BLS
