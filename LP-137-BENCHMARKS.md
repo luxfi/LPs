@@ -197,6 +197,40 @@ ctest --test-dir build-bench -R no-blst-in-production-check --output-on-failure
 
 From cevm v0.46.0 onward this returns PASS on every production binary.
 
+## Metal CPU/GPU crossover thresholds (cross-primitive)
+
+Per-primitive crossover sweep — smallest batch size N where median
+Metal time <= median CPU time on Apple M1 Max, Release, median of
+>=10 runs. Canonical table at
+[`luxcpp/crypto/CROSSOVER.md`](https://github.com/luxfi/luxcpp/blob/main/crypto/CROSSOVER.md);
+this section summarises the headline N_threshold values.
+
+| Primitive | Op | N_threshold | Recommended action |
+|-----------|----|-------------|---------------------|
+| Keccak-256 | batch hash, 32-byte input | N >= 6144 (~1.16x); 3.6x at N=65536 | gate at n>=6144; bypass for state-trie nodes <6k |
+| FHE NTT | N=4096 fused (production sweet spot) | B >= 8 (1.90x); 14.02x at B=128 | gate at B>=8 for N=4096 |
+| FHE NTT | N=8192 non-fused | B >= 32 (2.06x); 6.28x at B=128 | gate at B>=32 for N=8192 |
+| FHE NTT | N=2048 fused | B >= 8 (1.17x); 10.23x at B=128 | gate at B>=8 for N=2048 |
+| secp256k1 ecrecover | address batch (one thread/sig) | N >= 168 (1.01x); 31.93x at N=16384 | gate at n>=168 |
+| BLS aggregate verify | same-msg batch (CPU host blst, pubkey-cache hot) | n >= 16 (9.00x); 16.51x at n=1024 | already gated (cevm v0.46.2) |
+| BLS aggregate verify | general-msg batch (CPU host blst) | n >= 16 (2.51x); 2.67x at n=1024 | already gated |
+| EVM bytecode kernel V1 | 1 thread/tx | N ~= 2000 (1.5x); 1.75x at N=5000 | gate at n>=2000 |
+| BLS single pairing | e(P,Q) on Metal | **never** within sampled range (~930x slower) | CPU-only on M1; CUDA SoTA path |
+| Quasar substrate | full-round Metal vs CPU reference | **never** within 4096-tx envelope | gate locked above envelope (`kQuasarSubstrateMetalThreshold = 8192`) |
+| AIVM FullRound | end-to-end keccak-chain transition | **never** within sampled range (0.05x - 0.06x) | CPU-only on M1; dGPU-ready architecture |
+
+The substrate-wide pattern matches the constants pre-tuned in
+`luxfi/crypto/gpu/zk.go:32-47` (Poseidon2=64, Merkle=128, MSM=256,
+Commitment=128, FRI=512); the empirical sweep here calibrates one
+threshold per primitive that has a Metal kernel + bench harness pair
+landed today.
+
+Primitives skipped this pass: `sha256`, `ripemd160`, `blake2b` (sibling
+issue #87 ships these); `poseidon`, `ipa`, `poly_mul` (Metal driver
+exists but no bench harness landed yet); `secp256k1 batch_inv` (Metal
+driver dispatches single-thread by design for byte-equality, never beats
+CPU).
+
 ---
 
 # LP-137 9-Chain GPU-Native: Acceleration Roll-Up (Phase 2)
