@@ -1126,6 +1126,54 @@ The slogan stays right:
 
 > **The CPU touches reality. The GPU runs the chain.**
 
+## 45. Performance — measured (2026-04-26)
+
+GPU acceleration measured against CPU reference on Apple M1 Max
+(32-core integrated GPU, 10.4 TFLOPS FP32, 64 GB unified RAM, macOS
+26.4) — full roll-up in
+[`LP-137-BENCHMARKS.md`](LP-137-BENCHMARKS.md).
+
+**Headline by chain** (Metal vs CPU, representative workload):
+
+| Chain | VM | Speedup | Workload |
+|---|---|---:|---|
+| F | FHEVM | **23.6×** | NTT primitive, N=4096, batch=128 (CKKS slot config) |
+| F | FHEVM | 9.0×    | NTT primitive, N=4096, batch=32 |
+| F | FHEVM | 6.2×    | NTT primitive, N=8192, batch=128 |
+| C | EVM (cevm) | 0.47× | EVM v1 parity kernel, 256 tx × 30 iter (v2 SIMD pending) |
+| M | MPCVM | 0.034× | FROST sign 5-of-7 (scalar kernel by design; v0.62 fan-out) |
+| P, X, A, B | (pending) | — | benches not committed by the deadline |
+
+The GPU-residency invariant is **satisfied** at the architectural
+level on every chain (state and canonical transition logic on device,
+4-way byte-equal determinism per `LP-137-COVERAGE.md`). The measured
+GPU-vs-CPU **wall-clock** speedup today is real and 23× on the
+F-Chain inner loop; the other chains' crossover is gated on three
+in-code, line-cited milestones:
+
+- **cevm v0.45**: GPU pairing for BLS / Groth16 / Ringtail
+  (`quasar_bls_verifier.hpp` line 23 — projects ≥10×, math gives
+  ≥230× on 1024-validator quorum).
+- **cevm v2 EVM kernel**: 32-threads/tx SIMD path replaces v1 parity
+  kernel.
+- **mpcvm v0.62**: per-slot fan-out (radix sort + segmented unique +
+  parallel keccak); same canonical winner, parallel production;
+  targets Metal ≥ 5× CPU on xlarge.
+- **fhe dispatcher**: wires `FHEpke` / `FHEbinfhe` to
+  `lux::mlx_backend::MLXPolyOps` above the (B≥32, N∈{1024, 4096,
+  8192}) threshold; pulls CKKS / BFV / BGV / TFHE into the measured
+  23.6× band.
+
+CUDA backends build but were not run on this Apple host; H100 / Ada
+self-hosted runners report separately. The CPU reference oracle —
+the byte-equivalence ground truth — clears its release-blocking gate
+on every chain that ships a GPU engine (6/6 cevm determinism,
+mpcvm 4-way, fhe primitive parity).
+
+> **GPU acceleration verified on F-Chain (23.6× on production CKKS
+> NTT). Architectural invariant verified on all 9 chains. Per-chain
+> wall-clock crossover roadmap is in `LP-137-BENCHMARKS.md`.**
+
 ## References
 
 | Resource | Location |
@@ -1141,6 +1189,8 @@ The slogan stays right:
 | FHE on GPU / F-Chain | LP-013 |
 | Confidential ERC-20 | LP-067 |
 | DEX Precompile | LP-9010 |
+| 9-chain coverage roll-up | [LP-137-COVERAGE.md](LP-137-COVERAGE.md) |
+| 9-chain benchmark roll-up | [LP-137-BENCHMARKS.md](LP-137-BENCHMARKS.md) |
 
 External:
 - NVIDIA GPUDirect RDMA developer documentation
