@@ -42,11 +42,27 @@ through luxfi/crypto today; luxcpp/crypto is the eventual native-
 C++ replacement that lets cevm and other C++ binaries dispatch
 into Metal/CUDA without Go FFI.
 
-The "GPU is the gap" framing is correct: the gap is Metal/CUDA/WGSL
-kernels for primitives where batched-N workloads exist (sha256,
-ed25519, mldsa, mlkem, ripemd160, blake2b, blake3, poseidon, IPA,
-ringtail share-comp). It is **not** a "missing CPU bodies" gap —
-those exist in luxfi/crypto Go.
+**Layer 3.5 — C-ABI wiring (luxcpp/crypto/<alg>/c-abi/):** the
+**actual production bottleneck**. Per live FFI probe (2026-04-27,
+luxfi/crypto Rust workspace audit), 26 of 28 luxcpp/crypto archives
+return `CRYPTO_ERR_NOTIMPL = -5` for cryptographic operations even
+when symbols are exported. C++ bodies + Metal kernels may exist
+(see §87 sha256/blake2b/ripemd160 Metal pass) but the c-abi shim
+does not dispatch to them. Only `lux_keccak256` and
+`lux_secp256k1_ecrecover{,_batch}` are confirmed end-to-end working
+in production today. **CRITICAL FINDING**: `lux_blake3` symbol
+aliases to keccak (returns keccak digest for any input — silent
+correctness bug, tracked as #96). Earlier audit reports of
+"X/29 working" measured C++ body presence + Metal kernel byte-
+equality against published vectors, not the c-abi → body dispatch
+chain that production consumers actually call. The wiring sweep
+(~5-10 LOC per shim) is the right next step.
+
+The "GPU is the gap" framing is partially correct: Metal/CUDA/WGSL
+kernels for batched-N workloads are one gap (sibling agents
+shipping). The other, larger gap is **c-abi wiring** between
+canonical C++ bodies and the Rust/Go/cevm consumers — most c-abi
+shims today return NOTIMPL stubs.
 
 The four-kernel template:
 
