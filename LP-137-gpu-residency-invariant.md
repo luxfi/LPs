@@ -1170,15 +1170,23 @@ milestones from Phase-1:
 - **cevm v0.45 batched pairing** (shipped) — `verify_bls_aggregate_batch`,
   `verify_bls_same_message_batch`, `verify_groth16_batch`,
   `verify_ringtail_batch`. Same-message hot path 9.24× at n=1024
-  (target ≥10×, residual is `blst_p1_uncompress` cost). On-GPU Fp12
-  pairing lands v0.45.1.
+  (target ≥10×, residual is `blst_p1_uncompress` cost). Pairing math
+  itself stays on the canonical host body: the Stage 5b single-CB
+  Metal driver measured at 475 ms/pairing on M1 Max vs 510 µs host
+  blst (~930× slower) — Metal at N=1 is structurally bounded by the
+  serial Fp12 chain mismatching the SIMD GPU shape. Residency
+  invariant intact (production link graph is blst-symbol-free; the
+  canonical c-abi body remains the host computation). SoTA single-
+  pairing path is Linux+CUDA (`bls_driver_cuda.cpp` stub).
 - **cevm v0.45 V2 EVM kernel** (shipped) — `evm_kernel_v2.metal`
   32-threads/tx threadgroup dispatcher with V1 fallback at status=255.
   Build flag `LUX_EVM_KERNEL_V2=ON`. SIMD opcode fan-out lands v0.45.x.
 - **bridgevm v0.60 batched real BLS pairing** (shipped) —
   `bls::pre_verify_inbox` shards Miller loops across 10 M1 cores, one
-  final-exp. 8.58×–10.35× across 1k/5k/10k messages. On-GPU Miller
-  loops land v0.61.
+  final-exp. 8.58×–10.35× across 1k/5k/10k messages. Per-pairing
+  Miller compute stays on host (same Stage 5b measurement applies);
+  Metal SoTA path requires N>1 batched-parallel kernel saturation,
+  Linux+CUDA pivot, or Karabina compressed cyclo squarings.
 - **platformvm v0.57 single encoder + buffer pool + workgroup-parallel
   EpochTransition** (shipped) — 6.19×–6.77× Metal speedup on every
   measured workload size vs v0.56.
@@ -1230,7 +1238,7 @@ once but not blocked by CI. "Pending" = not yet landed.
 | 3 | Cert subject binds 9 chain transition roots + attestation_root + cert_mode | ✓ enforced (`quasar_9chain_integration_test.mm`, 7 tests) |
 | 4 | Composite confidential attestation across SEV-SNP / TDX / NRAS + RIM | ✓ enforced (11 parser + 16 composite tests, byte-equal C++↔Go) |
 | 5 | EVM precompile services route through GPU-resident batched drains | ✓ enforced (PrecompileService per-id batched entry-point; KeccakResidencySession ≥0.50 hit rate; transcript_root commits to input‖output‖gas‖status byte-equal CPU↔Metal) |
-| 6 | Production build has NO CPU fallback for hot precompile paths | ✓ enforced (no-blst-in-production-check passes from cevm v0.46.0; ctest WILL_FAIL property removed) |
+| 6 | Production build has NO direct blst symbols in hot precompile paths | ✓ enforced (no-blst-in-production-check passes from cevm v0.46.0; ctest WILL_FAIL property removed). Note: this is **symbol-routing** invariant — production link graph carries zero blst symbols, with all calls going through canonical `cevm::crypto::bls::*` c-abi. The c-abi body still computes pairing on host CPU; per Stage 5b (2026-04-27) Metal single-pairing on M1 Max is ~930× slower than host blst, so on-device pairing is **not** in production. SoTA on-device path is Linux+CUDA or batched-N kernel saturation. |
 | 7 | Production build has NO vendored blst dependency | ✓ enforced (cevm v0.46.0 dropped `cevm/cmake/blst.cmake`; blst pinned to `luxcpp/crypto/bls/test/cmake/blst.cmake` test-only) |
 | 8 | Single-fused-kernel pairing (≤1 dispatch per pairing) | pending (Stage 5b/6; today ~280 dispatches per pairing) |
 | 9 | WGSL higher-tower pairing ops on M1 | pending (mechanical `ptr<function, array<u32, N>>` rewrite for fp6_inv / fp12 mul/sqr/inv/conj/cyclo_sqr) |
