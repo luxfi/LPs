@@ -1,5 +1,5 @@
 ---
-lp: 043
+lp: 140
 title: Key VM
 tags: [key, k-chain, kms, pq-key-management, ml-kem, ml-dsa, vm]
 description: Distributed key management chain — key lifecycle for the whole network
@@ -13,7 +13,7 @@ requires:
   - lp-020 (Quasar Consensus)
 ---
 
-# LP-043: Key VM
+# LP-140: Key VM
 
 ## Abstract
 
@@ -75,7 +75,7 @@ type KeyRecord struct {
 ## DKG Flow
 
 1. K-chain accepts a `CreateKeyTx` from an authorized principal
-2. K-chain selects the committee (see LP-044 Threshold VM for committee selection)
+2. K-chain selects the committee (see LP-141 Threshold VM for committee selection)
 3. Committee runs DKG off-chain, publishes share commitments on K-chain
 4. K-chain verifies commitments, creates `KeyRecord`, sets Status=Active
 5. Key becomes available for use via T-chain signing sessions

@@ -1,5 +1,5 @@
 ---
-lp: 046
+lp: 143
 title: Session VM
 tags: [session, sessionvm, messaging, pq, inpars, vm]
 description: Post-quantum secure private messaging service node registry
@@ -10,10 +10,10 @@ category: Virtual Machines
 created: 2026-04-13
 requires:
   - lp-020 (Quasar Consensus)
-  - lp-042 (Identity VM)
+  - lp-139 (Identity VM)
 ---
 
-# LP-046: Session VM
+# LP-143: Session VM
 
 ## Abstract
 

@@ -1,5 +1,5 @@
 ---
-lp: 047
+lp: 144
 title: Fee Attribution and Rewards for PQ-Native Lux
 tags: [fees, rewards, staking, economics, pq, multichain]
 description: How transaction fees, block rewards, and service fees are divided among validators who opt into PQ security work
@@ -11,10 +11,10 @@ created: 2026-04-13
 requires:
   - lp-020 (Quasar Consensus)
   - lp-030 (Platform VM)
-  - lp-045 (Hierarchical Quorum Certs)
+  - lp-142 (Hierarchical Quorum Certs)
 ---
 
-# LP-047: Fee Attribution and Rewards for PQ-Native Lux
+# LP-144: Fee Attribution and Rewards for PQ-Native Lux
 
 ## Abstract
 
@@ -257,7 +257,7 @@ assuming uniform participation.
 
 - LP-020 Quasar Consensus
 - LP-030 Platform VM (staking primitives)
-- LP-045 Hierarchical Quorum Certificates (defines C1-C2 work)
-- LP-044 Threshold VM (defines C6 threshold signing)
+- LP-142 Hierarchical Quorum Certificates (defines C1-C2 work)
+- LP-141 Threshold VM (defines C6 threshold signing)
 - `~/work/lux/proofs/pq-finality-no-bls.tex`
 - `~/work/lux/consensus/METASTABLE_SIGNED_QUERIES.md`

@@ -1,5 +1,5 @@
 ---
-lp: 044
+lp: 141
 title: Threshold VM
 tags: [threshold, t-chain, mpc, fhe, signing-sessions, vm]
 description: MPC-as-a-service — threshold signing sessions and threshold FHE for the network
@@ -11,17 +11,17 @@ created: 2026-04-13
 requires:
   - lp-019 (Threshold MPC)
   - lp-020 (Quasar Consensus)
-  - lp-043 (Key VM)
+  - lp-140 (Key VM)
 ---
 
-# LP-044: Threshold VM
+# LP-141: Threshold VM
 
 ## Abstract
 
 The Threshold VM runs the T-chain, a dedicated chain for **executing
 threshold cryptographic protocols** — signing sessions, threshold FHE
 operations, session management, quotas. It is the hot path. The K-chain
-(Key VM, LP-043) is the cold path that owns keys; the T-chain borrows them
+(Key VM, LP-140) is the cold path that owns keys; the T-chain borrows them
 to sign.
 
 Precompile address nibble: `C=7` (see LP-129 Registry).
@@ -74,9 +74,9 @@ Committee size rules:
 - Medium (T in [7, 32]): deterministic sampling with VRF-based unbiasable
   selection
 - Large (T > 32): **SHOULD NOT** use a single session. Use hierarchical
-  quorum certs (LP-045).
+  quorum certs (LP-142).
 
-See LP-045 for why thousand-validator monolithic sessions are the wrong shape.
+See LP-142 for why thousand-validator monolithic sessions are the wrong shape.
 
 ## FHE Subsystem
 
@@ -109,4 +109,4 @@ once quorum is reached.
 | Key VM | `github.com/luxfi/chains/keyvm/` |
 | Threshold library | `github.com/luxfi/threshold/` |
 | Threshold ML-DSA | `github.com/luxfi/threshold/protocols/mldsa/` |
-| Hierarchical QC | LP-045 |
+| Hierarchical QC | LP-142 |

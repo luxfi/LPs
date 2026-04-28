@@ -1,5 +1,5 @@
 ---
-lp: 048
+lp: 145
 title: Permissioned Validators, Open Delegation, Read-Only Replicas
 tags: [validators, delegation, nft, scaling, replicas, economics]
 description: Bounded N=100 validator set via NFT seats, open stake delegation, unlimited read-only replicas for service scaling
@@ -10,11 +10,11 @@ category: Economics
 created: 2026-04-13
 requires:
   - lp-030 (Platform VM)
-  - lp-045 (Hierarchical Quorum Certs)
-  - lp-047 (Fee Attribution)
+  - lp-142 (Hierarchical Quorum Certs)
+  - lp-144 (Fee Attribution)
 ---
 
-# LP-048: Permissioned Validators, Open Delegation, Read-Only Replicas
+# LP-145: Permissioned Validators, Open Delegation, Read-Only Replicas
 
 ## Abstract
 
@@ -252,7 +252,7 @@ The seat count N is a P-Chain governance parameter, changeable via:
 ### Typical validator economics (N=100, 1B LUX total stake, 10% annual inflation)
 
 Annual protocol rewards: 100M LUX distributed across C1-C4 work classes
-(LP-047).
+(LP-144).
 
 Per-seat share (assuming uniform stake):
 - Block signing (C2): ~350k LUX / year
@@ -288,20 +288,20 @@ Pure cost center unless the replica opts into service monetization.
 | **Censorship resistance** | Replicas can relay transactions to any validator; no validator can uniquely block a tx |
 | **Accountability** | Double-sign slashes seat + self-bond + proportional delegations |
 
-## Interactions with LP-045 (Hierarchical QC)
+## Interactions with LP-142 (Hierarchical QC)
 
 With N=100 validators and k=32 committee per block:
 - Each block samples 32-of-100 via VRF or metastable query
 - Each seat signs ~1/3 of blocks on average
-- Cert size: 77 kB (per LP-045 measurements)
+- Cert size: 77 kB (per LP-142 measurements)
 - Verification: <1 ms per block
 
 The permissioned set size N=100 is small enough that light-client verify
 time is dominated by the committee cost k=32, not N.
 
-## Interactions with LP-047 (Fee Attribution)
+## Interactions with LP-144 (Fee Attribution)
 
-Fee distribution (LP-047) routes rewards to specific work classes. Under
+Fee distribution (LP-144) routes rewards to specific work classes. Under
 permissioned validators:
 
 - All C1-C4 rewards flow to seat holders
@@ -309,7 +309,7 @@ permissioned validators:
 - Service rewards (C6) may flow to non-validator replicas if they provide
   the service
 
-This keeps LP-047 unchanged; LP-048 just restricts who can hold C1-C5
+This keeps LP-144 unchanged; LP-145 just restricts who can hold C1-C5
 work classes (seat NFT required).
 
 ## Cryptographic profile for permissioned chains
@@ -348,7 +348,7 @@ quantum adversary materialises AND subverts the institutional layer.
 ### PQ upgrade path
 
 The protocol retains an **upgrade capability** so consensus can switch
-to ML-DSA + Ringtail (per LP-045) if quantum materialises:
+to ML-DSA + Ringtail (per LP-142) if quantum materialises:
 
 ```solidity
 contract ConsensusPrimitive {
@@ -391,8 +391,8 @@ commitments PQ-safe even if consensus is BLS today.
 ## References
 
 - LP-030 Platform VM
-- LP-045 Hierarchical Quorum Certs
-- LP-047 Fee Attribution
+- LP-142 Hierarchical Quorum Certs
+- LP-144 Fee Attribution
 - Cosmos Hub validator set (175 bonded)
 - Diem Association model (pre-shutdown)
 - Ethereum beacon chain delegation via liquid staking

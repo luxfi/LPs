@@ -1,5 +1,5 @@
 ---
-lp: 041
+lp: 138
 title: Relay VM
 tags: [relay, r-chain, cross-chain, messaging, warp, vm]
 description: Cross-chain message relay VM for warp-style verified message passing
@@ -14,7 +14,7 @@ requires:
   - lp-034 (Bridge VM)
 ---
 
-# LP-041: Relay VM
+# LP-138: Relay VM
 
 ## Abstract
 

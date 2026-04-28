@@ -1,5 +1,5 @@
 ---
-lp: 042
+lp: 139
 title: Identity VM
 tags: [identity, i-chain, did, vc, names, domains, vm]
 description: Unified identity chain — DIDs, verifiable credentials, names, and domains
@@ -13,7 +13,7 @@ requires:
   - lp-021 (Warp Messaging)
 ---
 
-# LP-042: Identity VM
+# LP-139: Identity VM
 
 ## Abstract
 
