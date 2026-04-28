@@ -33,7 +33,7 @@ scattered papers and changelogs. This LP fixes the timeline.
 |---|---|---|---|---|
 | 1.0 | December 2019 / 2020 | Mainnet launch | P-Chain, C-Chain, X-Chain; snowball-derived consensus; native AMM on D-Chain (GPU-native from day one); luxfi packages established. | `lux-network-whitepaper` (historical) |
 | 2.0 | 2023--2024 | Post-quantum uplift | Hybrid signatures, Q-Chain bring-up, F-Chain alpha, lattice-based primitives in mempool. Dual-stack (classical + PQ). | `lux-pq-crypto-suite`, `lux-hybrid-pq-architecture` |
-| 3.0 | 2025-12-25 | Full PQ + Quasar 3 | ML-DSA mandatory; three-lane post-quantum certificates (LP-105); QuasarSTM 3; Quasar GPU FHE service alpha. | `lp-105-quasar-consensus`, `lp-010-quasar-stm-3` |
+| 3.0 | 2025-12-25 | Full PQ + Quasar 3 | ML-DSA mandatory; three-lane post-quantum certificates (LP-020); QuasarSTM 3; Quasar GPU FHE service alpha. | `lp-020-quasar-consensus`, `lp-010-quasar-stm-3` |
 | 4.0 | 2026-02-14 | GPU-native 9-chain production | Quasar 4 (four cert lanes incl. SLH-DSA archival); QuasarSTM 4 with GPU-Residency invariant (LP-137); 9-chain topology in production (LP-134); white-label primary chain templates exported to Hanzo, Zoo, Pars. | `lux-4-0-launch`, `lp-010-quasar-stm-4` |
 
 ## 4.0 Topology and Financial-Rail Core
@@ -73,13 +73,13 @@ GPU-native operating model the default everywhere, not just on D-Chain.
 - LP-010 v4 QuasarSTM 4.0
 - LP-013 v2 F-Chain FHE Service
 - LP-020 v4 Four-Lane Post-Quantum Certificates
-- LP-105 Quasar 3.0 Consensus
+- LP-020 Quasar 3.0 Consensus
 - LP-134 Canonical 9-Chain Topology and Primary Chain Templates
 - LP-137 GPU-Residency Invariant for Lux-Family L1s
 - LP-310 Liquidity Protocol Common Settlement API
 - `lux-4-0-launch` (papers repo)
 - `lp-010-quasar-stm-4` (papers repo)
-- `lp-105-quasar-consensus` (papers repo)
+- `lp-020-quasar-consensus` (papers repo)
 
 ## Status
 
