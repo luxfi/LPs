@@ -92,6 +92,13 @@ End-to-end pre-sign throughput at threshold 5-of-7, secp256k1, median 25 runs:
 
 Round-by-round message-signing (after the message lands) is unchanged — the post-pre-sign per-signature combination remains a serial protocol round and falls under LP-137 §3.8 category C. Final numbers in the impl commit BENCHMARKS.md.
 
+#### Implementation status (2026-04-28 ship)
+
+- **FROST**: full kernel shipped (Metal + CUDA + WGSL host polyfill). 6/6 tests pass on commit `8e8fb102`. Throughput observed locally: 128 commitments/s × 2 backends at M=10 N=64.
+- **CGGMP21**: secp256k1 portion shipped. Paillier ciphertext + Π^enc proof bodies are **deferred behind LP-163 Karatsuba modexp at 2048-bit**: the wire layout `PresignRecord{R[33], K[512], G_cmt[512], pi_enc, status}` is frozen and consumers compile against the final ABI today, but `K`, `G_cmt`, and `pi_enc` are reserved bytes with `status=0xFF` until the Paillier path lands. Metal / CUDA kernels for the secp256k1 portion check status and skip the reserved payload; the host polyfill carries the byte-equal contract for the secp256k1 work.
+
+So the speedup numbers above are the *target*; the FROST ratios are reachable as the per-backend dispatch infrastructure (Metal `.metallib`, Dawn host runtime) lands in CI. The CGGMP21 ratios will follow LP-163 completion, since the Paillier sub-step dominates beyond the curve scalar mul.
+
 ## Implementation
 
 ### CPU canonical
