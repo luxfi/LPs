@@ -165,6 +165,13 @@ Last updated: 2026-04-28
 | LP-157 | evm256 — BN254 EVM Precompile Wrappers | Final | Cryptography |
 | LP-158 | modexp — Big-Integer Modular Exponentiation | Final | Cryptography |
 | LP-159 | poly_mul — Lattice Polynomial Multiplication | Final | Cryptography |
+| LP-160 | Batched Montgomery Inversion (3-Backend Uniform) | Final | Cryptography |
+| LP-161 | Multi-Curve Pippenger MSM | Final | Cryptography |
+| LP-162 | Combined-Pair Miller Loop | Final | Cryptography |
+| LP-163 | Big-Integer Karatsuba modexp | Final | Cryptography |
+| LP-164 | Extended-N Lattice NTT (Six-Step) | Final | Cryptography |
+| LP-165 | Pedersen Tree-Reduce Vector Commit | Final | Cryptography |
+| LP-166 | Threshold Pre-Signing Batch Kernel | Final | Cryptography |
 
 ## Numbering rules
 
@@ -173,7 +180,7 @@ Last updated: 2026-04-28
 - LP-110 through LP-129: cryptographic precompiles (EVM-callable)
 - LP-130 through LP-137: execution + architecture (AI, VRF, QuasarGPU, topology, cloud)
 - LP-138 through LP-145: post-quantum-native chain redesign (VMs + economics)
-- LP-146 through LP-159: per-algorithm crypto specs (1 LP per algorithm, ref LP-137)
+- LP-146 through LP-166: per-algorithm + acceleration kernel specs (1 LP per algorithm or kernel target, ref LP-137)
 
 ## Numbering history (2026-04-28)
 
