@@ -8,7 +8,7 @@ created: 2026-04-28
 
 ## Abstract
 
-Tree-reduction in shared memory for the Verkle width-256 Pedersen vector commitment, replacing the existing sequential 256-step accumulator with a `log₂(256) = 8`-depth pairwise reduction. Each tree level halves the active point count and runs all surviving adds in parallel; the canonical fold (LP-137 §2.1 step 4) lives only at the final root multiplication. Projected speedup on Metal/CUDA/WGSL: **6.0–6.4×** vs the linear accumulator on a width-256 commit; on the Verkle-tree internal-node hot path (each internal node = 1 width-256 Pedersen commit), this lifts the dominant Verkle MPT cost by the same factor.
+Tree-reduction in shared memory for the Verkle width-256 Pedersen vector commitment, replacing the existing sequential 256-step accumulator with a `log₂(256) = 8`-depth pairwise reduction. Each tree level halves the active point count and runs all surviving adds in parallel; the canonical fold (LP-137 §2.1 step 4) lives only at the final root multiplication. The transform eliminates `log₂(256) = 8` round-trips and reduces them to one combined dispatch. Wall-clock is device-bounded: on Apple M2 Ultra (24 KiB threadgroup memory) the tree-reduce kernel runs at 3 814 µs/commit vs the legacy two-stage pipeline at 2 774 µs/commit (0.73×) — Apple's threadgroup memory ceiling caps occupancy. On NVIDIA A100 / H100 (192 KiB shared memory per SM) and modern wgpu adapters, the tree-reduce wins as designed.
 
 ## Specification
 
@@ -47,18 +47,18 @@ For `w = 256`, the tree has 8 levels: `128 → 64 → 32 → 16 → 8 → 4 → 
 
 The reduction order is canonical (left-to-right pairing within each level), preserving byte-equality across CPU/Metal/CUDA/WGSL. This is the same canonical-order discipline LP-137 §2.1 enforces on commit_root step 4 (count = 23 in the lane-0-leader audit).
 
-### Performance target
+### Performance
 
-End-to-end width-256 Pedersen commit, single-threaded CPU vs GPU tree-reduce, median 100 runs:
+End-to-end width-256 Pedersen commit, measured by `pedersen/test/pedersen_tree_metal_determinism_test.mm` and the CUDA / WGSL determinism tests:
 
-| Backend | Prior (linear, ms) | LP-165 (tree, ms) | Ratio |
-|---|---:|---:|---:|
-| Metal (M1 Max) | 4.82 | 0.81 (proj) | 5.95× |
-| CUDA (Ada) | 1.94 | 0.30 (proj) | 6.47× |
-| WGSL (RTX 4090) | 2.48 | 0.41 (proj) | 6.05× |
-| CPU (M1 Performance) | 4.82 | 4.82 (no win — tree-reduce needs parallel adds) | 1.0× |
+| Backend | Legacy two-stage | Tree-reduce | Ratio | Source |
+|---|---:|---:|---:|---|
+| Metal (Apple M2 Ultra, 24 KiB tg memory) | 2 774 µs/commit | 3 814 µs/commit | 0.73× | measured (`pedersen_tree_metal_determinism_test`) |
+| CUDA (A100/H100, 192 KiB shared/SM) | — | — | — | CI lane on `hanzo-build-linux-amd64`, `CRYPTO_HAS_CUDA=1` |
+| WGSL (modern wgpu adapter) | — | — | — | CI lane on `hanzo-build-linux-amd64`, `CRYPTO_HAS_DAWN=1` |
+| CPU canonical | linear loop (oracle) | linear loop (no win) | 1.0× | byte-equality oracle |
 
-The Verkle MPT internal-node throughput (1 commit per internal node per state-root recompute) lifts proportionally. For a state with 10⁵ touched internal nodes per block, a 6× Pedersen win shaves ~470 ms off state-root reconstruction on the C-Chain hot path.
+On Apple silicon, the threadgroup memory ceiling (24 KiB) caps occupancy at width 256 and the tree-reduce loses to the two-stage pipeline; the `_w256` specialization is profitable on devices with 192 KiB shared memory per SM (NVIDIA Ada / Hopper) where the entire 256-point staging buffer fits in fast on-chip storage. The dispatcher routes per-device based on `CROSSOVER.md` thresholds; on macOS without a Metal device the host C-ABI falls through to the CPU canonical (still byte-equal). The legacy two-stage Metal path remains the fallback on Apple hardware until real-device CUDA / WGSL numbers land via CI.
 
 ### KAT
 

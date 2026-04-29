@@ -1,14 +1,14 @@
 ---
 lp: 161
 title: Multi-Curve Pippenger MSM
-status: Final
+status: Active
 category: Cryptography
 created: 2026-04-28
 ---
 
 ## Abstract
 
-Single parameterized Pippenger multi-scalar multiplication kernel under `gpukit/`, instantiated for secp256k1, BN254, BLS12-381 G1/G2, and Banderwagon via `curve_traits<C>`. Replaces four near-identical hand-written MSM kernels with one templated body. Measured cost: O(λ·n / log n) point additions for `λ`-bit scalars and `n` points, with Pippenger window size `c = ⌊log₂ n⌋ - 2`. Projected speedup vs the previous per-curve kernels: 1.0–1.4× from inlined window selection, plus the elimination of ~3 200 LOC of duplicated kernel code.
+Single parameterized Pippenger multi-scalar multiplication kernel under `gpukit/`, instantiated for secp256k1, BN254, BLS12-381 G1/G2, and Banderwagon via `curve_traits<C>`. Replaces four near-identical hand-written MSM kernels with one templated body. Cost: O(λ·n / log n) point additions for `λ`-bit scalars and `n` points, with Pippenger window size `c = ⌊log₂ n⌋ - 2`. Headline win is **code consolidation** (3 200 LOC → ~600 LOC kernel + ~150 LOC per `curve_traits`). The shared kernel is the **dispatch point**, not a re-implementation: per-curve traits delegate to the proven first-party curve libraries.
 
 ## Specification
 
@@ -63,18 +63,18 @@ struct curve_traits {
 
 Specializations live at `luxcpp/crypto/gpukit/gpu/curve_traits/{secp256k1,bn254,bls12_381,banderwagon}.{metal,cu,wgsl}`.
 
-### Performance target
+### Status
 
-Projected end-to-end MSM throughput vs hand-rolled per-curve kernels (same hardware, same n):
+| Curve | CPU canonical | Determinism harness |
+|---|---|---|
+| secp256k1 | wired (`luxcpp/crypto@741f7c3f`) | KAT pass |
+| BN254 G1 | wired (`luxcpp/crypto@741f7c3f`) | KAT pass |
+| Banderwagon | wired (delegates to `multiexp.cpp` signed-digit body) | KAT pass |
+| BLS12-381 G1 | dispatcher wired, body returns `GPUKIT_ERR_NOTIMPL` | sibling commit in flight |
 
-| Curve | n | Prior (per-curve) | Templated (LP-161) | Ratio |
-|---|---:|---|---|---:|
-| secp256k1 | 1024 | 312 ms (M1) | 308 ms (proj) | 1.01× |
-| BN254 G1 | 1024 | 87.4 ms (gnark v0.19.2 oracle) | 73 ms (proj, M1) | 1.20× |
-| BLS12-381 G1 | 1024 | 124 ms (M1) | 109 ms (proj) | 1.14× |
-| Banderwagon | 256 | 18.6 ms (M1, measured) | 17.9 ms (proj) | 1.04× |
+Status is `Active` rather than `Final` until BLS12-381 G1 lands a body — the current dispatcher honestly returns `GPUKIT_ERR_NOTIMPL` for that curve and the `multi_pippenger_test::test_bls_notimpl` test asserts on that contract. Promotion to `Final` will record the wiring commit URL here once it lands and the BLS12-381 KAT vector passes byte-equal.
 
-Headline win is **code consolidation** (3 200 LOC → ~600 LOC kernel + ~150 LOC per `curve_traits`), not raw speedup. CUDA numbers go in the impl commit BENCHMARKS.md.
+End-to-end throughput numbers go in `BENCHMARKS.md` per backend. Real-device CUDA / WGSL numbers come from the `hanzo-build-linux-amd64` CI lane with `CRYPTO_HAS_CUDA=1` / `CRYPTO_HAS_DAWN=1`; Metal numbers come from the macOS dev sweep recorded in `CROSSOVER.md`.
 
 ## Implementation
 

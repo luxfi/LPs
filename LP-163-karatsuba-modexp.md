@@ -8,7 +8,7 @@ created: 2026-04-28
 
 ## Abstract
 
-Karatsuba multiplication for the EIP-198 EVM `modexp` precompile and forward-compatible RSA-attestation paths at `M_len ∈ {512, 1024, 2048, 4096}` bits. Replaces the schoolbook `O(n²)` limb multiplication with the recursive `O(n^{log₂ 3}) ≈ O(n^{1.585})` Karatsuba split. At `M_len = 4096` (RSA-4096 attestation), the operand fits in 64 limbs of 64 bits, where Karatsuba beats schoolbook by ~2.4× per multiplication, and modexp issues `~6 144` multiplications per exponentiation (sliding-window with `w = 5`), yielding a projected end-to-end speedup of **2.1–2.4×** over the existing intx schoolbook. EIP-198 hot path (`M_len ≤ 256`) crossover lives below the Karatsuba threshold and is unaffected.
+Karatsuba multiplication for the EIP-198 EVM `modexp` precompile and forward-compatible RSA-attestation paths at `M_len ∈ {512, 1024, 2048, 4096}` bits. Replaces the schoolbook `O(n²)` limb multiplication with the recursive `O(n^{log₂ 3}) ≈ O(n^{1.585})` Karatsuba split. At `M_len = 4096` (RSA-4096 attestation), the operand fits in 64 limbs of 64 bits, and modexp issues `~6 144` multiplications per exponentiation (sliding-window with `w = 5`). The CPU-side Karatsuba threshold dispatch ships in the `intx` luxfi fork; Metal / CUDA / WGSL Karatsuba kernels ship in `modexp/gpu/`. EIP-198 hot path (`M_len ≤ 256`) crossover lives below the Karatsuba threshold and is unaffected.
 
 ## Specification
 
@@ -52,19 +52,19 @@ modexp(b, e, m):
 - New 4096-bit RSA verification vectors derived from `crypto/modexp/test/kat_rsa4096.json`, generated with `libgmp mpz_powm` as test oracle.
 - Cross-oracle: `intx::umul` v0.15.1 (schoolbook reference) vs `gmp::mpz_mul` (Karatsuba reference); equality on N=1000 random `(B, E, M)` triples per `M_len`.
 
-### Performance target
+### Performance
 
-Per-modexp wall-clock at `e = 65537` (RSA-2048/4096 verify hot path), median 100 runs:
+Per-modexp wall-clock at `e = 65537` (RSA-2048/4096 verify hot path). The reproducible bench is `luxcpp/crypto/modexp/test/modexp_karatsuba_bench.cpp` (CIOS schoolbook vs Karatsuba-SOS, single-thread, deterministic PRNG, warmup + median):
 
-| `M_len` (bits) | Prior (intx schoolbook) | LP-163 (Karatsuba) | Ratio |
+| `M_len` (bits) | Prior (intx CIOS schoolbook) | LP-163 (Karatsuba-SOS) | Ratio |
 |---:|---|---|---:|
-| 256 | 4.2 µs | 4.2 µs (unchanged, below cutover) | 1.0× |
-| 512 | 18.6 µs | 18.6 µs (unchanged) | 1.0× |
-| 1024 | 71 µs | 71 µs (unchanged) | 1.0× |
-| 2048 | 268 µs | 218 µs (proj) | 1.23× |
-| 4096 | 1 042 µs | 432 µs (proj) | **2.41×** |
+| 256 | unchanged (below cutover) | unchanged | 1.0× |
+| 512 | unchanged (below cutover) | unchanged | 1.0× |
+| 1024 | unchanged (below cutover) | unchanged | 1.0× |
+| 2048 | bench output | bench output | bench output |
+| 4096 | bench output | bench output | bench output |
 
-Numbers are CPU-side (intx fork). GPU Karatsuba kernel deferred — modexp is a low-throughput compute pattern dominated by data dependencies; CPU throughput is the binding constraint, not parallelism.
+The 2048 / 4096 rows are produced by the `modexp_karatsuba_bench` binary at build time; the ratio is host-dependent (M1 vs Ada vs Hopper) and recorded in `BENCHMARKS.md` per host. Numbers are CPU-side (intx fork). Metal / CUDA / WGSL Karatsuba multiplication kernels are wired (`modexp/gpu/{metal,cuda,wgsl}/modexp_karatsuba.{metal,cu,wgsl}`); the host driver issues three child kernels in parallel for the Karatsuba split when profitable.
 
 ## Implementation
 
@@ -76,8 +76,9 @@ Numbers are CPU-side (intx fork). GPU Karatsuba kernel deferred — modexp is a 
 
 ### GPU kernels
 
-- Metal: `luxcpp/crypto/modexp/gpu/metal/modexp.metal` — extended to dispatch the new larger `mont_mul_4096` path; existing Metal kernel handled `M_len ≤ 256`. Threading: one workgroup per modexp instance, single thread per limb operation (modexp is data-serial).
-- CUDA / WGSL: scaffold pending. Per LP-158, modexp is not the verifier hot path — pairings dominate. Karatsuba on CUDA/WGSL deferred until an attestation-batched RSA path materializes.
+- Metal: `luxcpp/crypto/modexp/gpu/metal/modexp_karatsuba.metal` — host driver issues three child command buffers per Karatsuba split (the three half-sized sub-products `z0`, `z1'`, `z2`) and a final fix-up kernel sums them per the Karatsuba recurrence. Byte-equivalence with the CPU body (`cevm::crypto::karatsuba::kmul`) is asserted by `modexp_karatsuba_gpu_test`.
+- CUDA: `luxcpp/crypto/modexp/gpu/cuda/modexp_karatsuba.cu` — three child kernels in parallel on independent CUDA streams when the Karatsuba split is profitable; falls back to schoolbook for sub-threshold operands.
+- WGSL: `luxcpp/crypto/modexp/gpu/wgsl/modexp_karatsuba.wgsl` — three workgroups concurrent for the sub-products.
 
 ### C-ABI surface
 
@@ -105,7 +106,7 @@ The Karatsuba path is internal to `intx` and not exposed to callers.
 
 ## Crossover
 
-`K_THRESHOLD = 32 limbs (2048 bits)` for the limb multiplier itself. modexp dispatcher level: `M_len ≤ 256 bytes → schoolbook intx`, `M_len > 256 bytes → Karatsuba intx`. CPU-only; no GPU crossover (kernel deferred).
+`K_THRESHOLD = 32 limbs (2048 bits)` for the limb multiplier itself. modexp dispatcher level: `M_len ≤ 256 bytes → schoolbook intx`, `M_len > 256 bytes → Karatsuba intx`. The GPU Karatsuba kernel uses the same threshold; below it, the GPU host driver issues a single workgroup schoolbook multiplication for byte-equality with the CPU body. Per-host crossover where GPU dispatch wins over CPU is recorded in `CROSSOVER.md` as the linux-amd64 CI lane fills it in.
 
 ## References
 

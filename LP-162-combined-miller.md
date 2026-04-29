@@ -8,7 +8,7 @@ created: 2026-04-28
 
 ## Abstract
 
-Fused k-pair Miller loop for BLS12-381 batch pairing verification. Replaces `k` independent Miller-loop dispatches plus a separate Fp12 product reduction with a single kernel that interleaves all `k` pairs through one shared 64-step ate loop and accumulates `f_k = ∏ f_i` line-by-line. Eliminates `k − 1` Fp12 multiplications per batch and reduces dispatch overhead from `k + 1` round-trips to `1`. Measured uplift on Apple M1 Max for `k = 4` BLS aggregate verify: **3.18×** end-to-end vs the prior linear-affine path; for `k = 1024` (BridgeVM batched real pairing): **9.5×** mean. Pre-existing `bls_combined_miller.metal` is the Metal reference; LP-162 ports to CUDA + WGSL and parameterizes by pair count.
+Fused k-pair Miller loop for BLS12-381 batch pairing verification. Replaces `k` independent Miller-loop dispatches plus a separate Fp12 product reduction with a single kernel that interleaves all `k` pairs through one shared 64-step ate loop and accumulates `f_k = ∏ f_i` line-by-line. Eliminates `k − 1` Fp12 multiplications per batch and reduces dispatch overhead from `k + 1` round-trips to `1`. Measured uplift on Apple M1 Max for `k = 1024` (BridgeVM batched real pairing): **9.5×** mean (LP-137 §2.3). Pre-existing `bls_combined_miller.metal` is the Metal reference; LP-162 ports to CUDA + WGSL and parameterizes by pair count.
 
 ## Specification
 
@@ -49,15 +49,13 @@ The `k` line evaluations per bit are independent (no cross-pair dependency) and 
 
 Line accumulation order is fixed: `j = 0` first, ascending. Squaring is the same per-bit canonical squaring as single-pair Miller. Final exponentiation runs once on the combined `f`. CPU/Metal/CUDA/WGSL produce byte-equal Fp12 output; the byte-equality test runs with `k ∈ {1, 2, 4, 8, 16, 64, 256, 1024}` × `100` random `(P, Q)` batches.
 
-### Performance target
+### Performance
 
-| `k` | Prior (per-pair Miller + product) | LP-162 fused | Ratio |
-|---:|---|---|---:|
-| 4 | 386.3 ms (M1, linear-aff) | 121.5 ms (proj) | 3.18× |
-| 16 | 1 542 ms | 410 ms (proj) | 3.76× |
-| 1024 | 99 040 ms | 10 425 ms (BridgeVM measured, n=1024 mean) | 9.50× |
+| `k` | Prior (per-pair Miller + product) | LP-162 fused | Source |
+|---:|---|---|---|
+| 1024 | 99 040 ms | 10 425 ms (9.50×) | BridgeVM v0.60 measured, n=1024 mean (LP-137 §2.3) |
 
-`k = 1024` is the BridgeVM v0.60 measured baseline (LP-137 §2.3); other rows are projected from the per-pair Miller-bit cost reduction. CUDA dGPU numbers projected to additional 2.5–4× over Metal owing to wider Fp12 arithmetic units; final numbers in the impl commit BENCHMARKS.md.
+The `k = 1024` row is the only row backed by a number on this host. Smaller `k` rows are intentionally omitted: the per-pair Miller-bit cost reduction is the same algorithmic transform but the wall-clock ratio is dispatch-overhead-bounded at small `k` and depends on the device. CUDA / WGSL real-device numbers land in `BENCHMARKS.md` from the `hanzo-build-linux-amd64` CI lane with `CRYPTO_HAS_CUDA=1` / `CRYPTO_HAS_DAWN=1`. The full bench ladder (`k ∈ {1, 2, 4, 8, 16, 64, 256, 1024}` per backend) lives in CI; this LP records only what is measured today.
 
 ## Implementation
 

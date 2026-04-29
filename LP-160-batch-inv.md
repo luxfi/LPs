@@ -8,7 +8,7 @@ created: 2026-04-28
 
 ## Abstract
 
-Montgomery's batched modular inversion replaces `N` independent field inversions with `1` inversion + `3·(N-1)` multiplications. The kernel was previously authored only on Metal (`secp256k1_batch_inv.metal`); LP-160 ports the algorithm to CUDA + WGSL under the canonical three-backend layout, and lifts the canonical body into `gpukit/` so every curve (secp256k1, BN254 Fp/Fr, BLS12-381 Fp/Fr, Banderwagon Fp) shares one kernel. Projected speedup vs `N` independent Fermat exponentiations: 38–55× at `N = 1024` on dGPU, 12–18× on Apple M1 (M1 dispatch overhead floor).
+Montgomery's batched modular inversion replaces `N` independent field inversions with `1` inversion + `3·(N-1)` multiplications. The kernel was previously authored only on Metal (`secp256k1_batch_inv.metal`); LP-160 ports the algorithm to CUDA + WGSL under the canonical three-backend layout, and lifts the canonical body into `gpukit/` so every curve (secp256k1, BN254 Fp/Fr, BLS12-381 Fp/Fr, Banderwagon Fp) shares one kernel. Apple M1 Max measured 10–20× over `N` independent Fermat exponentiations at `N = 1024` (see `CROSSOVER.md` §batch_inv). CUDA + WGSL real-device benchmarks land in CI on the `hanzo-build-linux-amd64` runner with `CRYPTO_HAS_CUDA=1` and `CRYPTO_HAS_DAWN=1`; macOS dev builds skip CUDA/WGSL legs by design and run Metal exclusively.
 
 ## Specification
 
@@ -38,17 +38,17 @@ Cost: `1 inv + 3·(N-1) muls`. For `q ≈ 2^256`, one inversion ≈ 256 squaring
 
 The forward prefix product and backward sweep are serial chains by construction — `p_i` depends on `p_{i-1}`, and the running `inv` depends on the previous `inv`. The kernel runs as a single workgroup of one thread (lane-0-leader pattern, classified as "Batch-inversion serial chain" in LP-137 §2.1 lane-0 audit). Byte-equality across CPU/Metal/CUDA/WGSL is unconditional.
 
-### Performance target
+### Performance
 
-Projected speedup vs `N`-many independent Fermat inversions, identical curve, identical hardware:
+Speedup vs `N`-many independent Fermat inversions, identical curve, identical hardware:
 
-| Backend | N=64 | N=256 | N=1024 |
-|---|---:|---:|---:|
-| Metal (M1 Max) | 6× | 11× | 14× (measured baseline, `secp256k1_batch_inv` 2026-02) |
-| CUDA (Ada/Hopper) | 18× (proj) | 32× (proj) | 48× (proj) |
-| WGSL (wgpu, RTX 4090) | 14× (proj) | 24× (proj) | 38× (proj) |
+| Backend | N=64 | N=256 | N=1024 | Source |
+|---|---:|---:|---:|---|
+| Metal (M1 Max) | 6× | 11× | 14× | measured (`CROSSOVER.md` §batch_inv, `secp256k1_batch_inv` 2026-02 baseline) |
+| CUDA (Ada/Hopper) | — | — | — | CI lane on `hanzo-build-linux-amd64`, `CRYPTO_HAS_CUDA=1` |
+| WGSL (wgpu, RTX 4090) | — | — | — | CI lane on `hanzo-build-linux-amd64`, `CRYPTO_HAS_DAWN=1` |
 
-CUDA + WGSL numbers are projected from arithmetic operation count + measured per-mul throughput on each backend; final numbers go in the impl commit's BENCHMARKS.md.
+macOS dev builds run Metal only; CUDA / WGSL legs are exercised on the linux-amd64 CI runner with the corresponding env flags and recorded directly in `BENCHMARKS.md` as they land. No projections here.
 
 ## Implementation
 
