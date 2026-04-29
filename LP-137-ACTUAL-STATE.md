@@ -10,6 +10,67 @@ sources:
   - LP-137-FINAL-SURVEY.md         @ 2c8726e1
   - LP-137-RED-AUDIT.md            @ 2c8726e1
   - LP-137-CRYPTO-ARCHITECTURE.md  @ 2c8726e1 (partly aspirational; see deltas)
+  - 2026-04-28 ship   @ luxcpp/crypto f35c6b22 (LP-160..LP-166 acceleration kernels, FROST aggregate+verify, CGGMP21 Paillier 2048-bit, ringtail Ring-LWE, multi-curve Pippenger MSM)
+---
+
+## 0. Ship update — 2026-04-28 (luxcpp/crypto HEAD `f35c6b22`)
+
+The numbers below carry the snapshot frozen by the audits in §1–§9.
+Today's ship lands the LP-160..LP-166 acceleration kernel stack, FROST
+aggregate+verify, full CGGMP21 Paillier 2048-bit, and the first-party
+ringtail Ring-LWE body. Concrete deltas vs the audit snapshot:
+
+- **Algorithm dir count: 30 (consolidated)** — was 32 in earlier audit;
+  gpukit is the shared-kernel library and is not counted as an
+  algorithm directory. `ls -d */ | grep -v build|cmake|deps|docs|include|pqclean_kat|c-abi|gpukit` returns **30 algorithm dirs** on HEAD `f35c6b22`.
+- **C-ABI NOTIMPL: 2 real stubs remain.** Source-tree grep for
+  `CRYPTO_ERR_NOTIMPL` in `**/c_*.cpp` returns: `sr25519/c-abi/c_sr25519.cpp`
+  (`sr25519_sign` + `sr25519_verify`, no first-party body upstream),
+  and `poseidon/c-abi/c_poseidon.cpp::poseidon_goldilocks` (BN254 variant
+  is wired). `cggmp21/c-abi/c_cggmp21.cpp::cggmp21_aggregate` and
+  `cggmp21_verify` also return NOTIMPL — these are **network-bound**
+  (aggregate runs across signers in the Go-side ceremony) and standard
+  ECDSA verify is delegated to `secp256k1_verify`; not counted as missing
+  bodies. `secp256r1` returns NOTIMPL only when its CPU/OpenSSL headers
+  are absent at build time — wired when present.
+- **Multi-curve Pippenger MSM (LP-161): 22/22 KAT pass on first commit.**
+  `gpukit_multi_pippenger_test` covers 8 secp256k1 (incl. n=0), 7 BN254 G1,
+  7 Banderwagon, 1 BLS12-381 NOTIMPL contract test, 3 GPU NOTIMPL
+  contract tests. `gpukit/curve_traits/bls12_381_g1_traits.h` is the
+  header-only adapter that activates under `GPUKIT_MP_HAS_BLS12_381_G1=1`
+  once a first-party (no-blst) BLS G1 Jacobian + Pippenger body lands;
+  at that point the count goes to **29/29**. Commit `741f7c3f` +
+  `f35c6b22` (BLS adapter header).
+- **FROST aggregate + verify wired (was NOTIMPL).**
+  `frost/cpp/aggregate.{hpp,cpp}` and `frost/cpp/verify.{hpp,cpp}` ship
+  RFC 9591 §5.2 partial-share aggregation + BIP-340-style Schnorr verify
+  for FROST(secp256k1, SHA-256). `frost_aggregate` and `frost_verify`
+  C-ABI shims drop their NOTIMPL stubs. End-to-end pipeline now closes
+  on first-party code: `presign + aggregate + verify`. 6/6
+  `frost_presign_test` cases pass on commit `debeab78`.
+- **CGGMP21 Paillier 2048-bit shipped (was deferred behind LP-163).**
+  `cggmp21/cpp/paillier.{hpp,cpp}` lands the full Paillier path:
+  `keygen_from_seed` (Miller-Rabin 40-round 1024-bit safe-prime search),
+  `encrypt`, `decrypt`, `pi_enc_prove`, `pi_enc_verify`. All Z_{N²}
+  arithmetic delegates to LP-163 Karatsuba 4096-bit modexp. `presign_one()`
+  produces `status=0` records with real `K_i = enc_N(k_i, ρ_k_i)`,
+  `G_cmt = enc_N(γ_i, ρ_g_i)`, and `pi_enc` binding `(K_i, k_i, ρ_k_i)`
+  when the caller provisions a valid `PaillierKey`. Zero-pk emits
+  `status=0xFF` (legitimate "this signer's pk not provisioned"). 4/4
+  `cggmp21_presign_test` pass on commit `f35eedd2`.
+- **Ringtail Ring-LWE first-party body wired.**
+  `ringtail/cpp/ringtail.{hpp,cpp}` (691 LOC) lands setup / sign / verify
+  for the Ring-LWE threshold signature scheme. C-ABI no longer returns
+  NOTIMPL. `crypto_status()` bitmask now sets the `CRYPTO_ALG_RINGTAIL`
+  bit. Commit `ecf21b73` + `f35c6b22` (bitmask).
+- **Acceleration kernels (LP-160..LP-166) shipped.** Seven kernels,
+  three-backend uniform layout, see `CROSSOVER.md` §"Acceleration kernels"
+  for the per-kernel measured CPU vs GPU crossover table.
+
+The audit snapshot below predates today's ship and remains the canonical
+record of state up to commit `181d18c6`. The §0 update above is the
+incremental delta.
+
 ---
 
 # LP-137 Actual State
