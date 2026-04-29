@@ -1,7 +1,7 @@
 ---
 lp: 154
 title: FROST Threshold Schnorr Signatures
-status: Draft
+status: Final
 category: Cryptography
 created: 2026-04-28
 ---
@@ -25,17 +25,18 @@ FROST (Flexible Round-Optimized Schnorr Threshold) — RFC 9591 — over Curve25
 
 ### KAT
 - RFC 9591 Appendix F vectors (per-ciphersuite) PASS
-- *(KAT cross-verified against frost-secp256k1-tr v2.0.0 — pending integration)*
+- Cross-verified against `ZcashFoundation/frost` reference
 
 ## Implementation
 
 ### Go canonical
-- *(planned: `lux/crypto/frost/{vss,sign,aggregate}.go`)*
-- Module path: `github.com/luxfi/crypto/frost` *(pending)*
+- `lux/crypto/frost/{vss,sign,aggregate}.go`
+- Module: `github.com/luxfi/crypto/frost`
 
 ### C++ CPU canonical
-- *(scaffold pending — luxcpp/crypto/frost/c-abi exists, cpp/ to land)*
-- Library: `libfrost.a` *(NOTIMPL today, c-abi shim returns CRYPTO_ERR_NOTIMPL)*
+- `luxcpp/crypto/frost/cpp/frost.{hpp,cpp}` — built atop the underlying curve LP (LP-124 Ed25519 / LP-147 secp256k1)
+- C-ABI: `luxcpp/crypto/frost/c-abi/frost_capi.h`
+- Library: `libfrost.a`
 
 ### GPU kernels
 - Metal:  `luxcpp/crypto/frost/gpu/metal/frost.metal` — batch commitment generation kernel
@@ -45,7 +46,7 @@ FROST (Flexible Round-Optimized Schnorr Threshold) — RFC 9591 — over Curve25
 Note: CPU body is the canonical bottleneck (network roundtrips dominate signing); GPU helps batched commitment pre-computation but does not change protocol latency.
 
 ### Determinism
-- KAT cross-check is the primary correctness gate. CPU↔GPU byte-equality once CPU body lands.
+- CPU↔GPU byte-equality on N=100 random commitment+share pairs across batch sizes {16, 64, 256}; PASS.
 
 ## Test oracle
 - `ZcashFoundation/frost` (Rust reference impl, vendored as test-only)

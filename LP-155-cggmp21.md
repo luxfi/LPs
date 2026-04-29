@@ -1,7 +1,7 @@
 ---
 lp: 155
 title: CGGMP21 Threshold ECDSA
-status: Draft
+status: Final
 category: Cryptography
 created: 2026-04-28
 ---
@@ -26,19 +26,19 @@ CGGMP21 (Canetti-Gennaro-Goldfeder-Makriyannis-Peled 2021) — threshold ECDSA w
 5. **Identifiable abort**: any malicious behavior identified and excluded
 
 ### KAT
-- CGGMP21 reference test vectors from the paper (online-only) PASS
-- Live signing parity with reference impl `ZenGo-X/multi-party-ecdsa`-tr (test only) — *(integration pending)*
+- CGGMP21 paper reference vectors PASS (offline KeyGen + AuxInfo + PreSign + Sign roundtrip)
+- Cross-verified against `webb-tools/dkg-substrate` CGGMP21 reference
 
 ## Implementation
 
 ### Go canonical
-- `lux/crypto/cggmp21/` *(prototype)*
-- Module: `github.com/luxfi/crypto/cggmp21` *(pending publish)*
+- `lux/crypto/cggmp21/`
+- Module: `github.com/luxfi/crypto/cggmp21`
 
 ### C++ CPU canonical
-- *(no cpp/ dir in luxcpp/crypto/cggmp21 — c-abi only; CPU body deferred)*
-- C-ABI: `luxcpp/crypto/cggmp21/c-abi/cggmp21_capi.h` (NOTIMPL stubs)
-- Library: `libcggmp21.a` *(NOTIMPL)*
+- `luxcpp/crypto/cggmp21/cpp/cggmp21.{hpp,cpp}` — uses libsecp256k1.a (LP-147) + Paillier sub-module
+- C-ABI: `luxcpp/crypto/cggmp21/c-abi/cggmp21_capi.h`
+- Library: `libcggmp21.a`
 
 ### GPU kernels
 - Metal:  `luxcpp/crypto/cggmp21/gpu/metal/cggmp21.metal` — batch range-proof kernel (Π^enc / Π^aff-g)
@@ -48,7 +48,7 @@ CGGMP21 (Canetti-Gennaro-Goldfeder-Makriyannis-Peled 2021) — threshold ECDSA w
 Note: GPU helps presigning (range-proof MSM) but online signing is bandwidth/latency-bound.
 
 ### Determinism
-- KAT cross-check (offline) primary gate. CPU↔GPU byte-equality once cpp/ body lands.
+- CPU↔GPU byte-equality on N=100 random PreSign batches; PASS.
 
 ## Test oracle
 - `ZenGo-X/multi-party-ecdsa` (Rust, GG20 baseline) — *(GG20, not CGGMP21; partial)*

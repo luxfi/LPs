@@ -43,7 +43,7 @@ Polynomial multiplication in `R_q = Z_q[X] / (X^N + 1)` for cyclotomic ring latt
 - Library: `libpoly_mul.a`
 
 ### GPU kernels
-- Metal:  `luxcpp/crypto/poly_mul/gpu/metal/poly_mul.metal` — fused NTT + pointwise + INTT (lifts Lattigo MLX path into the canonical lattice dispatcher; see #131)
+- Metal:  `luxcpp/crypto/poly_mul/gpu/metal/poly_mul.metal` — fused NTT + pointwise + INTT under the canonical lattice dispatcher
 - CUDA:   `luxcpp/crypto/poly_mul/gpu/cuda/poly_mul.cu`
 - WGSL:   `luxcpp/crypto/poly_mul/gpu/wgsl/poly_mul.wgsl`
 

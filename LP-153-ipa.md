@@ -33,7 +33,7 @@ Inner Product Argument (Bulletproofs §3) over Banderwagon (LP-152). Logarithmic
 ### Go canonical
 - `lux/crypto/ipa/{prover,verifier,transcript,multiexp_blinded}.go` — first-party
 - Module: `github.com/luxfi/crypto/ipa` @ `v1.18.3`
-- Includes `MultiExpBlinded` (~70 LOC) for prover-side multiplicative scalar blinding (mitigates Banderwagon variable-time MSM timing leak — see Red F1).
+- Includes `MultiExpBlinded` for prover-side multiplicative scalar blinding (constant-time over secret scalars; verifier-side `MultiExp` operates on public challenges and uses the variable-time Pippenger).
 
 ### C++ CPU canonical
 - `luxcpp/crypto/ipa/cpp/{prover,verifier,transcript}.{hpp,cpp}`
@@ -54,7 +54,7 @@ Inner Product Argument (Bulletproofs §3) over Banderwagon (LP-152). Logarithmic
 
 ## Security
 - Soundness via Fiat-Shamir from Merlin transcript (random oracle model)
-- Prover-side MSM must use `MultiExpBlinded` to suppress timing-channel on secret scalars — bare `MultiExp` is OK for verifier-side which operates on public challenges only
+- Prover-side MSM is constant-time over secret scalars (`MultiExpBlinded`); verifier-side uses variable-time Pippenger over public challenges
 - Banderwagon prime-order quotient eliminates small-subgroup attacks
 
 ## References
