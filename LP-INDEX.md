@@ -151,6 +151,20 @@ Last updated: 2026-04-28
 | LP-143 | Session VM | Draft | Virtual Machines |
 | LP-144 | Fee Attribution and Rewards for PQ-Native Lux | Draft | Economics |
 | LP-145 | Permissioned Validators, Open Delegation, Read-Only Replicas | Draft | Economics |
+| LP-146 | BN254 Pairing-Friendly Curve | Final | Cryptography |
+| LP-147 | secp256k1 (Bitcoin Curve) | Final | Cryptography |
+| LP-148 | SHA-256 | Final | Cryptography |
+| LP-149 | Keccak-256 (Ethereum Hash) | Final | Cryptography |
+| LP-150 | RIPEMD-160 | Final | Cryptography |
+| LP-151 | BLAKE2b | Final | Cryptography |
+| LP-152 | Banderwagon (Bandersnatch Prime-Order Quotient) | Final | Cryptography |
+| LP-153 | IPA Bulletproofs | Final | Cryptography |
+| LP-154 | FROST Threshold Schnorr | Draft | Cryptography |
+| LP-155 | CGGMP21 Threshold ECDSA | Draft | Cryptography |
+| LP-156 | Lamport One-Time Signatures | Final | Cryptography |
+| LP-157 | evm256 — BN254 EVM Precompile Wrappers | Final | Cryptography |
+| LP-158 | modexp — Big-Integer Modular Exponentiation | Final | Cryptography |
+| LP-159 | poly_mul — Lattice Polynomial Multiplication | Final | Cryptography |
 
 ## Numbering rules
 
@@ -158,7 +172,8 @@ Last updated: 2026-04-28
 - LP-100 through LP-109: core infrastructure (regenesis, primary consensus, replication)
 - LP-110 through LP-129: cryptographic precompiles (EVM-callable)
 - LP-130 through LP-137: execution + architecture (AI, VRF, QuasarGPU, topology, cloud)
-- LP-138 onward: post-quantum-native chain redesign (VMs + economics)
+- LP-138 through LP-145: post-quantum-native chain redesign (VMs + economics)
+- LP-146 through LP-159: per-algorithm crypto specs (1 LP per algorithm, ref LP-137)
 
 ## Numbering history (2026-04-28)
 
