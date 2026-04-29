@@ -1,10 +1,10 @@
-# CI Runner Deployment Runbook (2026-04-28)
+# CI Runner Deployment Runbook (2026-04-29)
 
-Step-by-step for the platform team to unblock CI in `luxcpp/*`, `luxfi/*`, `luxgpu/*`. Audit context: [CI-RUNNERS.md](./CI-RUNNERS.md).
+Per-org ARC listener install for `luxcpp/*`, `luxfi/*`, `luxgpu/*`, all reusing the canonical 2 hanzo scale-set labels. Audit + decision: [CI-RUNNERS.md](./CI-RUNNERS.md).
 
 ## Goal
 
-Stand up org-scoped GitHub Actions self-hosted runners for each org, registered with the labels existing workflows already target. No workflow edits required.
+Bring up one ARC listener per target org on the existing `hanzo-k8s` cluster, advertising the two canonical labels (`hanzo-build-linux-amd64`, `hanzo-build-linux-arm64`) so existing workflows pick up runners with no edits. **Two scale-set labels total across all orgs** — not six. The shared cluster + shared node pool + shared image is the canonical "AMD64 + ARM64 fleet" used by hanzoai, luxfi, luxcpp, luxgpu, zooai.
 
 ## Prerequisites
 
@@ -36,13 +36,13 @@ Use Option B in production. Reuse the existing KMSSecret CRD pattern from `~/wor
 
 ## Step 2 — Author per-org values files
 
-For each org `<org>` in {luxcpp, luxfi, luxgpu}, create two values files in `~/work/hanzo/universe/infra/k8s/arc/`:
+For each target org `<org>` in {luxcpp, luxfi, luxgpu}, copy the canonical hanzo values files from `~/work/hanzo/universe/infra/k8s/arc/values-build-{amd64,arm64}.yaml` and change exactly two fields: `githubConfigUrl` (point at the org) and `githubConfigSecret` (per-org KMS-synced secret). **Do not rename the scale set, do not add an `<org>-build-*` label.** Workflows already target `hanzo-build-linux-{amd64,arm64}` and that is the only label we ship.
 
 ### `values-<org>-build-amd64.yaml`
 ```yaml
 githubConfigUrl: https://github.com/<org>
 githubConfigSecret: arc-<org>-github-secret
-runnerScaleSetName: <org>-build-linux-amd64
+runnerScaleSetName: hanzo-build-linux-amd64
 minRunners: 0
 maxRunners: 30
 runnerGroup: Default
@@ -67,7 +67,7 @@ template:
         command: ["/home/runner/run.sh"]
         env:
           - name: ACTIONS_RUNNER_LABELS
-            value: "hanzo-build-linux-amd64,<org>-build-linux-amd64,self-hosted,Linux,X64"
+            value: "hanzo-build-linux-amd64,self-hosted,Linux,X64"
         securityContext:
           runAsNonRoot: true
           runAsUser: 1001
@@ -76,50 +76,12 @@ template:
 ```
 
 ### `values-<org>-build-arm64.yaml`
-```yaml
-githubConfigUrl: https://github.com/<org>
-githubConfigSecret: arc-<org>-github-secret
-runnerScaleSetName: <org>-build-linux-arm64
-minRunners: 0
-maxRunners: 10
-runnerGroup: Default
-containerMode:
-  type: dind
-template:
-  spec:
-    nodeSelector:
-      arch: arm64
-    tolerations:
-      - key: role
-        operator: Equal
-        value: runner
-        effect: NoSchedule
-      - key: kubernetes.io/arch
-        operator: Equal
-        value: arm64
-        effect: NoSchedule
-      - key: workload
-        operator: Exists
-        effect: NoSchedule
-    containers:
-      - name: runner
-        image: ghcr.io/actions/actions-runner:latest
-        command: ["/home/runner/run.sh"]
-        env:
-          - name: ACTIONS_RUNNER_LABELS
-            value: "hanzo-build-linux-arm64,<org>-build-linux-arm64,self-hosted,Linux,ARM64"
-        securityContext:
-          runAsNonRoot: true
-          runAsUser: 1001
-          allowPrivilegeEscalation: false
-          readOnlyRootFilesystem: false
-```
 
-The `hanzo-build-linux-{amd64,arm64}` labels MUST appear so existing workflows match without edits. The `<org>-build-linux-{amd64,arm64}` labels enable per-org observability and future fine-grained routing.
+**Status: paused.** Per `~/work/hanzo/CLAUDE.md` (2026-04-27 entry) DOKS does not currently offer arm64 droplets; the hanzoai arm64 Helm release is uninstalled. Do not install per-org arm64 listeners until DO ships arm64 instances. When that lands, the values file mirrors amd64 with `runnerScaleSetName: hanzo-build-linux-arm64`, ARM64 nodeSelector/tolerations, and `ACTIONS_RUNNER_LABELS: "hanzo-build-linux-arm64,self-hosted,Linux,ARM64"`.
 
-## Step 3 — Install scale sets
+`runnerScaleSetName` may legally be the same string across releases because Helm release names disambiguate the K8s objects (see Step 3). The `ACTIONS_RUNNER_LABELS` value is the only thing GitHub Actions matches on, and we want all orgs to advertise the same labels so workflows are portable.
 
-For each org, in order:
+## Step 3 — Install per-org listener (amd64 only — arm64 paused)
 
 ```bash
 unset GH_TOKEN GITHUB_TOKEN
@@ -129,12 +91,9 @@ helm upgrade --install ${ORG}-build-linux-amd64 \
   oci://ghcr.io/actions/actions-runner-controller-charts/gha-runner-scale-set \
   -n actions-runner-system --create-namespace \
   -f values-${ORG}-build-amd64.yaml
-
-helm upgrade --install ${ORG}-build-linux-arm64 \
-  oci://ghcr.io/actions/actions-runner-controller-charts/gha-runner-scale-set \
-  -n actions-runner-system \
-  -f values-${ORG}-build-arm64.yaml
 ```
+
+The Helm release name (`${ORG}-build-linux-amd64`) is what disambiguates K8s objects across orgs; the GitHub-side scale-set name and labels stay `hanzo-build-linux-amd64` for all orgs. Do not install the arm64 release until DO ships arm64 droplets (see Step 2 note).
 
 Wait for the listener pods:
 

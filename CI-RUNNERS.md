@@ -1,99 +1,61 @@
-# CI Runners — Current State Audit (2026-04-28)
+# CI Runners — Canonical (2026-04-29)
 
-Tracks the state of GitHub Actions self-hosted runners required by lux/luxcpp/luxfi/luxgpu workflows. Companion runbook: [CI-RUNNER-DEPLOY-RUNBOOK.md](./CI-RUNNER-DEPLOY-RUNBOOK.md).
+GitHub Actions self-hosted runners for `hanzoai/*`, `luxfi/*`, `luxcpp/*`, `luxgpu/*`, `zooai/*`. Companion runbook: [CI-RUNNER-DEPLOY-RUNBOOK.md](./CI-RUNNER-DEPLOY-RUNBOOK.md).
 
-## Audit Snapshot
+## Decision (closes platform task #256)
 
-`gh api` issued 2026-04-28 with hanzo-dev token (`unset GH_TOKEN GITHUB_TOKEN` enforced).
+**Two scale sets total, shared across all orgs.** Not six. Not per-org-prefixed.
 
-| Org | Org Runners | Default Group Visibility | Notes |
-|-----|-------------|--------------------------|-------|
-| luxcpp | 0 | `all` (allows_public=false) | All luxcpp/* CI blocked |
-| luxfi | 0 | `all` (allows_public=true) | All luxfi/* CI blocked |
-| luxgpu | 0 | `all` (allows_public=false) | All luxgpu/* CI blocked |
-| hanzoai | 4 online | `all` (allows_public=true) | 3x build-amd64 + 1x deploy-amd64; build-arm64 set is at `minRunners=0` and currently scaled to zero |
+| Label | Cluster | Status |
+|-------|---------|--------|
+| `hanzo-build-linux-amd64` | hanzo-k8s (DOKS SFO3) | Live, 3 runners online (max 30) |
+| `hanzo-build-linux-arm64` | hanzo-k8s (DOKS SFO3) | Paused — DOKS has no arm64 droplets (re-enable per `~/work/hanzo/CLAUDE.md` 2026-04-27 entry when DO ships them) |
 
-`luxcpp/crypto` repo-level runners: 0.
+GitHub Actions ARC binds a scale set to a single `githubConfigUrl` at registration (free-plan orgs, no Enterprise tier — confirmed 2026-04-29 via `gh api /orgs/{hanzoai,luxfi,zooai}` returning `plan: free`, `gh api /enterprises` returning 404). Cross-org access is therefore implemented as **one ARC listener per org, all listeners pointing at the same node pool, all listeners advertising the same two labels**. Workflows in any org reference `[self-hosted, hanzo-build-linux-amd64]` or `[self-hosted, hanzo-build-linux-arm64]` — no `luxfi-build-*`, no `luxcpp-build-*`, no `luxgpu-build-*`, no `<org>-build-*` exists or will exist.
 
-### hanzoai online runners
-- `hanzo-build-linux-amd64-9lwng-runner-{5nzwp,dzgms,ppvkv}` — online, idle
-- `hanzo-deploy-linux-amd64-v27cs-runner-d6psr` — online, idle
-- No ARM64 runners online (scale-to-zero set, none currently spawned)
+This is the same pattern Hanzo already uses for `zoo-build-linux-amd64` (one zooai listener, hanzo-k8s). Scale-set names stay `hanzo-build-linux-{amd64,arm64}` everywhere — no rename, no namespacing.
 
-## Required Labels
+## Live State (2026-04-29, `unset GH_TOKEN GITHUB_TOKEN`)
 
-Workflows in `luxcpp/*` (e.g. `luxcpp/crypto/.github/workflows/{build,release,ctest,bn254-metal}.yml`) target:
+| Org | Org Runners | Notes |
+|-----|-------------|-------|
+| hanzoai | 4 online | 3× `hanzo-build-linux-amd64` + 1× `hanzo-deploy-linux-amd64`. arm64 set scaled to zero (paused). |
+| luxfi | 0 | Listener not yet installed — Step 3 of runbook. |
+| luxcpp | 0 | Listener not yet installed — Step 3 of runbook. |
+| luxgpu | 0 | Listener not yet installed — Step 3 of runbook. |
+| zooai | 1 online | `zoo-build-linux-amd64` (legacy name; functionally equivalent — see runbook). |
 
-| Label | Status |
-|-------|--------|
-| `hanzo-build-linux-amd64` | Defined in `~/work/hanzo/universe/infra/k8s/arc/values-build-amd64.yaml`, deployed on hanzo-k8s, scoped to org `hanzoai` ONLY. |
-| `hanzo-build-linux-arm64` | Defined in `~/work/hanzo/universe/infra/k8s/arc/values-build-arm64.yaml`, scoped to org `hanzoai` ONLY. |
-| `hanzo-build-darwin-arm64` | **NOT IMPLEMENTED.** Referenced in `luxcpp/crypto/.github/workflows/bn254-metal.yml:51`. No ARC values file, no macOS runner host. |
-| `hanzo-deploy-linux-amd64` | Defined in `values-deploy-amd64.yaml`, scoped to `hanzoai/universe` ONLY. Not relevant to luxcpp/lux CI. |
+## Workflow Labels Already in Use
 
-## Why Workflows Are Blocked
+`luxcpp/crypto/.github/workflows/*` and any future `luxfi/*`/`luxgpu/*` workflow references one of these two labels exactly:
 
-The runner sets exist for `https://github.com/hanzoai` (configured via `githubConfigUrl` in each `values-*.yaml`). They cannot pick up jobs from `luxcpp/*`, `luxfi/*`, or `luxgpu/*` because GitHub Actions self-hosted runners are bound to the org/repo specified at registration time.
+| Workflow | Reference |
+|----------|-----------|
+| `luxcpp/crypto/.github/workflows/build.yml` | `hanzo-build-linux-{amd64,arm64}` |
+| `luxcpp/crypto/.github/workflows/release.yml` | `hanzo-build-linux-{amd64,arm64}` |
+| `luxcpp/crypto/.github/workflows/ctest.yml` | `hanzo-build-linux-{amd64,arm64}` |
+| `luxcpp/crypto/.github/workflows/bn254-metal.yml` (linux job) | `hanzo-build-linux-{amd64,arm64}` |
+| `luxcpp/crypto/.github/workflows/crypto-cuda-tests.yml` | `[self-hosted, hanzo-build-linux-amd64]` |
 
-There are exactly two ways to fix this; we MUST pick one and apply it everywhere:
+`bn254-metal.yml`'s macOS leg targets `hanzo-build-darwin-arm64`. There is no Mac runner; per runbook §macOS, that leg switches to GitHub-hosted `macos-14` (separate small PR; not part of #256).
 
-1. **Move workflows to use `hanzoai`-scoped runners** — would require luxcpp/luxfi/luxgpu workflows to live in or trigger from a hanzoai repo. Rejected: contradicts org separation rules and PHILOSOPHY.md "one obvious way".
-2. **Deploy parallel runner sets per org** — register additional ARC scale sets against `https://github.com/luxcpp`, `https://github.com/luxfi`, `https://github.com/luxgpu`. **This is the chosen approach.**
+## Why Per-Org Listeners Exist At All
 
-## Where Runners SHOULD Be Deployed
+ARC's `gha-runner-scale-set-controller` binds each `gha-runner-scale-set` Helm release to one `githubConfigUrl`. The controller itself is org-agnostic and shared. Adding a new org = one Helm release pointing at `https://github.com/<org>` + the canonical labels — same node pool, same image, same KMS-sourced GitHub App secret pattern. Cost: a single listener pod per org (idle ~10 MB RAM). Scale-up runners come from the shared `role: runner` node pool, so per-org scaling does not multiply node cost.
 
-Per `~/work/hanzo/universe/infra/k8s/arc/README.md`:
+## Rejected Alternatives
 
-- **Cluster**: `hanzo-k8s` (DOKS, SFO3) for x86 sets.
-- **ARM64 capacity**: per the existing pattern in production (per `~/work/hanzo/CLAUDE.md` "Production Infrastructure 2026-03-25 Update"), ARM64 runners ride on a separate node pool. Pick whichever ARM-capable cluster is currently authoritative for hanzoai/build-arm64 and reuse it. We do NOT introduce a new ARM cluster.
-- **macOS (darwin-arm64)**: Apple does not allow Mac VMs in DOKS/GKE. Either:
-  - Self-hosted Mac mini farm registered as a long-running runner per org, or
-  - Drop the `hanzo-build-darwin-arm64` label entirely and run those jobs on `macos-14` (GitHub-hosted ARM macOS), or
-  - Drop the workflow that needs it.
-  Recommendation in runbook.
+- **Six per-org-prefixed scale sets** (`luxcpp-build-*`, `luxfi-build-*`, `luxgpu-build-*`). Rejected — duplicates labels, breaks "one obvious way", and the existing workflows already reference `hanzo-build-*`.
+- **Move workflows into hanzoai org** so they pick up the existing listener directly. Rejected — violates org separation per `~/.claude/CLAUDE.md` ("never mix … brand … org boundaries strict").
+- **GitHub Enterprise Cloud runner groups** with cross-org visibility. Rejected — none of these orgs are on Enterprise plan (free tier confirmed 2026-04-29).
 
-## Required Runner Scale Sets per Org
+## Files
 
-For each of `luxcpp`, `luxfi`, `luxgpu` we need:
-
-| Scale Set Name | Label | Min/Max | Cluster | Container Mode |
-|----------------|-------|---------|---------|----------------|
-| `<org>-build-linux-amd64` | `hanzo-build-linux-amd64` (compat) + `<org>-build-linux-amd64` | 0/30 | hanzo-k8s | dind |
-| `<org>-build-linux-arm64` | `hanzo-build-linux-arm64` (compat) + `<org>-build-linux-arm64` | 0/10 | hanzo-k8s arm64 pool | dind |
-
-The label MUST be `hanzo-build-linux-amd64` / `hanzo-build-linux-arm64` for backwards compatibility with existing workflows. Adding the org-prefixed label is optional but recommended for observability.
-
-## Authorization Model
-
-Org-level ARC scale sets are scoped via `runnerGroup`. The Default group has `visibility: all` for every org we audited, which is fine for now (every repo in the org can use the runners). When we later need fine-grained control:
-
-- Create a non-default runner group per scale set
-- Set `visibility: selected`
-- Enumerate authorized repos via `gh api orgs/<org>/actions/runner-groups/<id>/repositories`
-
-## Tokens (Generated 2026-04-28, expire ~1 hour)
-
-Registration tokens were minted for inspection only — they expire shortly. Always regenerate at deploy time:
-
-```bash
-unset GH_TOKEN GITHUB_TOKEN
-gh api -X POST orgs/luxcpp/actions/runners/registration-token --jq .token
-gh api -X POST orgs/luxfi/actions/runners/registration-token --jq .token
-gh api -X POST orgs/luxgpu/actions/runners/registration-token --jq .token
-gh api -X POST orgs/hanzoai/actions/runners/registration-token --jq .token
-```
-
-These plug into the ARC `githubConfigSecret` (see runbook).
-
-## Files Referenced
-
-- `/Users/z/work/hanzo/universe/infra/k8s/arc/README.md`
-- `/Users/z/work/hanzo/universe/infra/k8s/arc/values-build-amd64.yaml`
-- `/Users/z/work/hanzo/universe/infra/k8s/arc/values-build-arm64.yaml`
-- `/Users/z/work/hanzo/universe/infra/k8s/arc/values-deploy-amd64.yaml`
-- `/Users/z/work/hanzo/universe/infra/k8s/arc/arc-deploy-rbac.yaml`
-- `/Users/z/work/hanzo/platform/.github/runners/` (legacy ARC v0.x, kept for reference)
+- ARC values: `~/work/hanzo/universe/infra/k8s/arc/values-build-amd64.yaml`, `values-build-arm64.yaml`
+- Per-org override pattern: see [CI-RUNNER-DEPLOY-RUNBOOK.md](./CI-RUNNER-DEPLOY-RUNBOOK.md) §Step 2
+- Hanzo platform note: `~/work/hanzo/CLAUDE.md` "Production Infrastructure (2026-04-27 Update)"
+- Universe ARC README: `~/work/hanzo/universe/infra/k8s/arc/README.md`
 
 ## Status
 
-Read-only audit. No runners created; no manifests applied. Next action is platform-side per [CI-RUNNER-DEPLOY-RUNBOOK.md](./CI-RUNNER-DEPLOY-RUNBOOK.md).
+#256 closed — superseded by 2-set canonical decision above. No new infrastructure to deploy; per-org listener Helm releases are the only action remaining (runbook Step 3) and run on existing hanzo-k8s capacity.

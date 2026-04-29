@@ -17,3 +17,7 @@ Each layer independently toggleable. `TripleSignRound1` runs all 3 in parallel. 
 - LP-076: Universal threshold
 - LP-022: ZAP wire protocol
 
+## CI Runners (2026-04-29) — closes #256
+
+Two ARC scale-set labels total across hanzoai/luxfi/luxcpp/luxgpu/zooai: `hanzo-build-linux-amd64` (live, hanzo-k8s) and `hanzo-build-linux-arm64` (paused — DOKS no arm64). One ARC listener Helm release per org, all listeners use the same scale-set name and same labels. No `<org>-build-*` labels exist or will be created. See `CI-RUNNERS.md` and `CI-RUNNER-DEPLOY-RUNBOOK.md` for full state.
+
