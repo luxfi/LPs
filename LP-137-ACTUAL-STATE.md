@@ -62,7 +62,8 @@ ringtail Ring-LWE body. Concrete deltas vs the audit snapshot:
   `ringtail/cpp/ringtail.{hpp,cpp}` (691 LOC) lands setup / sign / verify
   for the Ring-LWE threshold signature scheme. C-ABI no longer returns
   NOTIMPL. `crypto_status()` bitmask now sets the `CRYPTO_ALG_RINGTAIL`
-  bit. Commit `ecf21b73` + `f35c6b22` (bitmask).
+  bit. Commit `ecf21b73` + `f35c6b22` (bitmask). Ringtail full spec:
+  LP-073 + papers/lp-073-ringtail.pdf.
 - **Acceleration kernels (LP-160..LP-166) shipped.** Seven kernels,
   three-backend uniform layout, see `CROSSOVER.md` §"Acceleration kernels"
   for the per-kernel measured CPU vs GPU crossover table.

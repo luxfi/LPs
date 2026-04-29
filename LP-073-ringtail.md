@@ -1,91 +1,469 @@
 ---
 lp: 073
 title: Ringtail Lattice-Based Threshold Signatures
-tags: [post-quantum, ringtail, lattice, threshold, signature]
-description: Lattice-based threshold signature scheme for post-quantum MPC signing
+tags: [post-quantum, ringtail, lattice, threshold, signature, consensus]
+description: 2-round MAC-authenticated lattice threshold signature scheme. Production canonical for Lux Quasar consensus and bridge MPC signing.
 author: Lux Core Team (@luxfi)
 status: Final
 type: Standards Track
 category: Cryptography
 created: 2024-03-01
+updated: 2026-04-29
 references:
-  - lps-019 (Threshold MPC)
-  - lps-070 (ML-DSA)
-  - lps-076 (Universal Threshold Framework)
+  - LP-019 (Threshold MPC)
+  - LP-020 (Quasar Consensus)
+  - LP-022 (ZAP Wire Protocol)
+  - LP-029 (NTT Transform)
+  - LP-070 (ML-DSA)
+  - LP-075 (BLS Aggregate)
+  - LP-076 (Universal Threshold Framework)
+  - LP-077 (Linear Shamir)
+  - LP-137 (GPU Crypto Stack)
+canonical: github.com/luxfi/ringtail
 ---
 
 # LP-073: Ringtail Lattice-Based Threshold Signatures
 
 ## Abstract
 
-Defines Ringtail, a lattice-based threshold signature scheme for Lux Network. Ringtail enables t-of-n threshold signing where the aggregate signature is a single lattice-based signature verifiable at EVM precompile `0x000B`. Unlike classical threshold ECDSA (CGGMP21), Ringtail is post-quantum secure. Shares aggregate linearly (similar to BLS), avoiding the complex MtA protocols required by threshold ECDSA.
+Ringtail is a 2-round MAC-authenticated threshold signature scheme over the cyclotomic ring `R_q = Z_q[X]/(X^256 + 1)` with module-LWE hardness. The Go canonical at `github.com/luxfi/ringtail` is the byte-exact production reference: every C++/Metal/CUDA/WGSL port MUST reproduce its `WriteTo` byte stream and `Verify` accept set bit-for-bit.
+
+Ringtail is the post-quantum lane of Lux Quasar triple consensus (LP-020): each block carries a BLS12-381 aggregate (LP-075) for the classical fast path, a Ringtail aggregate for PQ liveness, and an ML-DSA-65 identity proof (LP-070). Ringtail's linear share aggregation removes the Paillier MtA cost of CGGMP21 ECDSA threshold signing while remaining quantum-secure.
+
+The canonical parameters, ring construction, and serialization are normative. Implementations that diverge from the byte stream produced by `lattice/v7` `structs.{Vector,Matrix}[ring.Poly].WriteTo` are not Ringtail; they are a different protocol.
 
 ## Specification
 
-### Parameters
+### 1. Ring Construction
 
-| Parameter | Value |
-|-----------|-------|
-| Lattice dimension | 512 |
-| Modulus q | 8380417 |
-| Signature size | ~2,400 B |
-| Public key size | ~1,500 B |
-| Security level | NIST Level 2 (128-bit PQ) |
+The protocol uses three rings, all of degree `φ = 256` and Standard NTT (negacyclic, `Z[X]/(X^φ+1)`):
 
-### Threshold DKG
+| Ring | Degree | Modulus | Purpose | Source |
+|------|--------|---------|---------|--------|
+| `R`   | 256 | `Q   = 0x1000000004A01` (48 bits) | working ring; NTT-friendly prime | `sign/config.go:19` |
+| `R_ξ` | 256 | `Qξ  = 0x40000` (`2^18`)          | rounded public-key co-domain      | `sign/config.go:21` |
+| `R_ν` | 256 | `Qν  = 0x80000` (`2^19`)          | hint co-domain (Δ ring)           | `sign/config.go:20` |
 
-```
-Each P_i generates a secret polynomial f_i(x) over the lattice ring R_q.
-Shares s_{i,j} = f_i(j) are distributed to each P_j.
-Verification via lattice-based commitments (Module-LWE).
-Group public key: sum of constant terms.
-```
+`R` is constructed by `ring.NewRing(256, []uint64{Q})` (`threshold/threshold.go:46`). The construction REQUIRES `Q ≡ 1 (mod 2·φ)`; this holds for `Q = 0x1000000004A01 = 281474976712705 ≡ 1 (mod 512)`. `R_ξ` and `R_ν` are non-NTT auxiliary rings (their moduli are powers of 2 and not `≡ 1 (mod 512)`); they are used only as containers for rounded coefficients (`utils/utils.go:411`).
 
-### Signing (2 rounds)
+#### 1.1 Montgomery and Barrett Constants
+
+For `Q = 0x1000000004A01`, Lattigo derives:
 
 ```
-Round 1: Each signer commits to a nonce vector (mask).
-Round 2: Each signer produces a partial signature using their share.
-Aggregation: Partial signatures sum to a valid Ringtail signature.
+MRedConstant(q) = q^{-1} mod 2^64                           (lattice/ring/modular_reduction.go:67-75)
+BRedConstant(q) = (⌊2^128 / q⌋ >> 64, ⌊2^128 / q⌋ mod 2^64) (lattice/ring/modular_reduction.go:99-107)
 ```
 
-The linear aggregation property means no MtA (Multiplicative-to-Additive) conversion is needed, unlike CGGMP21. This reduces signing complexity and eliminates Paillier encryption overhead.
+Implementations MUST compute these via `GenMRedConstant` / `GenBRedConstant` (or an equivalent that produces the same 64-bit values) and use Montgomery form (`MForm(x) = x · 2^64 mod q`) for all NTT-domain multiplies. `MulCoeffsMontgomery` is the only multiplication primitive used in `sign.go`.
 
-### Precompile
+#### 1.2 NTT Roots
 
-Address: `0x000B` (as specified in LP-019)
+The 2N-th primitive root `Ψ` is generated by `subring.generateNTTConstants` (`lattice/ring/subring.go:99`). `RootsForward` and `RootsBackward` are stored in Montgomery form, bit-reversed order. The negacyclic NTT is an in-place Cooley-Tukey decimation-in-time (`lattice/ring/ntt.go:174`).
+
+### 2. Protocol Parameters
+
+Constants from `sign/config.go`:
+
+| Symbol | Value | Meaning |
+|--------|-------|---------|
+| `φ`         | 256                | ring degree (`1 << LogN`, `LogN = 8`) |
+| `M`         | 8                  | matrix rows (public-key dimension) |
+| `N` (vec.)  | 7                  | matrix cols (secret-vector length) |
+| `Dbar`      | 48                 | masking nonce expansion factor |
+| `K`         | n (parties)        | total parties (set per epoch) |
+| `Threshold` | t                  | threshold (`1 ≤ t < n`) |
+| `Kappa`     | 23                 | challenge Hamming weight |
+| `Xi`        | 30                 | public-key rounding (`b̃ = ⌊b / 2^30⌉`) |
+| `Nu`        | 29                 | hint rounding (`h̃ = ⌊h / 2^29⌉`) |
+| `KeySize`   | 32                 | symmetric key bytes (BLAKE3 / MAC) |
+| `EtaEpsilon`| 2.650104           | rejection-sampling slack |
+
+Discrete-Gaussian parameters (`σ`, `B = 2σ` truncation bound):
+
+| Sampler | σ | B | Used for |
+|---------|---|---|----------|
+| `SigmaE`     | 6.108187070284607        | 12.21637414057    | LWE error `e`, per-party error `E_i`, per-party mask `R_i` |
+| `SigmaStar`  | 172 852 667 880.27 (≈2^37.33) | 345 705 335 760.54 | "star" mask `r*`, `e*` (single column of `R`, `E`) |
+| `SigmaU`     | 163 961 331.5            | 327 922 663.0     | challenge-side hash-to-Gaussian `u` |
+
+L2 acceptance bound: `B² = 184960669042442604975662780477` (`Bsquare`, `sign/config.go:8-9`); equivalent to `B = 430070539612332.205811372782969`.
+
+Note: in `config.go`, the symbol `N` denotes the secret-vector length (`= 7`) while `LogN = 8` defines the ring degree `φ = 256`. This spec uses `φ` for ring degree and `n_vec`/`m_pk` only when ambiguity could arise; the Go code uses bare `N` for the vector dimension because the ring object exposes `r.N()` for `φ`.
+
+### 3. Key Generation
+
+Trusted-dealer key generation (`sign.Gen`, `sign/sign.go:48-96`). All steps are deterministic given the 32-byte `trustedDealerKey`.
 
 ```
-Input:  (bytes32 messageHash, bytes signature, bytes publicKey)
-Output: bytes32 (0x01 valid, 0x00 invalid)
-Gas:    120,000
+Gen(R, R_ξ, sampler_uniform, k_TD : []byte[32], λ : []Poly[t]) ->
+    (A : Matrix[Poly]^{M×n_vec}, sk_i : Vector[Poly]^{n_vec}, seeds, MAC keys, b̃ : Vector[Poly]^M)
+
+1.  A ← UniformSamplePolyMatrix(R, M, n_vec)         // NTT + Montgomery form
+2.  PrecomputeRandomness(size, k_TD)
+       size = K·K·32 + φ·n_vec·(K−1)·⌈log2(Q)/8⌉ + K·(K−1)·32   // sign/sign.go:51
+       (BLAKE3 XOF over k_TD; consumed sequentially by GetRandomBytes)
+3.  prng ← BLAKE2 KeyedPRNG(k_TD)                    // lattice/utils/sampling/prng.go:45
+4.  s ← DiscreteGaussian(R, σ_E, B_E) over n_vec polynomials  (NOT in NTT)
+5.  sk_i ← ShamirSecretSharing(R, s, K, λ)           // primitives/shamir.go:66
+6.  Convert sk_i and s to NTT-Montgomery form
+7.  e ← DiscreteGaussian(R, σ_E, B_E) over M polynomials (NTT-Montgomery)
+8.  b ← A · s + e (mod Q) in NTT-Montgomery
+9.  IMForm + INTT(b) into standard form
+10. b̃ ← RoundVector(R, R_ξ, b, Xi)                   // ⌊(b + 2^{Xi-1}) / 2^Xi⌋ per coefficient
+11. seeds[i][j] ← 32 random bytes                    // shared NIZK seeds, K² total
+12. MACKeys[i][j] ← MACKeys[j][i] ← 32 random bytes  // pairwise symmetric, K(K−1)/2 total
+
+Return (A, {sk_i}, seeds, MACKeys, b̃)
 ```
 
-### Performance
+Public group key: `(A, b̃)`. Each party stores `(sk_i, seeds[i], MACKeys[i], λ_i)` where `λ_i` is the Lagrange coefficient evaluated at the active set `T = {0,…,K−1}` and converted to NTT-Montgomery form (`threshold/threshold.go:155-159`).
 
-| Operation | 3-of-5 | 5-of-7 |
-|-----------|--------|--------|
-| DKG | 8.5ms | 15.2ms |
-| Signing | 2.1ms | 3.4ms |
-| Verification | 0.9ms | 0.9ms (constant) |
+`ShamirSecretSharing` (`primitives/shamir.go:66-119`) is the optimized t=K variant: `K−1` shares are uniform mod `Q`; the last share is computed so the Lagrange combination at indices `1..K` reconstructs the secret coefficient. Coefficients are shared independently per polynomial position, and shares live in `Coeffs[0]` (single-RNS level).
 
-## Security Considerations
+### 4. Signing
 
-1. Security relies on Module-SIS hardness over polynomial rings.
-2. Abort identification: malicious signers are detectable via commitment verification.
-3. Signature size (~2.4 KB) is larger than ECDSA (65 B) but verification cost is O(1) regardless of group size.
-4. Nonce reuse is safe (unlike Schnorr) due to the lattice rejection sampling step.
+Signing is a 2-round protocol with a finalize step. Round 1 is offline (depends only on the message-independent state plus a session id); Round 2 binds the message `μ`.
 
-## Reference
+#### 4.1 Round 1 — Commit
 
-| Resource | Location |
-|----------|----------|
-| Ringtail implementation | `github.com/luxfi/crypto/ringtail/` |
-| Precompile | `github.com/luxfi/evm/precompile/contracts/ringtail.go` |
-| LP-019 MPC specification | `LP-019-threshold-mpc.md` |
+`Party.SignRound1` (`sign/sign.go:99-144`):
+
+```
+SignRound1(A, sid : int, k_PRF : []byte, T : []int) -> (D : Matrix[Poly]^{M×(Dbar+1)}, MACs : map[int][]byte)
+
+1.  k_sk ← BLAKE3(WriteTo(sk_i))[:32]                        // primitives/hash.go:19
+2.  prng ← BLAKE2 KeyedPRNG(k_sk)
+3.  r* ← DiscreteGaussian(R, σ*, B*) × n_vec   (NTT-Mont)
+4.  e* ← DiscreteGaussian(R, σ*, B*) × M       (NTT-Mont)
+5.  R_i ← DiscreteGaussian(R, σ_E, B_E) × n_vec × Dbar  (NTT-Mont)
+6.  E_i ← DiscreteGaussian(R, σ_E, B_E) × M × Dbar      (NTT-Mont)
+7.  R̂   ← [r* | R_i]   (n_vec × (Dbar+1))      // r* is column 0
+8.  Ê   ← [e* | E_i]   (M × (Dbar+1))
+9.  D_i ← A · R̂ + Ê    (NTT-Mont)
+10. For each j ∈ T, j ≠ id:
+        MAC_ij ← BLAKE3(int64-BE(id) || MACKeys[j] || WriteTo(D_i)
+                     || int64-BE(sid) || int32-BE(|T|) || ⊕ int32-BE(t_k) for t_k in T)[:32]
+11. Persist R̂ and D_i on the party state.
+
+Broadcast: D_i, {MAC_ij}_{j≠id}.
+```
+
+The `k_PRF` parameter is reserved for the `PRF` mask in Round 2; it is NOT consumed during Round 1 in the canonical (despite appearing in the signature).
+
+#### 4.2 Round 2 Preprocess — MAC Verify and Full-Rank Check
+
+`Party.SignRound2Preprocess` (`sign/sign.go:147-170`):
+
+```
+SignRound2Preprocess(A, b̃, {D_j}_{j∈T}, {MACs_j}_{j∈T}, sid, T) -> (ok, D_Σ, hash)
+
+1.  hash ← BLAKE3(WriteTo(A) || WriteTo(b̃) || int64-BE(sid)
+                || int32-BE(|T|) || ⊕ int32-BE(t_k) || ⊕ WriteTo(D_j) for j = 0..|T|-1)[:32]
+2.  For each j ≠ id ∈ T:
+       expected ← BLAKE3(int64-BE(id) || MACKeys[j] || WriteTo(D_j) || int64-BE(sid)
+                        || int32-BE(|T|) || ⊕ int32-BE(t_k))[:32]
+       If MACs_j[id] ≠ expected: return (false, nil, nil).
+3.  D_Σ ← Σ_{j∈T} D_j   (NTT-Mont)
+4.  If !FullRankCheck(D_Σ, R): return (false, nil, nil).
+5.  Return (true, D_Σ, hash).
+```
+
+`Hash` writes the matrices `D_j` in ascending `j` order over `0..|T|-1` (`primitives/hash.go:153-157`); this REQUIRES that callers populate the `D` map with contiguous keys starting from 0 for the deterministic hash to match across parties.
+
+`FullRankCheck` (`sign/sign.go:348-374`) confirms that for every coefficient slot `i ∈ [0, φ)`, the `M × Dbar` submatrix obtained by dropping column 0 (the `r*` column) of `D_Σ` is full rank modulo `Q`. This rules out `D_Σ` projections that admit forged opening windows.
+
+#### 4.3 Round 2 — Open
+
+`Party.SignRound2` (`sign/sign.go:173-231`):
+
+```
+SignRound2(A, b̃, D_Σ, sid, μ : string, T, k_PRF, hash) -> z_i : Vector[Poly]^{n_vec}
+
+1.  one ← MForm(NTT(X^0))                                    // NTT-Mont representation of 1
+2.  If Dbar > 0:
+       u' ← GaussianHash(R, hash, μ, σ_U, B_U, Dbar)          // primitives/hash.go:75
+       u  ← [one | u']        // length Dbar+1
+3.  h_raw ← D_Σ · u    (NTT-Mont, then IMForm + INTT)
+4.  h̃    ← RoundVector(R, R_ν, h_raw, Nu)
+5.  c    ← LowNormHash(R, A, b̃, h̃, μ, Kappa)                // primitives/hash.go:167
+6.  mask  ← Σ_{j∈T} PRF(R, seeds[id][j], k_PRF, μ, hash, n_vec)   (NTT-Mont)
+7.  mask' ← Σ_{j∈T} PRF(R, seeds[j][id], k_PRF, μ, hash, n_vec)   (NTT-Mont)
+8.  z_i ← R̂ · u + mask' + (sk_i ⊙ λ_i ⊙ c) − mask   (NTT-Mont)
+   where ⊙ is element-wise polynomial multiplication.
+9.  Persist h̃ and c on the party state.
+
+Broadcast: z_i.
+```
+
+`GaussianHash` (`primitives/hash.go:75-96`) seeds a fresh BLAKE2 KeyedPRNG with `BLAKE3(hash || μ)[:32]` and samples `Dbar` Gaussian polynomials at `(σ_U, B_U)`; output is in NTT-Mont form.
+
+`LowNormHash` (`primitives/hash.go:167-203`) seeds a fresh BLAKE2 KeyedPRNG with `BLAKE3(WriteTo(A) || WriteTo(b̃) || WriteTo(h̃) || μ)[:32]`, then samples a sparse ternary polynomial of Hamming weight `Kappa = 23` (each non-zero entry is `±1`) via Lattigo's `TernarySampler` with `Ternary{H: 23}` (`lattice/ring/sampler_ternary.go:198`), and converts to NTT-Mont form.
+
+`PRF` (`primitives/hash.go:99-125`) seeds a fresh BLAKE2 KeyedPRNG with `BLAKE3(k_PRF || sd_ij || hash || μ)[:32]` and samples `n_vec` uniform polynomials over `R`, NTT-Mont. `mask` cancels with the symmetric `mask'` term across all honest parties because pairwise seeds `seeds[i][j]` and `seeds[j][i]` produce the same PRF output (LP-019 §4.2 Lindell-style mask cancellation).
+
+#### 4.4 Finalize
+
+`Party.SignFinalize` (`sign/sign.go:234-264`):
+
+```
+Finalize({z_j}_{j∈T}, A, b̃) -> (c, z, Δ)
+
+1.  z ← Σ_j z_j                         (NTT-Mont)
+2.  b ← RestoreVector(R, R_ξ, b̃, Xi)    // coefficient-wise <<= Xi
+3.  Convert b to NTT-Mont
+4.  Az ← A · z   (NTT-Mont)
+5.  Az_bc ← Az − b · c   (NTT-Mont, then IMForm + INTT)
+6.  Az_bc_ν ← RoundVector(R, R_ν, Az_bc, Nu)
+7.  Δ ← h̃ − Az_bc_ν     (subtraction in R_ν, no NTT — operates on raw coefficients)
+Return (c, z, Δ).
+```
+
+Signature: `σ = (c, z, Δ)`. `c` is one polynomial in NTT-Mont (`φ` u64 limbs). `z` is `n_vec = 7` polynomials. `Δ` is `M = 8` polynomials in `R_ν` (coefficients fit in 19 bits but are stored as u64 by Lattigo).
+
+#### 4.5 Verify
+
+`sign.Verify` (`sign/sign.go:268-300`):
+
+```
+Verify(R, R_ξ, R_ν, z, A, μ, b̃, c, Δ̃) -> bool
+
+1.  z' ← deep copy of z (Verify must not mutate caller state)
+2.  Az ← A · z'                       (NTT-Mont)
+3.  b  ← RestoreVector(R, R_ξ, b̃, Xi); to NTT-Mont
+4.  Az_bc ← Az − b · c                (NTT-Mont, then IMForm + INTT)
+5.  Az_bc_ν ← RoundVector(R, R_ν, Az_bc, Nu)
+6.  h_reconstructed ← Az_bc_ν + Δ̃    (in R_ν)
+7.  c' ← LowNormHash(R, A, b̃, h_reconstructed, μ, Kappa)
+8.  If c' ≠ c (in NTT-Mont): return false.
+9.  Δ ← RestoreVector(R, R_ν, Δ̃, Nu) // in R, raw coefficients
+10. IMForm + INTT(z')                  // back to standard form
+11. Return CheckL2Norm(R, Δ, z') ≤ B²  (sign.go:303)
+
+CheckL2Norm: for each coefficient of Δ and z' interpreted as signed in (−Q/2, Q/2],
+sum-of-squares ≤ B² = 184960669042442604975662780477.
+```
+
+The hint `Δ` is the verifier's reconstruction shim: the rounded `A·z − b·c` in `R_ν` does not exactly equal `h̃` because of carry propagation across the rounding boundary. `Δ` is the per-coefficient correction, bounded so the L2-norm check fails for any forged `Δ` that would otherwise accept a wrong `c`.
+
+### 5. Wire Format
+
+The byte stream produced by Lattigo `lattice/v7` is normative. C++/GPU ports MUST emit byte-identical streams.
+
+#### 5.1 Polynomial Serialization
+
+A single `ring.Poly` with one RNS level (`Coeffs : structs.Matrix[uint64]`, shape `1 × φ`) serializes as (`lattice/ring/poly.go:117-140` → `lattice/utils/structs/matrix.go:82` → `lattice/utils/structs/vector.go:82`):
+
+```
+Poly:                                               // total = 8 + 8 + 8·φ = 16 + 2048 bytes for φ=256
+   uint64 LE   row_count   = 1
+   uint64 LE   col_count   = φ                      // 256
+   uint64 LE × φ  coefficients in row-major order
+```
+
+All multi-byte integers are little-endian (`encoding/binary.LittleEndian.PutUint64` at `lattice/utils/buffer/writer.go:325`). A zero-coefficient polynomial produces `01 00 00 00 00 00 00 00 | 00 01 00 00 00 00 00 00 | (256 × 0x00)` = 2064 bytes.
+
+#### 5.2 Vector and Matrix Serialization
+
+```
+Vector[Poly] of length n:
+   uint64 LE   length n
+   Poly × n                                         // each as §5.1
+
+Matrix[Poly] of shape m × n:
+   uint64 LE   row_count m
+   Vector[Poly] × m                                 // each as above
+```
+
+(`structs/vector.go:82-147`, `structs/matrix.go:82-106`.)
+
+#### 5.3 Signature Wire Format
+
+Concatenation in protocol order:
+
+```
+σ = c || z || Δ̃
+
+c   = Poly                                          // 2064 bytes
+z   = Vector[Poly] of length n_vec=7                // 8 + 7·2064 = 14456 bytes
+Δ̃   = Vector[Poly] of length M=8                    // 8 + 8·2064 = 16520 bytes (in R_ν, but lengths are identical since R_ν shares φ)
+                                                    // total: 33040 bytes
+```
+
+#### 5.4 Group Key Wire Format
+
+```
+GroupKey = A || b̃
+A  = Matrix[Poly] of shape M × n_vec  = 8 || (8 || 7·Poly)·8  // 116 224 bytes
+b̃ = Vector[Poly] of length M           = 8 + 8·2064 = 16 520 bytes
+```
+
+#### 5.5 Round 1 Wire Format
+
+Per-party broadcast in Round 1:
+
+```
+R1_i = WriteUint32-BE(party_id)
+    || Matrix[Poly]   // D_i, M × (Dbar+1) = 8 × 49 polys
+    || mac_count_uint32-BE
+    || (recipient_id_uint32-BE || mac_bytes_32) × mac_count
+```
+
+`R1_i.D_i` is `8 + 8·(8 + 49·2064) = 8 + 8·101144 = 809160` bytes. The framing of party id and MAC-count is implementation-defined; the **canonical Go uses `Round1Data` Go struct (`threshold/threshold.go:84-89`) without an on-wire byte order**. Cross-implementation transport MUST agree on a framing — RECOMMENDED: `int32-BE(party_id) || matrix.WriteTo() || int32-BE(mac_count) || (int32-BE(recipient) || mac[32]) × mac_count`. `MAC` itself is canonical (see §5.6).
+
+#### 5.6 MAC Input Format
+
+The MAC payload (`primitives/hash.go:34-72`) is hashed with BLAKE3 (no key material outside the included MACKey). Input layout:
+
+```
+mac_input = int64-BE(prover_id_or_verifier_id)      // partyID when generating, otherPartyID when verifying
+         || MACKey[32]
+         || Matrix[Poly].WriteTo(D_i)
+         || int64-BE(sid)
+         || int32-BE(|T|)
+         || int32-BE(t_k) for t_k in T (in order)
+MAC = BLAKE3(mac_input)[:32]
+```
+
+The asymmetry between generate and verify (the generator embeds `partyID`, the verifier embeds `otherPartyID`) is deliberate: the MAC is over "I, generator, claim D was sent under MACKey shared with you" — verification recomputes with the same identity in slot 0.
+
+#### 5.7 Hash and PRF Input Formats
+
+`Hash` (transcript), `LowNormHash` (challenge), `GaussianHash` (`u`), `PRF` (mask):
+
+```
+Hash = BLAKE3(
+    Matrix[Poly].WriteTo(A) || Vector[Poly].WriteTo(b)
+ || int64-BE(sid) || int32-BE(|T|) || (int32-BE(t_k))×|T|
+ || Matrix[Poly].WriteTo(D_0) || ... || Matrix[Poly].WriteTo(D_{|T|-1})
+)[:32]
+
+LowNormHash_seed = BLAKE3(
+    Matrix[Poly].WriteTo(A) || Vector[Poly].WriteTo(b̃)
+ || Vector[Poly].WriteTo(h̃) || []byte(μ)
+)[:32]
+c = TernarySampler(BLAKE2-KeyedPRNG(LowNormHash_seed), R, Ternary{H: 23}).Read()
+c ← NTT(c); c ← MForm(c)
+
+GaussianHash_seed = BLAKE3(hash || []byte(μ))[:32]
+u' = SamplePolyVector(BLAKE2-KeyedPRNG(GaussianHash_seed), R,
+                      DiscreteGaussian{σ_U, B_U}, len=Dbar, NTT=true, Mont=true)
+
+PRF_seed = BLAKE3(k_PRF || sd_ij || hash || []byte(μ))[:32]
+mask = SamplePolyVector(BLAKE2-KeyedPRNG(PRF_seed), R,
+                        UniformSampler, len=n_vec, NTT=true, Mont=true)
+```
+
+Notes:
+* `binary.Write(BigEndian, hash)` on a `[]byte` writes the raw bytes (Go reflection on slices). `LowNormHash` then writes `mu` via `binary.Write(BigEndian, []byte(mu))` which is identical to `buf.WriteString(mu)` — these MUST be byte-equal across implementations.
+* `BLAKE3` is the `github.com/zeebo/blake3` Go binding; output truncated to 32 bytes (`primitives/hash.go:30, 70, 89, 119, 162, 191`).
+
+#### 5.8 Discrete Gaussian Sampler
+
+`ring.GaussianSampler` (`lattice/ring/sampler_gaussian.go:48`) uses Marsaglia's Ziggurat algorithm (128 strata) over a BLAKE2-XOF byte stream. Per coefficient: `randU32` (8 bytes consumed; 4 used) for the strata index/sign, then 8-byte `randF64` consumed if a tail rejection occurs. Per-coefficient PRNG byte budget bounds:
+
+| Path | Bytes consumed |
+|------|----------------|
+| Common case (>99%) | 8 (one `randU32`) |
+| Strata 0 tail loop | 8 + 16·k (one `randU32` + `k` rejection rounds at 16 bytes each, geometric in tail probability) |
+| Inter-strata reject| 8 + 8 (one extra `randF64`) |
+
+The Karney/CDT discussion in earlier drafts is INCORRECT for this canonical: Lattigo uses Ziggurat. C++/GPU ports MUST replicate Ziggurat with the same `wn`, `kn`, `fn` tables (`lattice/ring/sampler_gaussian.go:267-358`) AND the same PRNG byte-stripe layout.
+
+#### 5.9 Ternary Sampler
+
+For challenge `c` with `Ternary{H: Kappa=23}`, `TernarySampler.sampleSparse` (`lattice/ring/sampler_ternary.go:198`):
+
+```
+1. Initialize index list [0, 1, ..., φ-1].
+2. Read ⌈Kappa/8⌉ random bytes from PRNG (sign bits, MSB-first within byte).
+3. For i = 0..Kappa-1:
+     a. Rejection-sample a position p ∈ [0, φ-i) using the smallest power-of-two mask
+        ≥ φ-i, consuming as many bytes as needed (1 byte per attempt at φ=256).
+     b. coeff[index[p]] ← (sign ? -1 : +1) lifted to (q-1) or 1.
+     c. Swap index[p] and index[φ-i-1]; decrement available slots.
+4. All other positions remain 0.
+```
+
+Output is in standard form; Ringtail then applies `NTT` + `MForm`. C++/GPU ports MUST mirror this rejection-sampling loop including the byte-stripe ordering.
+
+### 6. Security
+
+#### 6.1 Hardness Assumption
+
+Module-LWE over `R = Z_q[X]/(X^256+1)` with secret distribution `χ_E = D(σ_E ≈ 6.11)` and dimension `(M=8, n_vec=7)`. The scheme reduces to MLWE in a similar profile to Dilithium / ML-DSA-44 but at a smaller dimension because the threshold setting amortizes signing across `K` parties and the verifier checks an L2-bounded `Δ` instead of an `(α, β)`-bounded `(z, h)`.
+
+#### 6.2 Concrete Security
+
+The Ringtail paper (IEEE S&P 2025) targets ≥128-bit classical and ≥120-bit quantum security at the parameter set above. The canonical does not include a primal/dual lattice-attack estimator; LP-070 §6 provides comparable estimates for ML-DSA-44 (`q = 8 380 417`, `n = 256`, `k = 4`, `l = 4`).
+
+#### 6.3 Identifiable Abort
+
+Round 2 Preprocess (§4.2) MAC-verifies every `D_j` and rejects on first failure. The `FullRankCheck` over every coefficient slot of `D_Σ` rules out the residual class of malicious commitment messages that pass MAC but admit a re-opening attack. A failing `Verify` after a successful Round 2 indicates a corrupt `z_j` from one of the open shares; the canonical does not yet ship the share-by-share re-verify routine that would identify the cheater, this is future work (see §10).
+
+#### 6.4 Side-Channel Posture
+
+`ring.MRed` and `ring.MRedLazy` are constant-time on a 64-bit `bits.Mul64` substrate (Go and C++ on x86/ARM 64). The Ziggurat and ternary samplers contain a rejection-sampling loop whose iteration count depends on the random bytes consumed — these are NOT constant-time in the timing sense, but the PRNG seed is independent of the secret in all call sites except `PRNGKey(skShare)` (`primitives/hash.go:19`), where the BLAKE3 hashing is constant-time.
+
+#### 6.5 Nonce Reuse
+
+`r*` and `R_i` are sampled fresh per signing session. The canonical re-derives the per-session PRNG from `BLAKE3(WriteTo(sk_i))` (`sign.go:103`) — this means the same `(sk_i, sid, μ)` tuple deterministically produces the same `R_i` sequence and is therefore SAFE only when `sid` is unique per `(party_id, signing-session)`. Implementations MUST guarantee unique `sid` per session, e.g., monotonic counter + epoch tag.
+
+### 7. Implementation
+
+| Layer | Path | Status |
+|-------|------|--------|
+| Go canonical | `github.com/luxfi/ringtail` (`sign/`, `threshold/`, `primitives/`, `utils/`) | Production. 374-line `sign.go`, 294-line `threshold.go`. |
+| C++ port      | `github.com/luxfi/luxcpp` `crypto/ringtail/cpp/` (LP-137, ringtail.{hpp,cpp} 691 LOC) | Wired (LP-137-ACTUAL-STATE 2026-04-28 ship); KAT pending. |
+| Metal kernels | `crypto/ringtail/gpu/metal/` | Pending; mirrors C++ once KAT-equal. |
+| CUDA kernels  | `crypto/ringtail/gpu/cuda/`  | Pending; mirrors C++. |
+| WGSL kernels  | `crypto/ringtail/gpu/wgsl/`  | Pending; mirrors C++. |
+
+The Go canonical depends on `github.com/luxfi/lattice/v7` (Lattigo fork) for `ring`, `sampling`, `structs`. NEVER bump to v8 — v7 is pinned for byte-exact reproducibility (`go.mod`).
+
+### 8. Test Oracle
+
+The canonical Go test suite (`sign/sign_test.go`, `threshold/threshold_test.go`, `utils/utils_test.go`) is the byte oracle. Implementations MUST pass:
+
+1. **Single-end-to-end**: `ringtail.LocalRun(1)` (`sign/local.go:21`) — `Gen → Round1 → Round2Pre → Round2 → Finalize → Verify` must accept on `K = Threshold = 5`, `μ = "Message"`, `sid = 1`.
+2. **Cross-implementation KAT**: 16+ deterministic vectors from a fixed `trustedDealerKey ∈ {0x00..., 0x01..., ... 0x0F...}` at `(t,n) ∈ {(2,3), (3,5), (5,7), (7,10)}` covering: `A`, `b̃`, `sk_i` (per party), `D_i`, `MAC_ij`, `c`, `z_i`, `Δ`, `Verify(σ) = true`. KAT generator: `cmd/ringtail-kat/main.go` (to be added; see §10).
+3. **Negative cases**: corrupted `MAC`, corrupted `z_j`, modified `μ`, modified `b̃` MUST all reject.
+4. **Wire byte-equality**: `Vector[Poly].WriteTo` and `Matrix[Poly].WriteTo` outputs MUST hash to identical SHA-256 across Go canonical and C++ port for all 16 KAT inputs. SHA-256 manifest at `ringtail/test/kat/manifest.sha256`.
+
+### 9. Consensus Role (LP-020 / LP-022 cross-ref)
+
+Quasar 3.0 (LP-020) signs every Q-chain block with three independent threshold signatures in parallel:
+
+| Lane | Algorithm | LP | Role |
+|------|-----------|-----|------|
+| Classical fast path | BLS12-381 aggregate | LP-075 | 48-byte aggregate proof, sub-second finality on healthy validator set |
+| Post-quantum threshold | Ringtail | LP-073 (this LP) | ~33 KB aggregate, MLWE-secure liveness under quantum adversary |
+| Post-quantum identity | ML-DSA-65 | LP-070 | ~3.3 KB per validator, FIPS 204 compliance attestation |
+
+Block acceptance requires `BLS.Verify ∧ (Ringtail.Verify ∨ MLDSA.Verify)` — Ringtail provides aggregate PQ liveness; ML-DSA is the per-validator fallback when threshold ceremony fails. `IsTripleMode()` (LP-020) gates the dual-quantum mode.
+
+Epoch-keyed: `Gen` runs once per epoch (validator-set change). Per-block signing runs Round1+Round2+Finalize over ZAP transport (LP-022). Target consensus interval: 3 seconds per block; Ringtail Round1+Round2 budget is 600 ms aggregate at K=21 validators on `M2 Ultra` hosts (Go canonical timings; LP-137 ships GPU acceleration plan in §10 below).
+
+### 10. Open Problems / Future Work
+
+1. **Identifiable abort completion**: ship `IdentifyCheater(round2_data)` that re-verifies each `z_j` against `(D_j, λ_j, c, b̃)` and returns the first failing `j`. Currently `Verify` only reports global accept/reject.
+2. **GPU acceleration**: `MatrixMatrixMul` of `A · R̂` (`M×n_vec × n_vec×Dbar+1`) is the dominant Round 1 cost. Metal/CUDA kernels under LP-137 GPU substrate; crossover threshold `N* = 1` expected based on FHE NTT measurements (LP-137-BENCHMARKS).
+3. **DKG without trusted dealer**: replace `sign.Gen`'s trusted-dealer Shamir with Pedersen DKG over `R_q`. LP-019 §5 sketch; full spec pending.
+4. **Cross-implementation KAT**: `cmd/ringtail-kat/main.go` generator + `ringtail/test/kat/*.json` to be authored; SHA-256 manifest seals the Go ↔ C++ ↔ GPU byte-equality contract.
+5. **Concrete-security estimator**: integrate `lattice-estimator` (Albrecht et al.) inside `cmd/ringtail-params/main.go` to print primal/dual attack costs at the canonical `(M=8, n_vec=7, σ_E)` parameter set.
+6. **Round-1 piggyback**: precomputable phase (`A · R̂`, MAC keys, FullRankCheck of own contribution) can run before the message arrives. The protocol already supports it (the message `μ` enters only in Round 2); deployment runbook to be added under LP-020.
+
+## References
+
+* Lux Quasar Consensus 3.0 (LP-020).
+* ZAP Wire Protocol (LP-022).
+* NTT Transform (LP-029) — Cooley-Tukey constants.
+* ML-DSA / FIPS 204 (LP-070); BLS12-381 (LP-075); Universal Threshold (LP-076); Linear Shamir (LP-077).
+* GPU Crypto Stack (LP-137) — Metal/CUDA/WGSL kernel substrate.
+* Lattigo v7 fork (`github.com/luxfi/lattice/v7`): `ring/`, `utils/sampling`, `utils/structs`.
+* Ringtail academic paper, IEEE S\&P 2025 (Ringtail authors).
+* Dilithium / FIPS 204 §7 (rejection sampling, hint encoding).
 
 ## Copyright
 
-Copyright (C) 2024-2026, Lux Partners Limited. All rights reserved.
-
-Licensed under the MIT License.
+Copyright (C) 2024-2026, Lux Industries Inc. Licensed under the MIT License.
