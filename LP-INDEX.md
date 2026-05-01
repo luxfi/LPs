@@ -2,7 +2,7 @@
 
 Canonical index of all Lux Improvement Proposals in the modern (2025-2026) numbering scheme. One file per LP, named `LP-XXX-slug.md`. The legacy 4-digit catalog lives under `LPs/` and `docs/LP-INDEX.md`.
 
-Last updated: 2026-04-28
+Last updated: 2026-05-01
 
 ## Status legend
 
@@ -172,6 +172,7 @@ Last updated: 2026-04-28
 | LP-164 | Extended-N Lattice NTT (Six-Step) | Final | Cryptography |
 | LP-165 | Pedersen Tree-Reduce Vector Commit | Final | Cryptography |
 | LP-166 | Threshold Pre-Signing Batch Kernel | Final | Cryptography |
+| LP-167 | Agent Payment Standard | Draft | Markets |
 
 ## Numbering rules
 
@@ -181,6 +182,7 @@ Last updated: 2026-04-28
 - LP-130 through LP-137: execution + architecture (AI, VRF, QuasarGPU, topology, cloud)
 - LP-138 through LP-145: post-quantum-native chain redesign (VMs + economics)
 - LP-146 through LP-166: per-algorithm + acceleration kernel specs (1 LP per algorithm or kernel target, ref LP-137)
+- LP-167+: application-layer standards (agent payments, AI-native protocols)
 
 ## Numbering history (2026-04-28)
 
