@@ -1,7 +1,8 @@
 # Lux PQ Consensus Architecture — Status
 
 **v0.1.0** tagged 2026-03-03 (architecture freeze).
-**v0.1.1** post-freeze hardening (latest, 2026-05-04): Pulsar C++ native, Lens 15/15, cross-runtime gates, expanded fuzz battery, FHE GPU dispatch equivalence, second lattice DoS filed.
+**v0.1.1** measured but partially-committed (2026-05-04 morning).
+**v0.1.2** source lock (latest, 2026-05-04 evening): all v0.1.1 hardening deliverables committed across `luxcpp/crypto@6c497541`, `pulsar@39632ed`, `lens@8a47b4b`, `papers@02f8f9b`. Pulsar C++ native, Lens 15/15, cross-runtime gates, expanded fuzz battery, FHE GPU dispatch equivalence, second lattice DoS filed.
 
 This document is the **honest** status. Real measurements only. Real commit SHAs. No fabrication.
 
@@ -69,7 +70,7 @@ Papers cite by file path; bodies live in proofs/ once.
 
 ## v0.1.1 — Post-Freeze Hardening (2026-05-04)
 
-### Pulsar C++ — promoted from "ffi-go" to "native" (commit `luxcpp/crypto@???` + `pulsar@f9113d7`)
+### Pulsar C++ — promoted from "ffi-go" to "native" (commits `luxcpp/crypto@6c497541` + `pulsar@39632ed`)
 
 - **kImplStatus:** `"native"` (was `"ffi-go"`)
 - **dkg2 KAT replay:** **4/4 byte-equal** (was 0/4 — surface-only throws)
@@ -82,7 +83,7 @@ Three real bugs found and fixed during the port:
 2. Missing `Refresh()` path — reshare runner dispatched to `Reshare()` for refresh entries, producing wrong domain `"reshare-rng-stream"` instead of the expected refresh path. Added 80-LoC `lux::crypto::pulsar::reshare::refresh()` byte-equal port of Go `reshare.Refresh`.
 3. Pulsar uses CRIT-1-hardened `PRNGKeyForRound(skShare, sid)`; ringtail C++ defaulted to legacy `PRNGKey(skShare)` only. Added `sign_round1_crit1_hardened()` public variant; both ringtail's legacy KAT (16/16) and pulsar's hardened KAT (4/4) now pass simultaneously.
 
-### Lens C++ — promoted from 9/15 to 15/15 (commit `luxcpp/crypto@7a79f595` + `lens@???`)
+### Lens C++ — promoted from 9/15 to 15/15 (commits `luxcpp/crypto@6c497541` + `lens@8a47b4b`)
 
 - **kImplStatus:** `"native"` for all paths (was `"native"` for scalar paths only)
 - **KAT replay:** **15/15 byte-equal** (was 9/15; 6 DKG entries were SKIP'd behind `LENS_ERR_NATIVE_POINT_PENDING`)
@@ -199,6 +200,6 @@ Selected production-relevant rows (full table in `papers/lux-pq-consensus-benchm
 - **Real-host CI provisioning** (CUDA runner currently starved).
 - **Lens / LSS-reshare / Warp-envelope dedicated Go benchmarks** (referenced in paper but `Benchmark*` functions don't exist as Go testing.B harnesses yet).
 
-**Bottom line:** v0.1.1 is the honest hybrid PQ consensus stack. The Pulsar/Lens/FHE C++ ports are native for all locked-scope operations with measured byte-equality and bidirectional cross-runtime gates. GPU absolute throughput pending real hardware (the equivalence gate prevents drift in the meantime). Two real upstream DoS bugs filed.
+**Bottom line:** v0.1.2 is the source-locked honest hybrid PQ consensus stack. The Pulsar/Lens/FHE C++ ports are native for all locked-scope operations with measured byte-equality and bidirectional cross-runtime gates, and every byte of those bodies is now in tracked source (no more `kImplStatus = "ffi-go"`, no more `LENS_ERR_NATIVE_POINT_PENDING`). GPU absolute throughput pending real hardware (the equivalence gate prevents drift in the meantime). Two real upstream DoS bugs filed.
 
 The architecture is right. The implementation is real. The papers and proofs land. The C++/GPU story is honest — Pulsar and Lens are native byte-equal; FHE CUDA needs a real device for absolute numbers; Pulsar Metal NTT is wired but the dispatch overhead means CPU wins at the protocol's natural batch sizes (a finding, not a failure).
