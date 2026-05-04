@@ -141,3 +141,58 @@ Papers cite by file path; bodies live in proofs/ once.
 **Bottom line:** v0.1.0 is a production-grade Go-side release with honest C++ scaffolding plus standalone GPU primitives. v0.2.0 is the C++ native + GPU integration milestone.
 
 The architecture is right. The Go side is real. The papers and proofs land. The C++/GPU story is honestly half-built; the agent that audited Pulsar C++ refused to fabricate a passing report and gave a concrete 3.5–5 month effort estimate for the byte-equal native port — that estimate is the v0.2.0 budget.
+
+---
+
+## Known dependencies (open upstream — pinned 2026-05-04)
+
+### Lattice DoS surfaces — two distinct paths
+
+| Surface | Lattice issue | Lattice PR | Status (2026-05-04) | Lux mitigation |
+|---|---|---|---|---|
+| `utils/buffer.ReadUint{16,32,64}Slice` unbounded recursion | [#2](https://github.com/luxfi/lattice/issues/2) | [#3](https://github.com/luxfi/lattice/pull/3) | OPEN, not merged | `warp/pulsar.MaxPulseWireSize` (64 KB), `MaxPulseFrameSize` (32 KB), `MaxLatticeUintSliceLen` (4096); `validatePolyFrame` walks the wire end-to-end before lattigo's `ReadFrom` runs |
+| `utils/structs.Vector[T].ReadFrom` calls `make([]T, size)` with zero bound check; OOM is unrecoverable (`recover()` cannot catch fatal OOM) | [#4](https://github.com/luxfi/lattice/issues/4) | not yet filed (2026-05-04) | OPEN, not merged | `pulsar/threshold.validateVectorPolyFrameInline` — same defense-in-depth walker, mirrors `warp/pulsar.validateVectorPolyFrame`; pre-rejects frames with declared length > `maxLatticeUintSliceLen` (4096) BEFORE the `make()` call runs |
+
+Issue #4 was found 2026-05-04 by `FuzzPulsarSign1Round1Data` after a 30 s run (corpus seed `a80b8d313b40fa55`, 9-byte input `\xad\x93\xd8\x5a\x00\x04\x00\x00\\` reads `size = 0x40005AD893AD ≈ 70 trillion entries`). The 7-line fix in `vector.go` is independent of PR #3 and must land separately.
+
+### Plan when fixed upstream
+
+When PR #3 + Issue #4 land in `luxfi/lattice` and a tagged release ships:
+
+1. Bump `consensus`, `threshold`, `warp`, `pulsar`, `fhe` go.mod to the new tag.
+2. Run the full fuzz battery for 30 s × 23 harnesses = ~12 minutes (target: 0 panics, same as today).
+3. Keep both walker functions (`validatePolyFrame` and `validateVectorPolyFrameInline`) as **defense-in-depth** with a comment "pre-fix mitigation; upstream now caps natively at vector.go:NNN" — do not delete; the cap-at-host pattern is also what protects against future similar issues.
+
+### Fuzz battery — 23 active harnesses, 0 panics across all (2026-05-04)
+
+| Harness | Module | execs/30s | Result |
+|---|---|---|---|
+| FuzzPulsarSign1Round1Data | pulsar/threshold | 28,577 | PASS (with new validateVectorPolyFrameInline) |
+| FuzzPulsarSign2Round2Data | pulsar/threshold | 20,936 | PASS |
+| FuzzPulsarKeyShareSerialize | pulsar/threshold | 55,439 | PASS |
+| FuzzPulsarGroupKeySerialize | pulsar/threshold | 25,694 | PASS |
+| FuzzDKG2Round1Output | pulsar/dkg2 | 31,772 | PASS |
+| FuzzDKG2Round2Output | pulsar/dkg2 | 12,936 | PASS |
+| FuzzReshareCommitDigest | pulsar/reshare | 24,566 | PASS |
+| FuzzReshareComplaintMessage | pulsar/reshare | 822,941 | PASS |
+| FuzzActivationMessageSignableBytes | pulsar/reshare | 191,719 | PASS |
+| FuzzTranscriptInputsHash | pulsar/reshare | 140,787 | PASS |
+| FuzzLensSign1Data | lens/sign | 20,176 | PASS |
+| FuzzLensSign2Data | lens/sign | 58,552 | PASS |
+| FuzzLensKeyShareSerialize | lens/sign | 66,604 | PASS |
+| FuzzLensGroupKeySerialize | lens/sign | 53,680 | PASS |
+| FuzzPulseDeserialize | warp/pulsar | 60,913 | PASS |
+| FuzzPulseSerialize | warp/pulsar | 72,261 | PASS |
+| FuzzHorizonCertificate | warp/pulsar | 1,138,056 | PASS |
+| FuzzWarpV1Envelope | warp | 562,509 | PASS |
+| FuzzWarpEnvelopeV2 | warp | 581,424 | PASS |
+| FuzzBLSAggregateCert | warp | 588,441 | PASS |
+| FuzzMLDSACertSet | threshold/mldsa | 5,559,581 | PASS |
+| FuzzLSSPulsarConfig | threshold/lss | 536,572 | PASS |
+| FuzzLSSLensConfig | threshold/lss | 35,179 | PASS |
+
+**Total: 23 harnesses × 30 s = 11 m 30 s wall-time, 10,915,000+ fuzz execs, 0 panics.** One real DoS finding (lattice issue #4) gated behind `validateVectorPolyFrameInline` walker.
+
+Inactive harnesses gated by `//go:build fuzzing` in `threshold/protocols/lss/lss_fuzz_test.go` (FuzzReshareMessage, FuzzDynamicReshare, FuzzSignatureGeneration, FuzzRollback, FuzzConfigValidation, FuzzBlindingProtocol, FuzzMessageSerialization, FuzzLagrangeInterpolation): file does not compile against current `lss/config` types and `pkg/math/sample.Point`. Fixing the build is queued for v0.2.0; harnesses are not part of the active 23-harness battery today.
+
+**Host:** Apple M1 Max (Darwin arm64, kernel 25.4.0), Go 1.26.2.
