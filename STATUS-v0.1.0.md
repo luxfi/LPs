@@ -182,6 +182,9 @@ Selected production-relevant rows (full table in `papers/lux-pq-consensus-benchm
 | `regen-all-kats.sh` end-to-end | 58.86 s wall (75.26 s user + 7.00 s sys, 139% CPU) | — | M1 Max |
 | LSS reshare orchestration (5→7) | 9.96 us | — | M1 Max |
 | LSS reshare orchestration (7→10) | 14.97 us | — | M1 Max |
+| BenchmarkPulsarReshare n=21 (single-process / per-party) | 12.67 s / 0.603 s | — | M1 Max |
+| BenchmarkPulsarReshare n=64 (single-process / per-party) | 156.61 s / 2.447 s | — | M1 Max |
+| BenchmarkPulsarReshare n=128 (single-process / per-party) | 1212.74 s / 9.474 s | — | M1 Max |
 | FROST dynamic reshare (5→7) | 0.83 ms | — | M1 Max |
 | FROST dynamic reshare (7→10) | 1.37 ms | — | M1 Max |
 | Fuzz battery total: 23 harnesses × 30s | 108.6M execs, 0 panics | — | M1 Max |
