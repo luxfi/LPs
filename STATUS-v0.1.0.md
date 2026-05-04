@@ -212,7 +212,26 @@ Selected production-relevant rows (full table in `papers/lux-pq-consensus-benchm
 - **STARK / lattice-ZK proof lane** (replaces Groth16 wrapper for true PQ succinctness).
 - **Threshold ML-DSA standardization** (open production-research, no current standard).
 - **Real-host CI provisioning** (CUDA runner currently starved).
-- **Lens / LSS-reshare / Warp-envelope dedicated Go benchmarks** (referenced in paper but `Benchmark*` functions don't exist as Go testing.B harnesses yet).
+- **Lens / LSS-reshare / Warp-envelope dedicated Go benchmarks** (referenced in paper but `Benchmark*` functions don't exist as Go testing.B harnesses yet — `BenchmarkPulsarReshare` for n=21/64/128 landed in v0.1.4 via `threshold/protocols/lss/lss_pulsar_bench_test.go`).
+- **LP-107 Lux Math Substrate** — separate `luxfi/math` Go module + `luxcpp/crypto/math` C++ mirror. Phase 1 (no-stub policy + bounded-codec direction) landed via lattice PR #5; phases 2–7 queued. See `LP-107-lux-math-substrate.md`.
+
+### Stub audit follow-ons (LP-107 Phase 1 sweep, queued)
+
+The lattice repo's no-stub policy (PR #5) has not yet been applied across every Lux Go repo. Found 2026-05-04 evening sweep:
+
+| Repo | File | Status | Notes |
+|---|---|---|---|
+| pulsar | `reshare/quasar_integration.go:54` | Doc reference only | Mentions a slasher in `consensus/protocol/quasar/slashing.go` "not yet implemented" — that file is the real target, not pulsar. |
+| threshold | `protocols/ringtail/refresh/refresh.go` | **Real stub-refresh body** | Doc at `protocols/pulsar/pulsar.go:25` flags this. No production callers (only one test in `chains/thresholdvm`). Action: complete or delete after migrating that test to `protocols/pulsar/`. |
+| threshold | `protocols/mldsa/hrej.go:28` | "mathematical spec stub" | Real lattice-sampling work pending. |
+| threshold | `cmd/threshold-cli/main.go:246` | CLI placeholder | "distributed mode not yet implemented" — error-returning CLI, not unsafe. |
+| warp | `cmd/warpcli/main.go:152` | CLI placeholder | "Base64 encoding not yet implemented". |
+| consensus | `cmd/consensus/main.go:109+` | CLI placeholder | "DAG/PQ engine not yet implemented in new API" — multiple sites, all CLI. |
+| crypto | `aead/aead.go:159` | Real stub | "AES-256-GCM-SIV not yet implemented" — error-returning. |
+| crypto | `threshold/bls/scheme.go:87` | Real stub w/ redirect | "BLS DKG not yet implemented: use threshold/protocols/frost". |
+| crypto | `verkle/tree.go:1547,1551` | Real stub | "proof of absence stub" — error-returning verifier path. |
+
+LP-107 Phase 1 work plan: rename misleading dispatcher files to `*_purego.go` / `*_dispatch_purego.go`, give real bodies to fallback stubs, error-return only when the impl is genuinely native-pending.
 
 **Bottom line:** v0.1.2 is the source-locked honest hybrid PQ consensus stack. The Pulsar/Lens/FHE C++ ports are native for all locked-scope operations with measured byte-equality and bidirectional cross-runtime gates, and every byte of those bodies is now in tracked source (no more `kImplStatus = "ffi-go"`, no more `LENS_ERR_NATIVE_POINT_PENDING`). GPU absolute throughput pending real hardware (the equivalence gate prevents drift in the meantime). Two real upstream DoS bugs filed.
 
