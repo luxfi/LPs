@@ -216,13 +216,14 @@ Selected production-relevant rows (full table in `papers/lux-pq-consensus-benchm
 - **Threshold ML-DSA standardization** (open production-research, no current standard).
 - **Real-host CI provisioning** (CUDA runner currently starved).
 - **Lens / LSS-reshare / Warp-envelope dedicated Go benchmarks** (referenced in paper but `Benchmark*` functions don't exist as Go testing.B harnesses yet — `BenchmarkPulsarReshare` for n=21/64/128 landed in v0.1.4 via `threshold/protocols/lss/lss_pulsar_bench_test.go`).
-- **LP-107 Lux Math Substrate** — separate `luxfi/math` Go module + `luxcpp/crypto/math` C++ mirror. Phase 1 (no-stub policy + bounded-codec direction) landed via lattice PR #5; **Phase 2-7 landed 2026-05-04 evening**:
+- **LP-107 Lux Math Substrate** — separate `luxfi/math` Go module + `luxcpp/crypto/math` C++ mirror. Phase 1-7 landed 2026-05-04 evening + late-evening:
     - Phase 2: `luxfi/math` v1.3.0 — 8 packages (params/ backend/ codec/ modarith/ ntt/ poly/ rns/ sample/), 8/8 tests green.
-    - Phase 3: lattice consumes `math/codec` via `lattice/wire/` — PR luxfi/lattice#6 OPEN. Full inversion (lattice/ring → math/ntt) deferred (~5K LoC migration).
-    - Phase 4: pulsar consumes `math/codec` via `pulsar/wire/` (`luxfi/pulsar@0c7680e`, tagged v0.1.5).
-    - Phase 4: lens consumes `math/codec` via `lens/wire/` (`luxfi/lens@2e374b0`, tagged v0.1.3).
-    - Phase 5: fhe consumes `math/codec` via `fhe/wire/` (`luxfi/fhe@809c9c6`, tagged v0.1.4).
-    - Phase 6.3-6.5: `luxcpp/crypto/math` v0.2.1 — modarith/ntt/poly/sample C++ headers wrap canonical ringtail::lattice_ring bodies; codec C++ test 10/10; modarith C++ test 5/5; ntt C++ test 2/2.
+    - **Phase 3 (full inversion): `luxfi/math` v1.4.0** — canonical Lattigo-derived Montgomery NTT body migrated from `lattice/v7/ring` into `luxfi/math/ntt/canonical` (~3.7K LoC: subring.go + ntt.go 1320 LoC + ntt_simd.go 405 LoC + modular_reduction + factorization + utils + vec_ops + weierstrass). `lattice/v7/ring/modular_reduction.go` rewritten as a thin shim over `math/ntt/canonical` (`luxfi/lattice@72dbda13`). Cycle-free: `go list -deps github.com/luxfi/math/ntt` shows zero `luxfi/lattice` imports. Every existing lattice test PASSES post-migration (ring + ringqp + multiparty + schemes/{bgv,ckks} + types + sampling + ...).
+    - Phase 4: pulsar consumes `math/codec` via `pulsar/wire/` (`luxfi/pulsar@0c7680e`, v0.1.5).
+    - Phase 4: lens consumes `math/codec` via `lens/wire/` (`luxfi/lens@2e374b0`, v0.1.3).
+    - Phase 5: fhe consumes `math/codec` via `fhe/wire/` (`luxfi/fhe@809c9c6`, v0.1.4).
+    - **Phase 6.3-6.5 KAT extension: `luxcpp/crypto` v0.2.2** — three new C++ cross-runtime KAT gates added beyond codec: `math_modarith_cross_runtime_test` (900/900 entries byte-equal: 300 MontMul × 3 moduli + 300 AddMod + 300 MontgomeryRoundTrip), `math_ntt_cross_runtime_test` (50/50 entries byte-equal, Pulsar N=256 forward NTT), `math_sample_cross_runtime_test` (36/36 entries byte-equal across Uniform/Ternary/CenteredBinomial). **Total: 991 cross-runtime byte-equality assertions** gating any drift between Go and C++ substrate impls. ctest `^math_` summary: 7/7 PASS in 0.83s.
+    - **GPU NTT C-ABI: `luxcpp/crypto@aa809a9c`** — `math/ntt/c-abi/c_math_ntt.{h,cpp}` (376 LoC) wraps the existing `canonical_lattice_ring_{cuda,metal,wgpu}_{ntt,intt}` drivers with a math/ntt-shaped per-batch dispatch + runtime `_supports` probe. Compiles + links clean. Live device dispatch is opt-in via Go-side build tags (`cgo+cuda`, `cgo+metal+darwin`, `cgo+wgsl`); fallback to PureGo when no device is reachable.
     - Phase 7: cross-runtime KAT release gate `math_codec_cross_runtime_test`: 5/5 entries byte-equal Go ↔ C++ (incl. lattice issue #4 reject test).
   Same lattice issue #4 attack input now rejected identically by pulsar, lens, fhe, lattice, and the C++ math/codec — uniform hardening across the Lux protocol stack via the shared substrate.
   See `LP-107-lux-math-substrate.md` for full spec.
