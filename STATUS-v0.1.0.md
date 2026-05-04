@@ -216,7 +216,16 @@ Selected production-relevant rows (full table in `papers/lux-pq-consensus-benchm
 - **Threshold ML-DSA standardization** (open production-research, no current standard).
 - **Real-host CI provisioning** (CUDA runner currently starved).
 - **Lens / LSS-reshare / Warp-envelope dedicated Go benchmarks** (referenced in paper but `Benchmark*` functions don't exist as Go testing.B harnesses yet — `BenchmarkPulsarReshare` for n=21/64/128 landed in v0.1.4 via `threshold/protocols/lss/lss_pulsar_bench_test.go`).
-- **LP-107 Lux Math Substrate** — separate `luxfi/math` Go module + `luxcpp/crypto/math` C++ mirror. Phase 1 (no-stub policy + bounded-codec direction) landed via lattice PR #5; phases 2–7 queued. See `LP-107-lux-math-substrate.md`.
+- **LP-107 Lux Math Substrate** — separate `luxfi/math` Go module + `luxcpp/crypto/math` C++ mirror. Phase 1 (no-stub policy + bounded-codec direction) landed via lattice PR #5; **Phase 2-7 landed 2026-05-04 evening**:
+    - Phase 2: `luxfi/math` v1.3.0 — 8 packages (params/ backend/ codec/ modarith/ ntt/ poly/ rns/ sample/), 8/8 tests green.
+    - Phase 3: lattice consumes `math/codec` via `lattice/wire/` — PR luxfi/lattice#6 OPEN. Full inversion (lattice/ring → math/ntt) deferred (~5K LoC migration).
+    - Phase 4: pulsar consumes `math/codec` via `pulsar/wire/` (`luxfi/pulsar@0c7680e`, tagged v0.1.5).
+    - Phase 4: lens consumes `math/codec` via `lens/wire/` (`luxfi/lens@2e374b0`, tagged v0.1.3).
+    - Phase 5: fhe consumes `math/codec` via `fhe/wire/` (`luxfi/fhe@809c9c6`, tagged v0.1.4).
+    - Phase 6.3-6.5: `luxcpp/crypto/math` v0.2.1 — modarith/ntt/poly/sample C++ headers wrap canonical ringtail::lattice_ring bodies; codec C++ test 10/10; modarith C++ test 5/5; ntt C++ test 2/2.
+    - Phase 7: cross-runtime KAT release gate `math_codec_cross_runtime_test`: 5/5 entries byte-equal Go ↔ C++ (incl. lattice issue #4 reject test).
+  Same lattice issue #4 attack input now rejected identically by pulsar, lens, fhe, lattice, and the C++ math/codec — uniform hardening across the Lux protocol stack via the shared substrate.
+  See `LP-107-lux-math-substrate.md` for full spec.
 
 ### Stub audit follow-ons (LP-107 Phase 1 sweep, queued)
 
