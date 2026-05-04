@@ -122,55 +122,69 @@ Documented Go-canonical issue: t<n FROST signing has a Lagrange-domain mismatch 
 
 - **lattice issue #4** filed 2026-05-04: `Vector[T].ReadFrom` calls `make([]T, size)` with no bound check. 9-byte input `\xad\x93\xd8\x5a\x00\x04\x00\x00\\` → reads `size = 70 trillion entries` → `fatal error: out of memory: cannot allocate 105589698985984-byte block`. `recover()` cannot catch fatal OOM. Distinct DoS surface from issue #2 (which fixes inner `ReadUintNSlice` recursion). Discovered by `FuzzPulsarSign1Round1Data` in 30s.
 - **Mitigation:** `validateVectorPolyFrameInline` walker added to `pulsar/threshold/fuzz_round_test.go` (commit `pulsar@f9113d7`, +73 LoC) mirroring `warp/pulsar.validateVectorPolyFrame`. Failing input rejected: `"vector length 70368955777453 exceeds 4096"`.
-- **PR #3 status:** OPEN, `mergeable_state: unstable` (CI failing). go.mod bumps deferred until merge.
+- **PR #3 status (2026-05-04 evening):** OPEN, `mergeable: MERGEABLE`. `Run Go 1.25 tests` + `Run Go 1.26 tests` + `Run SIMD NTT tests` + `GitGuardian Security Checks` all SUCCESS. `Run static checks` (Makefile target `make checks`) FAILED on `gpu/gpu.go: unexpected operator` — a shell interpolation bug in the upstream Makefile, unrelated to PR #3's substantive change. go.mod bumps deferred until either the upstream Makefile is fixed or branch protection is relaxed for this PR. The substantive ReadUint64Slice + iterative-rewrite fix passes every Go test lane (gh run id 25303438846 jobs 74174516474, 74174516478, 74174516486 all SUCCESS).
+- **Other ReadUint{16,32}Slice paths:** confirmed audit 2026-05-04 — `lattice/utils/buffer/reader.go:115,189` recursion patterns are identical to ReadUint64Slice. Warp/pulsar's wire surface is uint64-only (Pulsar Q=0x1000000004A01 fits 48 bits, lattigo serializes via `Vector[Poly].WriteTo` → uint64 stream); `validateVectorPolyFrame` already bounds the entry-point Vector length and the inner Poly.Levels and Poly.Coeffs counts, so the recursion bound is implicit for our consumers. Adding 16/32-bit harnesses would be defensive but not required given the surface footprint.
 
-### Fuzz battery — 30-second run, 23 harnesses, 10.9M execs, 0 panics
+### Fuzz battery — 30-second run, 23 harnesses, 108.6M execs, 0 panics (2026-05-04 evening)
+
+Re-run 2026-05-04 evening (post-fuzz-battery, CPU quiescent, sequential execution — no contention between harnesses). Total: **108,593,693 execs**, **23/23 PASS**, **0 panics**. Distinct seed schedules per harness, full 30s of churning per. Logs at `/tmp/fuzz-2026-05-04/`.
 
 | Module | Harness | execs/30s | Result |
 |---|---|---|---|
-| pulsar/threshold | FuzzPulsarSign1Round1Data | 28,577 | PASS |
-| pulsar/threshold | FuzzPulsarSign2Round2Data | 20,936 | PASS |
-| pulsar/threshold | FuzzPulsarKeyShareSerialize | 55,439 | PASS |
-| pulsar/threshold | FuzzPulsarGroupKeySerialize | 25,694 | PASS |
-| pulsar/dkg2 | FuzzDKG2Round1Output | 31,772 | PASS |
-| pulsar/dkg2 | FuzzDKG2Round2Output | 12,936 | PASS |
-| pulsar/reshare | FuzzReshareCommitDigest | 24,566 | PASS |
-| pulsar/reshare | FuzzReshareComplaintMessage | 822,941 | PASS |
-| pulsar/reshare | FuzzActivationMessageSignableBytes | 191,719 | PASS |
-| pulsar/reshare | FuzzTranscriptInputsHash | 140,787 | PASS |
-| lens/sign | FuzzLensSign1Data | 20,176 | PASS |
-| lens/sign | FuzzLensSign2Data | 58,552 | PASS |
-| lens/sign | FuzzLensKeyShareSerialize | 66,604 | PASS |
-| lens/sign | FuzzLensGroupKeySerialize | 53,680 | PASS |
-| warp/pulsar | FuzzPulseDeserialize | 60,913 | PASS |
-| warp/pulsar | FuzzPulseSerialize | 72,261 | PASS |
-| warp/pulsar | FuzzHorizonCertificate | 1,138,056 | PASS |
-| warp | FuzzWarpV1Envelope | 562,509 | PASS |
-| warp | FuzzWarpEnvelopeV2 | 581,424 | PASS |
-| warp | FuzzBLSAggregateCert | 588,441 | PASS |
-| threshold/mldsa | FuzzMLDSACertSet | 5,559,581 | PASS |
-| threshold/lss | FuzzLSSPulsarConfig | 536,572 | PASS |
-| threshold/lss | FuzzLSSLensConfig | 35,179 | PASS |
+| pulsar/threshold | FuzzPulsarSign1Round1Data | 4,162,868 | PASS |
+| pulsar/threshold | FuzzPulsarSign2Round2Data | 6,316,778 | PASS |
+| pulsar/threshold | FuzzPulsarKeyShareSerialize | 6,426,665 | PASS |
+| pulsar/threshold | FuzzPulsarGroupKeySerialize | 6,374,643 | PASS |
+| pulsar/dkg2 | FuzzDKG2Round1Output | 6,089,124 | PASS |
+| pulsar/dkg2 | FuzzDKG2Round2Output | 1,320,431 | PASS |
+| pulsar/reshare | FuzzReshareCommitDigest | 972,324 | PASS |
+| pulsar/reshare | FuzzReshareComplaintMessage | 4,523,640 | PASS |
+| pulsar/reshare | FuzzActivationMessageSignableBytes | 305,332 | PASS |
+| pulsar/reshare | FuzzTranscriptInputsHash | 1,135,570 | PASS |
+| lens/sign | FuzzLensSign1Data | 9,807,024 | PASS |
+| lens/sign | FuzzLensSign2Data | 10,284,787 | PASS |
+| lens/sign | FuzzLensKeyShareSerialize | 10,523,633 | PASS |
+| lens/sign | FuzzLensGroupKeySerialize | 10,292,954 | PASS |
+| warp/pulsar | FuzzPulseDeserialize | 66,432 | PASS |
+| warp/pulsar | FuzzPulseSerialize | 228,639 | PASS |
+| warp/pulsar | FuzzHorizonCertificate | 3,710,390 | PASS |
+| warp | FuzzWarpV1Envelope | 3,984,478 | PASS |
+| warp | FuzzWarpEnvelopeV2 | 4,017,870 | PASS |
+| warp | FuzzBLSAggregateCert | 4,082,615 | PASS |
+| threshold/mldsa | FuzzMLDSACertSet | 12,873,458 | PASS |
+| threshold/lss | FuzzLSSPulsarConfig | 84,850 | PASS |
+| threshold/lss | FuzzLSSLensConfig | 1,009,188 | PASS |
 
-### Benchmark refresh — measured M1 Max (commit `papers@9a22d1a`)
+### Benchmark refresh — measured M1 Max evening 2026-05-04 (commits `papers@3a95fc2` + `luxcpp/crypto@9dd7455d`)
 
 Selected production-relevant rows (full table in `papers/lux-pq-consensus-benchmarks/sections/02-microbenchmarks.tex`):
 
-| Operation | Median | Host |
-|---|---|---|
-| Pulsar Gen, K=5 | 3.11 ms | M1 Max |
-| Pulsar Total Signing, K=5, per party | 87.37 ms | M1 Max |
-| Pulsar Verify, K=5 | 0.94 ms | M1 Max |
-| Pulsar Gen, K=21 | 24.49 ms | M1 Max |
-| Pulsar Total Signing, K=21, per party | 763.58 ms | M1 Max |
-| Pulsar Verify, K=21 | 1.49 ms | M1 Max |
-| Pulsar NTT C++, batch=1 | 1.37 us per-NTT | M1 Max |
-| Pulsar NTT C++, batch=128 | 1.34 us per-NTT (172 us total) | M1 Max |
-| FHE NTT PN10QP27 n=1024 CPU | 64 us | M1 Max |
-| FHE NTT PN11QP54 n=2048 CPU | 173 us | M1 Max |
-| FHE Bootstrap PN11QP54 N_br=2048 L=5 | 965 us | M1 Max |
-| 1000-seed CPU↔CUDA-dispatch byte-equiv | 3000/3000 PASS | M1 Max |
-| `regen-all-kats.sh` end-to-end | 61.5 s | M1 Max |
+| Operation | Median | p99 | Host |
+|---|---|---|---|
+| Pulsar Gen, K=5 | 3.272 ms | — | M1 Max |
+| Pulsar Total Signing, K=5, per party | 86.718 ms | — | M1 Max |
+| Pulsar Verify, K=5 | 0.931 ms | — | M1 Max |
+| Pulsar Gen, K=21 | 8.475 ms | — | M1 Max |
+| Pulsar Total Signing, K=21, per party | 159.987 ms (mean 160.190; second-run 159.879 confirms ±0.5%) | — | M1 Max |
+| Pulsar Verify, K=21 | 0.950 ms | — | M1 Max |
+| Pulsar NTT C++, batch=1 | 1.33 us per-NTT | 1.46 us | M1 Max |
+| Pulsar NTT C++, batch=8 | 11.21 us total / 1.401 us per-NTT | 11.37 us | M1 Max |
+| Pulsar NTT C++, batch=32 | 42.88 us total / 1.340 us per-NTT | 49.21 us | M1 Max |
+| Pulsar NTT C++, batch=128 | 168.13 us total / 1.313 us per-NTT | 176.21 us | M1 Max |
+| FHE NTT PN10QP27 n=1024 CPU | 61.04 us | 65.33 us | M1 Max |
+| FHE NTT PN11QP54 n=2048 CPU | 183.04 us | 210.71 us | M1 Max |
+| FHE KS PN10QP27 L=4 CPU | 37.17 us | 40.17 us | M1 Max |
+| FHE KS PN11QP54 L=5 CPU | 85.50 us | 100.08 us | M1 Max |
+| FHE Bootstrap PN10QP27 L=4 CPU | 1804.17 us | 1846.04 us | M1 Max |
+| FHE Bootstrap PN11QP54 L=5 CPU | 997.42 us | 1025.58 us | M1 Max |
+| 1000-seed CPU↔CUDA-dispatch byte-equiv (`fhe_dispatch_equiv_test 1000`) | 3000/3000 PASS, ~9.3 s wall | — | M1 Max |
+| 1000-seed backend-equiv sweep (`fhe_backend_equiv_test --sweep 1000`) | KAT 4/4 + sweep 3000/3000 PASS, ~5.0 s wall | — | M1 Max |
+| `regen-all-kats.sh` end-to-end | 58.86 s wall (75.26 s user + 7.00 s sys, 139% CPU) | — | M1 Max |
+| LSS reshare orchestration (5→7) | 9.96 us | — | M1 Max |
+| LSS reshare orchestration (7→10) | 14.97 us | — | M1 Max |
+| FROST dynamic reshare (5→7) | 0.83 ms | — | M1 Max |
+| FROST dynamic reshare (7→10) | 1.37 ms | — | M1 Max |
+| Fuzz battery total: 23 harnesses × 30s | 108.6M execs, 0 panics | — | M1 Max |
 
 ---
 
