@@ -246,6 +246,39 @@ The lattice repo's no-stub policy (PR #5) has not yet been applied across every 
 
 LP-107 Phase 1 work plan: rename misleading dispatcher files to `*_purego.go` / `*_dispatch_purego.go`, give real bodies to fallback stubs, error-return only when the impl is genuinely native-pending.
 
+### LP-108 Phase 4 vapor deletion — done 2026-05-04 evening
+
+Three scientist agents audited cevm / luxcpp/gpu+crypto/fhe / dex; found ~38K LoC of vapor across 6 repos. All deleted or archived in this session:
+
+| Repo | Branch / commit | Vapor removed |
+|---|---|---|
+| `luxcpp/cevm` | `feat/v0.29-persistent-kernel@8ffd0c32` | `evm_kernel_v2.metal` (always returned status=255 fallback), `v3_persistent.metal` (synthetic results, header admitted "not actually persistent"), `v3_persistent_host.{mm,hpp}` + `v3_queue.hpp`, `frame_cuda.cu` (29 LoC of comments), `frame_metal.mm` (43 LoC "leaf-pure frames only"), `EvmKernelHost::execute_v2 / has_v2 / pipeline_v2_ / load_evm_v2_library` surface, `bench_kernel.cpp` V2 timing block, kzg.cpp→kzg_blob.cpp build fix |
+| `luxcpp/crypto` | `main@4bd7d5a3` | `fhe/cpp/backends/metal/metal_ntt_kernel.{cpp,hpp}` — scaffold returned `has_device()=false`, routed to CPU. 5/5 FHE ctest still pass. |
+| `luxcpp/gpu` | `fix/keccak-num-inputs-bind@9d36d6ee` | Entire `kernels/` directory: 30 .metal/.cu/.wgsl files, 13,348 LoC. metal_backend / cuda_backend / dawn_backend register `*_not_supported_*` stubs; the kernels were never loaded. `fhe_kernels.metal:580` admitted "the host-side scheduler handles this pipeline" — that scheduler doesn't exist. |
+| `luxcpp/metal` | `main@266ebc4` | `kernels/fhe/` — 21 .metal files, 12,774 LoC. `metal_plugin.mm:520` literally said "(CPU fallback for now, Metal kernels can be added later)". `metal_op_*` symbols ran CPU loops, not Metal kernels. |
+| `lx/dex` | `daemon-standalone-consensus-2026-04-28@1c426af` | `pkg/engine/mlx_engine.{go,_test.go}` (`time.Sleep` simulating GPU + hardcoded 597 ns/order), `pkg/lx/fpga_accelerator.go` + `pkg/fpga/*` (8 files, ~3K LoC, interface-only, no bitstream), `BenchmarkMLXEngine` + `BenchmarkPlanetScale` (fabricated metrics — `b.ReportMetric(597, "ns/order")` literal, made-up watts/markets). `detectBestBackend` collapsed to `BackendGo` only. |
+| `luxfi/evm` | `main@d62564043` | `backend_auto.go::detectBackend` no longer auto-selects CppEVM on GPU detection (cevmExecutor returned nil-nil regardless; "GPU detected" log line was misleading). GPU presence still logged honestly. |
+
+**Cumulative: ~38K LoC of vapor archived/deleted across 6 repos.** Every `archive/lp108-2026-05-04/README.md` documents what was removed and what gates the bring-back.
+
+### What remains real and tested
+
+- Pulsar NTT Metal: 1.48× CPU at n=65536 (measured, paper §03)
+- WGSL Pulsar NTT via wgpu-native: 0.89× CPU (measured; native u64 emulation cost, paper §04)
+- cevm V1 EVM kernel: 147/147 opcode parity, Block-STM 1000/1000 match (audit-verified)
+- Quasar wave: 33+6+7+8+8 cases pass
+- FHE CPU oracle: 5/5 ctest pass (3000-seed CPU↔CUDA-dispatch byte-equiv) — still passes after Metal scaffold removal
+- DEX CPU matching: 5.51 M orders/s/core C++ (luxcpp/dex bench), 524k orders/s/core Go (lx/dex bench)
+- Cross-runtime KAT release gate: 991 byte-equality assertions Go ↔ C++ (codec 5 + modarith 900 + ntt 50 + sample 36)
+
+### What's documented as gap (not pretended-done)
+
+- **cevm CALL/CREATE on GPU:** returns `status=5` fallback (consensus blocker; tracked at lib/evm/gpu/kernel/evm_kernel.metal:8-10)
+- **evm-parity-test:** 0/133 vectors agree across CPU_Sequential / CPU_Parallel / GPU_Metal — gas-accounting + EIP-2929 warm/cold + storage-cap mismatches. Real CPU/GPU divergence; consensus blocker.
+- **backend_cevm per-tx → batch adapter:** cgo bridge exists (`luxfi/chains/evm/cevm/cevm_cgo.go::ExecuteBlock`), per-tx adapter pending. backend_cevm.go now documents the gap honestly.
+- **FHE Metal NTT:** real Metal NTT kernel exists at `crypto/ringtail/gpu/metal/canonical_lattice_ring.metal` (1.48× CPU). FHE composing it parameterized for FHE moduli is the migration path; not yet wired.
+- **DEX-on-GPU:** research project. Sequential price-time priority is the constraint, not lack of kernels. Tractable Phase 1: sig-batch verify on GPU using existing `crypto/secp256k1/gpu/` kernels (~1 week).
+
 **Bottom line:** v0.1.2 is the source-locked honest hybrid PQ consensus stack. The Pulsar/Lens/FHE C++ ports are native for all locked-scope operations with measured byte-equality and bidirectional cross-runtime gates, and every byte of those bodies is now in tracked source (no more `kImplStatus = "ffi-go"`, no more `LENS_ERR_NATIVE_POINT_PENDING`). GPU absolute throughput pending real hardware (the equivalence gate prevents drift in the meantime). Two real upstream DoS bugs filed.
 
 The architecture is right. The implementation is real. The papers and proofs land. The C++/GPU story is honest — Pulsar and Lens are native byte-equal; FHE CUDA needs a real device for absolute numbers; Pulsar Metal NTT is wired but the dispatch overhead means CPU wins at the protocol's natural batch sizes (a finding, not a failure).
