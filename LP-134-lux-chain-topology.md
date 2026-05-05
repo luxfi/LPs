@@ -16,9 +16,15 @@ requires:
 references:
   - lp-009 (GPU-Native EVM)
   - lp-013 (FHE on GPU)
-  - lp-019 (Threshold MPC)
-  - lp-063 (Z-Chain)
+  - lp-019 (Threshold MPC — defines M-Chain split)
+  - lp-063 (Z-Chain — Groth16 over BLS12-381)
   - lp-066 (TFHE)
+  - lp-073 (Ringtail / Pulsar threshold)
+  - lp-076 (Universal threshold)
+  - lp-110 (Quasar Unified Consensus)
+  - lp-167 (Lux FHE Runtime — defines F-Chain)
+  - lp-6332 (Teleport Bridge Architecture — T-Chain teleportvm)
+  - lp-9110 (Teleport Protocol Standard)
 deprecates:
   - lp-5013 (T-Chain MPC Custody) — superseded by M-Chain + F-Chain split
 ---
@@ -33,11 +39,17 @@ informal labels; this LP fixes the taxonomy at **nine** chains and
 specifies how each chain plugs into the QuasarGPU substrate (LP-132)
 and the Quasar 3.0 cert pipeline (LP-020).
 
-**Headline change**: T-Chain (which previously hosted *all* MPC and FHE
-ceremonies) is **split** into:
+**Headline change**: T-Chain (which previously hosted *all* MPC, FHE, and
+cross-chain message routing) is **split** into:
 
-- **M-Chain** — MPC ceremonies (CGGMP21, FROST, Ringtail-general)
-- **F-Chain** — FHE compute (TFHE, key-share ceremonies, encrypted EVM)
+- **M-Chain** — MPC ceremonies (CGGMP21, FROST, Pulsar-general) for
+  bridge custody of external wallets
+- **F-Chain** — FHE compute (TFHE bootstrap-key generation, encrypted EVM)
+- **Z-Chain** — Groth16 over BLS12-381 rollups (rolls N×ML-DSA-65 sigs
+  into one 192-byte proof per epoch)
+- **Q-Chain** — Pulsar 2-round threshold ceremony for **consensus** signing
+- **T-Chain** (legacy name retained for `teleportvm` only) — unified
+  bridge + relay + oracle execution surface (LP-6332, LP-9110)
 
 Two new chains are added:
 
@@ -53,12 +65,12 @@ Two new chains are added:
 | **P-Chain** | **PVM** | Platform — staking, validators, epoch, slashing | Nova (linear) | precompile (read-only roots in `pchain_validator_root`) | LP-1100, LP-015 |
 | **C-Chain** | **EVM** (cevm) | Contract — general smart contracts | Nova (linear) | `drain_exec` (EVM fiber VM, LP-009) | LP-009, LP-014 |
 | **X-Chain** | **XVM** | UTXO — assets, swaps, native txs | Nova (linear) | precompile | LP-014 |
-| **Q-Chain** | **QVM** | Quasar — Ringtail 2-round threshold ceremony for consensus | Nova or Nebula | `drain_cert_lane` (Ringtail verifier) | LP-073, LP-076 |
-| **Z-Chain** | **ZVM** | Zero-knowledge — Groth16 rollups (incl. ML-DSA-65 → 192-byte proof) | Nova | `drain_cert_lane` (Groth16 verifier) | LP-063 |
+| **Q-Chain** | **QVM** | Quasar — **Pulsar** 2-round threshold ceremony for PQ consensus signing | Nova or Nebula | `drain_cert_lane` (Pulsar verifier) | LP-073, LP-076 |
+| **Z-Chain** | **ZVM** | Zero-knowledge — **Groth16 over BLS12-381** rolling N×ML-DSA-65 sigs → one 192-byte proof | Nova | `drain_cert_lane` (Groth16 verifier) | LP-063 |
 | **A-Chain** | **AIVM** (AI / Attestation VM) | Attestation — unified attestation chain (TEE, audit, identity, AI provenance) | Nova or Nebula | `drain_attest` | LP-065, Hanzo AI Chain |
 | **B-Chain** | **BVM** | Bridge — native cross-ecosystem messaging | Nova (mostly) / Nebula (high-fanout) | `drain_bridge` | LP-016, LP-017 |
-| **M-Chain** | **MVM** (ThresholdVM-MPC) | MPC — CGGMP21, FROST, Ringtail-general ceremonies | Nebula (DAG of partials) | `drain_cert_lane` (M-Chain verifier) | LP-019, LP-076 |
-| **F-Chain** | **FVM** (ThresholdVM-FHE) | FHE — TFHE compute, key-share ceremonies, encrypted EVM | Nebula (computation graph) | `drain_fhe` | LP-013, LP-066 |
+| **M-Chain** | **MVM** (ThresholdVM-MPC) | MPC ceremonies — bridge custody for external wallets (CGGMP21, FROST, Pulsar-general) | Nebula (DAG of partials) | `drain_cert_lane` (M-Chain verifier) | LP-019, LP-076 |
+| **F-Chain** | **FVM** (ThresholdVM-FHE) | FHE — TFHE bootstrap-key generation, encrypted EVM, key-share ceremonies | Nebula (computation graph) | `drain_fhe` | LP-013, LP-066, LP-167 |
 
 ## Why nine?
 
@@ -114,17 +126,17 @@ chains:
 ```cpp
 enum class QuasarCertLane : uint8_t {
     // LP-020 §3.0
-    BLS              = 0,   // classical fast path (network-wide)
-    Ringtail         = 1,   // Q-Chain Ring-LWE 2-round threshold
-    MLDSAGroth16     = 2,   // Z-Chain Groth16 rollup of N ML-DSA-65 sigs
+    BLS              = 0,   // classical fast path (network-wide, BLS12-381)
+    Ringtail         = 1,   // Q-Chain Pulsar (Ring-LWE) 2-round PQ consensus threshold
+    MLDSAGroth16     = 2,   // Z-Chain Groth16-over-BLS12-381 rollup of N×ML-DSA-65 sigs
     // LP-134 §A/B/M/F integration
     AChainAttest     = 3,   // A-Chain TEE / audit attestation
     BChainBridge     = 4,   // B-Chain bridge message commitment
-    MChainCGGMP21    = 5,   // M-Chain CGGMP21 share
-    MChainFROST      = 6,   // M-Chain FROST share
-    MChainRingtailGen= 7,   // M-Chain Ringtail-general share
-    FChainTFHE       = 8,   // F-Chain TFHE compute attestation
-    FChainBootstrap  = 9,   // F-Chain blind-rotate / bootstrap proof
+    MChainCGGMP21    = 5,   // M-Chain CGGMP21 ECDSA-threshold share (bridge custody)
+    MChainFROST      = 6,   // M-Chain FROST Schnorr-threshold share (bridge custody)
+    MChainPulsarGen  = 7,   // M-Chain Pulsar-general PQ-threshold share (bridge custody)
+    FChainTFHE       = 8,   // F-Chain TFHE compute attestation (encrypted EVM op)
+    FChainBootstrap  = 9,   // F-Chain TFHE blind-rotate / bootstrap-key proof
     // …open-ended; new primitives append at end
 };
 ```
@@ -197,21 +209,33 @@ F-Chain roots through precompiles (e.g., a contract calling
 Unchanged. Native asset ledger; precompile-style settlement. Listed
 here for completeness.
 
-### Q-Chain (Quasar threshold)
+### Q-Chain (Quasar threshold — PQ consensus signing)
 
-Q-Chain runs the **Ringtail DKG ceremony** for consensus quorum. It
-emits `qchain_ceremony_root` per epoch, consumed by Quasar 3.0's
-Ringtail cert lane (LP-020 §Ringtail).
+Q-Chain runs the **Pulsar 2-round threshold ceremony** for **PQ
+consensus signing**. Pulsar is Lux's Ring-LWE / Module-LWE threshold
+construction (Pulsar = Lux variant of the original Ringtail with DKG2
+and the Pulsar-SHA3 hash suite — KMAC over cSHAKE256, see
+`pulsar/hash/sp800_185.go`). Production parameters: M=8, N=7,
+LogN=8 (ring degree 256), Q=0x1000000004A01 (48-bit NTT-friendly
+prime), Dbar=48, Kappa=23 → classical 2^142 / quantum 2^130 security.
 
-Note: Q-Chain only runs the *consensus-threshold* Ringtail ceremony.
-General-purpose Ringtail (for app threshold signing) lives on M-Chain.
+Q-Chain emits `qchain_ceremony_root` per epoch, consumed by Quasar
+3.0's Pulsar/Ringtail cert lane (LP-020 §Ringtail, LP-073).
 
-### Z-Chain (zero-knowledge)
+Note: Q-Chain runs *only* the **consensus-threshold** Pulsar ceremony.
+General-purpose Pulsar (for app threshold signing on bridge custody)
+lives on M-Chain (`MChainPulsarGen` lane).
 
-Z-Chain rolls N validator ML-DSA-65 sigs into one 192-byte Groth16
-proof per cert (LP-020 §MLDSAGroth16, LP-063). Other ZKP rollups
-(Halo2, Plonky2, etc.) plug in here as additional verifying-key
-commitments under `zchain_vk_root`.
+### Z-Chain (zero-knowledge — Groth16 over BLS12-381)
+
+Z-Chain rolls **N validator ML-DSA-65** signatures into **one 192-byte
+Groth16 proof** per certificate (LP-020 §MLDSAGroth16, LP-063). The
+proof system is **Groth16 over BLS12-381**; the R1CS encodes the
+ML-DSA-65 verification circuit (~2^22.5 constraints per verification,
+amortized to ~2^20 per validator at n=21 via shared-matrix
+optimization — see `~/work/lux/proofs/quasar-cert-soundness.tex`
+App. B). Other ZKP rollups (Halo2, Plonky2, etc.) plug in here as
+additional verifying-key commitments under `zchain_vk_root`.
 
 ### A-Chain (Attestation, NEW)
 
@@ -257,55 +281,86 @@ crossing).
 Existing bridge LPs (LP-003, LP-016, LP-017, LP-018) remain;
 LP-134 §B-Chain provides the unified routing surface.
 
-### M-Chain (MPC, NEW — split from T-Chain)
+### M-Chain (MPC ceremonies — bridge custody for external wallets)
 
-M-Chain hosts **all MPC ceremonies**:
+M-Chain hosts **all MPC ceremonies** used for bridge custody of keys
+that hold funds on **external** chains (Bitcoin, Ethereum, Solana,
+non-Lux EVMs). The validator quorum runs the protocol; the resulting
+threshold signature authorizes the external-chain transaction.
 
-| Ceremony | Cert lane | LP |
-|---|---|---|
-| CGGMP21 (ECDSA threshold) | `MChainCGGMP21` | LP-076 |
-| FROST (Schnorr threshold) | `MChainFROST` | LP-076 |
-| Ringtail-general (PQ threshold) | `MChainRingtailGen` | LP-073, LP-076 |
+| Ceremony | Curve / scheme | External wallet target | Cert lane | LP |
+|---|---|---|---|---|
+| **CGGMP21** | ECDSA threshold (secp256k1, secp256r1) | Bitcoin, Ethereum, EVMs, Cosmos | `MChainCGGMP21` | LP-019, LP-076 |
+| **FROST** | Schnorr threshold (Ed25519, Ristretto255) | Solana, Polkadot, Cosmos (Schnorr variants), Bitcoin Taproot | `MChainFROST` | LP-019, LP-076 |
+| **Pulsar-general** | Ring-LWE threshold (PQ-safe) | Future PQ-curve external chains, Lux-internal PQ custody | `MChainPulsarGen` | LP-019, LP-073, LP-076 |
 
-Each ceremony runs as a Nebula round (DAG of partial signatures →
-frontier → committed cert). The lane verifier in `drain_cert_lane`
+Each ceremony runs as a **Nebula round** (DAG of partial signatures
+→ frontier → committed cert). The lane verifier in `drain_cert_lane`
 dispatches by `cert_lane` to the protocol-specific check.
 
 `mchain_ceremony_root` commits the active ceremony state per epoch.
 
-### F-Chain (FHE, NEW — split from T-Chain)
+**Distinction from Q-Chain**: Q-Chain runs the *consensus* threshold
+(Pulsar 2-round, signs Lux blocks). M-Chain runs *application*
+threshold ceremonies (signs external-chain txs for bridge custody).
+Same cryptographic family (Pulsar / CGGMP21 / FROST), different
+purpose, different chain.
 
-F-Chain hosts **FHE compute**:
+### F-Chain (FHE — TFHE bootstrap-key generation, encrypted EVM)
+
+F-Chain hosts **TFHE compute** and the **TFHE bootstrap-key
+generation** ceremony. This is the encrypted-EVM substrate.
 
 | Use case | Cert lane / service |
 |---|---|
 | Encrypted EVM ops over TFHE ciphertexts | `FheCompute` service + `FChainTFHE` lane |
-| Blind-rotate / programmable bootstrap | `FChainBootstrap` lane |
-| TFHE key-share ceremonies | M-Chain ceremony into F-Chain key arena |
+| TFHE programmable bootstrap (blind-rotate) | `FChainBootstrap` lane |
+| TFHE bootstrap-key generation ceremony | M-Chain DKG produces shares → F-Chain assembles bootstrap key into key arena |
 | Confidential ERC-20 (LP-067) | C-Chain calls F-Chain precompile |
 | Private teleport (LP-068) | F-Chain → A-Chain attestation chain |
 
 `fchain_fhe_root` commits TFHE evaluation-key state per epoch.
 
-## Deprecation notice — T-Chain
+See LP-167 (Lux FHE Runtime) for the full F-Chain runtime
+specification: ciphertext format, bootstrap-key lifecycle, encrypted
+EVM opcode set, gas accounting under TFHE.
 
-LP-5013 ("T-Chain MPC Custody and Swap Signature Layer") is
-**deprecated**. T-Chain previously claimed authority over both MPC
-ceremonies and FHE compute. LP-134 splits these into:
+## Deprecation notice — T-Chain split (LP-5013, LP-7330 superseded)
 
-- **M-Chain** for ceremonies (LP-019, LP-076)
-- **F-Chain** for FHE compute (LP-013, LP-066)
+LP-5013 ("T-Chain MPC Custody and Swap Signature Layer") and
+LP-7330 ("T-Chain ThresholdVM Specification") are **superseded** as
+unified MPC + FHE + relay chain. LP-134 splits T-Chain's prior
+responsibilities across **four** chains:
+
+- **M-Chain** — MPC ceremonies for bridge custody (LP-019, LP-076)
+- **F-Chain** — FHE compute and TFHE bootstrap-key generation (LP-013, LP-066, LP-167)
+- **Z-Chain** — Groth16 over BLS12-381 (LP-063)
+- **Q-Chain** — Pulsar 2-round threshold for **consensus** signing (LP-073, LP-076)
+
+The "T-Chain" name is **retained only for `teleportvm`** — the
+unified bridge + relay + oracle execution surface (LP-6332 Teleport
+Bridge Architecture, LP-9110 Teleport Protocol Standard, LP-138 Relay
+VM). T-Chain in this narrower sense is a **C-Chain-style execution
+chain** that provides cross-chain message dispatch on top of the
+M-Chain custody primitive; it does **not** host MPC, FHE, or PQ
+ceremonies.
 
 Migration path:
 - T-Chain's MPC ceremonies move to M-Chain unchanged (same
   protocol semantics; new chain ID).
 - T-Chain's FHE pipeline moves to F-Chain.
-- Cross-chain messages that named T-Chain are accepted by both M-Chain
-  and F-Chain during a one-epoch grace window, then deprecated.
+- T-Chain's ML-DSA Groth16 rollup moves to Z-Chain.
+- T-Chain's consensus-threshold Pulsar ceremony moves to Q-Chain.
+- T-Chain's teleport / bridge-relay / oracle-aggregation surface
+  remains as `teleportvm` and **keeps the T-Chain name** for that
+  scope only.
+- Cross-chain messages that named the legacy T-Chain ceremony layers
+  are accepted by M-/F-/Z-/Q-Chain during a one-epoch grace window,
+  then deprecated.
 
 The QuasarGPU `cert_lane` dispatcher recognizes the legacy `TChain*`
 enum values during the grace period and routes them to the
-corresponding `MChain*` / `FChain*` verifier.
+corresponding `MChain*` / `FChain*` / `Z-` / `Q-` verifier.
 
 ## VM identifiers (canonical)
 
@@ -328,35 +383,38 @@ corresponding `MChain*` / `FChain*` verifier.
   the public VM identifier stays `EVM`.
 
 - `XVM` (X-Chain VM) is the Lux UTXO VM. **Lux X-Chain runs XVM.**
-  Upstream Avalanche called the same role "AVM" — that name is
-  *deprecated and unused* in Lux taxonomy. Any reference to "AVM" in
-  pre-2025 Lux docs that meant the X-Chain UTXO VM has been renamed
-  to **XVM**. Cross-references to upstream Avalanche literature that
-  cite "AVM" should be qualified as "(upstream Avalanche AVM = Lux
-  XVM)".
+  Historical UTXO-VM prior art is acknowledged in academic citations
+  in LP-110 §References (Team Rocket et al. 2018 metastable consensus
+  family) but the operational identifier in Lux is **XVM**. Any
+  reference to a different name in pre-2025 Lux docs that meant the
+  X-Chain UTXO VM has been renamed to **XVM**.
 
 - `AIVM` (A-Chain VM) is the Lux Attestation VM. The "AI" prefix is
   intentional — A-Chain hosts AI provenance, model registries, agent
-  identity, and TEE attestations. It also explicitly **disambiguates
-  from upstream Avalanche's AVM** (the UTXO VM, which Lux now calls
-  XVM). The Hanzo "AI Chain" brand surface is the same underlying
-  AIVM with AI-native UX (see LP-130 / Hanzo AI Chain whitepaper).
+  identity, and TEE attestations. The Hanzo "AI Chain" brand surface
+  is the same underlying AIVM with AI-native UX (see LP-130 / Hanzo
+  AI Chain whitepaper).
 
 - Threshold-VM family (M-Chain MVM, F-Chain FVM) shares the
   `~/work/lux/chains/thresholdvm` Go library substrate (LP-019,
   LP-076) but stays operationally distinct — orthogonal validators,
-  ceremony cadence, gas economics. **No shared T-Chain.**
+  ceremony cadence, gas economics. **No shared MPC + FHE + ZK + PQ
+  T-Chain.** ("T-Chain" is retained narrowly for `teleportvm` only;
+  see Deprecation notice above.)
 
-**Forbidden names** (must NOT appear in any current Lux LP, paper, or
-code identifier):
+**Forbidden operational names** (must NOT appear as live identifiers
+in any current Lux LP, paper, or code):
 
-- `AVM` (was upstream's X-Chain VM; Lux uses **XVM** instead)
-- `Snowball`, `Snowflake`, `Snowman`, `Avalanche` (consensus family)
-  — replaced by Quasar / Photon / Wave / Focus / Nova / Nebula per
-  LP-020 §2
+- Legacy UTXO-VM short name (Lux uses **XVM** instead)
+- `Snowball`, `Snowflake`, `Snowman` (linear-chain consensus family
+  prior art) — replaced by **Quasar / Photon / Wave / Focus / Nova /
+  Nebula / Prism / Horizon / Flare / Ray / Field** per LP-020 §2 and
+  LP-110
 
-These appear only in **historical** sections (e.g., "Origin", "Forked
-from") with explicit "(upstream X = Lux Y)" qualifiers.
+These names appear **only** in academic-citation sections (e.g.
+"Prior art", "References") qualified as historical prior art per
+LP-110 §References [4]. Operational identifiers, code symbols, chain
+aliases, and configuration keys MUST use the Lux taxonomy.
 
 ## Implementation plan
 
@@ -373,16 +431,20 @@ from") with explicit "(upstream X = Lux Y)" qualifiers.
 
 | Resource | Location |
 |---|---|
-| Quasar consensus | LP-020 |
+| Quasar consensus (unified) | LP-110, LP-020 |
 | QuasarGPU adapter | LP-132 |
 | QuasarSTM | LP-010 |
 | Quasar app stack | LP-133 |
 | GPU-native EVM | LP-009 |
 | FHE on GPU | LP-013 |
 | TFHE | LP-066 |
-| Threshold MPC | LP-019, LP-076 |
-| Z-Chain | LP-063 |
+| Lux FHE Runtime (F-Chain) | LP-167 |
+| Threshold MPC (M-Chain) | LP-019, LP-076 |
+| Pulsar / Ringtail PQ threshold | LP-073 |
+| Z-Chain (Groth16/BLS12-381) | LP-063 |
 | Bridge LPs | LP-003, LP-016, LP-017, LP-018 |
+| Teleport / T-Chain teleportvm | LP-6332, LP-9110, LP-138 |
+| Consensus knowledge base | `~/work/lux/consensus/LLM.md` |
 | Lux node | `~/work/lux/node` |
 
 ## Copyright
