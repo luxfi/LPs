@@ -13,6 +13,16 @@ tags: [threshold-crypto, mpc, library]
 order: 340
 ---
 
+> **LP-134 canonical naming (2025-12-15)**: This LP predates the
+> M-Chain / F-Chain split. Per **LP-134** (Lux Chain Topology),
+> MPC ceremonies for bridge custody of external wallets (BTC, ETH, SOL,
+> etc.) now run on **M-Chain** (CGGMP21, FROST, Pulsar-general). FHE
+> compute and TFHE bootstrap-key generation run on **F-Chain**. The name
+> "T-Chain" is retained ONLY for `teleportvm` (LP-6332). Where this LP
+> says "T-Chain MPC" / "T-Chain threshold" / "T-Chain FHE" / "T-Chain
+> custody", read it as **M-Chain** (for MPC) or **F-Chain** (for FHE).
+
+
 ## Abstract
 
 This LP documents `github.com/luxfi/threshold`, the core Go library providing threshold cryptography implementations for the Lux Network. The library implements five threshold signature protocols: LSS (Linear Secret Sharing), CMP (CGGMP21), FROST, Doerner, and Ringtail (post-quantum). It serves as the cryptographic foundation for T-Chain (ThresholdVM), B-Chain (BridgeVM), and all MPC operations in the Lux ecosystem.

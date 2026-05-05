@@ -21,8 +21,18 @@ references:
   - lp-1000 (P-Chain Staking)
   - lp-5200 (AI Mining Standard)
   - lp-9010 (DEX Precompile)
-  - lp-5013 (T-Chain MPC Custody)
+  - lp-134 (Lux Chain Topology — M-Chain MPC, supersedes lp-5013)
 ---
+
+> **LP-134 canonical naming (2025-12-15)**: This LP predates the
+> M-Chain / F-Chain split. Per **LP-134** (Lux Chain Topology),
+> MPC ceremonies for bridge custody of external wallets (BTC, ETH, SOL,
+> etc.) now run on **M-Chain** (CGGMP21, FROST, Pulsar-general). FHE
+> compute and TFHE bootstrap-key generation run on **F-Chain**. The name
+> "T-Chain" is retained ONLY for `teleportvm` (LP-6332). Where this LP
+> says "T-Chain MPC" / "T-Chain threshold" / "T-Chain FHE" / "T-Chain
+> custody", read it as **M-Chain** (for MPC) or **F-Chain** (for FHE).
+
 
 # LP-3103: US Regulatory Classification & Compliance Positioning
 
@@ -67,7 +77,7 @@ The release defines four categories of blockchain activity that do **not** const
 **1. Protocol Mining**
 > Mining activity where participants contribute computational resources to validate transactions and secure a network in exchange for programmatically determined rewards is an administrative activity, not an investment of money in a common enterprise with expectation of profits derived from the efforts of others.
 
-**Lux mapping**: Lux uses proof-of-stake consensus (Snowman/Quasar), not proof-of-work mining. However, the release uses "mining" broadly to encompass all forms of programmatic validation reward. Lux validators contribute stake (not compute) and receive programmatically determined rewards from protocol inflation. The economic structure is identical: administrative participation → deterministic reward.
+**Lux mapping**: Lux uses proof-of-stake consensus (Nova/Quasar; historical: Snowman), not proof-of-work mining. However, the release uses "mining" broadly to encompass all forms of programmatic validation reward. Lux validators contribute stake (not compute) and receive programmatically determined rewards from protocol inflation. The economic structure is identical: administrative participation → deterministic reward.
 
 **2. All Four Models of Staking**
 
@@ -262,7 +272,7 @@ The DEX precompile facilitates spot trading of commodity tokens. Under the joint
 
 ### Layer 3: Node Implementation (`/node/`)
 
-#### Consensus (Snowman/Quasar) — COMPLIANT
+#### Consensus (Nova/Quasar) — COMPLIANT
 
 | Component | Regulatory Relevance | Gap |
 |-----------|---------------------|-----|
@@ -296,7 +306,7 @@ Restaking: Subnet validation reusing primary network stake
 | Gossip protocol | Administrative message relay | None |
 | TLS authentication | Node identity verification (not user identity) | None |
 
-### Layer 4: MPC Custody (`/mpc/`, T-Chain)
+### Layer 4: MPC Custody (`/mpc/`, M-Chain — per LP-134; supersedes T-Chain)
 
 #### Threshold Signing (FROST/CGGMP21) — COMPLIANT WITH REQUIREMENTS
 
@@ -400,7 +410,7 @@ The Teleport Bridge MPC (`/mpc/`) operates as a relayer. Under the joint release
 | LRC-20 Token Standard | Correctly permissionless for commodity tokens |
 | Post-Quantum Precompiles | NIST FIPS compliant, regulatory positive |
 | Staking (all 4 models) | Explicitly classified as administrative |
-| Consensus (Snowman/Quasar) | Administrative activity per joint release |
+| Consensus (Nova/Quasar) | Administrative activity per joint release |
 | KYC/AML Stack | Comprehensive, correctly optional at base layer |
 | ZK Precompiles | Not regulated, privacy-preserving |
 | Node P2P Layer | Permissionless participation |

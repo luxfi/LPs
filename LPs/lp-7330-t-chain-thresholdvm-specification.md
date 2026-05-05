@@ -1,10 +1,11 @@
 ---
 lp: 7330
-title: T-Chain (ThresholdVM) Specification
-description: Defines the T-Chain as Lux Network's dedicated threshold signature chain for distributed key management with dynamic resharing
+title: T-Chain (ThresholdVM) Specification (SUPERSEDED by LP-134)
+description: Historical specification of T-Chain ThresholdVM. SUPERSEDED by LP-134 — see M-Chain (MPC for bridge custody of external wallets) and F-Chain (FHE compute).
 author: Lux Protocol Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
-status: Final
+status: Superseded
+superseded-by: lp-134
 type: Standards Track
 category: Core
 created: 2025-12-11
@@ -13,9 +14,17 @@ activation:
   flag: lp330-t-chain
   hfName: "Threshold"
   activationHeight: "0"
-tags: [threshold-crypto, mpc, vm]
+tags: [threshold-crypto, mpc, vm, superseded]
 order: 330
 ---
+
+> **SUPERSEDED by LP-134** (Lux Chain Topology, 2025-12-15): The
+> ThresholdVM substrate now powers **M-Chain (MVM)** for MPC ceremonies
+> on bridge custody of external wallets (CGGMP21, FROST, Pulsar-general)
+> and **F-Chain (FVM)** for FHE compute. Both share the
+> `~/work/lux/chains/thresholdvm` Go library but are operationally
+> distinct. The legacy name "T-Chain" is now reserved exclusively for
+> the `teleportvm` (LP-6332). New work MUST target M-Chain or F-Chain.
 
 > **See also**: [LP-14](/docs/lp-7014-t-chain-threshold-signatures-with-cgg21-uc-non-interactive-ecdsa/), [LP-81](/docs/lp-6081-b-chain-bridge-chain-specification/), [LP-103](/docs/lp-7103-mpc-lss---multi-party-computation-linear-secret-sharing-with-dynamic-resharing/), [LP-104](/docs/lp-7104-frost---flexible-round-optimized-schnorr-threshold-signatures-for-eddsa/), [LP-331](/docs/lp-6331-b-chain-bridgevm-specification/), [LP-332](/docs/lp-6332-teleport-bridge-architecture-unified-cross-chain-protocol/), [LP-333](/docs/lp-7333-dynamic-signer-rotation-with-lss-protocol/), [LP-334](/docs/lp-7334-per-asset-threshold-key-management/), [LP-335](/docs/lp-6335-bridge-smart-contract-integration/), [LP-336](/docs/lp-7336-k-chain-keymanagementvm-specification/), [LP-INDEX](/docs/)
 

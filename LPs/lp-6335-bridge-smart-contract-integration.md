@@ -13,6 +13,16 @@ tags: [bridge, evm]
 order: 335
 ---
 
+> **LP-134 canonical naming (2025-12-15)**: This LP predates the
+> M-Chain / F-Chain split. Per **LP-134** (Lux Chain Topology),
+> MPC ceremonies for bridge custody of external wallets (BTC, ETH, SOL,
+> etc.) now run on **M-Chain** (CGGMP21, FROST, Pulsar-general). FHE
+> compute and TFHE bootstrap-key generation run on **F-Chain**. The name
+> "T-Chain" is retained ONLY for `teleportvm` (LP-6332). Where this LP
+> says "T-Chain MPC" / "T-Chain threshold" / "T-Chain FHE" / "T-Chain
+> custody", read it as **M-Chain** (for MPC) or **F-Chain** (for FHE).
+
+
 ## Abstract
 
 This LP specifies the smart contract architecture for integrating the Lux Bridge with T-Chain's Multi-Party Computation (MPC) threshold signature infrastructure and B-Chain's bridge coordination layer. The bridge contract suite enables trustless, decentralized cross-chain asset transfers by verifying threshold signatures produced by the T-Chain validator committee. The specification covers five core contracts: BridgeVault (asset custody), BridgeRouter (transaction routing), TokenRegistry (cross-chain asset mapping), BridgeGovernor (parameter governance), and EmergencyBrake (circuit breaker). Together, these contracts provide a complete, auditable on-chain bridge system that replaces centralized custody with cryptographic guarantees from CGG21/CGGMP21 threshold ECDSA signatures, enabling secure transfers between LUX, ZOO, Ethereum, Base, Arbitrum, and other EVM-compatible chains.

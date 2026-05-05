@@ -313,7 +313,7 @@ When a trade executes on tZero:
 3. Compliance is enforced at the contract level regardless of trade origin
 4. Settlement confirmation is sent back to tZero
 
-The bridge operator for tZero settlement is a T-Chain MPC multisig (see LP-5013). No single key can execute settlements.
+The bridge operator for tZero settlement is an M-Chain MPC multisig (per LP-134; supersedes LP-5013). No single key can execute settlements.
 
 ## Regulatory Framework
 
@@ -446,7 +446,7 @@ Both paths enforce identical compliance via ComplianceRegistry.
 License: FINRA Broker-Dealer, SEC Section 15
 
 On-chain:
-- T-Chain MPC custody (LP-5013) -- multi-party computation for key management
+- M-Chain MPC custody (per LP-134; supersedes LP-5013) -- multi-party computation for key management of external-wallet bridge custody
 - Settlement transactions signed by MPC threshold
 
 Off-chain:
@@ -527,7 +527,7 @@ For L2/subnet deployments (e.g., Liquidity L2), deploy the same contracts on the
 | Lux Broker Service | https://github.com/luxfi/broker |
 | Lux CEX Engine | https://github.com/luxfi/cex |
 | Lux DEX Precompile (LP-9010) | https://github.com/luxfi/lps/LPs/lp-9010-dex-precompile.md |
-| T-Chain MPC Custody (LP-5013) | https://github.com/luxfi/lps/LPs/lp-5013 |
+| M-Chain MPC Custody (per LP-134; supersedes LP-5013) | https://github.com/luxfi/lps/LP-134-lux-chain-topology.md |
 | Warp Messaging (LP-6022) | https://github.com/luxfi/lps/LPs/lp-6022 |
 
 ## Security Considerations

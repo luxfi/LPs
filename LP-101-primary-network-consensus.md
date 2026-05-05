@@ -53,8 +53,9 @@ All other chains run as independent L1 chain networks. Their failure to initiali
 | C-Chain | General-purpose EVM | Legacy compatibility |
 | X-Chain | High-throughput asset transfers (DAG) | UTXO-based transfers |
 | D-Chain | Native DEX (CLOB + AMM) | Trading infrastructure |
-| Z-Chain | Zero-knowledge proofs | Privacy applications |
-| T-Chain | Threshold cryptography (MPC, FHE) | Key management, encryption |
+| Z-Chain | Zero-knowledge proofs (Groth16 over BLS12-381) | Privacy applications |
+| M-Chain | MPC ceremonies (CGGMP21, FROST, Pulsar-general) for bridge custody of external wallets | Threshold signing |
+| F-Chain | FHE compute + TFHE bootstrap-key generation (encrypted EVM) | Confidential computation |
 | B-Chain | Cross-network bridge | Asset bridging |
 | A-Chain | Attestation, AI verification | Proof-of-inference |
 | Q-Chain | Quantum consensus | Post-quantum finality |

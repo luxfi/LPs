@@ -1,11 +1,12 @@
 ---
 lp: 7000
-title: T-Chain - Core Threshold Signature Specification
-tags: [core, mpc, threshold, signatures, t-chain]
-description: Core specification for the T-Chain (Threshold VM), providing distributed key generation and threshold signatures
+title: T-Chain - Core Threshold Signature Specification (SUPERSEDED by LP-134)
+tags: [core, mpc, threshold, signatures, t-chain, superseded]
+description: Historical specification of T-Chain threshold signatures. SUPERSEDED by LP-134 — see M-Chain (MPC ceremonies for bridge custody of external wallets) and F-Chain (FHE compute).
 author: Lux Network Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
-status: Final
+status: Superseded
+superseded-by: lp-134
 type: Standards Track
 category: Core
 created: 2025-12-11
@@ -13,9 +14,16 @@ requires: 0000, 99
 order: 0
 ---
 
+> **SUPERSEDED by LP-134** (Lux Chain Topology, 2025-12-15): T-Chain
+> threshold/MPC functionality moved to **M-Chain** (MPC ceremonies for
+> bridge custody of external wallets — CGGMP21, FROST, Pulsar-general)
+> and TFHE bootstrap-key generation moved to **F-Chain**. The legacy
+> name **T-Chain** is retained ONLY for the `teleportvm` (unified
+> bridge+relay+oracle, LP-6332/LP-9110), not for any MPC/FHE workload.
+
 ## Abstract
 
-LP-7000 specifies the T-Chain (Threshold Signature Chain), Lux Network's specialized blockchain providing Multi-Party Computation (MPC) services including distributed key generation (DKG), threshold signatures, and secure key management. The T-Chain implements CGGMP21 for ECDSA, FROST for Schnorr/BLS, and Ringtail for post-quantum signatures.
+LP-7000 specifies the T-Chain (Threshold Signature Chain), Lux Network's specialized blockchain providing Multi-Party Computation (MPC) services including distributed key generation (DKG), threshold signatures, and secure key management. The T-Chain implements CGGMP21 for ECDSA, FROST for Schnorr/BLS, and Ringtail for post-quantum signatures. **Per LP-134, all MPC ceremonies for bridge custody of external wallets now run on M-Chain; FHE keygen runs on F-Chain.**
 
 ## Motivation
 

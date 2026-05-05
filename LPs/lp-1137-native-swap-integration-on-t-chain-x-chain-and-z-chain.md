@@ -13,6 +13,16 @@ requires: 6, 3, 3, 3
 order: 1137
 ---
 
+> **LP-134 canonical naming (2025-12-15)**: This LP predates the
+> M-Chain / F-Chain split. Per **LP-134** (Lux Chain Topology),
+> MPC ceremonies for bridge custody of external wallets (BTC, ETH, SOL,
+> etc.) now run on **M-Chain** (CGGMP21, FROST, Pulsar-general). FHE
+> compute and TFHE bootstrap-key generation run on **F-Chain**. The name
+> "T-Chain" is retained ONLY for `teleportvm` (LP-6332). Where this LP
+> says "T-Chain MPC" / "T-Chain threshold" / "T-Chain FHE" / "T-Chain
+> custody", read it as **M-Chain** (for MPC) or **F-Chain** (for FHE).
+
+
 ## Abstract
 
 This LP provides a deep-integration blueprint to migrate the legacy swaps REST API (`app/server/src/routes/swaps.ts`) into a fully on-chain workflow across T-Chain, X-Chain, and Z-Chain, eliminating centralized swap servers and off-chain key-managers.

@@ -18,6 +18,16 @@ tags: [bridge, mpc, vm]
 order: 331
 ---
 
+> **LP-134 canonical naming (2025-12-15)**: This LP predates the
+> M-Chain / F-Chain split. Per **LP-134** (Lux Chain Topology),
+> MPC ceremonies for bridge custody of external wallets (BTC, ETH, SOL,
+> etc.) now run on **M-Chain** (CGGMP21, FROST, Pulsar-general). FHE
+> compute and TFHE bootstrap-key generation run on **F-Chain**. The name
+> "T-Chain" is retained ONLY for `teleportvm` (LP-6332). Where this LP
+> says "T-Chain MPC" / "T-Chain threshold" / "T-Chain FHE" / "T-Chain
+> custody", read it as **M-Chain** (for MPC) or **F-Chain** (for FHE).
+
+
 > **See also**: [LP-330 T-Chain ThresholdVM](/docs/lp-7330-t-chain-thresholdvm-specification/), [LP-332 Teleport Bridge Architecture](/docs/lp-6332-teleport-bridge-architecture-unified-cross-chain-protocol/), [LP-333 Dynamic Signer Rotation](/docs/lp-7333-dynamic-signer-rotation-with-lss-protocol/), [LP-334 Per-Asset Threshold Key Management](/docs/lp-7334-per-asset-threshold-key-management/), [LP-335 Bridge Smart Contract Integration](/docs/lp-6335-bridge-smart-contract-integration/), [LP-INDEX](/docs/)
 
 # LP-331: B-Chain - BridgeVM Specification

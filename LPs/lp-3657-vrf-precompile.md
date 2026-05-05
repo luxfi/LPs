@@ -17,6 +17,16 @@ tags: [evm, precompile, cryptography, vrf, randomness]
 order: 3657
 ---
 
+> **LP-134 canonical naming (2025-12-15)**: This LP predates the
+> M-Chain / F-Chain split. Per **LP-134** (Lux Chain Topology),
+> MPC ceremonies for bridge custody of external wallets (BTC, ETH, SOL,
+> etc.) now run on **M-Chain** (CGGMP21, FROST, Pulsar-general). FHE
+> compute and TFHE bootstrap-key generation run on **F-Chain**. The name
+> "T-Chain" is retained ONLY for `teleportvm` (LP-6332). Where this LP
+> says "T-Chain MPC" / "T-Chain threshold" / "T-Chain FHE" / "T-Chain
+> custody", read it as **M-Chain** (for MPC) or **F-Chain** (for FHE).
+
+
 ## Abstract
 
 LP-3657 specifies a native EVM precompile for Verifiable Random Function (VRF) operations, enabling on-chain verifiable randomness. VRFs produce pseudorandom outputs that can be cryptographically verified against a public key, making them essential for fair leader election, lottery systems, and gaming applications. This precompile supports multiple VRF constructions: ECVRF (secp256k1, Ed25519), and post-quantum Ringtail VRF.

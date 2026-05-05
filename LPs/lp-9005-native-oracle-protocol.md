@@ -16,6 +16,16 @@ implementation: https://github.com/luxfi/dex
 order: 5
 ---
 
+> **LP-134 canonical naming (2025-12-15)**: This LP predates the
+> M-Chain / F-Chain split. Per **LP-134** (Lux Chain Topology),
+> MPC ceremonies for bridge custody of external wallets (BTC, ETH, SOL,
+> etc.) now run on **M-Chain** (CGGMP21, FROST, Pulsar-general). FHE
+> compute and TFHE bootstrap-key generation run on **F-Chain**. The name
+> "T-Chain" is retained ONLY for `teleportvm` (LP-6332). Where this LP
+> says "T-Chain MPC" / "T-Chain threshold" / "T-Chain FHE" / "T-Chain
+> custody", read it as **M-Chain** (for MPC) or **F-Chain** (for FHE).
+
+
 > **Part of LP-9000 Series**: This LP is part of the [LP-9000 DEX Series](/docs/lp-9000-dex-overview/) - Lux's standalone sidecar exchange network.
 
 > **LP-9000 Series**: [LP-9000 Overview](/docs/lp-9000-dex-overview/) | [LP-9001 Trading Engine](/docs/lp-9001-dex-trading-engine/) | [LP-9002 API](/docs/lp-9002-dex-api-rpc-specification/) | [LP-9003 Performance](/docs/lp-9003-high-performance-dex-protocol/) | [LP-9004 Perpetuals](/docs/lp-9004-perpetuals-derivatives-protocol/)

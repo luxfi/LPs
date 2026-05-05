@@ -11,7 +11,7 @@ created: 2020-01-15
 requires:
   - lps-001 (Digital Securities Standard)
   - lp-6022 (Warp Messaging 2.0)
-  - lp-5013 (T-Chain MPC Custody)
+  - lp-134 (Lux Chain Topology — M-Chain MPC, supersedes lp-5013)
   - lp-6331 (B-Chain BridgeVM)
   - lp-3001 (Teleport Bridge MPC)
 references:
@@ -120,7 +120,7 @@ The destination chain tracks `processedNonces[nonce]`. A nonce can only be proce
 ### Role: BRIDGE_ROLE
 
 The `BRIDGE_ROLE` authorizes `bridgeMint()` and `bridgeRelease()`. This role must be held by:
-- A T-Chain MPC multisig (LP-5013) for production deployments
+- An M-Chain MPC multisig (per LP-134; supersedes LP-5013) for production deployments — bridge custody of external wallets
 - A Warp-verified relayer contract for automated bridging
 
 A single EOA must never hold `BRIDGE_ROLE` in production.
@@ -315,7 +315,7 @@ X-Idempotency-Key: uuid-v4
 
 ### MPC Multisig
 
-The bridge operator for production deployments is a T-Chain MPC multisig (LP-5013):
+The bridge operator for production deployments is an M-Chain MPC multisig (per LP-134; supersedes LP-5013) hosting MPC ceremonies for bridge custody of external wallets (BTC, ETH, SOL, etc.):
 
 - **Threshold**: 3-of-5 signers minimum for security token bridges
 - **Key rotation**: Quarterly, via DKG resharing (LP-5333)
@@ -340,7 +340,7 @@ Warp Message (BLS signed)
         |
         v
 +-------------------+
-| T-Chain MPC        |
+| M-Chain MPC        |
 | (threshold sign)   |
 |                    |
 | 5. Sign bridgeMint |
@@ -417,7 +417,7 @@ Compliance checks in `lock()` add ~8,000-15,000 gas (via SecurityToken._update).
 |---|---|
 | SecurityBridge contract | `github.com/luxfi/standard/contracts/securities/bridge/SecurityBridge.sol` |
 | Warp Messaging 2.0 | `lp-6022-warp-messaging-20-native-interchain-transfers.md` |
-| T-Chain MPC Custody | `lp-5013-t-chain-decentralised-mpc-custody-and-swap-signature-layer.md` |
+| M-Chain MPC Custody (per LP-134; supersedes LP-5013) | `LP-134-lux-chain-topology.md` |
 | Teleport Bridge Architecture | `lp-6332-teleport-bridge-architecture-unified-cross-chain-protocol.md` |
 | LP-001 Digital Securities | `LP-001-digital-securities.md` |
 | tZero API | https://tzero.com |

@@ -13,6 +13,16 @@ tags: [teleport, bridge, cross-chain]
 order: 329
 ---
 
+> **LP-134 canonical naming (2025-12-15)**: This LP predates the
+> M-Chain / F-Chain split. Per **LP-134** (Lux Chain Topology),
+> MPC ceremonies for bridge custody of external wallets (BTC, ETH, SOL,
+> etc.) now run on **M-Chain** (CGGMP21, FROST, Pulsar-general). FHE
+> compute and TFHE bootstrap-key generation run on **F-Chain**. The name
+> "T-Chain" is retained ONLY for `teleportvm` (LP-6332). Where this LP
+> says "T-Chain MPC" / "T-Chain threshold" / "T-Chain FHE" / "T-Chain
+> custody", read it as **M-Chain** (for MPC) or **F-Chain** (for FHE).
+
+
 ## Abstract
 
 This LP serves as the master index for the Teleport Bridge System, Lux Network's unified cross-chain protocol combining threshold cryptography, dedicated bridge chains, and smart contract custody. The Teleport system enables trustless, decentralized bridging between Lux Network and external blockchains including Ethereum, Bitcoin, Base, Arbitrum, Optimism, and Cosmos IBC chains. A single MPC-generated address works across all EVM-compatible chains, with threshold signatures (CGG21 for ECDSA, LSS for dynamic resharing, FROST for Schnorr, and Ringtail for quantum-safe extensions) ensuring no single party controls bridged funds. This index provides navigation to all related LPs, summarizes system architecture, and serves as the entry point for understanding the complete bridge infrastructure.

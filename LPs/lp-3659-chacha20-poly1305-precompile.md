@@ -17,6 +17,16 @@ tags: [evm, precompile, cryptography, encryption, chacha20, aead]
 order: 3659
 ---
 
+> **LP-134 canonical naming (2025-12-15)**: This LP predates the
+> M-Chain / F-Chain split. Per **LP-134** (Lux Chain Topology),
+> MPC ceremonies for bridge custody of external wallets (BTC, ETH, SOL,
+> etc.) now run on **M-Chain** (CGGMP21, FROST, Pulsar-general). FHE
+> compute and TFHE bootstrap-key generation run on **F-Chain**. The name
+> "T-Chain" is retained ONLY for `teleportvm` (LP-6332). Where this LP
+> says "T-Chain MPC" / "T-Chain threshold" / "T-Chain FHE" / "T-Chain
+> custody", read it as **M-Chain** (for MPC) or **F-Chain** (for FHE).
+
+
 ## Abstract
 
 LP-3659 specifies a native EVM precompile for ChaCha20-Poly1305 authenticated encryption with associated data (AEAD). ChaCha20-Poly1305 is a high-performance symmetric cipher standardized in RFC 8439, widely used in TLS 1.3, WireGuard, and secure messaging. This precompile enables efficient on-chain encryption, secure key exchange completion, and confidential data handling.

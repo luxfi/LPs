@@ -15,7 +15,7 @@ order: 1100
 
 ## Abstract
 
-This LP defines a standard for bridged assets on the Lux Network, including tokens bridged from external chains (like Bitcoin, Ethereum, BSC) through the T-Chain bridge. It specifies interfaces for minting, burning, and managing bridged tokens while maintaining security, tracking origin chains, and enabling cross-chain composability.
+This LP defines a standard for bridged assets on the Lux Network, including tokens bridged from external chains (like Bitcoin, Ethereum, BSC) through the M-Chain MPC bridge custody (per LP-134). It specifies interfaces for minting, burning, and managing bridged tokens while maintaining security, tracking origin chains, and enabling cross-chain composability.
 
 ## Motivation
 
@@ -478,7 +478,7 @@ forge coverage --match-path test/tokens/\*
 | setFeeConfig | ~60,000 | ~1.5ms |
 | submitReserveProof | ~150,000 | ~3.7ms |
 
-### Integration with T-Chain Bridge
+### Integration with M-Chain Bridge (per LP-134)
 
 **Location**: `~/work/lux/bridge/src/mchain/`
 

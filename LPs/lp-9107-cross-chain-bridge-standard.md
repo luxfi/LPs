@@ -13,6 +13,16 @@ tags: [bridge, teleport, cross-chain, mpc, erc20b]
 order: 9107
 ---
 
+> **LP-134 canonical naming (2025-12-15)**: This LP predates the
+> M-Chain / F-Chain split. Per **LP-134** (Lux Chain Topology),
+> MPC ceremonies for bridge custody of external wallets (BTC, ETH, SOL,
+> etc.) now run on **M-Chain** (CGGMP21, FROST, Pulsar-general). FHE
+> compute and TFHE bootstrap-key generation run on **F-Chain**. The name
+> "T-Chain" is retained ONLY for `teleportvm` (LP-6332). Where this LP
+> says "T-Chain MPC" / "T-Chain threshold" / "T-Chain FHE" / "T-Chain
+> custody", read it as **M-Chain** (for MPC) or **F-Chain** (for FHE).
+
+
 ## Abstract
 
 This LP defines the Cross-Chain Bridge Standard for the Lux Network, documenting the bridge/teleport protocols at `/Users/z/work/lux/standard/src/teleport/`. The standard specifies the `Bridge.sol` contract architecture using MPC (Multi-Party Computation) oracle verification, the `ERC20B` bridgeable token standard, and signature verification using ECDSA with threshold signing. This enables seamless asset transfers between Lux C-Chain, Ethereum, Hanzo EVM, Zoo EVM, and other supported chains.

@@ -96,7 +96,7 @@ B-Chain bridge: 5 bps on bridged amount, split:
   20% to B-Chain liquidity providers
   10% to Q-Chain for finality stamping
 O-Chain oracle: per-feed subscription fee, 100% to data providers
-T-Chain signing: per-session fee, 100% to session participants
+M-Chain signing: per-session fee, 100% to session participants (MPC ceremonies for external-wallet bridge custody, per LP-134)
 K-Chain keygen: per-DKG fee, 100% to DKG participants
 ```
 
