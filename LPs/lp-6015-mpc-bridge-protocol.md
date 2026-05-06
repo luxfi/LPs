@@ -264,8 +264,8 @@ go test -tags=integration ./...
 
 ### Related LPs
 
-- **LP-13**: T-Chain Specification (custody layer)
-- **LP-14**: T-Chain Threshold Signatures (signing protocol)
+- **LP-13**: M-Chain Specification (MPC custody layer, per LP-134; formerly T-Chain)
+- **LP-14**: M-Chain Threshold Signatures (MPC signing protocol, per LP-134)
 - **LP-15**: MPC Bridge Protocol (this LP)
 - **LP-16**: Teleport Protocol (transfer layer)
 - **LP-17**: Bridge Asset Registry (asset tracking)

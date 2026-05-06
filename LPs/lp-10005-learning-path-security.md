@@ -71,11 +71,11 @@ After completing this path, you will understand:
 | 6 | [LP-0317](/docs/lp-0317-slh-dsa-stateless-hash-based-digital-signatures/) | SLH-DSA | 20 min | Medium |
 | 7 | [LP-0318](/docs/lp-0318-ml-kem-post-quantum-key-encapsulation/) | ML-KEM | 25 min | Deep |
 
-### Stage 3: MPC Attack Surfaces (T-Chain)
+### Stage 3: MPC Attack Surfaces (M-Chain, per LP-134)
 
 | Order | LP | Title | Time | Depth |
 |-------|-----|-------|------|-------|
-| 8 | [LP-7000](/docs/lp-7000-t-chain-threshold-specification/) | T-Chain Architecture | 30 min | Deep |
+| 8 | [LP-7000](/docs/lp-7000-t-chain-threshold-specification/) | M-Chain Architecture (formerly T-Chain) | 30 min | Deep |
 | 9 | [LP-0104](/docs/lp-0104-frost---flexible-round-optimized-schnorr-threshold-signatures-for-eddsa/) | FROST Security Model | 25 min | Deep |
 | 10 | [LP-0014](/docs/lp-0014-t-chain-threshold-signatures-with-cgg21-uc-non-interactive-ecdsa/) | CGGMP21 Analysis | 25 min | Deep |
 | 11 | [LP-0324](/docs/lp-0324-ringtail-threshold-signature-precompile/) | Ringtail (PQ Threshold) | 25 min | Deep |

@@ -55,7 +55,7 @@ HPKE (RFC 9180) provides:
 | Off-Chain Messaging | Encrypted messages with blockchain identities | Base/PSK |
 | Cross-Chain Secrets | Encrypted data for Warp messages | Auth |
 | Privacy-Preserving Oracles | Encrypt query/response data | AuthPSK |
-| Threshold Decryption | T-Chain distributed decryption | Base |
+| Threshold Decryption | M-Chain distributed decryption (MPC ceremonies, per LP-134) | Base |
 
 ## Specification
 

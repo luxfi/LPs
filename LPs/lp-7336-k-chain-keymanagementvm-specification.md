@@ -54,7 +54,7 @@ K-Chain implements the KeyManagementVM, a purpose-built virtual machine that pro
 
 1. **ML-KEM Key Encapsulation** - NIST FIPS 203 compliant post-quantum key encapsulation mechanism based on Module-Lattice cryptography (derived from CRYSTALS-Kyber)
 2. **Encrypted Secret Storage** - On-chain storage for encrypted secrets with envelope encryption (DEK/KEK model)
-3. **T-Chain Integration** - Threshold decryption via Linear Secret Sharing for distributed key custody
+3. **M-Chain Integration** - Threshold decryption via Linear Secret Sharing for distributed key custody
 4. **Policy-Based Access Control** - Fine-grained authorization for secret access with time-locks and multi-party approval
 
 K-Chain serves as the quantum-resistant key management layer for the Lux Network, providing HSM-like functionality on-chain for bridge message encryption, private smart contract state, credential storage, and enterprise key management.
@@ -92,7 +92,7 @@ K-Chain addresses these challenges by providing a specialized blockchain for cry
 1. **Post-Quantum Security**: ML-KEM (FIPS 203) provides lattice-based key encapsulation resistant to both classical and quantum attacks
 2. **Decentralized HSM**: On-chain key management with threshold access control eliminates single points of failure
 3. **Native Encryption Primitives**: Standard API for key generation, encapsulation, and data encryption
-4. **T-Chain Integration**: Threshold decryption ensures no single party can access secrets
+4. **M-Chain Integration**: Threshold decryption ensures no single party can access secrets
 5. **Hybrid Security**: Combined ML-KEM + ECDH provides defense-in-depth during quantum transition
 
 ### Use Cases
@@ -128,7 +128,7 @@ K-Chain is a specialized Lux chain running the KeyManagementVM:
 |          +--------------------+--------------------+                    |
 |                               |                                         |
 |                    +----------v-----------+                             |
-|                    |    T-Chain Bridge    |                             |
+|                    |    M-Chain Bridge    |                             |
 |                    |                      |                             |
 |                    | - Threshold Decrypt  |                             |
 |                    | - LSS Integration    |                             |
@@ -160,8 +160,8 @@ type KMSState struct {
     Authorizations    map[AuthID]*Authorization     // Active authorizations
     AuditLog          []AuditEntry                  // Immutable audit trail
 
-    // T-Chain Integration
-    ThresholdKeys     map[KeyID]*ThresholdKeyRef    // References to T-Chain keys
+    // M-Chain Integration
+    ThresholdKeys     map[KeyID]*ThresholdKeyRef    // References to M-Chain keys
     PendingDecrypts   map[RequestID]*DecryptRequest // Pending threshold decryptions
 
     // Protocol State
@@ -265,9 +265,9 @@ type EncryptionKey struct {
     RotatedAt       uint64                // Block height of last rotation
     Version         uint32                // Key version (incremented on rotation)
 
-    // T-Chain Binding (optional) - see LP-330 for ThresholdVM details
-    ThresholdBound  bool                  // Requires T-Chain threshold for access
-    TChainKeyID     ids.ID                // T-Chain key reference (ThresholdVM KeyID)
+    // M-Chain Binding (optional) - see LP-330 for ThresholdVM details
+    ThresholdBound  bool                  // Requires M-Chain threshold for access
+    TChainKeyID     ids.ID                // M-Chain key reference (ThresholdVM KeyID)
     Threshold       uint32                // Required threshold for decryption (t-of-n)
 
     // Status
@@ -366,7 +366,7 @@ K-Chain defines transaction types for key management operations:
 | 0xK8 | RotateKeyTx       | Rotate encryption key with re-encryption     | 200,000   |
 | 0xK9 | CreatePolicyTx    | Create access control policy                 | 75,000    |
 | 0xKA | UpdatePolicyTx    | Update access control policy                 | 50,000    |
-| 0xKB | ThresholdDecryptTx| Request threshold decryption via T-Chain     | 150,000   |
+| 0xKB | ThresholdDecryptTx| Request threshold decryption via M-Chain     | 150,000   |
 | 0xKC | HybridKeyGenTx    | Generate hybrid ML-KEM + ECDH key            | 125,000   |
 
 #### 1. KeyGenTx - Generate ML-KEM Key Pair
@@ -795,20 +795,20 @@ func (tx *StoreSecretTx) Execute(state *KMSState) (*EncryptedSecret, error) {
 }
 ```
 
-#### 5. ThresholdDecryptTx - T-Chain Integrated Decryption
+#### 5. ThresholdDecryptTx - M-Chain Integrated Decryption
 
-This transaction initiates threshold decryption via T-Chain (ThresholdVM). The workflow integrates
-with LP-330 (T-Chain ThresholdVM Specification) to provide distributed key custody without any
+This transaction initiates threshold decryption via M-Chain (MPC ceremonies). The workflow integrates
+with LP-330 (ThresholdVM Specification) to provide distributed key custody without any
 single party having access to the complete decryption key.
 
 **Cross-Chain Flow:**
 1. K-Chain receives `ThresholdDecryptTx`
-2. K-Chain validates access policy and sends Warp message to T-Chain
-3. T-Chain signers (per LP-330) provide partial decryptions
-4. When threshold (t-of-n) is reached, T-Chain sends result back to K-Chain
+2. K-Chain validates access policy and sends Warp message to M-Chain
+3. M-Chain signers (per LP-330) provide partial decryptions
+4. When threshold (t-of-n) is reached, M-Chain sends result back to K-Chain
 5. K-Chain completes decryption and delivers result via callback
 
-See [LP-330: T-Chain ThresholdVM Specification](/docs/lp-7330-t-chain-thresholdvm-specification/) for
+See [LP-330: ThresholdVM Specification](/docs/lp-7330-t-chain-thresholdvm-specification/) for
 details on threshold signature protocols (CGGMP21, FROST, LSS).
 
 ```go
@@ -819,15 +819,15 @@ import (
     "github.com/luxfi/warp"
 )
 
-// ThresholdDecryptTx requests threshold decryption via T-Chain
+// ThresholdDecryptTx requests threshold decryption via M-Chain
 type ThresholdDecryptTx struct {
     BaseTx
 
     // Secret Reference
     SecretID        ids.ID             // Secret to decrypt
 
-    // T-Chain Parameters (see LP-330 for threshold key management)
-    TChainKeyID     ids.ID             // T-Chain threshold key (ManagedKey.KeyID from LP-330)
+    // M-Chain Parameters (see LP-330 for threshold key management)
+    TChainKeyID     ids.ID             // M-Chain threshold key (ManagedKey.KeyID from LP-330)
     RequiredShares  uint32             // Minimum shares needed (must be <= threshold)
 
     // Authorization
@@ -872,7 +872,7 @@ const (
     RequestStatusExpired    RequestStatus = 0x04
 )
 
-// Execute initiates T-Chain threshold decryption
+// Execute initiates M-Chain threshold decryption (MPC ceremonies)
 func (tx *ThresholdDecryptTx) Execute(state *KMSState) (*DecryptRequest, error) {
     secret := state.Secrets[tx.SecretID]
     if secret == nil {
@@ -2456,7 +2456,7 @@ unauthenticated but may be rate-limited.
 }
 ```
 
-#### kms_thresholdDecrypt - Request T-Chain Threshold Decryption
+#### kms_thresholdDecrypt - Request M-Chain Threshold Decryption
 
 ```json
 // Request
@@ -3355,7 +3355,7 @@ const (
     // Authentication key derivation
     KDFInfoAuth = "LUX-K-Chain-Auth-v1"
 
-    // T-Chain threshold key derivation
+    // M-Chain threshold key derivation
     KDFInfoThreshold = "LUX-K-Chain-Threshold-v1"
 )
 

@@ -53,8 +53,8 @@ Ethereum L1
 │   │ Warp / IBC / SDK
 │   ▼
 ┌───┴───────────┬───────────┬────────────┐
-│ C-Chain (EVM) │ X-Chain   │ T-Chain    │ Z-Chain    │
-│               │ (AMM)     │ (MPC)      │ (zk/FHE)   │
+│ C-Chain (EVM) │ X-Chain   │ M-Chain    │ Z-Chain    │
+│               │ (AMM)     │ (MPC, per LP-134) │ (zk/FHE) │
 └───────────────┴───────────┴────────────┴────────────┘
 ```
 

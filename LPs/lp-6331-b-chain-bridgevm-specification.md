@@ -3288,7 +3288,7 @@ The insurance fund (10% of fees) covers:
 
 | LP | Title | Relationship |
 |----|-------|--------------|
-| [LP-330](/docs/lp-7330-t-chain-thresholdvm-specification/) | T-Chain ThresholdVM | MPC signing infrastructure |
+| [LP-330](/docs/lp-7330-t-chain-thresholdvm-specification/) | ThresholdVM (M-Chain MPC per LP-134) | MPC signing infrastructure |
 | [LP-332](/docs/lp-6332-teleport-bridge-architecture-unified-cross-chain-protocol/) | Teleport Bridge Architecture | High-level protocol design |
 | [LP-333](/docs/lp-7333-dynamic-signer-rotation-with-lss-protocol/) | Dynamic Signer Rotation (LSS) | Proactive key refresh |
 | [LP-334](/docs/lp-7334-per-asset-threshold-key-management/) | Per-Asset Threshold Keys | Asset isolation |

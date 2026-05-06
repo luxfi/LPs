@@ -780,7 +780,7 @@ func (p *ChaCha20Precompile) xaeadEncrypt(data []byte, suppliedGas uint64) ([]by
 |-------|-----------|-------------------------|
 | C-Chain | TEE Attestation | Encrypted attestation payloads |
 | C-Chain | Messaging | E2E encrypted messages |
-| T-Chain | Threshold | Encrypted key shares |
+| M-Chain | Threshold (MPC, per LP-134) | Encrypted key shares |
 | B-Chain | Bridge | Confidential cross-chain data |
 | All | Key Exchange | X25519 + ChaCha20-Poly1305 |
 

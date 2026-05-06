@@ -3496,7 +3496,7 @@ The Lux Bridge operates a bug bounty program to incentivize responsible disclosu
 | Component | In Scope | Out of Scope |
 |-----------|----------|--------------|
 | Bridge smart contracts (all chains) | Yes | Third-party dependencies |
-| T-Chain threshold VM | Yes | Lux consensus layer |
+| M-Chain threshold VM (MPC ceremonies, per LP-134) | Yes | Lux consensus layer |
 | B-Chain bridge VM | Yes | External chain bugs |
 | Relayer network | Yes | Social engineering |
 | Signer infrastructure | Yes (with restrictions) | Physical attacks |

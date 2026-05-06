@@ -196,7 +196,7 @@ An LP (Lux Proposal) is a design document describing a feature, standard, or pro
 | **Q-Chain** | Post-quantum operations | 4000-4999 |
 | **A-Chain** | AI and attestation | 5000-5999 |
 | **B-Chain** | Bridging | 6000-6999 |
-| **T-Chain** | Threshold cryptography | 7000-7999 |
+| **M-Chain** | MPC ceremonies / threshold cryptography (per LP-134) | 7000-7999 |
 | **Z-Chain** | Zero-knowledge proofs | 8000-8999 |
 | **DEX** | Trading infrastructure | 9000-9999 |
 
@@ -272,8 +272,8 @@ Lux implements a heterogeneous multi-chain architecture where each chain runs a 
             |                 |                 |
             v                 v                 v
 +---------------------+ +--------------+ +------------------+
-|      T-Chain        | |   Q-Chain    | |     B-Chain      |
-|    (Threshold)      | |  (Quantum)   | |    (Bridge)      |
+|      M-Chain        | |   Q-Chain    | |     B-Chain      |
+|   (MPC Ceremonies)  | |  (Quantum)   | |    (Bridge)      |
 +---------------------+ +--------------+ +------------------+
 | - FROST/CGGMP       | | - ML-KEM     | | - Cross-chain    |
 | - Ringtail          | | - ML-DSA     | | - Asset registry |
@@ -302,7 +302,7 @@ Each chain runs a dedicated VM from the node codebase:
 | P-Chain | platformvm | `vms/platformvm/` | Validator sets, staking, L1/L2/L3 chains |
 | C-Chain | cchainvm | `vms/cchainvm/` | EVM-compatible smart contracts |
 | X-Chain | exchangevm | `vms/exchangevm/` | UTXO-based asset exchange |
-| T-Chain | thresholdvm | `vms/thresholdvm/` | Threshold signatures |
+| M-Chain | thresholdvm (mvm) | `vms/thresholdvm/` | MPC ceremonies / threshold signatures (per LP-134) |
 | Q-Chain | quantumvm | `vms/quantumvm/` | Post-quantum cryptography |
 | B-Chain | bridgevm | `vms/bridgevm/` | Cross-chain bridging |
 | A-Chain | aivm | `vms/aivm/` | AI attestation |
@@ -467,7 +467,7 @@ node/
 │   ├── platformvm/    # P-Chain
 │   ├── cchainvm/      # C-Chain (EVM)
 │   ├── exchangevm/    # X-Chain
-│   ├── thresholdvm/   # T-Chain
+│   ├── thresholdvm/   # M-Chain (MPC ceremonies, per LP-134)
 │   ├── quantumvm/     # Q-Chain
 │   ├── bridgevm/      # B-Chain
 │   ├── aivm/          # A-Chain

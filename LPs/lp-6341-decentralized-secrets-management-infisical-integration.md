@@ -3350,12 +3350,12 @@ type E2EEncryption struct {
 ```go
 // ThresholdProtection requires multi-party approval for sensitive secrets
 type ThresholdProtection struct {
-    TChainKeyID    ids.ID   // T-Chain threshold key
+    TChainKeyID    ids.ID   // M-Chain threshold key
     Threshold      uint32   // Required signers
     Signers        []ids.ID // Authorized signers
 }
 
-// RequestThresholdDecryption initiates T-Chain decryption
+// RequestThresholdDecryption initiates M-Chain decryption (MPC ceremonies)
 func (s *SecretService) RequestThresholdDecryption(ctx context.Context, secretID ids.ID) (*DecryptRequest, error) {
     secret := s.state.Secrets[secretID]
     env := s.state.Environments[secret.EnvID]
@@ -3364,8 +3364,8 @@ func (s *SecretService) RequestThresholdDecryption(ctx context.Context, secretID
         return nil, fmt.Errorf("secret not threshold protected")
     }
 
-    // Submit to T-Chain for threshold decryption
-    // See LP-330 for T-Chain ThresholdVM specification
+    // Submit to M-Chain for threshold decryption (MPC ceremonies per LP-134)
+    // See LP-330 for ThresholdVM specification
     return s.tchain.RequestThresholdDecrypt(ctx, &tchain.ThresholdDecryptRequest{
         KeyID:          env.ThresholdKeyID,
         Ciphertext:     secret.KChainSecretID, // Reference to K-Chain encrypted data
@@ -4092,7 +4092,7 @@ This specification implements multiple layers of security for secrets management
 
 4. **Access Control**: Fine-grained RBAC with environment-based access policies. All access is audited on-chain for compliance.
 
-5. **Threshold Signature Integration**: Critical operations require T-Chain threshold signatures, preventing single-point-of-compromise attacks.
+5. **Threshold Signature Integration**: Critical operations require M-Chain MPC threshold signatures (per LP-134), preventing single-point-of-compromise attacks.
 
 6. **Post-Quantum Cryptography**: ML-KEM encryption ensures long-term security against future quantum computing attacks.
 
@@ -4102,7 +4102,7 @@ See Section "Security Considerations" within the Specification for detailed impl
 
 ## References
 
-1. [LP-330](/docs/lp-7330-t-chain-thresholdvm-specification/) - T-Chain ThresholdVM Specification
+1. [LP-330](/docs/lp-7330-t-chain-thresholdvm-specification/) - ThresholdVM Specification (M-Chain MPC ceremonies per LP-134)
 2. [LP-336](/docs/lp-7336-k-chain-keymanagementvm-specification/) - K-Chain KeyManagementVM Specification
 3. Infisical Documentation - https://infisical.com/docs
 4. HashiCorp Vault - https://www.vaultproject.io/docs

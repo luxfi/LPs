@@ -367,8 +367,8 @@ go test ./protocols/frost -run Threshold -v
 
 - **LP-7014**: CMP/CGG21 Protocol (ECDSA threshold)
 - **LP-7103**: LSS Protocol (dynamic resharing)
-- **LP-7330**: T-Chain ThresholdVM (VM integration)
-- **LP-13**: T-Chain Specification
+- **LP-7330**: ThresholdVM (M-Chain MPC ceremonies, per LP-134)
+- **LP-13**: M-Chain (formerly T-Chain) Specification
 
 ## Future Enhancements
 

@@ -237,13 +237,13 @@ Each LP MUST declare exactly one status:
 
 ---
 
-#### 7000–7999: Threshold / MPC (T-Chain)
+#### 7000–7999: Threshold / MPC (M-Chain, per LP-134)
 
-**Purpose**: Threshold signatures, MPC, custody.
+**Purpose**: Threshold signatures, MPC ceremonies, bridge custody.
 
 | Sub-range | Purpose |
 |-----------|---------|
-| 7000–7099 | T-Chain core |
+| 7000–7099 | M-Chain core (MPC ceremonies, per LP-134) |
 | 7100–7199 | Signing networks (FROST, CGGMP) |
 | 7200–7299 | DKG & resharing |
 | 7300–7399 | Custody, vaults |

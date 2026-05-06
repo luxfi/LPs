@@ -877,7 +877,7 @@ func padMessage(msg []byte) []byte {
 | **P-Chain Validators** | LSS + FROST | Validator key rotation | Epoch boundaries |
 | **C-Chain Multisig** | LSS + CGGMP21 | Contract upgrades | On-demand |
 | **Q-Chain Bridge** | LSS + FROST | Guardian rotation | Weekly/Monthly |
-| **T-Chain Threshold** | LSS + CGGMP21 | Key policy changes | On-demand |
+| **M-Chain Threshold** (MPC, per LP-134) | LSS + CGGMP21 | Key policy changes | On-demand |
 | **Cross-Chain Warp** | LSS + FROST | Relayer key updates | Hourly |
 | **Safe Module** | LSS + CGGMP21 | Institutional custody | Quarterly |
 
