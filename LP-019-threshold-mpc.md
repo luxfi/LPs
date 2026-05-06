@@ -451,7 +451,7 @@ The cert lanes on M-Chain are:
 | M-Chain (MPC, see LP-134) — ceremony host | LP-134 §M-Chain |
 | F-Chain (FHE keygen, see LP-134) — bootstrap-key ceremonies | LP-134 §F-Chain |
 | Shared substrate library (M-Chain + F-Chain) | `~/work/lux/chains/thresholdvm` |
-| LP-5013 T-Chain MPC Custody (deprecated, superseded 2025-12-25) | historical |
+| LP-5013 M-Chain MPC Custody (per LP-134; was T-Chain pre-2025-12-25) | historical |
 | DKG Resharing | `lp-5333-dkg-resharing.md` |
 | FROST paper | Komlo & Goldberg, "FROST: Flexible Round-Optimized Schnorr Threshold Signatures" (2020) |
 | CGGMP21 paper | Canetti et al., "UC Non-Interactive, Proactive, Threshold ECDSA with Identifiable Aborts" (2021) |

@@ -25,7 +25,9 @@ order: 1137
 
 ## Abstract
 
-This LP provides a deep-integration blueprint to migrate the legacy swaps REST API (`app/server/src/routes/swaps.ts`) into a fully on-chain workflow across T-Chain, X-Chain, and Z-Chain, eliminating centralized swap servers and off-chain key-managers.
+> Per **LP-134** (Lux Chain Topology), the MPC ceremonies described below run on **M-Chain (MVM)**. The filename and historical title are preserved for URL stability; in body text, "T-Chain (MPC)" is now M-Chain. The unqualified token "T-Chain" in this LP refers to MPC swap signing — read it as M-Chain unless explicitly tagged as `teleportvm`.
+
+This LP provides a deep-integration blueprint to migrate the legacy swaps REST API (`app/server/src/routes/swaps.ts`) into a fully on-chain workflow across M-Chain (per LP-134; previously T-Chain), X-Chain, and Z-Chain, eliminating centralized swap servers and off-chain key-managers.
 
 ## Motivation
 
@@ -54,7 +56,7 @@ The existing bridge back-end exposes HTTP routes:
 | Chain   | Role for swaps                                                                                           |
 |---------|----------------------------------------------------------------------------------------------------------|
 | X-Chain | `SwapTx` locks escrow funds; emits SwapID = txID; user intent                                     |
-| T-Chain | `SwapSigTx` contains aggregate MPC signature + proof of quorum; slashing for non-participation     |
+| M-Chain | `SwapSigTx` contains aggregate MPC signature + proof of quorum; slashing for non-participation (per LP-134; previously T-Chain) |
 | Z-Chain | (optional) privacy layer: `zSwapDeposit` → commitment; `zSwapRedeem` → shielded withdrawal proof     |
 
 ### 3 On-Chain Data Structures
@@ -80,10 +82,10 @@ Pain points:
 | Chain   | Role for swaps                                                                                           |
 |---------|----------------------------------------------------------------------------------------------------------|
 | X-Chain | `SwapTx` locks escrow funds; emits SwapID = txID; user intent                                     |
-| T-Chain | `SwapSigTx` contains aggregate MPC signature + proof of quorum; slashing for non-participation     |
+| M-Chain | `SwapSigTx` contains aggregate MPC signature + proof of quorum; slashing for non-participation (per LP-134; previously T-Chain) |
 | Z-Chain | (optional) privacy layer: `zSwapDeposit` → commitment; `zSwapRedeem` → shielded withdrawal proof     |
 
-After signing on T-Chain, X-Chain light-client proof unlocks escrow and relays native transaction. Privacy flag routes via Z-Chain.
+After signing on M-Chain (per LP-134), X-Chain light-client proof unlocks escrow and relays native transaction. Privacy flag routes via Z-Chain.
 
 ## 2 On-Chain Data Structures
 
@@ -105,7 +107,7 @@ type SwapTx struct {
 
 Funds lock to SwapFx until SwapSigTx appears; SwapID = txID.
 
-### 2.2 SwapSigTx (T-Chain)
+### 2.2 SwapSigTx (M-Chain, per LP-134)
 ```go
 type SwapSigTx struct {
     BaseTx
@@ -116,7 +118,7 @@ type SwapSigTx struct {
     ProofHash [32]byte
 }
 ```
-On seeing SwapTx, validators form threshold signature off-chain and submit SwapSigTx on T-Chain.
+On seeing SwapTx, validators form threshold signature off-chain and submit SwapSigTx on M-Chain (per LP-134).
 
 ### 3 Transaction Flow
 
@@ -124,11 +126,11 @@ On seeing SwapTx, validators form threshold signature off-chain and submit SwapS
 sequenceDiagram
     User->>Wallet: create swap (BTC→wBTC,0.1)
     Wallet-->>X-Chain: broadcast SwapTx
-    X-Chain->>T-Chain: watch SwapRequested event
-    T-Chain->>MPC Nodes: gather shares
-    MPC Nodes-->>T-Chain: threshold signature
-    T-Chain-->>T-Chain: submit SwapSigTx
-    T-Chain-->>X-Chain: WarpMsg proof
+    X-Chain->>M-Chain: watch SwapRequested event
+    M-Chain->>MPC Nodes: gather shares
+    MPC Nodes-->>M-Chain: threshold signature
+    M-Chain-->>M-Chain: submit SwapSigTx
+    M-Chain-->>X-Chain: WarpMsg proof
     X-Chain-->>X-Chain: unlock escrow, mark FINAL
     X-Chain-->>BTC: broadcast native txn
     BTC-->>User: funds arrive
@@ -142,14 +144,14 @@ sequenceDiagram
 |-----------------------|----------------------------------------|------------------------------|
 | POST /swaps           | dex.swap.submit({txHex})               | X-Chain dex.swap.submit      |
 | GET /swaps/:id        | dex.swap.status({swapID})              | X-Chain dex.swap.status      |
-| POST /swaps/:id/sign  | (no-op, automated on T-Chain)          |                              |
+| POST /swaps/:id/sign  | (no-op, automated on M-Chain per LP-134)|                          |
 | POST /swaps/:id/finalize | (no-op, automated on SwapSig detection)|                          |
 
 ### 5 Validator & MPC Stack
 
 ```
 X-Chain Node (luxd + DexFx)  <-->  dexfx plugin verifies SwapTx, watches proofs
-T-Chain Node (luxd + mpckeyd) <-->  mpckeyd holds key shares, exposes gRPC sign_swap
+M-Chain Node (luxd + mpckeyd, per LP-134) <-->  mpckeyd holds key shares, exposes gRPC sign_swap
 ```
 
 ### 6 State Diagrams
@@ -172,7 +174,7 @@ Privacy flag triggers Z-Chain peg, shielded mint, and zSwapRedeem → zk-proof w
 | Legacy Server Code     | New On-Chain Location                    |
 |------------------------|-------------------------------------------|
 | DB Swaps table         | dex.swap.history indexer                  |
-| Signature worker       | mpckeyd daemon on T-Chain                 |
+| Signature worker       | mpckeyd daemon on M-Chain (per LP-134)    |
 | REST routes            | JSON-RPC + WS dex.swap.*                  |
 | Polling & webhooks     | WS push feeds and RPC responses           |
 
@@ -208,7 +210,7 @@ MPC signers burn stake on misbehavior; relayer gas paid by fees built into SwapT
 
 **Location**: `~/work/lux/node/vms/xvm/` and `~/work/lux/node/vms/`
 
-**T-Chain Signing**: See [LP-7319: T-Chain MPC Custody](/docs/lp-7319-t-chain-decentralised-mpc-custody/) for MPC signing coordination.
+**M-Chain Signing** (per LP-134): See [LP-7319: M-Chain MPC Custody (was T-Chain MPC)](/docs/lp-7319-t-chain-decentralised-mpc-custody/) for MPC signing coordination. Per LP-134 the legacy "T-Chain (MPC)" name is now M-Chain (MVM); the filename is preserved for URL stability.
 
 **SwapTx State Machine**:
 ```go
@@ -223,7 +225,7 @@ const (
 )
 
 func (tx *SwapTx) Status() SwapStatus {
-    // Check if SwapSigTx exists on T-Chain
+    // Check if SwapSigTx exists on M-Chain (per LP-134)
     if mproof := getLightClientProof(tx.SwapID); mproof != nil {
         if isExpired(tx) {
             return EXPIRED

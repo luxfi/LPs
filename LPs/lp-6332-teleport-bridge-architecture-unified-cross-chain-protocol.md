@@ -821,7 +821,7 @@ interface ITeleportVault {
 contract TeleportVault is ITeleportVault, ReentrancyGuard, Pausable {
     using SafeERC20 for IERC20;
 
-    address public mpcSigner;  // T-Chain MPC address
+    address public mpcSigner;  // M-Chain MPC address (per LP-134)
     uint256 public depositNonce;
     uint256 public minConfirmations = 12;
 

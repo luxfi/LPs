@@ -212,7 +212,8 @@ The DeFi ecosystem on Lux is rapidly expanding with various protocols for lendin
 ## Related Specifications
 
 ### Infrastructure
-- [LP-13: T-Chain MPC Bridge](/docs/lp-13-t-chain-decentralised-mpc-custody-and-swap-signature-layer/)
+- [LP-134: Lux Chain Topology — M-Chain + F-Chain split](/docs/lp-134/)
+- [LP-13: M-Chain MPC Bridge (per LP-134; was T-Chain MPC)](/docs/lp-13-t-chain-decentralised-mpc-custody-and-swap-signature-layer/)
 - [LP-15: MPC Bridge Protocol](/docs/lp-15-mpc-bridge-protocol/)
 
 ### Development

@@ -24,6 +24,8 @@ order: 112
 
 ## Abstract
 
+> Per **LP-134** (Lux Chain Topology), this research has been retroactively remapped: where it discusses "T-Chain MPC" infrastructure, the canonical post-LP-134 location is **M-Chain (MVM)** for MPC ceremonies on bridge custody of external wallets. The legacy "T-Chain" name is retained only for `teleportvm` (LP-6332).
+
 This research LP analyzes cross-chain messaging architectures for the Lux Network, examining how messages, state, and assets can be securely communicated across Lux's eight chains and external blockchains. It investigates current implementations, security models, and provides recommendations for building robust cross-chain communication infrastructure.
 
 ## Motivation
@@ -38,9 +40,9 @@ Effective cross-chain messaging is crucial for:
 
 ## Current Implementation
 
-### T-Chain Bridge Repository
+### M-Chain Bridge Repository (per LP-134)
 - **GitHub**: https://github.com/luxfi/bridge
-- **Technology**: MPC-based message passing
+- **Technology**: MPC-based message passing on M-Chain (CGGMP21 / FROST ceremonies)
 - **Status**: Production on testnet
 
 ### Teleporter Protocol
@@ -68,7 +70,7 @@ interface CrossChainArchitecture {
   };
   
   supported_chains: {
-    internal: ["P-Chain", "X-Chain", "C-Chain", "T-Chain", "Z-Chain"];
+    internal: ["P-Chain", "X-Chain", "C-Chain", "M-Chain", "F-Chain", "Z-Chain"];
     external: ["Ethereum", "BSC", "Lux", "Polygon"];
   };
 }
@@ -139,7 +141,7 @@ interface SecurityModels {
   mpc_based: {
     pros: ["No single point of failure", "Flexible threshold", "Chain agnostic"];
     cons: ["Complex key management", "Slower consensus", "Liveness assumptions"];
-    implementation: "T-Chain with CGG21";
+    implementation: "M-Chain with CGG21 (per LP-134)";
   };
   
   light_client: {
@@ -317,7 +319,7 @@ recommended_architecture:
     cost: "Minimal"
   
   external_chains:  # To/from external blockchains
-    protocol: "T-Chain MPC Bridge"
+    protocol: "M-Chain MPC Bridge (per LP-134)"
     security: "Threshold signatures"
     latency: "2-5 minutes"
     cost: "Variable based on destination"

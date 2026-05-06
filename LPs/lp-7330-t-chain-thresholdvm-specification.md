@@ -90,7 +90,7 @@ T-Chain addresses these challenges by providing:
 ### Use Cases
 
 - **B-Chain Bridge Custody**: Threshold control of bridge vault addresses
-- **T-Chain Swap Signatures**: Distributed signing for cross-chain swaps
+- **M-Chain Swap Signatures** (per LP-134): Distributed signing for cross-chain swaps
 - **DAO Treasury Management**: Multi-party control of protocol funds
 - **Validator Key Rotation**: Seamless transition between validator sets
 - **Cross-Chain Oracle Signing**: Threshold attestation for oracle data
@@ -111,7 +111,7 @@ T-Chain is a specialized Lux chain running the ThresholdVM:
 |  |   Requests        |    |                   |    |                  | |
 |  +-------------------+    +-------------------+    +------------------+ |
 |  | SignRequest       |    | ThresholdVM       |    | B-Chain Bridge   | |
-|  | KeyGenRequest     |    | LSS Key Manager   |    | T-Chain MPC      | |
+|  | KeyGenRequest     |    | LSS Key Manager   |    | M-Chain MPC*     | |
 |  | ReshareRequest    |    | Session Orchestr. |    | DAO Contracts    | |
 |  | RefreshRequest    |    | Signature Agg.    |    | Oracle Services  | |
 |  +-------------------+    +-------------------+    +------------------+ |
@@ -125,6 +125,8 @@ T-Chain is a specialized Lux chain running the ThresholdVM:
 |  +-------------------------------------------------------------------+ |
 |                                                                         |
 +-------------------------------------------------------------------------+
+
+* Per LP-134, the "T-Chain MPC" consumer in this diagram is now M-Chain (MVM).
 ```
 
 ### Core Components
@@ -2554,18 +2556,18 @@ T-Chain is a new chain; no backwards compatibility concerns.
 
 ### Integration with Existing Chains
 
-- **B-Chain**: Uses T-Chain for bridge vault signatures via Warp messaging
-- **T-Chain**: Uses T-Chain for swap signatures
-- **C-Chain**: Contracts can request signatures via T-Chain precompile
+- **B-Chain**: Uses M-Chain (per LP-134) for bridge vault signatures via Warp messaging
+- **M-Chain (MVM)**: Hosts the swap-signature ceremonies originally specified for T-Chain
+- **C-Chain**: Contracts can request signatures via M-Chain precompile (per LP-134)
 
-### Migration from T-Chain MPC
+### Migration to M-Chain (per LP-134)
 
-Existing T-Chain MPC operations can migrate to T-Chain:
+> Per **LP-134**, the ThresholdVM substrate now powers M-Chain (MVM) for MPC ceremonies on bridge custody of external wallets. Existing operations migrate as follows:
 
-1. Register existing keys on T-Chain via `KeyGenTx` with known public keys
+1. Register existing keys on M-Chain via `KeyGenTx` with known public keys
 2. Run parallel signing during transition
-3. Update consumers to use T-Chain RPC
-4. Deprecate T-Chain MPC endpoints
+3. Update consumers to use M-Chain RPC (was T-Chain RPC pre-LP-134)
+4. Deprecate legacy T-Chain MPC endpoints; "T-Chain" name now reserved for `teleportvm` (LP-6332)
 
 ## Test Cases
 

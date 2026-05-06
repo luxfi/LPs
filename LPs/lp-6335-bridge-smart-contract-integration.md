@@ -1,7 +1,7 @@
 ---
 lp: 6335
 title: Bridge Smart Contract Integration
-description: Specification for bridge smart contract integration with T-Chain MPC threshold signatures and B-Chain bridge coordination
+description: Specification for bridge smart contract integration with M-Chain MPC threshold signatures (per LP-134) and B-Chain bridge coordination
 author: Lux Partners (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
 status: Draft
@@ -25,13 +25,15 @@ order: 335
 
 ## Abstract
 
-This LP specifies the smart contract architecture for integrating the Lux Bridge with T-Chain's Multi-Party Computation (MPC) threshold signature infrastructure and B-Chain's bridge coordination layer. The bridge contract suite enables trustless, decentralized cross-chain asset transfers by verifying threshold signatures produced by the T-Chain validator committee. The specification covers five core contracts: BridgeVault (asset custody), BridgeRouter (transaction routing), TokenRegistry (cross-chain asset mapping), BridgeGovernor (parameter governance), and EmergencyBrake (circuit breaker). Together, these contracts provide a complete, auditable on-chain bridge system that replaces centralized custody with cryptographic guarantees from CGG21/CGGMP21 threshold ECDSA signatures, enabling secure transfers between LUX, ZOO, Ethereum, Base, Arbitrum, and other EVM-compatible chains.
+> Per **LP-134** (Lux Chain Topology), MPC ceremonies for bridge custody of external wallets run on **M-Chain (MVM)**. References below to "T-Chain MPC" mean M-Chain post-LP-134; the legacy "T-Chain" name is retained only for `teleportvm` (LP-6332).
+
+This LP specifies the smart contract architecture for integrating the Lux Bridge with M-Chain's Multi-Party Computation (MPC) threshold signature infrastructure and B-Chain's bridge coordination layer. The bridge contract suite enables trustless, decentralized cross-chain asset transfers by verifying threshold signatures produced by the M-Chain validator committee. The specification covers five core contracts: BridgeVault (asset custody), BridgeRouter (transaction routing), TokenRegistry (cross-chain asset mapping), BridgeGovernor (parameter governance), and EmergencyBrake (circuit breaker). Together, these contracts provide a complete, auditable on-chain bridge system that replaces centralized custody with cryptographic guarantees from CGG21/CGGMP21 threshold ECDSA signatures, enabling secure transfers between LUX, ZOO, Ethereum, Base, Arbitrum, and other EVM-compatible chains.
 
 ## Related Specifications
 
 This LP is part of the Teleport Bridge architecture and coordinates with:
 
-- **[LP-0330](/docs/lp-7330-t-chain-thresholdvm-specification/)**: T-Chain ThresholdVM - MPC key generation and threshold signatures
+- **[LP-0330](/docs/lp-7330-t-chain-thresholdvm-specification/)**: ThresholdVM substrate (per LP-134, now hosting M-Chain MPC + F-Chain FHE; URL preserved)
 - **[LP-0331](/docs/lp-6331-b-chain-bridgevm-specification/)**: B-Chain BridgeVM - Bridge operation coordination and asset tracking
 - **[LP-0332](/docs/lp-6332-teleport-bridge-architecture-unified-cross-chain-protocol/)**: Teleport Architecture - Unified cross-chain protocol overview
 - **[LP-0333](/docs/lp-7333-dynamic-signer-rotation-with-lss-protocol/)**: LSS Protocol - Dynamic signer rotation without key changes
@@ -43,7 +45,7 @@ Cross-chain bridges are high-value targets with billions lost to exploits. The L
 
 1. **Decentralized Custody**: MPC threshold signatures eliminate single points of failure. No individual party controls bridge funds; a 2/3+1 threshold of validators must cooperate to authorize releases.
 
-2. **On-Chain Verification**: All signature verification occurs on-chain via ECDSA recovery, providing full transparency and auditability. The T-Chain MPC signer address is the sole authority for release authorization.
+2. **On-Chain Verification**: All signature verification occurs on-chain via ECDSA recovery, providing full transparency and auditability. The M-Chain MPC signer address (per LP-134) is the sole authority for release authorization.
 
 3. **Replay Protection**: Nonce-based transaction tracking prevents signature reuse. Each release operation requires a unique transaction identifier that is permanently recorded on-chain.
 
@@ -71,8 +73,9 @@ Cross-chain bridges are high-value targets with billions lost to exploits. The L
          |
          v
 +------------------+
-|    T-Chain MPC   |
+|    M-Chain MPC   |
 | (Threshold Sig)  |
+| (per LP-134)     |
 +------------------+
 ```
 
@@ -240,7 +243,7 @@ import "@openzeppelin/contracts/utils/Pausable.sol";
 /**
  * @title BridgeVault
  * @notice Holds bridged assets and releases on valid MPC signature
- * @dev Uses ECDSA signature verification against T-Chain MPC threshold address
+ * @dev Uses ECDSA signature verification against M-Chain MPC threshold address (per LP-134)
  *      Integrates with B-Chain for deposit observation and withdrawal coordination
  *      See LP-0335 for full specification
  */
@@ -269,7 +272,7 @@ contract BridgeVault is IBridgeVault, AccessControl, ReentrancyGuard, Pausable {
 
     // ============ State Variables ============
 
-    /// @notice Current MPC threshold signer address (derived from T-Chain DKG)
+    /// @notice Current MPC threshold signer address (derived from M-Chain DKG, per LP-134)
     address public override mpcSigner;
 
     /// @notice Pending signer update (for timelock)
@@ -421,7 +424,7 @@ contract BridgeVault is IBridgeVault, AccessControl, ReentrancyGuard, Pausable {
             abi.encodePacked("\x19\x01", DOMAIN_SEPARATOR, structHash)
         );
 
-        // Recover signer and validate against T-Chain MPC address
+        // Recover signer and validate against M-Chain MPC address (per LP-134)
         address recoveredSigner = digest.recover(signature);
         require(recoveredSigner == mpcSigner, "Invalid signature");
 
@@ -527,7 +530,7 @@ contract BridgeVault is IBridgeVault, AccessControl, ReentrancyGuard, Pausable {
 
     /**
      * @notice Initiate MPC signer update (timelocked)
-     * @dev New signer address comes from T-Chain DKG rotation
+     * @dev New signer address comes from M-Chain DKG rotation (per LP-134)
      * @param newSigner New signer address
      */
     function initiateSignerUpdate(address newSigner) external onlyRole(DEFAULT_ADMIN_ROLE) {
@@ -1654,9 +1657,9 @@ contract EmergencyBrake is AccessControl {
 }
 ```
 
-### 7. Signature Flow with T-Chain Integration
+### 7. Signature Flow with M-Chain Integration (per LP-134)
 
-The signature flow integrates with T-Chain's MPC infrastructure as specified in LP-0330 and LP-0332.
+The signature flow integrates with M-Chain's MPC infrastructure as specified in LP-0330 (substrate) and LP-0332. The TypeScript client below historically targeted "T-Chain"; per LP-134 the same RPC endpoints are now served by M-Chain (MVM).
 
 #### 7.1 TypeScript Client Integration
 
@@ -1687,8 +1690,8 @@ interface BridgeConfig {
 }
 
 /**
- * T-Chain MPC Signature Client
- * Communicates with T-Chain ThresholdVM for threshold signature generation
+ * M-Chain MPC Signature Client (per LP-134; class name retained for ABI continuity)
+ * Communicates with M-Chain (MVM) ThresholdVM for threshold signature generation
  */
 class TChainSignatureClient {
     private endpoint: string;
@@ -1909,7 +1912,7 @@ export class LuxBridgeClient {
     }
 
     /**
-     * Execute bridge release with T-Chain signature
+     * Execute bridge release with M-Chain signature (per LP-134)
      */
     async executeRelease(
         vault: ethers.Contract,
@@ -1938,7 +1941,7 @@ export class LuxBridgeClient {
             )
         );
 
-        // Request signature from T-Chain
+        // Request signature from M-Chain (per LP-134)
         const { sessionId } = await this.tChain.requestSignature({
             keyId: keyId,
             messageHash: messageHash,
@@ -2096,7 +2099,7 @@ async function deployBridgeContracts(config: DeploymentConfig) {
     await emergencyBrake.waitForDeployment();
     console.log('EmergencyBrake:', await emergencyBrake.getAddress());
 
-    // 3. Deploy BridgeVault (requires MPC signer from T-Chain)
+    // 3. Deploy BridgeVault (requires MPC signer from M-Chain, per LP-134)
     const BridgeVault = await ethers.getContractFactory('BridgeVault');
     const bridgeVault = await upgrades.deployProxy(
         BridgeVault,
@@ -2269,7 +2272,7 @@ The specification maintains backwards compatibility with the existing `Bridge.so
 1. Deploy new contracts alongside existing
 2. Register existing wrapped tokens in TokenRegistry
 3. Gradually migrate liquidity to new vaults
-4. Update T-Chain to sign for new contract addresses
+4. Update M-Chain (per LP-134) to sign for new contract addresses
 5. Deprecate old contracts after migration period
 
 ## Test Cases
@@ -2621,7 +2624,7 @@ describe('Bridge Integration', () => {
         );
         const depositReceipt = await depositTx.wait();
 
-        // 2. Request signature from T-Chain (mocked in test)
+        // 2. Request signature from M-Chain (per LP-134; mocked in test)
         const releaseParams = {
             token: ethers.ZeroAddress,
             recipient: recipient,
@@ -2784,17 +2787,17 @@ Before mainnet deployment, verify:
 | Attack Vector | Risk | Mitigation |
 |---------------|------|------------|
 | **Signature Replay** | High | Nonce tracking, source tx hash tracking, chain-specific domain separator |
-| **MPC Key Compromise** | Critical | Timelocked signer updates, T-Chain slashing, committee rotation via LSS |
+| **MPC Key Compromise** | Critical | Timelocked signer updates, M-Chain slashing (per LP-134), committee rotation via LSS |
 | **Flash Loan Attacks** | Medium | Daily limits, minimum amounts, time delays |
 | **Reentrancy** | High | ReentrancyGuard on all state-changing functions |
 | **Front-Running** | Low | EIP-712 signatures bound to specific parameters |
 | **Denial of Service** | Medium | Rate limiting via daily limits, emergency pause |
 | **Governance Attack** | Medium | Timelock delays, multi-sig requirements |
-| **Oracle Manipulation** | Low | T-Chain uses its own consensus, not external oracles |
+| **Oracle Manipulation** | Low | M-Chain (per LP-134) uses its own consensus, not external oracles |
 
 ### Security Properties
 
-1. **Signature Integrity**: Only valid threshold signatures from T-Chain MPC committee can authorize releases
+1. **Signature Integrity**: Only valid threshold signatures from the M-Chain MPC committee (per LP-134) can authorize releases
 2. **Replay Resistance**: Each release can only be executed once per chain
 3. **Pause Capability**: Any guardian can halt operations within seconds
 4. **Recovery**: Admin can restore operations after security review
@@ -2815,7 +2818,7 @@ Before mainnet deployment, verify:
 
 1. TokenRegistry (no dependencies)
 2. EmergencyBrake (requires guardian addresses)
-3. BridgeVault (requires MPC signer address from T-Chain)
+3. BridgeVault (requires MPC signer address from M-Chain, per LP-134)
 4. BridgeRouter (requires TokenRegistry, BridgeVault)
 5. BridgeGovernor (requires admin multisig)
 
@@ -2841,13 +2844,14 @@ MAX_DELAY = 30 days
 
 ### Related LPs
 
-- **[LP-0013](/docs/lp-7013-t-chain-decentralised-mpc-custody-and-swap-signature-layer/)**: T-Chain Specification (legacy MPC custody layer)
-- **[LP-0014](/docs/lp-7014-t-chain-threshold-signatures-with-cgg21-uc-non-interactive-ecdsa/)**: T-Chain Threshold Signatures (CGG21 protocol)
+- **[LP-0013](/docs/lp-7013-t-chain-decentralised-mpc-custody-and-swap-signature-layer/)**: M-Chain MPC Custody (per LP-134; legacy title was "T-Chain"; URL preserved)
+- **[LP-0014](/docs/lp-7014-t-chain-threshold-signatures-with-cgg21-uc-non-interactive-ecdsa/)**: M-Chain Threshold Signatures (CGG21 protocol; per LP-134; legacy "T-Chain" name; URL preserved)
+- **[LP-134](/docs/lp-134-lux-chain-topology/)**: Lux Chain Topology — M-Chain (MPC) + F-Chain (FHE) split (canonical naming)
 - **[LP-0015](/docs/lp-6015-mpc-bridge-protocol/)**: MPC Bridge Protocol (bridge protocol overview)
 - **[LP-0017](/docs/lp-6017-bridge-asset-registry/)**: Bridge Asset Registry (asset tracking)
 - **[LP-0019](/docs/lp-6019-bridge-security-framework/)**: Bridge Security Framework (security requirements)
 - **[LP-0301](/docs/lp-0301-lux-b-chain-cross-chain-bridge-protocol/)**: B-Chain Cross-Chain Bridge Protocol (legacy B-Chain integration)
-- **[LP-0330](/docs/lp-7330-t-chain-thresholdvm-specification/)**: T-Chain ThresholdVM Specification (MPC key management)
+- **[LP-0330](/docs/lp-7330-t-chain-thresholdvm-specification/)**: ThresholdVM Specification (substrate; per LP-134, now powers M-Chain MPC + F-Chain FHE; legacy "T-Chain" name retained in URL only)
 - **[LP-0331](/docs/lp-6331-b-chain-bridgevm-specification/)**: B-Chain BridgeVM Specification (bridge coordination)
 - **[LP-0332](/docs/lp-6332-teleport-bridge-architecture-unified-cross-chain-protocol/)**: Teleport Bridge Architecture (unified protocol)
 - **[LP-0333](/docs/lp-7333-dynamic-signer-rotation-with-lss-protocol/)**: Dynamic Signer Rotation (LSS protocol)

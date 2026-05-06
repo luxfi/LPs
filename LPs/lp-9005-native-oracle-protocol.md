@@ -1,8 +1,8 @@
 ---
 lp: 9005
 title: Native Oracle Protocol (Network-Wide)
-tags: [oracle, dex, price-feed, t-chain, warp, a-chain, c-chain, x-chain, lp-9000-series]
-description: Native oracle protocol for Lux network with sub-600ms price feeds via T-Chain signers and Warp TeleportAttest - OVER 9000x FASTER
+tags: [oracle, dex, price-feed, m-chain, warp, a-chain, c-chain, x-chain, lp-9000-series]
+description: Native oracle protocol for Lux network with sub-600ms price feeds via M-Chain threshold signers (per LP-134) and Warp TeleportAttest - OVER 9000x FASTER
 author: Lux Network Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
 status: Final
@@ -47,7 +47,9 @@ order: 5
 
 ## Abstract
 
-This LP specifies a **network-wide native oracle protocol** for Lux that leverages T-Chain threshold signers to provide decentralized, low-latency price feeds accessible from **all chains** (X-Chain, C-Chain, A-Chain). The protocol aggregates prices from external oracles (Pyth, Chainlink) and centralized exchanges, applies weighted median filtering with circuit breakers, and delivers attested price data via Warp TeleportAttest messages. This enables:
+> Per **LP-134** (Lux Chain Topology), threshold signing for this oracle protocol runs on **M-Chain (MVM)**, the dedicated MPC ceremony chain. Earlier drafts of this LP referenced "T-Chain" signers; that name now applies only to `teleportvm` (LP-6332).
+
+This LP specifies a **network-wide native oracle protocol** for Lux that leverages M-Chain threshold signers to provide decentralized, low-latency price feeds accessible from **all chains** (X-Chain, C-Chain, A-Chain). The protocol aggregates prices from external oracles (Pyth, Chainlink) and centralized exchanges, applies weighted median filtering with circuit breakers, and delivers attested price data via Warp TeleportAttest messages. This enables:
 
 - **X-Chain**: Sub-second price updates for perpetuals/DEX trading
 - **C-Chain**: Precompile-based oracle access for smart contracts (DeFi, lending, derivatives)
@@ -63,7 +65,7 @@ A unified oracle infrastructure provides:
 4. **Circuit Breakers**: Protection against erroneous or manipulated prices
 5. **Native Integration**: No external oracle dependencies or bridge risks
 
-The existing T-Chain infrastructure (LP-13, LP-14) provides the natural committee for price attestation. By combining this with Warp messaging and chain-specific delivery mechanisms, we create a fully native oracle serving the entire network.
+The existing M-Chain MPC infrastructure (LP-13, LP-14, per LP-134) provides the natural committee for price attestation. By combining this with Warp messaging and chain-specific delivery mechanisms, we create a fully native oracle serving the entire network.
 
 ## Specification
 
@@ -83,7 +85,7 @@ The existing T-Chain infrastructure (LP-13, LP-14) provides the natural committe
 │       └──────────────┴──────┬──────┴─────────────┴──────────────┘               │
 │                             ▼                                                    │
 │  ┌───────────────────────────────────────────────────────────────────────┐      │
-│  │                      T-CHAIN PRICE OBSERVERS                           │      │
+│  │                      M-CHAIN PRICE OBSERVERS                           │      │
 │  │  ┌─────────────────────────────────────────────────────────────────┐  │      │
 │  │  │               Oracle Aggregator (per signer)                     │  │      │
 │  │  │  • WeightedMedian aggregation                                    │  │      │
@@ -129,7 +131,7 @@ type PriceFeedPayload struct {
     // Header
     Version     uint8      `serialize:"true"` // Protocol version (1)
     Timestamp   uint64     `serialize:"true"` // Unix timestamp (ms)
-    AttesterID  ids.NodeID `serialize:"true"` // T-Chain signer
+    AttesterID  ids.NodeID `serialize:"true"` // M-Chain signer (per LP-134)
     
     // Price Data
     Symbol      string  `serialize:"true"` // e.g., "BTC-USD"
@@ -280,7 +282,7 @@ type AttestationPrice struct {
     Price      uint64     // 1e8 precision
     Confidence float64
     Timestamp  time.Time
-    Signers    []ids.NodeID  // T-Chain signers who attested
+    Signers    []ids.NodeID  // M-Chain signers who attested (per LP-134)
     Signature  []byte        // BLS aggregate
 }
 
@@ -407,7 +409,7 @@ type CircuitBreaker struct {
 │     │  payload = PriceFeedPayload{Symbol, Price, TWAP, VWAP, ...}        │    │
 │     └───────────────────────────────────────────────────────────────────┘    │
 │                                                                               │
-│  3. THRESHOLD SIGNING (T-Chain consensus, 67/100)                            │
+│  3. THRESHOLD SIGNING (M-Chain consensus, 67/100)                            │
 │     ┌───────────────────────────────────────────────────────────────────┐    │
 │     │  proposal = TeleportAttest{Type: 4, AttestType: 0x01, Payload}     │    │
 │     │  votes = CollectVotes(proposal)                                    │    │
@@ -511,11 +513,11 @@ go run ./cmd/dex-server/main.go \
 ### Why Network-Wide Instead of Chain-Specific?
 
 1. **Single Source of Truth**: All chains consume same attested prices
-2. **Infrastructure Reuse**: T-Chain signers serve entire network
+2. **Infrastructure Reuse**: M-Chain signers serve entire network
 3. **Consistency**: No price divergence between chains
 4. **Efficiency**: One attestation flow, multiple consumers
 
-### Why T-Chain for Attestation?
+### Why M-Chain for Attestation?
 
 1. **Existing Infrastructure**: 100 signers already bonded (100M LUX each)
 2. **Security Model**: 2/3 BFT threshold, slashable bonds
@@ -570,7 +572,8 @@ func TestWarpPriceAttestation(t *testing.T) {
 
 - **LP-11**: X-Chain Exchange Chain Specification
 - **LP-12**: C-Chain Contract Chain Specification
-- **LP-13**: T-Chain MPC Custody Layer (T-Chain signers)
+- **LP-13**: M-Chain MPC Custody Layer (M-Chain signers, per LP-134)
+- **LP-134**: Lux Chain Topology — M-Chain + F-Chain split
 - **LP-14**: CGG21 Threshold Signatures
 - **LP-36**: X-Chain Order-Book DEX API
 - **LP-80**: A-Chain Attestation Specification
@@ -583,7 +586,7 @@ func TestWarpPriceAttestation(t *testing.T) {
 
 2. **Staleness**: Price feeds expire after 60 seconds. Stale prices trigger conservative fallback pricing or trading halts.
 
-3. **Front-Running**: T-Chain signers use commit-reveal for price attestations. Price updates are encrypted until threshold signatures are collected.
+3. **Front-Running**: M-Chain signers use commit-reveal for price attestations. Price updates are encrypted until threshold signatures are collected.
 
 4. **Sybil Resistance**: Oracle operators must stake LUX tokens. Slashing for incorrect price reporting.
 

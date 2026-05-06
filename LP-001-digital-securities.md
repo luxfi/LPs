@@ -10,13 +10,14 @@ category: Markets
 created: 2018-06-01
 requires:
   - chain: C
-  - chain: T
+  - chain: M
   - chain: B
 references:
+  - lp-134 (Lux Chain Topology — M-Chain + F-Chain split)
   - lp-9010 (DEX Precompile)
   - lp-3020 (LRC-20 Fungible Token)
   - lp-6022 (Warp Messaging)
-  - lp-5013 (T-Chain MPC Custody)
+  - lp-5013 (M-Chain MPC Custody, per LP-134)
 ---
 
 # LP-001: Digital Securities Standard

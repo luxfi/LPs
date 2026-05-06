@@ -1,7 +1,7 @@
 ---
 lp: 6331
 title: B-Chain - BridgeVM Specification
-description: Complete specification for the B-Chain (BridgeVM), the dedicated cross-chain bridge chain for Lux Network with MPC custody and T-Chain threshold signature coordination.
+description: Complete specification for the B-Chain (BridgeVM), the dedicated cross-chain bridge chain for Lux Network with MPC custody and M-Chain threshold signature coordination (per LP-134; was T-Chain pre-2025-12-15).
 author: Lux Protocol Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
 status: Draft
@@ -92,7 +92,7 @@ Implementations claiming conformance to this specification:
 6. **SHOULD** support all chain types (EVM, Bitcoin, Cosmos) defined in this specification
 7. **SHOULD** implement WebSocket subscriptions for real-time updates
 8. **MAY** extend the fee model with additional chain-specific parameters
-9. **MUST NOT** process withdrawals without valid T-Chain MPC signatures
+9. **MUST NOT** process withdrawals without valid M-Chain MPC signatures (per LP-134; previously T-Chain MPC)
 10. **MUST NOT** accept deposits without sufficient confirmations on source chains
 
 ### RPC Endpoint Requirements
@@ -856,7 +856,7 @@ The B-Chain manages bridge operations through comprehensive state machines for d
                      |      |    SIGNING     |        |      |                           |
                      |      +-------+--------+        |      |                           |
                      |              |                 |      |                           |
-                     |    T-Chain threshold sign      |      |                           |
+                     |    M-Chain threshold sign      |      |                           |
                      |    completes (CGG21/LSS)       |      |                           |
                      |              |                 |      |                           |
                      |      +-------v--------+        |      |                           |
@@ -1756,7 +1756,7 @@ type FeeBreakdown struct {
 
     RelayerAmount   *big.Int  // 40% - paid to relayer who submitted observation
     ProtocolAmount  *big.Int  // 30% - sent to DAO treasury
-    ValidatorAmount *big.Int  // 20% - distributed to T-Chain MPC signers
+    ValidatorAmount *big.Int  // 20% - distributed to M-Chain MPC signers (per LP-134)
     InsuranceAmount *big.Int  // 10% - accumulates in insurance fund
 }
 

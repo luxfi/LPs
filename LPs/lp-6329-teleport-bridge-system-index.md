@@ -88,7 +88,8 @@ Chain Legend:
 | **X-Chain** | Exchange chain for UTXO-based transfers | Native UTXO multisig | **Live** |
 | **C-Chain** | EVM-compatible contract chain | Smart contract multisig (Gnosis Safe) | **Live** |
 | **Q-Chain** | Query/Index chain | Standard | **Live** |
-| **T-Chain** | Threshold signatures (ThresholdVM) | MPC threshold signatures | **Live** |
+| **M-Chain** | Threshold signatures (MVM, ThresholdVM substrate) per LP-134; legacy "T-Chain MPC" | MPC threshold signatures | **Live** |
+| **F-Chain** | FHE compute / TFHE keygen (FVM, ThresholdVM substrate) per LP-134 | FHE bootstrap-key ceremonies | **Live** |
 | **B-Chain** | Bridge operations (BridgeVM) | Decentralized cross-chain | **Live** |
 
 ### Experimental Chains
@@ -110,7 +111,7 @@ Chain Legend:
 
 | LP | Title | Description | Status |
 |----|-------|-------------|--------|
-| [LP-0330](/docs/lp-7330-t-chain-thresholdvm-specification/) | T-Chain ThresholdVM | All MPC/threshold operations: DKG, signing (CGG21, FROST), resharing (LSS) | Draft |
+| [LP-0330](/docs/lp-7330-t-chain-thresholdvm-specification/) | ThresholdVM substrate (per LP-134: M-Chain MPC + F-Chain FHE) | All MPC/threshold operations: DKG, signing (CGG21, FROST), resharing (LSS) | Draft |
 | [LP-0331](/docs/lp-6331-b-chain-bridgevm-specification/) | B-Chain BridgeVM | Bridge operations: deposits, withdrawals, cross-chain observation via validators | Draft |
 
 ### Protocols
@@ -132,7 +133,7 @@ Chain Legend:
 
 ### Architecture Notes
 
-**Multisig**: Traditional n-of-m multisig is handled natively by P-Chain and X-Chain. For C-Chain, Gnosis Safe is the recommended approach. Threshold cryptography (where no single party holds the complete key) is provided by T-Chain.
+**Multisig**: Traditional n-of-m multisig is handled natively by P-Chain and X-Chain. For C-Chain, Gnosis Safe is the recommended approach. Threshold cryptography (where no single party holds the complete key) is provided by **M-Chain (MVM)** per LP-134 — the legacy "T-Chain MPC" naming has been retired in favour of the M-Chain (MPC) / F-Chain (FHE) split; the "T-Chain" name is now reserved for `teleportvm` (LP-6332).
 
 **Relayers**: Bridge relayer functionality (external chain observation, fee funding, transaction execution) is fully integrated into B-Chain's BridgeVM via the RelayerRegistry. Relayers register with B-Chain and earn fees for executing cross-chain transactions.
 
@@ -140,16 +141,18 @@ Chain Legend:
 
 | LP | Title | Description |
 |----|-------|-------------|
-| [LP-13](/docs/lp-7013-t-chain-decentralised-mpc-custody-and-swap-signature-layer/) | T-Chain MPC Custody | Original MPC custody and swap signature layer |
+| [LP-13](/docs/lp-7013-t-chain-decentralised-mpc-custody-and-swap-signature-layer/) | M-Chain MPC Custody (per LP-134; legacy "T-Chain MPC" name) | Original MPC custody and swap signature layer; URL preserved for stability |
 | [LP-14](/docs/lp-7014-t-chain-threshold-signatures-with-cgg21-uc-non-interactive-ecdsa/) | CGG21 Threshold ECDSA | UC non-interactive threshold ECDSA with identifiable aborts |
 | [LP-103](/docs/lp-7103-mpc-lss---multi-party-computation-linear-secret-sharing-with-dynamic-resharing/) | LSS Protocol | Linear Secret Sharing with dynamic resharing |
 | [LP-104](/docs/lp-7104-frost---flexible-round-optimized-schnorr-threshold-signatures-for-eddsa/) | FROST | Flexible Round-Optimized Schnorr Threshold Signatures |
 
 ## Architecture Summary
 
-### T-Chain (ThresholdVM) - LP-0330
+### M-Chain / F-Chain (ThresholdVM substrate) - LP-0330 (per LP-134)
 
-The T-Chain provides threshold cryptography services:
+> Per **LP-134**, the ThresholdVM substrate (legacy "T-Chain") now powers two distinct chains: **M-Chain (MVM)** for MPC ceremonies on bridge custody of external wallets, and **F-Chain (FVM)** for FHE compute / TFHE keygen. The legacy "T-Chain" name is now reserved for `teleportvm` (LP-6332). Body text below uses M-Chain for MPC.
+
+The M-Chain provides threshold cryptography services:
 
 - **Algorithms**: CGG21 (ECDSA), FROST (Schnorr/EdDSA), LSS (resharing), Ringtail (quantum-safe)
 - **Key Management**: Per-key threshold configuration, dynamic signer sets
@@ -157,7 +160,7 @@ The T-Chain provides threshold cryptography services:
 - **Security**: Identifiable aborts, proactive refresh, Byzantine fault tolerance
 
 ```go
-// T-Chain managed key structure
+// M-Chain managed key structure (per LP-134)
 type ManagedKey struct {
     KeyID        KeyID              // "eth-usdc", "btc-native"
     PublicKey    []byte             // Aggregated public key (constant across reshares)
@@ -193,8 +196,8 @@ type BridgeState struct {
 
 The unified protocol specification covers:
 
-- **Deposit Flow**: External chain deposit -> relayer observation -> B-Chain confirmation -> T-Chain signature -> C-Chain mint
-- **Withdrawal Flow**: C-Chain burn -> B-Chain request -> T-Chain signature -> external chain release
+- **Deposit Flow**: External chain deposit -> relayer observation -> B-Chain confirmation -> M-Chain signature (per LP-134) -> C-Chain mint
+- **Withdrawal Flow**: C-Chain burn -> B-Chain request -> M-Chain signature (per LP-134) -> external chain release
 - **Cross-Chain Swaps**: Atomic operations with signature coordination
 - **Fee Distribution**: Validator (50%), relayer (20%), treasury (20%), burn (10%)
 
@@ -353,7 +356,7 @@ const status = await bridgeClient.getBridgeStatus(depositId);
 ### 4. Requesting a Threshold Signature
 
 ```bash
-# Request signature from T-Chain
+# Request signature from M-Chain (per LP-134; legacy URL path /ext/bc/T preserved)
 curl -X POST http://localhost:9630/ext/bc/T/rpc \
   -H "Content-Type: application/json" \
   -d '{
@@ -373,7 +376,7 @@ curl -X POST http://localhost:9630/ext/bc/T/rpc \
 
 | Repository | Description | Path |
 |------------|-------------|------|
-| [github.com/luxfi/node](https://github.com/luxfi/node) | T-Chain (ThresholdVM), B-Chain (BridgeVM) implementations | `~/work/lux/node` |
+| [github.com/luxfi/node](https://github.com/luxfi/node) | M-Chain (MVM, per LP-134) and F-Chain (FVM) on the ThresholdVM substrate; B-Chain (BridgeVM) implementations | `~/work/lux/node` |
 | [github.com/luxfi/bridge](https://github.com/luxfi/bridge) | Bridge monorepo (SDK, relayer, UI) | `~/work/lux/bridge` |
 | [github.com/luxfi/threshold](https://github.com/luxfi/threshold) | Threshold cryptography (CGG21, LSS, FROST, Ringtail) | `~/work/lux/threshold` |
 | [github.com/luxfi/crypto](https://github.com/luxfi/crypto) | Core cryptographic primitives | `~/work/lux/crypto` |
@@ -415,7 +418,7 @@ threshold/
 ## Roadmap
 
 ### Phase 1: Specifications (Current)
-- [x] T-Chain specification (LP-0330) - ThresholdVM
+- [x] ThresholdVM substrate specification (LP-0330) — per LP-134 powers M-Chain MPC + F-Chain FHE
 - [x] B-Chain specification (LP-0331) - BridgeVM
 - [x] Teleport architecture (LP-0332)
 - [x] LSS rotation protocol (LP-0333)
@@ -428,7 +431,7 @@ threshold/
 - [ ] I-Chain DID specification - RFC pending
 
 ### Phase 2: Mainnet Launch
-**Chains Live at Launch:** P-Chain, X-Chain, C-Chain, Q-Chain, T-Chain, B-Chain
+**Chains Live at Launch:** P-Chain, X-Chain, C-Chain, Q-Chain, M-Chain, F-Chain, B-Chain (per LP-134; legacy "T-Chain" split into M-Chain + F-Chain)
 - [ ] ThresholdVM implementation
 - [ ] BridgeVM implementation
 - [ ] CGG21 + LSS protocol integration
@@ -465,7 +468,9 @@ threshold/
 | **MPC** | Multi-Party Computation - cryptographic techniques for distributed computation |
 | **Reshare** | Process of redistributing key shares to new signer set while preserving public key |
 | **Ringtail** | Lattice-based post-quantum threshold signature scheme |
-| **T-Chain** | Threshold Chain - dedicated chain for threshold cryptography operations |
+| **M-Chain** | MPC Chain (MVM, per LP-134) — dedicated chain for MPC ceremonies on bridge custody of external wallets; replaces legacy "T-Chain MPC" naming |
+| **F-Chain** | FHE Chain (FVM, per LP-134) — dedicated chain for FHE compute and TFHE bootstrap-key ceremonies; replaces legacy "T-Chain FHE" naming |
+| **T-Chain (legacy)** | Pre-LP-134 name for what is now M-Chain + F-Chain. Now retained ONLY as the IBC/teleport chain backed by `teleportvm` (LP-6332) |
 | **B-Chain** | Bridge Chain - dedicated chain for bridge operation coordination |
 | **Threshold (t)** | Minimum number of signers required to produce a valid signature |
 | **Total Parties (n)** | Total number of signers holding key shares |
