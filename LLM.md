@@ -2,9 +2,9 @@
 
 ## Key Terminology (2026-04-10)
 
-**Quasar Consensus = Triple Consensus (BLS + Ringtail + ML-DSA)**:
+**Quasar Consensus = Triple Consensus (BLS + Pulsar + ML-DSA)**:
 - **BLS12-381**: classical fast-path, 48-byte aggregate proof
-- **Ringtail** (Ring-LWE): post-quantum threshold proof, variable size
+- **Pulsar** (Ring-LWE): post-quantum threshold proof, variable size
 - **ML-DSA-65** (FIPS 204): post-quantum identity proof, ~3.3 KB
 
 Each layer independently toggleable. `TripleSignRound1` runs all 3 in parallel. `IsTripleMode()` returns true when all configured. GPU acceleration aspirational (not yet implemented). Transport is ZAP, not p2p. PQ-TLS 1.3 coming (Go 1.26 ML-KEM-768 default).
@@ -12,7 +12,7 @@ Each layer independently toggleable. `TripleSignRound1` runs all 3 in parallel. 
 **Key LPs**:
 - LP-020: Quasar triple consensus (QuasarCert wire format)
 - LP-070: ML-DSA
-- LP-073: Ringtail
+- LP-073: Pulsar
 - LP-075: BLS
 - LP-076: Universal threshold
 - LP-022: ZAP wire protocol

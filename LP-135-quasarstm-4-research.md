@@ -78,7 +78,7 @@ The deliverables that landed for 2026-02-14:
 | **v0.42** | Cert-subject hardening + KnownTotalOrder | `certificate_subject` includes P/Q/Z roots; `KnownTotalOrder` introduced; Nova/Nebula mode roots separated |
 | **v0.43** | ConflictSpec ABI + LaneClass | Declared / predicted lane specs; owned-lane fast path; hot-lane telemetry; dynamic per-lane `VersioningMode` |
 | **v0.44** | Real BLS12-381 pairing kernel | Vendored Metal/CUDA pairing kernel replaces HMAC-keccak BLS verifier |
-| **v0.45** | Real Ringtail share verifier + real Groth16 verifier | Ring-LWE share verify against Q-Chain ceremony key; Groth16 over BLS12-381 against Z-Chain VK |
+| **v0.45** | Real Pulsar share verifier + real Groth16 verifier | Ring-LWE share verify against Q-Chain ceremony key; Groth16 over BLS12-381 against Z-Chain VK |
 | **v0.46** | Semantic reducers + deferred ops | Tier-3 reducer commit; `DeferredOpKind` enum; reducer plan root |
 | **v0.47** | Predictive scheduling + execution hints | Historical lane predictor; conflict matrix; ForeSight-style preflight reordering; Chiron-style hint roots emitted on every wave tick |
 | **v0.48** | Motor VersionBlock layout + A/B/M/F services | Consecutive versions per key; AdaptiveSchedule, BridgeAttest, MarketAuction, FiberCheckpoint drains |
@@ -97,7 +97,7 @@ test suite — `block_hash`, `state_root`, `receipts_root`, `execution_root`,
 | EVM coverage | 118 opcodes (no `CALL`, no `CREATE`, no `LOG`, no `EXTCODE*`) | **175 opcodes** including full `CALL`/`CALLCODE`/`DELEGATECALL`/`STATICCALL`, `CREATE`/`CREATE2`, `LOGn`, `EXTCODE*`, `RETURNDATA*`, `TLOAD`/`TSTORE`, `MCOPY`, `BLOBHASH`/`BLOBBASEFEE` |
 | SSTORE | linear write-through to MVCC arena | **journaled SSTORE** with EIP-2929 cold/warm + EIP-3529 refund accounting |
 | BLS verifier | HMAC-keccak placeholder | **Real BLS12-381 pairing** (vendored Metal/CUDA pairing kernel) |
-| Ringtail verifier | HMAC-keccak placeholder | **Real Ring-LWE share verify** against Q-Chain ceremony key |
+| Pulsar verifier | HMAC-keccak placeholder | **Real Ring-LWE share verify** against Q-Chain ceremony key |
 | Groth16 verifier | HMAC-keccak placeholder | **Real Groth16** over BLS12-381 against Z-Chain VK |
 | Tier 1 (lane-clock) | sketch | **Production lane-clock fast validation**, no per-key version chain touch |
 | Tier 3 (semantic) | enum + commit selector stub | **Production reducer commit** (`DeferredOpKind`: Add, Sub, Append, BalanceDelta, FeeAccumulate, OrderAppend, AuctionMatch, MintCounter, NonceAdvance) |
@@ -362,7 +362,7 @@ Each new service has a dedicated ring (header + items arena), the same
 back-pressure semantics as the 3.0 services, and the same wave-tick
 budget contract.
 
-## Real BLS / Ringtail / Groth16 verifiers
+## Real BLS / Pulsar / Groth16 verifiers
 
 The 3.0 cert verifiers were HMAC-keccak with a master secret — real
 cryptographic verification (one-way, cross-lane domain tags reject
@@ -372,7 +372,7 @@ function-pointer change. 4.0 makes those swaps:
 | Lane | 3.0 (HMAC-keccak) | 4.0 (real) | Substrate file |
 |---|---|---|---|
 | BLS | placeholder | **BLS12-381 pairing** kernel (vendored) | `lib/consensus/quasar/gpu/crypto/bls12_381.metal` / `.cu` |
-| Ringtail | placeholder | **Ring-LWE share verify** against Q-Chain ceremony key | `lib/consensus/quasar/gpu/crypto/ringtail.metal` / `.cu` |
+| Pulsar | placeholder | **Ring-LWE share verify** against Q-Chain ceremony key | `lib/consensus/quasar/gpu/crypto/ringtail.metal` / `.cu` |
 | Groth16 | placeholder | **Groth16 over BLS12-381** against Z-Chain VK | `lib/consensus/quasar/gpu/crypto/groth16.metal` / `.cu` |
 
 The verifiers run on-device. There is no CPU fallback on the round
@@ -427,9 +427,9 @@ Apple M1 Max, 1024-tx end-to-end stress, regulated-DEX workload mix:
 | Conflicts / repairs (16 same-key contention test) | 120 / 120 | **120 / 120** (unchanged — textbook Block-STM) |
 | Repair amplification (DEX mix) | ~0.97 | **~0.42** (Tier 3 reducers absorb fee/order/balance writes) |
 | BLS verify cost (per cert) | ~9 µs (HMAC-keccak placeholder) | **~46 µs** (real BLS12-381 pairing) |
-| Ringtail verify cost (per share) | ~7 µs (placeholder) | **~38 µs** (real Ring-LWE) |
+| Pulsar verify cost (per share) | ~7 µs (placeholder) | **~38 µs** (real Ring-LWE) |
 | Groth16 verify cost (per cert) | ~8 µs (placeholder) | **~62 µs** (real Groth16) |
-| Cert lanes per round | 1 (BLS) | **3** (BLS + Ringtail + Groth16, all real) |
+| Cert lanes per round | 1 (BLS) | **3** (BLS + Pulsar + Groth16, all real) |
 | EVM coverage | 118/175 opcodes | **175/175** |
 | Coverage (line) | informal | **82.4% Metal, 81.1% CUDA** |
 
@@ -521,7 +521,7 @@ BridgeAttest drain (cross-chain)              ← v0.48
 | ConflictSpec | `lib/consensus/quasar/gpu/conflict_spec.hpp` + driver |
 | LaneClass | `lib/consensus/quasar/gpu/lane_class.hpp` |
 | BLS verifier | `lib/consensus/quasar/gpu/crypto/bls12_381.metal` / `.cu` |
-| Ringtail verifier | `lib/consensus/quasar/gpu/crypto/ringtail.metal` / `.cu` |
+| Pulsar verifier | `lib/consensus/quasar/gpu/crypto/ringtail.metal` / `.cu` |
 | Groth16 verifier | `lib/consensus/quasar/gpu/crypto/groth16.metal` / `.cu` |
 | Motor VersionBlock | `lib/consensus/quasar/gpu/version_block.hpp` |
 | CSMV commit server | `lib/consensus/quasar/gpu/csmv_commit.metal` / `.cu` |
@@ -535,7 +535,7 @@ BridgeAttest drain (cross-chain)              ← v0.48
 > QuasarSTM 4.0 keeps every 3.0 invariant — deterministic ordered MVCC,
 > lane-aware validation, deterministic contention, commit horizons —
 > and ships, on the same substrate: full EVM coverage with journaled
-> SSTORE and EIP-2929/3529, real BLS12-381 / Ringtail / Groth16 cert
+> SSTORE and EIP-2929/3529, real BLS12-381 / Pulsar / Groth16 cert
 > verifiers, lane-clock Tier 1, semantic reducer Tier 3, ConflictSpec
 > ABI, NEMO LaneClass, dynamic per-lane versioning, fiber checkpoints,
 > commit horizon with MVCC GC, Motor VersionBlock layout, A/B/M/F drain

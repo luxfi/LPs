@@ -14,7 +14,7 @@ backend is asserted against).
 | P-Chain | PlatformVM | luxcpp/platformvm | v0.57 | 97.52% (TOTAL) / 99.25% (oracle) | 80.52% (TOTAL) / 90.07% (oracle)* | 53/53 | CPU+Metal+CUDA+WGSL |
 | C-Chain | EVM (cevm)   | luxcpp/cevm       | v0.46.1 | 95.78% (TOTAL) / 96.51% (mm) | 58.46% (TOTAL) / — | 59/59 | CPU+Metal+CUDA |
 | X-Chain | XVM          | luxcpp/xvm        | v0.55+1 | **97.48%** | **92.46%** | 44/44 layout + 7 det + 6 Metal | CPU+Metal+CUDA+WGSL |
-| Q-Chain | QuantumVM    | luxcpp/lattice + cevm/quasar | v0.43+ | (in cevm) | — | (in cevm 13 BLS+Ringtail) | CPU+Metal+CUDA+WGSL |
+| Q-Chain | QuantumVM    | luxcpp/lattice + cevm/quasar | v0.43+ | (in cevm) | — | (in cevm 13 BLS+Pulsar) | CPU+Metal+CUDA+WGSL |
 | Z-Chain | ZKVM         | cevm/quasar Groth16 | v0.44.0 | (in cevm) | — | (in cevm 13) | CPU+Metal+CUDA, WGSL partial |
 | A-Chain | AIVM         | luxcpp/aivm       | v0.58.2 | **98.71%** | **94.71%** | 45/45 | CPU+Metal+CUDA+WGSL |
 | B-Chain | BridgeVM     | luxcpp/bridgevm   | v0.60 | 98.17% | 90.53% | 42/42 | CPU+Metal+CUDA+WGSL |

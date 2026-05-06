@@ -46,7 +46,7 @@ proofs/pulsar/{unforgeability,reshare-preservation,activation-safety,hash-suite-
 proofs/lss/{lifecycle-safety,rollback-safety,adapter-contract}.tex
 proofs/quasar/{horizon-soundness,l1-l2-covalidation,warp-pq-soundness}.tex
 proofs/fhe/{correctness,dual-runtime-equivalence,nebula-binding,parameter-security}.tex
-proofs/lean/Crypto/{Ringtail,Threshold/Reshare,Pulsar/dkg2}.lean (mechanized)
+proofs/lean/Crypto/{Pulsar,Threshold/Reshare,Pulsar/dkg2}.lean (mechanized)
 ```
 
 Papers cite by file path; bodies live in proofs/ once.
@@ -59,7 +59,7 @@ Papers cite by file path; bodies live in proofs/ once.
 | 2. Cross-repo version pin | go.mod pinned to `v0.1.0` + `CROSS-REPO-VERSION-PIN.md` |
 | 3. HashSuite immutability | 18 tests across pulsar/keyera, lens/keyera, warp/pulsar |
 | 4. Negative transcript tests | 17 fields × 3 sites + orthogonality checks |
-| 5. Ringtail death-test | AST-scan tests in consensus/protocol/quasar + threshold/protocols/lss |
+| 5. Pulsar death-test | AST-scan tests in consensus/protocol/quasar + threshold/protocols/lss |
 | 6. Groth16 classification | `IsPQRootOfTrust` predicate + 8 doc-tests |
 | 7. Constant-time review | 24× (a) by-construction, 5× (b) documented gap, 0× (c) MUST-FIX |
 | 8. Fuzzing | 23 wire-format harnesses across all 9 repos; 0 panics in 10s each; **found real lattigo DoS** |

@@ -320,7 +320,7 @@ recommended_architecture:
   credentials:
     issuance: "Merkle tree for selective reveal"
     verification: "On-chain with caching"
-    portability: "Cross-chain via Teleporter"
+    portability: "Cross-chain via Lux Warp 2.0 + Lux Teleport (LP-6332)"
   
   reputation:
     calculation: "Multi-chain aggregation"

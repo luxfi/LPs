@@ -321,7 +321,7 @@ Mining rewards require BFT finality from Lux consensus:
 ## Rationale
 
 ### Why ML-DSA?
-NIST selected ML-DSA (formerly CRYSTALS-Dilithium) as the primary post-quantum signature standard. Level 3 provides 128-bit quantum security matching current blockchain standards.
+NIST selected ML-DSA (FIPS 204, formerly CRYSTALS-Dilithium) as the primary post-quantum signature standard. Level 3 provides 128-bit quantum security matching current blockchain standards.
 
 ### Why Teleport over Traditional Bridges?
 Teleport uses native L1 finality rather than relying on external validators, providing stronger security guarantees for AI reward transfers.

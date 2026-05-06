@@ -64,7 +64,7 @@ FPC is used as a sub-protocol within Quasar (LP-020):
 
 1. **Transaction conflict resolution**: when two conflicting transactions are observed, FPC decides which is accepted
 2. **Vertex preference**: in the X-chain DAG, FPC resolves conflicting vertices
-3. **Ringtail fallback**: when BLS quorum stalls, Ringtail uses FPC-style sampling for leader election
+3. **Pulsar fallback**: when BLS quorum stalls, Pulsar uses FPC-style sampling for leader election
 
 FPC is NOT used for block finality (that is BLS quorum in Quasar). FPC handles binary decisions within the consensus pipeline.
 

@@ -339,7 +339,7 @@ From actual benchmarks (`gas_data.json`):
 |--------|----------|----------------|--------------|
 | **Lamport OTS** | ~20M | ~8 KB | Unconditional |
 | ML-DSA-65 | ~100K | 3,309 bytes | Lattice-based |
-| Ringtail | ~200K | ~4 KB | Lattice-based |
+| Pulsar | ~200K | ~4 KB | Lattice-based |
 
 Lamport is expensive but provides the strongest quantum guarantees.
 
@@ -552,7 +552,7 @@ A native precompile could reduce costs dramatically:
 
 ### Comparison with ML-DSA/Ringtail
 
-| Criterion | Lamport OTS | ML-DSA | Ringtail |
+| Criterion | Lamport OTS | ML-DSA | Pulsar |
 |-----------|-------------|--------|----------|
 | Gas Cost | 19.65M | 100K | 200K |
 | Signature Size | 8 KB | 3.3 KB | 4 KB |
@@ -563,7 +563,7 @@ A native precompile could reduce costs dramatically:
 **Use Case Guidance:**
 - **Daily operations**: ML-DSA (standard, reusable)
 - **Ultra-secure escrow**: Lamport (unconditional security)
-- **Threshold signing**: Ringtail (post-quantum MPC)
+- **Threshold signing**: Pulsar (post-quantum MPC)
 
 ## Open Questions
 
@@ -577,7 +577,7 @@ A native precompile could reduce costs dramatically:
    - More complex implementation
    - Could be LP-2508
 
-3. **Integration with XMSS/SPHINCS+?**
+3. **Integration with XMSS/SLH-DSA (FIPS 205, formerly SPHINCS+)?**
    - Many-time signatures from OTS
    - Stateful key management required
    - Could be LP-2509
@@ -591,7 +591,7 @@ A native precompile could reduce costs dramatically:
 - **LP-4004**: Quantum-Resistant Cryptography Integration (foundational)
 - **LP-4105**: Lamport One-Time Signatures for Lux Safe (application)
 - **LP-2311**: ML-DSA Signature Verification Precompile (alternative PQ scheme)
-- **LP-7324**: Ringtail Threshold Signature Precompile (threshold PQ)
+- **LP-7324**: Pulsar Threshold Signature Precompile (threshold PQ)
 - **LP-4317**: SLH-DSA Stateless Hash-Based Digital Signatures (related)
 
 ## References

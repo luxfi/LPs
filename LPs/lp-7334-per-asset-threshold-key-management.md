@@ -58,7 +58,7 @@ type ManagedKey struct {
     Threshold    int         // t value for THIS key
     TotalParties int         // n value for THIS key
     PartyIDs     []party.ID  // Signers for THIS key
-    Algorithm    MPCAlgo     // CGG21, MuSig2, FROST, Ringtail
+    Algorithm    MPCAlgo     // CGG21, MuSig2, FROST, Pulsar
     CreatedAt    uint64      // Block height
     LastRotation uint64      // Last key refresh height
     Metadata     KeyMetadata // Extended attributes
@@ -225,7 +225,7 @@ This ensures safety with up to `f = n - t` Byzantine (malicious or unavailable) 
 | ECDSA chains (ETH, BSC, etc.) | CGG21 | Native ECDSA compatibility |
 | Bitcoin Taproot | MuSig2 | BIP-340 Schnorr aggregation |
 | EdDSA chains (XRPL, Solana) | FROST | Ed25519 threshold support |
-| Quantum-sensitive custody | Ringtail | Post-quantum lattice-based |
+| Quantum-sensitive custody | Pulsar | Post-quantum lattice-based |
 | High-frequency trading | CGG21 + presigning | Sub-100ms with offline prep |
 
 #### 2.4 Configuration Examples
@@ -259,7 +259,7 @@ var ethUSDCLargeConfig = KeyConfig{
     Algorithm:    AlgoCGG21,
     ValueTier:    TierLarge,
     MaxTxValue:   1_000_000 * 1e6, // $1M
-    QuantumBackup: true,           // Ringtail dual-sig enabled
+    QuantumBackup: true,           // Pulsar dual-sig enabled
 }
 ```
 
@@ -593,7 +593,7 @@ type KeyCreateTx struct {
     KeyID         string       // Unique key identifier
     Threshold     uint8        // Required signers
     TotalParties  uint8        // Total signers
-    Algorithm     MPCAlgo      // CGG21, MuSig2, FROST, Ringtail
+    Algorithm     MPCAlgo      // CGG21, MuSig2, FROST, Pulsar
     PartyIDs      []party.ID   // Initial signer set
     ValueTier     ValueTier    // Security tier
     MaxTxValue    uint64       // Per-tx limit (0 = unlimited)
@@ -1651,7 +1651,7 @@ Keys may be configured for hybrid classical/quantum security:
 type QuantumConfig struct {
     Enabled         bool   // Dual-signature mode
     ClassicalAlgo   MPCAlgo // CGG21, MuSig2, FROST
-    QuantumAlgo     MPCAlgo // Ringtail (lattice-based)
+    QuantumAlgo     MPCAlgo // Pulsar (lattice-based)
     ClassicalThresh uint8
     QuantumThresh   uint8
 }
@@ -1694,7 +1694,7 @@ This LP is additive to existing T-Chain and T-Chain functionality:
 
 4. **Geographic Diversity**: Signer distribution across multiple jurisdictions ensures resilience against regional failures, regulatory actions, and coordinated attacks. Higher-value tiers require more geographic diversity.
 
-5. **Algorithm Flexibility**: Supporting multiple MPC algorithms (CGG21, MuSig2, FROST, Ringtail) enables native compatibility with different blockchain curves and provides a quantum-safe migration path.
+5. **Algorithm Flexibility**: Supporting multiple MPC algorithms (CGG21, MuSig2, FROST, Pulsar) enables native compatibility with different blockchain curves and provides a quantum-safe migration path.
 
 6. **Proactive Key Refresh**: Time-based share regeneration without changing public keys provides forward security while maintaining operational continuity. Refresh intervals scale inversely with asset value.
 
@@ -1898,7 +1898,7 @@ All reference implementations are available in the Lux GitHub organization: http
 | CGG21 (ECDSA) | `github.com/luxfi/threshold` | `protocols/cmp/` |
 | MuSig2 (BIP-340) | `github.com/luxfi/threshold` | `protocols/musig2/` |
 | FROST (Schnorr) | `github.com/luxfi/threshold` | `protocols/frost/` |
-| Ringtail (PQ) | `github.com/luxfi/threshold` | `protocols/ringtail/` |
+| Pulsar (PQ) | `github.com/luxfi/threshold` | `protocols/ringtail/` |
 | LSS Resharing | `github.com/luxfi/threshold` | `protocols/lss/` |
 
 ### Bridge Integration

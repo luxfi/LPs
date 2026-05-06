@@ -72,7 +72,7 @@ BLS aggregate signatures require proof-of-possession (PoP) to prevent rogue key 
 
 ## Security Considerations
 
-1. BLS12-381 provides 128-bit classical security but is NOT post-quantum secure. Ringtail (LP-073) provides the PQ fallback.
+1. BLS12-381 provides 128-bit classical security but is NOT post-quantum secure. Pulsar (LP-073) provides the PQ fallback.
 2. Nonce-free: BLS signing is deterministic. No nonce reuse vulnerability.
 3. Aggregate verification is constant-time in signature count but linear in signer bitmap processing.
 4. Signer bitmap compression reduces Warp message size when many validators participate.

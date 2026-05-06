@@ -319,13 +319,13 @@ Requires network upgrade. Not backwards compatible. Downstream systems must acco
 - **Relayers**: Implement epoch-aware validator set queries
 - **Indexers**: Track epoch boundaries and validator set changes
 
-## Ringtail Key Epoch Management (LP-7324 Integration)
+## Pulsar Key Epoch Management (LP-7324 Integration)
 
 ### Overview
 
-The EpochManager provides epoch-based Ringtail key management for the Quasar consensus validator set. Fresh lattice-based threshold keys are generated when validators change, with rate limiting to prevent excessive key churn while still rotating frequently enough to frustrate quantum attacks.
+The EpochManager provides epoch-based Pulsar key management for the Quasar consensus validator set. Fresh lattice-based threshold keys are generated when validators change, with rate limiting to prevent excessive key churn while still rotating frequently enough to frustrate quantum attacks.
 
-### Ringtail Epoch Constants
+### Pulsar Epoch Constants
 
 | Constant | Value | Purpose |
 |----------|-------|---------|
@@ -342,7 +342,7 @@ The epoch uses `uint64` which supports values up to 18,446,744,073,709,551,615. 
 ### Key Rotation Behavior
 
 ```go
-// EpochManager manages Ringtail key epochs for the validator set.
+// EpochManager manages Pulsar key epochs for the validator set.
 type EpochManager struct {
     currentEpoch      uint64
     currentKeys       *EpochKeys
@@ -353,7 +353,7 @@ type EpochManager struct {
     threshold         int
 }
 
-// EpochKeys holds the Ringtail keys for a specific epoch.
+// EpochKeys holds the Pulsar keys for a specific epoch.
 type EpochKeys struct {
     Epoch           uint64
     CreatedAt       time.Time
@@ -393,7 +393,7 @@ Historical epochs are preserved for signature verification during transitions:
 ### Cross-Epoch Signature Verification
 
 ```go
-// VerifySignatureForEpoch verifies a Ringtail signature using the epoch's keys.
+// VerifySignatureForEpoch verifies a Pulsar signature using the epoch's keys.
 func (em *EpochManager) VerifySignatureForEpoch(message string, sig *Signature, epoch uint64) bool {
     keys, exists := em.epochHistory[epoch]
     if !exists || keys.GroupKey == nil || sig == nil {
@@ -408,7 +408,7 @@ func (em *EpochManager) VerifySignatureForEpoch(message string, sig *Signature, 
 The EpochManager integrates with Quasar's validator management:
 
 ```go
-// AddValidator rotates Ringtail keys when validator set changes
+// AddValidator rotates Pulsar keys when validator set changes
 func (q *Quasar) AddValidator(validatorID string, share *ringtailThreshold.KeyShare) error {
     keys, err := q.epochManager.RotateEpoch(validators, false)
     if errors.Is(err, ErrEpochRateLimited) || errors.Is(err, ErrNoValidatorChange) {
@@ -416,7 +416,7 @@ func (q *Quasar) AddValidator(validatorID string, share *ringtailThreshold.KeySh
         rotated = false
         err = nil
     }
-    // Update BLS and Ringtail validator sets in sync
+    // Update BLS and Pulsar validator sets in sync
     return q.syncValidatorSets()
 }
 ```
@@ -426,7 +426,7 @@ func (q *Quasar) AddValidator(validatorID string, share *ringtailThreshold.KeySh
 1. **Key Freshness**: Regular rotation invalidates any quantum attack progress
 2. **Rate Limiting**: Prevents DoS via excessive key generation
 3. **History Preservation**: Cross-epoch verification during transitions
-4. **Synchronized Sets**: BLS and Ringtail validator sets stay aligned
+4. **Synchronized Sets**: BLS and Pulsar validator sets stay aligned
 
 ### Implementation Files
 

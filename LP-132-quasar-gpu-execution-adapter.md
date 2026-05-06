@@ -16,7 +16,7 @@ requires:
 references:
   - lp-022 (ZAP wire protocol)
   - lp-070 (ML-DSA)
-  - lp-073 (Ringtail)
+  - lp-073 (Pulsar)
   - lp-075 (BLS)
   - lp-135 (QuasarSTM 4.0 — Production Spec, activation 2026-02-14)
   - lp-010-quasar-stm-4 (4.0 paper, 2026-02-14)
@@ -92,7 +92,7 @@ enum class ServiceId : uint32_t {
     Commit            = 7,   // commit + per-tx receipt keccak
     StateRequest      = 8,   // GPU → host page faults (out)
     StateResp         = 9,   // host → GPU page replies (in)
-    CertLane          = 10,  // BLS / Ringtail / MLDSAGroth16 lane artifacts
+    CertLane          = 10,  // BLS / Pulsar / MLDSAGroth16 lane artifacts
     CertOut           = 11,  // GPU-emitted per-lane QuasarCert commitments
 
     // 4.0 services (4 new) — production, shipped 2026-02-14 (v0.43, v0.47, v0.48)
@@ -222,7 +222,7 @@ Three verifiers (LP-132 §§drain_cert_lane), shipped state per lane:
 | Lane | Verifier | Status (post 2026-02-14) | Substrate file |
 |---|---|---|---|
 | BLS | `verify_bls_aggregate` | **v0.44 real BLS pairing** (BLS12-381) — replaces 3.0 HMAC-keccak placeholder | `lib/consensus/quasar/gpu/crypto/bls12_381.metal` / `.cu` |
-| Ringtail | `verify_ringtail_share` | **v0.45 real Ringtail Ring-LWE** share verifier against Q-Chain ceremony key — replaces 3.0 HMAC-keccak placeholder | `lib/consensus/quasar/gpu/crypto/ringtail.metal` / `.cu` |
+| Pulsar | `verify_ringtail_share` | **v0.45 real Pulsar Ring-LWE** share verifier against Q-Chain ceremony key — replaces 3.0 HMAC-keccak placeholder | `lib/consensus/quasar/gpu/crypto/ringtail.metal` / `.cu` |
 | MLDSAGroth16 | `verify_mldsa_groth16` | **v0.45 real Groth16** over BLS12-381 against Z-Chain VK — replaces 3.0 HMAC-keccak placeholder | `lib/consensus/quasar/gpu/crypto/groth16.metal` / `.cu` |
 
 The 3.0 launch (2025-12-25) shipped HMAC-keccak placeholders across all
@@ -230,7 +230,7 @@ three lanes — real cryptographic verification (one-way with a master
 secret; cross-lane domain tags reject replay), structured so the swap
 to real BLS / Ring-LWE / Groth16 was a single function-pointer change.
 That swap landed under QuasarSTM 4.0 (LP-135) in v0.44 (BLS) and v0.45
-(Ringtail + Groth16) and activated on **2026-02-14**. The HMAC-keccak
+(Pulsar + Groth16) and activated on **2026-02-14**. The HMAC-keccak
 path is preserved as a development-only mode for deterministic test
 vectors and is gated behind `EVM_DEV_HMAC_VERIFIER=1`. See
 LP-010-quasar-stm-4 (4.0 paper, 2026-02-14) for the migration.
@@ -333,7 +333,7 @@ The substrate ships with a comprehensive test surface
 | `evm_fiber_arithmetic` | `PUSH1 1; PUSH1 2; ADD; STOP` commits with correct gas |
 | `evm_fiber_storage` | SLOAD cold-miss → suspend → resume; fibers_suspended ≥ 1 |
 | `evm_fiber_revert` | REVERT path drains cleanly |
-| `quasar_quorum_round_trip` | 3 BLS + 1 ML-DSA + 2 Ringtail; tampered & cross-lane replay rejected |
+| `quasar_quorum_round_trip` | 3 BLS + 1 ML-DSA + 2 Pulsar; tampered & cross-lane replay rejected |
 
 Plus the broader 19-binary GPU test surface (parity, modes, host-bridge,
 pipeline, unified, gpu-state, opcodes, dispatch, refund, access-list,
@@ -369,7 +369,7 @@ QuasarGPU **must not** use:
 | **v0.42** | cert-subject hardening (`certificate_subject` includes P/Q/Z roots), `KnownTotalOrder`, mode roots separated |
 | **v0.43** | ConflictSpec ABI + LaneClass + dynamic per-lane VersioningMode + AdaptiveSchedule drain |
 | **v0.44** | **real BLS12-381 pairing kernel** (replaces HMAC-keccak BLS placeholder) |
-| **v0.45** | **real Ringtail Ring-LWE share verifier** + **real Groth16** verifier (replaces HMAC-keccak placeholders) |
+| **v0.45** | **real Pulsar Ring-LWE share verifier** + **real Groth16** verifier (replaces HMAC-keccak placeholders) |
 | **v0.46** | full EVM coverage (175 opcodes, full CALL/CREATE family, LOGn, EXTCODE*, RETURNDATA*, TLOAD/TSTORE, MCOPY, BLOBHASH/BLOBBASEFEE) + journaled SSTORE + EIP-2929/3529 + Tier 3 semantic reducers |
 | **v0.47** | predictive scheduling + Chiron-style execution-hint roots emitted per wave tick |
 | **v0.48** | Motor VersionBlock layout (4 → 8 inline versions per key) + A/B/M/F drains: AdaptiveSchedule, BridgeAttest, MarketAuction, FiberCheckpoint |
@@ -401,7 +401,7 @@ The QuasarSTM 4.0 production spec is LP-135. The 4.0 production paper
 - **2025-12-15** — 3.0 substrate spec, 12 service IDs, three HMAC-keccak
   cert verifiers, 118-opcode EVM fiber, single-GPU; activated 2025-12-25.
 - **2026-02-14** — **QuasarSTM 4.0 activation**: 16 service IDs (12 + 4
-  A/B/M/F), real BLS12-381 / Ringtail Ring-LWE / Groth16 verifiers
+  A/B/M/F), real BLS12-381 / Pulsar Ring-LWE / Groth16 verifiers
   (v0.44/v0.45), 175-opcode EVM with full CALL/CREATE/LOG/EXTCODE/
   RETURNDATA/TLOAD/TSTORE/MCOPY/BLOBHASH/BLOBBASEFEE coverage (v0.46),
   predictive scheduling + Chiron hint roots (v0.47), Motor VersionBlock

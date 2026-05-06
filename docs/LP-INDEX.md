@@ -323,7 +323,7 @@ LPs for multi-party computation, threshold signatures, and distributed key gener
 | [LP-7321](/docs/lp-7321-frost-threshold-signature-precompile/) | FROST Threshold Signature Precompile | `threshold-crypto`, `frost`, `precompile` | Draft |
 | [LP-7322](/docs/lp-7322-cggmp21-threshold-ecdsa-precompile/) | CGGMP21 ECDSA Precompile | `threshold-crypto`, `cggmp21`, `precompile` | Draft |
 | [LP-7323](/docs/lp-7323-lss-mpc-dynamic-resharing-extension/) | LSS MPC Dynamic Resharing | `mpc`, `lss`, `resharing` | Draft |
-| [LP-7324](/docs/lp-7324-ringtail-threshold-signature-precompile/) | Ringtail Threshold Signature Precompile | `pqc`, `ringtail`, `threshold-crypto`, `precompile` | Draft |
+| [LP-7324](/docs/lp-7324-ringtail-threshold-signature-precompile/) | Pulsar Threshold Signature Precompile | `pqc`, `ringtail`, `threshold-crypto`, `precompile` | Draft |
 | [LP-7325](/docs/lp-7325-kms-hardware-security-module-integration/) | KMS/HSM Integration | `security`, `hsm`, `kms` | Draft |
 | [LP-7333](/docs/lp-7333-dynamic-signer-rotation-with-lss-protocol/) | Dynamic Signer Rotation (LP-333) | `threshold-crypto`, `lss`, `signer-rotation` | Final |
 | [LP-7334](/docs/lp-7334-per-asset-threshold-key-management/) | Per-Asset Threshold Key Management | `threshold-crypto`, `keys`, `bridge` | Draft |

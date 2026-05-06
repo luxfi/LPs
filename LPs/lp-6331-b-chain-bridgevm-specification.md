@@ -72,7 +72,7 @@ B-Chain addresses these challenges by providing:
 
 3. **T-Chain Coordination**: Integration with the Threshold Chain (T-Chain) for secure, distributed signature generation using CGG21/CGGMP21 protocols.
 
-4. **Quantum-Safe Extensions**: Support for post-quantum cryptography through Ringtail lattice-based signatures during the transition period.
+4. **Quantum-Safe Extensions**: Support for post-quantum cryptography through Pulsar lattice-based signatures during the transition period.
 
 5. **Standardized Operations**: A single, auditable codebase for all cross-chain transfers with consistent security guarantees.
 
@@ -542,7 +542,7 @@ type MPCSignature struct {
     // Signer bitmap
     SignerBitmap    []byte
 
-    // Optional: Ringtail quantum-safe signature
+    // Optional: Pulsar quantum-safe signature
     RingtailSig     []byte
 
     // T-Chain proof
@@ -1960,7 +1960,7 @@ Total minimum size: 8 + 8 + 1 + 20 + 32 + 32 + 32 + 8 + 8 + 20 + 65 = 234 bytes
 | ProofLen |                TChainProof (variable)                      |
 +--------+--------+--------+--------+--------+--------+--------+--------+
 
-Minimum size (without Ringtail): 32 + 32 + 1 + 1 + 8 + 32 + 1 = 107 bytes
+Minimum size (without Pulsar): 32 + 32 + 1 + 1 + 8 + 32 + 1 = 107 bytes
 ```
 
 ### Relayer Protocol

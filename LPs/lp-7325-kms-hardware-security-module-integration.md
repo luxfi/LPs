@@ -228,9 +228,9 @@ func (v *Validator) Sign(msg []byte) (*bls.Signature, error) {
 }
 ```
 
-#### Q-Chain Threshold Signatures (Ringtail)
+#### Q-Chain Threshold Signatures (Pulsar)
 
-Integrates with LP-320 (Ringtail), LP-321 (FROST), LP-322 (CGGMP21):
+Integrates with LP-320 (Pulsar), LP-321 (FROST), LP-322 (CGGMP21):
 
 ```go
 // Q-Chain validator using HSM for threshold signing

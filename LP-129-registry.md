@@ -36,7 +36,7 @@ II = Item/function (8 bits, 256 items per family per chain)
 
 | P | LP Range | Family |
 |---|----------|--------|
-| 2 | LP-2xxx | PQ Identity (ML-DSA, ML-KEM, SLH-DSA, Ringtail, X-Wing) |
+| 2 | LP-2xxx | PQ Identity (ML-DSA, ML-KEM, SLH-DSA, Pulsar, X-Wing) |
 | 3 | LP-3xxx | EVM/Crypto (Ed25519, AI, Attestation, Quasar) |
 | 4 | LP-4xxx | Privacy/ZK |
 | 5 | LP-5xxx | Threshold/MPC (FROST, CGGMP21) |

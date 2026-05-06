@@ -17,7 +17,7 @@ order: 332
 
 ## Abstract
 
-This LP specifies the Teleport Bridge Architecture, a unified cross-chain protocol for Lux Network that combines T-Chain (ThresholdVM) for MPC key management with B-Chain (BridgeVM) for bridge operation coordination. The architecture enables trustless, decentralized bridging between Lux Network and external blockchains including Ethereum, Bitcoin, Base, Arbitrum, Optimism, and Cosmos IBC chains. A single MPC-generated address works across all EVM-compatible chains, eliminating the need for chain-specific custody solutions. The system uses threshold signatures (CGG21 for ECDSA, LSS for dynamic resharing, and Ringtail for quantum-safe extensions) with configurable t-of-n thresholds, ensuring no single party controls bridged funds. Teleport provides sub-minute finality for intra-Lux transfers and 8-20 minute finality for external chain bridges, processing over 100 TPS with bridge fees under $0.001.
+This LP specifies the Teleport Bridge Architecture, a unified cross-chain protocol for Lux Network that combines T-Chain (ThresholdVM) for MPC key management with B-Chain (BridgeVM) for bridge operation coordination. The architecture enables trustless, decentralized bridging between Lux Network and external blockchains including Ethereum, Bitcoin, Base, Arbitrum, Optimism, and Cosmos IBC chains. A single MPC-generated address works across all EVM-compatible chains, eliminating the need for chain-specific custody solutions. The system uses threshold signatures (CGG21 for ECDSA, LSS for dynamic resharing, and Pulsar for quantum-safe extensions) with configurable t-of-n thresholds, ensuring no single party controls bridged funds. Teleport provides sub-minute finality for intra-Lux transfers and 8-20 minute finality for external chain bridges, processing over 100 TPS with bridge fees under $0.001.
 
 ## Related Specifications
 
@@ -53,7 +53,7 @@ The Teleport Bridge Architecture addresses these challenges by:
 2. **Unified Infrastructure**: One MPC address works on ALL EVM chains - deploy once, bridge everywhere
 3. **Identifiable Aborts**: CGG21 protocol pinpoints misbehaving validators for slashing
 4. **Dynamic Resharing**: LSS protocol enables validator set changes without rotating public keys
-5. **Quantum-Safe Path**: Ringtail lattice-based signatures provide post-quantum protection
+5. **Quantum-Safe Path**: Pulsar lattice-based signatures provide post-quantum protection
 6. **Dual-Chain Coordination**: T-Chain manages keys, B-Chain orchestrates operations
 
 ### Comparison with Other Bridges
@@ -125,7 +125,7 @@ T-Chain is a specialized chain providing MPC key management. See [LP-330](/docs/
 
 **Responsibilities:**
 - Distributed key generation (DKG) without trusted dealer
-- Threshold signature generation (CGG21, LSS, FROST, Ringtail)
+- Threshold signature generation (CGG21, LSS, FROST, Pulsar)
 - Proactive key refresh (epoch-based)
 - Dynamic resharing for validator rotation (see [LP-333](/docs/lp-7333-dynamic-signer-rotation-with-lss-protocol/))
 - Key share storage and recovery
@@ -1581,11 +1581,11 @@ func (c *FeeConfig) CalculateFee(amount *big.Int) *big.Int {
 3. Reduces attack surface for key material
 4. Enables specialized consensus parameters per chain
 
-### Why CGG21 + LSS + Ringtail?
+### Why CGG21 + LSS + Pulsar?
 
 1. **CGG21**: Best-in-class threshold ECDSA with identifiable aborts - essential for accountability
 2. **LSS**: Unique dynamic resharing capability - enables validator rotation without key change (see [LP-333](/docs/lp-7333-dynamic-signer-rotation-with-lss-protocol/))
-3. **Ringtail**: Lattice-based post-quantum protection - future-proofs against quantum attacks
+3. **Pulsar**: Lattice-based post-quantum protection - future-proofs against quantum attacks
 
 ### Why Same MPC Address Across EVM Chains?
 
@@ -1617,7 +1617,7 @@ func (c *FeeConfig) CalculateFee(amount *big.Int) *big.Int {
 ```
 Phase 1 (Current): Deploy T-Chain + B-Chain with CGG21
 Phase 2 (Q1 2025): Enable LSS for dynamic resharing
-Phase 3 (Q2 2025): Add Ringtail dual signatures
+Phase 3 (Q2 2025): Add Pulsar dual signatures
 Phase 4 (Q3 2025): Full quantum-safe transition
 ```
 
@@ -1630,7 +1630,7 @@ Phase 4 (Q3 2025): Full quantum-safe transition
 | [github.com/luxfi/node](https://github.com/luxfi/node) | Lux node with T-Chain (ThresholdVM), B-Chain (BridgeVM) | Active |
 | [github.com/luxfi/bridge](https://github.com/luxfi/bridge) | Bridge monorepo (SDK, relayer, UI) | Active |
 | [github.com/luxfi/standard](https://github.com/luxfi/standard) | Solidity contracts (Vault, Release, Wrapped) | Active |
-| [github.com/luxfi/threshold](https://github.com/luxfi/threshold) | Threshold cryptography (CGG21, LSS, FROST, Ringtail) | Active |
+| [github.com/luxfi/threshold](https://github.com/luxfi/threshold) | Threshold cryptography (CGG21, LSS, FROST, Pulsar) | Active |
 | [github.com/luxfi/sdk](https://github.com/luxfi/sdk) | Client SDK (TypeScript, Go) | Active |
 
 ### Local Development
@@ -1695,7 +1695,7 @@ cd ~/work/lux/node
 | Replay Attack | Reuse old signatures | Chain-specific domain separators, nonces, expiry |
 | Oracle Manipulation | Wrong asset pricing | Multi-source oracles, TWAP, circuit breakers |
 | Smart Contract Bug | Fund drainage | Multiple audits, formal verification, upgrade timelock |
-| Quantum Attack | Future key extraction | Ringtail dual signatures, migration path |
+| Quantum Attack | Future key extraction | Pulsar dual signatures, migration path |
 
 ### Operational Security
 

@@ -57,7 +57,7 @@ Formal verification provides the highest level of assurance for blockchain proto
 
 - BLS bilinearity and aggregate soundness (proved)
 - FROST threshold signature unforgeability
-- Ringtail post-quantum threshold signatures
+- Pulsar post-quantum threshold signatures
 - ML-DSA FIPS 204 post-quantum signatures
 
 ### Halmos Symbolic Proofs

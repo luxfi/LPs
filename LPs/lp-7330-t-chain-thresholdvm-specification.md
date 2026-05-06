@@ -3028,7 +3028,7 @@ E Commitment:   0x025B6C7D8E9FA0B1C2D3E4F50617283940A1B2C3D4E5F60718293A4B5C6D7E
 github.com/luxfi/node/vms/thresholdvm/
 ├── vm.go           # (43 KB) ThresholdVM core - Initialize, BuildBlock, ParseBlock
 ├── executor.go     # (13 KB) Protocol executor - bridges VM to threshold library
-├── protocols.go    # (13 KB) Protocol handlers - LSS, CMP, FROST, BLS, Ringtail
+├── protocols.go    # (13 KB) Protocol handlers - LSS, CMP, FROST, BLS, Pulsar
 ├── rpc.go          # (27 KB) JSON-RPC API handlers
 ├── client.go       # (15 KB) Client for RPC interactions
 ├── block.go        # (4 KB) Block structure and validation
@@ -3225,7 +3225,7 @@ func (vm *VM) Initialize(...) error {
 
 ## Future Work
 
-1. **Post-Quantum Threshold**: Integrate Ringtail for quantum-safe threshold signatures
+1. **Post-Quantum Threshold**: Integrate Pulsar for quantum-safe threshold signatures
 2. **Hardware Security Module (HSM) Integration**: Support for HSM-backed shares
 3. **Multi-Chain Aggregation**: Sign for multiple chains in single session
 4. **Threshold Encryption**: Add threshold decryption capabilities

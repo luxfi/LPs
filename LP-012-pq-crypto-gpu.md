@@ -17,7 +17,7 @@ requires:
 
 ## Abstract
 
-All NIST FIPS post-quantum algorithms run natively on GPU. The Number Theoretic Transform (NTT) is the shared primitive — 6 GPU NTT variants accelerate ML-DSA, ML-KEM, SLH-DSA, and Ringtail simultaneously.
+All NIST FIPS post-quantum algorithms run natively on GPU. The Number Theoretic Transform (NTT) is the shared primitive — 6 GPU NTT variants accelerate ML-DSA, ML-KEM, SLH-DSA, and Pulsar simultaneously.
 
 ## Algorithms
 
@@ -26,7 +26,7 @@ All NIST FIPS post-quantum algorithms run natively on GPU. The Number Theoretic 
 | ML-DSA-65 | FIPS 204 | Signature verify | mldsa.metal |
 | ML-KEM-768 | FIPS 203 | Key decapsulate | mlkem.metal |
 | SLH-DSA | FIPS 205 | Signature verify | slhdsa.metal |
-| Ringtail | Lux-specific | Threshold sign | ringtail.metal |
+| Pulsar | Lux-specific | Threshold sign | ringtail.metal |
 
 ## Shared NTT
 

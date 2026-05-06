@@ -373,7 +373,7 @@ describe("LRC721 Private Ownership", () => {
 **Privacy Extensions**:
 - Location: `~/work/lux/standard/src/tokens/privacy/`
 - Contracts: `LRC721Private.sol`, `StealthTransfer.sol`
-- Integration with Ringtail ring signatures
+- Integration with Pulsar ring signatures
 
 **Testing**:
 ```bash

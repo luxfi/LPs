@@ -15,7 +15,18 @@ order: 22
 
 ## Abstract
 
-This LP proposes Warp Messaging 2.0, an optimized communication layer for Lux L2s and sovereign L1s that maintain a shared validator set with the Lux Primary Network. Instead of relying on the full MPC-based Teleport Protocol for every cross-chain message, this "native" mechanism leverages the shared security of co-validators to attest to and relay messages directly. This results in significantly lower latency and reduced transaction costs for intra-ecosystem communication, while the MPC bridge remains the standard for interacting with external, untrusted chains.
+This LP specifies **Lux Warp 2.0**, the canonical hybrid envelope for
+cross-chain messaging within the Lux ecosystem. Warp 2.0 carries the
+Warp 1.x message intact (the **Beam** lane: BLS12-381 aggregate +
+signer bitmap, see LP-075) alongside two post-quantum lanes: a per-
+validator **ML-DSA cert set** (FIPS 204, see LP-070) and a **Pulse**
+produced by the source chain's Pulsar threshold kernel (Lux's Ringtail
+variant with DKG2 + Pulsar-SHA3, see LP-073). All three lanes are
+bound to a common source-chain transcript, so destination chains can
+verify under any combination of classical / PQ assumptions. Warp 2.0
+ships in `github.com/luxfi/warp` (see `envelope.go`, `pulsar/`) and is
+the envelope path used by Lux's Quasar consensus integration (LP-110).
+Lux Teleport (LP-6332) is the asset-transfer protocol layered on top.
 
 ## Motivation
 
@@ -42,7 +53,7 @@ This process bypasses the full MPC signing ceremony, as the trust is placed in t
 
 **3. Fallback to MPC:**
 
-If a message is destined for an external chain (e.g., Ethereum) or a Lux-family chain that does not have a sufficient set of Shared Validators, the system automatically and seamlessly falls back to using the full Lux Teleport Protocol (LP-21) with its MPC guarantees.
+If a message is destined for an external chain (e.g., Ethereum) or a Lux-family chain that does not have a sufficient set of Shared Validators, the system automatically and seamlessly falls back to using the full Lux Teleport (LP-6332) with its MPC guarantees.
 
 ## Rationale
 
@@ -64,7 +75,7 @@ This design was chosen over a single MPC-for-all solution to enhance the user ex
   - Validates aggregated validator signatures
   - Processes intra-ecosystem messages
 
-- **Fallback to MPC**: Automatic routing to LP-21 for external chains
+- **Fallback to MPC**: Automatic routing to Lux Teleport (LP-6332) for external chains
 
 ### Node Implementation
 - **Validator Attestation**: In node P2P gossip layer

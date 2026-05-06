@@ -31,7 +31,7 @@ LP-3680 introduces the CLZ (Count Leading Zeros) opcode to the Lux EVM, providin
 1. **Post-Quantum Cryptography**
    - ML-DSA signature verification (LP-3500)
    - SLH-DSA hash-based signatures (LP-3501)
-   - Ringtail lattice signatures (LP-7324)
+   - Pulsar lattice signatures (LP-7324)
    - Bit manipulation in polynomial operations
 
 2. **Zero-Knowledge Proofs**
@@ -138,7 +138,7 @@ The CLZ (Count Leading Zeros) operation was selected as a dedicated opcode for s
 
 3. **Constant Time Property**: Unlike software implementations that may have variable timing, hardware CLZ executes in constant cycles, providing timing attack resistance.
 
-4. **PQ/ZK Optimization**: Post-quantum signatures (ML-DSA, SLH-DSA, Ringtail) and ZK proofs require extensive bit manipulation. Native CLZ reduces these costs by 90%+.
+4. **PQ/ZK Optimization**: Post-quantum signatures (ML-DSA, SLH-DSA, Pulsar) and ZK proofs require extensive bit manipulation. Native CLZ reduces these costs by 90%+.
 
 ### Opcode Number Selection
 
@@ -165,7 +165,7 @@ function normalizeCoeff(int256 coeff) internal pure returns (int256) {
 }
 ```
 
-### Ringtail Threshold Signatures (LP-7324)
+### Pulsar Threshold Signatures (LP-7324)
 
 ```solidity
 // Ring element degree calculation
@@ -264,7 +264,7 @@ contract CLZTest {
 - [ARM CLZ Instruction](https://developer.arm.com/documentation/)
 - LP-3500: ML-DSA Signature Precompile
 - LP-3501: SLH-DSA Signature Precompile
-- LP-7324: Ringtail Threshold Signature Precompile
+- LP-7324: Pulsar Threshold Signature Precompile
 
 ## Copyright
 

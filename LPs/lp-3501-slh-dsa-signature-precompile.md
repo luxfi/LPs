@@ -1,7 +1,7 @@
 ---
 lp: 3501
 title: SLH-DSA Signature Precompile
-description: Native precompile for NIST FIPS 205 SLH-DSA (SPHINCS+) hash-based post-quantum signatures
+description: Native precompile for NIST FIPS 205 SLH-DSA (SLH-DSA (FIPS 205, formerly SPHINCS+)) hash-based post-quantum signatures
 author: Lux Core Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
 status: Final
@@ -23,7 +23,7 @@ This LP specifies a precompiled contract for verifying SLH-DSA (Stateless Hash-b
 
 ## Motivation
 
-SLH-DSA (formerly SPHINCS+) provides unique security properties compared to ML-DSA:
+SLH-DSA provides unique security properties compared to ML-DSA:
 
 1. **Hash-based security**: Security relies only on hash function collision resistance, not structured lattice problems
 2. **Conservative security**: More conservative post-quantum assumption than lattice-based schemes
@@ -203,7 +203,7 @@ See: `precompiles/slhdsa/`
 - `README.md` - Complete documentation (329 lines)
 
 **Cryptography:**
-- Implementation: Uses native Go SPHINCS+ implementation
+- Implementation: Uses native Go SLH-DSA implementation
 - Standard: NIST FIPS 205 compliant
 - Variant: SLH-DSA-128s (32-byte public keys, 7,856-byte signatures)
 
@@ -252,7 +252,7 @@ However, larger signatures increase storage costs.
    - Current implementation uses 128s for efficiency
 
 2. **Signature aggregation?**
-   - Unlike BLS, SPHINCS+ signatures don't aggregate
+   - Unlike BLS, SLH-DSA signatures don't aggregate
    - Multiple signatures require multiple verifications
    - Could implement Merkle aggregation at application layer
 
@@ -274,18 +274,18 @@ This was chosen for:
 
 ### Integration with MPC/Threshold
 
-Unlike ML-DSA, SPHINCS+ is **stateless hash-based**:
+Unlike ML-DSA, SLH-DSA is **stateless hash-based**:
 - No threshold variant exists
 - Each signer must have full secret key
-- For threshold use cases, use Ringtail (LP-320) instead
+- For threshold use cases, use Pulsar (LP-320) instead
 
 ## References
 
 - **NIST FIPS 205**: https://csrc.nist.gov/pubs/fips/205/final
-- **SPHINCS+ Specification**: https://sphincs.org/
+- **SLH-DSA Specification**: https://sphincs.org/
 - **Implementation**: `precompiles/slhdsa/`
 - **LP-311**: ML-DSA Precompile (complementary PQ signature)
-- **LP-320**: Ringtail Threshold (PQ threshold variant)
+- **LP-320**: Pulsar Threshold (PQ threshold variant)
 
 ## Copyright
 

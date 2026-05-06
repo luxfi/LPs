@@ -1,7 +1,7 @@
 ---
 lp: 4303
 title: Lux Q-Security - Post-Quantum P-Chain Integration
-description: Post-quantum secure consensus layer integrated into P-Chain using ML-DSA (Dilithium), ML-KEM (Kyber), and BLS+Ringtail hybrid signatures
+description: Post-quantum secure consensus layer integrated into P-Chain using ML-DSA (ML-DSA), ML-KEM (ML-KEM), and BLS+Pulsar hybrid signatures
 author: Lux Partners (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
 status: Final
@@ -25,9 +25,9 @@ order: 303
 ## Abstract
 
 This LP specifies **Lux Q-Security**, a post-quantum secure consensus layer integrated into **P-Chain** (Platform Chain) using:
-- **Ringtail (ML-DSA)**: Dilithium-based digital signatures
-- **Kyber (ML-KEM)**: Post-quantum key encapsulation
-- **BLS+Ringtail Hybrid**: Dual-signature scheme for gradual migration
+- **Pulsar (ML-DSA)**: Dilithium-based digital signatures
+- **ML-KEM (ML-KEM)**: Post-quantum key encapsulation
+- **BLS+Pulsar Hybrid**: Dual-signature scheme for gradual migration
 
 Q-Security is NOT a separate Q-Chain, but rather a **quantum-resistant security layer** embedded in Lux's P-Chain validator and governance paths, providing post-quantum protection across the entire Lux L1 (P/X/B/Z chains).
 
@@ -49,7 +49,7 @@ Q-Security provides post-quantum protection across Lux's **6-chain mainnet archi
 
 | Chain | Purpose | Q-Security Integration |
 |-------|---------|----------------------|
-| **P-Chain** | Platform & Consensus | BLS+Ringtail dual-sig validators, PQC governance |
+| **P-Chain** | Platform & Consensus | BLS+Pulsar dual-sig validators, PQC governance |
 | **X-Chain** | UTXO Assets | Inherits P-Chain security, PQC transaction signing |
 | **B-Chain** | Bridge (BridgeVM) | Committee keys anchored to P-Chain PQC, MPC+PQC hybrid |
 | **Z-Chain** | ZK Privacy | Post-quantum zk-STARKs, FHE (quantum-resistant) |
@@ -62,19 +62,19 @@ Q-Security provides post-quantum protection across Lux's **6-chain mainnet archi
 
 ### Post-Quantum Signature Schemes
 
-**CRYSTALS-Dilithium** (NIST standardized):
+**ML-DSA (FIPS 204, formerly CRYSTALS-Dilithium)** (NIST standardized):
 - **Security level**: 128-bit post-quantum security (NIST Level III)
 - **Signature size**: 3,293 bytes (vs 65 bytes for ECDSA)
 - **Key size**: 1,952 bytes public, 4,000 bytes private
 - **Signing speed**: 0.8ms
 - **Verification speed**: 0.5ms
 
-**SPHINCS+** (Stateless signatures):
+**SLH-DSA (FIPS 205, formerly SPHINCS+)** (Stateless signatures):
 - **Security level**: 192-bit post-quantum security
 - **Signature size**: 17,088 bytes
 - **Use case**: Long-term security for checkpoints
 
-**Kyber** (Key encapsulation):
+**ML-KEM** (Key encapsulation):
 - **Security level**: 128-bit post-quantum security
 - **Ciphertext size**: 1,568 bytes
 - **Use case**: Secure validator communication
@@ -82,23 +82,23 @@ Q-Security provides post-quantum protection across Lux's **6-chain mainnet archi
 ### Hybrid Migration Strategy
 
 **Phase 1: Hybrid Mode** (2025-2027):
-- Validators sign with **both** ECDSA and Dilithium
+- Validators sign with **both** ECDSA and ML-DSA
 - Consensus accepts either signature type
 - Gradual migration without hard fork
 
-**Phase 2: Dilithium Primary** (2027-2030):
-- Dilithium signatures required
+**Phase 2: ML-DSA Primary** (2027-2030):
+- ML-DSA signatures required
 - ECDSA signatures optional (backward compatibility)
 
 **Phase 3: ECDSA Deprecated** (2030+):
-- Pure Dilithium consensus
+- Pure ML-DSA consensus
 - Legacy ECDSA validators sunset
 
 ### Lattice-Based Threshold Signatures
 
-**Distributed Dilithium Signing**:
+**Distributed ML-DSA Signing**:
 
-Traditional threshold signatures (BLS, ECDSA) vulnerable to quantum attacks. Lux implements **lattice-based threshold Dilithium**:
+Traditional threshold signatures (BLS, ECDSA) vulnerable to quantum attacks. Lux implements **lattice-based threshold ML-DSA**:
 
 ```
 // Each validator i holds secret share s_i
@@ -110,20 +110,20 @@ Traditional threshold signatures (BLS, ECDSA) vulnerable to quantum attacks. Lux
 // Distributed signing (t validators cooperate)
 σ ← ThresholdSign({s_i}_{i∈S}, message)  where |S| ≥ t
 
-// Verification (same as standard Dilithium)
+// Verification (same as standard ML-DSA)
 Valid ← Verify(pk, message, σ)
 ```
 
 **Advantages**:
 - No trusted dealer (distributed key generation)
 - Quantum-resistant (lattice hardness)
-- Same verification as standard Dilithium
+- Same verification as standard ML-DSA
 
 ### Performance Analysis
 
 **Throughput Impact**:
 
-| Metric | ECDSA Baseline | Pure Dilithium | With Aggregation |
+| Metric | ECDSA Baseline | Pure ML-DSA | With Aggregation |
 |--------|---------------|----------------|-----------------|
 | TPS | 65,000 | 50,000 (-23%) | 62,000 (-4.6%) |
 | Finality | 1.8s | 1.95s (+8.3%) | 1.85s (+2.8%) |
@@ -142,7 +142,7 @@ Block Header:
   - prevHash: Hash(previous block)
   - height: Block number
   - timestamp: Unix timestamp
-  - validatorSig: Dilithium signature (3,293 bytes)
+  - validatorSig: ML-DSA signature (3,293 bytes)
   - merkleRoot: Transaction Merkle root
 ```
 
@@ -151,21 +151,21 @@ Block Header:
 Vertex:
   - parents: {Hash(parent1), Hash(parent2), ...}
   - txs: [Transaction list]
-  - validatorSig: Dilithium signature
+  - validatorSig: ML-DSA signature
   - weight: Stake weight of validator
 ```
 
 ### Migration Timeline
 
-**Q1 2025**: Hybrid mode activation (ECDSA + Dilithium)
-**Q2 2026**: 50% validators using Dilithium
-**Q4 2027**: 90% validators using Dilithium
-**Q2 2030**: ECDSA deprecation (100% Dilithium)
+**Q1 2025**: Hybrid mode activation (ECDSA + ML-DSA)
+**Q2 2026**: 50% validators using ML-DSA
+**Q4 2027**: 90% validators using ML-DSA
+**Q2 2030**: ECDSA deprecation (100% ML-DSA)
 
 ### Cross-Chain Implications
 
 **Bridge Security**:
-- Upgrade threshold signature bridge to Dilithium
+- Upgrade threshold signature bridge to ML-DSA
 - Quantum-resistant light client proofs
 - Kyber-based encrypted channels for relayers
 
@@ -176,16 +176,16 @@ Vertex:
 
 ## Implementation
 
-### Dilithium API
+### ML-DSA API
 
 ```go
 // Generate quantum-safe key pair
 func GenerateDilithiumKey() (sk, pk []byte, err error)
 
-// Sign message with Dilithium
+// Sign message with ML-DSA
 func SignDilithium(sk []byte, message []byte) (signature []byte, err error)
 
-// Verify Dilithium signature
+// Verify ML-DSA signature
 func VerifyDilithium(pk []byte, message []byte, sig []byte) bool
 
 // Threshold signature (distributed)
@@ -218,41 +218,41 @@ quantum:
 | Algorithm | Key Gen | Sign | Verify | Signature Size |
 |-----------|---------|------|--------|----------------|
 | ECDSA (secp256k1) | 0.3ms | 0.4ms | 0.8ms | 65 bytes |
-| **Dilithium** | **1.2ms** | **0.8ms** | **0.5ms** | **3,293 bytes** |
-| SPHINCS+ | 5ms | 180ms | 2ms | 17,088 bytes |
+| **ML-DSA** | **1.2ms** | **0.8ms** | **0.5ms** | **3,293 bytes** |
+| SLH-DSA | 5ms | 180ms | 2ms | 17,088 bytes |
 
 ### Network Overhead
 
-**Transaction with Dilithium signature**:
+**Transaction with ML-DSA signature**:
 - ECDSA tx: 150 bytes
-- Dilithium tx: 3,378 bytes (22× larger)
+- ML-DSA tx: 3,378 bytes (22× larger)
 - With compression: 1,800 bytes (12× larger)
 
 **Block with 1000 txs**:
 - ECDSA: ~150 KB
-- Dilithium: ~3.3 MB
+- ML-DSA: ~3.3 MB
 - With aggregation: ~1.8 MB
 
 ## Rationale
 
 ### Design Decisions
 
-**1. Dilithium as Primary PQC Scheme**: CRYSTALS-Dilithium (ML-DSA) was selected over alternatives due to:
+**1. ML-DSA as Primary PQC Scheme**: ML-DSA (ML-DSA) was selected over alternatives due to:
 - NIST standardization (FIPS 204) providing regulatory certainty
 - Fastest verification among lattice-based signatures (0.5ms)
 - Reasonable signature size (3,293 bytes) compared to hash-based schemes
 - Strong security proofs based on Module-LWE hardness
 
-**2. Hybrid Migration Strategy**: The phased BLS+Ringtail hybrid approach was chosen over immediate replacement because:
+**2. Hybrid Migration Strategy**: The phased BLS+Pulsar hybrid approach was chosen over immediate replacement because:
 - Allows gradual validator migration without hard fork
 - Maintains backward compatibility during transition
 - Provides defense-in-depth (both schemes must be broken)
 - Enables testing and optimization before full commitment
 
 **3. Lattice-Based Threshold Signatures**: Traditional threshold schemes (Shamir, BLS) are quantum-vulnerable:
-- Threshold Dilithium preserves t-of-n security model
+- Threshold ML-DSA preserves t-of-n security model
 - No trusted dealer requirement (distributed key generation)
-- Same verification as standard Dilithium (interoperability)
+- Same verification as standard ML-DSA (interoperability)
 
 **4. Signature Aggregation**: To mitigate bandwidth overhead:
 - Batch verification reduces CPU cost by ~80% for bulk operations
@@ -261,8 +261,8 @@ quantum:
 
 ### Alternatives Considered
 
-- **SPHINCS+**: Hash-based signatures with 256-bit quantum security, but signature sizes (17KB+) and signing time (180ms) make it impractical for consensus. Reserved for checkpoint finality only.
-- **Falcon**: Faster than Dilithium but requires complex floating-point operations and has side-channel concerns. Not NIST-standardized as primary.
+- **SLH-DSA**: Hash-based signatures with 256-bit quantum security, but signature sizes (17KB+) and signing time (180ms) make it impractical for consensus. Reserved for checkpoint finality only.
+- **Falcon**: Faster than ML-DSA but requires complex floating-point operations and has side-channel concerns. Not NIST-standardized as primary.
 - **Rainbow**: Multivariate signatures rejected due to cryptanalysis concerns that led to NIST removal.
 - **Direct Replacement**: Immediate ECDSA deprecation rejected as too disruptive to existing infrastructure and validators.
 
@@ -273,31 +273,31 @@ This LP introduces significant but managed breaking changes:
 ### Transition Period
 
 **Phase 1 - Hybrid Mode (2025-2027)**:
-- Validators MAY use either ECDSA or Dilithium signatures
+- Validators MAY use either ECDSA or ML-DSA signatures
 - Consensus accepts both signature types
 - No breaking changes for existing infrastructure
-- New validators encouraged to use Dilithium
+- New validators encouraged to use ML-DSA
 
-**Phase 2 - Dilithium Primary (2027-2030)**:
-- Dilithium signatures REQUIRED for new validators
+**Phase 2 - ML-DSA Primary (2027-2030)**:
+- ML-DSA signatures REQUIRED for new validators
 - ECDSA signatures OPTIONAL for legacy validators
-- SDK updates for Dilithium support mandatory
-- Wallet providers must implement Dilithium signing
+- SDK updates for ML-DSA support mandatory
+- Wallet providers must implement ML-DSA signing
 
 **Phase 3 - ECDSA Deprecated (2030+)**:
-- Pure Dilithium consensus
+- Pure ML-DSA consensus
 - ECDSA-only validators cannot participate
 - Legacy transactions remain valid but cannot be created
 
 ### Migration Requirements
 
 **Validators**:
-- Generate Dilithium key pair via `lux quantum keygen`
+- Generate ML-DSA key pair via `lux quantum keygen`
 - Update configuration to enable hybrid mode
 - Transition to Dilithium-only after testing
 
 **Applications**:
-- Update SDK to version with Dilithium support
+- Update SDK to version with ML-DSA support
 - Handle larger signature sizes in transaction parsing
 - Implement dual-verification during hybrid period
 
@@ -316,9 +316,9 @@ This LP introduces significant but managed breaking changes:
 - Can run Grover's algorithm (2× speedup on hash collisions)
 
 **Lux Defenses**:
-- Dilithium resists Shor's algorithm (lattice problem)
-- SPHINCS+ resists all known quantum attacks (hash-based)
-- Kyber resists quantum key recovery (lattice problem)
+- ML-DSA resists Shor's algorithm (lattice problem)
+- SLH-DSA resists all known quantum attacks (hash-based)
+- ML-KEM resists quantum key recovery (lattice problem)
 
 ### Post-Quantum Security Levels
 
@@ -328,16 +328,16 @@ This LP introduces significant but managed breaking changes:
 - **Level V**: At least as hard as AES-256 (256-bit quantum security)
 
 **Lux Configuration**:
-- Dilithium: **Level III** (192-bit quantum security)
-- SPHINCS+: **Level V** (256-bit quantum security for checkpoints)
-- Kyber: **Level III** (192-bit quantum security)
+- ML-DSA: **Level III** (192-bit quantum security)
+- SLH-DSA: **Level V** (256-bit quantum security for checkpoints)
+- ML-KEM: **Level III** (192-bit quantum security)
 
 ## Deployment Status
 
 ### Testnet Results
 
 **Quantum Testnet** (Q3-Q4 2024):
-- Validators: 128 (64 Dilithium, 64 ECDSA hybrid)
+- Validators: 128 (64 ML-DSA, 64 ECDSA hybrid)
 - Blocks produced: 2.8M
 - Average finality: 1.92s (vs 1.80s for pure ECDSA)
 - Bandwidth overhead: +18% (with aggregation)
@@ -345,7 +345,7 @@ This LP introduces significant but managed breaking changes:
 ### Mainnet Activation
 
 **Hybrid Activation Date**: Q1 2025
-**Full Dilithium Transition**: Q4 2027
+**Full ML-DSA Transition**: Q4 2027
 
 ## Future Work
 
@@ -368,7 +368,7 @@ Upgrading zkSNARK circuits to quantum resistance:
 ### Unit Tests
 
 ```go
-// Test: Dilithium key generation
+// Test: ML-DSA key generation
 func TestDilithiumKeyGeneration(t *testing.T) {
     sk, pk, err := quantum.GenerateDilithiumKey()
     require.NoError(t, err)
@@ -376,7 +376,7 @@ func TestDilithiumKeyGeneration(t *testing.T) {
     require.Len(t, sk, 4000)  // ML-DSA-65 secret key size
 }
 
-// Test: Dilithium signature generation and verification
+// Test: ML-DSA signature generation and verification
 func TestDilithiumSignature(t *testing.T) {
     sk, pk, _ := quantum.GenerateDilithiumKey()
     message := []byte("test block hash")
@@ -417,7 +417,7 @@ func TestHybridSignature(t *testing.T) {
     require.True(t, valid)
 }
 
-// Test: Threshold Dilithium signing
+// Test: Threshold ML-DSA signing
 func TestThresholdDilithium(t *testing.T) {
     n := 10  // Total validators
     threshold := 7  // 2/3 + 1
@@ -430,7 +430,7 @@ func TestThresholdDilithium(t *testing.T) {
     sig, err := quantum.ThresholdSignDilithium(selectedShares, message, threshold)
     require.NoError(t, err)
 
-    // Verify with standard Dilithium verification
+    // Verify with standard ML-DSA verification
     valid := quantum.VerifyDilithium(pk, message, sig)
     require.True(t, valid)
 }
@@ -449,7 +449,7 @@ func TestThresholdBelowMinimum(t *testing.T) {
     require.Error(t, err)
 }
 
-// Test: Kyber key encapsulation
+// Test: ML-KEM key encapsulation
 func TestKyberKeyEncapsulation(t *testing.T) {
     pk, sk, _ := quantum.GenerateKyberKey()
 
@@ -484,8 +484,8 @@ func TestBlockDilithiumSignature(t *testing.T) {
 
 **Location**: `tests/e2e/quantum/pqc_test.go`
 
-1. **Hybrid Consensus**: Run 10-node network with 5 ECDSA and 5 Dilithium validators
-2. **Signature Migration**: Test validator transition from ECDSA to Dilithium mid-operation
+1. **Hybrid Consensus**: Run 10-node network with 5 ECDSA and 5 ML-DSA validators
+2. **Signature Migration**: Test validator transition from ECDSA to ML-DSA mid-operation
 3. **Threshold Signing**: Verify 2/3 threshold signatures with 100 validators
 4. **Cross-Chain PQC**: Test Q-Security with B-Chain bridge and Z-Chain privacy
 

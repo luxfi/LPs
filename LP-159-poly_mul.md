@@ -8,7 +8,7 @@ created: 2026-04-28
 
 ## Abstract
 
-Polynomial multiplication in `R_q = Z_q[X] / (X^N + 1)` for cyclotomic ring lattices. Building block for ML-KEM (LP-072), ML-DSA (LP-070), TFHE (LP-013/066) and Ringtail (LP-073). Implements both schoolbook (small N) and NTT-based fast multiplication (LP-029) with batched GPU kernels.
+Polynomial multiplication in `R_q = Z_q[X] / (X^N + 1)` for cyclotomic ring lattices. Building block for ML-KEM (LP-072), ML-DSA (LP-070), TFHE (LP-013/066) and Pulsar (LP-073). Implements both schoolbook (small N) and NTT-based fast multiplication (LP-029) with batched GPU kernels.
 
 ## Specification
 
@@ -18,7 +18,7 @@ Polynomial multiplication in `R_q = Z_q[X] / (X^N + 1)` for cyclotomic ring latt
   - ML-KEM: `q = 3329`
   - ML-DSA: `q = 8380417`
   - TFHE: `q = 2^64`
-  - Ringtail: scheme-specific
+  - Pulsar: scheme-specific
 - Multiplication via NTT when `N | (q - 1)/2` (negacyclic root of unity exists)
 
 ### Algorithm

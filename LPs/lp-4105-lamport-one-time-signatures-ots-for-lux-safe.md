@@ -556,7 +556,7 @@ BenchmarkMerkleProofVerification     100000   9,876 ns/op    2,048 B/op    16 al
 
 ## Future Enhancements
 
-1. **Stateless Signatures**: Implement SPHINCS+ for unlimited signing
+1. **Stateless Signatures**: Implement SLH-DSA (FIPS 205, formerly SPHINCS+) for unlimited signing
 2. **Threshold Lamport**: Distribute key shares among signers
 3. **Hardware Integration**: HSM support for key generation
 4. **Batch Verification**: Optimize multiple signature verification

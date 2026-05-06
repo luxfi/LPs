@@ -1,7 +1,7 @@
 ---
 lp: 6603
 title: Warp 1.5 - Quantum-Safe Cross-Chain Messaging
-description: Post-quantum secure cross-chain messaging with Ringtail signatures, ML-KEM encryption, and Teleport protocol integration
+description: Post-quantum secure cross-chain messaging with Pulsar signatures, ML-KEM encryption, and Teleport protocol integration
 author: Lux Core Team (@luxfi)
 discussions-to: https://forum.lux.network/t/lp-603-warp-1-5
 status: Final
@@ -28,13 +28,13 @@ order: 603
 ## TL;DR
 
 **Warp 1.5** upgrades Lux cross-chain messaging to be quantum-safe:
-- **Ringtail signatures** replace BLS for post-quantum security
+- **Pulsar signatures** replace BLS for post-quantum security
 - **ML-KEM-768** encryption for confidential messages
 - **Teleport protocol** standardizes 7 cross-chain operation types
 - Backward compatible with Warp 1.0 (BLS still supported during transition)
 
 ```
-Source Chain → [Create TeleportMessage] → [Sign with Ringtail] → Warp Layer → Destination Chain
+Source Chain → [Create TeleportMessage] → [Sign with Pulsar] → Warp Layer → Destination Chain
                      ↓                           ↓
               (optional encrypt)         (2/3 validator threshold)
 ```
@@ -62,7 +62,7 @@ Before reading this LP, you should understand:
 
 ## Abstract
 
-This proposal specifies Warp 1.5, a major upgrade to Lux's cross-chain messaging protocol that introduces post-quantum security through Ringtail lattice-based threshold signatures and ML-KEM-768 key encapsulation. Warp 1.5 maintains backward compatibility with existing BLS-based signatures while providing a migration path to full quantum resistance. The upgrade includes the Teleport high-level protocol for standardized cross-chain operations (transfers, swaps, attestations, governance, private transfers) and integrates with BridgeVM (B-Chain) and ThresholdVM (T-Chain) for MPC-based signing.
+This proposal specifies Warp 1.5, a major upgrade to Lux's cross-chain messaging protocol that introduces post-quantum security through Pulsar lattice-based threshold signatures and ML-KEM-768 key encapsulation. Warp 1.5 maintains backward compatibility with existing BLS-based signatures while providing a migration path to full quantum resistance. The upgrade includes the Teleport high-level protocol for standardized cross-chain operations (transfers, swaps, attestations, governance, private transfers) and integrates with BridgeVM (B-Chain) and ThresholdVM (T-Chain) for MPC-based signing.
 
 ---
 
@@ -92,7 +92,7 @@ Warp 1.0 uses BLS aggregate signatures:
 
 Three cryptographic upgrades:
 
-1. **Ringtail Signatures** - LWE-based threshold signatures
+1. **Pulsar Signatures** - LWE-based threshold signatures
 2. **ML-KEM-768 Encryption** - NIST FIPS 203 key encapsulation
 3. **AES-256-GCM** - Symmetric encryption (quantum-safe with 128-bit security)
 
@@ -104,7 +104,7 @@ Three cryptographic upgrades:
 |------|------------|
 | **LWE** | Learning With Errors - hard mathematical problem underlying post-quantum crypto |
 | **Ring-LWE** | Variant of LWE using polynomial rings for efficiency |
-| **Ringtail** | LWE-based threshold signature scheme with native t-of-n support |
+| **Pulsar** | LWE-based threshold signature scheme with native t-of-n support |
 | **ML-KEM** | Module-Lattice Key Encapsulation Mechanism (NIST FIPS 203) |
 | **KEM** | Key Encapsulation Mechanism - asymmetric crypto for key exchange |
 | **Threshold Signature** | Signature requiring t-of-n parties without reconstructing full key |
@@ -137,7 +137,7 @@ Three cryptographic upgrades:
 │     │ }                                                            │        │
 │     └──────────────────────────────────────────────────────────────┘        │
 │                              ↓                                              │
-│  3. SIGN WITH VALIDATORS (Ringtail threshold)                               │
+│  3. SIGN WITH VALIDATORS (Pulsar threshold)                               │
 │     ┌──────────────────────────────────────────────────────────────┐        │
 │     │                    BridgeVM (B-Chain)                        │        │
 │     │  ┌─────┐ ┌─────┐ ┌─────┐ ┌─────┐ ┌─────┐                    │        │
@@ -147,7 +147,7 @@ Three cryptographic upgrades:
 │     │     └───────┴───────┼───────┴───────┘                        │        │
 │     │                     ↓                                        │        │
 │     │           ThresholdVM (T-Chain)                              │        │
-│     │           [Ringtail t-of-n signing]                          │        │
+│     │           [Pulsar t-of-n signing]                          │        │
 │     │           Needs 67% validators to sign                       │        │
 │     └──────────────────────────────────────────────────────────────┘        │
 │                              ↓                                              │
@@ -157,7 +157,7 @@ Three cryptographic upgrades:
 │     │   UnsignedMessage: [TeleportMessage bytes]                   │        │
 │     │   Signature: RingtailSignature {                             │        │
 │     │     Signers: [bitset of who signed]                          │        │
-│     │     Signature: [~3-5KB Ringtail sig]                         │        │
+│     │     Signature: [~3-5KB Pulsar sig]                         │        │
 │     │   }                                                          │        │
 │     │ }                                                            │        │
 │     └──────────────────────────────────────────────────────────────┘        │
@@ -165,7 +165,7 @@ Three cryptographic upgrades:
 │  5. VERIFY ON DESTINATION                                                   │
 │     ┌──────────────────────────────────────────────────────────────┐        │
 │     │ Ethereum Bridge Contract:                                    │        │
-│     │ 1. Verify Ringtail signature against Lux validator set       │        │
+│     │ 1. Verify Pulsar signature against Lux validator set       │        │
 │     │ 2. Check 67%+ weight threshold                               │        │
 │     │ 3. Execute: Mint 100 wrapped LUX to recipient                │        │
 │     └──────────────────────────────────────────────────────────────┘        │
@@ -229,9 +229,9 @@ type SignatureType uint8
 const (
     // SigTypeBLS uses classical BLS signatures (Warp 1.0 compatibility)
     SigTypeBLS SignatureType = iota
-    // SigTypeRingtail uses quantum-safe Ringtail signatures (recommended)
+    // SigTypeRingtail uses quantum-safe Pulsar signatures (recommended)
     SigTypeRingtail
-    // SigTypeHybrid uses BLS+Ringtail hybrid (deprecated)
+    // SigTypeHybrid uses BLS+Pulsar hybrid (deprecated)
     SigTypeHybrid
 )
 ```
@@ -249,14 +249,14 @@ const (
 | Phase | Timeline | Default | Notes |
 |-------|----------|---------|-------|
 | Phase 1 | Current | BLS | Existing messages work unchanged |
-| Phase 2 | Q1 2025 | Ringtail | New default for all messages |
+| Phase 2 | Q1 2025 | Pulsar | New default for all messages |
 | Phase 3 | Q3 2025 | Ringtail-only | BLS support deprecated |
 
 ---
 
-### Ringtail Signature (Recommended)
+### Pulsar Signature (Recommended)
 
-Ringtail is a lattice-based threshold signature scheme based on Ring-LWE:
+Pulsar is a lattice-based threshold signature scheme based on Ring-LWE:
 
 ```go
 // RingtailSignature is the Warp 1.5 quantum-safe signature type
@@ -264,7 +264,7 @@ type RingtailSignature struct {
     // Signers is a big-endian byte slice encoding which validators signed
     Signers []byte `serialize:"true"`
 
-    // Signature is the Ringtail threshold signature
+    // Signature is the Pulsar threshold signature
     // Contains: c (challenge polynomial), z (response vector), Delta (hint vector)
     Signature []byte `serialize:"true"`
 }
@@ -280,9 +280,9 @@ type RingtailSignature struct {
 | Kappa | 23 | Hash output bound |
 | Dbar | 48 | Signature dimension |
 
-**Why Ringtail?**
+**Why Pulsar?**
 
-| Aspect | Ringtail | ML-DSA (Dilithium) |
+| Aspect | Pulsar | ML-DSA (ML-DSA) |
 |--------|----------|-------------------|
 | Threshold Support | **Native 2-round** | Requires complex MPC |
 | Implementation | Simple | Complex MPC around ML-DSA |
@@ -436,7 +436,7 @@ ThresholdVM provides MPC signing services:
 ├─────────────────────────────────────────────────────────────┤
 │                                                              │
 │  ┌──────────────┐    ┌──────────────┐    ┌──────────────┐   │
-│  │ LSS Protocol │    │ Ringtail     │    │ CGGMP21      │   │
+│  │ LSS Protocol │    │ Pulsar     │    │ CGGMP21      │   │
 │  │ (reshare)    │    │ Protocol     │    │ Protocol     │   │
 │  └──────────────┘    └──────────────┘    └──────────────┘   │
 │         │                   │                   │            │
@@ -452,7 +452,7 @@ ThresholdVM provides MPC signing services:
 | Protocol | Type | Use Case |
 |----------|------|----------|
 | LSS | Dynamic resharing | Validator set changes |
-| **Ringtail** | **Post-quantum** | **Warp 1.5 signatures** |
+| **Pulsar** | **Post-quantum** | **Warp 1.5 signatures** |
 | CGGMP21 | Classical ECDSA | EVM chain signing |
 | FROST | EdDSA | Solana, Cosmos |
 | BLS | Aggregate | Legacy Warp 1.0 |
@@ -529,14 +529,14 @@ if teleportMsg.Encrypted {
 
 ### Threat Model
 
-| Adversary | BLS | Ringtail | ML-KEM |
+| Adversary | BLS | Pulsar | ML-KEM |
 |-----------|-----|----------|--------|
 | Classical | ✅ Safe | ✅ Safe | ✅ Safe |
 | Quantum | ❌ Broken | ✅ Safe | ✅ Safe |
 
 ### Key Management
 
-- Validators MUST secure both BLS and Ringtail private keys
+- Validators MUST secure both BLS and Pulsar private keys
 - HSM storage recommended for production
 - Key rotation via LSS resharing protocol ([LP-333](/docs/lp-7333-dynamic-signer-rotation-with-lss-protocol/))
 
@@ -555,7 +555,7 @@ if teleportMsg.Encrypted {
 | Type | Size | Notes |
 |------|------|-------|
 | BLS | 96 bytes | Compact, aggregatable |
-| Ringtail | ~3-5 KB | Variable, threshold-dependent |
+| Pulsar | ~3-5 KB | Variable, threshold-dependent |
 | Hybrid | ~3.1-5.1 KB | Both signatures |
 
 ### Verification Times (Apple M1 Max)
@@ -563,7 +563,7 @@ if teleportMsg.Encrypted {
 | Operation | Time |
 |-----------|------|
 | BLS Verify | ~2.5 ms |
-| Ringtail Verify | ~5-8 ms |
+| Pulsar Verify | ~5-8 ms |
 | ML-KEM Decapsulate | ~0.2 ms |
 | AES-GCM Decrypt | ~0.01 ms |
 
@@ -611,7 +611,7 @@ go test -v ./vms/thresholdvm/...
 | Signature Types | [github.com/luxfi/node](https://github.com/luxfi/node) | `vms/platformvm/warp/signature.go` |
 | BridgeVM | [github.com/luxfi/node](https://github.com/luxfi/node) | `vms/bridgevm/` |
 | ThresholdVM | [github.com/luxfi/node](https://github.com/luxfi/node) | `vms/thresholdvm/` |
-| Ringtail Crypto | [github.com/luxfi/threshold](https://github.com/luxfi/threshold) | `protocols/ringtail/` |
+| Pulsar Crypto | [github.com/luxfi/threshold](https://github.com/luxfi/threshold) | `protocols/ringtail/` |
 
 **Git Tag**: `warp/v1.5.0`
 
@@ -621,13 +621,13 @@ go test -v ./vms/thresholdvm/...
 
 ### Q: Do I need to upgrade immediately?
 
-**A:** No. Warp 1.5 is backward compatible. BLS signatures continue to work. However, you should plan to migrate to Ringtail before Phase 3 (Q3 2025).
+**A:** No. Warp 1.5 is backward compatible. BLS signatures continue to work. However, you should plan to migrate to Pulsar before Phase 3 (Q3 2025).
 
-### Q: How much larger are Ringtail signatures?
+### Q: How much larger are Pulsar signatures?
 
 **A:** About 30-50x larger than BLS (~3-5KB vs 96 bytes). This is the tradeoff for quantum safety. For most applications, this is acceptable.
 
-### Q: Can I use encryption without Ringtail?
+### Q: Can I use encryption without Pulsar?
 
 **A:** Yes. The ML-KEM encryption is independent of signature type. You can encrypt payloads with any signature type.
 
@@ -635,34 +635,34 @@ go test -v ./vms/thresholdvm/...
 
 **A:** Use LP-333's `bridge_replaceSigner` to remove the compromised validator and trigger a reshare. The compromised key cannot sign new messages after removal.
 
-### Q: Is Ringtail NIST approved?
+### Q: Is Pulsar NIST approved?
 
-**A:** Ringtail is based on LWE, which is NIST-approved (ML-KEM/ML-DSA use similar assumptions). Ringtail specifically provides native threshold support not available in ML-DSA.
+**A:** Pulsar is based on LWE, which is NIST-approved (ML-KEM/ML-DSA use similar assumptions). Pulsar specifically provides native threshold support not available in ML-DSA.
 
 ---
 
 ## Rationale
 
-### Why Ringtail Over ML-DSA for Threshold Signatures?
+### Why Pulsar Over ML-DSA for Threshold Signatures?
 
-ML-DSA (formerly Dilithium) is NIST-approved but was designed for single-signer scenarios. Converting ML-DSA to threshold form requires complex MPC protocols with significant overhead. Ringtail was purpose-built for threshold signing:
+ML-DSA is NIST-approved but was designed for single-signer scenarios. Converting ML-DSA to threshold form requires complex MPC protocols with significant overhead. Pulsar was purpose-built for threshold signing:
 
-- **Native Threshold Support**: Ringtail's algebraic structure directly supports threshold operations without generic MPC protocols
+- **Native Threshold Support**: Pulsar's algebraic structure directly supports threshold operations without generic MPC protocols
 - **Two-Round Protocol**: Only 2 communication rounds for distributed signing (vs. 5+ for generic threshold ML-DSA)
 - **Same Security Foundation**: Based on Ring-LWE, sharing security assumptions with NIST-approved ML-KEM and ML-DSA
 
 ### Why Hybrid Mode?
 
-The hybrid BLS+Ringtail approach provides:
+The hybrid BLS+Pulsar approach provides:
 
 1. **Immediate Classical Security**: BLS signatures provide proven security against classical adversaries
-2. **Future Quantum Security**: Ringtail component provides protection against future quantum attacks
+2. **Future Quantum Security**: Pulsar component provides protection against future quantum attacks
 3. **Graceful Migration**: Validators can progressively upgrade to full quantum-safe mode
 4. **Backwards Compatibility**: Classical clients can still verify the BLS component
 
 ### Why Not ML-KEM for Key Exchange?
 
-ML-KEM is excellent for key encapsulation but Warp messages require digital signatures (authentication), not key exchange (confidentiality). Ringtail provides post-quantum signatures directly.
+ML-KEM is excellent for key encapsulation but Warp messages require digital signatures (authentication), not key exchange (confidentiality). Pulsar provides post-quantum signatures directly.
 
 ---
 
@@ -671,7 +671,7 @@ ML-KEM is excellent for key encapsulation but Warp messages require digital sign
 - Warp 1.0 clients can verify BLS signatures (unchanged)
 - Signature type indicated by codec type ID
 - Unknown signature types rejected safely
-- Upgrade path: BLS → Hybrid → Ringtail
+- Upgrade path: BLS → Hybrid → Pulsar
 
 ---
 

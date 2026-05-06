@@ -177,7 +177,7 @@ hot state windows
 validator-set cache
 stake table cache
 ZK verifying keys
-Ringtail public parameters
+Pulsar public parameters
 market metadata
 risk / compliance rule tables
 ```
@@ -527,7 +527,7 @@ divergence kills throughput):
 | Crypto | secp256k1/ecrecover, sha256, ripemd160 |
 | Hash | keccak (separate service §11) |
 | Elliptic curve | bn256 add/mul/pairing |
-| BLS / PQ cert | BLS aggregate, Ringtail share, Groth16 |
+| BLS / PQ cert | BLS aggregate, Pulsar share, Groth16 |
 | DEX / matching | OrderAppend, BatchAuction, ContinuousLimit, OMASettlement |
 | Compliance / risk | ComplianceCheck, RiskLimits, KYCEligibility |
 | Oracle / attestation | TEE quote, price feed, deadline |
@@ -549,7 +549,7 @@ divergence kills throughput):
 - Aggregate public keys; cache pubkeys in DeviceWarm.
 - Precompute committee pubkey tables per epoch.
 
-### Ringtail
+### Pulsar
 - Cache public params in DeviceWarm.
 - Batch NTT / polynomial operations.
 - Bind subject in GPU memory; no per-share host parse.
@@ -833,7 +833,7 @@ struct CertArtifact {
 
 Per-lane optimization:
 - **BLS**: cache pubkeys, batch verify, aggregate bitmaps.
-- **Ringtail**: cache ceremony params, batch polynomial ops.
+- **Pulsar**: cache ceremony params, batch polynomial ops.
 - **MLDSAGroth16**: cache VK, batch pairing verify.
 
 Invariant: all lanes bind same `certificate_subject`.
@@ -1106,7 +1106,7 @@ CPU reference == Metal == CUDA
 |---|---|
 | v0.42 | GPU-residency audit: ResidencyClass tags, ForbiddenHot counters, precompile fast-path assertions |
 | v0.43 | Precompile service ABI: PrecompileCall/Result, fiber suspend/resume, batched precompile queues |
-| v0.44 | Crypto precompiles: keccak, ecrecover, BLS, Ringtail, MLDSAGroth16, Groth16 VK cache |
+| v0.44 | Crypto precompiles: keccak, ecrecover, BLS, Pulsar, MLDSAGroth16, Groth16 VK cache |
 | v0.45 | DEX / compliance precompiles: OrderAppend, BatchAuction, RiskCheck, ComplianceGate, OMASettlement, AuditCommit |
 | v0.46 | Semantic reducers: FeeAccumulate, OrderAppend, BalanceDelta, AuditAppend |
 | v0.47 | GPU root pipeline: dirty-key gather, receipt root, execution root, mode root, audit root, certificate_subject |

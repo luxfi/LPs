@@ -1,6 +1,6 @@
 ---
 lp: 7324
-title: Ringtail Threshold Signature Precompile
+title: Pulsar Threshold Signature Precompile
 description: Native precompile for lattice-based (LWE) post-quantum threshold signatures
 author: Lux Core Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
@@ -19,7 +19,7 @@ order: 324
 
 ## Abstract
 
-This LP specifies a precompiled contract for verifying Ringtail threshold signatures at address `0x020000000000000000000000000000000000000B`. Ringtail is a lattice-based (Ring-LWE) two-round threshold signature scheme providing post-quantum security for multi-party signing scenarios. The precompile enables quantum-safe threshold wallets, distributed validator signing, and multi-party custody without requiring a trusted dealer.
+This LP specifies a precompiled contract for verifying Pulsar threshold signatures at address `0x020000000000000000000000000000000000000B`. Pulsar is a lattice-based (Ring-LWE) two-round threshold signature scheme providing post-quantum security for multi-party signing scenarios. The precompile enables quantum-safe threshold wallets, distributed validator signing, and multi-party custody without requiring a trusted dealer.
 
 ## Motivation
 
@@ -32,9 +32,9 @@ Multi-party signatures require multiple parties to collectively authorize operat
 3. **Post-Quantum Security**: Classical schemes (ECDSA, Schnorr) vulnerable to quantum attacks
 4. **No Trusted Dealer**: Key generation must be distributed
 
-### Why Ringtail?
+### Why Pulsar?
 
-Ringtail provides unique properties for quantum-safe threshold signatures:
+Pulsar provides unique properties for quantum-safe threshold signatures:
 
 1. **Post-Quantum**: Based on Ring Learning With Errors (Ring-LWE) lattice problem
 2. **Two-Round Protocol**: Efficient signing with only two communication rounds
@@ -67,13 +67,13 @@ The precompile accepts a packed binary input:
 | 0      | 4      | `threshold` | Required number of signers (big-endian uint32) |
 | 4      | 4      | `totalParties` | Total number of participants (big-endian uint32) |
 | 8      | 32     | `messageHash` | Hash of message being verified |
-| 40     | variable | `signature` | Ringtail threshold signature |
+| 40     | variable | `signature` | Pulsar threshold signature |
 
 **Minimum size**: 40 bytes + signature size (~1-2KB depending on parameters)
 
 ### Signature Format
 
-The Ringtail signature contains:
+The Pulsar signature contains:
 - **Round 1 Commitments**: Hash commitments from all signers
 - **Round 2 Responses**: Lattice-based signature shares
 - **Aggregated Signature**: Combined threshold signature
@@ -108,11 +108,11 @@ pragma solidity ^0.8.0;
 
 interface IRingtail {
     /**
-     * @dev Verifies a Ringtail threshold signature
+     * @dev Verifies a Pulsar threshold signature
      * @param threshold Required number of signers (t)
      * @param totalParties Total number of participants (n)
      * @param messageHash Hash of the signed message
-     * @param signature The Ringtail threshold signature
+     * @param signature The Pulsar threshold signature
      * @return valid True if signature is valid with threshold met
      */
     function verifyThreshold(
@@ -137,7 +137,7 @@ library RingtailLib {
     ) internal view {
         require(
             RINGTAIL.verifyThreshold(threshold, totalParties, messageHash, signature),
-            "Ringtail: invalid threshold signature"
+            "Pulsar: invalid threshold signature"
         );
     }
     
@@ -150,7 +150,7 @@ library RingtailLib {
 }
 
 /**
- * @dev Base contract for Ringtail threshold verification
+ * @dev Base contract for Pulsar threshold verification
  */
 abstract contract RingtailVerifier {
     IRingtail internal constant ringtail = IRingtail(0x020000000000000000000000000000000000000B);
@@ -163,7 +163,7 @@ abstract contract RingtailVerifier {
     ) {
         require(
             ringtail.verifyThreshold(threshold, totalParties, messageHash, signature),
-            "Invalid Ringtail threshold signature"
+            "Invalid Pulsar threshold signature"
         );
         _;
     }
@@ -223,18 +223,18 @@ contract ThresholdWallet is RingtailVerifier {
 
 ## Rationale
 
-### Why Ringtail Over Other Threshold Schemes?
+### Why Pulsar Over Other Threshold Schemes?
 
 **Comparison:**
 
 | Scheme | Post-Quantum | Rounds | Trusted Dealer | Security Assumption |
 |--------|--------------|--------|----------------|-------------------|
-| **Ringtail** | ✅ Yes | 2 | ❌ No | Ring-LWE |
+| **Pulsar** | ✅ Yes | 2 | ❌ No | Ring-LWE |
 | FROST | ❌ No | 2 | ❌ No | Discrete Log |
 | CGGMP21 | ❌ No | 5+ | ❌ No | Discrete Log |
 | BLS | ❌ No | 1 | ✅ Yes | Pairing |
 
-Ringtail is the ONLY post-quantum threshold scheme with:
+Pulsar is the ONLY post-quantum threshold scheme with:
 - No trusted dealer requirement
 - Two-round signing protocol
 - Provable security reductions
@@ -251,12 +251,12 @@ The gas formula accounts for:
 
 **Comparison to FROST**:
 - FROST: 50K base + 5K per signer (classical security)
-- Ringtail: 150K base + 10K per party (quantum security)
+- Pulsar: 150K base + 10K per party (quantum security)
 - **3x cost premium** for quantum resistance is acceptable
 
 ### Two-Round Protocol Efficiency
 
-Ringtail achieves threshold signatures in 2 rounds:
+Pulsar achieves threshold signatures in 2 rounds:
 
 ```
 Round 1: Each party broadcasts commitment
@@ -268,9 +268,9 @@ This is optimal - no threshold scheme can do better than 2 rounds without a trus
 
 ### Integration with Quasar Consensus
 
-Ringtail is used in Quasar (LP-99) for dual-certificate finality:
+Pulsar is used in Quasar (LP-99) for dual-certificate finality:
 - **BLS Certificate**: Classical finality (fast)
-- **Ringtail Certificate**: Post-quantum finality (secure)
+- **Pulsar Certificate**: Post-quantum finality (secure)
 
 Both must validate for true finality.
 
@@ -286,7 +286,7 @@ Projects using FROST/CGGMP21 can migrate incrementally:
 ```solidity
 function verify(bytes calldata frostSig, bytes calldata ringtailSig) {
     require(verifyFROST(frostSig), "FROST failed");
-    require(verifyRingtail(ringtailSig), "Ringtail failed");
+    require(verifyRingtail(ringtailSig), "Pulsar failed");
 }
 ```
 
@@ -303,7 +303,7 @@ function verify(bytes calldata frostSig, bytes calldata ringtailSig) {
 threshold: 2
 totalParties: 3
 messageHash: keccak256("Test message for threshold signature")
-signature: <Ringtail signature from 2 of 3 parties>
+signature: <Pulsar signature from 2 of 3 parties>
 ```
 
 **Expected Output:** `0x...0001` (valid)
@@ -316,7 +316,7 @@ signature: <Ringtail signature from 2 of 3 parties>
 threshold: 2
 totalParties: 3
 messageHash: <same as above>
-signature: <Ringtail signature from only 1 party>
+signature: <Pulsar signature from only 1 party>
 ```
 
 **Expected Output:** `0x...0000` (invalid - threshold not met)
@@ -328,7 +328,7 @@ signature: <Ringtail signature from only 1 party>
 threshold: 2
 totalParties: 3
 messageHash: <valid hash>
-signature: <Ringtail signature with 1 corrupted share>
+signature: <Pulsar signature with 1 corrupted share>
 ```
 
 **Expected Output:** `0x...0000` (invalid - share verification failed)
@@ -340,7 +340,7 @@ signature: <Ringtail signature with 1 corrupted share>
 threshold: 67
 totalParties: 100
 messageHash: <valid hash>
-signature: <Ringtail signature from 67 parties>
+signature: <Pulsar signature from 67 parties>
 ```
 
 **Expected Output:** `0x...0001` (valid)
@@ -352,7 +352,7 @@ signature: <Ringtail signature from 67 parties>
 
 ### Full Implementation Stack
 
-The Ringtail precompile is implemented across multiple layers, providing post-quantum threshold signatures:
+The Pulsar precompile is implemented across multiple layers, providing post-quantum threshold signatures:
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
@@ -366,7 +366,7 @@ The Ringtail precompile is implemented across multiple layers, providing post-qu
 └─────────────────────────┬───────────────────────────────────────┘
                           │ calls
 ┌─────────────────────────▼───────────────────────────────────────┐
-│           Ringtail Protocol Layer (Go)                          │
+│           Pulsar Protocol Layer (Go)                          │
 │  ringtail/ → Two-round threshold signature protocol            │
 │  + Distributed Key Generation (DKG)                             │
 │  + Shamir Secret Sharing over Ring-LWE                          │
@@ -392,7 +392,7 @@ The Ringtail precompile is implemented across multiple layers, providing post-qu
 
 **Precompile Address**: `0x020000000000000000000000000000000000000B`
 
-#### 2. Ringtail Protocol Layer (`~/work/lux/ringtail/`)
+#### 2. Pulsar Protocol Layer (`~/work/lux/ringtail/`)
 
 | Directory/File | Purpose |
 |----------------|---------|
@@ -454,14 +454,14 @@ const (
 
 | File | Purpose |
 |------|---------|
-| `epoch.go` | EpochManager for Ringtail key rotation |
-| `ringtail.go` | Threshold Ringtail signing for finality certificates |
-| `hybrid_consensus.go` | Dual-certificate finality (BLS + Ringtail) |
+| `epoch.go` | EpochManager for Pulsar key rotation |
+| `ringtail.go` | Threshold Pulsar signing for finality certificates |
+| `hybrid_consensus.go` | Dual-certificate finality (BLS + Pulsar) |
 | `epoch_test.go` | 8 comprehensive epoch management tests |
 
 **Epoch-Based Key Management**:
 ```go
-// EpochManager manages Ringtail key epochs for validator set
+// EpochManager manages Pulsar key epochs for validator set
 type EpochManager struct {
     currentEpoch      uint64
     currentKeys       *EpochKeys
@@ -527,7 +527,7 @@ All tests passing across the full stack:
 | Component | Repository |
 |-----------|------------|
 | Precompile | `github.com/luxfi/precompiles/ringtail/` |
-| Ringtail Library | `github.com/luxfi/ringtail/` |
+| Pulsar Library | `github.com/luxfi/ringtail/` |
 | Lattice Primitives | `github.com/luxfi/lattice/` |
 | Epoch Management | `github.com/luxfi/node/consensus/protocol/quasar/` |
 | Solidity Interface | `~/work/lux/standard/contracts/precompiles/ringtail/` |
@@ -536,7 +536,7 @@ All tests passing across the full stack:
 
 ### Post-Quantum Security
 
-Ringtail's security rests on the hardness of:
+Pulsar's security rests on the hardness of:
 
 1. **Ring Learning With Errors (Ring-LWE)**
    - Quantum computer cannot solve efficiently
@@ -561,7 +561,7 @@ Ringtail's security rests on the hardness of:
 
 ### Distributed Key Generation
 
-Ringtail supports DKG without trusted dealer:
+Pulsar supports DKG without trusted dealer:
 ```
 1. Each party generates share locally
 2. Broadcast commitments
@@ -600,7 +600,7 @@ Implementation uses:
 
 ### Epoch-Based Key Rotation (LP-1181 Integration)
 
-Ringtail keys are managed via epoch-based rotation in Quasar consensus:
+Pulsar keys are managed via epoch-based rotation in Quasar consensus:
 
 | Constant | Value | Purpose |
 |----------|-------|---------|
@@ -622,7 +622,7 @@ Ringtail keys are managed via epoch-based rotation in Quasar consensus:
 Signatures from previous epochs remain verifiable until history is pruned (default: last 3 epochs).
 
 ```go
-// EpochManager manages Ringtail key epochs for the validator set.
+// EpochManager manages Pulsar key epochs for the validator set.
 type EpochManager struct {
     currentEpoch      uint64
     currentKeys       *EpochKeys
@@ -649,7 +649,7 @@ func (em *EpochManager) VerifySignatureForEpoch(message string, sig *Signature, 
 
 ### Integration Security
 
-When using Ringtail in smart contracts:
+When using Pulsar in smart contracts:
 ```solidity
 // ✅ GOOD: Verify before state changes
 function withdraw(bytes calldata sig) external {
@@ -794,7 +794,7 @@ func (c *RingtailPrecompile) Run(input []byte) ([]byte, error) {
 }
 ```
 
-#### 2. Ringtail Protocol (`~/work/lux/ringtail/`)
+#### 2. Pulsar Protocol (`~/work/lux/ringtail/`)
 
 **Distributed Key Generation** (no trusted dealer):
 ```go
@@ -854,7 +854,7 @@ func SignRound2(share *Share, r1Outputs []*Round1Output) (*SignatureShare, error
 
 **Epoch-Based Key Management**:
 ```go
-// epoch.go - Ringtail key epochs for validator set
+// epoch.go - Pulsar key epochs for validator set
 type EpochManager struct {
     currentEpoch      uint64
     currentKeys       *EpochKeys
@@ -885,7 +885,7 @@ func (em *EpochManager) RotateEpoch(validators []string, force bool) error {
 }
 ```
 
-**Dual-Certificate Finality** (BLS + Ringtail):
+**Dual-Certificate Finality** (BLS + Pulsar):
 ```go
 // hybrid_consensus.go
 // Both certificates MUST validate for true finality
@@ -896,7 +896,7 @@ func ValidateBlock(block *Block) bool {
         return false
     }
     
-    // 2. Verify Ringtail threshold signature (post-quantum finality)
+    // 2. Verify Pulsar threshold signature (post-quantum finality)
     if !ringtail.Verify(block.RingtailSignature) {
         return false
     }
@@ -957,10 +957,10 @@ contract QuantumSafeVault is RingtailVerifier {
 
 ### Network Usage Map
 
-| Component | Location | Ringtail Usage |
+| Component | Location | Pulsar Usage |
 |-----------|----------|----------------|
 | Precompile | `precompiles/ringtail/` | On-chain verification |
-| Ringtail Library | `ringtail/` | Threshold signing protocol |
+| Pulsar Library | `ringtail/` | Threshold signing protocol |
 | Lattice Primitives | `lattice/` | Ring-LWE, Ring-SIS, NTT |
 | Epoch Management | `consensus/protocol/quasar/epoch.go` | Validator key rotation |
 | Quasar Finality | `consensus/protocol/quasar/hybrid_consensus.go` | Dual-certificate finality |
@@ -974,10 +974,10 @@ contract QuantumSafeVault is RingtailVerifier {
 |------|--------------|-------------------|
 | 2024-2030 | Low | Classical schemes acceptable for short-term |
 | 2030-2035 | Medium | Hybrid classical + PQ recommended |
-| 2035+ | High | Ringtail required for long-term security |
+| 2035+ | High | Pulsar required for long-term security |
 
 **Migration Strategy**:
-1. **Now**: Deploy hybrid (BLS + Ringtail) for new systems
+1. **Now**: Deploy hybrid (BLS + Pulsar) for new systems
 2. **2025-2027**: Transition existing systems to hybrid
 3. **2030+**: Phase out classical-only signatures
 
@@ -987,7 +987,7 @@ contract QuantumSafeVault is RingtailVerifier {
 
 | Scheme | 3-of-5 Threshold | 10-of-15 Threshold | Security |
 |--------|-----------------|-------------------|----------|
-| **Ringtail** | 200,000 gas | 300,000 gas | Post-quantum |
+| **Pulsar** | 200,000 gas | 300,000 gas | Post-quantum |
 | FROST | 75,000 gas | 125,000 gas | Classical |
 | CGGMP21 | 125,000 gas | 225,000 gas | Classical |
 
@@ -995,7 +995,7 @@ contract QuantumSafeVault is RingtailVerifier {
 
 ### Use Case Economics
 
-**When Ringtail is Worth It:**
+**When Pulsar is Worth It:**
 - High-value assets (> $1M) needing quantum protection
 - Long-term storage (> 5 years)
 - Critical infrastructure
@@ -1010,7 +1010,7 @@ contract QuantumSafeVault is RingtailVerifier {
 ### Validator Economics
 
 For Quasar consensus validators:
-- Ringtail verification per block: ~200K gas
+- Pulsar verification per block: ~200K gas
 - Cost per finality: $0.01 - $0.10 (depending on gas price)
 - Essential for dual-certificate finality
 - No alternative for quantum-safe threshold consensus
@@ -1035,7 +1035,7 @@ For Quasar consensus validators:
    - Significant performance gains possible
 
 4. **Cross-chain threshold?**
-   - Use Ringtail for multi-chain signing
+   - Use Pulsar for multi-chain signing
    - Coordinate threshold across different blockchains
    - Bridge security architecture
 
@@ -1043,7 +1043,7 @@ For Quasar consensus validators:
 
 ### Integration with `ringtail`
 
-The precompile uses the external Ringtail implementation:
+The precompile uses the external Pulsar implementation:
 ```go
 import "github.com/luxfi/ringtail/sign"
 
@@ -1052,7 +1052,7 @@ func verifyRingtail(threshold, totalParties uint32, msgHash []byte, sig []byte) 
 }
 ```
 
-**Ringtail Package Features:**
+**Pulsar Package Features:**
 - Two-round signing protocol
 - Distributed key generation
 - Shamir secret sharing
@@ -1074,7 +1074,7 @@ func verifyRingtail(threshold, totalParties uint32, msgHash []byte, sig []byte) 
 
 ## References
 
-- **Ringtail Paper**: "Two-Round Threshold Signatures from LWE" (ePrint 2024/1113)
+- **Pulsar Paper**: "Two-Round Threshold Signatures from LWE" (ePrint 2024/1113)
 - **Ring-LWE**: Lyubashevsky et al., "On Ideal Lattices and Learning with Errors Over Rings"
 - **Implementation**: `github.com/luxfi/ringtail` and `precompiles/ringtail/`
 - **LP-99**: Quasar Consensus with Dual-Certificate Finality

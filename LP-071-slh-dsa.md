@@ -18,7 +18,7 @@ references:
 
 ## Abstract
 
-Defines the integration of FIPS 205 SLH-DSA (formerly SPHINCS+) into Lux Network. SLH-DSA is a stateless hash-based signature scheme whose security relies solely on hash function properties -- no lattice assumptions. It serves as a conservative fallback if lattice-based schemes (ML-DSA) are broken. An EVM precompile at `0x0071` verifies SLH-DSA signatures.
+Defines the integration of FIPS 205 SLH-DSA (FIPS 205, formerly SPHINCS+) into Lux Network. SLH-DSA is a stateless hash-based signature scheme whose security relies solely on hash function properties -- no lattice assumptions. It serves as a conservative fallback if lattice-based schemes (ML-DSA) are broken. An EVM precompile at `0x0071` verifies SLH-DSA signatures.
 
 ## Specification
 

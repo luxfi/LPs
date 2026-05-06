@@ -86,7 +86,7 @@ Last updated: 2026-04-28
 | LP-070 | FIPS 204 ML-DSA Signatures | Final | Cryptography |
 | LP-071 | FIPS 205 SLH-DSA Hash-Based Signatures | Final | Cryptography |
 | LP-072 | FIPS 203 ML-KEM Key Encapsulation | Final | Cryptography |
-| LP-073 | Ringtail Lattice-Based Threshold Signatures | Final | Cryptography |
+| LP-073 | Pulsar Lattice-Based Threshold Signatures | Final | Cryptography |
 | LP-074 | FALCON Signature EVM Precompile | Final | Cryptography |
 | LP-075 | BLS Aggregate Signatures for Warp Messaging | Final | Cryptography |
 | LP-076 | Unified Threshold Cryptography Framework | Final | Cryptography |

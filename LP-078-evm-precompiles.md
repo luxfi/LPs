@@ -51,10 +51,10 @@ Three packages were removed for exposing secret key material in public calldata:
 
 | Address | Package | Description | LP |
 |---------|---------|-------------|-----|
-| 0x0200..06 | `mldsa` | ML-DSA verify — FIPS 204 (Dilithium) | 070 |
-| 0x0200..07 | `mlkem` | ML-KEM encap/decap — FIPS 203 (Kyber) | 072 |
-| 0x0600..01 | `slhdsa` | SLH-DSA verify — FIPS 205 (SPHINCS+) | 071 |
-| 0x0200..0B | `ringtail` | Ringtail lattice threshold signatures | 073 |
+| 0x0200..06 | `mldsa` | ML-DSA verify — FIPS 204 (ML-DSA) | 070 |
+| 0x0200..07 | `mlkem` | ML-KEM encap/decap — FIPS 203 (ML-KEM) | 072 |
+| 0x0600..01 | `slhdsa` | SLH-DSA verify — FIPS 205 (SLH-DSA (FIPS 205, formerly SPHINCS+)) | 071 |
+| 0x0200..0B | `ringtail` | Pulsar lattice threshold signatures | 073 |
 | 0x2221 | `xwing` | X-Wing hybrid KEM (X25519 + ML-KEM-768) | -- |
 
 ### Hashing (3 packages)
@@ -116,7 +116,7 @@ HPKE seal covers the same public-key encryption use case.
 | 0x0300..20 | `quasar` | Verkle tree verify | -- |
 | 0x0300..21 | `quasar` | BLS12-381 signature verify | -- |
 | 0x0300..22 | `quasar` | BLS12-381 aggregate | -- |
-| 0x0300..23 | `quasar` | Ringtail consensus verify | -- |
+| 0x0300..23 | `quasar` | Pulsar consensus verify | -- |
 | 0x0300..24 | `quasar` | Hybrid PQ verify | -- |
 
 ### BLS12-381 (1 package, 7+ addresses — EIP-2537)

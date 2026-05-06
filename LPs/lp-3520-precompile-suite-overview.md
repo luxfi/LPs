@@ -43,7 +43,7 @@ Without a central index, developers must navigate dozens of individual LPs to un
 | `0x0200000000000000000000000000000000000007` | SLH-DSA | Post-quantum hash-based signatures | LP-2312 | Draft |
 | `0x0200000000000000000000000000000000000008` | Warp | Cross-chain BLS messaging | LP-2313 | Draft |
 | `0x020000000000000000000000000000000000000A` | Quasar | Quantum consensus certificates | LP-4110 | Draft |
-| `0x020000000000000000000000000000000000000B` | Ringtail | PQ threshold signatures (Ring-LWE) | LP-7324 | Draft |
+| `0x020000000000000000000000000000000000000B` | Pulsar | PQ threshold signatures (Ring-LWE) | LP-7324 | Draft |
 | `0x020000000000000000000000000000000000000C` | FROST | Schnorr threshold signatures | LP-7321 | Draft |
 | `0x020000000000000000000000000000000000000D` | CGGMP21 | ECDSA threshold signatures | LP-7322 | Draft |
 
@@ -70,7 +70,7 @@ Without a central index, developers must navigate dozens of individual LPs to un
 |------------|-----------|-----------------|----------------|----------------|
 | FROST | 50,000 | 5,000 | 75,000 | Classical |
 | CGGMP21 | 75,000 | 10,000 | 125,000 | Classical |
-| Ringtail | 150,000 | 10,000 | 200,000 | Post-Quantum |
+| Pulsar | 150,000 | 10,000 | 200,000 | Post-Quantum |
 
 ### Cross-Chain and Consensus Precompiles
 
@@ -104,9 +104,9 @@ Without a central index, developers must navigate dozens of individual LPs to un
 
 | Precompile | Algorithm | Security Assumption | NIST Level |
 |------------|-----------|---------------------|------------|
-| ML-DSA | Dilithium (FIPS 204) | Module-LWE / Module-SIS | Level 3 (192-bit) |
-| SLH-DSA | SPHINCS+ (FIPS 205) | Hash collision resistance | Level 1 (128-bit) |
-| Ringtail | Ring-LWE threshold | Ring-LWE / Ring-SIS | Level 3 (128-bit PQ) |
+| ML-DSA | ML-DSA (FIPS 204) | Module-LWE / Module-SIS | Level 3 (192-bit) |
+| SLH-DSA | SLH-DSA (FIPS 205, formerly SPHINCS+) (FIPS 205) | Hash collision resistance | Level 1 (128-bit) |
+| Pulsar | Ring-LWE threshold | Ring-LWE / Ring-SIS | Level 3 (128-bit PQ) |
 
 ### Hybrid Security (Classical + Post-Quantum)
 
@@ -169,14 +169,14 @@ These precompiles manage chain economics:
 ### 5. Post-Quantum Signature Precompiles
 
 **ML-DSA** (`0x...0006`):
-- NIST FIPS 204 (Dilithium) signatures
+- NIST FIPS 204 (ML-DSA) signatures
 - Level 3 security (192-bit equivalent)
 - 1952-byte public keys, 3309-byte signatures
 - ~108us verification time
 - See LP-2311 for full specification
 
 **SLH-DSA** (`0x...0007`):
-- NIST FIPS 205 (SPHINCS+) hash-based signatures
+- NIST FIPS 205 (SLH-DSA) hash-based signatures
 - Level 1 security (128-bit equivalent)
 - 32-byte public keys, 7856-byte signatures
 - ~286us verification time
@@ -196,7 +196,7 @@ These precompiles manage chain economics:
 - Ethereum/Bitcoin ECDSA compatible
 - See LP-7322 for full specification
 
-**Ringtail** (`0x...000B`):
+**Pulsar** (`0x...000B`):
 - Post-quantum threshold signatures (Ring-LWE)
 - Two-round protocol without trusted dealer
 - Quantum-safe multi-party signing
@@ -215,7 +215,7 @@ These precompiles manage chain economics:
 | SLH-DSA | Complete | Complete | Complete | LP-2312 |
 | Warp | Complete | Complete | Complete | LP-2313 |
 | Quasar | Complete | Complete | Complete | LP-4110 |
-| Ringtail | Complete | Complete | Complete | LP-7324 |
+| Pulsar | Complete | Complete | Complete | LP-7324 |
 | FROST | Complete | Complete | Complete | LP-7321 |
 | CGGMP21 | Complete | Complete | Complete | LP-7322 |
 | secp256r1 | Complete | Complete | Complete | LP-2204 |
@@ -226,7 +226,7 @@ These precompiles manage chain economics:
 |-----------|----------------------|--------|
 | Genesis | DeployerAllowList, TxAllowList, FeeManager, NativeMinter, RewardManager | Mainnet |
 | Teleport | Warp | Cross-chain |
-| Quantum | ML-DSA, SLH-DSA, Ringtail, FROST, CGGMP21, Quasar | Post-quantum |
+| Quantum | ML-DSA, SLH-DSA, Pulsar, FROST, CGGMP21, Quasar | Post-quantum |
 | Granite | secp256r1 | Biometric wallets |
 
 ## Usage Patterns
@@ -296,7 +296,7 @@ function receiveMessage(
 - **LP-2314**: Fee Manager Precompile
 - **LP-7321**: FROST Threshold Signature Precompile
 - **LP-7322**: CGGMP21 Threshold ECDSA Precompile
-- **LP-7324**: Ringtail Threshold Signature Precompile
+- **LP-7324**: Pulsar Threshold Signature Precompile
 - **LP-4110**: Quasar Consensus Protocol
 
 ### Supporting Standards
@@ -380,7 +380,7 @@ Gas costs are calibrated to:
 The precompile suite provides a migration path:
 1. **Current**: Use classical signatures (ecrecover, secp256r1, FROST, CGGMP21)
 2. **Transition**: Use hybrid signatures (classical + PQ)
-3. **Future**: Use pure post-quantum (ML-DSA, SLH-DSA, Ringtail)
+3. **Future**: Use pure post-quantum (ML-DSA, SLH-DSA, Pulsar)
 
 ## Copyright
 

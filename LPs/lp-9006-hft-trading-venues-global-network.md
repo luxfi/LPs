@@ -543,7 +543,7 @@ This LP introduces new infrastructure that operates alongside existing Lux Netwo
 
 ### Cryptographic Security
 
-- **Post-quantum signatures** (Ringtail) for order authentication
+- **Post-quantum signatures** (Pulsar) for order authentication
 - **BLS aggregation** for efficient multi-party verification
 - **TLS 1.3** minimum for all external connections
 - **HSMs** for key management (FIPS 140-3 Level 3)

@@ -56,7 +56,7 @@ type KEMScheme interface {
 
 // Security proof: Based on Module-LWE problem
 // Reduction: If Module-LWE is hard, ML-KEM is IND-CCA2 secure
-// Reference: Bos et al., "CRYSTALS-Kyber: A CCA-Secure Module-Lattice-Based KEM"
+// Reference: Bos et al., "ML-KEM (FIPS 203, formerly CRYSTALS-Kyber): A CCA-Secure Module-Lattice-Based KEM"
 ```
 
 #### EVM Precompiled Contracts
@@ -124,7 +124,7 @@ Security Reduction: ML-DSA → Module-SIS + Module-LWE
 Quantum Security: 128/192/256-bit against Grover's algorithm
 Classical Security: 256/384/512-bit against lattice reduction
 
-Reference: Ducas et al., "CRYSTALS-Dilithium: Digital Signatures from Module Lattices"
+Reference: Ducas et al., "ML-DSA (FIPS 204, formerly CRYSTALS-Dilithium): Digital Signatures from Module Lattices"
 NIST PQC Round 3 Winner - Selected July 2022
 ```
 

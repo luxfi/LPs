@@ -123,7 +123,7 @@ Lux Network is organized into **eight tiers**, each serving a distinct purpose:
 | 1 | Core Path | (Complete steps above) |
 | 2 | LP-2300–2399 | Threshold crypto primitives (math only) |
 | 3 | [LP-7000](/docs/lp-7000-t-chain-threshold-specification/) | T-Chain architecture |
-| 4 | LP-7100–7199 | CGGMP21, FROST, Ringtail |
+| 4 | LP-7100–7199 | CGGMP21, FROST, Pulsar |
 | 5 | LP-7200–7299 | DKG & resharing |
 | 6 | LP-7300–7399 | Key rotation & custody |
 | 7 | LP-7400–7499 | KMS & HSM integration |

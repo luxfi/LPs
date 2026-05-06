@@ -25,7 +25,7 @@ order: 329
 
 ## Abstract
 
-This LP serves as the master index for the Teleport Bridge System, Lux Network's unified cross-chain protocol combining threshold cryptography, dedicated bridge chains, and smart contract custody. The Teleport system enables trustless, decentralized bridging between Lux Network and external blockchains including Ethereum, Bitcoin, Base, Arbitrum, Optimism, and Cosmos IBC chains. A single MPC-generated address works across all EVM-compatible chains, with threshold signatures (CGG21 for ECDSA, LSS for dynamic resharing, FROST for Schnorr, and Ringtail for quantum-safe extensions) ensuring no single party controls bridged funds. This index provides navigation to all related LPs, summarizes system architecture, and serves as the entry point for understanding the complete bridge infrastructure.
+This LP serves as the master index for the Teleport Bridge System, Lux Network's unified cross-chain protocol combining threshold cryptography, dedicated bridge chains, and smart contract custody. The Teleport system enables trustless, decentralized bridging between Lux Network and external blockchains including Ethereum, Bitcoin, Base, Arbitrum, Optimism, and Cosmos IBC chains. A single MPC-generated address works across all EVM-compatible chains, with threshold signatures (CGG21 for ECDSA, LSS for dynamic resharing, FROST for Schnorr, and Pulsar for quantum-safe extensions) ensuring no single party controls bridged funds. This index provides navigation to all related LPs, summarizes system architecture, and serves as the entry point for understanding the complete bridge infrastructure.
 
 ## Motivation
 
@@ -154,7 +154,7 @@ Chain Legend:
 
 The M-Chain provides threshold cryptography services:
 
-- **Algorithms**: CGG21 (ECDSA), FROST (Schnorr/EdDSA), LSS (resharing), Ringtail (quantum-safe)
+- **Algorithms**: CGG21 (ECDSA), FROST (Schnorr/EdDSA), LSS (resharing), Pulsar (quantum-safe)
 - **Key Management**: Per-key threshold configuration, dynamic signer sets
 - **Operations**: DKG (KeyGenTx), signing (SignRequestTx/SignResponseTx), resharing (ReshareTx)
 - **Security**: Identifiable aborts, proactive refresh, Byzantine fault tolerance
@@ -378,7 +378,7 @@ curl -X POST http://localhost:9630/ext/bc/T/rpc \
 |------------|-------------|------|
 | [github.com/luxfi/node](https://github.com/luxfi/node) | M-Chain (MVM, per LP-134) and F-Chain (FVM) on the ThresholdVM substrate; B-Chain (BridgeVM) implementations | `~/work/lux/node` |
 | [github.com/luxfi/bridge](https://github.com/luxfi/bridge) | Bridge monorepo (SDK, relayer, UI) | `~/work/lux/bridge` |
-| [github.com/luxfi/threshold](https://github.com/luxfi/threshold) | Threshold cryptography (CGG21, LSS, FROST, Ringtail) | `~/work/lux/threshold` |
+| [github.com/luxfi/threshold](https://github.com/luxfi/threshold) | Threshold cryptography (CGG21, LSS, FROST, Pulsar) | `~/work/lux/threshold` |
 | [github.com/luxfi/crypto](https://github.com/luxfi/crypto) | Core cryptographic primitives | `~/work/lux/crypto` |
 | [github.com/luxfi/mpc](https://github.com/luxfi/mpc) | MPC signer daemon and protocols | `~/work/lux/mpc` |
 | [github.com/luxfi/sdk](https://github.com/luxfi/sdk) | Client SDKs (TypeScript, Go) | `~/work/lux/sdk` |
@@ -441,7 +441,7 @@ threshold/
 ### Phase 3: Experimental Features
 - [ ] A-Chain (AIVM) - behind experimental flag on mainnet, default on devnet
 - [ ] Z-Chain (ZK) - devnet only initially
-- [ ] Ringtail quantum-safe signatures
+- [ ] Pulsar quantum-safe signatures
 
 ### Phase 4: RFC Implementations
 - [ ] K-Chain (KMS) - post RFC approval
@@ -467,7 +467,7 @@ threshold/
 | **LSS** | Linear Secret Sharing - resharing protocol enabling signer rotation without key reconstruction |
 | **MPC** | Multi-Party Computation - cryptographic techniques for distributed computation |
 | **Reshare** | Process of redistributing key shares to new signer set while preserving public key |
-| **Ringtail** | Lattice-based post-quantum threshold signature scheme |
+| **Pulsar** | Lattice-based post-quantum threshold signature scheme |
 | **M-Chain** | MPC Chain (MVM, per LP-134) — dedicated chain for MPC ceremonies on bridge custody of external wallets; replaces legacy "T-Chain MPC" naming |
 | **F-Chain** | FHE Chain (FVM, per LP-134) — dedicated chain for FHE compute and TFHE bootstrap-key ceremonies; replaces legacy "T-Chain FHE" naming |
 | **T-Chain (legacy)** | Pre-LP-134 name for what is now M-Chain + F-Chain. Now retained ONLY as the IBC/teleport chain backed by `teleportvm` (LP-6332) |

@@ -189,7 +189,7 @@ A read-only replica:
 
 - Connects to the Lux P2P network
 - Downloads blocks and Quasar certs
-- Verifies certs (ML-DSA sigs + Ringtail aggregates + Z-chain ZK proofs)
+- Verifies certs (ML-DSA sigs + Pulsar aggregates + Z-chain ZK proofs)
 - Executes transactions to compute state
 - Serves RPC to clients
 - Optionally serves archival history, light-client proofs, bridge proofs
@@ -348,7 +348,7 @@ quantum adversary materialises AND subverts the institutional layer.
 ### PQ upgrade path
 
 The protocol retains an **upgrade capability** so consensus can switch
-to ML-DSA + Ringtail (per LP-142) if quantum materialises:
+to ML-DSA + Pulsar (per LP-142) if quantum materialises:
 
 ```solidity
 contract ConsensusPrimitive {

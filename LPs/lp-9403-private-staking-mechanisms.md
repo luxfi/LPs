@@ -763,11 +763,11 @@ This LP introduces private staking as an optional feature alongside standard sta
 - **Commitments**: Pederson commitments for hiding amounts/identities
 - **Range Proofs**: Bulletproofs for stake amount validation
 - **Threshold Signatures**: CGGMP21 for distributed validation
-- **Ring Signatures**: Ringtail for anonymous participation
+- **Ring Signatures**: Pulsar for anonymous participation
 
 **Related Specifications**:
 - **LP-322**: CGGMP21 Threshold ECDSA (validator multi-sig)
-- **LP-320**: Ringtail Ring Signatures (anonymous validator selection)
+- **LP-320**: Pulsar Ring Signatures (anonymous validator selection)
 - **LP-310**: VDF Specifications (detailed VDF algorithm)
 - **LP-110**: Quasar Consensus (integrates private staking)
 

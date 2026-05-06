@@ -18,7 +18,7 @@ references:
 
 ## Abstract
 
-The Number Theoretic Transform (NTT) is the core arithmetic primitive underlying Lux's post-quantum cryptographic operations. NTT enables O(n log n) polynomial multiplication in Z_q[X]/(X^n + 1), replacing the naive O(n^2) approach. All lattice-based schemes in the Lux PQ suite -- CRYSTALS-Dilithium (signatures), CRYSTALS-Kyber (key encapsulation), and NTRU (encryption) -- rely on NTT for performance-critical polynomial arithmetic.
+The Number Theoretic Transform (NTT) is the core arithmetic primitive underlying Lux's post-quantum cryptographic operations. NTT enables O(n log n) polynomial multiplication in Z_q[X]/(X^n + 1), replacing the naive O(n^2) approach. All lattice-based schemes in the Lux PQ suite -- ML-DSA (FIPS 204, formerly CRYSTALS-Dilithium) (signatures), ML-KEM (FIPS 203, formerly CRYSTALS-Kyber) (key encapsulation), and NTRU (encryption) -- rely on NTT for performance-critical polynomial arithmetic.
 
 ## Specification
 

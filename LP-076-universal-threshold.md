@@ -10,7 +10,7 @@ category: Cryptography
 created: 2021-06-01
 references:
   - lps-019 (Threshold MPC)
-  - lps-073 (Ringtail)
+  - lps-073 (Pulsar)
   - lps-077 (Linear Secret Sharing)
   - lps-066 (Threshold FHE)
 ---
@@ -19,7 +19,7 @@ references:
 
 ## Abstract
 
-Defines a unified framework for all threshold cryptographic operations on Lux Network. Every threshold scheme (FROST, CGGMP21, Ringtail, threshold FHE, BLS threshold) shares a common DKG interface, resharing protocol (LSS), and key lifecycle. The framework provides a single Go/Rust API surface that abstracts over the underlying scheme.
+Defines a unified framework for all threshold cryptographic operations on Lux Network. Every threshold scheme (FROST, CGGMP21, Pulsar, threshold FHE, BLS threshold) shares a common DKG interface, resharing protocol (LSS), and key lifecycle. The framework provides a single Go/Rust API surface that abstracts over the underlying scheme.
 
 ## Specification
 
@@ -52,7 +52,7 @@ All schemes implement this interface. The ThresholdManager orchestrates rounds v
 |--------|-----|---------|---------|----------|
 | FROST | Pedersen | 2-round Schnorr | LSS | Ed25519 chains |
 | CGGMP21 | Paillier | Pre-sign + sign | LSS | secp256k1 chains |
-| Ringtail | Lattice | 2-round lattice | LSS | Post-quantum |
+| Pulsar | Lattice | 2-round lattice | LSS | Post-quantum |
 | BLS threshold | Feldman VSS | Single-round | LSS | Warp attestation |
 | Threshold FHE | Lattice DKG | N/A (decrypt only) | LSS | Confidential compute |
 

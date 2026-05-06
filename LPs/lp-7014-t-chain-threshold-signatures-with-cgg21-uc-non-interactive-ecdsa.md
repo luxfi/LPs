@@ -26,7 +26,7 @@ order: 14
 
 ## Abstract
 
-This proposal introduces a formal design for using the Chase–Gennaro–Goldfeder 2021 (CGG21) threshold signature scheme in Lux’s T-Chain (the MPC-based bridge chain). We expand on LP-13 by providing an academic-style rationale for adopting CGG21, an overview of its node-level integration in Lux’s MVM, comparisons with prior threshold schemes (GG18, DKLS19, and Ethereum’s threshold cryptography efforts), and a detailed threat model with security assumptions. We also outline a roadmap for a hybrid post-quantum upgrade, incorporating a subset of Ringtail (a lattice-based threshold signature scheme) participants into the signing group to achieve partial post-quantum protection during the transition.
+This proposal introduces a formal design for using the Chase–Gennaro–Goldfeder 2021 (CGG21) threshold signature scheme in Lux’s T-Chain (the MPC-based bridge chain). We expand on LP-13 by providing an academic-style rationale for adopting CGG21, an overview of its node-level integration in Lux’s MVM, comparisons with prior threshold schemes (GG18, DKLS19, and Ethereum’s threshold cryptography efforts), and a detailed threat model with security assumptions. We also outline a roadmap for a hybrid post-quantum upgrade, incorporating a subset of Pulsar (a lattice-based threshold signature scheme) participants into the signing group to achieve partial post-quantum protection during the transition.
 
 ## Motivation and Rationale for CGG21
 
@@ -81,9 +81,9 @@ CGG21 offers a compelling balance of low latency, accountability, and strong UC 
 
 ## Future Roadmap: Hybrid Post-Quantum Threshold Upgrade
 
-To mitigate future quantum threats, Lux plans a hybrid ECDSA/PQ threshold scheme. We will integrate Ringtail—a lattice-based 2‑round threshold signature based on LWE [7]—by augmenting the signer set with a random subset performing PQ signing.
+To mitigate future quantum threats, Lux plans a hybrid ECDSA/PQ threshold scheme. We will integrate Pulsar—a lattice-based 2‑round threshold signature based on LWE [7]—by augmenting the signer set with a random subset performing PQ signing.
 
-During an interim phase, each bridge operation will produce both a CGG21 ECDSA signature and a Ringtail PQ signature. The PQ signature serves as a fallback until on-chain enforcement is viable. As validators opt into PQ signing, governance will mandate hybrid signatures, gradually transitioning Lux’s bridge to quantum-resistant security without service interruption.
+During an interim phase, each bridge operation will produce both a CGG21 ECDSA signature and a Pulsar PQ signature. The PQ signature serves as a fallback until on-chain enforcement is viable. As validators opt into PQ signing, governance will mandate hybrid signatures, gradually transitioning Lux’s bridge to quantum-resistant security without service interruption.
 
 ## Implementation Status
 
@@ -101,7 +101,7 @@ Related implementations:
 
 ## Conclusion
 
-This draft LP specifies the integration of CGG21 threshold ECDSA into Lux's T-Chain, delivering low-latency non-interactive signing, identifiable aborts, proactive key refresh, and strong UC security. Our comparison shows CGG21's advantages over GG18, DKLS19, and early Ethereum threshold deployments. We also chart a path toward hybrid post-quantum threshold signing with Ringtail, ensuring Lux's bridges remain secure against both current and future adversaries.
+This draft LP specifies the integration of CGG21 threshold ECDSA into Lux's T-Chain, delivering low-latency non-interactive signing, identifiable aborts, proactive key refresh, and strong UC security. Our comparison shows CGG21's advantages over GG18, DKLS19, and early Ethereum threshold deployments. We also chart a path toward hybrid post-quantum threshold signing with Pulsar, ensuring Lux's bridges remain secure against both current and future adversaries.
 
 The complete implementation is available at `github.com/luxfi/threshold` with comprehensive test coverage and production-ready code.
 
@@ -113,7 +113,7 @@ The complete implementation is available at `github.com/luxfi/threshold` with co
 4. Lindell, Y., & Nof, A. (2018). **Fast Secure Two‑Party ECDSA Signing**. In ACM CCS 2018.  
 5. Shoup, V., & Groth, J. (2022). **Design and Analysis of a Distributed ECDSA Signing Service**. Cryptology ePrint Archive, Report 2022/506.  
 6. Threshold Network (2023). **Threshold ECDSA in tBTC and Migration Plans – Threshold Improvement Proposal 090**.  
-7. NTT Research et al. (2025). **Ringtail: Practical Two‑Round Threshold Signatures from Learning with Errors**. To appear in IEEE S&P 2025.  
+7. NTT Research et al. (2025). **Pulsar: Practical Two‑Round Threshold Signatures from Learning with Errors**. To appear in IEEE S&P 2025.  
 8. Entropy Project. **Overview of CGGMP21 Threshold ECDSA Scheme**.  
 9. NIST Multi‑Party Threshold Crypto Project (2023). **Threshold Schemes and Applications**.  
 10. Komlo, C., & Goldberg, I. (2022). **ROAST: Robust Asynchronous Schnorr Threshold Signatures**.  

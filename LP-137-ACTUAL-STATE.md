@@ -64,11 +64,11 @@ ringtail Ring-LWE body. Concrete deltas vs the audit snapshot:
   when the caller provisions a valid `PaillierKey`. Zero-pk emits
   `status=0xFF` (legitimate "this signer's pk not provisioned"). 4/4
   `cggmp21_presign_test` pass on commit `f35eedd2`.
-- **Ringtail Ring-LWE first-party body wired.**
+- **Pulsar Ring-LWE first-party body wired.**
   `ringtail/cpp/ringtail.{hpp,cpp}` (691 LOC) lands setup / sign / verify
   for the Ring-LWE threshold signature scheme. C-ABI no longer returns
   NOTIMPL. `crypto_status()` bitmask now sets the `CRYPTO_ALG_RINGTAIL`
-  bit. Commit `ecf21b73` + `f35c6b22` (bitmask). Ringtail full spec:
+  bit. Commit `ecf21b73` + `f35c6b22` (bitmask). Pulsar full spec:
   LP-073 + papers/lp-073-ringtail.pdf.
 - **Acceleration kernels (LP-160..LP-166) shipped.** Seven kernels,
   three-backend uniform layout, see `CROSSOVER.md` §"Acceleration kernels"

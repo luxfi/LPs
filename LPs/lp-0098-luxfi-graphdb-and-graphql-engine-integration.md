@@ -18,7 +18,7 @@ The Lux Network requires a unified graph database and GraphQL query engine nativ
 - a high-performance, deterministic graph storage engine (lux/graphdb) built on BadgerDB with quantum-safe signatures;
 - a custom GraphVM interpreter (lux/graphql) that compiles GraphQL queries with gas metering;
 - decentralized G-Chain nodes that users can run for local scaling and custom indexing; and
-- quantum-safe query authentication using dual certificates (BLS + Ringtail).
+- quantum-safe query authentication using dual certificates (BLS + Pulsar).
 
 By implementing GraphQL as a dedicated chain (G-Chain) with BadgerDB storage, Lux enables rich, performant queries with horizontal scaling—users can run their own nodes for read performance, custom indexing strategies, and specialized use cases.
 
@@ -45,7 +45,7 @@ This decentralized approach ensures:
 ### 1. GraphDB Backend (lux/graphdb)
 
 - **BadgerDB Foundation**: Uses BadgerDB as the core storage engine, shared across all Lux chains for consistency
-- **Quantum-Safe Storage**: All data entries signed with dual certificates (BLS + Ringtail) for future-proof security
+- **Quantum-Safe Storage**: All data entries signed with dual certificates (BLS + Pulsar) for future-proof security
 - **Deterministic State**: Synchronized compaction and SSTable generation keeps all G-Chain nodes in consensus
 - **Optimized Key-Value Model**: 
   - Nodes: `Node:<chain>:<type>:<id>`
@@ -146,7 +146,7 @@ This LP adds new precompiles (0x0B–0x11) and node hooks; it does not break exi
 - `graph.go` - Node/edge management
 - `verkle.go` - Verkle trie commitment
 - `replication.go` - Multi-node synchronization
-- `quantum_signatures.go` - BLS + Ringtail signing
+- `quantum_signatures.go` - BLS + Pulsar signing
 - `graphdb_test.go` - Unit tests (100+ test cases)
 
 **GraphVM Module** (`~/work/lux/graphql/`):

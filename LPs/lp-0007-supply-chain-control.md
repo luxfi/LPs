@@ -160,7 +160,7 @@ luxfi/warp        // Cross-chain messaging
 |----------|-----------------|-----------|
 | **DeFi** | Pool Manager, Lending, Synthetics, Transmuter, Alchemist, Liquidation, Interest Rates | ✗ None |
 | **AI** | AI Mining, Inference | ✗ None |
-| **PQ Crypto** | ML-DSA, SLH-DSA, FROST, Ringtail | ✗ None |
+| **PQ Crypto** | ML-DSA, SLH-DSA, FROST, Pulsar | ✗ None |
 | **MPC** | CGGMP21, Quasar | ✗ None |
 | **Governance** | Fee Manager, Reward Manager, Deployer Allowlist, TX Allowlist | ✓ Basic |
 | **Interop** | Warp (8 files), Native Asset, Native Minter | ✓ Partial |
@@ -174,8 +174,8 @@ luxfi/warp        // Cross-chain messaging
 | BLS12-381 | ✓ | ✓ | Aggregate signatures |
 | BN256 | ✓ | ✓ | Pairing-based |
 | secp256k1 | ✓ | ✓ | ECDSA |
-| **ML-DSA (Dilithium)** | ✓ | ✗ | NIST PQC |
-| **SLH-DSA (SPHINCS+)** | ✓ | ✗ | Hash-based |
+| **ML-DSA (ML-DSA)** | ✓ | ✗ | NIST PQC |
+| **SLH-DSA (SLH-DSA (FIPS 205, formerly SPHINCS+))** | ✓ | ✗ | Hash-based |
 | **FROST (Threshold)** | ✓ | ✗ | Threshold Schnorr |
 | **Lattice (Lattigo)** | ✓ | ✗ | FHE/lattice ops |
 | **CGGMP21 (MPC)** | ✓ | ✗ | Threshold ECDSA |

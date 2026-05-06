@@ -64,7 +64,7 @@ seam:
 | Bridge custody (cross-chain MPC) | **B-Chain** (routing) + **M-Chain** (signing) | LP-134, LP-016 |
 | Light-client proof format (MProof) | M-Chain `mchain_ceremony_root` in `QuasarRoundDescriptor` | LP-020 §3.0, LP-134 |
 
-ThresholdVM — the shared library substrate (CGGMP21 / FROST / Ringtail
+ThresholdVM — the shared library substrate (CGGMP21 / FROST / Pulsar
 DKG state machines, LSS resharing, partial-signature aggregation) — is
 extracted into `~/work/lux/chains/thresholdvm` and is consumed by both
 M-Chain and F-Chain runtimes. ThresholdVM is **not a chain**; it is a
@@ -235,7 +235,7 @@ type DualSigTx struct {
     AssetID          uint32
     ClassicalSig     []byte     // CGG21 signature
     ClassicalBitmap  []byte     // Classical signers
-    QuantumSig       []byte     // Ringtail signature
+    QuantumSig       []byte     // Pulsar signature
     QuantumBitmap    []byte     // Quantum signers
     ProofHash        [32]byte   // Combined proof hash
 }
@@ -317,7 +317,7 @@ Hot-path latency budget: < 200 ms signature generation (GG21 15-of-15 @ ~80 ms m
 
 ```protobuf
 service MPCKeydQuantum {
-    rpc SignSwapDual(SwapMsg) returns (DualSigReply);     // CGG21 + Ringtail
+    rpc SignSwapDual(SwapMsg) returns (DualSigReply);     // CGG21 + Pulsar
     rpc GenerateRingtailShare(ShareReq) returns (Share);   // Quantum share
     rpc CombineRingtailSigs(Shares) returns (RingtailSig); // Threshold combine
     rpc GetQuantumPhase() returns (PhaseInfo);             // Current phase
@@ -325,13 +325,13 @@ service MPCKeydQuantum {
 
 message DualSigReply {
     bytes classical_sig = 1;    // CGG21 signature
-    bytes quantum_sig = 2;      // Ringtail signature  
+    bytes quantum_sig = 2;      // Pulsar signature  
     bytes classical_bitmap = 3;
     bytes quantum_bitmap = 4;
 }
 ```
 
-Quantum signature latency: < 50 ms (Ringtail 15-of-21 @ ~7 ms computation + network).
+Quantum signature latency: < 50 ms (Pulsar 15-of-21 @ ~7 ms computation + network).
 
 ### 5.2  JSON-RPC additions (under `/ext/bc/M`)
 
@@ -382,7 +382,7 @@ T-Chain implements a phased approach to quantum resistance:
 - Secure against classical adversaries with 128-bit security
 
 **Phase 1 (Transition Period)**  
-- Both CGG21 and Ringtail signatures generated
+- Both CGG21 and Pulsar signatures generated
 - Only CGG21 required for validity
 - Allows testing and optimization of quantum components
 
@@ -393,14 +393,14 @@ T-Chain implements a phased approach to quantum resistance:
 
 **Phase 3 (Post-Quantum Only)**
 - After quantum computers pose real threat
-- Ringtail becomes primary, CGG21 optional
+- Pulsar becomes primary, CGG21 optional
 - Full quantum resistance achieved
 
 **Security Properties:**
 - **Threshold Security**: Both schemes use t-of-n threshold (no single point of failure)
 - **Hybrid Protection**: Compromise of one scheme doesn't compromise custody
 - **Forward Security**: Historical transactions remain secure even if quantum computers emerge
-- **Minimal Overhead**: Ringtail adds ~3KB per signature, <50ms latency
+- **Minimal Overhead**: Pulsar adds ~3KB per signature, <50ms latency
 
 ## 9  Backwards Compatibility
 
@@ -414,7 +414,7 @@ T-Chain implements a phased approach to quantum resistance:
 - Simnet: docker-compose spins X‑, M‑, Z‑Chain, 5 signer nodes, bitcoin-regtest.
 - Fuzz: mutate `SwapSigTx`/`DualSigTx` bitmaps, ensure rejection (<1 ms).
 - Load: 5 TPS swap, 15‑of‑15 signing (dual-sig mode), 72 h soak; expect CPU < 50% on 4‑core VPS.
-- Quantum tests: Verify Ringtail signatures, test phase transitions, benchmark PQ operations.
+- Quantum tests: Verify Pulsar signatures, test phase transitions, benchmark PQ operations.
 - Audits: cryptography (Trail of Bits), quantum-safe (ISARA), economic (Gauntlet).
 
 ## 11  Governance Actions Required
@@ -428,7 +428,7 @@ T-Chain implements a phased approach to quantum resistance:
 
 M‑Chain turns Lux's bridge into a fully on‑chain, MPC‑secured custody network with quantum-safe extensions.
 `SwapTx` (intent) on X‑Chain + `SwapSigTx`/`DualSigTx` (quorum proof) on M‑Chain replace every line of the old `swaps.ts` code.
-Validators run `mpckeyd` with CGG21 (classical) + Ringtail (quantum-safe); they are paid per signature and slashed for tardiness.
+Validators run `mpckeyd` with CGG21 (classical) + Pulsar (quantum-safe); they are paid per signature and slashed for tardiness.
 Result: trust-minimised, stateless, real-time swaps with optional Z‑Chain privacy and future-proof quantum resistance—no Postgres, no cron, just chain.
 
 ## Implementation
@@ -439,7 +439,7 @@ Result: trust-minimised, stateless, real-time swaps with optional Z‑Chain priv
 - **Local**: `mpc/`
 - **Size**: ~500 MB
 - **Languages**: Go (mpckeyd daemon), Rust (cryptographic backend)
-- **Consensus**: Bonded MPC validators with CGG21 + Ringtail signing
+- **Consensus**: Bonded MPC validators with CGG21 + Pulsar signing
 
 ### Key Components
 
@@ -448,7 +448,7 @@ Result: trust-minimised, stateless, real-time swaps with optional Z‑Chain priv
 | **MPC Daemon** | `mpc/cmd/lux-mpc-bridge` | Main MPC signing service |
 | **Bridge CLI** | `mpc/cmd/lux-mpc-cli` | Bridge configuration and management |
 | **CGG21 Threshold** | `mpc/pkg/crypto/cgg21/` | Classical ECDSA threshold signing |
-| **Ringtail Quantum** | `mpc/pkg/crypto/ringtail/` | Quantum-safe ring signatures |
+| **Pulsar Quantum** | `mpc/pkg/crypto/ringtail/` | Quantum-safe ring signatures |
 | **State Management** | `mpc/pkg/state/` | Custody and swap state |
 | **RPC API** | `mpc/pkg/api/` | JSON-RPC bridge interface |
 | **Vault Management** | `mpc/pkg/vault/` | Asset custody across chains |
@@ -475,7 +475,7 @@ make install
 cd mpc
 go test ./pkg/crypto/cgg21 -v
 
-# Test Ringtail quantum-safe signatures
+# Test Pulsar quantum-safe signatures
 go test ./pkg/crypto/ringtail -v
 
 # Test swap execution flow
@@ -542,7 +542,7 @@ curl -X POST --data '{
 
 - CGG21 Key Generation (15-of-20): ~2.5 seconds
 - CGG21 Signing (15-of-20): ~350ms
-- Ringtail Signing: ~45ms
+- Pulsar Signing: ~45ms
 - Signature Verification: <1ms
 
 ### Related LPs

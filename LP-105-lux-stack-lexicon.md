@@ -270,7 +270,7 @@ Use these names *verbatim* in specs and papers. Do not rename them.
 | Stateful hash signatures | LMS / XMSS / SLH-DSA | Lumen Audit (optional) | Public audit frames; forward-secure frame auth |
 | BLS aggregate | BLS12-381 aggregate signatures | Beam | Fast classical aggregate finality |
 | Curve threshold | FROST (RFC 9591, Komlo-Goldberg 2020) | Lens | Curve-threshold kernel |
-| Lattice threshold | Ringtail / Threshold Raccoon / Hermine family | Pulsar | PQ lattice threshold finality |
+| Lattice threshold | Pulsar / Threshold Raccoon / Hermine family | Pulsar | PQ lattice threshold finality |
 | Proactive refresh | HJKY97 | LSS | Same-set share refresh |
 | Secret redistribution | Desmedt-Jajodia 1997 | LSS | Old-set → new-set resharing |
 | Verifiable redistribution | Wong-Wang-Wing 2002 | LSS | VSR / transition verification |
@@ -489,9 +489,9 @@ The standalone Warp 2.0 specification (LP-021v2) elaborates the Pulse transcript
 
 The following terms are **explicitly excluded** from Lux specs, code, package names, and operator docs. They are either someone else's brand, confusing, or both.
 
-- **Star-Wars-flavored terms**: Comlink, Navicomputer, Holocron, Scomp, Transponder, Code Cylinder, A-Wing, X-Wing (as a Lux name), Y-Wing, B-Wing, TIE, Hyperdrive, Deflector, Tractor, Wayfinder, Lightsaber, Crystal (as a Lux key term), Kyber (as a Lux package name), Bantha, Wookie, anything else fictional.
+- **Star-Wars-flavored terms**: Comlink, Navicomputer, Holocron, Scomp, Transponder, Code Cylinder, A-Wing, X-Wing (as a Lux name), Y-Wing, B-Wing, TIE, Hyperdrive, Deflector, Tractor, Wayfinder, Lightsaber, Crystal (as a Lux key term), ML-KEM (as a Lux package name), Bantha, Wookie, anything else fictional.
 - **Trademarks and other-project names**: any term unique to a specific outside protocol family.
-- **Colliding crypto names**: do not name a Lux package `kyber` (collides with CRYSTALS-Kyber → ML-KEM). Do not name keys "Crystal" (collides with CRYSTALS-Kyber / CRYSTALS-Dilithium).
+- **Colliding crypto names**: do not name a Lux package `kyber` (collides with ML-KEM (FIPS 203, formerly CRYSTALS-Kyber) → ML-KEM). Do not name keys "Crystal" (collides with ML-KEM / ML-DSA (FIPS 204, formerly CRYSTALS-Dilithium)).
 
 If a developer needs a "cute" internal name, it must come from this LP's vocabulary or a future amendment. Contributions to this LP are welcome — the rule is the five-criteria test in the *Naming rules* section.
 

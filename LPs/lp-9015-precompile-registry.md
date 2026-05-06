@@ -98,7 +98,7 @@ library PrecompileRegistry {
     /// @notice Quasar quantum consensus operations
     address internal constant QUASAR = 0x020000000000000000000000000000000000000a;
 
-    /// @notice Ringtail lattice threshold signatures
+    /// @notice Pulsar lattice threshold signatures
     address internal constant RINGTAIL = 0x020000000000000000000000000000000000000B;
 
     /// @notice FROST Schnorr threshold signatures
@@ -175,7 +175,7 @@ library PrecompileRegistry {
         if (addr == SLH_DSA) return "SLH-DSA";
         if (addr == PQ_CRYPTO) return "PQCrypto";
         if (addr == QUASAR) return "Quasar";
-        if (addr == RINGTAIL) return "Ringtail";
+        if (addr == RINGTAIL) return "Pulsar";
         if (addr == FROST) return "FROST";
         if (addr == CGGMP21) return "CGGMP21";
         if (addr == BRIDGE) return "Bridge";
@@ -330,7 +330,7 @@ contract PrecompileChecker {
 │  │ 0x02...0008     │ SLH-DSA - FIPS 205 hash-based signatures (LP-2312)         │  │
 │  │ 0x02...0009     │ PQCrypto - General post-quantum operations                 │  │
 │  │ 0x02...000a     │ Quasar - Quantum consensus operations (LP-2516)            │  │
-│  │ 0x02...000B     │ Ringtail - Lattice threshold signatures (LP-320)           │  │
+│  │ 0x02...000B     │ Pulsar - Lattice threshold signatures (LP-320)           │  │
 │  │ 0x02...000c     │ FROST - Schnorr threshold signatures (LP-321)              │  │
 │  │ 0x02...000D     │ CGGMP21 - ECDSA threshold signatures (LP-322)              │  │
 │  │ 0x02...000E     │ Bridge - Bridge verification (reserved)                    │  │
@@ -370,7 +370,7 @@ contract PrecompileChecker {
 | ML-DSA | Verify signature | 100,000 |
 | FROST | Verify threshold | 75,000 |
 | CGGMP21 | Verify threshold | 125,000 |
-| Ringtail | Verify threshold | 200,000 |
+| Pulsar | Verify threshold | 200,000 |
 | DEX | Place order | 30,000 |
 | Oracle | Get price | 5,000 |
 
@@ -500,7 +500,7 @@ Critical operations should verify precompile availability before use.
 - **LP-9011**: Oracle Precompile
 - **LP-321**: FROST Threshold Signatures
 - **LP-322**: CGGMP21 Threshold ECDSA
-- **LP-320**: Ringtail Threshold Signatures
+- **LP-320**: Pulsar Threshold Signatures
 
 ## Copyright
 

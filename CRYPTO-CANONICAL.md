@@ -45,7 +45,7 @@ C-ABI surface lives at `luxcpp/crypto/c-abi/lux_crypto.h` and `<alg>/c-abi/`. Br
 | P-Chain PlatformVM | **6.5×** | v0.56 → v0.57 |
 | M-Chain FROST sign 5-of-7 | **4.23×** | 204.3 → 48.3 ms Metal |
 | C-Chain BLS aggregate (general msg) | **2.58×** | 1.20 s → 0.464 s |
-| Q-Chain Ringtail | **1.12×** | LWE-on-GPU lands v0.45.1 |
+| Q-Chain Pulsar | **1.12×** | LWE-on-GPU lands v0.45.1 |
 | A-Chain AIVM FullRound | **1.0×** | dGPU ready; M1 dispatch-bound |
 | X-Chain XVM Phase-2 | — | not committed by deadline |
 

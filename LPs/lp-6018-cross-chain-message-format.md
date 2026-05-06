@@ -228,7 +228,7 @@ function teleportAsset(
         abi.encode(payload)
     );
     
-    // AWM handles message relay
+    // Lux Warp 2.0 handles message relay (Beam + ML-DSA + Pulse)
     warpMessenger.sendMessage(destChain, encode(message));
 }
 ```

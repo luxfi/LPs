@@ -29,7 +29,7 @@ order: 3657
 
 ## Abstract
 
-LP-3657 specifies a native EVM precompile for Verifiable Random Function (VRF) operations, enabling on-chain verifiable randomness. VRFs produce pseudorandom outputs that can be cryptographically verified against a public key, making them essential for fair leader election, lottery systems, and gaming applications. This precompile supports multiple VRF constructions: ECVRF (secp256k1, Ed25519), and post-quantum Ringtail VRF.
+LP-3657 specifies a native EVM precompile for Verifiable Random Function (VRF) operations, enabling on-chain verifiable randomness. VRFs produce pseudorandom outputs that can be cryptographically verified against a public key, making them essential for fair leader election, lottery systems, and gaming applications. This precompile supports multiple VRF constructions: ECVRF (secp256k1, Ed25519), and post-quantum Pulsar VRF.
 
 ## Motivation
 
@@ -94,7 +94,7 @@ Three VRF constructions provide flexibility:
    - Used by Algorand, NEAR
    - Better for batch operations
 
-3. **Ringtail VRF**: Threshold/multi-party VRF
+3. **Pulsar VRF**: Threshold/multi-party VRF
    - Distributed key generation
    - No single point of failure
    - Post-quantum ready
@@ -114,7 +114,7 @@ Organized by operation category:
 - `0x01-0x0F`: ECVRF prove/verify operations
 - `0x10-0x1F`: Batch verification
 - `0x20-0x2F`: Proof conversion and hashing
-- `0x30-0x3F`: Ringtail threshold operations
+- `0x30-0x3F`: Pulsar threshold operations
 
 ### Gas Cost Derivation
 
@@ -188,14 +188,14 @@ Based on [draft-irtf-cfrg-vrf-15](https://datatracker.ietf.org/doc/draft-irtf-cf
 - Hash: SHA-512
 - Suite: `ECVRF-ED25519-SHA512-TAI`
 
-#### 3. Ringtail VRF (Threshold)
+#### 3. Pulsar VRF (Threshold)
 
-Threshold VRF using Ringtail signature aggregation for distributed randomness.
+Threshold VRF using Pulsar signature aggregation for distributed randomness.
 
 **Parameters:**
 - Scheme: Threshold EdDSA (t-of-n)
 - Hash: SHA-512
-- Aggregation: Ringtail
+- Aggregation: Pulsar
 
 ### Data Encoding
 
@@ -346,7 +346,7 @@ Batch verifies multiple VRF proofs for efficiency.
 
 #### vrfRingtailProve
 
-Generates a threshold VRF proof using Ringtail aggregation.
+Generates a threshold VRF proof using Pulsar aggregation.
 
 **Input:**
 ```
@@ -510,7 +510,7 @@ interface IVRF {
     /// @return pk Public key
     function vrfDerivePublicKey(bytes32 sk) external view returns (bytes memory pk);
 
-    /// @notice Generate threshold VRF proof (Ringtail)
+    /// @notice Generate threshold VRF proof (Pulsar)
     /// @param sks Array of secret key shares (t-of-n)
     /// @param alpha VRF input
     /// @return pi Aggregated proof
@@ -520,7 +520,7 @@ interface IVRF {
         bytes calldata alpha
     ) external view returns (bytes memory pi, bytes32 beta);
 
-    /// @notice Verify threshold VRF proof (Ringtail)
+    /// @notice Verify threshold VRF proof (Pulsar)
     /// @param pks Array of public key shares
     /// @param alpha VRF input
     /// @param pi Aggregated proof
@@ -946,7 +946,7 @@ No backwards compatibility issues. This LP introduces a new precompile at an unu
 - [IETF VRF Draft](https://datatracker.ietf.org/doc/draft-irtf-cfrg-vrf/)
 - [Chainlink VRF v2](https://docs.chain.link/vrf)
 - [LP-111: Photon Consensus Selection](./lp-111.md)
-- [LP-7324: Ringtail Threshold Signature](./lp-7324-ringtail-threshold-signature-precompile.md)
+- [LP-7324: Pulsar Threshold Signature](./lp-7324-ringtail-threshold-signature-precompile.md)
 - [LP-3654: Ed25519 Precompile](./lp-3654-ed25519-eddsa-precompile.md)
 
 ## Copyright

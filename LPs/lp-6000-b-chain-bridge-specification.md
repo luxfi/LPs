@@ -25,7 +25,7 @@ order: 0
 
 ## Abstract
 
-LP-6000 specifies the B-Chain (Bridge Chain), Lux Network's dedicated blockchain for secure cross-chain asset transfers. The B-Chain implements MPC-based custody using CGGMP21 threshold signatures extended with Ringtail for quantum safety.
+LP-6000 specifies the B-Chain (Bridge Chain), Lux Network's dedicated blockchain for secure cross-chain asset transfers. The B-Chain implements MPC-based custody using CGGMP21 threshold signatures extended with Pulsar for quantum safety.
 
 ## Motivation
 
@@ -89,7 +89,7 @@ node/vms/bridgevm/
 │   External Chains       │        B-Chain Core           │
 ├─────────────────────────┼───────────────────────────────┤
 │ • Ethereum              │ • MPC Custody (CGGMP21)       │
-│ • Bitcoin               │ • Ringtail Quantum Extension  │
+│ • Bitcoin               │ • Pulsar Quantum Extension  │
 │ • BSC                   │ • Asset Registry              │
 │ • Polygon               │ • Threshold Signing           │
 │ • Arbitrum              │ • Bridge State Machine        │
@@ -110,7 +110,7 @@ node/vms/bridgevm/
 type BridgeValidator struct {
     NodeID       ids.NodeID
     ClassicalKey *ecdsa.PublicKey  // CGGMP21 key share
-    QuantumKey   *ringtail.PublicKey // Ringtail key share
+    QuantumKey   *ringtail.PublicKey // Pulsar key share
     Stake        uint64
     Reputation   uint32
 }
@@ -153,8 +153,8 @@ interface IBridgeChain {
 B-Chain implements a dual-signature scheme during quantum transition:
 
 1. **Phase 1 (Current)**: CGGMP21 ECDSA only
-2. **Phase 2 (Transition)**: Both CGGMP21 and Ringtail required
-3. **Phase 3 (Post-Quantum)**: Ringtail only
+2. **Phase 2 (Transition)**: Both CGGMP21 and Pulsar required
+3. **Phase 3 (Post-Quantum)**: Pulsar only
 
 ```go
 func (b *Bridge) Sign(request BridgeRequest) (*DualSignature, error) {

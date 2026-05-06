@@ -1,7 +1,7 @@
 ---
 lp: 7340
 title: Threshold Cryptography Library (github.com/luxfi/threshold)
-description: Core Go library implementing LSS, CMP, FROST, Doerner, and Ringtail threshold cryptography protocols
+description: Core Go library implementing LSS, CMP, FROST, Doerner, and Pulsar threshold cryptography protocols
 author: Lux Industries Inc.
 discussions-to: https://github.com/luxfi/lps/discussions
 status: Final
@@ -25,7 +25,7 @@ order: 340
 
 ## Abstract
 
-This LP documents `github.com/luxfi/threshold`, the core Go library providing threshold cryptography implementations for the Lux Network. The library implements five threshold signature protocols: LSS (Linear Secret Sharing), CMP (CGGMP21), FROST, Doerner, and Ringtail (post-quantum). It serves as the cryptographic foundation for T-Chain (ThresholdVM), B-Chain (BridgeVM), and all MPC operations in the Lux ecosystem.
+This LP documents `github.com/luxfi/threshold`, the core Go library providing threshold cryptography implementations for the Lux Network. The library implements five threshold signature protocols: LSS (Linear Secret Sharing), CMP (CGGMP21), FROST, Doerner, and Pulsar (post-quantum). It serves as the cryptographic foundation for T-Chain (ThresholdVM), B-Chain (BridgeVM), and all MPC operations in the Lux ecosystem.
 
 ## Motivation
 
@@ -307,7 +307,7 @@ Supporting multiple threshold protocols addresses different use cases:
 2. **CMP (CGGMP21)**: UC-secure with identifiable abort for high-security applications
 3. **FROST**: Optimal for Schnorr-based chains (Bitcoin Taproot)
 4. **Doerner**: Efficient 2-party ECDSA for simpler deployments
-5. **Ringtail**: Post-quantum threshold signatures for future-proofing
+5. **Pulsar**: Post-quantum threshold signatures for future-proofing
 
 ### Modular Architecture
 

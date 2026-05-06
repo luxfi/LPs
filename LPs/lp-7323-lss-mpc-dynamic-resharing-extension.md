@@ -1074,9 +1074,9 @@ LSS includes adapters for 10+ blockchains:
   - Sui (`sui.go`) - Move-based chains
 
 **Post-Quantum Extensions:**
-- Ringtail (`ringtail.go`) - Lattice-based threshold
+- Pulsar (`ringtail.go`) - Lattice-based threshold
 - ML-DSA (`mldsa_threshold.go`) - FIPS 204 threshold
-- Dilithium (`dilithium.go`) - CRYSTALS-Dilithium
+- ML-DSA (`dilithium.go`) - ML-DSA (FIPS 204, formerly CRYSTALS-Dilithium)
 
 **Unified Interface:**
 ```go
@@ -1405,7 +1405,7 @@ LSS security relies on:
    - Broken by Shor's algorithm (quantum threat)
 
 2. **Hardness of Ring-LWE (Post-Quantum Extensions):**
-   - Required for Ringtail, ML-DSA threshold
+   - Required for Pulsar, ML-DSA threshold
    - Believed quantum-resistant
    - NIST standardized
 
@@ -1510,7 +1510,7 @@ defer func() {
 
 **Future Direction:**
 - LSS + ML-DSA threshold (post-quantum)
-- LSS + Ringtail threshold (lattice-based)
+- LSS + Pulsar threshold (lattice-based)
 - Hybrid classical + post-quantum
 
 **Timeline:** NIST recommends PQ migration by 2030
@@ -1519,7 +1519,7 @@ defer func() {
 
 - **LP-4**: Core primitives (cryptographic foundations)
 - **LP-311**: ML-DSA Precompile (post-quantum signatures)
-- **LP-320**: Ringtail Threshold Precompile (post-quantum threshold)
+- **LP-320**: Pulsar Threshold Precompile (post-quantum threshold)
 
 **Note:** LP-321 (FROST) and LP-322 (CGGMP21) are referenced as base protocols but do not yet have dedicated LPs. They are implemented in:
 - FROST: `github.com/luxfi/threshold/protocols/frost/`

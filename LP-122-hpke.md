@@ -69,7 +69,7 @@ Seal/Open adds per-byte cost based on the AEAD (AES-128-GCM: 5/byte, ChaCha20-Po
 2. Post-quantum hybrid KEMs (X25519+Kyber768, X-Wing) ensure security if either classical or lattice assumption holds.
 3. PSK mode provides additional key confirmation but requires pre-shared secret distribution.
 4. Auth mode provides sender authentication via the sender's static keypair.
-5. GPU acceleration for lattice KEM operations (Kyber encaps/decaps) via `luxfi/accel`.
+5. GPU acceleration for lattice KEM operations (ML-KEM encaps/decaps) via `luxfi/accel`.
 
 ## References
 

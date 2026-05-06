@@ -137,7 +137,9 @@ cd test/
 - **Documentation**: Bridge protocol specification
 
 ### Integration with Other LPs
-- **LP-22**: Warp 2.0 for intra-ecosystem chains
+- **LP-21 / LP-21v2**: Lux Warp 2.0 envelope (Beam + ML-DSA cert set + Pulse) — see `github.com/luxfi/warp`
+- **LP-110**: Quasar consensus (BLS + Pulsar + ML-DSA) underlying Warp 2.0
+- **LP-6332**: Teleport Bridge Architecture (canonical superseder of this LP)
 - **LP-23**: NFT teleportation using this protocol
 - **LP-19**: Security framework for bridge operations
 

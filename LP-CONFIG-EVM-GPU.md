@@ -39,7 +39,7 @@ There are two independent dials:
    through the CLI. This is a build-time selection that produces the chain's
    VM plugin binary.
 2. **GPU backend** — runtime acceleration for cryptographic primitives
-   (NTT for Ringtail consensus, FHE for ThresholdVM, lattice ops). This is
+   (NTT for Pulsar consensus, FHE for ThresholdVM, lattice ops). This is
    a node-level setting consumed by every chain on that node.
 
 Both dials are orthogonal. You can run a `gevm` chain with GPU enabled; you
@@ -198,7 +198,7 @@ kernels for every primitive. Availability per node build:
 | Primitive | CPU | Metal | CUDA | WGSL |
 |---|---|---|---|---|
 | BLS12-381 (consensus) | yes | yes | yes | yes |
-| Ringtail NTT (consensus) | yes | yes | yes | yes |
+| Pulsar NTT (consensus) | yes | yes | yes | yes |
 | ML-DSA-65 (consensus) | yes | yes | yes | yes |
 | FHE (ThresholdVM) | yes | yes | yes | yes |
 | KZG (data availability) | yes | yes | yes | yes |

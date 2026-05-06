@@ -34,7 +34,7 @@ deprecates:
 
 ## Abstract
 
-Defines the threshold MPC signing infrastructure for the Teleport bridge. Three protocols are used: FROST (Schnorr/EdDSA, 2-round, for Ed25519 chains), CGGMP21 (ECDSA, identifiable aborts, for secp256k1 chains), and LSS (Linear Shamir's Secret Sharing, wraps both, enables dynamic resharing). The MPC group produces a single aggregate signature per signing request. On-chain verification uses Lux EVM precompiles: FROST at 0x000C, CGGMP21 at 0x000D, and Ringtail (post-quantum) at 0x000B. LSS enables dynamic resharing (e.g. 3-of-5 to 5-of-7) in 0.14ms per party without reconstructing the secret key.
+Defines the threshold MPC signing infrastructure for the Teleport bridge. Three protocols are used: FROST (Schnorr/EdDSA, 2-round, for Ed25519 chains), CGGMP21 (ECDSA, identifiable aborts, for secp256k1 chains), and LSS (Linear Shamir's Secret Sharing, wraps both, enables dynamic resharing). The MPC group produces a single aggregate signature per signing request. On-chain verification uses Lux EVM precompiles: FROST at 0x000C, CGGMP21 at 0x000D, and Pulsar (post-quantum) at 0x000B. LSS enables dynamic resharing (e.g. 3-of-5 to 5-of-7) in 0.14ms per party without reconstructing the secret key.
 
 The MPC ceremonies in this LP are hosted on **M-Chain (MPC, see
 LP-134)**. TFHE bootstrap-key generation is hosted on **F-Chain (FHE
@@ -60,7 +60,7 @@ Threshold MPC solves both problems:
 |----------|-------|-----------|--------|-----------|-------------------|----------|
 | FROST | Ed25519 | EdDSA/Schnorr | 2 | 50,000 | 5,000 | Ed25519 chains: Solana, TON, Sui, Aptos, Polkadot, NEAR, Stellar, Cardano, StarkNet, ICP, Algorand, Tezos |
 | CGGMP21 | secp256k1 | ECDSA | pre-sign + sign | 75,000 | 10,000 | secp256k1 chains: Ethereum, Cosmos, XRPL, TRON, Stacks, Fuel, OP_NET, all EVM chains |
-| Ringtail | Lattice | PQ hybrid | 2 | 120,000 | 15,000 | Post-quantum bridge paths (LP-012 Phase 2) |
+| Pulsar | Lattice | PQ hybrid | 2 | 120,000 | 15,000 | Post-quantum bridge paths (LP-012 Phase 2) |
 
 The protocol is selected based on the destination chain's native signature verification. The MPC group maintains key shares for both FROST and CGGMP21 simultaneously (dual-key group).
 
@@ -268,7 +268,7 @@ Three Lux EVM precompiles handle threshold signature verification:
 
 | Address | Protocol | Input Format | Output |
 |---------|----------|-------------|--------|
-| 0x000B | Ringtail | (message, lattice_sig, lattice_pk) | bool valid |
+| 0x000B | Pulsar | (message, lattice_sig, lattice_pk) | bool valid |
 | 0x000C | FROST | (message, ed25519_sig, ed25519_pk) | bool valid |
 | 0x000D | CGGMP21 | (message_hash, ecdsa_sig, ecdsa_pk) | bool valid |
 
@@ -304,20 +304,20 @@ Returns: bytes32 (0x01 if valid, 0x00 if invalid)
 
 For most bridge operations, the standard ecrecover precompile (0x01) at 3,000 gas is sufficient. Precompile 0x000D is reserved for enhanced verification that includes MPC correctness proofs.
 
-#### Precompile 0x000B (Ringtail)
+#### Precompile 0x000B (Pulsar)
 
 ```
 Input encoding (ABI):
   bytes32  message_hash    // hash of the message
-  bytes    signature       // Ringtail lattice signature (variable length, ~2.4 KB)
-  bytes    pubkey          // Ringtail lattice public key (variable length, ~1.5 KB)
+  bytes    signature       // Pulsar lattice signature (variable length, ~2.4 KB)
+  bytes    pubkey          // Pulsar lattice public key (variable length, ~1.5 KB)
 
 Gas: 120,000
 
 Returns: bytes32 (0x01 if valid, 0x00 if invalid)
 ```
 
-Ringtail is the post-quantum threshold signature scheme (LP-012). It uses lattice-based cryptography that is threshold-friendly, meaning shares can be aggregated linearly (similar to BLS). Ringtail signatures are larger than classical signatures but verification is still O(1).
+Pulsar is the post-quantum threshold signature scheme (LP-012). It uses lattice-based cryptography that is threshold-friendly, meaning shares can be aggregated linearly (similar to BLS). Pulsar signatures are larger than classical signatures but verification is still O(1).
 
 ### 6. MPC Group Architecture
 
@@ -400,7 +400,7 @@ The resharing happens off-chain during the timelock window. By day 7, the new gr
 
 5. **Resharing security (LSS)**: During resharing, the old group must have t_old honest participants. If fewer than t_old old signers participate, resharing fails (liveness issue, not safety issue). The new group's shares are fresh -- compromising old shares after resharing reveals nothing.
 
-6. **Post-quantum readiness**: Ringtail (0x000B) provides a post-quantum signing path. The bridge can be configured to require dual signatures (classical + Ringtail) for high-value transfers, providing security if either scheme holds.
+6. **Post-quantum readiness**: Pulsar (0x000B) provides a post-quantum signing path. The bridge can be configured to require dual signatures (classical + Pulsar) for high-value transfers, providing security if either scheme holds.
 
 7. **Coordinator compromise**: The coordinator sees signing requests but not key shares. A compromised coordinator can delay or drop signing requests (liveness attack) but cannot forge signatures (safety). Coordinator redundancy (multiple stateless instances) mitigates liveness risk.
 
@@ -422,7 +422,7 @@ this LP are unchanged across the cutover.
 |---|---|
 | Protocol semantics (DKG, sign, reshare) | LP-019 (this LP), LP-076 |
 | Operational chain hosting ceremonies | M-Chain (LP-134 §M-Chain) |
-| Cert-lane wire shape on Quasar | LP-020 §Ringtail / §Cert lanes; LP-134 §QuasarCertLane registry |
+| Cert-lane wire shape on Quasar | LP-020 §Pulsar / §Cert lanes; LP-134 §QuasarCertLane registry |
 | Ceremony round → cert ingress | LP-133 §3 (MPC + KMS as Quasar cert lanes) |
 | Shared library substrate | `~/work/lux/chains/thresholdvm` (consumed by both M-Chain and F-Chain) |
 
@@ -443,7 +443,7 @@ The cert lanes on M-Chain are:
 | FROST implementation | `github.com/luxfi/mpc/frost/` |
 | CGGMP21 implementation | `github.com/luxfi/mpc/cggmp21/` |
 | LSS resharing | `github.com/luxfi/mpc/lss/` |
-| Ringtail precompile | `github.com/luxfi/evm/precompile/contracts/ringtail.go` |
+| Pulsar precompile | `github.com/luxfi/evm/precompile/contracts/ringtail.go` |
 | FROST precompile | `github.com/luxfi/evm/precompile/contracts/frost.go` |
 | CGGMP21 precompile | `github.com/luxfi/evm/precompile/contracts/cggmp21.go` |
 | LP-016 OmnichainRouter | `LP-016-omnichain-router.md` |

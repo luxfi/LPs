@@ -278,7 +278,7 @@ contract DAOGovernance is FROSTVerifier {
 | **FROST** | 2 | 64 bytes | 75,000 | ❌ | IETF, BIP-340 |
 | CGGMP21 | 5+ | 65 bytes | 125,000 | ❌ | ePrint 2021/060 |
 | BLS | 1 | 96 bytes | 120,000 | ❌ | ETH2, Warp |
-| Ringtail | 2 | ~4KB | 200,000 | ✅ | ePrint 2024/1113 |
+| Pulsar | 2 | ~4KB | 200,000 | ✅ | ePrint 2024/1113 |
 
 FROST advantages:
 - **Lowest gas cost** among classical threshold schemes
@@ -576,7 +576,7 @@ FROST's security rests on the **discrete logarithm assumption**:
 - Standard assumption for ECDSA, Schnorr, Ed25519
 - **Not quantum-safe** (vulnerable to Shor's algorithm)
 
-For quantum resistance, use **Ringtail** (LP-320) or LSS-MPC (LP-323).
+For quantum resistance, use **Pulsar** (LP-320) or LSS-MPC (LP-323).
 
 ### Threshold Security Properties
 
@@ -695,13 +695,13 @@ function withdraw(bytes calldata sig) external nonReentrant {
 |--------|--------|--------|--------|----------|----------|
 | **FROST** | 65,000 | 75,000 | 85,000 | Classical | General threshold |
 | CGGMP21 | 75,000 | 125,000 | 175,000 | Classical | ECDSA compatibility |
-| Ringtail | 180,000 | 200,000 | 220,000 | Post-quantum | Long-term storage |
+| Pulsar | 180,000 | 200,000 | 220,000 | Post-quantum | Long-term storage |
 | Native Multisig | 21k×2 | 21k×3 | 21k×5 | Classical | Simple multisig |
 
 **Trade-off Analysis**:
 - **FROST**: Best classical threshold (gas/security)
 - **CGGMP21**: Use when ECDSA compatibility required
-- **Ringtail**: Use when quantum resistance needed
+- **Pulsar**: Use when quantum resistance needed
 - **Native Multisig**: Cheaper but not aggregatable
 
 ### Use Case Economics
@@ -714,7 +714,7 @@ function withdraw(bytes calldata sig) external nonReentrant {
 
 **When to Use Alternatives**:
 - **Low-value (<$1K)**: Native multisig (cheaper)
-- **High-value (>$1M, long-term)**: Ringtail (quantum-safe)
+- **High-value (>$1M, long-term)**: Pulsar (quantum-safe)
 - **ECDSA required**: CGGMP21 (LP-322)
 
 ### Bridge Economics
@@ -833,7 +833,7 @@ See **LP-323** (LSS-MPC) for dynamic resharing capabilities:
 
 ### Related LPs
 - **LP-4**: Quantum-Resistant Cryptography Integration
-- **LP-320**: Ringtail Threshold Signatures (post-quantum alternative)
+- **LP-320**: Pulsar Threshold Signatures (post-quantum alternative)
 - **LP-322**: CGGMP21 Threshold ECDSA (ECDSA-compatible threshold)
 - **LP-323**: LSS-MPC (dynamic resharing for FROST)
 

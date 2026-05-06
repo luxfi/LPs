@@ -990,7 +990,7 @@ Benchmarks on Apple M1 Max:
 |----------|------|---------------|--------------|--------------|
 | CGGMP21 (this) | ECDSA | 65 bytes | 125,000 | ❌ |
 | FROST (LP-321) | Schnorr | 64 bytes | 100,000 | ❌ |
-| Ringtail (LP-320) | Lattice | ~1-2 KB | 150,000 | ✅ |
+| Pulsar (LP-320) | Lattice | ~1-2 KB | 150,000 | ✅ |
 | BLS (Warp) | BLS12-381 | 96 bytes | 120,000 | ❌ |
 
 **Cost Rationale**:

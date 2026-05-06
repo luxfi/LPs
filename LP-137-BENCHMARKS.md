@@ -44,7 +44,7 @@ This is now provable AND mechanically asserted for all 9 LP-134 chains:
 - Per-VM transition kernels: PlatformVM (6.5×), XVM (byte-equal harness
   pinned), MPCVM (18.6×), AIVM (architectural split — dGPU-ready),
   BridgeVM (BLS aggregate on-device through canonical surface).
-- EVM precompile services: keccak / ecrecover / BLS / Groth16 / Ringtail
+- EVM precompile services: keccak / ecrecover / BLS / Groth16 / Pulsar
   routed through `PrecompileService` per-id batched drains, with
   artifact roots (`transcript_root = keccak(input || output || gas ||
   status)`) flowing into `execution_root` byte-equal between CPU and
@@ -165,7 +165,7 @@ stays at:
 
   The same `tree_reduce<T, Combine>` template composes K-way grouped
   outputs across BLS pairings, Groth16 batched verify, MLDSAGroth16,
-  Ringtail share comp, MPCVM transcript roots, and receipt root
+  Pulsar share comp, MPCVM transcript roots, and receipt root
   composition — one canonical reduction shape across consumers.
 
   C-ABI: `bls12_381_fused_aggregate_verify_batch` +
@@ -324,7 +324,7 @@ is computed against the same Phase-1 baseline.
 | B | BridgeVM strict-mode BLS pairing 5k–10k msgs | luxcpp/bridgevm | host opaque blob (no real pairing) | 8.58×–10.35× batched real pairing | **9.5× mean** |
 | M | MPCVM xlarge ceremony | luxcpp/mpcvm | 0.010× (v0.61.1, 9 451 ms Metal) | 0.156× (v0.62, 507 ms Metal) | **18.6×** |
 | M | MPCVM FROST sign 5-of-7 | luxcpp/mpcvm | 0.034× (204.3 ms Metal) | 0.142× (48.3 ms Metal) | **4.23×** |
-| Q | QuantumVM (Ringtail in cevm) | luxcpp/lattice + cevm | host keccak baseline | 1.12× (buffer-reuse batch); LWE-on-GPU lands v0.45.1 | **1.12×** |
+| Q | QuantumVM (Pulsar in cevm) | luxcpp/lattice + cevm | host keccak baseline | 1.12× (buffer-reuse batch); LWE-on-GPU lands v0.45.1 | **1.12×** |
 | Z | ZKVM Groth16 (in cevm), n=16 | cevm/quasar | 26.5 µs (v0.44 unbatched, host) | 1.0 µs (v0.45 batched) | **synthetic-VK keccak amortization (real-fixture pending; 9–10× expected on real Groth16)** |
 | F | FHEVM NTT primitive N=4096, B=128 | luxcpp/fhe | 23.6× (unchanged) | 23.6× (unchanged) | **1.0×** |
 | F | FHEVM NTT primitive N=4096, B=32 | luxcpp/fhe | 9.0× | 9.0× | **1.0×** |

@@ -18,7 +18,7 @@ references:
 
 ## Abstract
 
-Defines the integration of FIPS 204 ML-DSA (formerly CRYSTALS-Dilithium) into Lux Network. ML-DSA provides post-quantum digital signatures based on module lattice hardness. Three parameter sets are supported: ML-DSA-44 (NIST Level 2), ML-DSA-65 (Level 3), and ML-DSA-87 (Level 5). An EVM precompile at `0x0070` verifies ML-DSA signatures on-chain.
+Defines the integration of FIPS 204 ML-DSA (FIPS 204, formerly CRYSTALS-Dilithium) into Lux Network. ML-DSA provides post-quantum digital signatures based on module lattice hardness. Three parameter sets are supported: ML-DSA-44 (NIST Level 2), ML-DSA-65 (Level 3), and ML-DSA-87 (Level 5). An EVM precompile at `0x0070` verifies ML-DSA signatures on-chain.
 
 ## Specification
 
@@ -46,7 +46,7 @@ Gas:    80,000 (ML-DSA-44), 120,000 (ML-DSA-65), 180,000 (ML-DSA-87)
 
 | Application | Description |
 |-------------|-------------|
-| Quasar consensus | Triple-hybrid PQ proof path: BLS + Ringtail + ML-DSA-65 (LP-020, LP-102) |
+| Quasar consensus | Triple-hybrid PQ proof path: BLS + Pulsar + ML-DSA-65 (LP-020, LP-102) |
 | Validator signing | Post-quantum block/vote signatures (LP-012) |
 | DID authentication | ML-DSA keys in DID documents (LP-060) |
 | Bridge attestation | PQ-safe bridge message signatures |

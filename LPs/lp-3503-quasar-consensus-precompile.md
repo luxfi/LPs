@@ -39,8 +39,8 @@ This LP specifies the Quasar consensus precompile suite at address range `0x0300
 Current blockchain consensus relies on BLS or ECDSA signatures for validator attestations. While BLS provides efficient aggregation, it remains vulnerable to quantum computers running Shor's algorithm. Quasar provides a hybrid approach:
 
 1. **Classical Performance**: BLS signatures for immediate speed (5,000 gas)
-2. **Quantum Safety**: Ringtail (ML-DSA) signatures for long-term security (8,000 gas)
-3. **Hybrid Security**: Combined BLS+Ringtail for defense-in-depth (10,000 gas)
+2. **Quantum Safety**: Pulsar (ML-DSA) signatures for long-term security (8,000 gas)
+3. **Hybrid Security**: Combined BLS+Pulsar for defense-in-depth (10,000 gas)
 
 ### Why FPC with K=3?
 
@@ -78,7 +78,7 @@ Each chain submits block tips to Q-Chain for quantum-safe finalization. Once fin
 | `0x0300000000000000000000000000000000000021` | BLSVerify | 5,000 | BLS signature verification |
 | `0x0300000000000000000000000000000000000022` | BLSAggregate | 2,000/sig | BLS signature aggregation |
 | `0x0300000000000000000000000000000000000023` | RingtailVerify | 8,000 | ML-DSA post-quantum verification |
-| `0x0300000000000000000000000000000000000024` | HybridVerify | 10,000 | BLS+Ringtail hybrid verification |
+| `0x0300000000000000000000000000000000000024` | HybridVerify | 10,000 | BLS+Pulsar hybrid verification |
 | `0x0300000000000000000000000000000000000025` | CompressedVerify | 1,000 | Ultra-compressed witness verification |
 
 ### VerkleVerify (0x...0020)
@@ -123,7 +123,7 @@ Aggregates multiple BLS signatures into a single signature.
 
 ### RingtailVerify (0x...0023)
 
-Verifies Ringtail (ML-DSA) post-quantum signatures.
+Verifies Pulsar (ML-DSA) post-quantum signatures.
 
 **Input Format:**
 | Offset | Length | Field | Description |
@@ -146,13 +146,13 @@ Verifies Ringtail (ML-DSA) post-quantum signatures.
 
 ### HybridVerify (0x...0024)
 
-Verifies combined BLS + Ringtail signatures for defense-in-depth.
+Verifies combined BLS + Pulsar signatures for defense-in-depth.
 
 **Input Format:**
 | Offset | Length | Field | Description |
 |--------|--------|-------|-------------|
 | 0 | 96 | `blsSignature` | BLS signature |
-| 96 | 2 | `ringtailSigLen` | Ringtail signature length |
+| 96 | 2 | `ringtailSigLen` | Pulsar signature length |
 | 98 | var | `ringtailSignature` | ML-DSA signature |
 | 98+len | 32 | `messageHash` | Message hash |
 | 130+len | 48 | `blsPublicKey` | BLS public key |
@@ -318,13 +318,13 @@ Finality (1ms):
 Validators maintain two key pairs:
 
 1. **BLS Key Pair**: For fast classical signatures
-2. **Ringtail Key Pair**: For quantum-safe signatures
+2. **Pulsar Key Pair**: For quantum-safe signatures
 
 **Signature Strategy:**
 ```
 Normal Operation:     BLS only (5,000 gas, fast)
-High-Value Blocks:    Hybrid BLS+Ringtail (10,000 gas, quantum-safe)
-Long-Term Finality:   Ringtail only (8,000 gas, stored on Q-Chain)
+High-Value Blocks:    Hybrid BLS+Pulsar (10,000 gas, quantum-safe)
+Long-Term Finality:   Pulsar only (8,000 gas, stored on Q-Chain)
 ```
 
 ### Q-Chain Role
@@ -338,14 +338,14 @@ type QChainFinalityRecord struct {
     BlockHash      [32]byte      // Finalized block hash
     Timestamp      uint64        // Finalization timestamp (ms)
     BLSAggSig      [96]byte      // Aggregated BLS signatures
-    RingtailSig    []byte        // Ringtail threshold signature
+    RingtailSig    []byte        // Pulsar threshold signature
     ValidatorBits  uint32        // Participating validator bitfield
 }
 ```
 
 **Finality Flow:**
 1. C-Chain block reaches local finality
-2. Validators sign block hash with BLS + Ringtail
+2. Validators sign block hash with BLS + Pulsar
 3. Aggregated proof submitted to Q-Chain
 4. Q-Chain verifies threshold and stores finality record
 5. Block inherits quantum resistance from Q-Chain attestation
@@ -368,7 +368,7 @@ contract LXDEXSettlement is QuasarVerifier {
         // Verify BLS aggregate (5,000 gas)
         _verifyBLS(validatorBits, blockHash, blsAggregate);
 
-        // Optional: Verify Ringtail for high-value settlements
+        // Optional: Verify Pulsar for high-value settlements
         if (msg.value > HIGH_VALUE_THRESHOLD) {
             _verifyRingtail(blockHash, ringtailProof);
         }
@@ -405,7 +405,7 @@ Each precompile serves a distinct purpose:
 | BLSVerify | 5,000 | BLS pairing ~100μs on M1 |
 | BLSAggregate | 2,000/sig | Linear aggregation cost |
 | RingtailVerify | 8,000 | ML-DSA ~108μs verification |
-| HybridVerify | 10,000 | BLS + Ringtail combined |
+| HybridVerify | 10,000 | BLS + Pulsar combined |
 | CompressedVerify | 1,000 | Bitfield counting only |
 
 ### Why K=3 Minimum?
@@ -430,10 +430,10 @@ This LP introduces new precompiles with no backwards compatibility issues. Exist
 
 ### Migration Path
 
-**Phase 1**: Deploy Quasar precompiles, validators generate Ringtail keys
+**Phase 1**: Deploy Quasar precompiles, validators generate Pulsar keys
 **Phase 2**: High-value transactions use hybrid verification
-**Phase 3**: Q-Chain stores Ringtail proofs for all finalized blocks
-**Phase 4**: Optional: Require Ringtail for cross-chain messages
+**Phase 3**: Q-Chain stores Pulsar proofs for all finalized blocks
+**Phase 4**: Optional: Require Pulsar for cross-chain messages
 
 ## Test Cases
 
@@ -474,7 +474,7 @@ function testCompressedWitness() public {
 
 ```solidity
 function testHybridVerification() public {
-    // Both BLS and Ringtail must pass
+    // Both BLS and Pulsar must pass
     bytes memory input = abi.encodePacked(
         blsSignature,      // 96 bytes
         uint16(ringtailSig.length),
@@ -526,7 +526,7 @@ function testInvalidSignatureRejected() public {
 
 **Cryptography Dependencies:**
 - `github.com/luxfi/crypto/bls`: BLS12-381 operations
-- `github.com/luxfi/crypto/mldsa`: ML-DSA (Ringtail) signatures
+- `github.com/luxfi/crypto/mldsa`: ML-DSA (Pulsar) signatures
 
 **Node Integration:**
 - `github.com/luxfi/node/vms/quantumvm/`: Q-Chain virtual machine
@@ -536,7 +536,7 @@ function testInvalidSignatureRejected() public {
 
 ### Post-Quantum Security
 
-Ringtail signatures provide security against quantum computers:
+Pulsar signatures provide security against quantum computers:
 - Based on Module-LWE lattice hardness
 - NIST FIPS 204 compliant (ML-DSA)
 - 128-bit post-quantum security (Level 3)
@@ -544,7 +544,7 @@ Ringtail signatures provide security against quantum computers:
 BLS signatures remain classical-only but provide:
 - Efficient aggregation (constant-size proofs)
 - Fast verification for normal operations
-- Defense-in-depth when combined with Ringtail
+- Defense-in-depth when combined with Pulsar
 
 ### Threshold Security
 
@@ -556,7 +556,7 @@ The 22/32 (2/3) threshold ensures:
 ### Validator Key Management
 
 **Requirements:**
-1. BLS and Ringtail keys stored separately
+1. BLS and Pulsar keys stored separately
 2. HSM recommended for high-value validators
 3. Key rotation policy every 90 days
 4. Multi-party computation for key generation

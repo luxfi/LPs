@@ -18,7 +18,7 @@ references:
 
 ## Abstract
 
-Defines the integration of FIPS 203 ML-KEM (formerly CRYSTALS-Kyber) into Lux Network. ML-KEM is a post-quantum key encapsulation mechanism for establishing shared secrets. It is used in TEE mesh communication (LP-065), MPC key transport, and encrypted P2P channels between validators. An EVM precompile at `0x0072` performs on-chain KEM decapsulation for smart contract use cases.
+Defines the integration of FIPS 203 ML-KEM (FIPS 203, formerly CRYSTALS-Kyber) into Lux Network. ML-KEM is a post-quantum key encapsulation mechanism for establishing shared secrets. It is used in TEE mesh communication (LP-065), MPC key transport, and encrypted P2P channels between validators. An EVM precompile at `0x0072` performs on-chain KEM decapsulation for smart contract use cases.
 
 ## Specification
 

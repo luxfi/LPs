@@ -428,7 +428,7 @@ interface IPostQuantumModule {
 }
 ```
 
-**Reference**: See LP-311 (ML-DSA), LP-312 (SLH-DSA), LP-320 (Ringtail Threshold).
+**Reference**: See LP-311 (ML-DSA), LP-312 (SLH-DSA), LP-320 (Pulsar Threshold).
 
 ## Formal Verification
 

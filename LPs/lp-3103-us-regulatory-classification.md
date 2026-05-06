@@ -216,7 +216,7 @@ No-consideration airdrops are outside Howey's first prong. Lux genesis allocatio
 | Precompile | Address | Regulatory Relevance | Gap |
 |------------|---------|---------------------|-----|
 | ML-DSA | `0x0200...0007` | FIPS 204 compliance — meets NIST standards for digital signatures | None |
-| Ringtail | `0x0200...000B` | Threshold signatures for institutional custody | None |
+| Pulsar | `0x0200...000B` | Threshold signatures for institutional custody | None |
 | PQCrypto | `0x0200...0009` | Multi-PQ operations | None |
 
 **Assessment**: Post-quantum cryptography strengthens regulatory positioning by demonstrating forward-looking security posture. NIST FIPS compliance is a regulatory positive.

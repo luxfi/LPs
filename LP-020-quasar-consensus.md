@@ -2,7 +2,7 @@
 lp: 020
 title: Quasar Consensus 3.0 — Cert Lanes + P/Q/Z Chain Pipeline
 tags: [consensus, bls, ringtail, ml-dsa, groth16, triple-consensus, cert-lanes, p-chain, q-chain, z-chain, post-quantum, gpu]
-description: Quasar 3.0 — three certificate lanes supplied by independent upstream chains (P-Chain stake, Q-Chain Ringtail DKG, Z-Chain Groth16 rollup), with a GPU-native adapter for execution-side certification (LP-132)
+description: Quasar 3.0 — three certificate lanes supplied by independent upstream chains (P-Chain stake, Q-Chain Pulsar DKG, Z-Chain Groth16 rollup), with a GPU-native adapter for execution-side certification (LP-132)
 author: Lux Industries
 status: Final
 type: Standards Track
@@ -12,7 +12,7 @@ updated: 2025-12-15
 requires:
   - lp-015 (Validator Key Management)
   - lp-070 (ML-DSA)
-  - lp-073 (Ringtail)
+  - lp-073 (Pulsar)
   - lp-075 (BLS)
   - lp-022 (ZAP wire protocol)
 references:
@@ -35,7 +35,7 @@ chains and verified on a GPU-native execution adapter:
 | Cert lane | Authority | Upstream | Wire-side artifact |
 |---|---|---|---|
 | **BLS** (classical fast path) | LP-075 | network-wide aggregation | 96-byte BLS12-381 G1 aggregate |
-| **Ringtail** (PQ threshold) | LP-073 | **Q-Chain** Ring-LWE 2-round DKG ceremony | variable share |
+| **Pulsar** (PQ threshold) | LP-073 | **Q-Chain** Ring-LWE 2-round DKG ceremony | variable share |
 | **MLDSAGroth16** (PQ identity rollup) | LP-070 + Z-Chain | **Z-Chain** Groth16 rollup of N validator ML-DSA-65 sigs | 192-byte proof + 32-byte public-inputs hash |
 
 Plus the **P-Chain** as the stake/validator-set authority. So Quasar
@@ -57,7 +57,7 @@ cross-chain replay become structurally impossible.
 | Vote ingress | "raw votes" | **certificate ingress** — three lane shapes |
 | Wire size | fixed 96-byte sig slot | **`(artifact_offset, artifact_len)` indirection** |
 | Subject | block hash + roots | adds `pchain_validator_root`, `qchain_ceremony_root`, `zchain_vk_root` (replay-proof) |
-| Signing-kind enum | `QuasarSigKind { BLS, Ringtail, MLDSA }` | **`QuasarCertLane { BLS, Ringtail, MLDSAGroth16 }`** |
+| Signing-kind enum | `QuasarSigKind { BLS, Pulsar, MLDSA }` | **`QuasarCertLane { BLS, Pulsar, MLDSAGroth16 }`** |
 | GPU interface | aspirational | **LP-132 QuasarGPU adapter** (concrete) |
 | Stake/validator authority | implicit | **explicit P-Chain commitment** in subject |
 
@@ -68,7 +68,7 @@ cross-chain replay become structurally impossible.
    │  P-Chain  │ ───────────────────────────────────►
    └───────────┘                                      │
                                                       │
-   ┌───────────┐   Ringtail DKG ceremony root         │
+   ┌───────────┐   Pulsar DKG ceremony root         │
    │  Q-Chain  │ ───────────────────────────────────► ├──────► Quasar
    └───────────┘                                      │        Round
                                                       │        Descriptor
@@ -96,7 +96,7 @@ cross-chain replay become structurally impossible.
                         │     keccak roots                       │
                         │     CertLane drains:                   │
                         │       BLS    → CertOut                 │
-                        │       Ringtail → CertOut               │
+                        │       Pulsar → CertOut               │
                         │       MLDSAGroth16 → CertOut           │
                         └─────────────────────────────┬──────────┘
                                                       │
@@ -132,7 +132,7 @@ certificate_subject = keccak(
 | Lane | Subject binding |
 |---|---|
 | BLS | `subject` is the BLS message; verifier checks `e(sig, G2) == e(H(subject), pk_aggregate)` |
-| Ringtail | `subject` is the Ring-LWE message; `qchain_ceremony_root` selects the DKG public key |
+| Pulsar | `subject` is the Ring-LWE message; `qchain_ceremony_root` selects the DKG public key |
 | MLDSAGroth16 | Groth16 public inputs include `subject`; `zchain_vk_root` selects the VK |
 
 A cert artifact for one round/epoch cannot satisfy a different round/
@@ -159,9 +159,9 @@ struct BLSAggregateArtifact {
 | Wire size | 96 + 32 = 128 bytes inline |
 | Verifier | `verify_bls_aggregate` (LP-132 §drain_cert_lane) |
 
-## Cert Lane: Ringtail (Q-Chain PQ threshold)
+## Cert Lane: Pulsar (Q-Chain PQ threshold)
 
-Q-Chain runs the Ringtail 2-round DKG ceremony for the active epoch
+Q-Chain runs the Pulsar 2-round DKG ceremony for the active epoch
 and commits the result to `qchain_ceremony_root` in the next
 QuasarRoundDescriptor.
 
@@ -184,7 +184,7 @@ struct RingtailShareArtifact {
 
 Q-Chain's role: run the threshold ceremony, NOT to verify execution.
 Q-Chain commits the public key for round R via
-`qchain_ceremony_root[R]`. Round-R cert artifacts on the Ringtail lane
+`qchain_ceremony_root[R]`. Round-R cert artifacts on the Pulsar lane
 must verify against that key.
 
 ## Cert Lane: MLDSAGroth16 (Z-Chain PQ identity rollup)
@@ -287,7 +287,7 @@ static_assert(sizeof(QuasarCert) == 432, "");
 ```
 
 A composed wire `QuasarCert` (per-lane → final 3-tuple) ends up at
-~416–448 bytes depending on Ringtail share size. 2.0's "248-byte
+~416–448 bytes depending on Pulsar share size. 2.0's "248-byte
 QuasarCert" line in the old LP referred only to the BLS+rolled-PQ
 combination; 3.0 makes the lane composition explicit.
 
@@ -339,9 +339,9 @@ mode-specific commitment.
 | Configuration | Lanes used | Use case |
 |---|---|---|
 | BLS-only | BLS | classical fast-path consensus |
-| BLS + Ringtail | BLS, Ringtail | dual with PQ threshold |
+| BLS + Pulsar | BLS, Pulsar | dual with PQ threshold |
 | BLS + MLDSAGroth16 | BLS, MLDSAGroth16 | dual with PQ identity rollup |
-| BLS + Ringtail + MLDSAGroth16 (full Quasar) | all three | triple mode (`TripleSignRound1`) |
+| BLS + Pulsar + MLDSAGroth16 (full Quasar) | all three | triple mode (`TripleSignRound1`) |
 | Production | all three + Z-Chain ZKP | succinct triple cert |
 
 `IsTripleMode()` returns true when all three lanes are configured.
@@ -352,7 +352,7 @@ mode-specific commitment.
 |---|---|---|
 | BLS quorum verify (n=100 signers) | 875 µs | 875 µs (unchanged) |
 | ML-DSA-65 lane verify | n × 254 µs = ~5 ms (n=21) | **one Groth16: 200–500 µs (GPU)** |
-| Ringtail share verify | unchanged | unchanged + GPU batch |
+| Pulsar share verify | unchanged | unchanged + GPU batch |
 | QuasarCert verify (n=21, all lanes, GPU) | 2–5 ms | **0.5–1.5 ms (GPU)** |
 | Subject replay protection | block_hash only | **chain-id + epoch + P/Q/Z roots** |
 | Wire ABI for new PQ scheme | break | **add an enum value** |
@@ -376,7 +376,7 @@ An adversary must break ALL THREE assumptions simultaneously:
 |---|---|---|
 | Discrete log on BLS12-381 | BLS | classical |
 | Module-LWE | MLDSAGroth16 | post-quantum identity proof |
-| Module-SIS | Ringtail | post-quantum threshold proof |
+| Module-SIS | Pulsar | post-quantum threshold proof |
 
 3.0 adds one more invariant by construction:
 
@@ -413,10 +413,10 @@ with three verifiers:
 > of Quasar 3.0 — real cryptographic verification (one-way with a
 > master secret, cross-lane domain tags reject replay), structured so
 > that the swap to the real primitives was a single function-pointer
-> change. They were replaced with **real BLS12-381, real Ringtail
+> change. They were replaced with **real BLS12-381, real Pulsar
 > Ring-LWE, and real Groth16 over BLS12-381** in **QuasarSTM 4.0** at
 > the **2026-02-14** activation: BLS pairing kernel landed in v0.44,
-> Ringtail share verifier and Groth16 verifier landed in v0.45. The
+> Pulsar share verifier and Groth16 verifier landed in v0.45. The
 > HMAC-keccak path is preserved as a development-only mode for
 > deterministic test vectors and is gated behind
 > `EVM_DEV_HMAC_VERIFIER=1`. See **LP-010-quasar-stm-4** (4.0
@@ -428,9 +428,9 @@ with three verifiers:
 | Version | Scope |
 |---|---|
 | **3.0.0** (this LP) | wire schema, three-lane ABI, P/Q/Z subject binding |
-| **3.0.1** | LP-132 GPU adapter ships real BLS / Ringtail / Groth16 verifiers |
+| **3.0.1** | LP-132 GPU adapter ships real BLS / Pulsar / Groth16 verifiers |
 | **3.0.2** | Z-Chain prover ships Groth16 proof generation pipeline |
-| **3.0.3** | Q-Chain ships Ringtail DKG ceremony commitments per epoch |
+| **3.0.3** | Q-Chain ships Pulsar DKG ceremony commitments per epoch |
 | **3.0.4** | P-Chain commits validator-set roots per epoch |
 
 ## Reference
@@ -440,7 +440,7 @@ with three verifiers:
 | Consensus implementation | `github.com/luxfi/consensus/protocol/quasar/` |
 | GPU execution adapter | `cevm/lib/consensus/quasar/gpu/` (LP-132) |
 | BLS | LP-015, LP-075 |
-| Ringtail | LP-073, LP-076 |
+| Pulsar | LP-073, LP-076 |
 | ML-DSA | LP-070 |
 | ZAP wire | LP-022 |
 | QuasarSTM | LP-010 |
@@ -449,7 +449,7 @@ with three verifiers:
 ## Changelog
 
 - **2022-06-01** — initial Quasar (BLS-only)
-- **2024** — added Ringtail PQ threshold lane
+- **2024** — added Pulsar PQ threshold lane
 - **2025** — added ML-DSA per-validator lane
 - **2025-11-30** — minor edits, validator key management notes
 - **2025-12-15** — **Quasar 3.0 final spec for 2025-12-25 launch**:
@@ -457,7 +457,7 @@ with three verifiers:
   P-Chain / Q-Chain / Z-Chain roots; ML-DSA becomes Z-Chain Groth16
   rollup, not per-validator; LP-132 GPU adapter spec referenced.
 - **2026-02-14** — **QuasarSTM 4.0 activation**: HMAC-keccak verifier
-  placeholders replaced with real BLS12-381 (v0.44), real Ringtail
+  placeholders replaced with real BLS12-381 (v0.44), real Pulsar
   Ring-LWE (v0.45), and real Groth16 over BLS12-381 (v0.45) under the
   4.0 milestone train. Wire format and `QuasarCertLane` enum
   unchanged. See LP-010-quasar-stm-4 and LP-135.

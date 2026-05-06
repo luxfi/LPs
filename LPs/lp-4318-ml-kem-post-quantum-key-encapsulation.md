@@ -1,7 +1,7 @@
 ---
 lp: 4318
 title: ML-KEM Post-Quantum Key Encapsulation
-description: NIST FIPS 203 ML-KEM (CRYSTALS-Kyber) post-quantum key encapsulation mechanism for secure key exchange
+description: NIST FIPS 203 ML-KEM (ML-KEM (FIPS 203, formerly CRYSTALS-Kyber)) post-quantum key encapsulation mechanism for secure key exchange
 author: Lux Partners (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
 status: Final
@@ -41,7 +41,7 @@ Current key exchange mechanisms are vulnerable to quantum attacks:
 
 **NIST Standardization**: FIPS 203 (August 2024)
 - Formally standardized post-quantum KEM
-- Based on Kyber (CRYSTALS-KEM competition winner)
+- Based on ML-KEM (CRYSTALS-KEM competition winner)
 - Extensive cryptanalysis by global community
 - Module-lattice security foundation
 
@@ -552,7 +552,7 @@ hybridSecret = KDF(ecdh_secret || mlkem_secret)
 - ML-KEM has NIST standardization (FIPS 203)
 - Best performance among PQ KEMs
 - Smallest ciphertext overhead (768-1568 bytes)
-- Most mature implementation (Kyber since 2017)
+- Most mature implementation (ML-KEM since 2017)
 
 **vs Hash-Based KEMs**:
 - ML-KEM is 10-100x faster
@@ -710,7 +710,7 @@ Copyright and related rights waived via [CC0](https://creativecommons.org/public
 
 ### Standards and Specifications
 1. **FIPS 203**: [Module-Lattice-Based Key-Encapsulation Mechanism Standard](https://csrc.nist.gov/pubs/fips/203/final)
-2. **CRYSTALS-Kyber**: [Specification v3.02](https://pq-crystals.org/kyber/)
+2. **ML-KEM**: [Specification v3.02](https://pq-crystals.org/kyber/)
 3. **CIRCL Library**: [Cloudflare Cryptographic Library](https://github.com/cloudflare/circl)
 
 ### Implementation Files

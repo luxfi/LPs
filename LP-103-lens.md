@@ -37,7 +37,7 @@ Lens is the **classical curve-based** threshold signature kernel — the sister 
 | Component | Pulsar | Lens |
 |---|---|---|
 | **Math fields** | Module-LWE / R_q | Discrete log / prime-order group |
-| **Sign math inherited (byte-equal)** | Ringtail Sign1/Sign2/Combine | FROST Round 1/Round 2/Aggregate |
+| **Sign math inherited (byte-equal)** | Pulsar Sign1/Sign2/Combine | FROST Round 1/Round 2/Aggregate |
 | **Commits** | A·NTT(s) + B·NTT(r) lattice Pedersen | g^s · h^r curve Pedersen |
 | **Genesis** | Trusted-dealer Bootstrap, OR Pedersen DKG over R_q (`pulsar/dkg2/`) | FROST DKG (proper distributed, no trusted dealer needed at all), OR trusted-dealer Bootstrap |
 | **Per-epoch DKG** | **Never** — VSR via `pulsar/reshare` | **Never** — VSR via `lens/reshare` |

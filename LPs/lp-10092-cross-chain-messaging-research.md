@@ -45,10 +45,13 @@ Effective cross-chain messaging is crucial for:
 - **Technology**: MPC-based message passing on M-Chain (CGGMP21 / FROST ceremonies)
 - **Status**: Production on testnet
 
-### Teleporter Protocol
-- **GitHub**: https://github.com/luxfi/teleporter
-- **Technology**: Native Lux cross-chain messaging
-- **Status**: Research phase
+### Lux Teleport (LP-6332) and Lux Warp 2.0
+- **Teleport repo**: https://github.com/luxfi/teleport (b-chain / teleportvm)
+- **Warp repo**: https://github.com/luxfi/warp (Beam + ML-DSA cert set + Pulse)
+- **Technology**: Native Lux cross-chain messaging. Lux Warp 2.0 is the
+  envelope path (Quasar consensus integration); Lux Teleport is the
+  asset-transfer protocol implemented by `teleportvm` on B-Chain.
+- **Status**: Warp 2.0 shipping in `github.com/luxfi/warp`; Teleport active
 
 ### Architecture Analysis
 
@@ -164,11 +167,16 @@ interface SecurityModels {
 }
 ```
 
-### 3. Teleporter Protocol Design
+### 3. Lux Teleport Messenger (LP-6332)
+
+Lux Teleport is the canonical asset-transfer protocol; Lux Warp 2.0
+(Beam + ML-DSA cert set + Pulse, see `github.com/luxfi/warp`) is the
+underlying envelope. The illustrative messenger below is intentionally
+distinct in naming from the upstream Avalabs `Teleporter` contract.
 
 ```solidity
-// Proposed Teleporter implementation
-contract TeleporterMessenger {
+// Proposed Lux Teleport messenger (illustrative)
+contract LuxTeleportMessenger {
     // Unified message format for all Lux chains
     struct TeleporterMessage {
         bytes32 messageID;
@@ -313,8 +321,8 @@ interface MessageDelivery {
 ```
 recommended_architecture:
   internal_chains:  # Between Lux chains
-    protocol: "Teleporter"
-    security: "Native consensus"
+    protocol: "Lux Warp 2.0 + Lux Teleport (LP-6332)"
+    security: "Native Quasar consensus (BLS Beam + ML-DSA + Pulsar Pulse)"
     latency: "<1 second"
     cost: "Minimal"
   
@@ -346,7 +354,7 @@ recommended_architecture:
 
 ## Implementation Roadmap
 
-### Phase 1: Teleporter Protocol (Q1 2025)
+### Phase 1: Lux Warp 2.0 + Lux Teleport (Q1 2025)
 - [ ] Native Lux chain messaging
 - [ ] Basic message passing
 - [ ] State verification
@@ -364,7 +372,8 @@ recommended_architecture:
 ## Related Repositories
 
 - **Bridge**: https://github.com/luxfi/bridge
-- **Teleporter**: https://github.com/luxfi/teleporter
+- **Lux Warp 2.0**: https://github.com/luxfi/warp (Beam + ML-DSA + Pulse)
+- **Lux Teleport (LP-6332)**: https://github.com/luxfi/teleport
 - **Light Client**: https://github.com/luxfi/light-client
 - **MPC Implementation**: https://github.com/luxfi/mpc-tss
 
@@ -377,7 +386,7 @@ recommended_architecture:
 
 ## Conclusion
 
-Cross-chain messaging is fundamental to Lux's multi-chain vision. The combination of Teleporter for internal communication and MPC bridges for external chains provides a robust foundation. Focus should be on security, performance, and developer experience.
+Cross-chain messaging is fundamental to Lux's multi-chain vision. The combination of Lux Warp 2.0 (Beam + ML-DSA cert set + Pulse, per LP-110 Quasar consensus) and Lux Teleport (LP-6332) for internal communication, paired with M-Chain MPC bridges for external chains, provides a robust foundation. Focus should be on security, performance, and developer experience.
 
 ## References
 

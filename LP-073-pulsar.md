@@ -28,7 +28,7 @@ upstream: github.com/luxfi/ringtail (academic reference; Pulsar is the productio
 
 > See [LP-105 §Architectural thesis](LP-105-lux-stack-lexicon.md#architectural-thesis) for the canonical Lux PQ-consensus thesis. The claims/evidence table and ten architectural commitments are also in LP-105 — single source of truth.
 
-> **Naming evolution.** LP-073 was originally titled "Ringtail Lattice-Based Threshold Signatures." It now describes **Pulsar**, the Lux production fork at `github.com/luxfi/pulsar`. Pulsar inherits Ringtail's 2-round signing math byte-equal but replaces upstream's broken Feldman DKG and trusted-dealer-per-epoch lifecycle with a key-era + verifiable-secret-resharing model. The original Ringtail codebase remains at `github.com/luxfi/ringtail` as the upstream/academic reference.
+> **Naming evolution.** LP-073 was originally titled "Pulsar Lattice-Based Threshold Signatures." It now describes **Pulsar**, the Lux production fork at `github.com/luxfi/pulsar`. Pulsar inherits Pulsar's 2-round signing math byte-equal but replaces upstream's broken Feldman DKG and trusted-dealer-per-epoch lifecycle with a key-era + verifiable-secret-resharing model. The original Pulsar codebase remains at `github.com/luxfi/ringtail` as the upstream/academic reference.
 
 ## Abstract
 
@@ -36,7 +36,7 @@ upstream: github.com/luxfi/ringtail (academic reference; Pulsar is the productio
 
 Pulsar is a 2-round MAC-authenticated lattice threshold signature scheme over the cyclotomic ring `R_q = Z_q[X]/(X^256 + 1)` with Module-LWE hardness, packaged with a **key-era lifecycle** that supports proactive resharing without a trusted dealer.
 
-The signing math is forked byte-equal from upstream Ringtail (NTT et al, eprint 2024/1113, IEEE S&P 2025). The lifecycle additions are new:
+The signing math is forked byte-equal from upstream Pulsar (NTT et al, eprint 2024/1113, IEEE S&P 2025). The lifecycle additions are new:
 
 1. **Genesis-only trust assumption.** A one-time foundation MPC ceremony — or, alternatively, a Pedersen DKG over `R_q` (research path, `pulsar/dkg2/`) — establishes the initial group public key `(A, bTilde)`. After ceremony close, no party retains the master secret `s`.
 
@@ -405,17 +405,17 @@ For challenge `c` with `Ternary{H: Kappa=23}`, `TernarySampler.sampleSparse` (`l
 4. All other positions remain 0.
 ```
 
-Output is in standard form; Ringtail then applies `NTT` + `MForm`. C++/GPU ports MUST mirror this rejection-sampling loop including the byte-stripe ordering.
+Output is in standard form; Pulsar then applies `NTT` + `MForm`. C++/GPU ports MUST mirror this rejection-sampling loop including the byte-stripe ordering.
 
 ### 6. Security
 
 #### 6.1 Hardness Assumption
 
-Module-LWE over `R = Z_q[X]/(X^256+1)` with secret distribution `χ_E = D(σ_E ≈ 6.11)` and dimension `(M=8, n_vec=7)`. The scheme reduces to MLWE in a similar profile to Dilithium / ML-DSA-44 but at a smaller dimension because the threshold setting amortizes signing across `K` parties and the verifier checks an L2-bounded `Δ` instead of an `(α, β)`-bounded `(z, h)`.
+Module-LWE over `R = Z_q[X]/(X^256+1)` with secret distribution `χ_E = D(σ_E ≈ 6.11)` and dimension `(M=8, n_vec=7)`. The scheme reduces to MLWE in a similar profile to ML-DSA / ML-DSA-44 but at a smaller dimension because the threshold setting amortizes signing across `K` parties and the verifier checks an L2-bounded `Δ` instead of an `(α, β)`-bounded `(z, h)`.
 
 #### 6.2 Concrete Security
 
-The Ringtail paper (IEEE S&P 2025) targets ≥128-bit classical and ≥120-bit quantum security at the parameter set above. The canonical does not include a primal/dual lattice-attack estimator; LP-070 §6 provides comparable estimates for ML-DSA-44 (`q = 8 380 417`, `n = 256`, `k = 4`, `l = 4`).
+The Pulsar paper (IEEE S&P 2025) targets ≥128-bit classical and ≥120-bit quantum security at the parameter set above. The canonical does not include a primal/dual lattice-attack estimator; LP-070 §6 provides comparable estimates for ML-DSA-44 (`q = 8 380 417`, `n = 256`, `k = 4`, `l = 4`).
 
 #### 6.3 Identifiable Abort
 
@@ -433,7 +433,7 @@ Round 2 Preprocess (§4.2) MAC-verifies every `D_j` and rejects on first failure
 
 | Layer | Path | Status |
 |-------|------|--------|
-| Go canonical (kernel) | `github.com/luxfi/pulsar` (`sign/`, `threshold/`, `primitives/`, `utils/`, `reshare/`, `keyera/`, `dkg2/`) | Shipping. Sign1/Sign2/Combine math byte-equal to upstream Ringtail; key-era lifecycle, VSR, activation cert added. |
+| Go canonical (kernel) | `github.com/luxfi/pulsar` (`sign/`, `threshold/`, `primitives/`, `utils/`, `reshare/`, `keyera/`, `dkg2/`) | Shipping. Sign1/Sign2/Combine math byte-equal to upstream Pulsar; key-era lifecycle, VSR, activation cert added. |
 | Go reference (academic) | `github.com/luxfi/ringtail` | Pinned upstream reference; deprecated for production paths. |
 | LSS adapter | `github.com/luxfi/threshold/protocols/lss/lss_pulsar.go` | Shipping. Wires LSS lifecycle (Generation, Rollback, snapshots, dealer/coordinator) to the Pulsar kernel. |
 | Quasar consensus integration | `github.com/luxfi/consensus/protocol/quasar` | Shipping. `epoch.go` Reshare/Refresh use `keyera.Bootstrap` + `lss.DynamicResharePulsar` under `QUASAR-PULSAR-ACTIVATE-v1`. |
@@ -461,21 +461,21 @@ Quasar 3.0 (LP-020) signs every Q-chain block with three independent threshold s
 | Lane | Algorithm | LP | Role |
 |------|-----------|-----|------|
 | Classical fast path | BLS12-381 aggregate | LP-075 | 48-byte aggregate proof, sub-second finality on healthy validator set |
-| Post-quantum threshold | Ringtail | LP-073 (this LP) | ~33 KB aggregate, MLWE-secure liveness under quantum adversary |
+| Post-quantum threshold | Pulsar | LP-073 (this LP) | ~33 KB aggregate, MLWE-secure liveness under quantum adversary |
 | Post-quantum identity | ML-DSA-65 | LP-070 | ~3.3 KB per validator, FIPS 204 compliance attestation |
 
-Block acceptance requires `BLS.Verify ∧ (Ringtail.Verify ∨ MLDSA.Verify)` — Ringtail provides aggregate PQ liveness; ML-DSA is the per-validator fallback when threshold ceremony fails. `IsTripleMode()` (LP-020) gates the dual-quantum mode.
+Block acceptance requires `BLS.Verify ∧ (Pulsar.Verify ∨ MLDSA.Verify)` — Pulsar provides aggregate PQ liveness; ML-DSA is the per-validator fallback when threshold ceremony fails. `IsTripleMode()` (LP-020) gates the dual-quantum mode.
 
-Epoch-keyed: `Gen` runs once per epoch (validator-set change). Per-block signing runs Round1+Round2+Finalize over ZAP transport (LP-022). Target consensus interval: 3 seconds per block; Ringtail Round1+Round2 budget is 600 ms aggregate at K=21 validators on `M2 Ultra` hosts (Go canonical timings; LP-137 ships GPU acceleration plan in §10 below).
+Epoch-keyed: `Gen` runs once per epoch (validator-set change). Per-block signing runs Round1+Round2+Finalize over ZAP transport (LP-022). Target consensus interval: 3 seconds per block; Pulsar Round1+Round2 budget is 600 ms aggregate at K=21 validators on `M2 Ultra` hosts (Go canonical timings; LP-137 ships GPU acceleration plan in §10 below).
 
 ### 9.1 Hash Layering (Normative)
 
-Ringtail uses two distinct hash functions at two distinct layers. This is intentional and not subject to "extended option" or per-layer negotiation:
+Pulsar uses two distinct hash functions at two distinct layers. This is intentional and not subject to "extended option" or per-layer negotiation:
 
 | Layer | Hash | Source | Why fixed |
 |-------|------|--------|-----------|
 | Lattigo internals (KeyedPRNG → uniform / discrete-Gaussian / ternary samplers) | BLAKE2b XOF | `lattice/utils/sampling/prng.go` (luxfi/lattice v7, upstream tuneinsight/lattigo) | Sampler byte-equality with upstream; every recorded ciphertext, KAT, and encoded structure depends on this exact byte stream. |
-| Ringtail transcripts (`Hash`, `LowNormHash`, `MAC`, `GaussianHash`, `PRF`, `PRNGKey`) | BLAKE3 (32-byte digest, optionally extended via XOF) | `primitives/hash.go`, `github.com/zeebo/blake3` | First-party; tree-mode + GPU-friendly extension where it actually pays off. |
+| Pulsar transcripts (`Hash`, `LowNormHash`, `MAC`, `GaussianHash`, `PRF`, `PRNGKey`) | BLAKE3 (32-byte digest, optionally extended via XOF) | `primitives/hash.go`, `github.com/zeebo/blake3` | First-party; tree-mode + GPU-friendly extension where it actually pays off. |
 
 **Rejected alternative**: adding BLAKE3 as an "extended" or "parallel" option inside `KeyedPRNG`. Reasons:
 
@@ -494,7 +494,7 @@ The shipping protocol (Sign math + key-era lifecycle + activation cert + LSS ada
 2. **GPU acceleration crossover**: `MatrixMatrixMul` of `A · R̂` (`M×n_vec × n_vec×Dbar+1`) is the dominant Round 1 cost. Metal/CUDA/WGSL kernels under the LP-137 GPU substrate are an active workstream. The crossover threshold `N* = 1` (per LP-137-BENCHMARKS FHE NTT measurements) suggests near-immediate GPU benefit at production validator counts; concrete kernel implementations and crossover-threshold sweeps remain open.
 3. **Distributed DKG**: `pulsar/dkg2/` ships the Pedersen DKG over `R_q` as an alternative to the trusted-dealer Bootstrap path. Both paths are operationally viable; the choice is per-deployment based on ceremony tolerance and validator-set provenance. Hardening of the constant-time verifier and KAT vectors for the dkg2 path is ongoing.
 4. **Cross-implementation KAT manifest**: a deterministic 16+ vector KAT seal across Go ↔ C++ ↔ GPU implementations. The Go canonical ships the byte oracle; the C++ port has KAT generators in flight (LP-137-ACTUAL-STATE 2026-04-28). The KAT manifest is the gating artifact for GPU port byte-equality.
-5. **Concrete-security estimator integration**: hooking `lattice-estimator` (Albrecht et al.) into a `cmd/pulsar-params/main.go` tool to emit primal/dual attack costs at the canonical `(M=8, n_vec=7, σ_E)` parameter set, alongside the IEEE S&P 2025 Ringtail estimates.
+5. **Concrete-security estimator integration**: hooking `lattice-estimator` (Albrecht et al.) into a `cmd/pulsar-params/main.go` tool to emit primal/dual attack costs at the canonical `(M=8, n_vec=7, σ_E)` parameter set, alongside the IEEE S&P 2025 Pulsar estimates.
 6. **Round-1 piggyback runbook**: the precomputable phase (`A · R̂`, MAC keys, FullRankCheck of own contribution) can run before the message arrives; the protocol already supports this since the message `μ` enters only in Round 2. The deployment-side timing analysis under WAN-distributed validator sets remains open.
 
 ### 11. Proof-Lane Classification Disclaimer (Normative)
@@ -504,7 +504,7 @@ Pulsar is the **post-quantum threshold finality lane** of Quasar (the lattice-si
 Some deployments compress the ML-DSA verification work into a Groth16 SNARK witness over BLS12-381 (e.g. Z-Chain rollups, LP-307). This compression is a **classical succinct proof of post-quantum signature verification**, not a PQ root of trust. Concretely:
 
 * The ML-DSA signatures themselves are post-quantum (FIPS 204 / Module-LWE + Module-SIS).
-* The Pulsar pulse is post-quantum (Ringtail / Module-LWE).
+* The Pulsar pulse is post-quantum (Pulsar / Module-LWE).
 * The Groth16 wrapper around ML-DSA verification is **not post-quantum**: pairing-based SNARKs over BLS12-381 are broken under Shor's algorithm, identical to the BLS Beam.
 
 Horizon-final certificates (LP-105 §"Quasar finality" / proofs/definitions/finality-definitions.tex Definition `ref:horizon-cert`) require all three certificate lanes — Beam, ML-DSA cert set, Pulsar Pulse — to bind the same transcript and verify under their respective hardness assumptions. **A Groth16 wrapper alone is not Horizon-final.** The classification predicate `IsPQFinal` in `warp/pulsar/classification.go` enforces this at runtime, and the lexicon table in LP-105 §"Proof-lane classification" enumerates the wrapper systems that ARE post-quantum (STARK, lattice-ZK) versus those that are not (Groth16, pairing-based PLONK, etc.).
@@ -519,8 +519,8 @@ When future PQ-friendly succinct-proof systems ship (STARK, lattice-based), they
 * ML-DSA / FIPS 204 (LP-070); BLS12-381 (LP-075); Universal Threshold (LP-076); Linear Shamir (LP-077).
 * GPU Crypto Stack (LP-137) — Metal/CUDA/WGSL kernel substrate.
 * Lattigo v7 fork (`github.com/luxfi/lattice/v7`): `ring/`, `utils/sampling`, `utils/structs`.
-* Ringtail academic paper, IEEE S\&P 2025 (Ringtail authors).
-* Dilithium / FIPS 204 §7 (rejection sampling, hint encoding).
+* Pulsar academic paper, IEEE S\&P 2025 (Pulsar authors).
+* ML-DSA / FIPS 204 §7 (rejection sampling, hint encoding).
 
 ## Copyright
 

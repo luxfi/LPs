@@ -52,7 +52,7 @@ The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "S
 
 K-Chain implements the KeyManagementVM, a purpose-built virtual machine that provides:
 
-1. **ML-KEM Key Encapsulation** - NIST FIPS 203 compliant post-quantum key encapsulation mechanism based on Module-Lattice cryptography (derived from CRYSTALS-Kyber)
+1. **ML-KEM Key Encapsulation** - NIST FIPS 203 compliant post-quantum key encapsulation mechanism based on Module-Lattice cryptography (derived from ML-KEM (FIPS 203, formerly CRYSTALS-Kyber))
 2. **Encrypted Secret Storage** - On-chain storage for encrypted secrets with envelope encryption (DEK/KEK model)
 3. **M-Chain Integration** - Threshold decryption via Linear Secret Sharing for distributed key custody
 4. **Policy-Based Access Control** - Fine-grained authorization for secret access with time-locks and multi-party approval
@@ -2932,7 +2932,7 @@ type YubiHSMConfig struct {
 
 // GenerateMLKEMKey generates ML-KEM key in YubiHSM
 func (y *YubiHSMProvider) GenerateMLKEMKey(keyID ids.ID, mode mlkem.Mode) (*HSMKeyHandle, error) {
-    // YubiHSM 2 supports Kyber (ML-KEM predecessor)
+    // YubiHSM 2 supports ML-KEM (ML-KEM predecessor)
     // FIPS 203 compliance requires firmware version 2.4+
     capabilities := yubihsm.CapabilityDecryptPKCS | yubihsm.CapabilityEncryptPKCS
 
@@ -3451,7 +3451,7 @@ var DefaultKMSParams = Parameters{
 ### Why ML-KEM (FIPS 203)?
 
 1. **NIST Standardization**: FIPS 203 is the official US government standard for post-quantum KEM
-2. **Mature Cryptanalysis**: Based on CRYSTALS-Kyber, extensively analyzed since 2017
+2. **Mature Cryptanalysis**: Based on ML-KEM, extensively analyzed since 2017
 3. **Performance**: Efficient key generation, encapsulation, and decapsulation
 4. **Security Margin**: Multiple parameter sets for different security levels
 
@@ -3885,7 +3885,7 @@ ML-KEM operations are computationally efficient:
 ### Informative References
 
 9. NIST. (2024). **Post-Quantum Cryptography Standards Announcement**. https://www.nist.gov/news-events/news/2024/08/nist-releases-first-3-finalized-post-quantum-encryption-standards
-10. Avanzi, R., et al. (2022). **CRYSTALS-Kyber: Algorithm Specification and Supporting Documentation**. NIST PQC Round 3 Submission.
+10. Avanzi, R., et al. (2022). **ML-KEM: Algorithm Specification and Supporting Documentation**. NIST PQC Round 3 Submission.
 11. Langley, A. (2019). **Hybrid Key Encapsulation**. IETF draft-ietf-tls-hybrid-design.
 12. Bernstein, D.J., & Lange, T. (2017). **Post-quantum cryptography**. Nature 549, 188-194.
 13. Shor, P.W. (1994). **Algorithms for quantum computation: discrete logarithms and factoring**. FOCS 1994.

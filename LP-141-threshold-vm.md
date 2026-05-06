@@ -35,7 +35,7 @@ T-chain supports these threshold signing protocols:
 | CGGMP21 | ECDSA secp256k1 | Bitcoin, Ethereum L1 |
 | FROST | Ed25519 Schnorr | Solana, TON, Cardano |
 | BLS | BLS12-381 | Aggregate consensus sigs |
-| Ringtail | Lattice (Raccoon-style) | PQ consensus certificates |
+| Pulsar | Lattice (Raccoon-style) | PQ consensus certificates |
 | LSS | Universal lattice framework | Experimental |
 | Threshold ML-DSA | FIPS 204 + threshold (LP-xxx) | PQ wallets, drop-in ML-DSA |
 

@@ -1,7 +1,7 @@
 ---
 lp: 4317
 title: SLH-DSA Stateless Hash-Based Digital Signatures
-description: NIST FIPS 205 SLH-DSA (SPHINCS+) stateless hash-based post-quantum digital signature implementation
+description: NIST FIPS 205 SLH-DSA (SLH-DSA (FIPS 205, formerly SPHINCS+)) stateless hash-based post-quantum digital signature implementation
 author: Lux Partners (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
 status: Final
@@ -33,7 +33,7 @@ This LP specifies the integration of **SLH-DSA (Stateless Hash-based Digital Sig
 
 While lattice-based schemes (ML-DSA) offer better performance, SLH-DSA provides **maximum security assurance**:
 - **No mathematical assumptions**: Security relies only on hash function collision resistance
-- **Decades of analysis**: Based on SPHINCS+ (2015) and earlier hash-based schemes dating to 1979
+- **Decades of analysis**: Based on SLH-DSA (2015) and earlier hash-based schemes dating to 1979
 - **Future-proof**: Resistant to both quantum computers AND future cryptanalytic breakthroughs
 - **Stateless**: No state management required (unlike earlier hash-based schemes like XMSS)
 
@@ -59,7 +59,7 @@ While lattice-based schemes (ML-DSA) offer better performance, SLH-DSA provides 
 
 ### Algorithm Overview
 
-SLH-DSA is based on **SPHINCS+** construction using:
+SLH-DSA is based on **SLH-DSA** construction using:
 - **FORS**: Few-time signature scheme (Forest of Random Subsets)
 - **WOTS+**: Winternitz One-Time Signature with improved security
 - **Hash Trees**: Merkle tree structures for key aggregation
@@ -634,7 +634,7 @@ Copyright and related rights waived via [CC0](https://creativecommons.org/public
 
 ### Standards and Specifications
 1. **FIPS 205**: [Stateless Hash-Based Digital Signature Standard](https://csrc.nist.gov/pubs/fips/205/final)
-2. **SPHINCS+**: [Specification v3.1](https://sphincs.org/)
+2. **SLH-DSA**: [Specification v3.1](https://sphincs.org/)
 3. **CIRCL Library**: [Cloudflare Cryptographic Library](https://github.com/cloudflare/circl)
 4. **Merkle Signatures**: [Merkle (1979) "Secrecy, Authentication, and Public Key Systems"](https://www.merkle.com/papers/Thesis1979.pdf)
 
@@ -679,7 +679,7 @@ Copyright and related rights waived via [CC0](https://creativecommons.org/public
 
 **2013**: SPHINCS proposed (first practical stateless hash-based signatures)
 
-**2015**: SPHINCS+ improves on SPHINCS (better performance, smaller signatures)
+**2015**: SLH-DSA improves on SPHINCS (better performance, smaller signatures)
 
 **2024**: NIST standardizes SLH-DSA as FIPS 205
 

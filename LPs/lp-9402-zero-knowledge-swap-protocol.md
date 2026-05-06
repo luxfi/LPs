@@ -728,7 +728,7 @@ This LP introduces a new ZK swap protocol compatible with existing infrastructur
 
 **Related Specifications**:
 - **LP-400**: Privacy AMM (uses ZK swap primitives)
-- **LP-320**: Ringtail Post-Quantum (lattice-based alternative)
+- **LP-320**: Pulsar Post-Quantum (lattice-based alternative)
 - **LP-402**: This specification (detailed ZK implementations)
 
 **Testing**:

@@ -19,7 +19,7 @@ references:
   - lp-019 (Threshold MPC — defines M-Chain split)
   - lp-063 (Z-Chain — Groth16 over BLS12-381)
   - lp-066 (TFHE)
-  - lp-073 (Ringtail / Pulsar threshold)
+  - lp-073 (Pulsar / Pulsar threshold)
   - lp-076 (Universal threshold)
   - lp-110 (Quasar Unified Consensus)
   - lp-167 (Lux FHE Runtime — defines F-Chain)
@@ -127,7 +127,7 @@ chains:
 enum class QuasarCertLane : uint8_t {
     // LP-020 §3.0
     BLS              = 0,   // classical fast path (network-wide, BLS12-381)
-    Ringtail         = 1,   // Q-Chain Pulsar (Ring-LWE) 2-round PQ consensus threshold
+    Pulsar         = 1,   // Q-Chain Pulsar (Ring-LWE) 2-round PQ consensus threshold
     MLDSAGroth16     = 2,   // Z-Chain Groth16-over-BLS12-381 rollup of N×ML-DSA-65 sigs
     // LP-134 §A/B/M/F integration
     AChainAttest     = 3,   // A-Chain TEE / audit attestation
@@ -167,7 +167,7 @@ enum class ServiceId : uint32_t {
     Commit       = 7,
     StateRequest = 8,
     StateResp    = 9,
-    CertLane     = 10,    // BLS / Ringtail / MLDSAGroth16 / AChain / BChain / MChain / FChain
+    CertLane     = 10,    // BLS / Pulsar / MLDSAGroth16 / AChain / BChain / MChain / FChain
     CertOut      = 11,
     // LP-134 §service additions
     FheCompute   = 12,    // F-Chain TFHE compute pipeline (drain_fhe)
@@ -213,14 +213,14 @@ here for completeness.
 
 Q-Chain runs the **Pulsar 2-round threshold ceremony** for **PQ
 consensus signing**. Pulsar is Lux's Ring-LWE / Module-LWE threshold
-construction (Pulsar = Lux variant of the original Ringtail with DKG2
+construction (Pulsar = Lux variant of the original Pulsar with DKG2
 and the Pulsar-SHA3 hash suite — KMAC over cSHAKE256, see
 `pulsar/hash/sp800_185.go`). Production parameters: M=8, N=7,
 LogN=8 (ring degree 256), Q=0x1000000004A01 (48-bit NTT-friendly
 prime), Dbar=48, Kappa=23 → classical 2^142 / quantum 2^130 security.
 
 Q-Chain emits `qchain_ceremony_root` per epoch, consumed by Quasar
-3.0's Pulsar/Ringtail cert lane (LP-020 §Ringtail, LP-073).
+3.0's Pulsar/Ringtail cert lane (LP-020 §Pulsar, LP-073).
 
 Note: Q-Chain runs *only* the **consensus-threshold** Pulsar ceremony.
 General-purpose Pulsar (for app threshold signing on bridge custody)
@@ -369,7 +369,7 @@ corresponding `MChain*` / `FChain*` / `Z-` / `Q-` verifier.
 | P-Chain | **PVM** | `lux:pvm`       | Platform VM (validator/stake state) |
 | C-Chain | **EVM** | `lux:evm`       | Contract VM (cevm — fork of evmone, GPU fiber VM per LP-009) |
 | X-Chain | **XVM** | `lux:xvm`       | UTXO VM (assets, swaps, native txs) |
-| Q-Chain | **QVM** | `lux:qvm`       | Quasar threshold-key VM (Ringtail DKG ceremony) |
+| Q-Chain | **QVM** | `lux:qvm`       | Quasar threshold-key VM (Pulsar DKG ceremony) |
 | Z-Chain | **ZVM** | `lux:zvm`       | Zero-knowledge VM (Groth16 rollups + ZKP registry) |
 | A-Chain | **AIVM** | `lux:aivm`     | AI / Attestation VM (TEE quotes, audit, identity, AI provenance, model registry) |
 | B-Chain | **BVM** | `lux:bvm`       | Bridge VM (cross-ecosystem messaging) |
@@ -440,7 +440,7 @@ aliases, and configuration keys MUST use the Lux taxonomy.
 | TFHE | LP-066 |
 | Lux FHE Runtime (F-Chain) | LP-167 |
 | Threshold MPC (M-Chain) | LP-019, LP-076 |
-| Pulsar / Ringtail PQ threshold | LP-073 |
+| Pulsar / Pulsar PQ threshold | LP-073 |
 | Z-Chain (Groth16/BLS12-381) | LP-063 |
 | Bridge LPs | LP-003, LP-016, LP-017, LP-018 |
 | Teleport / T-Chain teleportvm | LP-6332, LP-9110, LP-138 |

@@ -347,7 +347,7 @@ The Lux Bridge uses MPC-signed messages for cross-chain token transfers.
 | **SLH-DSA** | `0x0200000000000000000000000000000000000007` | Stateless hash signatures |
 | **PQCrypto** | `0x0200000000000000000000000000000000000009` | Multi-PQ operations |
 | **Quasar** | `0x020000000000000000000000000000000000000A` | Quantum consensus |
-| **Ringtail** | `0x020000000000000000000000000000000000000B` | Threshold lattice signatures |
+| **Pulsar** | `0x020000000000000000000000000000000000000B` | Threshold lattice signatures |
 | **FROST** | `0x020000000000000000000000000000000000000C` | Schnorr threshold |
 | **CGGMP21** | `0x020000000000000000000000000000000000000D` | ECDSA threshold |
 

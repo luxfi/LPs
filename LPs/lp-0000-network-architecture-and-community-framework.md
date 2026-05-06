@@ -276,7 +276,7 @@ Lux implements a heterogeneous multi-chain architecture where each chain runs a 
 |   (MPC Ceremonies)  | |  (Quantum)   | |    (Bridge)      |
 +---------------------+ +--------------+ +------------------+
 | - FROST/CGGMP       | | - ML-KEM     | | - Cross-chain    |
-| - Ringtail          | | - ML-DSA     | | - Asset registry |
+| - Pulsar          | | - ML-DSA     | | - Asset registry |
 | - MPC custody       | | - SLH-DSA    | | - Teleport       |
 | - Key management    | | - Quantum-safe| | - Message relay  |
 +---------------------+ +--------------+ +------------------+
@@ -367,7 +367,7 @@ LPs are organized by research domain — distinct knowledge areas that may span 
 | Subject | Description | Key LPs |
 |---------|-------------|---------|
 | **Consensus Systems** | Agreement, finality, validators | LP-110 to LP-116 |
-| **Threshold Cryptography** | FROST, CGGMP, Ringtail, distributed signing | LP-7100+ |
+| **Threshold Cryptography** | FROST, CGGMP, Pulsar, distributed signing | LP-7100+ |
 | **Multi-Party Computation** | General secure computation | LP-7000+ |
 | **Key Management** | K-Chain, HSM, policy engines | LP-7300+ |
 | **Post-Quantum Cryptography** | ML-KEM, ML-DSA, SLH-DSA | LP-311, LP-312, LP-313 |
@@ -439,7 +439,7 @@ The LP system defines standards from low-level primitives to application protoco
 
   Layer 1: Cryptographic Primitives
     - Post-quantum (ML-KEM, ML-DSA, SLH-DSA)
-    - Threshold (FROST, CGGMP, Ringtail)
+    - Threshold (FROST, CGGMP, Pulsar)
     - Classical (BLS, Ed25519, secp256k1)
 
 +=================================================================+

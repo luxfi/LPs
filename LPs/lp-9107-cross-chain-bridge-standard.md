@@ -236,7 +236,7 @@ For Lux chain-to-chain transfers, the bridge integrates with native Warp messagi
 │  Handler       Handler       Handler                            │
 │     │              │              │                             │
 │     └──────────────┴──────────────┘                            │
-│              Lux Warp Messaging (AWM)                          │
+│       Lux Warp 2.0 (Beam + ML-DSA cert set + Pulse)            │
 └─────────────────────────────────────────────────────────────────┘
                             │
                        MPC Bridge

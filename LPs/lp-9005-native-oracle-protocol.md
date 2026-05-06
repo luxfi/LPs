@@ -103,7 +103,7 @@ The existing M-Chain MPC infrastructure (LP-13, LP-14, per LP-134) provides the 
 │  │                     WARP TELEPORTATTEST                                │      │
 │  │  Type: 4 (TeleportAttest) / AttestationType: 0x01 (PriceFeed)         │      │
 │  │  Payload: PriceFeedPayload                                             │      │
-│  │  Signature: BLS aggregate (67+ signers) + optional Ringtail (PQ)       │      │
+│  │  Signature: BLS aggregate (67+ signers) + optional Pulsar (PQ)       │      │
 │  └───────────────────────────────────────────────────────────────────────┘      │
 │                              │                                                   │
 │      ┌───────────────────────┼───────────────────────┐                          │
@@ -415,7 +415,7 @@ type CircuitBreaker struct {
 │     │  votes = CollectVotes(proposal)                                    │    │
 │     │  if len(votes) >= 67:                                              │    │
 │     │      blsSig = BLS.Aggregate(votes)                                 │    │
-│     │      rtSig = Ringtail.Aggregate(votes)  // Optional PQ             │    │
+│     │      rtSig = Pulsar.Aggregate(votes)  // Optional PQ             │    │
 │     │      warpMsg = WarpMessage{Unsigned: proposal, Sig: blsSig, rtSig} │    │
 │     └───────────────────────────────────────────────────────────────────┘    │
 │                                                                               │
@@ -455,7 +455,7 @@ Initial supported symbols (extendable via governance):
 3. **Source Diversity**: Minimum 2 sources, weighted by reliability
 4. **Circuit Breakers**: >10% deviation pauses updates
 5. **Staleness Detection**: Prices marked stale after 2 seconds
-6. **Quantum Safety**: Optional Ringtail signatures for PQ protection
+6. **Quantum Safety**: Optional Pulsar signatures for PQ protection
 
 ### 9. Performance Targets
 

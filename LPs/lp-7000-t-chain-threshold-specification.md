@@ -23,7 +23,7 @@ order: 0
 
 ## Abstract
 
-LP-7000 specifies the T-Chain (Threshold Signature Chain), Lux Network's specialized blockchain providing Multi-Party Computation (MPC) services including distributed key generation (DKG), threshold signatures, and secure key management. The T-Chain implements CGGMP21 for ECDSA, FROST for Schnorr/BLS, and Ringtail for post-quantum signatures. **Per LP-134, all MPC ceremonies for bridge custody of external wallets now run on M-Chain; FHE keygen runs on F-Chain.**
+LP-7000 specifies the T-Chain (Threshold Signature Chain), Lux Network's specialized blockchain providing Multi-Party Computation (MPC) services including distributed key generation (DKG), threshold signatures, and secure key management. The T-Chain implements CGGMP21 for ECDSA, FROST for Schnorr/BLS, and Pulsar for post-quantum signatures. **Per LP-134, all MPC ceremonies for bridge custody of external wallets now run on M-Chain; FHE keygen runs on F-Chain.**
 
 ## Motivation
 
@@ -121,14 +121,14 @@ partialSig, err := session.SignBLS(keyShare, message)
 partialSig, err := session.SignSchnorr(keyShare, message)
 ```
 
-#### Ringtail - Post-Quantum Threshold
+#### Pulsar - Post-Quantum Threshold
 
 Ring-based threshold signatures for quantum resistance:
 
 ```go
 import "github.com/luxfi/node/vms/thresholdvm/ringtail"
 
-// Initialize Ringtail session
+// Initialize Pulsar session
 session := ringtail.NewSession(threshold, totalParties)
 
 // Quantum-safe threshold key generation
@@ -280,7 +280,7 @@ POST /ext/bc/T/threshold/reshare
 | DKG (3-of-5) | 500ms | One-time setup |
 | CGGMP21 Sign | 100ms | Per signature |
 | FROST Sign | 50ms | Per signature |
-| Ringtail Sign | 200ms | Post-quantum |
+| Pulsar Sign | 200ms | Post-quantum |
 | Warp Sign | 150ms | Including serialization |
 
 ## Rationale
@@ -290,7 +290,7 @@ Design decisions for T-Chain:
 1. **Multiple Protocols**: Different use cases need different security/performance tradeoffs
 2. **Warp Integration**: Native cross-chain messaging support
 3. **Proactive Security**: Regular refresh prevents compromise accumulation
-4. **Quantum Bridge**: Ringtail provides migration path to PQ security
+4. **Quantum Bridge**: Pulsar provides migration path to PQ security
 
 ## Backwards Compatibility
 
@@ -337,7 +337,7 @@ func TestFROSTSigning(t *testing.T)
 | LP-0083 | T-Chain Specification | Superseded by this LP |
 | LP-7100 | CGGMP21 ECDSA | Sub-specification |
 | LP-7200 | FROST Schnorr/BLS | Sub-specification |
-| LP-7300 | Ringtail PQ | Sub-specification |
+| LP-7300 | Pulsar PQ | Sub-specification |
 | LP-7400 | DKG Ceremonies | Sub-specification |
 | LP-6000 | B-Chain | Uses T-Chain for bridge custody |
 

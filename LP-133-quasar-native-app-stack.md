@@ -32,7 +32,7 @@ production surfaces:
    native Quasar appchains: each Base instance is a Quasar round
    preset with its own `chain_id`, validator subset, and per-tenant
    lanes; realtime subscriptions tail Quasar's `CertOut` ring.
-3. **MPC + KMS** — the Hanzo MPC engine (CGGMP21, FROST, Ringtail
+3. **MPC + KMS** — the Hanzo MPC engine (CGGMP21, FROST, Pulsar
    general) and Hanzo KMS plug in as additional `QuasarCertLane`
    variants, sharing the same wave-tick scheduler, GPU verifier, and
    replay-proof subject binding (LP-020 §3.0).
@@ -112,7 +112,7 @@ Each Base instance is a Quasar **chain preset**:
 struct BaseAppchainConfig {
     uint64_t chain_id;                // unique per-tenant
     Hash     validator_subset_root;   // P-Chain commitment to its validators
-    Hash     qchain_ceremony_root;    // Q-Chain Ringtail DKG root
+    Hash     qchain_ceremony_root;    // Q-Chain Pulsar DKG root
     Hash     zchain_vk_root;          // Z-Chain Groth16 VK root
     QuasarMode mode;                  // Nova=0 (typical) / Nebula=1 (high-fanout)
     uint64_t  block_time_ms;
@@ -175,7 +175,7 @@ ceremonies. Each ceremony round naturally maps to a Quasar round:
 | Round graph (interactive ceremonies) | Nebula DAG mode |
 
 Each ceremony type registers its verifier as a new `QuasarCertLane`
-variant (the enum is open-ended: BLS=0, Ringtail=1, MLDSAGroth16=2,
+variant (the enum is open-ended: BLS=0, Pulsar=1, MLDSAGroth16=2,
 MPCShare=3, FROSTShare=4, …). The verifier reads the artifact via
 `(artifact_offset, artifact_len)` and runs the ceremony-specific check.
 
@@ -184,7 +184,7 @@ Pattern:
 ```cpp
 enum class QuasarCertLane : uint8_t {
     BLS              = 0,
-    Ringtail         = 1,
+    Pulsar         = 1,
     MLDSAGroth16     = 2,
     CGGMP21Share     = 3,    // (added by LP-133)
     FROSTShare       = 4,    // (added by LP-133)

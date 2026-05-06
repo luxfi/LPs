@@ -98,7 +98,7 @@ After completing this path, you will understand:
 
 | Order | LP | Title | Time | Depth |
 |-------|-----|-------|------|-------|
-| 16 | [LP-0324](/docs/lp-0324-ringtail-threshold-signature-precompile/) | Ringtail (PQ Threshold) | 30 min | Deep |
+| 16 | [LP-0324](/docs/lp-0324-ringtail-threshold-signature-precompile/) | Pulsar (PQ Threshold) | 30 min | Deep |
 | 17 | [LP-7321](/docs/lp-7321-frost-threshold-signature-precompile/) | FROST Precompile | 20 min | Medium |
 | 18 | [LP-7322](/docs/lp-7322-cggmp21-threshold-ecdsa-precompile/) | CGGMP21 Precompile | 20 min | Medium |
 

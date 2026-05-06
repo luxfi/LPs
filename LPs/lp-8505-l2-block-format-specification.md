@@ -820,7 +820,7 @@ Key components:
 3. Google (2020). "Snappy Compression Algorithm"
 4. Facebook (2021). "Zstandard Compression"
 5. NIST (2022). "Post-Quantum Cryptography Standards"
-6. Bernstein, D.J., et al. (2019). "SPHINCS+: Practical stateless hash-based signatures"
+6. Bernstein, D.J., et al. (2019). "SLH-DSA (FIPS 205, formerly SPHINCS+): Practical stateless hash-based signatures"
 7. Polygon (2023). "Polygon zkEVM Block Format"
 8. Optimism (2023). "Bedrock Block Format Specification"
 9. Arbitrum (2023). "Nitro Block Structure"

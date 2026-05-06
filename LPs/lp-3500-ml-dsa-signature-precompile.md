@@ -1,7 +1,7 @@
 ---
 lp: 3500
 title: ML-DSA Signature Precompile
-description: Native precompile for NIST FIPS 204 ML-DSA (Dilithium) post-quantum signature verification
+description: Native precompile for NIST FIPS 204 ML-DSA (ML-DSA) post-quantum signature verification
 author: Lux Core Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
 status: Final
@@ -40,7 +40,7 @@ Current blockchain cryptography relies on ECDSA (secp256k1, secp256r1) which is 
 
 ### Why ML-DSA?
 
-ML-DSA (formerly Dilithium) was selected by NIST in 2024 as the primary post-quantum digital signature standard (FIPS 204) because:
+ML-DSA was selected by NIST in 2024 as the primary post-quantum digital signature standard (FIPS 204) because:
 
 1. **Security**: Based on the hardness of Module-LWE and Module-SIS lattice problems, believed quantum-resistant
 2. **Performance**: Faster verification than other PQ signatures (108μs vs 15ms for SLH-DSA)
@@ -414,7 +414,7 @@ Higher gas costs for PQ operations generate more fee revenue for validators, cre
 ## References
 
 - **NIST FIPS 204**: https://csrc.nist.gov/pubs/fips/204/final
-- **Dilithium Specification**: https://pq-crystals.org/dilithium/
+- **ML-DSA Specification**: https://pq-crystals.org/dilithium/
 - **CIRCL Library**: https://github.com/cloudflare/circl
 - **LP-4**: Quantum-Resistant Cryptography Integration
 - **Implementation**: `precompiles/mldsa/`

@@ -133,7 +133,7 @@ gid 4  drain_exec      (plaintext EVM fibers)
 gid 12 drain_fhe       (encrypted EVM via TFHE)
 gid 5  drain_validate  (Block-STM over both)
 gid 7  drain_commit    (root chain over both)
-gid 10 drain_cert_lane (BLS / Ringtail / MLDSAGroth16 / FChainTFHE)
+gid 10 drain_cert_lane (BLS / Pulsar / MLDSAGroth16 / FChainTFHE)
 ```
 
 Same `MvccSlot` table; same `RWSetEntry` validation. Encrypted SLOAD

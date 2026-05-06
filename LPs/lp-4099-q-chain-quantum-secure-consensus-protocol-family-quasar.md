@@ -140,7 +140,7 @@ func (q *QuasarConsensus) VerifyCheckpoint(signed *SignedCheckpoint) bool {
         return false
     }
     
-    // 3. Verify post-quantum Ringtail signature
+    // 3. Verify post-quantum Pulsar signature
     if !q.ringtail.Verify(signed.Checkpoint.Hash(), signed.RingtailSig) {
         return false
     }
@@ -186,7 +186,7 @@ func (q *QuasarConsensus) VerifyStateProof(proof *StateProof, checkpoint *Checkp
 2. At checkpoint interval (e.g., every 100 blocks):
    - Generate MMR proof from last checkpoint to current height
    - Create Checkpoint struct with metadata
-   - Sign with dual BLS+Ringtail signatures
+   - Sign with dual BLS+Pulsar signatures
 3. Submit SignedCheckpoint to Q-Chain (or parent PQC)
 4. Q-Chain validates:
    - Cryptographic proofs (MMR + signatures)
@@ -198,7 +198,7 @@ func (q *QuasarConsensus) VerifyStateProof(proof *StateProof, checkpoint *Checkp
 
 #### 6. Security Properties
 
-- **Post-Quantum Security**: All signatures use Lux's dual BLS+Ringtail scheme
+- **Post-Quantum Security**: All signatures use Lux's dual BLS+Pulsar scheme
 - **Efficient Proofs**: MMR provides O(log n) proofs for arbitrary block ranges
 - **State Verifiability**: Optional Verkle proofs for state transitions
 - **Economic Security**: QSF fees paid in LUX provide Sybil resistance
@@ -389,7 +389,7 @@ type ValidatorTx struct {
     EndTime         time.Time
     DelegationFee   uint32
     RewardAddress   Address
-    ProofOfStake    DualSignature  // BLS + Ringtail
+    ProofOfStake    DualSignature  // BLS + Pulsar
 }
 ```
 
@@ -427,7 +427,7 @@ Q-Chain requires two cryptographic certificates for block finality:
    - Aggregatable signatures for efficiency
    - Compatible with existing infrastructure
 
-2. **Ringtail Threshold Signature (Post-Quantum)**
+2. **Pulsar Threshold Signature (Post-Quantum)**
    - Lattice-based (LWE) with 128-bit post-quantum security
    - Threshold scheme: no single validator holds full key
    - Two-round protocol for efficiency
@@ -444,12 +444,12 @@ func IsBlockFinal(block Block, cert DualCertificate) bool {
 
 The dual-certificate design provides defense in depth:
 
-| Attack Scenario | BLS Certificate | Ringtail Certificate | Result |
+| Attack Scenario | BLS Certificate | Pulsar Certificate | Result |
 |----------------|-----------------|---------------------|---------|
 | Classical Attacker | Secure (128-bit) | Secure (harder) | ✅ Block Safe |
 | Quantum Attacker | Vulnerable | Secure (128-bit PQ) | ✅ Block Safe |
 | Implementation Bug in BLS | Compromised | Secure | ✅ Block Safe |
-| Implementation Bug in Ringtail | Secure | Compromised | ✅ Block Safe |
+| Implementation Bug in Pulsar | Secure | Compromised | ✅ Block Safe |
 | Both Systems Compromised | Compromised | Compromised | ❌ Block Unsafe |
 
 ### Quantum Attack Window
@@ -459,7 +459,7 @@ Q-Chain's rapid finality creates an impossibly narrow attack window:
 ```
 Timeline:
 T+0ms:   Block proposed
-T+50ms:  Ringtail timeout (mainnet)
+T+50ms:  Pulsar timeout (mainnet)
 T+295ms: BLS aggregation complete
 T+350ms: Block finalized
 
@@ -537,7 +537,7 @@ func (b *BLSAggregator) Aggregate() ([]byte, error) {
     return agg.Marshal()
 }
 
-// Ringtail Operations  
+// Pulsar Operations  
 type RingtailThreshold struct {
     threshold   int
     shares      map[ID]Share
@@ -596,7 +596,7 @@ func (q *QChain) ProposeBlock() (*Block, error) {
     // Sign with BLS
     block.ProposerSig = q.blsSign(block.Hash())
     
-    // Create Ringtail share
+    // Create Pulsar share
     block.ProposerShare = q.ringtailShare(block.Hash())
     
     // Broadcast proposal
@@ -732,7 +732,7 @@ var MainnetParams = Parameters{
     Beta:             8,
     
     // Quasar parameters
-    QThreshold:       15,  // 15 of 21 for Ringtail
+    QThreshold:       15,  // 15 of 21 for Pulsar
     QuasarTimeout:    50 * time.Millisecond,
     
     // Performance targets
@@ -748,9 +748,9 @@ var MainnetParams = Parameters{
 | Block Time | ~500ms | New block every 0.5 seconds |
 | Finality Latency | <350ms | Dual-cert finality achieved |
 | BLS Aggregation | ~295ms | Time to collect classical sigs |
-| Ringtail Aggregation | ~7ms | Time to combine PQ shares |
+| Pulsar Aggregation | ~7ms | Time to combine PQ shares |
 | Network Overhead | ~50ms | Propagation and processing |
-| Certificate Size | ~2.9KB | Combined BLS + Ringtail |
+| Certificate Size | ~2.9KB | Combined BLS + Pulsar |
 
 ### Latency Breakdown
 
@@ -762,7 +762,7 @@ Block Proposal
      │     ├─► Network RTT (~200ms)
      │     └─► Aggregation (~95ms)
      │
-     └─► Ringtail Collection ──► 50ms
+     └─► Pulsar Collection ──► 50ms
            │
            ├─► Share Collection (~48ms)
            └─► Combination (~7ms)
@@ -789,7 +789,7 @@ type SecurityParams struct {
 
 ### Post-Quantum Security
 
-Ringtail provides security based on lattice problems:
+Pulsar provides security based on lattice problems:
 
 | Parameter | Value | Security Level |
 |-----------|-------|----------------|
@@ -803,7 +803,7 @@ Ringtail provides security based on lattice problems:
 ```solidity
 enum SlashingReason {
     DOUBLE_SIGN,           // Signed conflicting blocks
-    MISSING_PQ_CERT,       // Failed to provide Ringtail
+    MISSING_PQ_CERT,       // Failed to provide Pulsar
     INVALID_SIGNATURE,     // Provided invalid sig
     DOWNTIME,             // Extended offline period
 }
@@ -879,7 +879,7 @@ GamingChainParams = Parameters{
 
 ### 1. Dynamic Validator Sets
 - Hot-swapping validators without downtime
-- Rapid DKG for new Ringtail keys
+- Rapid DKG for new Pulsar keys
 - Forward-secure key evolution
 
 ### 2. Cross-Chain Atomic Operations
@@ -956,7 +956,7 @@ The dual-certificate mechanism ensures that Q-Chain remains secure against both 
 ## References
 
 1. Lux Network Team, "Quasar: A Quantum-Resistant Consensus Protocol Family with Verkle Trees and FPC"
-2. NTT Research, "Ringtail: World's first two-round post-quantum threshold signature scheme"
+2. NTT Research, "Pulsar: World's first two-round post-quantum threshold signature scheme"
 3. Boneh et al., "BLS Signatures: Short Signatures from the Weil Pairing"
 4. Shor, P.W., "Polynomial-Time Algorithms for Prime Factorization and Discrete Logarithms on a Quantum Computer"
 5. NIST Post-Quantum Cryptography Standardization

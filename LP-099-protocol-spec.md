@@ -14,7 +14,7 @@ references:
   - lp-019 (Threshold MPC — M-Chain)
   - lp-020 (Quasar Triple Consensus)
   - lp-063 (Z-Chain — Groth16 over BLS12-381)
-  - lp-073 (Pulsar / Ringtail PQ threshold)
+  - lp-073 (Pulsar / Pulsar PQ threshold)
   - lp-076 (Universal threshold — M-Chain ceremonies)
   - lp-083 (Token Economics)
   - lp-110 (Quasar Unified Consensus)
@@ -84,7 +84,7 @@ chain and certificate lane.
 | **P-Chain** | PVM | Platform — staking, validators, epoch, slashing | (read-only roots) | LP-015 |
 | **C-Chain** | EVM | Contract — general smart contracts | — | LP-009 |
 | **X-Chain** | XVM | UTXO — assets, swaps, native txs | — | — |
-| **Q-Chain** | QVM | **Pulsar 2-round threshold for PQ consensus signing** | `Ringtail` | LP-073 |
+| **Q-Chain** | QVM | **Pulsar 2-round threshold for PQ consensus signing** | `Pulsar` | LP-073 |
 | **Z-Chain** | ZVM | **Groth16 over BLS12-381 — rolls N×ML-DSA-65 sigs into one 192-byte proof** | `MLDSAGroth16` | LP-063 |
 | **A-Chain** | AIVM | Attestation — TEE, audit, identity, AI provenance | `AChainAttest` | LP-065 |
 | **B-Chain** | BVM | Bridge — native cross-ecosystem messaging | `BChainBridge` | LP-016 |
@@ -106,7 +106,7 @@ assumptions, each contributed by a separate chain:
 | Layer | Scheme | Hardness | Source chain | In Cert |
 |-------|--------|----------|--------------|---------|
 | BLS | BLS12-381 aggregate | co-CDH (classical) | (network-wide) | 48 B |
-| Pulsar (Ringtail) | Ring-LWE threshold | Module-LWE (PQ) | **Q-Chain** | variable, ~33 KB |
+| Pulsar (Pulsar) | Ring-LWE threshold | Module-LWE (PQ) | **Q-Chain** | variable, ~33 KB |
 | MLDSAProof | ML-DSA-65 → Groth16 over BLS12-381 | Module-LWE + MSIS, then Groth16 SNARK | **Z-Chain** | 192 B |
 
 PQ modes (`config/pq_mode.go`): `BLSOnly`, `BLSPlusMLDSA`,

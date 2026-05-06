@@ -619,7 +619,7 @@ Compared to:
 
 **Integration with LP-303 (Quantum Security)**:
 - Q-security (PQC) protects attestation signatures
-- P-Chain anchors A-Chain checkpoints with dual-sig (BLS+Ringtail)
+- P-Chain anchors A-Chain checkpoints with dual-sig (BLS+Pulsar)
 - Future-proof against quantum attacks on attestations
 
 ## Deployment Timeline

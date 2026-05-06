@@ -19,7 +19,7 @@ references:
 
 ## Abstract
 
-The Quantum VM runs the Q-chain, a dedicated chain for post-quantum cryptographic operations. All transactions on the Q-chain use CRYSTALS-Dilithium signatures and CRYSTALS-Kyber key encapsulation. The Q-chain serves as the PQ key registry for the entire Lux network, allowing any chain to verify PQ signatures by referencing Q-chain state via Warp messages (LP-021).
+The Quantum VM runs the Q-chain, a dedicated chain for post-quantum cryptographic operations. All transactions on the Q-chain use ML-DSA (FIPS 204, formerly CRYSTALS-Dilithium) signatures and ML-KEM (FIPS 203, formerly CRYSTALS-Kyber) key encapsulation. The Q-chain serves as the PQ key registry for the entire Lux network, allowing any chain to verify PQ signatures by referencing Q-chain state via Warp messages (LP-021).
 
 ## Specification
 
@@ -53,7 +53,7 @@ QTx {
 }
 ```
 
-Signature verification uses the NTT-accelerated Dilithium verifier (LP-029).
+Signature verification uses the NTT-accelerated ML-DSA verifier (LP-029).
 
 ### PQ Key Registry
 
@@ -82,14 +82,14 @@ Any user can register their PQ keys on the Q-chain. Other chains verify PQ signa
 
 Users transition to PQ security:
 
-1. Register Dilithium key on Q-chain, linked to existing ECDSA address
+1. Register ML-DSA key on Q-chain, linked to existing ECDSA address
 2. Set PQ key as backup signer for multi-sig wallets
 3. When ECDSA is deprecated (quantum threat timeline), switch to Q-chain signing exclusively
 
 ## Security Considerations
 
 1. **Key size**: Dilithium-3 keys are large (1952 bytes public, 3293 bytes signature). Block size limits account for this.
-2. **Hybrid period**: during transition, both ECDSA and Dilithium signatures are accepted. A compromised ECDSA key cannot override a PQ-signed transaction if PQ is registered.
+2. **Hybrid period**: during transition, both ECDSA and ML-DSA signatures are accepted. A compromised ECDSA key cannot override a PQ-signed transaction if PQ is registered.
 3. **Parameter agility**: the Q-chain VM can be upgraded to new PQ standards (e.g., if NIST revises parameters) via subnet governance.
 
 ## Reference
@@ -97,8 +97,8 @@ Users transition to PQ security:
 | Resource | Location |
 |---|---|
 | Quantum VM | `github.com/luxfi/node/vms/qvm/` |
-| Dilithium implementation | `github.com/luxfi/node/crypto/dilithium/` |
-| Kyber implementation | `github.com/luxfi/node/crypto/kyber/` |
+| ML-DSA implementation | `github.com/luxfi/node/crypto/dilithium/` |
+| ML-KEM implementation | `github.com/luxfi/node/crypto/kyber/` |
 | NTT acceleration | LP-029 |
 
 ## Copyright

@@ -13,7 +13,7 @@ VM names are **explicit**: PlatformVM, BridgeVM, MPCVM, FHEVM, DEXVM
 | **P-Chain** | **PlatformVM** | PVM | `lux:platformvm` | Platform — staking, validators, epochs, slashing |
 | **C-Chain** | **EVM** (cevm) | — | `lux:evm` | Contracts — general smart contracts |
 | **X-Chain** | **XVM** | — | `lux:xvm` | UTXO — assets, swaps, native txs |
-| **Q-Chain** | **QuantumVM** | QVM | `lux:quantumvm` | Quasar threshold-key (Ringtail DKG ceremony) |
+| **Q-Chain** | **QuantumVM** | QVM | `lux:quantumvm` | Quasar threshold-key (Pulsar DKG ceremony) |
 | **Z-Chain** | **ZKVM** | ZVM | `lux:zkvm` | Zero-knowledge (Groth16 rollups + ZKP registry) |
 | **A-Chain** | **AIVM** | — | `lux:aivm` | Attestation + AI provenance (TEE quotes, audit, identity, model registry) |
 | **B-Chain** | **BridgeVM** | BVM | `lux:bridgevm` | Bridge — cross-ecosystem messaging |

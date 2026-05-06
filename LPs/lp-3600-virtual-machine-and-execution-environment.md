@@ -116,7 +116,7 @@ go test -v ./core/vm ./core/state
 - **Execution**: Custom VM with Quasar consensus
 - **Key Files**:
   - [`vm.go`](https://github.com/luxfi/node/blob/main/vms/quantumvm/vm.go) - Quantum VM
-  - [`config/config.go`](https://github.com/luxfi/node/blob/main/vms/quantumvm/config/config.go) - Ringtail and ML-DSA config
+  - [`config/config.go`](https://github.com/luxfi/node/blob/main/vms/quantumvm/config/config.go) - Pulsar and ML-DSA config
   - [`txs/`]() - Quantum-safe transactions
 
 **4. EVM (C-Chain)** (via `~/work/lux/evm/`)

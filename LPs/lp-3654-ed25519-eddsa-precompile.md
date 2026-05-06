@@ -65,7 +65,7 @@ LP-3654 specifies a native EVM precompile for Ed25519 elliptic curve operations 
    - PGP/GPG signature support
    - Passkey/WebAuthn Ed25519 mode
 
-4. **Threshold EdDSA (Ringtail)**
+4. **Threshold EdDSA (Pulsar)**
    - Distributed key generation
    - Partial signature aggregation
    - Key resharing protocols
@@ -590,7 +590,7 @@ func batchVerify(messages, signatures [][]byte, pubkeys [][]byte) bool {
 │         │                   │                   │                    │
 │         ▼                   ▼                   ▼                    │
 │  ┌──────────────┐    ┌──────────────┐    ┌──────────────┐          │
-│  │  Ringtail    │    │  Validator   │    │   SSH Key    │          │
+│  │  Pulsar    │    │  Validator   │    │   SSH Key    │          │
 │  │  Threshold   │    │  Signatures  │    │   Verify     │          │
 │  │    EdDSA     │    │              │    │              │          │
 │  └──────────────┘    └──────────────┘    └──────────────┘          │
@@ -605,7 +605,7 @@ func batchVerify(messages, signatures [][]byte, pubkeys [][]byte) bool {
 | C-Chain | Bridge Contracts | Solana/NEAR signature verification |
 | C-Chain | Identity | SSH key verification |
 | P-Chain | Staking | Validator EdDSA signatures |
-| T-Chain | Threshold | Ringtail EdDSA aggregation |
+| T-Chain | Threshold | Pulsar EdDSA aggregation |
 | B-Chain | Bridge | Cross-chain proof verification |
 
 ## Secure Implementation Guidelines
@@ -812,7 +812,7 @@ X25519 shared secrets may equal identity if peer provides small-order point. Imp
 - [RFC 8032: Edwards-Curve Digital Signature Algorithm (EdDSA)](https://datatracker.ietf.org/doc/html/rfc8032)
 - [RFC 7748: Elliptic Curves for Security](https://datatracker.ietf.org/doc/html/rfc7748)
 - [filippo.io/edwards25519](https://pkg.go.dev/filippo.io/edwards25519)
-- [LP-7324: Ringtail Threshold EdDSA](./lp-7324-ringtail-threshold-signature-precompile.md)
+- [LP-7324: Pulsar Threshold EdDSA](./lp-7324-ringtail-threshold-signature-precompile.md)
 - [LP-3652: secp256k1 ECDSA Precompile](./lp-3652-secp256k1-ecdsa-precompile.md)
 
 ## Copyright

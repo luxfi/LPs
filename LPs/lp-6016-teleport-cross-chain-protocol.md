@@ -14,7 +14,7 @@ order: 16
 
 ## Abstract
 
-The Teleport Cross-Chain Protocol enables instant, secure transfers of assets between Lux's various chains (P-Chain, X-Chain, C-Chain, and custom chains) without requiring external bridge infrastructure. Teleport leverages Lux's native consensus mechanisms and the Lux Warp Messaging (AWM) protocol to provide atomic cross-chain operations with minimal latency and maximum security.
+The Teleport Cross-Chain Protocol enables instant, secure transfers of assets between Lux's various chains (P-Chain, X-Chain, C-Chain, and custom chains) without requiring external bridge infrastructure. Teleport leverages Lux's native consensus mechanisms and **Lux Warp 2.0** (Beam BLS aggregate + ML-DSA cert set + Pulsar Pulse, see `github.com/luxfi/warp` and LP-110 Quasar consensus) to provide atomic cross-chain operations with minimal latency and maximum security.
 
 ## Motivation
 
@@ -51,7 +51,7 @@ Each supported chain implements a Teleport handler that:
 - Manages chain-specific asset representations
 
 #### 3. Message Format
-Teleport messages follow the AWM format with extensions:
+Teleport messages follow the Lux Warp 2.0 envelope format (see `github.com/luxfi/warp` `EnvelopeV2`) with extensions:
 ```
 TeleportMessage {
     version: uint8
@@ -79,7 +79,7 @@ TeleportMessage {
 
 #### Relay Phase
 1. Validators observe the signed message
-2. Message is relayed to destination chain via AWM
+2. Message is relayed to destination chain via Lux Warp 2.0 (Beam + ML-DSA cert set + Pulse)
 3. Destination chain validators verify the message signatures
 
 #### Completion Phase
@@ -127,7 +127,7 @@ function teleportAndCall(
 
 ### Design Decisions
 
-1. **AWM Integration**: Leveraging existing Lux infrastructure provides proven security and reduces implementation complexity
+1. **Lux Warp 2.0 Integration**: Leveraging existing Lux infrastructure (`github.com/luxfi/warp`) provides proven security (Beam classical fast-path + ML-DSA + Pulsar Pulse PQ lanes) and reduces implementation complexity
 
 2. **No Intermediate Tokens**: Unlike bridged assets, Teleport maintains native asset properties across chains
 

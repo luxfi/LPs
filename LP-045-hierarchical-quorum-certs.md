@@ -99,7 +99,7 @@ Root aggregator
 On-chain attestation
 ```
 
-Each cluster of ~32 validators runs **Threshold ML-DSA** or **Ringtail**
+Each cluster of ~32 validators runs **Threshold ML-DSA** or **Pulsar**
 to produce a cluster certificate. The root aggregator combines cluster
 certificates (either concatenate + bitmap, or run a second-level threshold
 over cluster representatives) into the final quorum certificate.
@@ -123,7 +123,7 @@ type ClusterCert struct {
     ClusterID        uint32
     Bitmap           []byte          // Which members of this cluster signed
     Sig              []byte          // Threshold signature from cluster
-    SigType          uint8           // 1=Threshold ML-DSA | 2=Ringtail | 3=BLS+Ringtail hybrid
+    SigType          uint8           // 1=Threshold ML-DSA | 2=Pulsar | 3=BLS+Pulsar hybrid
 }
 ```
 
@@ -140,8 +140,8 @@ On-chain verification:
 | Validator identity | ML-DSA | NIST-standard PQ signature, wallet/tooling compat |
 | Long-term voting | ML-DSA or Ed25519 | Individual signatures; no thresholding needed |
 | Cluster certificate (small committee) | Threshold ML-DSA (LP-xxx) | Small T, standard ML-DSA output for verifiers |
-| Cluster certificate (medium committee, high throughput) | Ringtail | Better scaling than thresholdized ML-DSA |
-| Aggregation (many committees) | BLS aggregate + Ringtail | BLS for classical speed + Ringtail for PQ defense in depth |
+| Cluster certificate (medium committee, high throughput) | Pulsar | Better scaling than thresholdized ML-DSA |
+| Aggregation (many committees) | BLS aggregate + Pulsar | BLS for classical speed + Pulsar for PQ defense in depth |
 | Rollup/archival compression | ZK proofs (Groth16/PLONK) | Single succinct proof over many QCs |
 
 ## Non-design: why not pure BLS
@@ -150,7 +150,7 @@ BLS gives you the systems property — "many signatures become one object" —
 but its algebra is broken by quantum computers. Lux takes BLS's
 **architectural ideas** (aggregator roles, signer bitmaps, committee
 selection, stake-weighted quorums, tree aggregation) and applies them over
-**PQ-safe primitives** (Threshold ML-DSA, Ringtail, hybrid certs per
+**PQ-safe primitives** (Threshold ML-DSA, Pulsar, hybrid certs per
 LP-020 Quasar).
 
 ## Accountability
@@ -186,7 +186,7 @@ deployment via a P-chain governance parameter.
 | Key VM | LP-043 |
 | Threshold VM | LP-044 |
 | Threshold ML-DSA | `papers/threshold-mldsa.tex` in `github.com/luxfi/threshold` |
-| Ringtail | `github.com/luxfi/threshold/protocols/ringtail/` |
+| Pulsar | `github.com/luxfi/threshold/protocols/ringtail/` |
 
 ## References
 
@@ -194,5 +194,5 @@ Celi, S.; del Pino, R.; Espitau, T.; Niot, G.; Prest, T.
 *Efficient Threshold ML-DSA*. USENIX Security Symposium, 2026.
 
 Boschini, C.; Kaviani, D.; Lai, R. W. F.; Malavolta, G.; Takahashi, A.;
-Tibouchi, M. *Ringtail: Practical Two-Round Threshold Signatures from
+Tibouchi, M. *Pulsar: Practical Two-Round Threshold Signatures from
 Learning With Errors*. IEEE S&P 2025.
