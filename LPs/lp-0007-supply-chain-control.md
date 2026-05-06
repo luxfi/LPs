@@ -174,8 +174,8 @@ luxfi/warp        // Cross-chain messaging
 | BLS12-381 | ✓ | ✓ | Aggregate signatures |
 | BN256 | ✓ | ✓ | Pairing-based |
 | secp256k1 | ✓ | ✓ | ECDSA |
-| **ML-DSA (ML-DSA)** | ✓ | ✗ | NIST PQC |
-| **SLH-DSA (SLH-DSA (FIPS 205, formerly SPHINCS+))** | ✓ | ✗ | Hash-based |
+| **ML-DSA** | ✓ | ✗ | NIST PQC |
+| **SLH-DSA (FIPS 205, formerly SPHINCS+)** | ✓ | ✗ | Hash-based |
 | **FROST (Threshold)** | ✓ | ✗ | Threshold Schnorr |
 | **Lattice (Lattigo)** | ✓ | ✗ | FHE/lattice ops |
 | **CGGMP21 (MPC)** | ✓ | ✗ | Threshold ECDSA |

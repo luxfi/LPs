@@ -1,7 +1,7 @@
 ---
 lp: 3501
 title: SLH-DSA Signature Precompile
-description: Native precompile for NIST FIPS 205 SLH-DSA (SLH-DSA (FIPS 205, formerly SPHINCS+)) hash-based post-quantum signatures
+description: Native precompile for NIST FIPS 205 SLH-DSA (FIPS 205, formerly SPHINCS+) hash-based post-quantum signatures
 author: Lux Core Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
 status: Final

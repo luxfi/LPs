@@ -1,7 +1,7 @@
 ---
 lp: 3500
 title: ML-DSA Signature Precompile
-description: Native precompile for NIST FIPS 204 ML-DSA (ML-DSA) post-quantum signature verification
+description: Native precompile for NIST FIPS 204 ML-DSA post-quantum signature verification
 author: Lux Core Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
 status: Final

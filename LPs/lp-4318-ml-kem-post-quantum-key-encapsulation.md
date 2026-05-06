@@ -1,7 +1,7 @@
 ---
 lp: 4318
 title: ML-KEM Post-Quantum Key Encapsulation
-description: NIST FIPS 203 ML-KEM (ML-KEM (FIPS 203, formerly CRYSTALS-Kyber)) post-quantum key encapsulation mechanism for secure key exchange
+description: NIST FIPS 203 ML-KEM (FIPS 203, formerly CRYSTALS-Kyber) post-quantum key encapsulation mechanism for secure key exchange
 author: Lux Partners (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
 status: Final

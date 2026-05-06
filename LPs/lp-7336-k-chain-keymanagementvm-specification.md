@@ -2932,7 +2932,7 @@ type YubiHSMConfig struct {
 
 // GenerateMLKEMKey generates ML-KEM key in YubiHSM
 func (y *YubiHSMProvider) GenerateMLKEMKey(keyID ids.ID, mode mlkem.Mode) (*HSMKeyHandle, error) {
-    // YubiHSM 2 supports ML-KEM (ML-KEM predecessor)
+    // YubiHSM 2 supports ML-KEM
     // FIPS 203 compliance requires firmware version 2.4+
     capabilities := yubihsm.CapabilityDecryptPKCS | yubihsm.CapabilityEncryptPKCS
 

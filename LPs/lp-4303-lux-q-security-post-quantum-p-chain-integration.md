@@ -1,7 +1,7 @@
 ---
 lp: 4303
 title: Lux Q-Security - Post-Quantum P-Chain Integration
-description: Post-quantum secure consensus layer integrated into P-Chain using ML-DSA (ML-DSA), ML-KEM (ML-KEM), and BLS+Pulsar hybrid signatures
+description: Post-quantum secure consensus layer integrated into P-Chain using ML-DSA, ML-KEM, and BLS+Pulsar hybrid signatures
 author: Lux Partners (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
 status: Final
@@ -26,7 +26,7 @@ order: 303
 
 This LP specifies **Lux Q-Security**, a post-quantum secure consensus layer integrated into **P-Chain** (Platform Chain) using:
 - **Pulsar (ML-DSA)**: Dilithium-based digital signatures
-- **ML-KEM (ML-KEM)**: Post-quantum key encapsulation
+- **ML-KEM**: Post-quantum key encapsulation
 - **BLS+Pulsar Hybrid**: Dual-signature scheme for gradual migration
 
 Q-Security is NOT a separate Q-Chain, but rather a **quantum-resistant security layer** embedded in Lux's P-Chain validator and governance paths, providing post-quantum protection across the entire Lux L1 (P/X/B/Z chains).
@@ -237,7 +237,7 @@ quantum:
 
 ### Design Decisions
 
-**1. ML-DSA as Primary PQC Scheme**: ML-DSA (ML-DSA) was selected over alternatives due to:
+**1. ML-DSA as Primary PQC Scheme**: ML-DSA was selected over alternatives due to:
 - NIST standardization (FIPS 204) providing regulatory certainty
 - Fastest verification among lattice-based signatures (0.5ms)
 - Reasonable signature size (3,293 bytes) compared to hash-based schemes

@@ -282,7 +282,7 @@ type RingtailSignature struct {
 
 **Why Pulsar?**
 
-| Aspect | Pulsar | ML-DSA (ML-DSA) |
+| Aspect | Pulsar | ML-DSA |
 |--------|----------|-------------------|
 | Threshold Support | **Native 2-round** | Requires complex MPC |
 | Implementation | Simple | Complex MPC around ML-DSA |
