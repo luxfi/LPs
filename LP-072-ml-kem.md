@@ -69,6 +69,41 @@ shared_secret = HKDF(X25519_secret || ML-KEM_secret)
 
 This ensures security if either X25519 or ML-KEM remains unbroken.
 
+### F103 — Hybrid vs Pure at the TLS Layer (Decision Record)
+
+The chain-wide `ChainSecurityProfile.KeyExchangeID` reads as **"the
+ML-KEM-768 component MUST be present on the wire"**, NOT "X25519 is
+forbidden in this layer". The IANA-registered hybrid `X25519MLKEM768`
+(curve ID `0x11ec`) — what real-world TLS 1.3 stacks implement today
+— satisfies `KeyExchangeMLKEM768` because the hybrid **contains** the
+ML-KEM-768 component.
+
+Two reasons to keep the hybrid as the canonical TLS-layer KEM:
+
+1. **Strictly stronger posture.** An attacker must break both X25519
+   AND ML-KEM-768 to derive the session key. Pure ML-KEM-768 collapses
+   to a single-assumption defence.
+2. **Deployable today.** No production TLS 1.3 stack ships pure
+   ML-KEM-768 standalone; every shipping implementation uses the
+   hybrid curve ID. Forcing pure would prevent strict-PQ chains from
+   peering with the rest of the ecosystem.
+
+The profile **deliberately does NOT** carry a separate "pure vs
+hybrid" enum byte: every additional axis is an additional downstream
+verifier obligation, and the audit signed off on the single-byte
+`KeyExchangeID` surface. `ForbidClassicalKEM` continues to refuse a
+pure-classical curve (e.g. X25519 alone) at the application layer; it
+does NOT refuse a hybrid that includes ML-KEM-768.
+
+Forks that wish to pin strictly-pure ML-KEM-768 at the TLS layer do
+so by overriding the chain's `KeyExchangeID` value, NOT by adding a
+new enum byte to the canonical profile.
+
+Implementation references:
+
+- `consensus/config/pq_mode.go` — `KeyExchangeID` enum + documentation
+- `node/network/peer/tls_config.go` — `CurvePreferences = [tls.X25519MLKEM768]`
+
 ## Security Considerations
 
 1. ML-KEM security relies on Module-LWE hardness (same assumption family as ML-DSA).
