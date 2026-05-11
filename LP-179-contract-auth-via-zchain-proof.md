@@ -2,7 +2,7 @@
 lp: 179
 title: Contract Auth via Z-Chain Proof (Lux mirror of HIP-0104)
 tags: [pq, contract-auth, precompile, z-chain, mirror, hip-0104]
-description: Lux-side mirror of Hanzo HIP-0104. Two precompiles at 0x13 (Z-Chain auth proof) and 0x14 (direct ML-DSA-65 verify) provide the contract-side strict-PQ auth surface. Heavy spec lives in HIP-0104.
+description: Lux-side mirror of Hanzo HIP-0104. Four precompiles at 0x0301..0x0304 (ML-DSA-65 / ML-DSA-87 / SLH-DSA / Z-Chain auth proof) provide the contract-side strict-PQ auth surface. Heavy spec lives in HIP-0104.
 author: Lux Core Team (@luxfi)
 status: Proposed
 type: Standards Track
@@ -23,17 +23,20 @@ references:
 
 ## Abstract
 
-LP-179 mirrors HIP-0104 into Lux. Two precompiles expose the strict-PQ
-contract-auth surface to EVM-compatible contracts on Lux:
+LP-179 mirrors HIP-0104 into Lux. Four precompiles expose the
+strict-PQ contract-auth surface to EVM-compatible contracts on Lux:
 
-- `0x13` — `ZCHAIN_AUTH_PROOF` verifier, accepts a format-byte-`0x10`
-  STARK_FRI_SHA3_PQ proof from LP-169 / HIP-0078 and returns the
-  authenticated 48-byte `AccountID` and `verified_at_height`.
-- `0x14` — direct ML-DSA-65 verifier, returns success/failure under
-  unmodified FIPS 204.
+- `0x0301` — `pq_verify_mldsa65`, FIPS 204 ML-DSA-65 verify.
+- `0x0302` — `pq_verify_mldsa87`, FIPS 204 ML-DSA-87 verify (high-value).
+- `0x0303` — `pq_verify_slh_dsa`, FIPS 205 SLH-DSA verify (hash-based
+  backstop).
+- `0x0304` — `pq_verify_z_auth_proof`, STARK_FRI_SHA3_PQ proof verifier
+  from LP-169 / HIP-0078; returns the authenticated 48-byte `AccountID`
+  and `verified_at_height`.
 
-Contracts call these via standard EVM `staticcall`. `ecrecover` is
-refused under `LUX_STRICT_PQ`.
+Each precompile returns `(bool ok, bytes payload)`. Contracts call
+these via standard EVM `staticcall`. `ecrecover` is refused under
+`LUX_STRICT_PQ`.
 
 ## Mirrored profile
 
@@ -57,11 +60,10 @@ ForbidFallbacks:     true
 ## Lux-specific bindings
 
 - `luxfi/consensus/protocol/auth/precompile.go` is the canonical
-  reference.
-- EVM-side binding: `luxfi/coreth/core/vm/contracts_pq.go`.
-- Gas schedule (canonical):
-    - `0x13` STARK_FRI_SHA3_PQ verify: 1,270,000 gas typical.
-    - `0x14` direct ML-DSA-65 verify: 800,000 gas.
+  reference; four `PrecompileAddrPQVerify*` constants pin the EVM
+  precompile addresses at 0x0301..0x0304.
+- EVM-side binding: `luxfi/coreth/core/vm/contracts_pq.go`. Gas
+  schedule lives there, not in consensus.
 - `ecrecover` (address `0x01`) is refused under `LUX_STRICT_PQ`. The
   permissive profile (`0x02`) keeps `ecrecover` available for
   transition.
@@ -70,8 +72,10 @@ ForbidFallbacks:     true
 ## Compliance
 
 A Lux EVM contract calling `ecrecover` under `LUX_STRICT_PQ` reverts
-with `ErrEcrecoverRefused`. Contracts MUST migrate to `staticcall(0x13)`
-or `staticcall(0x14)` before profile activation.
+with `ErrEcrecoverRefused`. Contracts MUST migrate to one of
+`staticcall(0x0301)` (ML-DSA-65 verify), `staticcall(0x0302)`
+(ML-DSA-87), `staticcall(0x0303)` (SLH-DSA), or `staticcall(0x0304)`
+(Z-Chain proof) before profile activation.
 
 ## References
 
