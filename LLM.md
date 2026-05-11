@@ -1,5 +1,38 @@
 # lps — AI Assistant Context
 
+## Post-E2E-PQ State (current)
+
+The Lux Proposals (LPs) repository now hosts the canonical E2E-PQ
+proposal set. Eight new LPs (168-179) landed this session, mirroring the
+Hanzo HIPs 0077-0104.
+
+### LPs that landed this session
+
+| LP | Mirrors HIP | Topic |
+|----|-------------|-------|
+| LP-168 | HIP-0077 | Mesh Identity |
+| LP-169 | HIP-0078 | Z-Chain |
+| LP-170 | HIP-0079 | Q-Chain |
+| LP-171 | HIP-0084 | Pulsar-M DKG |
+| LP-172..179 | HIP-0085..104 | E2E PQ coverage |
+
+### Recent significant commits
+
+| SHA | Impact |
+|-----|--------|
+| `77d6d4e` | LP-172..179 — mirror HIP-0085..104 |
+| `355a013` | LP-168/169/170/171 — mirror HIP-0077/0078/0079/0084 for Lux |
+| `88825fd` | PQ canonical terminology (FIPS 203/204/205 + Pulsar + Lamport) |
+| `e7a83ca` | Warp 2.0 canonical naming (Beam + ML-DSA + Pulse) |
+
+### Cross-repo coherence
+- This repo's LPs MIRROR the canonical Hanzo HIPs (HIP-0077..0104) for
+  the Lux network specifically.
+- Body text uses LP-specific paths (e.g. `luxfi/consensus`,
+  `luxfi/node`); cross-references to Hanzo + Zoo are kept explicit.
+
+---
+
 ## Key Terminology (2026-04-10)
 
 **Quasar Consensus = Triple Consensus (BLS + Pulsar + ML-DSA)**:

@@ -1,8 +1,8 @@
 ---
 lp: 171
-title: Pulsar-M — Threshold ML-DSA DKG & Signing (Lux mirror of HIP-0084)
-tags: [pq, pulsar-m, ml-dsa, threshold, dkg, mirror, hip-0084, nist-mptc]
-description: Lux-side mirror of Hanzo HIP-0084. Pins Pulsar-M-65 as the threshold ML-DSA primitive consumed by Q-Chain finality. Epoch-cadence DKG, identifiable abort, no BLS fallback. Threshold-aggregated signature verifies under unmodified FIPS 204 ML-DSA.Verify. Heavy spec lives in HIP-0084 and the NIST MPTC submission package.
+title: Pulsar — Threshold ML-DSA DKG & Signing (Lux mirror of HIP-0084)
+tags: [pq, pulsar, ml-dsa, threshold, dkg, mirror, hip-0084, nist-mptc]
+description: Lux-side mirror of Hanzo HIP-0084. Pins Pulsar-65 as the threshold ML-DSA primitive consumed by Q-Chain finality. Epoch-cadence DKG, identifiable abort, no BLS fallback. Threshold-aggregated signature verifies under unmodified FIPS 204 ML-DSA.Verify. Heavy spec lives in HIP-0084 and the NIST MPTC submission package.
 author: Lux Core Team (@luxfi)
 status: Proposed
 type: Standards Track
@@ -19,23 +19,23 @@ requires:
   - LP-170 (Q-Chain mirror)
 ---
 
-# LP-171: Pulsar-M — Threshold ML-DSA DKG & Signing
+# LP-171: Pulsar — Threshold ML-DSA DKG & Signing
 
 ## Abstract
 
-LP-171 mirrors Hanzo HIP-0084 into Lux. Pulsar-M is the **threshold
+LP-171 mirrors Hanzo HIP-0084 into Lux. Pulsar is the **threshold
 ML-DSA primitive** consumed by Q-Chain finality (LP-170) on the Lux
 primary network. It produces signatures byte-equal to single-party
 FIPS 204 ML-DSA — the threshold-aggregated output verifies under
 the unmodified FIPS 204 ML-DSA.Verify routine, with no Lux-specific
 verifier extension and no BLS fallback path.
 
-Pulsar-M targets NIST MPTC Class N1 (signing) + N4 (ML keygen /
+Pulsar targets NIST MPTC Class N1 (signing) + N4 (ML keygen /
 DKG) per NIST IR 8214C. LP-171 is the **deployment contract**
-between Q-Chain (consumer) and Pulsar-M (producer); the
+between Q-Chain (consumer) and Pulsar (producer); the
 cryptographic spec (protocol description, security games,
 parameter sets) is the NIST MPTC submission package at
-`luxfi/pulsar-m/spec/pulsar-m.tex`.
+`luxfi/pulsar/spec/pulsar.tex`.
 
 ## Mirrored profile
 
@@ -67,7 +67,7 @@ Resolved via `config.ProfileByID(config.ProfileLuxStrictPQ)`.
 
 | parameter             | value                                |
 |-----------------------|--------------------------------------|
-| sig scheme            | `0x52 Pulsar-M-65` (NIST PQ Cat 3)   |
+| sig scheme            | `0x52 Pulsar-65` (NIST PQ Cat 3)   |
 | hash family           | `0x01 SHA3_NIST`                     |
 | committee size `n`    | 64                                   |
 | BFT fault bound `f`   | 21                                   |
@@ -78,18 +78,18 @@ Resolved via `config.ProfileByID(config.ProfileLuxStrictPQ)`.
 | online signing        | preprocessing-enabled                |
 | abort handling        | identifiable abort, signed evidence  |
 
-High-value roots use `0x53 Pulsar-M-87` (NIST PQ Cat 5). The Lux
-primary network refuses `0x51 Pulsar-M-44`.
+High-value roots use `0x53 Pulsar-87` (NIST PQ Cat 5). The Lux
+primary network refuses `0x51 Pulsar-44`.
 
 ## Lux-specific bindings
 
-- **Reference implementation.** `luxfi/pulsar-m/ref/go/` ships through
+- **Reference implementation.** `luxfi/pulsar/ref/go/` ships through
   Sign + Verify with KAT cross-validation against the FIPS 204
   reference. KAT freeze: 2026-08-31 encoding gate.
 - **DKG flow.** DKG transcripts post to Z-Chain (LP-169) via the
   identity-registry path; participants are bound to
   `committee_root` per LP-170 clause 4 of the acceptance rule.
-- **Group public key.** Output of Pulsar-M DKG is a valid FIPS 204
+- **Group public key.** Output of Pulsar DKG is a valid FIPS 204
   ML-DSA-65 public key, indistinguishable from a single-party
   `ML-DSA.KeyGen` output under M-LWE. Bound into Q-Chain by
   `group_public_key_hash`.
@@ -99,18 +99,18 @@ primary network refuses `0x51 Pulsar-M-44`.
   protocol.
 - **Constant-time reshare.** F9 fix
   (`luxfi/pulsar/dkg2.constTimePolyEqual`) ports forward into
-  Pulsar-M's reshare path; no-secret-logs CI gate enforced in
-  `luxfi/pulsar-m`.
+  Pulsar's reshare path; no-secret-logs CI gate enforced in
+  `luxfi/pulsar`.
 
 ## Compliance
 
 A Lux validator MUST NOT silently substitute raw ML-DSA-65 or
-Ringtail for the Pulsar-M-65 production profile on the primary
+Ringtail for the Pulsar-65 production profile on the primary
 network. The fallback profiles are explicit operator opt-ins gated
 through `PQMode` selection (`mldsa` / `ringtail`) and refused by the
 Lux mainnet acceptance rule.
 
-A Pulsar-M ceremony whose participants do not match the
+A Pulsar ceremony whose participants do not match the
 Z-Chain-anchored `committee_root` is rejected by Q-Chain acceptance
 (LP-170 clause 4). A signature against a group key not in
 `group_public_key_hash` is refused (clause 6).
@@ -120,7 +120,7 @@ Z-Chain-anchored `committee_root` is rejected by Q-Chain acceptance
 - HIP-0084 — canonical deployment contract.
 - HIP-0078 / LP-169 — Z-Chain identity-rollup that anchors DKG
   transcripts + group keys.
-- HIP-0079 / LP-170 — Q-Chain consumer of Pulsar-M signatures.
-- `luxfi/pulsar-m/spec/pulsar-m.tex` — NIST MPTC submission package.
+- HIP-0079 / LP-170 — Q-Chain consumer of Pulsar signatures.
+- `luxfi/pulsar/spec/pulsar.tex` — NIST MPTC submission package.
 - NIST IR 8214C — First Call for Multi-Party Threshold Schemes.
 - FIPS 204 — verification target.
