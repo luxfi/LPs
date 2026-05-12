@@ -412,7 +412,7 @@ Reserved module interface for post-quantum signature integration:
 
 ```solidity
 interface IPostQuantumModule {
-    enum PQAlgorithm { ML_DSA_65, SLH_DSA_128S, RINGTAIL }
+    enum PQAlgorithm { ML_DSA_65, SLH_DSA_128S, CORONA }
 
     function registerPQKey(
         address owner,

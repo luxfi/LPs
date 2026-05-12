@@ -158,7 +158,7 @@ type Protocol uint8
 const (
     ProtocolCGGMP21 Protocol = iota
     ProtocolFROST
-    ProtocolRingtail
+    ProtocolCorona
 )
 ```
 
@@ -261,7 +261,7 @@ POST /ext/bc/T/threshold/reshare
     "keyRotationInterval": "24h",
     "signatureTimeout": "30s",
     "maxPendingSignatures": 1000,
-    "enableRingtail": true
+    "enableCorona": true
   }
 }
 ```

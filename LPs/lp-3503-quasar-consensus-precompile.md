@@ -77,7 +77,7 @@ Each chain submits block tips to Q-Chain for quantum-safe finalization. Once fin
 | `0x0300000000000000000000000000000000000020` | VerkleVerify | 3,000 | Verkle witness verification with PQ finality |
 | `0x0300000000000000000000000000000000000021` | BLSVerify | 5,000 | BLS signature verification |
 | `0x0300000000000000000000000000000000000022` | BLSAggregate | 2,000/sig | BLS signature aggregation |
-| `0x0300000000000000000000000000000000000023` | RingtailVerify | 8,000 | ML-DSA post-quantum verification |
+| `0x0300000000000000000000000000000000000023` | CoronaVerify | 8,000 | ML-DSA post-quantum verification |
 | `0x0300000000000000000000000000000000000024` | HybridVerify | 10,000 | BLS+Pulsar hybrid verification |
 | `0x0300000000000000000000000000000000000025` | CompressedVerify | 1,000 | Ultra-compressed witness verification |
 
@@ -121,7 +121,7 @@ Aggregates multiple BLS signatures into a single signature.
 
 **Gas:** 2,000 per signature (scales linearly)
 
-### RingtailVerify (0x...0023)
+### CoronaVerify (0x...0023)
 
 Verifies Pulsar (ML-DSA) post-quantum signatures.
 
@@ -207,7 +207,7 @@ interface IBLSAggregate {
         external view returns (bytes memory aggregatedSignature);
 }
 
-interface IRingtailVerify {
+interface ICoronaVerify {
     function verify(
         uint8 mode,
         bytes calldata publicKey,
@@ -243,14 +243,14 @@ library QuasarLib {
     address constant VERKLE_VERIFY = 0x0300000000000000000000000000000000000020;
     address constant BLS_VERIFY = 0x0300000000000000000000000000000000000021;
     address constant BLS_AGGREGATE = 0x0300000000000000000000000000000000000022;
-    address constant RINGTAIL_VERIFY = 0x0300000000000000000000000000000000000023;
+    address constant CORONA_VERIFY = 0x0300000000000000000000000000000000000023;
     address constant HYBRID_VERIFY = 0x0300000000000000000000000000000000000024;
     address constant COMPRESSED_VERIFY = 0x0300000000000000000000000000000000000025;
 
     uint256 constant VERKLE_GAS = 3000;
     uint256 constant BLS_VERIFY_GAS = 5000;
     uint256 constant BLS_AGGREGATE_GAS_PER_SIG = 2000;
-    uint256 constant RINGTAIL_GAS = 8000;
+    uint256 constant CORONA_GAS = 8000;
     uint256 constant HYBRID_GAS = 10000;
     uint256 constant COMPRESSED_GAS = 1000;
 
@@ -393,7 +393,7 @@ Each precompile serves a distinct purpose:
 1. **VerkleVerify**: State proofs with PQ finality assumption
 2. **BLSVerify**: Fast validator signatures (most common)
 3. **BLSAggregate**: Signature compression for efficiency
-4. **RingtailVerify**: Quantum-safe signatures when needed
+4. **CoronaVerify**: Quantum-safe signatures when needed
 5. **HybridVerify**: Defense-in-depth for critical operations
 6. **CompressedVerify**: Ultra-fast consensus witness checks
 
@@ -404,7 +404,7 @@ Each precompile serves a distinct purpose:
 | VerkleVerify | 3,000 | Simple commitment check with PQ assumption |
 | BLSVerify | 5,000 | BLS pairing ~100μs on M1 |
 | BLSAggregate | 2,000/sig | Linear aggregation cost |
-| RingtailVerify | 8,000 | ML-DSA ~108μs verification |
+| CoronaVerify | 8,000 | ML-DSA ~108μs verification |
 | HybridVerify | 10,000 | BLS + Pulsar combined |
 | CompressedVerify | 1,000 | Bitfield counting only |
 

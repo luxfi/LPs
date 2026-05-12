@@ -105,7 +105,7 @@ cross-chain replay become structurally impossible.
                         │   QuasarCert                            │
                         │     subject[32]                         │
                         │     bls_aggregate[96]                   │
-                        │     ringtail_artifact (offset/len)      │
+                        │     corona_artifact (offset/len)      │
                         │     mldsa_groth16_proof[192]            │
                         │     mldsa_groth16_pub_inputs_hash[32]   │
                         └─────────────────────────────────────────┘
@@ -166,10 +166,10 @@ and commits the result to `qchain_ceremony_root` in the next
 QuasarRoundDescriptor.
 
 ```cpp
-struct RingtailShareArtifact {
+struct CoronaShareArtifact {
     uint32_t participant_index;
     uint32_t round_index;             // 0 or 1 (2-round ceremony)
-    uint8_t  share[RINGTAIL_SHARE_BYTES];  // variable; defined upstream
+    uint8_t  share[CORONA_SHARE_BYTES];  // variable; defined upstream
 };
 ```
 
@@ -178,9 +178,9 @@ struct RingtailShareArtifact {
 | Hardness | Module-LWE (Ring-LWE) |
 | Threshold | t-of-n (defined per epoch) |
 | Aggregation | accumulator state (post-DKG, O(1) per added share) |
-| Verification | LP-073 §RingtailVerify with public key from `qchain_ceremony_root` |
+| Verification | LP-073 §CoronaVerify with public key from `qchain_ceremony_root` |
 | Wire size | variable (uses `(artifact_offset, artifact_len)`) |
-| Verifier | `verify_ringtail_share` (LP-132) |
+| Verifier | `verify_corona_share` (LP-132) |
 
 Q-Chain's role: run the threshold ceremony, NOT to verify execution.
 Q-Chain commits the public key for round R via
@@ -279,8 +279,8 @@ struct alignas(16) QuasarCert {
     uint8_t  bls_aggregate[96];                  ///< valid iff lane==BLS
     uint8_t  mldsa_groth16_proof[192];           ///< valid iff lane==MLDSAGroth16
     uint8_t  mldsa_groth16_pub_inputs_hash[32];
-    uint32_t ringtail_artifact_offset;
-    uint32_t ringtail_artifact_len;
+    uint32_t corona_artifact_offset;
+    uint32_t corona_artifact_len;
     uint64_t _pad1;
 };
 static_assert(sizeof(QuasarCert) == 432, "");
@@ -303,11 +303,11 @@ struct alignas(16) QuasarRoundResult {
     uint32_t fibers_suspended, fibers_resumed;
     // per-lane cert status
     uint32_t cert_status_bls;          ///< 0=incomplete, 1=quorum reached
-    uint32_t cert_status_ringtail;
+    uint32_t cert_status_corona;
     uint32_t mldsa_groth16_valid;      ///< 0/1 — Z-Chain proof verified
     // per-lane accumulated stake (lanes with per-validator stake)
     uint32_t cert_stake_bls_lo, cert_stake_bls_hi;
-    uint32_t cert_stake_ringtail_lo, cert_stake_ringtail_hi;
+    uint32_t cert_stake_corona_lo, cert_stake_corona_hi;
     // proof-only lane carries no stake aggregate (proven inside the proof)
     uint32_t mode;
     uint8_t  block_hash[32];
@@ -403,7 +403,7 @@ ServiceId::CertLane → drain_cert_lane → CertOut
 with three verifiers:
 
 - `verify_bls_aggregate` — pairing check via lux-accel BLS kernel
-- `verify_ringtail_share` — Ring-LWE share verify against Q-Chain key
+- `verify_corona_share` — Ring-LWE share verify against Q-Chain key
 - `verify_mldsa_groth16` — Groth16 verify against Z-Chain VK
 
 100% GPU-native: zero CPU compute on the round path.

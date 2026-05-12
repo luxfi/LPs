@@ -164,7 +164,7 @@ Following IETF ECVRF draft ensures:
 | `0x20` | `vrfBatchVerify(bytes[] pks, bytes[] alphas, bytes[] pis)` | 8,000 + 5,000/proof |
 | `0x30` | `vrfDerivePublicKey(bytes32 sk)` | 5,000 |
 | `0x40` | `vrfRingtailProve(bytes32[] sks, bytes alpha)` | 100,000 |
-| `0x41` | `vrfRingtailVerify(bytes32[] pks, bytes alpha, bytes pi)` | 50,000 |
+| `0x41` | `vrfCoronaVerify(bytes32[] pks, bytes alpha, bytes pi)` | 50,000 |
 
 ### VRF Constructions
 
@@ -526,7 +526,7 @@ interface IVRF {
     /// @param pi Aggregated proof
     /// @return valid True if proof is valid
     /// @return beta VRF output hash
-    function vrfRingtailVerify(
+    function vrfCoronaVerify(
         bytes32[] calldata pks,
         bytes calldata alpha,
         bytes calldata pi
@@ -566,7 +566,7 @@ const (
     SelectorBatchVerify    = 0x20
     SelectorDerivePublicKey = 0x30
     SelectorRingtailProve  = 0x40
-    SelectorRingtailVerify = 0x41
+    SelectorCoronaVerify = 0x41
 
     // Gas costs
     GasProve           = 50000
@@ -579,7 +579,7 @@ const (
     GasBatchPerProof   = 5000
     GasDeriveKey       = 5000
     GasRingtailProve   = 100000
-    GasRingtailVerify  = 50000
+    GasCoronaVerify  = 50000
 )
 
 type VRFPrecompile struct{}
@@ -603,8 +603,8 @@ func (p *VRFPrecompile) Run(accessibleState contract.AccessibleState, caller com
         return p.vrfEd25519Verify(data, suppliedGas)
     case SelectorBatchVerify:
         return p.vrfBatchVerify(data, suppliedGas)
-    case SelectorRingtailVerify:
-        return p.vrfRingtailVerify(data, suppliedGas)
+    case SelectorCoronaVerify:
+        return p.vrfCoronaVerify(data, suppliedGas)
     default:
         return nil, suppliedGas, ErrUnknownSelector
     }

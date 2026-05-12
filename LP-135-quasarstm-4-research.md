@@ -404,7 +404,7 @@ test surface:
 | `evm_tload_tstore` | PASS | PASS | yes |
 | `evm_mcopy` | PASS | PASS | yes |
 | `quasar_quorum_real_bls` | PASS | PASS | yes |
-| `quasar_quorum_real_ringtail` | PASS | PASS | yes |
+| `quasar_quorum_real_corona` | PASS | PASS | yes |
 | `quasar_quorum_real_groth16` | PASS | PASS | yes |
 | `reducer_lane_fee_accumulate` | PASS | PASS | yes |
 | `reducer_lane_order_append` | PASS | PASS | yes |

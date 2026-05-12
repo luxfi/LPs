@@ -102,7 +102,7 @@ audit. Status determined by running the test executables on M1 Max
 |---|---|---|---|---|---|
 | `luxfi/math/ntt/canonical/*` | Go-pure | ✅ ntt_test 3/3 | ✅ via Pulsar reshare | KEEP | canonical |
 | `luxfi/lattice/v7/ring/modular_reduction.go` | Go-pure | ✅ ring tests | ✅ | WRAP | already a thin shim over math/ntt/canonical (Phase 3 done) |
-| `luxcpp/crypto/corona/cpp/lattice_ring.cpp` | C++ CPU | ✅ ringtail_lattice_ring_kat | ✅ lattice_ring_bench | MOVE | → `luxcpp/math/src/cpu/ntt.cpp` (Pulsar parameter set) |
+| `luxcpp/crypto/corona/cpp/lattice_ring.cpp` | C++ CPU | ✅ corona_lattice_ring_kat | ✅ lattice_ring_bench | MOVE | → `luxcpp/math/src/cpu/ntt.cpp` (Pulsar parameter set) |
 | `luxcpp/crypto/corona/gpu/metal/lattice_ring.metal` | Metal | ✅ metal_kat_test | ✅ sweep bench | MOVE | → `luxcpp/math/src/gpu/metal/ntt_pulsar.metal` |
 | `luxcpp/crypto/corona/gpu/cuda/lattice_ring.cu` | CUDA | only via host polyfill | ⚠️ no live CUDA | MOVE | → `luxcpp/math/src/gpu/cuda/ntt_pulsar.cu` |
 | `luxcpp/crypto/corona/gpu/wgsl/lattice_ring.wgsl` | WGSL | ✅ wgsl_kat_test | ✅ sweep bench (real wgpu-native) | MOVE | → `luxcpp/math/src/gpu/wgsl/ntt_pulsar.wgsl` |

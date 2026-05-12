@@ -680,7 +680,7 @@ const (
 	ProtocolLSS     Protocol = "lss"
 	ProtocolCGG21   Protocol = "cgg21"
 	ProtocolFROST   Protocol = "frost"
-	ProtocolRingtail Protocol = "corona"
+	ProtocolCorona Protocol = "corona"
 )
 
 // DKGSession manages a distributed key generation ceremony

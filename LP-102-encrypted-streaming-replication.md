@@ -227,7 +227,7 @@ All 13 cryptographic layers are deployed on devnet, testnet, and mainnet.
 | 10 | MPC custody | PQ KEM encrypted key shares + Cloud HSM (FIPS 140-2 L3) | Safe (hardware isolation) | FIPS 203, FIPS 140-2 | Deployed |
 | 11 | Threshold signing | CGGMP21 (ECDSA), FROST (EdDSA), BLS, Pulsar (PQ lattice) | Safe (Pulsar PQ) | -- | Deployed |
 | 12 | On-chain precompiles | ML-DSA, ML-KEM, SLH-DSA, Pulsar, PQCrypto unified | Safe (all three FIPS) | FIPS 203/204/205 | Deployed |
-| 13 | Smart contracts | SafeMLDSASigner, SafeRingtailSigner, QuantumSafe base | Safe (precompile-backed) | FIPS 204 | Deployed |
+| 13 | Smart contracts | SafeMLDSASigner, SafeCoronaSigner, QuantumSafe base | Safe (precompile-backed) | FIPS 204 | Deployed |
 
 **EOA mitigation**: EOA transactions use secp256k1 ECDSA for wallet compatibility. PQ finality is achieved because Quasar consensus validators sign blocks with BLS + Pulsar + ML-DSA. A quantum adversary who forges an EOA signature still cannot finalize a block without compromising all three consensus assumptions.
 
@@ -248,7 +248,7 @@ Block finality requires valid signatures from all three schemes. An adversary mu
 Smart Accounts (ERC-4337 compliant) bypass the secp256k1 constraint via signature verification precompiles:
 
 - **SafeMLDSASigner**: Validates ML-DSA-65 signatures via precompile at `0x0130`/`0x0131`. Implements ERC-1271.
-- **SafeRingtailSigner**: Validates Pulsar lattice signatures via precompile at `0x0150`/`0x0151`.
+- **SafeCoronaSigner**: Validates Pulsar lattice signatures via precompile at `0x0150`/`0x0151`.
 - **QuantumSafe**: Base contract for Smart Accounts. Routes verification to the appropriate PQ precompile.
 
 ### On-Chain Precompiles

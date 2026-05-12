@@ -188,7 +188,7 @@ enum class QuasarCertLane : uint8_t {
     MLDSAGroth16     = 2,
     CGGMP21Share     = 3,    // (added by LP-133)
     FROSTShare       = 4,    // (added by LP-133)
-    RingtailGeneral  = 5,    // (added by LP-133)
+    CoronaGeneral  = 5,    // (added by LP-133)
     TFHEKeyShare     = 6,    // (added by LP-133)
 };
 ```

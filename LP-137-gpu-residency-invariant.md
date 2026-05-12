@@ -1169,7 +1169,7 @@ milestones from Phase-1:
 
 - **cevm v0.45 batched pairing** (shipped) — `verify_bls_aggregate_batch`,
   `verify_bls_same_message_batch`, `verify_groth16_batch`,
-  `verify_ringtail_batch`. Same-message hot path 9.24× at n=1024
+  `verify_corona_batch`. Same-message hot path 9.24× at n=1024
   (target ≥10×, residual is `blst_p1_uncompress` cost). Pairing math
   itself stays on the canonical host body: the Stage 5b single-CB
   Metal driver measured at 475 ms/pairing on M1 Max vs 510 µs host

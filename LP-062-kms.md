@@ -111,7 +111,7 @@ lanes from LP-134:
 |---|---|---|
 | Threshold ECDSA sign-as-key | `MChainCGGMP21` (5) | LP-019, LP-076 |
 | Threshold Schnorr/EdDSA sign-as-key | `MChainFROST` (6) | LP-019, LP-076 |
-| Post-quantum threshold sign | `MChainRingtailGen` (7) | LP-073, LP-076 |
+| Post-quantum threshold sign | `MChainCoronaGen` (7) | LP-073, LP-076 |
 | TFHE key-share storage | M-Chain ceremony → F-Chain key arena | LP-013, LP-066 |
 
 This makes threshold-KMS a thin wrapper over the existing MPC ceremony

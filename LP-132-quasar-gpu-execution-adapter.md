@@ -222,7 +222,7 @@ Three verifiers (LP-132 §§drain_cert_lane), shipped state per lane:
 | Lane | Verifier | Status (post 2026-02-14) | Substrate file |
 |---|---|---|---|
 | BLS | `verify_bls_aggregate` | **v0.44 real BLS pairing** (BLS12-381) — replaces 3.0 HMAC-keccak placeholder | `lib/consensus/quasar/gpu/crypto/bls12_381.metal` / `.cu` |
-| Pulsar | `verify_ringtail_share` | **v0.45 real Pulsar Ring-LWE** share verifier against Q-Chain ceremony key — replaces 3.0 HMAC-keccak placeholder | `lib/consensus/quasar/gpu/crypto/corona.metal` / `.cu` |
+| Pulsar | `verify_corona_share` | **v0.45 real Pulsar Ring-LWE** share verifier against Q-Chain ceremony key — replaces 3.0 HMAC-keccak placeholder | `lib/consensus/quasar/gpu/crypto/corona.metal` / `.cu` |
 | MLDSAGroth16 | `verify_mldsa_groth16` | **v0.45 real Groth16** over BLS12-381 against Z-Chain VK — replaces 3.0 HMAC-keccak placeholder | `lib/consensus/quasar/gpu/crypto/groth16.metal` / `.cu` |
 
 The 3.0 launch (2025-12-25) shipped HMAC-keccak placeholders across all

@@ -92,7 +92,7 @@ lives at `cevm/lib/evm/gpu/cuda/block_stm.{cu,_host.{hpp,cpp}}` and
 | **P-Chain** | PVM | No (linear, low-fanout) | per-tx, single producer | none — staking ops are serially ordered | drain_commit emits `pchain_validator_root` | `platformvm_*.{cu,metal,wgsl}` (staking, slashing, validator-set, transition). BLS sig batch via `quasar_bls_verifier.cpp`. |
 | **C-Chain** | EVM (cevm) | **Yes** | per-tx with ConflictSpec pre-placement | EIP-2930 access list > ABI selector > historical > precompile > learned > declared (six-source priority, 32-byte POD spec) | three-tier validation (read-set / write-set / semantic reducer) → drain_commit | `drain_exec` (EVM fiber VM, LP-009). Precompiles: ecrecover (cuda+metal), bls12-381 (cuda+metal), point_eval (metal), dex_match (metal), keccak (cuda+metal). modexp/blake2f/sha256/ripemd160/bn256 currently CPU-only. |
 | **X-Chain** | XVM | Partial — UTXO conflict graph, no MVCC re-exec | per-utxo (membership-proof level) | UTXO double-spend = static; no read-set tracking | `xchain_execution_root` via XVMTransition slot | `xvm_utxo.{cu,metal,wgsl}`, `xvm_membership.*`, `xvm_asset.*`, `xvm_roots.*`. |
-| **Q-Chain** | QVM | No (cert lane is non-MVCC) | per-share batch verify | Pulsar signer-set sigma-protocol; conflict = invalid share | `drain_cert_lane` via `quasar_ringtail_verifier.cpp` | `crypto/corona/gpu/metal/ringtail_{verify,sign,ops}.metal`. Lattice ops in `crypto/lattice` (NTT, ring). |
+| **Q-Chain** | QVM | No (cert lane is non-MVCC) | per-share batch verify | Pulsar signer-set sigma-protocol; conflict = invalid share | `drain_cert_lane` via `quasar_corona_verifier.cpp` | `crypto/corona/gpu/metal/corona_{verify,sign,ops}.metal`. Lattice ops in `crypto/lattice` (NTT, ring). |
 | **Z-Chain** | ZVM | No (cert lane) | per-proof batch verify | Groth16 pairing equation | `drain_cert_lane` via `quasar_groth16_verifier.cpp` (uses `vk_root` from round descriptor) | `crypto/bn254/gpu/metal/bn254.metal` for pairings; `crypto/kzg`, `crypto/ipa`, `crypto/banderwagon` for adjacent rollup proofs. |
 | **A-Chain** | AIVM | Partial — attestations are append-only with light dedup | per-attestation; one-pass verify | TEE-quote uniqueness + replay window | `drain_attest` → `achain_state_root` via AIVMTransition | `aivm_attestation.{cu,metal,wgsl}`, `aivm_anchor.*`, `ai_precompile_metal.mm`. Composite attestation parsers in `crypto/attestation`. |
 | **B-Chain** | BVM | Partial — bridge messages are independent unless fanout-merged (Nebula) | per-message; Nebula DAG when high-fanout | inbox replay-protection; signatures verified in batch | `drain_bridge` → `bchain_state_root` via BridgeVMTransition | `bridgevm_bls.cpp`, `bridgevm_liquidity.cu`, `bridgevm_kernels_common.{cuh,metal,wgsl}`. |
@@ -133,7 +133,7 @@ not the right tool — a single conflict check per item is enough.
 | BLS12-381 | C-Chain precompile, P-Chain validator BLS, B-Chain | `crypto/bls/cpp` | `cevm/.../precompiles/bls12_381_{cuda,metal}` |
 | KZG / point_eval | EIP-4844 blob, Verkle | `crypto/kzg/cpp` | `cevm/.../precompiles/point_eval_metal.mm` (cuda absent — TODO) |
 | IPA / Banderwagon / Pedersen | Verkle, ZK | `crypto/{ipa,banderwagon,pedersen}/cpp` | per-alg `gpu/{cuda,metal,wgsl}` |
-| Pulsar | Q-Chain consensus | `crypto/corona/cpu` | `crypto/corona/gpu/metal/ringtail_*.metal` |
+| Pulsar | Q-Chain consensus | `crypto/corona/cpu` | `crypto/corona/gpu/metal/corona_*.metal` |
 | Groth16 | Z-Chain | `quasar_groth16_verifier.cpp` | dispatches into bn254 GPU |
 | ML-DSA | Z-Chain (192-byte proof), A-Chain | `crypto/mldsa/cpp` | `crypto/mldsa/gpu/{cuda,metal,wgsl}` |
 | FHE / NTT | F-Chain | `fhe/src` (OpenFHE-derived) + `crypto/ntt/cpp` | `fhe/build_mlx`, `crypto/ntt/gpu`, `luxcpp/lattice` |
@@ -210,7 +210,7 @@ worker, dispatch shape identical to Metal.
 - Service ring (drain_*): `luxcpp/cevm/lib/consensus/quasar/gpu/quasar_wave.metal:642..2342`
 - Service IDs: `luxcpp/cevm/lib/consensus/quasar/gpu/quasar_gpu_layout.hpp:41`
 - Groth16 verifier (Z-Chain): `luxcpp/cevm/lib/consensus/quasar/gpu/quasar_groth16_verifier.{hpp,cpp}`
-- Pulsar verifier (Q-Chain): `luxcpp/cevm/lib/consensus/quasar/gpu/quasar_ringtail_verifier.{hpp,cpp}`
+- Pulsar verifier (Q-Chain): `luxcpp/cevm/lib/consensus/quasar/gpu/quasar_corona_verifier.{hpp,cpp}`
 - BLS verifier: `luxcpp/cevm/lib/consensus/quasar/gpu/quasar_bls_verifier.{hpp,cpp}`
 - Per-chain VMs: `luxcpp/{platformvm,xvm,aivm,bridgevm,mpcvm,fhe}/src`
 - C-Chain precompile dispatch: `luxcpp/cevm/lib/evm/gpu/precompiles/precompile_dispatch.hpp:1`

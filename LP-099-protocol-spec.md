@@ -110,7 +110,7 @@ assumptions, each contributed by a separate chain:
 | MLDSAProof | ML-DSA-65 → Groth16 over BLS12-381 | Module-LWE + MSIS, then Groth16 SNARK | **Z-Chain** | 192 B |
 
 PQ modes (`config/pq_mode.go`): `BLSOnly`, `BLSPlusMLDSA`,
-`BLSPlusRingtail`, `BLSPlusGroth16`, `TripleQuantum`. Triple mode
+`BLSPlusCorona`, `BLSPlusGroth16`, `DoubleLatticePlusClassical`. Triple mode
 runs all three layers in parallel via `TripleSignRound1`.
 
 ### Audit Requirements

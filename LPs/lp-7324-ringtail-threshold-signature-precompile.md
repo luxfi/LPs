@@ -106,7 +106,7 @@ Where:
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
-interface IRingtail {
+interface ICorona {
     /**
      * @dev Verifies a Pulsar threshold signature
      * @param threshold Required number of signers (t)
@@ -124,7 +124,7 @@ interface IRingtail {
 }
 
 library RingtailLib {
-    IRingtail constant RINGTAIL = IRingtail(0x020000000000000000000000000000000000000B);
+    ICorona constant CORONA = ICorona(0x020000000000000000000000000000000000000B);
     
     /**
      * @dev Verify threshold signature or revert
@@ -136,7 +136,7 @@ library RingtailLib {
         bytes calldata signature
     ) internal view {
         require(
-            RINGTAIL.verifyThreshold(threshold, totalParties, messageHash, signature),
+            CORONA.verifyThreshold(threshold, totalParties, messageHash, signature),
             "Pulsar: invalid threshold signature"
         );
     }
@@ -153,7 +153,7 @@ library RingtailLib {
  * @dev Base contract for Pulsar threshold verification
  */
 abstract contract RingtailVerifier {
-    IRingtail internal constant corona = IRingtail(0x020000000000000000000000000000000000000B);
+    ICorona internal constant corona = ICorona(0x020000000000000000000000000000000000000B);
     
     modifier validRingtailSignature(
         uint32 threshold,
@@ -357,7 +357,7 @@ The Pulsar precompile is implemented across multiple layers, providing post-quan
 ```
 ┌─────────────────────────────────────────────────────────────────┐
 │                    Solidity Interface                           │
-│  IRingtail.sol → RingtailLib.sol → RingtailVerifier.sol        │
+│  ICorona.sol → RingtailLib.sol → RingtailVerifier.sol        │
 └─────────────────────────┬───────────────────────────────────────┘
                           │ staticcall
 ┌─────────────────────────▼───────────────────────────────────────┐
@@ -387,7 +387,7 @@ The Pulsar precompile is implemented across multiple layers, providing post-quan
 | `contract.go` | 257 | Core precompile at `0x020000...000B`, signature verification |
 | `module.go` | 50 | Precompile registration with EVM |
 | `contract_test.go` | 236 | Comprehensive test suite |
-| `IRingtail.sol` | 288 | Solidity interface and library |
+| `ICorona.sol` | 288 | Solidity interface and library |
 | `README.md` | 501 | Complete documentation |
 
 **Precompile Address**: `0x020000000000000000000000000000000000000B`

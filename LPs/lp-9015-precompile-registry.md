@@ -99,7 +99,7 @@ library PrecompileRegistry {
     address internal constant QUASAR = 0x020000000000000000000000000000000000000a;
 
     /// @notice Pulsar lattice threshold signatures
-    address internal constant RINGTAIL = 0x020000000000000000000000000000000000000B;
+    address internal constant CORONA = 0x020000000000000000000000000000000000000B;
 
     /// @notice FROST Schnorr threshold signatures
     address internal constant FROST = 0x020000000000000000000000000000000000000c;
@@ -175,7 +175,7 @@ library PrecompileRegistry {
         if (addr == SLH_DSA) return "SLH-DSA";
         if (addr == PQ_CRYPTO) return "PQCrypto";
         if (addr == QUASAR) return "Quasar";
-        if (addr == RINGTAIL) return "Pulsar";
+        if (addr == CORONA) return "Pulsar";
         if (addr == FROST) return "FROST";
         if (addr == CGGMP21) return "CGGMP21";
         if (addr == BRIDGE) return "Bridge";
@@ -248,7 +248,7 @@ contract PrecompileChecker {
         mldsaAvailable = _isContractLive(PrecompileRegistry.ML_DSA);
         frostAvailable = _isContractLive(PrecompileRegistry.FROST);
         cggmp21Available = _isContractLive(PrecompileRegistry.CGGMP21);
-        ringtailAvailable = _isContractLive(PrecompileRegistry.RINGTAIL);
+        ringtailAvailable = _isContractLive(PrecompileRegistry.CORONA);
     }
 
     /// @notice Get all precompile statuses
@@ -271,7 +271,7 @@ contract PrecompileChecker {
         addresses[7] = PrecompileRegistry.SLH_DSA;
         addresses[8] = PrecompileRegistry.PQ_CRYPTO;
         addresses[9] = PrecompileRegistry.QUASAR;
-        addresses[10] = PrecompileRegistry.RINGTAIL;
+        addresses[10] = PrecompileRegistry.CORONA;
         addresses[11] = PrecompileRegistry.FROST;
         addresses[12] = PrecompileRegistry.CGGMP21;
         addresses[13] = PrecompileRegistry.BRIDGE;

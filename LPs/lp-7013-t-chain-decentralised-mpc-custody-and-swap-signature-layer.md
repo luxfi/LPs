@@ -249,7 +249,7 @@ if quantumPhase >= 1:
     
 // Phase 2: Both required
 if quantumPhase >= 2:
-    require RingtailVerify(QuantumPubKey[AssetID], QuantumBitmap, QuantumSig, msgHash(SwapID))
+    require CoronaVerify(QuantumPubKey[AssetID], QuantumBitmap, QuantumSig, msgHash(SwapID))
     
 require bitcount(ClassicalBitmap) >= threshold(AssetID)
 require bitcount(QuantumBitmap) >= qThreshold(AssetID)

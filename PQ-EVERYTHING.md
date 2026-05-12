@@ -53,7 +53,7 @@ Not algorithm choice — those are settled (NIST PQC round 4). The blockers are:
 
 ## Hash-layer choice (LP-073 §9.1)
 
-Recorded decision: **BLAKE2b in Lattigo PRNG, BLAKE3 in Pulsar transcripts, both in LP-149 EVM precompiles.** Validated empirically by `ringtail_blake_bench` (luxcpp/crypto):
+Recorded decision: **BLAKE2b in Lattigo PRNG, BLAKE3 in Pulsar transcripts, both in LP-149 EVM precompiles.** Validated empirically by `corona_blake_bench` (luxcpp/crypto):
 
 ```
                  64 B      1 KiB     64 KiB    1 MiB

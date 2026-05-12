@@ -67,7 +67,7 @@ corona Ring-LWE body. Concrete deltas vs the audit snapshot:
 - **Pulsar Ring-LWE first-party body wired.**
   `corona/cpp/corona.{hpp,cpp}` (691 LOC) lands setup / sign / verify
   for the Ring-LWE threshold signature scheme. C-ABI no longer returns
-  NOTIMPL. `crypto_status()` bitmask now sets the `CRYPTO_ALG_RINGTAIL`
+  NOTIMPL. `crypto_status()` bitmask now sets the `CRYPTO_ALG_CORONA`
   bit. Commit `ecf21b73` + `f35c6b22` (bitmask). Pulsar full spec:
   LP-073 + papers/lp-073-corona.pdf.
 - **Acceleration kernels (LP-160..LP-166) shipped.** Seven kernels,

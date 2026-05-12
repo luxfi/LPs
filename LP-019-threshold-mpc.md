@@ -432,7 +432,7 @@ The cert lanes on M-Chain are:
 |---|---|---|
 | `MChainCGGMP21` (5) | CGGMP21 ECDSA threshold | partial-share artifact |
 | `MChainFROST` (6) | FROST Schnorr/EdDSA threshold | partial-share artifact |
-| `MChainRingtailGen` (7) | Corona-general (PQ threshold) | partial-share artifact |
+| `MChainCoronaGen` (7) | Corona-general (PQ threshold) | partial-share artifact |
 
 (Lane numbers per LP-134 §QuasarCertLane registry.)
 

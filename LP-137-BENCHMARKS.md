@@ -385,7 +385,7 @@ latency dominates; expected to land on discrete CUDA hosts).
 
 - **cevm v0.45 batched pairing** — `verify_bls_aggregate_batch`,
   `verify_bls_same_message_batch`, `verify_groth16_batch`, and
-  `verify_ringtail_batch` collapse N pairings into one Miller-fold
+  `verify_corona_batch` collapse N pairings into one Miller-fold
   + one final-exponentiation. Same-message (consensus hot path) hits
   9.24× at n=1024 against a flat 1.15 ms host-blst baseline. Pairing
   itself is host blst (canonical c-abi body); the batching alone is
