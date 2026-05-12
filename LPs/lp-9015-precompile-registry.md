@@ -243,12 +243,12 @@ contract PrecompileChecker {
         bool mldsaAvailable,
         bool frostAvailable,
         bool cggmp21Available,
-        bool ringtailAvailable
+        bool coronaAvailable
     ) {
         mldsaAvailable = _isContractLive(PrecompileRegistry.ML_DSA);
         frostAvailable = _isContractLive(PrecompileRegistry.FROST);
         cggmp21Available = _isContractLive(PrecompileRegistry.CGGMP21);
-        ringtailAvailable = _isContractLive(PrecompileRegistry.CORONA);
+        coronaAvailable = _isContractLive(PrecompileRegistry.CORONA);
     }
 
     /// @notice Get all precompile statuses

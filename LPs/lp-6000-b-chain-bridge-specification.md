@@ -165,7 +165,7 @@ func (b *Bridge) Sign(request BridgeRequest) (*DualSignature, error) {
         sig.CGG21Sig = b.signCGG21(request)
     }
     if phase >= Phase2 {
-        sig.CoronaSig = b.signRingtail(request)
+        sig.CoronaSig = b.signCorona(request)
     }
 
     return sig, nil

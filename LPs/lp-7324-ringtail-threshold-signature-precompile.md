@@ -778,7 +778,7 @@ defer func() {
 
 ```go
 // contract.go - Core verification flow
-func (c *RingtailPrecompile) Run(input []byte) ([]byte, error) {
+func (c *CoronaPrecompile) Run(input []byte) ([]byte, error) {
     // 1. Parse threshold parameters
     threshold, totalParties, msgHash, sig := parseInput(input)
     
@@ -876,7 +876,7 @@ func (em *EpochManager) RotateEpoch(validators []string, force bool) error {
     }
     
     // Generate new threshold keys
-    groupKey, shares := ringtailDKG(validators, threshold)
+    groupKey, shares := coronaDKG(validators, threshold)
     
     // Prune old epochs
     em.pruneHistory()
@@ -928,7 +928,7 @@ contract QuantumSafeVault is CoronaVerifier {
         bytes calldata sig
     ) external nonReentrant {
         bytes32 messageHash = keccak256(abi.encode(
-            "RingtailVault-v1",
+            "CoronaVault-v1",
             block.chainid,
             address(this),
             to,
