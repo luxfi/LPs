@@ -152,8 +152,8 @@ Verifies combined BLS + Pulsar signatures for defense-in-depth.
 | Offset | Length | Field | Description |
 |--------|--------|-------|-------------|
 | 0 | 96 | `blsSignature` | BLS signature |
-| 96 | 2 | `ringtailSigLen` | Pulsar signature length |
-| 98 | var | `ringtailSignature` | ML-DSA signature |
+| 96 | 2 | `coronaSigLen` | Pulsar signature length |
+| 98 | var | `coronaSignature` | ML-DSA signature |
 | 98+len | 32 | `messageHash` | Message hash |
 | 130+len | 48 | `blsPublicKey` | BLS public key |
 | 178+len | var | `ringtailPublicKey` | ML-DSA public key |
@@ -219,7 +219,7 @@ interface ICoronaVerify {
 interface IHybridVerify {
     function verify(
         bytes calldata blsSignature,
-        bytes calldata ringtailSignature,
+        bytes calldata coronaSignature,
         bytes32 messageHash,
         bytes calldata blsPublicKey,
         bytes calldata ringtailPublicKey

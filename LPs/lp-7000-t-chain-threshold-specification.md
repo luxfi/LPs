@@ -303,7 +303,7 @@ See `github.com/luxfi/node/vms/thresholdvm/*_test.go`:
 ```go
 func TestThresholdVMStats(t *testing.T)
 func TestEncryptedWarpThroughThreshold(t *testing.T)
-func TestRingtailProtocolForWarp(t *testing.T)
+func TestCoronaProtocolForWarp(t *testing.T)
 func TestWarpMessageHashForSigning(t *testing.T)
 func TestThresholdConfigDefaults(t *testing.T)
 func TestKeyShareInterface(t *testing.T)
