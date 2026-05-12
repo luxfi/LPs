@@ -163,7 +163,7 @@ Following IETF ECVRF draft ensures:
 | `0x12` | `vrfEd25519ProofToHash(bytes pi)` | 1,500 |
 | `0x20` | `vrfBatchVerify(bytes[] pks, bytes[] alphas, bytes[] pis)` | 8,000 + 5,000/proof |
 | `0x30` | `vrfDerivePublicKey(bytes32 sk)` | 5,000 |
-| `0x40` | `vrfRingtailProve(bytes32[] sks, bytes alpha)` | 100,000 |
+| `0x40` | `vrfCoronaProve(bytes32[] sks, bytes alpha)` | 100,000 |
 | `0x41` | `vrfCoronaVerify(bytes32[] pks, bytes alpha, bytes pi)` | 50,000 |
 
 ### VRF Constructions
@@ -344,7 +344,7 @@ Batch verifies multiple VRF proofs for efficiency.
 | 1 | 32*n | Hashes (if all valid) |
 ```
 
-#### vrfRingtailProve
+#### vrfCoronaProve
 
 Generates a threshold VRF proof using Pulsar aggregation.
 
@@ -385,7 +385,7 @@ Generates a threshold VRF proof using Pulsar aggregation.
 │  ┌─────────────────────────────────────────────────────────────────┐│
 │  │ ecvrf_secp256k1.go       - ECVRF on secp256k1                   ││
 │  │ ecvrf_ed25519.go         - ECVRF on Ed25519                     ││
-│  │ ringtail_vrf.go          - Threshold VRF                        ││
+│  │ corona_vrf.go          - Threshold VRF                        ││
 │  │ hash_to_curve.go         - Try-and-increment / Elligator2       ││
 │  └─────────────────────────────────────────────────────────────────┘│
 ├─────────────────────────────────────────────────────────────────────┤
@@ -415,7 +415,7 @@ evm/precompile/contracts/vrf/
 ├── gas.go                  (2 KB)   # Gas metering
 ├── ecvrf_secp256k1.go      (8 KB)   # ECVRF secp256k1 implementation
 ├── ecvrf_ed25519.go        (7 KB)   # ECVRF Ed25519 implementation
-├── ringtail_vrf.go         (6 KB)   # Threshold VRF
+├── corona_vrf.go         (6 KB)   # Threshold VRF
 ├── hash_to_curve.go        (5 KB)   # Hash-to-curve algorithms
 ├── proof.go                (3 KB)   # Proof encoding/decoding
 └── testdata/
@@ -515,7 +515,7 @@ interface IVRF {
     /// @param alpha VRF input
     /// @return pi Aggregated proof
     /// @return beta VRF output hash
-    function vrfRingtailProve(
+    function vrfCoronaProve(
         bytes32[] calldata sks,
         bytes calldata alpha
     ) external view returns (bytes memory pi, bytes32 beta);
@@ -565,7 +565,7 @@ const (
     SelectorEd25519Hash    = 0x12
     SelectorBatchVerify    = 0x20
     SelectorDerivePublicKey = 0x30
-    SelectorRingtailProve  = 0x40
+    SelectorCoronaProve  = 0x40
     SelectorCoronaVerify = 0x41
 
     // Gas costs
@@ -578,7 +578,7 @@ const (
     GasBatchBase       = 8000
     GasBatchPerProof   = 5000
     GasDeriveKey       = 5000
-    GasRingtailProve   = 100000
+    GasCoronaProve   = 100000
     GasCoronaVerify  = 50000
 )
 

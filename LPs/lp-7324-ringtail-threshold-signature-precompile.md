@@ -123,7 +123,7 @@ interface ICorona {
     ) external view returns (bool valid);
 }
 
-library RingtailLib {
+library CoronaLib {
     ICorona constant CORONA = ICorona(0x020000000000000000000000000000000000000B);
     
     /**
@@ -152,7 +152,7 @@ library RingtailLib {
 /**
  * @dev Base contract for Pulsar threshold verification
  */
-abstract contract RingtailVerifier {
+abstract contract CoronaVerifier {
     ICorona internal constant corona = ICorona(0x020000000000000000000000000000000000000B);
     
     modifier validCoronaSignature(
@@ -173,7 +173,7 @@ abstract contract RingtailVerifier {
 ### Example Usage
 
 ```solidity
-contract QuantumSafeDAO is RingtailVerifier {
+contract QuantumSafeDAO is CoronaVerifier {
     struct Council {
         uint32 threshold;        // e.g., 3
         uint32 totalMembers;     // e.g., 5
@@ -196,7 +196,7 @@ contract QuantumSafeDAO is RingtailVerifier {
     }
 }
 
-contract ThresholdWallet is RingtailVerifier {
+contract ThresholdWallet is CoronaVerifier {
     uint32 public threshold = 2;
     uint32 public totalOwners = 3;
     
@@ -208,7 +208,7 @@ contract ThresholdWallet is RingtailVerifier {
     ) external {
         bytes32 txHash = keccak256(abi.encode(to, amount, nonce));
         
-        RingtailLib.verifyOrRevert(
+        CoronaLib.verifyOrRevert(
             threshold,
             totalOwners,
             txHash,
@@ -357,7 +357,7 @@ The Pulsar precompile is implemented across multiple layers, providing post-quan
 ```
 ┌─────────────────────────────────────────────────────────────────┐
 │                    Solidity Interface                           │
-│  ICorona.sol → RingtailLib.sol → RingtailVerifier.sol        │
+│  ICorona.sol → CoronaLib.sol → CoronaVerifier.sol        │
 └─────────────────────────┬───────────────────────────────────────┘
                           │ staticcall
 ┌─────────────────────────▼───────────────────────────────────────┐
@@ -913,9 +913,9 @@ func ValidateBlock(block *Block) bool {
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.24;
 
-import {RingtailLib} from "./RingtailLib.sol";
+import {CoronaLib} from "./CoronaLib.sol";
 
-contract QuantumSafeVault is RingtailVerifier {
+contract QuantumSafeVault is CoronaVerifier {
     uint32 public threshold;
     uint32 public totalOwners;
     mapping(bytes32 => bool) public usedNonces;
@@ -941,7 +941,7 @@ contract QuantumSafeVault is RingtailVerifier {
         usedNonces[messageHash] = true;
         
         // 2. Verify post-quantum threshold signature
-        RingtailLib.verifyOrRevert(
+        CoronaLib.verifyOrRevert(
             threshold,
             totalOwners,
             messageHash,
