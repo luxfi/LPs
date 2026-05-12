@@ -284,9 +284,9 @@ Projects using FROST/CGGMP21 can migrate incrementally:
 
 **Phase 1**: Dual signatures (classical + PQ)
 ```solidity
-function verify(bytes calldata frostSig, bytes calldata ringtailSig) {
+function verify(bytes calldata frostSig, bytes calldata coronaSig) {
     require(verifyFROST(frostSig), "FROST failed");
-    require(verifyRingtail(ringtailSig), "Pulsar failed");
+    require(verifyRingtail(coronaSig), "Pulsar failed");
 }
 ```
 

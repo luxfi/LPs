@@ -477,8 +477,8 @@ function testHybridVerification() public {
     // Both BLS and Pulsar must pass
     bytes memory input = abi.encodePacked(
         blsSignature,      // 96 bytes
-        uint16(ringtailSig.length),
-        ringtailSig,
+        uint16(coronaSig.length),
+        coronaSig,
         messageHash,       // 32 bytes
         blsPublicKey,      // 48 bytes
         coronaPublicKey

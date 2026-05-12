@@ -349,13 +349,13 @@ The pinnacle layer adding dual-certificate finality:
 type QuasarConsensus struct {
     engine      ConsensusEngine  // Beam or Nova
     blsAgg      *BLSAggregator
-    corona    *RingtailThreshold
+    corona    *CoronaThreshold
     timeout     time.Duration
 }
 
 type DualCertificate struct {
     BLSCert     []byte  // Classical BLS aggregate
-    RingtailCert []byte  // Post-quantum threshold sig
+    CoronaCert []byte  // Post-quantum threshold sig
 }
 
 func (q *QuasarConsensus) Finalize(block Block) (*DualCertificate, error) {
@@ -364,7 +364,7 @@ func (q *QuasarConsensus) Finalize(block Block) (*DualCertificate, error) {
     ch2 := make(chan []byte)
     
     go q.collectBLS(block, ch1)
-    go q.collectRingtail(block, ch2)
+    go q.collectCorona(block, ch2)
     
     select {
     case <-time.After(q.timeout):
@@ -436,7 +436,7 @@ Q-Chain requires two cryptographic certificates for block finality:
 // Block is final IFF both certificates are valid
 func IsBlockFinal(block Block, cert DualCertificate) bool {
     return verifyBLS(cert.BLSCert, block) && 
-           verifyRingtail(cert.RingtailCert, block)
+           verifyRingtail(cert.CoronaCert, block)
 }
 ```
 
@@ -538,13 +538,13 @@ func (b *BLSAggregator) Aggregate() ([]byte, error) {
 }
 
 // Pulsar Operations  
-type RingtailThreshold struct {
+type CoronaThreshold struct {
     threshold   int
     shares      map[ID]Share
     publicKey   PublicKey
 }
 
-func (r *RingtailThreshold) Combine() ([]byte, error) {
+func (r *CoronaThreshold) Combine() ([]byte, error) {
     if len(r.shares) < r.threshold {
         return nil, ErrInsufficientShares
     }
@@ -658,7 +658,7 @@ func (q *QChain) AggregateCertificates(block Block) (*DualCertificate, error) {
     
     return &DualCertificate{
         BLSCert:      blsCert,
-        RingtailCert: rtCert,
+        CoronaCert: rtCert,
     }, nil
 }
 ```

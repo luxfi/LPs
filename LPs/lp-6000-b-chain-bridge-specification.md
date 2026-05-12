@@ -139,7 +139,7 @@ interface IBridgeChain {
 
     struct DualSignature {
         bytes cgg21Sig;      // Classical threshold signature
-        bytes ringtailSig;   // Quantum-safe threshold signature
+        bytes coronaSig;   // Quantum-safe threshold signature
     }
 
     function initiateBridge(BridgeRequest calldata request) external payable;

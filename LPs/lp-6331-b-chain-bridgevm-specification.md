@@ -1424,7 +1424,7 @@ const (
     SigTypeECDSA    SignatureRequestType = 0  // CGG21
     SigTypeSchnorr  SignatureRequestType = 1  // MuSig2 for Bitcoin
     SigTypeEd25519  SignatureRequestType = 2  // FROST for Cosmos
-    SigTypeRingtail SignatureRequestType = 3  // Quantum-safe
+    SigTypeCorona SignatureRequestType = 3  // Quantum-safe
 )
 
 // TChainClient handles communication with T-Chain
@@ -1953,7 +1953,7 @@ Total minimum size: 8 + 8 + 1 + 20 + 32 + 32 + 32 + 8 + 8 + 20 + 65 = 234 bytes
 +--------+--------+--------+--------+--------+--------+--------+--------+
 |   V    |  BitmapLen  |          SignerBitmap (variable)               |
 +--------+--------+--------+--------+--------+--------+--------+--------+
-| RingtailLen |              CoronaSig (variable, optional)           |
+| CoronaLen |              CoronaSig (variable, optional)           |
 +--------+--------+--------+--------+--------+--------+--------+--------+
 |                    TChainBlockHash (32 bytes)                         |
 +--------+--------+--------+--------+--------+--------+--------+--------+

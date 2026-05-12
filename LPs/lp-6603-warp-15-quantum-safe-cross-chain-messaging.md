@@ -229,8 +229,8 @@ type SignatureType uint8
 const (
     // SigTypeBLS uses classical BLS signatures (Warp 1.0 compatibility)
     SigTypeBLS SignatureType = iota
-    // SigTypeRingtail uses quantum-safe Pulsar signatures (recommended)
-    SigTypeRingtail
+    // SigTypeCorona uses quantum-safe Pulsar signatures (recommended)
+    SigTypeCorona
     // SigTypeHybrid uses BLS+Pulsar hybrid (deprecated)
     SigTypeHybrid
 )
@@ -241,7 +241,7 @@ const (
 | Type | Use Case | Security | Size |
 |------|----------|----------|------|
 | **SigTypeBLS** | Legacy compatibility, small messages | Classical only | 96 bytes |
-| **SigTypeRingtail** | **New deployments (recommended)** | Post-quantum | ~3-5 KB |
+| **SigTypeCorona** | **New deployments (recommended)** | Post-quantum | ~3-5 KB |
 | **SigTypeHybrid** | Migration period (deprecated) | Both | ~3.1-5.1 KB |
 
 #### Migration Timeline
