@@ -436,7 +436,7 @@ Q-Chain requires two cryptographic certificates for block finality:
 // Block is final IFF both certificates are valid
 func IsBlockFinal(block Block, cert DualCertificate) bool {
     return verifyBLS(cert.BLSCert, block) && 
-           verifyRingtail(cert.CoronaCert, block)
+           verifyCorona(cert.CoronaCert, block)
 }
 ```
 
@@ -597,7 +597,7 @@ func (q *QChain) ProposeBlock() (*Block, error) {
     block.ProposerSig = q.blsSign(block.Hash())
     
     // Create Pulsar share
-    block.ProposerShare = q.ringtailShare(block.Hash())
+    block.ProposerShare = q.coronaShare(block.Hash())
     
     // Broadcast proposal
     q.network.Broadcast(&BlockProposal{block})

@@ -472,7 +472,7 @@ go test -v ./... -run Signature
 - TestGasOptimization - Batch verification efficiency
 - TestWalletUpgrade - Wallet interface transitions
 - TestCrossChain - Hybrid sig propagation in warp messages
-- TestRingtailIntegration - Privacy layer with hybrid sigs
+- TestCoronaIntegration - Privacy layer with hybrid sigs
 
 **Benchmark Results** (Apple M1 Max):
 ```

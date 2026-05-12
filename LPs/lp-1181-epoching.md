@@ -361,9 +361,9 @@ type EpochKeys struct {
     ValidatorSet    []string
     Threshold       int
     TotalParties    int
-    GroupKey        *ringtailThreshold.GroupKey
-    Shares          map[string]*ringtailThreshold.KeyShare
-    Signers         map[string]*ringtailThreshold.Signer
+    GroupKey        *coronaThreshold.GroupKey
+    Shares          map[string]*coronaThreshold.KeyShare
+    Signers         map[string]*coronaThreshold.Signer
 }
 ```
 
@@ -399,7 +399,7 @@ func (em *EpochManager) VerifySignatureForEpoch(message string, sig *Signature, 
     if !exists || keys.GroupKey == nil || sig == nil {
         return false
     }
-    return ringtailThreshold.Verify(keys.GroupKey, message, sig)
+    return coronaThreshold.Verify(keys.GroupKey, message, sig)
 }
 ```
 
@@ -409,7 +409,7 @@ The EpochManager integrates with Quasar's validator management:
 
 ```go
 // AddValidator rotates Pulsar keys when validator set changes
-func (q *Quasar) AddValidator(validatorID string, share *ringtailThreshold.KeyShare) error {
+func (q *Quasar) AddValidator(validatorID string, share *coronaThreshold.KeyShare) error {
     keys, err := q.epochManager.RotateEpoch(validators, false)
     if errors.Is(err, ErrEpochRateLimited) || errors.Is(err, ErrNoValidatorChange) {
         // Not an error - just rate limited or no change

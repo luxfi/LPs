@@ -286,7 +286,7 @@ Projects using FROST/CGGMP21 can migrate incrementally:
 ```solidity
 function verify(bytes calldata frostSig, bytes calldata coronaSig) {
     require(verifyFROST(frostSig), "FROST failed");
-    require(verifyRingtail(coronaSig), "Pulsar failed");
+    require(verifyCorona(coronaSig), "Pulsar failed");
 }
 ```
 
@@ -638,7 +638,7 @@ func (em *EpochManager) VerifySignatureForEpoch(message string, sig *Signature, 
     if !exists || keys.GroupKey == nil || sig == nil {
         return false
     }
-    return ringtailThreshold.Verify(keys.GroupKey, message, sig)
+    return coronaThreshold.Verify(keys.GroupKey, message, sig)
 }
 ```
 
@@ -1047,7 +1047,7 @@ The precompile uses the external Pulsar implementation:
 ```go
 import "github.com/luxfi/corona/sign"
 
-func verifyRingtail(threshold, totalParties uint32, msgHash []byte, sig []byte) bool {
+func verifyCorona(threshold, totalParties uint32, msgHash []byte, sig []byte) bool {
     return sign.Verify(sig, msgHash, threshold, totalParties)
 }
 ```
