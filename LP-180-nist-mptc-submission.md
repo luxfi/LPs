@@ -110,23 +110,29 @@ identity).
    via `jasmin/ml-dsa-65/fetch.sh`); the threshold-specific work
    is months of formal-methods engineering.
 
-4. **Red-team audit findings (2026-05)** — a 4-red-agent +
-   1-scientist swarm against the nation-state threat model found
-   13 production go-live blockers. The submission paper track is
-   unaffected (algorithmic claims Class N1 + Class N4 + quantum
-   resistance remain VALIDATED with documented caveats), but Lux
-   mainnet deployment as a strict-PQ chain is blocked until the
-   findings close. See `BLOCKERS.md` at the repository root for
-   the canonical bug list. Per the scientist audit, the following
-   five algorithmic claims need spec caveats added before submission:
-   adaptive corruption (UNSUPPORTED → spec must say static-only);
-   cross-domain isolation Pulsar/Corona (WEAK → both M-LWE and
-   R-LWE share algebraic-lattice hardness, not defense-in-depth);
-   constant-time Verify (WEAK → assertion not measurement; add
-   dudect); Z-Chain Groth16 / P3Q migration (WEAK → implementation
-   does not match doc claim of "192-byte Groth16 rollup"); 2-round
-   optimality (WEAK → clarify v0.1 reconstruction-aggregator trust
-   model vs Raccoon's 3-round true-threshold combine).
+4. **Red-team audit findings (2026-05) — all 13 CLOSED** —
+   a 4-red-agent + 1-scientist swarm against the nation-state
+   threat model originally found 13 production go-live blockers.
+   The CR-{1..13} list is now fully discharged across
+   pulsar-mptc + consensus + node + evm + geth + pq; see
+   `BLOCKERS.md` at the repository root for per-entry landing
+   commit attribution. Lux mainnet deployment as a strict-PQ
+   chain is no longer gated on the audit: every wire from the
+   profile-banner to the EVM precompile boundary to the
+   peer-handshake to the threshold-DKG to the consensus
+   envelope is now enforced. Per the scientist audit, the
+   following five algorithmic claims still need spec caveats
+   added before submission (these are about the paper, not the
+   code): adaptive corruption (UNSUPPORTED → spec must say
+   static-only); cross-domain isolation Pulsar/Corona (WEAK →
+   both M-LWE and R-LWE share algebraic-lattice hardness, not
+   defense-in-depth); constant-time Verify (WEAK → assertion not
+   measurement; dudect harness wired but submission-grade run
+   still pending); Z-Chain Groth16 / P3Q migration (WEAK →
+   implementation does not match doc claim of "192-byte Groth16
+   rollup"); 2-round optimality (WEAK → clarify v0.1
+   reconstruction-aggregator trust model vs Raccoon's 3-round
+   true-threshold combine).
 
 5. **No 1-round signing variant**. ML-DSA rejection sampling
    precludes 1-round threshold without a non-NIST-standard
