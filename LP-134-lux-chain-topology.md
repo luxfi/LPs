@@ -220,7 +220,7 @@ LogN=8 (ring degree 256), Q=0x1000000004A01 (48-bit NTT-friendly
 prime), Dbar=48, Kappa=23 → classical 2^142 / quantum 2^130 security.
 
 Q-Chain emits `qchain_ceremony_root` per epoch, consumed by Quasar
-3.0's Pulsar/Ringtail cert lane (LP-020 §Pulsar, LP-073).
+3.0's Pulsar/Corona cert lane (LP-020 §Pulsar, LP-073).
 
 Note: Q-Chain runs *only* the **consensus-threshold** Pulsar ceremony.
 General-purpose Pulsar (for app threshold signing on bridge custody)
@@ -373,7 +373,7 @@ corresponding `MChain*` / `FChain*` / `Z-` / `Q-` verifier.
 | Z-Chain | **ZVM** | `lux:zvm`       | Zero-knowledge VM (Groth16 rollups + ZKP registry) |
 | A-Chain | **AIVM** | `lux:aivm`     | AI / Attestation VM (TEE quotes, audit, identity, AI provenance, model registry) |
 | B-Chain | **BVM** | `lux:bvm`       | Bridge VM (cross-ecosystem messaging) |
-| M-Chain | **MVM** | `lux:mvm`       | MPC VM (CGGMP21, FROST, Ringtail-general ceremonies) |
+| M-Chain | **MVM** | `lux:mvm`       | MPC VM (CGGMP21, FROST, Corona-general ceremonies) |
 | F-Chain | **FVM** | `lux:fvm`       | FHE VM (TFHE compute, encrypted EVM, confidential ERC-20) |
 
 **Naming notes (canonical, post-2025-12-15)**:

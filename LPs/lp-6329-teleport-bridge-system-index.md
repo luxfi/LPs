@@ -412,7 +412,7 @@ threshold/
 ├── protocols/cmp/          # CGG21 protocol
 ├── protocols/frost/        # FROST protocol
 ├── protocols/musig2/       # MuSig2 for Bitcoin
-└── protocols/ringtail/     # Quantum-safe signatures
+└── protocols/corona/     # Quantum-safe signatures
 ```
 
 ## Roadmap

@@ -1,7 +1,7 @@
 ---
 lp: 3503
 title: Quasar Consensus Precompile
-description: Native precompile suite for hybrid BLS/Ringtail consensus operations enabling quantum-safe finality
+description: Native precompile suite for hybrid BLS/Corona consensus operations enabling quantum-safe finality
 author: Lux Core Team (@luxfi)
 discussions-to: https://github.com/luxfi/lps/discussions
 status: Final
@@ -19,7 +19,7 @@ order: 715
 
 ## Abstract
 
-This LP specifies the Quasar consensus precompile suite at address range `0x0300000000000000000000000000000000000020` through `0x0300000000000000000000000000000000000025`. Quasar provides hyper-efficient on-chain verification of consensus proofs using hybrid BLS/Ringtail signatures, enabling 1ms block finality via Fast Probabilistic Consensus (FPC) with K=3 validator minimum. The precompiles integrate with Q-Chain for quantum-safe finality across all Lux chains (P, C, X, A, etc.).
+This LP specifies the Quasar consensus precompile suite at address range `0x0300000000000000000000000000000000000020` through `0x0300000000000000000000000000000000000025`. Quasar provides hyper-efficient on-chain verification of consensus proofs using hybrid BLS/Corona signatures, enabling 1ms block finality via Fast Probabilistic Consensus (FPC) with K=3 validator minimum. The precompiles integrate with Q-Chain for quantum-safe finality across all Lux chains (P, C, X, A, etc.).
 
 ## Activation
 
@@ -58,7 +58,7 @@ Q-Chain serves as the quantum finality layer for all Lux chains:
 ```
 +------------------------------------------------------------------+
 |  Q-Chain (Quantum Finality Layer)                                |
-|  Stores quantum-final block tips via Quasar (BLS/Ringtail)       |
+|  Stores quantum-final block tips via Quasar (BLS/Corona)       |
 +------------------------------------------------------------------+
            |          |          |          |          |
     +------+   +------+   +------+   +------+   +------+
@@ -609,7 +609,7 @@ Compressed witnesses rely on validator bitfields. Attacks mitigated by:
 
 3. **Integration with ERC-4337 account abstraction?**
    - Quantum-safe user operations
-   - Ringtail-based bundler signatures
+   - Corona-based bundler signatures
 
 4. **Q-Chain fee model for finality attestations?**
    - Currently: No direct fees

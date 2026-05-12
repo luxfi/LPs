@@ -18,7 +18,7 @@ GPU acceleration routed through **`github.com/luxfi/accel`** (env: `GPU_BACKEND`
 | Hashes | keccak, sha256, blake2b, blake3, ripemd160, poseidon |
 | EC sigs | secp256k1, secp256r1, ed25519, sr25519 |
 | Pairings | bls (BLS12-381), bn254, kzg |
-| PQ | mldsa, mlkem, slhdsa, ringtail |
+| PQ | mldsa, mlkem, slhdsa, corona |
 | Threshold | frost, cggmp21 |
 | Other | aead, attestation, evm256, ipa, lamport, modexp, ntt, pedersen, poly_mul, verkle |
 

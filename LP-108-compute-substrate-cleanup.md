@@ -81,7 +81,7 @@ luxcpp/math/                       # ONE primitive substrate, C++/CPU + GPU
 luxcpp/cevm/                       # EVM execution kernels (Block-STM, opcodes)
 luxcpp/dex/                        # DEX matching kernels (CPU today; GPU=research)
 luxcpp/crypto/fhe/                 # FHE bootstrap + keyswitch (composes math/ntt)
-luxcpp/crypto/ringtail/            # Pulsar threshold (composes math/ntt + math/sample)
+luxcpp/crypto/corona/            # Pulsar threshold (composes math/ntt + math/sample)
 luxcpp/crypto/lens/                # Lens curve threshold (composes math/curve)
 luxfi/consensus/                   # consensus engine (composes everything)
 ```
@@ -102,10 +102,10 @@ audit. Status determined by running the test executables on M1 Max
 |---|---|---|---|---|---|
 | `luxfi/math/ntt/canonical/*` | Go-pure | ✅ ntt_test 3/3 | ✅ via Pulsar reshare | KEEP | canonical |
 | `luxfi/lattice/v7/ring/modular_reduction.go` | Go-pure | ✅ ring tests | ✅ | WRAP | already a thin shim over math/ntt/canonical (Phase 3 done) |
-| `luxcpp/crypto/ringtail/cpp/lattice_ring.cpp` | C++ CPU | ✅ ringtail_lattice_ring_kat | ✅ lattice_ring_bench | MOVE | → `luxcpp/math/src/cpu/ntt.cpp` (Pulsar parameter set) |
-| `luxcpp/crypto/ringtail/gpu/metal/lattice_ring.metal` | Metal | ✅ metal_kat_test | ✅ sweep bench | MOVE | → `luxcpp/math/src/gpu/metal/ntt_pulsar.metal` |
-| `luxcpp/crypto/ringtail/gpu/cuda/lattice_ring.cu` | CUDA | only via host polyfill | ⚠️ no live CUDA | MOVE | → `luxcpp/math/src/gpu/cuda/ntt_pulsar.cu` |
-| `luxcpp/crypto/ringtail/gpu/wgsl/lattice_ring.wgsl` | WGSL | ✅ wgsl_kat_test | ✅ sweep bench (real wgpu-native) | MOVE | → `luxcpp/math/src/gpu/wgsl/ntt_pulsar.wgsl` |
+| `luxcpp/crypto/corona/cpp/lattice_ring.cpp` | C++ CPU | ✅ ringtail_lattice_ring_kat | ✅ lattice_ring_bench | MOVE | → `luxcpp/math/src/cpu/ntt.cpp` (Pulsar parameter set) |
+| `luxcpp/crypto/corona/gpu/metal/lattice_ring.metal` | Metal | ✅ metal_kat_test | ✅ sweep bench | MOVE | → `luxcpp/math/src/gpu/metal/ntt_pulsar.metal` |
+| `luxcpp/crypto/corona/gpu/cuda/lattice_ring.cu` | CUDA | only via host polyfill | ⚠️ no live CUDA | MOVE | → `luxcpp/math/src/gpu/cuda/ntt_pulsar.cu` |
+| `luxcpp/crypto/corona/gpu/wgsl/lattice_ring.wgsl` | WGSL | ✅ wgsl_kat_test | ✅ sweep bench (real wgpu-native) | MOVE | → `luxcpp/math/src/gpu/wgsl/ntt_pulsar.wgsl` |
 
 ### NTT / Montgomery (the FHE PN10QP27 / PN11QP54 parameter sets)
 
@@ -173,8 +173,8 @@ audit. Status determined by running the test executables on M1 Max
 
 | File | Status | Action |
 |---|---|---|
-| `luxcpp/crypto/ringtail/gpu/metal/lattice_ring.metal` | ✅ benched (sweep), ✅ KAT, real perf | KEEP — promote to canonical Metal NTT |
-| `luxcpp/crypto/ringtail/gpu/wgsl/lattice_ring_wgpu.cpp` | ✅ real wgpu-native, ✅ KAT, ✅ benched | KEEP |
+| `luxcpp/crypto/corona/gpu/metal/lattice_ring.metal` | ✅ benched (sweep), ✅ KAT, real perf | KEEP — promote to canonical Metal NTT |
+| `luxcpp/crypto/corona/gpu/wgsl/lattice_ring_wgpu.cpp` | ✅ real wgpu-native, ✅ KAT, ✅ benched | KEEP |
 | Pulsar Round-1 mat-mul on GPU | ❌ no kernel — Round-1 is N serial CPU NTT calls | **WRITE** — domain-specific kernel that batches the 2688-NTT mat-mul through the canonical Metal NTT batch entry |
 
 ### Math substrate (LP-107 already shipped)
@@ -194,16 +194,16 @@ Move `luxcpp/crypto/math/` → `luxcpp/math/` so the C++ math substrate has the 
 
 ### Phase 2: Move generic kernels into `luxcpp/math/src/gpu/{metal,cuda,wgsl}/`
 
-Currently the canonical Pulsar NTT kernels live under `luxcpp/crypto/ringtail/gpu/`. Move them:
+Currently the canonical Pulsar NTT kernels live under `luxcpp/crypto/corona/gpu/`. Move them:
 
 ```
-luxcpp/crypto/ringtail/gpu/metal/lattice_ring.metal
+luxcpp/crypto/corona/gpu/metal/lattice_ring.metal
   → luxcpp/math/src/gpu/metal/ntt.metal
 
-luxcpp/crypto/ringtail/gpu/wgsl/lattice_ring.wgsl
+luxcpp/crypto/corona/gpu/wgsl/lattice_ring.wgsl
   → luxcpp/math/src/gpu/wgsl/ntt.wgsl
 
-luxcpp/crypto/ringtail/gpu/cuda/lattice_ring.cu
+luxcpp/crypto/corona/gpu/cuda/lattice_ring.cu
   → luxcpp/math/src/gpu/cuda/ntt.cu
 ```
 

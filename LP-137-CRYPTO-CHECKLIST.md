@@ -92,7 +92,7 @@ hosts. WGSL via `wgpu-native` is dispatchable on M1 but tests are gated on
 | 27 | Attestation (SEV-SNP / TDX / NV NRAS / composite) | AMD SEV-SNP ABI 1.55, Intel TDX module 1.5 SDM, NVIDIA NRAS protocol v3 | **27 byte-equal C++↔Go cases** (`attestation_test.cpp` 11 cases + `composite_test.cpp` 16 cases, 32 EXPECT asserts, LP-137 §2.7) — fixtures at `attestation/test/fixtures/` are real (LP-137 §2.7 "B2 closure", commit `81171eb6`) | `attestation/cpp/` 170 LOC parser-only (LP-137 §2.7 — full-chain verification lives in `luxd/cc/attest/`) | n/a (parser, no GPU path; LP-137 §3.8 Class C "structurally CPU-only") | n/a | n/a | n/a | go-sev-guest (SEV-SNP), Intel SGX-DCAP (TDX), documented NVIDIA test endpoints (NRAS); LP-137 §2.7 "second oracle commit `kat-second-oracle-2026-04-28`" |
 | 28 | FROST (threshold Schnorr) | Komlo-Goldberg 2020; LP-137 §3.4 "no first-party body authored" | 0 first-party KAT (`frost/test/` dir does not exist at SHA `7303b178`); LP-137 §2.3 line 171 reports **4.23× FROST sign 5-of-7** in mpcvm v0.62 (separate codebase) | `frost/cpp/` empty | `frost/gpu/metal/frost.metal` 439 LOC | `frost/gpu/cuda/frost.cu` 402 LOC | `frost/gpu/wgsl/frost.wgsl` 84 LOC | 0% (no test) | **MISSING-KAT** **MISSING-ORACLE** — kernels exist but no determinism tests; LP-137 §3.8 Class C "intra-ceremony round-by-round" |
 | 29 | CGGMP21 (threshold ECDSA) | Canetti-Gennaro-Goldfeder-Makriyannis-Peled 2021 | 0 first-party KAT at SHA `7303b178`; `lux/crypto/cggmp21/` 2 Go files no tests | `cggmp21/cpp/` empty | `cggmp21/gpu/metal/cggmp21.metal` 366 LOC | `cggmp21/gpu/cuda/cggmp21.cu` 347 LOC | `cggmp21/gpu/wgsl/cggmp21.wgsl` 132 LOC | 0% (no test) | **MISSING-KAT** **MISSING-ORACLE** — LP-137 §3.8 Class C |
-| 30 | Pulsar (lattice threshold) | Boneh-Komargodski-Lai-Wee 2024 (Pulsar signatures); LP-073 | 0 first-party KAT in `luxcpp/crypto/ringtail/`; LP-137 §6 #226 "luxfi/log+ringtail Sign API drift" → 1 fail of 58 in `lux/threshold` | `ringtail/cpp/` empty (umbrella in `lux/threshold` + `lux/lattice`) | `ringtail/gpu/metal/ringtail.metal` 378 LOC | `ringtail/gpu/cuda/ringtail.cu` 240 LOC | `ringtail/gpu/wgsl/ringtail.wgsl` 147 LOC | 0% (no test) | **MISSING-KAT** **MISSING-ORACLE** — kernels exist with no validation tests at SHA `7303b178` |
+| 30 | Pulsar (lattice threshold) | Boneh-Komargodski-Lai-Wee 2024 (Pulsar signatures); LP-073 | 0 first-party KAT in `luxcpp/crypto/corona/`; LP-137 §6 #226 "luxfi/log+corona Sign API drift" → 1 fail of 58 in `lux/threshold` | `corona/cpp/` empty (umbrella in `lux/threshold` + `lux/lattice`) | `corona/gpu/metal/corona.metal` 378 LOC | `corona/gpu/cuda/corona.cu` 240 LOC | `corona/gpu/wgsl/corona.wgsl` 147 LOC | 0% (no test) | **MISSING-KAT** **MISSING-ORACLE** — kernels exist with no validation tests at SHA `7303b178` |
 | 31 | sr25519 | Schnorrkel/Polkadot SCHEMA-3 spec | 0 first-party KAT at SHA `7303b178`; `lux/crypto/sr25519/` does not exist | `sr25519/cpp/` empty | `sr25519/gpu/metal/sr25519.metal` 404 LOC | `sr25519/gpu/cuda/sr25519.cu` 393 LOC | `sr25519/gpu/wgsl/sr25519.wgsl` 95 LOC | 0% (no test) | **MISSING-CPU-CANONICAL** **MISSING-KAT** **MISSING-ORACLE** — LP-137 §3.4 "no first-party body authored" |
 
 ## Aggregate by axis
@@ -102,8 +102,8 @@ Denominator: 31 algorithms cataloged.
 | Axis | Pass | Fail/Missing | % |
 |---|---:|---:|---:|
 | Spec citation present (published RFC/FIPS/paper) | 29 | 2 (evm256, sr25519) | 93.5% |
-| KAT vectors against published values | 22 | 9 (secp256r1, evm256, frost, cggmp21, ringtail, sr25519, ipa-GPU-only, verkle-GPU-only, kzg-NOTIMPL-prod) | 71.0% |
-| CPU-canonical body exists (`<alg>/cpp/<alg>.cpp` non-empty) | 25 | 6 (frost, cggmp21, ringtail, sr25519, evm256-empty-cpp/, kzg-NOTIMPL-prod) | 80.6% |
+| KAT vectors against published values | 22 | 9 (secp256r1, evm256, frost, cggmp21, corona, sr25519, ipa-GPU-only, verkle-GPU-only, kzg-NOTIMPL-prod) | 71.0% |
+| CPU-canonical body exists (`<alg>/cpp/<alg>.cpp` non-empty) | 25 | 6 (frost, cggmp21, corona, sr25519, evm256-empty-cpp/, kzg-NOTIMPL-prod) | 80.6% |
 | Metal kernel present | 27 | 4 (attestation, ipa, verkle, secp256r1) | 87.1% |
 | CUDA kernel present | 26 | 5 (attestation, ipa, verkle, secp256r1, modexp) | 83.9% |
 | WGSL kernel present | 26 | 5 (attestation, ipa, verkle, secp256r1, modexp) | 83.9% |
@@ -122,7 +122,7 @@ Denominator: 31 algorithms cataloged.
 2. **evm256** — empty `cpp/` dir, NOTIMPL stub.
 3. **frost** — kernels exist, no test/.
 4. **cggmp21** — kernels exist, no test/.
-5. **ringtail** — kernels exist, no test/.
+5. **corona** — kernels exist, no test/.
 6. **sr25519** — kernels exist, no test/.
 7. **ipa** — only CPU `ipa_kat_test.cpp`; GPU side absent at SHA `7303b178`.
 8. **verkle** — only Go side has `*_test.go`; C++ side is 25 LOC stub.
@@ -145,7 +145,7 @@ and LP-137 §2.3 reproduced rows.
 1. **secp256k1** — bitcoin-core/secp256k1 is the only oracle; CryptoKit (Apple) or libsecp-rs would close the gap. Flagged but acceptable: bitcoin-core is independent of any Go crypto family.
 2. **frost** — no oracle at all (no tests).
 3. **cggmp21** — no oracle at all.
-4. **ringtail** — no oracle at all.
+4. **corona** — no oracle at all.
 5. **sr25519** — no oracle at all.
 
 The two algorithms with confirmed two-oracle (gnark + arkworks) cross-check
@@ -156,7 +156,7 @@ projects at `bn254/test/tools/ark_oracle/` and
 this pattern.
 
 ### MISSING-CPU-CANONICAL (6)
-- **frost, cggmp21, ringtail, sr25519** — empty `cpp/` directories.
+- **frost, cggmp21, corona, sr25519** — empty `cpp/` directories.
 - **evm256** — empty `cpp/` directory.
 - **kzg** (production) — body exists but excluded from prod link graph by §46.
 
@@ -169,7 +169,7 @@ this pattern.
    in LP-137 §1 must remain qualified by §2.3's explicit retraction.
 
 2. **Author KAT files for the 6 NOTIMPL algorithms (secp256r1, evm256,
-   frost, cggmp21, ringtail, sr25519)** before any production deploy
+   frost, cggmp21, corona, sr25519)** before any production deploy
    reads from those code paths. CPU body presence without published
    vectors is a correctness gap; LP-137 §3.4 already catalogs these.
 

@@ -1,7 +1,7 @@
 ---
 lp: 045
 title: Hierarchical Quorum Certificates
-tags: [quasar, consensus, quorum, committee, pq, bls, ringtail, ml-dsa]
+tags: [quasar, consensus, quorum, committee, pq, bls, corona, ml-dsa]
 description: Committee-based PQ quorum certificates for N=1000+ validator networks
 author: Lux Industries
 status: Draft
@@ -186,7 +186,7 @@ deployment via a P-chain governance parameter.
 | Key VM | LP-043 |
 | Threshold VM | LP-044 |
 | Threshold ML-DSA | `papers/threshold-mldsa.tex` in `github.com/luxfi/threshold` |
-| Pulsar | `github.com/luxfi/threshold/protocols/ringtail/` |
+| Pulsar | `github.com/luxfi/threshold/protocols/corona/` |
 
 ## References
 

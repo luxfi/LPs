@@ -37,7 +37,7 @@ Validators opt in to one or more of these:
 |-------|------|---------|----------|
 | **C1** Propose | propose blocks on primary chain | every block slot when selected | signed proposal in block header |
 | **C2** Sign | committee member signs finalized block | ~k/N of blocks | sig in block cert |
-| **C3** Aggregate | produce epoch Ringtail/SNARK rollup | every epoch | aggregate proof on-chain |
+| **C3** Aggregate | produce epoch Corona/SNARK rollup | every epoch | aggregate proof on-chain |
 | **C4** Archive | produce era Groth16/PLONK proof | every era (168 epochs) | Z-chain proof record |
 | **C5** Track-chain validate | validate A/B/D/G/I/K/O/R/T specific chain | per track-chain block | track-chain cert |
 | **C6** Service | oracle feeds, FHE compute, TEE attestation, bridge signing | per request | request-response record |
@@ -149,7 +149,7 @@ earns a reward can also prove misbehavior:
 |---------|----------|---------|
 | Double-sign in committee | two sigs on conflicting blocks at same height | 100% of stake at risk |
 | Missed signing slot | no sig in cert when committee expected | 0.01% stake per miss |
-| Invalid aggregate | Ringtail/SNARK does not verify | 10% stake |
+| Invalid aggregate | Corona/SNARK does not verify | 10% stake |
 | Invalid era ZK proof | Groth16 does not verify | 100% of prover bond |
 | Service SLA breach (oracle stale data) | on-chain challenge + off-chain proof | 1% stake per offense |
 

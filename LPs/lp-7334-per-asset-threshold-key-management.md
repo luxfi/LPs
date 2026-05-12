@@ -1898,7 +1898,7 @@ All reference implementations are available in the Lux GitHub organization: http
 | CGG21 (ECDSA) | `github.com/luxfi/threshold` | `protocols/cmp/` |
 | MuSig2 (BIP-340) | `github.com/luxfi/threshold` | `protocols/musig2/` |
 | FROST (Schnorr) | `github.com/luxfi/threshold` | `protocols/frost/` |
-| Pulsar (PQ) | `github.com/luxfi/threshold` | `protocols/ringtail/` |
+| Pulsar (PQ) | `github.com/luxfi/threshold` | `protocols/corona/` |
 | LSS Resharing | `github.com/luxfi/threshold` | `protocols/lss/` |
 
 ### Bridge Integration

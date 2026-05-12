@@ -16,7 +16,7 @@ order: 99
 
 ## Abstract
 
-This LP introduces **Q-Chain** and the **Quasar consensus protocol family**, Lux Network's quantum-secure blockchain that serves as the platform management chain in Lux 2.0, replacing P-Chain from Lux 1.0. Q-Chain achieves both fast classical consensus and post-quantum finality via an integrated hybrid consensus framework. Beyond quantum security, Q-Chain manages validator coordination, staking operations, chain creation, and network governance. It supports linear and DAG-based transaction processing through multiple consensus engines, and provides **dual-certificate finality** combining BLS-based classical finalization and Ringtail-based quantum-resistant threshold signatures. The protocol achieves sub-second finality while maintaining security against both classical and quantum adversaries.
+This LP introduces **Q-Chain** and the **Quasar consensus protocol family**, Lux Network's quantum-secure blockchain that serves as the platform management chain in Lux 2.0, replacing P-Chain from Lux 1.0. Q-Chain achieves both fast classical consensus and post-quantum finality via an integrated hybrid consensus framework. Beyond quantum security, Q-Chain manages validator coordination, staking operations, chain creation, and network governance. It supports linear and DAG-based transaction processing through multiple consensus engines, and provides **dual-certificate finality** combining BLS-based classical finalization and Corona-based quantum-resistant threshold signatures. The protocol achieves sub-second finality while maintaining security against both classical and quantum adversaries.
 
 ## Motivation
 
@@ -141,7 +141,7 @@ func (q *QuasarConsensus) VerifyCheckpoint(signed *SignedCheckpoint) bool {
     }
     
     // 3. Verify post-quantum Pulsar signature
-    if !q.ringtail.Verify(signed.Checkpoint.Hash(), signed.RingtailSig) {
+    if !q.corona.Verify(signed.Checkpoint.Hash(), signed.RingtailSig) {
         return false
     }
     
@@ -349,7 +349,7 @@ The pinnacle layer adding dual-certificate finality:
 type QuasarConsensus struct {
     engine      ConsensusEngine  // Beam or Nova
     blsAgg      *BLSAggregator
-    ringtail    *RingtailThreshold
+    corona    *RingtailThreshold
     timeout     time.Duration
 }
 
@@ -483,7 +483,7 @@ Even with a large-scale quantum computer, breaking BLS12-381 would require:
 │   └── nova/         # DAG consensus
 ├── crypto/           # Cryptographic primitives
 │   ├── bls/          # BLS12-381 operations
-│   └── ringtail/     # Post-quantum threshold
+│   └── corona/     # Post-quantum threshold
 ├── engine/           # Consensus engines
 │   ├── common/       # Shared code
 │   ├── beam/         # Beam engine
@@ -550,7 +550,7 @@ func (r *RingtailThreshold) Combine() ([]byte, error) {
     }
     
     // Lattice-based combination
-    sig := ringtail.CombineShares(r.shares, r.threshold)
+    sig := corona.CombineShares(r.shares, r.threshold)
     return sig.Marshal()
 }
 ```
@@ -615,9 +615,9 @@ func (q *QChain) CollectShares(block Block) error {
         select {
         case share := <-q.shareChannel:
             if q.validateShare(share, block) {
-                q.ringtail.AddShare(share)
+                q.corona.AddShare(share)
                 
-                if q.ringtail.HasThreshold() {
+                if q.corona.HasThreshold() {
                     return nil
                 }
             }
@@ -647,7 +647,7 @@ func (q *QChain) AggregateCertificates(block Block) (*DualCertificate, error) {
     
     go func() {
         defer wg.Done()
-        rtCert, rtErr = q.ringtail.Combine()
+        rtCert, rtErr = q.corona.Combine()
     }()
     
     wg.Wait()

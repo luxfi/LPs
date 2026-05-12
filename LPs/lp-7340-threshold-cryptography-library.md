@@ -70,8 +70,8 @@ github.com/luxfi/threshold/
 │   ├── doerner/       # DKLS/Doerner 2-party ECDSA
 │   │   └── doerner.go
 │   │
-│   └── ringtail/      # Post-quantum lattice-based threshold
-│       └── ringtail.go
+│   └── corona/      # Post-quantum lattice-based threshold
+│       └── corona.go
 │
 ├── pkg/
 │   ├── party/         # Party identifiers and management

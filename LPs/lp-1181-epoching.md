@@ -435,7 +435,7 @@ func (q *Quasar) AddValidator(validatorID string, share *ringtailThreshold.KeySh
 | `consensus/protocol/quasar/epoch.go` | EpochManager implementation |
 | `consensus/protocol/quasar/epoch_test.go` | Epoch tests (8 tests) |
 | `consensus/protocol/quasar/core.go` | Quasar integration |
-| `ringtail/sign/sign.go` | Non-destructive Verify function |
+| `corona/sign/sign.go` | Non-destructive Verify function |
 
 ## Future Enhancements
 

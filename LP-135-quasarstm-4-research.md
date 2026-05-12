@@ -2,7 +2,7 @@
 lp: 135
 title: QuasarSTM 4.0 — Production Spec (activation 2026-02-14)
 tags: [final, parallel, block-stm, quasar-stm, mvcc, lanes, gpu, conflict-spec, lane-class, deferred-ops, version-block, csmv, semantic-reducers]
-description: QuasarSTM 4.0 — production spec activated on 2026-02-14. Closes the gaps left by 3.0: full EVM coverage, real BLS/Ringtail/Groth16 verifiers, lane-clock Tier 1, semantic reducers Tier 3, ConflictSpec ABI, NEMO LaneClass, dynamic per-lane versioning, fiber checkpoints, commit horizon, MVCC GC, Motor VersionBlock, A/B/M/F drain services, CSMV commit-server scaffold, cross-backend determinism harness.
+description: QuasarSTM 4.0 — production spec activated on 2026-02-14. Closes the gaps left by 3.0: full EVM coverage, real BLS/Corona/Groth16 verifiers, lane-clock Tier 1, semantic reducers Tier 3, ConflictSpec ABI, NEMO LaneClass, dynamic per-lane versioning, fiber checkpoints, commit horizon, MVCC GC, Motor VersionBlock, A/B/M/F drain services, CSMV commit-server scaffold, cross-backend determinism harness.
 author: Lux Core Team (@luxfi)
 status: Final
 type: Standards Track
@@ -372,7 +372,7 @@ function-pointer change. 4.0 makes those swaps:
 | Lane | 3.0 (HMAC-keccak) | 4.0 (real) | Substrate file |
 |---|---|---|---|
 | BLS | placeholder | **BLS12-381 pairing** kernel (vendored) | `lib/consensus/quasar/gpu/crypto/bls12_381.metal` / `.cu` |
-| Pulsar | placeholder | **Ring-LWE share verify** against Q-Chain ceremony key | `lib/consensus/quasar/gpu/crypto/ringtail.metal` / `.cu` |
+| Pulsar | placeholder | **Ring-LWE share verify** against Q-Chain ceremony key | `lib/consensus/quasar/gpu/crypto/corona.metal` / `.cu` |
 | Groth16 | placeholder | **Groth16 over BLS12-381** against Z-Chain VK | `lib/consensus/quasar/gpu/crypto/groth16.metal` / `.cu` |
 
 The verifiers run on-device. There is no CPU fallback on the round
@@ -521,7 +521,7 @@ BridgeAttest drain (cross-chain)              ← v0.48
 | ConflictSpec | `lib/consensus/quasar/gpu/conflict_spec.hpp` + driver |
 | LaneClass | `lib/consensus/quasar/gpu/lane_class.hpp` |
 | BLS verifier | `lib/consensus/quasar/gpu/crypto/bls12_381.metal` / `.cu` |
-| Pulsar verifier | `lib/consensus/quasar/gpu/crypto/ringtail.metal` / `.cu` |
+| Pulsar verifier | `lib/consensus/quasar/gpu/crypto/corona.metal` / `.cu` |
 | Groth16 verifier | `lib/consensus/quasar/gpu/crypto/groth16.metal` / `.cu` |
 | Motor VersionBlock | `lib/consensus/quasar/gpu/version_block.hpp` |
 | CSMV commit server | `lib/consensus/quasar/gpu/csmv_commit.metal` / `.cu` |

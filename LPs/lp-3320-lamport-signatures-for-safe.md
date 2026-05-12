@@ -550,7 +550,7 @@ A native precompile could reduce costs dramatically:
 
 **Recommendation**: Consider LP-2507 for Lamport verification precompile at address `0x0200...0007` if demand materializes.
 
-### Comparison with ML-DSA/Ringtail
+### Comparison with ML-DSA/Corona
 
 | Criterion | Lamport OTS | ML-DSA | Pulsar |
 |-----------|-------------|--------|----------|

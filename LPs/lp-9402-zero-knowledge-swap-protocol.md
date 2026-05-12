@@ -667,15 +667,15 @@ This LP introduces a new ZK swap protocol compatible with existing infrastructur
 ### Reference Implementation
 
 **Primary Locations**:
-- Ring signatures: `node/crypto/ringtail/`
+- Ring signatures: `node/crypto/corona/`
 - ZK swaps: `standard/src/privacy/zkswap/`
 - Stealth addresses: `standard/src/privacy/stealth/`
 - Bulletproofs: `node/crypto/bulletproof/`
 
 **Implementation Components**:
 
-1. **Ring Signature System** (`node/crypto/ringtail/`)
-   - `ringtail.go` - Complete ring signature implementation
+1. **Ring Signature System** (`node/crypto/corona/`)
+   - `corona.go` - Complete ring signature implementation
    - `linkable_ring_sig.go` - Linkable ring signatures (prevents double-spending)
    - `key_image.go` - Key image generation for untraceability
    - Ring size configurable (default: 16 members)
@@ -732,7 +732,7 @@ This LP introduces a new ZK swap protocol compatible with existing infrastructur
 - **LP-402**: This specification (detailed ZK implementations)
 
 **Testing**:
-- Ring signature tests: `node/crypto/ringtail/ringtail_test.go` (11 test cases)
+- Ring signature tests: `node/crypto/corona/ringtail_test.go` (11 test cases)
 - Bulletproof tests: `node/crypto/bulletproof/bulletproof_test.go`
 - Swap contract tests: `standard/src/privacy/zkswap/test/*.spec.ts`
 - Integration tests: End-to-end ZK swap with all components

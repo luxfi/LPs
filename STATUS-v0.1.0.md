@@ -14,7 +14,7 @@ This document is the **honest** status. Real measurements only. Real commit SHAs
 
 | Component | Status | Tests |
 |---|---|---|
-| **pulsar** kernel (sign / threshold / reshare / dkg2 / keyera / hash) | Production | 11 packages green; ringtail oracle KAT 16/16 byte-equal; reshare KAT 22/22; dkg2 KAT 4/4 |
+| **pulsar** kernel (sign / threshold / reshare / dkg2 / keyera / hash) | Production | 11 packages green; corona oracle KAT 16/16 byte-equal; reshare KAT 22/22; dkg2 KAT 4/4 |
 | **lens** kernel (sign / threshold / reshare / dkg / keyera / hash; Ed25519 + secp256k1 + Ristretto255) | Production | 7 packages green; FROST 2-round signing on all three curves |
 | **threshold/protocols/lss** (`lss_pulsar.go`, `lss_lens.go`) | Production | 10/10 acceptance tests for both adapters |
 | **threshold/protocols/lss/lss_frost.go** | Deprecated (superseded by lss_lens) | retained for in-flight callers |
@@ -81,7 +81,7 @@ Papers cite by file path; bodies live in proofs/ once.
 Three real bugs found and fixed during the port:
 1. `kTagALen / kTagBLen = 15` off-by-one in `dkg2.hpp` — strings `"pulsar.dkg2.A.v1"` are 16 bytes; A/B matrix BLAKE3 seeds were truncated. All four dkg2 KATs failed silently before fix.
 2. Missing `Refresh()` path — reshare runner dispatched to `Reshare()` for refresh entries, producing wrong domain `"reshare-rng-stream"` instead of the expected refresh path. Added 80-LoC `lux::crypto::pulsar::reshare::refresh()` byte-equal port of Go `reshare.Refresh`.
-3. Pulsar uses CRIT-1-hardened `PRNGKeyForRound(skShare, sid)`; ringtail C++ defaulted to legacy `PRNGKey(skShare)` only. Added `sign_round1_crit1_hardened()` public variant; both ringtail's legacy KAT (16/16) and pulsar's hardened KAT (4/4) now pass simultaneously.
+3. Pulsar uses CRIT-1-hardened `PRNGKeyForRound(skShare, sid)`; corona C++ defaulted to legacy `PRNGKey(skShare)` only. Added `sign_round1_crit1_hardened()` public variant; both corona's legacy KAT (16/16) and pulsar's hardened KAT (4/4) now pass simultaneously.
 
 ### Lens C++ — promoted from 9/15 to 15/15 (commits `luxcpp/crypto@6c497541` + `lens@8a47b4b`)
 
@@ -200,7 +200,7 @@ Selected production-relevant rows (full table in `papers/lux-pq-consensus-benchm
 - **Pulsar C++ is native** — sign + dkg2 + reshare bodies all byte-equal vs Go, all KATs pass (4/4 sign, 4/4 dkg2, 22/22 reshare), cross-runtime gate passes 30/30 forward + 3/3 reverse.
 - **Lens C++ is native across all three curves** — DKG + sign + reshare byte-equal vs Go for Ed25519, secp256k1, Ristretto255 (15/15 KAT + 18/18 point smoke + 3/3+3/3 cross-runtime).
 - **FHE C++ CPU is production**; CUDA dispatch equivalence enforced by 3000-seed test pending real-hardware execution.
-- Quasar consensus calls `lss.DynamicResharePulsar` with activation-cert gating; ringtail death-tests prevent regression.
+- Quasar consensus calls `lss.DynamicResharePulsar` with activation-cert gating; corona death-tests prevent regression.
 - Warp 2.0 carries Pulse-backed source finality across chain boundaries; cross-suite mismatch tests prevent envelope confusion.
 - Two real DoS bugs in `luxfi/lattice/v7/utils/buffer` discovered by Lux fuzzing — issues [#2](https://github.com/luxfi/lattice/issues/2), [#4](https://github.com/luxfi/lattice/issues/4); PR [#3](https://github.com/luxfi/lattice/pull/3) open with fix.
 - 23 wire-format fuzz harnesses, 30-second runs, 10.9M execs, 0 panics post-mitigation.
@@ -235,7 +235,7 @@ The lattice repo's no-stub policy (PR #5) has not yet been applied across every 
 | Repo | File | Status | Notes |
 |---|---|---|---|
 | pulsar | `reshare/quasar_integration.go:54` | Doc reference only | Mentions a slasher in `consensus/protocol/quasar/slashing.go` "not yet implemented" — that file is the real target, not pulsar. |
-| threshold | `protocols/ringtail/refresh/refresh.go` | **Real stub-refresh body** | Doc at `protocols/pulsar/pulsar.go:25` flags this. No production callers (only one test in `chains/thresholdvm`). Action: complete or delete after migrating that test to `protocols/pulsar/`. |
+| threshold | `protocols/corona/refresh/refresh.go` | **Real stub-refresh body** | Doc at `protocols/pulsar/pulsar.go:25` flags this. No production callers (only one test in `chains/thresholdvm`). Action: complete or delete after migrating that test to `protocols/pulsar/`. |
 | threshold | `protocols/mldsa/hrej.go:28` | "mathematical spec stub" | Real lattice-sampling work pending. |
 | threshold | `cmd/threshold-cli/main.go:246` | CLI placeholder | "distributed mode not yet implemented" — error-returning CLI, not unsafe. |
 | warp | `cmd/warpcli/main.go:152` | CLI placeholder | "Base64 encoding not yet implemented". |
@@ -276,7 +276,7 @@ Three scientist agents audited cevm / luxcpp/gpu+crypto/fhe / dex; found ~38K Lo
 - **cevm CALL/CREATE on GPU:** returns `status=5` fallback (consensus blocker; tracked at lib/evm/gpu/kernel/evm_kernel.metal:8-10)
 - **evm-parity-test:** 0/133 vectors agree across CPU_Sequential / CPU_Parallel / GPU_Metal — gas-accounting + EIP-2929 warm/cold + storage-cap mismatches. Real CPU/GPU divergence; consensus blocker.
 - **backend_cevm per-tx → batch adapter:** cgo bridge exists (`luxfi/chains/evm/cevm/cevm_cgo.go::ExecuteBlock`), per-tx adapter pending. backend_cevm.go now documents the gap honestly.
-- **FHE Metal NTT:** real Metal NTT kernel exists at `crypto/ringtail/gpu/metal/lattice_ring.metal` (1.48× CPU). FHE composing it parameterized for FHE moduli is the migration path; not yet wired.
+- **FHE Metal NTT:** real Metal NTT kernel exists at `crypto/corona/gpu/metal/lattice_ring.metal` (1.48× CPU). FHE composing it parameterized for FHE moduli is the migration path; not yet wired.
 - **DEX-on-GPU:** research project. Sequential price-time priority is the constraint, not lack of kernels. Tractable Phase 1: sig-batch verify on GPU using existing `crypto/secp256k1/gpu/` kernels (~1 week).
 
 **Bottom line:** v0.1.2 is the source-locked honest hybrid PQ consensus stack. The Pulsar/Lens/FHE C++ ports are native for all locked-scope operations with measured byte-equality and bidirectional cross-runtime gates, and every byte of those bodies is now in tracked source (no more `kImplStatus = "ffi-go"`, no more `LENS_ERR_NATIVE_POINT_PENDING`). GPU absolute throughput pending real hardware (the equivalence gate prevents drift in the meantime). Two real upstream DoS bugs filed.

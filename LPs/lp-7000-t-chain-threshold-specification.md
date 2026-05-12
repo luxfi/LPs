@@ -70,7 +70,7 @@ vm, err := factory.New(logger)
 node/vms/thresholdvm/
 ├── cggmp/            # CGGMP21 implementation
 ├── frost/            # FROST signatures
-├── ringtail/         # Post-quantum threshold
+├── corona/         # Post-quantum threshold
 ├── dkg/              # Distributed key generation
 ├── keygen/           # Key generation ceremonies
 ├── warp/             # Warp message integration
@@ -126,10 +126,10 @@ partialSig, err := session.SignSchnorr(keyShare, message)
 Ring-based threshold signatures for quantum resistance:
 
 ```go
-import "github.com/luxfi/node/vms/thresholdvm/ringtail"
+import "github.com/luxfi/node/vms/thresholdvm/corona"
 
 // Initialize Pulsar session
-session := ringtail.NewSession(threshold, totalParties)
+session := corona.NewSession(threshold, totalParties)
 
 // Quantum-safe threshold key generation
 keyShare, err := session.KeyGen(partyID)
@@ -319,7 +319,7 @@ func TestFROSTSigning(t *testing.T)
 **Dependencies**:
 - `vms/thresholdvm/cggmp`
 - `vms/thresholdvm/frost`
-- `vms/thresholdvm/ringtail`
+- `vms/thresholdvm/corona`
 - `vms/thresholdvm/dkg`
 
 ## Security Considerations

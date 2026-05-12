@@ -195,7 +195,7 @@ await client.refresh('eth-custody-key')
 
 ```typescript
 // Protocol types
-type Protocol = 'lss' | 'cggmp21' | 'frost' | 'bls' | 'ringtail'
+type Protocol = 'lss' | 'cggmp21' | 'frost' | 'bls' | 'corona'
 type Chain = 'ethereum' | 'bitcoin' | 'solana' | 'lux' | 'polygon' | 'arbitrum'
 type Curve = 'secp256k1' | 'ed25519' | 'bls12-381'
 

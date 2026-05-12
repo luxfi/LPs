@@ -125,7 +125,7 @@ The 9-chain LP-137 substrate has three families of crypto primitives:
 2. **EC / pairing primitives** (BLS, secp, ed25519): per-element parallel,
    GPU-native via batched-N residency, shipping. Geomean 9–17× at large N.
 3. **Lattice / FHE primitives** (Pulsar, ML-DSA, ML-KEM, FHE bootstrap):
-   *partial*. Ringtail/MLDSA/MLKEM ship dispatch-shape Metal skeletons
+   *partial*. Corona/MLDSA/MLKEM ship dispatch-shape Metal skeletons
    (#90, #102) but the FIPS-204/203 verify path is dGPU-deferred; **FHE
    bootstrap is fully CPU**.
 

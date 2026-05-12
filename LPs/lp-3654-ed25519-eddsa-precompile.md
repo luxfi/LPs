@@ -812,7 +812,7 @@ X25519 shared secrets may equal identity if peer provides small-order point. Imp
 - [RFC 8032: Edwards-Curve Digital Signature Algorithm (EdDSA)](https://datatracker.ietf.org/doc/html/rfc8032)
 - [RFC 7748: Elliptic Curves for Security](https://datatracker.ietf.org/doc/html/rfc7748)
 - [filippo.io/edwards25519](https://pkg.go.dev/filippo.io/edwards25519)
-- [LP-7324: Pulsar Threshold EdDSA](./lp-7324-ringtail-threshold-signature-precompile.md)
+- [LP-7324: Pulsar Threshold EdDSA](./lp-7324-corona-threshold-signature-precompile.md)
 - [LP-3652: secp256k1 ECDSA Precompile](./lp-3652-secp256k1-ecdsa-precompile.md)
 
 ## Copyright

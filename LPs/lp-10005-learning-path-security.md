@@ -78,7 +78,7 @@ After completing this path, you will understand:
 | 8 | [LP-7000](/docs/lp-7000-t-chain-threshold-specification/) | M-Chain Architecture (formerly T-Chain) | 30 min | Deep |
 | 9 | [LP-0104](/docs/lp-0104-frost---flexible-round-optimized-schnorr-threshold-signatures-for-eddsa/) | FROST Security Model | 25 min | Deep |
 | 10 | [LP-0014](/docs/lp-0014-t-chain-threshold-signatures-with-cgg21-uc-non-interactive-ecdsa/) | CGGMP21 Analysis | 25 min | Deep |
-| 11 | [LP-0324](/docs/lp-0324-ringtail-threshold-signature-precompile/) | Pulsar (PQ Threshold) | 25 min | Deep |
+| 11 | [LP-0324](/docs/lp-0324-corona-threshold-signature-precompile/) | Pulsar (PQ Threshold) | 25 min | Deep |
 
 ### Stage 4: ZK Trust Boundaries (Z-Chain)
 

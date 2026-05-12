@@ -163,7 +163,7 @@ already needed for compliance use cases.
 
 ### MPC (Hanzo MPC engine, M-Chain in Lux taxonomy — LP-134)
 
-The Hanzo MPC engine runs CGGMP21, FROST, Ringtail-general, TFHE
+The Hanzo MPC engine runs CGGMP21, FROST, Corona-general, TFHE
 ceremonies. Each ceremony round naturally maps to a Quasar round:
 
 | MPC concept | Quasar mapping |
@@ -266,7 +266,7 @@ void register_cert_lane(QuasarCertLane lane, LaneVerifier verifier);
 |---|---|
 | **v0.50** | Gateway lane-affinity routing (`~/work/hanzo/gateway`) |
 | **v0.51** | Base → Quasar adapter (`~/work/hanzo/base/quasar/`) |
-| **v0.52** | MPC cert-lane verifiers (CGGMP21, FROST, Ringtail-general) |
+| **v0.52** | MPC cert-lane verifiers (CGGMP21, FROST, Corona-general) |
 | **v0.53** | KMS as Quasar precompile + key-material lanes |
 | **v0.54** | TFHE key-share lane (lattice ceremony output) |
 | **v0.55** | Cross-chain message routing via per-lane cert artifacts |

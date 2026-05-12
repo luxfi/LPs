@@ -1679,7 +1679,7 @@ interface SignatureResponse {
     sessionId: string;
     signature: string;
     signers: string[];
-    protocol: 'cgg21' | 'lss' | 'ringtail';
+    protocol: 'cgg21' | 'lss' | 'corona';
 }
 
 interface BridgeConfig {

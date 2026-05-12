@@ -25,7 +25,7 @@ Repos surveyed: 156 luxfi, 31 luxcpp, 1 luxgpu = 188 total. Tagged: 132. Untagge
 | `github.com/luxfi/mpc` | luxfi/mpc | `v1.10.2` | `105ed30` | active |
 | `github.com/luxfi/dwallet` | luxfi/dwallet | `v0.1.0` | `437f2e3` | pre-release |
 | `github.com/luxfi/pqclean` | luxfi/pqclean | `round3` | `6cd3167` | non-semver tag — replaced by luxcpp/pqclean (see §3) |
-| `github.com/luxfi/ringtail` | luxfi/ringtail | `v0.4.0` | `8cbc42a` | pre-release |
+| `github.com/luxfi/corona` | luxfi/corona | `v0.4.0` | `8cbc42a` | pre-release |
 | `github.com/luxfi/safe-frost` | luxfi/safe-frost | `v0.1.0` | `74a27c3` | pre-release |
 | `github.com/luxfi/threshold` | luxfi/threshold | `v1.6.4` | `e24648e` | active |
 
@@ -176,7 +176,7 @@ luxcpp: evmone, evmc, fhe, gpu (no `lux-gpu` tag), session, dex, grpc, http.
 | ML-KEM (FIPS 203) | luxfi/crypto/mlkem | luxcpp/crypto/mlkem | luxcpp/lux-* | OK |
 | ML-DSA (FIPS 204) | luxfi/crypto/mldsa | luxcpp/crypto/mldsa | luxcpp/lux-* | OK |
 | SLH-DSA (FIPS 205) | luxfi/crypto/slhdsa | luxcpp/crypto/slhdsa | luxcpp/lux-* | OK |
-| Lattice/Ringtail | luxfi/lattice v7.0.2 + luxfi/ringtail v0.4.0 | luxcpp/lattice v1.0.0 | luxcpp/lux-* | **§5: v7 violates policy** |
+| Lattice/Corona | luxfi/lattice v7.0.2 + luxfi/corona v0.4.0 | luxcpp/lattice v1.0.0 | luxcpp/lux-* | **§5: v7 violates policy** |
 | BLAKE3 | luxfi/blake3 (`guts_0.0.0`) | luxcpp/blake3-reference v1.5.0 (KAT) + luxcpp/crypto/blake3 | — | **§5: non-semver tag** |
 | BLAKE2b | luxfi/crypto/blake2b | luxcpp/crypto/blake2b | — | OK |
 | Ed25519 | luxfi/edwards25519 v0.1.0 | luxcpp/ed25519-donna v0.1.0-luxcpp (KAT) + luxcpp/crypto/ed25519 | — | OK |

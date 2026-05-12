@@ -1,7 +1,7 @@
 ---
 lp: 012
 title: Post-Quantum Cryptography GPU Acceleration
-tags: [pq, mldsa, mlkem, slhdsa, ringtail, fips-203, fips-204, fips-205, ntt]
+tags: [pq, mldsa, mlkem, slhdsa, corona, fips-203, fips-204, fips-205, ntt]
 description: NIST FIPS post-quantum algorithms accelerated on GPU via NTT
 author: Lux Core Team (@luxfi)
 status: Final
@@ -26,7 +26,7 @@ All NIST FIPS post-quantum algorithms run natively on GPU. The Number Theoretic 
 | ML-DSA-65 | FIPS 204 | Signature verify | mldsa.metal |
 | ML-KEM-768 | FIPS 203 | Key decapsulate | mlkem.metal |
 | SLH-DSA | FIPS 205 | Signature verify | slhdsa.metal |
-| Pulsar | Lux-specific | Threshold sign | ringtail.metal |
+| Pulsar | Lux-specific | Threshold sign | corona.metal |
 
 ## Shared NTT
 

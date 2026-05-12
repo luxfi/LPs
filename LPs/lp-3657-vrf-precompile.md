@@ -426,7 +426,7 @@ evm/precompile/contracts/vrf/
 node/crypto/vrf/
 ├── vrf.go                  (6 KB)   # VRF interface
 ├── ecvrf.go                (8 KB)   # ECVRF implementation
-├── ringtail.go             (5 KB)   # Threshold VRF
+├── corona.go             (5 KB)   # Threshold VRF
 ├── hash_to_curve.go        (4 KB)   # Hash-to-curve
 └── vrf_test.go             (8 KB)   # Tests and benchmarks
 
@@ -946,7 +946,7 @@ No backwards compatibility issues. This LP introduces a new precompile at an unu
 - [IETF VRF Draft](https://datatracker.ietf.org/doc/draft-irtf-cfrg-vrf/)
 - [Chainlink VRF v2](https://docs.chain.link/vrf)
 - [LP-111: Photon Consensus Selection](./lp-111.md)
-- [LP-7324: Pulsar Threshold Signature](./lp-7324-ringtail-threshold-signature-precompile.md)
+- [LP-7324: Pulsar Threshold Signature](./lp-7324-corona-threshold-signature-precompile.md)
 - [LP-3654: Ed25519 Precompile](./lp-3654-ed25519-eddsa-precompile.md)
 
 ## Copyright

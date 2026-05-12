@@ -105,9 +105,9 @@ primary network refuses `0x51 Pulsar-44`.
 ## Compliance
 
 A Lux validator MUST NOT silently substitute raw ML-DSA-65 or
-Ringtail for the Pulsar-65 production profile on the primary
+Corona for the Pulsar-65 production profile on the primary
 network. The fallback profiles are explicit operator opt-ins gated
-through `PQMode` selection (`mldsa` / `ringtail`) and refused by the
+through `PQMode` selection (`mldsa` / `corona`) and refused by the
 Lux mainnet acceptance rule.
 
 A Pulsar ceremony whose participants do not match the

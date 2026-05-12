@@ -1,7 +1,7 @@
 ---
 lp: 073
 title: Pulsar — Lattice-Based Threshold Signatures with Dynamic Resharing
-tags: [post-quantum, pulsar, ringtail, lattice, threshold, signature, consensus, resharing, vsr, key-era]
+tags: [post-quantum, pulsar, corona, lattice, threshold, signature, consensus, resharing, vsr, key-era]
 description: 2-round MAC-authenticated lattice threshold signature scheme with key-era lifecycle, verifiable secret resharing, and persistent group public key. Production canonical for Lux Quasar consensus.
 author: Lux Core Team (@luxfi)
 status: Final
@@ -21,14 +21,14 @@ references:
   - LP-103 (Lens — curve threshold sister kernel)
   - LP-137 (GPU Crypto Stack)
 canonical: github.com/luxfi/pulsar
-upstream: github.com/luxfi/ringtail (academic reference; Pulsar is the production fork)
+upstream: github.com/luxfi/corona (academic reference; Pulsar is the production fork)
 ---
 
 # LP-073: Pulsar — Lattice-Based Threshold Signatures with Dynamic Resharing
 
 > See [LP-105 §Architectural thesis](LP-105-lux-stack-lexicon.md#architectural-thesis) for the canonical Lux PQ-consensus thesis. The claims/evidence table and ten architectural commitments are also in LP-105 — single source of truth.
 
-> **Naming evolution.** LP-073 was originally titled "Pulsar Lattice-Based Threshold Signatures." It now describes **Pulsar**, the Lux production fork at `github.com/luxfi/pulsar`. Pulsar inherits Pulsar's 2-round signing math byte-equal but replaces upstream's broken Feldman DKG and trusted-dealer-per-epoch lifecycle with a key-era + verifiable-secret-resharing model. The original Pulsar codebase remains at `github.com/luxfi/ringtail` as the upstream/academic reference.
+> **Naming evolution.** LP-073 was originally titled "Pulsar Lattice-Based Threshold Signatures." It now describes **Pulsar**, the Lux production fork at `github.com/luxfi/pulsar`. Pulsar inherits Pulsar's 2-round signing math byte-equal but replaces upstream's broken Feldman DKG and trusted-dealer-per-epoch lifecycle with a key-era + verifiable-secret-resharing model. The original Pulsar codebase remains at `github.com/luxfi/corona` as the upstream/academic reference.
 
 ## Abstract
 
@@ -434,14 +434,14 @@ Round 2 Preprocess (§4.2) MAC-verifies every `D_j` and rejects on first failure
 | Layer | Path | Status |
 |-------|------|--------|
 | Go canonical (kernel) | `github.com/luxfi/pulsar` (`sign/`, `threshold/`, `primitives/`, `utils/`, `reshare/`, `keyera/`, `dkg2/`) | Shipping. Sign1/Sign2/Combine math byte-equal to upstream Pulsar; key-era lifecycle, VSR, activation cert added. |
-| Go reference (academic) | `github.com/luxfi/ringtail` | Pinned upstream reference; deprecated for production paths. |
+| Go reference (academic) | `github.com/luxfi/corona` | Pinned upstream reference; deprecated for production paths. |
 | LSS adapter | `github.com/luxfi/threshold/protocols/lss/lss_pulsar.go` | Shipping. Wires LSS lifecycle (Generation, Rollback, snapshots, dealer/coordinator) to the Pulsar kernel. |
 | Quasar consensus integration | `github.com/luxfi/consensus/protocol/quasar` | Shipping. `epoch.go` Reshare/Refresh use `keyera.Bootstrap` + `lss.DynamicResharePulsar` under `QUASAR-PULSAR-ACTIVATE-v1`. |
-| C++ port (Sign math) | `github.com/luxfi/luxcpp` `crypto/ringtail/cpp/` (LP-137, ringtail.{hpp,cpp} 691 LOC) | Wired (LP-137-ACTUAL-STATE 2026-04-28); KAT in progress. |
+| C++ port (Sign math) | `github.com/luxfi/luxcpp` `crypto/corona/cpp/` (LP-137, corona.{hpp,cpp} 691 LOC) | Wired (LP-137-ACTUAL-STATE 2026-04-28); KAT in progress. |
 | Warp 2.0 envelope | `github.com/luxfi/warp/pulsar` | Shipping. `KernelVerifier` + `BuildSigningBytes` for cross-chain Pulse path. |
-| Metal kernels | `crypto/ringtail/gpu/metal/` | Open research; mirrors C++ once KAT-equal. |
-| CUDA kernels  | `crypto/ringtail/gpu/cuda/`  | Open research; mirrors C++. |
-| WGSL kernels  | `crypto/ringtail/gpu/wgsl/`  | Open research; mirrors C++. |
+| Metal kernels | `crypto/corona/gpu/metal/` | Open research; mirrors C++ once KAT-equal. |
+| CUDA kernels  | `crypto/corona/gpu/cuda/`  | Open research; mirrors C++. |
+| WGSL kernels  | `crypto/corona/gpu/wgsl/`  | Open research; mirrors C++. |
 
 The Go canonical depends on `github.com/luxfi/lattice/v7` (Lattigo fork) for `ring`, `sampling`, `structs`. NEVER bump to v8 — v7 is pinned for byte-exact reproducibility (`go.mod`).
 
@@ -449,10 +449,10 @@ The Go canonical depends on `github.com/luxfi/lattice/v7` (Lattigo fork) for `ri
 
 The canonical Go test suite (`sign/sign_test.go`, `threshold/threshold_test.go`, `utils/utils_test.go`) is the byte oracle. Implementations MUST pass:
 
-1. **Single-end-to-end**: `ringtail.LocalRun(1)` (`sign/local.go:21`) — `Gen → Round1 → Round2Pre → Round2 → Finalize → Verify` must accept on `K = Threshold = 5`, `μ = "Message"`, `sid = 1`.
-2. **Cross-implementation KAT**: 16+ deterministic vectors from a fixed `trustedDealerKey ∈ {0x00..., 0x01..., ... 0x0F...}` at `(t,n) ∈ {(2,3), (3,5), (5,7), (7,10)}` covering: `A`, `b̃`, `sk_i` (per party), `D_i`, `MAC_ij`, `c`, `z_i`, `Δ`, `Verify(σ) = true`. KAT generator: `cmd/ringtail-kat/main.go` (to be added; see §10).
+1. **Single-end-to-end**: `corona.LocalRun(1)` (`sign/local.go:21`) — `Gen → Round1 → Round2Pre → Round2 → Finalize → Verify` must accept on `K = Threshold = 5`, `μ = "Message"`, `sid = 1`.
+2. **Cross-implementation KAT**: 16+ deterministic vectors from a fixed `trustedDealerKey ∈ {0x00..., 0x01..., ... 0x0F...}` at `(t,n) ∈ {(2,3), (3,5), (5,7), (7,10)}` covering: `A`, `b̃`, `sk_i` (per party), `D_i`, `MAC_ij`, `c`, `z_i`, `Δ`, `Verify(σ) = true`. KAT generator: `cmd/corona-kat/main.go` (to be added; see §10).
 3. **Negative cases**: corrupted `MAC`, corrupted `z_j`, modified `μ`, modified `b̃` MUST all reject.
-4. **Wire byte-equality**: `Vector[Poly].WriteTo` and `Matrix[Poly].WriteTo` outputs MUST hash to identical SHA-256 across Go canonical and C++ port for all 16 KAT inputs. SHA-256 manifest at `ringtail/test/kat/manifest.sha256`.
+4. **Wire byte-equality**: `Vector[Poly].WriteTo` and `Matrix[Poly].WriteTo` outputs MUST hash to identical SHA-256 across Go canonical and C++ port for all 16 KAT inputs. SHA-256 manifest at `corona/test/kat/manifest.sha256`.
 
 ### 9. Consensus Role (LP-020 / LP-022 cross-ref)
 

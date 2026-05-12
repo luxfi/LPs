@@ -10,7 +10,7 @@ sources:
   - LP-137-FINAL-SURVEY.md         @ 2c8726e1
   - LP-137-RED-AUDIT.md            @ 2c8726e1
   - LP-137-CRYPTO-ARCHITECTURE.md  @ 2c8726e1 (partly aspirational; see deltas)
-  - 2026-04-28 ship   @ luxcpp/crypto f35c6b22 (LP-160..LP-166 acceleration kernels, FROST aggregate+verify, CGGMP21 Paillier 2048-bit, ringtail Ring-LWE, multi-curve Pippenger MSM)
+  - 2026-04-28 ship   @ luxcpp/crypto f35c6b22 (LP-160..LP-166 acceleration kernels, FROST aggregate+verify, CGGMP21 Paillier 2048-bit, corona Ring-LWE, multi-curve Pippenger MSM)
 ---
 
 ## 0. Ship update — 2026-04-28 (luxcpp/crypto HEAD `f35c6b22`)
@@ -18,7 +18,7 @@ sources:
 The numbers below carry the snapshot frozen by the audits in §1–§9.
 Today's ship lands the LP-160..LP-166 acceleration kernel stack, FROST
 aggregate+verify, full CGGMP21 Paillier 2048-bit, and the first-party
-ringtail Ring-LWE body. Concrete deltas vs the audit snapshot:
+corona Ring-LWE body. Concrete deltas vs the audit snapshot:
 
 - **Algorithm dir count: 30 (consolidated)** — was 32 in earlier audit;
   gpukit is the shared-kernel library and is not counted as an
@@ -65,11 +65,11 @@ ringtail Ring-LWE body. Concrete deltas vs the audit snapshot:
   `status=0xFF` (legitimate "this signer's pk not provisioned"). 4/4
   `cggmp21_presign_test` pass on commit `f35eedd2`.
 - **Pulsar Ring-LWE first-party body wired.**
-  `ringtail/cpp/ringtail.{hpp,cpp}` (691 LOC) lands setup / sign / verify
+  `corona/cpp/corona.{hpp,cpp}` (691 LOC) lands setup / sign / verify
   for the Ring-LWE threshold signature scheme. C-ABI no longer returns
   NOTIMPL. `crypto_status()` bitmask now sets the `CRYPTO_ALG_RINGTAIL`
   bit. Commit `ecf21b73` + `f35c6b22` (bitmask). Pulsar full spec:
-  LP-073 + papers/lp-073-ringtail.pdf.
+  LP-073 + papers/lp-073-corona.pdf.
 - **Acceleration kernels (LP-160..LP-166) shipped.** Seven kernels,
   three-backend uniform layout, see `CROSSOVER.md` §"Acceleration kernels"
   for the per-kernel measured CPU vs GPU crossover table.
@@ -152,7 +152,7 @@ audit @ `153d3908`):
 | Wired on main today | **8** |
 | Wired on a branch, ready to land | **11** (aead, blake3, ed25519, slhdsa, mldsa, mlkem, lamport, ntt, poly_mul, bn254, modexp, evm256 — counting evm256 alongside modexp) |
 | Partially wired on a branch | **3** (poseidon goldilocks variant, pedersen legacy form, secp256r1) |
-| No first-party body authored anywhere | **7** (kzg, ipa, verkle, sr25519, frost, cggmp21, ringtail) |
+| No first-party body authored anywhere | **7** (kzg, ipa, verkle, sr25519, frost, cggmp21, corona) |
 
 `origin/main` HEAD: `6eb3791c` ("crypto: CROSSOVER.md — per-primitive
 Metal CPU/GPU thresholds (M1 Max)"). The 8 wired-on-main today are:

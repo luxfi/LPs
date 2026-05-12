@@ -27,7 +27,7 @@ deprecates:
 > MPC Custody and Swap Signature Layer* is superseded by the
 > **M-Chain + F-Chain** split defined in LP-134, effective with the
 > Quasar 3.0 launch on 2025-12-25. M-Chain hosts the MPC ceremonies
-> (CGGMP21, FROST, Ringtail-general) described in this LP. F-Chain
+> (CGGMP21, FROST, Corona-general) described in this LP. F-Chain
 > hosts FHE compute and TFHE key-share ceremonies (LP-013). The
 > shared substrate library lives at `lux/chains/thresholdvm` and is
 > used by both M-Chain and F-Chain.
@@ -408,7 +408,7 @@ The resharing happens off-chain during the timelock window. By day 7, the new gr
 
 ## Operational Authority (Quasar 3.0)
 
-LP-019 specifies the **protocols** (FROST, CGGMP21, LSS, Ringtail-general). The
+LP-019 specifies the **protocols** (FROST, CGGMP21, LSS, Corona-general). The
 **operational chain** that hosts these ceremonies is **M-Chain (MPC, see
 LP-134)** (`lux:mpc`), established by LP-134 (Lux Chain Topology) at
 the Quasar 3.0 activation on 2025-12-25. Prior to that activation,
@@ -432,7 +432,7 @@ The cert lanes on M-Chain are:
 |---|---|---|
 | `MChainCGGMP21` (5) | CGGMP21 ECDSA threshold | partial-share artifact |
 | `MChainFROST` (6) | FROST Schnorr/EdDSA threshold | partial-share artifact |
-| `MChainRingtailGen` (7) | Ringtail-general (PQ threshold) | partial-share artifact |
+| `MChainRingtailGen` (7) | Corona-general (PQ threshold) | partial-share artifact |
 
 (Lane numbers per LP-134 §QuasarCertLane registry.)
 
@@ -443,7 +443,7 @@ The cert lanes on M-Chain are:
 | FROST implementation | `github.com/luxfi/mpc/frost/` |
 | CGGMP21 implementation | `github.com/luxfi/mpc/cggmp21/` |
 | LSS resharing | `github.com/luxfi/mpc/lss/` |
-| Pulsar precompile | `github.com/luxfi/evm/precompile/contracts/ringtail.go` |
+| Pulsar precompile | `github.com/luxfi/evm/precompile/contracts/corona.go` |
 | FROST precompile | `github.com/luxfi/evm/precompile/contracts/frost.go` |
 | CGGMP21 precompile | `github.com/luxfi/evm/precompile/contracts/cggmp21.go` |
 | LP-016 OmnichainRouter | `LP-016-omnichain-router.md` |

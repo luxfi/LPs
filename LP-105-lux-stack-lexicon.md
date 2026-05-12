@@ -78,7 +78,7 @@ Lux **does not rename NIST primitives**. ML-KEM stays ML-KEM. ML-DSA stays ML-DS
 | **Beam** | Fast classical aggregate | BLS aggregate certificate over independent validator keys |
 | **LSS** | Threshold lifecycle | Lifecycle Secret Sharing: generation, rollback, snapshots, live resharing |
 | **Lens** | Classical threshold | Curve-threshold kernel (FROST/Schnorr/EdDSA family); see LP-103 |
-| **Pulsar** | Post-quantum threshold | Lattice/PQ threshold kernel (Ringtail-derived) |
+| **Pulsar** | Post-quantum threshold | Lattice/PQ threshold kernel (Corona-derived) |
 | **Pulse** | PQ certificate artifact | One Pulsar threshold certificate over a Nebula root |
 | **Prism** | Certificate composition | Verifies that every certificate lane refracts from the same Nebula transcript |
 | **Horizon** | Finality semantics | Finality boundary once required certificate lanes bind the same transcript |
@@ -254,7 +254,7 @@ protocols/lss/                Lifecycle framework + adapters
 protocols/pulsar/             Round orchestration wrapper for Pulsar kernel
 protocols/lens/               Round orchestration wrapper for Lens kernel
 protocols/frost/              Upstream/reference primitives consumed by Lens
-protocols/ringtail/           Upstream/reference primitives consumed by Pulsar (deprecated for production)
+protocols/corona/           Upstream/reference primitives consumed by Pulsar (deprecated for production)
 ```
 
 ## Crypto-standard mapping

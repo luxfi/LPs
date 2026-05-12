@@ -29,7 +29,7 @@ Defines a unified framework for all threshold cryptographic operations on Lux Ne
 ThresholdManager
   |-- DKG (scheme-agnostic ceremony orchestration)
   |-- Reshare (LSS-based, works for all schemes)
-  |-- Sign (dispatches to FROST/CGGMP21/Ringtail based on key type)
+  |-- Sign (dispatches to FROST/CGGMP21/Corona based on key type)
   |-- Decrypt (dispatches to threshold FHE/threshold ElGamal)
 ```
 

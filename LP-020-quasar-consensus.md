@@ -1,7 +1,7 @@
 ---
 lp: 020
 title: Quasar Consensus 3.0 — Cert Lanes + P/Q/Z Chain Pipeline
-tags: [consensus, bls, ringtail, ml-dsa, groth16, triple-consensus, cert-lanes, p-chain, q-chain, z-chain, post-quantum, gpu]
+tags: [consensus, bls, corona, ml-dsa, groth16, triple-consensus, cert-lanes, p-chain, q-chain, z-chain, post-quantum, gpu]
 description: Quasar 3.0 — three certificate lanes supplied by independent upstream chains (P-Chain stake, Q-Chain Pulsar DKG, Z-Chain Groth16 rollup), with a GPU-native adapter for execution-side certification (LP-132)
 author: Lux Industries
 status: Final
@@ -260,7 +260,7 @@ struct alignas(16) QuasarCertIngress {
 static_assert(sizeof(QuasarCertIngress) == 96, "");
 ```
 
-Adding a new lane (e.g. SLH-DSA, Falcon, BLS-Ringtail-Composite)
+Adding a new lane (e.g. SLH-DSA, Falcon, BLS-Corona-Composite)
 requires only a new `QuasarCertLane` enum value plus a verifier — **no
 wire-format break**.
 

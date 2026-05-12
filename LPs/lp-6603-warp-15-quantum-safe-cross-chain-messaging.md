@@ -250,7 +250,7 @@ const (
 |-------|----------|---------|-------|
 | Phase 1 | Current | BLS | Existing messages work unchanged |
 | Phase 2 | Q1 2025 | Pulsar | New default for all messages |
-| Phase 3 | Q3 2025 | Ringtail-only | BLS support deprecated |
+| Phase 3 | Q3 2025 | Corona-only | BLS support deprecated |
 
 ---
 
@@ -270,7 +270,7 @@ type RingtailSignature struct {
 }
 ```
 
-**Cryptographic Parameters** (from [github.com/luxfi/ringtail](https://github.com/luxfi/ringtail)):
+**Cryptographic Parameters** (from [github.com/luxfi/corona](https://github.com/luxfi/corona)):
 
 | Parameter | Value | Description |
 |-----------|-------|-------------|
@@ -411,7 +411,7 @@ BridgeVM orchestrates bridge operations using Teleport:
 │  └──────────────┘    └──────────────┘    └──────────────┘   │
 │         │                   │                   │            │
 │         ▼                   ▼                   ▼            │
-│  100M LUX Bond        7 Message Types      BLS/Ringtail      │
+│  100M LUX Bond        7 Message Types      BLS/Corona      │
 │  Opt-in (first 100)   Transfer/Swap/etc    Quantum-Safe      │
 │                                                              │
 └─────────────────────────────────────────────────────────────┘
@@ -611,7 +611,7 @@ go test -v ./vms/thresholdvm/...
 | Signature Types | [github.com/luxfi/node](https://github.com/luxfi/node) | `vms/platformvm/warp/signature.go` |
 | BridgeVM | [github.com/luxfi/node](https://github.com/luxfi/node) | `vms/bridgevm/` |
 | ThresholdVM | [github.com/luxfi/node](https://github.com/luxfi/node) | `vms/thresholdvm/` |
-| Pulsar Crypto | [github.com/luxfi/threshold](https://github.com/luxfi/threshold) | `protocols/ringtail/` |
+| Pulsar Crypto | [github.com/luxfi/threshold](https://github.com/luxfi/threshold) | `protocols/corona/` |
 
 **Git Tag**: `warp/v1.5.0`
 

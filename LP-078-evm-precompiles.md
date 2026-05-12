@@ -54,7 +54,7 @@ Three packages were removed for exposing secret key material in public calldata:
 | 0x0200..06 | `mldsa` | ML-DSA verify — FIPS 204 (ML-DSA) | 070 |
 | 0x0200..07 | `mlkem` | ML-KEM encap/decap — FIPS 203 (ML-KEM) | 072 |
 | 0x0600..01 | `slhdsa` | SLH-DSA verify — FIPS 205 (SLH-DSA (FIPS 205, formerly SPHINCS+)) | 071 |
-| 0x0200..0B | `ringtail` | Pulsar lattice threshold signatures | 073 |
+| 0x0200..0B | `corona` | Pulsar lattice threshold signatures | 073 |
 | 0x2221 | `xwing` | X-Wing hybrid KEM (X25519 + ML-KEM-768) | -- |
 
 ### Hashing (3 packages)
@@ -214,8 +214,8 @@ Selector dispatch routes to 5 operations: VerifyNVTrust, VerifyTPM, VerifyComput
 | Package | Wraps | Status |
 |---------|-------|--------|
 | `pqcrypto` | mldsa + mlkem + slhdsa | Redundant — use explicit imports. Has own module registration (will be removed). |
-| `quantum` | mldsa + mlkem + slhdsa + ringtail | Library only, no init — dead blank import |
-| `threshold` | cggmp21 + frost + ringtail | Library only, no init — dead blank import |
+| `quantum` | mldsa + mlkem + slhdsa + corona | Library only, no init — dead blank import |
+| `threshold` | cggmp21 + frost + corona | Library only, no init — dead blank import |
 
 ## Address Range Summary
 

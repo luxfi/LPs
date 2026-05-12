@@ -421,7 +421,7 @@ Full compatibility maintained through:
 **Core Implementation Files**:
 1. **hybrid_consensus.go** - Dual-signature validation (BLS + ML-DSA)
 2. **quasar.go** - Main consensus orchestration
-3. **ringtail.go** - Privacy-preserving ring signatures
+3. **corona.go** - Privacy-preserving ring signatures
 4. **quasar_aggregator.go** - Threshold aggregation
 
 **Integration Points**:

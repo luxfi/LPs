@@ -16,13 +16,13 @@ This is the precise public claim. Three layers, three states:
 
 **Layer 1 — Go reference implementation (luxfi/crypto):** complete
 across every primitive (BLS, ed25519, secp256k1, secp256r1, mldsa,
-mlkem, slhdsa, ringtail, FROST, CGGMP21, IPA, NTT, poseidon,
+mlkem, slhdsa, corona, FROST, CGGMP21, IPA, NTT, poseidon,
 keccak, sha256, ripemd160, blake2b, blake3, kzg, lamport, bn254,
 bn256, hpke, ecies, kdf, …). 8 primitives ship explicit `gpu.go`
 GPU bridges (BLS, keccak, mlkem, secp256k1, mldsa, sha256, ed25519
 + master `gpu/gpu.go`); 4 ship `batch.go` for batched-N hot paths
 (mlkem, secp256k1, mldsa, bls). Pulsar + FROST + CGGMP21 live in
-their own repos (luxfi/ringtail, luxfi/threshold).
+their own repos (luxfi/corona, luxfi/threshold).
 
 **Layer 2 — GPU kernels (Metal/CUDA/WGSL):** ships full pipeline
 for BLS (Metal Stage 1–3 byte-equal blst across 2 746 vectors,
@@ -117,18 +117,18 @@ and structural reason where the template is split.
 | P-Chain | PlatformVM | v0.57 | `platformvm_transition.metal::platformvm_epoch_transition` | Phase 1 (256 threads): per-slot promotion + leaf hashing parallel; Phase 2 (thread 0): canonical fold | full template; thread-0 fold is canonical-by-design |
 | C-Chain | EVM (cevm/quasar) | v0.47.x | `quasar_wave.metal::quasar_wave_kernel` (12 service drains, gid-keyed) + `evm_kernel_v2.metal` (32-thread/tx threadgroup, v0.45) + `quasar_verify_votes_kernel` (one thread per vote slot, v0.44) | service drains run on `tid==0` per gid (one thread per service), V2 EVM kernel fans out 32 threads/tx for buffer prep (v0.47.2 SIMD), votes parallel-per-slot | wave scheduler IS the four-kernel template at substrate level (drains = parallel_eval per service); structural ceiling is the per-service single-leader (LP-137 §4 wave-tick design) |
 | X-Chain | XVM | v0.55+1 | `xvm_utxo.metal::xvm_utxo_transition` + `xvm_roots.metal::xvm_root_update` + `xvm_membership.metal` + `xvm_asset.metal` | UTXO transition is single-thread canonical (input/output spend ordering across txs is sequential); roots is single-thread canonical fold; membership/asset are single-thread canonical | structural-skip: UTXO consumption is canonical-sequential (each tx may spend a prior tx's output in canonical order — splitting requires Block-STM-style speculation which is the wrong shape for X-Chain ledger semantics) |
-| Q-Chain | QuantumVM (Pulsar) | (in cevm v0.43+) | `crypto/ringtail/gpu/metal/ringtail_verify.metal` + `ringtail_sign.metal` + `mpcvm/src/mpcvm_ringtail.metal` | Pulsar polynomial ops parallel (NTT/multiply); top-level verify uses single-thread challenge sampling (CUDA: `if (tid != 0) return;` for canonical challenge) | partial template; lower NTT is parallel; challenge sampling is canonical-by-design (Fiat-Shamir transcript byte-equal) |
+| Q-Chain | QuantumVM (Pulsar) | (in cevm v0.43+) | `crypto/corona/gpu/metal/ringtail_verify.metal` + `ringtail_sign.metal` + `mpcvm/src/mpcvm_ringtail.metal` | Pulsar polynomial ops parallel (NTT/multiply); top-level verify uses single-thread challenge sampling (CUDA: `if (tid != 0) return;` for canonical challenge) | partial template; lower NTT is parallel; challenge sampling is canonical-by-design (Fiat-Shamir transcript byte-equal) |
 | Z-Chain | ZKVM (Groth16) | (in cevm v0.44.0) | `quasar_groth16_verifier` (host blst) + `verify_groth16_batch` (Miller-fold + single final-exp across N proofs) | batched: shared Miller-loop fan-out, single final-exp reduction | full template at batch ≥ 2; structural for n=1 |
 | A-Chain | AIVM | v0.59 | `aivm_transition.metal::aivm_epoch_transition` + `aivm_attestation.metal::{aivm_attestation_locate, aivm_attestation_writeback}` + `aivm_anchor.metal` + `aivm_provenance.metal` | locate (1 thread, canonical: walks ops in canonical order, claims slots via collision-resolved hash) + writeback (kAttSlots threads in parallel, one per slot) | full template; locate IS the canonical determinism oracle (slot assignment must match CPU oracle byte-for-byte across collision sequences); writeback is the parallel work |
 | B-Chain | BridgeVM | v0.60 | `bridgevm_transition.metal::bridgevm_transition` (single-thread canonical fold) + `bridgevm_signer.metal` (single-thread canonical) + `bridgevm_message.metal` (parallel inbox/outbox) + `bridgevm_bls.cpp::pre_verify_inbox` (Miller-loop shard fan-out across 10 M1 cores) | Phase-3: BLS pairing pre-verify shards Miller across cores; transition fold is single-thread canonical | full template at the BLS layer; transition fold structural-canonical |
-| M-Chain | MPCVM | v0.62 | `mpcvm_transition.metal::{mpcvm_compute_leaves, mpcvm_compose_root}` + `mpcvm_ceremony.metal` (single-thread canonical) + `mpcvm_frost.metal`, `mpcvm_cggmp21.metal`, `mpcvm_ringtail.metal` (single-thread canonical, round-by-round protocols) | v0.62 split: kernel 1 dispatches gridSize = max(ceremony, share, contribution) — parallel leaf hashing; kernel 2 (1×1×1) — serial fold + epoch advance + state-root composition | full template: parallel_eval per slot, commit_root canonical fold; FROST/CGGMP21/Ringtail individual ceremonies are structural-sequential (round-by-round protocols where round N depends on round N-1's output) |
+| M-Chain | MPCVM | v0.62 | `mpcvm_transition.metal::{mpcvm_compute_leaves, mpcvm_compose_root}` + `mpcvm_ceremony.metal` (single-thread canonical) + `mpcvm_frost.metal`, `mpcvm_cggmp21.metal`, `mpcvm_ringtail.metal` (single-thread canonical, round-by-round protocols) | v0.62 split: kernel 1 dispatches gridSize = max(ceremony, share, contribution) — parallel leaf hashing; kernel 2 (1×1×1) — serial fold + epoch advance + state-root composition | full template: parallel_eval per slot, commit_root canonical fold; FROST/CGGMP21/Corona individual ceremonies are structural-sequential (round-by-round protocols where round N depends on round N-1's output) |
 | F-Chain | FHEVM | (luxcpp/fhe MLX backend) | `fhe/src/core/lib/math/hal/mlx/*` — NTT, twiddle cache, four-step fan-out, fused external product, key-switching fused, async pipeline | NTT is SIMD-parallel; CKKS slot pipeline is fan-out-able across 32 lanes; twiddle factors precomputed as DeviceWarm | full template at every layer (NTT butterfly is fundamentally parallel); 23.6× measured at N=4096 B=128 |
 
 **Verdict (chain VMs):** 9 of 9 satisfy the four-kernel template at
 the substrate level. Five (PlatformVM v0.57, AIVM v0.59, MPCVM v0.62,
 BridgeVM v0.60 BLS pre-verify, F-Chain NTT) ship a fully fan-out'd
 parallel_eval. Four (XVM, cevm/quasar wave service drains, MPCVM
-ceremony/FROST/CGGMP21/Ringtail single-ceremony paths, BridgeVM
+ceremony/FROST/CGGMP21/Corona single-ceremony paths, BridgeVM
 transition fold) keep a single-thread canonical step inside the
 template — none are parallelization opportunities; all are canonical
 determinism oracles or sequential-by-protocol.
@@ -176,7 +176,7 @@ structural reason for staying CPU-only (3 of 11).
 | 19 | poly_mul | yes (Go luxfi/crypto/poly_mul + C++ luxcpp/crypto/poly_mul/cpp; FFT-friendly Q=998244353; schoolbook + NTT byte-equal) (LP-137 Agent D) | Metal `poly_mul_batch.metal` + `poly_mul_batch_driver.mm` + `poly_mul_metal_test`; one thread per (batch_idx, output_coef); BATCH=100 N=64 byte-equal CPU↔Metal. Crossover N_threshold (M1 Max, median of 11): N=64 batch≈2048; N=128 batch≈1024; N=256 batch≈256; N=512 batch≈128; N=1024 batch≈64 | 13 Go KATs + 10354 C++ KATs + 6400 Metal byte-equal coefficients | **A** |
 | 20 | pedersen | Go body (luxfi/crypto/pedersen) + DeterministicGenerators + CommitBatch (LP-137 Agent D); C++ scaffold w/ validate_commit_inputs; GPU stencil — byte-equal commit body blocked on BN254 G1 backend (Agent E intx+evmmax bootstrap) | cross-proof batched commit shape locked in: Go `CommitBatch` + 11 reproducible KAT vectors against gnark-crypto BN254; C++ + Metal NOTIMPL after validation | 11 Go KATs + 33 C++ scaffold KATs | **B** (Go A; C++/GPU pending Agent E BN254) |
 | 21 | poseidon | NOTIMPL | n/a | n/a | **D** |
-| 22 | ringtail | NOTIMPL umbrella; cevm path lives in `cevm/lib/consensus/quasar/gpu/` | Metal `crypto/ringtail/gpu/metal/{ringtail.metal, ringtail_ops.metal, ringtail_sign.metal, ringtail_verify.metal}`; CUDA + WGSL ports; cevm `verify_ringtail_batch` GPU-batched at the NTT/polynomial layer | (cevm-side; intra-proof Fiat-Shamir is canonical-sequential per protocol) | **C** intra-proof; cross-proof batch is template-fit |
+| 22 | corona | NOTIMPL umbrella; cevm path lives in `cevm/lib/consensus/quasar/gpu/` | Metal `crypto/corona/gpu/metal/{corona.metal, ringtail_ops.metal, ringtail_sign.metal, ringtail_verify.metal}`; CUDA + WGSL ports; cevm `verify_ringtail_batch` GPU-batched at the NTT/polynomial layer | (cevm-side; intra-proof Fiat-Shamir is canonical-sequential per protocol) | **C** intra-proof; cross-proof batch is template-fit |
 | 23 | bls (Fp tower / G2 / Miller / final_exp) | yes | Metal Stage 1-3 byte-equal blst across Fp / G2 / Miller / final_exp; WGSL full Fp tower; CUDA stub | 2 746 Metal + 1 900 WGSL byte-equal | **A** |
 | 24 | frost | NOTIMPL umbrella; mpcvm_frost.metal exists (single-thread canonical, 3-round keygen / 2-round sign) | n/a as crypto primitive; mpcvm path is single-thread canonical | n/a | **C** intra-ceremony round-by-round; cross-ceremony batch is template-fit |
 | 25 | cggmp21 | NOTIMPL umbrella; mpcvm_cggmp21.metal exists (single-thread canonical) | n/a as crypto primitive; mpcvm path is single-thread canonical | n/a | **C** same as FROST |
@@ -193,7 +193,7 @@ structural reason for staying CPU-only (3 of 11).
 |---|---:|---|
 | **A** GPU-native today | **10** | sha256, keccak, ripemd160, blake2b, secp256k1, bls, ed25519 (v0.65 RFC 8032 byte-equal), mldsa (v0.65 skeleton, dGPU-deferred), mlkem (v0.65 skeleton, dGPU-deferred), poly_mul (LP-137 Agent D, BATCH=100 N=64 Metal byte-equal) (+ ntt via FHE backend) |
 | **B** GPU-feasible body shipped, kernel pending | **3** | ipa (Agent D Go A; C++/GPU pending Banderwagon), pedersen (Agent D Go A; C++/GPU pending BN254 G1), verkle (Agent D Go A; C++/GPU pending IPA) |
-| **C** Structurally CPU-only / round-by-round | **4** | attestation parsers, frost (intra-ceremony), cggmp21 (intra-ceremony), ringtail (intra-proof Fiat-Shamir) |
+| **C** Structurally CPU-only / round-by-round | **4** | attestation parsers, frost (intra-ceremony), cggmp21 (intra-ceremony), corona (intra-proof Fiat-Shamir) |
 | **D** NOTIMPL — no CPU body authored | **6** | blake3, sr25519, slhdsa, lamport, poseidon, aead |
 | **E** Bootstrap-blocked (cpp body needs intx/blst/evmmax) | **5** | bn254, secp256r1, kzg, modexp, evm256 |
 
@@ -338,11 +338,11 @@ substrate's residency contract:
 | P-Chain | `platformvm_gpu_engine.mm` Metal MTLBuffer arenas; epoch state, validator slots, stake records, slash evidence on-device | `platformvm_cpu_reference.cpp` | yes — `platformvm-determinism-test` |
 | C-Chain | `quasar_gpu_engine.mm` 12-service ring arenas (ingress / decode / crypto / dagready / exec / validate / repair / commit / statereq / stateresp / vote / qc); fibers, MVCC table, code arena, DAG nodes — all on-device | `quasar_cpu_reference.cpp` | yes — `quasar-determinism-test` 6/6 |
 | X-Chain | `xvm_gpu_engine.mm` UTXO arena, asset arena, tx arena, bloom + cuckoo membership tables — all on-device; offsets via `XVMRoundDescriptor` | `xvm_cpu_reference.cpp` | yes — `xvm-determinism-test` |
-| Q-Chain | Pulsar polynomial arenas in `mpcvm_gpu_engine.mm` + `cevm/lib/consensus/quasar/gpu/quasar_ringtail_verifier` (host blst for cert ingress; on-device verify path via `crypto/ringtail/gpu/`) | `quasar_cpu_reference.cpp` Pulsar verify | yes — `quasar-determinism-test` Pulsar vectors |
+| Q-Chain | Pulsar polynomial arenas in `mpcvm_gpu_engine.mm` + `cevm/lib/consensus/quasar/gpu/quasar_ringtail_verifier` (host blst for cert ingress; on-device verify path via `crypto/corona/gpu/`) | `quasar_cpu_reference.cpp` Pulsar verify | yes — `quasar-determinism-test` Pulsar vectors |
 | Z-Chain | Groth16 VK + proof arena DeviceWarm; `quasar_groth16_verifier` runs on host for cert ingress (1-pairing canonical body); batched `verify_groth16_batch` Miller-fold + final-exp on-device | `quasar_cpu_reference.cpp` Groth16 verify | yes — `quasar-determinism-test` Groth16 vectors |
 | A-Chain | `aivm_gpu_engine.mm` attestation arena, model registry, audit anchors, AIVM epoch state — all on-device | `aivm_cpu_reference.cpp` | yes — `aivm-determinism-test` |
 | B-Chain | `bridgevm_gpu_engine.mm` signer arena, liquidity, daily limits, inbox, outbox messages — all on-device; BLS pre-verify Miller-loop shard via `crypto/bls/` | `bridgevm_cpu_reference.cpp` | yes — `bridgevm-determinism-test` |
-| M-Chain | `mpcvm_gpu_engine.mm` ceremony arena, key shares, contributions, MPCVM epoch state — all on-device; FROST/CGGMP21/Ringtail per-protocol single-thread canonical | `mpcvm_cpu_reference.cpp` | yes — `mpcvm-determinism-test` |
+| M-Chain | `mpcvm_gpu_engine.mm` ceremony arena, key shares, contributions, MPCVM epoch state — all on-device; FROST/CGGMP21/Corona per-protocol single-thread canonical | `mpcvm_cpu_reference.cpp` | yes — `mpcvm-determinism-test` |
 | F-Chain | `fhe/src/core/lib/math/hal/mlx/` MLX backend; CKKS slot pipeline, NTT twiddle cache, fused external product, key-switching — all on-device | OpenFHE CPU reference | yes — 2174 gtest cases (158 core + 138 binfhe + 1876 pke) |
 
 **Production-binary blst-symbol invariant** (LP-137 audit checklist

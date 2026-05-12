@@ -625,7 +625,7 @@ for range ticker.C {
 | `lss/adapters/xrpl.go` | Ripple | ECDSA secp256k1 |
 | `lss/adapters/cardano.go` | Cardano | Ed25519 |
 | `lss/adapters/sui.go` | Sui | Ed25519 |
-| `lss/adapters/ringtail.go` | Post-Quantum | Ring-LWE |
+| `lss/adapters/corona.go` | Post-Quantum | Ring-LWE |
 | `lss/adapters/mldsa_threshold.go` | Post-Quantum | ML-DSA |
 
 ## Secure Implementation Guidelines
@@ -1074,7 +1074,7 @@ LSS includes adapters for 10+ blockchains:
   - Sui (`sui.go`) - Move-based chains
 
 **Post-Quantum Extensions:**
-- Pulsar (`ringtail.go`) - Lattice-based threshold
+- Pulsar (`corona.go`) - Lattice-based threshold
 - ML-DSA (`mldsa_threshold.go`) - FIPS 204 threshold
 - ML-DSA (`dilithium.go`) - ML-DSA (FIPS 204, formerly CRYSTALS-Dilithium)
 

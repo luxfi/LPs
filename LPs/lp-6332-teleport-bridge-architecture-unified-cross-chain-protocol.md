@@ -60,7 +60,7 @@ The Teleport Bridge Architecture addresses these challenges by:
 
 | Bridge | Custody Model | Signature | Finality | Accountability |
 |--------|---------------|-----------|----------|----------------|
-| **Teleport** | MPC t-of-n | CGG21/LSS/Ringtail | 8 min | Identifiable abort |
+| **Teleport** | MPC t-of-n | CGG21/LSS/Corona | 8 min | Identifiable abort |
 | Wormhole | Guardian multisig | ECDSA | 15 min | None |
 | LayerZero | Oracle+Relayer | Varies | 12 min | None |
 | Axelar | Validator set | Threshold | 10 min | Slashing |
@@ -253,7 +253,7 @@ The Teleport network requires a minimum of 5 nodes running both BridgeVM and Thr
       "curve": "secp256k1"
     },
     "bridge-quantum": {
-      "protocol": "ringtail",
+      "protocol": "corona",
       "threshold": 3,
       "parties": 5,
       "lattice": "dilithium3"
@@ -423,7 +423,7 @@ type SignatureRequestPayload struct {
 	RequestID   ids.ID   `json:"requestId"`
 	KeyID       string   `json:"keyId"`
 	MessageHash [32]byte `json:"messageHash"`
-	Protocol    string   `json:"protocol"` // "lss", "cgg21", "frost", "ringtail"
+	Protocol    string   `json:"protocol"` // "lss", "cgg21", "frost", "corona"
 	Deadline    uint64   `json:"deadline"`
 	Metadata    []byte   `json:"metadata"`
 }
@@ -680,7 +680,7 @@ const (
 	ProtocolLSS     Protocol = "lss"
 	ProtocolCGG21   Protocol = "cgg21"
 	ProtocolFROST   Protocol = "frost"
-	ProtocolRingtail Protocol = "ringtail"
+	ProtocolRingtail Protocol = "corona"
 )
 
 // DKGSession manages a distributed key generation ceremony

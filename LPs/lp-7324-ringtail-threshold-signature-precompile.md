@@ -10,7 +10,7 @@ category: Core
 created: 2025-11-13
 requires: 4, 3500
 activation:
-  flag: lp324-ringtail-precompile
+  flag: lp324-corona-precompile
   hfName: "Quantum"
   activationHeight: "0"
 tags: [pqc, threshold-crypto, precompile]
@@ -153,7 +153,7 @@ library RingtailLib {
  * @dev Base contract for Pulsar threshold verification
  */
 abstract contract RingtailVerifier {
-    IRingtail internal constant ringtail = IRingtail(0x020000000000000000000000000000000000000B);
+    IRingtail internal constant corona = IRingtail(0x020000000000000000000000000000000000000B);
     
     modifier validRingtailSignature(
         uint32 threshold,
@@ -162,7 +162,7 @@ abstract contract RingtailVerifier {
         bytes calldata signature
     ) {
         require(
-            ringtail.verifyThreshold(threshold, totalParties, messageHash, signature),
+            corona.verifyThreshold(threshold, totalParties, messageHash, signature),
             "Invalid Pulsar threshold signature"
         );
         _;
@@ -290,7 +290,7 @@ function verify(bytes calldata frostSig, bytes calldata ringtailSig) {
 }
 ```
 
-**Phase 2**: Migrate keys to Ringtail-only
+**Phase 2**: Migrate keys to Corona-only
 
 **Phase 3**: Deprecate classical threshold after transition period
 
@@ -362,12 +362,12 @@ The Pulsar precompile is implemented across multiple layers, providing post-quan
                           │ staticcall
 ┌─────────────────────────▼───────────────────────────────────────┐
 │              EVM Precompile Layer (Go)                          │
-│  precompiles/ringtail/contract.go → Run() → Verify()           │
+│  precompiles/corona/contract.go → Run() → Verify()           │
 └─────────────────────────┬───────────────────────────────────────┘
                           │ calls
 ┌─────────────────────────▼───────────────────────────────────────┐
 │           Pulsar Protocol Layer (Go)                          │
-│  ringtail/ → Two-round threshold signature protocol            │
+│  corona/ → Two-round threshold signature protocol            │
 │  + Distributed Key Generation (DKG)                             │
 │  + Shamir Secret Sharing over Ring-LWE                          │
 └─────────────────────────┬───────────────────────────────────────┘
@@ -380,7 +380,7 @@ The Pulsar precompile is implemented across multiple layers, providing post-quan
 └─────────────────────────────────────────────────────────────────┘
 ```
 
-#### 1. EVM Precompile Layer (`~/work/lux/precompiles/ringtail/`)
+#### 1. EVM Precompile Layer (`~/work/lux/precompiles/corona/`)
 
 | File | Lines | Purpose |
 |------|-------|---------|
@@ -392,7 +392,7 @@ The Pulsar precompile is implemented across multiple layers, providing post-quan
 
 **Precompile Address**: `0x020000000000000000000000000000000000000B`
 
-#### 2. Pulsar Protocol Layer (`~/work/lux/ringtail/`)
+#### 2. Pulsar Protocol Layer (`~/work/lux/corona/`)
 
 | Directory/File | Purpose |
 |----------------|---------|
@@ -455,7 +455,7 @@ const (
 | File | Purpose |
 |------|---------|
 | `epoch.go` | EpochManager for Pulsar key rotation |
-| `ringtail.go` | Threshold Pulsar signing for finality certificates |
+| `corona.go` | Threshold Pulsar signing for finality certificates |
 | `hybrid_consensus.go` | Dual-certificate finality (BLS + Pulsar) |
 | `epoch_test.go` | 8 comprehensive epoch management tests |
 
@@ -488,7 +488,7 @@ func (em *EpochManager) VerifySignatureForEpoch(
 
 All tests passing across the full stack:
 
-**Precompile Tests** (`precompiles/ringtail/contract_test.go`):
+**Precompile Tests** (`precompiles/corona/contract_test.go`):
 - Valid threshold signature verification
 - Insufficient threshold rejection
 - Invalid share detection
@@ -496,7 +496,7 @@ All tests passing across the full stack:
 - Gas cost verification
 - Edge cases and error handling
 
-**Protocol Tests** (`ringtail/sign/sign_test.go`):
+**Protocol Tests** (`corona/sign/sign_test.go`):
 - Two-round protocol correctness
 - Threshold aggregation (t-of-n for various t, n)
 - Signature non-malleability
@@ -526,11 +526,11 @@ All tests passing across the full stack:
 
 | Component | Repository |
 |-----------|------------|
-| Precompile | `github.com/luxfi/precompiles/ringtail/` |
-| Pulsar Library | `github.com/luxfi/ringtail/` |
+| Precompile | `github.com/luxfi/precompiles/corona/` |
+| Pulsar Library | `github.com/luxfi/corona/` |
 | Lattice Primitives | `github.com/luxfi/lattice/` |
 | Epoch Management | `github.com/luxfi/node/consensus/protocol/quasar/` |
-| Solidity Interface | `~/work/lux/standard/contracts/precompiles/ringtail/` |
+| Solidity Interface | `~/work/lux/standard/contracts/precompiles/corona/` |
 
 ## Security Considerations
 
@@ -645,7 +645,7 @@ func (em *EpochManager) VerifySignatureForEpoch(message string, sig *Signature, 
 **Implementation Files:**
 - `consensus/protocol/quasar/epoch.go` - EpochManager
 - `consensus/protocol/quasar/epoch_test.go` - Tests (8 tests)
-- `ringtail/sign/sign.go` - Non-destructive Verify function
+- `corona/sign/sign.go` - Non-destructive Verify function
 
 ### Integration Security
 
@@ -653,14 +653,14 @@ When using Pulsar in smart contracts:
 ```solidity
 // ✅ GOOD: Verify before state changes
 function withdraw(bytes calldata sig) external {
-    require(ringtail.verify(sig), "Invalid sig");
+    require(corona.verify(sig), "Invalid sig");
     // Safe to modify state
 }
 
 // ❌ BAD: State change before verification
 function withdraw(bytes calldata sig) external {
     updateState();  // Vulnerable to reentrancy
-    require(ringtail.verify(sig), "Invalid sig");
+    require(corona.verify(sig), "Invalid sig");
 }
 ```
 
@@ -768,7 +768,7 @@ defer func() {
 
 ### Integration Points Across Lux Infrastructure
 
-#### 1. EVM Precompile (`~/work/lux/precompiles/ringtail/`)
+#### 1. EVM Precompile (`~/work/lux/precompiles/corona/`)
 
 | Component | File | Security Role |
 |-----------|------|---------------|
@@ -788,13 +788,13 @@ func (c *RingtailPrecompile) Run(input []byte) ([]byte, error) {
     }
     
     // 3. Verify Ring-LWE signature
-    valid := ringtail.Verify(groupKey, msgHash, sig)
+    valid := corona.Verify(groupKey, msgHash, sig)
     
     return boolToBytes(valid), nil
 }
 ```
 
-#### 2. Pulsar Protocol (`~/work/lux/ringtail/`)
+#### 2. Pulsar Protocol (`~/work/lux/corona/`)
 
 **Distributed Key Generation** (no trusted dealer):
 ```go
@@ -897,7 +897,7 @@ func ValidateBlock(block *Block) bool {
     }
     
     // 2. Verify Pulsar threshold signature (post-quantum finality)
-    if !ringtail.Verify(block.RingtailSignature) {
+    if !corona.Verify(block.RingtailSignature) {
         return false
     }
     
@@ -959,8 +959,8 @@ contract QuantumSafeVault is RingtailVerifier {
 
 | Component | Location | Pulsar Usage |
 |-----------|----------|----------------|
-| Precompile | `precompiles/ringtail/` | On-chain verification |
-| Pulsar Library | `ringtail/` | Threshold signing protocol |
+| Precompile | `precompiles/corona/` | On-chain verification |
+| Pulsar Library | `corona/` | Threshold signing protocol |
 | Lattice Primitives | `lattice/` | Ring-LWE, Ring-SIS, NTT |
 | Epoch Management | `consensus/protocol/quasar/epoch.go` | Validator key rotation |
 | Quasar Finality | `consensus/protocol/quasar/hybrid_consensus.go` | Dual-certificate finality |
@@ -1041,11 +1041,11 @@ For Quasar consensus validators:
 
 ## Implementation Notes
 
-### Integration with `ringtail`
+### Integration with `corona`
 
 The precompile uses the external Pulsar implementation:
 ```go
-import "github.com/luxfi/ringtail/sign"
+import "github.com/luxfi/corona/sign"
 
 func verifyRingtail(threshold, totalParties uint32, msgHash []byte, sig []byte) bool {
     return sign.Verify(sig, msgHash, threshold, totalParties)
@@ -1076,7 +1076,7 @@ func verifyRingtail(threshold, totalParties uint32, msgHash []byte, sig []byte) 
 
 - **Pulsar Paper**: "Two-Round Threshold Signatures from LWE" (ePrint 2024/1113)
 - **Ring-LWE**: Lyubashevsky et al., "On Ideal Lattices and Learning with Errors Over Rings"
-- **Implementation**: `github.com/luxfi/ringtail` and `precompiles/ringtail/`
+- **Implementation**: `github.com/luxfi/corona` and `precompiles/corona/`
 - **LP-99**: Quasar Consensus with Dual-Certificate Finality
 - **LP-311**: ML-DSA Precompile (non-threshold PQ signature)
 - **LP-321**: FROST Precompile (classical threshold for comparison)

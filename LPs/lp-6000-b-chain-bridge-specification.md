@@ -110,7 +110,7 @@ node/vms/bridgevm/
 type BridgeValidator struct {
     NodeID       ids.NodeID
     ClassicalKey *ecdsa.PublicKey  // CGGMP21 key share
-    QuantumKey   *ringtail.PublicKey // Pulsar key share
+    QuantumKey   *corona.PublicKey // Pulsar key share
     Stake        uint64
     Reputation   uint32
 }
@@ -119,7 +119,7 @@ type CustodyGroup struct {
     Validators      []BridgeValidator
     Threshold       uint32  // t-of-n threshold
     ClassicalPubKey *ecdsa.PublicKey
-    QuantumPubKey   *ringtail.PublicKey
+    QuantumPubKey   *corona.PublicKey
 }
 ```
 

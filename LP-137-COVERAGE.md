@@ -56,7 +56,7 @@ PHILOSOPHY.md asks for.
 
 | Repo | Surface | Coverage / Tests |
 |---|---|---|
-| `luxcpp/crypto`   | 29 algorithms (secp256k1, mldsa, mlkem, slhdsa, ed25519, keccak, bls, kzg, bn254, ringtail, threshold, ipa, lamport, …) | 16 ctest targets registered, 84+ CPU PASS cases + 7 gpukit equivalence harnesses; per-algorithm structural detail in `luxcpp/crypto/COVERAGE.md` |
+| `luxcpp/crypto`   | 29 algorithms (secp256k1, mldsa, mlkem, slhdsa, ed25519, keccak, bls, kzg, bn254, corona, threshold, ipa, lamport, …) | 16 ctest targets registered, 84+ CPU PASS cases + 7 gpukit equivalence harnesses; per-algorithm structural detail in `luxcpp/crypto/COVERAGE.md` |
 | `lux/crypto/rust/lux-crypto` | Canonical Rust binding to luxcpp/crypto C-ABI | 9/9 tests passing; pure-Rust dispatch helpers at 100%; whole-crate 36.97% reflects FFI declaration weight (see crate COVERAGE.md) |
 
 ## Method

@@ -102,4 +102,4 @@ K-chain is the archive.
 |----------|----------|
 | Key VM | `github.com/luxfi/chains/keyvm/` |
 | Threshold VM | `github.com/luxfi/chains/thresholdvm/` |
-| DKG primitives | `github.com/luxfi/threshold/protocols/{mldsa,frost,cggmp21,bls,ringtail}` |
+| DKG primitives | `github.com/luxfi/threshold/protocols/{mldsa,frost,cggmp21,bls,corona}` |

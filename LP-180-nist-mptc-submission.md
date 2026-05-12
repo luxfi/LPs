@@ -137,7 +137,7 @@ identity).
 5. **No 1-round signing variant**. ML-DSA rejection sampling
    precludes 1-round threshold without a non-NIST-standard
    preprocessing oracle. NIST is aware; this is shared with
-   Raccoon and Ringtail submissions.
+   Raccoon and Corona submissions.
 
 ## Acceptance criteria for "ready to submit"
 
@@ -162,7 +162,7 @@ The submission tarball at `submission-2026-11-16` must pass:
 - FIPS 204: *Module-Lattice-Based Digital Signature Standard*
   (August 2024)
 - Boschini, Kaviani, Lai, Malavolta, Takahashi, Tibouchi.
-  *Ringtail: Practical two-round threshold signatures from learning
+  *Corona: Practical two-round threshold signatures from learning
   with errors*. IACR ePrint 2024/1113.
 - del Pino, Prest, Rossi, Saarinen. *Raccoon*: NIST PQC additional
   digital signatures submission, 2024.

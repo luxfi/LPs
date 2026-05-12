@@ -49,7 +49,7 @@ Not algorithm choice — those are settled (NIST PQC round 4). The blockers are:
 2. **Hardware wallet support.** Ledger/Trezor have no ML-DSA firmware. Pulsar has no firmware anywhere yet.
 3. **Aggregate proof size.** Pulsar aggregate is ~33 KB vs BLS 48 bytes. Quasar's bandwidth budget tolerates it (per-block PQ is ~5% of typical EVM block size); but light clients optimizing for bytes-on-chain will keep BLS as the canonical primary aggregate for years.
 4. **Performance.** Pulsar signing is ~600 ms aggregate at K=21 validators on M2 Ultra (Go canonical). LP-137 GPU plan brings this down ~10×. Until M5 (Metal/CUDA/WGSL byte-equal) lands, Pulsar is CPU-only and the bandwidth-throughput tradeoff disfavors making it the primary lane.
-5. **DKG without trusted dealer.** `sign.Gen` in luxfi/ringtail still uses a trusted dealer for Shamir setup. Pedersen-DKG-over-R_q is sketched in LP-019 §5; until built, fully-decentralized PQ threshold sig is incomplete.
+5. **DKG without trusted dealer.** `sign.Gen` in luxfi/corona still uses a trusted dealer for Shamir setup. Pedersen-DKG-over-R_q is sketched in LP-019 §5; until built, fully-decentralized PQ threshold sig is incomplete.
 
 ## Hash-layer choice (LP-073 §9.1)
 

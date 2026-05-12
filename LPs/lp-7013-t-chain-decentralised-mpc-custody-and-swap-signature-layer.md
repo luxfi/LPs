@@ -30,7 +30,7 @@ T-Chain (chain ID `T`, VM ID `thresholdvm`) ran from **2025-01-23**
 (LP-7013 acceptance) through **2025-12-25** (Quasar 3.0 activation,
 LP-134 §M/F split). It was the original "ceremony chain" — a single
 sovereign chain that hosted *both* threshold-MPC ceremonies (CGGMP21,
-FROST, Ringtail-general) and FHE compute (TFHE evaluation, blind-rotate,
+FROST, Corona-general) and FHE compute (TFHE evaluation, blind-rotate,
 programmable bootstrap, key-share ceremonies).
 
 ### Why the split
@@ -57,7 +57,7 @@ seam:
 |---|---|---|
 | CGGMP21 threshold ECDSA ceremonies | **M-Chain** (`lux:mpc`) | LP-019, LP-076 |
 | FROST threshold Schnorr/EdDSA ceremonies | **M-Chain** | LP-019, LP-076 |
-| Ringtail-general threshold ceremonies | **M-Chain** | LP-073, LP-076 |
+| Corona-general threshold ceremonies | **M-Chain** | LP-073, LP-076 |
 | `SwapSigTx` / `DualSigTx` flow | **M-Chain** | LP-019 + LP-134 |
 | TFHE evaluation, blind-rotate, bootstrap | **F-Chain** (`lux:fhe`) | LP-013, LP-066 |
 | TFHE key-share ceremonies | **M-Chain** ceremony emits → **F-Chain** key arena | LP-013, LP-076 |
@@ -410,7 +410,7 @@ T-Chain implements a phased approach to quantum resistance:
 
 ## 10  Reference Implementation & Test Plan
 
-- `mpckeyd`: Go, imports tss-lib (CGG21) + btcd/agg (MuSig2) + ristretto/ed25519-frost + ringtail-go (quantum-safe).
+- `mpckeyd`: Go, imports tss-lib (CGG21) + btcd/agg (MuSig2) + ristretto/ed25519-frost + corona-go (quantum-safe).
 - Simnet: docker-compose spins X‑, M‑, Z‑Chain, 5 signer nodes, bitcoin-regtest.
 - Fuzz: mutate `SwapSigTx`/`DualSigTx` bitmaps, ensure rejection (<1 ms).
 - Load: 5 TPS swap, 15‑of‑15 signing (dual-sig mode), 72 h soak; expect CPU < 50% on 4‑core VPS.
@@ -448,7 +448,7 @@ Result: trust-minimised, stateless, real-time swaps with optional Z‑Chain priv
 | **MPC Daemon** | `mpc/cmd/lux-mpc-bridge` | Main MPC signing service |
 | **Bridge CLI** | `mpc/cmd/lux-mpc-cli` | Bridge configuration and management |
 | **CGG21 Threshold** | `mpc/pkg/crypto/cgg21/` | Classical ECDSA threshold signing |
-| **Pulsar Quantum** | `mpc/pkg/crypto/ringtail/` | Quantum-safe ring signatures |
+| **Pulsar Quantum** | `mpc/pkg/crypto/corona/` | Quantum-safe ring signatures |
 | **State Management** | `mpc/pkg/state/` | Custody and swap state |
 | **RPC API** | `mpc/pkg/api/` | JSON-RPC bridge interface |
 | **Vault Management** | `mpc/pkg/vault/` | Asset custody across chains |
@@ -476,7 +476,7 @@ cd mpc
 go test ./pkg/crypto/cgg21 -v
 
 # Test Pulsar quantum-safe signatures
-go test ./pkg/crypto/ringtail -v
+go test ./pkg/crypto/corona -v
 
 # Test swap execution flow
 go test ./pkg/bridge -v
@@ -490,7 +490,7 @@ go test -tags=integration ./...
 
 # Performance benchmarks
 go test ./pkg/crypto/cgg21 -bench=. -benchmem
-go test ./pkg/crypto/ringtail -bench=. -benchmem
+go test ./pkg/crypto/corona -bench=. -benchmem
 ```
 
 ### Signer Node Setup

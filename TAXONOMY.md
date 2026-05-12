@@ -17,7 +17,7 @@ VM names are **explicit**: PlatformVM, BridgeVM, MPCVM, FHEVM, DEXVM
 | **Z-Chain** | **ZKVM** | ZVM | `lux:zkvm` | Zero-knowledge (Groth16 rollups + ZKP registry) |
 | **A-Chain** | **AIVM** | — | `lux:aivm` | Attestation + AI provenance (TEE quotes, audit, identity, model registry) |
 | **B-Chain** | **BridgeVM** | BVM | `lux:bridgevm` | Bridge — cross-ecosystem messaging |
-| **M-Chain** | **MPCVM** | MVM | `lux:mpcvm` | MPC ceremonies (CGGMP21, FROST, Ringtail-general) |
+| **M-Chain** | **MPCVM** | MVM | `lux:mpcvm` | MPC ceremonies (CGGMP21, FROST, Corona-general) |
 | **F-Chain** | **FHEVM** | FVM | `lux:fhevm` | FHE compute (TFHE, encrypted EVM, confidential ERC-20) |
 | **D-Chain** | **DEXVM** | DVM | `lux:dexvm` | DEX — orderbook, AMM, lending, settlement (white-label template) |
 

@@ -11,7 +11,7 @@ created: 2026-05-04
 
 ## Abstract
 
-Lux currently has Montgomery arithmetic, NTT, RNS, polynomial operations, GPU dispatch, parameter registries, and bounded serialization scattered across `lattice/`, `pulsar/`, `fhe/`, `crypto/ntt/`, `luxcpp/crypto/{pulsar,fhe,ringtail}/`, and others — with overlap, drift potential, and no single canonical owner. LP-107 promotes a shared `luxfi/math` Go module + `luxcpp/crypto/math` C++ mirror as the substrate that every protocol repo consumes. Protocols own protocol semantics; math owns the kernels; KATs bind both layers across runtimes.
+Lux currently has Montgomery arithmetic, NTT, RNS, polynomial operations, GPU dispatch, parameter registries, and bounded serialization scattered across `lattice/`, `pulsar/`, `fhe/`, `crypto/ntt/`, `luxcpp/crypto/{pulsar,fhe,corona}/`, and others — with overlap, drift potential, and no single canonical owner. LP-107 promotes a shared `luxfi/math` Go module + `luxcpp/crypto/math` C++ mirror as the substrate that every protocol repo consumes. Protocols own protocol semantics; math owns the kernels; KATs bind both layers across runtimes.
 
 ## Motivation
 
@@ -21,7 +21,7 @@ The current layout has accumulated parallel implementations:
 * `lattice/gpu/gpu_montgomery_*.go` — dispatch wrappers (cgo+gpu vs pure-Go).
 * `crypto/ntt/ntt.go` — a separate \"vector kernels and tests\" reference NTT.
 * `pulsar/threshold/*` — Pulsar protocol-specific lattice ops, embedding NTT calls.
-* `luxcpp/crypto/ringtail/cpp/lattice_ring*` — native C++ NTT used by both ringtail and pulsar.
+* `luxcpp/crypto/corona/cpp/lattice_ring*` — native C++ NTT used by both corona and pulsar.
 * `luxcpp/crypto/fhe/cpp/backends/*` — FHE-side NTT/keyswitch/bootstrap.
 
 Outcomes of the current shape:

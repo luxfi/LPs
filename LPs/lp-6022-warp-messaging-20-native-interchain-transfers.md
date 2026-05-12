@@ -20,7 +20,7 @@ cross-chain messaging within the Lux ecosystem. Warp 2.0 carries the
 Warp 1.x message intact (the **Beam** lane: BLS12-381 aggregate +
 signer bitmap, see LP-075) alongside two post-quantum lanes: a per-
 validator **ML-DSA cert set** (FIPS 204, see LP-070) and a **Pulse**
-produced by the source chain's Pulsar threshold kernel (Lux's Ringtail
+produced by the source chain's Pulsar threshold kernel (Lux's Corona
 variant with DKG2 + Pulsar-SHA3, see LP-073). All three lanes are
 bound to a common source-chain transcript, so destination chains can
 verify under any combination of classical / PQ assumptions. Warp 2.0

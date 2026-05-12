@@ -53,7 +53,7 @@ Metal CPU/GPU thresholds (M1 Max)").
 | **sr25519**    | **NOTIMPL** | **2**         | **NO**           | none authored                             | not started                                       |
 | **frost**      | **NOTIMPL** | **4**         | **NO**           | none authored                             | not started                                       |
 | **cggmp21**    | **NOTIMPL** | **4**         | **NO**           | none authored                             | not started                                       |
-| **ringtail**   | **NOTIMPL** | **3**         | **NO**           | none authored                             | not started                                       |
+| **corona**   | **NOTIMPL** | **3**         | **NO**           | none authored                             | not started                                       |
 
 ### Tally
 
@@ -62,7 +62,7 @@ Metal CPU/GPU thresholds (M1 Max)").
 | Wired on main today | 8 |
 | Wired on a branch, ready to land | 11 (aead, blake3, ed25519, slhdsa, mldsa, mlkem, lamport, ntt, poly_mul, bn254, modexp, evm256 — counting evm256 alongside modexp) |
 | Partially wired on a branch | 3 (poseidon goldilocks variant, pedersen legacy form, secp256r1) |
-| No first-party body authored anywhere | 7 (kzg, ipa, verkle, sr25519, frost, cggmp21, ringtail) |
+| No first-party body authored anywhere | 7 (kzg, ipa, verkle, sr25519, frost, cggmp21, corona) |
 
 (Strictly: `aead-cpp-cpu-2026-04-27` is a meta-branch that contains
 blake3/ed25519/slhdsa/mldsa/mlkem/lamport/ntt/poly_mul/bls + aead in one
@@ -154,7 +154,7 @@ because every branch tips off the same `origin/main` base.
 
 After steps 1–7 the algo state on main goes from **8 wired / 21
 NOTIMPL** to **20 wired / 9 NOTIMPL**. Remaining NOTIMPL: kzg,
-secp256r1, ipa, verkle, sr25519, frost, cggmp21, ringtail, plus the
+secp256r1, ipa, verkle, sr25519, frost, cggmp21, corona, plus the
 two partial residuals (`poseidon_goldilocks`, legacy `pedersen_commit`).
 
 ## Architecture doc delta
