@@ -319,7 +319,7 @@ Hot-path latency budget: < 200 ms signature generation (GG21 15-of-15 @ ~80 ms m
 service MPCKeydQuantum {
     rpc SignSwapDual(SwapMsg) returns (DualSigReply);     // CGG21 + Pulsar
     rpc GenerateRingtailShare(ShareReq) returns (Share);   // Quantum share
-    rpc CombineRingtailSigs(Shares) returns (RingtailSig); // Threshold combine
+    rpc CombineCoronaSigs(Shares) returns (CoronaSig); // Threshold combine
     rpc GetQuantumPhase() returns (PhaseInfo);             // Current phase
 }
 

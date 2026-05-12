@@ -156,7 +156,7 @@ Verifies combined BLS + Pulsar signatures for defense-in-depth.
 | 98 | var | `coronaSignature` | ML-DSA signature |
 | 98+len | 32 | `messageHash` | Message hash |
 | 130+len | 48 | `blsPublicKey` | BLS public key |
-| 178+len | var | `ringtailPublicKey` | ML-DSA public key |
+| 178+len | var | `coronaPublicKey` | ML-DSA public key |
 
 **Output:** 32-byte boolean (both must be valid)
 
@@ -222,7 +222,7 @@ interface IHybridVerify {
         bytes calldata coronaSignature,
         bytes32 messageHash,
         bytes calldata blsPublicKey,
-        bytes calldata ringtailPublicKey
+        bytes calldata coronaPublicKey
     ) external view returns (bool valid);
 }
 
@@ -259,7 +259,7 @@ library QuasarLib {
     uint256 constant VALIDATOR_THRESHOLD = 22;
 
     error BLSVerificationFailed();
-    error RingtailVerificationFailed();
+    error CoronaVerificationFailed();
     error HybridVerificationFailed();
 
     function verifyBLS(
@@ -338,7 +338,7 @@ type QChainFinalityRecord struct {
     BlockHash      [32]byte      // Finalized block hash
     Timestamp      uint64        // Finalization timestamp (ms)
     BLSAggSig      [96]byte      // Aggregated BLS signatures
-    RingtailSig    []byte        // Pulsar threshold signature
+    CoronaSig    []byte        // Pulsar threshold signature
     ValidatorBits  uint32        // Participating validator bitfield
 }
 ```
@@ -360,7 +360,7 @@ contract LXDEXSettlement is QuasarVerifier {
         bytes32 blockHash,
         uint32 validatorBits,
         bytes calldata blsAggregate,
-        bytes calldata ringtailProof
+        bytes calldata coronaProof
     ) external {
         // Verify compressed witness (1,000 gas)
         require(_isThresholdMet(validatorBits), "Threshold not met");
@@ -370,7 +370,7 @@ contract LXDEXSettlement is QuasarVerifier {
 
         // Optional: Verify Pulsar for high-value settlements
         if (msg.value > HIGH_VALUE_THRESHOLD) {
-            _verifyRingtail(blockHash, ringtailProof);
+            _verifyCorona(blockHash, coronaProof);
         }
 
         // Execute settlement
@@ -481,7 +481,7 @@ function testHybridVerification() public {
         ringtailSig,
         messageHash,       // 32 bytes
         blsPublicKey,      // 48 bytes
-        ringtailPublicKey
+        coronaPublicKey
     );
 
     (bool success, bytes memory result) = HYBRID_VERIFY.staticcall(input);

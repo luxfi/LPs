@@ -543,7 +543,7 @@ type MPCSignature struct {
     SignerBitmap    []byte
 
     // Optional: Pulsar quantum-safe signature
-    RingtailSig     []byte
+    CoronaSig     []byte
 
     // T-Chain proof
     TChainBlockHash ids.ID
@@ -1953,7 +1953,7 @@ Total minimum size: 8 + 8 + 1 + 20 + 32 + 32 + 32 + 8 + 8 + 20 + 65 = 234 bytes
 +--------+--------+--------+--------+--------+--------+--------+--------+
 |   V    |  BitmapLen  |          SignerBitmap (variable)               |
 +--------+--------+--------+--------+--------+--------+--------+--------+
-| RingtailLen |              RingtailSig (variable, optional)           |
+| RingtailLen |              CoronaSig (variable, optional)           |
 +--------+--------+--------+--------+--------+--------+--------+--------+
 |                    TChainBlockHash (32 bytes)                         |
 +--------+--------+--------+--------+--------+--------+--------+--------+

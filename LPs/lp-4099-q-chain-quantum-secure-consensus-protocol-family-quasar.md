@@ -118,7 +118,7 @@ type Checkpoint struct {
 type SignedCheckpoint struct {
     Checkpoint     Checkpoint
     BLSsig         []byte         // Classical BLS aggregate signature
-    RingtailSig    []byte         // Post-quantum threshold signature
+    CoronaSig    []byte         // Post-quantum threshold signature
     SignerBitmap   []byte         // Bitmap of signing validators
 }
 ```
@@ -141,7 +141,7 @@ func (q *QuasarConsensus) VerifyCheckpoint(signed *SignedCheckpoint) bool {
     }
     
     // 3. Verify post-quantum Pulsar signature
-    if !q.corona.Verify(signed.Checkpoint.Hash(), signed.RingtailSig) {
+    if !q.corona.Verify(signed.Checkpoint.Hash(), signed.CoronaSig) {
         return false
     }
     

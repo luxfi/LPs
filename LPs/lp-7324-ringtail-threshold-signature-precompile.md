@@ -155,7 +155,7 @@ library RingtailLib {
 abstract contract RingtailVerifier {
     ICorona internal constant corona = ICorona(0x020000000000000000000000000000000000000B);
     
-    modifier validRingtailSignature(
+    modifier validCoronaSignature(
         uint32 threshold,
         uint32 totalParties,
         bytes32 messageHash,
@@ -185,7 +185,7 @@ contract QuantumSafeDAO is RingtailVerifier {
     function executeProposal(
         bytes32 proposalHash,
         bytes calldata councilSignature
-    ) external validRingtailSignature(
+    ) external validCoronaSignature(
         council.threshold,
         council.totalMembers,
         proposalHash,
@@ -897,7 +897,7 @@ func ValidateBlock(block *Block) bool {
     }
     
     // 2. Verify Pulsar threshold signature (post-quantum finality)
-    if !corona.Verify(block.RingtailSignature) {
+    if !corona.Verify(block.CoronaSignature) {
         return false
     }
     

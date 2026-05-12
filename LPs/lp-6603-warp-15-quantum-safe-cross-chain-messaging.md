@@ -155,7 +155,7 @@ Three cryptographic upgrades:
 │     ┌──────────────────────────────────────────────────────────────┐        │
 │     │ WarpMessage {                                                │        │
 │     │   UnsignedMessage: [TeleportMessage bytes]                   │        │
-│     │   Signature: RingtailSignature {                             │        │
+│     │   Signature: CoronaSignature {                             │        │
 │     │     Signers: [bitset of who signed]                          │        │
 │     │     Signature: [~3-5KB Pulsar sig]                         │        │
 │     │   }                                                          │        │
@@ -259,8 +259,8 @@ const (
 Pulsar is a lattice-based threshold signature scheme based on Ring-LWE:
 
 ```go
-// RingtailSignature is the Warp 1.5 quantum-safe signature type
-type RingtailSignature struct {
+// CoronaSignature is the Warp 1.5 quantum-safe signature type
+type CoronaSignature struct {
     // Signers is a big-endian byte slice encoding which validators signed
     Signers []byte `serialize:"true"`
 
@@ -593,8 +593,8 @@ go test -v ./vms/thresholdvm/...
 
 ### Test Coverage
 
-- `TestRingtailSignatureNumSigners` - Signer bitset encoding
-- `TestRingtailSignatureVerify` - Signature verification
+- `TestCoronaSignatureNumSigners` - Signer bitset encoding
+- `TestCoronaSignatureVerify` - Signature verification
 - `TestEncryptWarpPayload` - ML-KEM encryption
 - `TestEncryptedPayloadRoundTrip` - Encrypt/decrypt cycle
 - `TestTeleportMessageValidate` - Message validation
